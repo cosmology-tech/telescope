@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`encoded 1`] = `
+Array [
+  "joinPool",
+  "exitPool",
+  "swapExactAmountIn",
+  "swapExactAmountOut",
+  "joinSwapExternAmountIn",
+  "joinSwapShareAmountOut",
+  "exitSwapExternAmountOut",
+  "exitSwapShareAmountIn",
+]
+`;
+
+exports[`fromJSON 1`] = `
+Array [
+  "joinPool",
+  "exitPool",
+  "swapExactAmountIn",
+  "swapExactAmountOut",
+  "joinSwapExternAmountIn",
+  "joinSwapShareAmountOut",
+  "exitSwapExternAmountOut",
+  "exitSwapShareAmountIn",
+]
+`;
+
+exports[`json 1`] = `
+Array [
+  "joinPool",
+  "exitPool",
+  "swapExactAmountIn",
+  "swapExactAmountOut",
+  "joinSwapExternAmountIn",
+  "joinSwapShareAmountOut",
+  "exitSwapExternAmountOut",
+  "exitSwapShareAmountIn",
+]
+`;
+
+exports[`messages 1`] = `
+Array [
+  "joinPool",
+  "exitPool",
+  "swapExactAmountIn",
+  "swapExactAmountOut",
+  "joinSwapExternAmountIn",
+  "joinSwapShareAmountOut",
+  "exitSwapExternAmountOut",
+  "exitSwapShareAmountIn",
+]
+`;
+
+exports[`toJSON 1`] = `
+Array [
+  "joinPool",
+  "exitPool",
+  "swapExactAmountIn",
+  "swapExactAmountOut",
+  "joinSwapExternAmountIn",
+  "joinSwapShareAmountOut",
+  "exitSwapExternAmountOut",
+  "exitSwapShareAmountIn",
+]
+`;
