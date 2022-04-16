@@ -1,4 +1,4 @@
-# telescope 🔭
+# Osmosis Protobufs 🔭
 
 Typescript Protobuf Messages for Osmosis
 
