@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AminoHelpers 1`] = `
+Object {
+  "loc": "/amino.helpers.ts",
+  "name": "AminoHeight",
+  "type": "Interface",
+}
+`;
+
+exports[`Nested Props 1`] = `
+Object {
+  "loc": "/cosmos/staking/v1beta1/staking.ts",
+  "name": "Description",
+  "type": "Interface",
+}
+`;
+
+exports[`Nested Props 2`] = `
+Object {
+  "loc": "/cosmos/staking/v1beta1/staking.ts",
+  "name": "CommissionRates",
+  "type": "Interface",
+}
+`;
+
+exports[`dependencies 1`] = `
+Object {
+  "loc": "/cosmos/group/v1/tx.ts",
+  "name": "Exec",
+  "type": "Enum",
+}
+`;
+
+exports[`dependencies 2`] = `
+Object {
+  "loc": "/cosmos/gov/v1/gov.ts",
+  "name": "VoteOption",
+  "type": "Enum",
+}
+`;
+
+exports[`dependencies 3`] = `
+Object {
+  "loc": "/osmosis/gamm/v1beta1/tx.ts",
+  "name": "MsgJoinPool",
+  "type": "Interface",
+}
+`;
+
+exports[`interfaces 1`] = `
+Object {
+  "poolId": "Long",
+  "sender": "string",
+  "shareOutAmount": "string",
+  "tokenInMaxs": "Coin[]",
+}
+`;
+
+exports[`non-TX deps 1`] = `
+Object {
+  "loc": "/cosmos/authz/v1beta1/event.ts",
+  "name": "EventGrant",
+  "type": "Interface",
+}
+`;
+
+exports[`packages 1`] = `
+Array [
+  Object {
+    "filename": "/osmosis/superfluid/genesis.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.superfluid",
+  },
+  Object {
+    "filename": "/osmosis/superfluid/params.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.superfluid",
+  },
+  Object {
+    "filename": "/osmosis/superfluid/query.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.superfluid",
+  },
+  Object {
+    "filename": "/osmosis/superfluid/superfluid.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.superfluid",
+  },
+  Object {
+    "filename": "/osmosis/superfluid/tx.ts",
+    "mutations": Array [
+      Object {
+        "TypeName": "MsgSuperfluidDelegate",
+        "methodName": "superfluidDelegate",
+        "typeUrl": "/osmosis.superfluid.MsgSuperfluidDelegate",
+      },
+      Object {
+        "TypeName": "MsgSuperfluidUndelegate",
+        "methodName": "superfluidUndelegate",
+        "typeUrl": "/osmosis.superfluid.MsgSuperfluidUndelegate",
+      },
+      Object {
+        "TypeName": "MsgSuperfluidUnbondLock",
+        "methodName": "superfluidUnbondLock",
+        "typeUrl": "/osmosis.superfluid.MsgSuperfluidUnbondLock",
+      },
+      Object {
+        "TypeName": "MsgLockAndSuperfluidDelegate",
+        "methodName": "lockAndSuperfluidDelegate",
+        "typeUrl": "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
+      },
+    ],
+    "protoPackage": "osmosis.superfluid",
+  },
+]
+`;
+
+exports[`packages 2`] = `
+Array [
+  Object {
+    "filename": "/osmosis/gamm/pool-models/balancer/balancerPool.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.gamm.v1beta1",
+  },
+  Object {
+    "filename": "/osmosis/gamm/pool-models/balancer/tx.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.gamm.v1beta1",
+  },
+  Object {
+    "filename": "/osmosis/gamm/v1beta1/genesis.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.gamm.v1beta1",
+  },
+  Object {
+    "filename": "/osmosis/gamm/v1beta1/query.ts",
+    "mutations": Array [],
+    "protoPackage": "osmosis.gamm.v1beta1",
+  },
+  Object {
+    "filename": "/osmosis/gamm/v1beta1/tx.ts",
+    "mutations": Array [
+      Object {
+        "TypeName": "MsgJoinPool",
+        "methodName": "joinPool",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgJoinPool",
+      },
+      Object {
+        "TypeName": "MsgExitPool",
+        "methodName": "exitPool",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgExitPool",
+      },
+      Object {
+        "TypeName": "MsgSwapExactAmountIn",
+        "methodName": "swapExactAmountIn",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+      },
+      Object {
+        "TypeName": "MsgSwapExactAmountOut",
+        "methodName": "swapExactAmountOut",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+      },
+      Object {
+        "TypeName": "MsgJoinSwapExternAmountIn",
+        "methodName": "joinSwapExternAmountIn",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
+      },
+      Object {
+        "TypeName": "MsgJoinSwapShareAmountOut",
+        "methodName": "joinSwapShareAmountOut",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
+      },
+      Object {
+        "TypeName": "MsgExitSwapExternAmountOut",
+        "methodName": "exitSwapExternAmountOut",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
+      },
+      Object {
+        "TypeName": "MsgExitSwapShareAmountIn",
+        "methodName": "exitSwapShareAmountIn",
+        "typeUrl": "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
+      },
+    ],
+    "protoPackage": "osmosis.gamm.v1beta1",
+  },
+]
+`;
