@@ -1,0 +1,13 @@
+import * as t from '@babel/types';
+import { Enum, Field, Interface, MessageSchema } from '../types';
+export declare const fromAminoStringToLong: (prop: string, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoFromArrayCall: (prop: string, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoSnakeToCamel: (prop: string, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoHeight: (prop: string, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoDuration: (prop: string, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoEnum: (val: Enum, field: Field, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoEnumArray: (val: Enum, field: Field, scope: string[]) => t.ObjectProperty;
+export declare const fromAminoInterface: (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number) => any;
+export declare const fromAminoInterfaceArray: (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number) => t.ObjectProperty;
+export declare const fromAminoParseField: (field: Field, enums: Enum[], interfaces: Interface[], scope?: any[], nested?: number) => any;
+export declare const fromAmino: (schema: MessageSchema, enums: Enum[], interfaces: Interface[]) => t.ArrowFunctionExpression;
