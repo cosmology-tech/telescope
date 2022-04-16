@@ -1,0 +1,42 @@
+{
+  "name": "telescope",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "private": true,
+  "scripts": {
+    "build": "lerna run prepare --parallel",
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "elint": "DEBUG=eslint:*,eslintrc:* eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --ignore-path .gitignore . --fix",
+    "pretest": "yarn lint",
+    "test:watch": "jest --watch",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.17.6",
+    "@babel/core": "7.17.8",
+    "@babel/eslint-parser": "^7.5.4",
+    "@pyramation/babel-preset-env": "0.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^27.5.1",
+    "eslint": "8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "27.5.1",
+    "lerna": "4.0.0",
+    "prettier": "2.6.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/osmosis-labs/telescope"
+  },
+  "dependencies": {
+    "@jest/transform": "27.5.1"
+  }
+}
