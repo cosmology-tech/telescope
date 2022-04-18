@@ -20,13 +20,18 @@ export interface GenericInterface {
     filename: string;
     node: any;
 }
+export interface TelescopePlugin {
+    name: string;
+    plugin: Function;
+}
 export declare class TSProtoStore {
     protoPath: string;
     outPath: string;
     paths: string[];
     files: TSFileStore[];
     enums: Enum[];
-    constructor(protoPath: any, outPath: any);
+    plugins: TelescopePlugin[];
+    constructor(protoPath: string, outPath: string, plugins?: TelescopePlugin[]);
     load(): void;
     write(): void;
     traverse(): void;

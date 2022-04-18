@@ -5,9 +5,10 @@ import { readFileSync, writeFileSync } from 'fs';
 import { sync as glob } from 'glob';
 import { sync as mkdirp } from 'mkdirp';
 import babelTraverse from '@babel/traverse';
-import { parse } from '@babel/parser';
+import { parse, ParserPlugin } from '@babel/parser';
 import { registerDeps } from './plugin';
 import mutator from './mutate';
+import { snake } from 'case';
 import { makeAutoObservable } from 'mobx';
 import * as c from '@cosmonauts/ast-gen';
 import * as t from '@babel/types';
@@ -46,6 +47,20 @@ export interface GenericInterface {
   filename: string;
   node: any;
 }
+
+export interface TelescopePlugin {
+  name: string;
+  plugin: Function
+}
+
+const defaultPlugins: TelescopePlugin[] = [
+  {
+    name: 'aminoCasing',
+    plugin: () => {
+      return snake;
+    }
+  }
+]
 export class TSProtoStore {
 
   protoPath: string;
@@ -55,10 +70,13 @@ export class TSProtoStore {
   files: TSFileStore[] = [];
   enums: Enum[] = [];
 
-  constructor(protoPath, outPath) {
+  plugins: TelescopePlugin[];
+
+  constructor(protoPath: string, outPath: string, plugins: TelescopePlugin[] = defaultPlugins) {
     this.outPath = resolve(outPath);
     this.protoPath = resolve(protoPath);
     this.paths = glob(this.protoPath + '/**/*.ts');
+    this.plugins = plugins;
     // 1x loop through files get symbols
     this.load();
 
@@ -261,19 +279,12 @@ export class TSFileStore implements FileStore {
     this.code = code || readFileSync(filename, 'utf-8');
     this.program = program;
 
-    const plugins = [
-      'objectRestSpread',
-      'classProperties',
-      'optionalCatchBinding',
-      'asyncGenerators',
-      'decorators-legacy',
-      'typescript',
-      'dynamicImport'
+    const plugins: ParserPlugin[] = [
+      'typescript'
     ];
 
     this.ast = parse(this.code, {
       sourceType: 'module',
-      // babelrc: false,
       plugins
     });
 
@@ -410,6 +421,7 @@ export class TSFileStore implements FileStore {
 
 
     if (this.mutations.length) {
+      const aminoCasingFn = this.program.plugins.find(p => p.name === 'aminoCasing').plugin({ protoPackage: this.protoPackage });
 
       const schemata = this.mutations.map(mutation => {
         const i = this.getInterface(mutation.TypeName);
@@ -430,17 +442,20 @@ export class TSFileStore implements FileStore {
           typeUrl: mutation.typeUrl
         };
 
+
         aminos.push(
           c.makeAminoTypeInterface(
             schema,
             this.program.enums,
-            this.program.getDefinitions()
+            this.program.getDefinitions(),
+            undefined,
+            aminoCasingFn
           )
         );
 
       });
 
-      aminos.push(c.aminoConverter(schemata, this.program.enums, this.program.getDefinitions()));
+      aminos.push(c.aminoConverter(schemata, this.program.enums, this.program.getDefinitions(), aminoCasingFn));
 
       messages = t.exportNamedDeclaration(t.variableDeclaration('const', [
         t.variableDeclarator(t.identifier('messages'), t.objectExpression(
