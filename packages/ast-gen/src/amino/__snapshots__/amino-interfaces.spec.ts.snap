@@ -1,6 +1,346 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`aminoConverter 1`] = `
+exports[`camel aminoConverter 1`] = `
+"export const AminoConverter = {
+  \\"/cosmos.some.MsgThing\\": {
+    aminoType: \\"cosmos-sdk/MstThing\\",
+    toAmino: ({
+      durationCamelCase,
+      coinsCamelCase,
+      someDuration,
+      someHeight,
+      myCoin,
+      camelCaseName,
+      voteValue,
+      previousVotes,
+      desc,
+      commission,
+      str
+    }: MstThing): AminoMstThing[\\"value\\"] => {
+      return {
+        durationCamelCase: durationCamelCase.toString(),
+        coinsCamelCase,
+        someDuration: (someDuration * 1_000_000_000).toString(),
+        someHeight: someHeight ? {
+          revisionHeight: omitDefault(someHeight.revisionHeight)?.toString(),
+          revisionNumber: omitDefault(someHeight.revisionNumber)?.toString()
+        } : {},
+        myCoin: {
+          denom: myCoin.denom,
+          amount: Long.fromNumber(myCoin.amount).toString()
+        },
+        camelCaseName,
+        voteValue,
+        previousVotes,
+        desc: {
+          moniker: desc.moniker,
+          identity: desc.identity,
+          website: desc.website,
+          securityContact: desc.securityContact,
+          details: desc.details,
+          superNested: {
+            rate: desc.superNested.rate,
+            maxRate: desc.superNested.maxRate,
+            maxChangeRate: desc.superNested.maxChangeRate,
+            specialPropertyHere: desc.superNested.specialPropertyHere.map(el0 => ({
+              rate: el0.rate,
+              maxRate: el0.maxRate,
+              maxChangeRate: el0.maxChangeRate
+            }))
+          },
+          manyComissions: desc.manyComissions.map(el0 => ({
+            rate: el0.rate,
+            maxRate: el0.maxRate,
+            maxChangeRate: el0.maxChangeRate,
+            specialPropertyHere: el0.specialPropertyHere.map(el1 => ({
+              rate: el1.rate,
+              maxRate: el1.maxRate,
+              maxChangeRate: el1.maxChangeRate
+            }))
+          }))
+        },
+        commission: {
+          rate: commission.rate,
+          maxRate: commission.maxRate,
+          maxChangeRate: commission.maxChangeRate,
+          specialPropertyHere: commission.specialPropertyHere.map(el0 => ({
+            rate: el0.rate,
+            maxRate: el0.maxRate,
+            maxChangeRate: el0.maxChangeRate
+          }))
+        },
+        str
+      };
+    },
+    fromAmino: ({
+      durationCamelCase,
+      coinsCamelCase,
+      someDuration,
+      someHeight,
+      myCoin,
+      camelCaseName,
+      voteValue,
+      previousVotes,
+      desc,
+      commission,
+      str
+    }: AminoMstThing[\\"value\\"]): MstThing => {
+      return {
+        durationCamelCase: Long.fromString(durationCamelCase),
+        coinsCamelCase: Array.from(coinsCamelCase),
+        someDuration: {
+          seconds: Long.fromNumber(Math.floor(parseInt(someDuration) / 1_000_000_000)),
+          nanos: parseInt(someDuration) % 1_000_000_000
+        },
+        someHeight: someHeight ? {
+          revisionHeight: Long.fromString(someHeight.revisionHeight || \\"0\\", true),
+          revisionNumber: Long.fromString(someHeight.revisionNumber || \\"0\\", true)
+        } : undefined,
+        myCoin,
+        camelCaseName,
+        voteValue: voteOptionToJSON(voteValue),
+        previousVotes: previousVotes.map(el => voteOptionToJSON(el)),
+        desc: {
+          moniker: desc.moniker,
+          identity: desc.identity,
+          website: desc.website,
+          securityContact: desc.securityContact,
+          details: desc.details,
+          superNested: {
+            rate: desc.superNested.rate,
+            maxRate: desc.superNested.maxRate,
+            maxChangeRate: desc.superNested.maxChangeRate,
+            specialPropertyHere: desc.superNested.specialPropertyHere.map(el2 => ({
+              rate: el2.rate,
+              maxRate: el2.maxRate,
+              maxChangeRate: el2.maxChangeRate
+            }))
+          },
+          manyComissions: desc.manyComissions.map(el1 => ({
+            rate: el1.rate,
+            maxRate: el1.maxRate,
+            maxChangeRate: el1.maxChangeRate,
+            specialPropertyHere: el1.specialPropertyHere.map(el2 => ({
+              rate: el2.rate,
+              maxRate: el2.maxRate,
+              maxChangeRate: el2.maxChangeRate
+            }))
+          }))
+        },
+        commission: {
+          rate: commission.rate,
+          maxRate: commission.maxRate,
+          maxChangeRate: commission.maxChangeRate,
+          specialPropertyHere: commission.specialPropertyHere.map(el1 => ({
+            rate: el1.rate,
+            maxRate: el1.maxRate,
+            maxChangeRate: el1.maxChangeRate
+          }))
+        },
+        str
+      };
+    }
+  }
+};"
+`;
+
+exports[`camel makeAminoConverterItem 1`] = `
+"\\"/cosmos.some.MsgThing\\": {
+  aminoType: \\"cosmos-sdk/MstThing\\",
+  toAmino: ({
+    durationCamelCase,
+    coinsCamelCase,
+    someDuration,
+    someHeight,
+    myCoin,
+    camelCaseName,
+    voteValue,
+    previousVotes,
+    desc,
+    commission,
+    str
+  }: MstThing): AminoMstThing[\\"value\\"] => {
+    return {
+      durationCamelCase: durationCamelCase.toString(),
+      coinsCamelCase,
+      someDuration: (someDuration * 1_000_000_000).toString(),
+      someHeight: someHeight ? {
+        revisionHeight: omitDefault(someHeight.revisionHeight)?.toString(),
+        revisionNumber: omitDefault(someHeight.revisionNumber)?.toString()
+      } : {},
+      myCoin: {
+        denom: myCoin.denom,
+        amount: Long.fromNumber(myCoin.amount).toString()
+      },
+      camelCaseName,
+      voteValue,
+      previousVotes,
+      desc: {
+        moniker: desc.moniker,
+        identity: desc.identity,
+        website: desc.website,
+        securityContact: desc.securityContact,
+        details: desc.details,
+        superNested: {
+          rate: desc.superNested.rate,
+          maxRate: desc.superNested.maxRate,
+          maxChangeRate: desc.superNested.maxChangeRate,
+          specialPropertyHere: desc.superNested.specialPropertyHere.map(el0 => ({
+            rate: el0.rate,
+            maxRate: el0.maxRate,
+            maxChangeRate: el0.maxChangeRate
+          }))
+        },
+        manyComissions: desc.manyComissions.map(el0 => ({
+          rate: el0.rate,
+          maxRate: el0.maxRate,
+          maxChangeRate: el0.maxChangeRate,
+          specialPropertyHere: el0.specialPropertyHere.map(el1 => ({
+            rate: el1.rate,
+            maxRate: el1.maxRate,
+            maxChangeRate: el1.maxChangeRate
+          }))
+        }))
+      },
+      commission: {
+        rate: commission.rate,
+        maxRate: commission.maxRate,
+        maxChangeRate: commission.maxChangeRate,
+        specialPropertyHere: commission.specialPropertyHere.map(el0 => ({
+          rate: el0.rate,
+          maxRate: el0.maxRate,
+          maxChangeRate: el0.maxChangeRate
+        }))
+      },
+      str
+    };
+  },
+  fromAmino: ({
+    durationCamelCase,
+    coinsCamelCase,
+    someDuration,
+    someHeight,
+    myCoin,
+    camelCaseName,
+    voteValue,
+    previousVotes,
+    desc,
+    commission,
+    str
+  }: AminoMstThing[\\"value\\"]): MstThing => {
+    return {
+      durationCamelCase: Long.fromString(durationCamelCase),
+      coinsCamelCase: Array.from(coinsCamelCase),
+      someDuration: {
+        seconds: Long.fromNumber(Math.floor(parseInt(someDuration) / 1_000_000_000)),
+        nanos: parseInt(someDuration) % 1_000_000_000
+      },
+      someHeight: someHeight ? {
+        revisionHeight: Long.fromString(someHeight.revisionHeight || \\"0\\", true),
+        revisionNumber: Long.fromString(someHeight.revisionNumber || \\"0\\", true)
+      } : undefined,
+      myCoin,
+      camelCaseName,
+      voteValue: voteOptionToJSON(voteValue),
+      previousVotes: previousVotes.map(el => voteOptionToJSON(el)),
+      desc: {
+        moniker: desc.moniker,
+        identity: desc.identity,
+        website: desc.website,
+        securityContact: desc.securityContact,
+        details: desc.details,
+        superNested: {
+          rate: desc.superNested.rate,
+          maxRate: desc.superNested.maxRate,
+          maxChangeRate: desc.superNested.maxChangeRate,
+          specialPropertyHere: desc.superNested.specialPropertyHere.map(el2 => ({
+            rate: el2.rate,
+            maxRate: el2.maxRate,
+            maxChangeRate: el2.maxChangeRate
+          }))
+        },
+        manyComissions: desc.manyComissions.map(el1 => ({
+          rate: el1.rate,
+          maxRate: el1.maxRate,
+          maxChangeRate: el1.maxChangeRate,
+          specialPropertyHere: el1.specialPropertyHere.map(el2 => ({
+            rate: el2.rate,
+            maxRate: el2.maxRate,
+            maxChangeRate: el2.maxChangeRate
+          }))
+        }))
+      },
+      commission: {
+        rate: commission.rate,
+        maxRate: commission.maxRate,
+        maxChangeRate: commission.maxChangeRate,
+        specialPropertyHere: commission.specialPropertyHere.map(el1 => ({
+          rate: el1.rate,
+          maxRate: el1.maxRate,
+          maxChangeRate: el1.maxChangeRate
+        }))
+      },
+      str
+    };
+  }
+}"
+`;
+
+exports[`camel makeAminoTypeInterface 1`] = `
+"export interface AminoMstThing extends AminoMsg {
+  type: \\"cosmos-sdk/MstThing\\";
+  value: {
+    durationCamelCase: string;
+    coinsCamelCase: Coin[];
+    someDuration: Duration[];
+    someHeight: AminoHeight;
+    myCoin: Coin;
+    camelCaseName: string;
+    voteValue: number;
+    previousVotes: number[];
+    desc: {
+      moniker: string;
+      identity: string;
+      website: string;
+      securityContact: string;
+      details: string;
+      superNested: {
+        rate: string;
+        maxRate: string;
+        maxChangeRate: string;
+        specialPropertyHere: {
+          rate: string;
+          maxRate: string;
+          maxChangeRate: string;
+        }[];
+      };
+      manyComissions: {
+        rate: string;
+        maxRate: string;
+        maxChangeRate: string;
+        specialPropertyHere: {
+          rate: string;
+          maxRate: string;
+          maxChangeRate: string;
+        }[];
+      }[];
+    };
+    commission: {
+      rate: string;
+      maxRate: string;
+      maxChangeRate: string;
+      specialPropertyHere: {
+        rate: string;
+        maxRate: string;
+        maxChangeRate: string;
+      }[];
+    };
+    str: string;
+  };
+}"
+`;
+
+exports[`snake aminoConverter 1`] = `
 "export const AminoConverter = {
   \\"/cosmos.some.MsgThing\\": {
     aminoType: \\"cosmos-sdk/MstThing\\",
@@ -144,7 +484,7 @@ exports[`aminoConverter 1`] = `
 };"
 `;
 
-exports[`makeAminoConverterItem 1`] = `
+exports[`snake makeAminoConverterItem 1`] = `
 "\\"/cosmos.some.MsgThing\\": {
   aminoType: \\"cosmos-sdk/MstThing\\",
   toAmino: ({
@@ -286,7 +626,7 @@ exports[`makeAminoConverterItem 1`] = `
 }"
 `;
 
-exports[`makeAminoTypeInterface 1`] = `
+exports[`snake makeAminoTypeInterface 1`] = `
 "export interface AminoMstThing extends AminoMsg {
   type: \\"cosmos-sdk/MstThing\\";
   value: {

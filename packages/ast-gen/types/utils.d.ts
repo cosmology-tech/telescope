@@ -22,4 +22,4 @@ export declare const getFieldDimensionality: (field: Field) => {
     isArray: boolean;
 };
 export declare const memberExpressionOrIdentifier: (names: any) => any;
-export declare const memberExpressionOrIdentifierSnake: (names: any) => any;
+export declare const memberExpressionOrIdentifierAminoCasing: (names: any, aminoCasingFn: Function) => any;
