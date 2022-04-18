@@ -9,7 +9,7 @@ import { QueryCondition } from "../../osmosis/lockup/lock";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 export interface AminoMsgCreateGauge extends AminoMsg {
-  type: "osmosis/incentives/msg-create-gauge";
+  type: "osmosis/incentives/create-gauge";
   value: {
     isPerpetual: boolean;
     owner: string;
@@ -28,7 +28,7 @@ export interface AminoMsgCreateGauge extends AminoMsg {
   };
 }
 export interface AminoMsgAddToGauge extends AminoMsg {
-  type: "osmosis/incentives/msg-add-to-gauge";
+  type: "osmosis/incentives/add-to-gauge";
   value: {
     owner: string;
     gaugeId: string;
@@ -40,7 +40,7 @@ export interface AminoMsgAddToGauge extends AminoMsg {
 }
 export const AminoConverter = {
   "/osmosis.incentives.MsgCreateGauge": {
-    aminoType: "osmosis/incentives/msg-create-gauge",
+    aminoType: "osmosis/incentives/create-gauge",
     toAmino: ({
       isPerpetual,
       owner,
@@ -93,7 +93,7 @@ export const AminoConverter = {
     }
   },
   "/osmosis.incentives.MsgAddToGauge": {
-    aminoType: "osmosis/incentives/msg-add-to-gauge",
+    aminoType: "osmosis/incentives/add-to-gauge",
     toAmino: ({
       owner,
       gaugeId,

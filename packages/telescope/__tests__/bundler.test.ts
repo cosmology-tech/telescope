@@ -19,7 +19,7 @@ const outPath = join(tmpdir(), 'chain1');
 const program = new TSProtoStore(protoPath, outPath);
 
 const preview = (ast) => {
-    console.log(generate(ast).code)
+    expect(generate(ast).code).toMatchSnapshot();
 }
 
 it('packages', async () => {

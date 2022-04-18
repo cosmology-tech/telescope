@@ -1,7 +1,7 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking } from "./tx";
 export interface AminoMsgLockTokens extends AminoMsg {
-    type: "osmosis/lockup/msg-lock-tokens";
+    type: "osmosis/lockup/lock-tokens";
     value: {
         owner: string;
         duration: string;
@@ -12,13 +12,13 @@ export interface AminoMsgLockTokens extends AminoMsg {
     };
 }
 export interface AminoMsgBeginUnlockingAll extends AminoMsg {
-    type: "osmosis/lockup/msg-begin-unlocking-all";
+    type: "osmosis/lockup/begin-unlocking-all";
     value: {
         owner: string;
     };
 }
 export interface AminoMsgBeginUnlocking extends AminoMsg {
-    type: "osmosis/lockup/msg-begin-unlocking";
+    type: "osmosis/lockup/begin-unlocking";
     value: {
         owner: string;
         id: string;

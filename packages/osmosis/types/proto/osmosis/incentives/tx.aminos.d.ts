@@ -1,7 +1,7 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgCreateGauge, MsgAddToGauge } from "./tx";
 export interface AminoMsgCreateGauge extends AminoMsg {
-    type: "osmosis/incentives/msg-create-gauge";
+    type: "osmosis/incentives/create-gauge";
     value: {
         isPerpetual: boolean;
         owner: string;
@@ -20,7 +20,7 @@ export interface AminoMsgCreateGauge extends AminoMsg {
     };
 }
 export interface AminoMsgAddToGauge extends AminoMsg {
-    type: "osmosis/incentives/msg-add-to-gauge";
+    type: "osmosis/incentives/add-to-gauge";
     value: {
         owner: string;
         gaugeId: string;

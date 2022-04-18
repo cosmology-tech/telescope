@@ -9,7 +9,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "../../osmosis/lockup/lock";
 export interface AminoMsgLockTokens extends AminoMsg {
-  type: "osmosis/lockup/msg-lock-tokens";
+  type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
     duration: string;
@@ -20,13 +20,13 @@ export interface AminoMsgLockTokens extends AminoMsg {
   };
 }
 export interface AminoMsgBeginUnlockingAll extends AminoMsg {
-  type: "osmosis/lockup/msg-begin-unlocking-all";
+  type: "osmosis/lockup/begin-unlocking-all";
   value: {
     owner: string;
   };
 }
 export interface AminoMsgBeginUnlocking extends AminoMsg {
-  type: "osmosis/lockup/msg-begin-unlocking";
+  type: "osmosis/lockup/begin-unlocking";
   value: {
     owner: string;
     id: string;
@@ -38,7 +38,7 @@ export interface AminoMsgBeginUnlocking extends AminoMsg {
 }
 export const AminoConverter = {
   "/osmosis.lockup.MsgLockTokens": {
-    aminoType: "osmosis/lockup/msg-lock-tokens",
+    aminoType: "osmosis/lockup/lock-tokens",
     toAmino: ({
       owner,
       duration,
@@ -69,7 +69,7 @@ export const AminoConverter = {
     }
   },
   "/osmosis.lockup.MsgBeginUnlockingAll": {
-    aminoType: "osmosis/lockup/msg-begin-unlocking-all",
+    aminoType: "osmosis/lockup/begin-unlocking-all",
     toAmino: ({
       owner
     }: MsgBeginUnlockingAll): AminoMsgBeginUnlockingAll["value"] => {
@@ -86,7 +86,7 @@ export const AminoConverter = {
     }
   },
   "/osmosis.lockup.MsgBeginUnlocking": {
-    aminoType: "osmosis/lockup/msg-begin-unlocking",
+    aminoType: "osmosis/lockup/begin-unlocking",
     toAmino: ({
       owner,
       ID,

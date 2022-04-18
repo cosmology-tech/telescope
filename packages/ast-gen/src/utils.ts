@@ -59,6 +59,7 @@ export const typeUrlToAmino = (str, MsgName) => {
         case 'osmosis': {
             const n = elements.filter(a => !a.match(/v1beta1/));
             n[n.length - 1] = kebab(n[n.length - 1]);
+            n[n.length - 1] = n[n.length - 1].replace(/^msg-/, '');
             return n.join('/');
         } default:
             return str;

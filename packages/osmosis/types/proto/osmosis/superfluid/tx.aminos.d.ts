@@ -1,7 +1,7 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate } from "./tx";
 export interface AminoMsgSuperfluidDelegate extends AminoMsg {
-    type: "osmosis/superfluid/msg-superfluid-delegate";
+    type: "osmosis/superfluid/superfluid-delegate";
     value: {
         sender: string;
         lockId: string;
@@ -9,21 +9,21 @@ export interface AminoMsgSuperfluidDelegate extends AminoMsg {
     };
 }
 export interface AminoMsgSuperfluidUndelegate extends AminoMsg {
-    type: "osmosis/superfluid/msg-superfluid-undelegate";
+    type: "osmosis/superfluid/superfluid-undelegate";
     value: {
         sender: string;
         lockId: string;
     };
 }
 export interface AminoMsgSuperfluidUnbondLock extends AminoMsg {
-    type: "osmosis/superfluid/msg-superfluid-unbond-lock";
+    type: "osmosis/superfluid/superfluid-unbond-lock";
     value: {
         sender: string;
         lockId: string;
     };
 }
 export interface AminoMsgLockAndSuperfluidDelegate extends AminoMsg {
-    type: "osmosis/superfluid/msg-lock-and-superfluid-delegate";
+    type: "osmosis/superfluid/lock-and-superfluid-delegate";
     value: {
         sender: string;
         coins: {
