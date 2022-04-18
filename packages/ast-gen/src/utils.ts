@@ -113,21 +113,21 @@ export const memberExpressionOrIdentifier = (names) => {
     )
 };
 
-export const memberExpressionOrIdentifierSnake = (names) => {
+export const memberExpressionOrIdentifierAminoCasing = (names, aminoCasingFn: Function) => {
     if (names.length === 1) {
-        return t.identifier(snake(names[0]))
+        return t.identifier(aminoCasingFn(names[0]))
     }
     if (names.length === 2) {
         const [b, a] = names;
         return t.memberExpression(
-            t.identifier(snake(a)),
-            t.identifier(snake(b))
+            t.identifier(aminoCasingFn(a)),
+            t.identifier(aminoCasingFn(b))
         );
     }
     const [name, ...rest] = names;
 
     return t.memberExpression(
-        memberExpressionOrIdentifierSnake(rest),
-        t.identifier(snake(name))
+        memberExpressionOrIdentifierAminoCasing(rest, aminoCasingFn),
+        t.identifier(aminoCasingFn(name))
     )
 };

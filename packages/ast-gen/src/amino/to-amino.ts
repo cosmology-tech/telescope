@@ -1,9 +1,8 @@
 import * as t from '@babel/types';
-import { snake } from 'case';
 import { BILLION, getFieldDimensionality, memberExpressionOrIdentifier, shorthandProperty } from '../utils';
 import { Enum, Field, Interface, MessageSchema } from '../types';
 
-export const toAminoDuration = (prop: string, scope: string[]) => {
+export const toAminoDuration = (prop: string, scope: string[], aminoCasingFn: Function) => {
   const exp = t.binaryExpression(
     '*',
     memberExpressionOrIdentifier(scope),
@@ -17,31 +16,31 @@ export const toAminoDuration = (prop: string, scope: string[]) => {
     ),
     []
   )
-  return t.objectProperty(t.identifier(snake(prop)), value);
+  return t.objectProperty(t.identifier(aminoCasingFn(prop)), value);
 };
 
-export const toAminoSnakeToCamel = (prop: string, scope: string[]) => {
-  if (prop === snake(prop) && scope.length === 1) {
+export const toAminoCaseToCamel = (prop: string, scope: string[], aminoCasingFn: Function) => {
+  if (prop === aminoCasingFn(prop) && scope.length === 1) {
     return shorthandProperty(prop);
   }
-  return t.objectProperty(t.identifier(snake(prop)), memberExpressionOrIdentifier(scope))
+  return t.objectProperty(t.identifier(aminoCasingFn(prop)), memberExpressionOrIdentifier(scope))
 };
 
-export const toAminoInterface = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number) => {
+export const toAminoInterface = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number, aminoCasingFn: Function) => {
   const properties = ival.fields.map(field => {
-    return toAminoParseField(field, enums, interfaces, scope, nested)
+    return toAminoParseField(field, enums, interfaces, scope, nested, aminoCasingFn)
   });
-  return t.objectProperty(t.identifier(snake(field.name)),
+  return t.objectProperty(t.identifier(aminoCasingFn(field.name)),
     t.objectExpression(
       properties
     )
   );
 };
 
-export const toAminoInterfaceArray = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number) => {
+export const toAminoInterfaceArray = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number, aminoCasingFn: Function) => {
   const variable = 'el' + nested;
   const properties = ival.fields.map(field => {
-    return toAminoParseField(field, enums, interfaces, [variable], nested + 1)
+    return toAminoParseField(field, enums, interfaces, [variable], nested + 1, aminoCasingFn)
   });
 
   const expr = t.callExpression(
@@ -61,20 +60,20 @@ export const toAminoInterfaceArray = (field: Field, ival: Interface, enums: Enum
     ]
   );
 
-  return t.objectProperty(t.identifier(snake(field.name)),
+  return t.objectProperty(t.identifier(aminoCasingFn(field.name)),
     expr
   );
 }
 
-export const toAminoLongToString = (prop: string, scope: string[]) => {
-  return t.objectProperty(t.identifier(snake(prop)),
+export const toAminoLongToString = (prop: string, scope: string[], aminoCasingFn: Function) => {
+  return t.objectProperty(t.identifier(aminoCasingFn(prop)),
     t.callExpression(
       t.memberExpression(memberExpressionOrIdentifier(scope), t.identifier('toString')),
       [])
   )
 };
 
-export const toAminoCoin = (prop: string, scope: string[]) => {
+export const toAminoCoin = (prop: string, scope: string[], aminoCasingFn: Function) => {
   const value = t.objectExpression([
     t.objectProperty(t.identifier('denom'), t.memberExpression(
       memberExpressionOrIdentifier(scope),
@@ -102,14 +101,14 @@ export const toAminoCoin = (prop: string, scope: string[]) => {
       )
     )
   ]);
-  return t.objectProperty(t.identifier(snake(prop)), value);
+  return t.objectProperty(t.identifier(aminoCasingFn(prop)), value);
 };
 
-export const toAminoHeight = (prop: string, scope: string[]) => {
+export const toAminoHeight = (prop: string, scope: string[], aminoCasingFn: Function) => {
   const value = t.objectExpression(
     [
       t.objectProperty(
-        t.identifier('revision_height'),
+        t.identifier(aminoCasingFn('revision_height')),
         t.optionalCallExpression(
           t.optionalMemberExpression(
             t.callExpression(
@@ -131,7 +130,7 @@ export const toAminoHeight = (prop: string, scope: string[]) => {
       ),
       //
       t.objectProperty(
-        t.identifier('revision_number'),
+        t.identifier(aminoCasingFn('revision_number')),
         t.optionalCallExpression(
           t.optionalMemberExpression(
             t.callExpression(
@@ -160,10 +159,10 @@ export const toAminoHeight = (prop: string, scope: string[]) => {
     t.objectExpression([])
   );
 
-  return t.objectProperty(t.identifier(snake(prop)), cond);
+  return t.objectProperty(t.identifier(aminoCasingFn(prop)), cond);
 };
 
-export const toAminoParseField = (field: Field, enums: Enum[], interfaces: Interface[], scope = [], nested = 0) => {
+export const toAminoParseField = (field: Field, enums: Enum[], interfaces: Interface[], scope = [], nested = 0, aminoCasingFn: Function) => {
 
   const newScope = [field.name, ...scope];
   const { typeName, dimensions, isArray } = getFieldDimensionality(field);
@@ -171,11 +170,11 @@ export const toAminoParseField = (field: Field, enums: Enum[], interfaces: Inter
   // special cases
   switch (field.type) {
     case 'Coin':
-      return toAminoCoin(field.name, newScope);
+      return toAminoCoin(field.name, newScope, aminoCasingFn);
     case 'Duration':
-      return toAminoDuration(field.name, newScope);
+      return toAminoDuration(field.name, newScope, aminoCasingFn);
     case 'Height':
-      return toAminoHeight(field.name, newScope);
+      return toAminoHeight(field.name, newScope, aminoCasingFn);
     default:
   }
 
@@ -185,21 +184,21 @@ export const toAminoParseField = (field: Field, enums: Enum[], interfaces: Inter
   const ival: Interface = interfaces.find(e => e.name === typeName);
   if (ival) {
     if (!isArray) {
-      return toAminoInterface(field, ival, enums, interfaces, newScope, nested);
+      return toAminoInterface(field, ival, enums, interfaces, newScope, nested, aminoCasingFn);
     } else if (dimensions === 0) {
-      return toAminoInterfaceArray(field, ival, enums, interfaces, newScope, nested);
+      return toAminoInterfaceArray(field, ival, enums, interfaces, newScope, nested, aminoCasingFn);
     }
   }
 
   switch (field.type) {
     case 'Long':
-      return toAminoLongToString(field.name, newScope);
+      return toAminoLongToString(field.name, newScope, aminoCasingFn);
     default:
-      return toAminoSnakeToCamel(field.name, newScope);
+      return toAminoCaseToCamel(field.name, newScope, aminoCasingFn);
   }
 };
 
-export const toAmino = (schema: MessageSchema, enums: Enum[], interfaces: Interface[]) => {
+export const toAmino = (schema: MessageSchema, enums: Enum[], interfaces: Interface[], aminoCasingFn: Function) => {
 
   const TypeName = schema.name;
 
@@ -215,7 +214,7 @@ export const toAmino = (schema: MessageSchema, enums: Enum[], interfaces: Interf
     t.blockStatement([
       t.returnStatement(
         t.objectExpression(
-          schema.fields.map((field) => toAminoParseField(field, enums, interfaces))
+          schema.fields.map((field) => toAminoParseField(field, enums, interfaces, undefined, undefined, aminoCasingFn))
         )
       )
     ])

@@ -1,14 +1,13 @@
 import * as t from '@babel/types';
-import { snake } from 'case';
 import { Enum, Field, Interface, MessageSchema } from '../types';
 import {
   BILLION,
   getFieldDimensionality,
-  memberExpressionOrIdentifierSnake,
+  memberExpressionOrIdentifierAminoCasing,
   shorthandProperty
 } from '../utils';
 
-export const fromAminoStringToLong = (prop: string, scope: string[]) => {
+export const fromAminoStringToLong = (prop: string, scope: string[], aminoCasingFn: Function) => {
   return t.objectProperty(t.identifier(prop),
     t.callExpression(
       t.memberExpression(
@@ -16,12 +15,12 @@ export const fromAminoStringToLong = (prop: string, scope: string[]) => {
         t.identifier('fromString')
       ),
       [
-        memberExpressionOrIdentifierSnake(scope)
+        memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn)
       ]
     ))
 }
 
-export const fromAminoFromArrayCall = (prop: string, scope: string[]) => {
+export const fromAminoFromArrayCall = (prop: string, scope: string[], aminoCasingFn: Function) => {
   return t.objectProperty(t.identifier(prop),
     t.callExpression(
       t.memberExpression(
@@ -29,23 +28,23 @@ export const fromAminoFromArrayCall = (prop: string, scope: string[]) => {
         t.identifier('from')
       ),
       [
-        memberExpressionOrIdentifierSnake(scope)
+        memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn)
       ]
     ))
 }
 
-export const fromAminoSnakeToCamel = (prop: string, scope: string[]) => {
-  if (prop === snake(prop) && scope.length === 1) {
+export const fromAminoCaseToCamel = (prop: string, scope: string[], aminoCasingFn: Function) => {
+  if (prop === aminoCasingFn(prop) && scope.length === 1) {
     return shorthandProperty(prop);
   }
-  return t.objectProperty(t.identifier(prop), memberExpressionOrIdentifierSnake(scope))
+  return t.objectProperty(t.identifier(prop), memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn))
 }
 
-export const fromAminoHeight = (prop: string, scope: string[]) => {
+export const fromAminoHeight = (prop: string, scope: string[], aminoCasingFn: Function) => {
   return t.objectProperty(
     t.identifier(prop),
     t.conditionalExpression(
-      memberExpressionOrIdentifierSnake(scope),
+      memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn),
       t.objectExpression([
         t.objectProperty(t.identifier('revisionHeight'),
           t.callExpression(
@@ -54,8 +53,8 @@ export const fromAminoHeight = (prop: string, scope: string[]) => {
               t.logicalExpression(
                 '||',
                 t.memberExpression(
-                  memberExpressionOrIdentifierSnake(scope),
-                  t.identifier('revision_height')
+                  memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn),
+                  t.identifier(aminoCasingFn('revision_height'))
                 ),
                 t.stringLiteral('0')
               ),
@@ -70,8 +69,8 @@ export const fromAminoHeight = (prop: string, scope: string[]) => {
               t.logicalExpression(
                 '||',
                 t.memberExpression(
-                  memberExpressionOrIdentifierSnake(scope),
-                  t.identifier('revision_number')
+                  memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn),
+                  t.identifier(aminoCasingFn('revision_number'))
                 ),
                 t.stringLiteral('0')
               ),
@@ -84,7 +83,7 @@ export const fromAminoHeight = (prop: string, scope: string[]) => {
   )
 };
 
-export const fromAminoDuration = (prop: string, scope: string[]) => {
+export const fromAminoDuration = (prop: string, scope: string[], aminoCasingFn: Function) => {
   const value = t.objectExpression(
     [
       t.objectProperty(t.identifier('seconds'), t.callExpression(
@@ -99,7 +98,7 @@ export const fromAminoDuration = (prop: string, scope: string[]) => {
               t.callExpression(
                 t.identifier('parseInt'),
                 [
-                  memberExpressionOrIdentifierSnake(scope)
+                  memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn)
                 ]
               ),
               BILLION
@@ -114,7 +113,7 @@ export const fromAminoDuration = (prop: string, scope: string[]) => {
           t.callExpression(
             t.identifier('parseInt'),
             [
-              memberExpressionOrIdentifierSnake(scope)
+              memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn)
             ]
           ),
           BILLION
@@ -125,20 +124,20 @@ export const fromAminoDuration = (prop: string, scope: string[]) => {
   return t.objectProperty(t.identifier(prop), value);
 };
 
-export const fromAminoEnum = (val: Enum, field: Field, scope: string[]) => {
+export const fromAminoEnum = (val: Enum, field: Field, scope: string[], aminoCasingFn: Function) => {
   const toFunc = val.to.funcName;
   const value = t.callExpression(
     t.identifier(toFunc), [
-    memberExpressionOrIdentifierSnake(scope)
+    memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn)
   ]);
   return t.objectProperty(t.identifier(field.name), value);
 };
 
-export const fromAminoEnumArray = (val: Enum, field: Field, scope: string[]) => {
+export const fromAminoEnumArray = (val: Enum, field: Field, scope: string[], aminoCasingFn: Function) => {
   const toFunc = val.to.funcName;
   const value = t.callExpression(
     t.memberExpression(
-      memberExpressionOrIdentifierSnake(scope),
+      memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn),
       t.identifier('map')
     ),
     [
@@ -158,9 +157,9 @@ export const fromAminoEnumArray = (val: Enum, field: Field, scope: string[]) => 
   return t.objectProperty(t.identifier(field.name), value);
 };
 
-export const fromAminoInterface = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number) => {
+export const fromAminoInterface = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number, aminoCasingFn: Function) => {
   const properties = ival.fields.map(field => {
-    return fromAminoParseField(field, enums, interfaces, scope, nested + 1)
+    return fromAminoParseField(field, enums, interfaces, scope, nested + 1, aminoCasingFn)
   });
   return t.objectProperty(t.identifier(field.name),
     t.objectExpression(
@@ -169,15 +168,15 @@ export const fromAminoInterface = (field: Field, ival: Interface, enums: Enum[],
   );
 };
 
-export const fromAminoInterfaceArray = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number) => {
+export const fromAminoInterfaceArray = (field: Field, ival: Interface, enums: Enum[], interfaces: Interface[], scope: string[], nested: number, aminoCasingFn: Function) => {
   const variable = 'el' + nested;
   const properties = ival.fields.map(field => {
-    return fromAminoParseField(field, enums, interfaces, [variable], nested + 1)
+    return fromAminoParseField(field, enums, interfaces, [variable], nested + 1, aminoCasingFn)
   });
 
   const expr = t.callExpression(
     t.memberExpression(
-      memberExpressionOrIdentifierSnake(scope),
+      memberExpressionOrIdentifierAminoCasing(scope, aminoCasingFn),
       t.identifier('map')
     ),
     [
@@ -197,7 +196,7 @@ export const fromAminoInterfaceArray = (field: Field, ival: Interface, enums: En
   );
 };
 
-export const fromAminoParseField = (field: Field, enums: Enum[], interfaces: Interface[], scope = [], nested = 0) => {
+export const fromAminoParseField = (field: Field, enums: Enum[], interfaces: Interface[], scope = [], nested = 0, aminoCasingFn: Function) => {
 
   const newScope = [field.name, ...scope];
   const { typeName, dimensions, isArray } = getFieldDimensionality(field);
@@ -205,9 +204,9 @@ export const fromAminoParseField = (field: Field, enums: Enum[], interfaces: Int
   // special cases
   switch (field.type) {
     case 'Duration':
-      return fromAminoDuration(field.name, newScope);
+      return fromAminoDuration(field.name, newScope, aminoCasingFn);
     case 'Height':
-      return fromAminoHeight(field.name, newScope);
+      return fromAminoHeight(field.name, newScope, aminoCasingFn);
     default:
   }
 
@@ -215,9 +214,9 @@ export const fromAminoParseField = (field: Field, enums: Enum[], interfaces: Int
   const val = enums.find(e => e.name === typeName);
   if (val) {
     if (!isArray) {
-      return fromAminoEnum(val, field, newScope);
+      return fromAminoEnum(val, field, newScope, aminoCasingFn);
     } else if (dimensions === 0) {
-      return fromAminoEnumArray(val, field, newScope);
+      return fromAminoEnumArray(val, field, newScope, aminoCasingFn);
     }
   }
 
@@ -225,26 +224,26 @@ export const fromAminoParseField = (field: Field, enums: Enum[], interfaces: Int
   const ival: Interface = interfaces.find(e => e.name === typeName);
   if (ival) {
     if (!isArray) {
-      return fromAminoInterface(field, ival, enums, interfaces, newScope, nested);
+      return fromAminoInterface(field, ival, enums, interfaces, newScope, nested, aminoCasingFn);
     } else if (dimensions === 0) {
-      return fromAminoInterfaceArray(field, ival, enums, interfaces, newScope, nested);
+      return fromAminoInterfaceArray(field, ival, enums, interfaces, newScope, nested, aminoCasingFn);
     }
   }
 
   switch (field.type) {
     case 'Long':
-      return fromAminoStringToLong(field.name, newScope);
+      return fromAminoStringToLong(field.name, newScope, aminoCasingFn);
     case 'Coin[]':
-      return fromAminoFromArrayCall(field.name, newScope);
+      return fromAminoFromArrayCall(field.name, newScope, aminoCasingFn);
     default:
-      return fromAminoSnakeToCamel(field.name, newScope);
+      return fromAminoCaseToCamel(field.name, newScope, aminoCasingFn);
   }
 };
 
-export const fromAmino = (schema: MessageSchema, enums: Enum[], interfaces: Interface[]) => {
+export const fromAmino = (schema: MessageSchema, enums: Enum[], interfaces: Interface[], aminoCasingFn: Function) => {
 
   const fromAminoParams = t.objectPattern(
-    schema.fields.map((field) => t.objectProperty(t.identifier(snake(field.name)), t.identifier(snake(field.name)), false, true))
+    schema.fields.map((field) => t.objectProperty(t.identifier(aminoCasingFn(field.name)), t.identifier(aminoCasingFn(field.name)), false, true))
   );
   fromAminoParams.typeAnnotation = t.tsTypeAnnotation(t.tsIndexedAccessType(
     t.tsTypeReference(t.identifier('Amino' + schema.name)),
@@ -258,7 +257,7 @@ export const fromAmino = (schema: MessageSchema, enums: Enum[], interfaces: Inte
     t.blockStatement([
       t.returnStatement(
         t.objectExpression(
-          schema.fields.map((field) => fromAminoParseField(field, enums, interfaces))
+          schema.fields.map((field) => fromAminoParseField(field, enums, interfaces, undefined, undefined, aminoCasingFn))
         )
       )
     ])

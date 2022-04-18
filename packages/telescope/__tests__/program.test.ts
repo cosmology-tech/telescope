@@ -5,11 +5,21 @@ import { join } from 'path';
 import {
     TSProtoStore
 } from '../src'
-
+import { snake, camel } from 'case';
 const protoPath = __dirname + '/../__fixtures__/chain1'
 const outPath = join(tmpdir(), 'chain1');
 
-const program = new TSProtoStore(protoPath, outPath);
+const program = new TSProtoStore(protoPath, outPath, [
+    {
+        name: 'aminoCasing',
+        plugin: ({ protoPackage }) => {
+            if (protoPackage.startsWith('osmosis')) {
+                return camel;
+            }
+            return snake;
+        }
+    }
+]);
 
 it('packages', async () => {
     const superfluid = program.findFilesOfPackage('osmosis.superfluid');
