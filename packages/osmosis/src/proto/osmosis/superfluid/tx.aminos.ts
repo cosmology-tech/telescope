@@ -10,22 +10,22 @@ export interface AminoMsgSuperfluidDelegate extends AminoMsg {
   type: "osmosis/superfluid/msg-superfluid-delegate";
   value: {
     sender: string;
-    lock_id: string;
-    val_addr: string;
+    lockId: string;
+    valAddr: string;
   };
 }
 export interface AminoMsgSuperfluidUndelegate extends AminoMsg {
   type: "osmosis/superfluid/msg-superfluid-undelegate";
   value: {
     sender: string;
-    lock_id: string;
+    lockId: string;
   };
 }
 export interface AminoMsgSuperfluidUnbondLock extends AminoMsg {
   type: "osmosis/superfluid/msg-superfluid-unbond-lock";
   value: {
     sender: string;
-    lock_id: string;
+    lockId: string;
   };
 }
 export interface AminoMsgLockAndSuperfluidDelegate extends AminoMsg {
@@ -36,7 +36,7 @@ export interface AminoMsgLockAndSuperfluidDelegate extends AminoMsg {
       denom: string;
       amount: string;
     }[];
-    val_addr: string;
+    valAddr: string;
   };
 }
 export const AminoConverter = {
@@ -49,19 +49,19 @@ export const AminoConverter = {
     }: MsgSuperfluidDelegate): AminoMsgSuperfluidDelegate["value"] => {
       return {
         sender,
-        lock_id: lockId,
-        val_addr: valAddr
+        lockId,
+        valAddr
       };
     },
     fromAmino: ({
       sender,
-      lock_id,
-      val_addr
+      lockId,
+      valAddr
     }: AminoMsgSuperfluidDelegate["value"]): MsgSuperfluidDelegate => {
       return {
         sender,
-        lockId: lock_id,
-        valAddr: val_addr
+        lockId,
+        valAddr
       };
     }
   },
@@ -73,16 +73,16 @@ export const AminoConverter = {
     }: MsgSuperfluidUndelegate): AminoMsgSuperfluidUndelegate["value"] => {
       return {
         sender,
-        lock_id: lockId
+        lockId
       };
     },
     fromAmino: ({
       sender,
-      lock_id
+      lockId
     }: AminoMsgSuperfluidUndelegate["value"]): MsgSuperfluidUndelegate => {
       return {
         sender,
-        lockId: lock_id
+        lockId
       };
     }
   },
@@ -94,16 +94,16 @@ export const AminoConverter = {
     }: MsgSuperfluidUnbondLock): AminoMsgSuperfluidUnbondLock["value"] => {
       return {
         sender,
-        lock_id: lockId
+        lockId
       };
     },
     fromAmino: ({
       sender,
-      lock_id
+      lockId
     }: AminoMsgSuperfluidUnbondLock["value"]): MsgSuperfluidUnbondLock => {
       return {
         sender,
-        lockId: lock_id
+        lockId
       };
     }
   },
@@ -120,13 +120,13 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        val_addr: valAddr
+        valAddr
       };
     },
     fromAmino: ({
       sender,
       coins,
-      val_addr
+      valAddr
     }: AminoMsgLockAndSuperfluidDelegate["value"]): MsgLockAndSuperfluidDelegate => {
       return {
         sender,
@@ -134,7 +134,7 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        valAddr: val_addr
+        valAddr
       };
     }
   }
