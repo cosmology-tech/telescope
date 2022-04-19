@@ -3,10 +3,10 @@ import { MsgCreateGauge, MsgAddToGauge } from "./tx";
 export interface AminoMsgCreateGauge extends AminoMsg {
     type: "osmosis/incentives/create-gauge";
     value: {
-        isPerpetual: boolean;
+        is_perpetual: boolean;
         owner: string;
-        distributeTo: {
-            lockQueryType: number;
+        distribute_to: {
+            lock_query_type: number;
             denom: string;
             duration: string;
             timestamp: Date;
@@ -15,15 +15,15 @@ export interface AminoMsgCreateGauge extends AminoMsg {
             denom: string;
             amount: string;
         }[];
-        startTime: Date;
-        numEpochsPaidOver: string;
+        start_time: Date;
+        num_epochs_paid_over: string;
     };
 }
 export interface AminoMsgAddToGauge extends AminoMsg {
     type: "osmosis/incentives/add-to-gauge";
     value: {
         owner: string;
-        gaugeId: string;
+        gauge_id: string;
         rewards: {
             denom: string;
             amount: string;
@@ -34,11 +34,11 @@ export declare const AminoConverter: {
     "/osmosis.incentives.MsgCreateGauge": {
         aminoType: string;
         toAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: MsgCreateGauge) => AminoMsgCreateGauge["value"];
-        fromAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: AminoMsgCreateGauge["value"]) => MsgCreateGauge;
+        fromAmino: ({ is_perpetual, owner, distribute_to, coins, start_time, num_epochs_paid_over }: AminoMsgCreateGauge["value"]) => MsgCreateGauge;
     };
     "/osmosis.incentives.MsgAddToGauge": {
         aminoType: string;
         toAmino: ({ owner, gaugeId, rewards }: MsgAddToGauge) => AminoMsgAddToGauge["value"];
-        fromAmino: ({ owner, gaugeId, rewards }: AminoMsgAddToGauge["value"]) => MsgAddToGauge;
+        fromAmino: ({ owner, gauge_id, rewards }: AminoMsgAddToGauge["value"]) => MsgAddToGauge;
     };
 };

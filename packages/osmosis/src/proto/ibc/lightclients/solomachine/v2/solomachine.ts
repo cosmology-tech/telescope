@@ -132,7 +132,7 @@ export function dataTypeToJSON(object: DataType): string {
 
 export interface ClientState {
   /** latest sequence of the client state */
-  sequence: string;
+  sequence: Long;
   /** frozen sequence of the solo machine */
 
   isFrozen: boolean;
@@ -160,14 +160,14 @@ export interface ConsensusState {
    */
 
   diversifier: string;
-  timestamp: string;
+  timestamp: Long;
 }
 /** Header defines a solo machine consensus header */
 
 export interface Header {
   /** sequence to update solo machine public key at */
-  sequence: string;
-  timestamp: string;
+  sequence: Long;
+  timestamp: Long;
   signature: Uint8Array;
   newPublicKey: Any;
   newDiversifier: string;
@@ -179,7 +179,7 @@ export interface Header {
 
 export interface Misbehaviour {
   clientId: string;
-  sequence: string;
+  sequence: Long;
   signatureOne: SignatureAndData;
   signatureTwo: SignatureAndData;
 }
@@ -192,7 +192,7 @@ export interface SignatureAndData {
   signature: Uint8Array;
   dataType: DataType;
   data: Uint8Array;
-  timestamp: string;
+  timestamp: Long;
 }
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
@@ -201,13 +201,13 @@ export interface SignatureAndData {
 
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
-  timestamp: string;
+  timestamp: Long;
 }
 /** SignBytes defines the signed bytes used for signature verification. */
 
 export interface SignBytes {
-  sequence: string;
-  timestamp: string;
+  sequence: Long;
+  timestamp: Long;
   diversifier: string;
   /** type of the data used */
 
@@ -291,12 +291,12 @@ export interface PacketReceiptAbsenceData {
 
 export interface NextSequenceRecvData {
   path: Uint8Array;
-  nextSeqRecv: string;
+  nextSeqRecv: Long;
 }
 
 function createBaseClientState(): ClientState {
   return {
-    sequence: "0",
+    sequence: Long.UZERO,
     isFrozen: false,
     consensusState: undefined,
     allowUpdateAfterProposal: false
@@ -305,7 +305,7 @@ function createBaseClientState(): ClientState {
 
 export const ClientState = {
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sequence !== "0") {
+    if (!message.sequence.isZero()) {
       writer.uint32(8).uint64(message.sequence);
     }
 
@@ -334,7 +334,7 @@ export const ClientState = {
 
       switch (tag >>> 3) {
         case 1:
-          message.sequence = longToString((reader.uint64() as Long));
+          message.sequence = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -360,7 +360,7 @@ export const ClientState = {
 
   fromJSON(object: any): ClientState {
     return {
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
+      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
       isFrozen: isSet(object.isFrozen) ? Boolean(object.isFrozen) : false,
       consensusState: isSet(object.consensusState) ? ConsensusState.fromJSON(object.consensusState) : undefined,
       allowUpdateAfterProposal: isSet(object.allowUpdateAfterProposal) ? Boolean(object.allowUpdateAfterProposal) : false
@@ -369,7 +369,7 @@ export const ClientState = {
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     message.isFrozen !== undefined && (obj.isFrozen = message.isFrozen);
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? ConsensusState.toJSON(message.consensusState) : undefined);
     message.allowUpdateAfterProposal !== undefined && (obj.allowUpdateAfterProposal = message.allowUpdateAfterProposal);
@@ -378,7 +378,7 @@ export const ClientState = {
 
   fromPartial<I extends Exact<DeepPartial<ClientState>, I>>(object: I): ClientState {
     const message = createBaseClientState();
-    message.sequence = object.sequence ?? "0";
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.isFrozen = object.isFrozen ?? false;
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : undefined;
     message.allowUpdateAfterProposal = object.allowUpdateAfterProposal ?? false;
@@ -391,7 +391,7 @@ function createBaseConsensusState(): ConsensusState {
   return {
     publicKey: undefined,
     diversifier: "",
-    timestamp: "0"
+    timestamp: Long.UZERO
   };
 }
 
@@ -405,7 +405,7 @@ export const ConsensusState = {
       writer.uint32(18).string(message.diversifier);
     }
 
-    if (message.timestamp !== "0") {
+    if (!message.timestamp.isZero()) {
       writer.uint32(24).uint64(message.timestamp);
     }
 
@@ -430,7 +430,7 @@ export const ConsensusState = {
           break;
 
         case 3:
-          message.timestamp = longToString((reader.uint64() as Long));
+          message.timestamp = (reader.uint64() as Long);
           break;
 
         default:
@@ -446,7 +446,7 @@ export const ConsensusState = {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0"
+      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO
     };
   },
 
@@ -454,7 +454,7 @@ export const ConsensusState = {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.diversifier !== undefined && (obj.diversifier = message.diversifier);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     return obj;
   },
 
@@ -462,7 +462,7 @@ export const ConsensusState = {
     const message = createBaseConsensusState();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.diversifier = object.diversifier ?? "";
-    message.timestamp = object.timestamp ?? "0";
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
   }
 
@@ -470,8 +470,8 @@ export const ConsensusState = {
 
 function createBaseHeader(): Header {
   return {
-    sequence: "0",
-    timestamp: "0",
+    sequence: Long.UZERO,
+    timestamp: Long.UZERO,
     signature: new Uint8Array(),
     newPublicKey: undefined,
     newDiversifier: ""
@@ -480,11 +480,11 @@ function createBaseHeader(): Header {
 
 export const Header = {
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sequence !== "0") {
+    if (!message.sequence.isZero()) {
       writer.uint32(8).uint64(message.sequence);
     }
 
-    if (message.timestamp !== "0") {
+    if (!message.timestamp.isZero()) {
       writer.uint32(16).uint64(message.timestamp);
     }
 
@@ -513,11 +513,11 @@ export const Header = {
 
       switch (tag >>> 3) {
         case 1:
-          message.sequence = longToString((reader.uint64() as Long));
+          message.sequence = (reader.uint64() as Long);
           break;
 
         case 2:
-          message.timestamp = longToString((reader.uint64() as Long));
+          message.timestamp = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -543,8 +543,8 @@ export const Header = {
 
   fromJSON(object: any): Header {
     return {
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
       newPublicKey: isSet(object.newPublicKey) ? Any.fromJSON(object.newPublicKey) : undefined,
       newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : ""
@@ -553,8 +553,8 @@ export const Header = {
 
   toJSON(message: Header): unknown {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
+    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
     message.newPublicKey !== undefined && (obj.newPublicKey = message.newPublicKey ? Any.toJSON(message.newPublicKey) : undefined);
     message.newDiversifier !== undefined && (obj.newDiversifier = message.newDiversifier);
@@ -563,8 +563,8 @@ export const Header = {
 
   fromPartial<I extends Exact<DeepPartial<Header>, I>>(object: I): Header {
     const message = createBaseHeader();
-    message.sequence = object.sequence ?? "0";
-    message.timestamp = object.timestamp ?? "0";
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     message.signature = object.signature ?? new Uint8Array();
     message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
@@ -576,7 +576,7 @@ export const Header = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
-    sequence: "0",
+    sequence: Long.UZERO,
     signatureOne: undefined,
     signatureTwo: undefined
   };
@@ -588,7 +588,7 @@ export const Misbehaviour = {
       writer.uint32(10).string(message.clientId);
     }
 
-    if (message.sequence !== "0") {
+    if (!message.sequence.isZero()) {
       writer.uint32(16).uint64(message.sequence);
     }
 
@@ -617,7 +617,7 @@ export const Misbehaviour = {
           break;
 
         case 2:
-          message.sequence = longToString((reader.uint64() as Long));
+          message.sequence = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -640,7 +640,7 @@ export const Misbehaviour = {
   fromJSON(object: any): Misbehaviour {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
+      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
       signatureOne: isSet(object.signatureOne) ? SignatureAndData.fromJSON(object.signatureOne) : undefined,
       signatureTwo: isSet(object.signatureTwo) ? SignatureAndData.fromJSON(object.signatureTwo) : undefined
     };
@@ -649,7 +649,7 @@ export const Misbehaviour = {
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     message.signatureOne !== undefined && (obj.signatureOne = message.signatureOne ? SignatureAndData.toJSON(message.signatureOne) : undefined);
     message.signatureTwo !== undefined && (obj.signatureTwo = message.signatureTwo ? SignatureAndData.toJSON(message.signatureTwo) : undefined);
     return obj;
@@ -658,7 +658,7 @@ export const Misbehaviour = {
   fromPartial<I extends Exact<DeepPartial<Misbehaviour>, I>>(object: I): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
-    message.sequence = object.sequence ?? "0";
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : undefined;
     message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : undefined;
     return message;
@@ -671,7 +671,7 @@ function createBaseSignatureAndData(): SignatureAndData {
     signature: new Uint8Array(),
     dataType: 0,
     data: new Uint8Array(),
-    timestamp: "0"
+    timestamp: Long.UZERO
   };
 }
 
@@ -689,7 +689,7 @@ export const SignatureAndData = {
       writer.uint32(26).bytes(message.data);
     }
 
-    if (message.timestamp !== "0") {
+    if (!message.timestamp.isZero()) {
       writer.uint32(32).uint64(message.timestamp);
     }
 
@@ -718,7 +718,7 @@ export const SignatureAndData = {
           break;
 
         case 4:
-          message.timestamp = longToString((reader.uint64() as Long));
+          message.timestamp = (reader.uint64() as Long);
           break;
 
         default:
@@ -735,7 +735,7 @@ export const SignatureAndData = {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
       dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0"
+      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO
     };
   },
 
@@ -744,7 +744,7 @@ export const SignatureAndData = {
     message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
     message.dataType !== undefined && (obj.dataType = dataTypeToJSON(message.dataType));
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     return obj;
   },
 
@@ -753,7 +753,7 @@ export const SignatureAndData = {
     message.signature = object.signature ?? new Uint8Array();
     message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
-    message.timestamp = object.timestamp ?? "0";
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
   }
 
@@ -762,7 +762,7 @@ export const SignatureAndData = {
 function createBaseTimestampedSignatureData(): TimestampedSignatureData {
   return {
     signatureData: new Uint8Array(),
-    timestamp: "0"
+    timestamp: Long.UZERO
   };
 }
 
@@ -772,7 +772,7 @@ export const TimestampedSignatureData = {
       writer.uint32(10).bytes(message.signatureData);
     }
 
-    if (message.timestamp !== "0") {
+    if (!message.timestamp.isZero()) {
       writer.uint32(16).uint64(message.timestamp);
     }
 
@@ -793,7 +793,7 @@ export const TimestampedSignatureData = {
           break;
 
         case 2:
-          message.timestamp = longToString((reader.uint64() as Long));
+          message.timestamp = (reader.uint64() as Long);
           break;
 
         default:
@@ -808,21 +808,21 @@ export const TimestampedSignatureData = {
   fromJSON(object: any): TimestampedSignatureData {
     return {
       signatureData: isSet(object.signatureData) ? bytesFromBase64(object.signatureData) : new Uint8Array(),
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0"
+      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO
     };
   },
 
   toJSON(message: TimestampedSignatureData): unknown {
     const obj: any = {};
     message.signatureData !== undefined && (obj.signatureData = base64FromBytes(message.signatureData !== undefined ? message.signatureData : new Uint8Array()));
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<TimestampedSignatureData>, I>>(object: I): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     message.signatureData = object.signatureData ?? new Uint8Array();
-    message.timestamp = object.timestamp ?? "0";
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
   }
 
@@ -830,8 +830,8 @@ export const TimestampedSignatureData = {
 
 function createBaseSignBytes(): SignBytes {
   return {
-    sequence: "0",
-    timestamp: "0",
+    sequence: Long.UZERO,
+    timestamp: Long.UZERO,
     diversifier: "",
     dataType: 0,
     data: new Uint8Array()
@@ -840,11 +840,11 @@ function createBaseSignBytes(): SignBytes {
 
 export const SignBytes = {
   encode(message: SignBytes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sequence !== "0") {
+    if (!message.sequence.isZero()) {
       writer.uint32(8).uint64(message.sequence);
     }
 
-    if (message.timestamp !== "0") {
+    if (!message.timestamp.isZero()) {
       writer.uint32(16).uint64(message.timestamp);
     }
 
@@ -873,11 +873,11 @@ export const SignBytes = {
 
       switch (tag >>> 3) {
         case 1:
-          message.sequence = longToString((reader.uint64() as Long));
+          message.sequence = (reader.uint64() as Long);
           break;
 
         case 2:
-          message.timestamp = longToString((reader.uint64() as Long));
+          message.timestamp = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -903,8 +903,8 @@ export const SignBytes = {
 
   fromJSON(object: any): SignBytes {
     return {
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
       dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
@@ -913,8 +913,8 @@ export const SignBytes = {
 
   toJSON(message: SignBytes): unknown {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
+    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || Long.UZERO).toString());
     message.diversifier !== undefined && (obj.diversifier = message.diversifier);
     message.dataType !== undefined && (obj.dataType = dataTypeToJSON(message.dataType));
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
@@ -923,8 +923,8 @@ export const SignBytes = {
 
   fromPartial<I extends Exact<DeepPartial<SignBytes>, I>>(object: I): SignBytes {
     const message = createBaseSignBytes();
-    message.sequence = object.sequence ?? "0";
-    message.timestamp = object.timestamp ?? "0";
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     message.diversifier = object.diversifier ?? "";
     message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
@@ -1476,7 +1476,7 @@ export const PacketReceiptAbsenceData = {
 function createBaseNextSequenceRecvData(): NextSequenceRecvData {
   return {
     path: new Uint8Array(),
-    nextSeqRecv: "0"
+    nextSeqRecv: Long.UZERO
   };
 }
 
@@ -1486,7 +1486,7 @@ export const NextSequenceRecvData = {
       writer.uint32(10).bytes(message.path);
     }
 
-    if (message.nextSeqRecv !== "0") {
+    if (!message.nextSeqRecv.isZero()) {
       writer.uint32(16).uint64(message.nextSeqRecv);
     }
 
@@ -1507,7 +1507,7 @@ export const NextSequenceRecvData = {
           break;
 
         case 2:
-          message.nextSeqRecv = longToString((reader.uint64() as Long));
+          message.nextSeqRecv = (reader.uint64() as Long);
           break;
 
         default:
@@ -1522,21 +1522,21 @@ export const NextSequenceRecvData = {
   fromJSON(object: any): NextSequenceRecvData {
     return {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
-      nextSeqRecv: isSet(object.nextSeqRecv) ? String(object.nextSeqRecv) : "0"
+      nextSeqRecv: isSet(object.nextSeqRecv) ? Long.fromString(object.nextSeqRecv) : Long.UZERO
     };
   },
 
   toJSON(message: NextSequenceRecvData): unknown {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.nextSeqRecv !== undefined && (obj.nextSeqRecv = message.nextSeqRecv);
+    message.nextSeqRecv !== undefined && (obj.nextSeqRecv = (message.nextSeqRecv || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<NextSequenceRecvData>, I>>(object: I): NextSequenceRecvData {
     const message = createBaseNextSequenceRecvData();
     message.path = object.path ?? new Uint8Array();
-    message.nextSeqRecv = object.nextSeqRecv ?? "0";
+    message.nextSeqRecv = object.nextSeqRecv !== undefined && object.nextSeqRecv !== null ? Long.fromValue(object.nextSeqRecv) : Long.UZERO;
     return message;
   }
 
@@ -1579,13 +1579,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

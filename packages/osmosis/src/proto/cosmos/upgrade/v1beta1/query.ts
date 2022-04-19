@@ -33,7 +33,7 @@ export interface QueryAppliedPlanRequest {
 
 export interface QueryAppliedPlanResponse {
   /** height is the block height at which the plan was applied. */
-  height: string;
+  height: Long;
 }
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
@@ -47,7 +47,7 @@ export interface QueryUpgradedConsensusStateRequest {
    * last height of the current chain must be sent in request
    * as this is the height under which next consensus state is stored
    */
-  lastHeight: string;
+  lastHeight: Long;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
@@ -262,13 +262,13 @@ export const QueryAppliedPlanRequest = {
 
 function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
   return {
-    height: "0"
+    height: Long.ZERO
   };
 }
 
 export const QueryAppliedPlanResponse = {
   encode(message: QueryAppliedPlanResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
 
@@ -285,7 +285,7 @@ export const QueryAppliedPlanResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = longToString((reader.int64() as Long));
+          message.height = (reader.int64() as Long);
           break;
 
         default:
@@ -299,19 +299,19 @@ export const QueryAppliedPlanResponse = {
 
   fromJSON(object: any): QueryAppliedPlanResponse {
     return {
-      height: isSet(object.height) ? String(object.height) : "0"
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO
     };
   },
 
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryAppliedPlanResponse>, I>>(object: I): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
   }
 
@@ -319,13 +319,13 @@ export const QueryAppliedPlanResponse = {
 
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {
-    lastHeight: "0"
+    lastHeight: Long.ZERO
   };
 }
 
 export const QueryUpgradedConsensusStateRequest = {
   encode(message: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.lastHeight !== "0") {
+    if (!message.lastHeight.isZero()) {
       writer.uint32(8).int64(message.lastHeight);
     }
 
@@ -342,7 +342,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lastHeight = longToString((reader.int64() as Long));
+          message.lastHeight = (reader.int64() as Long);
           break;
 
         default:
@@ -356,19 +356,19 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromJSON(object: any): QueryUpgradedConsensusStateRequest {
     return {
-      lastHeight: isSet(object.lastHeight) ? String(object.lastHeight) : "0"
+      lastHeight: isSet(object.lastHeight) ? Long.fromString(object.lastHeight) : Long.ZERO
     };
   },
 
   toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
     const obj: any = {};
-    message.lastHeight !== undefined && (obj.lastHeight = message.lastHeight);
+    message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>>(object: I): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
-    message.lastHeight = object.lastHeight ?? "0";
+    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? Long.fromValue(object.lastHeight) : Long.ZERO;
     return message;
   }
 
@@ -690,13 +690,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

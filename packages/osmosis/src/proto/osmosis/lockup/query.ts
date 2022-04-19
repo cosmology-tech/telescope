@@ -68,13 +68,13 @@ export interface LockedDenomResponse {
   amount: string;
 }
 export interface LockedRequest {
-  lockId: string;
+  lockId: Long;
 }
 export interface LockedResponse {
   lock: PeriodLock;
 }
 export interface SyntheticLockupsByLockupIDRequest {
-  lockId: string;
+  lockId: Long;
 }
 export interface SyntheticLockupsByLockupIDResponse {
   syntheticLocks: SyntheticLock[];
@@ -1342,13 +1342,13 @@ export const LockedDenomResponse = {
 
 function createBaseLockedRequest(): LockedRequest {
   return {
-    lockId: "0"
+    lockId: Long.UZERO
   };
 }
 
 export const LockedRequest = {
   encode(message: LockedRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
 
@@ -1365,7 +1365,7 @@ export const LockedRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         default:
@@ -1379,19 +1379,19 @@ export const LockedRequest = {
 
   fromJSON(object: any): LockedRequest {
     return {
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0"
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
     };
   },
 
   toJSON(message: LockedRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<LockedRequest>, I>>(object: I): LockedRequest {
     const message = createBaseLockedRequest();
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
 
@@ -1456,13 +1456,13 @@ export const LockedResponse = {
 
 function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockupIDRequest {
   return {
-    lockId: "0"
+    lockId: Long.UZERO
   };
 }
 
 export const SyntheticLockupsByLockupIDRequest = {
   encode(message: SyntheticLockupsByLockupIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
 
@@ -1479,7 +1479,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         default:
@@ -1493,19 +1493,19 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0"
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
     };
   },
 
   toJSON(message: SyntheticLockupsByLockupIDRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<SyntheticLockupsByLockupIDRequest>, I>>(object: I): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
 
@@ -1984,12 +1984,12 @@ export const AccountLockedLongerDurationDenomResponse = {
 /** Query defines the gRPC querier service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -1998,7 +1998,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -2024,8 +2024,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

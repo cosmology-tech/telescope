@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -209,16 +210,12 @@ export declare const FieldMask: {
     decode(input: _m0.Reader | Uint8Array, length?: number): FieldMask;
     fromJSON(object: any): FieldMask;
     toJSON(message: FieldMask): string;
-    fromPartial<I extends {
-        paths?: string[];
-    } & {
-        paths?: string[] & string[] & Record<Exclude<keyof I["paths"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "paths">, never>>(object: I): FieldMask;
+    fromPartial<I extends unknown>(object: I): FieldMask;
     wrap(paths: string[]): FieldMask;
     unwrap(message: FieldMask): string[];
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

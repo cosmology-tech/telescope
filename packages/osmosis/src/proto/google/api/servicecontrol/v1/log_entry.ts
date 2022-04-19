@@ -130,7 +130,7 @@ export interface LogEntrySourceLocation {
    * available.
    */
 
-  line: string;
+  line: Long;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -525,7 +525,7 @@ export const LogEntryOperation = {
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
     file: "",
-    line: "0",
+    line: Long.ZERO,
     function: ""
   };
 }
@@ -536,7 +536,7 @@ export const LogEntrySourceLocation = {
       writer.uint32(10).string(message.file);
     }
 
-    if (message.line !== "0") {
+    if (!message.line.isZero()) {
       writer.uint32(16).int64(message.line);
     }
 
@@ -561,7 +561,7 @@ export const LogEntrySourceLocation = {
           break;
 
         case 2:
-          message.line = longToString((reader.int64() as Long));
+          message.line = (reader.int64() as Long);
           break;
 
         case 3:
@@ -580,7 +580,7 @@ export const LogEntrySourceLocation = {
   fromJSON(object: any): LogEntrySourceLocation {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? String(object.line) : "0",
+      line: isSet(object.line) ? Long.fromString(object.line) : Long.ZERO,
       function: isSet(object.function) ? String(object.function) : ""
     };
   },
@@ -588,7 +588,7 @@ export const LogEntrySourceLocation = {
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = message.line);
+    message.line !== undefined && (obj.line = (message.line || Long.ZERO).toString());
     message.function !== undefined && (obj.function = message.function);
     return obj;
   },
@@ -596,19 +596,19 @@ export const LogEntrySourceLocation = {
   fromPartial<I extends Exact<DeepPartial<LogEntrySourceLocation>, I>>(object: I): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line ?? "0";
+    message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
     message.function = object.function ?? "";
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -617,7 +617,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -632,8 +632,8 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

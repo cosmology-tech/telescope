@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Empty } from "../../../google/protobuf/empty";
 import { Operation } from "../../../google/longrunning/operations";
@@ -1191,1318 +1192,280 @@ export interface CopyLogEntriesMetadata {
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
     /** Number of log entries copied. */
-    logEntriesCopiedCount: string;
+    logEntriesCopiedCount: Long;
 }
 export declare const LogBucket: {
     encode(message: LogBucket, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogBucket;
     fromJSON(object: any): LogBucket;
     toJSON(message: LogBucket): unknown;
-    fromPartial<I extends {
-        name?: string;
-        description?: string;
-        createTime?: Date;
-        updateTime?: Date;
-        retentionDays?: number;
-        locked?: boolean;
-        lifecycleState?: LifecycleState;
-        restrictedFields?: string[];
-        cmekSettings?: {
-            name?: string;
-            kmsKeyName?: string;
-            serviceAccountId?: string;
-        };
-    } & {
-        name?: string;
-        description?: string;
-        createTime?: Date;
-        updateTime?: Date;
-        retentionDays?: number;
-        locked?: boolean;
-        lifecycleState?: LifecycleState;
-        restrictedFields?: string[] & string[] & Record<Exclude<keyof I["restrictedFields"], keyof string[]>, never>;
-        cmekSettings?: {
-            name?: string;
-            kmsKeyName?: string;
-            serviceAccountId?: string;
-        } & {
-            name?: string;
-            kmsKeyName?: string;
-            serviceAccountId?: string;
-        } & Record<Exclude<keyof I["cmekSettings"], keyof CmekSettings>, never>;
-    } & Record<Exclude<keyof I, keyof LogBucket>, never>>(object: I): LogBucket;
+    fromPartial<I extends unknown>(object: I): LogBucket;
 };
 export declare const LogView: {
     encode(message: LogView, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogView;
     fromJSON(object: any): LogView;
     toJSON(message: LogView): unknown;
-    fromPartial<I extends {
-        name?: string;
-        description?: string;
-        createTime?: Date;
-        updateTime?: Date;
-        filter?: string;
-    } & {
-        name?: string;
-        description?: string;
-        createTime?: Date;
-        updateTime?: Date;
-        filter?: string;
-    } & Record<Exclude<keyof I, keyof LogView>, never>>(object: I): LogView;
+    fromPartial<I extends unknown>(object: I): LogView;
 };
 export declare const LogSink: {
     encode(message: LogSink, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogSink;
     fromJSON(object: any): LogSink;
     toJSON(message: LogSink): unknown;
-    fromPartial<I extends {
-        name?: string;
-        destination?: string;
-        filter?: string;
-        description?: string;
-        disabled?: boolean;
-        exclusions?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        }[];
-        outputVersionFormat?: LogSink_VersionFormat;
-        writerIdentity?: string;
-        includeChildren?: boolean;
-        bigqueryOptions?: {
-            usePartitionedTables?: boolean;
-            usesTimestampColumnPartitioning?: boolean;
-        };
-        createTime?: Date;
-        updateTime?: Date;
-    } & {
-        name?: string;
-        destination?: string;
-        filter?: string;
-        description?: string;
-        disabled?: boolean;
-        exclusions?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        }[] & ({
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["exclusions"][number], keyof LogExclusion>, never>)[] & Record<Exclude<keyof I["exclusions"], keyof {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        }[]>, never>;
-        outputVersionFormat?: LogSink_VersionFormat;
-        writerIdentity?: string;
-        includeChildren?: boolean;
-        bigqueryOptions?: {
-            usePartitionedTables?: boolean;
-            usesTimestampColumnPartitioning?: boolean;
-        } & {
-            usePartitionedTables?: boolean;
-            usesTimestampColumnPartitioning?: boolean;
-        } & Record<Exclude<keyof I["bigqueryOptions"], keyof BigQueryOptions>, never>;
-        createTime?: Date;
-        updateTime?: Date;
-    } & Record<Exclude<keyof I, keyof LogSink>, never>>(object: I): LogSink;
+    fromPartial<I extends unknown>(object: I): LogSink;
 };
 export declare const BigQueryOptions: {
     encode(message: BigQueryOptions, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BigQueryOptions;
     fromJSON(object: any): BigQueryOptions;
     toJSON(message: BigQueryOptions): unknown;
-    fromPartial<I extends {
-        usePartitionedTables?: boolean;
-        usesTimestampColumnPartitioning?: boolean;
-    } & {
-        usePartitionedTables?: boolean;
-        usesTimestampColumnPartitioning?: boolean;
-    } & Record<Exclude<keyof I, keyof BigQueryOptions>, never>>(object: I): BigQueryOptions;
+    fromPartial<I extends unknown>(object: I): BigQueryOptions;
 };
 export declare const ListBucketsRequest: {
     encode(message: ListBucketsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsRequest;
     fromJSON(object: any): ListBucketsRequest;
     toJSON(message: ListBucketsRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & Record<Exclude<keyof I, keyof ListBucketsRequest>, never>>(object: I): ListBucketsRequest;
+    fromPartial<I extends unknown>(object: I): ListBucketsRequest;
 };
 export declare const ListBucketsResponse: {
     encode(message: ListBucketsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponse;
     fromJSON(object: any): ListBucketsResponse;
     toJSON(message: ListBucketsResponse): unknown;
-    fromPartial<I extends {
-        buckets?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        }[];
-        nextPageToken?: string;
-    } & {
-        buckets?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        }[] & ({
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        } & {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[] & string[] & Record<Exclude<keyof I["buckets"][number]["restrictedFields"], keyof string[]>, never>;
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            } & {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            } & Record<Exclude<keyof I["buckets"][number]["cmekSettings"], keyof CmekSettings>, never>;
-        } & Record<Exclude<keyof I["buckets"][number], keyof LogBucket>, never>)[] & Record<Exclude<keyof I["buckets"], keyof {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        }[]>, never>;
-        nextPageToken?: string;
-    } & Record<Exclude<keyof I, keyof ListBucketsResponse>, never>>(object: I): ListBucketsResponse;
+    fromPartial<I extends unknown>(object: I): ListBucketsResponse;
 };
 export declare const CreateBucketRequest: {
     encode(message: CreateBucketRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateBucketRequest;
     fromJSON(object: any): CreateBucketRequest;
     toJSON(message: CreateBucketRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        bucketId?: string;
-        bucket?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        };
-    } & {
-        parent?: string;
-        bucketId?: string;
-        bucket?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        } & {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[] & string[] & Record<Exclude<keyof I["bucket"]["restrictedFields"], keyof string[]>, never>;
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            } & {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            } & Record<Exclude<keyof I["bucket"]["cmekSettings"], keyof CmekSettings>, never>;
-        } & Record<Exclude<keyof I["bucket"], keyof LogBucket>, never>;
-    } & Record<Exclude<keyof I, keyof CreateBucketRequest>, never>>(object: I): CreateBucketRequest;
+    fromPartial<I extends unknown>(object: I): CreateBucketRequest;
 };
 export declare const UpdateBucketRequest: {
     encode(message: UpdateBucketRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateBucketRequest;
     fromJSON(object: any): UpdateBucketRequest;
     toJSON(message: UpdateBucketRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        bucket?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        };
-        updateMask?: string[];
-    } & {
-        name?: string;
-        bucket?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[];
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            };
-        } & {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            retentionDays?: number;
-            locked?: boolean;
-            lifecycleState?: LifecycleState;
-            restrictedFields?: string[] & string[] & Record<Exclude<keyof I["bucket"]["restrictedFields"], keyof string[]>, never>;
-            cmekSettings?: {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            } & {
-                name?: string;
-                kmsKeyName?: string;
-                serviceAccountId?: string;
-            } & Record<Exclude<keyof I["bucket"]["cmekSettings"], keyof CmekSettings>, never>;
-        } & Record<Exclude<keyof I["bucket"], keyof LogBucket>, never>;
-        updateMask?: string[] & string[] & Record<Exclude<keyof I["updateMask"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateBucketRequest>, never>>(object: I): UpdateBucketRequest;
+    fromPartial<I extends unknown>(object: I): UpdateBucketRequest;
 };
 export declare const GetBucketRequest: {
     encode(message: GetBucketRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetBucketRequest;
     fromJSON(object: any): GetBucketRequest;
     toJSON(message: GetBucketRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetBucketRequest;
+    fromPartial<I extends unknown>(object: I): GetBucketRequest;
 };
 export declare const DeleteBucketRequest: {
     encode(message: DeleteBucketRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteBucketRequest;
     fromJSON(object: any): DeleteBucketRequest;
     toJSON(message: DeleteBucketRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): DeleteBucketRequest;
+    fromPartial<I extends unknown>(object: I): DeleteBucketRequest;
 };
 export declare const UndeleteBucketRequest: {
     encode(message: UndeleteBucketRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteBucketRequest;
     fromJSON(object: any): UndeleteBucketRequest;
     toJSON(message: UndeleteBucketRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): UndeleteBucketRequest;
+    fromPartial<I extends unknown>(object: I): UndeleteBucketRequest;
 };
 export declare const ListViewsRequest: {
     encode(message: ListViewsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsRequest;
     fromJSON(object: any): ListViewsRequest;
     toJSON(message: ListViewsRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & Record<Exclude<keyof I, keyof ListViewsRequest>, never>>(object: I): ListViewsRequest;
+    fromPartial<I extends unknown>(object: I): ListViewsRequest;
 };
 export declare const ListViewsResponse: {
     encode(message: ListViewsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponse;
     fromJSON(object: any): ListViewsResponse;
     toJSON(message: ListViewsResponse): unknown;
-    fromPartial<I extends {
-        views?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        }[];
-        nextPageToken?: string;
-    } & {
-        views?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        }[] & ({
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        } & {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        } & Record<Exclude<keyof I["views"][number], keyof LogView>, never>)[] & Record<Exclude<keyof I["views"], keyof {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        }[]>, never>;
-        nextPageToken?: string;
-    } & Record<Exclude<keyof I, keyof ListViewsResponse>, never>>(object: I): ListViewsResponse;
+    fromPartial<I extends unknown>(object: I): ListViewsResponse;
 };
 export declare const CreateViewRequest: {
     encode(message: CreateViewRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateViewRequest;
     fromJSON(object: any): CreateViewRequest;
     toJSON(message: CreateViewRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        viewId?: string;
-        view?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        };
-    } & {
-        parent?: string;
-        viewId?: string;
-        view?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        } & {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        } & Record<Exclude<keyof I["view"], keyof LogView>, never>;
-    } & Record<Exclude<keyof I, keyof CreateViewRequest>, never>>(object: I): CreateViewRequest;
+    fromPartial<I extends unknown>(object: I): CreateViewRequest;
 };
 export declare const UpdateViewRequest: {
     encode(message: UpdateViewRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateViewRequest;
     fromJSON(object: any): UpdateViewRequest;
     toJSON(message: UpdateViewRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        view?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        };
-        updateMask?: string[];
-    } & {
-        name?: string;
-        view?: {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        } & {
-            name?: string;
-            description?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            filter?: string;
-        } & Record<Exclude<keyof I["view"], keyof LogView>, never>;
-        updateMask?: string[] & string[] & Record<Exclude<keyof I["updateMask"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateViewRequest>, never>>(object: I): UpdateViewRequest;
+    fromPartial<I extends unknown>(object: I): UpdateViewRequest;
 };
 export declare const GetViewRequest: {
     encode(message: GetViewRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetViewRequest;
     fromJSON(object: any): GetViewRequest;
     toJSON(message: GetViewRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetViewRequest;
+    fromPartial<I extends unknown>(object: I): GetViewRequest;
 };
 export declare const DeleteViewRequest: {
     encode(message: DeleteViewRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteViewRequest;
     fromJSON(object: any): DeleteViewRequest;
     toJSON(message: DeleteViewRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): DeleteViewRequest;
+    fromPartial<I extends unknown>(object: I): DeleteViewRequest;
 };
 export declare const ListSinksRequest: {
     encode(message: ListSinksRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksRequest;
     fromJSON(object: any): ListSinksRequest;
     toJSON(message: ListSinksRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & Record<Exclude<keyof I, keyof ListSinksRequest>, never>>(object: I): ListSinksRequest;
+    fromPartial<I extends unknown>(object: I): ListSinksRequest;
 };
 export declare const ListSinksResponse: {
     encode(message: ListSinksResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponse;
     fromJSON(object: any): ListSinksResponse;
     toJSON(message: ListSinksResponse): unknown;
-    fromPartial<I extends {
-        sinks?: {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        }[];
-        nextPageToken?: string;
-    } & {
-        sinks?: {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        }[] & ({
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[] & ({
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            } & {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            } & Record<Exclude<keyof I["sinks"][number]["exclusions"][number], keyof LogExclusion>, never>)[] & Record<Exclude<keyof I["sinks"][number]["exclusions"], keyof {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[]>, never>;
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            } & {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            } & Record<Exclude<keyof I["sinks"][number]["bigqueryOptions"], keyof BigQueryOptions>, never>;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["sinks"][number], keyof LogSink>, never>)[] & Record<Exclude<keyof I["sinks"], keyof {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        }[]>, never>;
-        nextPageToken?: string;
-    } & Record<Exclude<keyof I, keyof ListSinksResponse>, never>>(object: I): ListSinksResponse;
+    fromPartial<I extends unknown>(object: I): ListSinksResponse;
 };
 export declare const GetSinkRequest: {
     encode(message: GetSinkRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetSinkRequest;
     fromJSON(object: any): GetSinkRequest;
     toJSON(message: GetSinkRequest): unknown;
-    fromPartial<I extends {
-        sinkName?: string;
-    } & {
-        sinkName?: string;
-    } & Record<Exclude<keyof I, "sinkName">, never>>(object: I): GetSinkRequest;
+    fromPartial<I extends unknown>(object: I): GetSinkRequest;
 };
 export declare const CreateSinkRequest: {
     encode(message: CreateSinkRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateSinkRequest;
     fromJSON(object: any): CreateSinkRequest;
     toJSON(message: CreateSinkRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        sink?: {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        };
-        uniqueWriterIdentity?: boolean;
-    } & {
-        parent?: string;
-        sink?: {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[] & ({
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            } & {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            } & Record<Exclude<keyof I["sink"]["exclusions"][number], keyof LogExclusion>, never>)[] & Record<Exclude<keyof I["sink"]["exclusions"], keyof {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[]>, never>;
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            } & {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            } & Record<Exclude<keyof I["sink"]["bigqueryOptions"], keyof BigQueryOptions>, never>;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["sink"], keyof LogSink>, never>;
-        uniqueWriterIdentity?: boolean;
-    } & Record<Exclude<keyof I, keyof CreateSinkRequest>, never>>(object: I): CreateSinkRequest;
+    fromPartial<I extends unknown>(object: I): CreateSinkRequest;
 };
 export declare const UpdateSinkRequest: {
     encode(message: UpdateSinkRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSinkRequest;
     fromJSON(object: any): UpdateSinkRequest;
     toJSON(message: UpdateSinkRequest): unknown;
-    fromPartial<I extends {
-        sinkName?: string;
-        sink?: {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        };
-        uniqueWriterIdentity?: boolean;
-        updateMask?: string[];
-    } & {
-        sinkName?: string;
-        sink?: {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[];
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            };
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            destination?: string;
-            filter?: string;
-            description?: string;
-            disabled?: boolean;
-            exclusions?: {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[] & ({
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            } & {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            } & Record<Exclude<keyof I["sink"]["exclusions"][number], keyof LogExclusion>, never>)[] & Record<Exclude<keyof I["sink"]["exclusions"], keyof {
-                name?: string;
-                description?: string;
-                filter?: string;
-                disabled?: boolean;
-                createTime?: Date;
-                updateTime?: Date;
-            }[]>, never>;
-            outputVersionFormat?: LogSink_VersionFormat;
-            writerIdentity?: string;
-            includeChildren?: boolean;
-            bigqueryOptions?: {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            } & {
-                usePartitionedTables?: boolean;
-                usesTimestampColumnPartitioning?: boolean;
-            } & Record<Exclude<keyof I["sink"]["bigqueryOptions"], keyof BigQueryOptions>, never>;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["sink"], keyof LogSink>, never>;
-        uniqueWriterIdentity?: boolean;
-        updateMask?: string[] & string[] & Record<Exclude<keyof I["updateMask"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateSinkRequest>, never>>(object: I): UpdateSinkRequest;
+    fromPartial<I extends unknown>(object: I): UpdateSinkRequest;
 };
 export declare const DeleteSinkRequest: {
     encode(message: DeleteSinkRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSinkRequest;
     fromJSON(object: any): DeleteSinkRequest;
     toJSON(message: DeleteSinkRequest): unknown;
-    fromPartial<I extends {
-        sinkName?: string;
-    } & {
-        sinkName?: string;
-    } & Record<Exclude<keyof I, "sinkName">, never>>(object: I): DeleteSinkRequest;
+    fromPartial<I extends unknown>(object: I): DeleteSinkRequest;
 };
 export declare const LogExclusion: {
     encode(message: LogExclusion, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusion;
     fromJSON(object: any): LogExclusion;
     toJSON(message: LogExclusion): unknown;
-    fromPartial<I extends {
-        name?: string;
-        description?: string;
-        filter?: string;
-        disabled?: boolean;
-        createTime?: Date;
-        updateTime?: Date;
-    } & {
-        name?: string;
-        description?: string;
-        filter?: string;
-        disabled?: boolean;
-        createTime?: Date;
-        updateTime?: Date;
-    } & Record<Exclude<keyof I, keyof LogExclusion>, never>>(object: I): LogExclusion;
+    fromPartial<I extends unknown>(object: I): LogExclusion;
 };
 export declare const ListExclusionsRequest: {
     encode(message: ListExclusionsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsRequest;
     fromJSON(object: any): ListExclusionsRequest;
     toJSON(message: ListExclusionsRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & {
-        parent?: string;
-        pageToken?: string;
-        pageSize?: number;
-    } & Record<Exclude<keyof I, keyof ListExclusionsRequest>, never>>(object: I): ListExclusionsRequest;
+    fromPartial<I extends unknown>(object: I): ListExclusionsRequest;
 };
 export declare const ListExclusionsResponse: {
     encode(message: ListExclusionsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponse;
     fromJSON(object: any): ListExclusionsResponse;
     toJSON(message: ListExclusionsResponse): unknown;
-    fromPartial<I extends {
-        exclusions?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        }[];
-        nextPageToken?: string;
-    } & {
-        exclusions?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        }[] & ({
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["exclusions"][number], keyof LogExclusion>, never>)[] & Record<Exclude<keyof I["exclusions"], keyof {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        }[]>, never>;
-        nextPageToken?: string;
-    } & Record<Exclude<keyof I, keyof ListExclusionsResponse>, never>>(object: I): ListExclusionsResponse;
+    fromPartial<I extends unknown>(object: I): ListExclusionsResponse;
 };
 export declare const GetExclusionRequest: {
     encode(message: GetExclusionRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetExclusionRequest;
     fromJSON(object: any): GetExclusionRequest;
     toJSON(message: GetExclusionRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetExclusionRequest;
+    fromPartial<I extends unknown>(object: I): GetExclusionRequest;
 };
 export declare const CreateExclusionRequest: {
     encode(message: CreateExclusionRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateExclusionRequest;
     fromJSON(object: any): CreateExclusionRequest;
     toJSON(message: CreateExclusionRequest): unknown;
-    fromPartial<I extends {
-        parent?: string;
-        exclusion?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        };
-    } & {
-        parent?: string;
-        exclusion?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["exclusion"], keyof LogExclusion>, never>;
-    } & Record<Exclude<keyof I, keyof CreateExclusionRequest>, never>>(object: I): CreateExclusionRequest;
+    fromPartial<I extends unknown>(object: I): CreateExclusionRequest;
 };
 export declare const UpdateExclusionRequest: {
     encode(message: UpdateExclusionRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateExclusionRequest;
     fromJSON(object: any): UpdateExclusionRequest;
     toJSON(message: UpdateExclusionRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        exclusion?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        };
-        updateMask?: string[];
-    } & {
-        name?: string;
-        exclusion?: {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & {
-            name?: string;
-            description?: string;
-            filter?: string;
-            disabled?: boolean;
-            createTime?: Date;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["exclusion"], keyof LogExclusion>, never>;
-        updateMask?: string[] & string[] & Record<Exclude<keyof I["updateMask"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateExclusionRequest>, never>>(object: I): UpdateExclusionRequest;
+    fromPartial<I extends unknown>(object: I): UpdateExclusionRequest;
 };
 export declare const DeleteExclusionRequest: {
     encode(message: DeleteExclusionRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteExclusionRequest;
     fromJSON(object: any): DeleteExclusionRequest;
     toJSON(message: DeleteExclusionRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): DeleteExclusionRequest;
+    fromPartial<I extends unknown>(object: I): DeleteExclusionRequest;
 };
 export declare const GetCmekSettingsRequest: {
     encode(message: GetCmekSettingsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetCmekSettingsRequest;
     fromJSON(object: any): GetCmekSettingsRequest;
     toJSON(message: GetCmekSettingsRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetCmekSettingsRequest;
+    fromPartial<I extends unknown>(object: I): GetCmekSettingsRequest;
 };
 export declare const UpdateCmekSettingsRequest: {
     encode(message: UpdateCmekSettingsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateCmekSettingsRequest;
     fromJSON(object: any): UpdateCmekSettingsRequest;
     toJSON(message: UpdateCmekSettingsRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        cmekSettings?: {
-            name?: string;
-            kmsKeyName?: string;
-            serviceAccountId?: string;
-        };
-        updateMask?: string[];
-    } & {
-        name?: string;
-        cmekSettings?: {
-            name?: string;
-            kmsKeyName?: string;
-            serviceAccountId?: string;
-        } & {
-            name?: string;
-            kmsKeyName?: string;
-            serviceAccountId?: string;
-        } & Record<Exclude<keyof I["cmekSettings"], keyof CmekSettings>, never>;
-        updateMask?: string[] & string[] & Record<Exclude<keyof I["updateMask"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateCmekSettingsRequest>, never>>(object: I): UpdateCmekSettingsRequest;
+    fromPartial<I extends unknown>(object: I): UpdateCmekSettingsRequest;
 };
 export declare const CmekSettings: {
     encode(message: CmekSettings, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettings;
     fromJSON(object: any): CmekSettings;
     toJSON(message: CmekSettings): unknown;
-    fromPartial<I extends {
-        name?: string;
-        kmsKeyName?: string;
-        serviceAccountId?: string;
-    } & {
-        name?: string;
-        kmsKeyName?: string;
-        serviceAccountId?: string;
-    } & Record<Exclude<keyof I, keyof CmekSettings>, never>>(object: I): CmekSettings;
+    fromPartial<I extends unknown>(object: I): CmekSettings;
 };
 export declare const GetSettingsRequest: {
     encode(message: GetSettingsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetSettingsRequest;
     fromJSON(object: any): GetSettingsRequest;
     toJSON(message: GetSettingsRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetSettingsRequest;
+    fromPartial<I extends unknown>(object: I): GetSettingsRequest;
 };
 export declare const UpdateSettingsRequest: {
     encode(message: UpdateSettingsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSettingsRequest;
     fromJSON(object: any): UpdateSettingsRequest;
     toJSON(message: UpdateSettingsRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        settings?: {
-            name?: string;
-            kmsKeyName?: string;
-            kmsServiceAccountId?: string;
-            storageLocation?: string;
-            disableDefaultSink?: boolean;
-        };
-        updateMask?: string[];
-    } & {
-        name?: string;
-        settings?: {
-            name?: string;
-            kmsKeyName?: string;
-            kmsServiceAccountId?: string;
-            storageLocation?: string;
-            disableDefaultSink?: boolean;
-        } & {
-            name?: string;
-            kmsKeyName?: string;
-            kmsServiceAccountId?: string;
-            storageLocation?: string;
-            disableDefaultSink?: boolean;
-        } & Record<Exclude<keyof I["settings"], keyof Settings>, never>;
-        updateMask?: string[] & string[] & Record<Exclude<keyof I["updateMask"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateSettingsRequest>, never>>(object: I): UpdateSettingsRequest;
+    fromPartial<I extends unknown>(object: I): UpdateSettingsRequest;
 };
 export declare const Settings: {
     encode(message: Settings, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Settings;
     fromJSON(object: any): Settings;
     toJSON(message: Settings): unknown;
-    fromPartial<I extends {
-        name?: string;
-        kmsKeyName?: string;
-        kmsServiceAccountId?: string;
-        storageLocation?: string;
-        disableDefaultSink?: boolean;
-    } & {
-        name?: string;
-        kmsKeyName?: string;
-        kmsServiceAccountId?: string;
-        storageLocation?: string;
-        disableDefaultSink?: boolean;
-    } & Record<Exclude<keyof I, keyof Settings>, never>>(object: I): Settings;
+    fromPartial<I extends unknown>(object: I): Settings;
 };
 export declare const CopyLogEntriesRequest: {
     encode(message: CopyLogEntriesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesRequest;
     fromJSON(object: any): CopyLogEntriesRequest;
     toJSON(message: CopyLogEntriesRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        filter?: string;
-        destination?: string;
-    } & {
-        name?: string;
-        filter?: string;
-        destination?: string;
-    } & Record<Exclude<keyof I, keyof CopyLogEntriesRequest>, never>>(object: I): CopyLogEntriesRequest;
+    fromPartial<I extends unknown>(object: I): CopyLogEntriesRequest;
 };
 export declare const CopyLogEntriesMetadata: {
     encode(message: CopyLogEntriesMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesMetadata;
     fromJSON(object: any): CopyLogEntriesMetadata;
     toJSON(message: CopyLogEntriesMetadata): unknown;
-    fromPartial<I extends {
-        startTime?: Date;
-        endTime?: Date;
-        state?: OperationState;
-        cancellationRequested?: boolean;
-        request?: {
-            name?: string;
-            filter?: string;
-            destination?: string;
-        };
-        progress?: number;
-        writerIdentity?: string;
-    } & {
-        startTime?: Date;
-        endTime?: Date;
-        state?: OperationState;
-        cancellationRequested?: boolean;
-        request?: {
-            name?: string;
-            filter?: string;
-            destination?: string;
-        } & {
-            name?: string;
-            filter?: string;
-            destination?: string;
-        } & Record<Exclude<keyof I["request"], keyof CopyLogEntriesRequest>, never>;
-        progress?: number;
-        writerIdentity?: string;
-    } & Record<Exclude<keyof I, keyof CopyLogEntriesMetadata>, never>>(object: I): CopyLogEntriesMetadata;
+    fromPartial<I extends unknown>(object: I): CopyLogEntriesMetadata;
 };
 export declare const CopyLogEntriesResponse: {
     encode(message: CopyLogEntriesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesResponse;
     fromJSON(object: any): CopyLogEntriesResponse;
     toJSON(message: CopyLogEntriesResponse): unknown;
-    fromPartial<I extends {
-        logEntriesCopiedCount?: string;
-    } & {
-        logEntriesCopiedCount?: string;
-    } & Record<Exclude<keyof I, "logEntriesCopiedCount">, never>>(object: I): CopyLogEntriesResponse;
+    fromPartial<I extends unknown>(object: I): CopyLogEntriesResponse;
 };
 /** Service for configuring sinks used to route log entries. */
 export interface ConfigServiceV2 {
@@ -2706,7 +1669,7 @@ interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

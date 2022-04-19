@@ -94,7 +94,7 @@ export const AminoConverter = {
     }: MsgBeginUnlocking): AminoMsgBeginUnlocking["value"] => {
       return {
         owner,
-        id: ID,
+        id: ID.toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -108,7 +108,7 @@ export const AminoConverter = {
     }: AminoMsgBeginUnlocking["value"]): MsgBeginUnlocking => {
       return {
         owner,
-        ID: id,
+        ID: Long.fromString(id),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

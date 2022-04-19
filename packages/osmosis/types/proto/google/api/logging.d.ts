@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Logging configuration of the service.
@@ -69,59 +70,17 @@ export declare const Logging: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Logging;
     fromJSON(object: any): Logging;
     toJSON(message: Logging): unknown;
-    fromPartial<I extends {
-        producerDestinations?: {
-            monitoredResource?: string;
-            logs?: string[];
-        }[];
-        consumerDestinations?: {
-            monitoredResource?: string;
-            logs?: string[];
-        }[];
-    } & {
-        producerDestinations?: {
-            monitoredResource?: string;
-            logs?: string[];
-        }[] & ({
-            monitoredResource?: string;
-            logs?: string[];
-        } & {
-            monitoredResource?: string;
-            logs?: string[] & string[] & Record<Exclude<keyof I["producerDestinations"][number]["logs"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["producerDestinations"][number], keyof Logging_LoggingDestination>, never>)[] & Record<Exclude<keyof I["producerDestinations"], keyof {
-            monitoredResource?: string;
-            logs?: string[];
-        }[]>, never>;
-        consumerDestinations?: {
-            monitoredResource?: string;
-            logs?: string[];
-        }[] & ({
-            monitoredResource?: string;
-            logs?: string[];
-        } & {
-            monitoredResource?: string;
-            logs?: string[] & string[] & Record<Exclude<keyof I["consumerDestinations"][number]["logs"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["consumerDestinations"][number], keyof Logging_LoggingDestination>, never>)[] & Record<Exclude<keyof I["consumerDestinations"], keyof {
-            monitoredResource?: string;
-            logs?: string[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Logging>, never>>(object: I): Logging;
+    fromPartial<I extends unknown>(object: I): Logging;
 };
 export declare const Logging_LoggingDestination: {
     encode(message: Logging_LoggingDestination, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Logging_LoggingDestination;
     fromJSON(object: any): Logging_LoggingDestination;
     toJSON(message: Logging_LoggingDestination): unknown;
-    fromPartial<I extends {
-        monitoredResource?: string;
-        logs?: string[];
-    } & {
-        monitoredResource?: string;
-        logs?: string[] & string[] & Record<Exclude<keyof I["logs"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof Logging_LoggingDestination>, never>>(object: I): Logging_LoggingDestination;
+    fromPartial<I extends unknown>(object: I): Logging_LoggingDestination;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

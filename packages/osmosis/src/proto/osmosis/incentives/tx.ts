@@ -22,12 +22,12 @@ export interface MsgCreateGauge {
   startTime: Date;
   /** number of epochs distribution will be done */
 
-  numEpochsPaidOver: string;
+  numEpochsPaidOver: Long;
 }
 export interface MsgCreateGaugeResponse {}
 export interface MsgAddToGauge {
   owner: string;
-  gaugeId: string;
+  gaugeId: Long;
   rewards: Coin[];
 }
 export interface MsgAddToGaugeResponse {}
@@ -39,7 +39,7 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
     distributeTo: undefined,
     coins: [],
     startTime: undefined,
-    numEpochsPaidOver: "0"
+    numEpochsPaidOver: Long.UZERO
   };
 }
 
@@ -65,7 +65,7 @@ export const MsgCreateGauge = {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
 
-    if (message.numEpochsPaidOver !== "0") {
+    if (!message.numEpochsPaidOver.isZero()) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
 
@@ -102,7 +102,7 @@ export const MsgCreateGauge = {
           break;
 
         case 6:
-          message.numEpochsPaidOver = longToString((reader.uint64() as Long));
+          message.numEpochsPaidOver = (reader.uint64() as Long);
           break;
 
         default:
@@ -121,7 +121,7 @@ export const MsgCreateGauge = {
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? String(object.numEpochsPaidOver) : "0"
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromString(object.numEpochsPaidOver) : Long.UZERO
     };
   },
 
@@ -138,7 +138,7 @@ export const MsgCreateGauge = {
     }
 
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = message.numEpochsPaidOver);
+    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || Long.UZERO).toString());
     return obj;
   },
 
@@ -149,7 +149,7 @@ export const MsgCreateGauge = {
     message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver ?? "0";
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO;
     return message;
   }
 
@@ -201,7 +201,7 @@ export const MsgCreateGaugeResponse = {
 function createBaseMsgAddToGauge(): MsgAddToGauge {
   return {
     owner: "",
-    gaugeId: "0",
+    gaugeId: Long.UZERO,
     rewards: []
   };
 }
@@ -212,7 +212,7 @@ export const MsgAddToGauge = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.gaugeId !== "0") {
+    if (!message.gaugeId.isZero()) {
       writer.uint32(16).uint64(message.gaugeId);
     }
 
@@ -237,7 +237,7 @@ export const MsgAddToGauge = {
           break;
 
         case 2:
-          message.gaugeId = longToString((reader.uint64() as Long));
+          message.gaugeId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -256,7 +256,7 @@ export const MsgAddToGauge = {
   fromJSON(object: any): MsgAddToGauge {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      gaugeId: isSet(object.gaugeId) ? String(object.gaugeId) : "0",
+      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -264,7 +264,7 @@ export const MsgAddToGauge = {
   toJSON(message: MsgAddToGauge): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.gaugeId !== undefined && (obj.gaugeId = message.gaugeId);
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
 
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toJSON(e) : undefined);
@@ -278,7 +278,7 @@ export const MsgAddToGauge = {
   fromPartial<I extends Exact<DeepPartial<MsgAddToGauge>, I>>(object: I): MsgAddToGauge {
     const message = createBaseMsgAddToGauge();
     message.owner = object.owner ?? "";
-    message.gaugeId = object.gaugeId ?? "0";
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.rewards = object.rewards?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -328,12 +328,12 @@ export const MsgAddToGaugeResponse = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -342,7 +342,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -357,8 +357,8 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

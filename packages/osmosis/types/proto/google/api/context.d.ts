@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Context` defines which contexts an API requests.
@@ -76,63 +77,17 @@ export declare const Context: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Context;
     fromJSON(object: any): Context;
     toJSON(message: Context): unknown;
-    fromPartial<I extends {
-        rules?: {
-            selector?: string;
-            requested?: string[];
-            provided?: string[];
-            allowedRequestExtensions?: string[];
-            allowedResponseExtensions?: string[];
-        }[];
-    } & {
-        rules?: {
-            selector?: string;
-            requested?: string[];
-            provided?: string[];
-            allowedRequestExtensions?: string[];
-            allowedResponseExtensions?: string[];
-        }[] & ({
-            selector?: string;
-            requested?: string[];
-            provided?: string[];
-            allowedRequestExtensions?: string[];
-            allowedResponseExtensions?: string[];
-        } & {
-            selector?: string;
-            requested?: string[] & string[] & Record<Exclude<keyof I["rules"][number]["requested"], keyof string[]>, never>;
-            provided?: string[] & string[] & Record<Exclude<keyof I["rules"][number]["provided"], keyof string[]>, never>;
-            allowedRequestExtensions?: string[] & string[] & Record<Exclude<keyof I["rules"][number]["allowedRequestExtensions"], keyof string[]>, never>;
-            allowedResponseExtensions?: string[] & string[] & Record<Exclude<keyof I["rules"][number]["allowedResponseExtensions"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["rules"][number], keyof ContextRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
-            selector?: string;
-            requested?: string[];
-            provided?: string[];
-            allowedRequestExtensions?: string[];
-            allowedResponseExtensions?: string[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "rules">, never>>(object: I): Context;
+    fromPartial<I extends unknown>(object: I): Context;
 };
 export declare const ContextRule: {
     encode(message: ContextRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ContextRule;
     fromJSON(object: any): ContextRule;
     toJSON(message: ContextRule): unknown;
-    fromPartial<I extends {
-        selector?: string;
-        requested?: string[];
-        provided?: string[];
-        allowedRequestExtensions?: string[];
-        allowedResponseExtensions?: string[];
-    } & {
-        selector?: string;
-        requested?: string[] & string[] & Record<Exclude<keyof I["requested"], keyof string[]>, never>;
-        provided?: string[] & string[] & Record<Exclude<keyof I["provided"], keyof string[]>, never>;
-        allowedRequestExtensions?: string[] & string[] & Record<Exclude<keyof I["allowedRequestExtensions"], keyof string[]>, never>;
-        allowedResponseExtensions?: string[] & string[] & Record<Exclude<keyof I["allowedResponseExtensions"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof ContextRule>, never>>(object: I): ContextRule;
+    fromPartial<I extends unknown>(object: I): ContextRule;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

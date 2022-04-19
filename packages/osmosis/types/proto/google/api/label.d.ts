@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** A description of a label. */
 export interface LabelDescriptor {
@@ -25,18 +26,10 @@ export declare const LabelDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): LabelDescriptor;
     fromJSON(object: any): LabelDescriptor;
     toJSON(message: LabelDescriptor): unknown;
-    fromPartial<I extends {
-        key?: string;
-        valueType?: LabelDescriptor_ValueType;
-        description?: string;
-    } & {
-        key?: string;
-        valueType?: LabelDescriptor_ValueType;
-        description?: string;
-    } & Record<Exclude<keyof I, keyof LabelDescriptor>, never>>(object: I): LabelDescriptor;
+    fromPartial<I extends unknown>(object: I): LabelDescriptor;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

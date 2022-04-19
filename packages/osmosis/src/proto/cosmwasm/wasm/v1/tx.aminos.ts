@@ -113,7 +113,7 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        code_id: codeId,
+        code_id: codeId.toString(),
         label,
         msg,
         funds: funds.map(el0 => ({
@@ -133,7 +133,7 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        codeId: code_id,
+        codeId: Long.fromString(code_id),
         label,
         msg,
         funds: funds.map(el0 => ({
@@ -189,7 +189,7 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        code_id: codeId,
+        code_id: codeId.toString(),
         msg
       };
     },
@@ -202,7 +202,7 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        codeId: code_id,
+        codeId: Long.fromString(code_id),
         msg
       };
     }

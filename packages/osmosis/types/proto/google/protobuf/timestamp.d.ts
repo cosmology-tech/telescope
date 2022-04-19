@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -98,7 +99,7 @@ export interface Timestamp {
      * 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
      * 9999-12-31T23:59:59Z inclusive.
      */
-    seconds: string;
+    seconds: Long;
     /**
      * Non-negative fractions of a second at nanosecond resolution. Negative
      * second values with fractions must still have non-negative nanos values
@@ -112,16 +113,10 @@ export declare const Timestamp: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Timestamp;
     fromJSON(object: any): Timestamp;
     toJSON(message: Timestamp): unknown;
-    fromPartial<I extends {
-        seconds?: string;
-        nanos?: number;
-    } & {
-        seconds?: string;
-        nanos?: number;
-    } & Record<Exclude<keyof I, keyof Timestamp>, never>>(object: I): Timestamp;
+    fromPartial<I extends unknown>(object: I): Timestamp;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

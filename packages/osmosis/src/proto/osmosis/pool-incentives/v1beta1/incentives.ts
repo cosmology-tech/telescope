@@ -19,7 +19,7 @@ export interface DistrInfo {
   records: DistrRecord[];
 }
 export interface DistrRecord {
-  gaugeId: string;
+  gaugeId: Long;
   weight: string;
 }
 
@@ -220,14 +220,14 @@ export const DistrInfo = {
 
 function createBaseDistrRecord(): DistrRecord {
   return {
-    gaugeId: "0",
+    gaugeId: Long.UZERO,
     weight: ""
   };
 }
 
 export const DistrRecord = {
   encode(message: DistrRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.gaugeId !== "0") {
+    if (!message.gaugeId.isZero()) {
       writer.uint32(8).uint64(message.gaugeId);
     }
 
@@ -248,7 +248,7 @@ export const DistrRecord = {
 
       switch (tag >>> 3) {
         case 1:
-          message.gaugeId = longToString((reader.uint64() as Long));
+          message.gaugeId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -266,28 +266,28 @@ export const DistrRecord = {
 
   fromJSON(object: any): DistrRecord {
     return {
-      gaugeId: isSet(object.gaugeId) ? String(object.gaugeId) : "0",
+      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
 
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = message.gaugeId);
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<DistrRecord>, I>>(object: I): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId ?? "0";
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.weight = object.weight ?? "";
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
@@ -300,10 +300,6 @@ function toDuration(duration: string): Duration {
 
 function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
-
-function longToString(long: Long) {
-  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

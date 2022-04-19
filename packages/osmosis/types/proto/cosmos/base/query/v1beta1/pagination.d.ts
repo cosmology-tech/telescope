@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -20,12 +21,12 @@ export interface PageRequest {
      * It is less efficient than using key. Only one of offset or key should
      * be set.
      */
-    offset: string;
+    offset: Long;
     /**
      * limit is the total number of results to be returned in the result page.
      * If left empty it will default to a value to be set by each app.
      */
-    limit: string;
+    limit: Long;
     /**
      * count_total is set to true  to indicate that the result set should include
      * a count of the total number of items available for pagination in UIs.
@@ -60,42 +61,24 @@ export interface PageResponse {
      * total is total number of results available if PageRequest.count_total
      * was set, its value is undefined otherwise
      */
-    total: string;
+    total: Long;
 }
 export declare const PageRequest: {
     encode(message: PageRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PageRequest;
     fromJSON(object: any): PageRequest;
     toJSON(message: PageRequest): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-        offset?: string;
-        limit?: string;
-        countTotal?: boolean;
-        reverse?: boolean;
-    } & {
-        key?: Uint8Array;
-        offset?: string;
-        limit?: string;
-        countTotal?: boolean;
-        reverse?: boolean;
-    } & Record<Exclude<keyof I, keyof PageRequest>, never>>(object: I): PageRequest;
+    fromPartial<I extends unknown>(object: I): PageRequest;
 };
 export declare const PageResponse: {
     encode(message: PageResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PageResponse;
     fromJSON(object: any): PageResponse;
     toJSON(message: PageResponse): unknown;
-    fromPartial<I extends {
-        nextKey?: Uint8Array;
-        total?: string;
-    } & {
-        nextKey?: Uint8Array;
-        total?: string;
-    } & Record<Exclude<keyof I, keyof PageResponse>, never>>(object: I): PageResponse;
+    fromPartial<I extends unknown>(object: I): PageResponse;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

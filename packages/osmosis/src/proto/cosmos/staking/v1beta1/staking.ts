@@ -151,7 +151,7 @@ export interface Validator {
   description: Description;
   /** unbonding_height defines, if unbonding, the height at which this validator has begun unbonding. */
 
-  unbondingHeight: string;
+  unbondingHeight: Long;
   /** unbonding_time defines, if unbonding, the min time for the validator to complete unbonding. */
 
   unbondingTime: Date;
@@ -234,7 +234,7 @@ export interface UnbondingDelegation {
 
 export interface UnbondingDelegationEntry {
   /** creation_height is the height which the unbonding took place. */
-  creationHeight: string;
+  creationHeight: Long;
   /** completion_time is the unix time for unbonding completion. */
 
   completionTime: Date;
@@ -249,7 +249,7 @@ export interface UnbondingDelegationEntry {
 
 export interface RedelegationEntry {
   /** creation_height  defines the height which the redelegation took place. */
-  creationHeight: string;
+  creationHeight: Long;
   /** completion_time defines the unix time for redelegation completion. */
 
   completionTime: Date;
@@ -677,7 +677,7 @@ function createBaseValidator(): Validator {
     tokens: "",
     delegatorShares: "",
     description: undefined,
-    unbondingHeight: "0",
+    unbondingHeight: Long.ZERO,
     unbondingTime: undefined,
     commission: undefined,
     minSelfDelegation: ""
@@ -714,7 +714,7 @@ export const Validator = {
       Description.encode(message.description, writer.uint32(58).fork()).ldelim();
     }
 
-    if (message.unbondingHeight !== "0") {
+    if (!message.unbondingHeight.isZero()) {
       writer.uint32(64).int64(message.unbondingHeight);
     }
 
@@ -771,7 +771,7 @@ export const Validator = {
           break;
 
         case 8:
-          message.unbondingHeight = longToString((reader.int64() as Long));
+          message.unbondingHeight = (reader.int64() as Long);
           break;
 
         case 9:
@@ -804,7 +804,7 @@ export const Validator = {
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      unbondingHeight: isSet(object.unbondingHeight) ? String(object.unbondingHeight) : "0",
+      unbondingHeight: isSet(object.unbondingHeight) ? Long.fromString(object.unbondingHeight) : Long.ZERO,
       unbondingTime: isSet(object.unbondingTime) ? fromJsonTimestamp(object.unbondingTime) : undefined,
       commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
       minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
@@ -820,7 +820,7 @@ export const Validator = {
     message.tokens !== undefined && (obj.tokens = message.tokens);
     message.delegatorShares !== undefined && (obj.delegatorShares = message.delegatorShares);
     message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
-    message.unbondingHeight !== undefined && (obj.unbondingHeight = message.unbondingHeight);
+    message.unbondingHeight !== undefined && (obj.unbondingHeight = (message.unbondingHeight || Long.ZERO).toString());
     message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime.toISOString());
     message.commission !== undefined && (obj.commission = message.commission ? Commission.toJSON(message.commission) : undefined);
     message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
@@ -836,7 +836,7 @@ export const Validator = {
     message.tokens = object.tokens ?? "";
     message.delegatorShares = object.delegatorShares ?? "";
     message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
-    message.unbondingHeight = object.unbondingHeight ?? "0";
+    message.unbondingHeight = object.unbondingHeight !== undefined && object.unbondingHeight !== null ? Long.fromValue(object.unbondingHeight) : Long.ZERO;
     message.unbondingTime = object.unbondingTime ?? undefined;
     message.commission = object.commission !== undefined && object.commission !== null ? Commission.fromPartial(object.commission) : undefined;
     message.minSelfDelegation = object.minSelfDelegation ?? "";
@@ -1354,7 +1354,7 @@ export const UnbondingDelegation = {
 
 function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
-    creationHeight: "0",
+    creationHeight: Long.ZERO,
     completionTime: undefined,
     initialBalance: "",
     balance: ""
@@ -1363,7 +1363,7 @@ function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
 
 export const UnbondingDelegationEntry = {
   encode(message: UnbondingDelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.creationHeight !== "0") {
+    if (!message.creationHeight.isZero()) {
       writer.uint32(8).int64(message.creationHeight);
     }
 
@@ -1392,7 +1392,7 @@ export const UnbondingDelegationEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.creationHeight = longToString((reader.int64() as Long));
+          message.creationHeight = (reader.int64() as Long);
           break;
 
         case 2:
@@ -1418,7 +1418,7 @@ export const UnbondingDelegationEntry = {
 
   fromJSON(object: any): UnbondingDelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? String(object.creationHeight) : "0",
+      creationHeight: isSet(object.creationHeight) ? Long.fromString(object.creationHeight) : Long.ZERO,
       completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
@@ -1427,7 +1427,7 @@ export const UnbondingDelegationEntry = {
 
   toJSON(message: UnbondingDelegationEntry): unknown {
     const obj: any = {};
-    message.creationHeight !== undefined && (obj.creationHeight = message.creationHeight);
+    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || Long.ZERO).toString());
     message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
     message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
     message.balance !== undefined && (obj.balance = message.balance);
@@ -1436,7 +1436,7 @@ export const UnbondingDelegationEntry = {
 
   fromPartial<I extends Exact<DeepPartial<UnbondingDelegationEntry>, I>>(object: I): UnbondingDelegationEntry {
     const message = createBaseUnbondingDelegationEntry();
-    message.creationHeight = object.creationHeight ?? "0";
+    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? Long.fromValue(object.creationHeight) : Long.ZERO;
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.balance = object.balance ?? "";
@@ -1447,7 +1447,7 @@ export const UnbondingDelegationEntry = {
 
 function createBaseRedelegationEntry(): RedelegationEntry {
   return {
-    creationHeight: "0",
+    creationHeight: Long.ZERO,
     completionTime: undefined,
     initialBalance: "",
     sharesDst: ""
@@ -1456,7 +1456,7 @@ function createBaseRedelegationEntry(): RedelegationEntry {
 
 export const RedelegationEntry = {
   encode(message: RedelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.creationHeight !== "0") {
+    if (!message.creationHeight.isZero()) {
       writer.uint32(8).int64(message.creationHeight);
     }
 
@@ -1485,7 +1485,7 @@ export const RedelegationEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.creationHeight = longToString((reader.int64() as Long));
+          message.creationHeight = (reader.int64() as Long);
           break;
 
         case 2:
@@ -1511,7 +1511,7 @@ export const RedelegationEntry = {
 
   fromJSON(object: any): RedelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? String(object.creationHeight) : "0",
+      creationHeight: isSet(object.creationHeight) ? Long.fromString(object.creationHeight) : Long.ZERO,
       completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""
@@ -1520,7 +1520,7 @@ export const RedelegationEntry = {
 
   toJSON(message: RedelegationEntry): unknown {
     const obj: any = {};
-    message.creationHeight !== undefined && (obj.creationHeight = message.creationHeight);
+    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || Long.ZERO).toString());
     message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
     message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
     message.sharesDst !== undefined && (obj.sharesDst = message.sharesDst);
@@ -1529,7 +1529,7 @@ export const RedelegationEntry = {
 
   fromPartial<I extends Exact<DeepPartial<RedelegationEntry>, I>>(object: I): RedelegationEntry {
     const message = createBaseRedelegationEntry();
-    message.creationHeight = object.creationHeight ?? "0";
+    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? Long.fromValue(object.creationHeight) : Long.ZERO;
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.sharesDst = object.sharesDst ?? "";
@@ -2036,12 +2036,12 @@ export const Pool = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -2050,7 +2050,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -2076,8 +2076,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

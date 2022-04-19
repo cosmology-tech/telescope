@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -23,50 +24,24 @@ export declare const EventSend: {
     decode(input: _m0.Reader | Uint8Array, length?: number): EventSend;
     fromJSON(object: any): EventSend;
     toJSON(message: EventSend): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-        sender?: string;
-        receiver?: string;
-    } & {
-        classId?: string;
-        id?: string;
-        sender?: string;
-        receiver?: string;
-    } & Record<Exclude<keyof I, keyof EventSend>, never>>(object: I): EventSend;
+    fromPartial<I extends unknown>(object: I): EventSend;
 };
 export declare const EventMint: {
     encode(message: EventMint, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventMint;
     fromJSON(object: any): EventMint;
     toJSON(message: EventMint): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-        owner?: string;
-    } & {
-        classId?: string;
-        id?: string;
-        owner?: string;
-    } & Record<Exclude<keyof I, keyof EventMint>, never>>(object: I): EventMint;
+    fromPartial<I extends unknown>(object: I): EventMint;
 };
 export declare const EventBurn: {
     encode(message: EventBurn, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventBurn;
     fromJSON(object: any): EventBurn;
     toJSON(message: EventBurn): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-        owner?: string;
-    } & {
-        classId?: string;
-        id?: string;
-        owner?: string;
-    } & Record<Exclude<keyof I, keyof EventBurn>, never>>(object: I): EventBurn;
+    fromPartial<I extends unknown>(object: I): EventBurn;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

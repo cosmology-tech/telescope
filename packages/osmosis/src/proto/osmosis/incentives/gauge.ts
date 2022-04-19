@@ -7,7 +7,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 export interface Gauge {
   /** unique ID of a Gauge */
-  id: string;
+  id: Long;
   /**
    * flag to show if it's perpetual or multi-epoch
    * distribution incentives by third party
@@ -31,10 +31,10 @@ export interface Gauge {
   startTime: Date;
   /** number of epochs distribution will be done */
 
-  numEpochsPaidOver: string;
+  numEpochsPaidOver: Long;
   /** number of epochs distributed already */
 
-  filledEpochs: string;
+  filledEpochs: Long;
   /** already distributed coins */
 
   distributedCoins: Coin[];
@@ -45,20 +45,20 @@ export interface LockableDurationsInfo {
 
 function createBaseGauge(): Gauge {
   return {
-    id: "0",
+    id: Long.UZERO,
     isPerpetual: false,
     distributeTo: undefined,
     coins: [],
     startTime: undefined,
-    numEpochsPaidOver: "0",
-    filledEpochs: "0",
+    numEpochsPaidOver: Long.UZERO,
+    filledEpochs: Long.UZERO,
     distributedCoins: []
   };
 }
 
 export const Gauge = {
   encode(message: Gauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
 
@@ -78,11 +78,11 @@ export const Gauge = {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
 
-    if (message.numEpochsPaidOver !== "0") {
+    if (!message.numEpochsPaidOver.isZero()) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
 
-    if (message.filledEpochs !== "0") {
+    if (!message.filledEpochs.isZero()) {
       writer.uint32(56).uint64(message.filledEpochs);
     }
 
@@ -103,7 +103,7 @@ export const Gauge = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = longToString((reader.uint64() as Long));
+          message.id = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -123,11 +123,11 @@ export const Gauge = {
           break;
 
         case 6:
-          message.numEpochsPaidOver = longToString((reader.uint64() as Long));
+          message.numEpochsPaidOver = (reader.uint64() as Long);
           break;
 
         case 7:
-          message.filledEpochs = longToString((reader.uint64() as Long));
+          message.filledEpochs = (reader.uint64() as Long);
           break;
 
         case 8:
@@ -145,20 +145,20 @@ export const Gauge = {
 
   fromJSON(object: any): Gauge {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
       isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? String(object.numEpochsPaidOver) : "0",
-      filledEpochs: isSet(object.filledEpochs) ? String(object.filledEpochs) : "0",
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromString(object.numEpochsPaidOver) : Long.UZERO,
+      filledEpochs: isSet(object.filledEpochs) ? Long.fromString(object.filledEpochs) : Long.UZERO,
       distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
 
   toJSON(message: Gauge): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     message.isPerpetual !== undefined && (obj.isPerpetual = message.isPerpetual);
     message.distributeTo !== undefined && (obj.distributeTo = message.distributeTo ? QueryCondition.toJSON(message.distributeTo) : undefined);
 
@@ -169,8 +169,8 @@ export const Gauge = {
     }
 
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = message.numEpochsPaidOver);
-    message.filledEpochs !== undefined && (obj.filledEpochs = message.filledEpochs);
+    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || Long.UZERO).toString());
+    message.filledEpochs !== undefined && (obj.filledEpochs = (message.filledEpochs || Long.UZERO).toString());
 
     if (message.distributedCoins) {
       obj.distributedCoins = message.distributedCoins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -183,13 +183,13 @@ export const Gauge = {
 
   fromPartial<I extends Exact<DeepPartial<Gauge>, I>>(object: I): Gauge {
     const message = createBaseGauge();
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.isPerpetual = object.isPerpetual ?? false;
     message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver ?? "0";
-    message.filledEpochs = object.filledEpochs ?? "0";
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO;
+    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? Long.fromValue(object.filledEpochs) : Long.UZERO;
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -259,12 +259,12 @@ export const LockableDurationsInfo = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -273,7 +273,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -299,8 +299,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

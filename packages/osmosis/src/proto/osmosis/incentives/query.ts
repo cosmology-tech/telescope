@@ -14,7 +14,7 @@ export interface ModuleDistributedCoinsResponse {
   coins: Coin[];
 }
 export interface GaugeByIDRequest {
-  id: string;
+  id: Long;
 }
 export interface GaugeByIDResponse {
   gauge: Gauge;
@@ -63,8 +63,8 @@ export interface UpcomingGaugesResponse {
 }
 export interface RewardsEstRequest {
   owner: string;
-  lockIds: string[];
-  endEpoch: string;
+  lockIds: Long[];
+  endEpoch: Long;
 }
 export interface RewardsEstResponse {
   coins: Coin[];
@@ -288,13 +288,13 @@ export const ModuleDistributedCoinsResponse = {
 
 function createBaseGaugeByIDRequest(): GaugeByIDRequest {
   return {
-    id: "0"
+    id: Long.UZERO
   };
 }
 
 export const GaugeByIDRequest = {
   encode(message: GaugeByIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
 
@@ -311,7 +311,7 @@ export const GaugeByIDRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = longToString((reader.uint64() as Long));
+          message.id = (reader.uint64() as Long);
           break;
 
         default:
@@ -325,19 +325,19 @@ export const GaugeByIDRequest = {
 
   fromJSON(object: any): GaugeByIDRequest {
     return {
-      id: isSet(object.id) ? String(object.id) : "0"
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO
     };
   },
 
   toJSON(message: GaugeByIDRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<GaugeByIDRequest>, I>>(object: I): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     return message;
   }
 
@@ -944,7 +944,7 @@ function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
     owner: "",
     lockIds: [],
-    endEpoch: "0"
+    endEpoch: Long.ZERO
   };
 }
 
@@ -962,7 +962,7 @@ export const RewardsEstRequest = {
 
     writer.ldelim();
 
-    if (message.endEpoch !== "0") {
+    if (!message.endEpoch.isZero()) {
       writer.uint32(24).int64(message.endEpoch);
     }
 
@@ -987,16 +987,16 @@ export const RewardsEstRequest = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.lockIds.push(longToString((reader.uint64() as Long)));
+              message.lockIds.push((reader.uint64() as Long));
             }
           } else {
-            message.lockIds.push(longToString((reader.uint64() as Long)));
+            message.lockIds.push((reader.uint64() as Long));
           }
 
           break;
 
         case 3:
-          message.endEpoch = longToString((reader.int64() as Long));
+          message.endEpoch = (reader.int64() as Long);
           break;
 
         default:
@@ -1011,8 +1011,8 @@ export const RewardsEstRequest = {
   fromJSON(object: any): RewardsEstRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => String(e)) : [],
-      endEpoch: isSet(object.endEpoch) ? String(object.endEpoch) : "0"
+      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => Long.fromString(e)) : [],
+      endEpoch: isSet(object.endEpoch) ? Long.fromString(object.endEpoch) : Long.ZERO
     };
   },
 
@@ -1021,20 +1021,20 @@ export const RewardsEstRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
 
     if (message.lockIds) {
-      obj.lockIds = message.lockIds.map(e => e);
+      obj.lockIds = message.lockIds.map(e => (e || Long.UZERO).toString());
     } else {
       obj.lockIds = [];
     }
 
-    message.endEpoch !== undefined && (obj.endEpoch = message.endEpoch);
+    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<RewardsEstRequest>, I>>(object: I): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
-    message.lockIds = object.lockIds?.map(e => e) || [];
-    message.endEpoch = object.endEpoch ?? "0";
+    message.lockIds = object.lockIds?.map(e => Long.fromValue(e)) || [];
+    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? Long.fromValue(object.endEpoch) : Long.ZERO;
     return message;
   }
 
@@ -1211,7 +1211,7 @@ export const QueryLockableDurationsResponse = {
 /** Query defines the gRPC querier service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
@@ -1224,10 +1224,6 @@ function toDuration(duration: string): Duration {
 
 function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
-
-function longToString(long: Long) {
-  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

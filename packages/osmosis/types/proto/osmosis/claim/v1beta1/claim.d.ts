@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export declare enum Action {
@@ -26,33 +27,10 @@ export declare const ClaimRecord: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ClaimRecord;
     fromJSON(object: any): ClaimRecord;
     toJSON(message: ClaimRecord): unknown;
-    fromPartial<I extends {
-        address?: string;
-        initialClaimableAmount?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        actionCompleted?: boolean[];
-    } & {
-        address?: string;
-        initialClaimableAmount?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["initialClaimableAmount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["initialClaimableAmount"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        actionCompleted?: boolean[] & boolean[] & Record<Exclude<keyof I["actionCompleted"], keyof boolean[]>, never>;
-    } & Record<Exclude<keyof I, keyof ClaimRecord>, never>>(object: I): ClaimRecord;
+    fromPartial<I extends unknown>(object: I): ClaimRecord;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

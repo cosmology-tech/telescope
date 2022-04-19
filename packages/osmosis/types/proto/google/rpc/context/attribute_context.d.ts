@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 /**
@@ -63,7 +64,7 @@ export interface AttributeContext_Peer {
     /** The IP address of the peer. */
     ip: string;
     /** The network port of the peer. */
-    port: string;
+    port: Long;
     /** The labels associated with the peer. */
     labels: {
         [key: string]: string;
@@ -222,7 +223,7 @@ export interface AttributeContext_Request {
      */
     time: Date;
     /** The HTTP request size in bytes. If unknown, it must be -1. */
-    size: string;
+    size: Long;
     /**
      * The network protocol used with the request, such as "http/1.1",
      * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
@@ -251,9 +252,9 @@ export interface AttributeContext_Request_HeadersEntry {
  */
 export interface AttributeContext_Response {
     /** The HTTP response status code, such as `200` and `404`. */
-    code: string;
+    code: Long;
     /** The HTTP response size in bytes. If unknown, it must be -1. */
-    size: string;
+    size: Long;
     /**
      * The HTTP response headers. If multiple headers share the same key, they
      * must be merged according to HTTP spec. All header keys must be
@@ -387,565 +388,87 @@ export declare const AttributeContext: {
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext;
     fromJSON(object: any): AttributeContext;
     toJSON(message: AttributeContext): unknown;
-    fromPartial<I extends {
-        origin?: {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            principal?: string;
-            regionCode?: string;
-        };
-        source?: {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            principal?: string;
-            regionCode?: string;
-        };
-        destination?: {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            principal?: string;
-            regionCode?: string;
-        };
-        request?: {
-            id?: string;
-            method?: string;
-            headers?: {
-                [x: string]: string;
-            };
-            path?: string;
-            host?: string;
-            scheme?: string;
-            query?: string;
-            time?: Date;
-            size?: string;
-            protocol?: string;
-            reason?: string;
-            auth?: {
-                principal?: string;
-                audiences?: string[];
-                presenter?: string;
-                claims?: {
-                    [x: string]: any;
-                };
-                accessLevels?: string[];
-            };
-        };
-        response?: {
-            code?: string;
-            size?: string;
-            headers?: {
-                [x: string]: string;
-            };
-            time?: Date;
-            backendLatency?: string;
-        };
-        resource?: {
-            service?: string;
-            name?: string;
-            type?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            uid?: string;
-            annotations?: {
-                [x: string]: string;
-            };
-            displayName?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            deleteTime?: Date;
-            etag?: string;
-            location?: string;
-        };
-        api?: {
-            service?: string;
-            operation?: string;
-            protocol?: string;
-            version?: string;
-        };
-        extensions?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        origin?: {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            principal?: string;
-            regionCode?: string;
-        } & {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["origin"]["labels"], string | number>, never>;
-            principal?: string;
-            regionCode?: string;
-        } & Record<Exclude<keyof I["origin"], keyof AttributeContext_Peer>, never>;
-        source?: {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            principal?: string;
-            regionCode?: string;
-        } & {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["source"]["labels"], string | number>, never>;
-            principal?: string;
-            regionCode?: string;
-        } & Record<Exclude<keyof I["source"], keyof AttributeContext_Peer>, never>;
-        destination?: {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            principal?: string;
-            regionCode?: string;
-        } & {
-            ip?: string;
-            port?: string;
-            labels?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["destination"]["labels"], string | number>, never>;
-            principal?: string;
-            regionCode?: string;
-        } & Record<Exclude<keyof I["destination"], keyof AttributeContext_Peer>, never>;
-        request?: {
-            id?: string;
-            method?: string;
-            headers?: {
-                [x: string]: string;
-            };
-            path?: string;
-            host?: string;
-            scheme?: string;
-            query?: string;
-            time?: Date;
-            size?: string;
-            protocol?: string;
-            reason?: string;
-            auth?: {
-                principal?: string;
-                audiences?: string[];
-                presenter?: string;
-                claims?: {
-                    [x: string]: any;
-                };
-                accessLevels?: string[];
-            };
-        } & {
-            id?: string;
-            method?: string;
-            headers?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["request"]["headers"], string | number>, never>;
-            path?: string;
-            host?: string;
-            scheme?: string;
-            query?: string;
-            time?: Date;
-            size?: string;
-            protocol?: string;
-            reason?: string;
-            auth?: {
-                principal?: string;
-                audiences?: string[];
-                presenter?: string;
-                claims?: {
-                    [x: string]: any;
-                };
-                accessLevels?: string[];
-            } & {
-                principal?: string;
-                audiences?: string[] & string[] & Record<Exclude<keyof I["request"]["auth"]["audiences"], keyof string[]>, never>;
-                presenter?: string;
-                claims?: {
-                    [x: string]: any;
-                } & {
-                    [x: string]: any;
-                } & Record<Exclude<keyof I["request"]["auth"]["claims"], string | number>, never>;
-                accessLevels?: string[] & string[] & Record<Exclude<keyof I["request"]["auth"]["accessLevels"], keyof string[]>, never>;
-            } & Record<Exclude<keyof I["request"]["auth"], keyof AttributeContext_Auth>, never>;
-        } & Record<Exclude<keyof I["request"], keyof AttributeContext_Request>, never>;
-        response?: {
-            code?: string;
-            size?: string;
-            headers?: {
-                [x: string]: string;
-            };
-            time?: Date;
-            backendLatency?: string;
-        } & {
-            code?: string;
-            size?: string;
-            headers?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["response"]["headers"], string | number>, never>;
-            time?: Date;
-            backendLatency?: string;
-        } & Record<Exclude<keyof I["response"], keyof AttributeContext_Response>, never>;
-        resource?: {
-            service?: string;
-            name?: string;
-            type?: string;
-            labels?: {
-                [x: string]: string;
-            };
-            uid?: string;
-            annotations?: {
-                [x: string]: string;
-            };
-            displayName?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            deleteTime?: Date;
-            etag?: string;
-            location?: string;
-        } & {
-            service?: string;
-            name?: string;
-            type?: string;
-            labels?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["resource"]["labels"], string | number>, never>;
-            uid?: string;
-            annotations?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["resource"]["annotations"], string | number>, never>;
-            displayName?: string;
-            createTime?: Date;
-            updateTime?: Date;
-            deleteTime?: Date;
-            etag?: string;
-            location?: string;
-        } & Record<Exclude<keyof I["resource"], keyof AttributeContext_Resource>, never>;
-        api?: {
-            service?: string;
-            operation?: string;
-            protocol?: string;
-            version?: string;
-        } & {
-            service?: string;
-            operation?: string;
-            protocol?: string;
-            version?: string;
-        } & Record<Exclude<keyof I["api"], keyof AttributeContext_Api>, never>;
-        extensions?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["extensions"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["extensions"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof AttributeContext>, never>>(object: I): AttributeContext;
+    fromPartial<I extends unknown>(object: I): AttributeContext;
 };
 export declare const AttributeContext_Peer: {
     encode(message: AttributeContext_Peer, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Peer;
     fromJSON(object: any): AttributeContext_Peer;
     toJSON(message: AttributeContext_Peer): unknown;
-    fromPartial<I extends {
-        ip?: string;
-        port?: string;
-        labels?: {
-            [x: string]: string;
-        };
-        principal?: string;
-        regionCode?: string;
-    } & {
-        ip?: string;
-        port?: string;
-        labels?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["labels"], string | number>, never>;
-        principal?: string;
-        regionCode?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Peer>, never>>(object: I): AttributeContext_Peer;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Peer;
 };
 export declare const AttributeContext_Peer_LabelsEntry: {
     encode(message: AttributeContext_Peer_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Peer_LabelsEntry;
     fromJSON(object: any): AttributeContext_Peer_LabelsEntry;
     toJSON(message: AttributeContext_Peer_LabelsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Peer_LabelsEntry>, never>>(object: I): AttributeContext_Peer_LabelsEntry;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Peer_LabelsEntry;
 };
 export declare const AttributeContext_Api: {
     encode(message: AttributeContext_Api, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Api;
     fromJSON(object: any): AttributeContext_Api;
     toJSON(message: AttributeContext_Api): unknown;
-    fromPartial<I extends {
-        service?: string;
-        operation?: string;
-        protocol?: string;
-        version?: string;
-    } & {
-        service?: string;
-        operation?: string;
-        protocol?: string;
-        version?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Api>, never>>(object: I): AttributeContext_Api;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Api;
 };
 export declare const AttributeContext_Auth: {
     encode(message: AttributeContext_Auth, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Auth;
     fromJSON(object: any): AttributeContext_Auth;
     toJSON(message: AttributeContext_Auth): unknown;
-    fromPartial<I extends {
-        principal?: string;
-        audiences?: string[];
-        presenter?: string;
-        claims?: {
-            [x: string]: any;
-        };
-        accessLevels?: string[];
-    } & {
-        principal?: string;
-        audiences?: string[] & string[] & Record<Exclude<keyof I["audiences"], keyof string[]>, never>;
-        presenter?: string;
-        claims?: {
-            [x: string]: any;
-        } & {
-            [x: string]: any;
-        } & Record<Exclude<keyof I["claims"], string | number>, never>;
-        accessLevels?: string[] & string[] & Record<Exclude<keyof I["accessLevels"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Auth>, never>>(object: I): AttributeContext_Auth;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Auth;
 };
 export declare const AttributeContext_Request: {
     encode(message: AttributeContext_Request, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Request;
     fromJSON(object: any): AttributeContext_Request;
     toJSON(message: AttributeContext_Request): unknown;
-    fromPartial<I extends {
-        id?: string;
-        method?: string;
-        headers?: {
-            [x: string]: string;
-        };
-        path?: string;
-        host?: string;
-        scheme?: string;
-        query?: string;
-        time?: Date;
-        size?: string;
-        protocol?: string;
-        reason?: string;
-        auth?: {
-            principal?: string;
-            audiences?: string[];
-            presenter?: string;
-            claims?: {
-                [x: string]: any;
-            };
-            accessLevels?: string[];
-        };
-    } & {
-        id?: string;
-        method?: string;
-        headers?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["headers"], string | number>, never>;
-        path?: string;
-        host?: string;
-        scheme?: string;
-        query?: string;
-        time?: Date;
-        size?: string;
-        protocol?: string;
-        reason?: string;
-        auth?: {
-            principal?: string;
-            audiences?: string[];
-            presenter?: string;
-            claims?: {
-                [x: string]: any;
-            };
-            accessLevels?: string[];
-        } & {
-            principal?: string;
-            audiences?: string[] & string[] & Record<Exclude<keyof I["auth"]["audiences"], keyof string[]>, never>;
-            presenter?: string;
-            claims?: {
-                [x: string]: any;
-            } & {
-                [x: string]: any;
-            } & Record<Exclude<keyof I["auth"]["claims"], string | number>, never>;
-            accessLevels?: string[] & string[] & Record<Exclude<keyof I["auth"]["accessLevels"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["auth"], keyof AttributeContext_Auth>, never>;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Request>, never>>(object: I): AttributeContext_Request;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Request;
 };
 export declare const AttributeContext_Request_HeadersEntry: {
     encode(message: AttributeContext_Request_HeadersEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Request_HeadersEntry;
     fromJSON(object: any): AttributeContext_Request_HeadersEntry;
     toJSON(message: AttributeContext_Request_HeadersEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Request_HeadersEntry>, never>>(object: I): AttributeContext_Request_HeadersEntry;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Request_HeadersEntry;
 };
 export declare const AttributeContext_Response: {
     encode(message: AttributeContext_Response, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Response;
     fromJSON(object: any): AttributeContext_Response;
     toJSON(message: AttributeContext_Response): unknown;
-    fromPartial<I extends {
-        code?: string;
-        size?: string;
-        headers?: {
-            [x: string]: string;
-        };
-        time?: Date;
-        backendLatency?: string;
-    } & {
-        code?: string;
-        size?: string;
-        headers?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["headers"], string | number>, never>;
-        time?: Date;
-        backendLatency?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Response>, never>>(object: I): AttributeContext_Response;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Response;
 };
 export declare const AttributeContext_Response_HeadersEntry: {
     encode(message: AttributeContext_Response_HeadersEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Response_HeadersEntry;
     fromJSON(object: any): AttributeContext_Response_HeadersEntry;
     toJSON(message: AttributeContext_Response_HeadersEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Response_HeadersEntry>, never>>(object: I): AttributeContext_Response_HeadersEntry;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Response_HeadersEntry;
 };
 export declare const AttributeContext_Resource: {
     encode(message: AttributeContext_Resource, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource;
     fromJSON(object: any): AttributeContext_Resource;
     toJSON(message: AttributeContext_Resource): unknown;
-    fromPartial<I extends {
-        service?: string;
-        name?: string;
-        type?: string;
-        labels?: {
-            [x: string]: string;
-        };
-        uid?: string;
-        annotations?: {
-            [x: string]: string;
-        };
-        displayName?: string;
-        createTime?: Date;
-        updateTime?: Date;
-        deleteTime?: Date;
-        etag?: string;
-        location?: string;
-    } & {
-        service?: string;
-        name?: string;
-        type?: string;
-        labels?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["labels"], string | number>, never>;
-        uid?: string;
-        annotations?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["annotations"], string | number>, never>;
-        displayName?: string;
-        createTime?: Date;
-        updateTime?: Date;
-        deleteTime?: Date;
-        etag?: string;
-        location?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Resource>, never>>(object: I): AttributeContext_Resource;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Resource;
 };
 export declare const AttributeContext_Resource_LabelsEntry: {
     encode(message: AttributeContext_Resource_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource_LabelsEntry;
     fromJSON(object: any): AttributeContext_Resource_LabelsEntry;
     toJSON(message: AttributeContext_Resource_LabelsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Resource_LabelsEntry>, never>>(object: I): AttributeContext_Resource_LabelsEntry;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Resource_LabelsEntry;
 };
 export declare const AttributeContext_Resource_AnnotationsEntry: {
     encode(message: AttributeContext_Resource_AnnotationsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource_AnnotationsEntry;
     fromJSON(object: any): AttributeContext_Resource_AnnotationsEntry;
     toJSON(message: AttributeContext_Resource_AnnotationsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof AttributeContext_Resource_AnnotationsEntry>, never>>(object: I): AttributeContext_Resource_AnnotationsEntry;
+    fromPartial<I extends unknown>(object: I): AttributeContext_Resource_AnnotationsEntry;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

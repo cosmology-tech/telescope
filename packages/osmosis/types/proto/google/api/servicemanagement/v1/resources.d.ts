@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { ConfigChange } from "../../../../google/api/config_change";
 /**
@@ -278,266 +279,87 @@ export declare const ManagedService: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService;
     fromJSON(object: any): ManagedService;
     toJSON(message: ManagedService): unknown;
-    fromPartial<I extends {
-        serviceName?: string;
-        producerProjectId?: string;
-    } & {
-        serviceName?: string;
-        producerProjectId?: string;
-    } & Record<Exclude<keyof I, keyof ManagedService>, never>>(object: I): ManagedService;
+    fromPartial<I extends unknown>(object: I): ManagedService;
 };
 export declare const OperationMetadata: {
     encode(message: OperationMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata;
     fromJSON(object: any): OperationMetadata;
     toJSON(message: OperationMetadata): unknown;
-    fromPartial<I extends {
-        resourceNames?: string[];
-        steps?: {
-            description?: string;
-            status?: OperationMetadata_Status;
-        }[];
-        progressPercentage?: number;
-        startTime?: Date;
-    } & {
-        resourceNames?: string[] & string[] & Record<Exclude<keyof I["resourceNames"], keyof string[]>, never>;
-        steps?: {
-            description?: string;
-            status?: OperationMetadata_Status;
-        }[] & ({
-            description?: string;
-            status?: OperationMetadata_Status;
-        } & {
-            description?: string;
-            status?: OperationMetadata_Status;
-        } & Record<Exclude<keyof I["steps"][number], keyof OperationMetadata_Step>, never>)[] & Record<Exclude<keyof I["steps"], keyof {
-            description?: string;
-            status?: OperationMetadata_Status;
-        }[]>, never>;
-        progressPercentage?: number;
-        startTime?: Date;
-    } & Record<Exclude<keyof I, keyof OperationMetadata>, never>>(object: I): OperationMetadata;
+    fromPartial<I extends unknown>(object: I): OperationMetadata;
 };
 export declare const OperationMetadata_Step: {
     encode(message: OperationMetadata_Step, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata_Step;
     fromJSON(object: any): OperationMetadata_Step;
     toJSON(message: OperationMetadata_Step): unknown;
-    fromPartial<I extends {
-        description?: string;
-        status?: OperationMetadata_Status;
-    } & {
-        description?: string;
-        status?: OperationMetadata_Status;
-    } & Record<Exclude<keyof I, keyof OperationMetadata_Step>, never>>(object: I): OperationMetadata_Step;
+    fromPartial<I extends unknown>(object: I): OperationMetadata_Step;
 };
 export declare const Diagnostic: {
     encode(message: Diagnostic, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Diagnostic;
     fromJSON(object: any): Diagnostic;
     toJSON(message: Diagnostic): unknown;
-    fromPartial<I extends {
-        location?: string;
-        kind?: Diagnostic_Kind;
-        message?: string;
-    } & {
-        location?: string;
-        kind?: Diagnostic_Kind;
-        message?: string;
-    } & Record<Exclude<keyof I, keyof Diagnostic>, never>>(object: I): Diagnostic;
+    fromPartial<I extends unknown>(object: I): Diagnostic;
 };
 export declare const ConfigSource: {
     encode(message: ConfigSource, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigSource;
     fromJSON(object: any): ConfigSource;
     toJSON(message: ConfigSource): unknown;
-    fromPartial<I extends {
-        id?: string;
-        files?: {
-            filePath?: string;
-            fileContents?: Uint8Array;
-            fileType?: ConfigFile_FileType;
-        }[];
-    } & {
-        id?: string;
-        files?: {
-            filePath?: string;
-            fileContents?: Uint8Array;
-            fileType?: ConfigFile_FileType;
-        }[] & ({
-            filePath?: string;
-            fileContents?: Uint8Array;
-            fileType?: ConfigFile_FileType;
-        } & {
-            filePath?: string;
-            fileContents?: Uint8Array;
-            fileType?: ConfigFile_FileType;
-        } & Record<Exclude<keyof I["files"][number], keyof ConfigFile>, never>)[] & Record<Exclude<keyof I["files"], keyof {
-            filePath?: string;
-            fileContents?: Uint8Array;
-            fileType?: ConfigFile_FileType;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof ConfigSource>, never>>(object: I): ConfigSource;
+    fromPartial<I extends unknown>(object: I): ConfigSource;
 };
 export declare const ConfigFile: {
     encode(message: ConfigFile, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigFile;
     fromJSON(object: any): ConfigFile;
     toJSON(message: ConfigFile): unknown;
-    fromPartial<I extends {
-        filePath?: string;
-        fileContents?: Uint8Array;
-        fileType?: ConfigFile_FileType;
-    } & {
-        filePath?: string;
-        fileContents?: Uint8Array;
-        fileType?: ConfigFile_FileType;
-    } & Record<Exclude<keyof I, keyof ConfigFile>, never>>(object: I): ConfigFile;
+    fromPartial<I extends unknown>(object: I): ConfigFile;
 };
 export declare const ConfigRef: {
     encode(message: ConfigRef, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigRef;
     fromJSON(object: any): ConfigRef;
     toJSON(message: ConfigRef): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): ConfigRef;
+    fromPartial<I extends unknown>(object: I): ConfigRef;
 };
 export declare const ChangeReport: {
     encode(message: ChangeReport, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ChangeReport;
     fromJSON(object: any): ChangeReport;
     toJSON(message: ChangeReport): unknown;
-    fromPartial<I extends {
-        configChanges?: {
-            element?: string;
-            oldValue?: string;
-            newValue?: string;
-            changeType?: import("../../../../google/api/config_change").ChangeType;
-            advices?: {
-                description?: string;
-            }[];
-        }[];
-    } & {
-        configChanges?: {
-            element?: string;
-            oldValue?: string;
-            newValue?: string;
-            changeType?: import("../../../../google/api/config_change").ChangeType;
-            advices?: {
-                description?: string;
-            }[];
-        }[] & ({
-            element?: string;
-            oldValue?: string;
-            newValue?: string;
-            changeType?: import("../../../../google/api/config_change").ChangeType;
-            advices?: {
-                description?: string;
-            }[];
-        } & {
-            element?: string;
-            oldValue?: string;
-            newValue?: string;
-            changeType?: import("../../../../google/api/config_change").ChangeType;
-            advices?: {
-                description?: string;
-            }[] & ({
-                description?: string;
-            } & {
-                [x: string]: any;
-            } & Record<Exclude<keyof I["configChanges"][number]["advices"][number], "description">, never>)[] & Record<Exclude<keyof I["configChanges"][number]["advices"], keyof {
-                description?: string;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["configChanges"][number], keyof ConfigChange>, never>)[] & Record<Exclude<keyof I["configChanges"], keyof {
-            element?: string;
-            oldValue?: string;
-            newValue?: string;
-            changeType?: import("../../../../google/api/config_change").ChangeType;
-            advices?: {
-                description?: string;
-            }[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "configChanges">, never>>(object: I): ChangeReport;
+    fromPartial<I extends unknown>(object: I): ChangeReport;
 };
 export declare const Rollout: {
     encode(message: Rollout, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout;
     fromJSON(object: any): Rollout;
     toJSON(message: Rollout): unknown;
-    fromPartial<I extends {
-        rolloutId?: string;
-        createTime?: Date;
-        createdBy?: string;
-        status?: Rollout_RolloutStatus;
-        trafficPercentStrategy?: {
-            percentages?: {
-                [x: string]: number;
-            };
-        };
-        deleteServiceStrategy?: {};
-        serviceName?: string;
-    } & {
-        rolloutId?: string;
-        createTime?: Date;
-        createdBy?: string;
-        status?: Rollout_RolloutStatus;
-        trafficPercentStrategy?: {
-            percentages?: {
-                [x: string]: number;
-            };
-        } & {
-            percentages?: {
-                [x: string]: number;
-            } & {
-                [x: string]: number;
-            } & Record<Exclude<keyof I["trafficPercentStrategy"]["percentages"], string | number>, never>;
-        } & Record<Exclude<keyof I["trafficPercentStrategy"], "percentages">, never>;
-        deleteServiceStrategy?: {} & {} & Record<Exclude<keyof I["deleteServiceStrategy"], never>, never>;
-        serviceName?: string;
-    } & Record<Exclude<keyof I, keyof Rollout>, never>>(object: I): Rollout;
+    fromPartial<I extends unknown>(object: I): Rollout;
 };
 export declare const Rollout_TrafficPercentStrategy: {
     encode(message: Rollout_TrafficPercentStrategy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy;
     fromJSON(object: any): Rollout_TrafficPercentStrategy;
     toJSON(message: Rollout_TrafficPercentStrategy): unknown;
-    fromPartial<I extends {
-        percentages?: {
-            [x: string]: number;
-        };
-    } & {
-        percentages?: {
-            [x: string]: number;
-        } & {
-            [x: string]: number;
-        } & Record<Exclude<keyof I["percentages"], string | number>, never>;
-    } & Record<Exclude<keyof I, "percentages">, never>>(object: I): Rollout_TrafficPercentStrategy;
+    fromPartial<I extends unknown>(object: I): Rollout_TrafficPercentStrategy;
 };
 export declare const Rollout_TrafficPercentStrategy_PercentagesEntry: {
     encode(message: Rollout_TrafficPercentStrategy_PercentagesEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy_PercentagesEntry;
     fromJSON(object: any): Rollout_TrafficPercentStrategy_PercentagesEntry;
     toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: number;
-    } & {
-        key?: string;
-        value?: number;
-    } & Record<Exclude<keyof I, keyof Rollout_TrafficPercentStrategy_PercentagesEntry>, never>>(object: I): Rollout_TrafficPercentStrategy_PercentagesEntry;
+    fromPartial<I extends unknown>(object: I): Rollout_TrafficPercentStrategy_PercentagesEntry;
 };
 export declare const Rollout_DeleteServiceStrategy: {
     encode(_: Rollout_DeleteServiceStrategy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_DeleteServiceStrategy;
     fromJSON(_: any): Rollout_DeleteServiceStrategy;
     toJSON(_: Rollout_DeleteServiceStrategy): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): Rollout_DeleteServiceStrategy;
+    fromPartial<I extends unknown>(_: I): Rollout_DeleteServiceStrategy;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

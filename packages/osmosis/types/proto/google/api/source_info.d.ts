@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../google/protobuf/any";
 /** Source information used to create a Service Config */
@@ -10,29 +11,10 @@ export declare const SourceInfo: {
     decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo;
     fromJSON(object: any): SourceInfo;
     toJSON(message: SourceInfo): unknown;
-    fromPartial<I extends {
-        sourceFiles?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        sourceFiles?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["sourceFiles"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["sourceFiles"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "sourceFiles">, never>>(object: I): SourceInfo;
+    fromPartial<I extends unknown>(object: I): SourceInfo;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

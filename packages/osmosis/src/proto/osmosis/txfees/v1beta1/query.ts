@@ -10,7 +10,7 @@ export interface QueryDenomPoolIdRequest {
   denom: string;
 }
 export interface QueryDenomPoolIdResponse {
-  poolID: string;
+  poolID: Long;
 }
 export interface QueryBaseDenomRequest {}
 export interface QueryBaseDenomResponse {
@@ -182,13 +182,13 @@ export const QueryDenomPoolIdRequest = {
 
 function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
   return {
-    poolID: "0"
+    poolID: Long.UZERO
   };
 }
 
 export const QueryDenomPoolIdResponse = {
   encode(message: QueryDenomPoolIdResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolID !== "0") {
+    if (!message.poolID.isZero()) {
       writer.uint32(8).uint64(message.poolID);
     }
 
@@ -205,7 +205,7 @@ export const QueryDenomPoolIdResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolID = longToString((reader.uint64() as Long));
+          message.poolID = (reader.uint64() as Long);
           break;
 
         default:
@@ -219,19 +219,19 @@ export const QueryDenomPoolIdResponse = {
 
   fromJSON(object: any): QueryDenomPoolIdResponse {
     return {
-      poolID: isSet(object.poolID) ? String(object.poolID) : "0"
+      poolID: isSet(object.poolID) ? Long.fromString(object.poolID) : Long.UZERO
     };
   },
 
   toJSON(message: QueryDenomPoolIdResponse): unknown {
     const obj: any = {};
-    message.poolID !== undefined && (obj.poolID = message.poolID);
+    message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryDenomPoolIdResponse>, I>>(object: I): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
-    message.poolID = object.poolID ?? "0";
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
   }
 
@@ -337,13 +337,9 @@ export const QueryBaseDenomResponse = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

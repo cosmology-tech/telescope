@@ -12,7 +12,7 @@ export interface QueryBalanceRequest {
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 
 export interface QueryBalanceResponse {
-  amount: string;
+  amount: Long;
 }
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 
@@ -33,7 +33,7 @@ export interface QuerySupplyRequest {
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 
 export interface QuerySupplyResponse {
-  amount: string;
+  amount: Long;
 }
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 
@@ -153,13 +153,13 @@ export const QueryBalanceRequest = {
 
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   return {
-    amount: "0"
+    amount: Long.UZERO
   };
 }
 
 export const QueryBalanceResponse = {
   encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.amount !== "0") {
+    if (!message.amount.isZero()) {
       writer.uint32(8).uint64(message.amount);
     }
 
@@ -176,7 +176,7 @@ export const QueryBalanceResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.amount = longToString((reader.uint64() as Long));
+          message.amount = (reader.uint64() as Long);
           break;
 
         default:
@@ -190,19 +190,19 @@ export const QueryBalanceResponse = {
 
   fromJSON(object: any): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? String(object.amount) : "0"
+      amount: isSet(object.amount) ? Long.fromString(object.amount) : Long.UZERO
     };
   },
 
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
+    message.amount !== undefined && (obj.amount = (message.amount || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryBalanceResponse>, I>>(object: I): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.amount = object.amount ?? "0";
+    message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
     return message;
   }
 
@@ -393,13 +393,13 @@ export const QuerySupplyRequest = {
 
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   return {
-    amount: "0"
+    amount: Long.UZERO
   };
 }
 
 export const QuerySupplyResponse = {
   encode(message: QuerySupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.amount !== "0") {
+    if (!message.amount.isZero()) {
       writer.uint32(8).uint64(message.amount);
     }
 
@@ -416,7 +416,7 @@ export const QuerySupplyResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.amount = longToString((reader.uint64() as Long));
+          message.amount = (reader.uint64() as Long);
           break;
 
         default:
@@ -430,19 +430,19 @@ export const QuerySupplyResponse = {
 
   fromJSON(object: any): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? String(object.amount) : "0"
+      amount: isSet(object.amount) ? Long.fromString(object.amount) : Long.UZERO
     };
   },
 
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
+    message.amount !== undefined && (obj.amount = (message.amount || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QuerySupplyResponse>, I>>(object: I): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.amount = object.amount ?? "0";
+    message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
     return message;
   }
 
@@ -978,13 +978,9 @@ export const QueryClassesResponse = {
 /** Query defines the gRPC querier service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

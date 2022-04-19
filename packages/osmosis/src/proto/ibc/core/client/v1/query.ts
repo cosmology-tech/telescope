@@ -61,10 +61,10 @@ export interface QueryConsensusStateRequest {
   clientId: string;
   /** consensus state revision number */
 
-  revisionNumber: string;
+  revisionNumber: Long;
   /** consensus state revision height */
 
-  revisionHeight: string;
+  revisionHeight: Long;
   /**
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
@@ -447,8 +447,8 @@ export const QueryClientStatesResponse = {
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
   return {
     clientId: "",
-    revisionNumber: "0",
-    revisionHeight: "0",
+    revisionNumber: Long.UZERO,
+    revisionHeight: Long.UZERO,
     latestHeight: false
   };
 }
@@ -459,11 +459,11 @@ export const QueryConsensusStateRequest = {
       writer.uint32(10).string(message.clientId);
     }
 
-    if (message.revisionNumber !== "0") {
+    if (!message.revisionNumber.isZero()) {
       writer.uint32(16).uint64(message.revisionNumber);
     }
 
-    if (message.revisionHeight !== "0") {
+    if (!message.revisionHeight.isZero()) {
       writer.uint32(24).uint64(message.revisionHeight);
     }
 
@@ -488,11 +488,11 @@ export const QueryConsensusStateRequest = {
           break;
 
         case 2:
-          message.revisionNumber = longToString((reader.uint64() as Long));
+          message.revisionNumber = (reader.uint64() as Long);
           break;
 
         case 3:
-          message.revisionHeight = longToString((reader.uint64() as Long));
+          message.revisionHeight = (reader.uint64() as Long);
           break;
 
         case 4:
@@ -511,8 +511,8 @@ export const QueryConsensusStateRequest = {
   fromJSON(object: any): QueryConsensusStateRequest {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? String(object.revisionNumber) : "0",
-      revisionHeight: isSet(object.revisionHeight) ? String(object.revisionHeight) : "0",
+      revisionNumber: isSet(object.revisionNumber) ? Long.fromString(object.revisionNumber) : Long.UZERO,
+      revisionHeight: isSet(object.revisionHeight) ? Long.fromString(object.revisionHeight) : Long.UZERO,
       latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false
     };
   },
@@ -520,8 +520,8 @@ export const QueryConsensusStateRequest = {
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.revisionNumber !== undefined && (obj.revisionNumber = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revisionHeight = message.revisionHeight);
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight);
     return obj;
   },
@@ -529,8 +529,8 @@ export const QueryConsensusStateRequest = {
   fromPartial<I extends Exact<DeepPartial<QueryConsensusStateRequest>, I>>(object: I): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
-    message.revisionNumber = object.revisionNumber ?? "0";
-    message.revisionHeight = object.revisionHeight ?? "0";
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     message.latestHeight = object.latestHeight ?? false;
     return message;
   }
@@ -1215,13 +1215,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

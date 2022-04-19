@@ -40,7 +40,7 @@ export interface LastValidatorPower {
   address: string;
   /** power defines the power of the validator. */
 
-  power: string;
+  power: Long;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -213,7 +213,7 @@ export const GenesisState = {
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {
     address: "",
-    power: "0"
+    power: Long.ZERO
   };
 }
 
@@ -223,7 +223,7 @@ export const LastValidatorPower = {
       writer.uint32(10).string(message.address);
     }
 
-    if (message.power !== "0") {
+    if (!message.power.isZero()) {
       writer.uint32(16).int64(message.power);
     }
 
@@ -244,7 +244,7 @@ export const LastValidatorPower = {
           break;
 
         case 2:
-          message.power = longToString((reader.int64() as Long));
+          message.power = (reader.int64() as Long);
           break;
 
         default:
@@ -259,21 +259,21 @@ export const LastValidatorPower = {
   fromJSON(object: any): LastValidatorPower {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? String(object.power) : "0"
+      power: isSet(object.power) ? Long.fromString(object.power) : Long.ZERO
     };
   },
 
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = message.power);
+    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<LastValidatorPower>, I>>(object: I): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power ?? "0";
+    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     return message;
   }
 
@@ -316,13 +316,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

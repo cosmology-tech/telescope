@@ -23,7 +23,7 @@ export interface QueryContractHistoryRequest {
 }
 export interface QueryContractsByCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
-  codeId: string;
+  codeId: Long;
 }
 /** ContractInfoWithAddress adds the address (key) to the ContractInfo representation */
 
@@ -55,11 +55,11 @@ export interface QuerySmartContractStateResponse {
 }
 export interface QueryCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
-  codeId: string;
+  codeId: Long;
 }
 export interface CodeInfoResponse {
   /** id for legacy support */
-  codeId: string;
+  codeId: Long;
   creator: Uint8Array;
   dataHash: Uint8Array;
   source: string;
@@ -280,13 +280,13 @@ export const QueryContractHistoryRequest = {
 
 function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
   return {
-    codeId: "0"
+    codeId: Long.UZERO
   };
 }
 
 export const QueryContractsByCodeRequest = {
   encode(message: QueryContractsByCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
+    if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
 
@@ -303,7 +303,7 @@ export const QueryContractsByCodeRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.codeId = longToString((reader.uint64() as Long));
+          message.codeId = (reader.uint64() as Long);
           break;
 
         default:
@@ -317,19 +317,19 @@ export const QueryContractsByCodeRequest = {
 
   fromJSON(object: any): QueryContractsByCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0"
+      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryContractsByCodeRequest): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = message.codeId);
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryContractsByCodeRequest>, I>>(object: I): QueryContractsByCodeRequest {
     const message = createBaseQueryContractsByCodeRequest();
-    message.codeId = object.codeId ?? "0";
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     return message;
   }
 
@@ -766,13 +766,13 @@ export const QuerySmartContractStateResponse = {
 
 function createBaseQueryCodeRequest(): QueryCodeRequest {
   return {
-    codeId: "0"
+    codeId: Long.UZERO
   };
 }
 
 export const QueryCodeRequest = {
   encode(message: QueryCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
+    if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
 
@@ -789,7 +789,7 @@ export const QueryCodeRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.codeId = longToString((reader.uint64() as Long));
+          message.codeId = (reader.uint64() as Long);
           break;
 
         default:
@@ -803,19 +803,19 @@ export const QueryCodeRequest = {
 
   fromJSON(object: any): QueryCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0"
+      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryCodeRequest): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = message.codeId);
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryCodeRequest>, I>>(object: I): QueryCodeRequest {
     const message = createBaseQueryCodeRequest();
-    message.codeId = object.codeId ?? "0";
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     return message;
   }
 
@@ -823,7 +823,7 @@ export const QueryCodeRequest = {
 
 function createBaseCodeInfoResponse(): CodeInfoResponse {
   return {
-    codeId: "0",
+    codeId: Long.UZERO,
     creator: new Uint8Array(),
     dataHash: new Uint8Array(),
     source: "",
@@ -833,7 +833,7 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
 
 export const CodeInfoResponse = {
   encode(message: CodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
+    if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
 
@@ -866,7 +866,7 @@ export const CodeInfoResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.codeId = longToString((reader.uint64() as Long));
+          message.codeId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -896,7 +896,7 @@ export const CodeInfoResponse = {
 
   fromJSON(object: any): CodeInfoResponse {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
       creator: isSet(object.creator) ? bytesFromBase64(object.creator) : new Uint8Array(),
       dataHash: isSet(object.dataHash) ? bytesFromBase64(object.dataHash) : new Uint8Array(),
       source: isSet(object.source) ? String(object.source) : "",
@@ -906,7 +906,7 @@ export const CodeInfoResponse = {
 
   toJSON(message: CodeInfoResponse): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = message.codeId);
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.creator !== undefined && (obj.creator = base64FromBytes(message.creator !== undefined ? message.creator : new Uint8Array()));
     message.dataHash !== undefined && (obj.dataHash = base64FromBytes(message.dataHash !== undefined ? message.dataHash : new Uint8Array()));
     message.source !== undefined && (obj.source = message.source);
@@ -916,7 +916,7 @@ export const CodeInfoResponse = {
 
   fromPartial<I extends Exact<DeepPartial<CodeInfoResponse>, I>>(object: I): CodeInfoResponse {
     const message = createBaseCodeInfoResponse();
-    message.codeId = object.codeId ?? "0";
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.creator = object.creator ?? new Uint8Array();
     message.dataHash = object.dataHash ?? new Uint8Array();
     message.source = object.source ?? "";
@@ -1403,13 +1403,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

@@ -372,13 +372,13 @@ export interface QuotaBucket {
    * The effective limit of this quota bucket. Equal to default_limit if there
    * are no overrides.
    */
-  effectiveLimit: string;
+  effectiveLimit: Long;
   /**
    * The default limit of this quota bucket, as specified by the service
    * configuration.
    */
 
-  defaultLimit: string;
+  defaultLimit: Long;
   /** Producer override on this quota bucket. */
 
   producerOverride: QuotaOverride;
@@ -430,7 +430,7 @@ export interface QuotaOverride {
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
 
-  overrideValue: string;
+  overrideValue: Long;
   /**
    * If this map is nonempty, then this override applies only to specific values
    * for dimensions defined in the limit unit.
@@ -516,7 +516,7 @@ export interface AdminQuotaPolicy {
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
 
-  policyValue: string;
+  policyValue: Long;
   /**
    * If this map is nonempty, then this policy applies only to specific values
    * for dimensions defined in the limit unit.
@@ -1174,8 +1174,8 @@ export const ConsumerQuotaLimit = {
 
 function createBaseQuotaBucket(): QuotaBucket {
   return {
-    effectiveLimit: "0",
-    defaultLimit: "0",
+    effectiveLimit: Long.ZERO,
+    defaultLimit: Long.ZERO,
     producerOverride: undefined,
     consumerOverride: undefined,
     adminOverride: undefined,
@@ -1185,11 +1185,11 @@ function createBaseQuotaBucket(): QuotaBucket {
 
 export const QuotaBucket = {
   encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.effectiveLimit !== "0") {
+    if (!message.effectiveLimit.isZero()) {
       writer.uint32(8).int64(message.effectiveLimit);
     }
 
-    if (message.defaultLimit !== "0") {
+    if (!message.defaultLimit.isZero()) {
       writer.uint32(16).int64(message.defaultLimit);
     }
 
@@ -1224,11 +1224,11 @@ export const QuotaBucket = {
 
       switch (tag >>> 3) {
         case 1:
-          message.effectiveLimit = longToString((reader.int64() as Long));
+          message.effectiveLimit = (reader.int64() as Long);
           break;
 
         case 2:
-          message.defaultLimit = longToString((reader.int64() as Long));
+          message.defaultLimit = (reader.int64() as Long);
           break;
 
         case 3:
@@ -1263,8 +1263,8 @@ export const QuotaBucket = {
 
   fromJSON(object: any): QuotaBucket {
     return {
-      effectiveLimit: isSet(object.effectiveLimit) ? String(object.effectiveLimit) : "0",
-      defaultLimit: isSet(object.defaultLimit) ? String(object.defaultLimit) : "0",
+      effectiveLimit: isSet(object.effectiveLimit) ? Long.fromString(object.effectiveLimit) : Long.ZERO,
+      defaultLimit: isSet(object.defaultLimit) ? Long.fromString(object.defaultLimit) : Long.ZERO,
       producerOverride: isSet(object.producerOverride) ? QuotaOverride.fromJSON(object.producerOverride) : undefined,
       consumerOverride: isSet(object.consumerOverride) ? QuotaOverride.fromJSON(object.consumerOverride) : undefined,
       adminOverride: isSet(object.adminOverride) ? QuotaOverride.fromJSON(object.adminOverride) : undefined,
@@ -1279,8 +1279,8 @@ export const QuotaBucket = {
 
   toJSON(message: QuotaBucket): unknown {
     const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effectiveLimit = message.effectiveLimit);
-    message.defaultLimit !== undefined && (obj.defaultLimit = message.defaultLimit);
+    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || Long.ZERO).toString());
+    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || Long.ZERO).toString());
     message.producerOverride !== undefined && (obj.producerOverride = message.producerOverride ? QuotaOverride.toJSON(message.producerOverride) : undefined);
     message.consumerOverride !== undefined && (obj.consumerOverride = message.consumerOverride ? QuotaOverride.toJSON(message.consumerOverride) : undefined);
     message.adminOverride !== undefined && (obj.adminOverride = message.adminOverride ? QuotaOverride.toJSON(message.adminOverride) : undefined);
@@ -1297,8 +1297,8 @@ export const QuotaBucket = {
 
   fromPartial<I extends Exact<DeepPartial<QuotaBucket>, I>>(object: I): QuotaBucket {
     const message = createBaseQuotaBucket();
-    message.effectiveLimit = object.effectiveLimit ?? "0";
-    message.defaultLimit = object.defaultLimit ?? "0";
+    message.effectiveLimit = object.effectiveLimit !== undefined && object.effectiveLimit !== null ? Long.fromValue(object.effectiveLimit) : Long.ZERO;
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? Long.fromValue(object.defaultLimit) : Long.ZERO;
     message.producerOverride = object.producerOverride !== undefined && object.producerOverride !== null ? QuotaOverride.fromPartial(object.producerOverride) : undefined;
     message.consumerOverride = object.consumerOverride !== undefined && object.consumerOverride !== null ? QuotaOverride.fromPartial(object.consumerOverride) : undefined;
     message.adminOverride = object.adminOverride !== undefined && object.adminOverride !== null ? QuotaOverride.fromPartial(object.adminOverride) : undefined;
@@ -1388,7 +1388,7 @@ export const QuotaBucket_DimensionsEntry = {
 function createBaseQuotaOverride(): QuotaOverride {
   return {
     name: "",
-    overrideValue: "0",
+    overrideValue: Long.ZERO,
     dimensions: {},
     metric: "",
     unit: "",
@@ -1402,7 +1402,7 @@ export const QuotaOverride = {
       writer.uint32(10).string(message.name);
     }
 
-    if (message.overrideValue !== "0") {
+    if (!message.overrideValue.isZero()) {
       writer.uint32(16).int64(message.overrideValue);
     }
 
@@ -1442,7 +1442,7 @@ export const QuotaOverride = {
           break;
 
         case 2:
-          message.overrideValue = longToString((reader.int64() as Long));
+          message.overrideValue = (reader.int64() as Long);
           break;
 
         case 3:
@@ -1478,7 +1478,7 @@ export const QuotaOverride = {
   fromJSON(object: any): QuotaOverride {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      overrideValue: isSet(object.overrideValue) ? String(object.overrideValue) : "0",
+      overrideValue: isSet(object.overrideValue) ? Long.fromString(object.overrideValue) : Long.ZERO,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1494,7 +1494,7 @@ export const QuotaOverride = {
   toJSON(message: QuotaOverride): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.overrideValue = message.overrideValue);
+    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || Long.ZERO).toString());
     obj.dimensions = {};
 
     if (message.dimensions) {
@@ -1512,7 +1512,7 @@ export const QuotaOverride = {
   fromPartial<I extends Exact<DeepPartial<QuotaOverride>, I>>(object: I): QuotaOverride {
     const message = createBaseQuotaOverride();
     message.name = object.name ?? "";
-    message.overrideValue = object.overrideValue ?? "0";
+    message.overrideValue = object.overrideValue !== undefined && object.overrideValue !== null ? Long.fromValue(object.overrideValue) : Long.ZERO;
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1665,7 +1665,7 @@ export const OverrideInlineSource = {
 function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   return {
     name: "",
-    policyValue: "0",
+    policyValue: Long.ZERO,
     dimensions: {},
     metric: "",
     unit: "",
@@ -1679,7 +1679,7 @@ export const AdminQuotaPolicy = {
       writer.uint32(10).string(message.name);
     }
 
-    if (message.policyValue !== "0") {
+    if (!message.policyValue.isZero()) {
       writer.uint32(16).int64(message.policyValue);
     }
 
@@ -1719,7 +1719,7 @@ export const AdminQuotaPolicy = {
           break;
 
         case 2:
-          message.policyValue = longToString((reader.int64() as Long));
+          message.policyValue = (reader.int64() as Long);
           break;
 
         case 3:
@@ -1755,7 +1755,7 @@ export const AdminQuotaPolicy = {
   fromJSON(object: any): AdminQuotaPolicy {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      policyValue: isSet(object.policyValue) ? String(object.policyValue) : "0",
+      policyValue: isSet(object.policyValue) ? Long.fromString(object.policyValue) : Long.ZERO,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1771,7 +1771,7 @@ export const AdminQuotaPolicy = {
   toJSON(message: AdminQuotaPolicy): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policyValue = message.policyValue);
+    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || Long.ZERO).toString());
     obj.dimensions = {};
 
     if (message.dimensions) {
@@ -1789,7 +1789,7 @@ export const AdminQuotaPolicy = {
   fromPartial<I extends Exact<DeepPartial<AdminQuotaPolicy>, I>>(object: I): AdminQuotaPolicy {
     const message = createBaseAdminQuotaPolicy();
     message.name = object.name ?? "";
-    message.policyValue = object.policyValue ?? "0";
+    message.policyValue = object.policyValue !== undefined && object.policyValue !== null ? Long.fromValue(object.policyValue) : Long.ZERO;
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1945,13 +1945,9 @@ export const ServiceIdentity = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

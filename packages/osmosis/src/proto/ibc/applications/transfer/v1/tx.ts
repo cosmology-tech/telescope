@@ -35,7 +35,7 @@ export interface MsgTransfer {
    * The timeout is disabled when set to 0.
    */
 
-  timeoutTimestamp: string;
+  timeoutTimestamp: Long;
 }
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 
@@ -49,7 +49,7 @@ function createBaseMsgTransfer(): MsgTransfer {
     sender: "",
     receiver: "",
     timeoutHeight: undefined,
-    timeoutTimestamp: "0"
+    timeoutTimestamp: Long.UZERO
   };
 }
 
@@ -79,7 +79,7 @@ export const MsgTransfer = {
       Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
     }
 
-    if (message.timeoutTimestamp !== "0") {
+    if (!message.timeoutTimestamp.isZero()) {
       writer.uint32(56).uint64(message.timeoutTimestamp);
     }
 
@@ -120,7 +120,7 @@ export const MsgTransfer = {
           break;
 
         case 7:
-          message.timeoutTimestamp = longToString((reader.uint64() as Long));
+          message.timeoutTimestamp = (reader.uint64() as Long);
           break;
 
         default:
@@ -140,7 +140,7 @@ export const MsgTransfer = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? String(object.timeoutTimestamp) : "0"
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromString(object.timeoutTimestamp) : Long.UZERO
     };
   },
 
@@ -152,7 +152,7 @@ export const MsgTransfer = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = message.timeoutTimestamp);
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
     return obj;
   },
 
@@ -164,7 +164,7 @@ export const MsgTransfer = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp ?? "0";
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     return message;
   }
 
@@ -215,13 +215,9 @@ export const MsgTransferResponse = {
 /** Msg defines the ibc/transfer Msg service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

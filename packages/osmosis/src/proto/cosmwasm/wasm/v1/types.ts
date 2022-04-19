@@ -134,7 +134,7 @@ export interface AccessConfig {
 export interface Params {
   codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
-  maxWasmCodeSize: string;
+  maxWasmCodeSize: Long;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
 
@@ -152,7 +152,7 @@ export interface CodeInfo {
 
 export interface ContractInfo {
   /** CodeID is the reference to the stored Wasm code */
-  codeId: string;
+  codeId: Long;
   /** Creator address who initially instantiated the contract */
 
   creator: string;
@@ -183,7 +183,7 @@ export interface ContractCodeHistoryEntry {
   operation: ContractCodeHistoryOperationType;
   /** CodeID is the reference to the stored WASM code */
 
-  codeId: string;
+  codeId: Long;
   /** Updated Tx position when the operation was executed. */
 
   updated: AbsoluteTxPosition;
@@ -196,13 +196,13 @@ export interface ContractCodeHistoryEntry {
 
 export interface AbsoluteTxPosition {
   /** BlockHeight is the block the contract was created at */
-  blockHeight: string;
+  blockHeight: Long;
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
    * or gas consumed)
    */
 
-  txIndex: string;
+  txIndex: Long;
 }
 /** Model is a struct that holds a KV pair */
 
@@ -344,7 +344,7 @@ function createBaseParams(): Params {
   return {
     codeUploadAccess: undefined,
     instantiateDefaultPermission: 0,
-    maxWasmCodeSize: "0"
+    maxWasmCodeSize: Long.UZERO
   };
 }
 
@@ -358,7 +358,7 @@ export const Params = {
       writer.uint32(16).int32(message.instantiateDefaultPermission);
     }
 
-    if (message.maxWasmCodeSize !== "0") {
+    if (!message.maxWasmCodeSize.isZero()) {
       writer.uint32(24).uint64(message.maxWasmCodeSize);
     }
 
@@ -383,7 +383,7 @@ export const Params = {
           break;
 
         case 3:
-          message.maxWasmCodeSize = longToString((reader.uint64() as Long));
+          message.maxWasmCodeSize = (reader.uint64() as Long);
           break;
 
         default:
@@ -399,7 +399,7 @@ export const Params = {
     return {
       codeUploadAccess: isSet(object.codeUploadAccess) ? AccessConfig.fromJSON(object.codeUploadAccess) : undefined,
       instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : 0,
-      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? String(object.maxWasmCodeSize) : "0"
+      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? Long.fromString(object.maxWasmCodeSize) : Long.UZERO
     };
   },
 
@@ -407,7 +407,7 @@ export const Params = {
     const obj: any = {};
     message.codeUploadAccess !== undefined && (obj.codeUploadAccess = message.codeUploadAccess ? AccessConfig.toJSON(message.codeUploadAccess) : undefined);
     message.instantiateDefaultPermission !== undefined && (obj.instantiateDefaultPermission = accessTypeToJSON(message.instantiateDefaultPermission));
-    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = message.maxWasmCodeSize);
+    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = (message.maxWasmCodeSize || Long.UZERO).toString());
     return obj;
   },
 
@@ -415,7 +415,7 @@ export const Params = {
     const message = createBaseParams();
     message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
-    message.maxWasmCodeSize = object.maxWasmCodeSize ?? "0";
+    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? Long.fromValue(object.maxWasmCodeSize) : Long.UZERO;
     return message;
   }
 
@@ -504,7 +504,7 @@ export const CodeInfo = {
 
 function createBaseContractInfo(): ContractInfo {
   return {
-    codeId: "0",
+    codeId: Long.UZERO,
     creator: "",
     admin: "",
     label: "",
@@ -516,7 +516,7 @@ function createBaseContractInfo(): ContractInfo {
 
 export const ContractInfo = {
   encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
+    if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
 
@@ -557,7 +557,7 @@ export const ContractInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.codeId = longToString((reader.uint64() as Long));
+          message.codeId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -595,7 +595,7 @@ export const ContractInfo = {
 
   fromJSON(object: any): ContractInfo {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
       creator: isSet(object.creator) ? String(object.creator) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
@@ -607,7 +607,7 @@ export const ContractInfo = {
 
   toJSON(message: ContractInfo): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = message.codeId);
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.creator !== undefined && (obj.creator = message.creator);
     message.admin !== undefined && (obj.admin = message.admin);
     message.label !== undefined && (obj.label = message.label);
@@ -619,7 +619,7 @@ export const ContractInfo = {
 
   fromPartial<I extends Exact<DeepPartial<ContractInfo>, I>>(object: I): ContractInfo {
     const message = createBaseContractInfo();
-    message.codeId = object.codeId ?? "0";
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
@@ -634,7 +634,7 @@ export const ContractInfo = {
 function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
-    codeId: "0",
+    codeId: Long.UZERO,
     updated: undefined,
     msg: new Uint8Array()
   };
@@ -646,7 +646,7 @@ export const ContractCodeHistoryEntry = {
       writer.uint32(8).int32(message.operation);
     }
 
-    if (message.codeId !== "0") {
+    if (!message.codeId.isZero()) {
       writer.uint32(16).uint64(message.codeId);
     }
 
@@ -675,7 +675,7 @@ export const ContractCodeHistoryEntry = {
           break;
 
         case 2:
-          message.codeId = longToString((reader.uint64() as Long));
+          message.codeId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -698,7 +698,7 @@ export const ContractCodeHistoryEntry = {
   fromJSON(object: any): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
@@ -707,7 +707,7 @@ export const ContractCodeHistoryEntry = {
   toJSON(message: ContractCodeHistoryEntry): unknown {
     const obj: any = {};
     message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
-    message.codeId !== undefined && (obj.codeId = message.codeId);
+    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toJSON(message.updated) : undefined);
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
@@ -716,7 +716,7 @@ export const ContractCodeHistoryEntry = {
   fromPartial<I extends Exact<DeepPartial<ContractCodeHistoryEntry>, I>>(object: I): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
-    message.codeId = object.codeId ?? "0";
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();
     return message;
@@ -726,18 +726,18 @@ export const ContractCodeHistoryEntry = {
 
 function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   return {
-    blockHeight: "0",
-    txIndex: "0"
+    blockHeight: Long.UZERO,
+    txIndex: Long.UZERO
   };
 }
 
 export const AbsoluteTxPosition = {
   encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.blockHeight !== "0") {
+    if (!message.blockHeight.isZero()) {
       writer.uint32(8).uint64(message.blockHeight);
     }
 
-    if (message.txIndex !== "0") {
+    if (!message.txIndex.isZero()) {
       writer.uint32(16).uint64(message.txIndex);
     }
 
@@ -754,11 +754,11 @@ export const AbsoluteTxPosition = {
 
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = longToString((reader.uint64() as Long));
+          message.blockHeight = (reader.uint64() as Long);
           break;
 
         case 2:
-          message.txIndex = longToString((reader.uint64() as Long));
+          message.txIndex = (reader.uint64() as Long);
           break;
 
         default:
@@ -772,22 +772,22 @@ export const AbsoluteTxPosition = {
 
   fromJSON(object: any): AbsoluteTxPosition {
     return {
-      blockHeight: isSet(object.blockHeight) ? String(object.blockHeight) : "0",
-      txIndex: isSet(object.txIndex) ? String(object.txIndex) : "0"
+      blockHeight: isSet(object.blockHeight) ? Long.fromString(object.blockHeight) : Long.UZERO,
+      txIndex: isSet(object.txIndex) ? Long.fromString(object.txIndex) : Long.UZERO
     };
   },
 
   toJSON(message: AbsoluteTxPosition): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = message.blockHeight);
-    message.txIndex !== undefined && (obj.txIndex = message.txIndex);
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.UZERO).toString());
+    message.txIndex !== undefined && (obj.txIndex = (message.txIndex || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<AbsoluteTxPosition>, I>>(object: I): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
-    message.blockHeight = object.blockHeight ?? "0";
-    message.txIndex = object.txIndex ?? "0";
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.UZERO;
+    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? Long.fromValue(object.txIndex) : Long.UZERO;
     return message;
   }
 
@@ -899,13 +899,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

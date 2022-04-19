@@ -26,7 +26,7 @@ export interface Distribution {
    * must equal the sum of the values in `bucket_counts` if a histogram is
    * provided.
    */
-  count: string;
+  count: Long;
   /**
    * The arithmetic mean of the values in the population. If `count` is zero
    * then this field must be zero.
@@ -76,7 +76,7 @@ export interface Distribution {
    * `bucket_counts` is the count for the overflow bucket (number N-1).
    */
 
-  bucketCounts: string[];
+  bucketCounts: Long[];
   /** Must be in increasing order of `value` field. */
 
   exemplars: Distribution_Exemplar[];
@@ -216,7 +216,7 @@ export interface Distribution_Exemplar {
 
 function createBaseDistribution(): Distribution {
   return {
-    count: "0",
+    count: Long.ZERO,
     mean: 0,
     sumOfSquaredDeviation: 0,
     range: undefined,
@@ -228,7 +228,7 @@ function createBaseDistribution(): Distribution {
 
 export const Distribution = {
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.count !== "0") {
+    if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
     }
 
@@ -273,7 +273,7 @@ export const Distribution = {
 
       switch (tag >>> 3) {
         case 1:
-          message.count = longToString((reader.int64() as Long));
+          message.count = (reader.int64() as Long);
           break;
 
         case 2:
@@ -297,10 +297,10 @@ export const Distribution = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.bucketCounts.push(longToString((reader.int64() as Long)));
+              message.bucketCounts.push((reader.int64() as Long));
             }
           } else {
-            message.bucketCounts.push(longToString((reader.int64() as Long)));
+            message.bucketCounts.push((reader.int64() as Long));
           }
 
           break;
@@ -320,26 +320,26 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
-      count: isSet(object.count) ? String(object.count) : "0",
+      count: isSet(object.count) ? Long.fromString(object.count) : Long.ZERO,
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
       range: isSet(object.range) ? Distribution_Range.fromJSON(object.range) : undefined,
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
-      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => String(e)) : [],
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromString(e)) : [],
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
 
   toJSON(message: Distribution): unknown {
     const obj: any = {};
-    message.count !== undefined && (obj.count = message.count);
+    message.count !== undefined && (obj.count = (message.count || Long.ZERO).toString());
     message.mean !== undefined && (obj.mean = message.mean);
     message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
     message.range !== undefined && (obj.range = message.range ? Distribution_Range.toJSON(message.range) : undefined);
     message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
 
     if (message.bucketCounts) {
-      obj.bucketCounts = message.bucketCounts.map(e => e);
+      obj.bucketCounts = message.bucketCounts.map(e => (e || Long.ZERO).toString());
     } else {
       obj.bucketCounts = [];
     }
@@ -355,12 +355,12 @@ export const Distribution = {
 
   fromPartial<I extends Exact<DeepPartial<Distribution>, I>>(object: I): Distribution {
     const message = createBaseDistribution();
-    message.count = object.count ?? "0";
+    message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
     message.mean = object.mean ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
     message.range = object.range !== undefined && object.range !== null ? Distribution_Range.fromPartial(object.range) : undefined;
     message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
-    message.bucketCounts = object.bucketCounts?.map(e => e) || [];
+    message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   }
@@ -841,12 +841,12 @@ export const Distribution_Exemplar = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -855,7 +855,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -870,8 +870,8 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

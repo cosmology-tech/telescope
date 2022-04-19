@@ -4,9 +4,9 @@ export interface AminoMsgJoinPool extends AminoMsg {
     type: "osmosis/gamm/join-pool";
     value: {
         sender: string;
-        poolId: string;
-        shareOutAmount: string;
-        tokenInMaxs: {
+        pool_id: string;
+        share_out_amount: string;
+        token_in_maxs: {
             denom: string;
             amount: string;
         }[];
@@ -16,9 +16,9 @@ export interface AminoMsgExitPool extends AminoMsg {
     type: "osmosis/gamm/exit-pool";
     value: {
         sender: string;
-        poolId: string;
-        shareInAmount: string;
-        tokenOutMins: {
+        pool_id: string;
+        share_in_amount: string;
+        token_out_mins: {
             denom: string;
             amount: string;
         }[];
@@ -29,14 +29,14 @@ export interface AminoMsgSwapExactAmountIn extends AminoMsg {
     value: {
         sender: string;
         routes: {
-            poolId: string;
-            tokenOutDenom: string;
+            pool_id: string;
+            token_out_denom: string;
         }[];
-        tokenIn: {
+        token_in: {
             denom: string;
             amount: string;
         };
-        tokenOutMinAmount: string;
+        token_out_min_amount: string;
     };
 }
 export interface AminoMsgSwapExactAmountOut extends AminoMsg {
@@ -44,11 +44,11 @@ export interface AminoMsgSwapExactAmountOut extends AminoMsg {
     value: {
         sender: string;
         routes: {
-            poolId: string;
-            tokenInDenom: string;
+            pool_id: string;
+            token_in_denom: string;
         }[];
-        tokenInMaxAmount: string;
-        tokenOut: {
+        token_in_max_amount: string;
+        token_out: {
             denom: string;
             amount: string;
         };
@@ -58,85 +58,85 @@ export interface AminoMsgJoinSwapExternAmountIn extends AminoMsg {
     type: "osmosis/gamm/join-swap-extern-amount-in";
     value: {
         sender: string;
-        poolId: string;
-        tokenIn: {
+        pool_id: string;
+        token_in: {
             denom: string;
             amount: string;
         };
-        shareOutMinAmount: string;
+        share_out_min_amount: string;
     };
 }
 export interface AminoMsgJoinSwapShareAmountOut extends AminoMsg {
     type: "osmosis/gamm/join-swap-share-amount-out";
     value: {
         sender: string;
-        poolId: string;
-        tokenInDenom: string;
-        shareOutAmount: string;
-        tokenInMaxAmount: string;
+        pool_id: string;
+        token_in_denom: string;
+        share_out_amount: string;
+        token_in_max_amount: string;
     };
 }
 export interface AminoMsgExitSwapExternAmountOut extends AminoMsg {
     type: "osmosis/gamm/exit-swap-extern-amount-out";
     value: {
         sender: string;
-        poolId: string;
-        tokenOut: {
+        pool_id: string;
+        token_out: {
             denom: string;
             amount: string;
         };
-        shareInMaxAmount: string;
+        share_in_max_amount: string;
     };
 }
 export interface AminoMsgExitSwapShareAmountIn extends AminoMsg {
     type: "osmosis/gamm/exit-swap-share-amount-in";
     value: {
         sender: string;
-        poolId: string;
-        tokenOutDenom: string;
-        shareInAmount: string;
-        tokenOutMinAmount: string;
+        pool_id: string;
+        token_out_denom: string;
+        share_in_amount: string;
+        token_out_min_amount: string;
     };
 }
 export declare const AminoConverter: {
     "/osmosis.gamm.v1beta1.MsgJoinPool": {
         aminoType: string;
         toAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: MsgJoinPool) => AminoMsgJoinPool["value"];
-        fromAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: AminoMsgJoinPool["value"]) => MsgJoinPool;
+        fromAmino: ({ sender, pool_id, share_out_amount, token_in_maxs }: AminoMsgJoinPool["value"]) => MsgJoinPool;
     };
     "/osmosis.gamm.v1beta1.MsgExitPool": {
         aminoType: string;
         toAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: MsgExitPool) => AminoMsgExitPool["value"];
-        fromAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: AminoMsgExitPool["value"]) => MsgExitPool;
+        fromAmino: ({ sender, pool_id, share_in_amount, token_out_mins }: AminoMsgExitPool["value"]) => MsgExitPool;
     };
     "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn": {
         aminoType: string;
         toAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: MsgSwapExactAmountIn) => AminoMsgSwapExactAmountIn["value"];
-        fromAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: AminoMsgSwapExactAmountIn["value"]) => MsgSwapExactAmountIn;
+        fromAmino: ({ sender, routes, token_in, token_out_min_amount }: AminoMsgSwapExactAmountIn["value"]) => MsgSwapExactAmountIn;
     };
     "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut": {
         aminoType: string;
         toAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: MsgSwapExactAmountOut) => AminoMsgSwapExactAmountOut["value"];
-        fromAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: AminoMsgSwapExactAmountOut["value"]) => MsgSwapExactAmountOut;
+        fromAmino: ({ sender, routes, token_in_max_amount, token_out }: AminoMsgSwapExactAmountOut["value"]) => MsgSwapExactAmountOut;
     };
     "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn": {
         aminoType: string;
         toAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: MsgJoinSwapExternAmountIn) => AminoMsgJoinSwapExternAmountIn["value"];
-        fromAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: AminoMsgJoinSwapExternAmountIn["value"]) => MsgJoinSwapExternAmountIn;
+        fromAmino: ({ sender, pool_id, token_in, share_out_min_amount }: AminoMsgJoinSwapExternAmountIn["value"]) => MsgJoinSwapExternAmountIn;
     };
     "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut": {
         aminoType: string;
         toAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: MsgJoinSwapShareAmountOut) => AminoMsgJoinSwapShareAmountOut["value"];
-        fromAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: AminoMsgJoinSwapShareAmountOut["value"]) => MsgJoinSwapShareAmountOut;
+        fromAmino: ({ sender, pool_id, token_in_denom, share_out_amount, token_in_max_amount }: AminoMsgJoinSwapShareAmountOut["value"]) => MsgJoinSwapShareAmountOut;
     };
     "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut": {
         aminoType: string;
         toAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: MsgExitSwapExternAmountOut) => AminoMsgExitSwapExternAmountOut["value"];
-        fromAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: AminoMsgExitSwapExternAmountOut["value"]) => MsgExitSwapExternAmountOut;
+        fromAmino: ({ sender, pool_id, token_out, share_in_max_amount }: AminoMsgExitSwapExternAmountOut["value"]) => MsgExitSwapExternAmountOut;
     };
     "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn": {
         aminoType: string;
         toAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: MsgExitSwapShareAmountIn) => AminoMsgExitSwapShareAmountIn["value"];
-        fromAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: AminoMsgExitSwapShareAmountIn["value"]) => MsgExitSwapShareAmountIn;
+        fromAmino: ({ sender, pool_id, token_out_denom, share_in_amount, token_out_min_amount }: AminoMsgExitSwapShareAmountIn["value"]) => MsgExitSwapShareAmountIn;
     };
 };

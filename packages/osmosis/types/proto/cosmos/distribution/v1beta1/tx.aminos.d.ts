@@ -1,14 +1,14 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgSetWithdrawAddress, MsgWithdrawDelegatorReward, MsgWithdrawValidatorCommission, MsgFundCommunityPool } from "./tx";
 export interface AminoMsgSetWithdrawAddress extends AminoMsg {
-    type: "cosmos-sdk/MsgSetWithdrawAddress";
+    type: "cosmos-sdk/MsgModifyWithdrawAddress";
     value: {
         delegator_address: string;
         withdraw_address: string;
     };
 }
 export interface AminoMsgWithdrawDelegatorReward extends AminoMsg {
-    type: "cosmos-sdk/MsgWithdrawDelegatorReward";
+    type: "cosmos-sdk/MsgWithdrawDelegationReward";
     value: {
         delegator_address: string;
         validator_address: string;

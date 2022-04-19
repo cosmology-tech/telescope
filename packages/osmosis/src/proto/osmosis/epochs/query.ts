@@ -10,7 +10,7 @@ export interface QueryCurrentEpochRequest {
   identifier: string;
 }
 export interface QueryCurrentEpochResponse {
-  currentEpoch: string;
+  currentEpoch: Long;
 }
 
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
@@ -178,13 +178,13 @@ export const QueryCurrentEpochRequest = {
 
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   return {
-    currentEpoch: "0"
+    currentEpoch: Long.ZERO
   };
 }
 
 export const QueryCurrentEpochResponse = {
   encode(message: QueryCurrentEpochResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.currentEpoch !== "0") {
+    if (!message.currentEpoch.isZero()) {
       writer.uint32(8).int64(message.currentEpoch);
     }
 
@@ -201,7 +201,7 @@ export const QueryCurrentEpochResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.currentEpoch = longToString((reader.int64() as Long));
+          message.currentEpoch = (reader.int64() as Long);
           break;
 
         default:
@@ -215,19 +215,19 @@ export const QueryCurrentEpochResponse = {
 
   fromJSON(object: any): QueryCurrentEpochResponse {
     return {
-      currentEpoch: isSet(object.currentEpoch) ? String(object.currentEpoch) : "0"
+      currentEpoch: isSet(object.currentEpoch) ? Long.fromString(object.currentEpoch) : Long.ZERO
     };
   },
 
   toJSON(message: QueryCurrentEpochResponse): unknown {
     const obj: any = {};
-    message.currentEpoch !== undefined && (obj.currentEpoch = message.currentEpoch);
+    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryCurrentEpochResponse>, I>>(object: I): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    message.currentEpoch = object.currentEpoch ?? "0";
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;
   }
 
@@ -235,13 +235,9 @@ export const QueryCurrentEpochResponse = {
 /** Query defines the gRPC querier service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

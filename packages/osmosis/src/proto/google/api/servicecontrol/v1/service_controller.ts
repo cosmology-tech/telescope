@@ -80,7 +80,7 @@ export interface CheckResponse_ConsumerInfo {
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
-  projectNumber: string;
+  projectNumber: Long;
   /**
    * The type of the consumer which should have been defined in
    * [Google Resource Manager](https://cloud.google.com/resource-manager/).
@@ -93,7 +93,7 @@ export interface CheckResponse_ConsumerInfo {
    * consumer number is found.
    */
 
-  consumerNumber: string;
+  consumerNumber: Long;
 }
 /**
  * The type of the consumer as defined in
@@ -523,15 +523,15 @@ export const CheckResponse_CheckInfo = {
 
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   return {
-    projectNumber: "0",
+    projectNumber: Long.ZERO,
     type: 0,
-    consumerNumber: "0"
+    consumerNumber: Long.ZERO
   };
 }
 
 export const CheckResponse_ConsumerInfo = {
   encode(message: CheckResponse_ConsumerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.projectNumber !== "0") {
+    if (!message.projectNumber.isZero()) {
       writer.uint32(8).int64(message.projectNumber);
     }
 
@@ -539,7 +539,7 @@ export const CheckResponse_ConsumerInfo = {
       writer.uint32(16).int32(message.type);
     }
 
-    if (message.consumerNumber !== "0") {
+    if (!message.consumerNumber.isZero()) {
       writer.uint32(24).int64(message.consumerNumber);
     }
 
@@ -556,7 +556,7 @@ export const CheckResponse_ConsumerInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.projectNumber = longToString((reader.int64() as Long));
+          message.projectNumber = (reader.int64() as Long);
           break;
 
         case 2:
@@ -564,7 +564,7 @@ export const CheckResponse_ConsumerInfo = {
           break;
 
         case 3:
-          message.consumerNumber = longToString((reader.int64() as Long));
+          message.consumerNumber = (reader.int64() as Long);
           break;
 
         default:
@@ -578,25 +578,25 @@ export const CheckResponse_ConsumerInfo = {
 
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: isSet(object.projectNumber) ? String(object.projectNumber) : "0",
+      projectNumber: isSet(object.projectNumber) ? Long.fromString(object.projectNumber) : Long.ZERO,
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumerNumber: isSet(object.consumerNumber) ? String(object.consumerNumber) : "0"
+      consumerNumber: isSet(object.consumerNumber) ? Long.fromString(object.consumerNumber) : Long.ZERO
     };
   },
 
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
-    message.projectNumber !== undefined && (obj.projectNumber = message.projectNumber);
+    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || Long.ZERO).toString());
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    message.consumerNumber !== undefined && (obj.consumerNumber = message.consumerNumber);
+    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<CheckResponse_ConsumerInfo>, I>>(object: I): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    message.projectNumber = object.projectNumber ?? "0";
+    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
     message.type = object.type ?? 0;
-    message.consumerNumber = object.consumerNumber ?? "0";
+    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
     return message;
   }
 
@@ -918,13 +918,9 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

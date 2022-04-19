@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * PubKey defines a secp256k1 public key
@@ -18,25 +19,17 @@ export declare const PubKey: {
     decode(input: _m0.Reader | Uint8Array, length?: number): PubKey;
     fromJSON(object: any): PubKey;
     toJSON(message: PubKey): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-    } & {
-        key?: Uint8Array;
-    } & Record<Exclude<keyof I, "key">, never>>(object: I): PubKey;
+    fromPartial<I extends unknown>(object: I): PubKey;
 };
 export declare const PrivKey: {
     encode(message: PrivKey, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PrivKey;
     fromJSON(object: any): PrivKey;
     toJSON(message: PrivKey): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-    } & {
-        key?: Uint8Array;
-    } & Record<Exclude<keyof I, "key">, never>>(object: I): PrivKey;
+    fromPartial<I extends unknown>(object: I): PrivKey;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

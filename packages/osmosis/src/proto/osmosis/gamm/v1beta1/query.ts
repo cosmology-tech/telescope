@@ -8,7 +8,7 @@ import { SwapAmountInRoute, SwapAmountOutRoute } from "../../../osmosis/gamm/v1b
 
 /** =============================== Pool */
 export interface QueryPoolRequest {
-  poolId: string;
+  poolId: Long;
 }
 export interface QueryPoolResponse {
   pool: Any;
@@ -29,12 +29,12 @@ export interface QueryPoolsResponse {
 
 export interface QueryNumPoolsRequest {}
 export interface QueryNumPoolsResponse {
-  numPools: string;
+  numPools: Long;
 }
 /** =============================== PoolParams */
 
 export interface QueryPoolParamsRequest {
-  poolId: string;
+  poolId: Long;
 }
 export interface QueryPoolParamsResponse {
   params: Any;
@@ -42,7 +42,7 @@ export interface QueryPoolParamsResponse {
 /** =============================== PoolLiquidity */
 
 export interface QueryTotalPoolLiquidityRequest {
-  poolId: string;
+  poolId: Long;
 }
 export interface QueryTotalPoolLiquidityResponse {
   liquidity: Coin[];
@@ -50,7 +50,7 @@ export interface QueryTotalPoolLiquidityResponse {
 /** =============================== TotalShares */
 
 export interface QueryTotalSharesRequest {
-  poolId: string;
+  poolId: Long;
 }
 export interface QueryTotalSharesResponse {
   totalShares: Coin;
@@ -58,7 +58,7 @@ export interface QueryTotalSharesResponse {
 /** =============================== SpotPrice */
 
 export interface QuerySpotPriceRequest {
-  poolId: string;
+  poolId: Long;
   tokenInDenom: string;
   tokenOutDenom: string;
 }
@@ -70,7 +70,7 @@ export interface QuerySpotPriceResponse {
 
 export interface QuerySwapExactAmountInRequest {
   sender: string;
-  poolId: string;
+  poolId: Long;
   tokenIn: string;
   routes: SwapAmountInRoute[];
 }
@@ -81,7 +81,7 @@ export interface QuerySwapExactAmountInResponse {
 
 export interface QuerySwapExactAmountOutRequest {
   sender: string;
-  poolId: string;
+  poolId: Long;
   routes: SwapAmountOutRoute[];
   tokenOut: string;
 }
@@ -95,13 +95,13 @@ export interface QueryTotalLiquidityResponse {
 
 function createBaseQueryPoolRequest(): QueryPoolRequest {
   return {
-    poolId: "0"
+    poolId: Long.UZERO
   };
 }
 
 export const QueryPoolRequest = {
   encode(message: QueryPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -118,7 +118,7 @@ export const QueryPoolRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         default:
@@ -132,19 +132,19 @@ export const QueryPoolRequest = {
 
   fromJSON(object: any): QueryPoolRequest {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0"
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryPoolRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryPoolRequest>, I>>(object: I): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
 
@@ -384,13 +384,13 @@ export const QueryNumPoolsRequest = {
 
 function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
   return {
-    numPools: "0"
+    numPools: Long.UZERO
   };
 }
 
 export const QueryNumPoolsResponse = {
   encode(message: QueryNumPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.numPools !== "0") {
+    if (!message.numPools.isZero()) {
       writer.uint32(8).uint64(message.numPools);
     }
 
@@ -407,7 +407,7 @@ export const QueryNumPoolsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.numPools = longToString((reader.uint64() as Long));
+          message.numPools = (reader.uint64() as Long);
           break;
 
         default:
@@ -421,19 +421,19 @@ export const QueryNumPoolsResponse = {
 
   fromJSON(object: any): QueryNumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? String(object.numPools) : "0"
+      numPools: isSet(object.numPools) ? Long.fromString(object.numPools) : Long.UZERO
     };
   },
 
   toJSON(message: QueryNumPoolsResponse): unknown {
     const obj: any = {};
-    message.numPools !== undefined && (obj.numPools = message.numPools);
+    message.numPools !== undefined && (obj.numPools = (message.numPools || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryNumPoolsResponse>, I>>(object: I): QueryNumPoolsResponse {
     const message = createBaseQueryNumPoolsResponse();
-    message.numPools = object.numPools ?? "0";
+    message.numPools = object.numPools !== undefined && object.numPools !== null ? Long.fromValue(object.numPools) : Long.UZERO;
     return message;
   }
 
@@ -441,13 +441,13 @@ export const QueryNumPoolsResponse = {
 
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
   return {
-    poolId: "0"
+    poolId: Long.UZERO
   };
 }
 
 export const QueryPoolParamsRequest = {
   encode(message: QueryPoolParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -464,7 +464,7 @@ export const QueryPoolParamsRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         default:
@@ -478,19 +478,19 @@ export const QueryPoolParamsRequest = {
 
   fromJSON(object: any): QueryPoolParamsRequest {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0"
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryPoolParamsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryPoolParamsRequest>, I>>(object: I): QueryPoolParamsRequest {
     const message = createBaseQueryPoolParamsRequest();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
 
@@ -555,13 +555,13 @@ export const QueryPoolParamsResponse = {
 
 function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequest {
   return {
-    poolId: "0"
+    poolId: Long.UZERO
   };
 }
 
 export const QueryTotalPoolLiquidityRequest = {
   encode(message: QueryTotalPoolLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -578,7 +578,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         default:
@@ -592,19 +592,19 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0"
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryTotalPoolLiquidityRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryTotalPoolLiquidityRequest>, I>>(object: I): QueryTotalPoolLiquidityRequest {
     const message = createBaseQueryTotalPoolLiquidityRequest();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
 
@@ -675,13 +675,13 @@ export const QueryTotalPoolLiquidityResponse = {
 
 function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
   return {
-    poolId: "0"
+    poolId: Long.UZERO
   };
 }
 
 export const QueryTotalSharesRequest = {
   encode(message: QueryTotalSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -698,7 +698,7 @@ export const QueryTotalSharesRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         default:
@@ -712,19 +712,19 @@ export const QueryTotalSharesRequest = {
 
   fromJSON(object: any): QueryTotalSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0"
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryTotalSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryTotalSharesRequest>, I>>(object: I): QueryTotalSharesRequest {
     const message = createBaseQueryTotalSharesRequest();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
 
@@ -789,7 +789,7 @@ export const QueryTotalSharesResponse = {
 
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
-    poolId: "0",
+    poolId: Long.UZERO,
     tokenInDenom: "",
     tokenOutDenom: ""
   };
@@ -797,7 +797,7 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 
 export const QuerySpotPriceRequest = {
   encode(message: QuerySpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -822,7 +822,7 @@ export const QuerySpotPriceRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -844,7 +844,7 @@ export const QuerySpotPriceRequest = {
 
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : "",
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
@@ -852,7 +852,7 @@ export const QuerySpotPriceRequest = {
 
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);
     message.tokenOutDenom !== undefined && (obj.tokenOutDenom = message.tokenOutDenom);
     return obj;
@@ -860,7 +860,7 @@ export const QuerySpotPriceRequest = {
 
   fromPartial<I extends Exact<DeepPartial<QuerySpotPriceRequest>, I>>(object: I): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokenInDenom = object.tokenInDenom ?? "";
     message.tokenOutDenom = object.tokenOutDenom ?? "";
     return message;
@@ -928,7 +928,7 @@ export const QuerySpotPriceResponse = {
 function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInRequest {
   return {
     sender: "",
-    poolId: "0",
+    poolId: Long.UZERO,
     tokenIn: "",
     routes: []
   };
@@ -940,7 +940,7 @@ export const QuerySwapExactAmountInRequest = {
       writer.uint32(10).string(message.sender);
     }
 
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(16).uint64(message.poolId);
     }
 
@@ -969,7 +969,7 @@ export const QuerySwapExactAmountInRequest = {
           break;
 
         case 2:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -992,7 +992,7 @@ export const QuerySwapExactAmountInRequest = {
   fromJSON(object: any): QuerySwapExactAmountInRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
@@ -1001,7 +1001,7 @@ export const QuerySwapExactAmountInRequest = {
   toJSON(message: QuerySwapExactAmountInRequest): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
 
     if (message.routes) {
@@ -1016,7 +1016,7 @@ export const QuerySwapExactAmountInRequest = {
   fromPartial<I extends Exact<DeepPartial<QuerySwapExactAmountInRequest>, I>>(object: I): QuerySwapExactAmountInRequest {
     const message = createBaseQuerySwapExactAmountInRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -1084,7 +1084,7 @@ export const QuerySwapExactAmountInResponse = {
 function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequest {
   return {
     sender: "",
-    poolId: "0",
+    poolId: Long.UZERO,
     routes: [],
     tokenOut: ""
   };
@@ -1096,7 +1096,7 @@ export const QuerySwapExactAmountOutRequest = {
       writer.uint32(10).string(message.sender);
     }
 
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(16).uint64(message.poolId);
     }
 
@@ -1125,7 +1125,7 @@ export const QuerySwapExactAmountOutRequest = {
           break;
 
         case 2:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -1148,7 +1148,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
@@ -1157,7 +1157,7 @@ export const QuerySwapExactAmountOutRequest = {
   toJSON(message: QuerySwapExactAmountOutRequest): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
 
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
@@ -1172,7 +1172,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromPartial<I extends Exact<DeepPartial<QuerySwapExactAmountOutRequest>, I>>(object: I): QuerySwapExactAmountOutRequest {
     const message = createBaseQuerySwapExactAmountOutRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -1343,13 +1343,9 @@ export const QueryTotalLiquidityResponse = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

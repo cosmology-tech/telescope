@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** `Backend` defines the backend configuration for a service. */
 export interface Backend {
@@ -161,91 +162,17 @@ export declare const Backend: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Backend;
     fromJSON(object: any): Backend;
     toJSON(message: Backend): unknown;
-    fromPartial<I extends {
-        rules?: {
-            selector?: string;
-            address?: string;
-            deadline?: number;
-            minDeadline?: number;
-            operationDeadline?: number;
-            pathTranslation?: BackendRule_PathTranslation;
-            jwtAudience?: string | undefined;
-            disableAuth?: boolean | undefined;
-            protocol?: string;
-        }[];
-    } & {
-        rules?: {
-            selector?: string;
-            address?: string;
-            deadline?: number;
-            minDeadline?: number;
-            operationDeadline?: number;
-            pathTranslation?: BackendRule_PathTranslation;
-            jwtAudience?: string | undefined;
-            disableAuth?: boolean | undefined;
-            protocol?: string;
-        }[] & ({
-            selector?: string;
-            address?: string;
-            deadline?: number;
-            minDeadline?: number;
-            operationDeadline?: number;
-            pathTranslation?: BackendRule_PathTranslation;
-            jwtAudience?: string | undefined;
-            disableAuth?: boolean | undefined;
-            protocol?: string;
-        } & {
-            selector?: string;
-            address?: string;
-            deadline?: number;
-            minDeadline?: number;
-            operationDeadline?: number;
-            pathTranslation?: BackendRule_PathTranslation;
-            jwtAudience?: string | undefined;
-            disableAuth?: boolean | undefined;
-            protocol?: string;
-        } & Record<Exclude<keyof I["rules"][number], keyof BackendRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
-            selector?: string;
-            address?: string;
-            deadline?: number;
-            minDeadline?: number;
-            operationDeadline?: number;
-            pathTranslation?: BackendRule_PathTranslation;
-            jwtAudience?: string | undefined;
-            disableAuth?: boolean | undefined;
-            protocol?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "rules">, never>>(object: I): Backend;
+    fromPartial<I extends unknown>(object: I): Backend;
 };
 export declare const BackendRule: {
     encode(message: BackendRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BackendRule;
     fromJSON(object: any): BackendRule;
     toJSON(message: BackendRule): unknown;
-    fromPartial<I extends {
-        selector?: string;
-        address?: string;
-        deadline?: number;
-        minDeadline?: number;
-        operationDeadline?: number;
-        pathTranslation?: BackendRule_PathTranslation;
-        jwtAudience?: string | undefined;
-        disableAuth?: boolean | undefined;
-        protocol?: string;
-    } & {
-        selector?: string;
-        address?: string;
-        deadline?: number;
-        minDeadline?: number;
-        operationDeadline?: number;
-        pathTranslation?: BackendRule_PathTranslation;
-        jwtAudience?: string | undefined;
-        disableAuth?: boolean | undefined;
-        protocol?: string;
-    } & Record<Exclude<keyof I, keyof BackendRule>, never>>(object: I): BackendRule;
+    fromPartial<I extends unknown>(object: I): BackendRule;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

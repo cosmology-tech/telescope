@@ -11,7 +11,7 @@ export interface GenesisState {
   params: Params;
   gauges: Gauge[];
   lockableDurations: string[];
-  lastGaugeId: string;
+  lastGaugeId: Long;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -19,7 +19,7 @@ function createBaseGenesisState(): GenesisState {
     params: undefined,
     gauges: [],
     lockableDurations: [],
-    lastGaugeId: "0"
+    lastGaugeId: Long.UZERO
   };
 }
 
@@ -37,7 +37,7 @@ export const GenesisState = {
       Duration.encode(toDuration(v!), writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.lastGaugeId !== "0") {
+    if (!message.lastGaugeId.isZero()) {
       writer.uint32(32).uint64(message.lastGaugeId);
     }
 
@@ -66,7 +66,7 @@ export const GenesisState = {
           break;
 
         case 4:
-          message.lastGaugeId = longToString((reader.uint64() as Long));
+          message.lastGaugeId = (reader.uint64() as Long);
           break;
 
         default:
@@ -83,7 +83,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromJSON(e)) : [],
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => String(e)) : [],
-      lastGaugeId: isSet(object.lastGaugeId) ? String(object.lastGaugeId) : "0"
+      lastGaugeId: isSet(object.lastGaugeId) ? Long.fromString(object.lastGaugeId) : Long.UZERO
     };
   },
 
@@ -103,7 +103,7 @@ export const GenesisState = {
       obj.lockableDurations = [];
     }
 
-    message.lastGaugeId !== undefined && (obj.lastGaugeId = message.lastGaugeId);
+    message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || Long.UZERO).toString());
     return obj;
   },
 
@@ -112,13 +112,13 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
     message.lockableDurations = object.lockableDurations?.map(e => e) || [];
-    message.lastGaugeId = object.lastGaugeId ?? "0";
+    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? Long.fromValue(object.lastGaugeId) : Long.UZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
@@ -131,10 +131,6 @@ function toDuration(duration: string): Duration {
 
 function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
-
-function longToString(long: Long) {
-  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

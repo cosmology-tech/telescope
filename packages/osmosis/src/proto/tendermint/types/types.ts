@@ -134,7 +134,7 @@ export interface Header {
   /** basic block info */
   version: Consensus;
   chainId: string;
-  height: string;
+  height: Long;
   time: Date;
   /** prev block info */
 
@@ -184,7 +184,7 @@ export interface Data {
 
 export interface Vote {
   type: SignedMsgType;
-  height: string;
+  height: Long;
   round: number;
   /** zero if vote is nil. */
 
@@ -197,7 +197,7 @@ export interface Vote {
 /** Commit contains the evidence that a block was committed by a set of validators. */
 
 export interface Commit {
-  height: string;
+  height: Long;
   round: number;
   blockId: BlockID;
   signatures: CommitSig[];
@@ -212,7 +212,7 @@ export interface CommitSig {
 }
 export interface Proposal {
   type: SignedMsgType;
-  height: string;
+  height: Long;
   round: number;
   polRound: number;
   blockId: BlockID;
@@ -229,9 +229,9 @@ export interface LightBlock {
 }
 export interface BlockMeta {
   blockId: BlockID;
-  blockSize: string;
+  blockSize: Long;
   header: Header;
-  numTxs: string;
+  numTxs: Long;
 }
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 
@@ -464,7 +464,7 @@ function createBaseHeader(): Header {
   return {
     version: undefined,
     chainId: "",
-    height: "0",
+    height: Long.ZERO,
     time: undefined,
     lastBlockId: undefined,
     lastCommitHash: new Uint8Array(),
@@ -489,7 +489,7 @@ export const Header = {
       writer.uint32(18).string(message.chainId);
     }
 
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(24).int64(message.height);
     }
 
@@ -558,7 +558,7 @@ export const Header = {
           break;
 
         case 3:
-          message.height = longToString((reader.int64() as Long));
+          message.height = (reader.int64() as Long);
           break;
 
         case 4:
@@ -618,7 +618,7 @@ export const Header = {
     return {
       version: isSet(object.version) ? Consensus.fromJSON(object.version) : undefined,
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       lastBlockId: isSet(object.lastBlockId) ? BlockID.fromJSON(object.lastBlockId) : undefined,
       lastCommitHash: isSet(object.lastCommitHash) ? bytesFromBase64(object.lastCommitHash) : new Uint8Array(),
@@ -637,7 +637,7 @@ export const Header = {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version ? Consensus.toJSON(message.version) : undefined);
     message.chainId !== undefined && (obj.chainId = message.chainId);
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
     message.lastBlockId !== undefined && (obj.lastBlockId = message.lastBlockId ? BlockID.toJSON(message.lastBlockId) : undefined);
     message.lastCommitHash !== undefined && (obj.lastCommitHash = base64FromBytes(message.lastCommitHash !== undefined ? message.lastCommitHash : new Uint8Array()));
@@ -656,7 +656,7 @@ export const Header = {
     const message = createBaseHeader();
     message.version = object.version !== undefined && object.version !== null ? Consensus.fromPartial(object.version) : undefined;
     message.chainId = object.chainId ?? "";
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.time = object.time ?? undefined;
     message.lastBlockId = object.lastBlockId !== undefined && object.lastBlockId !== null ? BlockID.fromPartial(object.lastBlockId) : undefined;
     message.lastCommitHash = object.lastCommitHash ?? new Uint8Array();
@@ -739,7 +739,7 @@ export const Data = {
 function createBaseVote(): Vote {
   return {
     type: 0,
-    height: "0",
+    height: Long.ZERO,
     round: 0,
     blockId: undefined,
     timestamp: undefined,
@@ -755,7 +755,7 @@ export const Vote = {
       writer.uint32(8).int32(message.type);
     }
 
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(16).int64(message.height);
     }
 
@@ -800,7 +800,7 @@ export const Vote = {
           break;
 
         case 2:
-          message.height = longToString((reader.int64() as Long));
+          message.height = (reader.int64() as Long);
           break;
 
         case 3:
@@ -839,7 +839,7 @@ export const Vote = {
   fromJSON(object: any): Vote {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
@@ -852,7 +852,7 @@ export const Vote = {
   toJSON(message: Vote): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.round !== undefined && (obj.round = Math.round(message.round));
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -865,7 +865,7 @@ export const Vote = {
   fromPartial<I extends Exact<DeepPartial<Vote>, I>>(object: I): Vote {
     const message = createBaseVote();
     message.type = object.type ?? 0;
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.timestamp = object.timestamp ?? undefined;
@@ -879,7 +879,7 @@ export const Vote = {
 
 function createBaseCommit(): Commit {
   return {
-    height: "0",
+    height: Long.ZERO,
     round: 0,
     blockId: undefined,
     signatures: []
@@ -888,7 +888,7 @@ function createBaseCommit(): Commit {
 
 export const Commit = {
   encode(message: Commit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
 
@@ -917,7 +917,7 @@ export const Commit = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = longToString((reader.int64() as Long));
+          message.height = (reader.int64() as Long);
           break;
 
         case 2:
@@ -943,7 +943,7 @@ export const Commit = {
 
   fromJSON(object: any): Commit {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromJSON(e)) : []
@@ -952,7 +952,7 @@ export const Commit = {
 
   toJSON(message: Commit): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.round !== undefined && (obj.round = Math.round(message.round));
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
 
@@ -967,7 +967,7 @@ export const Commit = {
 
   fromPartial<I extends Exact<DeepPartial<Commit>, I>>(object: I): Commit {
     const message = createBaseCommit();
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.signatures = object.signatures?.map(e => CommitSig.fromPartial(e)) || [];
@@ -1072,7 +1072,7 @@ export const CommitSig = {
 function createBaseProposal(): Proposal {
   return {
     type: 0,
-    height: "0",
+    height: Long.ZERO,
     round: 0,
     polRound: 0,
     blockId: undefined,
@@ -1087,7 +1087,7 @@ export const Proposal = {
       writer.uint32(8).int32(message.type);
     }
 
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(16).int64(message.height);
     }
 
@@ -1128,7 +1128,7 @@ export const Proposal = {
           break;
 
         case 2:
-          message.height = longToString((reader.int64() as Long));
+          message.height = (reader.int64() as Long);
           break;
 
         case 3:
@@ -1163,7 +1163,7 @@ export const Proposal = {
   fromJSON(object: any): Proposal {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -1175,7 +1175,7 @@ export const Proposal = {
   toJSON(message: Proposal): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.round !== undefined && (obj.round = Math.round(message.round));
     message.polRound !== undefined && (obj.polRound = Math.round(message.polRound));
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
@@ -1187,7 +1187,7 @@ export const Proposal = {
   fromPartial<I extends Exact<DeepPartial<Proposal>, I>>(object: I): Proposal {
     const message = createBaseProposal();
     message.type = object.type ?? 0;
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
@@ -1339,9 +1339,9 @@ export const LightBlock = {
 function createBaseBlockMeta(): BlockMeta {
   return {
     blockId: undefined,
-    blockSize: "0",
+    blockSize: Long.ZERO,
     header: undefined,
-    numTxs: "0"
+    numTxs: Long.ZERO
   };
 }
 
@@ -1351,7 +1351,7 @@ export const BlockMeta = {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.blockSize !== "0") {
+    if (!message.blockSize.isZero()) {
       writer.uint32(16).int64(message.blockSize);
     }
 
@@ -1359,7 +1359,7 @@ export const BlockMeta = {
       Header.encode(message.header, writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.numTxs !== "0") {
+    if (!message.numTxs.isZero()) {
       writer.uint32(32).int64(message.numTxs);
     }
 
@@ -1380,7 +1380,7 @@ export const BlockMeta = {
           break;
 
         case 2:
-          message.blockSize = longToString((reader.int64() as Long));
+          message.blockSize = (reader.int64() as Long);
           break;
 
         case 3:
@@ -1388,7 +1388,7 @@ export const BlockMeta = {
           break;
 
         case 4:
-          message.numTxs = longToString((reader.int64() as Long));
+          message.numTxs = (reader.int64() as Long);
           break;
 
         default:
@@ -1403,27 +1403,27 @@ export const BlockMeta = {
   fromJSON(object: any): BlockMeta {
     return {
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
-      blockSize: isSet(object.blockSize) ? String(object.blockSize) : "0",
+      blockSize: isSet(object.blockSize) ? Long.fromString(object.blockSize) : Long.ZERO,
       header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
-      numTxs: isSet(object.numTxs) ? String(object.numTxs) : "0"
+      numTxs: isSet(object.numTxs) ? Long.fromString(object.numTxs) : Long.ZERO
     };
   },
 
   toJSON(message: BlockMeta): unknown {
     const obj: any = {};
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
-    message.blockSize !== undefined && (obj.blockSize = message.blockSize);
+    message.blockSize !== undefined && (obj.blockSize = (message.blockSize || Long.ZERO).toString());
     message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    message.numTxs !== undefined && (obj.numTxs = message.numTxs);
+    message.numTxs !== undefined && (obj.numTxs = (message.numTxs || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<BlockMeta>, I>>(object: I): BlockMeta {
     const message = createBaseBlockMeta();
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
-    message.blockSize = object.blockSize ?? "0";
+    message.blockSize = object.blockSize !== undefined && object.blockSize !== null ? Long.fromValue(object.blockSize) : Long.ZERO;
     message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
-    message.numTxs = object.numTxs ?? "0";
+    message.numTxs = object.numTxs !== undefined && object.numTxs !== null ? Long.fromValue(object.numTxs) : Long.ZERO;
     return message;
   }
 
@@ -1547,12 +1547,12 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -1561,7 +1561,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -1576,8 +1576,8 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

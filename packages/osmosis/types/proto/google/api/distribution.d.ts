@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../google/protobuf/any";
 /**
@@ -22,7 +23,7 @@ export interface Distribution {
      * must equal the sum of the values in `bucket_counts` if a histogram is
      * provided.
      */
-    count: string;
+    count: Long;
     /**
      * The arithmetic mean of the values in the population. If `count` is zero
      * then this field must be zero.
@@ -67,7 +68,7 @@ export interface Distribution {
      * counts for the finite buckets (number 1 through N-2). The N'th value in
      * `bucket_counts` is the count for the overflow bucket (number N-1).
      */
-    bucketCounts: string[];
+    bucketCounts: Long[];
     /** Must be in increasing order of `value` field. */
     exemplars: Distribution_Exemplar[];
 }
@@ -193,260 +194,52 @@ export declare const Distribution: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution;
     fromJSON(object: any): Distribution;
     toJSON(message: Distribution): unknown;
-    fromPartial<I extends {
-        count?: string;
-        mean?: number;
-        sumOfSquaredDeviation?: number;
-        range?: {
-            min?: number;
-            max?: number;
-        };
-        bucketOptions?: {
-            linearBuckets?: {
-                numFiniteBuckets?: number;
-                width?: number;
-                offset?: number;
-            };
-            exponentialBuckets?: {
-                numFiniteBuckets?: number;
-                growthFactor?: number;
-                scale?: number;
-            };
-            explicitBuckets?: {
-                bounds?: number[];
-            };
-        };
-        bucketCounts?: string[];
-        exemplars?: {
-            value?: number;
-            timestamp?: Date;
-            attachments?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        }[];
-    } & {
-        count?: string;
-        mean?: number;
-        sumOfSquaredDeviation?: number;
-        range?: {
-            min?: number;
-            max?: number;
-        } & {
-            min?: number;
-            max?: number;
-        } & Record<Exclude<keyof I["range"], keyof Distribution_Range>, never>;
-        bucketOptions?: {
-            linearBuckets?: {
-                numFiniteBuckets?: number;
-                width?: number;
-                offset?: number;
-            };
-            exponentialBuckets?: {
-                numFiniteBuckets?: number;
-                growthFactor?: number;
-                scale?: number;
-            };
-            explicitBuckets?: {
-                bounds?: number[];
-            };
-        } & {
-            linearBuckets?: {
-                numFiniteBuckets?: number;
-                width?: number;
-                offset?: number;
-            } & {
-                numFiniteBuckets?: number;
-                width?: number;
-                offset?: number;
-            } & Record<Exclude<keyof I["bucketOptions"]["linearBuckets"], keyof Distribution_BucketOptions_Linear>, never>;
-            exponentialBuckets?: {
-                numFiniteBuckets?: number;
-                growthFactor?: number;
-                scale?: number;
-            } & {
-                numFiniteBuckets?: number;
-                growthFactor?: number;
-                scale?: number;
-            } & Record<Exclude<keyof I["bucketOptions"]["exponentialBuckets"], keyof Distribution_BucketOptions_Exponential>, never>;
-            explicitBuckets?: {
-                bounds?: number[];
-            } & {
-                bounds?: number[] & number[] & Record<Exclude<keyof I["bucketOptions"]["explicitBuckets"]["bounds"], keyof number[]>, never>;
-            } & Record<Exclude<keyof I["bucketOptions"]["explicitBuckets"], "bounds">, never>;
-        } & Record<Exclude<keyof I["bucketOptions"], keyof Distribution_BucketOptions>, never>;
-        bucketCounts?: string[] & string[] & Record<Exclude<keyof I["bucketCounts"], keyof string[]>, never>;
-        exemplars?: {
-            value?: number;
-            timestamp?: Date;
-            attachments?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        }[] & ({
-            value?: number;
-            timestamp?: Date;
-            attachments?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        } & {
-            value?: number;
-            timestamp?: Date;
-            attachments?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[] & ({
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["exemplars"][number]["attachments"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["exemplars"][number]["attachments"], keyof {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["exemplars"][number], keyof Distribution_Exemplar>, never>)[] & Record<Exclude<keyof I["exemplars"], keyof {
-            value?: number;
-            timestamp?: Date;
-            attachments?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Distribution>, never>>(object: I): Distribution;
+    fromPartial<I extends unknown>(object: I): Distribution;
 };
 export declare const Distribution_Range: {
     encode(message: Distribution_Range, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_Range;
     fromJSON(object: any): Distribution_Range;
     toJSON(message: Distribution_Range): unknown;
-    fromPartial<I extends {
-        min?: number;
-        max?: number;
-    } & {
-        min?: number;
-        max?: number;
-    } & Record<Exclude<keyof I, keyof Distribution_Range>, never>>(object: I): Distribution_Range;
+    fromPartial<I extends unknown>(object: I): Distribution_Range;
 };
 export declare const Distribution_BucketOptions: {
     encode(message: Distribution_BucketOptions, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions;
     fromJSON(object: any): Distribution_BucketOptions;
     toJSON(message: Distribution_BucketOptions): unknown;
-    fromPartial<I extends {
-        linearBuckets?: {
-            numFiniteBuckets?: number;
-            width?: number;
-            offset?: number;
-        };
-        exponentialBuckets?: {
-            numFiniteBuckets?: number;
-            growthFactor?: number;
-            scale?: number;
-        };
-        explicitBuckets?: {
-            bounds?: number[];
-        };
-    } & {
-        linearBuckets?: {
-            numFiniteBuckets?: number;
-            width?: number;
-            offset?: number;
-        } & {
-            numFiniteBuckets?: number;
-            width?: number;
-            offset?: number;
-        } & Record<Exclude<keyof I["linearBuckets"], keyof Distribution_BucketOptions_Linear>, never>;
-        exponentialBuckets?: {
-            numFiniteBuckets?: number;
-            growthFactor?: number;
-            scale?: number;
-        } & {
-            numFiniteBuckets?: number;
-            growthFactor?: number;
-            scale?: number;
-        } & Record<Exclude<keyof I["exponentialBuckets"], keyof Distribution_BucketOptions_Exponential>, never>;
-        explicitBuckets?: {
-            bounds?: number[];
-        } & {
-            bounds?: number[] & number[] & Record<Exclude<keyof I["explicitBuckets"]["bounds"], keyof number[]>, never>;
-        } & Record<Exclude<keyof I["explicitBuckets"], "bounds">, never>;
-    } & Record<Exclude<keyof I, keyof Distribution_BucketOptions>, never>>(object: I): Distribution_BucketOptions;
+    fromPartial<I extends unknown>(object: I): Distribution_BucketOptions;
 };
 export declare const Distribution_BucketOptions_Linear: {
     encode(message: Distribution_BucketOptions_Linear, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Linear;
     fromJSON(object: any): Distribution_BucketOptions_Linear;
     toJSON(message: Distribution_BucketOptions_Linear): unknown;
-    fromPartial<I extends {
-        numFiniteBuckets?: number;
-        width?: number;
-        offset?: number;
-    } & {
-        numFiniteBuckets?: number;
-        width?: number;
-        offset?: number;
-    } & Record<Exclude<keyof I, keyof Distribution_BucketOptions_Linear>, never>>(object: I): Distribution_BucketOptions_Linear;
+    fromPartial<I extends unknown>(object: I): Distribution_BucketOptions_Linear;
 };
 export declare const Distribution_BucketOptions_Exponential: {
     encode(message: Distribution_BucketOptions_Exponential, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Exponential;
     fromJSON(object: any): Distribution_BucketOptions_Exponential;
     toJSON(message: Distribution_BucketOptions_Exponential): unknown;
-    fromPartial<I extends {
-        numFiniteBuckets?: number;
-        growthFactor?: number;
-        scale?: number;
-    } & {
-        numFiniteBuckets?: number;
-        growthFactor?: number;
-        scale?: number;
-    } & Record<Exclude<keyof I, keyof Distribution_BucketOptions_Exponential>, never>>(object: I): Distribution_BucketOptions_Exponential;
+    fromPartial<I extends unknown>(object: I): Distribution_BucketOptions_Exponential;
 };
 export declare const Distribution_BucketOptions_Explicit: {
     encode(message: Distribution_BucketOptions_Explicit, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Explicit;
     fromJSON(object: any): Distribution_BucketOptions_Explicit;
     toJSON(message: Distribution_BucketOptions_Explicit): unknown;
-    fromPartial<I extends {
-        bounds?: number[];
-    } & {
-        bounds?: number[] & number[] & Record<Exclude<keyof I["bounds"], keyof number[]>, never>;
-    } & Record<Exclude<keyof I, "bounds">, never>>(object: I): Distribution_BucketOptions_Explicit;
+    fromPartial<I extends unknown>(object: I): Distribution_BucketOptions_Explicit;
 };
 export declare const Distribution_Exemplar: {
     encode(message: Distribution_Exemplar, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_Exemplar;
     fromJSON(object: any): Distribution_Exemplar;
     toJSON(message: Distribution_Exemplar): unknown;
-    fromPartial<I extends {
-        value?: number;
-        timestamp?: Date;
-        attachments?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        value?: number;
-        timestamp?: Date;
-        attachments?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["attachments"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["attachments"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Distribution_Exemplar>, never>>(object: I): Distribution_Exemplar;
+    fromPartial<I extends unknown>(object: I): Distribution_Exemplar;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

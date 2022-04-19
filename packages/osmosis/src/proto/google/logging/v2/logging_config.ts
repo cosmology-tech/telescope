@@ -1449,7 +1449,7 @@ export interface CopyLogEntriesMetadata {
 
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
-  logEntriesCopiedCount: string;
+  logEntriesCopiedCount: Long;
 }
 
 function createBaseLogBucket(): LogBucket {
@@ -4556,13 +4556,13 @@ export const CopyLogEntriesMetadata = {
 
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   return {
-    logEntriesCopiedCount: "0"
+    logEntriesCopiedCount: Long.ZERO
   };
 }
 
 export const CopyLogEntriesResponse = {
   encode(message: CopyLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.logEntriesCopiedCount !== "0") {
+    if (!message.logEntriesCopiedCount.isZero()) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }
 
@@ -4579,7 +4579,7 @@ export const CopyLogEntriesResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.logEntriesCopiedCount = longToString((reader.int64() as Long));
+          message.logEntriesCopiedCount = (reader.int64() as Long);
           break;
 
         default:
@@ -4593,19 +4593,19 @@ export const CopyLogEntriesResponse = {
 
   fromJSON(object: any): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? String(object.logEntriesCopiedCount) : "0"
+      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? Long.fromString(object.logEntriesCopiedCount) : Long.ZERO
     };
   },
 
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
-    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = message.logEntriesCopiedCount);
+    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<CopyLogEntriesResponse>, I>>(object: I): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    message.logEntriesCopiedCount = object.logEntriesCopiedCount ?? "0";
+    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
     return message;
   }
 
@@ -4998,12 +4998,12 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -5012,7 +5012,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -5027,8 +5027,8 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

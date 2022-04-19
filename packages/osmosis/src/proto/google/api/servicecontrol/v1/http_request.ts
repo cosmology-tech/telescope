@@ -23,7 +23,7 @@ export interface HttpRequest {
    * headers and the request body.
    */
 
-  requestSize: string;
+  requestSize: Long;
   /**
    * The response code indicating the status of the response.
    * Examples: 200, 404.
@@ -35,7 +35,7 @@ export interface HttpRequest {
    * including the response headers and the response body.
    */
 
-  responseSize: string;
+  responseSize: Long;
   /**
    * The user agent sent by the client. Example:
    * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
@@ -89,7 +89,7 @@ export interface HttpRequest {
    * cache fill was attempted.
    */
 
-  cacheFillBytes: string;
+  cacheFillBytes: Long;
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
 
   protocol: string;
@@ -99,9 +99,9 @@ function createBaseHttpRequest(): HttpRequest {
   return {
     requestMethod: "",
     requestUrl: "",
-    requestSize: "0",
+    requestSize: Long.ZERO,
     status: 0,
-    responseSize: "0",
+    responseSize: Long.ZERO,
     userAgent: "",
     remoteIp: "",
     serverIp: "",
@@ -110,7 +110,7 @@ function createBaseHttpRequest(): HttpRequest {
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,
-    cacheFillBytes: "0",
+    cacheFillBytes: Long.ZERO,
     protocol: ""
   };
 }
@@ -125,7 +125,7 @@ export const HttpRequest = {
       writer.uint32(18).string(message.requestUrl);
     }
 
-    if (message.requestSize !== "0") {
+    if (!message.requestSize.isZero()) {
       writer.uint32(24).int64(message.requestSize);
     }
 
@@ -133,7 +133,7 @@ export const HttpRequest = {
       writer.uint32(32).int32(message.status);
     }
 
-    if (message.responseSize !== "0") {
+    if (!message.responseSize.isZero()) {
       writer.uint32(40).int64(message.responseSize);
     }
 
@@ -169,7 +169,7 @@ export const HttpRequest = {
       writer.uint32(80).bool(message.cacheValidatedWithOriginServer);
     }
 
-    if (message.cacheFillBytes !== "0") {
+    if (!message.cacheFillBytes.isZero()) {
       writer.uint32(96).int64(message.cacheFillBytes);
     }
 
@@ -198,7 +198,7 @@ export const HttpRequest = {
           break;
 
         case 3:
-          message.requestSize = longToString((reader.int64() as Long));
+          message.requestSize = (reader.int64() as Long);
           break;
 
         case 4:
@@ -206,7 +206,7 @@ export const HttpRequest = {
           break;
 
         case 5:
-          message.responseSize = longToString((reader.int64() as Long));
+          message.responseSize = (reader.int64() as Long);
           break;
 
         case 6:
@@ -242,7 +242,7 @@ export const HttpRequest = {
           break;
 
         case 12:
-          message.cacheFillBytes = longToString((reader.int64() as Long));
+          message.cacheFillBytes = (reader.int64() as Long);
           break;
 
         case 15:
@@ -262,9 +262,9 @@ export const HttpRequest = {
     return {
       requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
       requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
-      requestSize: isSet(object.requestSize) ? String(object.requestSize) : "0",
+      requestSize: isSet(object.requestSize) ? Long.fromString(object.requestSize) : Long.ZERO,
       status: isSet(object.status) ? Number(object.status) : 0,
-      responseSize: isSet(object.responseSize) ? String(object.responseSize) : "0",
+      responseSize: isSet(object.responseSize) ? Long.fromString(object.responseSize) : Long.ZERO,
       userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
@@ -273,7 +273,7 @@ export const HttpRequest = {
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
-      cacheFillBytes: isSet(object.cacheFillBytes) ? String(object.cacheFillBytes) : "0",
+      cacheFillBytes: isSet(object.cacheFillBytes) ? Long.fromString(object.cacheFillBytes) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
@@ -282,9 +282,9 @@ export const HttpRequest = {
     const obj: any = {};
     message.requestMethod !== undefined && (obj.requestMethod = message.requestMethod);
     message.requestUrl !== undefined && (obj.requestUrl = message.requestUrl);
-    message.requestSize !== undefined && (obj.requestSize = message.requestSize);
+    message.requestSize !== undefined && (obj.requestSize = (message.requestSize || Long.ZERO).toString());
     message.status !== undefined && (obj.status = Math.round(message.status));
-    message.responseSize !== undefined && (obj.responseSize = message.responseSize);
+    message.responseSize !== undefined && (obj.responseSize = (message.responseSize || Long.ZERO).toString());
     message.userAgent !== undefined && (obj.userAgent = message.userAgent);
     message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
     message.serverIp !== undefined && (obj.serverIp = message.serverIp);
@@ -293,7 +293,7 @@ export const HttpRequest = {
     message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
     message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
     message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);
-    message.cacheFillBytes !== undefined && (obj.cacheFillBytes = message.cacheFillBytes);
+    message.cacheFillBytes !== undefined && (obj.cacheFillBytes = (message.cacheFillBytes || Long.ZERO).toString());
     message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
   },
@@ -302,9 +302,9 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    message.requestSize = object.requestSize ?? "0";
+    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? Long.fromValue(object.requestSize) : Long.ZERO;
     message.status = object.status ?? 0;
-    message.responseSize = object.responseSize ?? "0";
+    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? Long.fromValue(object.responseSize) : Long.ZERO;
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
@@ -313,14 +313,14 @@ export const HttpRequest = {
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    message.cacheFillBytes = object.cacheFillBytes ?? "0";
+    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? Long.fromValue(object.cacheFillBytes) : Long.ZERO;
     message.protocol = object.protocol ?? "";
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
@@ -333,10 +333,6 @@ function toDuration(duration: string): Duration {
 
 function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
-
-function longToString(long: Long) {
-  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

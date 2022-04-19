@@ -4,18 +4,18 @@ import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 export interface MsgSuperfluidDelegate {
   sender: string;
-  lockId: string;
+  lockId: Long;
   valAddr: string;
 }
 export interface MsgSuperfluidDelegateResponse {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
-  lockId: string;
+  lockId: Long;
 }
 export interface MsgSuperfluidUndelegateResponse {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
-  lockId: string;
+  lockId: Long;
 }
 export interface MsgSuperfluidUnbondLockResponse {}
 /**
@@ -30,13 +30,13 @@ export interface MsgLockAndSuperfluidDelegate {
   valAddr: string;
 }
 export interface MsgLockAndSuperfluidDelegateResponse {
-  ID: string;
+  ID: Long;
 }
 
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
   return {
     sender: "",
-    lockId: "0",
+    lockId: Long.UZERO,
     valAddr: ""
   };
 }
@@ -47,7 +47,7 @@ export const MsgSuperfluidDelegate = {
       writer.uint32(10).string(message.sender);
     }
 
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(16).uint64(message.lockId);
     }
 
@@ -72,7 +72,7 @@ export const MsgSuperfluidDelegate = {
           break;
 
         case 2:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -91,7 +91,7 @@ export const MsgSuperfluidDelegate = {
   fromJSON(object: any): MsgSuperfluidDelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0",
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO,
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
@@ -99,7 +99,7 @@ export const MsgSuperfluidDelegate = {
   toJSON(message: MsgSuperfluidDelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
     return obj;
   },
@@ -107,7 +107,7 @@ export const MsgSuperfluidDelegate = {
   fromPartial<I extends Exact<DeepPartial<MsgSuperfluidDelegate>, I>>(object: I): MsgSuperfluidDelegate {
     const message = createBaseMsgSuperfluidDelegate();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.valAddr = object.valAddr ?? "";
     return message;
   }
@@ -160,7 +160,7 @@ export const MsgSuperfluidDelegateResponse = {
 function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
   return {
     sender: "",
-    lockId: "0"
+    lockId: Long.UZERO
   };
 }
 
@@ -170,7 +170,7 @@ export const MsgSuperfluidUndelegate = {
       writer.uint32(10).string(message.sender);
     }
 
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(16).uint64(message.lockId);
     }
 
@@ -191,7 +191,7 @@ export const MsgSuperfluidUndelegate = {
           break;
 
         case 2:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         default:
@@ -206,21 +206,21 @@ export const MsgSuperfluidUndelegate = {
   fromJSON(object: any): MsgSuperfluidUndelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0"
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
     };
   },
 
   toJSON(message: MsgSuperfluidUndelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgSuperfluidUndelegate>, I>>(object: I): MsgSuperfluidUndelegate {
     const message = createBaseMsgSuperfluidUndelegate();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
 
@@ -272,7 +272,7 @@ export const MsgSuperfluidUndelegateResponse = {
 function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
   return {
     sender: "",
-    lockId: "0"
+    lockId: Long.UZERO
   };
 }
 
@@ -282,7 +282,7 @@ export const MsgSuperfluidUnbondLock = {
       writer.uint32(10).string(message.sender);
     }
 
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(16).uint64(message.lockId);
     }
 
@@ -303,7 +303,7 @@ export const MsgSuperfluidUnbondLock = {
           break;
 
         case 2:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         default:
@@ -318,21 +318,21 @@ export const MsgSuperfluidUnbondLock = {
   fromJSON(object: any): MsgSuperfluidUnbondLock {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0"
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
     };
   },
 
   toJSON(message: MsgSuperfluidUnbondLock): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgSuperfluidUnbondLock>, I>>(object: I): MsgSuperfluidUnbondLock {
     const message = createBaseMsgSuperfluidUnbondLock();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
 
@@ -470,13 +470,13 @@ export const MsgLockAndSuperfluidDelegate = {
 
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
   return {
-    ID: "0"
+    ID: Long.UZERO
   };
 }
 
 export const MsgLockAndSuperfluidDelegateResponse = {
   encode(message: MsgLockAndSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ID !== "0") {
+    if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
     }
 
@@ -493,7 +493,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.ID = longToString((reader.uint64() as Long));
+          message.ID = (reader.uint64() as Long);
           break;
 
         default:
@@ -507,19 +507,19 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: isSet(object.ID) ? String(object.ID) : "0"
+      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO
     };
   },
 
   toJSON(message: MsgLockAndSuperfluidDelegateResponse): unknown {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
+    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgLockAndSuperfluidDelegateResponse>, I>>(object: I): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
-    message.ID = object.ID ?? "0";
+    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
   }
 
@@ -527,13 +527,9 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 /** Msg defines the Msg service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

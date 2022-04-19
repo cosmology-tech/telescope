@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 /** VoteOption enumerates the valid vote options for a given proposal. */
@@ -121,7 +122,7 @@ export interface DecisionPolicyWindows {
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfo {
     /** id is the unique ID of the group. */
-    id: string;
+    id: Long;
     /** admin is the account address of the group's admin. */
     admin: string;
     /** metadata is any arbitrary metadata to attached to the group. */
@@ -132,7 +133,7 @@ export interface GroupInfo {
      * or any member is added or removed this version is incremented and will
      * cause proposals based on older versions of this group to fail
      */
-    version: string;
+    version: Long;
     /** total_weight is the sum of the group members' weights. */
     totalWeight: string;
     /** created_at is a timestamp specifying when a group was created. */
@@ -141,7 +142,7 @@ export interface GroupInfo {
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMember {
     /** group_id is the unique ID of the group. */
-    groupId: string;
+    groupId: Long;
     /** member is the member data. */
     member: Member;
 }
@@ -150,7 +151,7 @@ export interface GroupPolicyInfo {
     /** address is the account address of group policy. */
     address: string;
     /** group_id is the unique ID of the group. */
-    groupId: string;
+    groupId: Long;
     /** admin is the account address of the group admin. */
     admin: string;
     /** metadata is any arbitrary metadata to attached to the group policy. */
@@ -159,7 +160,7 @@ export interface GroupPolicyInfo {
      * version is used to track changes to a group's GroupPolicyInfo structure that
      * would create a different result on a running proposal.
      */
-    version: string;
+    version: Long;
     /** decision_policy specifies the group policy's decision policy. */
     decisionPolicy: Any;
     /** created_at is a timestamp specifying when a group policy was created. */
@@ -173,7 +174,7 @@ export interface GroupPolicyInfo {
  */
 export interface Proposal {
     /** id is the unique id of the proposal. */
-    id: string;
+    id: Long;
     /** address is the account address of group policy. */
     address: string;
     /** metadata is any arbitrary metadata to attached to the proposal. */
@@ -186,12 +187,12 @@ export interface Proposal {
      * group_version tracks the version of the group that this proposal corresponds to.
      * When group membership is changed, existing proposals from previous group versions will become invalid.
      */
-    groupVersion: string;
+    groupVersion: Long;
     /**
      * group_policy_version tracks the version of the group policy that this proposal corresponds to.
      * When a decision policy is changed, existing proposals from previous policy versions will become invalid.
      */
-    groupPolicyVersion: string;
+    groupPolicyVersion: Long;
     /** status represents the high level position in the life cycle of the proposal. Initial value is Submitted. */
     status: ProposalStatus;
     /**
@@ -233,7 +234,7 @@ export interface TallyResult {
 /** Vote represents a vote for a proposal. */
 export interface Vote {
     /** proposal is the unique ID of the proposal. */
-    proposalId: string;
+    proposalId: Long;
     /** voter is the account address of the voter. */
     voter: string;
     /** option is the voter's choice on the proposal. */
@@ -248,295 +249,80 @@ export declare const Member: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Member;
     fromJSON(object: any): Member;
     toJSON(message: Member): unknown;
-    fromPartial<I extends {
-        address?: string;
-        weight?: string;
-        metadata?: string;
-        addedAt?: Date;
-    } & {
-        address?: string;
-        weight?: string;
-        metadata?: string;
-        addedAt?: Date;
-    } & Record<Exclude<keyof I, keyof Member>, never>>(object: I): Member;
+    fromPartial<I extends unknown>(object: I): Member;
 };
 export declare const Members: {
     encode(message: Members, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Members;
     fromJSON(object: any): Members;
     toJSON(message: Members): unknown;
-    fromPartial<I extends {
-        members?: {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        }[];
-    } & {
-        members?: {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        }[] & ({
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        } & {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        } & Record<Exclude<keyof I["members"][number], keyof Member>, never>)[] & Record<Exclude<keyof I["members"], keyof {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "members">, never>>(object: I): Members;
+    fromPartial<I extends unknown>(object: I): Members;
 };
 export declare const ThresholdDecisionPolicy: {
     encode(message: ThresholdDecisionPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ThresholdDecisionPolicy;
     fromJSON(object: any): ThresholdDecisionPolicy;
     toJSON(message: ThresholdDecisionPolicy): unknown;
-    fromPartial<I extends {
-        threshold?: string;
-        windows?: {
-            votingPeriod?: string;
-            minExecutionPeriod?: string;
-        };
-    } & {
-        threshold?: string;
-        windows?: {
-            votingPeriod?: string;
-            minExecutionPeriod?: string;
-        } & {
-            votingPeriod?: string;
-            minExecutionPeriod?: string;
-        } & Record<Exclude<keyof I["windows"], keyof DecisionPolicyWindows>, never>;
-    } & Record<Exclude<keyof I, keyof ThresholdDecisionPolicy>, never>>(object: I): ThresholdDecisionPolicy;
+    fromPartial<I extends unknown>(object: I): ThresholdDecisionPolicy;
 };
 export declare const PercentageDecisionPolicy: {
     encode(message: PercentageDecisionPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PercentageDecisionPolicy;
     fromJSON(object: any): PercentageDecisionPolicy;
     toJSON(message: PercentageDecisionPolicy): unknown;
-    fromPartial<I extends {
-        percentage?: string;
-        windows?: {
-            votingPeriod?: string;
-            minExecutionPeriod?: string;
-        };
-    } & {
-        percentage?: string;
-        windows?: {
-            votingPeriod?: string;
-            minExecutionPeriod?: string;
-        } & {
-            votingPeriod?: string;
-            minExecutionPeriod?: string;
-        } & Record<Exclude<keyof I["windows"], keyof DecisionPolicyWindows>, never>;
-    } & Record<Exclude<keyof I, keyof PercentageDecisionPolicy>, never>>(object: I): PercentageDecisionPolicy;
+    fromPartial<I extends unknown>(object: I): PercentageDecisionPolicy;
 };
 export declare const DecisionPolicyWindows: {
     encode(message: DecisionPolicyWindows, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DecisionPolicyWindows;
     fromJSON(object: any): DecisionPolicyWindows;
     toJSON(message: DecisionPolicyWindows): unknown;
-    fromPartial<I extends {
-        votingPeriod?: string;
-        minExecutionPeriod?: string;
-    } & {
-        votingPeriod?: string;
-        minExecutionPeriod?: string;
-    } & Record<Exclude<keyof I, keyof DecisionPolicyWindows>, never>>(object: I): DecisionPolicyWindows;
+    fromPartial<I extends unknown>(object: I): DecisionPolicyWindows;
 };
 export declare const GroupInfo: {
     encode(message: GroupInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GroupInfo;
     fromJSON(object: any): GroupInfo;
     toJSON(message: GroupInfo): unknown;
-    fromPartial<I extends {
-        id?: string;
-        admin?: string;
-        metadata?: string;
-        version?: string;
-        totalWeight?: string;
-        createdAt?: Date;
-    } & {
-        id?: string;
-        admin?: string;
-        metadata?: string;
-        version?: string;
-        totalWeight?: string;
-        createdAt?: Date;
-    } & Record<Exclude<keyof I, keyof GroupInfo>, never>>(object: I): GroupInfo;
+    fromPartial<I extends unknown>(object: I): GroupInfo;
 };
 export declare const GroupMember: {
     encode(message: GroupMember, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GroupMember;
     fromJSON(object: any): GroupMember;
     toJSON(message: GroupMember): unknown;
-    fromPartial<I extends {
-        groupId?: string;
-        member?: {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        };
-    } & {
-        groupId?: string;
-        member?: {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        } & {
-            address?: string;
-            weight?: string;
-            metadata?: string;
-            addedAt?: Date;
-        } & Record<Exclude<keyof I["member"], keyof Member>, never>;
-    } & Record<Exclude<keyof I, keyof GroupMember>, never>>(object: I): GroupMember;
+    fromPartial<I extends unknown>(object: I): GroupMember;
 };
 export declare const GroupPolicyInfo: {
     encode(message: GroupPolicyInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GroupPolicyInfo;
     fromJSON(object: any): GroupPolicyInfo;
     toJSON(message: GroupPolicyInfo): unknown;
-    fromPartial<I extends {
-        address?: string;
-        groupId?: string;
-        admin?: string;
-        metadata?: string;
-        version?: string;
-        decisionPolicy?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        createdAt?: Date;
-    } & {
-        address?: string;
-        groupId?: string;
-        admin?: string;
-        metadata?: string;
-        version?: string;
-        decisionPolicy?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["decisionPolicy"], keyof Any>, never>;
-        createdAt?: Date;
-    } & Record<Exclude<keyof I, keyof GroupPolicyInfo>, never>>(object: I): GroupPolicyInfo;
+    fromPartial<I extends unknown>(object: I): GroupPolicyInfo;
 };
 export declare const Proposal: {
     encode(message: Proposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Proposal;
     fromJSON(object: any): Proposal;
     toJSON(message: Proposal): unknown;
-    fromPartial<I extends {
-        id?: string;
-        address?: string;
-        metadata?: string;
-        proposers?: string[];
-        submitTime?: Date;
-        groupVersion?: string;
-        groupPolicyVersion?: string;
-        status?: ProposalStatus;
-        result?: ProposalResult;
-        finalTallyResult?: {
-            yesCount?: string;
-            abstainCount?: string;
-            noCount?: string;
-            noWithVetoCount?: string;
-        };
-        votingPeriodEnd?: Date;
-        executorResult?: ProposalExecutorResult;
-        messages?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        id?: string;
-        address?: string;
-        metadata?: string;
-        proposers?: string[] & string[] & Record<Exclude<keyof I["proposers"], keyof string[]>, never>;
-        submitTime?: Date;
-        groupVersion?: string;
-        groupPolicyVersion?: string;
-        status?: ProposalStatus;
-        result?: ProposalResult;
-        finalTallyResult?: {
-            yesCount?: string;
-            abstainCount?: string;
-            noCount?: string;
-            noWithVetoCount?: string;
-        } & {
-            yesCount?: string;
-            abstainCount?: string;
-            noCount?: string;
-            noWithVetoCount?: string;
-        } & Record<Exclude<keyof I["finalTallyResult"], keyof TallyResult>, never>;
-        votingPeriodEnd?: Date;
-        executorResult?: ProposalExecutorResult;
-        messages?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["messages"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["messages"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Proposal>, never>>(object: I): Proposal;
+    fromPartial<I extends unknown>(object: I): Proposal;
 };
 export declare const TallyResult: {
     encode(message: TallyResult, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TallyResult;
     fromJSON(object: any): TallyResult;
     toJSON(message: TallyResult): unknown;
-    fromPartial<I extends {
-        yesCount?: string;
-        abstainCount?: string;
-        noCount?: string;
-        noWithVetoCount?: string;
-    } & {
-        yesCount?: string;
-        abstainCount?: string;
-        noCount?: string;
-        noWithVetoCount?: string;
-    } & Record<Exclude<keyof I, keyof TallyResult>, never>>(object: I): TallyResult;
+    fromPartial<I extends unknown>(object: I): TallyResult;
 };
 export declare const Vote: {
     encode(message: Vote, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Vote;
     fromJSON(object: any): Vote;
     toJSON(message: Vote): unknown;
-    fromPartial<I extends {
-        proposalId?: string;
-        voter?: string;
-        option?: VoteOption;
-        metadata?: string;
-        submitTime?: Date;
-    } & {
-        proposalId?: string;
-        voter?: string;
-        option?: VoteOption;
-        metadata?: string;
-        submitTime?: Date;
-    } & Record<Exclude<keyof I, keyof Vote>, never>>(object: I): Vote;
+    fromPartial<I extends unknown>(object: I): Vote;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

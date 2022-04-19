@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Selects and configures the service controller used by the service.  The
@@ -16,14 +17,10 @@ export declare const Control: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Control;
     fromJSON(object: any): Control;
     toJSON(message: Control): unknown;
-    fromPartial<I extends {
-        environment?: string;
-    } & {
-        environment?: string;
-    } & Record<Exclude<keyof I, "environment">, never>>(object: I): Control;
+    fromPartial<I extends unknown>(object: I): Control;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

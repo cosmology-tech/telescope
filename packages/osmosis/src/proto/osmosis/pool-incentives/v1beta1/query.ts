@@ -5,13 +5,13 @@ import { DistrInfo, Params } from "../../../osmosis/pool-incentives/v1beta1/ince
 import { Duration } from "../../../google/protobuf/duration";
 import { Gauge } from "../../../osmosis/incentives/gauge";
 export interface QueryGaugeIdsRequest {
-  poolId: string;
+  poolId: Long;
 }
 export interface QueryGaugeIdsResponse {
   gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
-  gaugeId: string;
+  gaugeId: Long;
   duration: string;
 }
 export interface QueryDistrInfoRequest {}
@@ -28,9 +28,9 @@ export interface QueryLockableDurationsResponse {
 }
 export interface QueryIncentivizedPoolsRequest {}
 export interface IncentivizedPool {
-  poolId: string;
+  poolId: Long;
   lockableDuration: string;
-  gaugeId: string;
+  gaugeId: Long;
 }
 export interface QueryIncentivizedPoolsResponse {
   incentivizedPools: IncentivizedPool[];
@@ -42,13 +42,13 @@ export interface QueryExternalIncentiveGaugesResponse {
 
 function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
   return {
-    poolId: "0"
+    poolId: Long.UZERO
   };
 }
 
 export const QueryGaugeIdsRequest = {
   encode(message: QueryGaugeIdsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -65,7 +65,7 @@ export const QueryGaugeIdsRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         default:
@@ -79,19 +79,19 @@ export const QueryGaugeIdsRequest = {
 
   fromJSON(object: any): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0"
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryGaugeIdsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGaugeIdsRequest>, I>>(object: I): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
 
@@ -162,14 +162,14 @@ export const QueryGaugeIdsResponse = {
 
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
   return {
-    gaugeId: "0",
+    gaugeId: Long.UZERO,
     duration: undefined
   };
 }
 
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.gaugeId !== "0") {
+    if (!message.gaugeId.isZero()) {
       writer.uint32(8).uint64(message.gaugeId);
     }
 
@@ -190,7 +190,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
       switch (tag >>> 3) {
         case 1:
-          message.gaugeId = longToString((reader.uint64() as Long));
+          message.gaugeId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -208,21 +208,21 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gaugeId) ? String(object.gaugeId) : "0",
+      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
       duration: isSet(object.duration) ? String(object.duration) : undefined
     };
   },
 
   toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = message.gaugeId);
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     message.duration !== undefined && (obj.duration = message.duration);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>, I>>(object: I): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId ?? "0";
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.duration = object.duration ?? undefined;
     return message;
   }
@@ -580,15 +580,15 @@ export const QueryIncentivizedPoolsRequest = {
 
 function createBaseIncentivizedPool(): IncentivizedPool {
   return {
-    poolId: "0",
+    poolId: Long.UZERO,
     lockableDuration: undefined,
-    gaugeId: "0"
+    gaugeId: Long.UZERO
   };
 }
 
 export const IncentivizedPool = {
   encode(message: IncentivizedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -596,7 +596,7 @@ export const IncentivizedPool = {
       Duration.encode(toDuration(message.lockableDuration), writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.gaugeId !== "0") {
+    if (!message.gaugeId.isZero()) {
       writer.uint32(24).uint64(message.gaugeId);
     }
 
@@ -613,7 +613,7 @@ export const IncentivizedPool = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -621,7 +621,7 @@ export const IncentivizedPool = {
           break;
 
         case 3:
-          message.gaugeId = longToString((reader.uint64() as Long));
+          message.gaugeId = (reader.uint64() as Long);
           break;
 
         default:
@@ -635,25 +635,25 @@ export const IncentivizedPool = {
 
   fromJSON(object: any): IncentivizedPool {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
       lockableDuration: isSet(object.lockableDuration) ? String(object.lockableDuration) : undefined,
-      gaugeId: isSet(object.gaugeId) ? String(object.gaugeId) : "0"
+      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO
     };
   },
 
   toJSON(message: IncentivizedPool): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.lockableDuration !== undefined && (obj.lockableDuration = message.lockableDuration);
-    message.gaugeId !== undefined && (obj.gaugeId = message.gaugeId);
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<IncentivizedPool>, I>>(object: I): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.lockableDuration = object.lockableDuration ?? undefined;
-    message.gaugeId = object.gaugeId ?? "0";
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     return message;
   }
 
@@ -828,7 +828,7 @@ export const QueryExternalIncentiveGaugesResponse = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
@@ -841,10 +841,6 @@ function toDuration(duration: string): Duration {
 
 function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
-
-function longToString(long: Long) {
-  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

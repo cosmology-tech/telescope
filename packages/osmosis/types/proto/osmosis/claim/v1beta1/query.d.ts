@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../../osmosis/claim/v1beta1/params";
 import { ClaimRecord, Action } from "../../../osmosis/claim/v1beta1/claim";
@@ -42,198 +43,74 @@ export declare const QueryModuleAccountBalanceRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountBalanceRequest;
     fromJSON(_: any): QueryModuleAccountBalanceRequest;
     toJSON(_: QueryModuleAccountBalanceRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryModuleAccountBalanceRequest;
+    fromPartial<I extends unknown>(_: I): QueryModuleAccountBalanceRequest;
 };
 export declare const QueryModuleAccountBalanceResponse: {
     encode(message: QueryModuleAccountBalanceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountBalanceResponse;
     fromJSON(object: any): QueryModuleAccountBalanceResponse;
     toJSON(message: QueryModuleAccountBalanceResponse): unknown;
-    fromPartial<I extends {
-        moduleAccountBalance?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        moduleAccountBalance?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["moduleAccountBalance"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["moduleAccountBalance"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "moduleAccountBalance">, never>>(object: I): QueryModuleAccountBalanceResponse;
+    fromPartial<I extends unknown>(object: I): QueryModuleAccountBalanceResponse;
 };
 export declare const QueryParamsRequest: {
     encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryParamsRequest;
+    fromPartial<I extends unknown>(_: I): QueryParamsRequest;
 };
 export declare const QueryParamsResponse: {
     encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
-    fromPartial<I extends {
-        params?: {
-            airdropStartTime?: Date;
-            durationUntilDecay?: string;
-            durationOfDecay?: string;
-            claimDenom?: string;
-        };
-    } & {
-        params?: {
-            airdropStartTime?: Date;
-            durationUntilDecay?: string;
-            durationOfDecay?: string;
-            claimDenom?: string;
-        } & {
-            airdropStartTime?: Date;
-            durationUntilDecay?: string;
-            durationOfDecay?: string;
-            claimDenom?: string;
-        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
-    } & Record<Exclude<keyof I, "params">, never>>(object: I): QueryParamsResponse;
+    fromPartial<I extends unknown>(object: I): QueryParamsResponse;
 };
 export declare const QueryClaimRecordRequest: {
     encode(message: QueryClaimRecordRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimRecordRequest;
     fromJSON(object: any): QueryClaimRecordRequest;
     toJSON(message: QueryClaimRecordRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-    } & {
-        address?: string;
-    } & Record<Exclude<keyof I, "address">, never>>(object: I): QueryClaimRecordRequest;
+    fromPartial<I extends unknown>(object: I): QueryClaimRecordRequest;
 };
 export declare const QueryClaimRecordResponse: {
     encode(message: QueryClaimRecordResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimRecordResponse;
     fromJSON(object: any): QueryClaimRecordResponse;
     toJSON(message: QueryClaimRecordResponse): unknown;
-    fromPartial<I extends {
-        claimRecord?: {
-            address?: string;
-            initialClaimableAmount?: {
-                denom?: string;
-                amount?: string;
-            }[];
-            actionCompleted?: boolean[];
-        };
-    } & {
-        claimRecord?: {
-            address?: string;
-            initialClaimableAmount?: {
-                denom?: string;
-                amount?: string;
-            }[];
-            actionCompleted?: boolean[];
-        } & {
-            address?: string;
-            initialClaimableAmount?: {
-                denom?: string;
-                amount?: string;
-            }[] & ({
-                denom?: string;
-                amount?: string;
-            } & {
-                denom?: string;
-                amount?: string;
-            } & Record<Exclude<keyof I["claimRecord"]["initialClaimableAmount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["claimRecord"]["initialClaimableAmount"], keyof {
-                denom?: string;
-                amount?: string;
-            }[]>, never>;
-            actionCompleted?: boolean[] & boolean[] & Record<Exclude<keyof I["claimRecord"]["actionCompleted"], keyof boolean[]>, never>;
-        } & Record<Exclude<keyof I["claimRecord"], keyof ClaimRecord>, never>;
-    } & Record<Exclude<keyof I, "claimRecord">, never>>(object: I): QueryClaimRecordResponse;
+    fromPartial<I extends unknown>(object: I): QueryClaimRecordResponse;
 };
 export declare const QueryClaimableForActionRequest: {
     encode(message: QueryClaimableForActionRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableForActionRequest;
     fromJSON(object: any): QueryClaimableForActionRequest;
     toJSON(message: QueryClaimableForActionRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-        action?: Action;
-    } & {
-        address?: string;
-        action?: Action;
-    } & Record<Exclude<keyof I, keyof QueryClaimableForActionRequest>, never>>(object: I): QueryClaimableForActionRequest;
+    fromPartial<I extends unknown>(object: I): QueryClaimableForActionRequest;
 };
 export declare const QueryClaimableForActionResponse: {
     encode(message: QueryClaimableForActionResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableForActionResponse;
     fromJSON(object: any): QueryClaimableForActionResponse;
     toJSON(message: QueryClaimableForActionResponse): unknown;
-    fromPartial<I extends {
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["coins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "coins">, never>>(object: I): QueryClaimableForActionResponse;
+    fromPartial<I extends unknown>(object: I): QueryClaimableForActionResponse;
 };
 export declare const QueryTotalClaimableRequest: {
     encode(message: QueryTotalClaimableRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalClaimableRequest;
     fromJSON(object: any): QueryTotalClaimableRequest;
     toJSON(message: QueryTotalClaimableRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-    } & {
-        address?: string;
-    } & Record<Exclude<keyof I, "address">, never>>(object: I): QueryTotalClaimableRequest;
+    fromPartial<I extends unknown>(object: I): QueryTotalClaimableRequest;
 };
 export declare const QueryTotalClaimableResponse: {
     encode(message: QueryTotalClaimableResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalClaimableResponse;
     fromJSON(object: any): QueryTotalClaimableResponse;
     toJSON(message: QueryTotalClaimableResponse): unknown;
-    fromPartial<I extends {
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["coins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "coins">, never>>(object: I): QueryTotalClaimableResponse;
+    fromPartial<I extends unknown>(object: I): QueryTotalClaimableResponse;
 };
 /** Query defines the gRPC querier service. */
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

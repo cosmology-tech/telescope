@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -119,16 +120,10 @@ export declare const Any: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Any;
     fromJSON(object: any): Any;
     toJSON(message: Any): unknown;
-    fromPartial<I extends {
-        typeUrl?: string;
-        value?: Uint8Array;
-    } & {
-        typeUrl?: string;
-        value?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof Any>, never>>(object: I): Any;
+    fromPartial<I extends unknown>(object: I): Any;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

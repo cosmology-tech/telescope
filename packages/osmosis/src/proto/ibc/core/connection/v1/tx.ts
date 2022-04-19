@@ -13,7 +13,7 @@ export interface MsgConnectionOpenInit {
   clientId: string;
   counterparty: Counterparty;
   version: Version;
-  delayPeriod: string;
+  delayPeriod: Long;
   signer: string;
 }
 /**
@@ -37,7 +37,7 @@ export interface MsgConnectionOpenTry {
   previousConnectionId: string;
   clientState: Any;
   counterparty: Counterparty;
-  delayPeriod: string;
+  delayPeriod: Long;
   counterpartyVersions: Version[];
   proofHeight: Height;
   /**
@@ -112,7 +112,7 @@ function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
     clientId: "",
     counterparty: undefined,
     version: undefined,
-    delayPeriod: "0",
+    delayPeriod: Long.UZERO,
     signer: ""
   };
 }
@@ -131,7 +131,7 @@ export const MsgConnectionOpenInit = {
       Version.encode(message.version, writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.delayPeriod !== "0") {
+    if (!message.delayPeriod.isZero()) {
       writer.uint32(32).uint64(message.delayPeriod);
     }
 
@@ -164,7 +164,7 @@ export const MsgConnectionOpenInit = {
           break;
 
         case 4:
-          message.delayPeriod = longToString((reader.uint64() as Long));
+          message.delayPeriod = (reader.uint64() as Long);
           break;
 
         case 5:
@@ -185,7 +185,7 @@ export const MsgConnectionOpenInit = {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? String(object.delayPeriod) : "0",
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO,
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -195,7 +195,7 @@ export const MsgConnectionOpenInit = {
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
     message.version !== undefined && (obj.version = message.version ? Version.toJSON(message.version) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = message.delayPeriod);
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -205,7 +205,7 @@ export const MsgConnectionOpenInit = {
     message.clientId = object.clientId ?? "";
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.version = object.version !== undefined && object.version !== null ? Version.fromPartial(object.version) : undefined;
-    message.delayPeriod = object.delayPeriod ?? "0";
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -261,7 +261,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
     previousConnectionId: "",
     clientState: undefined,
     counterparty: undefined,
-    delayPeriod: "0",
+    delayPeriod: Long.UZERO,
     counterpartyVersions: [],
     proofHeight: undefined,
     proofInit: new Uint8Array(),
@@ -290,7 +290,7 @@ export const MsgConnectionOpenTry = {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.delayPeriod !== "0") {
+    if (!message.delayPeriod.isZero()) {
       writer.uint32(40).uint64(message.delayPeriod);
     }
 
@@ -351,7 +351,7 @@ export const MsgConnectionOpenTry = {
           break;
 
         case 5:
-          message.delayPeriod = longToString((reader.uint64() as Long));
+          message.delayPeriod = (reader.uint64() as Long);
           break;
 
         case 6:
@@ -397,7 +397,7 @@ export const MsgConnectionOpenTry = {
       previousConnectionId: isSet(object.previousConnectionId) ? String(object.previousConnectionId) : "",
       clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? String(object.delayPeriod) : "0",
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO,
       counterpartyVersions: Array.isArray(object?.counterpartyVersions) ? object.counterpartyVersions.map((e: any) => Version.fromJSON(e)) : [],
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
       proofInit: isSet(object.proofInit) ? bytesFromBase64(object.proofInit) : new Uint8Array(),
@@ -414,7 +414,7 @@ export const MsgConnectionOpenTry = {
     message.previousConnectionId !== undefined && (obj.previousConnectionId = message.previousConnectionId);
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = message.delayPeriod);
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
 
     if (message.counterpartyVersions) {
       obj.counterpartyVersions = message.counterpartyVersions.map(e => e ? Version.toJSON(e) : undefined);
@@ -437,7 +437,7 @@ export const MsgConnectionOpenTry = {
     message.previousConnectionId = object.previousConnectionId ?? "";
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod ?? "0";
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     message.counterpartyVersions = object.counterpartyVersions?.map(e => Version.fromPartial(e)) || [];
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.proofInit = object.proofInit ?? new Uint8Array();
@@ -876,13 +876,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

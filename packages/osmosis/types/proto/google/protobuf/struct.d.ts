@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -70,17 +71,7 @@ export declare const Struct: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Struct;
     fromJSON(object: any): Struct;
     toJSON(message: Struct): unknown;
-    fromPartial<I extends {
-        fields?: {
-            [x: string]: any;
-        };
-    } & {
-        fields?: {
-            [x: string]: any;
-        } & {
-            [x: string]: any;
-        } & Record<Exclude<keyof I["fields"], string | number>, never>;
-    } & Record<Exclude<keyof I, "fields">, never>>(object: I): Struct;
+    fromPartial<I extends unknown>(object: I): Struct;
     wrap(object: {
         [key: string]: any;
     }): Struct;
@@ -93,40 +84,14 @@ export declare const Struct_FieldsEntry: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsEntry;
     fromJSON(object: any): Struct_FieldsEntry;
     toJSON(message: Struct_FieldsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: any | undefined;
-    } & {
-        key?: string;
-        value?: any | undefined;
-    } & Record<Exclude<keyof I, keyof Struct_FieldsEntry>, never>>(object: I): Struct_FieldsEntry;
+    fromPartial<I extends unknown>(object: I): Struct_FieldsEntry;
 };
 export declare const Value: {
     encode(message: Value, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Value;
     fromJSON(object: any): Value;
     toJSON(message: Value): unknown;
-    fromPartial<I extends {
-        nullValue?: NullValue | undefined;
-        numberValue?: number | undefined;
-        stringValue?: string | undefined;
-        boolValue?: boolean | undefined;
-        structValue?: {
-            [x: string]: any;
-        };
-        listValue?: any[];
-    } & {
-        nullValue?: NullValue | undefined;
-        numberValue?: number | undefined;
-        stringValue?: string | undefined;
-        boolValue?: boolean | undefined;
-        structValue?: {
-            [x: string]: any;
-        } & {
-            [x: string]: any;
-        } & Record<Exclude<keyof I["structValue"], string | number>, never>;
-        listValue?: any[] & any[] & Record<Exclude<keyof I["listValue"], keyof any[]>, never>;
-    } & Record<Exclude<keyof I, keyof Value>, never>>(object: I): Value;
+    fromPartial<I extends unknown>(object: I): Value;
     wrap(value: any): Value;
     unwrap(message: Value): string | number | boolean | Object | null | Array<any> | undefined;
 };
@@ -135,16 +100,12 @@ export declare const ListValue: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ListValue;
     fromJSON(object: any): ListValue;
     toJSON(message: ListValue): unknown;
-    fromPartial<I extends {
-        values?: any[];
-    } & {
-        values?: any[] & any[] & Record<Exclude<keyof I["values"], keyof any[]>, never>;
-    } & Record<Exclude<keyof I, "values">, never>>(object: I): ListValue;
+    fromPartial<I extends unknown>(object: I): ListValue;
     wrap(value: Array<any> | undefined): ListValue;
     unwrap(message: ListValue): Array<any>;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

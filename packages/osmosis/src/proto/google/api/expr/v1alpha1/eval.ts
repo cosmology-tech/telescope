@@ -25,10 +25,10 @@ export interface EvalState {
 
 export interface EvalState_Result {
   /** The id of the expression this result if for. */
-  expr: string;
+  expr: Long;
   /** The index in `values` of the resulting value. */
 
-  value: string;
+  value: Long;
 }
 /** The value of an evaluated expression. */
 
@@ -102,7 +102,7 @@ export interface ErrorSet {
 
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
-  exprs: string[];
+  exprs: Long[];
 }
 
 function createBaseEvalState(): EvalState {
@@ -187,18 +187,18 @@ export const EvalState = {
 
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: "0",
-    value: "0"
+    expr: Long.ZERO,
+    value: Long.ZERO
   };
 }
 
 export const EvalState_Result = {
   encode(message: EvalState_Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.expr !== "0") {
+    if (!message.expr.isZero()) {
       writer.uint32(8).int64(message.expr);
     }
 
-    if (message.value !== "0") {
+    if (!message.value.isZero()) {
       writer.uint32(16).int64(message.value);
     }
 
@@ -215,11 +215,11 @@ export const EvalState_Result = {
 
       switch (tag >>> 3) {
         case 1:
-          message.expr = longToString((reader.int64() as Long));
+          message.expr = (reader.int64() as Long);
           break;
 
         case 2:
-          message.value = longToString((reader.int64() as Long));
+          message.value = (reader.int64() as Long);
           break;
 
         default:
@@ -233,22 +233,22 @@ export const EvalState_Result = {
 
   fromJSON(object: any): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? String(object.expr) : "0",
-      value: isSet(object.value) ? String(object.value) : "0"
+      expr: isSet(object.expr) ? Long.fromString(object.expr) : Long.ZERO,
+      value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
     };
   },
 
   toJSON(message: EvalState_Result): unknown {
     const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr);
-    message.value !== undefined && (obj.value = message.value);
+    message.expr !== undefined && (obj.expr = (message.expr || Long.ZERO).toString());
+    message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EvalState_Result>, I>>(object: I): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr ?? "0";
-    message.value = object.value ?? "0";
+    message.expr = object.expr !== undefined && object.expr !== null ? Long.fromValue(object.expr) : Long.ZERO;
+    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
   }
 
@@ -430,10 +430,10 @@ export const UnknownSet = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.exprs.push(longToString((reader.int64() as Long)));
+              message.exprs.push((reader.int64() as Long));
             }
           } else {
-            message.exprs.push(longToString((reader.int64() as Long)));
+            message.exprs.push((reader.int64() as Long));
           }
 
           break;
@@ -449,7 +449,7 @@ export const UnknownSet = {
 
   fromJSON(object: any): UnknownSet {
     return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => String(e)) : []
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromString(e)) : []
     };
   },
 
@@ -457,7 +457,7 @@ export const UnknownSet = {
     const obj: any = {};
 
     if (message.exprs) {
-      obj.exprs = message.exprs.map(e => e);
+      obj.exprs = message.exprs.map(e => (e || Long.ZERO).toString());
     } else {
       obj.exprs = [];
     }
@@ -467,19 +467,15 @@ export const UnknownSet = {
 
   fromPartial<I extends Exact<DeepPartial<UnknownSet>, I>>(object: I): UnknownSet {
     const message = createBaseUnknownSet();
-    message.exprs = object.exprs?.map(e => e) || [];
+    message.exprs = object.exprs?.map(e => Long.fromValue(e)) || [];
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

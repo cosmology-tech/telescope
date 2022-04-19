@@ -12,7 +12,7 @@ export interface MsgCreateVestingAccount {
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
-  endTime: string;
+  endTime: Long;
   delayed: boolean;
 }
 /** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
@@ -39,7 +39,7 @@ export interface MsgCreatePermanentLockedAccountResponse {}
 export interface MsgCreatePeriodicVestingAccount {
   fromAddress: string;
   toAddress: string;
-  startTime: string;
+  startTime: Long;
   vestingPeriods: Period[];
 }
 /**
@@ -54,7 +54,7 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
     fromAddress: "",
     toAddress: "",
     amount: [],
-    endTime: "0",
+    endTime: Long.ZERO,
     delayed: false
   };
 }
@@ -73,7 +73,7 @@ export const MsgCreateVestingAccount = {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.endTime !== "0") {
+    if (!message.endTime.isZero()) {
       writer.uint32(32).int64(message.endTime);
     }
 
@@ -106,7 +106,7 @@ export const MsgCreateVestingAccount = {
           break;
 
         case 4:
-          message.endTime = longToString((reader.int64() as Long));
+          message.endTime = (reader.int64() as Long);
           break;
 
         case 5:
@@ -127,7 +127,7 @@ export const MsgCreateVestingAccount = {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? String(object.endTime) : "0",
+      endTime: isSet(object.endTime) ? Long.fromString(object.endTime) : Long.ZERO,
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
@@ -143,7 +143,7 @@ export const MsgCreateVestingAccount = {
       obj.amount = [];
     }
 
-    message.endTime !== undefined && (obj.endTime = message.endTime);
+    message.endTime !== undefined && (obj.endTime = (message.endTime || Long.ZERO).toString());
     message.delayed !== undefined && (obj.delayed = message.delayed);
     return obj;
   },
@@ -153,7 +153,7 @@ export const MsgCreateVestingAccount = {
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    message.endTime = object.endTime ?? "0";
+    message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
     message.delayed = object.delayed ?? false;
     return message;
   }
@@ -337,7 +337,7 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
   return {
     fromAddress: "",
     toAddress: "",
-    startTime: "0",
+    startTime: Long.ZERO,
     vestingPeriods: []
   };
 }
@@ -352,7 +352,7 @@ export const MsgCreatePeriodicVestingAccount = {
       writer.uint32(18).string(message.toAddress);
     }
 
-    if (message.startTime !== "0") {
+    if (!message.startTime.isZero()) {
       writer.uint32(24).int64(message.startTime);
     }
 
@@ -381,7 +381,7 @@ export const MsgCreatePeriodicVestingAccount = {
           break;
 
         case 3:
-          message.startTime = longToString((reader.int64() as Long));
+          message.startTime = (reader.int64() as Long);
           break;
 
         case 4:
@@ -401,7 +401,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? String(object.startTime) : "0",
+      startTime: isSet(object.startTime) ? Long.fromString(object.startTime) : Long.ZERO,
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },
@@ -410,7 +410,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    message.startTime !== undefined && (obj.startTime = message.startTime);
+    message.startTime !== undefined && (obj.startTime = (message.startTime || Long.ZERO).toString());
 
     if (message.vestingPeriods) {
       obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
@@ -425,7 +425,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const message = createBaseMsgCreatePeriodicVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime ?? "0";
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
   }
@@ -477,13 +477,9 @@ export const MsgCreatePeriodicVestingAccountResponse = {
 /** Msg defines the bank Msg service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

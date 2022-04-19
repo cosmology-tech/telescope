@@ -12,7 +12,7 @@ export interface Params {
 
 export interface GenesisState {
   pools: Any[];
-  nextPoolNumber: string;
+  nextPoolNumber: Long;
   params: Params;
 }
 
@@ -82,7 +82,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     pools: [],
-    nextPoolNumber: "0",
+    nextPoolNumber: Long.UZERO,
     params: undefined
   };
 }
@@ -93,7 +93,7 @@ export const GenesisState = {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.nextPoolNumber !== "0") {
+    if (!message.nextPoolNumber.isZero()) {
       writer.uint32(16).uint64(message.nextPoolNumber);
     }
 
@@ -118,7 +118,7 @@ export const GenesisState = {
           break;
 
         case 2:
-          message.nextPoolNumber = longToString((reader.uint64() as Long));
+          message.nextPoolNumber = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -137,7 +137,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? String(object.nextPoolNumber) : "0",
+      nextPoolNumber: isSet(object.nextPoolNumber) ? Long.fromString(object.nextPoolNumber) : Long.UZERO,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -151,7 +151,7 @@ export const GenesisState = {
       obj.pools = [];
     }
 
-    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = message.nextPoolNumber);
+    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || Long.UZERO).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
@@ -159,20 +159,16 @@ export const GenesisState = {
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.nextPoolNumber = object.nextPoolNumber ?? "0";
+    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? Long.fromValue(object.nextPoolNumber) : Long.UZERO;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

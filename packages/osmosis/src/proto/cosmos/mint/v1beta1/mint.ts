@@ -29,7 +29,7 @@ export interface Params {
   goalBonded: string;
   /** expected blocks per year */
 
-  blocksPerYear: string;
+  blocksPerYear: Long;
 }
 
 function createBaseMinter(): Minter {
@@ -108,7 +108,7 @@ function createBaseParams(): Params {
     inflationMax: "",
     inflationMin: "",
     goalBonded: "",
-    blocksPerYear: "0"
+    blocksPerYear: Long.UZERO
   };
 }
 
@@ -134,7 +134,7 @@ export const Params = {
       writer.uint32(42).string(message.goalBonded);
     }
 
-    if (message.blocksPerYear !== "0") {
+    if (!message.blocksPerYear.isZero()) {
       writer.uint32(48).uint64(message.blocksPerYear);
     }
 
@@ -171,7 +171,7 @@ export const Params = {
           break;
 
         case 6:
-          message.blocksPerYear = longToString((reader.uint64() as Long));
+          message.blocksPerYear = (reader.uint64() as Long);
           break;
 
         default:
@@ -190,7 +190,7 @@ export const Params = {
       inflationMax: isSet(object.inflationMax) ? String(object.inflationMax) : "",
       inflationMin: isSet(object.inflationMin) ? String(object.inflationMin) : "",
       goalBonded: isSet(object.goalBonded) ? String(object.goalBonded) : "",
-      blocksPerYear: isSet(object.blocksPerYear) ? String(object.blocksPerYear) : "0"
+      blocksPerYear: isSet(object.blocksPerYear) ? Long.fromString(object.blocksPerYear) : Long.UZERO
     };
   },
 
@@ -201,7 +201,7 @@ export const Params = {
     message.inflationMax !== undefined && (obj.inflationMax = message.inflationMax);
     message.inflationMin !== undefined && (obj.inflationMin = message.inflationMin);
     message.goalBonded !== undefined && (obj.goalBonded = message.goalBonded);
-    message.blocksPerYear !== undefined && (obj.blocksPerYear = message.blocksPerYear);
+    message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || Long.UZERO).toString());
     return obj;
   },
 
@@ -212,19 +212,15 @@ export const Params = {
     message.inflationMax = object.inflationMax ?? "";
     message.inflationMin = object.inflationMin ?? "";
     message.goalBonded = object.goalBonded ?? "";
-    message.blocksPerYear = object.blocksPerYear ?? "0";
+    message.blocksPerYear = object.blocksPerYear !== undefined && object.blocksPerYear !== null ? Long.fromValue(object.blocksPerYear) : Long.UZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

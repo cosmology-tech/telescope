@@ -47,7 +47,7 @@ export interface ValidatorHistoricalRewardsRecord {
   validatorAddress: string;
   /** period defines the period the historical rewards apply to. */
 
-  period: string;
+  period: Long;
   /** rewards defines the historical rewards of a validator. */
 
   rewards: ValidatorHistoricalRewards;
@@ -80,10 +80,10 @@ export interface ValidatorSlashEventRecord {
   validatorAddress: string;
   /** height defines the block height at which the slash event occured. */
 
-  height: string;
+  height: Long;
   /** period is the period of the slash event. */
 
-  period: string;
+  period: Long;
   /** validator_slash_event describes the slash event. */
 
   validatorSlashEvent: ValidatorSlashEvent;
@@ -338,7 +338,7 @@ export const ValidatorAccumulatedCommissionRecord = {
 function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalRewardsRecord {
   return {
     validatorAddress: "",
-    period: "0",
+    period: Long.UZERO,
     rewards: undefined
   };
 }
@@ -349,7 +349,7 @@ export const ValidatorHistoricalRewardsRecord = {
       writer.uint32(10).string(message.validatorAddress);
     }
 
-    if (message.period !== "0") {
+    if (!message.period.isZero()) {
       writer.uint32(16).uint64(message.period);
     }
 
@@ -374,7 +374,7 @@ export const ValidatorHistoricalRewardsRecord = {
           break;
 
         case 2:
-          message.period = longToString((reader.uint64() as Long));
+          message.period = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -393,7 +393,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromJSON(object: any): ValidatorHistoricalRewardsRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      period: isSet(object.period) ? String(object.period) : "0",
+      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO,
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromJSON(object.rewards) : undefined
     };
   },
@@ -401,7 +401,7 @@ export const ValidatorHistoricalRewardsRecord = {
   toJSON(message: ValidatorHistoricalRewardsRecord): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.period !== undefined && (obj.period = message.period);
+    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toJSON(message.rewards) : undefined);
     return obj;
   },
@@ -409,7 +409,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromPartial<I extends Exact<DeepPartial<ValidatorHistoricalRewardsRecord>, I>>(object: I): ValidatorHistoricalRewardsRecord {
     const message = createBaseValidatorHistoricalRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.period = object.period ?? "0";
+    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     message.rewards = object.rewards !== undefined && object.rewards !== null ? ValidatorHistoricalRewards.fromPartial(object.rewards) : undefined;
     return message;
   }
@@ -569,8 +569,8 @@ export const DelegatorStartingInfoRecord = {
 function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
   return {
     validatorAddress: "",
-    height: "0",
-    period: "0",
+    height: Long.UZERO,
+    period: Long.UZERO,
     validatorSlashEvent: undefined
   };
 }
@@ -581,11 +581,11 @@ export const ValidatorSlashEventRecord = {
       writer.uint32(10).string(message.validatorAddress);
     }
 
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(16).uint64(message.height);
     }
 
-    if (message.period !== "0") {
+    if (!message.period.isZero()) {
       writer.uint32(24).uint64(message.period);
     }
 
@@ -610,11 +610,11 @@ export const ValidatorSlashEventRecord = {
           break;
 
         case 2:
-          message.height = longToString((reader.uint64() as Long));
+          message.height = (reader.uint64() as Long);
           break;
 
         case 3:
-          message.period = longToString((reader.uint64() as Long));
+          message.period = (reader.uint64() as Long);
           break;
 
         case 4:
@@ -633,8 +633,8 @@ export const ValidatorSlashEventRecord = {
   fromJSON(object: any): ValidatorSlashEventRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      height: isSet(object.height) ? String(object.height) : "0",
-      period: isSet(object.period) ? String(object.period) : "0",
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.UZERO,
+      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO,
       validatorSlashEvent: isSet(object.validatorSlashEvent) ? ValidatorSlashEvent.fromJSON(object.validatorSlashEvent) : undefined
     };
   },
@@ -642,8 +642,8 @@ export const ValidatorSlashEventRecord = {
   toJSON(message: ValidatorSlashEventRecord): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.height !== undefined && (obj.height = message.height);
-    message.period !== undefined && (obj.period = message.period);
+    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
+    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     message.validatorSlashEvent !== undefined && (obj.validatorSlashEvent = message.validatorSlashEvent ? ValidatorSlashEvent.toJSON(message.validatorSlashEvent) : undefined);
     return obj;
   },
@@ -651,8 +651,8 @@ export const ValidatorSlashEventRecord = {
   fromPartial<I extends Exact<DeepPartial<ValidatorSlashEventRecord>, I>>(object: I): ValidatorSlashEventRecord {
     const message = createBaseValidatorSlashEventRecord();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.height = object.height ?? "0";
-    message.period = object.period ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     message.validatorSlashEvent = object.validatorSlashEvent !== undefined && object.validatorSlashEvent !== null ? ValidatorSlashEvent.fromPartial(object.validatorSlashEvent) : undefined;
     return message;
   }
@@ -861,13 +861,9 @@ export const GenesisState = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

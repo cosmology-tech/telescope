@@ -111,8 +111,8 @@ export interface Header {
  */
 
 export interface Fraction {
-  numerator: string;
-  denominator: string;
+  numerator: Long;
+  denominator: Long;
 }
 
 function createBaseClientState(): ClientState {
@@ -560,18 +560,18 @@ export const Header = {
 
 function createBaseFraction(): Fraction {
   return {
-    numerator: "0",
-    denominator: "0"
+    numerator: Long.UZERO,
+    denominator: Long.UZERO
   };
 }
 
 export const Fraction = {
   encode(message: Fraction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.numerator !== "0") {
+    if (!message.numerator.isZero()) {
       writer.uint32(8).uint64(message.numerator);
     }
 
-    if (message.denominator !== "0") {
+    if (!message.denominator.isZero()) {
       writer.uint32(16).uint64(message.denominator);
     }
 
@@ -588,11 +588,11 @@ export const Fraction = {
 
       switch (tag >>> 3) {
         case 1:
-          message.numerator = longToString((reader.uint64() as Long));
+          message.numerator = (reader.uint64() as Long);
           break;
 
         case 2:
-          message.denominator = longToString((reader.uint64() as Long));
+          message.denominator = (reader.uint64() as Long);
           break;
 
         default:
@@ -606,22 +606,22 @@ export const Fraction = {
 
   fromJSON(object: any): Fraction {
     return {
-      numerator: isSet(object.numerator) ? String(object.numerator) : "0",
-      denominator: isSet(object.denominator) ? String(object.denominator) : "0"
+      numerator: isSet(object.numerator) ? Long.fromString(object.numerator) : Long.UZERO,
+      denominator: isSet(object.denominator) ? Long.fromString(object.denominator) : Long.UZERO
     };
   },
 
   toJSON(message: Fraction): unknown {
     const obj: any = {};
-    message.numerator !== undefined && (obj.numerator = message.numerator);
-    message.denominator !== undefined && (obj.denominator = message.denominator);
+    message.numerator !== undefined && (obj.numerator = (message.numerator || Long.UZERO).toString());
+    message.denominator !== undefined && (obj.denominator = (message.denominator || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Fraction>, I>>(object: I): Fraction {
     const message = createBaseFraction();
-    message.numerator = object.numerator ?? "0";
-    message.denominator = object.denominator ?? "0";
+    message.numerator = object.numerator !== undefined && object.numerator !== null ? Long.fromValue(object.numerator) : Long.UZERO;
+    message.denominator = object.denominator !== undefined && object.denominator !== null ? Long.fromValue(object.denominator) : Long.UZERO;
     return message;
   }
 
@@ -664,12 +664,12 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -678,7 +678,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -704,8 +704,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

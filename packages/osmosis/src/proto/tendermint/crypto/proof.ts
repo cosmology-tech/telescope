@@ -2,8 +2,8 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 export interface Proof {
-  total: string;
-  index: string;
+  total: Long;
+  index: Long;
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
@@ -38,8 +38,8 @@ export interface ProofOps {
 
 function createBaseProof(): Proof {
   return {
-    total: "0",
-    index: "0",
+    total: Long.ZERO,
+    index: Long.ZERO,
     leafHash: new Uint8Array(),
     aunts: []
   };
@@ -47,11 +47,11 @@ function createBaseProof(): Proof {
 
 export const Proof = {
   encode(message: Proof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.total !== "0") {
+    if (!message.total.isZero()) {
       writer.uint32(8).int64(message.total);
     }
 
-    if (message.index !== "0") {
+    if (!message.index.isZero()) {
       writer.uint32(16).int64(message.index);
     }
 
@@ -76,11 +76,11 @@ export const Proof = {
 
       switch (tag >>> 3) {
         case 1:
-          message.total = longToString((reader.int64() as Long));
+          message.total = (reader.int64() as Long);
           break;
 
         case 2:
-          message.index = longToString((reader.int64() as Long));
+          message.index = (reader.int64() as Long);
           break;
 
         case 3:
@@ -102,8 +102,8 @@ export const Proof = {
 
   fromJSON(object: any): Proof {
     return {
-      total: isSet(object.total) ? String(object.total) : "0",
-      index: isSet(object.index) ? String(object.index) : "0",
+      total: isSet(object.total) ? Long.fromString(object.total) : Long.ZERO,
+      index: isSet(object.index) ? Long.fromString(object.index) : Long.ZERO,
       leafHash: isSet(object.leafHash) ? bytesFromBase64(object.leafHash) : new Uint8Array(),
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };
@@ -111,8 +111,8 @@ export const Proof = {
 
   toJSON(message: Proof): unknown {
     const obj: any = {};
-    message.total !== undefined && (obj.total = message.total);
-    message.index !== undefined && (obj.index = message.index);
+    message.total !== undefined && (obj.total = (message.total || Long.ZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
     message.leafHash !== undefined && (obj.leafHash = base64FromBytes(message.leafHash !== undefined ? message.leafHash : new Uint8Array()));
 
     if (message.aunts) {
@@ -126,8 +126,8 @@ export const Proof = {
 
   fromPartial<I extends Exact<DeepPartial<Proof>, I>>(object: I): Proof {
     const message = createBaseProof();
-    message.total = object.total ?? "0";
-    message.index = object.index ?? "0";
+    message.total = object.total !== undefined && object.total !== null ? Long.fromValue(object.total) : Long.ZERO;
+    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
@@ -466,13 +466,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

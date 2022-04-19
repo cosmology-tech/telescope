@@ -77,7 +77,7 @@ export interface PoolAsset {
 }
 export interface Pool {
   address: string;
-  id: string;
+  id: Long;
   poolParams: PoolParams;
   /**
    * This string specifies who will govern the pool in the future.
@@ -363,7 +363,7 @@ export const PoolAsset = {
 function createBasePool(): Pool {
   return {
     address: "",
-    id: "0",
+    id: Long.UZERO,
     poolParams: undefined,
     futurePoolGovernor: "",
     totalShares: undefined,
@@ -378,7 +378,7 @@ export const Pool = {
       writer.uint32(10).string(message.address);
     }
 
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(16).uint64(message.id);
     }
 
@@ -419,7 +419,7 @@ export const Pool = {
           break;
 
         case 2:
-          message.id = longToString((reader.uint64() as Long));
+          message.id = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -454,7 +454,7 @@ export const Pool = {
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? String(object.id) : "0",
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
@@ -466,7 +466,7 @@ export const Pool = {
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
@@ -484,7 +484,7 @@ export const Pool = {
   fromPartial<I extends Exact<DeepPartial<Pool>, I>>(object: I): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
@@ -495,12 +495,12 @@ export const Pool = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -509,7 +509,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -535,8 +535,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

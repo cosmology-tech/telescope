@@ -19,7 +19,7 @@ export interface GenesisState {
   createLocalhost: boolean;
   /** the sequence for the next generated client identifier */
 
-  nextClientSequence: string;
+  nextClientSequence: Long;
 }
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
@@ -50,7 +50,7 @@ function createBaseGenesisState(): GenesisState {
     clientsMetadata: [],
     params: undefined,
     createLocalhost: false,
-    nextClientSequence: "0"
+    nextClientSequence: Long.UZERO
   };
 }
 
@@ -76,7 +76,7 @@ export const GenesisState = {
       writer.uint32(40).bool(message.createLocalhost);
     }
 
-    if (message.nextClientSequence !== "0") {
+    if (!message.nextClientSequence.isZero()) {
       writer.uint32(48).uint64(message.nextClientSequence);
     }
 
@@ -113,7 +113,7 @@ export const GenesisState = {
           break;
 
         case 6:
-          message.nextClientSequence = longToString((reader.uint64() as Long));
+          message.nextClientSequence = (reader.uint64() as Long);
           break;
 
         default:
@@ -132,7 +132,7 @@ export const GenesisState = {
       clientsMetadata: Array.isArray(object?.clientsMetadata) ? object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e)) : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       createLocalhost: isSet(object.createLocalhost) ? Boolean(object.createLocalhost) : false,
-      nextClientSequence: isSet(object.nextClientSequence) ? String(object.nextClientSequence) : "0"
+      nextClientSequence: isSet(object.nextClientSequence) ? Long.fromString(object.nextClientSequence) : Long.UZERO
     };
   },
 
@@ -159,7 +159,7 @@ export const GenesisState = {
 
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     message.createLocalhost !== undefined && (obj.createLocalhost = message.createLocalhost);
-    message.nextClientSequence !== undefined && (obj.nextClientSequence = message.nextClientSequence);
+    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || Long.UZERO).toString());
     return obj;
   },
 
@@ -170,7 +170,7 @@ export const GenesisState = {
     message.clientsMetadata = object.clientsMetadata?.map(e => IdentifiedGenesisMetadata.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.createLocalhost = object.createLocalhost ?? false;
-    message.nextClientSequence = object.nextClientSequence ?? "0";
+    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? Long.fromValue(object.nextClientSequence) : Long.UZERO;
     return message;
   }
 
@@ -357,13 +357,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

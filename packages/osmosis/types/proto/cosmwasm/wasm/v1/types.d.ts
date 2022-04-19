@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 /** AccessType permission types */
@@ -41,7 +42,7 @@ export interface AccessConfig {
 export interface Params {
     codeUploadAccess: AccessConfig;
     instantiateDefaultPermission: AccessType;
-    maxWasmCodeSize: string;
+    maxWasmCodeSize: Long;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfo {
@@ -55,7 +56,7 @@ export interface CodeInfo {
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
     /** CodeID is the reference to the stored Wasm code */
-    codeId: string;
+    codeId: Long;
     /** Creator address who initially instantiated the contract */
     creator: string;
     /** Admin is an optional address that can execute migrations */
@@ -79,7 +80,7 @@ export interface ContractInfo {
 export interface ContractCodeHistoryEntry {
     operation: ContractCodeHistoryOperationType;
     /** CodeID is the reference to the stored WASM code */
-    codeId: string;
+    codeId: Long;
     /** Updated Tx position when the operation was executed. */
     updated: AbsoluteTxPosition;
     msg: Uint8Array;
@@ -90,12 +91,12 @@ export interface ContractCodeHistoryEntry {
  */
 export interface AbsoluteTxPosition {
     /** BlockHeight is the block the contract was created at */
-    blockHeight: string;
+    blockHeight: Long;
     /**
      * TxIndex is a monotonic counter within the block (actual transaction index,
      * or gas consumed)
      */
-    txIndex: string;
+    txIndex: Long;
 }
 /** Model is a struct that holds a KV pair */
 export interface Model {
@@ -109,168 +110,59 @@ export declare const AccessTypeParam: {
     decode(input: _m0.Reader | Uint8Array, length?: number): AccessTypeParam;
     fromJSON(object: any): AccessTypeParam;
     toJSON(message: AccessTypeParam): unknown;
-    fromPartial<I extends {
-        value?: AccessType;
-    } & {
-        value?: AccessType;
-    } & Record<Exclude<keyof I, "value">, never>>(object: I): AccessTypeParam;
+    fromPartial<I extends unknown>(object: I): AccessTypeParam;
 };
 export declare const AccessConfig: {
     encode(message: AccessConfig, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AccessConfig;
     fromJSON(object: any): AccessConfig;
     toJSON(message: AccessConfig): unknown;
-    fromPartial<I extends {
-        permission?: AccessType;
-        address?: string;
-    } & {
-        permission?: AccessType;
-        address?: string;
-    } & Record<Exclude<keyof I, keyof AccessConfig>, never>>(object: I): AccessConfig;
+    fromPartial<I extends unknown>(object: I): AccessConfig;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        codeUploadAccess?: {
-            permission?: AccessType;
-            address?: string;
-        };
-        instantiateDefaultPermission?: AccessType;
-        maxWasmCodeSize?: string;
-    } & {
-        codeUploadAccess?: {
-            permission?: AccessType;
-            address?: string;
-        } & {
-            permission?: AccessType;
-            address?: string;
-        } & Record<Exclude<keyof I["codeUploadAccess"], keyof AccessConfig>, never>;
-        instantiateDefaultPermission?: AccessType;
-        maxWasmCodeSize?: string;
-    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
+    fromPartial<I extends unknown>(object: I): Params;
 };
 export declare const CodeInfo: {
     encode(message: CodeInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CodeInfo;
     fromJSON(object: any): CodeInfo;
     toJSON(message: CodeInfo): unknown;
-    fromPartial<I extends {
-        codeHash?: Uint8Array;
-        creator?: string;
-        instantiateConfig?: {
-            permission?: AccessType;
-            address?: string;
-        };
-    } & {
-        codeHash?: Uint8Array;
-        creator?: string;
-        instantiateConfig?: {
-            permission?: AccessType;
-            address?: string;
-        } & {
-            permission?: AccessType;
-            address?: string;
-        } & Record<Exclude<keyof I["instantiateConfig"], keyof AccessConfig>, never>;
-    } & Record<Exclude<keyof I, keyof CodeInfo>, never>>(object: I): CodeInfo;
+    fromPartial<I extends unknown>(object: I): CodeInfo;
 };
 export declare const ContractInfo: {
     encode(message: ContractInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ContractInfo;
     fromJSON(object: any): ContractInfo;
     toJSON(message: ContractInfo): unknown;
-    fromPartial<I extends {
-        codeId?: string;
-        creator?: string;
-        admin?: string;
-        label?: string;
-        created?: {
-            blockHeight?: string;
-            txIndex?: string;
-        };
-        ibcPortId?: string;
-        extension?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        codeId?: string;
-        creator?: string;
-        admin?: string;
-        label?: string;
-        created?: {
-            blockHeight?: string;
-            txIndex?: string;
-        } & {
-            blockHeight?: string;
-            txIndex?: string;
-        } & Record<Exclude<keyof I["created"], keyof AbsoluteTxPosition>, never>;
-        ibcPortId?: string;
-        extension?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["extension"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof ContractInfo>, never>>(object: I): ContractInfo;
+    fromPartial<I extends unknown>(object: I): ContractInfo;
 };
 export declare const ContractCodeHistoryEntry: {
     encode(message: ContractCodeHistoryEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ContractCodeHistoryEntry;
     fromJSON(object: any): ContractCodeHistoryEntry;
     toJSON(message: ContractCodeHistoryEntry): unknown;
-    fromPartial<I extends {
-        operation?: ContractCodeHistoryOperationType;
-        codeId?: string;
-        updated?: {
-            blockHeight?: string;
-            txIndex?: string;
-        };
-        msg?: Uint8Array;
-    } & {
-        operation?: ContractCodeHistoryOperationType;
-        codeId?: string;
-        updated?: {
-            blockHeight?: string;
-            txIndex?: string;
-        } & {
-            blockHeight?: string;
-            txIndex?: string;
-        } & Record<Exclude<keyof I["updated"], keyof AbsoluteTxPosition>, never>;
-        msg?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof ContractCodeHistoryEntry>, never>>(object: I): ContractCodeHistoryEntry;
+    fromPartial<I extends unknown>(object: I): ContractCodeHistoryEntry;
 };
 export declare const AbsoluteTxPosition: {
     encode(message: AbsoluteTxPosition, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AbsoluteTxPosition;
     fromJSON(object: any): AbsoluteTxPosition;
     toJSON(message: AbsoluteTxPosition): unknown;
-    fromPartial<I extends {
-        blockHeight?: string;
-        txIndex?: string;
-    } & {
-        blockHeight?: string;
-        txIndex?: string;
-    } & Record<Exclude<keyof I, keyof AbsoluteTxPosition>, never>>(object: I): AbsoluteTxPosition;
+    fromPartial<I extends unknown>(object: I): AbsoluteTxPosition;
 };
 export declare const Model: {
     encode(message: Model, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Model;
     fromJSON(object: any): Model;
     toJSON(message: Model): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-        value?: Uint8Array;
-    } & {
-        key?: Uint8Array;
-        value?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof Model>, never>>(object: I): Model;
+    fromPartial<I extends unknown>(object: I): Model;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

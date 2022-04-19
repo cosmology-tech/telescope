@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
-  height: string;
+  height: Long;
   format: number;
   chunks: number;
   hash: Uint8Array;
@@ -38,7 +38,7 @@ export interface SnapshotIAVLItem {
   value: Uint8Array;
   /** version is block height */
 
-  version: string;
+  version: Long;
   /** height is depth of the tree. */
 
   height: number;
@@ -68,7 +68,7 @@ export interface SnapshotSchema {
 
 function createBaseSnapshot(): Snapshot {
   return {
-    height: "0",
+    height: Long.UZERO,
     format: 0,
     chunks: 0,
     hash: new Uint8Array(),
@@ -78,7 +78,7 @@ function createBaseSnapshot(): Snapshot {
 
 export const Snapshot = {
   encode(message: Snapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(8).uint64(message.height);
     }
 
@@ -111,7 +111,7 @@ export const Snapshot = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = longToString((reader.uint64() as Long));
+          message.height = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -141,7 +141,7 @@ export const Snapshot = {
 
   fromJSON(object: any): Snapshot {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.UZERO,
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
@@ -151,7 +151,7 @@ export const Snapshot = {
 
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));
     message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
@@ -161,7 +161,7 @@ export const Snapshot = {
 
   fromPartial<I extends Exact<DeepPartial<Snapshot>, I>>(object: I): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
@@ -412,7 +412,7 @@ function createBaseSnapshotIAVLItem(): SnapshotIAVLItem {
   return {
     key: new Uint8Array(),
     value: new Uint8Array(),
-    version: "0",
+    version: Long.ZERO,
     height: 0
   };
 }
@@ -427,7 +427,7 @@ export const SnapshotIAVLItem = {
       writer.uint32(18).bytes(message.value);
     }
 
-    if (message.version !== "0") {
+    if (!message.version.isZero()) {
       writer.uint32(24).int64(message.version);
     }
 
@@ -456,7 +456,7 @@ export const SnapshotIAVLItem = {
           break;
 
         case 3:
-          message.version = longToString((reader.int64() as Long));
+          message.version = (reader.int64() as Long);
           break;
 
         case 4:
@@ -476,7 +476,7 @@ export const SnapshotIAVLItem = {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      version: isSet(object.version) ? String(object.version) : "0",
+      version: isSet(object.version) ? Long.fromString(object.version) : Long.ZERO,
       height: isSet(object.height) ? Number(object.height) : 0
     };
   },
@@ -485,7 +485,7 @@ export const SnapshotIAVLItem = {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     message.height !== undefined && (obj.height = Math.round(message.height));
     return obj;
   },
@@ -494,7 +494,7 @@ export const SnapshotIAVLItem = {
     const message = createBaseSnapshotIAVLItem();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.version = object.version ?? "0";
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.height = object.height ?? 0;
     return message;
   }
@@ -796,13 +796,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

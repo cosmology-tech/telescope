@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -19,20 +20,10 @@ export declare const StoreKVPair: {
     decode(input: _m0.Reader | Uint8Array, length?: number): StoreKVPair;
     fromJSON(object: any): StoreKVPair;
     toJSON(message: StoreKVPair): unknown;
-    fromPartial<I extends {
-        storeKey?: string;
-        delete?: boolean;
-        key?: Uint8Array;
-        value?: Uint8Array;
-    } & {
-        storeKey?: string;
-        delete?: boolean;
-        key?: Uint8Array;
-        value?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof StoreKVPair>, never>>(object: I): StoreKVPair;
+    fromPartial<I extends unknown>(object: I): StoreKVPair;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

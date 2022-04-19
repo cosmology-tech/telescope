@@ -11,13 +11,13 @@ export interface MsgIBCSend {
    * The timeout is disabled when set to 0.
    */
 
-  timeoutHeight: string;
+  timeoutHeight: Long;
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
 
-  timeoutTimestamp: string;
+  timeoutTimestamp: Long;
   /**
    * Data is the payload to transfer. We must not make assumption what format or
    * content is in here.
@@ -34,8 +34,8 @@ export interface MsgIBCCloseChannel {
 function createBaseMsgIBCSend(): MsgIBCSend {
   return {
     channel: "",
-    timeoutHeight: "0",
-    timeoutTimestamp: "0",
+    timeoutHeight: Long.UZERO,
+    timeoutTimestamp: Long.UZERO,
     data: new Uint8Array()
   };
 }
@@ -46,11 +46,11 @@ export const MsgIBCSend = {
       writer.uint32(18).string(message.channel);
     }
 
-    if (message.timeoutHeight !== "0") {
+    if (!message.timeoutHeight.isZero()) {
       writer.uint32(32).uint64(message.timeoutHeight);
     }
 
-    if (message.timeoutTimestamp !== "0") {
+    if (!message.timeoutTimestamp.isZero()) {
       writer.uint32(40).uint64(message.timeoutTimestamp);
     }
 
@@ -75,11 +75,11 @@ export const MsgIBCSend = {
           break;
 
         case 4:
-          message.timeoutHeight = longToString((reader.uint64() as Long));
+          message.timeoutHeight = (reader.uint64() as Long);
           break;
 
         case 5:
-          message.timeoutTimestamp = longToString((reader.uint64() as Long));
+          message.timeoutTimestamp = (reader.uint64() as Long);
           break;
 
         case 6:
@@ -98,8 +98,8 @@ export const MsgIBCSend = {
   fromJSON(object: any): MsgIBCSend {
     return {
       channel: isSet(object.channel) ? String(object.channel) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? String(object.timeoutHeight) : "0",
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? String(object.timeoutTimestamp) : "0",
+      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromString(object.timeoutHeight) : Long.UZERO,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromString(object.timeoutTimestamp) : Long.UZERO,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -107,8 +107,8 @@ export const MsgIBCSend = {
   toJSON(message: MsgIBCSend): unknown {
     const obj: any = {};
     message.channel !== undefined && (obj.channel = message.channel);
-    message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = message.timeoutTimestamp);
+    message.timeoutHeight !== undefined && (obj.timeoutHeight = (message.timeoutHeight || Long.UZERO).toString());
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
@@ -116,8 +116,8 @@ export const MsgIBCSend = {
   fromPartial<I extends Exact<DeepPartial<MsgIBCSend>, I>>(object: I): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
-    message.timeoutHeight = object.timeoutHeight ?? "0";
-    message.timeoutTimestamp = object.timeoutTimestamp ?? "0";
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Long.fromValue(object.timeoutHeight) : Long.UZERO;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
   }
@@ -218,13 +218,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

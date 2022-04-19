@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Status } from "../../../../google/rpc/status";
 /**
@@ -99,50 +100,10 @@ export declare const CheckError: {
     decode(input: _m0.Reader | Uint8Array, length?: number): CheckError;
     fromJSON(object: any): CheckError;
     toJSON(message: CheckError): unknown;
-    fromPartial<I extends {
-        code?: CheckError_Code;
-        subject?: string;
-        detail?: string;
-        status?: {
-            code?: number;
-            message?: string;
-            details?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        };
-    } & {
-        code?: CheckError_Code;
-        subject?: string;
-        detail?: string;
-        status?: {
-            code?: number;
-            message?: string;
-            details?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        } & {
-            code?: number;
-            message?: string;
-            details?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[] & ({
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["status"]["details"][number], keyof import("../../../protobuf/any").Any>, never>)[] & Record<Exclude<keyof I["status"]["details"], keyof {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["status"], keyof Status>, never>;
-    } & Record<Exclude<keyof I, keyof CheckError>, never>>(object: I): CheckError;
+    fromPartial<I extends unknown>(object: I): CheckError;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

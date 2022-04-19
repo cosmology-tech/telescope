@@ -58,10 +58,10 @@ export interface QueryValidatorSlashesRequest {
   validatorAddress: string;
   /** starting_height defines the optional starting height to query the slashes. */
 
-  startingHeight: string;
+  startingHeight: Long;
   /** starting_height defines the optional ending height to query the slashes. */
 
-  endingHeight: string;
+  endingHeight: Long;
   /** pagination defines an optional pagination for the request. */
 
   pagination: PageRequest;
@@ -503,8 +503,8 @@ export const QueryValidatorCommissionResponse = {
 function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest {
   return {
     validatorAddress: "",
-    startingHeight: "0",
-    endingHeight: "0",
+    startingHeight: Long.UZERO,
+    endingHeight: Long.UZERO,
     pagination: undefined
   };
 }
@@ -515,11 +515,11 @@ export const QueryValidatorSlashesRequest = {
       writer.uint32(10).string(message.validatorAddress);
     }
 
-    if (message.startingHeight !== "0") {
+    if (!message.startingHeight.isZero()) {
       writer.uint32(16).uint64(message.startingHeight);
     }
 
-    if (message.endingHeight !== "0") {
+    if (!message.endingHeight.isZero()) {
       writer.uint32(24).uint64(message.endingHeight);
     }
 
@@ -544,11 +544,11 @@ export const QueryValidatorSlashesRequest = {
           break;
 
         case 2:
-          message.startingHeight = longToString((reader.uint64() as Long));
+          message.startingHeight = (reader.uint64() as Long);
           break;
 
         case 3:
-          message.endingHeight = longToString((reader.uint64() as Long));
+          message.endingHeight = (reader.uint64() as Long);
           break;
 
         case 4:
@@ -567,8 +567,8 @@ export const QueryValidatorSlashesRequest = {
   fromJSON(object: any): QueryValidatorSlashesRequest {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      startingHeight: isSet(object.startingHeight) ? String(object.startingHeight) : "0",
-      endingHeight: isSet(object.endingHeight) ? String(object.endingHeight) : "0",
+      startingHeight: isSet(object.startingHeight) ? Long.fromString(object.startingHeight) : Long.UZERO,
+      endingHeight: isSet(object.endingHeight) ? Long.fromString(object.endingHeight) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -576,8 +576,8 @@ export const QueryValidatorSlashesRequest = {
   toJSON(message: QueryValidatorSlashesRequest): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.startingHeight = message.startingHeight);
-    message.endingHeight !== undefined && (obj.endingHeight = message.endingHeight);
+    message.startingHeight !== undefined && (obj.startingHeight = (message.startingHeight || Long.UZERO).toString());
+    message.endingHeight !== undefined && (obj.endingHeight = (message.endingHeight || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -585,8 +585,8 @@ export const QueryValidatorSlashesRequest = {
   fromPartial<I extends Exact<DeepPartial<QueryValidatorSlashesRequest>, I>>(object: I): QueryValidatorSlashesRequest {
     const message = createBaseQueryValidatorSlashesRequest();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.startingHeight = object.startingHeight ?? "0";
-    message.endingHeight = object.endingHeight ?? "0";
+    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? Long.fromValue(object.startingHeight) : Long.UZERO;
+    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? Long.fromValue(object.endingHeight) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
@@ -1279,13 +1279,9 @@ export const QueryCommunityPoolResponse = {
 /** Query defines the gRPC querier service for distribution module. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

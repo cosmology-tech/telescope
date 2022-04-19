@@ -37,7 +37,7 @@ export interface ValidatorHistoricalRewards {
 
 export interface ValidatorCurrentRewards {
   rewards: DecCoin[];
-  period: string;
+  period: Long;
 }
 /**
  * ValidatorAccumulatedCommission represents accumulated commission
@@ -63,7 +63,7 @@ export interface ValidatorOutstandingRewards {
  */
 
 export interface ValidatorSlashEvent {
-  validatorPeriod: string;
+  validatorPeriod: Long;
   fraction: string;
 }
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
@@ -98,9 +98,9 @@ export interface CommunityPoolSpendProposal {
  */
 
 export interface DelegatorStartingInfo {
-  previousPeriod: string;
+  previousPeriod: Long;
   stake: string;
-  height: string;
+  height: Long;
 }
 /**
  * DelegationDelegatorReward represents the properties
@@ -295,7 +295,7 @@ export const ValidatorHistoricalRewards = {
 function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
   return {
     rewards: [],
-    period: "0"
+    period: Long.UZERO
   };
 }
 
@@ -305,7 +305,7 @@ export const ValidatorCurrentRewards = {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.period !== "0") {
+    if (!message.period.isZero()) {
       writer.uint32(16).uint64(message.period);
     }
 
@@ -326,7 +326,7 @@ export const ValidatorCurrentRewards = {
           break;
 
         case 2:
-          message.period = longToString((reader.uint64() as Long));
+          message.period = (reader.uint64() as Long);
           break;
 
         default:
@@ -341,7 +341,7 @@ export const ValidatorCurrentRewards = {
   fromJSON(object: any): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
-      period: isSet(object.period) ? String(object.period) : "0"
+      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO
     };
   },
 
@@ -354,14 +354,14 @@ export const ValidatorCurrentRewards = {
       obj.rewards = [];
     }
 
-    message.period !== undefined && (obj.period = message.period);
+    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<ValidatorCurrentRewards>, I>>(object: I): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.period = object.period ?? "0";
+    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     return message;
   }
 
@@ -495,14 +495,14 @@ export const ValidatorOutstandingRewards = {
 
 function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
   return {
-    validatorPeriod: "0",
+    validatorPeriod: Long.UZERO,
     fraction: ""
   };
 }
 
 export const ValidatorSlashEvent = {
   encode(message: ValidatorSlashEvent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.validatorPeriod !== "0") {
+    if (!message.validatorPeriod.isZero()) {
       writer.uint32(8).uint64(message.validatorPeriod);
     }
 
@@ -523,7 +523,7 @@ export const ValidatorSlashEvent = {
 
       switch (tag >>> 3) {
         case 1:
-          message.validatorPeriod = longToString((reader.uint64() as Long));
+          message.validatorPeriod = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -541,21 +541,21 @@ export const ValidatorSlashEvent = {
 
   fromJSON(object: any): ValidatorSlashEvent {
     return {
-      validatorPeriod: isSet(object.validatorPeriod) ? String(object.validatorPeriod) : "0",
+      validatorPeriod: isSet(object.validatorPeriod) ? Long.fromString(object.validatorPeriod) : Long.UZERO,
       fraction: isSet(object.fraction) ? String(object.fraction) : ""
     };
   },
 
   toJSON(message: ValidatorSlashEvent): unknown {
     const obj: any = {};
-    message.validatorPeriod !== undefined && (obj.validatorPeriod = message.validatorPeriod);
+    message.validatorPeriod !== undefined && (obj.validatorPeriod = (message.validatorPeriod || Long.UZERO).toString());
     message.fraction !== undefined && (obj.fraction = message.fraction);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<ValidatorSlashEvent>, I>>(object: I): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
-    message.validatorPeriod = object.validatorPeriod ?? "0";
+    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? Long.fromValue(object.validatorPeriod) : Long.UZERO;
     message.fraction = object.fraction ?? "";
     return message;
   }
@@ -789,15 +789,15 @@ export const CommunityPoolSpendProposal = {
 
 function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
   return {
-    previousPeriod: "0",
+    previousPeriod: Long.UZERO,
     stake: "",
-    height: "0"
+    height: Long.UZERO
   };
 }
 
 export const DelegatorStartingInfo = {
   encode(message: DelegatorStartingInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.previousPeriod !== "0") {
+    if (!message.previousPeriod.isZero()) {
       writer.uint32(8).uint64(message.previousPeriod);
     }
 
@@ -805,7 +805,7 @@ export const DelegatorStartingInfo = {
       writer.uint32(18).string(message.stake);
     }
 
-    if (message.height !== "0") {
+    if (!message.height.isZero()) {
       writer.uint32(24).uint64(message.height);
     }
 
@@ -822,7 +822,7 @@ export const DelegatorStartingInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.previousPeriod = longToString((reader.uint64() as Long));
+          message.previousPeriod = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -830,7 +830,7 @@ export const DelegatorStartingInfo = {
           break;
 
         case 3:
-          message.height = longToString((reader.uint64() as Long));
+          message.height = (reader.uint64() as Long);
           break;
 
         default:
@@ -844,25 +844,25 @@ export const DelegatorStartingInfo = {
 
   fromJSON(object: any): DelegatorStartingInfo {
     return {
-      previousPeriod: isSet(object.previousPeriod) ? String(object.previousPeriod) : "0",
+      previousPeriod: isSet(object.previousPeriod) ? Long.fromString(object.previousPeriod) : Long.UZERO,
       stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? String(object.height) : "0"
+      height: isSet(object.height) ? Long.fromString(object.height) : Long.UZERO
     };
   },
 
   toJSON(message: DelegatorStartingInfo): unknown {
     const obj: any = {};
-    message.previousPeriod !== undefined && (obj.previousPeriod = message.previousPeriod);
+    message.previousPeriod !== undefined && (obj.previousPeriod = (message.previousPeriod || Long.UZERO).toString());
     message.stake !== undefined && (obj.stake = message.stake);
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<DelegatorStartingInfo>, I>>(object: I): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
-    message.previousPeriod = object.previousPeriod ?? "0";
+    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? Long.fromValue(object.previousPeriod) : Long.UZERO;
     message.stake = object.stake ?? "";
-    message.height = object.height ?? "0";
+    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
     return message;
   }
 
@@ -1048,13 +1048,9 @@ export const CommunityPoolSpendProposalWithDeposit = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

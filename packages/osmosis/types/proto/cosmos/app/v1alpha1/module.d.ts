@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
@@ -86,67 +87,24 @@ export declare const ModuleDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleDescriptor;
     fromJSON(object: any): ModuleDescriptor;
     toJSON(message: ModuleDescriptor): unknown;
-    fromPartial<I extends {
-        goImport?: string;
-        usePackage?: {
-            name?: string;
-            revision?: number;
-        }[];
-        canMigrateFrom?: {
-            module?: string;
-        }[];
-    } & {
-        goImport?: string;
-        usePackage?: {
-            name?: string;
-            revision?: number;
-        }[] & ({
-            name?: string;
-            revision?: number;
-        } & {
-            name?: string;
-            revision?: number;
-        } & Record<Exclude<keyof I["usePackage"][number], keyof PackageReference>, never>)[] & Record<Exclude<keyof I["usePackage"], keyof {
-            name?: string;
-            revision?: number;
-        }[]>, never>;
-        canMigrateFrom?: {
-            module?: string;
-        }[] & ({
-            module?: string;
-        } & {
-            module?: string;
-        } & Record<Exclude<keyof I["canMigrateFrom"][number], "module">, never>)[] & Record<Exclude<keyof I["canMigrateFrom"], keyof {
-            module?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof ModuleDescriptor>, never>>(object: I): ModuleDescriptor;
+    fromPartial<I extends unknown>(object: I): ModuleDescriptor;
 };
 export declare const PackageReference: {
     encode(message: PackageReference, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PackageReference;
     fromJSON(object: any): PackageReference;
     toJSON(message: PackageReference): unknown;
-    fromPartial<I extends {
-        name?: string;
-        revision?: number;
-    } & {
-        name?: string;
-        revision?: number;
-    } & Record<Exclude<keyof I, keyof PackageReference>, never>>(object: I): PackageReference;
+    fromPartial<I extends unknown>(object: I): PackageReference;
 };
 export declare const MigrateFromInfo: {
     encode(message: MigrateFromInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MigrateFromInfo;
     fromJSON(object: any): MigrateFromInfo;
     toJSON(message: MigrateFromInfo): unknown;
-    fromPartial<I extends {
-        module?: string;
-    } & {
-        module?: string;
-    } & Record<Exclude<keyof I, "module">, never>>(object: I): MigrateFromInfo;
+    fromPartial<I extends unknown>(object: I): MigrateFromInfo;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

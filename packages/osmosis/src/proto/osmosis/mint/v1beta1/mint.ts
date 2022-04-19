@@ -49,7 +49,7 @@ export interface Params {
   epochIdentifier: string;
   /** number of epochs take to reduce rewards */
 
-  reductionPeriodInEpochs: string;
+  reductionPeriodInEpochs: Long;
   /** reduction multiplier to execute on each period */
 
   reductionFactor: string;
@@ -61,7 +61,7 @@ export interface Params {
   weightedDeveloperRewardsReceivers: WeightedAddress[];
   /** start epoch to distribute minting rewards */
 
-  mintingRewardsDistributionStartEpoch: string;
+  mintingRewardsDistributionStartEpoch: Long;
 }
 
 function createBaseMinter(): Minter {
@@ -288,11 +288,11 @@ function createBaseParams(): Params {
     mintDenom: "",
     genesisEpochProvisions: "",
     epochIdentifier: "",
-    reductionPeriodInEpochs: "0",
+    reductionPeriodInEpochs: Long.ZERO,
     reductionFactor: "",
     distributionProportions: undefined,
     weightedDeveloperRewardsReceivers: [],
-    mintingRewardsDistributionStartEpoch: "0"
+    mintingRewardsDistributionStartEpoch: Long.ZERO
   };
 }
 
@@ -310,7 +310,7 @@ export const Params = {
       writer.uint32(26).string(message.epochIdentifier);
     }
 
-    if (message.reductionPeriodInEpochs !== "0") {
+    if (!message.reductionPeriodInEpochs.isZero()) {
       writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
 
@@ -326,7 +326,7 @@ export const Params = {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
 
-    if (message.mintingRewardsDistributionStartEpoch !== "0") {
+    if (!message.mintingRewardsDistributionStartEpoch.isZero()) {
       writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
 
@@ -355,7 +355,7 @@ export const Params = {
           break;
 
         case 4:
-          message.reductionPeriodInEpochs = longToString((reader.int64() as Long));
+          message.reductionPeriodInEpochs = (reader.int64() as Long);
           break;
 
         case 5:
@@ -371,7 +371,7 @@ export const Params = {
           break;
 
         case 8:
-          message.mintingRewardsDistributionStartEpoch = longToString((reader.int64() as Long));
+          message.mintingRewardsDistributionStartEpoch = (reader.int64() as Long);
           break;
 
         default:
@@ -388,11 +388,11 @@ export const Params = {
       mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
       genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? String(object.reductionPeriodInEpochs) : "0",
+      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? Long.fromString(object.reductionPeriodInEpochs) : Long.ZERO,
       reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
       distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? String(object.mintingRewardsDistributionStartEpoch) : "0"
+      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? Long.fromString(object.mintingRewardsDistributionStartEpoch) : Long.ZERO
     };
   },
 
@@ -401,7 +401,7 @@ export const Params = {
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = message.reductionPeriodInEpochs);
+    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || Long.ZERO).toString());
     message.reductionFactor !== undefined && (obj.reductionFactor = message.reductionFactor);
     message.distributionProportions !== undefined && (obj.distributionProportions = message.distributionProportions ? DistributionProportions.toJSON(message.distributionProportions) : undefined);
 
@@ -411,7 +411,7 @@ export const Params = {
       obj.weightedDeveloperRewardsReceivers = [];
     }
 
-    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = message.mintingRewardsDistributionStartEpoch);
+    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || Long.ZERO).toString());
     return obj;
   },
 
@@ -420,23 +420,19 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs ?? "0";
+    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? Long.fromValue(object.reductionPeriodInEpochs) : Long.ZERO;
     message.reductionFactor = object.reductionFactor ?? "";
     message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : undefined;
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch ?? "0";
+    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

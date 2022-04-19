@@ -47,7 +47,7 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
  */
 
 export interface PeriodLock {
-  ID: string;
+  ID: Long;
   owner: string;
   duration: string;
   endTime: Date;
@@ -85,7 +85,7 @@ export interface QueryCondition {
 
 export interface SyntheticLock {
   /** underlying native lockup id for this synthetic lockup */
-  underlyingLockId: string;
+  underlyingLockId: Long;
   synthDenom: string;
   /**
    * used for unbonding synthetic lockups, for active synthetic lockups, this
@@ -98,7 +98,7 @@ export interface SyntheticLock {
 
 function createBasePeriodLock(): PeriodLock {
   return {
-    ID: "0",
+    ID: Long.UZERO,
     owner: "",
     duration: undefined,
     endTime: undefined,
@@ -108,7 +108,7 @@ function createBasePeriodLock(): PeriodLock {
 
 export const PeriodLock = {
   encode(message: PeriodLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ID !== "0") {
+    if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
     }
 
@@ -141,7 +141,7 @@ export const PeriodLock = {
 
       switch (tag >>> 3) {
         case 1:
-          message.ID = longToString((reader.uint64() as Long));
+          message.ID = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -171,7 +171,7 @@ export const PeriodLock = {
 
   fromJSON(object: any): PeriodLock {
     return {
-      ID: isSet(object.ID) ? String(object.ID) : "0",
+      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? String(object.duration) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
@@ -181,7 +181,7 @@ export const PeriodLock = {
 
   toJSON(message: PeriodLock): unknown {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
+    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
@@ -197,7 +197,7 @@ export const PeriodLock = {
 
   fromPartial<I extends Exact<DeepPartial<PeriodLock>, I>>(object: I): PeriodLock {
     const message = createBasePeriodLock();
-    message.ID = object.ID ?? "0";
+    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
     message.endTime = object.endTime ?? undefined;
@@ -302,7 +302,7 @@ export const QueryCondition = {
 
 function createBaseSyntheticLock(): SyntheticLock {
   return {
-    underlyingLockId: "0",
+    underlyingLockId: Long.UZERO,
     synthDenom: "",
     endTime: undefined,
     duration: undefined
@@ -311,7 +311,7 @@ function createBaseSyntheticLock(): SyntheticLock {
 
 export const SyntheticLock = {
   encode(message: SyntheticLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.underlyingLockId !== "0") {
+    if (!message.underlyingLockId.isZero()) {
       writer.uint32(8).uint64(message.underlyingLockId);
     }
 
@@ -340,7 +340,7 @@ export const SyntheticLock = {
 
       switch (tag >>> 3) {
         case 1:
-          message.underlyingLockId = longToString((reader.uint64() as Long));
+          message.underlyingLockId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -366,7 +366,7 @@ export const SyntheticLock = {
 
   fromJSON(object: any): SyntheticLock {
     return {
-      underlyingLockId: isSet(object.underlyingLockId) ? String(object.underlyingLockId) : "0",
+      underlyingLockId: isSet(object.underlyingLockId) ? Long.fromString(object.underlyingLockId) : Long.UZERO,
       synthDenom: isSet(object.synthDenom) ? String(object.synthDenom) : "",
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
       duration: isSet(object.duration) ? String(object.duration) : undefined
@@ -375,7 +375,7 @@ export const SyntheticLock = {
 
   toJSON(message: SyntheticLock): unknown {
     const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlyingLockId = message.underlyingLockId);
+    message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || Long.UZERO).toString());
     message.synthDenom !== undefined && (obj.synthDenom = message.synthDenom);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration);
@@ -384,7 +384,7 @@ export const SyntheticLock = {
 
   fromPartial<I extends Exact<DeepPartial<SyntheticLock>, I>>(object: I): SyntheticLock {
     const message = createBaseSyntheticLock();
-    message.underlyingLockId = object.underlyingLockId ?? "0";
+    message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? Long.fromValue(object.underlyingLockId) : Long.UZERO;
     message.synthDenom = object.synthDenom ?? "";
     message.endTime = object.endTime ?? undefined;
     message.duration = object.duration ?? undefined;
@@ -393,12 +393,12 @@ export const SyntheticLock = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -407,7 +407,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -433,8 +433,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

@@ -78,7 +78,7 @@ export interface AttributeContext_Peer {
   ip: string;
   /** The network port of the peer. */
 
-  port: string;
+  port: Long;
   /** The labels associated with the peer. */
 
   labels: {
@@ -258,7 +258,7 @@ export interface AttributeContext_Request {
   time: Date;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
 
-  size: string;
+  size: Long;
   /**
    * The network protocol used with the request, such as "http/1.1",
    * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
@@ -291,10 +291,10 @@ export interface AttributeContext_Request_HeadersEntry {
 
 export interface AttributeContext_Response {
   /** The HTTP response status code, such as `200` and `404`. */
-  code: string;
+  code: Long;
   /** The HTTP response size in bytes. If unknown, it must be -1. */
 
-  size: string;
+  size: Long;
   /**
    * The HTTP response headers. If multiple headers share the same key, they
    * must be merged according to HTTP spec. All header keys must be
@@ -589,7 +589,7 @@ export const AttributeContext = {
 function createBaseAttributeContext_Peer(): AttributeContext_Peer {
   return {
     ip: "",
-    port: "0",
+    port: Long.ZERO,
     labels: {},
     principal: "",
     regionCode: ""
@@ -602,7 +602,7 @@ export const AttributeContext_Peer = {
       writer.uint32(10).string(message.ip);
     }
 
-    if (message.port !== "0") {
+    if (!message.port.isZero()) {
       writer.uint32(16).int64(message.port);
     }
 
@@ -638,7 +638,7 @@ export const AttributeContext_Peer = {
           break;
 
         case 2:
-          message.port = longToString((reader.int64() as Long));
+          message.port = (reader.int64() as Long);
           break;
 
         case 6:
@@ -670,7 +670,7 @@ export const AttributeContext_Peer = {
   fromJSON(object: any): AttributeContext_Peer {
     return {
       ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? String(object.port) : "0",
+      port: isSet(object.port) ? Long.fromString(object.port) : Long.ZERO,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -685,7 +685,7 @@ export const AttributeContext_Peer = {
   toJSON(message: AttributeContext_Peer): unknown {
     const obj: any = {};
     message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = message.port);
+    message.port !== undefined && (obj.port = (message.port || Long.ZERO).toString());
     obj.labels = {};
 
     if (message.labels) {
@@ -702,7 +702,7 @@ export const AttributeContext_Peer = {
   fromPartial<I extends Exact<DeepPartial<AttributeContext_Peer>, I>>(object: I): AttributeContext_Peer {
     const message = createBaseAttributeContext_Peer();
     message.ip = object.ip ?? "";
-    message.port = object.port ?? "0";
+    message.port = object.port !== undefined && object.port !== null ? Long.fromValue(object.port) : Long.ZERO;
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1008,7 +1008,7 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     scheme: "",
     query: "",
     time: undefined,
-    size: "0",
+    size: Long.ZERO,
     protocol: "",
     reason: "",
     auth: undefined
@@ -1052,7 +1052,7 @@ export const AttributeContext_Request = {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(74).fork()).ldelim();
     }
 
-    if (message.size !== "0") {
+    if (!message.size.isZero()) {
       writer.uint32(80).int64(message.size);
     }
 
@@ -1118,7 +1118,7 @@ export const AttributeContext_Request = {
           break;
 
         case 10:
-          message.size = longToString((reader.int64() as Long));
+          message.size = (reader.int64() as Long);
           break;
 
         case 11:
@@ -1157,7 +1157,7 @@ export const AttributeContext_Request = {
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      size: isSet(object.size) ? String(object.size) : "0",
+      size: isSet(object.size) ? Long.fromString(object.size) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
       auth: isSet(object.auth) ? AttributeContext_Auth.fromJSON(object.auth) : undefined
@@ -1181,7 +1181,7 @@ export const AttributeContext_Request = {
     message.scheme !== undefined && (obj.scheme = message.scheme);
     message.query !== undefined && (obj.query = message.query);
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.size !== undefined && (obj.size = message.size);
+    message.size !== undefined && (obj.size = (message.size || Long.ZERO).toString());
     message.protocol !== undefined && (obj.protocol = message.protocol);
     message.reason !== undefined && (obj.reason = message.reason);
     message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toJSON(message.auth) : undefined);
@@ -1206,7 +1206,7 @@ export const AttributeContext_Request = {
     message.scheme = object.scheme ?? "";
     message.query = object.query ?? "";
     message.time = object.time ?? undefined;
-    message.size = object.size ?? "0";
+    message.size = object.size !== undefined && object.size !== null ? Long.fromValue(object.size) : Long.ZERO;
     message.protocol = object.protocol ?? "";
     message.reason = object.reason ?? "";
     message.auth = object.auth !== undefined && object.auth !== null ? AttributeContext_Auth.fromPartial(object.auth) : undefined;
@@ -1286,8 +1286,8 @@ export const AttributeContext_Request_HeadersEntry = {
 
 function createBaseAttributeContext_Response(): AttributeContext_Response {
   return {
-    code: "0",
-    size: "0",
+    code: Long.ZERO,
+    size: Long.ZERO,
     headers: {},
     time: undefined,
     backendLatency: undefined
@@ -1296,11 +1296,11 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
 
 export const AttributeContext_Response = {
   encode(message: AttributeContext_Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.code !== "0") {
+    if (!message.code.isZero()) {
       writer.uint32(8).int64(message.code);
     }
 
-    if (message.size !== "0") {
+    if (!message.size.isZero()) {
       writer.uint32(16).int64(message.size);
     }
 
@@ -1332,11 +1332,11 @@ export const AttributeContext_Response = {
 
       switch (tag >>> 3) {
         case 1:
-          message.code = longToString((reader.int64() as Long));
+          message.code = (reader.int64() as Long);
           break;
 
         case 2:
-          message.size = longToString((reader.int64() as Long));
+          message.size = (reader.int64() as Long);
           break;
 
         case 3:
@@ -1367,8 +1367,8 @@ export const AttributeContext_Response = {
 
   fromJSON(object: any): AttributeContext_Response {
     return {
-      code: isSet(object.code) ? String(object.code) : "0",
-      size: isSet(object.size) ? String(object.size) : "0",
+      code: isSet(object.code) ? Long.fromString(object.code) : Long.ZERO,
+      size: isSet(object.size) ? Long.fromString(object.size) : Long.ZERO,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1382,8 +1382,8 @@ export const AttributeContext_Response = {
 
   toJSON(message: AttributeContext_Response): unknown {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.size !== undefined && (obj.size = message.size);
+    message.code !== undefined && (obj.code = (message.code || Long.ZERO).toString());
+    message.size !== undefined && (obj.size = (message.size || Long.ZERO).toString());
     obj.headers = {};
 
     if (message.headers) {
@@ -1399,8 +1399,8 @@ export const AttributeContext_Response = {
 
   fromPartial<I extends Exact<DeepPartial<AttributeContext_Response>, I>>(object: I): AttributeContext_Response {
     const message = createBaseAttributeContext_Response();
-    message.code = object.code ?? "0";
-    message.size = object.size ?? "0";
+    message.code = object.code !== undefined && object.code !== null ? Long.fromValue(object.code) : Long.ZERO;
+    message.size = object.size !== undefined && object.size !== null ? Long.fromValue(object.size) : Long.ZERO;
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1869,12 +1869,12 @@ export const AttributeContext_Resource_AnnotationsEntry = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -1883,7 +1883,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -1909,8 +1909,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

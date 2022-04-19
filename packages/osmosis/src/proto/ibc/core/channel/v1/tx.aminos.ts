@@ -430,7 +430,7 @@ export const AminoConverter = {
     }: MsgRecvPacket): AminoMsgRecvPacket["value"] => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: packet.sequence.toString(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -440,7 +440,7 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: packet.timeoutTimestamp
+          timeout_timestamp: packet.timeoutTimestamp.toString()
         },
         proof_commitment: proofCommitment,
         proof_height: proofHeight ? {
@@ -458,7 +458,7 @@ export const AminoConverter = {
     }: AminoMsgRecvPacket["value"]): MsgRecvPacket => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -468,7 +468,7 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         proofCommitment: proof_commitment,
         proofHeight: proof_height ? {
@@ -490,7 +490,7 @@ export const AminoConverter = {
     }: MsgTimeout): AminoMsgTimeout["value"] => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: packet.sequence.toString(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -500,14 +500,14 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: packet.timeoutTimestamp
+          timeout_timestamp: packet.timeoutTimestamp.toString()
         },
         proof_unreceived: proofUnreceived,
         proof_height: proofHeight ? {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
         } : {},
-        next_sequence_recv: nextSequenceRecv,
+        next_sequence_recv: nextSequenceRecv.toString(),
         signer
       };
     },
@@ -520,7 +520,7 @@ export const AminoConverter = {
     }: AminoMsgTimeout["value"]): MsgTimeout => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -530,14 +530,14 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofHeight: proof_height ? {
           revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
           revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
         } : undefined,
-        nextSequenceRecv: next_sequence_recv,
+        nextSequenceRecv: Long.fromString(next_sequence_recv),
         signer
       };
     }
@@ -554,7 +554,7 @@ export const AminoConverter = {
     }: MsgTimeoutOnClose): AminoMsgTimeoutOnClose["value"] => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: packet.sequence.toString(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -564,7 +564,7 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: packet.timeoutTimestamp
+          timeout_timestamp: packet.timeoutTimestamp.toString()
         },
         proof_unreceived: proofUnreceived,
         proof_close: proofClose,
@@ -572,7 +572,7 @@ export const AminoConverter = {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
         } : {},
-        next_sequence_recv: nextSequenceRecv,
+        next_sequence_recv: nextSequenceRecv.toString(),
         signer
       };
     },
@@ -586,7 +586,7 @@ export const AminoConverter = {
     }: AminoMsgTimeoutOnClose["value"]): MsgTimeoutOnClose => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -596,7 +596,7 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofClose: proof_close,
@@ -604,7 +604,7 @@ export const AminoConverter = {
           revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
           revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
         } : undefined,
-        nextSequenceRecv: next_sequence_recv,
+        nextSequenceRecv: Long.fromString(next_sequence_recv),
         signer
       };
     }
@@ -620,7 +620,7 @@ export const AminoConverter = {
     }: MsgAcknowledgement): AminoMsgAcknowledgement["value"] => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: packet.sequence.toString(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -630,7 +630,7 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: packet.timeoutTimestamp
+          timeout_timestamp: packet.timeoutTimestamp.toString()
         },
         acknowledgement,
         proof_acked: proofAcked,
@@ -650,7 +650,7 @@ export const AminoConverter = {
     }: AminoMsgAcknowledgement["value"]): MsgAcknowledgement => {
       return {
         packet: {
-          sequence: packet.sequence,
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -660,7 +660,7 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         acknowledgement,
         proofAcked: proof_acked,

@@ -6,13 +6,13 @@ import { ProposalExecutorResult, proposalExecutorResultFromJSON, proposalExecuto
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  groupId: Long;
 }
 /** EventUpdateGroup is an event emitted when a group is updated. */
 
 export interface EventUpdateGroup {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  groupId: Long;
 }
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 
@@ -30,25 +30,25 @@ export interface EventUpdateGroupPolicy {
 
 export interface EventSubmitProposal {
   /** proposal_id is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
 }
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 
 export interface EventWithdrawProposal {
   /** proposal_id is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
 }
 /** EventVote is an event emitted when a voter votes on a proposal. */
 
 export interface EventVote {
   /** proposal_id is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
 }
 /** EventExec is an event emitted when a proposal is executed. */
 
 export interface EventExec {
   /** proposal_id is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
   /** result is the proposal execution result. */
 
   result: ProposalExecutorResult;
@@ -57,7 +57,7 @@ export interface EventExec {
 
 export interface EventLeaveGroup {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  groupId: Long;
   /** address is the account address of the group member. */
 
   address: string;
@@ -65,13 +65,13 @@ export interface EventLeaveGroup {
 
 function createBaseEventCreateGroup(): EventCreateGroup {
   return {
-    groupId: "0"
+    groupId: Long.UZERO
   };
 }
 
 export const EventCreateGroup = {
   encode(message: EventCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -88,7 +88,7 @@ export const EventCreateGroup = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         default:
@@ -102,19 +102,19 @@ export const EventCreateGroup = {
 
   fromJSON(object: any): EventCreateGroup {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0"
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
     };
   },
 
   toJSON(message: EventCreateGroup): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventCreateGroup>, I>>(object: I): EventCreateGroup {
     const message = createBaseEventCreateGroup();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   }
 
@@ -122,13 +122,13 @@ export const EventCreateGroup = {
 
 function createBaseEventUpdateGroup(): EventUpdateGroup {
   return {
-    groupId: "0"
+    groupId: Long.UZERO
   };
 }
 
 export const EventUpdateGroup = {
   encode(message: EventUpdateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -145,7 +145,7 @@ export const EventUpdateGroup = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         default:
@@ -159,19 +159,19 @@ export const EventUpdateGroup = {
 
   fromJSON(object: any): EventUpdateGroup {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0"
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
     };
   },
 
   toJSON(message: EventUpdateGroup): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventUpdateGroup>, I>>(object: I): EventUpdateGroup {
     const message = createBaseEventUpdateGroup();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   }
 
@@ -293,13 +293,13 @@ export const EventUpdateGroupPolicy = {
 
 function createBaseEventSubmitProposal(): EventSubmitProposal {
   return {
-    proposalId: "0"
+    proposalId: Long.UZERO
   };
 }
 
 export const EventSubmitProposal = {
   encode(message: EventSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -316,7 +316,7 @@ export const EventSubmitProposal = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         default:
@@ -330,19 +330,19 @@ export const EventSubmitProposal = {
 
   fromJSON(object: any): EventSubmitProposal {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0"
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
     };
   },
 
   toJSON(message: EventSubmitProposal): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventSubmitProposal>, I>>(object: I): EventSubmitProposal {
     const message = createBaseEventSubmitProposal();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 
@@ -350,13 +350,13 @@ export const EventSubmitProposal = {
 
 function createBaseEventWithdrawProposal(): EventWithdrawProposal {
   return {
-    proposalId: "0"
+    proposalId: Long.UZERO
   };
 }
 
 export const EventWithdrawProposal = {
   encode(message: EventWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -373,7 +373,7 @@ export const EventWithdrawProposal = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         default:
@@ -387,19 +387,19 @@ export const EventWithdrawProposal = {
 
   fromJSON(object: any): EventWithdrawProposal {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0"
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
     };
   },
 
   toJSON(message: EventWithdrawProposal): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventWithdrawProposal>, I>>(object: I): EventWithdrawProposal {
     const message = createBaseEventWithdrawProposal();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 
@@ -407,13 +407,13 @@ export const EventWithdrawProposal = {
 
 function createBaseEventVote(): EventVote {
   return {
-    proposalId: "0"
+    proposalId: Long.UZERO
   };
 }
 
 export const EventVote = {
   encode(message: EventVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -430,7 +430,7 @@ export const EventVote = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         default:
@@ -444,19 +444,19 @@ export const EventVote = {
 
   fromJSON(object: any): EventVote {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0"
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
     };
   },
 
   toJSON(message: EventVote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventVote>, I>>(object: I): EventVote {
     const message = createBaseEventVote();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 
@@ -464,14 +464,14 @@ export const EventVote = {
 
 function createBaseEventExec(): EventExec {
   return {
-    proposalId: "0",
+    proposalId: Long.UZERO,
     result: 0
   };
 }
 
 export const EventExec = {
   encode(message: EventExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -492,7 +492,7 @@ export const EventExec = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -510,21 +510,21 @@ export const EventExec = {
 
   fromJSON(object: any): EventExec {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
     };
   },
 
   toJSON(message: EventExec): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventExec>, I>>(object: I): EventExec {
     const message = createBaseEventExec();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.result = object.result ?? 0;
     return message;
   }
@@ -533,14 +533,14 @@ export const EventExec = {
 
 function createBaseEventLeaveGroup(): EventLeaveGroup {
   return {
-    groupId: "0",
+    groupId: Long.UZERO,
     address: ""
   };
 }
 
 export const EventLeaveGroup = {
   encode(message: EventLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -561,7 +561,7 @@ export const EventLeaveGroup = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -579,34 +579,30 @@ export const EventLeaveGroup = {
 
   fromJSON(object: any): EventLeaveGroup {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
 
   toJSON(message: EventLeaveGroup): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventLeaveGroup>, I>>(object: I): EventLeaveGroup {
     const message = createBaseEventLeaveGroup();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.address = object.address ?? "";
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

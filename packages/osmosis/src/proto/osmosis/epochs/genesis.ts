@@ -7,10 +7,10 @@ export interface EpochInfo {
   identifier: string;
   startTime: Date;
   duration: string;
-  currentEpoch: string;
+  currentEpoch: Long;
   currentEpochStartTime: Date;
   epochCountingStarted: boolean;
-  currentEpochStartHeight: string;
+  currentEpochStartHeight: Long;
 }
 /** GenesisState defines the epochs module's genesis state. */
 
@@ -23,10 +23,10 @@ function createBaseEpochInfo(): EpochInfo {
     identifier: "",
     startTime: undefined,
     duration: undefined,
-    currentEpoch: "0",
+    currentEpoch: Long.ZERO,
     currentEpochStartTime: undefined,
     epochCountingStarted: false,
-    currentEpochStartHeight: "0"
+    currentEpochStartHeight: Long.ZERO
   };
 }
 
@@ -44,7 +44,7 @@ export const EpochInfo = {
       Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.currentEpoch !== "0") {
+    if (!message.currentEpoch.isZero()) {
       writer.uint32(32).int64(message.currentEpoch);
     }
 
@@ -56,7 +56,7 @@ export const EpochInfo = {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
 
-    if (message.currentEpochStartHeight !== "0") {
+    if (!message.currentEpochStartHeight.isZero()) {
       writer.uint32(64).int64(message.currentEpochStartHeight);
     }
 
@@ -85,7 +85,7 @@ export const EpochInfo = {
           break;
 
         case 4:
-          message.currentEpoch = longToString((reader.int64() as Long));
+          message.currentEpoch = (reader.int64() as Long);
           break;
 
         case 5:
@@ -97,7 +97,7 @@ export const EpochInfo = {
           break;
 
         case 8:
-          message.currentEpochStartHeight = longToString((reader.int64() as Long));
+          message.currentEpochStartHeight = (reader.int64() as Long);
           break;
 
         default:
@@ -114,10 +114,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       duration: isSet(object.duration) ? String(object.duration) : undefined,
-      currentEpoch: isSet(object.currentEpoch) ? String(object.currentEpoch) : "0",
+      currentEpoch: isSet(object.currentEpoch) ? Long.fromString(object.currentEpoch) : Long.ZERO,
       currentEpochStartTime: isSet(object.currentEpochStartTime) ? fromJsonTimestamp(object.currentEpochStartTime) : undefined,
       epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
-      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? String(object.currentEpochStartHeight) : "0"
+      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromString(object.currentEpochStartHeight) : Long.ZERO
     };
   },
 
@@ -126,10 +126,10 @@ export const EpochInfo = {
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration);
-    message.currentEpoch !== undefined && (obj.currentEpoch = message.currentEpoch);
+    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || Long.ZERO).toString());
     message.currentEpochStartTime !== undefined && (obj.currentEpochStartTime = message.currentEpochStartTime.toISOString());
     message.epochCountingStarted !== undefined && (obj.epochCountingStarted = message.epochCountingStarted);
-    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = message.currentEpochStartHeight);
+    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || Long.ZERO).toString());
     return obj;
   },
 
@@ -138,10 +138,10 @@ export const EpochInfo = {
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
     message.duration = object.duration ?? undefined;
-    message.currentEpoch = object.currentEpoch ?? "0";
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;
-    message.currentEpochStartHeight = object.currentEpochStartHeight ?? "0";
+    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO;
     return message;
   }
 
@@ -210,12 +210,12 @@ export const GenesisState = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -224,7 +224,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -250,8 +250,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

@@ -63,7 +63,7 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        end_time: endTime,
+        end_time: endTime.toString(),
         delayed
       };
     },
@@ -81,7 +81,7 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        endTime: end_time,
+        endTime: Long.fromString(end_time),
         delayed
       };
     }
@@ -128,9 +128,9 @@ export const AminoConverter = {
       return {
         from_address: fromAddress,
         to_address: toAddress,
-        start_time: startTime,
+        start_time: startTime.toString(),
         vesting_periods: vestingPeriods.map(el0 => ({
-          length: el0.length,
+          length: el0.length.toString(),
           amount: el0.amount.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
@@ -147,9 +147,9 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        startTime: start_time,
+        startTime: Long.fromString(start_time),
         vestingPeriods: vesting_periods.map(el0 => ({
-          length: el0.length,
+          length: Long.fromString(el0.length),
           amount: el0.amount.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
