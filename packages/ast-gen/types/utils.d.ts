@@ -12,7 +12,7 @@ export declare const FieldTypeAsts: {
     Coin: () => t.TSTypeReference;
     Long: () => t.TSTypeReference;
 };
-export declare const typeUrlToAmino: (str: any, MsgName: any) => any;
+export declare const typeUrlToAmino: (typeUrl: any, exceptions?: {}) => any;
 export declare const shorthandProperty: (prop: string) => t.ObjectProperty;
 export declare const importStmt: (names: string[], path: string) => t.ImportDeclaration;
 export declare const importAminoMsg: () => t.ImportDeclaration;
