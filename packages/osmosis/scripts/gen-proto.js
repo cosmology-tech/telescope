@@ -5,7 +5,7 @@ import { camel, snake } from 'case';
 const protoPath = resolve(join(__dirname, '..', 'out', 'proto'));
 const outPath = resolve(__dirname, '..', 'src' ,'proto');
 
-telescope(protoPath, outPath, [
+telescope({protoPath, outPath, plugins: [
     {
         name: 'aminoCasing',
         plugin: ({protoPackage}) => {
@@ -15,4 +15,4 @@ telescope(protoPath, outPath, [
             return snake;
         }
     }
-]);
+]});

@@ -76,15 +76,24 @@ export class TSProtoStore {
   exceptions: AminoExceptions;
 
   constructor(
-    protoPath: string,
-    outPath: string,
-    exceptions: AminoExceptions,
-    plugins: TelescopePlugin[] = defaultPlugins
+    {
+      protoPath,
+      outPath,
+      exceptions,
+      plugins
+    }
+      :
+      {
+        protoPath: string,
+        outPath: string,
+        exceptions?: AminoExceptions,
+        plugins?: TelescopePlugin[]
+      }
   ) {
     this.outPath = resolve(outPath);
     this.protoPath = resolve(protoPath);
     this.paths = glob(this.protoPath + '/**/*.ts');
-    this.plugins = plugins;
+    this.plugins = plugins ?? defaultPlugins;
     this.exceptions = exceptions;
     // 1x loop through files get symbols
     this.load();

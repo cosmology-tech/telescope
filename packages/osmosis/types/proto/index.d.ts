@@ -11277,18 +11277,18 @@ export declare namespace osmosis {
                     aminoType: string;
                     toAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: _488.MsgJoinPool) => {
                         sender: string;
-                        pool_id: string;
-                        share_out_amount: string;
-                        token_in_maxs: {
+                        poolId: string;
+                        shareOutAmount: string;
+                        tokenInMaxs: {
                             denom: string;
                             amount: string;
                         }[];
                     };
-                    fromAmino: ({ sender, pool_id, share_out_amount, token_in_maxs }: {
+                    fromAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: {
                         sender: string;
-                        pool_id: string;
-                        share_out_amount: string;
-                        token_in_maxs: {
+                        poolId: string;
+                        shareOutAmount: string;
+                        tokenInMaxs: {
                             denom: string;
                             amount: string;
                         }[];
@@ -11298,18 +11298,18 @@ export declare namespace osmosis {
                     aminoType: string;
                     toAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: _488.MsgExitPool) => {
                         sender: string;
-                        pool_id: string;
-                        share_in_amount: string;
-                        token_out_mins: {
+                        poolId: string;
+                        shareInAmount: string;
+                        tokenOutMins: {
                             denom: string;
                             amount: string;
                         }[];
                     };
-                    fromAmino: ({ sender, pool_id, share_in_amount, token_out_mins }: {
+                    fromAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: {
                         sender: string;
-                        pool_id: string;
-                        share_in_amount: string;
-                        token_out_mins: {
+                        poolId: string;
+                        shareInAmount: string;
+                        tokenOutMins: {
                             denom: string;
                             amount: string;
                         }[];
@@ -11320,26 +11320,26 @@ export declare namespace osmosis {
                     toAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: _488.MsgSwapExactAmountIn) => {
                         sender: string;
                         routes: {
-                            pool_id: string;
-                            token_out_denom: string;
+                            poolId: string;
+                            tokenOutDenom: string;
                         }[];
-                        token_in: {
+                        tokenIn: {
                             denom: string;
                             amount: string;
                         };
-                        token_out_min_amount: string;
+                        tokenOutMinAmount: string;
                     };
-                    fromAmino: ({ sender, routes, token_in, token_out_min_amount }: {
+                    fromAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: {
                         sender: string;
                         routes: {
-                            pool_id: string;
-                            token_out_denom: string;
+                            poolId: string;
+                            tokenOutDenom: string;
                         }[];
-                        token_in: {
+                        tokenIn: {
                             denom: string;
                             amount: string;
                         };
-                        token_out_min_amount: string;
+                        tokenOutMinAmount: string;
                     }) => _488.MsgSwapExactAmountIn;
                 };
                 "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut": {
@@ -11347,23 +11347,23 @@ export declare namespace osmosis {
                     toAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: _488.MsgSwapExactAmountOut) => {
                         sender: string;
                         routes: {
-                            pool_id: string;
-                            token_in_denom: string;
+                            poolId: string;
+                            tokenInDenom: string;
                         }[];
-                        token_in_max_amount: string;
-                        token_out: {
+                        tokenInMaxAmount: string;
+                        tokenOut: {
                             denom: string;
                             amount: string;
                         };
                     };
-                    fromAmino: ({ sender, routes, token_in_max_amount, token_out }: {
+                    fromAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: {
                         sender: string;
                         routes: {
-                            pool_id: string;
-                            token_in_denom: string;
+                            poolId: string;
+                            tokenInDenom: string;
                         }[];
-                        token_in_max_amount: string;
-                        token_out: {
+                        tokenInMaxAmount: string;
+                        tokenOut: {
                             denom: string;
                             amount: string;
                         };
@@ -11373,76 +11373,76 @@ export declare namespace osmosis {
                     aminoType: string;
                     toAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: _488.MsgJoinSwapExternAmountIn) => {
                         sender: string;
-                        pool_id: string;
-                        token_in: {
+                        poolId: string;
+                        tokenIn: {
                             denom: string;
                             amount: string;
                         };
-                        share_out_min_amount: string;
+                        shareOutMinAmount: string;
                     };
-                    fromAmino: ({ sender, pool_id, token_in, share_out_min_amount }: {
+                    fromAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: {
                         sender: string;
-                        pool_id: string;
-                        token_in: {
+                        poolId: string;
+                        tokenIn: {
                             denom: string;
                             amount: string;
                         };
-                        share_out_min_amount: string;
+                        shareOutMinAmount: string;
                     }) => _488.MsgJoinSwapExternAmountIn;
                 };
                 "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut": {
                     aminoType: string;
                     toAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: _488.MsgJoinSwapShareAmountOut) => {
                         sender: string;
-                        pool_id: string;
-                        token_in_denom: string;
-                        share_out_amount: string;
-                        token_in_max_amount: string;
+                        poolId: string;
+                        tokenInDenom: string;
+                        shareOutAmount: string;
+                        tokenInMaxAmount: string;
                     };
-                    fromAmino: ({ sender, pool_id, token_in_denom, share_out_amount, token_in_max_amount }: {
+                    fromAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: {
                         sender: string;
-                        pool_id: string;
-                        token_in_denom: string;
-                        share_out_amount: string;
-                        token_in_max_amount: string;
+                        poolId: string;
+                        tokenInDenom: string;
+                        shareOutAmount: string;
+                        tokenInMaxAmount: string;
                     }) => _488.MsgJoinSwapShareAmountOut;
                 };
                 "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut": {
                     aminoType: string;
                     toAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: _488.MsgExitSwapExternAmountOut) => {
                         sender: string;
-                        pool_id: string;
-                        token_out: {
+                        poolId: string;
+                        tokenOut: {
                             denom: string;
                             amount: string;
                         };
-                        share_in_max_amount: string;
+                        shareInMaxAmount: string;
                     };
-                    fromAmino: ({ sender, pool_id, token_out, share_in_max_amount }: {
+                    fromAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: {
                         sender: string;
-                        pool_id: string;
-                        token_out: {
+                        poolId: string;
+                        tokenOut: {
                             denom: string;
                             amount: string;
                         };
-                        share_in_max_amount: string;
+                        shareInMaxAmount: string;
                     }) => _488.MsgExitSwapExternAmountOut;
                 };
                 "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn": {
                     aminoType: string;
                     toAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: _488.MsgExitSwapShareAmountIn) => {
                         sender: string;
-                        pool_id: string;
-                        token_out_denom: string;
-                        share_in_amount: string;
-                        token_out_min_amount: string;
+                        poolId: string;
+                        tokenOutDenom: string;
+                        shareInAmount: string;
+                        tokenOutMinAmount: string;
                     };
-                    fromAmino: ({ sender, pool_id, token_out_denom, share_in_amount, token_out_min_amount }: {
+                    fromAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: {
                         sender: string;
-                        pool_id: string;
-                        token_out_denom: string;
-                        share_in_amount: string;
-                        token_out_min_amount: string;
+                        poolId: string;
+                        tokenOutDenom: string;
+                        shareInAmount: string;
+                        tokenOutMinAmount: string;
                     }) => _488.MsgExitSwapShareAmountIn;
                 };
             };
@@ -11848,10 +11848,10 @@ export declare namespace osmosis {
             "/osmosis.incentives.MsgCreateGauge": {
                 aminoType: string;
                 toAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: _504.MsgCreateGauge) => {
-                    is_perpetual: boolean;
+                    isPerpetual: boolean;
                     owner: string;
-                    distribute_to: {
-                        lock_query_type: number;
+                    distributeTo: {
+                        lockQueryType: number;
                         denom: string;
                         duration: string;
                         timestamp: Date;
@@ -11860,14 +11860,14 @@ export declare namespace osmosis {
                         denom: string;
                         amount: string;
                     }[];
-                    start_time: Date;
-                    num_epochs_paid_over: string;
+                    startTime: Date;
+                    numEpochsPaidOver: string;
                 };
-                fromAmino: ({ is_perpetual, owner, distribute_to, coins, start_time, num_epochs_paid_over }: {
-                    is_perpetual: boolean;
+                fromAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: {
+                    isPerpetual: boolean;
                     owner: string;
-                    distribute_to: {
-                        lock_query_type: number;
+                    distributeTo: {
+                        lockQueryType: number;
                         denom: string;
                         duration: string;
                         timestamp: Date;
@@ -11876,23 +11876,23 @@ export declare namespace osmosis {
                         denom: string;
                         amount: string;
                     }[];
-                    start_time: Date;
-                    num_epochs_paid_over: string;
+                    startTime: Date;
+                    numEpochsPaidOver: string;
                 }) => _504.MsgCreateGauge;
             };
             "/osmosis.incentives.MsgAddToGauge": {
                 aminoType: string;
                 toAmino: ({ owner, gaugeId, rewards }: _504.MsgAddToGauge) => {
                     owner: string;
-                    gauge_id: string;
+                    gaugeId: string;
                     rewards: {
                         denom: string;
                         amount: string;
                     }[];
                 };
-                fromAmino: ({ owner, gauge_id, rewards }: {
+                fromAmino: ({ owner, gaugeId, rewards }: {
                     owner: string;
-                    gauge_id: string;
+                    gaugeId: string;
                     rewards: {
                         denom: string;
                         amount: string;
@@ -12814,35 +12814,35 @@ export declare namespace osmosis {
                 aminoType: string;
                 toAmino: ({ sender, lockId, valAddr }: _550.MsgSuperfluidDelegate) => {
                     sender: string;
-                    lock_id: string;
-                    val_addr: string;
+                    lockId: string;
+                    valAddr: string;
                 };
-                fromAmino: ({ sender, lock_id, val_addr }: {
+                fromAmino: ({ sender, lockId, valAddr }: {
                     sender: string;
-                    lock_id: string;
-                    val_addr: string;
+                    lockId: string;
+                    valAddr: string;
                 }) => _550.MsgSuperfluidDelegate;
             };
             "/osmosis.superfluid.MsgSuperfluidUndelegate": {
                 aminoType: string;
                 toAmino: ({ sender, lockId }: _550.MsgSuperfluidUndelegate) => {
                     sender: string;
-                    lock_id: string;
+                    lockId: string;
                 };
-                fromAmino: ({ sender, lock_id }: {
+                fromAmino: ({ sender, lockId }: {
                     sender: string;
-                    lock_id: string;
+                    lockId: string;
                 }) => _550.MsgSuperfluidUndelegate;
             };
             "/osmosis.superfluid.MsgSuperfluidUnbondLock": {
                 aminoType: string;
                 toAmino: ({ sender, lockId }: _550.MsgSuperfluidUnbondLock) => {
                     sender: string;
-                    lock_id: string;
+                    lockId: string;
                 };
-                fromAmino: ({ sender, lock_id }: {
+                fromAmino: ({ sender, lockId }: {
                     sender: string;
-                    lock_id: string;
+                    lockId: string;
                 }) => _550.MsgSuperfluidUnbondLock;
             };
             "/osmosis.superfluid.MsgLockAndSuperfluidDelegate": {
@@ -12853,15 +12853,15 @@ export declare namespace osmosis {
                         denom: string;
                         amount: string;
                     }[];
-                    val_addr: string;
+                    valAddr: string;
                 };
-                fromAmino: ({ sender, coins, val_addr }: {
+                fromAmino: ({ sender, coins, valAddr }: {
                     sender: string;
                     coins: {
                         denom: string;
                         amount: string;
                     }[];
-                    val_addr: string;
+                    valAddr: string;
                 }) => _550.MsgLockAndSuperfluidDelegate;
             };
         };

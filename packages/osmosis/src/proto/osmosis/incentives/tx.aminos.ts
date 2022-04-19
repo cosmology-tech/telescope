@@ -11,10 +11,10 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 export interface AminoMsgCreateGauge extends AminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: {
-    is_perpetual: boolean;
+    isPerpetual: boolean;
     owner: string;
-    distribute_to: {
-      lock_query_type: number;
+    distributeTo: {
+      lockQueryType: number;
       denom: string;
       duration: string;
       timestamp: Date;
@@ -23,15 +23,15 @@ export interface AminoMsgCreateGauge extends AminoMsg {
       denom: string;
       amount: string;
     }[];
-    start_time: Date;
-    num_epochs_paid_over: string;
+    startTime: Date;
+    numEpochsPaidOver: string;
   };
 }
 export interface AminoMsgAddToGauge extends AminoMsg {
   type: "osmosis/incentives/add-to-gauge";
   value: {
     owner: string;
-    gauge_id: string;
+    gaugeId: string;
     rewards: {
       denom: string;
       amount: string;
@@ -50,10 +50,10 @@ export const AminoConverter = {
       numEpochsPaidOver
     }: MsgCreateGauge): AminoMsgCreateGauge["value"] => {
       return {
-        is_perpetual: isPerpetual,
+        isPerpetual,
         owner,
-        distribute_to: {
-          lock_query_type: distributeTo.lockQueryType,
+        distributeTo: {
+          lockQueryType: distributeTo.lockQueryType,
           denom: distributeTo.denom,
           duration: distributeTo.duration,
           timestamp: distributeTo.timestamp
@@ -62,33 +62,33 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        start_time: startTime,
-        num_epochs_paid_over: numEpochsPaidOver.toString()
+        startTime,
+        numEpochsPaidOver: numEpochsPaidOver.toString()
       };
     },
     fromAmino: ({
-      is_perpetual,
+      isPerpetual,
       owner,
-      distribute_to,
+      distributeTo,
       coins,
-      start_time,
-      num_epochs_paid_over
+      startTime,
+      numEpochsPaidOver
     }: AminoMsgCreateGauge["value"]): MsgCreateGauge => {
       return {
-        isPerpetual: is_perpetual,
+        isPerpetual,
         owner,
         distributeTo: {
-          lockQueryType: lockQueryTypeFromJSON(distribute_to.lock_query_type),
-          denom: distribute_to.denom,
-          duration: distribute_to.duration,
-          timestamp: distribute_to.timestamp
+          lockQueryType: lockQueryTypeFromJSON(distributeTo.lockQueryType),
+          denom: distributeTo.denom,
+          duration: distributeTo.duration,
+          timestamp: distributeTo.timestamp
         },
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
-        startTime: start_time,
-        numEpochsPaidOver: Long.fromString(num_epochs_paid_over)
+        startTime,
+        numEpochsPaidOver: Long.fromString(numEpochsPaidOver)
       };
     }
   },
@@ -101,7 +101,7 @@ export const AminoConverter = {
     }: MsgAddToGauge): AminoMsgAddToGauge["value"] => {
       return {
         owner,
-        gauge_id: gaugeId.toString(),
+        gaugeId: gaugeId.toString(),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -110,12 +110,12 @@ export const AminoConverter = {
     },
     fromAmino: ({
       owner,
-      gauge_id,
+      gaugeId,
       rewards
     }: AminoMsgAddToGauge["value"]): MsgAddToGauge => {
       return {
         owner,
-        gaugeId: Long.fromString(gauge_id),
+        gaugeId: Long.fromString(gaugeId),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
