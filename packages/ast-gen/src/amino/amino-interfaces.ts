@@ -4,8 +4,6 @@ import { toAmino } from './to-amino';
 import { fromAmino } from './from-amino';
 import { getFieldDimensionality, typeUrlToAmino, arrayTypeNDimensions } from '../utils';
 
-
-
 export const makeAminoConverterItem = (
   {
     schema,
@@ -58,11 +56,21 @@ export const aminoConverter = (
 };
 
 export const renderAminoField = (
-  field: Field,
-  enums: Enum[],
-  interfaces: any[] = [],
-  imports: any[] = [],
-  aminoCasingFn: Function
+  {
+    field,
+    enums,
+    interfaces = [],
+    imports = [],
+    aminoCasingFn
+  }
+    :
+    {
+      field: Field,
+      enums: Enum[],
+      interfaces?: Interface[],
+      imports?: any[],
+      aminoCasingFn: Function
+    }
 ) => {
 
   const { typeName, dimensions, isArray } = getFieldDimensionality(field);
@@ -104,7 +112,7 @@ export const renderAminoField = (
   const ival: Interface = interfaces.find(e => e.name === typeName);
   if (ival) {
     const properties = ival.fields.map(field =>
-      renderAminoField(field, enums, interfaces, imports, aminoCasingFn)
+      renderAminoField({ field, enums, interfaces, imports, aminoCasingFn })
     );
 
     if (isArray) {
@@ -177,7 +185,7 @@ export const makeAminoTypeInterface = (
         )),
         t.tSPropertySignature(t.identifier('value'), t.tsTypeAnnotation(t.tsTypeLiteral(
           schema.fields.map((field) => {
-            return renderAminoField(field, enums, interfaces, imports, aminoCasingFn);
+            return renderAminoField({ field, enums, interfaces, imports, aminoCasingFn });
           })
         )))
       ])

@@ -19,7 +19,8 @@ import {
   MessageSchema,
   EnumConverter,
   Interface,
-  Field
+  Field,
+  AminoExceptions
 } from '@cosmonauts/ast-gen';
 import { aminoHelperCode } from './helpers';
 import { parsePackage, recursiveModuleBundle } from './utils';
@@ -72,11 +73,19 @@ export class TSProtoStore {
 
   plugins: TelescopePlugin[];
 
-  constructor(protoPath: string, outPath: string, plugins: TelescopePlugin[] = defaultPlugins) {
+  exceptions: AminoExceptions;
+
+  constructor(
+    protoPath: string,
+    outPath: string,
+    exceptions: AminoExceptions,
+    plugins: TelescopePlugin[] = defaultPlugins
+  ) {
     this.outPath = resolve(outPath);
     this.protoPath = resolve(protoPath);
     this.paths = glob(this.protoPath + '/**/*.ts');
     this.plugins = plugins;
+    this.exceptions = exceptions;
     // 1x loop through files get symbols
     this.load();
 
@@ -444,18 +453,26 @@ export class TSFileStore implements FileStore {
 
 
         aminos.push(
-          c.makeAminoTypeInterface(
+          c.makeAminoTypeInterface({
             schema,
-            this.program.enums,
-            this.program.getDefinitions(),
-            undefined,
-            aminoCasingFn
-          )
+            enums: this.program.enums,
+            interfaces: this.program.getDefinitions(),
+            aminoCasingFn,
+            exceptions: this.program.exceptions
+          })
         );
 
       });
 
-      aminos.push(c.aminoConverter(schemata, this.program.enums, this.program.getDefinitions(), aminoCasingFn));
+      aminos.push(
+        c.aminoConverter({
+          schemata,
+          enums: this.program.enums,
+          interfaces: this.program.getDefinitions(),
+          aminoCasingFn,
+          exceptions: this.program.exceptions
+        })
+      );
 
       messages = t.exportNamedDeclaration(t.variableDeclaration('const', [
         t.variableDeclarator(t.identifier('messages'), t.objectExpression(

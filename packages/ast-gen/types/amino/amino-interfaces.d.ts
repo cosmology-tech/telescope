@@ -13,7 +13,13 @@ export declare const aminoConverter: ({ schemata, enums, interfaces, aminoCasing
     interfaces: Interface[];
     aminoCasingFn: Function;
 }) => t.ExportNamedDeclaration;
-export declare const renderAminoField: (field: Field, enums: Enum[], interfaces: any[], imports: any[], aminoCasingFn: Function) => any;
+export declare const renderAminoField: ({ field, enums, interfaces, imports, aminoCasingFn }: {
+    field: Field;
+    enums: Enum[];
+    interfaces?: any[];
+    imports?: any[];
+    aminoCasingFn: Function;
+}) => any;
 export declare const makeAminoTypeInterface: ({ schema, enums, interfaces, imports, aminoCasingFn, exceptions }: {
     schema: MessageSchema;
     enums: Enum[];
