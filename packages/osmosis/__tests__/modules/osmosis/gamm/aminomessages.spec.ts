@@ -37,6 +37,45 @@ describe("AminoTypes", () => {
       };
       expect(aminoMsg).toEqual(expected);
     });
+    it("works for MsgSwapExactAmountIn", () => {
+      const msg: MsgSwapExactAmountIn = {
+        sender: "osmo1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+        routes: [
+          {
+            poolId: Long.fromNumber(1),
+            tokenOutDenom: "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+          }
+        ],
+        tokenIn: {
+          denom: 'uosmo',
+          amount: '25652'
+        },
+        tokenOutMinAmount: '6036'
+      };
+      const aminoTypes = new AminoTypes({ additions: AminoConverter });
+      const aminoMsg = aminoTypes.toAmino({
+        typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+        value: msg,
+      });
+      const expected: AminoMsgSwapExactAmountIn = {
+        type: "osmosis/gamm/swap-exact-amount-in",
+        value: {
+          sender: "osmo1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+          routes: [
+            {
+              poolId: "1",
+              tokenOutDenom: "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+            }
+          ],
+          tokenIn: {
+            denom: 'uosmo',
+            amount: '25652'
+          },
+          tokenOutMinAmount: '6036'
+        },
+      };
+      expect(aminoMsg).toEqual(expected);
+    });
   });
 
   describe("fromAmino", () => {
@@ -63,6 +102,44 @@ describe("AminoTypes", () => {
       };
       expect(msg).toEqual({
         typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
+        value: expectedValue,
+      });
+    });
+    it("works for MsgSwapExactAmountIn", () => {
+      const aminoMsg: AminoMsgSwapExactAmountIn = {
+        type: "osmosis/gamm/swap-exact-amount-in",
+        value: {
+          sender: "osmo1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+          routes: [
+            {
+              poolId: "1",
+              tokenOutDenom: "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+            }
+          ],
+          tokenIn: {
+            denom: 'uosmo',
+            amount: '25652'
+          },
+          tokenOutMinAmount: '6036'
+        },
+      };
+      const msg = new AminoTypes({ additions: AminoConverter }).fromAmino(aminoMsg);
+      const expectedValue: MsgSwapExactAmountIn = {
+        sender: "osmo1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+        routes: [
+          {
+            poolId: Long.fromNumber(1),
+            tokenOutDenom: "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+          }
+        ],
+        tokenIn: {
+          denom: 'uosmo',
+          amount: '25652'
+        },
+        tokenOutMinAmount: '6036'
+      };
+      expect(msg).toEqual({
+        typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
         value: expectedValue,
       });
     });
