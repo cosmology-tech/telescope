@@ -6,7 +6,8 @@ import {
     addToJSONMethod,
     toObjectWithEncodedMethods,
     toObjectWithPartialMethods,
-    createTypeRegistry
+    createTypeRegistry,
+    createRegistryLoader
 } from './messages';
 import generate from '@babel/generator';
 import { mutations } from './__fixtures__';
@@ -50,5 +51,9 @@ it('toObjectWithPartialMethods', async () => {
 });
 
 it('createTypeRegistry', async () => {
-    printCode(createTypeRegistry(mutations));
+    expectCode(createTypeRegistry(mutations));
+});
+
+it('createRegistryLoader', async () => {
+    printCode(createRegistryLoader());
 });

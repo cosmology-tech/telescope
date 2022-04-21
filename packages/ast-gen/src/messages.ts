@@ -204,3 +204,91 @@ export const createTypeRegistry = (mutations: Mutation[]) => t.exportNamedDeclar
   t.variableDeclarator(t.identifier('registry'), t.objectExpression(
     mutations.map(mutation => createTypeRegistryObject(mutation))
   ))]));
+
+const tsArrowFunctionExpression = (
+  params: (t.Identifier | t.Pattern | t.RestElement)[],
+  body: t.BlockStatement | t.Expression,
+  // typeAnnotation: t.TSTypeAnnotation,
+  isAsync: boolean = false
+) => {
+  const el = t.arrowFunctionExpression(params, body, isAsync);
+  // el.type
+  return el;
+};
+
+const tsIdentifier = (name: string, typeAnnotation: t.TSTypeAnnotation) => {
+  const el = t.identifier(name);
+  el.typeAnnotation = typeAnnotation;
+  return el;
+}
+
+export const createRegistryLoader = () => {
+  return t.exportNamedDeclaration(t.variableDeclaration(
+    'const',
+    [
+      t.variableDeclarator(
+        t.identifier('load'),
+        t.arrowFunctionExpression(
+          [
+            tsIdentifier('protoRegistry', t.tsTypeAnnotation(
+              t.tsTypeReference(
+                t.identifier('Registry')
+              )
+            ))
+          ],
+          t.blockStatement(
+            [
+              t.expressionStatement(
+                t.callExpression(
+                  t.memberExpression(
+                    t.callExpression(
+                      t.memberExpression(
+                        t.identifier(
+                          'Object'
+                        ),
+                        t.identifier('keys')
+                      ),
+                      [
+                        t.identifier('registry')
+                      ]
+                    ),
+                    t.identifier('forEach')
+                  ),
+                  [
+                    t.arrowFunctionExpression(
+                      [
+                        t.identifier('typeUrl')
+                      ],
+                      t.blockStatement(
+                        [
+                          t.expressionStatement(
+                            t.callExpression(
+                              t.memberExpression(
+                                t.identifier(
+                                  'protoRegistry'
+                                ),
+                                t.identifier('register')
+                              ),
+                              [
+                                t.identifier('typeUrl'),
+                                t.memberExpression(
+                                  t.identifier('registry'),
+                                  t.identifier('typeUrl'),
+                                  true
+                                )
+                              ]
+                            )
+                          )
+                        ]
+                      )
+                    )
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      )
+    ]
+  ))
+};
