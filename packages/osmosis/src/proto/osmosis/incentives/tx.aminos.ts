@@ -16,7 +16,10 @@ export interface AminoMsgCreateGauge extends AminoMsg {
     distributeTo: {
       lockQueryType: number;
       denom: string;
-      duration: string;
+      duration: {
+        seconds: string;
+        nanos: number;
+      };
       timestamp: Date;
     };
     coins: {
@@ -55,7 +58,7 @@ export const AminoConverter = {
         distributeTo: {
           lockQueryType: distributeTo.lockQueryType,
           denom: distributeTo.denom,
-          duration: distributeTo.duration,
+          duration: (distributeTo.duration * 1_000_000_000).toString(),
           timestamp: distributeTo.timestamp
         },
         coins: coins.map(el0 => ({
@@ -80,7 +83,10 @@ export const AminoConverter = {
         distributeTo: {
           lockQueryType: lockQueryTypeFromJSON(distributeTo.lockQueryType),
           denom: distributeTo.denom,
-          duration: distributeTo.duration,
+          duration: {
+            seconds: Long.fromNumber(Math.floor(parseInt(distributeTo.duration) / 1_000_000_000)),
+            nanos: parseInt(distributeTo.duration) % 1_000_000_000
+          },
           timestamp: distributeTo.timestamp
         },
         coins: coins.map(el0 => ({

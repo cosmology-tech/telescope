@@ -12,7 +12,10 @@ export interface AminoMsgLockTokens extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
-    duration: string;
+    duration: {
+      seconds: string;
+      nanos: number;
+    };
     coins: {
       denom: string;
       amount: string;
@@ -46,7 +49,7 @@ export const AminoConverter = {
     }: MsgLockTokens): AminoMsgLockTokens["value"] => {
       return {
         owner,
-        duration,
+        duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -60,7 +63,10 @@ export const AminoConverter = {
     }: AminoMsgLockTokens["value"]): MsgLockTokens => {
       return {
         owner,
-        duration,
+        duration: {
+          seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
+          nanos: parseInt(duration) % 1_000_000_000
+        },
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

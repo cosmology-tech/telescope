@@ -12476,7 +12476,10 @@ export declare namespace osmosis {
                     distributeTo: {
                         lockQueryType: number;
                         denom: string;
-                        duration: string;
+                        duration: {
+                            seconds: string;
+                            nanos: number;
+                        };
                         timestamp: Date;
                     };
                     coins: {
@@ -12492,7 +12495,10 @@ export declare namespace osmosis {
                     distributeTo: {
                         lockQueryType: number;
                         denom: string;
-                        duration: string;
+                        duration: {
+                            seconds: string;
+                            nanos: number;
+                        };
                         timestamp: Date;
                     };
                     coins: {
@@ -12799,7 +12805,10 @@ export declare namespace osmosis {
                 aminoType: string;
                 toAmino: ({ owner, duration, coins }: _364.MsgLockTokens) => {
                     owner: string;
-                    duration: string;
+                    duration: {
+                        seconds: string;
+                        nanos: number;
+                    };
                     coins: {
                         denom: string;
                         amount: string;
@@ -12807,7 +12816,10 @@ export declare namespace osmosis {
                 };
                 fromAmino: ({ owner, duration, coins }: {
                     owner: string;
-                    duration: string;
+                    duration: {
+                        seconds: string;
+                        nanos: number;
+                    };
                     coins: {
                         denom: string;
                         amount: string;

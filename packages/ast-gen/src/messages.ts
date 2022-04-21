@@ -175,7 +175,6 @@ export const createTypeRegistryObject = (mutation: Mutation) => {
   );
 };
 
-
 export const toObjectWithPartialMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
   t.variableDeclarator(t.identifier('messages'), t.objectExpression(
     mutations.map(mutation => addFromPartialMethod(mutation))
