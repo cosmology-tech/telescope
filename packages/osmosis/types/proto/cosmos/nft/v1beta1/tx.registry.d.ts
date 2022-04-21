@@ -1,5 +1,6 @@
 import { MsgSend } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/cosmos.nft.v1beta1.MsgSend": {
         encode(message: MsgSend, writer?: _m0.Writer): _m0.Writer;
@@ -9,3 +10,4 @@ export declare const registry: {
         fromPartial<I extends unknown>(object: I): MsgSend;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

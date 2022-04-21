@@ -49,6 +49,7 @@ export declare namespace ibc {
                         fromPartial<I extends unknown>(object: I): _694.MsgTransfer;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.applications.transfer.v1.MsgTransfer": {
                         aminoType: string;
@@ -398,6 +399,7 @@ export declare namespace ibc {
                         fromPartial<I_18 extends unknown>(object: I_18): _707.MsgAcknowledgement;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.channel.v1.MsgChannelOpenInit": {
                         aminoType: string;
@@ -1222,6 +1224,7 @@ export declare namespace ibc {
                         fromPartial<I_6 extends unknown>(object: I_6): _719.MsgSubmitMisbehaviour;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.client.v1.MsgCreateClient": {
                         aminoType: string;
@@ -1712,6 +1715,7 @@ export declare namespace ibc {
                         fromPartial<I_6 extends unknown>(object: I_6): _732.MsgConnectionOpenConfirm;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.connection.v1.MsgConnectionOpenInit": {
                         aminoType: string;

@@ -1,5 +1,6 @@
 import { MsgUnjail } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/cosmos.slashing.v1beta1.MsgUnjail": {
         encode(message: MsgUnjail, writer?: _m0.Writer): _m0.Writer;
@@ -9,3 +10,4 @@ export declare const registry: {
         fromPartial<I extends unknown>(object: I): MsgUnjail;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

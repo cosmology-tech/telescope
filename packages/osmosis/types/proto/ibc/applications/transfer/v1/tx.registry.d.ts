@@ -1,5 +1,6 @@
 import { MsgTransfer } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/ibc.applications.transfer.v1.MsgTransfer": {
         encode(message: MsgTransfer, writer?: _m0.Writer): _m0.Writer;
@@ -9,3 +10,4 @@ export declare const registry: {
         fromPartial<I extends unknown>(object: I): MsgTransfer;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

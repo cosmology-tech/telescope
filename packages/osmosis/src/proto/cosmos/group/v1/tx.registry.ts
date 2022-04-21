@@ -7,6 +7,7 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { VoteOption, Member, voteOptionFromJSON, voteOptionToJSON } from "../../../cosmos/group/v1/types";
+import { Registry } from "@cosmjs/proto-signing";
 export const registry = {
   "/cosmos.group.v1.MsgCreateGroup": MsgCreateGroup,
   "/cosmos.group.v1.MsgUpdateGroupMembers": MsgUpdateGroupMembers,
@@ -22,4 +23,9 @@ export const registry = {
   "/cosmos.group.v1.MsgVote": MsgVote,
   "/cosmos.group.v1.MsgExec": MsgExec,
   "/cosmos.group.v1.MsgLeaveGroup": MsgLeaveGroup
+};
+export const load = (protoRegistry: Registry) => {
+  Object.keys(registry).forEach(typeUrl => {
+    protoRegistry.register(typeUrl, registry[typeUrl]);
+  });
 };

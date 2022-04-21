@@ -415,7 +415,7 @@ export class TSFileStore implements FileStore {
     // BEGIN AMINOS
     const a = this.program.findDependency('AminoHeight');
     const rel = relative(dirname(this.filename), a.loc);
-    const importStmt2 = c.importStmt(['Registry'], '@cosmjs/proto-signing'['AminoHeight', 'omitDefault'], rel.replace(extname(rel), ''));
+    const importStmt2 = c.importStmt(['AminoHeight', 'omitDefault'], rel.replace(extname(rel), ''));
     // END AMINOS
 
     // THIS SIMPLY W/O CHECKING IMPORTS ALL MESSAGES FROM THIS FILE...

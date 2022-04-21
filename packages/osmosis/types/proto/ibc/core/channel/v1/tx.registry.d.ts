@@ -1,5 +1,6 @@
 import { MsgChannelOpenInit, MsgChannelOpenTry, MsgChannelOpenAck, MsgChannelOpenConfirm, MsgChannelCloseInit, MsgChannelCloseConfirm, MsgRecvPacket, MsgTimeout, MsgTimeoutOnClose, MsgAcknowledgement } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/ibc.core.channel.v1.MsgChannelOpenInit": {
         encode(message: MsgChannelOpenInit, writer?: _m0.Writer): _m0.Writer;
@@ -72,3 +73,4 @@ export declare const registry: {
         fromPartial<I_9 extends unknown>(object: I_9): MsgAcknowledgement;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

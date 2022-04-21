@@ -366,6 +366,7 @@ export declare namespace osmosis {
                     fromPartial<I_14 extends unknown>(object: I_14): _757.MsgExitSwapShareAmountIn;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/osmosis.gamm.v1beta1.MsgJoinPool": {
                     aminoType: string;
@@ -954,6 +955,7 @@ export declare namespace osmosis {
                 fromPartial<I_2 extends unknown>(object: I_2): _770.MsgAddToGauge;
             };
         };
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.incentives.MsgCreateGauge": {
                 aminoType: string;
@@ -1287,6 +1289,7 @@ export declare namespace osmosis {
                 fromPartial<I_4 extends unknown>(object: I_4): _782.MsgBeginUnlocking;
             };
         };
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.lockup.MsgLockTokens": {
                 aminoType: string;
@@ -1984,6 +1987,7 @@ export declare namespace osmosis {
                 fromPartial<I_6 extends unknown>(object: I_6): _803.MsgLockAndSuperfluidDelegate;
             };
         };
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.superfluid.MsgSuperfluidDelegate": {
                 aminoType: string;

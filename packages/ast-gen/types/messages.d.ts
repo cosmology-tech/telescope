@@ -38,3 +38,4 @@ export declare const toObjectWithJsonMethods: (mutations: Mutation[]) => t.Expor
 export declare const toObjectWithToJSONMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
 export declare const toObjectWithFromJSONMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
 export declare const createTypeRegistry: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const createRegistryLoader: () => t.ExportNamedDeclaration;

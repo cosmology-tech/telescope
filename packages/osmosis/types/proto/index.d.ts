@@ -597,6 +597,7 @@ export declare namespace cosmos {
                     fromPartial<I_4 extends unknown>(object: I_4): _12.MsgRevoke;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.authz.v1beta1.MsgGrant": {
                     aminoType: string;
@@ -863,6 +864,7 @@ export declare namespace cosmos {
                     fromPartial<I_2 extends unknown>(object: I_2): _25.MsgMultiSend;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.bank.v1beta1.MsgSend": {
                     aminoType: string;
@@ -1807,6 +1809,7 @@ export declare namespace cosmos {
                     fromPartial<I extends unknown>(object: I): _47.MsgVerifyInvariant;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.crisis.v1beta1.MsgVerifyInvariant": {
                     aminoType: string;
@@ -2058,6 +2061,7 @@ export declare namespace cosmos {
                     fromPartial<I_6 extends unknown>(object: I_6): _65.MsgFundCommunityPool;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress": {
                     aminoType: string;
@@ -2491,6 +2495,7 @@ export declare namespace cosmos {
                     fromPartial<I extends unknown>(object: I): _77.MsgSubmitEvidence;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.evidence.v1beta1.MsgSubmitEvidence": {
                     aminoType: string;
@@ -2630,6 +2635,7 @@ export declare namespace cosmos {
                     fromPartial<I_2 extends unknown>(object: I_2): _89.MsgRevokeAllowance;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
                     aminoType: string;
@@ -2911,6 +2917,7 @@ export declare namespace cosmos {
                     fromPartial<I_8 extends unknown>(object: I_8): _102.MsgDeposit;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.gov.v1.MsgSubmitProposal": {
                     aminoType: string;
@@ -3391,6 +3398,7 @@ export declare namespace cosmos {
                     fromPartial<I_6 extends unknown>(object: I_6): _114.MsgDeposit;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.gov.v1beta1.MsgSubmitProposal": {
                     aminoType: string;
@@ -4139,6 +4147,7 @@ export declare namespace cosmos {
                     fromPartial<I_37 extends unknown>(object: I_37): _126.MsgLeaveGroup;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.group.v1.MsgCreateGroup": {
                     aminoType: string;
@@ -5026,6 +5035,7 @@ export declare namespace cosmos {
                     fromPartial<I extends unknown>(object: I): _144.MsgSend;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.nft.v1beta1.MsgSend": {
                     aminoType: string;
@@ -5351,6 +5361,7 @@ export declare namespace cosmos {
                     fromPartial<I extends unknown>(object: I): _160.MsgUnjail;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.slashing.v1beta1.MsgUnjail": {
                     aminoType: string;
@@ -5587,6 +5598,7 @@ export declare namespace cosmos {
                     fromPartial<I_8 extends unknown>(object: I_8): _173.MsgUndelegate;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.staking.v1beta1.MsgCreateValidator": {
                     aminoType: string;
@@ -6498,6 +6510,7 @@ export declare namespace cosmos {
                     fromPartial<I_6 extends unknown>(object: I_6): _186.MsgCancelUpgrade;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": {
                     aminoType: string;
@@ -6769,6 +6782,7 @@ export declare namespace cosmos {
                     fromPartial<I_10 extends unknown>(object: I_10): _196.MsgCreatePeriodicVestingAccount;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.vesting.v1beta1.MsgCreateVestingAccount": {
                     aminoType: string;
@@ -7106,6 +7120,7 @@ export declare namespace cosmwasm {
                     fromPartial<I_18 extends unknown>(object: I_18): _210.MsgClearAdmin;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmwasm.wasm.v1.MsgStoreCode": {
                     aminoType: string;
@@ -9211,6 +9226,7 @@ export declare namespace ibc {
                         fromPartial<I extends unknown>(object: I): _276.MsgTransfer;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.applications.transfer.v1.MsgTransfer": {
                         aminoType: string;
@@ -9560,6 +9576,7 @@ export declare namespace ibc {
                         fromPartial<I_18 extends unknown>(object: I_18): _289.MsgAcknowledgement;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.channel.v1.MsgChannelOpenInit": {
                         aminoType: string;
@@ -10384,6 +10401,7 @@ export declare namespace ibc {
                         fromPartial<I_6 extends unknown>(object: I_6): _301.MsgSubmitMisbehaviour;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.client.v1.MsgCreateClient": {
                         aminoType: string;
@@ -10874,6 +10892,7 @@ export declare namespace ibc {
                         fromPartial<I_6 extends unknown>(object: I_6): _314.MsgConnectionOpenConfirm;
                     };
                 };
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.connection.v1.MsgConnectionOpenInit": {
                         aminoType: string;
@@ -11879,6 +11898,7 @@ export declare namespace osmosis {
                     fromPartial<I_14 extends unknown>(object: I_14): _339.MsgExitSwapShareAmountIn;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/osmosis.gamm.v1beta1.MsgJoinPool": {
                     aminoType: string;
@@ -12467,6 +12487,7 @@ export declare namespace osmosis {
                 fromPartial<I_2 extends unknown>(object: I_2): _352.MsgAddToGauge;
             };
         };
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.incentives.MsgCreateGauge": {
                 aminoType: string;
@@ -12800,6 +12821,7 @@ export declare namespace osmosis {
                 fromPartial<I_4 extends unknown>(object: I_4): _364.MsgBeginUnlocking;
             };
         };
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.lockup.MsgLockTokens": {
                 aminoType: string;
@@ -13497,6 +13519,7 @@ export declare namespace osmosis {
                 fromPartial<I_6 extends unknown>(object: I_6): _385.MsgLockAndSuperfluidDelegate;
             };
         };
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.superfluid.MsgSuperfluidDelegate": {
                 aminoType: string;

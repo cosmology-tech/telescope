@@ -1,5 +1,6 @@
 import { MsgCreateGroup, MsgUpdateGroupMembers, MsgUpdateGroupAdmin, MsgUpdateGroupMetadata, MsgCreateGroupPolicy, MsgUpdateGroupPolicyAdmin, MsgCreateGroupWithPolicy, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyMetadata, MsgSubmitProposal, MsgWithdrawProposal, MsgVote, MsgExec, MsgLeaveGroup } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/cosmos.group.v1.MsgCreateGroup": {
         encode(message: MsgCreateGroup, writer?: _m0.Writer): _m0.Writer;
@@ -100,3 +101,4 @@ export declare const registry: {
         fromPartial<I_13 extends unknown>(object: I_13): MsgLeaveGroup;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

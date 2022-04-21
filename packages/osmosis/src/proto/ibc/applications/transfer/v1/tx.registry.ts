@@ -7,6 +7,12 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../../ibc/core/client/v1/client";
+import { Registry } from "@cosmjs/proto-signing";
 export const registry = {
   "/ibc.applications.transfer.v1.MsgTransfer": MsgTransfer
+};
+export const load = (protoRegistry: Registry) => {
+  Object.keys(registry).forEach(typeUrl => {
+    protoRegistry.register(typeUrl, registry[typeUrl]);
+  });
 };

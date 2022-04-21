@@ -1,5 +1,6 @@
 import { MsgCreateValidator, MsgEditValidator, MsgDelegate, MsgBeginRedelegate, MsgUndelegate } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/cosmos.staking.v1beta1.MsgCreateValidator": {
         encode(message: MsgCreateValidator, writer?: _m0.Writer): _m0.Writer;
@@ -37,3 +38,4 @@ export declare const registry: {
         fromPartial<I_4 extends unknown>(object: I_4): MsgUndelegate;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

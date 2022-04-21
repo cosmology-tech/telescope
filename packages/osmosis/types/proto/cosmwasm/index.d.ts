@@ -197,6 +197,7 @@ export declare namespace cosmwasm {
                     fromPartial<I_18 extends unknown>(object: I_18): _628.MsgClearAdmin;
                 };
             };
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmwasm.wasm.v1.MsgStoreCode": {
                     aminoType: string;

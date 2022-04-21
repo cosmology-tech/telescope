@@ -8,9 +8,15 @@ import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "../../../cosmos/gov/v1beta1/gov";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Registry } from "@cosmjs/proto-signing";
 export const registry = {
   "/cosmos.gov.v1beta1.MsgSubmitProposal": MsgSubmitProposal,
   "/cosmos.gov.v1beta1.MsgVote": MsgVote,
   "/cosmos.gov.v1beta1.MsgVoteWeighted": MsgVoteWeighted,
   "/cosmos.gov.v1beta1.MsgDeposit": MsgDeposit
+};
+export const load = (protoRegistry: Registry) => {
+  Object.keys(registry).forEach(typeUrl => {
+    protoRegistry.register(typeUrl, registry[typeUrl]);
+  });
 };

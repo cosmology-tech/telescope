@@ -1,5 +1,6 @@
 import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract, MsgMigrateContract, MsgUpdateAdmin, MsgClearAdmin } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/cosmwasm.wasm.v1.MsgStoreCode": {
         encode(message: MsgStoreCode, writer?: _m0.Writer): _m0.Writer;
@@ -44,3 +45,4 @@ export declare const registry: {
         fromPartial<I_5 extends unknown>(object: I_5): MsgClearAdmin;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

@@ -1,5 +1,6 @@
 import { MsgJoinPool, MsgExitPool, MsgSwapExactAmountIn, MsgSwapExactAmountOut, MsgJoinSwapExternAmountIn, MsgJoinSwapShareAmountOut, MsgExitSwapShareAmountIn, MsgExitSwapExternAmountOut } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/osmosis.gamm.v1beta1.MsgJoinPool": {
         encode(message: MsgJoinPool, writer?: _m0.Writer): _m0.Writer;
@@ -58,3 +59,4 @@ export declare const registry: {
         fromPartial<I_7 extends unknown>(object: I_7): MsgExitSwapShareAmountIn;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

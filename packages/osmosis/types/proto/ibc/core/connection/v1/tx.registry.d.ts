@@ -1,5 +1,6 @@
 import { MsgConnectionOpenInit, MsgConnectionOpenTry, MsgConnectionOpenAck, MsgConnectionOpenConfirm } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/ibc.core.connection.v1.MsgConnectionOpenInit": {
         encode(message: MsgConnectionOpenInit, writer?: _m0.Writer): _m0.Writer;
@@ -30,3 +31,4 @@ export declare const registry: {
         fromPartial<I_3 extends unknown>(object: I_3): MsgConnectionOpenConfirm;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

@@ -1,5 +1,6 @@
 import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/osmosis.superfluid.MsgSuperfluidDelegate": {
         encode(message: MsgSuperfluidDelegate, writer?: _m0.Writer): _m0.Writer;
@@ -30,3 +31,4 @@ export declare const registry: {
         fromPartial<I_3 extends unknown>(object: I_3): MsgLockAndSuperfluidDelegate;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;

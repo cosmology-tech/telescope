@@ -1,5 +1,6 @@
 import { MsgSoftwareUpgrade, MsgCancelUpgrade } from "./tx";
 import * as _m0 from "protobufjs/minimal";
+import { Registry } from "@cosmjs/proto-signing";
 export declare const registry: {
     "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": {
         encode(message: MsgSoftwareUpgrade, writer?: _m0.Writer): _m0.Writer;
@@ -16,3 +17,4 @@ export declare const registry: {
         fromPartial<I_1 extends unknown>(object: I_1): MsgCancelUpgrade;
     };
 };
+export declare const load: (protoRegistry: Registry) => void;
