@@ -437,7 +437,6 @@ export class TSFileStore implements FileStore {
       , t.stringLiteral(`./${basename(this.filename).replace(extname(this.filename), '')}`));
 
 
-    this.outFiles = [];
 
     if (this.mutations.length) {
       const aminoCasingFn = this.program.plugins.find(p => p.name === 'aminoCasing').plugin({ protoPackage: this.protoPackage });
@@ -489,6 +488,8 @@ export class TSFileStore implements FileStore {
       toJSON = c.toObjectWithToJSONMethods(this.mutations);
       fromJSON = c.toObjectWithFromJSONMethods(this.mutations);
       encoded = c.toObjectWithEncodedMethods(this.mutations);
+
+      this.outFiles = [];
 
       const makeFile = (ast: any[]) => {
         return t.file(t.program([
@@ -545,7 +546,7 @@ export class TSFileStore implements FileStore {
       if (registry) {
         this.outFiles.push({
           filename: this.getSiblingFileName('registry'),
-          ast: makeFile(registry)
+          ast: makeFile([registry])
         });
       }
 
@@ -555,7 +556,6 @@ export class TSFileStore implements FileStore {
       });
 
     }
-
 
   }
 
