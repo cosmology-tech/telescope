@@ -10,7 +10,7 @@ import { registerDeps } from './plugin';
 import mutator from './mutate';
 import { snake } from 'case';
 import { makeAutoObservable } from 'mobx';
-import * as c from '@cosmonauts/ast-gen';
+import * as c from '@osmonauts/ast-gen';
 import * as t from '@babel/types';
 import * as dotty from 'dotty';
 import {
@@ -21,7 +21,7 @@ import {
   Interface,
   Field,
   AminoExceptions
-} from '@cosmonauts/ast-gen';
+} from '@osmonauts/ast-gen';
 import { aminoHelperCode } from './helpers';
 import { parsePackage, recursiveModuleBundle } from './utils';
 

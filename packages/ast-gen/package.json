@@ -1,5 +1,5 @@
 {
-  "name": "@cosmonauts/ast-gen",
+  "name": "@osmonauts/ast-gen",
   "version": "0.1.1",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",

@@ -1,4 +1,4 @@
-# @cosmonauts/ast-gen
+# @osmonauts/ast-gen
 
 Cosmos Typescript ASTs
 
@@ -6,7 +6,7 @@ Cosmos Typescript ASTs
 
 ```js
 import generate from '@babel/generator';
-import { messages } from '@cosmonauts/ast-gen';
+import { messages } from '@osmonauts/ast-gen';
 
 export const mutations: Mutation[] = [
     { methodName: 'joinPool', typeUrl: '/cosmos.pools.transfer.v1.MsgJoinPool', TypeName: 'MsgJoinPool' },
@@ -41,7 +41,7 @@ export const messages = {
 
 ```js
 import generate from '@babel/generator';
-import { encoded } from '@cosmonauts/ast-gen';
+import { encoded } from '@osmonauts/ast-gen';
 
 export const mutations: Mutation[] = [
     { methodName: 'joinPool', typeUrl: '/cosmos.pools.transfer.v1.MsgJoinPool', TypeName: 'MsgJoinPool' },
@@ -76,7 +76,7 @@ export const encoded = {
 ```js
 import generate from '@babel/generator';
 import * as t from '@babel/types';
-import { recursiveNamespace } from '@cosmonauts/ast-gen';
+import { recursiveNamespace } from '@osmonauts/ast-gen';
 
 const myModule = recursiveNamespace(
     [

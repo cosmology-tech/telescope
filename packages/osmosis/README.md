@@ -5,14 +5,14 @@ Typescript Protobuf Messages for Osmosis
 # usage
 
 ```sh
-npm install @cosmonauts/osmosis
+npm install @osmonauts/osmosis
 ```
 
 ## Example
 
 ```js
 import { coin } from '@cosmjs/amino';
-import { MsgJoinPool } from '@cosmonauts/osmosis/main/proto/osmosis/gamm/v1beta1/tx';
+import { MsgJoinPool } from '@osmonauts/osmosis/main/proto/osmosis/gamm/v1beta1/tx';
 const msg = MsgJoinPool.fromPartial({
   poolId: '606',
   sender: 'osmo1f4vxvvvvvvvvvv3luuddddddddddcccccccccc',

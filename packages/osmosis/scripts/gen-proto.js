@@ -1,5 +1,5 @@
 import { join, resolve } from 'path';
-import telescope from '@cosmonauts/telescope';
+import telescope from '@osmonauts/telescope';
 import { camel, snake } from 'case';
 
 const protoPath = resolve(join(__dirname, '..', 'out', 'proto'));

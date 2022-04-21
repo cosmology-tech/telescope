@@ -1,5 +1,5 @@
 import generate from '@babel/generator';
-import * as c from '@cosmonauts/ast-gen';
+import * as c from '@osmonauts/ast-gen';
 import * as t from '@babel/types';
 import { tmpdir } from 'os';
 import { join, relative, dirname, extname, basename } from 'path';
