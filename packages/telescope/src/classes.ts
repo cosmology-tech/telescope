@@ -403,6 +403,7 @@ export class TSFileStore implements FileStore {
 
   generateFiles() {
     const aminos = [];
+    let registry = null;
     let messages = null;
     let toJSON = null;
     let fromJSON = null;
@@ -416,8 +417,6 @@ export class TSFileStore implements FileStore {
     const rel = relative(dirname(this.filename), a.loc);
     const importStmt2 = c.importStmt(['AminoHeight', 'omitDefault'], rel.replace(extname(rel), ''));
     // END AMINOS
-
-
 
     // THIS SIMPLY W/O CHECKING IMPORTS ALL MESSAGES FROM THIS FILE...
     const portedImports = {};
@@ -437,6 +436,8 @@ export class TSFileStore implements FileStore {
       theImportSpecifiers
       , t.stringLiteral(`./${basename(this.filename).replace(extname(this.filename), '')}`));
 
+
+    this.outFiles = [];
 
     if (this.mutations.length) {
       const aminoCasingFn = this.program.plugins.find(p => p.name === 'aminoCasing').plugin({ protoPackage: this.protoPackage });
@@ -460,7 +461,6 @@ export class TSFileStore implements FileStore {
           typeUrl: mutation.typeUrl
         };
 
-
         aminos.push(
           c.makeAminoTypeInterface({
             schema,
@@ -483,92 +483,79 @@ export class TSFileStore implements FileStore {
         })
       );
 
-      messages = t.exportNamedDeclaration(t.variableDeclaration('const', [
-        t.variableDeclarator(t.identifier('messages'), t.objectExpression(
-          this.mutations.map(mutationInfo => c.addFromPartialMethod(mutationInfo))
-        ))]));
+      messages = c.toObjectWithPartialMethods(this.mutations);
+      registry = c.createTypeRegistry(this.mutations);
+      json = c.toObjectWithJsonMethods(this.mutations);
+      toJSON = c.toObjectWithToJSONMethods(this.mutations);
+      fromJSON = c.toObjectWithFromJSONMethods(this.mutations);
+      encoded = c.toObjectWithEncodedMethods(this.mutations);
 
-      json = t.exportNamedDeclaration(t.variableDeclaration('const', [
-        t.variableDeclarator(t.identifier('json'), t.objectExpression(
-          this.mutations.map(mutationInfo => c.addJsonMethod(mutationInfo))
-        ))]));
+      const makeFile = (ast: any[]) => {
+        return t.file(t.program([
+          importStmt,
+          importStmt2,
+          interfaceImport,
+          ...this.importStmts,
+          ...ast
+        ]))
+      }
 
-      toJSON = t.exportNamedDeclaration(t.variableDeclaration('const', [
-        t.variableDeclarator(t.identifier('toJSON'), t.objectExpression(
-          this.mutations.map(mutationInfo => c.addToJSONMethod(mutationInfo))
-        ))]));
+      if (messages) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('messages'),
+          ast: makeFile([messages])
+        });
+      }
 
-      fromJSON = t.exportNamedDeclaration(t.variableDeclaration('const', [
-        t.variableDeclarator(t.identifier('fromJSON'), t.objectExpression(
-          this.mutations.map(mutationInfo => c.addFromJSONMethod(mutationInfo))
-        ))]));
+      if (json) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('json'),
+          ast: makeFile([json])
+        });
+      }
 
-      encoded = t.exportNamedDeclaration(t.variableDeclaration('const', [
-        t.variableDeclarator(t.identifier('encoded'), t.objectExpression(
-          this.mutations.map(mutationInfo => c.addEncodedMethod(mutationInfo))
-        ))]));
+      if (toJSON) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('toJSON'),
+          ast: makeFile([toJSON])
+        });
+      }
 
+      if (fromJSON) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('fromJSON'),
+          ast: makeFile([fromJSON])
+        });
+      }
 
-    }
+      if (encoded) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('encoded'),
+          ast: makeFile([encoded])
+        });
+      }
 
-    this.outFiles = [];
+      if (aminos.length) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('aminos'),
+          ast: makeFile(aminos)
+        });
+      }
 
-    const makeFile = (ast: any[]) => {
-      return t.file(t.program([
-        importStmt,
-        importStmt2,
-        interfaceImport,
-        ...this.importStmts,
-        ...ast
-      ]))
-    }
+      if (registry) {
+        this.outFiles.push({
+          filename: this.getSiblingFileName('registry'),
+          ast: makeFile(registry)
+        });
+      }
 
-    if (messages) {
       this.outFiles.push({
-        filename: this.getSiblingFileName('messages'),
-        ast: makeFile([messages])
+        filename: this.filename,
+        ast: this.ast
       });
+
     }
 
-    if (json) {
-      this.outFiles.push({
-        filename: this.getSiblingFileName('json'),
-        ast: makeFile([json])
-      });
-    }
-
-    if (toJSON) {
-      this.outFiles.push({
-        filename: this.getSiblingFileName('toJSON'),
-        ast: makeFile([toJSON])
-      });
-    }
-
-    if (fromJSON) {
-      this.outFiles.push({
-        filename: this.getSiblingFileName('fromJSON'),
-        ast: makeFile([fromJSON])
-      });
-    }
-
-    if (encoded) {
-      this.outFiles.push({
-        filename: this.getSiblingFileName('encoded'),
-        ast: makeFile([encoded])
-      });
-    }
-
-    if (aminos.length) {
-      this.outFiles.push({
-        filename: this.getSiblingFileName('aminos'),
-        ast: makeFile(aminos)
-      });
-    }
-
-    this.outFiles.push({
-      filename: this.filename,
-      ast: this.ast
-    });
 
   }
 

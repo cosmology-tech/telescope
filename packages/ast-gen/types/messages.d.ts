@@ -31,5 +31,10 @@ export declare const addEncodedMethod: ({ methodName, typeUrl, TypeName }: {
     typeUrl: any;
     TypeName: any;
 }) => t.ObjectMethod;
-export declare const messages: (mutations: Mutation[]) => t.ExportNamedDeclaration;
-export declare const encoded: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const createTypeRegistryObject: (mutation: Mutation) => t.ObjectProperty;
+export declare const toObjectWithPartialMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const toObjectWithEncodedMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const toObjectWithJsonMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const toObjectWithToJSONMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const toObjectWithFromJSONMethods: (mutations: Mutation[]) => t.ExportNamedDeclaration;
+export declare const createTypeRegistry: (mutations: Mutation[]) => t.ExportNamedDeclaration;

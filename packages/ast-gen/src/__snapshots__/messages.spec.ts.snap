@@ -45,7 +45,26 @@ exports[`addToJSONMethod 1`] = `
 }"
 `;
 
-exports[`encoded 1`] = `
+exports[`createTypeRegistry 1`] = `
+"export const register = {
+  joinPool(value: MsgJoinPool) {
+    return {
+      type_url: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+      value: MsgJoinPool.encode(value).finish()
+    };
+  },
+
+  exitPool(value: MsgExitPool) {
+    return {
+      type_url: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+      value: MsgExitPool.encode(value).finish()
+    };
+  }
+
+};"
+`;
+
+exports[`toObjectWithEncodedMethods 1`] = `
 "export const encoded = {
   joinPool(value: MsgJoinPool) {
     return {
@@ -64,7 +83,7 @@ exports[`encoded 1`] = `
 };"
 `;
 
-exports[`messages 1`] = `
+exports[`toObjectWithPartialMethods 1`] = `
 "export const messages = {
   joinPool(value: MsgJoinPool) {
     return {

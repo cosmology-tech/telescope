@@ -168,13 +168,40 @@ export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
     )]));
 };
 
+export const createTypeRegistryObject = (mutation: Mutation) => {
+  return t.objectProperty(
+    t.stringLiteral(mutation.typeUrl),
+    t.identifier(mutation.TypeName)
+  );
+};
 
-export const messages = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+
+export const toObjectWithPartialMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
   t.variableDeclarator(t.identifier('messages'), t.objectExpression(
     mutations.map(mutation => addFromPartialMethod(mutation))
   ))]));
 
-export const encoded = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+export const toObjectWithEncodedMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
   t.variableDeclarator(t.identifier('encoded'), t.objectExpression(
     mutations.map(mutation => addEncodedMethod(mutation))
+  ))]));
+
+export const toObjectWithJsonMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('json'), t.objectExpression(
+    mutations.map(mutation => addJsonMethod(mutation))
+  ))]));
+
+export const toObjectWithToJSONMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('toJSON'), t.objectExpression(
+    mutations.map(mutation => addToJSONMethod(mutation))
+  ))]));
+
+export const toObjectWithFromJSONMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('fromJSON'), t.objectExpression(
+    mutations.map(mutation => addFromJSONMethod(mutation))
+  ))]));
+
+export const createTypeRegistry = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('registry'), t.objectExpression(
+    mutations.map(mutation => createTypeRegistryObject(mutation))
   ))]));

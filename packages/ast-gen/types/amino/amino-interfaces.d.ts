@@ -7,16 +7,17 @@ export declare const makeAminoConverterItem: ({ schema, enums, interfaces, amino
     aminoCasingFn: Function;
     exceptions?: AminoExceptions;
 }) => t.ObjectProperty;
-export declare const aminoConverter: ({ schemata, enums, interfaces, aminoCasingFn }: {
+export declare const aminoConverter: ({ schemata, enums, interfaces, aminoCasingFn, exceptions }: {
     schemata: MessageSchema[];
     enums: Enum[];
     interfaces: Interface[];
     aminoCasingFn: Function;
+    exceptions?: AminoExceptions;
 }) => t.ExportNamedDeclaration;
 export declare const renderAminoField: ({ field, enums, interfaces, imports, aminoCasingFn }: {
     field: Field;
     enums: Enum[];
-    interfaces?: any[];
+    interfaces?: Interface[];
     imports?: any[];
     aminoCasingFn: Function;
 }) => any;

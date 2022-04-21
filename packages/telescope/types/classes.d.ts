@@ -1,5 +1,5 @@
-import * as c from '@cosmonauts/ast-gen';
-import { Enum, Mutation, EnumConverter, Interface, Field } from '@cosmonauts/ast-gen';
+import * as c from '@osmonauts/ast-gen';
+import { Enum, Mutation, EnumConverter, Interface, Field, AminoExceptions } from '@osmonauts/ast-gen';
 export interface FileStore {
     filename: string;
     code: string;
@@ -31,7 +31,13 @@ export declare class TSProtoStore {
     files: TSFileStore[];
     enums: Enum[];
     plugins: TelescopePlugin[];
-    constructor(protoPath: string, outPath: string, plugins?: TelescopePlugin[]);
+    exceptions: AminoExceptions;
+    constructor({ protoPath, outPath, exceptions, plugins }: {
+        protoPath: string;
+        outPath: string;
+        exceptions?: AminoExceptions;
+        plugins?: TelescopePlugin[];
+    });
     load(): void;
     write(): void;
     traverse(): void;

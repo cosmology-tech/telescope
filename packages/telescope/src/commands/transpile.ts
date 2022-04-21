@@ -21,5 +21,5 @@ export default async (argv) => {
   ];
 
   const { tsProtoPath, outPath } = await prompt(questions, argv);
-  telescope(tsProtoPath, outPath);
+  telescope({ protoPath: tsProtoPath, outPath })
 };

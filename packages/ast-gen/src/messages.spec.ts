@@ -1,10 +1,24 @@
-import { addEncodedMethod, addFromPartialMethod, addJsonMethod, addFromJSONMethod, addToJSONMethod, encoded, messages } from './messages';
+import {
+    addEncodedMethod,
+    addFromPartialMethod,
+    addJsonMethod,
+    addFromJSONMethod,
+    addToJSONMethod,
+    toObjectWithEncodedMethods,
+    toObjectWithPartialMethods,
+    createTypeRegistry
+} from './messages';
 import generate from '@babel/generator';
 import { mutations } from './__fixtures__';
 const expectCode = (ast) => {
     expect(
         generate(ast).code
     ).toMatchSnapshot();
+}
+const printCode = (ast) => {
+    console.log(
+        generate(ast).code
+    );
 }
 
 it('addEncodedMethod', async () => {
@@ -27,10 +41,14 @@ it('addJsonMethod', async () => {
     expectCode(addJsonMethod(mutations[0]));
 });
 
-it('encoded', async () => {
-    expectCode(encoded(mutations));
+it('toObjectWithEncodedMethods', async () => {
+    expectCode(toObjectWithEncodedMethods(mutations));
 });
 
-it('messages', async () => {
-    expectCode(messages(mutations));
+it('toObjectWithPartialMethods', async () => {
+    expectCode(toObjectWithPartialMethods(mutations));
+});
+
+it('createTypeRegistry', async () => {
+    printCode(createTypeRegistry(mutations));
 });

@@ -1,5 +1,12 @@
 export * from './classes';
 export * from './plugin';
+import { AminoExceptions } from '@osmonauts/ast-gen';
 import { TelescopePlugin } from './classes';
-declare const _default: (protoPath: string, outPath: string, plugins: TelescopePlugin[]) => void;
+interface TelescopeInput {
+    protoPath: string;
+    outPath: string;
+    exceptions?: AminoExceptions;
+    plugins?: TelescopePlugin[];
+}
+declare const _default: (input: TelescopeInput) => void;
 export default _default;

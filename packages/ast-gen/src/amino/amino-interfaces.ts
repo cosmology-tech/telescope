@@ -38,19 +38,21 @@ export const aminoConverter = (
     schemata,
     enums,
     interfaces,
-    aminoCasingFn
+    aminoCasingFn,
+    exceptions
   }
     :
     {
       schemata: MessageSchema[],
       enums: Enum[],
       interfaces: Interface[],
-      aminoCasingFn: Function
+      aminoCasingFn: Function,
+      exceptions?: AminoExceptions
     }) => {
   return t.exportNamedDeclaration(t.variableDeclaration('const', [
     t.variableDeclarator(t.identifier('AminoConverter'),
       t.objectExpression(
-        schemata.map(schema => makeAminoConverterItem({ schema, enums, interfaces, aminoCasingFn }))
+        schemata.map(schema => makeAminoConverterItem({ schema, enums, interfaces, aminoCasingFn, exceptions }))
       ))
   ]));
 };
