@@ -1,23 +1,19 @@
 import * as t from '@babel/types';
 import { Mutation } from './types';
 
+const tsIdentifier = (name: string, typeAnnotation: t.TSTypeAnnotation) => {
+  const el = t.identifier(name);
+  el.typeAnnotation = typeAnnotation;
+  return el;
+}
+
 export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    {
-      type: 'Identifier',
-      name: 'value',
-      typeAnnotation: {
-        type: 'TSTypeAnnotation',
-        typeAnnotation: {
-          type: 'TSTypeReference',
-          // @ts-ignore
-          typeName: {
-            type: 'Identifier',
-            name: TypeName
-          }
-        }
-      }
-    }
+    tsIdentifier('value', t.tsTypeAnnotation(
+      t.tsTypeReference(
+        t.identifier(TypeName)
+      )
+    ))
   ], t.blockStatement([
     t.returnStatement(
       t.objectExpression([
@@ -41,21 +37,11 @@ export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) =>
 
 export const addFromJSONMethod = ({ methodName, typeUrl, TypeName }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    {
-      type: 'Identifier',
-      name: 'value',
-      typeAnnotation: {
-        type: 'TSTypeAnnotation',
-        typeAnnotation: {
-          type: 'TSTypeReference',
-          // @ts-ignore
-          typeName: {
-            type: 'Identifier',
-            name: 'any'
-          }
-        }
-      }
-    }
+    tsIdentifier('value', t.tsTypeAnnotation(
+      t.tsTypeReference(
+        t.identifier('any')
+      )
+    ))
   ], t.blockStatement([
     t.returnStatement(
       t.objectExpression([
@@ -88,21 +74,11 @@ export const addToJSONMethod = ({ methodName, typeUrl, TypeName }) => {
 
 export const addJsonMethod = ({ methodName, typeUrl, TypeName }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    {
-      type: 'Identifier',
-      name: 'value',
-      typeAnnotation: {
-        type: 'TSTypeAnnotation',
-        typeAnnotation: {
-          type: 'TSTypeReference',
-          // @ts-ignore
-          typeName: {
-            type: 'Identifier',
-            name: TypeName
-          }
-        }
-      }
-    }
+    tsIdentifier('value', t.tsTypeAnnotation(
+      t.tsTypeReference(
+        t.identifier(TypeName)
+      )
+    ))
   ], t.blockStatement([
     t.returnStatement(
       t.objectExpression([
@@ -122,21 +98,11 @@ export const addJsonMethod = ({ methodName, typeUrl, TypeName }) => {
 
 export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    {
-      type: 'Identifier',
-      name: 'value',
-      typeAnnotation: {
-        type: 'TSTypeAnnotation',
-        typeAnnotation: {
-          type: 'TSTypeReference',
-          // @ts-ignore
-          typeName: {
-            type: 'Identifier',
-            name: TypeName
-          }
-        }
-      }
-    }
+    tsIdentifier('value', t.tsTypeAnnotation(
+      t.tsTypeReference(
+        t.identifier(TypeName)
+      )
+    ))
   ], t.blockStatement([
     t.returnStatement(
       t.objectExpression([
@@ -204,23 +170,6 @@ export const createTypeRegistry = (mutations: Mutation[]) => t.exportNamedDeclar
   t.variableDeclarator(t.identifier('registry'), t.objectExpression(
     mutations.map(mutation => createTypeRegistryObject(mutation))
   ))]));
-
-const tsArrowFunctionExpression = (
-  params: (t.Identifier | t.Pattern | t.RestElement)[],
-  body: t.BlockStatement | t.Expression,
-  // typeAnnotation: t.TSTypeAnnotation,
-  isAsync: boolean = false
-) => {
-  const el = t.arrowFunctionExpression(params, body, isAsync);
-  // el.type
-  return el;
-};
-
-const tsIdentifier = (name: string, typeAnnotation: t.TSTypeAnnotation) => {
-  const el = t.identifier(name);
-  el.typeAnnotation = typeAnnotation;
-  return el;
-}
 
 export const createRegistryLoader = () => {
   return t.exportNamedDeclaration(t.variableDeclaration(

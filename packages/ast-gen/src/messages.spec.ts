@@ -55,5 +55,5 @@ it('createTypeRegistry', async () => {
 });
 
 it('createRegistryLoader', async () => {
-    printCode(createRegistryLoader());
+    expectCode(createRegistryLoader());
 });
