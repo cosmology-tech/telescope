@@ -8,7 +8,7 @@ import * as _m0 from "protobufjs/minimal";
  * updated in ResponseEndBlock.
  */
 export interface App {
-  protocol: string;
+  protocol: Long;
   software: string;
 }
 /**
@@ -18,20 +18,20 @@ export interface App {
  */
 
 export interface Consensus {
-  block: string;
-  app: string;
+  block: Long;
+  app: Long;
 }
 
 function createBaseApp(): App {
   return {
-    protocol: "0",
+    protocol: Long.UZERO,
     software: ""
   };
 }
 
 export const App = {
   encode(message: App, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.protocol !== "0") {
+    if (!message.protocol.isZero()) {
       writer.uint32(8).uint64(message.protocol);
     }
 
@@ -52,7 +52,7 @@ export const App = {
 
       switch (tag >>> 3) {
         case 1:
-          message.protocol = longToString((reader.uint64() as Long));
+          message.protocol = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -70,21 +70,21 @@ export const App = {
 
   fromJSON(object: any): App {
     return {
-      protocol: isSet(object.protocol) ? String(object.protocol) : "0",
+      protocol: isSet(object.protocol) ? Long.fromString(object.protocol) : Long.UZERO,
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
 
   toJSON(message: App): unknown {
     const obj: any = {};
-    message.protocol !== undefined && (obj.protocol = message.protocol);
+    message.protocol !== undefined && (obj.protocol = (message.protocol || Long.UZERO).toString());
     message.software !== undefined && (obj.software = message.software);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<App>, I>>(object: I): App {
     const message = createBaseApp();
-    message.protocol = object.protocol ?? "0";
+    message.protocol = object.protocol !== undefined && object.protocol !== null ? Long.fromValue(object.protocol) : Long.UZERO;
     message.software = object.software ?? "";
     return message;
   }
@@ -93,18 +93,18 @@ export const App = {
 
 function createBaseConsensus(): Consensus {
   return {
-    block: "0",
-    app: "0"
+    block: Long.UZERO,
+    app: Long.UZERO
   };
 }
 
 export const Consensus = {
   encode(message: Consensus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.block !== "0") {
+    if (!message.block.isZero()) {
       writer.uint32(8).uint64(message.block);
     }
 
-    if (message.app !== "0") {
+    if (!message.app.isZero()) {
       writer.uint32(16).uint64(message.app);
     }
 
@@ -121,11 +121,11 @@ export const Consensus = {
 
       switch (tag >>> 3) {
         case 1:
-          message.block = longToString((reader.uint64() as Long));
+          message.block = (reader.uint64() as Long);
           break;
 
         case 2:
-          message.app = longToString((reader.uint64() as Long));
+          message.app = (reader.uint64() as Long);
           break;
 
         default:
@@ -139,34 +139,30 @@ export const Consensus = {
 
   fromJSON(object: any): Consensus {
     return {
-      block: isSet(object.block) ? String(object.block) : "0",
-      app: isSet(object.app) ? String(object.app) : "0"
+      block: isSet(object.block) ? Long.fromString(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromString(object.app) : Long.UZERO
     };
   },
 
   toJSON(message: Consensus): unknown {
     const obj: any = {};
-    message.block !== undefined && (obj.block = message.block);
-    message.app !== undefined && (obj.app = message.app);
+    message.block !== undefined && (obj.block = (message.block || Long.UZERO).toString());
+    message.app !== undefined && (obj.app = (message.app || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Consensus>, I>>(object: I): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block ?? "0";
-    message.app = object.app ?? "0";
+    message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
+    message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

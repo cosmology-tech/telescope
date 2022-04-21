@@ -30,7 +30,7 @@ export interface AssetMultiplierResponse {
 export interface SuperfluidIntermediaryAccountInfo {
   denom: string;
   valAddr: string;
-  gaugeId: string;
+  gaugeId: Long;
   address: string;
 }
 export interface AllIntermediaryAccountsRequest {
@@ -41,7 +41,7 @@ export interface AllIntermediaryAccountsResponse {
   pagination: PageResponse;
 }
 export interface ConnectedIntermediaryAccountRequest {
-  lockId: string;
+  lockId: Long;
 }
 export interface ConnectedIntermediaryAccountResponse {
   account: SuperfluidIntermediaryAccountInfo;
@@ -527,7 +527,7 @@ function createBaseSuperfluidIntermediaryAccountInfo(): SuperfluidIntermediaryAc
   return {
     denom: "",
     valAddr: "",
-    gaugeId: "0",
+    gaugeId: Long.UZERO,
     address: ""
   };
 }
@@ -542,7 +542,7 @@ export const SuperfluidIntermediaryAccountInfo = {
       writer.uint32(18).string(message.valAddr);
     }
 
-    if (message.gaugeId !== "0") {
+    if (!message.gaugeId.isZero()) {
       writer.uint32(24).uint64(message.gaugeId);
     }
 
@@ -571,7 +571,7 @@ export const SuperfluidIntermediaryAccountInfo = {
           break;
 
         case 3:
-          message.gaugeId = longToString((reader.uint64() as Long));
+          message.gaugeId = (reader.uint64() as Long);
           break;
 
         case 4:
@@ -591,7 +591,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? String(object.gaugeId) : "0",
+      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -600,7 +600,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gaugeId = message.gaugeId);
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
@@ -609,7 +609,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     const message = createBaseSuperfluidIntermediaryAccountInfo();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId ?? "0";
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.address = object.address ?? "";
     return message;
   }
@@ -750,13 +750,13 @@ export const AllIntermediaryAccountsResponse = {
 
 function createBaseConnectedIntermediaryAccountRequest(): ConnectedIntermediaryAccountRequest {
   return {
-    lockId: "0"
+    lockId: Long.UZERO
   };
 }
 
 export const ConnectedIntermediaryAccountRequest = {
   encode(message: ConnectedIntermediaryAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
 
@@ -773,7 +773,7 @@ export const ConnectedIntermediaryAccountRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         default:
@@ -787,19 +787,19 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromJSON(object: any): ConnectedIntermediaryAccountRequest {
     return {
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0"
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
     };
   },
 
   toJSON(message: ConnectedIntermediaryAccountRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<ConnectedIntermediaryAccountRequest>, I>>(object: I): ConnectedIntermediaryAccountRequest {
     const message = createBaseConnectedIntermediaryAccountRequest();
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
 
@@ -1675,13 +1675,9 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
 /** Query defines the gRPC querier service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

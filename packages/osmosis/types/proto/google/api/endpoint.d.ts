@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -55,20 +56,10 @@ export declare const Endpoint: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Endpoint;
     fromJSON(object: any): Endpoint;
     toJSON(message: Endpoint): unknown;
-    fromPartial<I extends {
-        name?: string;
-        aliases?: string[];
-        target?: string;
-        allowCors?: boolean;
-    } & {
-        name?: string;
-        aliases?: string[] & string[] & Record<Exclude<keyof I["aliases"], keyof string[]>, never>;
-        target?: string;
-        allowCors?: boolean;
-    } & Record<Exclude<keyof I, keyof Endpoint>, never>>(object: I): Endpoint;
+    fromPartial<I extends unknown>(object: I): Endpoint;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

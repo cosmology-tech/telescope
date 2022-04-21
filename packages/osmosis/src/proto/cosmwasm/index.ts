@@ -1,41 +1,33 @@
-import * as _878 from "./wasm/v1/genesis";
-import * as _879 from "./wasm/v1/genesis";
-import * as _880 from "./wasm/v1/ibc";
-import * as _881 from "./wasm/v1/ibc";
-import * as _882 from "./wasm/v1/proposal";
-import * as _883 from "./wasm/v1/proposal";
-import * as _884 from "./wasm/v1/query";
-import * as _885 from "./wasm/v1/query";
-import * as _886 from "./wasm/v1/tx";
-import * as _887 from "./wasm/v1/tx.messages";
-import * as _888 from "./wasm/v1/tx.json";
-import * as _889 from "./wasm/v1/tx.toJSON";
-import * as _890 from "./wasm/v1/tx.fromJSON";
-import * as _891 from "./wasm/v1/tx.encoded";
-import * as _892 from "./wasm/v1/tx.aminos";
-import * as _893 from "./wasm/v1/tx";
-import * as _894 from "./wasm/v1/types";
-import * as _895 from "./wasm/v1/types";
+import * as _624 from "./wasm/v1/genesis";
+import * as _625 from "./wasm/v1/ibc";
+import * as _626 from "./wasm/v1/proposal";
+import * as _627 from "./wasm/v1/query";
+import * as _628 from "./wasm/v1/tx";
+import * as _629 from "./wasm/v1/tx.messages";
+import * as _630 from "./wasm/v1/tx.json";
+import * as _631 from "./wasm/v1/tx.toJSON";
+import * as _632 from "./wasm/v1/tx.fromJSON";
+import * as _633 from "./wasm/v1/tx.encoded";
+import * as _634 from "./wasm/v1/tx.aminos";
+import * as _635 from "./wasm/v1/tx.registry";
+import * as _636 from "./wasm/v1/tx";
+import * as _637 from "./wasm/v1/types";
 export namespace cosmwasm {
   export namespace wasm {
-    export const v1 = { ..._878,
-      ..._879,
-      ..._880,
-      ..._881,
-      ..._882,
-      ..._883,
-      ..._884,
-      ..._885,
-      ..._886,
-      ..._887,
-      ..._888,
-      ..._889,
-      ..._890,
-      ..._891,
-      ..._892,
-      ..._893,
-      ..._894,
-      ..._895
+    export const v1 = { ..._624,
+      ..._625,
+      ..._626,
+      ..._627,
+      ..._628,
+      ..._629,
+      ..._630,
+      ..._631,
+      ..._632,
+      ..._633,
+      ..._634,
+      ..._635,
+      ..._636,
+      ..._637
     };
   }
 }

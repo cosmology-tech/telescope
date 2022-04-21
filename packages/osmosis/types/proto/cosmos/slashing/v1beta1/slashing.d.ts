@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -6,13 +7,13 @@ import * as _m0 from "protobufjs/minimal";
 export interface ValidatorSigningInfo {
     address: string;
     /** Height at which validator was first a candidate OR was unjailed */
-    startHeight: string;
+    startHeight: Long;
     /**
      * Index which is incremented each time the validator was a bonded
      * in a block and may have signed a precommit or not. This in conjunction with the
      * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      */
-    indexOffset: string;
+    indexOffset: Long;
     /** Timestamp until which the validator is jailed due to liveness downtime. */
     jailedUntil: Date;
     /**
@@ -24,11 +25,11 @@ export interface ValidatorSigningInfo {
      * A counter kept to avoid unnecessary array reads.
      * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      */
-    missedBlocksCounter: string;
+    missedBlocksCounter: Long;
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface Params {
-    signedBlocksWindow: string;
+    signedBlocksWindow: Long;
     minSignedPerWindow: Uint8Array;
     downtimeJailDuration: string;
     slashFractionDoubleSign: Uint8Array;
@@ -39,43 +40,17 @@ export declare const ValidatorSigningInfo: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSigningInfo;
     fromJSON(object: any): ValidatorSigningInfo;
     toJSON(message: ValidatorSigningInfo): unknown;
-    fromPartial<I extends {
-        address?: string;
-        startHeight?: string;
-        indexOffset?: string;
-        jailedUntil?: Date;
-        tombstoned?: boolean;
-        missedBlocksCounter?: string;
-    } & {
-        address?: string;
-        startHeight?: string;
-        indexOffset?: string;
-        jailedUntil?: Date;
-        tombstoned?: boolean;
-        missedBlocksCounter?: string;
-    } & Record<Exclude<keyof I, keyof ValidatorSigningInfo>, never>>(object: I): ValidatorSigningInfo;
+    fromPartial<I extends unknown>(object: I): ValidatorSigningInfo;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        signedBlocksWindow?: string;
-        minSignedPerWindow?: Uint8Array;
-        downtimeJailDuration?: string;
-        slashFractionDoubleSign?: Uint8Array;
-        slashFractionDowntime?: Uint8Array;
-    } & {
-        signedBlocksWindow?: string;
-        minSignedPerWindow?: Uint8Array;
-        downtimeJailDuration?: string;
-        slashFractionDoubleSign?: Uint8Array;
-        slashFractionDowntime?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
+    fromPartial<I extends unknown>(object: I): Params;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

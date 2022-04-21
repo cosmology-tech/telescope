@@ -12,14 +12,14 @@ export interface GenesisState {
   params: Params;
   /** current halven period start epoch */
 
-  halvenStartedEpoch: string;
+  halvenStartedEpoch: Long;
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
     minter: undefined,
     params: undefined,
-    halvenStartedEpoch: "0"
+    halvenStartedEpoch: Long.ZERO
   };
 }
 
@@ -33,7 +33,7 @@ export const GenesisState = {
       Params.encode(message.params, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.halvenStartedEpoch !== "0") {
+    if (!message.halvenStartedEpoch.isZero()) {
       writer.uint32(24).int64(message.halvenStartedEpoch);
     }
 
@@ -58,7 +58,7 @@ export const GenesisState = {
           break;
 
         case 3:
-          message.halvenStartedEpoch = longToString((reader.int64() as Long));
+          message.halvenStartedEpoch = (reader.int64() as Long);
           break;
 
         default:
@@ -74,7 +74,7 @@ export const GenesisState = {
     return {
       minter: isSet(object.minter) ? Minter.fromJSON(object.minter) : undefined,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      halvenStartedEpoch: isSet(object.halvenStartedEpoch) ? String(object.halvenStartedEpoch) : "0"
+      halvenStartedEpoch: isSet(object.halvenStartedEpoch) ? Long.fromString(object.halvenStartedEpoch) : Long.ZERO
     };
   },
 
@@ -82,7 +82,7 @@ export const GenesisState = {
     const obj: any = {};
     message.minter !== undefined && (obj.minter = message.minter ? Minter.toJSON(message.minter) : undefined);
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.halvenStartedEpoch !== undefined && (obj.halvenStartedEpoch = message.halvenStartedEpoch);
+    message.halvenStartedEpoch !== undefined && (obj.halvenStartedEpoch = (message.halvenStartedEpoch || Long.ZERO).toString());
     return obj;
   },
 
@@ -90,19 +90,15 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.minter = object.minter !== undefined && object.minter !== null ? Minter.fromPartial(object.minter) : undefined;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
-    message.halvenStartedEpoch = object.halvenStartedEpoch ?? "0";
+    message.halvenStartedEpoch = object.halvenStartedEpoch !== undefined && object.halvenStartedEpoch !== null ? Long.fromValue(object.halvenStartedEpoch) : Long.ZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

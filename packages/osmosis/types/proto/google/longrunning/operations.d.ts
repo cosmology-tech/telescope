@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../google/protobuf/any";
 import { Status } from "../../google/rpc/status";
@@ -125,273 +126,56 @@ export declare const Operation: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Operation;
     fromJSON(object: any): Operation;
     toJSON(message: Operation): unknown;
-    fromPartial<I extends {
-        name?: string;
-        metadata?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        done?: boolean;
-        error?: {
-            code?: number;
-            message?: string;
-            details?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        };
-        response?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        name?: string;
-        metadata?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["metadata"], keyof Any>, never>;
-        done?: boolean;
-        error?: {
-            code?: number;
-            message?: string;
-            details?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[];
-        } & {
-            code?: number;
-            message?: string;
-            details?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[] & ({
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["error"]["details"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["error"]["details"], keyof {
-                typeUrl?: string;
-                value?: Uint8Array;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["error"], keyof Status>, never>;
-        response?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["response"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof Operation>, never>>(object: I): Operation;
+    fromPartial<I extends unknown>(object: I): Operation;
 };
 export declare const GetOperationRequest: {
     encode(message: GetOperationRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetOperationRequest;
     fromJSON(object: any): GetOperationRequest;
     toJSON(message: GetOperationRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetOperationRequest;
+    fromPartial<I extends unknown>(object: I): GetOperationRequest;
 };
 export declare const ListOperationsRequest: {
     encode(message: ListOperationsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsRequest;
     fromJSON(object: any): ListOperationsRequest;
     toJSON(message: ListOperationsRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        filter?: string;
-        pageSize?: number;
-        pageToken?: string;
-    } & {
-        name?: string;
-        filter?: string;
-        pageSize?: number;
-        pageToken?: string;
-    } & Record<Exclude<keyof I, keyof ListOperationsRequest>, never>>(object: I): ListOperationsRequest;
+    fromPartial<I extends unknown>(object: I): ListOperationsRequest;
 };
 export declare const ListOperationsResponse: {
     encode(message: ListOperationsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponse;
     fromJSON(object: any): ListOperationsResponse;
     toJSON(message: ListOperationsResponse): unknown;
-    fromPartial<I extends {
-        operations?: {
-            name?: string;
-            metadata?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            done?: boolean;
-            error?: {
-                code?: number;
-                message?: string;
-                details?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[];
-            };
-            response?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[];
-        nextPageToken?: string;
-    } & {
-        operations?: {
-            name?: string;
-            metadata?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            done?: boolean;
-            error?: {
-                code?: number;
-                message?: string;
-                details?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[];
-            };
-            response?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[] & ({
-            name?: string;
-            metadata?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            done?: boolean;
-            error?: {
-                code?: number;
-                message?: string;
-                details?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[];
-            };
-            response?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            name?: string;
-            metadata?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["operations"][number]["metadata"], keyof Any>, never>;
-            done?: boolean;
-            error?: {
-                code?: number;
-                message?: string;
-                details?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[];
-            } & {
-                code?: number;
-                message?: string;
-                details?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[] & ({
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                } & {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                } & Record<Exclude<keyof I["operations"][number]["error"]["details"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["operations"][number]["error"]["details"], keyof {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[]>, never>;
-            } & Record<Exclude<keyof I["operations"][number]["error"], keyof Status>, never>;
-            response?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["operations"][number]["response"], keyof Any>, never>;
-        } & Record<Exclude<keyof I["operations"][number], keyof Operation>, never>)[] & Record<Exclude<keyof I["operations"], keyof {
-            name?: string;
-            metadata?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            done?: boolean;
-            error?: {
-                code?: number;
-                message?: string;
-                details?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                }[];
-            };
-            response?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[]>, never>;
-        nextPageToken?: string;
-    } & Record<Exclude<keyof I, keyof ListOperationsResponse>, never>>(object: I): ListOperationsResponse;
+    fromPartial<I extends unknown>(object: I): ListOperationsResponse;
 };
 export declare const CancelOperationRequest: {
     encode(message: CancelOperationRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CancelOperationRequest;
     fromJSON(object: any): CancelOperationRequest;
     toJSON(message: CancelOperationRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): CancelOperationRequest;
+    fromPartial<I extends unknown>(object: I): CancelOperationRequest;
 };
 export declare const DeleteOperationRequest: {
     encode(message: DeleteOperationRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteOperationRequest;
     fromJSON(object: any): DeleteOperationRequest;
     toJSON(message: DeleteOperationRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): DeleteOperationRequest;
+    fromPartial<I extends unknown>(object: I): DeleteOperationRequest;
 };
 export declare const WaitOperationRequest: {
     encode(message: WaitOperationRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): WaitOperationRequest;
     fromJSON(object: any): WaitOperationRequest;
     toJSON(message: WaitOperationRequest): unknown;
-    fromPartial<I extends {
-        name?: string;
-        timeout?: string;
-    } & {
-        name?: string;
-        timeout?: string;
-    } & Record<Exclude<keyof I, keyof WaitOperationRequest>, never>>(object: I): WaitOperationRequest;
+    fromPartial<I extends unknown>(object: I): WaitOperationRequest;
 };
 export declare const OperationInfo: {
     encode(message: OperationInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OperationInfo;
     fromJSON(object: any): OperationInfo;
     toJSON(message: OperationInfo): unknown;
-    fromPartial<I extends {
-        responseType?: string;
-        metadataType?: string;
-    } & {
-        responseType?: string;
-        metadataType?: string;
-    } & Record<Exclude<keyof I, keyof OperationInfo>, never>>(object: I): OperationInfo;
+    fromPartial<I extends unknown>(object: I): OperationInfo;
 };
 /**
  * Manages long-running operations with an API service.
@@ -470,7 +254,7 @@ interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

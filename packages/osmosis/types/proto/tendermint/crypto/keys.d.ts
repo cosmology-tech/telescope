@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKey {
@@ -9,16 +10,10 @@ export declare const PublicKey: {
     decode(input: _m0.Reader | Uint8Array, length?: number): PublicKey;
     fromJSON(object: any): PublicKey;
     toJSON(message: PublicKey): unknown;
-    fromPartial<I extends {
-        ed25519?: Uint8Array | undefined;
-        secp256k1?: Uint8Array | undefined;
-    } & {
-        ed25519?: Uint8Array | undefined;
-        secp256k1?: Uint8Array | undefined;
-    } & Record<Exclude<keyof I, keyof PublicKey>, never>>(object: I): PublicKey;
+    fromPartial<I extends unknown>(object: I): PublicKey;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

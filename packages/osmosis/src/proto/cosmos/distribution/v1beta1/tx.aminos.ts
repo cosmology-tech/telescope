@@ -7,14 +7,14 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface AminoMsgSetWithdrawAddress extends AminoMsg {
-  type: "cosmos-sdk/MsgSetWithdrawAddress";
+  type: "cosmos-sdk/MsgModifyWithdrawAddress";
   value: {
     delegator_address: string;
     withdraw_address: string;
   };
 }
 export interface AminoMsgWithdrawDelegatorReward extends AminoMsg {
-  type: "cosmos-sdk/MsgWithdrawDelegatorReward";
+  type: "cosmos-sdk/MsgWithdrawDelegationReward";
   value: {
     delegator_address: string;
     validator_address: string;
@@ -38,7 +38,7 @@ export interface AminoMsgFundCommunityPool extends AminoMsg {
 }
 export const AminoConverter = {
   "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress": {
-    aminoType: "cosmos-sdk/MsgSetWithdrawAddress",
+    aminoType: "cosmos-sdk/MsgModifyWithdrawAddress",
     toAmino: ({
       delegatorAddress,
       withdrawAddress
@@ -59,7 +59,7 @@ export const AminoConverter = {
     }
   },
   "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward": {
-    aminoType: "cosmos-sdk/MsgWithdrawDelegatorReward",
+    aminoType: "cosmos-sdk/MsgWithdrawDelegationReward",
     toAmino: ({
       delegatorAddress,
       validatorAddress

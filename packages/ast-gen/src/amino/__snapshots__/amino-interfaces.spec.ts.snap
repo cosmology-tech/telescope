@@ -3,7 +3,7 @@
 exports[`camel aminoConverter 1`] = `
 "export const AminoConverter = {
   \\"/cosmos.some.MsgThing\\": {
-    aminoType: \\"cosmos-sdk/MstThing\\",
+    aminoType: \\"cosmos-sdk/MsgThing\\",
     toAmino: ({
       durationCamelCase,
       coinsCamelCase,
@@ -146,7 +146,7 @@ exports[`camel aminoConverter 1`] = `
 
 exports[`camel makeAminoConverterItem 1`] = `
 "\\"/cosmos.some.MsgThing\\": {
-  aminoType: \\"cosmos-sdk/MstThing\\",
+  aminoType: \\"cosmos-sdk/MsgThing\\",
   toAmino: ({
     durationCamelCase,
     coinsCamelCase,
@@ -288,7 +288,61 @@ exports[`camel makeAminoConverterItem 1`] = `
 
 exports[`camel makeAminoTypeInterface 1`] = `
 "export interface AminoMstThing extends AminoMsg {
-  type: \\"cosmos-sdk/MstThing\\";
+  type: \\"cosmos-sdk/MsgThing\\";
+  value: {
+    durationCamelCase: string;
+    coinsCamelCase: Coin[];
+    someDuration: Duration[];
+    someHeight: AminoHeight;
+    myCoin: Coin;
+    camelCaseName: string;
+    voteValue: number;
+    previousVotes: number[];
+    desc: {
+      moniker: string;
+      identity: string;
+      website: string;
+      securityContact: string;
+      details: string;
+      superNested: {
+        rate: string;
+        maxRate: string;
+        maxChangeRate: string;
+        specialPropertyHere: {
+          rate: string;
+          maxRate: string;
+          maxChangeRate: string;
+        }[];
+      };
+      manyComissions: {
+        rate: string;
+        maxRate: string;
+        maxChangeRate: string;
+        specialPropertyHere: {
+          rate: string;
+          maxRate: string;
+          maxChangeRate: string;
+        }[];
+      }[];
+    };
+    commission: {
+      rate: string;
+      maxRate: string;
+      maxChangeRate: string;
+      specialPropertyHere: {
+        rate: string;
+        maxRate: string;
+        maxChangeRate: string;
+      }[];
+    };
+    str: string;
+  };
+}"
+`;
+
+exports[`plugins makeAminoTypeInterface 1`] = `
+"export interface AminoMstThing extends AminoMsg {
+  type: \\"special-override-type\\";
   value: {
     durationCamelCase: string;
     coinsCamelCase: Coin[];
@@ -343,7 +397,7 @@ exports[`camel makeAminoTypeInterface 1`] = `
 exports[`snake aminoConverter 1`] = `
 "export const AminoConverter = {
   \\"/cosmos.some.MsgThing\\": {
-    aminoType: \\"cosmos-sdk/MstThing\\",
+    aminoType: \\"cosmos-sdk/MsgThing\\",
     toAmino: ({
       durationCamelCase,
       coinsCamelCase,
@@ -486,7 +540,7 @@ exports[`snake aminoConverter 1`] = `
 
 exports[`snake makeAminoConverterItem 1`] = `
 "\\"/cosmos.some.MsgThing\\": {
-  aminoType: \\"cosmos-sdk/MstThing\\",
+  aminoType: \\"cosmos-sdk/MsgThing\\",
   toAmino: ({
     durationCamelCase,
     coinsCamelCase,
@@ -628,7 +682,7 @@ exports[`snake makeAminoConverterItem 1`] = `
 
 exports[`snake makeAminoTypeInterface 1`] = `
 "export interface AminoMstThing extends AminoMsg {
-  type: \\"cosmos-sdk/MstThing\\";
+  type: \\"cosmos-sdk/MsgThing\\";
   value: {
     duration_camel_case: string;
     coins_camel_case: Coin[];

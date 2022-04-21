@@ -11,7 +11,7 @@ export interface MsgCreateBalancerPool {
   futurePoolGovernor: string;
 }
 export interface MsgCreateBalancerPoolResponse {
-  poolId: string;
+  poolId: Long;
 }
 
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
@@ -115,13 +115,13 @@ export const MsgCreateBalancerPool = {
 
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
   return {
-    poolId: "0"
+    poolId: Long.UZERO
   };
 }
 
 export const MsgCreateBalancerPoolResponse = {
   encode(message: MsgCreateBalancerPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.poolId !== "0") {
+    if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
 
@@ -138,7 +138,7 @@ export const MsgCreateBalancerPoolResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = longToString((reader.uint64() as Long));
+          message.poolId = (reader.uint64() as Long);
           break;
 
         default:
@@ -152,19 +152,19 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? String(object.poolId) : "0"
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     };
   },
 
   toJSON(message: MsgCreateBalancerPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateBalancerPoolResponse>, I>>(object: I): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId ?? "0";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
 
@@ -188,13 +188,9 @@ export class BalancerMsgClientImpl implements BalancerMsg {
 
 }
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

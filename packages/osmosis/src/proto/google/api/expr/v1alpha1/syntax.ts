@@ -37,7 +37,7 @@ export interface Expr {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: string;
+  id: Long;
   /** A literal expression. */
 
   constExpr: Constant | undefined;
@@ -153,7 +153,7 @@ export interface Expr_CreateStruct_Entry {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: string;
+  id: Long;
   /** The field key for a message creator statement. */
 
   fieldKey: string | undefined;
@@ -252,10 +252,10 @@ export interface Constant {
   boolValue: boolean | undefined;
   /** int64 value. */
 
-  int64Value: string | undefined;
+  int64Value: Long | undefined;
   /** uint64 value. */
 
-  uint64Value: string | undefined;
+  uint64Value: Long | undefined;
   /** double value. */
 
   doubleValue: number | undefined;
@@ -314,7 +314,7 @@ export interface SourceInfo {
    */
 
   positions: {
-    [key: string]: number;
+    [key: Long]: number;
   };
   /**
    * A map from the parse node id where a macro replacement was made to the
@@ -328,15 +328,15 @@ export interface SourceInfo {
    */
 
   macroCalls: {
-    [key: string]: Expr;
+    [key: Long]: Expr;
   };
 }
 export interface SourceInfo_PositionsEntry {
-  key: string;
+  key: Long;
   value: number;
 }
 export interface SourceInfo_MacroCallsEntry {
-  key: string;
+  key: Long;
   value: Expr;
 }
 /** A specific position in source. */
@@ -432,7 +432,7 @@ export const ParsedExpr = {
 
 function createBaseExpr(): Expr {
   return {
-    id: "0",
+    id: Long.ZERO,
     constExpr: undefined,
     identExpr: undefined,
     selectExpr: undefined,
@@ -445,7 +445,7 @@ function createBaseExpr(): Expr {
 
 export const Expr = {
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(16).int64(message.id);
     }
 
@@ -490,7 +490,7 @@ export const Expr = {
 
       switch (tag >>> 3) {
         case 2:
-          message.id = longToString((reader.int64() as Long));
+          message.id = (reader.int64() as Long);
           break;
 
         case 3:
@@ -532,7 +532,7 @@ export const Expr = {
 
   fromJSON(object: any): Expr {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
       constExpr: isSet(object.constExpr) ? Constant.fromJSON(object.constExpr) : undefined,
       identExpr: isSet(object.identExpr) ? Expr_Ident.fromJSON(object.identExpr) : undefined,
       selectExpr: isSet(object.selectExpr) ? Expr_Select.fromJSON(object.selectExpr) : undefined,
@@ -545,7 +545,7 @@ export const Expr = {
 
   toJSON(message: Expr): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
     message.constExpr !== undefined && (obj.constExpr = message.constExpr ? Constant.toJSON(message.constExpr) : undefined);
     message.identExpr !== undefined && (obj.identExpr = message.identExpr ? Expr_Ident.toJSON(message.identExpr) : undefined);
     message.selectExpr !== undefined && (obj.selectExpr = message.selectExpr ? Expr_Select.toJSON(message.selectExpr) : undefined);
@@ -558,7 +558,7 @@ export const Expr = {
 
   fromPartial<I extends Exact<DeepPartial<Expr>, I>>(object: I): Expr {
     const message = createBaseExpr();
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.constExpr = object.constExpr !== undefined && object.constExpr !== null ? Constant.fromPartial(object.constExpr) : undefined;
     message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
     message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
@@ -936,7 +936,7 @@ export const Expr_CreateStruct = {
 
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
-    id: "0",
+    id: Long.ZERO,
     fieldKey: undefined,
     mapKey: undefined,
     value: undefined
@@ -945,7 +945,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 
 export const Expr_CreateStruct_Entry = {
   encode(message: Expr_CreateStruct_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
     }
 
@@ -974,7 +974,7 @@ export const Expr_CreateStruct_Entry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = longToString((reader.int64() as Long));
+          message.id = (reader.int64() as Long);
           break;
 
         case 2:
@@ -1000,7 +1000,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
@@ -1009,7 +1009,7 @@ export const Expr_CreateStruct_Entry = {
 
   toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
     message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
     message.mapKey !== undefined && (obj.mapKey = message.mapKey ? Expr.toJSON(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
@@ -1018,7 +1018,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct_Entry>, I>>(object: I): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.fieldKey = object.fieldKey ?? undefined;
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
@@ -1229,11 +1229,11 @@ export const Constant = {
           break;
 
         case 3:
-          message.int64Value = longToString((reader.int64() as Long));
+          message.int64Value = (reader.int64() as Long);
           break;
 
         case 4:
-          message.uint64Value = longToString((reader.uint64() as Long));
+          message.uint64Value = (reader.uint64() as Long);
           break;
 
         case 5:
@@ -1269,8 +1269,8 @@ export const Constant = {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? String(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? String(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
@@ -1283,8 +1283,8 @@ export const Constant = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = message.nullValue !== undefined ? nullValueToJSON(message.nullValue) : undefined);
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = message.int64Value);
-    message.uint64Value !== undefined && (obj.uint64Value = message.uint64Value);
+    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
@@ -1297,8 +1297,8 @@ export const Constant = {
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value ?? undefined;
-    message.uint64Value = object.uint64Value ?? undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
@@ -1414,15 +1414,15 @@ export const SourceInfo = {
       location: isSet(object.location) ? String(object.location) : "",
       lineOffsets: Array.isArray(object?.lineOffsets) ? object.lineOffsets.map((e: any) => Number(e)) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: string]: number;
+        [key: Long]: number;
       }>((acc, [key, value]) => {
-        acc[key] = Number(value);
+        acc[Number(key)] = Number(value);
         return acc;
       }, {}) : {},
       macroCalls: isObject(object.macroCalls) ? Object.entries(object.macroCalls).reduce<{
-        [key: string]: Expr;
+        [key: Long]: Expr;
       }>((acc, [key, value]) => {
-        acc[key] = Expr.fromJSON(value);
+        acc[Number(key)] = Expr.fromJSON(value);
         return acc;
       }, {}) : {}
     };
@@ -1464,19 +1464,19 @@ export const SourceInfo = {
     message.location = object.location ?? "";
     message.lineOffsets = object.lineOffsets?.map(e => e) || [];
     message.positions = Object.entries(object.positions ?? {}).reduce<{
-      [key: string]: number;
+      [key: Long]: number;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = Number(value);
+        acc[Number(key)] = Number(value);
       }
 
       return acc;
     }, {});
     message.macroCalls = Object.entries(object.macroCalls ?? {}).reduce<{
-      [key: string]: Expr;
+      [key: Long]: Expr;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = Expr.fromPartial(value);
+        acc[Number(key)] = Expr.fromPartial(value);
       }
 
       return acc;
@@ -1488,14 +1488,14 @@ export const SourceInfo = {
 
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
   return {
-    key: "0",
+    key: Long.ZERO,
     value: 0
   };
 }
 
 export const SourceInfo_PositionsEntry = {
   encode(message: SourceInfo_PositionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "0") {
+    if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
 
@@ -1516,7 +1516,7 @@ export const SourceInfo_PositionsEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.key = longToString((reader.int64() as Long));
+          message.key = (reader.int64() as Long);
           break;
 
         case 2:
@@ -1534,21 +1534,21 @@ export const SourceInfo_PositionsEntry = {
 
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "0",
+      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
   toJSON(message: SourceInfo_PositionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsEntry>, I>>(object: I): SourceInfo_PositionsEntry {
     const message = createBaseSourceInfo_PositionsEntry();
-    message.key = object.key ?? "0";
+    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value ?? 0;
     return message;
   }
@@ -1557,14 +1557,14 @@ export const SourceInfo_PositionsEntry = {
 
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
   return {
-    key: "0",
+    key: Long.ZERO,
     value: undefined
   };
 }
 
 export const SourceInfo_MacroCallsEntry = {
   encode(message: SourceInfo_MacroCallsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "0") {
+    if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
 
@@ -1585,7 +1585,7 @@ export const SourceInfo_MacroCallsEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.key = longToString((reader.int64() as Long));
+          message.key = (reader.int64() as Long);
           break;
 
         case 2:
@@ -1603,21 +1603,21 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "0",
+      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },
 
   toJSON(message: SourceInfo_MacroCallsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<SourceInfo_MacroCallsEntry>, I>>(object: I): SourceInfo_MacroCallsEntry {
     const message = createBaseSourceInfo_MacroCallsEntry();
-    message.key = object.key ?? "0";
+    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   }
@@ -1754,12 +1754,12 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -1768,7 +1768,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -1794,8 +1794,8 @@ function fromDuration(duration: Duration): string {
   return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

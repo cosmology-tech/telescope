@@ -49,7 +49,7 @@ export const AminoConverter = {
     }: MsgSuperfluidDelegate): AminoMsgSuperfluidDelegate["value"] => {
       return {
         sender,
-        lockId,
+        lockId: lockId.toString(),
         valAddr
       };
     },
@@ -60,7 +60,7 @@ export const AminoConverter = {
     }: AminoMsgSuperfluidDelegate["value"]): MsgSuperfluidDelegate => {
       return {
         sender,
-        lockId,
+        lockId: Long.fromString(lockId),
         valAddr
       };
     }
@@ -73,7 +73,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUndelegate): AminoMsgSuperfluidUndelegate["value"] => {
       return {
         sender,
-        lockId
+        lockId: lockId.toString()
       };
     },
     fromAmino: ({
@@ -82,7 +82,7 @@ export const AminoConverter = {
     }: AminoMsgSuperfluidUndelegate["value"]): MsgSuperfluidUndelegate => {
       return {
         sender,
-        lockId
+        lockId: Long.fromString(lockId)
       };
     }
   },
@@ -94,7 +94,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUnbondLock): AminoMsgSuperfluidUnbondLock["value"] => {
       return {
         sender,
-        lockId
+        lockId: lockId.toString()
       };
     },
     fromAmino: ({
@@ -103,7 +103,7 @@ export const AminoConverter = {
     }: AminoMsgSuperfluidUnbondLock["value"]): MsgSuperfluidUnbondLock => {
       return {
         sender,
-        lockId
+        lockId: Long.fromString(lockId)
       };
     }
   },

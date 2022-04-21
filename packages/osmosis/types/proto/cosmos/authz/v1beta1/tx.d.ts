@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Grant } from "../../../cosmos/authz/v1beta1/authz";
 import { Any } from "../../../google/protobuf/any";
@@ -49,107 +50,45 @@ export declare const MsgGrant: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrant;
     fromJSON(object: any): MsgGrant;
     toJSON(message: MsgGrant): unknown;
-    fromPartial<I extends {
-        granter?: string;
-        grantee?: string;
-        grant?: {
-            authorization?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            expiration?: Date;
-        };
-    } & {
-        granter?: string;
-        grantee?: string;
-        grant?: {
-            authorization?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            expiration?: Date;
-        } & {
-            authorization?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["grant"]["authorization"], keyof Any>, never>;
-            expiration?: Date;
-        } & Record<Exclude<keyof I["grant"], keyof Grant>, never>;
-    } & Record<Exclude<keyof I, keyof MsgGrant>, never>>(object: I): MsgGrant;
+    fromPartial<I extends unknown>(object: I): MsgGrant;
 };
 export declare const MsgExecResponse: {
     encode(message: MsgExecResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecResponse;
     fromJSON(object: any): MsgExecResponse;
     toJSON(message: MsgExecResponse): unknown;
-    fromPartial<I extends {
-        results?: Uint8Array[];
-    } & {
-        results?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["results"], keyof Uint8Array[]>, never>;
-    } & Record<Exclude<keyof I, "results">, never>>(object: I): MsgExecResponse;
+    fromPartial<I extends unknown>(object: I): MsgExecResponse;
 };
 export declare const MsgExec: {
     encode(message: MsgExec, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgExec;
     fromJSON(object: any): MsgExec;
     toJSON(message: MsgExec): unknown;
-    fromPartial<I extends {
-        grantee?: string;
-        msgs?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        grantee?: string;
-        msgs?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["msgs"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["msgs"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof MsgExec>, never>>(object: I): MsgExec;
+    fromPartial<I extends unknown>(object: I): MsgExec;
 };
 export declare const MsgGrantResponse: {
     encode(_: MsgGrantResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantResponse;
     fromJSON(_: any): MsgGrantResponse;
     toJSON(_: MsgGrantResponse): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgGrantResponse;
+    fromPartial<I extends unknown>(_: I): MsgGrantResponse;
 };
 export declare const MsgRevoke: {
     encode(message: MsgRevoke, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevoke;
     fromJSON(object: any): MsgRevoke;
     toJSON(message: MsgRevoke): unknown;
-    fromPartial<I extends {
-        granter?: string;
-        grantee?: string;
-        msgTypeUrl?: string;
-    } & {
-        granter?: string;
-        grantee?: string;
-        msgTypeUrl?: string;
-    } & Record<Exclude<keyof I, keyof MsgRevoke>, never>>(object: I): MsgRevoke;
+    fromPartial<I extends unknown>(object: I): MsgRevoke;
 };
 export declare const MsgRevokeResponse: {
     encode(_: MsgRevokeResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeResponse;
     fromJSON(_: any): MsgRevokeResponse;
     toJSON(_: MsgRevokeResponse): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgRevokeResponse;
+    fromPartial<I extends unknown>(_: I): MsgRevokeResponse;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

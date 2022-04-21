@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 /** Class defines the class of the nft type. */
@@ -35,63 +36,17 @@ export declare const Class: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Class;
     fromJSON(object: any): Class;
     toJSON(message: Class): unknown;
-    fromPartial<I extends {
-        id?: string;
-        name?: string;
-        symbol?: string;
-        description?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        id?: string;
-        name?: string;
-        symbol?: string;
-        description?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["data"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof Class>, never>>(object: I): Class;
+    fromPartial<I extends unknown>(object: I): Class;
 };
 export declare const NFT: {
     encode(message: NFT, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): NFT;
     fromJSON(object: any): NFT;
     toJSON(message: NFT): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        classId?: string;
-        id?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["data"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof NFT>, never>>(object: I): NFT;
+    fromPartial<I extends unknown>(object: I): NFT;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

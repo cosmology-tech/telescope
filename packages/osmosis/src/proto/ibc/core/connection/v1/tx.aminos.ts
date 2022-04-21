@@ -100,7 +100,7 @@ export const AminoConverter = {
           identifier: version.identifier,
           features: version.features
         },
-        delay_period: delayPeriod,
+        delay_period: delayPeriod.toString(),
         signer
       };
     },
@@ -121,7 +121,7 @@ export const AminoConverter = {
           identifier: version.identifier,
           features: version.features
         },
-        delayPeriod: delay_period,
+        delayPeriod: Long.fromString(delay_period),
         signer
       };
     }
@@ -153,7 +153,7 @@ export const AminoConverter = {
           port_id: counterparty.portId,
           channel_id: counterparty.channelId
         },
-        delay_period: delayPeriod,
+        delay_period: delayPeriod.toString(),
         counterparty_versions: counterpartyVersions.map(el0 => ({
           identifier: el0.identifier,
           features: el0.features
@@ -197,7 +197,7 @@ export const AminoConverter = {
           portId: counterparty.port_id,
           channelId: counterparty.channel_id
         },
-        delayPeriod: delay_period,
+        delayPeriod: Long.fromString(delay_period),
         counterpartyVersions: counterparty_versions.map(el0 => ({
           identifier: el0.identifier,
           features: el0.features

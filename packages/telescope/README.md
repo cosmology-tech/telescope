@@ -1,4 +1,4 @@
-# @cosmonauts/telescope
+# @osmonauts/telescope
 
 A TypeScript Transpiler for Comsos Protobufs
 
@@ -51,7 +51,7 @@ You should now seem some `.ts` files generated in `./src`. These are the real so
 ## programatic usage
 
 ```js
-import telescope from '@cosmonauts/telescope';
+import telescope from '@osmonauts/telescope';
 
 // specify proto path and out path
 telescope(protoPath, outPath);

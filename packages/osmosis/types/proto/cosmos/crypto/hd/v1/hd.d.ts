@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44Params {
@@ -20,22 +21,10 @@ export declare const BIP44Params: {
     decode(input: _m0.Reader | Uint8Array, length?: number): BIP44Params;
     fromJSON(object: any): BIP44Params;
     toJSON(message: BIP44Params): unknown;
-    fromPartial<I extends {
-        purpose?: number;
-        coinType?: number;
-        account?: number;
-        change?: boolean;
-        addressIndex?: number;
-    } & {
-        purpose?: number;
-        coinType?: number;
-        account?: number;
-        change?: boolean;
-        addressIndex?: number;
-    } & Record<Exclude<keyof I, keyof BIP44Params>, never>>(object: I): BIP44Params;
+    fromPartial<I extends unknown>(object: I): BIP44Params;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

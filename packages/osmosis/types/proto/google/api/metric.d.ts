@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { LaunchStage } from "../../google/api/launch_stage";
 import { LabelDescriptor } from "../../google/api/label";
@@ -265,113 +266,31 @@ export declare const MetricDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor;
     fromJSON(object: any): MetricDescriptor;
     toJSON(message: MetricDescriptor): unknown;
-    fromPartial<I extends {
-        name?: string;
-        type?: string;
-        labels?: {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[];
-        metricKind?: MetricDescriptor_MetricKind;
-        valueType?: MetricDescriptor_ValueType;
-        unit?: string;
-        description?: string;
-        displayName?: string;
-        metadata?: {
-            launchStage?: LaunchStage;
-            samplePeriod?: string;
-            ingestDelay?: string;
-        };
-        launchStage?: LaunchStage;
-        monitoredResourceTypes?: string[];
-    } & {
-        name?: string;
-        type?: string;
-        labels?: {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[] & ({
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        } & {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        } & Record<Exclude<keyof I["labels"][number], keyof LabelDescriptor>, never>)[] & Record<Exclude<keyof I["labels"], keyof {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[]>, never>;
-        metricKind?: MetricDescriptor_MetricKind;
-        valueType?: MetricDescriptor_ValueType;
-        unit?: string;
-        description?: string;
-        displayName?: string;
-        metadata?: {
-            launchStage?: LaunchStage;
-            samplePeriod?: string;
-            ingestDelay?: string;
-        } & {
-            launchStage?: LaunchStage;
-            samplePeriod?: string;
-            ingestDelay?: string;
-        } & Record<Exclude<keyof I["metadata"], keyof MetricDescriptor_MetricDescriptorMetadata>, never>;
-        launchStage?: LaunchStage;
-        monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["monitoredResourceTypes"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof MetricDescriptor>, never>>(object: I): MetricDescriptor;
+    fromPartial<I extends unknown>(object: I): MetricDescriptor;
 };
 export declare const MetricDescriptor_MetricDescriptorMetadata: {
     encode(message: MetricDescriptor_MetricDescriptorMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor_MetricDescriptorMetadata;
     fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata;
     toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown;
-    fromPartial<I extends {
-        launchStage?: LaunchStage;
-        samplePeriod?: string;
-        ingestDelay?: string;
-    } & {
-        launchStage?: LaunchStage;
-        samplePeriod?: string;
-        ingestDelay?: string;
-    } & Record<Exclude<keyof I, keyof MetricDescriptor_MetricDescriptorMetadata>, never>>(object: I): MetricDescriptor_MetricDescriptorMetadata;
+    fromPartial<I extends unknown>(object: I): MetricDescriptor_MetricDescriptorMetadata;
 };
 export declare const Metric: {
     encode(message: Metric, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Metric;
     fromJSON(object: any): Metric;
     toJSON(message: Metric): unknown;
-    fromPartial<I extends {
-        type?: string;
-        labels?: {
-            [x: string]: string;
-        };
-    } & {
-        type?: string;
-        labels?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["labels"], string | number>, never>;
-    } & Record<Exclude<keyof I, keyof Metric>, never>>(object: I): Metric;
+    fromPartial<I extends unknown>(object: I): Metric;
 };
 export declare const Metric_LabelsEntry: {
     encode(message: Metric_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Metric_LabelsEntry;
     fromJSON(object: any): Metric_LabelsEntry;
     toJSON(message: Metric_LabelsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof Metric_LabelsEntry>, never>>(object: I): Metric_LabelsEntry;
+    fromPartial<I extends unknown>(object: I): Metric_LabelsEntry;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

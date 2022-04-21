@@ -143,7 +143,7 @@ export const AminoConverter = {
       metadata
     }: MsgVote): AminoMsgVote["value"] => {
       return {
-        proposal_id: proposalId,
+        proposal_id: proposalId.toString(),
         voter,
         option,
         metadata
@@ -156,7 +156,7 @@ export const AminoConverter = {
       metadata
     }: AminoMsgVote["value"]): MsgVote => {
       return {
-        proposalId: proposal_id,
+        proposalId: Long.fromString(proposal_id),
         voter,
         option: voteOptionFromJSON(option),
         metadata
@@ -172,7 +172,7 @@ export const AminoConverter = {
       metadata
     }: MsgVoteWeighted): AminoMsgVoteWeighted["value"] => {
       return {
-        proposal_id: proposalId,
+        proposal_id: proposalId.toString(),
         voter,
         options: options.map(el0 => ({
           option: el0.option,
@@ -188,7 +188,7 @@ export const AminoConverter = {
       metadata
     }: AminoMsgVoteWeighted["value"]): MsgVoteWeighted => {
       return {
-        proposalId: proposal_id,
+        proposalId: Long.fromString(proposal_id),
         voter,
         options: options.map(el0 => ({
           option: voteOptionFromJSON(el0.option),
@@ -206,7 +206,7 @@ export const AminoConverter = {
       amount
     }: MsgDeposit): AminoMsgDeposit["value"] => {
       return {
-        proposal_id: proposalId,
+        proposal_id: proposalId.toString(),
         depositor,
         amount: amount.map(el0 => ({
           denom: el0.denom,
@@ -220,7 +220,7 @@ export const AminoConverter = {
       amount
     }: AminoMsgDeposit["value"]): MsgDeposit => {
       return {
-        proposalId: proposal_id,
+        proposalId: Long.fromString(proposal_id),
         depositor,
         amount: amount.map(el0 => ({
           denom: el0.denom,

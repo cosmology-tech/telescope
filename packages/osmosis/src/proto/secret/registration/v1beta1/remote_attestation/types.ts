@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 export interface QuoteReport {
   id: string;
   timestamp: string;
-  version: string;
+  version: Long;
   isvEnclaveQuoteStatus: string;
   platformInfoBlob: string;
   isvEnclaveQuoteBody: string;
@@ -16,8 +16,8 @@ export interface QuoteReportBody {
   reportData: string;
 }
 export interface QuoteReportData {
-  version: string;
-  signType: string;
+  version: Long;
+  signType: Long;
   reportBody: QuoteReportBody;
 }
 export interface EndorsedAttestationReport {
@@ -45,7 +45,7 @@ function createBaseQuoteReport(): QuoteReport {
   return {
     id: "",
     timestamp: "",
-    version: "0",
+    version: Long.UZERO,
     isvEnclaveQuoteStatus: "",
     platformInfoBlob: "",
     isvEnclaveQuoteBody: "",
@@ -63,7 +63,7 @@ export const QuoteReport = {
       writer.uint32(18).string(message.timestamp);
     }
 
-    if (message.version !== "0") {
+    if (!message.version.isZero()) {
       writer.uint32(24).uint64(message.version);
     }
 
@@ -104,7 +104,7 @@ export const QuoteReport = {
           break;
 
         case 3:
-          message.version = longToString((reader.uint64() as Long));
+          message.version = (reader.uint64() as Long);
           break;
 
         case 4:
@@ -136,7 +136,7 @@ export const QuoteReport = {
     return {
       id: isSet(object.id) ? String(object.id) : "",
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "",
-      version: isSet(object.version) ? String(object.version) : "0",
+      version: isSet(object.version) ? Long.fromString(object.version) : Long.UZERO,
       isvEnclaveQuoteStatus: isSet(object.isvEnclaveQuoteStatus) ? String(object.isvEnclaveQuoteStatus) : "",
       platformInfoBlob: isSet(object.platformInfoBlob) ? String(object.platformInfoBlob) : "",
       isvEnclaveQuoteBody: isSet(object.isvEnclaveQuoteBody) ? String(object.isvEnclaveQuoteBody) : "",
@@ -148,7 +148,7 @@ export const QuoteReport = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
     message.isvEnclaveQuoteStatus !== undefined && (obj.isvEnclaveQuoteStatus = message.isvEnclaveQuoteStatus);
     message.platformInfoBlob !== undefined && (obj.platformInfoBlob = message.platformInfoBlob);
     message.isvEnclaveQuoteBody !== undefined && (obj.isvEnclaveQuoteBody = message.isvEnclaveQuoteBody);
@@ -166,7 +166,7 @@ export const QuoteReport = {
     const message = createBaseQuoteReport();
     message.id = object.id ?? "";
     message.timestamp = object.timestamp ?? "";
-    message.version = object.version ?? "0";
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
     message.isvEnclaveQuoteStatus = object.isvEnclaveQuoteStatus ?? "";
     message.platformInfoBlob = object.platformInfoBlob ?? "";
     message.isvEnclaveQuoteBody = object.isvEnclaveQuoteBody ?? "";
@@ -259,19 +259,19 @@ export const QuoteReportBody = {
 
 function createBaseQuoteReportData(): QuoteReportData {
   return {
-    version: "0",
-    signType: "0",
+    version: Long.UZERO,
+    signType: Long.UZERO,
     reportBody: undefined
   };
 }
 
 export const QuoteReportData = {
   encode(message: QuoteReportData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.version !== "0") {
+    if (!message.version.isZero()) {
       writer.uint32(8).uint64(message.version);
     }
 
-    if (message.signType !== "0") {
+    if (!message.signType.isZero()) {
       writer.uint32(16).uint64(message.signType);
     }
 
@@ -292,11 +292,11 @@ export const QuoteReportData = {
 
       switch (tag >>> 3) {
         case 1:
-          message.version = longToString((reader.uint64() as Long));
+          message.version = (reader.uint64() as Long);
           break;
 
         case 2:
-          message.signType = longToString((reader.uint64() as Long));
+          message.signType = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -314,24 +314,24 @@ export const QuoteReportData = {
 
   fromJSON(object: any): QuoteReportData {
     return {
-      version: isSet(object.version) ? String(object.version) : "0",
-      signType: isSet(object.signType) ? String(object.signType) : "0",
+      version: isSet(object.version) ? Long.fromString(object.version) : Long.UZERO,
+      signType: isSet(object.signType) ? Long.fromString(object.signType) : Long.UZERO,
       reportBody: isSet(object.reportBody) ? QuoteReportBody.fromJSON(object.reportBody) : undefined
     };
   },
 
   toJSON(message: QuoteReportData): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.signType !== undefined && (obj.signType = message.signType);
+    message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
+    message.signType !== undefined && (obj.signType = (message.signType || Long.UZERO).toString());
     message.reportBody !== undefined && (obj.reportBody = message.reportBody ? QuoteReportBody.toJSON(message.reportBody) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QuoteReportData>, I>>(object: I): QuoteReportData {
     const message = createBaseQuoteReportData();
-    message.version = object.version ?? "0";
-    message.signType = object.signType ?? "0";
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
+    message.signType = object.signType !== undefined && object.signType !== null ? Long.fromValue(object.signType) : Long.UZERO;
     message.reportBody = object.reportBody !== undefined && object.reportBody !== null ? QuoteReportBody.fromPartial(object.reportBody) : undefined;
     return message;
   }
@@ -678,13 +678,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

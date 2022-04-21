@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { DistrRecord } from "../../../osmosis/pool-incentives/v1beta1/incentives";
 /**
@@ -33,63 +34,17 @@ export declare const ReplacePoolIncentivesProposal: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ReplacePoolIncentivesProposal;
     fromJSON(object: any): ReplacePoolIncentivesProposal;
     toJSON(message: ReplacePoolIncentivesProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: string;
-            weight?: string;
-        }[];
-    } & {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: string;
-            weight?: string;
-        }[] & ({
-            gaugeId?: string;
-            weight?: string;
-        } & {
-            gaugeId?: string;
-            weight?: string;
-        } & Record<Exclude<keyof I["records"][number], keyof DistrRecord>, never>)[] & Record<Exclude<keyof I["records"], keyof {
-            gaugeId?: string;
-            weight?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof ReplacePoolIncentivesProposal>, never>>(object: I): ReplacePoolIncentivesProposal;
+    fromPartial<I extends unknown>(object: I): ReplacePoolIncentivesProposal;
 };
 export declare const UpdatePoolIncentivesProposal: {
     encode(message: UpdatePoolIncentivesProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePoolIncentivesProposal;
     fromJSON(object: any): UpdatePoolIncentivesProposal;
     toJSON(message: UpdatePoolIncentivesProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: string;
-            weight?: string;
-        }[];
-    } & {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: string;
-            weight?: string;
-        }[] & ({
-            gaugeId?: string;
-            weight?: string;
-        } & {
-            gaugeId?: string;
-            weight?: string;
-        } & Record<Exclude<keyof I["records"][number], keyof DistrRecord>, never>)[] & Record<Exclude<keyof I["records"], keyof {
-            gaugeId?: string;
-            weight?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdatePoolIncentivesProposal>, never>>(object: I): UpdatePoolIncentivesProposal;
+    fromPartial<I extends unknown>(object: I): UpdatePoolIncentivesProposal;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

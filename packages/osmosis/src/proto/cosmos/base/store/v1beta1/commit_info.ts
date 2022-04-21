@@ -7,7 +7,7 @@ import * as _m0 from "protobufjs/minimal";
  * a version/height.
  */
 export interface CommitInfo {
-  version: string;
+  version: Long;
   storeInfos: StoreInfo[];
 }
 /**
@@ -25,20 +25,20 @@ export interface StoreInfo {
  */
 
 export interface CommitID {
-  version: string;
+  version: Long;
   hash: Uint8Array;
 }
 
 function createBaseCommitInfo(): CommitInfo {
   return {
-    version: "0",
+    version: Long.ZERO,
     storeInfos: []
   };
 }
 
 export const CommitInfo = {
   encode(message: CommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.version !== "0") {
+    if (!message.version.isZero()) {
       writer.uint32(8).int64(message.version);
     }
 
@@ -59,7 +59,7 @@ export const CommitInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.version = longToString((reader.int64() as Long));
+          message.version = (reader.int64() as Long);
           break;
 
         case 2:
@@ -77,14 +77,14 @@ export const CommitInfo = {
 
   fromJSON(object: any): CommitInfo {
     return {
-      version: isSet(object.version) ? String(object.version) : "0",
+      version: isSet(object.version) ? Long.fromString(object.version) : Long.ZERO,
       storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
     };
   },
 
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
 
     if (message.storeInfos) {
       obj.storeInfos = message.storeInfos.map(e => e ? StoreInfo.toJSON(e) : undefined);
@@ -97,7 +97,7 @@ export const CommitInfo = {
 
   fromPartial<I extends Exact<DeepPartial<CommitInfo>, I>>(object: I): CommitInfo {
     const message = createBaseCommitInfo();
-    message.version = object.version ?? "0";
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
   }
@@ -175,14 +175,14 @@ export const StoreInfo = {
 
 function createBaseCommitID(): CommitID {
   return {
-    version: "0",
+    version: Long.ZERO,
     hash: new Uint8Array()
   };
 }
 
 export const CommitID = {
   encode(message: CommitID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.version !== "0") {
+    if (!message.version.isZero()) {
       writer.uint32(8).int64(message.version);
     }
 
@@ -203,7 +203,7 @@ export const CommitID = {
 
       switch (tag >>> 3) {
         case 1:
-          message.version = longToString((reader.int64() as Long));
+          message.version = (reader.int64() as Long);
           break;
 
         case 2:
@@ -221,21 +221,21 @@ export const CommitID = {
 
   fromJSON(object: any): CommitID {
     return {
-      version: isSet(object.version) ? String(object.version) : "0",
+      version: isSet(object.version) ? Long.fromString(object.version) : Long.ZERO,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
 
   toJSON(message: CommitID): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<CommitID>, I>>(object: I): CommitID {
     const message = createBaseCommitID();
-    message.version = object.version ?? "0";
+    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.hash = object.hash ?? new Uint8Array();
     return message;
   }
@@ -279,13 +279,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

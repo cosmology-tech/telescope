@@ -31,7 +31,7 @@ export interface Explain {
 
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
-  id: string;
+  id: Long;
   /** Index of the value in the values list. */
 
   valueIndex: number;
@@ -119,14 +119,14 @@ export const Explain = {
 
 function createBaseExplain_ExprStep(): Explain_ExprStep {
   return {
-    id: "0",
+    id: Long.ZERO,
     valueIndex: 0
   };
 }
 
 export const Explain_ExprStep = {
   encode(message: Explain_ExprStep, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
     }
 
@@ -147,7 +147,7 @@ export const Explain_ExprStep = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = longToString((reader.int64() as Long));
+          message.id = (reader.int64() as Long);
           break;
 
         case 2:
@@ -165,34 +165,30 @@ export const Explain_ExprStep = {
 
   fromJSON(object: any): Explain_ExprStep {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
       valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
     };
   },
 
   toJSON(message: Explain_ExprStep): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Explain_ExprStep>, I>>(object: I): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.valueIndex = object.valueIndex ?? 0;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

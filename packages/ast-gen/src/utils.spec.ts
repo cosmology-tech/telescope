@@ -1,4 +1,4 @@
-import { encoded } from './messages';
+import { toObjectWithEncodedMethods } from './messages';
 import { recursiveNamespace } from './utils';
 import generate from '@babel/generator';
 import { mutations } from './__fixtures__';
@@ -11,6 +11,6 @@ const expectCode = (ast) => {
 
 it('recursiveNamespace', async () => {
     expectCode(
-        recursiveNamespace(['osmosis', 'gamm', 'v1beta', 'pools'].reverse(), [encoded(mutations)])[0]
+        recursiveNamespace(['osmosis', 'gamm', 'v1beta', 'pools'].reverse(), [toObjectWithEncodedMethods(mutations)])[0]
     );
 });

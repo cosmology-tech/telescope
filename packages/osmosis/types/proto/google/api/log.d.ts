@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { LabelDescriptor } from "../../google/api/label";
 /**
@@ -40,40 +41,10 @@ export declare const LogDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): LogDescriptor;
     fromJSON(object: any): LogDescriptor;
     toJSON(message: LogDescriptor): unknown;
-    fromPartial<I extends {
-        name?: string;
-        labels?: {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[];
-        description?: string;
-        displayName?: string;
-    } & {
-        name?: string;
-        labels?: {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[] & ({
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        } & {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        } & Record<Exclude<keyof I["labels"][number], keyof LabelDescriptor>, never>)[] & Record<Exclude<keyof I["labels"], keyof {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[]>, never>;
-        description?: string;
-        displayName?: string;
-    } & Record<Exclude<keyof I, keyof LogDescriptor>, never>>(object: I): LogDescriptor;
+    fromPartial<I extends unknown>(object: I): LogDescriptor;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

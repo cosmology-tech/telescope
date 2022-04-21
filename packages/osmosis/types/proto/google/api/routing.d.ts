@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Specifies the routing information that should be sent along with the request
@@ -438,42 +439,17 @@ export declare const RoutingRule: {
     decode(input: _m0.Reader | Uint8Array, length?: number): RoutingRule;
     fromJSON(object: any): RoutingRule;
     toJSON(message: RoutingRule): unknown;
-    fromPartial<I extends {
-        routingParameters?: {
-            field?: string;
-            pathTemplate?: string;
-        }[];
-    } & {
-        routingParameters?: {
-            field?: string;
-            pathTemplate?: string;
-        }[] & ({
-            field?: string;
-            pathTemplate?: string;
-        } & {
-            field?: string;
-            pathTemplate?: string;
-        } & Record<Exclude<keyof I["routingParameters"][number], keyof RoutingParameter>, never>)[] & Record<Exclude<keyof I["routingParameters"], keyof {
-            field?: string;
-            pathTemplate?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "routingParameters">, never>>(object: I): RoutingRule;
+    fromPartial<I extends unknown>(object: I): RoutingRule;
 };
 export declare const RoutingParameter: {
     encode(message: RoutingParameter, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): RoutingParameter;
     fromJSON(object: any): RoutingParameter;
     toJSON(message: RoutingParameter): unknown;
-    fromPartial<I extends {
-        field?: string;
-        pathTemplate?: string;
-    } & {
-        field?: string;
-        pathTemplate?: string;
-    } & Record<Exclude<keyof I, keyof RoutingParameter>, never>>(object: I): RoutingParameter;
+    fromPartial<I extends unknown>(object: I): RoutingParameter;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

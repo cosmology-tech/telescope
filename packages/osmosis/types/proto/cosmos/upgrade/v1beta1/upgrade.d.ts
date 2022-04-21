@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 /** Plan specifies information about a planned upgrade and when it should occur. */
@@ -24,7 +25,7 @@ export interface Plan {
      * The height at which the upgrade must be performed.
      * Only used if Time is not set.
      */
-    height: string;
+    height: Long;
     /**
      * Any application specific upgrade info to be included on-chain
      * such as a git commit that validators could automatically upgrade to
@@ -73,109 +74,38 @@ export interface ModuleVersion {
     /** name of the app module */
     name: string;
     /** consensus version of the app module */
-    version: string;
+    version: Long;
 }
 export declare const Plan: {
     encode(message: Plan, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Plan;
     fromJSON(object: any): Plan;
     toJSON(message: Plan): unknown;
-    fromPartial<I extends {
-        name?: string;
-        time?: Date;
-        height?: string;
-        info?: string;
-        upgradedClientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        name?: string;
-        time?: Date;
-        height?: string;
-        info?: string;
-        upgradedClientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["upgradedClientState"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof Plan>, never>>(object: I): Plan;
+    fromPartial<I extends unknown>(object: I): Plan;
 };
 export declare const SoftwareUpgradeProposal: {
     encode(message: SoftwareUpgradeProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SoftwareUpgradeProposal;
     fromJSON(object: any): SoftwareUpgradeProposal;
     toJSON(message: SoftwareUpgradeProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        plan?: {
-            name?: string;
-            time?: Date;
-            height?: string;
-            info?: string;
-            upgradedClientState?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        };
-    } & {
-        title?: string;
-        description?: string;
-        plan?: {
-            name?: string;
-            time?: Date;
-            height?: string;
-            info?: string;
-            upgradedClientState?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            name?: string;
-            time?: Date;
-            height?: string;
-            info?: string;
-            upgradedClientState?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["plan"]["upgradedClientState"], keyof Any>, never>;
-        } & Record<Exclude<keyof I["plan"], keyof Plan>, never>;
-    } & Record<Exclude<keyof I, keyof SoftwareUpgradeProposal>, never>>(object: I): SoftwareUpgradeProposal;
+    fromPartial<I extends unknown>(object: I): SoftwareUpgradeProposal;
 };
 export declare const CancelSoftwareUpgradeProposal: {
     encode(message: CancelSoftwareUpgradeProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal;
     fromJSON(object: any): CancelSoftwareUpgradeProposal;
     toJSON(message: CancelSoftwareUpgradeProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-    } & {
-        title?: string;
-        description?: string;
-    } & Record<Exclude<keyof I, keyof CancelSoftwareUpgradeProposal>, never>>(object: I): CancelSoftwareUpgradeProposal;
+    fromPartial<I extends unknown>(object: I): CancelSoftwareUpgradeProposal;
 };
 export declare const ModuleVersion: {
     encode(message: ModuleVersion, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleVersion;
     fromJSON(object: any): ModuleVersion;
     toJSON(message: ModuleVersion): unknown;
-    fromPartial<I extends {
-        name?: string;
-        version?: string;
-    } & {
-        name?: string;
-        version?: string;
-    } & Record<Exclude<keyof I, keyof ModuleVersion>, never>>(object: I): ModuleVersion;
+    fromPartial<I extends unknown>(object: I): ModuleVersion;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

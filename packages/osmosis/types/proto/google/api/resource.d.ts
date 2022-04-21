@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * A simple descriptor of a resource type.
@@ -220,39 +221,17 @@ export declare const ResourceDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ResourceDescriptor;
     fromJSON(object: any): ResourceDescriptor;
     toJSON(message: ResourceDescriptor): unknown;
-    fromPartial<I extends {
-        type?: string;
-        pattern?: string[];
-        nameField?: string;
-        history?: ResourceDescriptor_History;
-        plural?: string;
-        singular?: string;
-        style?: ResourceDescriptor_Style[];
-    } & {
-        type?: string;
-        pattern?: string[] & string[] & Record<Exclude<keyof I["pattern"], keyof string[]>, never>;
-        nameField?: string;
-        history?: ResourceDescriptor_History;
-        plural?: string;
-        singular?: string;
-        style?: ResourceDescriptor_Style[] & ResourceDescriptor_Style[] & Record<Exclude<keyof I["style"], keyof ResourceDescriptor_Style[]>, never>;
-    } & Record<Exclude<keyof I, keyof ResourceDescriptor>, never>>(object: I): ResourceDescriptor;
+    fromPartial<I extends unknown>(object: I): ResourceDescriptor;
 };
 export declare const ResourceReference: {
     encode(message: ResourceReference, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ResourceReference;
     fromJSON(object: any): ResourceReference;
     toJSON(message: ResourceReference): unknown;
-    fromPartial<I extends {
-        type?: string;
-        childType?: string;
-    } & {
-        type?: string;
-        childType?: string;
-    } & Record<Exclude<keyof I, keyof ResourceReference>, never>>(object: I): ResourceReference;
+    fromPartial<I extends unknown>(object: I): ResourceReference;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

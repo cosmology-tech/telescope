@@ -6,11 +6,11 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "../../osmosis/lockup/lock";
 export interface MsgLockTokens {
   owner: string;
-  duration: string;
+  duration: Duration;
   coins: Coin[];
 }
 export interface MsgLockTokensResponse {
-  ID: string;
+  ID: Long;
 }
 export interface MsgBeginUnlockingAll {
   owner: string;
@@ -20,7 +20,7 @@ export interface MsgBeginUnlockingAllResponse {
 }
 export interface MsgBeginUnlocking {
   owner: string;
-  ID: string;
+  ID: Long;
   /** Amount of unlocking coins. Unlock all if not set. */
 
   coins: Coin[];
@@ -44,7 +44,7 @@ export const MsgLockTokens = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.coins) {
@@ -68,7 +68,7 @@ export const MsgLockTokens = {
           break;
 
         case 2:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
@@ -87,7 +87,7 @@ export const MsgLockTokens = {
   fromJSON(object: any): MsgLockTokens {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -95,7 +95,7 @@ export const MsgLockTokens = {
   toJSON(message: MsgLockTokens): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -109,7 +109,7 @@ export const MsgLockTokens = {
   fromPartial<I extends Exact<DeepPartial<MsgLockTokens>, I>>(object: I): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
-    message.duration = object.duration ?? undefined;
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -118,13 +118,13 @@ export const MsgLockTokens = {
 
 function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
   return {
-    ID: "0"
+    ID: Long.UZERO
   };
 }
 
 export const MsgLockTokensResponse = {
   encode(message: MsgLockTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ID !== "0") {
+    if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
     }
 
@@ -141,7 +141,7 @@ export const MsgLockTokensResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.ID = longToString((reader.uint64() as Long));
+          message.ID = (reader.uint64() as Long);
           break;
 
         default:
@@ -155,19 +155,19 @@ export const MsgLockTokensResponse = {
 
   fromJSON(object: any): MsgLockTokensResponse {
     return {
-      ID: isSet(object.ID) ? String(object.ID) : "0"
+      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO
     };
   },
 
   toJSON(message: MsgLockTokensResponse): unknown {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
+    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgLockTokensResponse>, I>>(object: I): MsgLockTokensResponse {
     const message = createBaseMsgLockTokensResponse();
-    message.ID = object.ID ?? "0";
+    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
   }
 
@@ -296,7 +296,7 @@ export const MsgBeginUnlockingAllResponse = {
 function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
   return {
     owner: "",
-    ID: "0",
+    ID: Long.UZERO,
     coins: []
   };
 }
@@ -307,7 +307,7 @@ export const MsgBeginUnlocking = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.ID !== "0") {
+    if (!message.ID.isZero()) {
       writer.uint32(16).uint64(message.ID);
     }
 
@@ -332,7 +332,7 @@ export const MsgBeginUnlocking = {
           break;
 
         case 2:
-          message.ID = longToString((reader.uint64() as Long));
+          message.ID = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -351,7 +351,7 @@ export const MsgBeginUnlocking = {
   fromJSON(object: any): MsgBeginUnlocking {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? String(object.ID) : "0",
+      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -359,7 +359,7 @@ export const MsgBeginUnlocking = {
   toJSON(message: MsgBeginUnlocking): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = message.ID);
+    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -373,7 +373,7 @@ export const MsgBeginUnlocking = {
   fromPartial<I extends Exact<DeepPartial<MsgBeginUnlocking>, I>>(object: I): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
     message.owner = object.owner ?? "";
-    message.ID = object.ID ?? "0";
+    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -439,24 +439,9 @@ export const MsgBeginUnlockingResponse = {
 /** Msg defines the Msg service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

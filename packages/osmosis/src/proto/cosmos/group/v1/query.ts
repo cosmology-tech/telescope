@@ -7,7 +7,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  groupId: Long;
 }
 /** QueryGroupInfoResponse is the Query/GroupInfo response type. */
 
@@ -31,7 +31,7 @@ export interface QueryGroupPolicyInfoResponse {
 
 export interface QueryGroupMembersRequest {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  groupId: Long;
   /** pagination defines an optional pagination for the request. */
 
   pagination: PageRequest;
@@ -67,7 +67,7 @@ export interface QueryGroupsByAdminResponse {
 
 export interface QueryGroupPoliciesByGroupRequest {
   /** group_id is the unique ID of the group policy's group. */
-  groupId: string;
+  groupId: Long;
   /** pagination defines an optional pagination for the request. */
 
   pagination: PageRequest;
@@ -103,7 +103,7 @@ export interface QueryGroupPoliciesByAdminResponse {
 
 export interface QueryProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: string;
+  proposalId: Long;
 }
 /** QueryProposalResponse is the Query/Proposal response type. */
 
@@ -133,7 +133,7 @@ export interface QueryProposalsByGroupPolicyResponse {
 
 export interface QueryVoteByProposalVoterRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: string;
+  proposalId: Long;
   /** voter is a proposal voter account address. */
 
   voter: string;
@@ -148,7 +148,7 @@ export interface QueryVoteByProposalVoterResponse {
 
 export interface QueryVotesByProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: string;
+  proposalId: Long;
   /** pagination defines an optional pagination for the request. */
 
   pagination: PageRequest;
@@ -202,7 +202,7 @@ export interface QueryGroupsByMemberResponse {
 
 export interface QueryTallyResultRequest {
   /** proposal_id is the unique id of a proposal. */
-  proposalId: string;
+  proposalId: Long;
 }
 /** QueryTallyResultResponse is the Query/TallyResult response type. */
 
@@ -213,13 +213,13 @@ export interface QueryTallyResultResponse {
 
 function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
   return {
-    groupId: "0"
+    groupId: Long.UZERO
   };
 }
 
 export const QueryGroupInfoRequest = {
   encode(message: QueryGroupInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -236,7 +236,7 @@ export const QueryGroupInfoRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         default:
@@ -250,19 +250,19 @@ export const QueryGroupInfoRequest = {
 
   fromJSON(object: any): QueryGroupInfoRequest {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0"
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryGroupInfoRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGroupInfoRequest>, I>>(object: I): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   }
 
@@ -441,14 +441,14 @@ export const QueryGroupPolicyInfoResponse = {
 
 function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
   return {
-    groupId: "0",
+    groupId: Long.UZERO,
     pagination: undefined
   };
 }
 
 export const QueryGroupMembersRequest = {
   encode(message: QueryGroupMembersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -469,7 +469,7 @@ export const QueryGroupMembersRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -487,21 +487,21 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
 
   toJSON(message: QueryGroupMembersRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGroupMembersRequest>, I>>(object: I): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
@@ -729,14 +729,14 @@ export const QueryGroupsByAdminResponse = {
 
 function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
   return {
-    groupId: "0",
+    groupId: Long.UZERO,
     pagination: undefined
   };
 }
 
 export const QueryGroupPoliciesByGroupRequest = {
   encode(message: QueryGroupPoliciesByGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -757,7 +757,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -775,21 +775,21 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
 
   toJSON(message: QueryGroupPoliciesByGroupRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGroupPoliciesByGroupRequest>, I>>(object: I): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
@@ -1017,13 +1017,13 @@ export const QueryGroupPoliciesByAdminResponse = {
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
   return {
-    proposalId: "0"
+    proposalId: Long.UZERO
   };
 }
 
 export const QueryProposalRequest = {
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1040,7 +1040,7 @@ export const QueryProposalRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         default:
@@ -1054,19 +1054,19 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0"
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryProposalRequest>, I>>(object: I): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 
@@ -1275,14 +1275,14 @@ export const QueryProposalsByGroupPolicyResponse = {
 
 function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
   return {
-    proposalId: "0",
+    proposalId: Long.UZERO,
     voter: ""
   };
 }
 
 export const QueryVoteByProposalVoterRequest = {
   encode(message: QueryVoteByProposalVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1303,7 +1303,7 @@ export const QueryVoteByProposalVoterRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -1321,21 +1321,21 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
 
   toJSON(message: QueryVoteByProposalVoterRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryVoteByProposalVoterRequest>, I>>(object: I): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
     return message;
   }
@@ -1401,14 +1401,14 @@ export const QueryVoteByProposalVoterResponse = {
 
 function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
   return {
-    proposalId: "0",
+    proposalId: Long.UZERO,
     pagination: undefined
   };
 }
 
 export const QueryVotesByProposalRequest = {
   encode(message: QueryVotesByProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1429,7 +1429,7 @@ export const QueryVotesByProposalRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -1447,21 +1447,21 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
 
   toJSON(message: QueryVotesByProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryVotesByProposalRequest>, I>>(object: I): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   }
@@ -1833,13 +1833,13 @@ export const QueryGroupsByMemberResponse = {
 
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
   return {
-    proposalId: "0"
+    proposalId: Long.UZERO
   };
 }
 
 export const QueryTallyResultRequest = {
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1856,7 +1856,7 @@ export const QueryTallyResultRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         default:
@@ -1870,19 +1870,19 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0"
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
     };
   },
 
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryTallyResultRequest>, I>>(object: I): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 
@@ -1947,13 +1947,9 @@ export const QueryTallyResultResponse = {
 /** Query is the cosmos.group.v1 Query service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 export declare enum ScalarType {
     SCALAR_TYPE_UNSPECIFIED = 0,
@@ -61,31 +62,17 @@ export declare const InterfaceDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceDescriptor;
     fromJSON(object: any): InterfaceDescriptor;
     toJSON(message: InterfaceDescriptor): unknown;
-    fromPartial<I extends {
-        name?: string;
-        description?: string;
-    } & {
-        name?: string;
-        description?: string;
-    } & Record<Exclude<keyof I, keyof InterfaceDescriptor>, never>>(object: I): InterfaceDescriptor;
+    fromPartial<I extends unknown>(object: I): InterfaceDescriptor;
 };
 export declare const ScalarDescriptor: {
     encode(message: ScalarDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ScalarDescriptor;
     fromJSON(object: any): ScalarDescriptor;
     toJSON(message: ScalarDescriptor): unknown;
-    fromPartial<I extends {
-        name?: string;
-        description?: string;
-        fieldType?: ScalarType[];
-    } & {
-        name?: string;
-        description?: string;
-        fieldType?: ScalarType[] & ScalarType[] & Record<Exclude<keyof I["fieldType"], keyof ScalarType[]>, never>;
-    } & Record<Exclude<keyof I, keyof ScalarDescriptor>, never>>(object: I): ScalarDescriptor;
+    fromPartial<I extends unknown>(object: I): ScalarDescriptor;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

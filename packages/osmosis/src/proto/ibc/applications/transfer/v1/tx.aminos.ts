@@ -47,7 +47,7 @@ export const AminoConverter = {
           revision_height: omitDefault(timeoutHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(timeoutHeight.revisionNumber)?.toString()
         } : {},
-        timeout_timestamp: timeoutTimestamp
+        timeout_timestamp: timeoutTimestamp.toString()
       };
     },
     fromAmino: ({
@@ -72,7 +72,7 @@ export const AminoConverter = {
           revisionHeight: Long.fromString(timeout_height.revision_height || "0", true),
           revisionNumber: Long.fromString(timeout_height.revision_number || "0", true)
         } : undefined,
-        timeoutTimestamp: timeout_timestamp
+        timeoutTimestamp: Long.fromString(timeout_timestamp)
       };
     }
   }

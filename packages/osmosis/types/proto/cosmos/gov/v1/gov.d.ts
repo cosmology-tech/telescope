@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
@@ -61,13 +62,13 @@ export interface WeightedVoteOption {
  * proposal.
  */
 export interface Deposit {
-    proposalId: string;
+    proposalId: Long;
     depositor: string;
     amount: Coin[];
 }
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
-    id: string;
+    id: Long;
     messages: Any[];
     status: ProposalStatus;
     /**
@@ -96,7 +97,7 @@ export interface TallyResult {
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
-    proposalId: string;
+    proposalId: Long;
     voter: string;
     options: WeightedVoteOption[];
     /** metadata is any  arbitrary metadata to attached to the vote. */
@@ -137,223 +138,59 @@ export declare const WeightedVoteOption: {
     decode(input: _m0.Reader | Uint8Array, length?: number): WeightedVoteOption;
     fromJSON(object: any): WeightedVoteOption;
     toJSON(message: WeightedVoteOption): unknown;
-    fromPartial<I extends {
-        option?: VoteOption;
-        weight?: string;
-    } & {
-        option?: VoteOption;
-        weight?: string;
-    } & Record<Exclude<keyof I, keyof WeightedVoteOption>, never>>(object: I): WeightedVoteOption;
+    fromPartial<I extends unknown>(object: I): WeightedVoteOption;
 };
 export declare const Deposit: {
     encode(message: Deposit, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Deposit;
     fromJSON(object: any): Deposit;
     toJSON(message: Deposit): unknown;
-    fromPartial<I extends {
-        proposalId?: string;
-        depositor?: string;
-        amount?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        proposalId?: string;
-        depositor?: string;
-        amount?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["amount"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Deposit>, never>>(object: I): Deposit;
+    fromPartial<I extends unknown>(object: I): Deposit;
 };
 export declare const Proposal: {
     encode(message: Proposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Proposal;
     fromJSON(object: any): Proposal;
     toJSON(message: Proposal): unknown;
-    fromPartial<I extends {
-        id?: string;
-        messages?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-        status?: ProposalStatus;
-        finalTallyResult?: {
-            yesCount?: string;
-            abstainCount?: string;
-            noCount?: string;
-            noWithVetoCount?: string;
-        };
-        submitTime?: Date;
-        depositEndTime?: Date;
-        totalDeposit?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        votingStartTime?: Date;
-        votingEndTime?: Date;
-        metadata?: string;
-    } & {
-        id?: string;
-        messages?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["messages"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["messages"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-        status?: ProposalStatus;
-        finalTallyResult?: {
-            yesCount?: string;
-            abstainCount?: string;
-            noCount?: string;
-            noWithVetoCount?: string;
-        } & {
-            yesCount?: string;
-            abstainCount?: string;
-            noCount?: string;
-            noWithVetoCount?: string;
-        } & Record<Exclude<keyof I["finalTallyResult"], keyof TallyResult>, never>;
-        submitTime?: Date;
-        depositEndTime?: Date;
-        totalDeposit?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["totalDeposit"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["totalDeposit"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        votingStartTime?: Date;
-        votingEndTime?: Date;
-        metadata?: string;
-    } & Record<Exclude<keyof I, keyof Proposal>, never>>(object: I): Proposal;
+    fromPartial<I extends unknown>(object: I): Proposal;
 };
 export declare const TallyResult: {
     encode(message: TallyResult, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TallyResult;
     fromJSON(object: any): TallyResult;
     toJSON(message: TallyResult): unknown;
-    fromPartial<I extends {
-        yesCount?: string;
-        abstainCount?: string;
-        noCount?: string;
-        noWithVetoCount?: string;
-    } & {
-        yesCount?: string;
-        abstainCount?: string;
-        noCount?: string;
-        noWithVetoCount?: string;
-    } & Record<Exclude<keyof I, keyof TallyResult>, never>>(object: I): TallyResult;
+    fromPartial<I extends unknown>(object: I): TallyResult;
 };
 export declare const Vote: {
     encode(message: Vote, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Vote;
     fromJSON(object: any): Vote;
     toJSON(message: Vote): unknown;
-    fromPartial<I extends {
-        proposalId?: string;
-        voter?: string;
-        options?: {
-            option?: VoteOption;
-            weight?: string;
-        }[];
-        metadata?: string;
-    } & {
-        proposalId?: string;
-        voter?: string;
-        options?: {
-            option?: VoteOption;
-            weight?: string;
-        }[] & ({
-            option?: VoteOption;
-            weight?: string;
-        } & {
-            option?: VoteOption;
-            weight?: string;
-        } & Record<Exclude<keyof I["options"][number], keyof WeightedVoteOption>, never>)[] & Record<Exclude<keyof I["options"], keyof {
-            option?: VoteOption;
-            weight?: string;
-        }[]>, never>;
-        metadata?: string;
-    } & Record<Exclude<keyof I, keyof Vote>, never>>(object: I): Vote;
+    fromPartial<I extends unknown>(object: I): Vote;
 };
 export declare const DepositParams: {
     encode(message: DepositParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DepositParams;
     fromJSON(object: any): DepositParams;
     toJSON(message: DepositParams): unknown;
-    fromPartial<I extends {
-        minDeposit?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        maxDepositPeriod?: string;
-    } & {
-        minDeposit?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["minDeposit"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["minDeposit"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        maxDepositPeriod?: string;
-    } & Record<Exclude<keyof I, keyof DepositParams>, never>>(object: I): DepositParams;
+    fromPartial<I extends unknown>(object: I): DepositParams;
 };
 export declare const VotingParams: {
     encode(message: VotingParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): VotingParams;
     fromJSON(object: any): VotingParams;
     toJSON(message: VotingParams): unknown;
-    fromPartial<I extends {
-        votingPeriod?: string;
-    } & {
-        votingPeriod?: string;
-    } & Record<Exclude<keyof I, "votingPeriod">, never>>(object: I): VotingParams;
+    fromPartial<I extends unknown>(object: I): VotingParams;
 };
 export declare const TallyParams: {
     encode(message: TallyParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TallyParams;
     fromJSON(object: any): TallyParams;
     toJSON(message: TallyParams): unknown;
-    fromPartial<I extends {
-        quorum?: string;
-        threshold?: string;
-        vetoThreshold?: string;
-    } & {
-        quorum?: string;
-        threshold?: string;
-        vetoThreshold?: string;
-    } & Record<Exclude<keyof I, keyof TallyParams>, never>>(object: I): TallyParams;
+    fromPartial<I extends unknown>(object: I): TallyParams;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { LaunchStage } from "../../google/api/launch_stage";
 import { LabelDescriptor } from "../../google/api/label";
@@ -121,114 +122,38 @@ export declare const MonitoredResourceDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceDescriptor;
     fromJSON(object: any): MonitoredResourceDescriptor;
     toJSON(message: MonitoredResourceDescriptor): unknown;
-    fromPartial<I extends {
-        name?: string;
-        type?: string;
-        displayName?: string;
-        description?: string;
-        labels?: {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[];
-        launchStage?: LaunchStage;
-    } & {
-        name?: string;
-        type?: string;
-        displayName?: string;
-        description?: string;
-        labels?: {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[] & ({
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        } & {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        } & Record<Exclude<keyof I["labels"][number], keyof LabelDescriptor>, never>)[] & Record<Exclude<keyof I["labels"], keyof {
-            key?: string;
-            valueType?: import("../../google/api/label").LabelDescriptor_ValueType;
-            description?: string;
-        }[]>, never>;
-        launchStage?: LaunchStage;
-    } & Record<Exclude<keyof I, keyof MonitoredResourceDescriptor>, never>>(object: I): MonitoredResourceDescriptor;
+    fromPartial<I extends unknown>(object: I): MonitoredResourceDescriptor;
 };
 export declare const MonitoredResource: {
     encode(message: MonitoredResource, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource;
     fromJSON(object: any): MonitoredResource;
     toJSON(message: MonitoredResource): unknown;
-    fromPartial<I extends {
-        type?: string;
-        labels?: {
-            [x: string]: string;
-        };
-    } & {
-        type?: string;
-        labels?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["labels"], string | number>, never>;
-    } & Record<Exclude<keyof I, keyof MonitoredResource>, never>>(object: I): MonitoredResource;
+    fromPartial<I extends unknown>(object: I): MonitoredResource;
 };
 export declare const MonitoredResource_LabelsEntry: {
     encode(message: MonitoredResource_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_LabelsEntry;
     fromJSON(object: any): MonitoredResource_LabelsEntry;
     toJSON(message: MonitoredResource_LabelsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof MonitoredResource_LabelsEntry>, never>>(object: I): MonitoredResource_LabelsEntry;
+    fromPartial<I extends unknown>(object: I): MonitoredResource_LabelsEntry;
 };
 export declare const MonitoredResourceMetadata: {
     encode(message: MonitoredResourceMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata;
     fromJSON(object: any): MonitoredResourceMetadata;
     toJSON(message: MonitoredResourceMetadata): unknown;
-    fromPartial<I extends {
-        systemLabels?: {
-            [x: string]: any;
-        };
-        userLabels?: {
-            [x: string]: string;
-        };
-    } & {
-        systemLabels?: {
-            [x: string]: any;
-        } & {
-            [x: string]: any;
-        } & Record<Exclude<keyof I["systemLabels"], string | number>, never>;
-        userLabels?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["userLabels"], string | number>, never>;
-    } & Record<Exclude<keyof I, keyof MonitoredResourceMetadata>, never>>(object: I): MonitoredResourceMetadata;
+    fromPartial<I extends unknown>(object: I): MonitoredResourceMetadata;
 };
 export declare const MonitoredResourceMetadata_UserLabelsEntry: {
     encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata_UserLabelsEntry;
     fromJSON(object: any): MonitoredResourceMetadata_UserLabelsEntry;
     toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof MonitoredResourceMetadata_UserLabelsEntry>, never>>(object: I): MonitoredResourceMetadata_UserLabelsEntry;
+    fromPartial<I extends unknown>(object: I): MonitoredResourceMetadata_UserLabelsEntry;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

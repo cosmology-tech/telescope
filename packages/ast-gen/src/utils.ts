@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { kebab, snake } from "case";
-import { Field } from './types';
+import { kebab } from "case";
+import { Field, DEFAULT_AMINO_EXCEPTIONS } from './types';
 
 const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
@@ -48,21 +48,28 @@ export const FieldTypeAsts = {
     }
 };
 
-export const typeUrlToAmino = (str, MsgName) => {
-    const name = str.replace(/^\//, '');
+export const typeUrlToAmino = (typeUrl, exceptions = {}) => {
+    const exceptionsToCheck = {
+        ...exceptions,
+        ...DEFAULT_AMINO_EXCEPTIONS
+    }
+    const exceptionAminoName = exceptionsToCheck?.[typeUrl]?.aminoType;
+    if (exceptionAminoName) return exceptionAminoName;
+
+    const name = typeUrl.replace(/^\//, '');
     const elements = name.split('.');
     const pkg = elements[0];
     switch (pkg) {
         case 'cosmos':
         case 'ibc':
-            return `cosmos-sdk/${MsgName}`;
+            return `cosmos-sdk/${elements[elements.length - 1]}`;
         case 'osmosis': {
             const n = elements.filter(a => !a.match(/v1beta1/));
             n[n.length - 1] = kebab(n[n.length - 1]);
             n[n.length - 1] = n[n.length - 1].replace(/^msg-/, '');
             return n.join('/');
         } default:
-            return str;
+            return typeUrl;
     }
 }
 

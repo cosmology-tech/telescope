@@ -25,7 +25,7 @@ export interface CheckedExpr {
    *   the message.
    */
   referenceMap: {
-    [key: string]: Reference;
+    [key: Long]: Reference;
   };
   /**
    * A map from expression ids to types.
@@ -36,7 +36,7 @@ export interface CheckedExpr {
    */
 
   typeMap: {
-    [key: string]: Type;
+    [key: Long]: Type;
   };
   /**
    * The source info derived from input that generated the parsed `expr` and
@@ -63,11 +63,11 @@ export interface CheckedExpr {
   expr: Expr;
 }
 export interface CheckedExpr_ReferenceMapEntry {
-  key: string;
+  key: Long;
   value: Reference;
 }
 export interface CheckedExpr_TypeMapEntry {
-  key: string;
+  key: Long;
   value: Type;
 }
 /** Represents a CEL type. */
@@ -570,15 +570,15 @@ export const CheckedExpr = {
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
-        [key: string]: Reference;
+        [key: Long]: Reference;
       }>((acc, [key, value]) => {
-        acc[key] = Reference.fromJSON(value);
+        acc[Number(key)] = Reference.fromJSON(value);
         return acc;
       }, {}) : {},
       typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
-        [key: string]: Type;
+        [key: Long]: Type;
       }>((acc, [key, value]) => {
-        acc[key] = Type.fromJSON(value);
+        acc[Number(key)] = Type.fromJSON(value);
         return acc;
       }, {}) : {},
       sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
@@ -614,19 +614,19 @@ export const CheckedExpr = {
   fromPartial<I extends Exact<DeepPartial<CheckedExpr>, I>>(object: I): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
-      [key: string]: Reference;
+      [key: Long]: Reference;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = Reference.fromPartial(value);
+        acc[Number(key)] = Reference.fromPartial(value);
       }
 
       return acc;
     }, {});
     message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
-      [key: string]: Type;
+      [key: Long]: Type;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = Type.fromPartial(value);
+        acc[Number(key)] = Type.fromPartial(value);
       }
 
       return acc;
@@ -641,14 +641,14 @@ export const CheckedExpr = {
 
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {
-    key: "0",
+    key: Long.ZERO,
     value: undefined
   };
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
   encode(message: CheckedExpr_ReferenceMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "0") {
+    if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
 
@@ -669,7 +669,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.key = longToString((reader.int64() as Long));
+          message.key = (reader.int64() as Long);
           break;
 
         case 2:
@@ -687,21 +687,21 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "0",
+      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
 
   toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<CheckedExpr_ReferenceMapEntry>, I>>(object: I): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
-    message.key = object.key ?? "0";
+    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   }
@@ -710,14 +710,14 @@ export const CheckedExpr_ReferenceMapEntry = {
 
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   return {
-    key: "0",
+    key: Long.ZERO,
     value: undefined
   };
 }
 
 export const CheckedExpr_TypeMapEntry = {
   encode(message: CheckedExpr_TypeMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "0") {
+    if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
 
@@ -738,7 +738,7 @@ export const CheckedExpr_TypeMapEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.key = longToString((reader.int64() as Long));
+          message.key = (reader.int64() as Long);
           break;
 
         case 2:
@@ -756,21 +756,21 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "0",
+      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
 
   toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<CheckedExpr_TypeMapEntry>, I>>(object: I): CheckedExpr_TypeMapEntry {
     const message = createBaseCheckedExpr_TypeMapEntry();
-    message.key = object.key ?? "0";
+    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
   }
@@ -1694,13 +1694,9 @@ export const Reference = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

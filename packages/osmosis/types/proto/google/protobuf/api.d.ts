@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { SourceContext } from "../../google/protobuf/source_context";
 import { Syntax, Option } from "../../google/protobuf/type";
@@ -165,240 +166,24 @@ export declare const Api: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Api;
     fromJSON(object: any): Api;
     toJSON(message: Api): unknown;
-    fromPartial<I extends {
-        name?: string;
-        methods?: {
-            name?: string;
-            requestTypeUrl?: string;
-            requestStreaming?: boolean;
-            responseTypeUrl?: string;
-            responseStreaming?: boolean;
-            options?: {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            }[];
-            syntax?: Syntax;
-        }[];
-        options?: {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[];
-        version?: string;
-        sourceContext?: {
-            fileName?: string;
-        };
-        mixins?: {
-            name?: string;
-            root?: string;
-        }[];
-        syntax?: Syntax;
-    } & {
-        name?: string;
-        methods?: {
-            name?: string;
-            requestTypeUrl?: string;
-            requestStreaming?: boolean;
-            responseTypeUrl?: string;
-            responseStreaming?: boolean;
-            options?: {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            }[];
-            syntax?: Syntax;
-        }[] & ({
-            name?: string;
-            requestTypeUrl?: string;
-            requestStreaming?: boolean;
-            responseTypeUrl?: string;
-            responseStreaming?: boolean;
-            options?: {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            }[];
-            syntax?: Syntax;
-        } & {
-            name?: string;
-            requestTypeUrl?: string;
-            requestStreaming?: boolean;
-            responseTypeUrl?: string;
-            responseStreaming?: boolean;
-            options?: {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            }[] & ({
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            } & {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                } & {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                } & Record<Exclude<keyof I["methods"][number]["options"][number]["value"], keyof import("./any").Any>, never>;
-            } & Record<Exclude<keyof I["methods"][number]["options"][number], keyof Option>, never>)[] & Record<Exclude<keyof I["methods"][number]["options"], keyof {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            }[]>, never>;
-            syntax?: Syntax;
-        } & Record<Exclude<keyof I["methods"][number], keyof Method>, never>)[] & Record<Exclude<keyof I["methods"], keyof {
-            name?: string;
-            requestTypeUrl?: string;
-            requestStreaming?: boolean;
-            responseTypeUrl?: string;
-            responseStreaming?: boolean;
-            options?: {
-                name?: string;
-                value?: {
-                    typeUrl?: string;
-                    value?: Uint8Array;
-                };
-            }[];
-            syntax?: Syntax;
-        }[]>, never>;
-        options?: {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[] & ({
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["options"][number]["value"], keyof import("./any").Any>, never>;
-        } & Record<Exclude<keyof I["options"][number], keyof Option>, never>)[] & Record<Exclude<keyof I["options"], keyof {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[]>, never>;
-        version?: string;
-        sourceContext?: {
-            fileName?: string;
-        } & {
-            fileName?: string;
-        } & Record<Exclude<keyof I["sourceContext"], "fileName">, never>;
-        mixins?: {
-            name?: string;
-            root?: string;
-        }[] & ({
-            name?: string;
-            root?: string;
-        } & {
-            name?: string;
-            root?: string;
-        } & Record<Exclude<keyof I["mixins"][number], keyof Mixin>, never>)[] & Record<Exclude<keyof I["mixins"], keyof {
-            name?: string;
-            root?: string;
-        }[]>, never>;
-        syntax?: Syntax;
-    } & Record<Exclude<keyof I, keyof Api>, never>>(object: I): Api;
+    fromPartial<I extends unknown>(object: I): Api;
 };
 export declare const Method: {
     encode(message: Method, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Method;
     fromJSON(object: any): Method;
     toJSON(message: Method): unknown;
-    fromPartial<I extends {
-        name?: string;
-        requestTypeUrl?: string;
-        requestStreaming?: boolean;
-        responseTypeUrl?: string;
-        responseStreaming?: boolean;
-        options?: {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[];
-        syntax?: Syntax;
-    } & {
-        name?: string;
-        requestTypeUrl?: string;
-        requestStreaming?: boolean;
-        responseTypeUrl?: string;
-        responseStreaming?: boolean;
-        options?: {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[] & ({
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["options"][number]["value"], keyof import("./any").Any>, never>;
-        } & Record<Exclude<keyof I["options"][number], keyof Option>, never>)[] & Record<Exclude<keyof I["options"], keyof {
-            name?: string;
-            value?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[]>, never>;
-        syntax?: Syntax;
-    } & Record<Exclude<keyof I, keyof Method>, never>>(object: I): Method;
+    fromPartial<I extends unknown>(object: I): Method;
 };
 export declare const Mixin: {
     encode(message: Mixin, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Mixin;
     fromJSON(object: any): Mixin;
     toJSON(message: Mixin): unknown;
-    fromPartial<I extends {
-        name?: string;
-        root?: string;
-    } & {
-        name?: string;
-        root?: string;
-    } & Record<Exclude<keyof I, keyof Mixin>, never>>(object: I): Mixin;
+    fromPartial<I extends unknown>(object: I): Mixin;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

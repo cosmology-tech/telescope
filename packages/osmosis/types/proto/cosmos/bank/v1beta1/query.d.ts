@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
@@ -155,624 +156,137 @@ export declare const QueryBalanceRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest;
     fromJSON(object: any): QueryBalanceRequest;
     toJSON(message: QueryBalanceRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-        denom?: string;
-    } & {
-        address?: string;
-        denom?: string;
-    } & Record<Exclude<keyof I, keyof QueryBalanceRequest>, never>>(object: I): QueryBalanceRequest;
+    fromPartial<I extends unknown>(object: I): QueryBalanceRequest;
 };
 export declare const QueryBalanceResponse: {
     encode(message: QueryBalanceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse;
     fromJSON(object: any): QueryBalanceResponse;
     toJSON(message: QueryBalanceResponse): unknown;
-    fromPartial<I extends {
-        balance?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        balance?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["balance"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, "balance">, never>>(object: I): QueryBalanceResponse;
+    fromPartial<I extends unknown>(object: I): QueryBalanceResponse;
 };
 export declare const QueryAllBalancesRequest: {
     encode(message: QueryAllBalancesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesRequest;
     fromJSON(object: any): QueryAllBalancesRequest;
     toJSON(message: QueryAllBalancesRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        address?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, keyof QueryAllBalancesRequest>, never>>(object: I): QueryAllBalancesRequest;
+    fromPartial<I extends unknown>(object: I): QueryAllBalancesRequest;
 };
 export declare const QueryAllBalancesResponse: {
     encode(message: QueryAllBalancesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesResponse;
     fromJSON(object: any): QueryAllBalancesResponse;
     toJSON(message: QueryAllBalancesResponse): unknown;
-    fromPartial<I extends {
-        balances?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        balances?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["balances"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["balances"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryAllBalancesResponse>, never>>(object: I): QueryAllBalancesResponse;
+    fromPartial<I extends unknown>(object: I): QueryAllBalancesResponse;
 };
 export declare const QuerySpendableBalancesRequest: {
     encode(message: QuerySpendableBalancesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesRequest;
     fromJSON(object: any): QuerySpendableBalancesRequest;
     toJSON(message: QuerySpendableBalancesRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        address?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, keyof QuerySpendableBalancesRequest>, never>>(object: I): QuerySpendableBalancesRequest;
+    fromPartial<I extends unknown>(object: I): QuerySpendableBalancesRequest;
 };
 export declare const QuerySpendableBalancesResponse: {
     encode(message: QuerySpendableBalancesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesResponse;
     fromJSON(object: any): QuerySpendableBalancesResponse;
     toJSON(message: QuerySpendableBalancesResponse): unknown;
-    fromPartial<I extends {
-        balances?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        balances?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["balances"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["balances"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QuerySpendableBalancesResponse>, never>>(object: I): QuerySpendableBalancesResponse;
+    fromPartial<I extends unknown>(object: I): QuerySpendableBalancesResponse;
 };
 export declare const QueryTotalSupplyRequest: {
     encode(message: QueryTotalSupplyRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyRequest;
     fromJSON(object: any): QueryTotalSupplyRequest;
     toJSON(message: QueryTotalSupplyRequest): unknown;
-    fromPartial<I extends {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryTotalSupplyRequest;
+    fromPartial<I extends unknown>(object: I): QueryTotalSupplyRequest;
 };
 export declare const QueryTotalSupplyResponse: {
     encode(message: QueryTotalSupplyResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyResponse;
     fromJSON(object: any): QueryTotalSupplyResponse;
     toJSON(message: QueryTotalSupplyResponse): unknown;
-    fromPartial<I extends {
-        supply?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        supply?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["supply"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["supply"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryTotalSupplyResponse>, never>>(object: I): QueryTotalSupplyResponse;
+    fromPartial<I extends unknown>(object: I): QueryTotalSupplyResponse;
 };
 export declare const QuerySupplyOfRequest: {
     encode(message: QuerySupplyOfRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfRequest;
     fromJSON(object: any): QuerySupplyOfRequest;
     toJSON(message: QuerySupplyOfRequest): unknown;
-    fromPartial<I extends {
-        denom?: string;
-    } & {
-        denom?: string;
-    } & Record<Exclude<keyof I, "denom">, never>>(object: I): QuerySupplyOfRequest;
+    fromPartial<I extends unknown>(object: I): QuerySupplyOfRequest;
 };
 export declare const QuerySupplyOfResponse: {
     encode(message: QuerySupplyOfResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfResponse;
     fromJSON(object: any): QuerySupplyOfResponse;
     toJSON(message: QuerySupplyOfResponse): unknown;
-    fromPartial<I extends {
-        amount?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        amount?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["amount"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, "amount">, never>>(object: I): QuerySupplyOfResponse;
+    fromPartial<I extends unknown>(object: I): QuerySupplyOfResponse;
 };
 export declare const QueryParamsRequest: {
     encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryParamsRequest;
+    fromPartial<I extends unknown>(_: I): QueryParamsRequest;
 };
 export declare const QueryParamsResponse: {
     encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
-    fromPartial<I extends {
-        params?: {
-            sendEnabled?: {
-                denom?: string;
-                enabled?: boolean;
-            }[];
-            defaultSendEnabled?: boolean;
-        };
-    } & {
-        params?: {
-            sendEnabled?: {
-                denom?: string;
-                enabled?: boolean;
-            }[];
-            defaultSendEnabled?: boolean;
-        } & {
-            sendEnabled?: {
-                denom?: string;
-                enabled?: boolean;
-            }[] & ({
-                denom?: string;
-                enabled?: boolean;
-            } & {
-                denom?: string;
-                enabled?: boolean;
-            } & Record<Exclude<keyof I["params"]["sendEnabled"][number], keyof import("../../../cosmos/bank/v1beta1/bank").SendEnabled>, never>)[] & Record<Exclude<keyof I["params"]["sendEnabled"], keyof {
-                denom?: string;
-                enabled?: boolean;
-            }[]>, never>;
-            defaultSendEnabled?: boolean;
-        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
-    } & Record<Exclude<keyof I, "params">, never>>(object: I): QueryParamsResponse;
+    fromPartial<I extends unknown>(object: I): QueryParamsResponse;
 };
 export declare const QueryDenomsMetadataRequest: {
     encode(message: QueryDenomsMetadataRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataRequest;
     fromJSON(object: any): QueryDenomsMetadataRequest;
     toJSON(message: QueryDenomsMetadataRequest): unknown;
-    fromPartial<I extends {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryDenomsMetadataRequest;
+    fromPartial<I extends unknown>(object: I): QueryDenomsMetadataRequest;
 };
 export declare const QueryDenomsMetadataResponse: {
     encode(message: QueryDenomsMetadataResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataResponse;
     fromJSON(object: any): QueryDenomsMetadataResponse;
     toJSON(message: QueryDenomsMetadataResponse): unknown;
-    fromPartial<I extends {
-        metadatas?: {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[];
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        metadatas?: {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[];
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        }[] & ({
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[];
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        } & {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[] & ({
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            } & {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[] & string[] & Record<Exclude<keyof I["metadatas"][number]["denomUnits"][number]["aliases"], keyof string[]>, never>;
-            } & Record<Exclude<keyof I["metadatas"][number]["denomUnits"][number], keyof import("../../../cosmos/bank/v1beta1/bank").DenomUnit>, never>)[] & Record<Exclude<keyof I["metadatas"][number]["denomUnits"], keyof {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[]>, never>;
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        } & Record<Exclude<keyof I["metadatas"][number], keyof Metadata>, never>)[] & Record<Exclude<keyof I["metadatas"], keyof {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[];
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryDenomsMetadataResponse>, never>>(object: I): QueryDenomsMetadataResponse;
+    fromPartial<I extends unknown>(object: I): QueryDenomsMetadataResponse;
 };
 export declare const QueryDenomMetadataRequest: {
     encode(message: QueryDenomMetadataRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataRequest;
     fromJSON(object: any): QueryDenomMetadataRequest;
     toJSON(message: QueryDenomMetadataRequest): unknown;
-    fromPartial<I extends {
-        denom?: string;
-    } & {
-        denom?: string;
-    } & Record<Exclude<keyof I, "denom">, never>>(object: I): QueryDenomMetadataRequest;
+    fromPartial<I extends unknown>(object: I): QueryDenomMetadataRequest;
 };
 export declare const QueryDenomMetadataResponse: {
     encode(message: QueryDenomMetadataResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataResponse;
     fromJSON(object: any): QueryDenomMetadataResponse;
     toJSON(message: QueryDenomMetadataResponse): unknown;
-    fromPartial<I extends {
-        metadata?: {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[];
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        };
-    } & {
-        metadata?: {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[];
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        } & {
-            description?: string;
-            denomUnits?: {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[] & ({
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            } & {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[] & string[] & Record<Exclude<keyof I["metadata"]["denomUnits"][number]["aliases"], keyof string[]>, never>;
-            } & Record<Exclude<keyof I["metadata"]["denomUnits"][number], keyof import("../../../cosmos/bank/v1beta1/bank").DenomUnit>, never>)[] & Record<Exclude<keyof I["metadata"]["denomUnits"], keyof {
-                denom?: string;
-                exponent?: number;
-                aliases?: string[];
-            }[]>, never>;
-            base?: string;
-            display?: string;
-            name?: string;
-            symbol?: string;
-            uri?: string;
-            uriHash?: string;
-        } & Record<Exclude<keyof I["metadata"], keyof Metadata>, never>;
-    } & Record<Exclude<keyof I, "metadata">, never>>(object: I): QueryDenomMetadataResponse;
+    fromPartial<I extends unknown>(object: I): QueryDenomMetadataResponse;
 };
 export declare const QueryDenomOwnersRequest: {
     encode(message: QueryDenomOwnersRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersRequest;
     fromJSON(object: any): QueryDenomOwnersRequest;
     toJSON(message: QueryDenomOwnersRequest): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        denom?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, keyof QueryDenomOwnersRequest>, never>>(object: I): QueryDenomOwnersRequest;
+    fromPartial<I extends unknown>(object: I): QueryDenomOwnersRequest;
 };
 export declare const DenomOwner: {
     encode(message: DenomOwner, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DenomOwner;
     fromJSON(object: any): DenomOwner;
     toJSON(message: DenomOwner): unknown;
-    fromPartial<I extends {
-        address?: string;
-        balance?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        address?: string;
-        balance?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["balance"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, keyof DenomOwner>, never>>(object: I): DenomOwner;
+    fromPartial<I extends unknown>(object: I): DenomOwner;
 };
 export declare const QueryDenomOwnersResponse: {
     encode(message: QueryDenomOwnersResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersResponse;
     fromJSON(object: any): QueryDenomOwnersResponse;
     toJSON(message: QueryDenomOwnersResponse): unknown;
-    fromPartial<I extends {
-        denomOwners?: {
-            address?: string;
-            balance?: {
-                denom?: string;
-                amount?: string;
-            };
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        denomOwners?: {
-            address?: string;
-            balance?: {
-                denom?: string;
-                amount?: string;
-            };
-        }[] & ({
-            address?: string;
-            balance?: {
-                denom?: string;
-                amount?: string;
-            };
-        } & {
-            address?: string;
-            balance?: {
-                denom?: string;
-                amount?: string;
-            } & {
-                denom?: string;
-                amount?: string;
-            } & Record<Exclude<keyof I["denomOwners"][number]["balance"], keyof Coin>, never>;
-        } & Record<Exclude<keyof I["denomOwners"][number], keyof DenomOwner>, never>)[] & Record<Exclude<keyof I["denomOwners"], keyof {
-            address?: string;
-            balance?: {
-                denom?: string;
-                amount?: string;
-            };
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryDenomOwnersResponse>, never>>(object: I): QueryDenomOwnersResponse;
+    fromPartial<I extends unknown>(object: I): QueryDenomOwnersResponse;
 };
 /** Query defines the gRPC querier service. */
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

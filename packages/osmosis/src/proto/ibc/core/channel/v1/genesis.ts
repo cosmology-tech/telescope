@@ -14,7 +14,7 @@ export interface GenesisState {
   ackSequences: PacketSequence[];
   /** the sequence for the next generated channel identifier */
 
-  nextChannelSequence: string;
+  nextChannelSequence: Long;
 }
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
@@ -24,7 +24,7 @@ export interface GenesisState {
 export interface PacketSequence {
   portId: string;
   channelId: string;
-  sequence: string;
+  sequence: Long;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -36,7 +36,7 @@ function createBaseGenesisState(): GenesisState {
     sendSequences: [],
     recvSequences: [],
     ackSequences: [],
-    nextChannelSequence: "0"
+    nextChannelSequence: Long.UZERO
   };
 }
 
@@ -70,7 +70,7 @@ export const GenesisState = {
       PacketSequence.encode(v!, writer.uint32(58).fork()).ldelim();
     }
 
-    if (message.nextChannelSequence !== "0") {
+    if (!message.nextChannelSequence.isZero()) {
       writer.uint32(64).uint64(message.nextChannelSequence);
     }
 
@@ -115,7 +115,7 @@ export const GenesisState = {
           break;
 
         case 8:
-          message.nextChannelSequence = longToString((reader.uint64() as Long));
+          message.nextChannelSequence = (reader.uint64() as Long);
           break;
 
         default:
@@ -136,7 +136,7 @@ export const GenesisState = {
       sendSequences: Array.isArray(object?.sendSequences) ? object.sendSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
       recvSequences: Array.isArray(object?.recvSequences) ? object.recvSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
       ackSequences: Array.isArray(object?.ackSequences) ? object.ackSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
-      nextChannelSequence: isSet(object.nextChannelSequence) ? String(object.nextChannelSequence) : "0"
+      nextChannelSequence: isSet(object.nextChannelSequence) ? Long.fromString(object.nextChannelSequence) : Long.UZERO
     };
   },
 
@@ -185,7 +185,7 @@ export const GenesisState = {
       obj.ackSequences = [];
     }
 
-    message.nextChannelSequence !== undefined && (obj.nextChannelSequence = message.nextChannelSequence);
+    message.nextChannelSequence !== undefined && (obj.nextChannelSequence = (message.nextChannelSequence || Long.UZERO).toString());
     return obj;
   },
 
@@ -198,7 +198,7 @@ export const GenesisState = {
     message.sendSequences = object.sendSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.recvSequences = object.recvSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.ackSequences = object.ackSequences?.map(e => PacketSequence.fromPartial(e)) || [];
-    message.nextChannelSequence = object.nextChannelSequence ?? "0";
+    message.nextChannelSequence = object.nextChannelSequence !== undefined && object.nextChannelSequence !== null ? Long.fromValue(object.nextChannelSequence) : Long.UZERO;
     return message;
   }
 
@@ -208,7 +208,7 @@ function createBasePacketSequence(): PacketSequence {
   return {
     portId: "",
     channelId: "",
-    sequence: "0"
+    sequence: Long.UZERO
   };
 }
 
@@ -222,7 +222,7 @@ export const PacketSequence = {
       writer.uint32(18).string(message.channelId);
     }
 
-    if (message.sequence !== "0") {
+    if (!message.sequence.isZero()) {
       writer.uint32(24).uint64(message.sequence);
     }
 
@@ -247,7 +247,7 @@ export const PacketSequence = {
           break;
 
         case 3:
-          message.sequence = longToString((reader.uint64() as Long));
+          message.sequence = (reader.uint64() as Long);
           break;
 
         default:
@@ -263,7 +263,7 @@ export const PacketSequence = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0"
+      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
     };
   },
 
@@ -271,7 +271,7 @@ export const PacketSequence = {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
 
@@ -279,19 +279,15 @@ export const PacketSequence = {
     const message = createBasePacketSequence();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence ?? "0";
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

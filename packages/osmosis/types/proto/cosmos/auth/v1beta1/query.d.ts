@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Params } from "../../../cosmos/auth/v1beta1/auth";
@@ -75,231 +76,101 @@ export declare const QueryAccountsRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsRequest;
     fromJSON(object: any): QueryAccountsRequest;
     toJSON(message: QueryAccountsRequest): unknown;
-    fromPartial<I extends {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryAccountsRequest;
+    fromPartial<I extends unknown>(object: I): QueryAccountsRequest;
 };
 export declare const QueryAccountsResponse: {
     encode(message: QueryAccountsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse;
     fromJSON(object: any): QueryAccountsResponse;
     toJSON(message: QueryAccountsResponse): unknown;
-    fromPartial<I extends {
-        accounts?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        accounts?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["accounts"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["accounts"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryAccountsResponse>, never>>(object: I): QueryAccountsResponse;
+    fromPartial<I extends unknown>(object: I): QueryAccountsResponse;
 };
 export declare const QueryAccountRequest: {
     encode(message: QueryAccountRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountRequest;
     fromJSON(object: any): QueryAccountRequest;
     toJSON(message: QueryAccountRequest): unknown;
-    fromPartial<I extends {
-        address?: string;
-    } & {
-        address?: string;
-    } & Record<Exclude<keyof I, "address">, never>>(object: I): QueryAccountRequest;
+    fromPartial<I extends unknown>(object: I): QueryAccountRequest;
 };
 export declare const QueryModuleAccountsRequest: {
     encode(_: QueryModuleAccountsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsRequest;
     fromJSON(_: any): QueryModuleAccountsRequest;
     toJSON(_: QueryModuleAccountsRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryModuleAccountsRequest;
+    fromPartial<I extends unknown>(_: I): QueryModuleAccountsRequest;
 };
 export declare const QueryParamsResponse: {
     encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
-    fromPartial<I extends {
-        params?: {
-            maxMemoCharacters?: string;
-            txSigLimit?: string;
-            txSizeCostPerByte?: string;
-            sigVerifyCostEd25519?: string;
-            sigVerifyCostSecp256k1?: string;
-        };
-    } & {
-        params?: {
-            maxMemoCharacters?: string;
-            txSigLimit?: string;
-            txSizeCostPerByte?: string;
-            sigVerifyCostEd25519?: string;
-            sigVerifyCostSecp256k1?: string;
-        } & {
-            maxMemoCharacters?: string;
-            txSigLimit?: string;
-            txSizeCostPerByte?: string;
-            sigVerifyCostEd25519?: string;
-            sigVerifyCostSecp256k1?: string;
-        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
-    } & Record<Exclude<keyof I, "params">, never>>(object: I): QueryParamsResponse;
+    fromPartial<I extends unknown>(object: I): QueryParamsResponse;
 };
 export declare const QueryAccountResponse: {
     encode(message: QueryAccountResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponse;
     fromJSON(object: any): QueryAccountResponse;
     toJSON(message: QueryAccountResponse): unknown;
-    fromPartial<I extends {
-        account?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        account?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["account"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, "account">, never>>(object: I): QueryAccountResponse;
+    fromPartial<I extends unknown>(object: I): QueryAccountResponse;
 };
 export declare const QueryParamsRequest: {
     encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryParamsRequest;
+    fromPartial<I extends unknown>(_: I): QueryParamsRequest;
 };
 export declare const QueryModuleAccountsResponse: {
     encode(message: QueryModuleAccountsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponse;
     fromJSON(object: any): QueryModuleAccountsResponse;
     toJSON(message: QueryModuleAccountsResponse): unknown;
-    fromPartial<I extends {
-        accounts?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        accounts?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["accounts"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["accounts"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "accounts">, never>>(object: I): QueryModuleAccountsResponse;
+    fromPartial<I extends unknown>(object: I): QueryModuleAccountsResponse;
 };
 export declare const Bech32PrefixRequest: {
     encode(_: Bech32PrefixRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixRequest;
     fromJSON(_: any): Bech32PrefixRequest;
     toJSON(_: Bech32PrefixRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): Bech32PrefixRequest;
+    fromPartial<I extends unknown>(_: I): Bech32PrefixRequest;
 };
 export declare const Bech32PrefixResponse: {
     encode(message: Bech32PrefixResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponse;
     fromJSON(object: any): Bech32PrefixResponse;
     toJSON(message: Bech32PrefixResponse): unknown;
-    fromPartial<I extends {
-        bech32Prefix?: string;
-    } & {
-        bech32Prefix?: string;
-    } & Record<Exclude<keyof I, "bech32Prefix">, never>>(object: I): Bech32PrefixResponse;
+    fromPartial<I extends unknown>(object: I): Bech32PrefixResponse;
 };
 export declare const AddressBytesToStringRequest: {
     encode(message: AddressBytesToStringRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringRequest;
     fromJSON(object: any): AddressBytesToStringRequest;
     toJSON(message: AddressBytesToStringRequest): unknown;
-    fromPartial<I extends {
-        addressBytes?: Uint8Array;
-    } & {
-        addressBytes?: Uint8Array;
-    } & Record<Exclude<keyof I, "addressBytes">, never>>(object: I): AddressBytesToStringRequest;
+    fromPartial<I extends unknown>(object: I): AddressBytesToStringRequest;
 };
 export declare const AddressBytesToStringResponse: {
     encode(message: AddressBytesToStringResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponse;
     fromJSON(object: any): AddressBytesToStringResponse;
     toJSON(message: AddressBytesToStringResponse): unknown;
-    fromPartial<I extends {
-        addressString?: string;
-    } & {
-        addressString?: string;
-    } & Record<Exclude<keyof I, "addressString">, never>>(object: I): AddressBytesToStringResponse;
+    fromPartial<I extends unknown>(object: I): AddressBytesToStringResponse;
 };
 export declare const AddressStringToBytesRequest: {
     encode(message: AddressStringToBytesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesRequest;
     fromJSON(object: any): AddressStringToBytesRequest;
     toJSON(message: AddressStringToBytesRequest): unknown;
-    fromPartial<I extends {
-        addressString?: string;
-    } & {
-        addressString?: string;
-    } & Record<Exclude<keyof I, "addressString">, never>>(object: I): AddressStringToBytesRequest;
+    fromPartial<I extends unknown>(object: I): AddressStringToBytesRequest;
 };
 export declare const AddressStringToBytesResponse: {
     encode(message: AddressStringToBytesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponse;
     fromJSON(object: any): AddressStringToBytesResponse;
     toJSON(message: AddressStringToBytesResponse): unknown;
-    fromPartial<I extends {
-        addressBytes?: Uint8Array;
-    } & {
-        addressBytes?: Uint8Array;
-    } & Record<Exclude<keyof I, "addressBytes">, never>>(object: I): AddressStringToBytesResponse;
+    fromPartial<I extends unknown>(object: I): AddressStringToBytesResponse;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

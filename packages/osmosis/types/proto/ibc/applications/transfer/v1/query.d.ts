@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { DenomTrace, Params } from "../../../../ibc/applications/transfer/v1/transfer";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
@@ -48,128 +49,46 @@ export declare const QueryDenomTraceRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTraceRequest;
     fromJSON(object: any): QueryDenomTraceRequest;
     toJSON(message: QueryDenomTraceRequest): unknown;
-    fromPartial<I extends {
-        hash?: string;
-    } & {
-        hash?: string;
-    } & Record<Exclude<keyof I, "hash">, never>>(object: I): QueryDenomTraceRequest;
+    fromPartial<I extends unknown>(object: I): QueryDenomTraceRequest;
 };
 export declare const QueryDenomTraceResponse: {
     encode(message: QueryDenomTraceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTraceResponse;
     fromJSON(object: any): QueryDenomTraceResponse;
     toJSON(message: QueryDenomTraceResponse): unknown;
-    fromPartial<I extends {
-        denomTrace?: {
-            path?: string;
-            baseDenom?: string;
-        };
-    } & {
-        denomTrace?: {
-            path?: string;
-            baseDenom?: string;
-        } & {
-            path?: string;
-            baseDenom?: string;
-        } & Record<Exclude<keyof I["denomTrace"], keyof DenomTrace>, never>;
-    } & Record<Exclude<keyof I, "denomTrace">, never>>(object: I): QueryDenomTraceResponse;
+    fromPartial<I extends unknown>(object: I): QueryDenomTraceResponse;
 };
 export declare const QueryDenomTracesRequest: {
     encode(message: QueryDenomTracesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTracesRequest;
     fromJSON(object: any): QueryDenomTracesRequest;
     toJSON(message: QueryDenomTracesRequest): unknown;
-    fromPartial<I extends {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: string;
-            limit?: string;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryDenomTracesRequest;
+    fromPartial<I extends unknown>(object: I): QueryDenomTracesRequest;
 };
 export declare const QueryDenomTracesResponse: {
     encode(message: QueryDenomTracesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTracesResponse;
     fromJSON(object: any): QueryDenomTracesResponse;
     toJSON(message: QueryDenomTracesResponse): unknown;
-    fromPartial<I extends {
-        denomTraces?: {
-            path?: string;
-            baseDenom?: string;
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        };
-    } & {
-        denomTraces?: {
-            path?: string;
-            baseDenom?: string;
-        }[] & ({
-            path?: string;
-            baseDenom?: string;
-        } & {
-            path?: string;
-            baseDenom?: string;
-        } & Record<Exclude<keyof I["denomTraces"][number], keyof DenomTrace>, never>)[] & Record<Exclude<keyof I["denomTraces"], keyof {
-            path?: string;
-            baseDenom?: string;
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & {
-            nextKey?: Uint8Array;
-            total?: string;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryDenomTracesResponse>, never>>(object: I): QueryDenomTracesResponse;
+    fromPartial<I extends unknown>(object: I): QueryDenomTracesResponse;
 };
 export declare const QueryParamsRequest: {
     encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryParamsRequest;
+    fromPartial<I extends unknown>(_: I): QueryParamsRequest;
 };
 export declare const QueryParamsResponse: {
     encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
-    fromPartial<I extends {
-        params?: {
-            sendEnabled?: boolean;
-            receiveEnabled?: boolean;
-        };
-    } & {
-        params?: {
-            sendEnabled?: boolean;
-            receiveEnabled?: boolean;
-        } & {
-            sendEnabled?: boolean;
-            receiveEnabled?: boolean;
-        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
-    } & Record<Exclude<keyof I, "params">, never>>(object: I): QueryParamsResponse;
+    fromPartial<I extends unknown>(object: I): QueryParamsResponse;
 };
 /** Query provides defines the gRPC querier service. */
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

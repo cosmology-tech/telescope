@@ -1023,8 +1023,8 @@ export interface UninterpretedOption {
    */
 
   identifierValue: string;
-  positiveIntValue: string;
-  negativeIntValue: string;
+  positiveIntValue: Long;
+  negativeIntValue: Long;
   doubleValue: number;
   stringValue: Uint8Array;
   aggregateValue: string;
@@ -3616,8 +3616,8 @@ function createBaseUninterpretedOption(): UninterpretedOption {
   return {
     name: [],
     identifierValue: "",
-    positiveIntValue: "0",
-    negativeIntValue: "0",
+    positiveIntValue: Long.UZERO,
+    negativeIntValue: Long.ZERO,
     doubleValue: 0,
     stringValue: new Uint8Array(),
     aggregateValue: ""
@@ -3634,11 +3634,11 @@ export const UninterpretedOption = {
       writer.uint32(26).string(message.identifierValue);
     }
 
-    if (message.positiveIntValue !== "0") {
+    if (!message.positiveIntValue.isZero()) {
       writer.uint32(32).uint64(message.positiveIntValue);
     }
 
-    if (message.negativeIntValue !== "0") {
+    if (!message.negativeIntValue.isZero()) {
       writer.uint32(40).int64(message.negativeIntValue);
     }
 
@@ -3675,11 +3675,11 @@ export const UninterpretedOption = {
           break;
 
         case 4:
-          message.positiveIntValue = longToString((reader.uint64() as Long));
+          message.positiveIntValue = (reader.uint64() as Long);
           break;
 
         case 5:
-          message.negativeIntValue = longToString((reader.int64() as Long));
+          message.negativeIntValue = (reader.int64() as Long);
           break;
 
         case 6:
@@ -3707,8 +3707,8 @@ export const UninterpretedOption = {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e)) : [],
       identifierValue: isSet(object.identifierValue) ? String(object.identifierValue) : "",
-      positiveIntValue: isSet(object.positiveIntValue) ? String(object.positiveIntValue) : "0",
-      negativeIntValue: isSet(object.negativeIntValue) ? String(object.negativeIntValue) : "0",
+      positiveIntValue: isSet(object.positiveIntValue) ? Long.fromString(object.positiveIntValue) : Long.UZERO,
+      negativeIntValue: isSet(object.negativeIntValue) ? Long.fromString(object.negativeIntValue) : Long.ZERO,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
       stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(),
       aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : ""
@@ -3725,8 +3725,8 @@ export const UninterpretedOption = {
     }
 
     message.identifierValue !== undefined && (obj.identifierValue = message.identifierValue);
-    message.positiveIntValue !== undefined && (obj.positiveIntValue = message.positiveIntValue);
-    message.negativeIntValue !== undefined && (obj.negativeIntValue = message.negativeIntValue);
+    message.positiveIntValue !== undefined && (obj.positiveIntValue = (message.positiveIntValue || Long.UZERO).toString());
+    message.negativeIntValue !== undefined && (obj.negativeIntValue = (message.negativeIntValue || Long.ZERO).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = base64FromBytes(message.stringValue !== undefined ? message.stringValue : new Uint8Array()));
     message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
@@ -3737,8 +3737,8 @@ export const UninterpretedOption = {
     const message = createBaseUninterpretedOption();
     message.name = object.name?.map(e => UninterpretedOption_NamePart.fromPartial(e)) || [];
     message.identifierValue = object.identifierValue ?? "";
-    message.positiveIntValue = object.positiveIntValue ?? "0";
-    message.negativeIntValue = object.negativeIntValue ?? "0";
+    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? Long.fromValue(object.positiveIntValue) : Long.UZERO;
+    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? Long.fromValue(object.negativeIntValue) : Long.ZERO;
     message.doubleValue = object.doubleValue ?? 0;
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";
@@ -4238,13 +4238,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

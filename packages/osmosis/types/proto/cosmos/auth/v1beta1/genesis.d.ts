@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../../cosmos/auth/v1beta1/auth";
 import { Any } from "../../../google/protobuf/any";
@@ -13,49 +14,10 @@ export declare const GenesisState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
-    fromPartial<I extends {
-        params?: {
-            maxMemoCharacters?: string;
-            txSigLimit?: string;
-            txSizeCostPerByte?: string;
-            sigVerifyCostEd25519?: string;
-            sigVerifyCostSecp256k1?: string;
-        };
-        accounts?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[];
-    } & {
-        params?: {
-            maxMemoCharacters?: string;
-            txSigLimit?: string;
-            txSizeCostPerByte?: string;
-            sigVerifyCostEd25519?: string;
-            sigVerifyCostSecp256k1?: string;
-        } & {
-            maxMemoCharacters?: string;
-            txSigLimit?: string;
-            txSizeCostPerByte?: string;
-            sigVerifyCostEd25519?: string;
-            sigVerifyCostSecp256k1?: string;
-        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
-        accounts?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[] & ({
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["accounts"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["accounts"], keyof {
-            typeUrl?: string;
-            value?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof GenesisState>, never>>(object: I): GenesisState;
+    fromPartial<I extends unknown>(object: I): GenesisState;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

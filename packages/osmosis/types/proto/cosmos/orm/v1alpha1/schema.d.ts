@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** StorageType */
 export declare enum StorageType {
@@ -78,51 +79,17 @@ export declare const ModuleSchemaDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleSchemaDescriptor;
     fromJSON(object: any): ModuleSchemaDescriptor;
     toJSON(message: ModuleSchemaDescriptor): unknown;
-    fromPartial<I extends {
-        schemaFile?: {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        }[];
-        prefix?: Uint8Array;
-    } & {
-        schemaFile?: {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        }[] & ({
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        } & {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        } & Record<Exclude<keyof I["schemaFile"][number], keyof ModuleSchemaDescriptor_FileEntry>, never>)[] & Record<Exclude<keyof I["schemaFile"], keyof {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        }[]>, never>;
-        prefix?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof ModuleSchemaDescriptor>, never>>(object: I): ModuleSchemaDescriptor;
+    fromPartial<I extends unknown>(object: I): ModuleSchemaDescriptor;
 };
 export declare const ModuleSchemaDescriptor_FileEntry: {
     encode(message: ModuleSchemaDescriptor_FileEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleSchemaDescriptor_FileEntry;
     fromJSON(object: any): ModuleSchemaDescriptor_FileEntry;
     toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown;
-    fromPartial<I extends {
-        id?: number;
-        protoFileName?: string;
-        storageType?: StorageType;
-    } & {
-        id?: number;
-        protoFileName?: string;
-        storageType?: StorageType;
-    } & Record<Exclude<keyof I, keyof ModuleSchemaDescriptor_FileEntry>, never>>(object: I): ModuleSchemaDescriptor_FileEntry;
+    fromPartial<I extends unknown>(object: I): ModuleSchemaDescriptor_FileEntry;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

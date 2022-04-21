@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * A descriptor for defining project properties for a service. One service may
@@ -62,49 +63,17 @@ export declare const ProjectProperties: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ProjectProperties;
     fromJSON(object: any): ProjectProperties;
     toJSON(message: ProjectProperties): unknown;
-    fromPartial<I extends {
-        properties?: {
-            name?: string;
-            type?: Property_PropertyType;
-            description?: string;
-        }[];
-    } & {
-        properties?: {
-            name?: string;
-            type?: Property_PropertyType;
-            description?: string;
-        }[] & ({
-            name?: string;
-            type?: Property_PropertyType;
-            description?: string;
-        } & {
-            name?: string;
-            type?: Property_PropertyType;
-            description?: string;
-        } & Record<Exclude<keyof I["properties"][number], keyof Property>, never>)[] & Record<Exclude<keyof I["properties"], keyof {
-            name?: string;
-            type?: Property_PropertyType;
-            description?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "properties">, never>>(object: I): ProjectProperties;
+    fromPartial<I extends unknown>(object: I): ProjectProperties;
 };
 export declare const Property: {
     encode(message: Property, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Property;
     fromJSON(object: any): Property;
     toJSON(message: Property): unknown;
-    fromPartial<I extends {
-        name?: string;
-        type?: Property_PropertyType;
-        description?: string;
-    } & {
-        name?: string;
-        type?: Property_PropertyType;
-        description?: string;
-    } & Record<Exclude<keyof I, keyof Property>, never>>(object: I): Property;
+    fromPartial<I extends unknown>(object: I): Property;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

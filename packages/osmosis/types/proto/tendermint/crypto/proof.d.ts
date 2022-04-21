@@ -1,7 +1,8 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 export interface Proof {
-    total: string;
-    index: string;
+    total: Long;
+    index: Long;
     leafHash: Uint8Array;
     aunts: Uint8Array[];
 }
@@ -35,109 +36,38 @@ export declare const Proof: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Proof;
     fromJSON(object: any): Proof;
     toJSON(message: Proof): unknown;
-    fromPartial<I extends {
-        total?: string;
-        index?: string;
-        leafHash?: Uint8Array;
-        aunts?: Uint8Array[];
-    } & {
-        total?: string;
-        index?: string;
-        leafHash?: Uint8Array;
-        aunts?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["aunts"], keyof Uint8Array[]>, never>;
-    } & Record<Exclude<keyof I, keyof Proof>, never>>(object: I): Proof;
+    fromPartial<I extends unknown>(object: I): Proof;
 };
 export declare const ValueOp: {
     encode(message: ValueOp, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValueOp;
     fromJSON(object: any): ValueOp;
     toJSON(message: ValueOp): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-        proof?: {
-            total?: string;
-            index?: string;
-            leafHash?: Uint8Array;
-            aunts?: Uint8Array[];
-        };
-    } & {
-        key?: Uint8Array;
-        proof?: {
-            total?: string;
-            index?: string;
-            leafHash?: Uint8Array;
-            aunts?: Uint8Array[];
-        } & {
-            total?: string;
-            index?: string;
-            leafHash?: Uint8Array;
-            aunts?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["proof"]["aunts"], keyof Uint8Array[]>, never>;
-        } & Record<Exclude<keyof I["proof"], keyof Proof>, never>;
-    } & Record<Exclude<keyof I, keyof ValueOp>, never>>(object: I): ValueOp;
+    fromPartial<I extends unknown>(object: I): ValueOp;
 };
 export declare const DominoOp: {
     encode(message: DominoOp, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DominoOp;
     fromJSON(object: any): DominoOp;
     toJSON(message: DominoOp): unknown;
-    fromPartial<I extends {
-        key?: string;
-        input?: string;
-        output?: string;
-    } & {
-        key?: string;
-        input?: string;
-        output?: string;
-    } & Record<Exclude<keyof I, keyof DominoOp>, never>>(object: I): DominoOp;
+    fromPartial<I extends unknown>(object: I): DominoOp;
 };
 export declare const ProofOp: {
     encode(message: ProofOp, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ProofOp;
     fromJSON(object: any): ProofOp;
     toJSON(message: ProofOp): unknown;
-    fromPartial<I extends {
-        type?: string;
-        key?: Uint8Array;
-        data?: Uint8Array;
-    } & {
-        type?: string;
-        key?: Uint8Array;
-        data?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof ProofOp>, never>>(object: I): ProofOp;
+    fromPartial<I extends unknown>(object: I): ProofOp;
 };
 export declare const ProofOps: {
     encode(message: ProofOps, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ProofOps;
     fromJSON(object: any): ProofOps;
     toJSON(message: ProofOps): unknown;
-    fromPartial<I extends {
-        ops?: {
-            type?: string;
-            key?: Uint8Array;
-            data?: Uint8Array;
-        }[];
-    } & {
-        ops?: {
-            type?: string;
-            key?: Uint8Array;
-            data?: Uint8Array;
-        }[] & ({
-            type?: string;
-            key?: Uint8Array;
-            data?: Uint8Array;
-        } & {
-            type?: string;
-            key?: Uint8Array;
-            data?: Uint8Array;
-        } & Record<Exclude<keyof I["ops"][number], keyof ProofOp>, never>)[] & Record<Exclude<keyof I["ops"], keyof {
-            type?: string;
-            key?: Uint8Array;
-            data?: Uint8Array;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "ops">, never>>(object: I): ProofOps;
+    fromPartial<I extends unknown>(object: I): ProofOps;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

@@ -29,7 +29,7 @@ export interface FloatValue {
 
 export interface Int64Value {
   /** The int64 value. */
-  value: string;
+  value: Long;
 }
 /**
  * Wrapper message for `uint64`.
@@ -39,7 +39,7 @@ export interface Int64Value {
 
 export interface UInt64Value {
   /** The uint64 value. */
-  value: string;
+  value: Long;
 }
 /**
  * Wrapper message for `int32`.
@@ -208,13 +208,13 @@ export const FloatValue = {
 
 function createBaseInt64Value(): Int64Value {
   return {
-    value: "0"
+    value: Long.ZERO
   };
 }
 
 export const Int64Value = {
   encode(message: Int64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.value !== "0") {
+    if (!message.value.isZero()) {
       writer.uint32(8).int64(message.value);
     }
 
@@ -231,7 +231,7 @@ export const Int64Value = {
 
       switch (tag >>> 3) {
         case 1:
-          message.value = longToString((reader.int64() as Long));
+          message.value = (reader.int64() as Long);
           break;
 
         default:
@@ -245,19 +245,19 @@ export const Int64Value = {
 
   fromJSON(object: any): Int64Value {
     return {
-      value: isSet(object.value) ? String(object.value) : "0"
+      value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
     };
   },
 
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Int64Value>, I>>(object: I): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value ?? "0";
+    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
   }
 
@@ -265,13 +265,13 @@ export const Int64Value = {
 
 function createBaseUInt64Value(): UInt64Value {
   return {
-    value: "0"
+    value: Long.UZERO
   };
 }
 
 export const UInt64Value = {
   encode(message: UInt64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.value !== "0") {
+    if (!message.value.isZero()) {
       writer.uint32(8).uint64(message.value);
     }
 
@@ -288,7 +288,7 @@ export const UInt64Value = {
 
       switch (tag >>> 3) {
         case 1:
-          message.value = longToString((reader.uint64() as Long));
+          message.value = (reader.uint64() as Long);
           break;
 
         default:
@@ -302,19 +302,19 @@ export const UInt64Value = {
 
   fromJSON(object: any): UInt64Value {
     return {
-      value: isSet(object.value) ? String(object.value) : "0"
+      value: isSet(object.value) ? Long.fromString(object.value) : Long.UZERO
     };
   },
 
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<UInt64Value>, I>>(object: I): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value ?? "0";
+    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
     return message;
   }
 
@@ -642,13 +642,9 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

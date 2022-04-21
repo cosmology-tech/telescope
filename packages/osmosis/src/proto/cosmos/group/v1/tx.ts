@@ -65,7 +65,7 @@ export interface MsgCreateGroup {
 
 export interface MsgCreateGroupResponse {
   /** group_id is the unique ID of the newly created group. */
-  groupId: string;
+  groupId: Long;
 }
 /** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
 
@@ -74,7 +74,7 @@ export interface MsgUpdateGroupMembers {
   admin: string;
   /** group_id is the unique ID of the group. */
 
-  groupId: string;
+  groupId: Long;
   /**
    * member_updates is the list of members to update,
    * set weight to 0 to remove a member.
@@ -92,7 +92,7 @@ export interface MsgUpdateGroupAdmin {
   admin: string;
   /** group_id is the unique ID of the group. */
 
-  groupId: string;
+  groupId: Long;
   /** new_admin is the group new admin account address. */
 
   newAdmin: string;
@@ -107,7 +107,7 @@ export interface MsgUpdateGroupMetadata {
   admin: string;
   /** group_id is the unique ID of the group. */
 
-  groupId: string;
+  groupId: Long;
   /** metadata is the updated group's metadata. */
 
   metadata: string;
@@ -122,7 +122,7 @@ export interface MsgCreateGroupPolicy {
   admin: string;
   /** group_id is the unique ID of the group. */
 
-  groupId: string;
+  groupId: Long;
   /** metadata is any arbitrary metadata attached to the group policy. */
 
   metadata: string;
@@ -173,7 +173,7 @@ export interface MsgCreateGroupWithPolicy {
 
 export interface MsgCreateGroupWithPolicyResponse {
   /** group_id is the unique ID of the newly created group with policy. */
-  groupId: string;
+  groupId: Long;
   /** group_policy_address is the account address of the newly created group policy. */
 
   groupPolicyAddress: string;
@@ -240,13 +240,13 @@ export interface MsgSubmitProposal {
 
 export interface MsgSubmitProposalResponse {
   /** proposal is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
 }
 /** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
 
 export interface MsgWithdrawProposal {
   /** proposal is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
   /** address is the admin of the group policy or one of the proposer of the proposal. */
 
   address: string;
@@ -258,7 +258,7 @@ export interface MsgWithdrawProposalResponse {}
 
 export interface MsgVote {
   /** proposal is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
   /** voter is the voter account address. */
 
   voter: string;
@@ -282,7 +282,7 @@ export interface MsgVoteResponse {}
 
 export interface MsgExec {
   /** proposal is the unique ID of the proposal. */
-  proposalId: string;
+  proposalId: Long;
   /** signer is the account address used to execute the proposal. */
 
   signer: string;
@@ -297,7 +297,7 @@ export interface MsgLeaveGroup {
   address: string;
   /** group_id is the unique ID of the group. */
 
-  groupId: string;
+  groupId: Long;
 }
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 
@@ -392,13 +392,13 @@ export const MsgCreateGroup = {
 
 function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
   return {
-    groupId: "0"
+    groupId: Long.UZERO
   };
 }
 
 export const MsgCreateGroupResponse = {
   encode(message: MsgCreateGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -415,7 +415,7 @@ export const MsgCreateGroupResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         default:
@@ -429,19 +429,19 @@ export const MsgCreateGroupResponse = {
 
   fromJSON(object: any): MsgCreateGroupResponse {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0"
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
     };
   },
 
   toJSON(message: MsgCreateGroupResponse): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateGroupResponse>, I>>(object: I): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   }
 
@@ -450,7 +450,7 @@ export const MsgCreateGroupResponse = {
 function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
   return {
     admin: "",
-    groupId: "0",
+    groupId: Long.UZERO,
     memberUpdates: []
   };
 }
@@ -461,7 +461,7 @@ export const MsgUpdateGroupMembers = {
       writer.uint32(10).string(message.admin);
     }
 
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
 
@@ -486,7 +486,7 @@ export const MsgUpdateGroupMembers = {
           break;
 
         case 2:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -505,7 +505,7 @@ export const MsgUpdateGroupMembers = {
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       memberUpdates: Array.isArray(object?.memberUpdates) ? object.memberUpdates.map((e: any) => Member.fromJSON(e)) : []
     };
   },
@@ -513,7 +513,7 @@ export const MsgUpdateGroupMembers = {
   toJSON(message: MsgUpdateGroupMembers): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
 
     if (message.memberUpdates) {
       obj.memberUpdates = message.memberUpdates.map(e => e ? Member.toJSON(e) : undefined);
@@ -527,7 +527,7 @@ export const MsgUpdateGroupMembers = {
   fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembers>, I>>(object: I): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.memberUpdates = object.memberUpdates?.map(e => Member.fromPartial(e)) || [];
     return message;
   }
@@ -580,7 +580,7 @@ export const MsgUpdateGroupMembersResponse = {
 function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
   return {
     admin: "",
-    groupId: "0",
+    groupId: Long.UZERO,
     newAdmin: ""
   };
 }
@@ -591,7 +591,7 @@ export const MsgUpdateGroupAdmin = {
       writer.uint32(10).string(message.admin);
     }
 
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
 
@@ -616,7 +616,7 @@ export const MsgUpdateGroupAdmin = {
           break;
 
         case 2:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -635,7 +635,7 @@ export const MsgUpdateGroupAdmin = {
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : ""
     };
   },
@@ -643,7 +643,7 @@ export const MsgUpdateGroupAdmin = {
   toJSON(message: MsgUpdateGroupAdmin): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
     return obj;
   },
@@ -651,7 +651,7 @@ export const MsgUpdateGroupAdmin = {
   fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdmin>, I>>(object: I): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.newAdmin = object.newAdmin ?? "";
     return message;
   }
@@ -704,7 +704,7 @@ export const MsgUpdateGroupAdminResponse = {
 function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
   return {
     admin: "",
-    groupId: "0",
+    groupId: Long.UZERO,
     metadata: ""
   };
 }
@@ -715,7 +715,7 @@ export const MsgUpdateGroupMetadata = {
       writer.uint32(10).string(message.admin);
     }
 
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
 
@@ -740,7 +740,7 @@ export const MsgUpdateGroupMetadata = {
           break;
 
         case 2:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -759,7 +759,7 @@ export const MsgUpdateGroupMetadata = {
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -767,7 +767,7 @@ export const MsgUpdateGroupMetadata = {
   toJSON(message: MsgUpdateGroupMetadata): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.metadata !== undefined && (obj.metadata = message.metadata);
     return obj;
   },
@@ -775,7 +775,7 @@ export const MsgUpdateGroupMetadata = {
   fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadata>, I>>(object: I): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.metadata = object.metadata ?? "";
     return message;
   }
@@ -828,7 +828,7 @@ export const MsgUpdateGroupMetadataResponse = {
 function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
   return {
     admin: "",
-    groupId: "0",
+    groupId: Long.UZERO,
     metadata: "",
     decisionPolicy: undefined
   };
@@ -840,7 +840,7 @@ export const MsgCreateGroupPolicy = {
       writer.uint32(10).string(message.admin);
     }
 
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
 
@@ -869,7 +869,7 @@ export const MsgCreateGroupPolicy = {
           break;
 
         case 2:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 3:
@@ -892,7 +892,7 @@ export const MsgCreateGroupPolicy = {
   fromJSON(object: any): MsgCreateGroupPolicy {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
     };
@@ -901,7 +901,7 @@ export const MsgCreateGroupPolicy = {
   toJSON(message: MsgCreateGroupPolicy): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.metadata !== undefined && (obj.metadata = message.metadata);
     message.decisionPolicy !== undefined && (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
@@ -910,7 +910,7 @@ export const MsgCreateGroupPolicy = {
   fromPartial<I extends Exact<DeepPartial<MsgCreateGroupPolicy>, I>>(object: I): MsgCreateGroupPolicy {
     const message = createBaseMsgCreateGroupPolicy();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.metadata = object.metadata ?? "";
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
@@ -1181,14 +1181,14 @@ export const MsgCreateGroupWithPolicy = {
 
 function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyResponse {
   return {
-    groupId: "0",
+    groupId: Long.UZERO,
     groupPolicyAddress: ""
   };
 }
 
 export const MsgCreateGroupWithPolicyResponse = {
   encode(message: MsgCreateGroupWithPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
 
@@ -1209,7 +1209,7 @@ export const MsgCreateGroupWithPolicyResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -1227,21 +1227,21 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
       groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : ""
     };
   },
 
   toJSON(message: MsgCreateGroupWithPolicyResponse): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateGroupWithPolicyResponse>, I>>(object: I): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
     return message;
   }
@@ -1658,13 +1658,13 @@ export const MsgSubmitProposal = {
 
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
   return {
-    proposalId: "0"
+    proposalId: Long.UZERO
   };
 }
 
 export const MsgSubmitProposalResponse = {
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1681,7 +1681,7 @@ export const MsgSubmitProposalResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         default:
@@ -1695,19 +1695,19 @@ export const MsgSubmitProposalResponse = {
 
   fromJSON(object: any): MsgSubmitProposalResponse {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0"
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
     };
   },
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgSubmitProposalResponse>, I>>(object: I): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
   }
 
@@ -1715,14 +1715,14 @@ export const MsgSubmitProposalResponse = {
 
 function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
   return {
-    proposalId: "0",
+    proposalId: Long.UZERO,
     address: ""
   };
 }
 
 export const MsgWithdrawProposal = {
   encode(message: MsgWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1743,7 +1743,7 @@ export const MsgWithdrawProposal = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -1761,21 +1761,21 @@ export const MsgWithdrawProposal = {
 
   fromJSON(object: any): MsgWithdrawProposal {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
 
   toJSON(message: MsgWithdrawProposal): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgWithdrawProposal>, I>>(object: I): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.address = object.address ?? "";
     return message;
   }
@@ -1827,7 +1827,7 @@ export const MsgWithdrawProposalResponse = {
 
 function createBaseMsgVote(): MsgVote {
   return {
-    proposalId: "0",
+    proposalId: Long.UZERO,
     voter: "",
     option: 0,
     metadata: "",
@@ -1837,7 +1837,7 @@ function createBaseMsgVote(): MsgVote {
 
 export const MsgVote = {
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -1870,7 +1870,7 @@ export const MsgVote = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -1900,7 +1900,7 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -1910,7 +1910,7 @@ export const MsgVote = {
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     message.metadata !== undefined && (obj.metadata = message.metadata);
@@ -1920,7 +1920,7 @@ export const MsgVote = {
 
   fromPartial<I extends Exact<DeepPartial<MsgVote>, I>>(object: I): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -1975,14 +1975,14 @@ export const MsgVoteResponse = {
 
 function createBaseMsgExec(): MsgExec {
   return {
-    proposalId: "0",
+    proposalId: Long.UZERO,
     signer: ""
   };
 }
 
 export const MsgExec = {
   encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
+    if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
 
@@ -2003,7 +2003,7 @@ export const MsgExec = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToString((reader.uint64() as Long));
+          message.proposalId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -2021,21 +2021,21 @@ export const MsgExec = {
 
   fromJSON(object: any): MsgExec {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
 
   toJSON(message: MsgExec): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgExec>, I>>(object: I): MsgExec {
     const message = createBaseMsgExec();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
   }
@@ -2088,7 +2088,7 @@ export const MsgExecResponse = {
 function createBaseMsgLeaveGroup(): MsgLeaveGroup {
   return {
     address: "",
-    groupId: "0"
+    groupId: Long.UZERO
   };
 }
 
@@ -2098,7 +2098,7 @@ export const MsgLeaveGroup = {
       writer.uint32(10).string(message.address);
     }
 
-    if (message.groupId !== "0") {
+    if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
 
@@ -2119,7 +2119,7 @@ export const MsgLeaveGroup = {
           break;
 
         case 2:
-          message.groupId = longToString((reader.uint64() as Long));
+          message.groupId = (reader.uint64() as Long);
           break;
 
         default:
@@ -2134,21 +2134,21 @@ export const MsgLeaveGroup = {
   fromJSON(object: any): MsgLeaveGroup {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0"
+      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
     };
   },
 
   toJSON(message: MsgLeaveGroup): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.groupId !== undefined && (obj.groupId = message.groupId);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgLeaveGroup>, I>>(object: I): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
     message.address = object.address ?? "";
-    message.groupId = object.groupId ?? "0";
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
   }
 
@@ -2199,13 +2199,9 @@ export const MsgLeaveGroupResponse = {
 /** Msg is the cosmos.group.v1 Msg service. */
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

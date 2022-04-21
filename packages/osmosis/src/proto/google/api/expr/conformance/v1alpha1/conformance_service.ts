@@ -116,7 +116,7 @@ export interface IssueDetails {
   position: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
 
-  id: string;
+  id: Long;
 }
 /** Severities of issues. */
 
@@ -791,7 +791,7 @@ function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
     position: undefined,
-    id: "0"
+    id: Long.ZERO
   };
 }
 
@@ -805,7 +805,7 @@ export const IssueDetails = {
       SourcePosition.encode(message.position, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.id !== "0") {
+    if (!message.id.isZero()) {
       writer.uint32(24).int64(message.id);
     }
 
@@ -830,7 +830,7 @@ export const IssueDetails = {
           break;
 
         case 3:
-          message.id = longToString((reader.int64() as Long));
+          message.id = (reader.int64() as Long);
           break;
 
         default:
@@ -846,7 +846,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? String(object.id) : "0"
+      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO
     };
   },
 
@@ -854,7 +854,7 @@ export const IssueDetails = {
     const obj: any = {};
     message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);
-    message.id !== undefined && (obj.id = message.id);
+    message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
     return obj;
   },
 
@@ -862,7 +862,7 @@ export const IssueDetails = {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
-    message.id = object.id ?? "0";
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     return message;
   }
 
@@ -924,13 +924,9 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

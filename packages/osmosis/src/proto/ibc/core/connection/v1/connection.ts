@@ -94,7 +94,7 @@ export interface ConnectionEnd {
    * clients.
    */
 
-  delayPeriod: string;
+  delayPeriod: Long;
 }
 /**
  * IdentifiedConnection defines a connection with additional connection
@@ -121,7 +121,7 @@ export interface IdentifiedConnection {
   counterparty: Counterparty;
   /** delay period associated with this connection. */
 
-  delayPeriod: string;
+  delayPeriod: Long;
 }
 /** Counterparty defines the counterparty chain associated with a connection end. */
 
@@ -176,7 +176,7 @@ export interface Params {
    * largest amount of time that the chain might reasonably take to produce the next block under normal operating
    * conditions. A safe choice is 3-5x the expected time per block.
    */
-  maxExpectedTimePerBlock: string;
+  maxExpectedTimePerBlock: Long;
 }
 
 function createBaseConnectionEnd(): ConnectionEnd {
@@ -185,7 +185,7 @@ function createBaseConnectionEnd(): ConnectionEnd {
     versions: [],
     state: 0,
     counterparty: undefined,
-    delayPeriod: "0"
+    delayPeriod: Long.UZERO
   };
 }
 
@@ -207,7 +207,7 @@ export const ConnectionEnd = {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.delayPeriod !== "0") {
+    if (!message.delayPeriod.isZero()) {
       writer.uint32(40).uint64(message.delayPeriod);
     }
 
@@ -240,7 +240,7 @@ export const ConnectionEnd = {
           break;
 
         case 5:
-          message.delayPeriod = longToString((reader.uint64() as Long));
+          message.delayPeriod = (reader.uint64() as Long);
           break;
 
         default:
@@ -258,7 +258,7 @@ export const ConnectionEnd = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? String(object.delayPeriod) : "0"
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO
     };
   },
 
@@ -274,7 +274,7 @@ export const ConnectionEnd = {
 
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = message.delayPeriod);
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
     return obj;
   },
 
@@ -284,7 +284,7 @@ export const ConnectionEnd = {
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod ?? "0";
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
   }
 
@@ -297,7 +297,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
     versions: [],
     state: 0,
     counterparty: undefined,
-    delayPeriod: "0"
+    delayPeriod: Long.UZERO
   };
 }
 
@@ -323,7 +323,7 @@ export const IdentifiedConnection = {
       Counterparty.encode(message.counterparty, writer.uint32(42).fork()).ldelim();
     }
 
-    if (message.delayPeriod !== "0") {
+    if (!message.delayPeriod.isZero()) {
       writer.uint32(48).uint64(message.delayPeriod);
     }
 
@@ -360,7 +360,7 @@ export const IdentifiedConnection = {
           break;
 
         case 6:
-          message.delayPeriod = longToString((reader.uint64() as Long));
+          message.delayPeriod = (reader.uint64() as Long);
           break;
 
         default:
@@ -379,7 +379,7 @@ export const IdentifiedConnection = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? String(object.delayPeriod) : "0"
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO
     };
   },
 
@@ -396,7 +396,7 @@ export const IdentifiedConnection = {
 
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = message.delayPeriod);
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
     return obj;
   },
 
@@ -407,7 +407,7 @@ export const IdentifiedConnection = {
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod ?? "0";
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
   }
 
@@ -709,13 +709,13 @@ export const Version = {
 
 function createBaseParams(): Params {
   return {
-    maxExpectedTimePerBlock: "0"
+    maxExpectedTimePerBlock: Long.UZERO
   };
 }
 
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.maxExpectedTimePerBlock !== "0") {
+    if (!message.maxExpectedTimePerBlock.isZero()) {
       writer.uint32(8).uint64(message.maxExpectedTimePerBlock);
     }
 
@@ -732,7 +732,7 @@ export const Params = {
 
       switch (tag >>> 3) {
         case 1:
-          message.maxExpectedTimePerBlock = longToString((reader.uint64() as Long));
+          message.maxExpectedTimePerBlock = (reader.uint64() as Long);
           break;
 
         default:
@@ -746,31 +746,27 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? String(object.maxExpectedTimePerBlock) : "0"
+      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? Long.fromString(object.maxExpectedTimePerBlock) : Long.UZERO
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = message.maxExpectedTimePerBlock);
+    message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = (message.maxExpectedTimePerBlock || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock ?? "0";
+    message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

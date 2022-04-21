@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 export interface Params {
     /**
@@ -16,7 +17,7 @@ export interface DistrInfo {
     records: DistrRecord[];
 }
 export interface DistrRecord {
-    gaugeId: string;
+    gaugeId: Long;
     weight: string;
 }
 export declare const Params: {
@@ -24,66 +25,31 @@ export declare const Params: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        mintedDenom?: string;
-    } & {
-        mintedDenom?: string;
-    } & Record<Exclude<keyof I, "mintedDenom">, never>>(object: I): Params;
+    fromPartial<I extends unknown>(object: I): Params;
 };
 export declare const LockableDurationsInfo: {
     encode(message: LockableDurationsInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LockableDurationsInfo;
     fromJSON(object: any): LockableDurationsInfo;
     toJSON(message: LockableDurationsInfo): unknown;
-    fromPartial<I extends {
-        lockableDurations?: string[];
-    } & {
-        lockableDurations?: string[] & string[] & Record<Exclude<keyof I["lockableDurations"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "lockableDurations">, never>>(object: I): LockableDurationsInfo;
+    fromPartial<I extends unknown>(object: I): LockableDurationsInfo;
 };
 export declare const DistrInfo: {
     encode(message: DistrInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DistrInfo;
     fromJSON(object: any): DistrInfo;
     toJSON(message: DistrInfo): unknown;
-    fromPartial<I extends {
-        totalWeight?: string;
-        records?: {
-            gaugeId?: string;
-            weight?: string;
-        }[];
-    } & {
-        totalWeight?: string;
-        records?: {
-            gaugeId?: string;
-            weight?: string;
-        }[] & ({
-            gaugeId?: string;
-            weight?: string;
-        } & {
-            gaugeId?: string;
-            weight?: string;
-        } & Record<Exclude<keyof I["records"][number], keyof DistrRecord>, never>)[] & Record<Exclude<keyof I["records"], keyof {
-            gaugeId?: string;
-            weight?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof DistrInfo>, never>>(object: I): DistrInfo;
+    fromPartial<I extends unknown>(object: I): DistrInfo;
 };
 export declare const DistrRecord: {
     encode(message: DistrRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DistrRecord;
     fromJSON(object: any): DistrRecord;
     toJSON(message: DistrRecord): unknown;
-    fromPartial<I extends {
-        gaugeId?: string;
-        weight?: string;
-    } & {
-        gaugeId?: string;
-        weight?: string;
-    } & Record<Exclude<keyof I, keyof DistrRecord>, never>>(object: I): DistrRecord;
+    fromPartial<I extends unknown>(object: I): DistrRecord;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

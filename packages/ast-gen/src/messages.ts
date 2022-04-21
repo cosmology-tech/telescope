@@ -168,13 +168,127 @@ export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
     )]));
 };
 
+export const createTypeRegistryObject = (mutation: Mutation) => {
+  return t.objectProperty(
+    t.stringLiteral(mutation.typeUrl),
+    t.identifier(mutation.TypeName)
+  );
+};
 
-export const messages = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+export const toObjectWithPartialMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
   t.variableDeclarator(t.identifier('messages'), t.objectExpression(
     mutations.map(mutation => addFromPartialMethod(mutation))
   ))]));
 
-export const encoded = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+export const toObjectWithEncodedMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
   t.variableDeclarator(t.identifier('encoded'), t.objectExpression(
     mutations.map(mutation => addEncodedMethod(mutation))
   ))]));
+
+export const toObjectWithJsonMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('json'), t.objectExpression(
+    mutations.map(mutation => addJsonMethod(mutation))
+  ))]));
+
+export const toObjectWithToJSONMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('toJSON'), t.objectExpression(
+    mutations.map(mutation => addToJSONMethod(mutation))
+  ))]));
+
+export const toObjectWithFromJSONMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('fromJSON'), t.objectExpression(
+    mutations.map(mutation => addFromJSONMethod(mutation))
+  ))]));
+
+export const createTypeRegistry = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
+  t.variableDeclarator(t.identifier('registry'), t.objectExpression(
+    mutations.map(mutation => createTypeRegistryObject(mutation))
+  ))]));
+
+const tsArrowFunctionExpression = (
+  params: (t.Identifier | t.Pattern | t.RestElement)[],
+  body: t.BlockStatement | t.Expression,
+  // typeAnnotation: t.TSTypeAnnotation,
+  isAsync: boolean = false
+) => {
+  const el = t.arrowFunctionExpression(params, body, isAsync);
+  // el.type
+  return el;
+};
+
+const tsIdentifier = (name: string, typeAnnotation: t.TSTypeAnnotation) => {
+  const el = t.identifier(name);
+  el.typeAnnotation = typeAnnotation;
+  return el;
+}
+
+export const createRegistryLoader = () => {
+  return t.exportNamedDeclaration(t.variableDeclaration(
+    'const',
+    [
+      t.variableDeclarator(
+        t.identifier('load'),
+        t.arrowFunctionExpression(
+          [
+            tsIdentifier('protoRegistry', t.tsTypeAnnotation(
+              t.tsTypeReference(
+                t.identifier('Registry')
+              )
+            ))
+          ],
+          t.blockStatement(
+            [
+              t.expressionStatement(
+                t.callExpression(
+                  t.memberExpression(
+                    t.callExpression(
+                      t.memberExpression(
+                        t.identifier(
+                          'Object'
+                        ),
+                        t.identifier('keys')
+                      ),
+                      [
+                        t.identifier('registry')
+                      ]
+                    ),
+                    t.identifier('forEach')
+                  ),
+                  [
+                    t.arrowFunctionExpression(
+                      [
+                        t.identifier('typeUrl')
+                      ],
+                      t.blockStatement(
+                        [
+                          t.expressionStatement(
+                            t.callExpression(
+                              t.memberExpression(
+                                t.identifier(
+                                  'protoRegistry'
+                                ),
+                                t.identifier('register')
+                              ),
+                              [
+                                t.identifier('typeUrl'),
+                                t.memberExpression(
+                                  t.identifier('registry'),
+                                  t.identifier('typeUrl'),
+                                  true
+                                )
+                              ]
+                            )
+                          )
+                        ]
+                      )
+                    )
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      )
+    ]
+  ))
+};

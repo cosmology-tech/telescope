@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -17,7 +18,7 @@ export interface HttpRequest {
      * The size of the HTTP request message in bytes, including the request
      * headers and the request body.
      */
-    requestSize: string;
+    requestSize: Long;
     /**
      * The response code indicating the status of response.
      * Examples: 200, 404.
@@ -27,7 +28,7 @@ export interface HttpRequest {
      * The size of the HTTP response message sent back to the client, in bytes,
      * including the response headers and the response body.
      */
-    responseSize: string;
+    responseSize: Long;
     /**
      * The user agent sent by the client. Example:
      * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
@@ -74,7 +75,7 @@ export interface HttpRequest {
      * The number of HTTP response bytes inserted into cache. Set only when a
      * cache fill was attempted.
      */
-    cacheFillBytes: string;
+    cacheFillBytes: Long;
     /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
     protocol: string;
 }
@@ -83,42 +84,10 @@ export declare const HttpRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): HttpRequest;
     fromJSON(object: any): HttpRequest;
     toJSON(message: HttpRequest): unknown;
-    fromPartial<I extends {
-        requestMethod?: string;
-        requestUrl?: string;
-        requestSize?: string;
-        status?: number;
-        responseSize?: string;
-        userAgent?: string;
-        remoteIp?: string;
-        serverIp?: string;
-        referer?: string;
-        latency?: string;
-        cacheLookup?: boolean;
-        cacheHit?: boolean;
-        cacheValidatedWithOriginServer?: boolean;
-        cacheFillBytes?: string;
-        protocol?: string;
-    } & {
-        requestMethod?: string;
-        requestUrl?: string;
-        requestSize?: string;
-        status?: number;
-        responseSize?: string;
-        userAgent?: string;
-        remoteIp?: string;
-        serverIp?: string;
-        referer?: string;
-        latency?: string;
-        cacheLookup?: boolean;
-        cacheHit?: boolean;
-        cacheValidatedWithOriginServer?: boolean;
-        cacheFillBytes?: string;
-        protocol?: string;
-    } & Record<Exclude<keyof I, keyof HttpRequest>, never>>(object: I): HttpRequest;
+    fromPartial<I extends unknown>(object: I): HttpRequest;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

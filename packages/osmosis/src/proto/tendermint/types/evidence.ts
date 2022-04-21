@@ -13,17 +13,17 @@ export interface Evidence {
 export interface DuplicateVoteEvidence {
   voteA: Vote;
   voteB: Vote;
-  totalVotingPower: string;
-  validatorPower: string;
+  totalVotingPower: Long;
+  validatorPower: Long;
   timestamp: Date;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 
 export interface LightClientAttackEvidence {
   conflictingBlock: LightBlock;
-  commonHeight: string;
+  commonHeight: Long;
   byzantineValidators: Validator[];
-  totalVotingPower: string;
+  totalVotingPower: Long;
   timestamp: Date;
 }
 export interface EvidenceList {
@@ -103,8 +103,8 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
     voteA: undefined,
     voteB: undefined,
-    totalVotingPower: "0",
-    validatorPower: "0",
+    totalVotingPower: Long.ZERO,
+    validatorPower: Long.ZERO,
     timestamp: undefined
   };
 }
@@ -119,11 +119,11 @@ export const DuplicateVoteEvidence = {
       Vote.encode(message.voteB, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.totalVotingPower !== "0") {
+    if (!message.totalVotingPower.isZero()) {
       writer.uint32(24).int64(message.totalVotingPower);
     }
 
-    if (message.validatorPower !== "0") {
+    if (!message.validatorPower.isZero()) {
       writer.uint32(32).int64(message.validatorPower);
     }
 
@@ -152,11 +152,11 @@ export const DuplicateVoteEvidence = {
           break;
 
         case 3:
-          message.totalVotingPower = longToString((reader.int64() as Long));
+          message.totalVotingPower = (reader.int64() as Long);
           break;
 
         case 4:
-          message.validatorPower = longToString((reader.int64() as Long));
+          message.validatorPower = (reader.int64() as Long);
           break;
 
         case 5:
@@ -176,8 +176,8 @@ export const DuplicateVoteEvidence = {
     return {
       voteA: isSet(object.voteA) ? Vote.fromJSON(object.voteA) : undefined,
       voteB: isSet(object.voteB) ? Vote.fromJSON(object.voteB) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? String(object.totalVotingPower) : "0",
-      validatorPower: isSet(object.validatorPower) ? String(object.validatorPower) : "0",
+      totalVotingPower: isSet(object.totalVotingPower) ? Long.fromString(object.totalVotingPower) : Long.ZERO,
+      validatorPower: isSet(object.validatorPower) ? Long.fromString(object.validatorPower) : Long.ZERO,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
     };
   },
@@ -186,8 +186,8 @@ export const DuplicateVoteEvidence = {
     const obj: any = {};
     message.voteA !== undefined && (obj.voteA = message.voteA ? Vote.toJSON(message.voteA) : undefined);
     message.voteB !== undefined && (obj.voteB = message.voteB ? Vote.toJSON(message.voteB) : undefined);
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = message.totalVotingPower);
-    message.validatorPower !== undefined && (obj.validatorPower = message.validatorPower);
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || Long.ZERO).toString());
+    message.validatorPower !== undefined && (obj.validatorPower = (message.validatorPower || Long.ZERO).toString());
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
     return obj;
   },
@@ -196,8 +196,8 @@ export const DuplicateVoteEvidence = {
     const message = createBaseDuplicateVoteEvidence();
     message.voteA = object.voteA !== undefined && object.voteA !== null ? Vote.fromPartial(object.voteA) : undefined;
     message.voteB = object.voteB !== undefined && object.voteB !== null ? Vote.fromPartial(object.voteB) : undefined;
-    message.totalVotingPower = object.totalVotingPower ?? "0";
-    message.validatorPower = object.validatorPower ?? "0";
+    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
+    message.validatorPower = object.validatorPower !== undefined && object.validatorPower !== null ? Long.fromValue(object.validatorPower) : Long.ZERO;
     message.timestamp = object.timestamp ?? undefined;
     return message;
   }
@@ -207,9 +207,9 @@ export const DuplicateVoteEvidence = {
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
     conflictingBlock: undefined,
-    commonHeight: "0",
+    commonHeight: Long.ZERO,
     byzantineValidators: [],
-    totalVotingPower: "0",
+    totalVotingPower: Long.ZERO,
     timestamp: undefined
   };
 }
@@ -220,7 +220,7 @@ export const LightClientAttackEvidence = {
       LightBlock.encode(message.conflictingBlock, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.commonHeight !== "0") {
+    if (!message.commonHeight.isZero()) {
       writer.uint32(16).int64(message.commonHeight);
     }
 
@@ -228,7 +228,7 @@ export const LightClientAttackEvidence = {
       Validator.encode(v!, writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.totalVotingPower !== "0") {
+    if (!message.totalVotingPower.isZero()) {
       writer.uint32(32).int64(message.totalVotingPower);
     }
 
@@ -253,7 +253,7 @@ export const LightClientAttackEvidence = {
           break;
 
         case 2:
-          message.commonHeight = longToString((reader.int64() as Long));
+          message.commonHeight = (reader.int64() as Long);
           break;
 
         case 3:
@@ -261,7 +261,7 @@ export const LightClientAttackEvidence = {
           break;
 
         case 4:
-          message.totalVotingPower = longToString((reader.int64() as Long));
+          message.totalVotingPower = (reader.int64() as Long);
           break;
 
         case 5:
@@ -280,9 +280,9 @@ export const LightClientAttackEvidence = {
   fromJSON(object: any): LightClientAttackEvidence {
     return {
       conflictingBlock: isSet(object.conflictingBlock) ? LightBlock.fromJSON(object.conflictingBlock) : undefined,
-      commonHeight: isSet(object.commonHeight) ? String(object.commonHeight) : "0",
+      commonHeight: isSet(object.commonHeight) ? Long.fromString(object.commonHeight) : Long.ZERO,
       byzantineValidators: Array.isArray(object?.byzantineValidators) ? object.byzantineValidators.map((e: any) => Validator.fromJSON(e)) : [],
-      totalVotingPower: isSet(object.totalVotingPower) ? String(object.totalVotingPower) : "0",
+      totalVotingPower: isSet(object.totalVotingPower) ? Long.fromString(object.totalVotingPower) : Long.ZERO,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
     };
   },
@@ -290,7 +290,7 @@ export const LightClientAttackEvidence = {
   toJSON(message: LightClientAttackEvidence): unknown {
     const obj: any = {};
     message.conflictingBlock !== undefined && (obj.conflictingBlock = message.conflictingBlock ? LightBlock.toJSON(message.conflictingBlock) : undefined);
-    message.commonHeight !== undefined && (obj.commonHeight = message.commonHeight);
+    message.commonHeight !== undefined && (obj.commonHeight = (message.commonHeight || Long.ZERO).toString());
 
     if (message.byzantineValidators) {
       obj.byzantineValidators = message.byzantineValidators.map(e => e ? Validator.toJSON(e) : undefined);
@@ -298,7 +298,7 @@ export const LightClientAttackEvidence = {
       obj.byzantineValidators = [];
     }
 
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = message.totalVotingPower);
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || Long.ZERO).toString());
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
     return obj;
   },
@@ -306,9 +306,9 @@ export const LightClientAttackEvidence = {
   fromPartial<I extends Exact<DeepPartial<LightClientAttackEvidence>, I>>(object: I): LightClientAttackEvidence {
     const message = createBaseLightClientAttackEvidence();
     message.conflictingBlock = object.conflictingBlock !== undefined && object.conflictingBlock !== null ? LightBlock.fromPartial(object.conflictingBlock) : undefined;
-    message.commonHeight = object.commonHeight ?? "0";
+    message.commonHeight = object.commonHeight !== undefined && object.commonHeight !== null ? Long.fromValue(object.commonHeight) : Long.ZERO;
     message.byzantineValidators = object.byzantineValidators?.map(e => Validator.fromPartial(e)) || [];
-    message.totalVotingPower = object.totalVotingPower ?? "0";
+    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
     message.timestamp = object.timestamp ?? undefined;
     return message;
   }
@@ -378,12 +378,12 @@ export const EvidenceList = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = date.getTime() % 1_000 * 1_000_000;
   return {
     seconds,
@@ -392,7 +392,7 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = Number(t.seconds) * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
@@ -407,8 +407,8 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToString(long: Long) {
-  return long.toString();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 if (_m0.util.Long !== Long) {

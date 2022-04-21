@@ -5,14 +5,14 @@ import { PeriodLock, SyntheticLock } from "../../osmosis/lockup/lock";
 
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
-  lastLockId: string;
+  lastLockId: Long;
   locks: PeriodLock[];
   syntheticLocks: SyntheticLock[];
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
-    lastLockId: "0",
+    lastLockId: Long.UZERO,
     locks: [],
     syntheticLocks: []
   };
@@ -20,7 +20,7 @@ function createBaseGenesisState(): GenesisState {
 
 export const GenesisState = {
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.lastLockId !== "0") {
+    if (!message.lastLockId.isZero()) {
       writer.uint32(8).uint64(message.lastLockId);
     }
 
@@ -45,7 +45,7 @@ export const GenesisState = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lastLockId = longToString((reader.uint64() as Long));
+          message.lastLockId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -67,7 +67,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      lastLockId: isSet(object.lastLockId) ? String(object.lastLockId) : "0",
+      lastLockId: isSet(object.lastLockId) ? Long.fromString(object.lastLockId) : Long.UZERO,
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : [],
       syntheticLocks: Array.isArray(object?.syntheticLocks) ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e)) : []
     };
@@ -75,7 +75,7 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.lastLockId !== undefined && (obj.lastLockId = message.lastLockId);
+    message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || Long.UZERO).toString());
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -94,7 +94,7 @@ export const GenesisState = {
 
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
-    message.lastLockId = object.lastLockId ?? "0";
+    message.lastLockId = object.lastLockId !== undefined && object.lastLockId !== null ? Long.fromValue(object.lastLockId) : Long.UZERO;
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
@@ -102,13 +102,9 @@ export const GenesisState = {
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

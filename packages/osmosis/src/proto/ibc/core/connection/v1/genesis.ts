@@ -9,7 +9,7 @@ export interface GenesisState {
   clientConnectionPaths: ConnectionPaths[];
   /** the sequence for the next generated connection identifier */
 
-  nextConnectionSequence: string;
+  nextConnectionSequence: Long;
   params: Params;
 }
 
@@ -17,7 +17,7 @@ function createBaseGenesisState(): GenesisState {
   return {
     connections: [],
     clientConnectionPaths: [],
-    nextConnectionSequence: "0",
+    nextConnectionSequence: Long.UZERO,
     params: undefined
   };
 }
@@ -32,7 +32,7 @@ export const GenesisState = {
       ConnectionPaths.encode(v!, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.nextConnectionSequence !== "0") {
+    if (!message.nextConnectionSequence.isZero()) {
       writer.uint32(24).uint64(message.nextConnectionSequence);
     }
 
@@ -61,7 +61,7 @@ export const GenesisState = {
           break;
 
         case 3:
-          message.nextConnectionSequence = longToString((reader.uint64() as Long));
+          message.nextConnectionSequence = (reader.uint64() as Long);
           break;
 
         case 4:
@@ -81,7 +81,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e)) : [],
       clientConnectionPaths: Array.isArray(object?.clientConnectionPaths) ? object.clientConnectionPaths.map((e: any) => ConnectionPaths.fromJSON(e)) : [],
-      nextConnectionSequence: isSet(object.nextConnectionSequence) ? String(object.nextConnectionSequence) : "0",
+      nextConnectionSequence: isSet(object.nextConnectionSequence) ? Long.fromString(object.nextConnectionSequence) : Long.UZERO,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -101,7 +101,7 @@ export const GenesisState = {
       obj.clientConnectionPaths = [];
     }
 
-    message.nextConnectionSequence !== undefined && (obj.nextConnectionSequence = message.nextConnectionSequence);
+    message.nextConnectionSequence !== undefined && (obj.nextConnectionSequence = (message.nextConnectionSequence || Long.UZERO).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
@@ -110,20 +110,16 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
     message.clientConnectionPaths = object.clientConnectionPaths?.map(e => ConnectionPaths.fromPartial(e)) || [];
-    message.nextConnectionSequence = object.nextConnectionSequence ?? "0";
+    message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

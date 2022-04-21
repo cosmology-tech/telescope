@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -229,262 +230,45 @@ export declare const Authentication: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Authentication;
     fromJSON(object: any): Authentication;
     toJSON(message: Authentication): unknown;
-    fromPartial<I extends {
-        rules?: {
-            selector?: string;
-            oauth?: {
-                canonicalScopes?: string;
-            };
-            allowWithoutCredential?: boolean;
-            requirements?: {
-                providerId?: string;
-                audiences?: string;
-            }[];
-        }[];
-        providers?: {
-            id?: string;
-            issuer?: string;
-            jwksUri?: string;
-            audiences?: string;
-            authorizationUrl?: string;
-            jwtLocations?: {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            }[];
-        }[];
-    } & {
-        rules?: {
-            selector?: string;
-            oauth?: {
-                canonicalScopes?: string;
-            };
-            allowWithoutCredential?: boolean;
-            requirements?: {
-                providerId?: string;
-                audiences?: string;
-            }[];
-        }[] & ({
-            selector?: string;
-            oauth?: {
-                canonicalScopes?: string;
-            };
-            allowWithoutCredential?: boolean;
-            requirements?: {
-                providerId?: string;
-                audiences?: string;
-            }[];
-        } & {
-            selector?: string;
-            oauth?: {
-                canonicalScopes?: string;
-            } & {
-                canonicalScopes?: string;
-            } & Record<Exclude<keyof I["rules"][number]["oauth"], "canonicalScopes">, never>;
-            allowWithoutCredential?: boolean;
-            requirements?: {
-                providerId?: string;
-                audiences?: string;
-            }[] & ({
-                providerId?: string;
-                audiences?: string;
-            } & {
-                providerId?: string;
-                audiences?: string;
-            } & Record<Exclude<keyof I["rules"][number]["requirements"][number], keyof AuthRequirement>, never>)[] & Record<Exclude<keyof I["rules"][number]["requirements"], keyof {
-                providerId?: string;
-                audiences?: string;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["rules"][number], keyof AuthenticationRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
-            selector?: string;
-            oauth?: {
-                canonicalScopes?: string;
-            };
-            allowWithoutCredential?: boolean;
-            requirements?: {
-                providerId?: string;
-                audiences?: string;
-            }[];
-        }[]>, never>;
-        providers?: {
-            id?: string;
-            issuer?: string;
-            jwksUri?: string;
-            audiences?: string;
-            authorizationUrl?: string;
-            jwtLocations?: {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            }[];
-        }[] & ({
-            id?: string;
-            issuer?: string;
-            jwksUri?: string;
-            audiences?: string;
-            authorizationUrl?: string;
-            jwtLocations?: {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            }[];
-        } & {
-            id?: string;
-            issuer?: string;
-            jwksUri?: string;
-            audiences?: string;
-            authorizationUrl?: string;
-            jwtLocations?: {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            }[] & ({
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            } & {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            } & Record<Exclude<keyof I["providers"][number]["jwtLocations"][number], keyof JwtLocation>, never>)[] & Record<Exclude<keyof I["providers"][number]["jwtLocations"], keyof {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["providers"][number], keyof AuthProvider>, never>)[] & Record<Exclude<keyof I["providers"], keyof {
-            id?: string;
-            issuer?: string;
-            jwksUri?: string;
-            audiences?: string;
-            authorizationUrl?: string;
-            jwtLocations?: {
-                header?: string | undefined;
-                query?: string | undefined;
-                valuePrefix?: string;
-            }[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Authentication>, never>>(object: I): Authentication;
+    fromPartial<I extends unknown>(object: I): Authentication;
 };
 export declare const AuthenticationRule: {
     encode(message: AuthenticationRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticationRule;
     fromJSON(object: any): AuthenticationRule;
     toJSON(message: AuthenticationRule): unknown;
-    fromPartial<I extends {
-        selector?: string;
-        oauth?: {
-            canonicalScopes?: string;
-        };
-        allowWithoutCredential?: boolean;
-        requirements?: {
-            providerId?: string;
-            audiences?: string;
-        }[];
-    } & {
-        selector?: string;
-        oauth?: {
-            canonicalScopes?: string;
-        } & {
-            canonicalScopes?: string;
-        } & Record<Exclude<keyof I["oauth"], "canonicalScopes">, never>;
-        allowWithoutCredential?: boolean;
-        requirements?: {
-            providerId?: string;
-            audiences?: string;
-        }[] & ({
-            providerId?: string;
-            audiences?: string;
-        } & {
-            providerId?: string;
-            audiences?: string;
-        } & Record<Exclude<keyof I["requirements"][number], keyof AuthRequirement>, never>)[] & Record<Exclude<keyof I["requirements"], keyof {
-            providerId?: string;
-            audiences?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof AuthenticationRule>, never>>(object: I): AuthenticationRule;
+    fromPartial<I extends unknown>(object: I): AuthenticationRule;
 };
 export declare const JwtLocation: {
     encode(message: JwtLocation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): JwtLocation;
     fromJSON(object: any): JwtLocation;
     toJSON(message: JwtLocation): unknown;
-    fromPartial<I extends {
-        header?: string | undefined;
-        query?: string | undefined;
-        valuePrefix?: string;
-    } & {
-        header?: string | undefined;
-        query?: string | undefined;
-        valuePrefix?: string;
-    } & Record<Exclude<keyof I, keyof JwtLocation>, never>>(object: I): JwtLocation;
+    fromPartial<I extends unknown>(object: I): JwtLocation;
 };
 export declare const AuthProvider: {
     encode(message: AuthProvider, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthProvider;
     fromJSON(object: any): AuthProvider;
     toJSON(message: AuthProvider): unknown;
-    fromPartial<I extends {
-        id?: string;
-        issuer?: string;
-        jwksUri?: string;
-        audiences?: string;
-        authorizationUrl?: string;
-        jwtLocations?: {
-            header?: string | undefined;
-            query?: string | undefined;
-            valuePrefix?: string;
-        }[];
-    } & {
-        id?: string;
-        issuer?: string;
-        jwksUri?: string;
-        audiences?: string;
-        authorizationUrl?: string;
-        jwtLocations?: {
-            header?: string | undefined;
-            query?: string | undefined;
-            valuePrefix?: string;
-        }[] & ({
-            header?: string | undefined;
-            query?: string | undefined;
-            valuePrefix?: string;
-        } & {
-            header?: string | undefined;
-            query?: string | undefined;
-            valuePrefix?: string;
-        } & Record<Exclude<keyof I["jwtLocations"][number], keyof JwtLocation>, never>)[] & Record<Exclude<keyof I["jwtLocations"], keyof {
-            header?: string | undefined;
-            query?: string | undefined;
-            valuePrefix?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof AuthProvider>, never>>(object: I): AuthProvider;
+    fromPartial<I extends unknown>(object: I): AuthProvider;
 };
 export declare const OAuthRequirements: {
     encode(message: OAuthRequirements, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OAuthRequirements;
     fromJSON(object: any): OAuthRequirements;
     toJSON(message: OAuthRequirements): unknown;
-    fromPartial<I extends {
-        canonicalScopes?: string;
-    } & {
-        canonicalScopes?: string;
-    } & Record<Exclude<keyof I, "canonicalScopes">, never>>(object: I): OAuthRequirements;
+    fromPartial<I extends unknown>(object: I): OAuthRequirements;
 };
 export declare const AuthRequirement: {
     encode(message: AuthRequirement, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthRequirement;
     fromJSON(object: any): AuthRequirement;
     toJSON(message: AuthRequirement): unknown;
-    fromPartial<I extends {
-        providerId?: string;
-        audiences?: string;
-    } & {
-        providerId?: string;
-        audiences?: string;
-    } & Record<Exclude<keyof I, keyof AuthRequirement>, never>>(object: I): AuthRequirement;
+    fromPartial<I extends unknown>(object: I): AuthRequirement;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

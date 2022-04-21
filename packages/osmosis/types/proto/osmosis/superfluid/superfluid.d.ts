@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 export declare enum SuperfluidAssetType {
@@ -21,7 +22,7 @@ export interface SuperfluidIntermediaryAccount {
     denom: string;
     valAddr: string;
     /** perpetual gauge for rewards distribution */
-    gaugeId: string;
+    gaugeId: Long;
 }
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
@@ -33,7 +34,7 @@ export interface SuperfluidIntermediaryAccount {
  * change.
  */
 export interface OsmoEquivalentMultiplierRecord {
-    epochNumber: string;
+    epochNumber: Long;
     /** superfluid asset denom, can be LP token or native token */
     denom: string;
     multiplier: string;
@@ -48,7 +49,7 @@ export interface SuperfluidDelegationRecord {
     delegationAmount: Coin;
 }
 export interface LockIdIntermediaryAccountConnection {
-    lockId: string;
+    lockId: Long;
     intermediaryAccount: string;
 }
 export declare const SuperfluidAsset: {
@@ -56,83 +57,38 @@ export declare const SuperfluidAsset: {
     decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidAsset;
     fromJSON(object: any): SuperfluidAsset;
     toJSON(message: SuperfluidAsset): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        assetType?: SuperfluidAssetType;
-    } & {
-        denom?: string;
-        assetType?: SuperfluidAssetType;
-    } & Record<Exclude<keyof I, keyof SuperfluidAsset>, never>>(object: I): SuperfluidAsset;
+    fromPartial<I extends unknown>(object: I): SuperfluidAsset;
 };
 export declare const SuperfluidIntermediaryAccount: {
     encode(message: SuperfluidIntermediaryAccount, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidIntermediaryAccount;
     fromJSON(object: any): SuperfluidIntermediaryAccount;
     toJSON(message: SuperfluidIntermediaryAccount): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        valAddr?: string;
-        gaugeId?: string;
-    } & {
-        denom?: string;
-        valAddr?: string;
-        gaugeId?: string;
-    } & Record<Exclude<keyof I, keyof SuperfluidIntermediaryAccount>, never>>(object: I): SuperfluidIntermediaryAccount;
+    fromPartial<I extends unknown>(object: I): SuperfluidIntermediaryAccount;
 };
 export declare const OsmoEquivalentMultiplierRecord: {
     encode(message: OsmoEquivalentMultiplierRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OsmoEquivalentMultiplierRecord;
     fromJSON(object: any): OsmoEquivalentMultiplierRecord;
     toJSON(message: OsmoEquivalentMultiplierRecord): unknown;
-    fromPartial<I extends {
-        epochNumber?: string;
-        denom?: string;
-        multiplier?: string;
-    } & {
-        epochNumber?: string;
-        denom?: string;
-        multiplier?: string;
-    } & Record<Exclude<keyof I, keyof OsmoEquivalentMultiplierRecord>, never>>(object: I): OsmoEquivalentMultiplierRecord;
+    fromPartial<I extends unknown>(object: I): OsmoEquivalentMultiplierRecord;
 };
 export declare const SuperfluidDelegationRecord: {
     encode(message: SuperfluidDelegationRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationRecord;
     fromJSON(object: any): SuperfluidDelegationRecord;
     toJSON(message: SuperfluidDelegationRecord): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        delegationAmount?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        delegationAmount?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["delegationAmount"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, keyof SuperfluidDelegationRecord>, never>>(object: I): SuperfluidDelegationRecord;
+    fromPartial<I extends unknown>(object: I): SuperfluidDelegationRecord;
 };
 export declare const LockIdIntermediaryAccountConnection: {
     encode(message: LockIdIntermediaryAccountConnection, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LockIdIntermediaryAccountConnection;
     fromJSON(object: any): LockIdIntermediaryAccountConnection;
     toJSON(message: LockIdIntermediaryAccountConnection): unknown;
-    fromPartial<I extends {
-        lockId?: string;
-        intermediaryAccount?: string;
-    } & {
-        lockId?: string;
-        intermediaryAccount?: string;
-    } & Record<Exclude<keyof I, keyof LockIdIntermediaryAccountConnection>, never>>(object: I): LockIdIntermediaryAccountConnection;
+    fromPartial<I extends unknown>(object: I): LockIdIntermediaryAccountConnection;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * App includes the protocol and software version for the application.
@@ -5,7 +6,7 @@ import * as _m0 from "protobufjs/minimal";
  * updated in ResponseEndBlock.
  */
 export interface App {
-    protocol: string;
+    protocol: Long;
     software: string;
 }
 /**
@@ -14,37 +15,25 @@ export interface App {
  * state transition machine.
  */
 export interface Consensus {
-    block: string;
-    app: string;
+    block: Long;
+    app: Long;
 }
 export declare const App: {
     encode(message: App, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): App;
     fromJSON(object: any): App;
     toJSON(message: App): unknown;
-    fromPartial<I extends {
-        protocol?: string;
-        software?: string;
-    } & {
-        protocol?: string;
-        software?: string;
-    } & Record<Exclude<keyof I, keyof App>, never>>(object: I): App;
+    fromPartial<I extends unknown>(object: I): App;
 };
 export declare const Consensus: {
     encode(message: Consensus, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Consensus;
     fromJSON(object: any): Consensus;
     toJSON(message: Consensus): unknown;
-    fromPartial<I extends {
-        block?: string;
-        app?: string;
-    } & {
-        block?: string;
-        app?: string;
-    } & Record<Exclude<keyof I, keyof Consensus>, never>>(object: I): Consensus;
+    fromPartial<I extends unknown>(object: I): Consensus;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

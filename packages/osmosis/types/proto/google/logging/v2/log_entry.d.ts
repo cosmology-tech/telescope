@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { MonitoredResource } from "../../../google/api/monitored_resource";
 import { LogSeverity } from "../../../google/logging/type/log_severity";
@@ -192,7 +193,7 @@ export interface LogEntrySourceLocation {
      * Optional. Line within the source file. 1-based; 0 indicates no line number
      * available.
      */
-    line: string;
+    line: Long;
     /**
      * Optional. Human-readable name of the function or method being invoked, with
      * optional context such as the class or package name. This information may be
@@ -229,231 +230,38 @@ export declare const LogEntry: {
     decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry;
     fromJSON(object: any): LogEntry;
     toJSON(message: LogEntry): unknown;
-    fromPartial<I extends {
-        logName?: string;
-        resource?: {
-            type?: string;
-            labels?: {
-                [x: string]: string;
-            };
-        };
-        protoPayload?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        textPayload?: string | undefined;
-        jsonPayload?: {
-            [x: string]: any;
-        };
-        timestamp?: Date;
-        receiveTimestamp?: Date;
-        severity?: LogSeverity;
-        insertId?: string;
-        httpRequest?: {
-            requestMethod?: string;
-            requestUrl?: string;
-            requestSize?: string;
-            status?: number;
-            responseSize?: string;
-            userAgent?: string;
-            remoteIp?: string;
-            serverIp?: string;
-            referer?: string;
-            latency?: string;
-            cacheLookup?: boolean;
-            cacheHit?: boolean;
-            cacheValidatedWithOriginServer?: boolean;
-            cacheFillBytes?: string;
-            protocol?: string;
-        };
-        labels?: {
-            [x: string]: string;
-        };
-        operation?: {
-            id?: string;
-            producer?: string;
-            first?: boolean;
-            last?: boolean;
-        };
-        trace?: string;
-        spanId?: string;
-        traceSampled?: boolean;
-        sourceLocation?: {
-            file?: string;
-            line?: string;
-            function?: string;
-        };
-        split?: {
-            uid?: string;
-            index?: number;
-            totalSplits?: number;
-        };
-    } & {
-        logName?: string;
-        resource?: {
-            type?: string;
-            labels?: {
-                [x: string]: string;
-            };
-        } & {
-            type?: string;
-            labels?: {
-                [x: string]: string;
-            } & {
-                [x: string]: string;
-            } & Record<Exclude<keyof I["resource"]["labels"], string | number>, never>;
-        } & Record<Exclude<keyof I["resource"], keyof MonitoredResource>, never>;
-        protoPayload?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["protoPayload"], keyof Any>, never>;
-        textPayload?: string | undefined;
-        jsonPayload?: {
-            [x: string]: any;
-        } & {
-            [x: string]: any;
-        } & Record<Exclude<keyof I["jsonPayload"], string | number>, never>;
-        timestamp?: Date;
-        receiveTimestamp?: Date;
-        severity?: LogSeverity;
-        insertId?: string;
-        httpRequest?: {
-            requestMethod?: string;
-            requestUrl?: string;
-            requestSize?: string;
-            status?: number;
-            responseSize?: string;
-            userAgent?: string;
-            remoteIp?: string;
-            serverIp?: string;
-            referer?: string;
-            latency?: string;
-            cacheLookup?: boolean;
-            cacheHit?: boolean;
-            cacheValidatedWithOriginServer?: boolean;
-            cacheFillBytes?: string;
-            protocol?: string;
-        } & {
-            requestMethod?: string;
-            requestUrl?: string;
-            requestSize?: string;
-            status?: number;
-            responseSize?: string;
-            userAgent?: string;
-            remoteIp?: string;
-            serverIp?: string;
-            referer?: string;
-            latency?: string;
-            cacheLookup?: boolean;
-            cacheHit?: boolean;
-            cacheValidatedWithOriginServer?: boolean;
-            cacheFillBytes?: string;
-            protocol?: string;
-        } & Record<Exclude<keyof I["httpRequest"], keyof HttpRequest>, never>;
-        labels?: {
-            [x: string]: string;
-        } & {
-            [x: string]: string;
-        } & Record<Exclude<keyof I["labels"], string | number>, never>;
-        operation?: {
-            id?: string;
-            producer?: string;
-            first?: boolean;
-            last?: boolean;
-        } & {
-            id?: string;
-            producer?: string;
-            first?: boolean;
-            last?: boolean;
-        } & Record<Exclude<keyof I["operation"], keyof LogEntryOperation>, never>;
-        trace?: string;
-        spanId?: string;
-        traceSampled?: boolean;
-        sourceLocation?: {
-            file?: string;
-            line?: string;
-            function?: string;
-        } & {
-            file?: string;
-            line?: string;
-            function?: string;
-        } & Record<Exclude<keyof I["sourceLocation"], keyof LogEntrySourceLocation>, never>;
-        split?: {
-            uid?: string;
-            index?: number;
-            totalSplits?: number;
-        } & {
-            uid?: string;
-            index?: number;
-            totalSplits?: number;
-        } & Record<Exclude<keyof I["split"], keyof LogSplit>, never>;
-    } & Record<Exclude<keyof I, keyof LogEntry>, never>>(object: I): LogEntry;
+    fromPartial<I extends unknown>(object: I): LogEntry;
 };
 export declare const LogEntry_LabelsEntry: {
     encode(message: LogEntry_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry;
     fromJSON(object: any): LogEntry_LabelsEntry;
     toJSON(message: LogEntry_LabelsEntry): unknown;
-    fromPartial<I extends {
-        key?: string;
-        value?: string;
-    } & {
-        key?: string;
-        value?: string;
-    } & Record<Exclude<keyof I, keyof LogEntry_LabelsEntry>, never>>(object: I): LogEntry_LabelsEntry;
+    fromPartial<I extends unknown>(object: I): LogEntry_LabelsEntry;
 };
 export declare const LogEntryOperation: {
     encode(message: LogEntryOperation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogEntryOperation;
     fromJSON(object: any): LogEntryOperation;
     toJSON(message: LogEntryOperation): unknown;
-    fromPartial<I extends {
-        id?: string;
-        producer?: string;
-        first?: boolean;
-        last?: boolean;
-    } & {
-        id?: string;
-        producer?: string;
-        first?: boolean;
-        last?: boolean;
-    } & Record<Exclude<keyof I, keyof LogEntryOperation>, never>>(object: I): LogEntryOperation;
+    fromPartial<I extends unknown>(object: I): LogEntryOperation;
 };
 export declare const LogEntrySourceLocation: {
     encode(message: LogEntrySourceLocation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogEntrySourceLocation;
     fromJSON(object: any): LogEntrySourceLocation;
     toJSON(message: LogEntrySourceLocation): unknown;
-    fromPartial<I extends {
-        file?: string;
-        line?: string;
-        function?: string;
-    } & {
-        file?: string;
-        line?: string;
-        function?: string;
-    } & Record<Exclude<keyof I, keyof LogEntrySourceLocation>, never>>(object: I): LogEntrySourceLocation;
+    fromPartial<I extends unknown>(object: I): LogEntrySourceLocation;
 };
 export declare const LogSplit: {
     encode(message: LogSplit, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogSplit;
     fromJSON(object: any): LogSplit;
     toJSON(message: LogSplit): unknown;
-    fromPartial<I extends {
-        uid?: string;
-        index?: number;
-        totalSplits?: number;
-    } & {
-        uid?: string;
-        index?: number;
-        totalSplits?: number;
-    } & Record<Exclude<keyof I, keyof LogSplit>, never>>(object: I): LogSplit;
+    fromPartial<I extends unknown>(object: I): LogSplit;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

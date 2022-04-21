@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Monitoring configuration of the service.
@@ -94,59 +95,17 @@ export declare const Monitoring: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Monitoring;
     fromJSON(object: any): Monitoring;
     toJSON(message: Monitoring): unknown;
-    fromPartial<I extends {
-        producerDestinations?: {
-            monitoredResource?: string;
-            metrics?: string[];
-        }[];
-        consumerDestinations?: {
-            monitoredResource?: string;
-            metrics?: string[];
-        }[];
-    } & {
-        producerDestinations?: {
-            monitoredResource?: string;
-            metrics?: string[];
-        }[] & ({
-            monitoredResource?: string;
-            metrics?: string[];
-        } & {
-            monitoredResource?: string;
-            metrics?: string[] & string[] & Record<Exclude<keyof I["producerDestinations"][number]["metrics"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["producerDestinations"][number], keyof Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["producerDestinations"], keyof {
-            monitoredResource?: string;
-            metrics?: string[];
-        }[]>, never>;
-        consumerDestinations?: {
-            monitoredResource?: string;
-            metrics?: string[];
-        }[] & ({
-            monitoredResource?: string;
-            metrics?: string[];
-        } & {
-            monitoredResource?: string;
-            metrics?: string[] & string[] & Record<Exclude<keyof I["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["consumerDestinations"][number], keyof Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["consumerDestinations"], keyof {
-            monitoredResource?: string;
-            metrics?: string[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Monitoring>, never>>(object: I): Monitoring;
+    fromPartial<I extends unknown>(object: I): Monitoring;
 };
 export declare const Monitoring_MonitoringDestination: {
     encode(message: Monitoring_MonitoringDestination, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Monitoring_MonitoringDestination;
     fromJSON(object: any): Monitoring_MonitoringDestination;
     toJSON(message: Monitoring_MonitoringDestination): unknown;
-    fromPartial<I extends {
-        monitoredResource?: string;
-        metrics?: string[];
-    } & {
-        monitoredResource?: string;
-        metrics?: string[] & string[] & Record<Exclude<keyof I["metrics"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof Monitoring_MonitoringDestination>, never>>(object: I): Monitoring_MonitoringDestination;
+    fromPartial<I extends unknown>(object: I): Monitoring_MonitoringDestination;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

@@ -2,7 +2,11 @@
 
 exports[`encode 1`] = `
 Object {
-  "poolId": "606",
+  "poolId": Long {
+    "high": 0,
+    "low": 606,
+    "unsigned": true,
+  },
   "sender": "osmo1f4vxvvvvvvvvvv3luuddddddddddcccccccccc",
   "shareOutAmount": "101010101",
   "tokenInMaxs": Array [
@@ -20,7 +24,11 @@ Object {
 
 exports[`fromPartial 1`] = `
 Object {
-  "poolId": "606",
+  "poolId": Long {
+    "high": 0,
+    "low": 606,
+    "unsigned": false,
+  },
   "sender": "osmo1f4vxvvvvvvvvvv3luuddddddddddcccccccccc",
   "shareOutAmount": "101010101",
   "tokenInMaxs": Array [
@@ -38,7 +46,11 @@ Object {
 
 exports[`fromPartial.scoped 1`] = `
 Object {
-  "poolId": "606",
+  "poolId": Long {
+    "high": 0,
+    "low": 606,
+    "unsigned": false,
+  },
   "sender": "osmo1f4vxvvvvvvvvvv3luuddddddddddcccccccccc",
   "shareOutAmount": "101010101",
   "tokenInMaxs": Array [

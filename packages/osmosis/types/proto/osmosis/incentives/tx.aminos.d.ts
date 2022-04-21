@@ -8,7 +8,10 @@ export interface AminoMsgCreateGauge extends AminoMsg {
         distributeTo: {
             lockQueryType: number;
             denom: string;
-            duration: string;
+            duration: {
+                seconds: string;
+                nanos: number;
+            };
             timestamp: Date;
         };
         coins: {

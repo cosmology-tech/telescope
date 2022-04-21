@@ -10,28 +10,56 @@ const expectCode = (ast) => {
 
 describe('snake', () => {
   it('makeAminoConverterItem', async () => {
-    expectCode(makeAminoConverterItem(schemata[0], enums, interfaces, snake));
+    expectCode(makeAminoConverterItem({
+      schema: schemata[0],
+      enums,
+      interfaces,
+      aminoCasingFn: snake
+    }));
   });
 
   it('makeAminoTypeInterface', async () => {
-    expectCode(makeAminoTypeInterface(schemata[0], enums, interfaces, undefined, snake));
+    expectCode(makeAminoTypeInterface({
+      schema: schemata[0],
+      enums,
+      interfaces,
+      aminoCasingFn: snake
+    }));
   });
 
   it('aminoConverter', async () => {
-    expectCode(aminoConverter(schemata, enums, interfaces, snake));
+    expectCode(aminoConverter({ schemata, enums, interfaces, aminoCasingFn: snake }));
   });
 })
 
 describe('camel', () => {
   it('makeAminoConverterItem', async () => {
-    expectCode(makeAminoConverterItem(schemata[0], enums, interfaces, camel));
+    expectCode(makeAminoConverterItem({ schema: schemata[0], enums, interfaces, aminoCasingFn: camel }));
   });
 
   it('makeAminoTypeInterface', async () => {
-    expectCode(makeAminoTypeInterface(schemata[0], enums, interfaces, undefined, camel));
+    expectCode(makeAminoTypeInterface({ schema: schemata[0], enums, interfaces, aminoCasingFn: camel }));
   });
 
   it('aminoConverter', async () => {
-    expectCode(aminoConverter(schemata, enums, interfaces, camel));
+    expectCode(aminoConverter({ schemata, enums, interfaces, aminoCasingFn: camel }));
   });
 })
+
+describe('plugins', () => {
+  it('makeAminoTypeInterface', async () => {
+    expectCode(makeAminoTypeInterface({
+      schema: schemata[0],
+      enums,
+      interfaces,
+      aminoCasingFn: camel,
+      exceptions: {
+        '/cosmos.some.MsgThing': {
+          aminoType: 'special-override-type',
+        }
+      }
+    }));
+  });
+})
+
+

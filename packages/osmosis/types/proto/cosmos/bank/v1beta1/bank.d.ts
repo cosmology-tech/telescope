@@ -1,3 +1,4 @@
+import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 /** Params defines the parameters for the bank module. */
@@ -98,186 +99,52 @@ export declare const Params: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        sendEnabled?: {
-            denom?: string;
-            enabled?: boolean;
-        }[];
-        defaultSendEnabled?: boolean;
-    } & {
-        sendEnabled?: {
-            denom?: string;
-            enabled?: boolean;
-        }[] & ({
-            denom?: string;
-            enabled?: boolean;
-        } & {
-            denom?: string;
-            enabled?: boolean;
-        } & Record<Exclude<keyof I["sendEnabled"][number], keyof SendEnabled>, never>)[] & Record<Exclude<keyof I["sendEnabled"], keyof {
-            denom?: string;
-            enabled?: boolean;
-        }[]>, never>;
-        defaultSendEnabled?: boolean;
-    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
+    fromPartial<I extends unknown>(object: I): Params;
 };
 export declare const SendEnabled: {
     encode(message: SendEnabled, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SendEnabled;
     fromJSON(object: any): SendEnabled;
     toJSON(message: SendEnabled): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        enabled?: boolean;
-    } & {
-        denom?: string;
-        enabled?: boolean;
-    } & Record<Exclude<keyof I, keyof SendEnabled>, never>>(object: I): SendEnabled;
+    fromPartial<I extends unknown>(object: I): SendEnabled;
 };
 export declare const Input: {
     encode(message: Input, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Input;
     fromJSON(object: any): Input;
     toJSON(message: Input): unknown;
-    fromPartial<I extends {
-        address?: string;
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        address?: string;
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["coins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Input>, never>>(object: I): Input;
+    fromPartial<I extends unknown>(object: I): Input;
 };
 export declare const Output: {
     encode(message: Output, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Output;
     fromJSON(object: any): Output;
     toJSON(message: Output): unknown;
-    fromPartial<I extends {
-        address?: string;
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        address?: string;
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["coins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Output>, never>>(object: I): Output;
+    fromPartial<I extends unknown>(object: I): Output;
 };
 export declare const Supply: {
     encode(message: Supply, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Supply;
     fromJSON(object: any): Supply;
     toJSON(message: Supply): unknown;
-    fromPartial<I extends {
-        total?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        total?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["total"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["total"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "total">, never>>(object: I): Supply;
+    fromPartial<I extends unknown>(object: I): Supply;
 };
 export declare const DenomUnit: {
     encode(message: DenomUnit, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DenomUnit;
     fromJSON(object: any): DenomUnit;
     toJSON(message: DenomUnit): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        exponent?: number;
-        aliases?: string[];
-    } & {
-        denom?: string;
-        exponent?: number;
-        aliases?: string[] & string[] & Record<Exclude<keyof I["aliases"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof DenomUnit>, never>>(object: I): DenomUnit;
+    fromPartial<I extends unknown>(object: I): DenomUnit;
 };
 export declare const Metadata: {
     encode(message: Metadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Metadata;
     fromJSON(object: any): Metadata;
     toJSON(message: Metadata): unknown;
-    fromPartial<I extends {
-        description?: string;
-        denomUnits?: {
-            denom?: string;
-            exponent?: number;
-            aliases?: string[];
-        }[];
-        base?: string;
-        display?: string;
-        name?: string;
-        symbol?: string;
-        uri?: string;
-        uriHash?: string;
-    } & {
-        description?: string;
-        denomUnits?: {
-            denom?: string;
-            exponent?: number;
-            aliases?: string[];
-        }[] & ({
-            denom?: string;
-            exponent?: number;
-            aliases?: string[];
-        } & {
-            denom?: string;
-            exponent?: number;
-            aliases?: string[] & string[] & Record<Exclude<keyof I["denomUnits"][number]["aliases"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["denomUnits"][number], keyof DenomUnit>, never>)[] & Record<Exclude<keyof I["denomUnits"], keyof {
-            denom?: string;
-            exponent?: number;
-            aliases?: string[];
-        }[]>, never>;
-        base?: string;
-        display?: string;
-        name?: string;
-        symbol?: string;
-        uri?: string;
-        uriHash?: string;
-    } & Record<Exclude<keyof I, keyof Metadata>, never>>(object: I): Metadata;
+    fromPartial<I extends unknown>(object: I): Metadata;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : Partial<T>;
 declare type KeysOfUnion<T> = T extends T ? keyof T : never;

@@ -53,7 +53,7 @@ export interface SuperfluidIntermediaryAccount {
   valAddr: string;
   /** perpetual gauge for rewards distribution */
 
-  gaugeId: string;
+  gaugeId: Long;
 }
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
@@ -66,7 +66,7 @@ export interface SuperfluidIntermediaryAccount {
  */
 
 export interface OsmoEquivalentMultiplierRecord {
-  epochNumber: string;
+  epochNumber: Long;
   /** superfluid asset denom, can be LP token or native token */
 
   denom: string;
@@ -83,7 +83,7 @@ export interface SuperfluidDelegationRecord {
   delegationAmount: Coin;
 }
 export interface LockIdIntermediaryAccountConnection {
-  lockId: string;
+  lockId: Long;
   intermediaryAccount: string;
 }
 
@@ -160,7 +160,7 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
   return {
     denom: "",
     valAddr: "",
-    gaugeId: "0"
+    gaugeId: Long.UZERO
   };
 }
 
@@ -174,7 +174,7 @@ export const SuperfluidIntermediaryAccount = {
       writer.uint32(18).string(message.valAddr);
     }
 
-    if (message.gaugeId !== "0") {
+    if (!message.gaugeId.isZero()) {
       writer.uint32(24).uint64(message.gaugeId);
     }
 
@@ -199,7 +199,7 @@ export const SuperfluidIntermediaryAccount = {
           break;
 
         case 3:
-          message.gaugeId = longToString((reader.uint64() as Long));
+          message.gaugeId = (reader.uint64() as Long);
           break;
 
         default:
@@ -215,7 +215,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? String(object.gaugeId) : "0"
+      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO
     };
   },
 
@@ -223,7 +223,7 @@ export const SuperfluidIntermediaryAccount = {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gaugeId = message.gaugeId);
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     return obj;
   },
 
@@ -231,7 +231,7 @@ export const SuperfluidIntermediaryAccount = {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId ?? "0";
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     return message;
   }
 
@@ -239,7 +239,7 @@ export const SuperfluidIntermediaryAccount = {
 
 function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRecord {
   return {
-    epochNumber: "0",
+    epochNumber: Long.ZERO,
     denom: "",
     multiplier: ""
   };
@@ -247,7 +247,7 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 
 export const OsmoEquivalentMultiplierRecord = {
   encode(message: OsmoEquivalentMultiplierRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.epochNumber !== "0") {
+    if (!message.epochNumber.isZero()) {
       writer.uint32(8).int64(message.epochNumber);
     }
 
@@ -272,7 +272,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
       switch (tag >>> 3) {
         case 1:
-          message.epochNumber = longToString((reader.int64() as Long));
+          message.epochNumber = (reader.int64() as Long);
           break;
 
         case 2:
@@ -294,7 +294,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epochNumber) ? String(object.epochNumber) : "0",
+      epochNumber: isSet(object.epochNumber) ? Long.fromString(object.epochNumber) : Long.ZERO,
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -302,7 +302,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   toJSON(message: OsmoEquivalentMultiplierRecord): unknown {
     const obj: any = {};
-    message.epochNumber !== undefined && (obj.epochNumber = message.epochNumber);
+    message.epochNumber !== undefined && (obj.epochNumber = (message.epochNumber || Long.ZERO).toString());
     message.denom !== undefined && (obj.denom = message.denom);
     message.multiplier !== undefined && (obj.multiplier = message.multiplier);
     return obj;
@@ -310,7 +310,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromPartial<I extends Exact<DeepPartial<OsmoEquivalentMultiplierRecord>, I>>(object: I): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
-    message.epochNumber = object.epochNumber ?? "0";
+    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? Long.fromValue(object.epochNumber) : Long.ZERO;
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
@@ -401,14 +401,14 @@ export const SuperfluidDelegationRecord = {
 
 function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAccountConnection {
   return {
-    lockId: "0",
+    lockId: Long.UZERO,
     intermediaryAccount: ""
   };
 }
 
 export const LockIdIntermediaryAccountConnection = {
   encode(message: LockIdIntermediaryAccountConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.lockId !== "0") {
+    if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
 
@@ -429,7 +429,7 @@ export const LockIdIntermediaryAccountConnection = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = longToString((reader.uint64() as Long));
+          message.lockId = (reader.uint64() as Long);
           break;
 
         case 2:
@@ -447,34 +447,30 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lockId) ? String(object.lockId) : "0",
+      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO,
       intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
     };
   },
 
   toJSON(message: LockIdIntermediaryAccountConnection): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = message.lockId);
+    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     message.intermediaryAccount !== undefined && (obj.intermediaryAccount = message.intermediaryAccount);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<LockIdIntermediaryAccountConnection>, I>>(object: I): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
-    message.lockId = object.lockId ?? "0";
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
   }
 
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
+export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function longToString(long: Long) {
-  return long.toString();
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);
