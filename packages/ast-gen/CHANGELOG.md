@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast-gen@0.1.3...@osmonauts/ast-gen@0.1.4) (2022-04-21)
+
+**Note:** Version bump only for package @osmonauts/ast-gen
+
+
+
+
+
 ## [0.1.3](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast-gen@0.1.2...@osmonauts/ast-gen@0.1.3) (2022-04-21)
 
 **Note:** Version bump only for package @osmonauts/ast-gen
