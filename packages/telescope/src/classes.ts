@@ -212,7 +212,15 @@ export class TSProtoStore {
       const pkgs = allPackages[base];
       parsePackageCreateClient({ obj: pkgs, bundleFilePath, clientFilePath, importPaths, bundleVariables });
       const body = buildClients(bundleVariables);
-      this.writeFile(t.program([...importPaths, ...body]), clientFilePath);
+
+      if (!body.length) return;
+
+      const imports = [
+        c.importStmt(['OfflineSigner', 'GeneratedType', 'Registry'], '@cosmjs/proto-signing'),
+        c.importStmt(['defaultRegistryTypes', 'AminoTypes', 'SigningStargateClient'], '@cosmjs/stargate'),
+      ];
+
+      this.writeFile(t.program([...importPaths, ...imports, ...body]), clientFilePath);
 
       // const bundle = readFileSync(bundleFilePath, 'utf-8');
       // writeFileSync(bundleFilePath, `${bundle}\nexport * from './client';`);

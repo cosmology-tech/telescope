@@ -6,6 +6,8 @@ import * as _878 from "./lockup/tx.aminos";
 import * as _879 from "./lockup/tx.registry";
 import * as _880 from "./superfluid/tx.aminos";
 import * as _881 from "./superfluid/tx.registry";
+import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
+import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 export const getOsmosisSigningClient = async ({
   rpcEndpoint,
   signer,
