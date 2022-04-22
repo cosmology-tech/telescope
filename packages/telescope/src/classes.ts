@@ -23,7 +23,7 @@ import {
   AminoExceptions
 } from '@osmonauts/ast-gen';
 import { aminoHelperCode } from './helpers';
-import { parsePackage, recursiveModuleBundle } from './utils';
+import { buildClients, parsePackage, parsePackageCreateClient, recursiveModuleBundle } from './utils';
 
 export interface FileStore {
   filename: string;
@@ -200,12 +200,33 @@ export class TSProtoStore {
     this.writeFile(t.program([...importPaths, ...body]), bundleFile);
   }
 
+  buildClients(): void {
+    const allPackages = this.getPackagesBundled();
+    Object.keys(allPackages).forEach(base => {
+
+      const bundleFilePath = join(this.protoPath, base, 'index.ts');
+      const clientFilePath = join(this.protoPath, base, 'client.ts');
+      const bundleVariables = {};
+      const importPaths = [];
+
+      const pkgs = allPackages[base];
+      parsePackageCreateClient({ obj: pkgs, bundleFilePath, clientFilePath, importPaths, bundleVariables });
+      const body = buildClients(bundleVariables);
+      this.writeFile(t.program([...importPaths, ...body]), clientFilePath);
+
+      // const bundle = readFileSync(bundleFilePath, 'utf-8');
+      // writeFileSync(bundleFilePath, `${bundle}\nexport * from './client';`);
+    });
+
+  }
+
   protoPathToOutPath(filename) {
     return join(this.outPath, '.', filename.replace(this.protoPath, ''));
   }
 
   writeFile(ast, filename) {
     const output = generate(ast);
+    if (!output.code.trim().length) return;
     const file = this.protoPathToOutPath(filename);
     mkdirp(dirname(file));
     writeFileSync(file, output.code);
@@ -550,7 +571,7 @@ export class TSFileStore implements FileStore {
           ast: makeFile([
             registry,
             c.createRegistryLoader(),
-          ], [c.importStmt(['Registry'], '@cosmjs/proto-signing')])
+          ], [c.importStmt(['Registry', 'GeneratedType'], '@cosmjs/proto-signing')])
         });
       }
 
