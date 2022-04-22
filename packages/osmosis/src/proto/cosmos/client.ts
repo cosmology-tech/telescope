@@ -28,7 +28,7 @@ import * as _862 from "./vesting/v1beta1/tx.aminos";
 import * as _863 from "./vesting/v1beta1/tx.registry";
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-export const getCosmosSigningClient = async ({
+export const getSigningCosmosClient = async ({
   rpcEndpoint,
   signer,
   defaultTypes = defaultRegistryTypes

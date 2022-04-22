@@ -8,7 +8,7 @@ import * as _872 from "./core/connection/v1/tx.aminos";
 import * as _873 from "./core/connection/v1/tx.registry";
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-export const getIbcSigningClient = async ({
+export const getSigningIbcClient = async ({
   rpcEndpoint,
   signer,
   defaultTypes = defaultRegistryTypes

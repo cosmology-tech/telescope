@@ -8,7 +8,7 @@ import * as _880 from "./superfluid/tx.aminos";
 import * as _881 from "./superfluid/tx.registry";
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-export const getOsmosisSigningClient = async ({
+export const getSigningOsmosisClient = async ({
   rpcEndpoint,
   signer,
   defaultTypes = defaultRegistryTypes

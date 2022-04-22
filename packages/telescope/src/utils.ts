@@ -68,7 +68,7 @@ const createFileBundle = (obj, filename, bundleFile, importPaths, bundleVariable
 
 export const buildClients = (obj) => {
     return Object.keys(obj).map(pkg => {
-        const name = 'get' + pascal(pkg + 'SigningClient');
+        const name = 'getSigning' + pascal(pkg + 'Client');
         const { registries, aminos } = obj[pkg];
         return ast.createClient({
             name,
