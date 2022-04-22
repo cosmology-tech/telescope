@@ -74,7 +74,7 @@ export const createClient = ({ name, packages }: CreateClient) => {
                               ...packages.map(pkg =>
                                 t.spreadElement(
                                   memberExpressionOrIdentifier(
-                                    'osmosis.gamm.v1beta1'.split('.').reverse()
+                                    `${pkg}.registry`.split('.').reverse()
                                   )
                                 )
                               )
@@ -99,7 +99,7 @@ export const createClient = ({ name, packages }: CreateClient) => {
                               ...packages.map(pkg =>
                                 t.spreadElement(
                                   memberExpressionOrIdentifier(
-                                    'osmosis.gamm.v1beta1'.split('.').reverse()
+                                    `${pkg}.AminoConverter`.split('.').reverse()
                                   )
                                 )
                               )
