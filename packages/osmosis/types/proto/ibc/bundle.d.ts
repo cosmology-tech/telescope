@@ -2253,5 +2253,3 @@ export declare namespace ibc {
         }
     }
 }
-export * from './bundle';
-export * from './client';

@@ -98,4 +98,3 @@ export declare const ics23: {
         fromPartial<I_12 extends unknown>(object: I_12): _418.CompressedNonExistenceProof;
     };
 };
-export * from './bundle';

@@ -177,17 +177,26 @@ export class TSProtoStore {
     Object.keys(allPackages).forEach(base => {
       const pkgs = allPackages[base];
       const bundleVariables = {};
-      const bundleFile = join(this.protoPath, base, 'index.ts');
+      const bundleFile = join(this.protoPath, base, 'bundle.ts');
       const importPaths = [];
       parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
       const body = recursiveModuleBundle(bundleVariables);
       this.writeFile(t.program([...importPaths, ...body]), bundleFile);
+      const indexOutPath = join(this.outPath, base, 'index.ts');
+      let bundle;
+      try {
+        bundle = readFileSync(indexOutPath, 'utf-8');
+      } catch (e) {
+        bundle = '';
+      }
+      writeFileSync(indexOutPath, `${bundle}\nexport * from './bundle';`);
+
     });
   }
 
   bundleRootPackage(): void {
     const allPackages = this.getPackagesBundled();
-    const bundleFile = join(this.protoPath, 'index.ts');
+    const bundleFile = join(this.protoPath, 'bundle.ts');
     const bundleVariables = {};
     const importPaths = [];
 
@@ -198,13 +207,23 @@ export class TSProtoStore {
 
     const body = recursiveModuleBundle(bundleVariables);
     this.writeFile(t.program([...importPaths, ...body]), bundleFile);
+
+    const indexOutPath = join(this.outPath, 'index.ts');
+    let bundle;
+    try {
+      bundle = readFileSync(indexOutPath, 'utf-8');
+    } catch (e) {
+      bundle = '';
+    }
+    writeFileSync(indexOutPath, `${bundle}\nexport * from './bundle';`);
+
   }
 
   buildClients(): void {
     const allPackages = this.getPackagesBundled();
     Object.keys(allPackages).forEach(base => {
 
-      const bundleFilePath = join(this.protoPath, base, 'index.ts');
+      const bundleFilePath = join(this.protoPath, base, 'bundle.ts');
       const clientFilePath = join(this.protoPath, base, 'client.ts');
       const bundleVariables = {};
       const importPaths = [];
@@ -222,24 +241,27 @@ export class TSProtoStore {
 
       this.writeFile(t.program([...importPaths, ...imports, ...body]), clientFilePath);
 
-      // const bundle = readFileSync(bundleFilePath, 'utf-8');
-      // writeFileSync(bundleFilePath, `${bundle}\nexport * from './client';`);
+      const indexOutPath = join(this.outPath, base, 'index.ts');
+      let bundle;
+      try {
+        bundle = readFileSync(indexOutPath, 'utf-8');
+      } catch (e) {
+        bundle = '';
+      }
+      writeFileSync(indexOutPath, `${bundle}\nexport * from './client';`);
     });
 
   }
 
   buildClientsRoot(): void {
     const allPackages = this.getPackagesBundled();
-    const bundleFilePath = join(this.protoPath, 'index.ts');
+    const bundleFilePath = join(this.protoPath, 'bundle.ts');
     const clientFilePath = join(this.protoPath, 'client.ts');
     const bundleVariables = {};
     const importPaths = [];
     Object.keys(allPackages).forEach(base => {
-
-
       const pkgs = allPackages[base];
       parsePackageCreateClient({ obj: pkgs, bundleFilePath, clientFilePath, importPaths, bundleVariables });
-
     });
 
     const body = buildClients(bundleVariables);
@@ -253,9 +275,14 @@ export class TSProtoStore {
 
     this.writeFile(t.program([...importPaths, ...imports, ...body]), clientFilePath);
 
-    const bundleOutFilePath = join(this.outPath, 'index.ts');
-    const bundle = readFileSync(bundleOutFilePath, 'utf-8');
-    writeFileSync(bundleOutFilePath, `${bundle}\nexport * from './client';`);
+    const indexOutPath = join(this.outPath, 'index.ts');
+    let bundle;
+    try {
+      bundle = readFileSync(indexOutPath, 'utf-8');
+    } catch (e) {
+      bundle = '';
+    }
+    writeFileSync(indexOutPath, `${bundle}\nexport * from './client';`);
   }
 
   protoPathToOutPath(filename) {

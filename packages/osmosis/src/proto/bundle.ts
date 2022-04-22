@@ -1049,6 +1049,3 @@ export namespace tendermint {
   export const version = { ..._417
   };
 }
-export * from './client';
-export * from './bundle';
-export * from './client';

@@ -639,4 +639,3 @@ export declare namespace tendermint {
         };
     };
 }
-export * from './bundle';

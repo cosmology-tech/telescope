@@ -346,4 +346,3 @@ export declare namespace secret {
         }
     }
 }
-export * from './bundle';

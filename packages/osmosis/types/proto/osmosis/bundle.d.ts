@@ -2307,5 +2307,3 @@ export declare namespace osmosis {
         };
     }
 }
-export * from './bundle';
-export * from './client';

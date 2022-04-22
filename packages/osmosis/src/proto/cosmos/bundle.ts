@@ -516,5 +516,3 @@ export namespace cosmos {
     };
   }
 }
-export * from './bundle';
-export * from './client';

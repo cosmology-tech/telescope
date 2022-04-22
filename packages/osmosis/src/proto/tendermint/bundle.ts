@@ -30,4 +30,3 @@ export namespace tendermint {
   export const version = { ..._835
   };
 }
-export * from './bundle';

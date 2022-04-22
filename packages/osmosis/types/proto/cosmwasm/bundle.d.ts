@@ -639,5 +639,3 @@ export declare namespace cosmwasm {
         };
     }
 }
-export * from './bundle';
-export * from './client';

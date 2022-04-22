@@ -18,4 +18,3 @@ export declare const cosmos_proto: {
         fromPartial<I_1 extends unknown>(object: I_1): _419.ScalarDescriptor;
     };
 };
-export * from './bundle';
