@@ -214,23 +214,16 @@ export const createRegistryLoader = () => {
               t.expressionStatement(
                 t.callExpression(
                   t.memberExpression(
-                    t.callExpression(
-                      t.memberExpression(
-                        t.identifier(
-                          'Object'
-                        ),
-                        t.identifier('keys')
-                      ),
-                      [
-                        t.identifier('registry')
-                      ]
-                    ),
+                    t.identifier('registry'),
                     t.identifier('forEach')
                   ),
                   [
                     t.arrowFunctionExpression(
                       [
-                        t.identifier('typeUrl')
+                        t.arrayPattern([
+                          t.identifier('typeUrl'),
+                          t.identifier('mod')
+                        ])
                       ],
                       t.blockStatement(
                         [
@@ -244,11 +237,7 @@ export const createRegistryLoader = () => {
                               ),
                               [
                                 t.identifier('typeUrl'),
-                                t.memberExpression(
-                                  t.identifier('registry'),
-                                  t.identifier('typeUrl'),
-                                  true
-                                )
+                                t.identifier('mod')
                               ]
                             )
                           )

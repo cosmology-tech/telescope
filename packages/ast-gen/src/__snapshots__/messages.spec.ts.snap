@@ -47,8 +47,8 @@ exports[`addToJSONMethod 1`] = `
 
 exports[`createRegistryLoader 1`] = `
 "export const load = (protoRegistry: Registry) => {
-  Object.keys(registry).forEach(typeUrl => {
-    protoRegistry.register(typeUrl, registry[typeUrl]);
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
   });
 };"
 `;
