@@ -37,22 +37,7 @@ export const getCosmosSigningClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry({ ...defaultTypes,
-    ..._837.registry,
-    ..._839.registry,
-    ..._841.registry,
-    ..._843.registry,
-    ..._845.registry,
-    ..._847.registry,
-    ..._849.registry,
-    ..._851.registry,
-    ..._853.registry,
-    ..._855.registry,
-    ..._857.registry,
-    ..._859.registry,
-    ..._861.registry,
-    ..._863.registry
-  });
+  const registry = new Registry([...defaultTypes, ..._837.registry, ..._839.registry, ..._841.registry, ..._843.registry, ..._845.registry, ..._847.registry, ..._849.registry, ..._851.registry, ..._853.registry, ..._855.registry, ..._857.registry, ..._859.registry, ..._861.registry, ..._863.registry]);
   const aminoTypes = new AminoTypes({ ..._836.AminoConverter,
     ..._838.AminoConverter,
     ..._840.AminoConverter,

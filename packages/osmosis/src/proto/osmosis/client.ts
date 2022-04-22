@@ -17,12 +17,7 @@ export const getOsmosisSigningClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry({ ...defaultTypes,
-    ..._875.registry,
-    ..._877.registry,
-    ..._879.registry,
-    ..._881.registry
-  });
+  const registry = new Registry([...defaultTypes, ..._875.registry, ..._877.registry, ..._879.registry, ..._881.registry]);
   const aminoTypes = new AminoTypes({ ..._874.AminoConverter,
     ..._876.AminoConverter,
     ..._878.AminoConverter,

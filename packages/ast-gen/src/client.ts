@@ -96,7 +96,7 @@ export const createClient = ({ name, registries, aminos }: CreateClient) => {
                       t.newExpression(
                         t.identifier('Registry'),
                         [
-                          t.objectExpression(
+                          t.arrayExpression(
                             [
                               t.spreadElement(
                                 t.identifier('defaultTypes')

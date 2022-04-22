@@ -11,9 +11,7 @@ export const getCosmwasmSigningClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry({ ...defaultTypes,
-    ..._865.registry
-  });
+  const registry = new Registry([...defaultTypes, ..._865.registry]);
   const aminoTypes = new AminoTypes({ ..._864.AminoConverter
   });
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {

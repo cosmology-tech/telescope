@@ -17,12 +17,7 @@ export const getIbcSigningClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry({ ...defaultTypes,
-    ..._867.registry,
-    ..._869.registry,
-    ..._871.registry,
-    ..._873.registry
-  });
+  const registry = new Registry([...defaultTypes, ..._867.registry, ..._869.registry, ..._871.registry, ..._873.registry]);
   const aminoTypes = new AminoTypes({ ..._866.AminoConverter,
     ..._868.AminoConverter,
     ..._870.AminoConverter,
