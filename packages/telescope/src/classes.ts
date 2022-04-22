@@ -228,6 +228,36 @@ export class TSProtoStore {
 
   }
 
+  buildClientsRoot(): void {
+    const allPackages = this.getPackagesBundled();
+    const bundleFilePath = join(this.protoPath, 'index.ts');
+    const clientFilePath = join(this.protoPath, 'client.ts');
+    const bundleVariables = {};
+    const importPaths = [];
+    Object.keys(allPackages).forEach(base => {
+
+
+      const pkgs = allPackages[base];
+      parsePackageCreateClient({ obj: pkgs, bundleFilePath, clientFilePath, importPaths, bundleVariables });
+
+    });
+
+    const body = buildClients(bundleVariables);
+
+    if (!body.length) return;
+
+    const imports = [
+      c.importStmt(['OfflineSigner', 'GeneratedType', 'Registry'], '@cosmjs/proto-signing'),
+      c.importStmt(['defaultRegistryTypes', 'AminoTypes', 'SigningStargateClient'], '@cosmjs/stargate'),
+    ];
+
+    this.writeFile(t.program([...importPaths, ...imports, ...body]), clientFilePath);
+
+    const bundleOutFilePath = join(this.outPath, 'index.ts');
+    const bundle = readFileSync(bundleOutFilePath, 'utf-8');
+    writeFileSync(bundleOutFilePath, `${bundle}\nexport * from './client';`);
+  }
+
   protoPathToOutPath(filename) {
     return join(this.outPath, '.', filename.replace(this.protoPath, ''));
   }

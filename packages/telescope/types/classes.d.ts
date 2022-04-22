@@ -51,6 +51,7 @@ export declare class TSProtoStore {
     bundlePackages(): void;
     bundleRootPackage(): void;
     buildClients(): void;
+    buildClientsRoot(): void;
     protoPathToOutPath(filename: any): string;
     writeFile(ast: any, filename: any): void;
     findDependency(name: any): {

@@ -20,4 +20,5 @@ export default (input: TelescopeInput) => {
     protoStore.bundleRootPackage();
     protoStore.bundlePackages();
     protoStore.buildClients();
+    protoStore.buildClientsRoot();
 };

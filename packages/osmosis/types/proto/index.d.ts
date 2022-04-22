@@ -14278,3 +14278,4 @@ export declare namespace tendermint {
         };
     };
 }
+export * from './client';
