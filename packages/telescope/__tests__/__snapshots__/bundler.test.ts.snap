@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`clients 1`] = `""`;
+
 exports[`packages 1`] = `
 "import * as _0 from \\"../confio/proofs\\";
 export const ics23 = { ..._0

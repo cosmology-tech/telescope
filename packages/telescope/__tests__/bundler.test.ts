@@ -11,15 +11,20 @@ import {
 } from '../src'
 import {
     parsePackage,
-    recursiveModuleBundle
+    recursiveModuleBundle,
+    parsePackageCreateClient,
+    buildClients
 } from '../src/utils'
 
 const protoPath = __dirname + '/../__fixtures__/chain1'
 const outPath = join(tmpdir(), 'chain1');
-const program = new TSProtoStore(protoPath, outPath);
+const program = new TSProtoStore({ protoPath, outPath });
 
-const preview = (ast) => {
+const expectCode = (ast) => {
     expect(generate(ast).code).toMatchSnapshot();
+}
+const printCode = (ast) => {
+    console.log(generate(ast).code);
 }
 
 it('packages', async () => {
@@ -31,7 +36,7 @@ it('packages', async () => {
         const importPaths = [];
         parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
         const body = recursiveModuleBundle(bundleVariables);
-        preview(t.program([...importPaths, ...body]))
+        expectCode(t.program([...importPaths, ...body]))
     });
 })
 
@@ -47,5 +52,26 @@ it('root', async () => {
     });
 
     const body = recursiveModuleBundle(bundleVariables);
-    preview(t.program([...importPaths, ...body]))
+    expectCode(t.program([...importPaths, ...body]))
+})
+
+it('clients', async () => {
+    const allPackages = program.getPackagesBundled();
+    program.write();
+    Object.keys(allPackages).forEach(base => {
+
+        const bundleFilePath = join(protoPath, base, 'index.ts');
+        const clientFilePath = join(protoPath, base, 'client.ts');
+        const bundleVariables = {};
+        const importPaths = [];
+
+        const pkgs = allPackages[base];
+        parsePackageCreateClient({ obj: pkgs, bundleFilePath, clientFilePath, importPaths, bundleVariables });
+        console.log(JSON.stringify(bundleVariables, null, 2));
+
+        const body = buildClients(bundleVariables);
+        printCode(t.program([...importPaths, ...body]))
+    });
+
+
 })

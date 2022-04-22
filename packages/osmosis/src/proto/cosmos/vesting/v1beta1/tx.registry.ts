@@ -7,14 +7,10 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Period } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Registry } from "@cosmjs/proto-signing";
-export const registry = {
-  "/cosmos.vesting.v1beta1.MsgCreateVestingAccount": MsgCreateVestingAccount,
-  "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount": MsgCreatePermanentLockedAccount,
-  "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount": MsgCreatePeriodicVestingAccount
-};
+import { Registry, GeneratedType } from "@cosmjs/proto-signing";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.vesting.v1beta1.MsgCreateVestingAccount", MsgCreateVestingAccount], ["/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount", MsgCreatePermanentLockedAccount], ["/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount", MsgCreatePeriodicVestingAccount]];
 export const load = (protoRegistry: Registry) => {
-  Object.keys(registry).forEach(typeUrl => {
-    protoRegistry.register(typeUrl, registry[typeUrl]);
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
   });
 };

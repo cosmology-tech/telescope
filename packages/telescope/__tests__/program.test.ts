@@ -1,25 +1,29 @@
 import generate from '@babel/generator';
 import * as t from '@babel/types';
 import { tmpdir } from 'os';
+import { pascal } from 'case';
 import { join } from 'path';
 import {
     TSProtoStore
 } from '../src'
 import { snake, camel } from 'case';
+
 const protoPath = __dirname + '/../__fixtures__/chain1'
 const outPath = join(tmpdir(), 'chain1');
 
-const program = new TSProtoStore(protoPath, outPath, [
-    {
-        name: 'aminoCasing',
-        plugin: ({ protoPackage }) => {
-            if (protoPackage.startsWith('osmosis')) {
-                return camel;
+const program = new TSProtoStore({
+    protoPath, outPath, plugins: [
+        {
+            name: 'aminoCasing',
+            plugin: ({ protoPackage }) => {
+                if (protoPackage.startsWith('osmosis')) {
+                    return camel;
+                }
+                return snake;
             }
-            return snake;
         }
-    }
-]);
+    ]
+});
 
 it('packages', async () => {
     const superfluid = program.findFilesOfPackage('osmosis.superfluid');
@@ -92,23 +96,7 @@ it('Nested Props', async () => {
     const desc = staking.getInterface('Description');
     expect(desc).toBeTruthy();
     expect(comm).toBeTruthy();
-
-    // // console.log(comm, desc)
-    // desc.fields.forEach(field => {
-    //     const val = generate(field.node).code;
-
-    //     // console.log(field.name, val);
-    // })
-
-
 });
-
-// TODO
-// can we ask the program, 
-// hey, where can i get omitDefault?
-// and it returns the aminos?
-// feels like maybe we should use TSFile for every file?
-// but maybe we can generate new files in the process of parsing files.
 
 it('AminoHelpers', async () => {
     const a = program.findDependency('AminoHeight');

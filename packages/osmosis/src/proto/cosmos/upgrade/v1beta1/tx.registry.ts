@@ -6,13 +6,10 @@ import { MsgSoftwareUpgrade, MsgCancelUpgrade, MsgSoftwareUpgradeResponse, MsgCa
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Plan } from "../../../cosmos/upgrade/v1beta1/upgrade";
-import { Registry } from "@cosmjs/proto-signing";
-export const registry = {
-  "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": MsgSoftwareUpgrade,
-  "/cosmos.upgrade.v1beta1.MsgCancelUpgrade": MsgCancelUpgrade
-};
+import { Registry, GeneratedType } from "@cosmjs/proto-signing";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade", MsgSoftwareUpgrade], ["/cosmos.upgrade.v1beta1.MsgCancelUpgrade", MsgCancelUpgrade]];
 export const load = (protoRegistry: Registry) => {
-  Object.keys(registry).forEach(typeUrl => {
-    protoRegistry.register(typeUrl, registry[typeUrl]);
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
   });
 };

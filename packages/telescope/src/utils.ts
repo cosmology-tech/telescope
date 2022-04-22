@@ -1,6 +1,8 @@
 import { join, relative, dirname, extname, basename } from 'path';
 import * as t from '@babel/types';
+import * as ast from '@osmonauts/ast-gen'
 import dotty from 'dotty';
+import { pascal } from 'case';
 
 export const recursiveModuleBundle = (obj) => {
     return Object.keys(obj).map(key => {
@@ -64,6 +66,18 @@ const createFileBundle = (obj, filename, bundleFile, importPaths, bundleVariable
     dotty.put(bundleVariables, obj.pkg + '.' + variable, true);
 }
 
+export const buildClients = (obj) => {
+    return Object.keys(obj).map(pkg => {
+        const name = 'getSigning' + pascal(pkg + 'Client');
+        const { registries, aminos } = obj[pkg];
+        return ast.createClient({
+            name,
+            registries,
+            aminos
+        })
+    })
+
+}
 
 export const parsePackage = (obj, bundleFile, importPaths, bundleVariables) => {
     if (!obj) return;
@@ -81,3 +95,42 @@ export const parsePackage = (obj, bundleFile, importPaths, bundleVariables) => {
         parsePackage(obj[mini], bundleFile, importPaths, bundleVariables);
     })
 }
+
+export const parsePackageCreateClient = ({ obj, bundleFilePath, clientFilePath, importPaths, bundleVariables, level = 0 }) => {
+    if (!obj) return;
+    if (obj.pkg && obj.files) {
+        const matched = obj.files.filter(file => file.mutations.length);
+        if (matched.length) {
+            const value = dotty.get(bundleVariables, obj.pkg.split('.')[0] + '.include') ?? [];
+            const newvalue = [...value, obj.pkg];
+            dotty.put(bundleVariables, obj.pkg.split('.')[0] + '.include', newvalue);
+        }
+        obj.files.forEach(file => {
+            file.outFiles.forEach(outFile => {
+                if (/registry.ts$/.test(outFile.filename)) {
+                    let rel = relative(dirname(clientFilePath), outFile.filename);
+                    if (!rel.startsWith('.')) rel = `./${rel}`;
+                    const variable = `_${counter++}`;
+                    importPaths.push(importNamespace(variable, rel));
+                    const value = dotty.get(bundleVariables, obj.pkg.split('.')[0] + '.registries') ?? [];
+                    const newvalue = [...value, variable];
+                    dotty.put(bundleVariables, obj.pkg.split('.')[0] + '.registries', newvalue);
+                }
+                if (/aminos.ts$/.test(outFile.filename)) {
+                    let rel = relative(dirname(clientFilePath), outFile.filename);
+                    if (!rel.startsWith('.')) rel = `./${rel}`;
+                    const variable = `_${counter++}`;
+                    importPaths.push(importNamespace(variable, rel));
+                    const value = dotty.get(bundleVariables, obj.pkg.split('.')[0] + '.aminos') ?? [];
+                    const newvalue = [...value, variable];
+                    dotty.put(bundleVariables, obj.pkg.split('.')[0] + '.aminos', newvalue);
+                }
+            });
+        });
+        return;
+    }
+    Object.keys(obj).forEach(mini => {
+        parsePackageCreateClient({ obj: obj[mini], bundleFilePath, clientFilePath, importPaths, bundleVariables, level: level + 1 });
+    })
+}
+

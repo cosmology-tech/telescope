@@ -317,29 +317,7 @@ export declare namespace cosmos {
                 toJSON(_: _430.MsgRevokeResponse): unknown;
                 fromPartial<I_5 extends unknown>(_: I_5): _430.MsgRevokeResponse;
             };
-            registry: {
-                "/cosmos.authz.v1beta1.MsgGrant": {
-                    encode(message: _430.MsgGrant, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _430.MsgGrant;
-                    fromJSON(object: any): _430.MsgGrant;
-                    toJSON(message: _430.MsgGrant): unknown;
-                    fromPartial<I extends unknown>(object: I): _430.MsgGrant;
-                };
-                "/cosmos.authz.v1beta1.MsgExec": {
-                    encode(message: _430.MsgExec, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _430.MsgExec;
-                    fromJSON(object: any): _430.MsgExec;
-                    toJSON(message: _430.MsgExec): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _430.MsgExec;
-                };
-                "/cosmos.authz.v1beta1.MsgRevoke": {
-                    encode(message: _430.MsgRevoke, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _430.MsgRevoke;
-                    fromJSON(object: any): _430.MsgRevoke;
-                    toJSON(message: _430.MsgRevoke): unknown;
-                    fromPartial<I_4 extends unknown>(object: I_4): _430.MsgRevoke;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.authz.v1beta1.MsgGrant": {
@@ -591,22 +569,7 @@ export declare namespace cosmos {
                 toJSON(_: _443.MsgMultiSendResponse): unknown;
                 fromPartial<I_3 extends unknown>(_: I_3): _443.MsgMultiSendResponse;
             };
-            registry: {
-                "/cosmos.bank.v1beta1.MsgSend": {
-                    encode(message: _443.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _443.MsgSend;
-                    fromJSON(object: any): _443.MsgSend;
-                    toJSON(message: _443.MsgSend): unknown;
-                    fromPartial<I extends unknown>(object: I): _443.MsgSend;
-                };
-                "/cosmos.bank.v1beta1.MsgMultiSend": {
-                    encode(message: _443.MsgMultiSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _443.MsgMultiSend;
-                    fromJSON(object: any): _443.MsgMultiSend;
-                    toJSON(message: _443.MsgMultiSend): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _443.MsgMultiSend;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.bank.v1beta1.MsgSend": {
@@ -1543,15 +1506,7 @@ export declare namespace cosmos {
                 toJSON(_: _465.MsgVerifyInvariantResponse): unknown;
                 fromPartial<I_1 extends unknown>(_: I_1): _465.MsgVerifyInvariantResponse;
             };
-            registry: {
-                "/cosmos.crisis.v1beta1.MsgVerifyInvariant": {
-                    encode(message: _465.MsgVerifyInvariant, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _465.MsgVerifyInvariant;
-                    fromJSON(object: any): _465.MsgVerifyInvariant;
-                    toJSON(message: _465.MsgVerifyInvariant): unknown;
-                    fromPartial<I extends unknown>(object: I): _465.MsgVerifyInvariant;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.crisis.v1beta1.MsgVerifyInvariant": {
@@ -1774,36 +1729,7 @@ export declare namespace cosmos {
                 toJSON(_: _483.MsgFundCommunityPoolResponse): unknown;
                 fromPartial<I_7 extends unknown>(_: I_7): _483.MsgFundCommunityPoolResponse;
             };
-            registry: {
-                "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress": {
-                    encode(message: _483.MsgSetWithdrawAddress, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _483.MsgSetWithdrawAddress;
-                    fromJSON(object: any): _483.MsgSetWithdrawAddress;
-                    toJSON(message: _483.MsgSetWithdrawAddress): unknown;
-                    fromPartial<I extends unknown>(object: I): _483.MsgSetWithdrawAddress;
-                };
-                "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward": {
-                    encode(message: _483.MsgWithdrawDelegatorReward, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _483.MsgWithdrawDelegatorReward;
-                    fromJSON(object: any): _483.MsgWithdrawDelegatorReward;
-                    toJSON(message: _483.MsgWithdrawDelegatorReward): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _483.MsgWithdrawDelegatorReward;
-                };
-                "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission": {
-                    encode(message: _483.MsgWithdrawValidatorCommission, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _483.MsgWithdrawValidatorCommission;
-                    fromJSON(object: any): _483.MsgWithdrawValidatorCommission;
-                    toJSON(message: _483.MsgWithdrawValidatorCommission): unknown;
-                    fromPartial<I_4 extends unknown>(object: I_4): _483.MsgWithdrawValidatorCommission;
-                };
-                "/cosmos.distribution.v1beta1.MsgFundCommunityPool": {
-                    encode(message: _483.MsgFundCommunityPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _483.MsgFundCommunityPool;
-                    fromJSON(object: any): _483.MsgFundCommunityPool;
-                    toJSON(message: _483.MsgFundCommunityPool): unknown;
-                    fromPartial<I_6 extends unknown>(object: I_6): _483.MsgFundCommunityPool;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress": {
@@ -2229,15 +2155,7 @@ export declare namespace cosmos {
                 toJSON(message: _495.MsgSubmitEvidenceResponse): unknown;
                 fromPartial<I_1 extends unknown>(object: I_1): _495.MsgSubmitEvidenceResponse;
             };
-            registry: {
-                "/cosmos.evidence.v1beta1.MsgSubmitEvidence": {
-                    encode(message: _495.MsgSubmitEvidence, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _495.MsgSubmitEvidence;
-                    fromJSON(object: any): _495.MsgSubmitEvidence;
-                    toJSON(message: _495.MsgSubmitEvidence): unknown;
-                    fromPartial<I extends unknown>(object: I): _495.MsgSubmitEvidence;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.evidence.v1beta1.MsgSubmitEvidence": {
@@ -2362,22 +2280,7 @@ export declare namespace cosmos {
                 toJSON(_: _507.MsgRevokeAllowanceResponse): unknown;
                 fromPartial<I_3 extends unknown>(_: I_3): _507.MsgRevokeAllowanceResponse;
             };
-            registry: {
-                "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
-                    encode(message: _507.MsgGrantAllowance, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _507.MsgGrantAllowance;
-                    fromJSON(object: any): _507.MsgGrantAllowance;
-                    toJSON(message: _507.MsgGrantAllowance): unknown;
-                    fromPartial<I extends unknown>(object: I): _507.MsgGrantAllowance;
-                };
-                "/cosmos.feegrant.v1beta1.MsgRevokeAllowance": {
-                    encode(message: _507.MsgRevokeAllowance, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _507.MsgRevokeAllowance;
-                    fromJSON(object: any): _507.MsgRevokeAllowance;
-                    toJSON(message: _507.MsgRevokeAllowance): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _507.MsgRevokeAllowance;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
@@ -2623,43 +2526,7 @@ export declare namespace cosmos {
                 toJSON(_: _520.MsgDepositResponse): unknown;
                 fromPartial<I_9 extends unknown>(_: I_9): _520.MsgDepositResponse;
             };
-            registry: {
-                "/cosmos.gov.v1.MsgSubmitProposal": {
-                    encode(message: _520.MsgSubmitProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _520.MsgSubmitProposal;
-                    fromJSON(object: any): _520.MsgSubmitProposal;
-                    toJSON(message: _520.MsgSubmitProposal): unknown;
-                    fromPartial<I extends unknown>(object: I): _520.MsgSubmitProposal;
-                };
-                "/cosmos.gov.v1.MsgExecLegacyContent": {
-                    encode(message: _520.MsgExecLegacyContent, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _520.MsgExecLegacyContent;
-                    fromJSON(object: any): _520.MsgExecLegacyContent;
-                    toJSON(message: _520.MsgExecLegacyContent): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _520.MsgExecLegacyContent;
-                };
-                "/cosmos.gov.v1.MsgVote": {
-                    encode(message: _520.MsgVote, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _520.MsgVote;
-                    fromJSON(object: any): _520.MsgVote;
-                    toJSON(message: _520.MsgVote): unknown;
-                    fromPartial<I_4 extends unknown>(object: I_4): _520.MsgVote;
-                };
-                "/cosmos.gov.v1.MsgVoteWeighted": {
-                    encode(message: _520.MsgVoteWeighted, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _520.MsgVoteWeighted;
-                    fromJSON(object: any): _520.MsgVoteWeighted;
-                    toJSON(message: _520.MsgVoteWeighted): unknown;
-                    fromPartial<I_6 extends unknown>(object: I_6): _520.MsgVoteWeighted;
-                };
-                "/cosmos.gov.v1.MsgDeposit": {
-                    encode(message: _520.MsgDeposit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _520.MsgDeposit;
-                    fromJSON(object: any): _520.MsgDeposit;
-                    toJSON(message: _520.MsgDeposit): unknown;
-                    fromPartial<I_8 extends unknown>(object: I_8): _520.MsgDeposit;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.gov.v1.MsgSubmitProposal": {
@@ -3111,36 +2978,7 @@ export declare namespace cosmos {
                 toJSON(_: _532.MsgDepositResponse): unknown;
                 fromPartial<I_7 extends unknown>(_: I_7): _532.MsgDepositResponse;
             };
-            registry: {
-                "/cosmos.gov.v1beta1.MsgSubmitProposal": {
-                    encode(message: _532.MsgSubmitProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _532.MsgSubmitProposal;
-                    fromJSON(object: any): _532.MsgSubmitProposal;
-                    toJSON(message: _532.MsgSubmitProposal): unknown;
-                    fromPartial<I extends unknown>(object: I): _532.MsgSubmitProposal;
-                };
-                "/cosmos.gov.v1beta1.MsgVote": {
-                    encode(message: _532.MsgVote, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _532.MsgVote;
-                    fromJSON(object: any): _532.MsgVote;
-                    toJSON(message: _532.MsgVote): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _532.MsgVote;
-                };
-                "/cosmos.gov.v1beta1.MsgVoteWeighted": {
-                    encode(message: _532.MsgVoteWeighted, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _532.MsgVoteWeighted;
-                    fromJSON(object: any): _532.MsgVoteWeighted;
-                    toJSON(message: _532.MsgVoteWeighted): unknown;
-                    fromPartial<I_4 extends unknown>(object: I_4): _532.MsgVoteWeighted;
-                };
-                "/cosmos.gov.v1beta1.MsgDeposit": {
-                    encode(message: _532.MsgDeposit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _532.MsgDeposit;
-                    fromJSON(object: any): _532.MsgDeposit;
-                    toJSON(message: _532.MsgDeposit): unknown;
-                    fromPartial<I_6 extends unknown>(object: I_6): _532.MsgDeposit;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.gov.v1beta1.MsgSubmitProposal": {
@@ -3790,106 +3628,7 @@ export declare namespace cosmos {
                 toJSON(_: _544.MsgLeaveGroupResponse): unknown;
                 fromPartial<I_38 extends unknown>(_: I_38): _544.MsgLeaveGroupResponse;
             };
-            registry: {
-                "/cosmos.group.v1.MsgCreateGroup": {
-                    encode(message: _544.MsgCreateGroup, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgCreateGroup;
-                    fromJSON(object: any): _544.MsgCreateGroup;
-                    toJSON(message: _544.MsgCreateGroup): unknown;
-                    fromPartial<I_11 extends unknown>(object: I_11): _544.MsgCreateGroup;
-                };
-                "/cosmos.group.v1.MsgUpdateGroupMembers": {
-                    encode(message: _544.MsgUpdateGroupMembers, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgUpdateGroupMembers;
-                    fromJSON(object: any): _544.MsgUpdateGroupMembers;
-                    toJSON(message: _544.MsgUpdateGroupMembers): unknown;
-                    fromPartial<I_13 extends unknown>(object: I_13): _544.MsgUpdateGroupMembers;
-                };
-                "/cosmos.group.v1.MsgUpdateGroupAdmin": {
-                    encode(message: _544.MsgUpdateGroupAdmin, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgUpdateGroupAdmin;
-                    fromJSON(object: any): _544.MsgUpdateGroupAdmin;
-                    toJSON(message: _544.MsgUpdateGroupAdmin): unknown;
-                    fromPartial<I_15 extends unknown>(object: I_15): _544.MsgUpdateGroupAdmin;
-                };
-                "/cosmos.group.v1.MsgUpdateGroupMetadata": {
-                    encode(message: _544.MsgUpdateGroupMetadata, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgUpdateGroupMetadata;
-                    fromJSON(object: any): _544.MsgUpdateGroupMetadata;
-                    toJSON(message: _544.MsgUpdateGroupMetadata): unknown;
-                    fromPartial<I_17 extends unknown>(object: I_17): _544.MsgUpdateGroupMetadata;
-                };
-                "/cosmos.group.v1.MsgCreateGroupPolicy": {
-                    encode(message: _544.MsgCreateGroupPolicy, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgCreateGroupPolicy;
-                    fromJSON(object: any): _544.MsgCreateGroupPolicy;
-                    toJSON(message: _544.MsgCreateGroupPolicy): unknown;
-                    fromPartial<I_19 extends unknown>(object: I_19): _544.MsgCreateGroupPolicy;
-                };
-                "/cosmos.group.v1.MsgCreateGroupWithPolicy": {
-                    encode(message: _544.MsgCreateGroupWithPolicy, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgCreateGroupWithPolicy;
-                    fromJSON(object: any): _544.MsgCreateGroupWithPolicy;
-                    toJSON(message: _544.MsgCreateGroupWithPolicy): unknown;
-                    fromPartial<I_22 extends unknown>(object: I_22): _544.MsgCreateGroupWithPolicy;
-                };
-                "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin": {
-                    encode(message: _544.MsgUpdateGroupPolicyAdmin, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgUpdateGroupPolicyAdmin;
-                    fromJSON(object: any): _544.MsgUpdateGroupPolicyAdmin;
-                    toJSON(message: _544.MsgUpdateGroupPolicyAdmin): unknown;
-                    fromPartial<I_21 extends unknown>(object: I_21): _544.MsgUpdateGroupPolicyAdmin;
-                };
-                "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy": {
-                    encode(message: _544.MsgUpdateGroupPolicyDecisionPolicy, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgUpdateGroupPolicyDecisionPolicy;
-                    fromJSON(object: any): _544.MsgUpdateGroupPolicyDecisionPolicy;
-                    toJSON(message: _544.MsgUpdateGroupPolicyDecisionPolicy): unknown;
-                    fromPartial<I_25 extends unknown>(object: I_25): _544.MsgUpdateGroupPolicyDecisionPolicy;
-                };
-                "/cosmos.group.v1.MsgUpdateGroupPolicyMetadata": {
-                    encode(message: _544.MsgUpdateGroupPolicyMetadata, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgUpdateGroupPolicyMetadata;
-                    fromJSON(object: any): _544.MsgUpdateGroupPolicyMetadata;
-                    toJSON(message: _544.MsgUpdateGroupPolicyMetadata): unknown;
-                    fromPartial<I_27 extends unknown>(object: I_27): _544.MsgUpdateGroupPolicyMetadata;
-                };
-                "/cosmos.group.v1.MsgSubmitProposal": {
-                    encode(message: _544.MsgSubmitProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgSubmitProposal;
-                    fromJSON(object: any): _544.MsgSubmitProposal;
-                    toJSON(message: _544.MsgSubmitProposal): unknown;
-                    fromPartial<I_29 extends unknown>(object: I_29): _544.MsgSubmitProposal;
-                };
-                "/cosmos.group.v1.MsgWithdrawProposal": {
-                    encode(message: _544.MsgWithdrawProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgWithdrawProposal;
-                    fromJSON(object: any): _544.MsgWithdrawProposal;
-                    toJSON(message: _544.MsgWithdrawProposal): unknown;
-                    fromPartial<I_31 extends unknown>(object: I_31): _544.MsgWithdrawProposal;
-                };
-                "/cosmos.group.v1.MsgVote": {
-                    encode(message: _544.MsgVote, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgVote;
-                    fromJSON(object: any): _544.MsgVote;
-                    toJSON(message: _544.MsgVote): unknown;
-                    fromPartial<I_33 extends unknown>(object: I_33): _544.MsgVote;
-                };
-                "/cosmos.group.v1.MsgExec": {
-                    encode(message: _544.MsgExec, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgExec;
-                    fromJSON(object: any): _544.MsgExec;
-                    toJSON(message: _544.MsgExec): unknown;
-                    fromPartial<I_35 extends unknown>(object: I_35): _544.MsgExec;
-                };
-                "/cosmos.group.v1.MsgLeaveGroup": {
-                    encode(message: _544.MsgLeaveGroup, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _544.MsgLeaveGroup;
-                    fromJSON(object: any): _544.MsgLeaveGroup;
-                    toJSON(message: _544.MsgLeaveGroup): unknown;
-                    fromPartial<I_37 extends unknown>(object: I_37): _544.MsgLeaveGroup;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.group.v1.MsgCreateGroup": {
@@ -4769,15 +4508,7 @@ export declare namespace cosmos {
                 toJSON(_: _562.MsgSendResponse): unknown;
                 fromPartial<I_1 extends unknown>(_: I_1): _562.MsgSendResponse;
             };
-            registry: {
-                "/cosmos.nft.v1beta1.MsgSend": {
-                    encode(message: _562.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _562.MsgSend;
-                    fromJSON(object: any): _562.MsgSend;
-                    toJSON(message: _562.MsgSend): unknown;
-                    fromPartial<I extends unknown>(object: I): _562.MsgSend;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.nft.v1beta1.MsgSend": {
@@ -5095,15 +4826,7 @@ export declare namespace cosmos {
                 toJSON(_: _578.MsgUnjailResponse): unknown;
                 fromPartial<I_1 extends unknown>(_: I_1): _578.MsgUnjailResponse;
             };
-            registry: {
-                "/cosmos.slashing.v1beta1.MsgUnjail": {
-                    encode(message: _578.MsgUnjail, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _578.MsgUnjail;
-                    fromJSON(object: any): _578.MsgUnjail;
-                    toJSON(message: _578.MsgUnjail): unknown;
-                    fromPartial<I extends unknown>(object: I): _578.MsgUnjail;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.slashing.v1beta1.MsgUnjail": {
@@ -5304,43 +5027,7 @@ export declare namespace cosmos {
                 toJSON(message: _591.MsgUndelegateResponse): unknown;
                 fromPartial<I_9 extends unknown>(object: I_9): _591.MsgUndelegateResponse;
             };
-            registry: {
-                "/cosmos.staking.v1beta1.MsgCreateValidator": {
-                    encode(message: _591.MsgCreateValidator, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _591.MsgCreateValidator;
-                    fromJSON(object: any): _591.MsgCreateValidator;
-                    toJSON(message: _591.MsgCreateValidator): unknown;
-                    fromPartial<I extends unknown>(object: I): _591.MsgCreateValidator;
-                };
-                "/cosmos.staking.v1beta1.MsgEditValidator": {
-                    encode(message: _591.MsgEditValidator, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _591.MsgEditValidator;
-                    fromJSON(object: any): _591.MsgEditValidator;
-                    toJSON(message: _591.MsgEditValidator): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _591.MsgEditValidator;
-                };
-                "/cosmos.staking.v1beta1.MsgDelegate": {
-                    encode(message: _591.MsgDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _591.MsgDelegate;
-                    fromJSON(object: any): _591.MsgDelegate;
-                    toJSON(message: _591.MsgDelegate): unknown;
-                    fromPartial<I_4 extends unknown>(object: I_4): _591.MsgDelegate;
-                };
-                "/cosmos.staking.v1beta1.MsgBeginRedelegate": {
-                    encode(message: _591.MsgBeginRedelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _591.MsgBeginRedelegate;
-                    fromJSON(object: any): _591.MsgBeginRedelegate;
-                    toJSON(message: _591.MsgBeginRedelegate): unknown;
-                    fromPartial<I_6 extends unknown>(object: I_6): _591.MsgBeginRedelegate;
-                };
-                "/cosmos.staking.v1beta1.MsgUndelegate": {
-                    encode(message: _591.MsgUndelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _591.MsgUndelegate;
-                    fromJSON(object: any): _591.MsgUndelegate;
-                    toJSON(message: _591.MsgUndelegate): unknown;
-                    fromPartial<I_8 extends unknown>(object: I_8): _591.MsgUndelegate;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.staking.v1beta1.MsgCreateValidator": {
@@ -6237,22 +5924,7 @@ export declare namespace cosmos {
                 toJSON(_: _604.MsgCancelUpgradeResponse): unknown;
                 fromPartial<I_7 extends unknown>(_: I_7): _604.MsgCancelUpgradeResponse;
             };
-            registry: {
-                "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": {
-                    encode(message: _604.MsgSoftwareUpgrade, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _604.MsgSoftwareUpgrade;
-                    fromJSON(object: any): _604.MsgSoftwareUpgrade;
-                    toJSON(message: _604.MsgSoftwareUpgrade): unknown;
-                    fromPartial<I_4 extends unknown>(object: I_4): _604.MsgSoftwareUpgrade;
-                };
-                "/cosmos.upgrade.v1beta1.MsgCancelUpgrade": {
-                    encode(message: _604.MsgCancelUpgrade, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _604.MsgCancelUpgrade;
-                    fromJSON(object: any): _604.MsgCancelUpgrade;
-                    toJSON(message: _604.MsgCancelUpgrade): unknown;
-                    fromPartial<I_6 extends unknown>(object: I_6): _604.MsgCancelUpgrade;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": {
@@ -6502,29 +6174,7 @@ export declare namespace cosmos {
                 toJSON(_: _614.MsgCreatePeriodicVestingAccountResponse): unknown;
                 fromPartial<I_11 extends unknown>(_: I_11): _614.MsgCreatePeriodicVestingAccountResponse;
             };
-            registry: {
-                "/cosmos.vesting.v1beta1.MsgCreateVestingAccount": {
-                    encode(message: _614.MsgCreateVestingAccount, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _614.MsgCreateVestingAccount;
-                    fromJSON(object: any): _614.MsgCreateVestingAccount;
-                    toJSON(message: _614.MsgCreateVestingAccount): unknown;
-                    fromPartial<I_6 extends unknown>(object: I_6): _614.MsgCreateVestingAccount;
-                };
-                "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount": {
-                    encode(message: _614.MsgCreatePermanentLockedAccount, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _614.MsgCreatePermanentLockedAccount;
-                    fromJSON(object: any): _614.MsgCreatePermanentLockedAccount;
-                    toJSON(message: _614.MsgCreatePermanentLockedAccount): unknown;
-                    fromPartial<I_8 extends unknown>(object: I_8): _614.MsgCreatePermanentLockedAccount;
-                };
-                "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount": {
-                    encode(message: _614.MsgCreatePeriodicVestingAccount, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _614.MsgCreatePeriodicVestingAccount;
-                    fromJSON(object: any): _614.MsgCreatePeriodicVestingAccount;
-                    toJSON(message: _614.MsgCreatePeriodicVestingAccount): unknown;
-                    fromPartial<I_10 extends unknown>(object: I_10): _614.MsgCreatePeriodicVestingAccount;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmos.vesting.v1beta1.MsgCreateVestingAccount": {

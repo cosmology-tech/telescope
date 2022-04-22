@@ -47,18 +47,13 @@ exports[`addToJSONMethod 1`] = `
 
 exports[`createRegistryLoader 1`] = `
 "export const load = (protoRegistry: Registry) => {
-  Object.keys(registry).forEach(typeUrl => {
-    protoRegistry.register(typeUrl, registry[typeUrl]);
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
   });
 };"
 `;
 
-exports[`createTypeRegistry 1`] = `
-"export const registry = {
-  \\"/cosmos.pools.transfer.v1.MsgJoinPool\\": MsgJoinPool,
-  \\"/cosmos.pools.transfer.v1.MsgExitPool\\": MsgExitPool
-};"
-`;
+exports[`createTypeRegistry 1`] = `"export const registry: ReadonlyArray<[string, GeneratedType]> = [[\\"/cosmos.pools.transfer.v1.MsgJoinPool\\", MsgJoinPool], [\\"/cosmos.pools.transfer.v1.MsgExitPool\\", MsgExitPool]];"`;
 
 exports[`toObjectWithEncodedMethods 1`] = `
 "export const encoded = {

@@ -8,16 +8,10 @@ import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "../../../cosmos/gov/v1/gov";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Registry } from "@cosmjs/proto-signing";
-export const registry = {
-  "/cosmos.gov.v1.MsgSubmitProposal": MsgSubmitProposal,
-  "/cosmos.gov.v1.MsgExecLegacyContent": MsgExecLegacyContent,
-  "/cosmos.gov.v1.MsgVote": MsgVote,
-  "/cosmos.gov.v1.MsgVoteWeighted": MsgVoteWeighted,
-  "/cosmos.gov.v1.MsgDeposit": MsgDeposit
-};
+import { Registry, GeneratedType } from "@cosmjs/proto-signing";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.gov.v1.MsgSubmitProposal", MsgSubmitProposal], ["/cosmos.gov.v1.MsgExecLegacyContent", MsgExecLegacyContent], ["/cosmos.gov.v1.MsgVote", MsgVote], ["/cosmos.gov.v1.MsgVoteWeighted", MsgVoteWeighted], ["/cosmos.gov.v1.MsgDeposit", MsgDeposit]];
 export const load = (protoRegistry: Registry) => {
-  Object.keys(registry).forEach(typeUrl => {
-    protoRegistry.register(typeUrl, registry[typeUrl]);
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
   });
 };

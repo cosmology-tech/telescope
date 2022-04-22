@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/ast-gen",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast-gen#readme",
@@ -85,10 +85,10 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@babel/types": "7.17.0",
-    "@cosmjs/amino": "0.27.1",
-    "@cosmjs/proto-signing": "0.27.1",
-    "@cosmjs/stargate": "0.27.1",
-    "@cosmjs/tendermint-rpc": "^0.28.0",
+    "@cosmjs/amino": "0.28.4",
+    "@cosmjs/proto-signing": "0.28.4",
+    "@cosmjs/stargate": "0.28.4",
+    "@cosmjs/tendermint-rpc": "^0.28.4",
     "ast-stringify": "0.1.0",
     "case": "1.6.3",
     "long": "^5.2.0"
