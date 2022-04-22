@@ -308,64 +308,7 @@ export declare namespace osmosis {
                 toJSON(message: _757.MsgExitSwapExternAmountOutResponse): unknown;
                 fromPartial<I_17 extends unknown>(object: I_17): _757.MsgExitSwapExternAmountOutResponse;
             };
-            registry: {
-                "/osmosis.gamm.v1beta1.MsgJoinPool": {
-                    encode(message: _757.MsgJoinPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinPool;
-                    fromJSON(object: any): _757.MsgJoinPool;
-                    toJSON(message: _757.MsgJoinPool): unknown;
-                    fromPartial<I extends unknown>(object: I): _757.MsgJoinPool;
-                };
-                "/osmosis.gamm.v1beta1.MsgExitPool": {
-                    encode(message: _757.MsgExitPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitPool;
-                    fromJSON(object: any): _757.MsgExitPool;
-                    toJSON(message: _757.MsgExitPool): unknown;
-                    fromPartial<I_2 extends unknown>(object: I_2): _757.MsgExitPool;
-                };
-                "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn": {
-                    encode(message: _757.MsgSwapExactAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgSwapExactAmountIn;
-                    fromJSON(object: any): _757.MsgSwapExactAmountIn;
-                    toJSON(message: _757.MsgSwapExactAmountIn): unknown;
-                    fromPartial<I_5 extends unknown>(object: I_5): _757.MsgSwapExactAmountIn;
-                };
-                "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut": {
-                    encode(message: _757.MsgSwapExactAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgSwapExactAmountOut;
-                    fromJSON(object: any): _757.MsgSwapExactAmountOut;
-                    toJSON(message: _757.MsgSwapExactAmountOut): unknown;
-                    fromPartial<I_8 extends unknown>(object: I_8): _757.MsgSwapExactAmountOut;
-                };
-                "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn": {
-                    encode(message: _757.MsgJoinSwapExternAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinSwapExternAmountIn;
-                    fromJSON(object: any): _757.MsgJoinSwapExternAmountIn;
-                    toJSON(message: _757.MsgJoinSwapExternAmountIn): unknown;
-                    fromPartial<I_10 extends unknown>(object: I_10): _757.MsgJoinSwapExternAmountIn;
-                };
-                "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut": {
-                    encode(message: _757.MsgJoinSwapShareAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinSwapShareAmountOut;
-                    fromJSON(object: any): _757.MsgJoinSwapShareAmountOut;
-                    toJSON(message: _757.MsgJoinSwapShareAmountOut): unknown;
-                    fromPartial<I_12 extends unknown>(object: I_12): _757.MsgJoinSwapShareAmountOut;
-                };
-                "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut": {
-                    encode(message: _757.MsgExitSwapExternAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitSwapExternAmountOut;
-                    fromJSON(object: any): _757.MsgExitSwapExternAmountOut;
-                    toJSON(message: _757.MsgExitSwapExternAmountOut): unknown;
-                    fromPartial<I_16 extends unknown>(object: I_16): _757.MsgExitSwapExternAmountOut;
-                };
-                "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn": {
-                    encode(message: _757.MsgExitSwapShareAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitSwapShareAmountIn;
-                    fromJSON(object: any): _757.MsgExitSwapShareAmountIn;
-                    toJSON(message: _757.MsgExitSwapShareAmountIn): unknown;
-                    fromPartial<I_14 extends unknown>(object: I_14): _757.MsgExitSwapShareAmountIn;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/osmosis.gamm.v1beta1.MsgJoinPool": {
@@ -939,22 +882,7 @@ export declare namespace osmosis {
             toJSON(_: _770.MsgAddToGaugeResponse): unknown;
             fromPartial<I_3 extends unknown>(_: I_3): _770.MsgAddToGaugeResponse;
         };
-        registry: {
-            "/osmosis.incentives.MsgCreateGauge": {
-                encode(message: _770.MsgCreateGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _770.MsgCreateGauge;
-                fromJSON(object: any): _770.MsgCreateGauge;
-                toJSON(message: _770.MsgCreateGauge): unknown;
-                fromPartial<I extends unknown>(object: I): _770.MsgCreateGauge;
-            };
-            "/osmosis.incentives.MsgAddToGauge": {
-                encode(message: _770.MsgAddToGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _770.MsgAddToGauge;
-                fromJSON(object: any): _770.MsgAddToGauge;
-                toJSON(message: _770.MsgAddToGauge): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _770.MsgAddToGauge;
-            };
-        };
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
         load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.incentives.MsgCreateGauge": {
@@ -1266,29 +1194,7 @@ export declare namespace osmosis {
             toJSON(message: _782.MsgBeginUnlockingResponse): unknown;
             fromPartial<I_5 extends unknown>(object: I_5): _782.MsgBeginUnlockingResponse;
         };
-        registry: {
-            "/osmosis.lockup.MsgLockTokens": {
-                encode(message: _782.MsgLockTokens, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgLockTokens;
-                fromJSON(object: any): _782.MsgLockTokens;
-                toJSON(message: _782.MsgLockTokens): unknown;
-                fromPartial<I extends unknown>(object: I): _782.MsgLockTokens;
-            };
-            "/osmosis.lockup.MsgBeginUnlockingAll": {
-                encode(message: _782.MsgBeginUnlockingAll, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgBeginUnlockingAll;
-                fromJSON(object: any): _782.MsgBeginUnlockingAll;
-                toJSON(message: _782.MsgBeginUnlockingAll): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _782.MsgBeginUnlockingAll;
-            };
-            "/osmosis.lockup.MsgBeginUnlocking": {
-                encode(message: _782.MsgBeginUnlocking, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgBeginUnlocking;
-                fromJSON(object: any): _782.MsgBeginUnlocking;
-                toJSON(message: _782.MsgBeginUnlocking): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _782.MsgBeginUnlocking;
-            };
-        };
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
         load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.lockup.MsgLockTokens": {
@@ -1957,36 +1863,7 @@ export declare namespace osmosis {
             toJSON(message: _803.MsgLockAndSuperfluidDelegateResponse): unknown;
             fromPartial<I_7 extends unknown>(object: I_7): _803.MsgLockAndSuperfluidDelegateResponse;
         };
-        registry: {
-            "/osmosis.superfluid.MsgSuperfluidDelegate": {
-                encode(message: _803.MsgSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidDelegate;
-                fromJSON(object: any): _803.MsgSuperfluidDelegate;
-                toJSON(message: _803.MsgSuperfluidDelegate): unknown;
-                fromPartial<I extends unknown>(object: I): _803.MsgSuperfluidDelegate;
-            };
-            "/osmosis.superfluid.MsgSuperfluidUndelegate": {
-                encode(message: _803.MsgSuperfluidUndelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidUndelegate;
-                fromJSON(object: any): _803.MsgSuperfluidUndelegate;
-                toJSON(message: _803.MsgSuperfluidUndelegate): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _803.MsgSuperfluidUndelegate;
-            };
-            "/osmosis.superfluid.MsgSuperfluidUnbondLock": {
-                encode(message: _803.MsgSuperfluidUnbondLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidUnbondLock;
-                fromJSON(object: any): _803.MsgSuperfluidUnbondLock;
-                toJSON(message: _803.MsgSuperfluidUnbondLock): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _803.MsgSuperfluidUnbondLock;
-            };
-            "/osmosis.superfluid.MsgLockAndSuperfluidDelegate": {
-                encode(message: _803.MsgLockAndSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgLockAndSuperfluidDelegate;
-                fromJSON(object: any): _803.MsgLockAndSuperfluidDelegate;
-                toJSON(message: _803.MsgLockAndSuperfluidDelegate): unknown;
-                fromPartial<I_6 extends unknown>(object: I_6): _803.MsgLockAndSuperfluidDelegate;
-            };
-        };
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
         load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         AminoConverter: {
             "/osmosis.superfluid.MsgSuperfluidDelegate": {

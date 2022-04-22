@@ -40,15 +40,7 @@ export declare namespace ibc {
                     toJSON(_: _694.MsgTransferResponse): unknown;
                     fromPartial<I_1 extends unknown>(_: I_1): _694.MsgTransferResponse;
                 };
-                registry: {
-                    "/ibc.applications.transfer.v1.MsgTransfer": {
-                        encode(message: _694.MsgTransfer, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _694.MsgTransfer;
-                        fromJSON(object: any): _694.MsgTransfer;
-                        toJSON(message: _694.MsgTransfer): unknown;
-                        fromPartial<I extends unknown>(object: I): _694.MsgTransfer;
-                    };
-                };
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.applications.transfer.v1.MsgTransfer": {
@@ -327,78 +319,7 @@ export declare namespace ibc {
                     toJSON(_: _707.MsgAcknowledgementResponse): unknown;
                     fromPartial<I_19 extends unknown>(_: I_19): _707.MsgAcknowledgementResponse;
                 };
-                registry: {
-                    "/ibc.core.channel.v1.MsgChannelOpenInit": {
-                        encode(message: _707.MsgChannelOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgChannelOpenInit;
-                        fromJSON(object: any): _707.MsgChannelOpenInit;
-                        toJSON(message: _707.MsgChannelOpenInit): unknown;
-                        fromPartial<I extends unknown>(object: I): _707.MsgChannelOpenInit;
-                    };
-                    "/ibc.core.channel.v1.MsgChannelOpenTry": {
-                        encode(message: _707.MsgChannelOpenTry, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgChannelOpenTry;
-                        fromJSON(object: any): _707.MsgChannelOpenTry;
-                        toJSON(message: _707.MsgChannelOpenTry): unknown;
-                        fromPartial<I_2 extends unknown>(object: I_2): _707.MsgChannelOpenTry;
-                    };
-                    "/ibc.core.channel.v1.MsgChannelOpenAck": {
-                        encode(message: _707.MsgChannelOpenAck, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgChannelOpenAck;
-                        fromJSON(object: any): _707.MsgChannelOpenAck;
-                        toJSON(message: _707.MsgChannelOpenAck): unknown;
-                        fromPartial<I_4 extends unknown>(object: I_4): _707.MsgChannelOpenAck;
-                    };
-                    "/ibc.core.channel.v1.MsgChannelOpenConfirm": {
-                        encode(message: _707.MsgChannelOpenConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgChannelOpenConfirm;
-                        fromJSON(object: any): _707.MsgChannelOpenConfirm;
-                        toJSON(message: _707.MsgChannelOpenConfirm): unknown;
-                        fromPartial<I_6 extends unknown>(object: I_6): _707.MsgChannelOpenConfirm;
-                    };
-                    "/ibc.core.channel.v1.MsgChannelCloseInit": {
-                        encode(message: _707.MsgChannelCloseInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgChannelCloseInit;
-                        fromJSON(object: any): _707.MsgChannelCloseInit;
-                        toJSON(message: _707.MsgChannelCloseInit): unknown;
-                        fromPartial<I_8 extends unknown>(object: I_8): _707.MsgChannelCloseInit;
-                    };
-                    "/ibc.core.channel.v1.MsgChannelCloseConfirm": {
-                        encode(message: _707.MsgChannelCloseConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgChannelCloseConfirm;
-                        fromJSON(object: any): _707.MsgChannelCloseConfirm;
-                        toJSON(message: _707.MsgChannelCloseConfirm): unknown;
-                        fromPartial<I_10 extends unknown>(object: I_10): _707.MsgChannelCloseConfirm;
-                    };
-                    "/ibc.core.channel.v1.MsgRecvPacket": {
-                        encode(message: _707.MsgRecvPacket, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgRecvPacket;
-                        fromJSON(object: any): _707.MsgRecvPacket;
-                        toJSON(message: _707.MsgRecvPacket): unknown;
-                        fromPartial<I_12 extends unknown>(object: I_12): _707.MsgRecvPacket;
-                    };
-                    "/ibc.core.channel.v1.MsgTimeout": {
-                        encode(message: _707.MsgTimeout, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgTimeout;
-                        fromJSON(object: any): _707.MsgTimeout;
-                        toJSON(message: _707.MsgTimeout): unknown;
-                        fromPartial<I_14 extends unknown>(object: I_14): _707.MsgTimeout;
-                    };
-                    "/ibc.core.channel.v1.MsgTimeoutOnClose": {
-                        encode(message: _707.MsgTimeoutOnClose, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgTimeoutOnClose;
-                        fromJSON(object: any): _707.MsgTimeoutOnClose;
-                        toJSON(message: _707.MsgTimeoutOnClose): unknown;
-                        fromPartial<I_16 extends unknown>(object: I_16): _707.MsgTimeoutOnClose;
-                    };
-                    "/ibc.core.channel.v1.MsgAcknowledgement": {
-                        encode(message: _707.MsgAcknowledgement, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _707.MsgAcknowledgement;
-                        fromJSON(object: any): _707.MsgAcknowledgement;
-                        toJSON(message: _707.MsgAcknowledgement): unknown;
-                        fromPartial<I_18 extends unknown>(object: I_18): _707.MsgAcknowledgement;
-                    };
-                };
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.channel.v1.MsgChannelOpenInit": {
@@ -1194,36 +1115,7 @@ export declare namespace ibc {
                     toJSON(_: _719.MsgSubmitMisbehaviourResponse): unknown;
                     fromPartial<I_7 extends unknown>(_: I_7): _719.MsgSubmitMisbehaviourResponse;
                 };
-                registry: {
-                    "/ibc.core.client.v1.MsgCreateClient": {
-                        encode(message: _719.MsgCreateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _719.MsgCreateClient;
-                        fromJSON(object: any): _719.MsgCreateClient;
-                        toJSON(message: _719.MsgCreateClient): unknown;
-                        fromPartial<I extends unknown>(object: I): _719.MsgCreateClient;
-                    };
-                    "/ibc.core.client.v1.MsgUpdateClient": {
-                        encode(message: _719.MsgUpdateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _719.MsgUpdateClient;
-                        fromJSON(object: any): _719.MsgUpdateClient;
-                        toJSON(message: _719.MsgUpdateClient): unknown;
-                        fromPartial<I_2 extends unknown>(object: I_2): _719.MsgUpdateClient;
-                    };
-                    "/ibc.core.client.v1.MsgUpgradeClient": {
-                        encode(message: _719.MsgUpgradeClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _719.MsgUpgradeClient;
-                        fromJSON(object: any): _719.MsgUpgradeClient;
-                        toJSON(message: _719.MsgUpgradeClient): unknown;
-                        fromPartial<I_4 extends unknown>(object: I_4): _719.MsgUpgradeClient;
-                    };
-                    "/ibc.core.client.v1.MsgSubmitMisbehaviour": {
-                        encode(message: _719.MsgSubmitMisbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _719.MsgSubmitMisbehaviour;
-                        fromJSON(object: any): _719.MsgSubmitMisbehaviour;
-                        toJSON(message: _719.MsgSubmitMisbehaviour): unknown;
-                        fromPartial<I_6 extends unknown>(object: I_6): _719.MsgSubmitMisbehaviour;
-                    };
-                };
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.client.v1.MsgCreateClient": {
@@ -1685,36 +1577,7 @@ export declare namespace ibc {
                     toJSON(_: _732.MsgConnectionOpenConfirmResponse): unknown;
                     fromPartial<I_7 extends unknown>(_: I_7): _732.MsgConnectionOpenConfirmResponse;
                 };
-                registry: {
-                    "/ibc.core.connection.v1.MsgConnectionOpenInit": {
-                        encode(message: _732.MsgConnectionOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _732.MsgConnectionOpenInit;
-                        fromJSON(object: any): _732.MsgConnectionOpenInit;
-                        toJSON(message: _732.MsgConnectionOpenInit): unknown;
-                        fromPartial<I extends unknown>(object: I): _732.MsgConnectionOpenInit;
-                    };
-                    "/ibc.core.connection.v1.MsgConnectionOpenTry": {
-                        encode(message: _732.MsgConnectionOpenTry, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _732.MsgConnectionOpenTry;
-                        fromJSON(object: any): _732.MsgConnectionOpenTry;
-                        toJSON(message: _732.MsgConnectionOpenTry): unknown;
-                        fromPartial<I_2 extends unknown>(object: I_2): _732.MsgConnectionOpenTry;
-                    };
-                    "/ibc.core.connection.v1.MsgConnectionOpenAck": {
-                        encode(message: _732.MsgConnectionOpenAck, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _732.MsgConnectionOpenAck;
-                        fromJSON(object: any): _732.MsgConnectionOpenAck;
-                        toJSON(message: _732.MsgConnectionOpenAck): unknown;
-                        fromPartial<I_4 extends unknown>(object: I_4): _732.MsgConnectionOpenAck;
-                    };
-                    "/ibc.core.connection.v1.MsgConnectionOpenConfirm": {
-                        encode(message: _732.MsgConnectionOpenConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                        decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _732.MsgConnectionOpenConfirm;
-                        fromJSON(object: any): _732.MsgConnectionOpenConfirm;
-                        toJSON(message: _732.MsgConnectionOpenConfirm): unknown;
-                        fromPartial<I_6 extends unknown>(object: I_6): _732.MsgConnectionOpenConfirm;
-                    };
-                };
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 AminoConverter: {
                     "/ibc.core.connection.v1.MsgConnectionOpenInit": {

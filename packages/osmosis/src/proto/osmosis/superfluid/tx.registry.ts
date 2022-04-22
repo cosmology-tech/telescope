@@ -6,15 +6,10 @@ import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { Registry } from "@cosmjs/proto-signing";
-export const registry = {
-  "/osmosis.superfluid.MsgSuperfluidDelegate": MsgSuperfluidDelegate,
-  "/osmosis.superfluid.MsgSuperfluidUndelegate": MsgSuperfluidUndelegate,
-  "/osmosis.superfluid.MsgSuperfluidUnbondLock": MsgSuperfluidUnbondLock,
-  "/osmosis.superfluid.MsgLockAndSuperfluidDelegate": MsgLockAndSuperfluidDelegate
-};
+import { Registry, GeneratedType } from "@cosmjs/proto-signing";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.superfluid.MsgSuperfluidDelegate", MsgSuperfluidDelegate], ["/osmosis.superfluid.MsgSuperfluidUndelegate", MsgSuperfluidUndelegate], ["/osmosis.superfluid.MsgSuperfluidUnbondLock", MsgSuperfluidUnbondLock], ["/osmosis.superfluid.MsgLockAndSuperfluidDelegate", MsgLockAndSuperfluidDelegate]];
 export const load = (protoRegistry: Registry) => {
-  Object.keys(registry).forEach(typeUrl => {
-    protoRegistry.register(typeUrl, registry[typeUrl]);
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
   });
 };

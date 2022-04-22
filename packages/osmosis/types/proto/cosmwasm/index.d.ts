@@ -153,50 +153,7 @@ export declare namespace cosmwasm {
                 toJSON(_: _628.MsgClearAdminResponse): unknown;
                 fromPartial<I_19 extends unknown>(_: I_19): _628.MsgClearAdminResponse;
             };
-            registry: {
-                "/cosmwasm.wasm.v1.MsgStoreCode": {
-                    encode(message: _628.MsgStoreCode, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _628.MsgStoreCode;
-                    fromJSON(object: any): _628.MsgStoreCode;
-                    toJSON(message: _628.MsgStoreCode): unknown;
-                    fromPartial<I_8 extends unknown>(object: I_8): _628.MsgStoreCode;
-                };
-                "/cosmwasm.wasm.v1.MsgInstantiateContract": {
-                    encode(message: _628.MsgInstantiateContract, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _628.MsgInstantiateContract;
-                    fromJSON(object: any): _628.MsgInstantiateContract;
-                    toJSON(message: _628.MsgInstantiateContract): unknown;
-                    fromPartial<I_10 extends unknown>(object: I_10): _628.MsgInstantiateContract;
-                };
-                "/cosmwasm.wasm.v1.MsgExecuteContract": {
-                    encode(message: _628.MsgExecuteContract, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _628.MsgExecuteContract;
-                    fromJSON(object: any): _628.MsgExecuteContract;
-                    toJSON(message: _628.MsgExecuteContract): unknown;
-                    fromPartial<I_12 extends unknown>(object: I_12): _628.MsgExecuteContract;
-                };
-                "/cosmwasm.wasm.v1.MsgMigrateContract": {
-                    encode(message: _628.MsgMigrateContract, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _628.MsgMigrateContract;
-                    fromJSON(object: any): _628.MsgMigrateContract;
-                    toJSON(message: _628.MsgMigrateContract): unknown;
-                    fromPartial<I_14 extends unknown>(object: I_14): _628.MsgMigrateContract;
-                };
-                "/cosmwasm.wasm.v1.MsgUpdateAdmin": {
-                    encode(message: _628.MsgUpdateAdmin, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _628.MsgUpdateAdmin;
-                    fromJSON(object: any): _628.MsgUpdateAdmin;
-                    toJSON(message: _628.MsgUpdateAdmin): unknown;
-                    fromPartial<I_16 extends unknown>(object: I_16): _628.MsgUpdateAdmin;
-                };
-                "/cosmwasm.wasm.v1.MsgClearAdmin": {
-                    encode(message: _628.MsgClearAdmin, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _628.MsgClearAdmin;
-                    fromJSON(object: any): _628.MsgClearAdmin;
-                    toJSON(message: _628.MsgClearAdmin): unknown;
-                    fromPartial<I_18 extends unknown>(object: I_18): _628.MsgClearAdmin;
-                };
-            };
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             AminoConverter: {
                 "/cosmwasm.wasm.v1.MsgStoreCode": {
