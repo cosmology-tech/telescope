@@ -12,9 +12,28 @@ const tsObjectPattern = (
 }
 interface CreateClient {
   name: string;
-  packages: string[];
+  registries: string[];
+  aminos: string[];
 }
-export const createClient = ({ name, packages }: CreateClient) => {
+export const createClient = ({ name, registries, aminos }: CreateClient) => {
+
+  const prop = t.tsPropertySignature(
+    t.identifier('defaultTypes'),
+    t.tsTypeAnnotation(
+      t.tsTypeReference(t.identifier('ReadonlyArray'), t.tsTypeParameterInstantiation(
+        [
+          t.tsTupleType([
+            t.tsStringKeyword(),
+            t.tsTypeReference(
+              t.identifier('GeneratedType')
+            )]
+          )
+        ]
+      ))
+    )
+  );
+  prop.optional = true;
+
   return t.exportNamedDeclaration(
     t.variableDeclaration(
       'const',
@@ -36,6 +55,15 @@ export const createClient = ({ name, packages }: CreateClient) => {
                     t.identifier('signer'),
                     false,
                     true
+                  ),
+                  t.objectProperty(
+                    t.identifier('defaultTypes'),
+                    t.assignmentPattern(
+                      t.identifier('defaultTypes'),
+                      t.identifier('defaultRegistryTypes')
+                    ),
+                    false,
+                    true
                   )
                 ],
                 t.tsTypeAnnotation(
@@ -50,7 +78,9 @@ export const createClient = ({ name, packages }: CreateClient) => {
                         t.tsTypeAnnotation(t.tsTypeReference(
                           t.identifier('OfflineSigner')
                         ))
-                      )
+                      ),
+                      prop
+
                     ]
                   )
                 )
@@ -69,9 +99,9 @@ export const createClient = ({ name, packages }: CreateClient) => {
                           t.objectExpression(
                             [
                               t.spreadElement(
-                                t.identifier('defaultRegistryTypes')
+                                t.identifier('defaultTypes')
                               ),
-                              ...packages.map(pkg =>
+                              ...registries.map(pkg =>
                                 t.spreadElement(
                                   memberExpressionOrIdentifier(
                                     `${pkg}.registry`.split('.').reverse()
@@ -96,7 +126,7 @@ export const createClient = ({ name, packages }: CreateClient) => {
                         [
                           t.objectExpression(
                             [
-                              ...packages.map(pkg =>
+                              ...aminos.map(pkg =>
                                 t.spreadElement(
                                   memberExpressionOrIdentifier(
                                     `${pkg}.AminoConverter`.split('.').reverse()

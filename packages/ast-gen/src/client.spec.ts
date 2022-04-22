@@ -19,7 +19,12 @@ const printCode = (ast) => {
 it('createClient', async () => {
     printCode(createClient({
         name: 'getSigningOsmosisClient',
-        packages: [
+        registries: [
+            'osmosis.gamm.v1beta1',
+            'osmosis.superfluid.v1beta1',
+            'osmosis.lockup'
+        ],
+        aminos: [
             'osmosis.gamm.v1beta1',
             'osmosis.superfluid.v1beta1',
             'osmosis.lockup'
