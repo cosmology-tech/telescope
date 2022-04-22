@@ -11,12 +11,13 @@ import {
 } from '../src'
 import {
     parsePackage,
+    parsePackageCreateClients,
     recursiveModuleBundle
 } from '../src/utils'
 
 const protoPath = __dirname + '/../__fixtures__/chain1'
 const outPath = join(tmpdir(), 'chain1');
-const program = new TSProtoStore(protoPath, outPath);
+const program = new TSProtoStore({ protoPath, outPath });
 
 const preview = (ast) => {
     expect(generate(ast).code).toMatchSnapshot();

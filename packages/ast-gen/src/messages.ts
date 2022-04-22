@@ -134,12 +134,6 @@ export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
     )]));
 };
 
-export const createTypeRegistryObject = (mutation: Mutation) => {
-  return t.objectProperty(
-    t.stringLiteral(mutation.typeUrl),
-    t.identifier(mutation.TypeName)
-  );
-};
 
 export const toObjectWithPartialMethods = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
   t.variableDeclarator(t.identifier('messages'), t.objectExpression(
@@ -166,10 +160,40 @@ export const toObjectWithFromJSONMethods = (mutations: Mutation[]) => t.exportNa
     mutations.map(mutation => addFromJSONMethod(mutation))
   ))]));
 
-export const createTypeRegistry = (mutations: Mutation[]) => t.exportNamedDeclaration(t.variableDeclaration('const', [
-  t.variableDeclarator(t.identifier('registry'), t.objectExpression(
-    mutations.map(mutation => createTypeRegistryObject(mutation))
-  ))]));
+export const createTypeRegistryObject = (mutation: Mutation) => {
+  return t.objectProperty(
+    t.stringLiteral(mutation.typeUrl),
+    t.identifier(mutation.TypeName)
+  );
+};
+
+export const createTypeRegistry = (mutations: Mutation[]) => t.exportNamedDeclaration(
+  t.variableDeclaration('const', [
+    t.variableDeclarator(tsIdentifier(
+      'registry',
+      t.tsTypeAnnotation(
+        t.tsTypeReference(t.identifier('ReadonlyArray'), t.tsTypeParameterInstantiation(
+          [
+            t.tsTupleType([
+              t.tsStringKeyword(),
+              t.tsTypeReference(
+                t.identifier('GeneratedType')
+              )]
+            )
+          ]
+        ))
+      )
+    ), t.arrayExpression(
+      [
+        ...mutations.map(mutation => t.arrayExpression(
+          [
+            t.stringLiteral(mutation.typeUrl),
+            t.identifier(mutation.TypeName)
+          ]
+        ))
+      ]
+    ))
+  ]));
 
 export const createRegistryLoader = () => {
   return t.exportNamedDeclaration(t.variableDeclaration(

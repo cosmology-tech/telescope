@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createClient 1`] = `
+"export const getSigningOsmosisClient = async ({
+  rpcEndpoint,
+  signer
+}: {
+  rpcEndpoint: string;
+}) => {
+  const registry = new Registry(defaultRegistryTypes);
+};"
+`;
