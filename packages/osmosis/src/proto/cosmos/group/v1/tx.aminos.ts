@@ -110,14 +110,16 @@ export interface AminoMsgUpdateGroupPolicyMetadata extends AminoMsg {
 export interface AminoMsgSubmitProposal extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: {
-    address: string;
-    proposers: string[];
-    metadata: string;
     messages: {
       type_url: string;
       value: Uint8Array;
     }[];
-    exec: number;
+    initial_deposit: {
+      denom: string;
+      amount: string;
+    }[];
+    proposer: string;
+    metadata: string;
   };
 }
 export interface AminoMsgWithdrawProposal extends AminoMsg {
@@ -134,14 +136,16 @@ export interface AminoMsgVote extends AminoMsg {
     voter: string;
     option: number;
     metadata: string;
-    exec: number;
   };
 }
 export interface AminoMsgExec extends AminoMsg {
   type: "cosmos-sdk/MsgExec";
   value: {
-    proposal_id: string;
-    signer: string;
+    grantee: string;
+    msgs: {
+      type_url: string;
+      value: Uint8Array;
+    }[];
   };
 }
 export interface AminoMsgLeaveGroup extends AminoMsg {
@@ -444,39 +448,41 @@ export const AminoConverter = {
   "/cosmos.group.v1.MsgSubmitProposal": {
     aminoType: "cosmos-sdk/MsgSubmitProposal",
     toAmino: ({
-      address,
-      proposers,
-      metadata,
       messages,
-      exec
+      initialDeposit,
+      proposer,
+      metadata
     }: MsgSubmitProposal): AminoMsgSubmitProposal["value"] => {
       return {
-        address,
-        proposers,
-        metadata,
         messages: messages.map(el0 => ({
           type_url: el0.typeUrl,
           value: el0.value
         })),
-        exec
+        initial_deposit: initialDeposit.map(el0 => ({
+          denom: el0.denom,
+          amount: el0.amount
+        })),
+        proposer,
+        metadata
       };
     },
     fromAmino: ({
-      address,
-      proposers,
-      metadata,
       messages,
-      exec
+      initial_deposit,
+      proposer,
+      metadata
     }: AminoMsgSubmitProposal["value"]): MsgSubmitProposal => {
       return {
-        address,
-        proposers,
-        metadata,
         messages: messages.map(el0 => ({
           typeUrl: el0.type_url,
           value: el0.value
         })),
-        exec: execFromJSON(exec)
+        initialDeposit: initial_deposit.map(el0 => ({
+          denom: el0.denom,
+          amount: el0.amount
+        })),
+        proposer,
+        metadata
       };
     }
   },
@@ -507,51 +513,53 @@ export const AminoConverter = {
       proposalId,
       voter,
       option,
-      metadata,
-      exec
+      metadata
     }: MsgVote): AminoMsgVote["value"] => {
       return {
         proposal_id: proposalId.toString(),
         voter,
         option,
-        metadata,
-        exec
+        metadata
       };
     },
     fromAmino: ({
       proposal_id,
       voter,
       option,
-      metadata,
-      exec
+      metadata
     }: AminoMsgVote["value"]): MsgVote => {
       return {
         proposalId: Long.fromString(proposal_id),
         voter,
         option: voteOptionFromJSON(option),
-        metadata,
-        exec: execFromJSON(exec)
+        metadata
       };
     }
   },
   "/cosmos.group.v1.MsgExec": {
     aminoType: "cosmos-sdk/MsgExec",
     toAmino: ({
-      proposalId,
-      signer
+      grantee,
+      msgs
     }: MsgExec): AminoMsgExec["value"] => {
       return {
-        proposal_id: proposalId.toString(),
-        signer
+        grantee,
+        msgs: msgs.map(el0 => ({
+          type_url: el0.typeUrl,
+          value: el0.value
+        }))
       };
     },
     fromAmino: ({
-      proposal_id,
-      signer
+      grantee,
+      msgs
     }: AminoMsgExec["value"]): MsgExec => {
       return {
-        proposalId: Long.fromString(proposal_id),
-        signer
+        grantee,
+        msgs: msgs.map(el0 => ({
+          typeUrl: el0.type_url,
+          value: el0.value
+        }))
       };
     }
   },

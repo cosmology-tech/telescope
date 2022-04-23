@@ -20,7 +20,7 @@ import { Duration } from "../../google/protobuf/duration";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: string;
+  retryDelay: Duration;
 }
 /** Describes additional debugging info. */
 
@@ -292,7 +292,7 @@ function createBaseRetryInfo(): RetryInfo {
 export const RetryInfo = {
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
-      Duration.encode(toDuration(message.retryDelay), writer.uint32(10).fork()).ldelim();
+      Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -308,7 +308,7 @@ export const RetryInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.retryDelay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.retryDelay = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -322,19 +322,19 @@ export const RetryInfo = {
 
   fromJSON(object: any): RetryInfo {
     return {
-      retryDelay: isSet(object.retryDelay) ? String(object.retryDelay) : undefined
+      retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
     };
   },
 
   toJSON(message: RetryInfo): unknown {
     const obj: any = {};
-    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay);
+    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<RetryInfo>, I>>(object: I): RetryInfo {
     const message = createBaseRetryInfo();
-    message.retryDelay = object.retryDelay ?? undefined;
+    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
   }
 
@@ -1366,17 +1366,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

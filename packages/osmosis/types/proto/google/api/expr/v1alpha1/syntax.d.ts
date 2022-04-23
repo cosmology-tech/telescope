@@ -1,6 +1,7 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { NullValue } from "../../../../google/protobuf/struct";
+import { Duration } from "../../../../google/protobuf/duration";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
     /** The parsed expression. */
@@ -231,7 +232,7 @@ export interface Constant {
      *
      * @deprecated
      */
-    durationValue: string | undefined;
+    durationValue: Duration | undefined;
     /**
      * protobuf.Timestamp value.
      *

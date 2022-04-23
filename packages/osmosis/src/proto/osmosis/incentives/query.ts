@@ -3,8 +3,8 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Gauge } from "../../osmosis/incentives/gauge";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
-import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Duration } from "../../google/protobuf/duration";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsResponse {
   coins: Coin[];
@@ -71,7 +71,7 @@ export interface RewardsEstResponse {
 }
 export interface QueryLockableDurationsRequest {}
 export interface QueryLockableDurationsResponse {
-  lockableDurations: string[];
+  lockableDurations: Duration[];
 }
 
 function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequest {
@@ -1155,7 +1155,7 @@ function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsRespo
 export const QueryLockableDurationsResponse = {
   encode(message: QueryLockableDurationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
-      Duration.encode(toDuration(v!), writer.uint32(10).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -1171,7 +1171,7 @@ export const QueryLockableDurationsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockableDurations.push(fromDuration(Duration.decode(reader, reader.uint32())));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -1185,7 +1185,7 @@ export const QueryLockableDurationsResponse = {
 
   fromJSON(object: any): QueryLockableDurationsResponse {
     return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => String(e)) : []
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
     };
   },
 
@@ -1193,7 +1193,7 @@ export const QueryLockableDurationsResponse = {
     const obj: any = {};
 
     if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e);
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
     } else {
       obj.lockableDurations = [];
     }
@@ -1203,7 +1203,7 @@ export const QueryLockableDurationsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsResponse>, I>>(object: I): QueryLockableDurationsResponse {
     const message = createBaseQueryLockableDurationsResponse();
-    message.lockableDurations = object.lockableDurations?.map(e => e) || [];
+    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
   }
 
@@ -1214,17 +1214,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

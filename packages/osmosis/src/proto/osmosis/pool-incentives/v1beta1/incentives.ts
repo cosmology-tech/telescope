@@ -12,7 +12,7 @@ export interface Params {
   mintedDenom: string;
 }
 export interface LockableDurationsInfo {
-  lockableDurations: string[];
+  lockableDurations: Duration[];
 }
 export interface DistrInfo {
   totalWeight: string;
@@ -89,7 +89,7 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 export const LockableDurationsInfo = {
   encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
-      Duration.encode(toDuration(v!), writer.uint32(10).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -105,7 +105,7 @@ export const LockableDurationsInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockableDurations.push(fromDuration(Duration.decode(reader, reader.uint32())));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -119,7 +119,7 @@ export const LockableDurationsInfo = {
 
   fromJSON(object: any): LockableDurationsInfo {
     return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => String(e)) : []
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
     };
   },
 
@@ -127,7 +127,7 @@ export const LockableDurationsInfo = {
     const obj: any = {};
 
     if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e);
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
     } else {
       obj.lockableDurations = [];
     }
@@ -137,7 +137,7 @@ export const LockableDurationsInfo = {
 
   fromPartial<I extends Exact<DeepPartial<LockableDurationsInfo>, I>>(object: I): LockableDurationsInfo {
     const message = createBaseLockableDurationsInfo();
-    message.lockableDurations = object.lockableDurations?.map(e => e) || [];
+    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
   }
 
@@ -290,17 +290,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

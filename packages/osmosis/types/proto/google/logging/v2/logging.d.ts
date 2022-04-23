@@ -2,6 +2,7 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { MonitoredResource, MonitoredResourceDescriptor } from "../../../google/api/monitored_resource";
 import { Status } from "../../../google/rpc/status";
+import { Duration } from "../../../google/protobuf/duration";
 import { Observable } from "rxjs";
 import { LogEntry } from "../../../google/logging/v2/log_entry";
 import { Empty } from "../../../google/protobuf/empty";
@@ -327,7 +328,7 @@ export interface TailLogEntriesRequest {
      * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
      * milliseconds.
      */
-    bufferWindow: string;
+    bufferWindow: Duration;
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponse {

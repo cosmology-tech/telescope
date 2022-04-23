@@ -358,14 +358,14 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    * a smaller sampling period.
    */
 
-  samplePeriod: string;
+  samplePeriod: Duration;
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
 
-  ingestDelay: string;
+  ingestDelay: Duration;
 }
 /**
  * A specific metric, identified by specifying values for all of the
@@ -596,11 +596,11 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     }
 
     if (message.samplePeriod !== undefined) {
-      Duration.encode(toDuration(message.samplePeriod), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.samplePeriod, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.ingestDelay !== undefined) {
-      Duration.encode(toDuration(message.ingestDelay), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.ingestDelay, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -620,11 +620,11 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
           break;
 
         case 2:
-          message.samplePeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.samplePeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
-          message.ingestDelay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.ingestDelay = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -639,24 +639,24 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
       launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
-      samplePeriod: isSet(object.samplePeriod) ? String(object.samplePeriod) : undefined,
-      ingestDelay: isSet(object.ingestDelay) ? String(object.ingestDelay) : undefined
+      samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
+      ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
     };
   },
 
   toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown {
     const obj: any = {};
     message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod);
-    message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay);
+    message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod ? Duration.toJSON(message.samplePeriod) : undefined);
+    message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay ? Duration.toJSON(message.ingestDelay) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MetricDescriptor_MetricDescriptorMetadata>, I>>(object: I): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
-    message.samplePeriod = object.samplePeriod ?? undefined;
-    message.ingestDelay = object.ingestDelay ?? undefined;
+    message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : undefined;
+    message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : undefined;
     return message;
   }
 
@@ -830,17 +830,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

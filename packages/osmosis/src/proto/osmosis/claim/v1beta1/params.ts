@@ -1,14 +1,14 @@
 /* eslint-disable */
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /** Params defines the claim module's parameters. */
 export interface Params {
   airdropStartTime: Date;
-  durationUntilDecay: string;
-  durationOfDecay: string;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
   /** denom of claimable asset */
 
   claimDenom: string;
@@ -30,11 +30,11 @@ export const Params = {
     }
 
     if (message.durationUntilDecay !== undefined) {
-      Duration.encode(toDuration(message.durationUntilDecay), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.durationUntilDecay, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.durationOfDecay !== undefined) {
-      Duration.encode(toDuration(message.durationOfDecay), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.durationOfDecay, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.claimDenom !== "") {
@@ -58,11 +58,11 @@ export const Params = {
           break;
 
         case 2:
-          message.durationUntilDecay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationUntilDecay = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
-          message.durationOfDecay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationOfDecay = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:
@@ -81,8 +81,8 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
-      durationUntilDecay: isSet(object.durationUntilDecay) ? String(object.durationUntilDecay) : undefined,
-      durationOfDecay: isSet(object.durationOfDecay) ? String(object.durationOfDecay) : undefined,
+      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
+      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
       claimDenom: isSet(object.claimDenom) ? String(object.claimDenom) : ""
     };
   },
@@ -90,8 +90,8 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());
-    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay);
-    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay);
+    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay ? Duration.toJSON(message.durationOfDecay) : undefined);
     message.claimDenom !== undefined && (obj.claimDenom = message.claimDenom);
     return obj;
   },
@@ -99,8 +99,8 @@ export const Params = {
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay ?? undefined;
-    message.durationOfDecay = object.durationOfDecay ?? undefined;
+    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : undefined;
+    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
     message.claimDenom = object.claimDenom ?? "";
     return message;
   }
@@ -134,17 +134,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

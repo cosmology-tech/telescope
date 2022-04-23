@@ -3,9 +3,9 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Header } from "../../../tendermint/types/types";
 import { Any } from "../../../google/protobuf/any";
+import { Duration } from "../../../google/protobuf/duration";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Duration } from "../../../google/protobuf/duration";
 
 /** BondStatus is the status of a validator. */
 export enum BondStatus {
@@ -282,7 +282,7 @@ export interface Redelegation {
 
 export interface Params {
   /** unbonding_time is the time duration of unbonding. */
-  unbondingTime: string;
+  unbondingTime: Duration;
   /** max_validators is the maximum number of validators. */
 
   maxValidators: number;
@@ -1651,7 +1651,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.unbondingTime !== undefined) {
-      Duration.encode(toDuration(message.unbondingTime), writer.uint32(10).fork()).ldelim();
+      Duration.encode(message.unbondingTime, writer.uint32(10).fork()).ldelim();
     }
 
     if (message.maxValidators !== 0) {
@@ -1687,7 +1687,7 @@ export const Params = {
 
       switch (tag >>> 3) {
         case 1:
-          message.unbondingTime = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.unbondingTime = Duration.decode(reader, reader.uint32());
           break;
 
         case 2:
@@ -1721,7 +1721,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      unbondingTime: isSet(object.unbondingTime) ? String(object.unbondingTime) : undefined,
+      unbondingTime: isSet(object.unbondingTime) ? Duration.fromJSON(object.unbondingTime) : undefined,
       maxValidators: isSet(object.maxValidators) ? Number(object.maxValidators) : 0,
       maxEntries: isSet(object.maxEntries) ? Number(object.maxEntries) : 0,
       historicalEntries: isSet(object.historicalEntries) ? Number(object.historicalEntries) : 0,
@@ -1732,7 +1732,7 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime);
+    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime ? Duration.toJSON(message.unbondingTime) : undefined);
     message.maxValidators !== undefined && (obj.maxValidators = Math.round(message.maxValidators));
     message.maxEntries !== undefined && (obj.maxEntries = Math.round(message.maxEntries));
     message.historicalEntries !== undefined && (obj.historicalEntries = Math.round(message.historicalEntries));
@@ -1743,7 +1743,7 @@ export const Params = {
 
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.unbondingTime = object.unbondingTime ?? undefined;
+    message.unbondingTime = object.unbondingTime !== undefined && object.unbondingTime !== null ? Duration.fromPartial(object.unbondingTime) : undefined;
     message.maxValidators = object.maxValidators ?? 0;
     message.maxEntries = object.maxEntries ?? 0;
     message.historicalEntries = object.historicalEntries ?? 0;
@@ -2063,17 +2063,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

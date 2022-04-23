@@ -103,14 +103,16 @@ export interface AminoMsgUpdateGroupPolicyMetadata extends AminoMsg {
 export interface AminoMsgSubmitProposal extends AminoMsg {
     type: "cosmos-sdk/MsgSubmitProposal";
     value: {
-        address: string;
-        proposers: string[];
-        metadata: string;
         messages: {
             type_url: string;
             value: Uint8Array;
         }[];
-        exec: number;
+        initial_deposit: {
+            denom: string;
+            amount: string;
+        }[];
+        proposer: string;
+        metadata: string;
     };
 }
 export interface AminoMsgWithdrawProposal extends AminoMsg {
@@ -127,14 +129,16 @@ export interface AminoMsgVote extends AminoMsg {
         voter: string;
         option: number;
         metadata: string;
-        exec: number;
     };
 }
 export interface AminoMsgExec extends AminoMsg {
     type: "cosmos-sdk/MsgExec";
     value: {
-        proposal_id: string;
-        signer: string;
+        grantee: string;
+        msgs: {
+            type_url: string;
+            value: Uint8Array;
+        }[];
     };
 }
 export interface AminoMsgLeaveGroup extends AminoMsg {
@@ -192,8 +196,8 @@ export declare const AminoConverter: {
     };
     "/cosmos.group.v1.MsgSubmitProposal": {
         aminoType: string;
-        toAmino: ({ address, proposers, metadata, messages, exec }: MsgSubmitProposal) => AminoMsgSubmitProposal["value"];
-        fromAmino: ({ address, proposers, metadata, messages, exec }: AminoMsgSubmitProposal["value"]) => MsgSubmitProposal;
+        toAmino: ({ messages, initialDeposit, proposer, metadata }: MsgSubmitProposal) => AminoMsgSubmitProposal["value"];
+        fromAmino: ({ messages, initial_deposit, proposer, metadata }: AminoMsgSubmitProposal["value"]) => MsgSubmitProposal;
     };
     "/cosmos.group.v1.MsgWithdrawProposal": {
         aminoType: string;
@@ -202,13 +206,13 @@ export declare const AminoConverter: {
     };
     "/cosmos.group.v1.MsgVote": {
         aminoType: string;
-        toAmino: ({ proposalId, voter, option, metadata, exec }: MsgVote) => AminoMsgVote["value"];
-        fromAmino: ({ proposal_id, voter, option, metadata, exec }: AminoMsgVote["value"]) => MsgVote;
+        toAmino: ({ proposalId, voter, option, metadata }: MsgVote) => AminoMsgVote["value"];
+        fromAmino: ({ proposal_id, voter, option, metadata }: AminoMsgVote["value"]) => MsgVote;
     };
     "/cosmos.group.v1.MsgExec": {
         aminoType: string;
-        toAmino: ({ proposalId, signer }: MsgExec) => AminoMsgExec["value"];
-        fromAmino: ({ proposal_id, signer }: AminoMsgExec["value"]) => MsgExec;
+        toAmino: ({ grantee, msgs }: MsgExec) => AminoMsgExec["value"];
+        fromAmino: ({ grantee, msgs }: AminoMsgExec["value"]) => MsgExec;
     };
     "/cosmos.group.v1.MsgLeaveGroup": {
         aminoType: string;

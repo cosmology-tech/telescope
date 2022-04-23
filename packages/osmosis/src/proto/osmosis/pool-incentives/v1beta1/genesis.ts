@@ -8,7 +8,7 @@ import { Duration } from "../../../google/protobuf/duration";
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
-  lockableDurations: string[];
+  lockableDurations: Duration[];
   distrInfo: DistrInfo;
 }
 
@@ -27,7 +27,7 @@ export const GenesisState = {
     }
 
     for (const v of message.lockableDurations) {
-      Duration.encode(toDuration(v!), writer.uint32(18).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.distrInfo !== undefined) {
@@ -51,7 +51,7 @@ export const GenesisState = {
           break;
 
         case 2:
-          message.lockableDurations.push(fromDuration(Duration.decode(reader, reader.uint32())));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
 
         case 3:
@@ -70,7 +70,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => String(e)) : [],
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
       distrInfo: isSet(object.distrInfo) ? DistrInfo.fromJSON(object.distrInfo) : undefined
     };
   },
@@ -80,7 +80,7 @@ export const GenesisState = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
 
     if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e);
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
     } else {
       obj.lockableDurations = [];
     }
@@ -92,7 +92,7 @@ export const GenesisState = {
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
-    message.lockableDurations = object.lockableDurations?.map(e => e) || [];
+    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
     return message;
   }
@@ -102,17 +102,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

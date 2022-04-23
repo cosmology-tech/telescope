@@ -2983,59 +2983,65 @@ export declare namespace cosmos {
             AminoConverter: {
                 "/cosmos.gov.v1beta1.MsgSubmitProposal": {
                     aminoType: string;
-                    toAmino: ({ content, initialDeposit, proposer }: _532.MsgSubmitProposal) => {
-                        content: {
+                    toAmino: ({ messages, initialDeposit, proposer, metadata }: _532.MsgSubmitProposal) => {
+                        messages: {
                             type_url: string;
                             value: Uint8Array;
-                        };
+                        }[];
                         initial_deposit: {
                             denom: string;
                             amount: string;
                         }[];
                         proposer: string;
+                        metadata: string;
                     };
-                    fromAmino: ({ content, initial_deposit, proposer }: {
-                        content: {
+                    fromAmino: ({ messages, initial_deposit, proposer, metadata }: {
+                        messages: {
                             type_url: string;
                             value: Uint8Array;
-                        };
+                        }[];
                         initial_deposit: {
                             denom: string;
                             amount: string;
                         }[];
                         proposer: string;
+                        metadata: string;
                     }) => _532.MsgSubmitProposal;
                 };
                 "/cosmos.gov.v1beta1.MsgVote": {
                     aminoType: string;
-                    toAmino: ({ proposalId, voter, option }: _532.MsgVote) => {
+                    toAmino: ({ proposalId, voter, option, metadata }: _532.MsgVote) => {
                         proposal_id: string;
                         voter: string;
                         option: number;
+                        metadata: string;
                     };
-                    fromAmino: ({ proposal_id, voter, option }: {
+                    fromAmino: ({ proposal_id, voter, option, metadata }: {
                         proposal_id: string;
                         voter: string;
                         option: number;
+                        metadata: string;
                     }) => _532.MsgVote;
                 };
                 "/cosmos.gov.v1beta1.MsgVoteWeighted": {
                     aminoType: string;
-                    toAmino: ({ proposalId, voter, options }: _532.MsgVoteWeighted) => {
+                    toAmino: ({ proposalId, voter, options, metadata }: _532.MsgVoteWeighted) => {
                         proposal_id: string;
                         voter: string;
                         options: {
                             option: number;
                             weight: string;
                         }[];
+                        metadata: string;
                     };
-                    fromAmino: ({ proposal_id, voter, options }: {
+                    fromAmino: ({ proposal_id, voter, options, metadata }: {
                         proposal_id: string;
                         voter: string;
                         options: {
                             option: number;
                             weight: string;
                         }[];
+                        metadata: string;
                     }) => _532.MsgVoteWeighted;
                 };
                 "/cosmos.gov.v1beta1.MsgDeposit": {
@@ -3806,25 +3812,29 @@ export declare namespace cosmos {
                 };
                 "/cosmos.group.v1.MsgSubmitProposal": {
                     aminoType: string;
-                    toAmino: ({ address, proposers, metadata, messages, exec }: _544.MsgSubmitProposal) => {
-                        address: string;
-                        proposers: string[];
-                        metadata: string;
+                    toAmino: ({ messages, initialDeposit, proposer, metadata }: _544.MsgSubmitProposal) => {
                         messages: {
                             type_url: string;
                             value: Uint8Array;
                         }[];
-                        exec: number;
+                        initial_deposit: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        proposer: string;
+                        metadata: string;
                     };
-                    fromAmino: ({ address, proposers, metadata, messages, exec }: {
-                        address: string;
-                        proposers: string[];
-                        metadata: string;
+                    fromAmino: ({ messages, initial_deposit, proposer, metadata }: {
                         messages: {
                             type_url: string;
                             value: Uint8Array;
                         }[];
-                        exec: number;
+                        initial_deposit: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        proposer: string;
+                        metadata: string;
                     }) => _544.MsgSubmitProposal;
                 };
                 "/cosmos.group.v1.MsgWithdrawProposal": {
@@ -3840,30 +3850,34 @@ export declare namespace cosmos {
                 };
                 "/cosmos.group.v1.MsgVote": {
                     aminoType: string;
-                    toAmino: ({ proposalId, voter, option, metadata, exec }: _544.MsgVote) => {
+                    toAmino: ({ proposalId, voter, option, metadata }: _544.MsgVote) => {
                         proposal_id: string;
                         voter: string;
                         option: number;
                         metadata: string;
-                        exec: number;
                     };
-                    fromAmino: ({ proposal_id, voter, option, metadata, exec }: {
+                    fromAmino: ({ proposal_id, voter, option, metadata }: {
                         proposal_id: string;
                         voter: string;
                         option: number;
                         metadata: string;
-                        exec: number;
                     }) => _544.MsgVote;
                 };
                 "/cosmos.group.v1.MsgExec": {
                     aminoType: string;
-                    toAmino: ({ proposalId, signer }: _544.MsgExec) => {
-                        proposal_id: string;
-                        signer: string;
+                    toAmino: ({ grantee, msgs }: _544.MsgExec) => {
+                        grantee: string;
+                        msgs: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
                     };
-                    fromAmino: ({ proposal_id, signer }: {
-                        proposal_id: string;
-                        signer: string;
+                    fromAmino: ({ grantee, msgs }: {
+                        grantee: string;
+                        msgs: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
                     }) => _544.MsgExec;
                 };
                 "/cosmos.group.v1.MsgLeaveGroup": {
@@ -4513,17 +4527,21 @@ export declare namespace cosmos {
             AminoConverter: {
                 "/cosmos.nft.v1beta1.MsgSend": {
                     aminoType: string;
-                    toAmino: ({ classId, id, sender, receiver }: _562.MsgSend) => {
-                        class_id: string;
-                        id: string;
-                        sender: string;
-                        receiver: string;
+                    toAmino: ({ fromAddress, toAddress, amount }: _562.MsgSend) => {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
                     };
-                    fromAmino: ({ class_id, id, sender, receiver }: {
-                        class_id: string;
-                        id: string;
-                        sender: string;
-                        receiver: string;
+                    fromAmino: ({ from_address, to_address, amount }: {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
                     }) => _562.MsgSend;
                 };
             };

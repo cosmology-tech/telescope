@@ -2,15 +2,15 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../osmosis/incentives/params";
-import { Duration } from "../../google/protobuf/duration";
 import { Gauge } from "../../osmosis/incentives/gauge";
+import { Duration } from "../../google/protobuf/duration";
 
 /** GenesisState defines the incentives module's genesis state. */
 export interface GenesisState {
   /** params defines all the parameters of the module */
   params: Params;
   gauges: Gauge[];
-  lockableDurations: string[];
+  lockableDurations: Duration[];
   lastGaugeId: Long;
 }
 
@@ -34,7 +34,7 @@ export const GenesisState = {
     }
 
     for (const v of message.lockableDurations) {
-      Duration.encode(toDuration(v!), writer.uint32(26).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(26).fork()).ldelim();
     }
 
     if (!message.lastGaugeId.isZero()) {
@@ -62,7 +62,7 @@ export const GenesisState = {
           break;
 
         case 3:
-          message.lockableDurations.push(fromDuration(Duration.decode(reader, reader.uint32())));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
 
         case 4:
@@ -82,7 +82,7 @@ export const GenesisState = {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromJSON(e)) : [],
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => String(e)) : [],
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
       lastGaugeId: isSet(object.lastGaugeId) ? Long.fromString(object.lastGaugeId) : Long.UZERO
     };
   },
@@ -98,7 +98,7 @@ export const GenesisState = {
     }
 
     if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e);
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
     } else {
       obj.lockableDurations = [];
     }
@@ -111,7 +111,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
-    message.lockableDurations = object.lockableDurations?.map(e => e) || [];
+    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? Long.fromValue(object.lastGaugeId) : Long.UZERO;
     return message;
   }
@@ -121,17 +121,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

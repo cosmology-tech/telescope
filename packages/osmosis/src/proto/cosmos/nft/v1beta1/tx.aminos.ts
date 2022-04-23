@@ -8,39 +8,43 @@ import * as _m0 from "protobufjs/minimal";
 export interface AminoMsgSend extends AminoMsg {
   type: "cosmos-sdk/MsgSend";
   value: {
-    class_id: string;
-    id: string;
-    sender: string;
-    receiver: string;
+    from_address: string;
+    to_address: string;
+    amount: {
+      denom: string;
+      amount: string;
+    }[];
   };
 }
 export const AminoConverter = {
   "/cosmos.nft.v1beta1.MsgSend": {
     aminoType: "cosmos-sdk/MsgSend",
     toAmino: ({
-      classId,
-      id,
-      sender,
-      receiver
+      fromAddress,
+      toAddress,
+      amount
     }: MsgSend): AminoMsgSend["value"] => {
       return {
-        class_id: classId,
-        id,
-        sender,
-        receiver
+        from_address: fromAddress,
+        to_address: toAddress,
+        amount: amount.map(el0 => ({
+          denom: el0.denom,
+          amount: el0.amount
+        }))
       };
     },
     fromAmino: ({
-      class_id,
-      id,
-      sender,
-      receiver
+      from_address,
+      to_address,
+      amount
     }: AminoMsgSend["value"]): MsgSend => {
       return {
-        classId: class_id,
-        id,
-        sender,
-        receiver
+        fromAddress: from_address,
+        toAddress: to_address,
+        amount: amount.map(el0 => ({
+          denom: el0.denom,
+          amount: el0.amount
+        }))
       };
     }
   }

@@ -190,7 +190,8 @@ export class TSProtoStore {
       } catch (e) {
         bundle = '';
       }
-      writeFileSync(indexOutPath, `${bundle}\nexport * from './bundle';`);
+      if (!/bundle/.test(bundle))
+        writeFileSync(indexOutPath, `${bundle}\nexport * from './bundle';`);
 
     });
   }
@@ -216,7 +217,8 @@ export class TSProtoStore {
     } catch (e) {
       bundle = '';
     }
-    writeFileSync(indexOutPath, `${bundle}\nexport * from './bundle';`);
+    if (!/bundle/.test(bundle))
+      writeFileSync(indexOutPath, `${bundle}\nexport * from './bundle';`);
 
   }
 
@@ -249,7 +251,8 @@ export class TSProtoStore {
       } catch (e) {
         bundle = '';
       }
-      writeFileSync(indexOutPath, `${bundle}\nexport * from './client';`);
+      if (!/client/.test(bundle))
+        writeFileSync(indexOutPath, `${bundle}\nexport * from './client';`);
     });
 
   }
@@ -283,7 +286,8 @@ export class TSProtoStore {
     } catch (e) {
       bundle = '';
     }
-    writeFileSync(indexOutPath, `${bundle}\nexport * from './client';`);
+    if (!/client/.test(bundle))
+      writeFileSync(indexOutPath, `${bundle}\nexport * from './client';`);
   }
 
   protoPathToOutPath(filename) {

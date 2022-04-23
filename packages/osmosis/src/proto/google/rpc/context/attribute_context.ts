@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
 import { Struct } from "../../../google/protobuf/struct";
 
@@ -317,7 +317,7 @@ export interface AttributeContext_Response {
    * complete response from the backend.
    */
 
-  backendLatency: string;
+  backendLatency: Duration;
 }
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
@@ -1316,7 +1316,7 @@ export const AttributeContext_Response = {
     }
 
     if (message.backendLatency !== undefined) {
-      Duration.encode(toDuration(message.backendLatency), writer.uint32(42).fork()).ldelim();
+      Duration.encode(message.backendLatency, writer.uint32(42).fork()).ldelim();
     }
 
     return writer;
@@ -1353,7 +1353,7 @@ export const AttributeContext_Response = {
           break;
 
         case 5:
-          message.backendLatency = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.backendLatency = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -1376,7 +1376,7 @@ export const AttributeContext_Response = {
         return acc;
       }, {}) : {},
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      backendLatency: isSet(object.backendLatency) ? String(object.backendLatency) : undefined
+      backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
     };
   },
 
@@ -1393,7 +1393,7 @@ export const AttributeContext_Response = {
     }
 
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.backendLatency !== undefined && (obj.backendLatency = message.backendLatency);
+    message.backendLatency !== undefined && (obj.backendLatency = message.backendLatency ? Duration.toJSON(message.backendLatency) : undefined);
     return obj;
   },
 
@@ -1411,7 +1411,7 @@ export const AttributeContext_Response = {
       return acc;
     }, {});
     message.time = object.time ?? undefined;
-    message.backendLatency = object.backendLatency ?? undefined;
+    message.backendLatency = object.backendLatency !== undefined && object.backendLatency !== null ? Duration.fromPartial(object.backendLatency) : undefined;
     return message;
   }
 
@@ -1896,17 +1896,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

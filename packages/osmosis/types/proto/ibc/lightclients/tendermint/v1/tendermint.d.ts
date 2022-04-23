@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../../google/protobuf/duration";
 import { Height } from "../../../../ibc/core/client/v1/client";
 import { MerkleRoot } from "../../../../ibc/core/commitment/v1/commitment";
 import { SignedHeader } from "../../../../tendermint/types/types";
@@ -16,11 +17,11 @@ export interface ClientState {
      * duration of the period since the LastestTimestamp during which the
      * submitted headers are valid for upgrade
      */
-    trustingPeriod: string;
+    trustingPeriod: Duration;
     /** duration of the staking unbonding period */
-    unbondingPeriod: string;
+    unbondingPeriod: Duration;
     /** defines how much new (untrusted) header's Time can drift into the future. */
-    maxClockDrift: string;
+    maxClockDrift: Duration;
     /** Block height when the client was frozen due to a misbehaviour */
     frozenHeight: Height;
     /** Latest height the client was updated to */

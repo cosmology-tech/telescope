@@ -3,8 +3,8 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { QueryCondition } from "../../osmosis/lockup/lock";
 import { Timestamp } from "../../google/protobuf/timestamp";
-import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Duration } from "../../google/protobuf/duration";
 export interface Gauge {
   /** unique ID of a Gauge */
   id: Long;
@@ -40,7 +40,7 @@ export interface Gauge {
   distributedCoins: Coin[];
 }
 export interface LockableDurationsInfo {
-  lockableDurations: string[];
+  lockableDurations: Duration[];
 }
 
 function createBaseGauge(): Gauge {
@@ -205,7 +205,7 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 export const LockableDurationsInfo = {
   encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
-      Duration.encode(toDuration(v!), writer.uint32(10).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -221,7 +221,7 @@ export const LockableDurationsInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockableDurations.push(fromDuration(Duration.decode(reader, reader.uint32())));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -235,7 +235,7 @@ export const LockableDurationsInfo = {
 
   fromJSON(object: any): LockableDurationsInfo {
     return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => String(e)) : []
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
     };
   },
 
@@ -243,7 +243,7 @@ export const LockableDurationsInfo = {
     const obj: any = {};
 
     if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e);
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
     } else {
       obj.lockableDurations = [];
     }
@@ -253,7 +253,7 @@ export const LockableDurationsInfo = {
 
   fromPartial<I extends Exact<DeepPartial<LockableDurationsInfo>, I>>(object: I): LockableDurationsInfo {
     const message = createBaseLockableDurationsInfo();
-    message.lockableDurations = object.lockableDurations?.map(e => e) || [];
+    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
   }
 
@@ -286,17 +286,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

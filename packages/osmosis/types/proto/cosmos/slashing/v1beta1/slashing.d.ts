@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
@@ -31,7 +32,7 @@ export interface ValidatorSigningInfo {
 export interface Params {
     signedBlocksWindow: Long;
     minSignedPerWindow: Uint8Array;
-    downtimeJailDuration: string;
+    downtimeJailDuration: Duration;
     slashFractionDoubleSign: Uint8Array;
     slashFractionDowntime: Uint8Array;
 }

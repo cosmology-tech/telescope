@@ -2,12 +2,13 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../osmosis/incentives/params";
 import { Gauge } from "../../osmosis/incentives/gauge";
+import { Duration } from "../../google/protobuf/duration";
 /** GenesisState defines the incentives module's genesis state. */
 export interface GenesisState {
     /** params defines all the parameters of the module */
     params: Params;
     gauges: Gauge[];
-    lockableDurations: string[];
+    lockableDurations: Duration[];
     lastGaugeId: Long;
 }
 export declare const GenesisState: {

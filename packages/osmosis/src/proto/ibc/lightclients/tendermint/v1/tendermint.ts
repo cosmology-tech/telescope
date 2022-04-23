@@ -1,12 +1,12 @@
 /* eslint-disable */
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../../google/protobuf/duration";
 import { Height } from "../../../../ibc/core/client/v1/client";
 import { MerkleRoot } from "../../../../ibc/core/commitment/v1/commitment";
 import { SignedHeader } from "../../../../tendermint/types/types";
 import { ValidatorSet } from "../../../../tendermint/types/validator";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
-import { Duration } from "../../../../google/protobuf/duration";
 import { ProofSpec } from "../../../../confio/proofs";
 
 /**
@@ -21,13 +21,13 @@ export interface ClientState {
    * submitted headers are valid for upgrade
    */
 
-  trustingPeriod: string;
+  trustingPeriod: Duration;
   /** duration of the staking unbonding period */
 
-  unbondingPeriod: string;
+  unbondingPeriod: Duration;
   /** defines how much new (untrusted) header's Time can drift into the future. */
 
-  maxClockDrift: string;
+  maxClockDrift: Duration;
   /** Block height when the client was frozen due to a misbehaviour */
 
   frozenHeight: Height;
@@ -142,15 +142,15 @@ export const ClientState = {
     }
 
     if (message.trustingPeriod !== undefined) {
-      Duration.encode(toDuration(message.trustingPeriod), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.unbondingPeriod !== undefined) {
-      Duration.encode(toDuration(message.unbondingPeriod), writer.uint32(34).fork()).ldelim();
+      Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
     }
 
     if (message.maxClockDrift !== undefined) {
-      Duration.encode(toDuration(message.maxClockDrift), writer.uint32(42).fork()).ldelim();
+      Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
     }
 
     if (message.frozenHeight !== undefined) {
@@ -198,15 +198,15 @@ export const ClientState = {
           break;
 
         case 3:
-          message.trustingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.trustingPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:
-          message.unbondingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.unbondingPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 5:
-          message.maxClockDrift = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.maxClockDrift = Duration.decode(reader, reader.uint32());
           break;
 
         case 6:
@@ -246,9 +246,9 @@ export const ClientState = {
     return {
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
       trustLevel: isSet(object.trustLevel) ? Fraction.fromJSON(object.trustLevel) : undefined,
-      trustingPeriod: isSet(object.trustingPeriod) ? String(object.trustingPeriod) : undefined,
-      unbondingPeriod: isSet(object.unbondingPeriod) ? String(object.unbondingPeriod) : undefined,
-      maxClockDrift: isSet(object.maxClockDrift) ? String(object.maxClockDrift) : undefined,
+      trustingPeriod: isSet(object.trustingPeriod) ? Duration.fromJSON(object.trustingPeriod) : undefined,
+      unbondingPeriod: isSet(object.unbondingPeriod) ? Duration.fromJSON(object.unbondingPeriod) : undefined,
+      maxClockDrift: isSet(object.maxClockDrift) ? Duration.fromJSON(object.maxClockDrift) : undefined,
       frozenHeight: isSet(object.frozenHeight) ? Height.fromJSON(object.frozenHeight) : undefined,
       latestHeight: isSet(object.latestHeight) ? Height.fromJSON(object.latestHeight) : undefined,
       proofSpecs: Array.isArray(object?.proofSpecs) ? object.proofSpecs.map((e: any) => ProofSpec.fromJSON(e)) : [],
@@ -262,9 +262,9 @@ export const ClientState = {
     const obj: any = {};
     message.chainId !== undefined && (obj.chainId = message.chainId);
     message.trustLevel !== undefined && (obj.trustLevel = message.trustLevel ? Fraction.toJSON(message.trustLevel) : undefined);
-    message.trustingPeriod !== undefined && (obj.trustingPeriod = message.trustingPeriod);
-    message.unbondingPeriod !== undefined && (obj.unbondingPeriod = message.unbondingPeriod);
-    message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift);
+    message.trustingPeriod !== undefined && (obj.trustingPeriod = message.trustingPeriod ? Duration.toJSON(message.trustingPeriod) : undefined);
+    message.unbondingPeriod !== undefined && (obj.unbondingPeriod = message.unbondingPeriod ? Duration.toJSON(message.unbondingPeriod) : undefined);
+    message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift ? Duration.toJSON(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
 
@@ -289,9 +289,9 @@ export const ClientState = {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
     message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : undefined;
-    message.trustingPeriod = object.trustingPeriod ?? undefined;
-    message.unbondingPeriod = object.unbondingPeriod ?? undefined;
-    message.maxClockDrift = object.maxClockDrift ?? undefined;
+    message.trustingPeriod = object.trustingPeriod !== undefined && object.trustingPeriod !== null ? Duration.fromPartial(object.trustingPeriod) : undefined;
+    message.unbondingPeriod = object.unbondingPeriod !== undefined && object.unbondingPeriod !== null ? Duration.fromPartial(object.unbondingPeriod) : undefined;
+    message.maxClockDrift = object.maxClockDrift !== undefined && object.maxClockDrift !== null ? Duration.fromPartial(object.maxClockDrift) : undefined;
     message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : undefined;
     message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : undefined;
     message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
@@ -655,11 +655,9 @@ const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buff
 
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-
-  for (const byte of arr) {
+  arr.forEach(byte => {
     bin.push(String.fromCharCode(byte));
-  }
-
+  });
   return btoa(bin.join(""));
 }
 
@@ -691,17 +689,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

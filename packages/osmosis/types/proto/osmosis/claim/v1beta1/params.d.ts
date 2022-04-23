@@ -1,10 +1,11 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 /** Params defines the claim module's parameters. */
 export interface Params {
     airdropStartTime: Date;
-    durationUntilDecay: string;
-    durationOfDecay: string;
+    durationUntilDecay: Duration;
+    durationOfDecay: Duration;
     /** denom of claimable asset */
     claimDenom: string;
 }

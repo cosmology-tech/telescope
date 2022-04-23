@@ -11,15 +11,16 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface AminoMsgSubmitProposal extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: {
-    content: {
+    messages: {
       type_url: string;
       value: Uint8Array;
-    };
+    }[];
     initial_deposit: {
       denom: string;
       amount: string;
     }[];
     proposer: string;
+    metadata: string;
   };
 }
 export interface AminoMsgVote extends AminoMsg {
@@ -28,6 +29,7 @@ export interface AminoMsgVote extends AminoMsg {
     proposal_id: string;
     voter: string;
     option: number;
+    metadata: string;
   };
 }
 export interface AminoMsgVoteWeighted extends AminoMsg {
@@ -39,6 +41,7 @@ export interface AminoMsgVoteWeighted extends AminoMsg {
       option: number;
       weight: string;
     }[];
+    metadata: string;
   };
 }
 export interface AminoMsgDeposit extends AminoMsg {
@@ -56,37 +59,41 @@ export const AminoConverter = {
   "/cosmos.gov.v1beta1.MsgSubmitProposal": {
     aminoType: "cosmos-sdk/MsgSubmitProposal",
     toAmino: ({
-      content,
+      messages,
       initialDeposit,
-      proposer
+      proposer,
+      metadata
     }: MsgSubmitProposal): AminoMsgSubmitProposal["value"] => {
       return {
-        content: {
-          type_url: content.typeUrl,
-          value: content.value
-        },
+        messages: messages.map(el0 => ({
+          type_url: el0.typeUrl,
+          value: el0.value
+        })),
         initial_deposit: initialDeposit.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
-        proposer
+        proposer,
+        metadata
       };
     },
     fromAmino: ({
-      content,
+      messages,
       initial_deposit,
-      proposer
+      proposer,
+      metadata
     }: AminoMsgSubmitProposal["value"]): MsgSubmitProposal => {
       return {
-        content: {
-          typeUrl: content.type_url,
-          value: content.value
-        },
+        messages: messages.map(el0 => ({
+          typeUrl: el0.type_url,
+          value: el0.value
+        })),
         initialDeposit: initial_deposit.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
-        proposer
+        proposer,
+        metadata
       };
     }
   },
@@ -95,23 +102,27 @@ export const AminoConverter = {
     toAmino: ({
       proposalId,
       voter,
-      option
+      option,
+      metadata
     }: MsgVote): AminoMsgVote["value"] => {
       return {
         proposal_id: proposalId.toString(),
         voter,
-        option
+        option,
+        metadata
       };
     },
     fromAmino: ({
       proposal_id,
       voter,
-      option
+      option,
+      metadata
     }: AminoMsgVote["value"]): MsgVote => {
       return {
         proposalId: Long.fromString(proposal_id),
         voter,
-        option: voteOptionFromJSON(option)
+        option: voteOptionFromJSON(option),
+        metadata
       };
     }
   },
@@ -120,7 +131,8 @@ export const AminoConverter = {
     toAmino: ({
       proposalId,
       voter,
-      options
+      options,
+      metadata
     }: MsgVoteWeighted): AminoMsgVoteWeighted["value"] => {
       return {
         proposal_id: proposalId.toString(),
@@ -128,13 +140,15 @@ export const AminoConverter = {
         options: options.map(el0 => ({
           option: el0.option,
           weight: el0.weight
-        }))
+        })),
+        metadata
       };
     },
     fromAmino: ({
       proposal_id,
       voter,
-      options
+      options,
+      metadata
     }: AminoMsgVoteWeighted["value"]): MsgVoteWeighted => {
       return {
         proposalId: Long.fromString(proposal_id),
@@ -142,7 +156,8 @@ export const AminoConverter = {
         options: options.map(el0 => ({
           option: voteOptionFromJSON(el0.option),
           weight: el0.weight
-        }))
+        })),
+        metadata
       };
     }
   },

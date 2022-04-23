@@ -1,9 +1,9 @@
 /* eslint-disable */
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
-import { Duration } from "../../../../google/protobuf/duration";
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -27,7 +27,7 @@ export interface SmoothWeightChangeParams {
   startTime: Date;
   /** Duration for the weights to change over */
 
-  duration: string;
+  duration: Duration;
   /**
    * The initial pool weights. These are copied from the pool's settings
    * at the time of weight change instantiation.
@@ -122,7 +122,7 @@ export const SmoothWeightChangeParams = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.initialPoolWeights) {
@@ -150,7 +150,7 @@ export const SmoothWeightChangeParams = {
           break;
 
         case 2:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
@@ -173,7 +173,7 @@ export const SmoothWeightChangeParams = {
   fromJSON(object: any): SmoothWeightChangeParams {
     return {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : [],
       targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
     };
@@ -182,7 +182,7 @@ export const SmoothWeightChangeParams = {
   toJSON(message: SmoothWeightChangeParams): unknown {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
 
     if (message.initialPoolWeights) {
       obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
@@ -202,7 +202,7 @@ export const SmoothWeightChangeParams = {
   fromPartial<I extends Exact<DeepPartial<SmoothWeightChangeParams>, I>>(object: I): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime ?? undefined;
-    message.duration = object.duration ?? undefined;
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
@@ -522,17 +522,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

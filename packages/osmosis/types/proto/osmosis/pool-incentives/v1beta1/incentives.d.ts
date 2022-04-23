@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 export interface Params {
     /**
      * minted_denom is the denomination of the coin expected to be minted by the
@@ -10,7 +11,7 @@ export interface Params {
     mintedDenom: string;
 }
 export interface LockableDurationsInfo {
-    lockableDurations: string[];
+    lockableDurations: Duration[];
 }
 export interface DistrInfo {
     totalWeight: string;

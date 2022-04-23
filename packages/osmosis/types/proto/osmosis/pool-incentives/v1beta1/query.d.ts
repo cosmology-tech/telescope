@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { DistrInfo, Params } from "../../../osmosis/pool-incentives/v1beta1/incentives";
 import { Gauge } from "../../../osmosis/incentives/gauge";
 export interface QueryGaugeIdsRequest {
@@ -10,7 +11,7 @@ export interface QueryGaugeIdsResponse {
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
     gaugeId: Long;
-    duration: string;
+    duration: Duration;
 }
 export interface QueryDistrInfoRequest {
 }
@@ -25,13 +26,13 @@ export interface QueryParamsResponse {
 export interface QueryLockableDurationsRequest {
 }
 export interface QueryLockableDurationsResponse {
-    lockableDurations: string[];
+    lockableDurations: Duration[];
 }
 export interface QueryIncentivizedPoolsRequest {
 }
 export interface IncentivizedPool {
     poolId: Long;
-    lockableDuration: string;
+    lockableDuration: Duration;
     gaugeId: Long;
 }
 export interface QueryIncentivizedPoolsResponse {

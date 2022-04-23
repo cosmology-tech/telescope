@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
  * defined by the HTTP specification. Product-specific logging
@@ -57,7 +58,7 @@ export interface HttpRequest {
      * The request processing latency on the server, from the time the request was
      * received until the response was sent.
      */
-    latency: string;
+    latency: Duration;
     /** Whether or not a cache lookup was attempted. */
     cacheLookup: boolean;
     /**

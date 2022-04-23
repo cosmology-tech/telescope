@@ -101,7 +101,7 @@ export interface WaitOperationRequest {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
 
-  timeout: string;
+  timeout: Duration;
 }
 /**
  * A message representing the message types used by a long-running operation.
@@ -600,7 +600,7 @@ export const WaitOperationRequest = {
     }
 
     if (message.timeout !== undefined) {
-      Duration.encode(toDuration(message.timeout), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.timeout, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -620,7 +620,7 @@ export const WaitOperationRequest = {
           break;
 
         case 2:
-          message.timeout = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.timeout = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -635,21 +635,21 @@ export const WaitOperationRequest = {
   fromJSON(object: any): WaitOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timeout: isSet(object.timeout) ? String(object.timeout) : undefined
+      timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
     };
   },
 
   toJSON(message: WaitOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.timeout !== undefined && (obj.timeout = message.timeout);
+    message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toJSON(message.timeout) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<WaitOperationRequest>, I>>(object: I): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
-    message.timeout = object.timeout ?? undefined;
+    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
     return message;
   }
 
@@ -842,17 +842,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

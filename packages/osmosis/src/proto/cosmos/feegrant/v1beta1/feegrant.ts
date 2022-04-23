@@ -1,9 +1,9 @@
 /* eslint-disable */
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Duration } from "../../../google/protobuf/duration";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 /** Since: cosmos-sdk 0.43 */
@@ -36,7 +36,7 @@ export interface PeriodicAllowance {
    * be spent before that allowance is reset
    */
 
-  period: string;
+  period: Duration;
   /**
    * period_spend_limit specifies the maximum number of coins that can be spent
    * in the period
@@ -168,7 +168,7 @@ export const PeriodicAllowance = {
     }
 
     if (message.period !== undefined) {
-      Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.period, writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.periodSpendLimit) {
@@ -200,7 +200,7 @@ export const PeriodicAllowance = {
           break;
 
         case 2:
-          message.period = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.period = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
@@ -227,7 +227,7 @@ export const PeriodicAllowance = {
   fromJSON(object: any): PeriodicAllowance {
     return {
       basic: isSet(object.basic) ? BasicAllowance.fromJSON(object.basic) : undefined,
-      period: isSet(object.period) ? String(object.period) : undefined,
+      period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.periodSpendLimit) ? object.periodSpendLimit.map((e: any) => Coin.fromJSON(e)) : [],
       periodCanSpend: Array.isArray(object?.periodCanSpend) ? object.periodCanSpend.map((e: any) => Coin.fromJSON(e)) : [],
       periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
@@ -237,7 +237,7 @@ export const PeriodicAllowance = {
   toJSON(message: PeriodicAllowance): unknown {
     const obj: any = {};
     message.basic !== undefined && (obj.basic = message.basic ? BasicAllowance.toJSON(message.basic) : undefined);
-    message.period !== undefined && (obj.period = message.period);
+    message.period !== undefined && (obj.period = message.period ? Duration.toJSON(message.period) : undefined);
 
     if (message.periodSpendLimit) {
       obj.periodSpendLimit = message.periodSpendLimit.map(e => e ? Coin.toJSON(e) : undefined);
@@ -258,7 +258,7 @@ export const PeriodicAllowance = {
   fromPartial<I extends Exact<DeepPartial<PeriodicAllowance>, I>>(object: I): PeriodicAllowance {
     const message = createBasePeriodicAllowance();
     message.basic = object.basic !== undefined && object.basic !== null ? BasicAllowance.fromPartial(object.basic) : undefined;
-    message.period = object.period ?? undefined;
+    message.period = object.period !== undefined && object.period !== null ? Duration.fromPartial(object.period) : undefined;
     message.periodSpendLimit = object.periodSpendLimit?.map(e => Coin.fromPartial(e)) || [];
     message.periodCanSpend = object.periodCanSpend?.map(e => Coin.fromPartial(e)) || [];
     message.periodReset = object.periodReset ?? undefined;
@@ -450,17 +450,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

@@ -2,8 +2,8 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
-import { Duration } from "../../../../google/protobuf/duration";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../../google/protobuf/struct";
+import { Duration } from "../../../../google/protobuf/duration";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -273,7 +273,7 @@ export interface Constant {
    * @deprecated
    */
 
-  durationValue: string | undefined;
+  durationValue: Duration | undefined;
   /**
    * protobuf.Timestamp value.
    *
@@ -1201,7 +1201,7 @@ export const Constant = {
     }
 
     if (message.durationValue !== undefined) {
-      Duration.encode(toDuration(message.durationValue), writer.uint32(66).fork()).ldelim();
+      Duration.encode(message.durationValue, writer.uint32(66).fork()).ldelim();
     }
 
     if (message.timestampValue !== undefined) {
@@ -1249,7 +1249,7 @@ export const Constant = {
           break;
 
         case 8:
-          message.durationValue = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationValue = Duration.decode(reader, reader.uint32());
           break;
 
         case 9:
@@ -1274,7 +1274,7 @@ export const Constant = {
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
-      durationValue: isSet(object.durationValue) ? String(object.durationValue) : undefined,
+      durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
       timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
   },
@@ -1288,7 +1288,7 @@ export const Constant = {
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
-    message.durationValue !== undefined && (obj.durationValue = message.durationValue);
+    message.durationValue !== undefined && (obj.durationValue = message.durationValue ? Duration.toJSON(message.durationValue) : undefined);
     message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;
   },
@@ -1302,7 +1302,7 @@ export const Constant = {
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.durationValue = object.durationValue ?? undefined;
+    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : undefined;
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   }
@@ -1745,11 +1745,9 @@ const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buff
 
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-
-  for (const byte of arr) {
+  arr.forEach(byte => {
     bin.push(String.fromCharCode(byte));
-  }
-
+  });
   return btoa(bin.join(""));
 }
 
@@ -1781,17 +1779,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
 }
 
 function numberToLong(number: number) {

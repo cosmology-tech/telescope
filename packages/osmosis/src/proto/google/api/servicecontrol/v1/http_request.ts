@@ -67,7 +67,7 @@ export interface HttpRequest {
    * received until the response was sent.
    */
 
-  latency: string;
+  latency: Duration;
   /** Whether or not a cache lookup was attempted. */
 
   cacheLookup: boolean;
@@ -154,7 +154,7 @@ export const HttpRequest = {
     }
 
     if (message.latency !== undefined) {
-      Duration.encode(toDuration(message.latency), writer.uint32(114).fork()).ldelim();
+      Duration.encode(message.latency, writer.uint32(114).fork()).ldelim();
     }
 
     if (message.cacheLookup === true) {
@@ -226,7 +226,7 @@ export const HttpRequest = {
           break;
 
         case 14:
-          message.latency = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.latency = Duration.decode(reader, reader.uint32());
           break;
 
         case 11:
@@ -269,7 +269,7 @@ export const HttpRequest = {
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
       referer: isSet(object.referer) ? String(object.referer) : "",
-      latency: isSet(object.latency) ? String(object.latency) : undefined,
+      latency: isSet(object.latency) ? Duration.fromJSON(object.latency) : undefined,
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
@@ -289,7 +289,7 @@ export const HttpRequest = {
     message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
     message.serverIp !== undefined && (obj.serverIp = message.serverIp);
     message.referer !== undefined && (obj.referer = message.referer);
-    message.latency !== undefined && (obj.latency = message.latency);
+    message.latency !== undefined && (obj.latency = message.latency ? Duration.toJSON(message.latency) : undefined);
     message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
     message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
     message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);
@@ -309,7 +309,7 @@ export const HttpRequest = {
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    message.latency = object.latency ?? undefined;
+    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : undefined;
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
@@ -323,17 +323,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);

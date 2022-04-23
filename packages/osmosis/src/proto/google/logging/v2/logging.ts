@@ -3,8 +3,8 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { MonitoredResource, MonitoredResourceDescriptor } from "../../../google/api/monitored_resource";
 import { Status } from "../../../google/rpc/status";
-import { Observable } from "rxjs";
 import { Duration } from "../../../google/protobuf/duration";
+import { Observable } from "rxjs";
 import { LogEntry } from "../../../google/logging/v2/log_entry";
 import { Empty } from "../../../google/protobuf/empty";
 import { map } from "rxjs/operators";
@@ -358,7 +358,7 @@ export interface TailLogEntriesRequest {
    * milliseconds.
    */
 
-  bufferWindow: string;
+  bufferWindow: Duration;
 }
 /** Result returned from `TailLogEntries`. */
 
@@ -1440,7 +1440,7 @@ export const TailLogEntriesRequest = {
     }
 
     if (message.bufferWindow !== undefined) {
-      Duration.encode(toDuration(message.bufferWindow), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.bufferWindow, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -1464,7 +1464,7 @@ export const TailLogEntriesRequest = {
           break;
 
         case 3:
-          message.bufferWindow = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.bufferWindow = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -1480,7 +1480,7 @@ export const TailLogEntriesRequest = {
     return {
       resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
       filter: isSet(object.filter) ? String(object.filter) : "",
-      bufferWindow: isSet(object.bufferWindow) ? String(object.bufferWindow) : undefined
+      bufferWindow: isSet(object.bufferWindow) ? Duration.fromJSON(object.bufferWindow) : undefined
     };
   },
 
@@ -1494,7 +1494,7 @@ export const TailLogEntriesRequest = {
     }
 
     message.filter !== undefined && (obj.filter = message.filter);
-    message.bufferWindow !== undefined && (obj.bufferWindow = message.bufferWindow);
+    message.bufferWindow !== undefined && (obj.bufferWindow = message.bufferWindow ? Duration.toJSON(message.bufferWindow) : undefined);
     return obj;
   },
 
@@ -1502,7 +1502,7 @@ export const TailLogEntriesRequest = {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
-    message.bufferWindow = object.bufferWindow ?? undefined;
+    message.bufferWindow = object.bufferWindow !== undefined && object.bufferWindow !== null ? Duration.fromPartial(object.bufferWindow) : undefined;
     return message;
   }
 
@@ -1761,17 +1761,6 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toDuration(duration: string): Duration {
-  return {
-    seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
-    nanos: parseInt(duration) % 1_000_000_000
-  };
-}
-
-function fromDuration(duration: Duration): string {
-  return parseInt(duration.seconds) * 1_000_000_000 + parseInt(duration.nanoseconds);
-}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = (Long as any);
