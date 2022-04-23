@@ -10,6 +10,7 @@ import { registerDeps } from './plugin';
 import mutator from './mutate';
 import { snake } from 'case';
 import { makeAutoObservable } from 'mobx';
+import { detectServiceType } from './service-type-visitor';
 import * as c from '@osmonauts/ast-gen';
 import * as t from '@babel/types';
 import * as dotty from 'dotty';
@@ -375,6 +376,9 @@ export class TSFileStore implements FileStore {
 
   outFiles: OutFile[] = [];
 
+  _isQuery: boolean = false;
+  _isMutation: boolean = false;
+
   constructor(filename, code, program) {
     this.protoPath = program.protoPath;
     this.outPath = program.outPath;
@@ -394,6 +398,7 @@ export class TSFileStore implements FileStore {
 
     // first visit
     this.visitor = registerDeps(filename, this);
+    babelTraverse(this.ast, detectServiceType(this));
     babelTraverse(this.ast, this.visitor);
 
     this.mutator = mutator(filename)
@@ -406,11 +411,11 @@ export class TSFileStore implements FileStore {
   }
 
   isQuery() {
-    return basename(this.filename) === 'query.ts';
+    return this._isQuery;
   }
 
   isTransaction() {
-    return basename(this.filename) === 'tx.ts';
+    return this._isMutation;
   }
 
   setPackage(value) {
@@ -448,6 +453,10 @@ export class TSFileStore implements FileStore {
     return this.definitions.find(a => a.name === type);
   }
 
+  getProgramInterface(type: string): Interface {
+    return this.program.getDefinitions().find(a => a.name === type);
+  }
+
   addEnum(el: Enum) {
     this.enums.push(el);
     this.program.addEnum(el);
@@ -482,6 +491,7 @@ export class TSFileStore implements FileStore {
 
   write() {
     this.generateFiles();
+    this.writeFile(this.ast, this.filename);
     this.outFiles.forEach(file => {
       this.writeFile(file.ast, file.filename);
     })
@@ -528,7 +538,8 @@ export class TSFileStore implements FileStore {
       const aminoCasingFn = this.program.plugins.find(p => p.name === 'aminoCasing').plugin({ protoPackage: this.protoPackage });
 
       const schemata = this.mutations.map(mutation => {
-        const i = this.getInterface(mutation.TypeName);
+        const i = this.getProgramInterface(mutation.TypeName);
+
         const schema: MessageSchema = {
           fields: i.fields,
           name: mutation.TypeName,
@@ -538,7 +549,7 @@ export class TSFileStore implements FileStore {
       });
 
       this.mutations.forEach(mutation => {
-        const i = this.getInterface(mutation.TypeName);
+        const i = this.getProgramInterface(mutation.TypeName);
 
         const schema: MessageSchema = {
           fields: i.fields,
