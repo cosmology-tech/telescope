@@ -1,0 +1,92 @@
+import Long from "long";
+import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../google/protobuf/duration";
+import { Coin } from "../../cosmos/base/v1beta1/coin";
+export declare enum LockQueryType {
+    /** ByDuration - Queries for locks that are longer than a certain duration */
+    ByDuration = 0,
+    /** ByTime - Queries for lockups that started before a specific time */
+    ByTime = 1,
+    UNRECOGNIZED = -1
+}
+export declare function lockQueryTypeFromJSON(object: any): LockQueryType;
+export declare function lockQueryTypeToJSON(object: LockQueryType): string;
+/**
+ * PeriodLock is a single unit of lock by period. It's a record of locked coin
+ * at a specific time. It stores owner, duration, unlock time and the amount of
+ * coins locked.
+ */
+export interface PeriodLock {
+    ID: Long;
+    owner: string;
+    duration: Duration;
+    endTime: Date;
+    coins: Coin[];
+}
+export interface QueryCondition {
+    /** type of lock query, ByLockDuration | ByLockTime */
+    lockQueryType: LockQueryType;
+    /** What token denomination are we looking for lockups of */
+    denom: string;
+    /** valid when query condition is ByDuration */
+    duration: Duration;
+    /** valid when query condition is ByTime */
+    timestamp: Date;
+}
+/**
+ * SyntheticLock is a single unit of synthetic lockup
+ * TODO: Change this to have
+ * * underlying_lock_id
+ * * synthetic_coin
+ * * end_time
+ * * duration
+ * * owner
+ * We then index synthetic locks by the denom, just like we do with normal
+ * locks. Ideally we even get an interface, so we can re-use that same logic.
+ * I currently have no idea how reward distribution is supposed to be working...
+ * EVENTUALLY
+ * we make a "constrained_coin" field, which is what the current "coins" field
+ * is. Constrained coin field can be a #post-v7 feature, since we aren't
+ * allowing partial unlocks of synthetic lockups.
+ */
+export interface SyntheticLock {
+    /** underlying native lockup id for this synthetic lockup */
+    underlyingLockId: Long;
+    synthDenom: string;
+    /**
+     * used for unbonding synthetic lockups, for active synthetic lockups, this
+     * value is set to uninitialized value
+     */
+    endTime: Date;
+    duration: Duration;
+}
+export declare const PeriodLock: {
+    encode(message: PeriodLock, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): PeriodLock;
+    fromJSON(object: any): PeriodLock;
+    toJSON(message: PeriodLock): unknown;
+    fromPartial<I extends unknown>(object: I): PeriodLock;
+};
+export declare const QueryCondition: {
+    encode(message: QueryCondition, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCondition;
+    fromJSON(object: any): QueryCondition;
+    toJSON(message: QueryCondition): unknown;
+    fromPartial<I extends unknown>(object: I): QueryCondition;
+};
+export declare const SyntheticLock: {
+    encode(message: SyntheticLock, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLock;
+    fromJSON(object: any): SyntheticLock;
+    toJSON(message: SyntheticLock): unknown;
+    fromPartial<I extends unknown>(object: I): SyntheticLock;
+};
+declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
+    [K in keyof T]?: DeepPartial<T[K]>;
+} : Partial<T>;
+declare type KeysOfUnion<T> = T extends T ? keyof T : never;
+export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
+    [K in keyof P]: Exact<P[K], I[K]>;
+} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
+export {};

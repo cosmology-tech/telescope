@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "./types",
+        "emitDeclarationOnly": true,
+        "isolatedModules": true,
+        "allowJs": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "./out"
+    ]
+}
