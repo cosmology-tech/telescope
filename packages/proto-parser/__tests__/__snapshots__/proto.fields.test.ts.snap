@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Coin 1`] = `
+Object {
+  "fields": Array [
+    Object {
+      "bytes": false,
+      "declaringField": null,
+      "defaultValue": null,
+      "extensionField": null,
+      "long": false,
+      "map": false,
+      "name": "denom",
+      "optional": true,
+      "options": undefined,
+      "partOf": null,
+      "repeated": false,
+      "required": false,
+      "resolvedType": null,
+      "type": "string",
+      "typeDefault": null,
+    },
+    Object {
+      "bytes": false,
+      "declaringField": null,
+      "defaultValue": null,
+      "extensionField": null,
+      "long": false,
+      "map": false,
+      "name": "amount",
+      "optional": true,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Int",
+        "(gogoproto.customtype)": "Int",
+        "(gogoproto.nullable)": false,
+      },
+      "partOf": null,
+      "repeated": false,
+      "required": false,
+      "resolvedType": null,
+      "type": "string",
+      "typeDefault": null,
+    },
+  ],
+  "name": "Coin",
+}
+`;
+
+exports[`DecCoin 1`] = `
+Object {
+  "fields": Array [
+    Object {
+      "bytes": false,
+      "declaringField": null,
+      "defaultValue": null,
+      "extensionField": null,
+      "long": false,
+      "map": false,
+      "name": "denom",
+      "optional": true,
+      "options": undefined,
+      "partOf": null,
+      "repeated": false,
+      "required": false,
+      "resolvedType": null,
+      "type": "string",
+      "typeDefault": null,
+    },
+    Object {
+      "bytes": false,
+      "declaringField": null,
+      "defaultValue": null,
+      "extensionField": null,
+      "long": false,
+      "map": false,
+      "name": "amount",
+      "optional": true,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Dec",
+        "(gogoproto.customtype)": "Dec",
+        "(gogoproto.nullable)": false,
+      },
+      "partOf": null,
+      "repeated": false,
+      "required": false,
+      "resolvedType": null,
+      "type": "string",
+      "typeDefault": null,
+    },
+  ],
+  "name": "DecCoin",
+}
+`;
+
+exports[`DecProto 1`] = `
+Object {
+  "fields": Array [
+    Object {
+      "bytes": false,
+      "declaringField": null,
+      "defaultValue": null,
+      "extensionField": null,
+      "long": false,
+      "map": false,
+      "name": "dec",
+      "optional": true,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Dec",
+        "(gogoproto.customtype)": "Dec",
+        "(gogoproto.nullable)": false,
+      },
+      "partOf": null,
+      "repeated": false,
+      "required": false,
+      "resolvedType": null,
+      "type": "string",
+      "typeDefault": null,
+    },
+  ],
+  "name": "DecProto",
+}
+`;
+
+exports[`IntProto 1`] = `
+Object {
+  "fields": Array [
+    Object {
+      "bytes": false,
+      "declaringField": null,
+      "defaultValue": null,
+      "extensionField": null,
+      "long": false,
+      "map": false,
+      "name": "int",
+      "optional": true,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Int",
+        "(gogoproto.customtype)": "Int",
+        "(gogoproto.nullable)": false,
+      },
+      "partOf": null,
+      "repeated": false,
+      "required": false,
+      "resolvedType": null,
+      "type": "string",
+      "typeDefault": null,
+    },
+  ],
+  "name": "IntProto",
+}
+`;
