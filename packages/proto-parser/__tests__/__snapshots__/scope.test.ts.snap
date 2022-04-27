@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`imports lookup Any 1`] = `"google/protobuf/any.proto"`;
-
 exports[`nested lookup 1`] = `
 Object {
   "comment": "Severities of issues.",

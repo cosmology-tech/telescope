@@ -152,9 +152,13 @@ export const lookup = (store: ProtoStore, root: ProtoRoot, name: string, allowNe
     return recursiveLookup(nested, name, [root.package], allowNested);
 };
 
-export const getObjectName = (store: ProtoStore, root: ProtoRoot, name: string) => {
-    const object = lookup(store, root, name);
-    if (!object) throw new Error(`${name} not found in proto!`);
-    console.log(object.scope);
-};
+/*
+    nested objects get a slightly different naming convention
+    e.g. SignatureDescriptor_Data or SignatureDescriptor_Data_Multi
+*/
 
+export const getObjectName = (name: string, scope: string[] = []) => {
+    if (!scope.length || scope.length === 1) return name;
+    const [_pkg, ...scopes] = scope;
+    return [...scopes, name].join('_')
+};
