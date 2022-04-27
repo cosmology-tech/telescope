@@ -2,150 +2,117 @@
 
 exports[`Coin 1`] = `
 Object {
-  "fields": Array [
-    Object {
-      "bytes": false,
-      "declaringField": null,
-      "defaultValue": null,
-      "extensionField": null,
-      "long": false,
-      "map": false,
-      "name": "denom",
-      "optional": true,
-      "options": undefined,
-      "partOf": null,
-      "repeated": false,
-      "required": false,
-      "resolvedType": null,
-      "type": "string",
-      "typeDefault": null,
-    },
-    Object {
-      "bytes": false,
-      "declaringField": null,
-      "defaultValue": null,
-      "extensionField": null,
-      "long": false,
-      "map": false,
-      "name": "amount",
-      "optional": true,
+  "fields": Object {
+    "amount": Object {
+      "id": 2,
       "options": Object {
         "(cosmos_proto.scalar)": "cosmos.Int",
         "(gogoproto.customtype)": "Int",
         "(gogoproto.nullable)": false,
       },
-      "partOf": null,
-      "repeated": false,
-      "required": false,
-      "resolvedType": null,
       "type": "string",
-      "typeDefault": null,
     },
-  ],
-  "name": "Coin",
+    "denom": Object {
+      "id": 1,
+      "type": "string",
+    },
+  },
+  "options": Object {
+    "(gogoproto.equal)": true,
+  },
 }
 `;
 
 exports[`DecCoin 1`] = `
 Object {
-  "fields": Array [
-    Object {
-      "bytes": false,
-      "declaringField": null,
-      "defaultValue": null,
-      "extensionField": null,
-      "long": false,
-      "map": false,
-      "name": "denom",
-      "optional": true,
-      "options": undefined,
-      "partOf": null,
-      "repeated": false,
-      "required": false,
-      "resolvedType": null,
-      "type": "string",
-      "typeDefault": null,
-    },
-    Object {
-      "bytes": false,
-      "declaringField": null,
-      "defaultValue": null,
-      "extensionField": null,
-      "long": false,
-      "map": false,
-      "name": "amount",
-      "optional": true,
+  "fields": Object {
+    "amount": Object {
+      "id": 2,
       "options": Object {
         "(cosmos_proto.scalar)": "cosmos.Dec",
         "(gogoproto.customtype)": "Dec",
         "(gogoproto.nullable)": false,
       },
-      "partOf": null,
-      "repeated": false,
-      "required": false,
-      "resolvedType": null,
       "type": "string",
-      "typeDefault": null,
     },
-  ],
-  "name": "DecCoin",
+    "denom": Object {
+      "id": 1,
+      "type": "string",
+    },
+  },
+  "options": Object {
+    "(gogoproto.equal)": true,
+  },
 }
 `;
 
 exports[`DecProto 1`] = `
 Object {
-  "fields": Array [
-    Object {
-      "bytes": false,
-      "declaringField": null,
-      "defaultValue": null,
-      "extensionField": null,
-      "long": false,
-      "map": false,
-      "name": "dec",
-      "optional": true,
+  "fields": Object {
+    "dec": Object {
+      "id": 1,
       "options": Object {
         "(cosmos_proto.scalar)": "cosmos.Dec",
         "(gogoproto.customtype)": "Dec",
         "(gogoproto.nullable)": false,
       },
-      "partOf": null,
-      "repeated": false,
-      "required": false,
-      "resolvedType": null,
       "type": "string",
-      "typeDefault": null,
     },
-  ],
-  "name": "DecProto",
+  },
 }
 `;
 
 exports[`IntProto 1`] = `
 Object {
-  "fields": Array [
-    Object {
-      "bytes": false,
-      "declaringField": null,
-      "defaultValue": null,
-      "extensionField": null,
-      "long": false,
-      "map": false,
-      "name": "int",
-      "optional": true,
+  "fields": Object {
+    "int": Object {
+      "id": 1,
       "options": Object {
         "(cosmos_proto.scalar)": "cosmos.Int",
         "(gogoproto.customtype)": "Int",
         "(gogoproto.nullable)": false,
       },
-      "partOf": null,
-      "repeated": false,
-      "required": false,
-      "resolvedType": null,
       "type": "string",
-      "typeDefault": null,
     },
-  ],
-  "name": "IntProto",
+  },
+}
+`;
+
+exports[`MsgExitPool 1`] = `
+Object {
+  "fields": Object {
+    "poolId": Object {
+      "id": 2,
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:pool_id",
+      },
+      "type": "uint64",
+    },
+    "sender": Object {
+      "id": 1,
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:sender",
+      },
+      "type": "string",
+    },
+    "shareInAmount": Object {
+      "id": 3,
+      "options": Object {
+        "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+        "(gogoproto.moretags)": "yaml:share_in_amount",
+        "(gogoproto.nullable)": false,
+      },
+      "type": "string",
+    },
+    "tokenOutMins": Object {
+      "id": 4,
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:token_out_min_amounts",
+        "(gogoproto.nullable)": false,
+      },
+      "rule": "repeated",
+      "type": "cosmos.base.v1beta1.Coin",
+    },
+  },
 }
 `;

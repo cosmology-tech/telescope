@@ -1,26 +1,28 @@
-import { ProtoResolver, ProtoGlobber } from '../src/index'
-import dotty from 'dotty';
-const globber = new ProtoGlobber(__dirname + '/../__fixtures__/chain1');
-const resolver = new ProtoResolver(globber.getDeps());
-
-const logstringify = (obj) => console.log(JSON.stringify(obj, null, 2));
+import { ProtoStore } from '../src/index'
+const store = new ProtoStore(__dirname + '/../__fixtures__/chain1');
 
 it('Coin', () => {
-    const Coin = globber.getProtoNestedObjectSchema('cosmos/base/v1beta1/coin.proto', 'Coin');
+    const Coin = store.findProtoObject('cosmos/base/v1beta1/coin.proto', 'Coin');
     expect(Coin).toMatchSnapshot();
 });
 
 it('DecCoin', () => {
-    const DeCoin = globber.getProtoNestedObjectSchema('cosmos/base/v1beta1/coin.proto', 'DecCoin');
+    const DeCoin = store.findProtoObject('cosmos/base/v1beta1/coin.proto', 'DecCoin');
     expect(DeCoin).toMatchSnapshot();
 });
 
 it('IntProto', () => {
-    const IntProto = globber.getProtoNestedObjectSchema('cosmos/base/v1beta1/coin.proto', 'IntProto');
+    const IntProto = store.findProtoObject('cosmos/base/v1beta1/coin.proto', 'IntProto');
     expect(IntProto).toMatchSnapshot();
 });
 
 it('DecProto', () => {
-    const DecProto = globber.getProtoNestedObjectSchema('cosmos/base/v1beta1/coin.proto', 'DecProto');
+    const DecProto = store.findProtoObject('cosmos/base/v1beta1/coin.proto', 'DecProto');
     expect(DecProto).toMatchSnapshot();
 });
+
+it('MsgExitPool', () => {
+    const MsgExitPool = store.findProtoObject('osmosis/gamm/v1beta1/tx.proto', 'MsgExitPool');
+    expect(MsgExitPool).toMatchSnapshot();
+});
+

@@ -1,14 +1,9 @@
 import { sync as glob } from 'glob';
-import { parse, Service } from 'protobufjs';
+import { parse } from 'protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import dotty from 'dotty';
-
-export interface ProtoDep {
-    filename: string;
-    pkg: string;
-    imports: string[]
-}
+import { ProtoDep, ProtoRef } from './types';
+import { getNestedProto } from './utils';
 
 function depResolve(deps: ProtoDep[], protofile: string, resolved: string[], unresolved: string[]) {
     unresolved.push(protofile);
@@ -66,7 +61,7 @@ export class ProtoResolver {
     }
 }
 
-export class ProtoGlobber {
+export class ProtoStore {
     files: string[];
     protoDir: string;
     deps: ProtoDep[];
@@ -76,94 +71,18 @@ export class ProtoGlobber {
         this.protoDir = pathResolve(protoDir);
     }
 
-    findProto(filename) {
+    findProto(filename): ProtoRef {
         return this.getProtos().find(proto => {
             return proto.filename === filename
         });
     }
 
-    getProtoNested(filename) {
-        const coinProto = this.findProto(filename);
-        const nestedPath = 'root.nested.' + coinProto.proto.package.split('.').join('.nested.') + '.nested';
-        return dotty.get(coinProto.proto, nestedPath)
+    findProtoObject(filename, name): any {
+        const proto = this.findProto(filename);
+        return getNestedProto(proto.proto)[name];
     }
 
-    getProtoNestedObject(filename, objname) {
-        const children = this.getProtoNested(filename);
-        return children[objname];
-    }
-
-    listProtoObjects(filename) {
-        const nested = this.getProtoNested(filename);
-        return Object.keys(nested);
-    }
-
-    listServicesObjects(filename) {
-        const nested = this.getProtoNested(filename);
-        return Object.keys(nested).map(key => {
-            return nested[key]
-        }).filter(obj => {
-            return obj instanceof Service;
-        })
-    }
-
-    listServices(filename) {
-        const services = this.listServicesObjects(filename);
-        return services.map(svc => {
-            return {
-                name: svc.name,
-                methods: Object.keys(svc.methods).map(k => {
-                    const method = svc.methods[k];
-                    return {
-                        name: k,
-                        options: method.options,
-                        type: method.type,
-                        resolved: method.resolved,
-                        comment: method.comment,
-                        filename: method.filename,
-                        requestType: method.requestType,
-                        requestStream: method.requestStream,
-                        responseType: method.responseType,
-                        responseStream: method.responseStream,
-                        resolvedRequestType: method.resolvedRequestType,
-                        resolvedResponseType: method.resolvedResponseType,
-                    }
-                })
-            }
-        })
-    }
-
-    getProtoNestedObjectSchema(filename, objname) {
-        const obj = this.getProtoNestedObject(filename, objname);
-        if (!obj) throw new Error(`cannot find ${objname}`);
-        if (!obj.fields) throw new Error(`cannot find ${objname} fields.`);
-        const fields = Object.keys(obj.fields).map(key => {
-            const field = obj.fields[key];
-            return {
-                name: field.name,
-                type: field.type,
-                required: field.required,
-                optional: field.optional,
-                repeated: field.repeated,
-                map: field.map,
-                partOf: field.partOf,
-                typeDefault: field.typeDefault,
-                defaultValue: field.defaultValue,
-                long: field.long,
-                bytes: field.bytes,
-                resolvedType: field.resolvedType,
-                extensionField: field.extensionField,
-                declaringField: field.declaringField,
-                options: field.options
-            };
-        });
-        return {
-            name: objname,
-            fields
-        };
-    }
-
-    getProtos() {
+    getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
         const protoSplat = join(this.protoDir, '/**/*.proto');
         const protoFiles = glob(protoSplat);
@@ -173,13 +92,19 @@ export class ProtoGlobber {
             content: readFileSync(filename, 'utf-8')
         }))
         const protos = contents.map(({ absolute, filename, content }) => {
-            return { proto: parse(content), absolute, filename };
+            return {
+                proto: parse(content, {
+                    keepCase: false,
+                    alternateCommentMode: true,
+                    preferTrailingComment: false
+                }), absolute, filename
+            };
         });
         this.protos = protos;
         return protos;
     }
 
-    getDeps() {
+    getDeps(): ProtoDep[] {
         if (this.deps) return this.deps;
         const deps = this.getProtos().map(el => {
             const {
