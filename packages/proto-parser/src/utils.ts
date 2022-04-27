@@ -1,7 +1,6 @@
-import { parse, Service, Type, Enum } from 'protobufjs';
 import dotty from 'dotty';
-
-import { ProtoDep, ProtoRef, ProtoRoot } from './types';
+import { Service, Type, Enum } from 'protobufjs';
+import { ProtoRoot } from './types';
 
 export const getNestedProto = (root: ProtoRoot) => {
     const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';
@@ -14,10 +13,10 @@ export const getServices = (root: ProtoRoot) => {
         return nested[key]
     }).filter(obj => {
         return obj instanceof Service;
-    }).map(service => {
+    }).map(el => {
         return {
-            name: service.name,
-            ...service.toJSON({ keepComments: true })
+            name: el.name,
+            ...el.toJSON({ keepComments: true })
         }
     });
 };
@@ -28,8 +27,11 @@ export const getTypes = (root: ProtoRoot) => {
         return nested[key]
     }).filter(obj => {
         return obj instanceof Type;
-    }).map(type => {
-        return type.toJSON({ keepComments: true });
+    }).map(el => {
+        return {
+            name: el.name,
+            ...el.toJSON({ keepComments: true })
+        }
     });
 };
 
@@ -40,7 +42,10 @@ export const getEnums = (root: ProtoRoot) => {
     }).filter(obj => {
         return obj instanceof Enum;
     }).map(el => {
-        return el.toJSON({ keepComments: true });
+        return {
+            name: el.name,
+            ...el.toJSON({ keepComments: true })
+        }
     });
 };
 

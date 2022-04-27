@@ -11,6 +11,7 @@ Array [
       "VOTE_OPTION_UNSPECIFIED": "VOTE_OPTION_UNSPECIFIED defines a no-op vote option.",
       "VOTE_OPTION_YES": "VOTE_OPTION_YES defines a yes vote option.",
     },
+    "name": "VoteOption",
     "options": Object {
       "(gogoproto.goproto_enum_prefix)": false,
     },
@@ -37,6 +38,7 @@ been rejected.",
       "PROPOSAL_STATUS_VOTING_PERIOD": "PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
 period.",
     },
+    "name": "ProposalStatus",
     "options": Object {
       "(gogoproto.goproto_enum_prefix)": false,
     },
