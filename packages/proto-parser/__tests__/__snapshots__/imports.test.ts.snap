@@ -39,6 +39,14 @@ Object {
 }
 `;
 
+exports[`imports lookup google.rpc.Status 1`] = `
+Object {
+  "import": "google/rpc/status.proto",
+  "name": "Status",
+  "package": "google.rpc",
+}
+`;
+
 exports[`imports lookup google/api/expr/v1alpha1/checked Empty 1`] = `
 Object {
   "import": "google/protobuf/empty.proto",
@@ -66,6 +74,14 @@ Object {
   "import": "google/protobuf/struct.proto",
   "name": "NullValue",
   "package": "google.protobuf",
+}
+`;
+
+exports[`imports lookup ibc.core.client.v1.Height 1`] = `
+Object {
+  "import": "ibc/core/client/v1/client.proto",
+  "name": "Height",
+  "package": "ibc.core.client.v1",
 }
 `;
 

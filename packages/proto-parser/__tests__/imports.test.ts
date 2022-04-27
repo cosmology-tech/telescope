@@ -80,10 +80,10 @@ describe('imports lookup', () => {
     describe('cosmos/tx/v1beta1/service.proto', () => {
         const ref = store.findProto('cosmos/tx/v1beta1/service.proto');
         it('.tendermint.types.BlockID', () => {
-            //     - [x] .tendermint.types.BlockID -> BlockID (imported from tendermint/types/types)
-            //     - [x] .tendermint.types.Block ->Block (imported from tendermint/types/block)
-            //    https://github.com/pyramation/protobuf-example-reference/blob/master/ts/cosmos/tx/v1beta1/service.ts#L7-L8
-            //    https://github.com/pyramation/protobuf-example-reference/blob/master/json/cosmos/tx/v1beta1/service.json#L238-L242
+            //  - [x] .tendermint.types.BlockID -> BlockID (imported from tendermint/types/types)
+            //  - [x] .tendermint.types.Block ->Block (imported from tendermint/types/block)
+            // https://github.com/pyramation/protobuf-example-reference/blob/master/ts/cosmos/tx/v1beta1/service.ts#L7-L8
+            // https://github.com/pyramation/protobuf-example-reference/blob/master/json/cosmos/tx/v1beta1/service.json#L238-L242
             const { obj, importedName, ...BlockID } = protoImportLookup(store, ref.proto, '.tendermint.types.BlockID');
             expect(obj.name).toEqual('BlockID')
             expect(importedName).toEqual('tendermint.types.BlockID')
@@ -91,10 +91,10 @@ describe('imports lookup', () => {
             expect(BlockID).toMatchSnapshot();
         });
         it('.tendermint.types.Block', () => {
-            //     - [x] .tendermint.types.BlockID -> BlockID (imported from tendermint/types/types)
-            //     - [x] .tendermint.types.Block ->Block (imported from tendermint/types/block)
-            //    https://github.com/pyramation/protobuf-example-reference/blob/master/ts/cosmos/tx/v1beta1/service.ts#L7-L8
-            //    https://github.com/pyramation/protobuf-example-reference/blob/master/json/cosmos/tx/v1beta1/service.json#L238-L242
+            //  - [x] .tendermint.types.BlockID -> BlockID (imported from tendermint/types/types)
+            //  - [x] .tendermint.types.Block ->Block (imported from tendermint/types/block)
+            // https://github.com/pyramation/protobuf-example-reference/blob/master/ts/cosmos/tx/v1beta1/service.ts#L7-L8
+            // https://github.com/pyramation/protobuf-example-reference/blob/master/json/cosmos/tx/v1beta1/service.json#L238-L242
             const { obj, importedName, ...Block } = protoImportLookup(store, ref.proto, '.tendermint.types.Block');
             expect(obj.name).toEqual('Block')
             expect(importedName).toEqual('tendermint.types.Block')
@@ -103,17 +103,25 @@ describe('imports lookup', () => {
         });
     })
     it('google.rpc.Status', () => {
-        const ref1 = store.findProto('google/api/expr/v1alpha1/eval.proto');
-        const ref2 = store.findProto('google/rpc/status.proto');
-        // - [ ] google.rpc.Status -> Status (imported from status rpc nested Status obj)
+        // - [x] google.rpc.Status -> Status (imported from status rpc nested Status obj)
         // https://github.com/pyramation/protobuf-example-reference/blob/master/json/google/api/expr/v1alpha1/eval.json#L82
         // https://github.com/pyramation/protobuf-example-reference/blob/master/json/google/rpc/status.json#L21
+        const ref = store.findProto('google/api/expr/v1alpha1/eval.proto');
+        const { obj, importedName, ...Status } = protoImportLookup(store, ref.proto, 'google.rpc.Status');
+        expect(obj.name).toEqual('Status')
+        expect(importedName).toEqual('google.rpc.Status')
+        expect(obj.scope).toEqual(['google.rpc'])
+        expect(Status).toMatchSnapshot();
     });
     it('ibc.core.client.v1.Height', () => {
-        const ref = store.findProto('ibc/core/channel/v1/query.proto');
-        // - [ ] ibc.core.client.v1.Height -> Height (imported from ibc/core/client/v1/client)
+        // - [x] ibc.core.client.v1.Height -> Height (imported from ibc/core/client/v1/client)
         // https://github.com/pyramation/protobuf-example-reference/blob/master/json/ibc/core/channel/v1/query.json#L234
         // https://github.com/pyramation/protobuf-example-reference/blob/master/ts/ibc/core/channel/v1/query.ts#L5
-
+        const ref = store.findProto('ibc/core/channel/v1/query.proto');
+        const { obj, importedName, ...Height } = protoImportLookup(store, ref.proto, 'ibc.core.client.v1.Height');
+        expect(obj.name).toEqual('Height');
+        expect(importedName).toEqual('ibc.core.client.v1.Height')
+        expect(obj.scope).toEqual(['ibc.core.client.v1'])
+        expect(Height).toMatchSnapshot();
     });
 });
