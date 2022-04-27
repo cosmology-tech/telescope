@@ -9,7 +9,7 @@ export class ProtoStore {
     files: string[];
     protoDir: string;
     deps: ProtoDep[];
-    protos: any[];
+    protos: ProtoRef[];
 
     constructor(protoDir) {
         this.protoDir = pathResolve(protoDir);
@@ -60,7 +60,7 @@ export class ProtoStore {
             } = el;
             return {
                 filename,
-                pkg,
+                package: pkg,
                 imports
             }
         });

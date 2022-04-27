@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`imports lookup Any 1`] = `
+Object {
+  "import": "google/protobuf/any.proto",
+  "name": "Any",
+}
+`;
+
+exports[`imports lookup Duration 1`] = `
+Object {
+  "import": "google/protobuf/duration.proto",
+  "name": "Duration",
+  "package": "google.protobuf",
+}
+`;
+
+exports[`imports lookup cosmos.base.query.v1beta1.PageResponse 1`] = `
+Object {
+  "import": "cosmos/base/query/v1beta1/pagination.proto",
+  "name": "PageResponse",
+  "package": "cosmos.base.query.v1beta1",
+}
+`;
+
+exports[`imports lookup cosmos/tx/v1beta1/service.proto .tendermint.types.Block 1`] = `
+Object {
+  "import": "tendermint/types/block.proto",
+  "name": "Block",
+  "package": "tendermint.types",
+}
+`;
+
+exports[`imports lookup cosmos/tx/v1beta1/service.proto .tendermint.types.BlockID 1`] = `
+Object {
+  "import": "tendermint/types/types.proto",
+  "name": "BlockID",
+  "package": "tendermint.types",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked Empty 1`] = `
+Object {
+  "import": "google/protobuf/empty.proto",
+  "name": "Empty",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked NullValue 1`] = `
+Object {
+  "import": "google/protobuf/struct.proto",
+  "name": "NullValue",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked google.protobuf.Empty 1`] = `
+Object {
+  "import": "google/protobuf/empty.proto",
+  "name": "Empty",
+  "package": "google.protobuf",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked google.protobuf.NullValue 1`] = `
+Object {
+  "import": "google/protobuf/struct.proto",
+  "name": "NullValue",
+  "package": "google.protobuf",
+}
+`;
+
+exports[`imports lookup osmosis/claim/v1beta1/params.proto Duration 1`] = `
+Object {
+  "import": "google/protobuf/duration.proto",
+  "name": "Duration",
+}
+`;
+
+exports[`imports lookup osmosis/claim/v1beta1/params.proto google.protobuf.Duration 1`] = `
+Object {
+  "import": "google/protobuf/duration.proto",
+  "name": "Duration",
+  "package": "google.protobuf",
+}
+`;

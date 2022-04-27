@@ -45,7 +45,7 @@ export class ProtoResolver {
         const deps: ProtoDep[] = [
             ...this.deps,
             {
-                pkg: '_root',
+                package: '_root',
                 filename: '_root',
                 imports,
             }

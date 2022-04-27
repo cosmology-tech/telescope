@@ -1,7 +1,7 @@
 
 export interface ProtoDep {
     filename: string;
-    pkg: string;
+    package: string;
     imports: string[]
 }
 export interface ProtoRef {
