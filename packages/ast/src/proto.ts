@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { camel } from 'case';
+import { camel, pascal } from 'case';
 import { identifier, tsEnumMember, tsPropertySignature, functionDeclaration } from './utils';
 
 const NATIVE_TYPES = [
@@ -39,6 +39,51 @@ export const getTSTypeFromProtoType = (type) => {
             return t.tsTypeReference(t.identifier('Any'));
         default:
             throw new Error('getTSTypeFromProtoType() type not found');
+    };
+};
+
+
+export const getDefaultTSTypeFromProtoType = (type, isArray) => {
+
+    if (isArray) {
+        return t.arrayExpression([]);
+    }
+
+    switch (type) {
+        case 'string':
+            return t.stringLiteral('');
+        case 'int32':
+        case 'uint32':
+        case 'double':
+            return t.numericLiteral(0);
+        case 'int64':
+        case 'uint64':
+            return t.memberExpression(
+                t.identifier('Long'),
+                t.identifier('UZERO')
+            );
+        case 'bytes':
+            return t.newExpression(
+                t.identifier('Uint8Array'),
+                []
+            );
+        case 'bool':
+            return t.booleanLiteral(false)
+        case 'google.protobuf.Timestamp':
+            return t.identifier('undefined');
+        case 'google.protobuf.Duration':
+            return t.identifier('undefined');
+        case 'google.protobuf.Any':
+            return t.identifier('undefined');
+
+        case 'cosmos.base.v1beta1.Coins':
+            return t.arrayExpression([]);
+        case 'cosmos.base.v1beta1.Coin':
+            return t.identifier('undefined');
+
+        default:
+            console.warn('getDefaultTSTypeFromProtoType() type not found: ' + type);
+            return t.identifier('undefined');
     };
 };
 
@@ -157,6 +202,38 @@ export const createProtoType = (name: string, proto: ProtoType) => {
             })
         )
     ))
+};
+
+
+export const createCreateProtoType = (name: string, proto: ProtoType) => {
+    const fields = Object.keys(proto.fields).map(key => {
+        const field: ProtoField = proto.fields[key];
+        return {
+            name: key,
+            keyType: field.keyType,
+            type: field.type,
+            rule: field.rule
+        };
+    })
+        .map(field => {
+            return t.objectProperty(
+                t.identifier(field.name),
+                getDefaultTSTypeFromProtoType(field.type, field.rule === 'repeated')
+            )
+        })
+
+
+    return functionDeclaration(t.identifier(`createBase${pascal(name)}`),
+        [],
+        t.blockStatement([
+            t.returnStatement(t.objectExpression(
+                [
+                    ...fields,
+                ]
+            ))
+        ]), false, false, t.tsTypeAnnotation(
+            t.tsTypeReference(t.identifier(name))
+        ))
 };
 
 const getEnumValues = (proto: ProtoEnum) => {

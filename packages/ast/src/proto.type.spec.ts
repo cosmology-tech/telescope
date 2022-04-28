@@ -1,6 +1,7 @@
-import { createProtoType } from './proto';
-import struct from '../../../__fixtures__/proto-json/google/protobuf/struct.json'
-import authz from '../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json'
+import { createProtoType, createCreateProtoType } from './proto';
+import struct from '../../../__fixtures__/proto-json/google/protobuf/struct.json';
+import authz from '../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
+import gamm from '../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
 import generate from '@babel/generator';
 
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
@@ -36,6 +37,19 @@ it('authz', async () => {
     expectCode(createProtoType('authz',
         getNestedProto(authz).Grant
     ));
+});
+
+describe('createCreateProtoType', () => {
+    it('Grant', () => {
+        printCode(createCreateProtoType('Grant',
+            getNestedProto(authz).Grant
+        ));
+    });
+    it('MsgJoinPool', () => {
+        printCode(createCreateProtoType('MsgJoinPool',
+            getNestedProto(gamm).MsgJoinPool
+        ));
+    });
 });
 
 describe('traversed', () => {

@@ -1,4 +1,8 @@
-import { createProtoEnum, createProtoEnumFromJSON, createProtoEnumToJSON } from './proto';
+import {
+    createProtoEnum,
+    createProtoEnumFromJSON,
+    createProtoEnumToJSON
+} from './proto';
 import struct from '../../../__fixtures__/proto-json/google/protobuf/struct.json'
 import { getNestedProto } from '@osmonauts/proto-parser';
 import generate from '@babel/generator';
