@@ -576,6 +576,160 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
     )
 };
 
+export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
+    return objectMethod('method',
+        t.identifier('fromJSON'),
+        [
+            identifier('object',
+                t.tsTypeAnnotation(
+                    t.tsAnyKeyword()
+                ),
+                false
+            )
+
+        ],
+        t.blockStatement(
+            [
+                t.returnStatement(
+                    t.objectExpression([
+
+                        /*
+
+                        sender: isSet(object.sender) ? String(object.sender) : ""
+
+                        */
+                        t.objectProperty(
+                            t.identifier('sender'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.identifier('isSet'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('sender')
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.identifier('String'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('sender')
+                                        )
+                                    ]
+                                ),
+                                t.stringLiteral('')
+                            )
+                        ),
+
+                        /*
+
+                        poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+
+                        */
+
+                        t.objectProperty(
+                            t.identifier('poolId'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.identifier('isSet'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('poolId')
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('Long'),
+                                        t.identifier('fromString')
+                                    ),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('poolId')
+                                        )
+                                    ]
+                                ),
+                                t.memberExpression(
+                                    t.identifier('Long'),
+                                    t.identifier('UZERO')
+                                )
+                            )
+                        ),
+
+                        /*
+        
+                        tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+
+                        */
+
+                        t.objectProperty(
+                            t.identifier('tokenInMaxs'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('Array'),
+                                        t.identifier('isArray')
+                                    ),
+                                    [
+                                        t.optionalMemberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('tokenInMaxs'),
+                                            false,
+                                            true
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('tokenInMaxs')
+                                        ),
+                                        t.identifier('map')
+                                    ),
+                                    [
+                                        t.arrowFunctionExpression(
+                                            [
+                                                identifier('e',
+                                                    t.tsTypeAnnotation(
+                                                        t.tsAnyKeyword()
+                                                    )
+                                                )
+                                            ],
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('Coin'),
+                                                    t.identifier('fromJSON')
+                                                ),
+                                                [
+                                                    t.identifier('e')
+                                                ]
+                                            )
+                                        )
+                                    ]
+                                ),
+                                t.arrayExpression([])
+                            )
+                        )
+                    ])
+                )
+            ]
+        ),
+        false,
+        false,
+        false,
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier('MsgJoinPool')
+            )
+        )
+    )
+};
+
 export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration('const',
@@ -584,7 +738,8 @@ export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => 
                 t.objectExpression(
                     [
                         protoEncodeMethod(name, proto),
-                        protoDecodeMethod(name, proto)
+                        protoDecodeMethod(name, proto),
+                        protoFromJSONMethod(name, proto),
                     ]
                 )
             )]
