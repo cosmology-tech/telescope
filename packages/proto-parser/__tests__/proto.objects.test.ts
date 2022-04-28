@@ -1,6 +1,6 @@
 import { ProtoResolver, ProtoStore } from '../src/index'
 import { getNestedProto, getServices } from '../src/utils';
-const store = new ProtoStore(__dirname + '/../__fixtures__/chain1');
+const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 
 it('Coin', () => {
     const objects = store.findProto('cosmos/base/v1beta1/coin.proto');

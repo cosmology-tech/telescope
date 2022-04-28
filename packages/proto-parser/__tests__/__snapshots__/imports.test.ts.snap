@@ -7,14 +7,6 @@ Object {
 }
 `;
 
-exports[`imports lookup Duration 1`] = `
-Object {
-  "import": "google/protobuf/duration.proto",
-  "name": "Duration",
-  "package": "google.protobuf",
-}
-`;
-
 exports[`imports lookup cosmos.base.query.v1beta1.PageResponse 1`] = `
 Object {
   "import": "cosmos/base/query/v1beta1/pagination.proto",

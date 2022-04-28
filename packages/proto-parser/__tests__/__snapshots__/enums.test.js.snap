@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nested lookup 1`] = `
+Object {
+  "comment": "Severities of issues.",
+  "comments": Object {
+    "DEPRECATION": "Deprecation issue for statements and method that may no longer be
+supported or maintained.",
+    "ERROR": "Errors such as: unmatched curly braces or variable redefinition.",
+    "SEVERITY_UNSPECIFIED": "An unspecified severity.",
+    "WARNING": "Warnings such as: unused variables.",
+  },
+  "filename": null,
+  "name": "Severity",
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "id": Object {
+        "id": 3,
+        "type": "int64",
+      },
+      "position": Object {
+        "id": 2,
+        "type": "google.api.expr.v1alpha1.SourcePosition",
+      },
+      "severity": Object {
+        "id": 1,
+        "type": "Severity",
+      },
+    },
+    "nested": Object {
+      "Severity": Object {
+        "values": Object {
+          "DEPRECATION": 1,
+          "ERROR": 3,
+          "SEVERITY_UNSPECIFIED": 0,
+          "WARNING": 2,
+        },
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.conformance.v1alpha1",
+    "IssueDetails",
+  ],
+  "values": Object {
+    "DEPRECATION": 1,
+    "ERROR": 3,
+    "SEVERITY_UNSPECIFIED": 0,
+    "WARNING": 2,
+  },
+  "valuesById": Object {
+    "0": "SEVERITY_UNSPECIFIED",
+    "1": "DEPRECATION",
+    "2": "WARNING",
+    "3": "ERROR",
+  },
+}
+`;
