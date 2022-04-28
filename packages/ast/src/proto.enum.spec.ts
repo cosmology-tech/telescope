@@ -17,13 +17,13 @@ const printCode = (ast) => {
 }
 
 it('createProtoEnum', async () => {
-    printCode(createProtoEnum('NullValue', getNestedProto(struct).NullValue));
+    expectCode(createProtoEnum('NullValue', getNestedProto(struct).NullValue));
 });
 
 it('createProtoEnumFromJSON', async () => {
-    printCode(createProtoEnumFromJSON('NullValue', getNestedProto(struct).NullValue));
+    expectCode(createProtoEnumFromJSON('NullValue', getNestedProto(struct).NullValue));
 });
 
 it('createProtoEnumToJSON', async () => {
-    printCode(createProtoEnumToJSON('NullValue', getNestedProto(struct).NullValue));
+    expectCode(createProtoEnumToJSON('NullValue', getNestedProto(struct).NullValue));
 });

@@ -159,51 +159,7 @@ export const createProtoType = (name: string, proto: ProtoType) => {
     ))
 };
 
-
-export const createProtoEnum = (name: string, proto: ProtoEnum) => {
-    return t.exportNamedDeclaration(
-        t.tsEnumDeclaration(
-            t.identifier('IssueDetails_Severity'),
-            [
-                tsEnumMember(
-                    t.identifier('SEVERITY_UNSPECIFIED'),
-                    t.numericLiteral(0),
-                    [{
-                        type: 'CommentBlock',
-                        value: 'SEVERITY_UNSPECIFIED is ....'
-                    }]
-                ),
-                tsEnumMember(
-                    t.identifier('DEPRECATION'),
-                    t.numericLiteral(1),
-                    [{
-                        type: 'CommentBlock',
-                        value: '@DEPRECATION'
-                    }]
-                ),
-                tsEnumMember(
-                    t.identifier('WARNING'),
-                    t.numericLiteral(2),
-                    null
-                ),
-                tsEnumMember(
-                    t.identifier('ERROR'),
-                    t.numericLiteral(3),
-                    null
-                ),
-                // unrecognized
-                tsEnumMember(
-                    t.identifier('UNRECOGNIZED'),
-                    t.unaryExpression('-', t.numericLiteral(1)),
-                    null
-                ),
-            ]
-        )
-    )
-};
-
-export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
-
+const getEnumValues = (proto: ProtoEnum) => {
     const enums = Object.keys(proto.values).map(key => {
         const e = {
             name: key,
@@ -216,7 +172,40 @@ export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
         }
         return e;
     });
+    return enums;
+}
 
+export const createProtoEnum = (name: string, proto: ProtoEnum) => {
+    const enums = getEnumValues(proto);
+    const values = enums.map(e => {
+        return tsEnumMember(
+            t.identifier(e.name),
+            t.numericLiteral(e.value),
+            e.comment ? [{
+                type: 'CommentBlock',
+                value: e.comment
+            }] : []
+        );
+    })
+    return t.exportNamedDeclaration(
+        t.tsEnumDeclaration(
+            t.identifier(name),
+            [
+                ...values,
+                // default
+                tsEnumMember(
+                    t.identifier('UNRECOGNIZED'),
+                    t.unaryExpression('-', t.numericLiteral(1)),
+                    null
+                ),
+            ]
+        )
+    )
+};
+
+export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
+
+    const enums = getEnumValues(proto);
     const switches = enums.map(e => {
         return t.switchCase(t.numericLiteral(e.value), []),
             t.switchCase(t.stringLiteral(e.name), [
@@ -262,17 +251,7 @@ export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
 
 export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
 
-    const enums = Object.keys(proto.values).map(key => {
-        const e = {
-            name: key,
-            comment: null
-        };
-        if (proto.comments[key]) {
-            e.comment = proto.comments[key];
-        }
-        return e;
-    });
-
+    const enums = getEnumValues(proto);
     const switches = enums.map(e => {
         return t.switchCase(
             t.memberExpression(
