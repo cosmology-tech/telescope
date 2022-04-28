@@ -1,0 +1,50 @@
+{
+  "package": "osmosis.txfees.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "txfees": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/txfees/types"
+                },
+                "nested": {
+                  "FeeToken": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "denom": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:denom"
+                        },
+                        "comment": null
+                      },
+                      "poolID": {
+                        "type": "uint64",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "FeeToken is a struct that specifies a coin denom, and pool ID pair.\nThis marks the token as eligible for use as a tx fee asset in Osmosis.\nIts price in osmo is derived through looking at the provided pool ID.\nThe pool ID must have osmo as one of its assets."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

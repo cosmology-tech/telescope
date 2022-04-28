@@ -1,0 +1,114 @@
+{
+  "package": "cosmos.crypto.keyring.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "cosmos/crypto/hd/v1/hd.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crypto": {
+            "nested": {
+              "keyring": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/crypto/keyring",
+                      "(gogoproto.goproto_getters_all)": false
+                    },
+                    "nested": {
+                      "Record": {
+                        "oneofs": {
+                          "item": {
+                            "oneof": [
+                              "local",
+                              "ledger",
+                              "multi",
+                              "offline"
+                            ],
+                            "comment": "Record contains one of the following items"
+                          }
+                        },
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "name represents a name of Record"
+                          },
+                          "pubKey": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "comment": "pub_key represents a public key in any format"
+                          },
+                          "local": {
+                            "type": "Local",
+                            "id": 3,
+                            "comment": "local stores the public information about a locally stored key"
+                          },
+                          "ledger": {
+                            "type": "Ledger",
+                            "id": 4,
+                            "comment": "ledger stores the public information about a Ledger key"
+                          },
+                          "multi": {
+                            "type": "Multi",
+                            "id": 5,
+                            "comment": "Multi does not store any information."
+                          },
+                          "offline": {
+                            "type": "Offline",
+                            "id": 6,
+                            "comment": "Offline does not store any information."
+                          }
+                        },
+                        "nested": {
+                          "Local": {
+                            "fields": {
+                              "privKey": {
+                                "type": "google.protobuf.Any",
+                                "id": 1,
+                                "comment": null
+                              },
+                              "privKeyType": {
+                                "type": "string",
+                                "id": 2,
+                                "comment": null
+                              }
+                            },
+                            "comment": "Item is a keyring item stored in a keyring backend.\nLocal item"
+                          },
+                          "Ledger": {
+                            "fields": {
+                              "path": {
+                                "type": "hd.v1.BIP44Params",
+                                "id": 1,
+                                "comment": null
+                              }
+                            },
+                            "comment": "Ledger item"
+                          },
+                          "Multi": {
+                            "fields": {},
+                            "comment": "Multi item"
+                          },
+                          "Offline": {
+                            "fields": {},
+                            "comment": "Offline item"
+                          }
+                        },
+                        "comment": "Record is used for representing a key in the keyring."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

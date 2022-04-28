@@ -1,0 +1,432 @@
+{
+  "package": "cosmos.base.reflection.v2alpha1",
+  "imports": [
+    "google/api/annotations.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "reflection": {
+                "nested": {
+                  "v2alpha1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/server/grpc/reflection/v2alpha1"
+                    },
+                    "nested": {
+                      "AppDescriptor": {
+                        "fields": {
+                          "authn": {
+                            "type": "AuthnDescriptor",
+                            "id": 1,
+                            "comment": "AuthnDescriptor provides information on how to authenticate transactions on the application\nNOTE: experimental and subject to change in future releases."
+                          },
+                          "chain": {
+                            "type": "ChainDescriptor",
+                            "id": 2,
+                            "comment": "chain provides the chain descriptor"
+                          },
+                          "codec": {
+                            "type": "CodecDescriptor",
+                            "id": 3,
+                            "comment": "codec provides metadata information regarding codec related types"
+                          },
+                          "configuration": {
+                            "type": "ConfigurationDescriptor",
+                            "id": 4,
+                            "comment": "configuration provides metadata information regarding the sdk.Config type"
+                          },
+                          "queryServices": {
+                            "type": "QueryServicesDescriptor",
+                            "id": 5,
+                            "comment": "query_services provides metadata information regarding the available queriable endpoints"
+                          },
+                          "tx": {
+                            "type": "TxDescriptor",
+                            "id": 6,
+                            "comment": "tx provides metadata information regarding how to send transactions to the given application"
+                          }
+                        },
+                        "comment": "AppDescriptor describes a cosmos-sdk based application"
+                      },
+                      "TxDescriptor": {
+                        "fields": {
+                          "fullname": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)\nit is not meant to support polymorphism of transaction types, it is supposed to be used by\nreflection clients to understand if they can handle a specific transaction type in an application."
+                          },
+                          "msgs": {
+                            "rule": "repeated",
+                            "type": "MsgDescriptor",
+                            "id": 2,
+                            "comment": "msgs lists the accepted application messages (sdk.Msg)"
+                          }
+                        },
+                        "comment": "TxDescriptor describes the accepted transaction type"
+                      },
+                      "AuthnDescriptor": {
+                        "fields": {
+                          "signModes": {
+                            "rule": "repeated",
+                            "type": "SigningModeDescriptor",
+                            "id": 1,
+                            "comment": "sign_modes defines the supported signature algorithm"
+                          }
+                        },
+                        "comment": "AuthnDescriptor provides information on how to sign transactions without relying\non the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures"
+                      },
+                      "SigningModeDescriptor": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "name defines the unique name of the signing mode"
+                          },
+                          "number": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "number is the unique int32 identifier for the sign_mode enum"
+                          },
+                          "authnInfoProviderMethodFullname": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "authn_info_provider_method_fullname defines the fullname of the method to call to get\nthe metadata required to authenticate using the provided sign_modes"
+                          }
+                        },
+                        "comment": "SigningModeDescriptor provides information on a signing flow of the application\nNOTE(fdymylja): here we could go as far as providing an entire flow on how\nto sign a message given a SigningModeDescriptor, but it's better to think about\nthis another time"
+                      },
+                      "ChainDescriptor": {
+                        "fields": {
+                          "id": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "id is the chain id"
+                          }
+                        },
+                        "comment": "ChainDescriptor describes chain information of the application"
+                      },
+                      "CodecDescriptor": {
+                        "fields": {
+                          "interfaces": {
+                            "rule": "repeated",
+                            "type": "InterfaceDescriptor",
+                            "id": 1,
+                            "comment": "interfaces is a list of the registerted interfaces descriptors"
+                          }
+                        },
+                        "comment": "CodecDescriptor describes the registered interfaces and provides metadata information on the types"
+                      },
+                      "InterfaceDescriptor": {
+                        "fields": {
+                          "fullname": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "fullname is the name of the interface"
+                          },
+                          "interfaceAcceptingMessages": {
+                            "rule": "repeated",
+                            "type": "InterfaceAcceptingMessageDescriptor",
+                            "id": 2,
+                            "comment": "interface_accepting_messages contains information regarding the proto messages which contain the interface as\ngoogle.protobuf.Any field"
+                          },
+                          "interfaceImplementers": {
+                            "rule": "repeated",
+                            "type": "InterfaceImplementerDescriptor",
+                            "id": 3,
+                            "comment": "interface_implementers is a list of the descriptors of the interface implementers"
+                          }
+                        },
+                        "comment": "InterfaceDescriptor describes the implementation of an interface"
+                      },
+                      "InterfaceImplementerDescriptor": {
+                        "fields": {
+                          "fullname": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "fullname is the protobuf queryable name of the interface implementer"
+                          },
+                          "typeUrl": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "type_url defines the type URL used when marshalling the type as any\nthis is required so we can provide type safe google.protobuf.Any marshalling and\nunmarshalling, making sure that we don't accept just 'any' type\nin our interface fields"
+                          }
+                        },
+                        "comment": "InterfaceImplementerDescriptor describes an interface implementer"
+                      },
+                      "InterfaceAcceptingMessageDescriptor": {
+                        "fields": {
+                          "fullname": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "fullname is the protobuf fullname of the type containing the interface"
+                          },
+                          "fieldDescriptorNames": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "field_descriptor_names is a list of the protobuf name (not fullname) of the field\nwhich contains the interface as google.protobuf.Any (the interface is the same, but\nit can be in multiple fields of the same proto message)"
+                          }
+                        },
+                        "comment": "InterfaceAcceptingMessageDescriptor describes a protobuf message which contains\nan interface represented as a google.protobuf.Any"
+                      },
+                      "ConfigurationDescriptor": {
+                        "fields": {
+                          "bech32AccountAddressPrefix": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "bech32_account_address_prefix is the account address prefix"
+                          }
+                        },
+                        "comment": "ConfigurationDescriptor contains metadata information on the sdk.Config"
+                      },
+                      "MsgDescriptor": {
+                        "fields": {
+                          "msgTypeUrl": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "msg_type_url contains the TypeURL of a sdk.Msg."
+                          }
+                        },
+                        "comment": "MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction"
+                      },
+                      "ReflectionService": {
+                        "methods": {
+                          "GetAuthnDescriptor": {
+                            "requestType": "GetAuthnDescriptorRequest",
+                            "responseType": "GetAuthnDescriptorResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/app_descriptor/authn"
+                            },
+                            "comment": "GetAuthnDescriptor returns information on how to authenticate transactions in the application\nNOTE: this RPC is still experimental and might be subject to breaking changes or removal in\nfuture releases of the cosmos-sdk.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/app_descriptor/authn"
+                                }
+                              }
+                            ]
+                          },
+                          "GetChainDescriptor": {
+                            "requestType": "GetChainDescriptorRequest",
+                            "responseType": "GetChainDescriptorResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/app_descriptor/chain"
+                            },
+                            "comment": "GetChainDescriptor returns the description of the chain",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/app_descriptor/chain"
+                                }
+                              }
+                            ]
+                          },
+                          "GetCodecDescriptor": {
+                            "requestType": "GetCodecDescriptorRequest",
+                            "responseType": "GetCodecDescriptorResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/app_descriptor/codec"
+                            },
+                            "comment": "GetCodecDescriptor returns the descriptor of the codec of the application",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/app_descriptor/codec"
+                                }
+                              }
+                            ]
+                          },
+                          "GetConfigurationDescriptor": {
+                            "requestType": "GetConfigurationDescriptorRequest",
+                            "responseType": "GetConfigurationDescriptorResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/app_descriptor/configuration"
+                            },
+                            "comment": "GetConfigurationDescriptor returns the descriptor for the sdk.Config of the application",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/app_descriptor/configuration"
+                                }
+                              }
+                            ]
+                          },
+                          "GetQueryServicesDescriptor": {
+                            "requestType": "GetQueryServicesDescriptorRequest",
+                            "responseType": "GetQueryServicesDescriptorResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/app_descriptor/query_services"
+                            },
+                            "comment": "GetQueryServicesDescriptor returns the available gRPC queryable services of the application",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/app_descriptor/query_services"
+                                }
+                              }
+                            ]
+                          },
+                          "GetTxDescriptor": {
+                            "requestType": "GetTxDescriptorRequest",
+                            "responseType": "GetTxDescriptorResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/app_descriptor/tx_descriptor"
+                            },
+                            "comment": "GetTxDescriptor returns information on the used transaction object and available msgs that can be used",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/app_descriptor/tx_descriptor"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "ReflectionService defines a service for application reflection."
+                      },
+                      "GetAuthnDescriptorRequest": {
+                        "fields": {},
+                        "comment": "GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC"
+                      },
+                      "GetAuthnDescriptorResponse": {
+                        "fields": {
+                          "authn": {
+                            "type": "AuthnDescriptor",
+                            "id": 1,
+                            "comment": "authn describes how to authenticate to the application when sending transactions"
+                          }
+                        },
+                        "comment": "GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC"
+                      },
+                      "GetChainDescriptorRequest": {
+                        "fields": {},
+                        "comment": "GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC"
+                      },
+                      "GetChainDescriptorResponse": {
+                        "fields": {
+                          "chain": {
+                            "type": "ChainDescriptor",
+                            "id": 1,
+                            "comment": "chain describes application chain information"
+                          }
+                        },
+                        "comment": "GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC"
+                      },
+                      "GetCodecDescriptorRequest": {
+                        "fields": {},
+                        "comment": "GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC"
+                      },
+                      "GetCodecDescriptorResponse": {
+                        "fields": {
+                          "codec": {
+                            "type": "CodecDescriptor",
+                            "id": 1,
+                            "comment": "codec describes the application codec such as registered interfaces and implementations"
+                          }
+                        },
+                        "comment": "GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC"
+                      },
+                      "GetConfigurationDescriptorRequest": {
+                        "fields": {},
+                        "comment": "GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC"
+                      },
+                      "GetConfigurationDescriptorResponse": {
+                        "fields": {
+                          "config": {
+                            "type": "ConfigurationDescriptor",
+                            "id": 1,
+                            "comment": "config describes the application's sdk.Config"
+                          }
+                        },
+                        "comment": "GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC"
+                      },
+                      "GetQueryServicesDescriptorRequest": {
+                        "fields": {},
+                        "comment": "GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC"
+                      },
+                      "GetQueryServicesDescriptorResponse": {
+                        "fields": {
+                          "queries": {
+                            "type": "QueryServicesDescriptor",
+                            "id": 1,
+                            "comment": "queries provides information on the available queryable services"
+                          }
+                        },
+                        "comment": "GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC"
+                      },
+                      "GetTxDescriptorRequest": {
+                        "fields": {},
+                        "comment": "GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC"
+                      },
+                      "GetTxDescriptorResponse": {
+                        "fields": {
+                          "tx": {
+                            "type": "TxDescriptor",
+                            "id": 1,
+                            "comment": "tx provides information on msgs that can be forwarded to the application\nalongside the accepted transaction protobuf type"
+                          }
+                        },
+                        "comment": "GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC"
+                      },
+                      "QueryServicesDescriptor": {
+                        "fields": {
+                          "queryServices": {
+                            "rule": "repeated",
+                            "type": "QueryServiceDescriptor",
+                            "id": 1,
+                            "comment": "query_services is a list of cosmos-sdk QueryServiceDescriptor"
+                          }
+                        },
+                        "comment": "QueryServicesDescriptor contains the list of cosmos-sdk queriable services"
+                      },
+                      "QueryServiceDescriptor": {
+                        "fields": {
+                          "fullname": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "fullname is the protobuf fullname of the service descriptor"
+                          },
+                          "isModule": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "is_module describes if this service is actually exposed by an application's module"
+                          },
+                          "methods": {
+                            "rule": "repeated",
+                            "type": "QueryMethodDescriptor",
+                            "id": 3,
+                            "comment": "methods provides a list of query service methods"
+                          }
+                        },
+                        "comment": "QueryServiceDescriptor describes a cosmos-sdk queryable service"
+                      },
+                      "QueryMethodDescriptor": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "name is the protobuf name (not fullname) of the method"
+                          },
+                          "fullQueryPath": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "full_query_path is the path that can be used to query\nthis method via tendermint abci.Query"
+                          }
+                        },
+                        "comment": "QueryMethodDescriptor describes a queryable method of a query service\nno other info is provided beside method name and tendermint queryable path\nbecause it would be redundant with the grpc reflection service"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

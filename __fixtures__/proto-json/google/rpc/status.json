@@ -1,0 +1,48 @@
+{
+  "package": "google.rpc",
+  "imports": [
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "rpc": {
+            "options": {
+              "cc_enable_arenas": true,
+              "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+              "java_multiple_files": true,
+              "java_outer_classname": "StatusProto",
+              "java_package": "com.google.rpc",
+              "objc_class_prefix": "RPC"
+            },
+            "nested": {
+              "Status": {
+                "fields": {
+                  "code": {
+                    "type": "int32",
+                    "id": 1,
+                    "comment": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]."
+                  },
+                  "message": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "A developer-facing error message, which should be in English. Any\nuser-facing error message should be localized and sent in the\n[google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+                  },
+                  "details": {
+                    "rule": "repeated",
+                    "type": "google.protobuf.Any",
+                    "id": 3,
+                    "comment": "A list of messages that carry the error details.  There is a common set of\nmessage types for APIs to use."
+                  }
+                },
+                "comment": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors)."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

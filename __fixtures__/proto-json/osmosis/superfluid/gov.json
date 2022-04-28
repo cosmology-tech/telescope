@@ -1,0 +1,82 @@
+{
+  "package": "osmosis.superfluid.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/superfluid/superfluid.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "superfluid": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/superfluid/types"
+                },
+                "nested": {
+                  "SetSuperfluidAssetsProposal": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "assets": {
+                        "rule": "repeated",
+                        "type": "SuperfluidAsset",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "SetSuperfluidAssetsProposal is a gov Content type to update the superfluid\nassets"
+                  },
+                  "RemoveSuperfluidAssetsProposal": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "superfluidAssetDenoms": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid\nassets by denom"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

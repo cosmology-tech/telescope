@@ -1,0 +1,55 @@
+{
+  "package": "ibc.lightclients.localhost.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "ibc/core/client/v1/client.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "lightclients": {
+            "nested": {
+              "localhost": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/light-clients/09-localhost/types"
+                    },
+                    "nested": {
+                      "ClientState": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "chainId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:chain_id"
+                            },
+                            "comment": "self chain ID"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "self latest block height"
+                          }
+                        },
+                        "comment": "ClientState defines a loopback (localhost) client. It requires (read-only)\naccess to keys outside the client prefix."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

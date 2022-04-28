@@ -1,0 +1,78 @@
+{
+  "package": "cosmos.params.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "params": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/params/types/proposal",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "ParameterChangeProposal": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "changes": {
+                        "rule": "repeated",
+                        "type": "ParamChange",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "ParameterChangeProposal defines a proposal to change one or more parameters."
+                  },
+                  "ParamChange": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "subspace": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "key": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "value": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "ParamChange defines an individual parameter change, for use in\nParameterChangeProposal."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

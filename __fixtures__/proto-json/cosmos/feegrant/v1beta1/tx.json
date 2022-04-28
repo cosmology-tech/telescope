@@ -1,0 +1,107 @@
+{
+  "package": "cosmos.feegrant.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "feegrant": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/feegrant"
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "GrantAllowance": {
+                        "requestType": "MsgGrantAllowance",
+                        "responseType": "MsgGrantAllowanceResponse",
+                        "comment": "GrantAllowance grants fee allowance to the grantee on the granter's\naccount with the provided expiration time."
+                      },
+                      "RevokeAllowance": {
+                        "requestType": "MsgRevokeAllowance",
+                        "responseType": "MsgRevokeAllowanceResponse",
+                        "comment": "RevokeAllowance revokes any fee allowance of granter's account that\nhas been granted to the grantee."
+                      }
+                    },
+                    "comment": "Msg defines the feegrant msg service."
+                  },
+                  "MsgGrantAllowance": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "granter"
+                    },
+                    "fields": {
+                      "granter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "granter is the address of the user granting an allowance of their funds."
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "grantee is the address of the user being granted an allowance of another user's funds."
+                      },
+                      "allowance": {
+                        "type": "google.protobuf.Any",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "FeeAllowanceI"
+                        },
+                        "comment": "allowance can be any of basic, periodic, allowed fee allowance."
+                      }
+                    },
+                    "comment": "MsgGrantAllowance adds permission for Grantee to spend up to Allowance\nof fees from the account of Granter."
+                  },
+                  "MsgGrantAllowanceResponse": {
+                    "fields": {},
+                    "comment": "MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type."
+                  },
+                  "MsgRevokeAllowance": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "granter"
+                    },
+                    "fields": {
+                      "granter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "granter is the address of the user granting an allowance of their funds."
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "grantee is the address of the user being granted an allowance of another user's funds."
+                      }
+                    },
+                    "comment": "MsgRevokeAllowance removes any existing Allowance from Granter to Grantee."
+                  },
+                  "MsgRevokeAllowanceResponse": {
+                    "fields": {},
+                    "comment": "MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

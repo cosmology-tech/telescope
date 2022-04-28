@@ -1,0 +1,374 @@
+{
+  "package": "ics23",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ics23": {
+        "options": {
+          "go_package": "github.com/confio/ics23/go"
+        },
+        "nested": {
+          "HashOp": {
+            "values": {
+              "NO_HASH": 0,
+              "SHA256": 1,
+              "SHA512": 2,
+              "KECCAK": 3,
+              "RIPEMD160": 4,
+              "BITCOIN": 5
+            },
+            "comment": null,
+            "comments": {
+              "NO_HASH": "NO_HASH is the default if no data passed. Note this is an illegal argument some places.",
+              "SHA256": null,
+              "SHA512": null,
+              "KECCAK": null,
+              "RIPEMD160": null,
+              "BITCOIN": "ripemd160(sha256(x))"
+            }
+          },
+          "LengthOp": {
+            "values": {
+              "NO_PREFIX": 0,
+              "VAR_PROTO": 1,
+              "VAR_RLP": 2,
+              "FIXED32_BIG": 3,
+              "FIXED32_LITTLE": 4,
+              "FIXED64_BIG": 5,
+              "FIXED64_LITTLE": 6,
+              "REQUIRE_32_BYTES": 7,
+              "REQUIRE_64_BYTES": 8
+            },
+            "comment": "LengthOp defines how to process the key and value of the LeafOp\nto include length information. After encoding the length with the given\nalgorithm, the length will be prepended to the key and value bytes.\n(Each one with it's own encoded length)",
+            "comments": {
+              "NO_PREFIX": "NO_PREFIX don't include any length info",
+              "VAR_PROTO": "VAR_PROTO uses protobuf (and go-amino) varint encoding of the length",
+              "VAR_RLP": "VAR_RLP uses rlp int encoding of the length",
+              "FIXED32_BIG": "FIXED32_BIG uses big-endian encoding of the length as a 32 bit integer",
+              "FIXED32_LITTLE": "FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit integer",
+              "FIXED64_BIG": "FIXED64_BIG uses big-endian encoding of the length as a 64 bit integer",
+              "FIXED64_LITTLE": "FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit integer",
+              "REQUIRE_32_BYTES": "REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32 bytes (sha256 output)",
+              "REQUIRE_64_BYTES": "REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output)"
+            }
+          },
+          "ExistenceProof": {
+            "fields": {
+              "key": {
+                "type": "bytes",
+                "id": 1,
+                "comment": null
+              },
+              "value": {
+                "type": "bytes",
+                "id": 2,
+                "comment": null
+              },
+              "leaf": {
+                "type": "LeafOp",
+                "id": 3,
+                "comment": null
+              },
+              "path": {
+                "rule": "repeated",
+                "type": "InnerOp",
+                "id": 4,
+                "comment": null
+              }
+            },
+            "comment": "ExistenceProof takes a key and a value and a set of steps to perform on it.\nThe result of peforming all these steps will provide a \"root hash\", which can\nbe compared to the value in a header.\n\nSince it is computationally infeasible to produce a hash collission for any of the used\ncryptographic hash functions, if someone can provide a series of operations to transform\na given key and value into a root hash that matches some trusted root, these key and values\nmust be in the referenced merkle tree.\n\nThe only possible issue is maliablity in LeafOp, such as providing extra prefix data,\nwhich should be controlled by a spec. Eg. with lengthOp as NONE,\nprefix = FOO, key = BAR, value = CHOICE\nand\nprefix = F, key = OOBAR, value = CHOICE\nwould produce the same value.\n\nWith LengthOp this is tricker but not impossible. Which is why the \"leafPrefixEqual\" field\nin the ProofSpec is valuable to prevent this mutability. And why all trees should\nlength-prefix the data before hashing it."
+          },
+          "NonExistenceProof": {
+            "fields": {
+              "key": {
+                "type": "bytes",
+                "id": 1,
+                "comment": "TODO: remove this as unnecessary??? we prove a range"
+              },
+              "left": {
+                "type": "ExistenceProof",
+                "id": 2,
+                "comment": null
+              },
+              "right": {
+                "type": "ExistenceProof",
+                "id": 3,
+                "comment": null
+              }
+            },
+            "comment": "NonExistenceProof takes a proof of two neighbors, one left of the desired key,\none right of the desired key. If both proofs are valid AND they are neighbors,\nthen there is no valid proof for the given key."
+          },
+          "CommitmentProof": {
+            "oneofs": {
+              "proof": {
+                "oneof": [
+                  "exist",
+                  "nonexist",
+                  "batch",
+                  "compressed"
+                ],
+                "comment": null
+              }
+            },
+            "fields": {
+              "exist": {
+                "type": "ExistenceProof",
+                "id": 1,
+                "comment": null
+              },
+              "nonexist": {
+                "type": "NonExistenceProof",
+                "id": 2,
+                "comment": null
+              },
+              "batch": {
+                "type": "BatchProof",
+                "id": 3,
+                "comment": null
+              },
+              "compressed": {
+                "type": "CompressedBatchProof",
+                "id": 4,
+                "comment": null
+              }
+            },
+            "comment": "CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages"
+          },
+          "LeafOp": {
+            "fields": {
+              "hash": {
+                "type": "HashOp",
+                "id": 1,
+                "comment": null
+              },
+              "prehashKey": {
+                "type": "HashOp",
+                "id": 2,
+                "comment": null
+              },
+              "prehashValue": {
+                "type": "HashOp",
+                "id": 3,
+                "comment": null
+              },
+              "length": {
+                "type": "LengthOp",
+                "id": 4,
+                "comment": null
+              },
+              "prefix": {
+                "type": "bytes",
+                "id": 5,
+                "comment": "prefix is a fixed bytes that may optionally be included at the beginning to differentiate\na leaf node from an inner node."
+              }
+            },
+            "comment": "LeafOp represents the raw key-value data we wish to prove, and\nmust be flexible to represent the internal transformation from\nthe original key-value pairs into the basis hash, for many existing\nmerkle trees.\n\nkey and value are passed in. So that the signature of this operation is:\nleafOp(key, value) -> output\n\nTo process this, first prehash the keys and values if needed (ANY means no hash in this case):\nhkey = prehashKey(key)\nhvalue = prehashValue(value)\n\nThen combine the bytes, and hash it\noutput = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)"
+          },
+          "InnerOp": {
+            "fields": {
+              "hash": {
+                "type": "HashOp",
+                "id": 1,
+                "comment": null
+              },
+              "prefix": {
+                "type": "bytes",
+                "id": 2,
+                "comment": null
+              },
+              "suffix": {
+                "type": "bytes",
+                "id": 3,
+                "comment": null
+              }
+            },
+            "comment": "InnerOp represents a merkle-proof step that is not a leaf.\nIt represents concatenating two children and hashing them to provide the next result.\n\nThe result of the previous step is passed in, so the signature of this op is:\ninnerOp(child) -> output\n\nThe result of applying InnerOp should be:\noutput = op.hash(op.prefix || child || op.suffix)\n\nwhere the || operator is concatenation of binary data,\nand child is the result of hashing all the tree below this step.\n\nAny special data, like prepending child with the length, or prepending the entire operation with\nsome value to differentiate from leaf nodes, should be included in prefix and suffix.\nIf either of prefix or suffix is empty, we just treat it as an empty string"
+          },
+          "ProofSpec": {
+            "fields": {
+              "leafSpec": {
+                "type": "LeafOp",
+                "id": 1,
+                "comment": "any field in the ExistenceProof must be the same as in this spec.\nexcept Prefix, which is just the first bytes of prefix (spec can be longer)"
+              },
+              "innerSpec": {
+                "type": "InnerSpec",
+                "id": 2,
+                "comment": null
+              },
+              "maxDepth": {
+                "type": "int32",
+                "id": 3,
+                "comment": "max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries)"
+              },
+              "minDepth": {
+                "type": "int32",
+                "id": 4,
+                "comment": "min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries)"
+              }
+            },
+            "comment": "ProofSpec defines what the expected parameters are for a given proof type.\nThis can be stored in the client and used to validate any incoming proofs.\n\nverify(ProofSpec, Proof) -> Proof | Error\n\nAs demonstrated in tests, if we don't fix the algorithm used to calculate the\nLeafHash for a given tree, there are many possible key-value pairs that can\ngenerate a given hash (by interpretting the preimage differently).\nWe need this for proper security, requires client knows a priori what\ntree format server uses. But not in code, rather a configuration object."
+          },
+          "InnerSpec": {
+            "fields": {
+              "childOrder": {
+                "rule": "repeated",
+                "type": "int32",
+                "id": 1,
+                "comment": "Child order is the ordering of the children node, must count from 0\niavl tree is [0, 1] (left then right)\nmerk is [0, 2, 1] (left, right, here)"
+              },
+              "childSize": {
+                "type": "int32",
+                "id": 2,
+                "comment": null
+              },
+              "minPrefixLength": {
+                "type": "int32",
+                "id": 3,
+                "comment": null
+              },
+              "maxPrefixLength": {
+                "type": "int32",
+                "id": 4,
+                "comment": null
+              },
+              "emptyChild": {
+                "type": "bytes",
+                "id": 5,
+                "comment": "empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0)"
+              },
+              "hash": {
+                "type": "HashOp",
+                "id": 6,
+                "comment": "hash is the algorithm that must be used for each InnerOp"
+              }
+            },
+            "comment": "InnerSpec contains all store-specific structure info to determine if two proofs from a\ngiven store are neighbors.\n\nThis enables:\n\nisLeftMost(spec: InnerSpec, op: InnerOp)\nisRightMost(spec: InnerSpec, op: InnerOp)\nisLeftNeighbor(spec: InnerSpec, left: InnerOp, right: InnerOp)"
+          },
+          "BatchProof": {
+            "fields": {
+              "entries": {
+                "rule": "repeated",
+                "type": "BatchEntry",
+                "id": 1,
+                "comment": null
+              }
+            },
+            "comment": "BatchProof is a group of multiple proof types than can be compressed"
+          },
+          "BatchEntry": {
+            "oneofs": {
+              "proof": {
+                "oneof": [
+                  "exist",
+                  "nonexist"
+                ],
+                "comment": null
+              }
+            },
+            "fields": {
+              "exist": {
+                "type": "ExistenceProof",
+                "id": 1,
+                "comment": null
+              },
+              "nonexist": {
+                "type": "NonExistenceProof",
+                "id": 2,
+                "comment": null
+              }
+            },
+            "comment": "Use BatchEntry not CommitmentProof, to avoid recursion"
+          },
+          "CompressedBatchProof": {
+            "fields": {
+              "entries": {
+                "rule": "repeated",
+                "type": "CompressedBatchEntry",
+                "id": 1,
+                "comment": null
+              },
+              "lookupInners": {
+                "rule": "repeated",
+                "type": "InnerOp",
+                "id": 2,
+                "comment": null
+              }
+            },
+            "comment": null
+          },
+          "CompressedBatchEntry": {
+            "oneofs": {
+              "proof": {
+                "oneof": [
+                  "exist",
+                  "nonexist"
+                ],
+                "comment": null
+              }
+            },
+            "fields": {
+              "exist": {
+                "type": "CompressedExistenceProof",
+                "id": 1,
+                "comment": null
+              },
+              "nonexist": {
+                "type": "CompressedNonExistenceProof",
+                "id": 2,
+                "comment": null
+              }
+            },
+            "comment": "Use BatchEntry not CommitmentProof, to avoid recursion"
+          },
+          "CompressedExistenceProof": {
+            "fields": {
+              "key": {
+                "type": "bytes",
+                "id": 1,
+                "comment": null
+              },
+              "value": {
+                "type": "bytes",
+                "id": 2,
+                "comment": null
+              },
+              "leaf": {
+                "type": "LeafOp",
+                "id": 3,
+                "comment": null
+              },
+              "path": {
+                "rule": "repeated",
+                "type": "int32",
+                "id": 4,
+                "comment": "these are indexes into the lookup_inners table in CompressedBatchProof"
+              }
+            },
+            "comment": null
+          },
+          "CompressedNonExistenceProof": {
+            "fields": {
+              "key": {
+                "type": "bytes",
+                "id": 1,
+                "comment": "TODO: remove this as unnecessary??? we prove a range"
+              },
+              "left": {
+                "type": "CompressedExistenceProof",
+                "id": 2,
+                "comment": null
+              },
+              "right": {
+                "type": "CompressedExistenceProof",
+                "id": 3,
+                "comment": null
+              }
+            },
+            "comment": null
+          }
+        }
+      }
+    }
+  }
+}

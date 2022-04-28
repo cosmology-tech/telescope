@@ -1,0 +1,406 @@
+{
+  "package": "osmosis.incentives",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/duration.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "osmosis/incentives/gauge.proto",
+    "osmosis/lockup/lock.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "incentives": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/incentives/types"
+            },
+            "nested": {
+              "Query": {
+                "methods": {
+                  "ModuleToDistributeCoins": {
+                    "requestType": "ModuleToDistributeCoinsRequest",
+                    "responseType": "ModuleToDistributeCoinsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/module_to_distribute_coins"
+                    },
+                    "comment": "returns coins that is going to be distributed",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/module_to_distribute_coins"
+                        }
+                      }
+                    ]
+                  },
+                  "ModuleDistributedCoins": {
+                    "requestType": "ModuleDistributedCoinsRequest",
+                    "responseType": "ModuleDistributedCoinsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/module_distributed_coins"
+                    },
+                    "comment": "returns coins that are distributed by module so far",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/module_distributed_coins"
+                        }
+                      }
+                    ]
+                  },
+                  "GaugeByID": {
+                    "requestType": "GaugeByIDRequest",
+                    "responseType": "GaugeByIDResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/gauge_by_id/{id}"
+                    },
+                    "comment": "returns Gauge by id",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/gauge_by_id/{id}"
+                        }
+                      }
+                    ]
+                  },
+                  "Gauges": {
+                    "requestType": "GaugesRequest",
+                    "responseType": "GaugesResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/gauges"
+                    },
+                    "comment": "returns gauges both upcoming and active",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/gauges"
+                        }
+                      }
+                    ]
+                  },
+                  "ActiveGauges": {
+                    "requestType": "ActiveGaugesRequest",
+                    "responseType": "ActiveGaugesResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/active_gauges"
+                    },
+                    "comment": "returns active gauges",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/active_gauges"
+                        }
+                      }
+                    ]
+                  },
+                  "ActiveGaugesPerDenom": {
+                    "requestType": "ActiveGaugesPerDenomRequest",
+                    "responseType": "ActiveGaugesPerDenomResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/active_gauges_per_denom"
+                    },
+                    "comment": null,
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/active_gauges_per_denom"
+                        }
+                      }
+                    ]
+                  },
+                  "UpcomingGauges": {
+                    "requestType": "UpcomingGaugesRequest",
+                    "responseType": "UpcomingGaugesResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/upcoming_gauges"
+                    },
+                    "comment": "returns scheduled gauges",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/upcoming_gauges"
+                        }
+                      }
+                    ]
+                  },
+                  "RewardsEst": {
+                    "requestType": "RewardsEstRequest",
+                    "responseType": "RewardsEstResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/rewards_est/{owner}"
+                    },
+                    "comment": "RewardsEst returns an estimate of the rewards at a future specific time.\nThe querier either provides an address or a set of locks\nfor which they want to find the associated rewards.",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/rewards_est/{owner}"
+                        }
+                      }
+                    ]
+                  },
+                  "LockableDurations": {
+                    "requestType": "QueryLockableDurationsRequest",
+                    "responseType": "QueryLockableDurationsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/incentives/v1beta1/lockable_durations"
+                    },
+                    "comment": "returns lockable durations that are valid to give incentives",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/incentives/v1beta1/lockable_durations"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "comment": "Query defines the gRPC querier service."
+              },
+              "ModuleToDistributeCoinsRequest": {
+                "fields": {},
+                "comment": null
+              },
+              "ModuleToDistributeCoinsResponse": {
+                "fields": {
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ModuleDistributedCoinsRequest": {
+                "fields": {},
+                "comment": null
+              },
+              "ModuleDistributedCoinsResponse": {
+                "fields": {
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "GaugeByIDRequest": {
+                "fields": {
+                  "id": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "GaugeByIDResponse": {
+                "fields": {
+                  "gauge": {
+                    "type": "Gauge",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "GaugesRequest": {
+                "fields": {
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageRequest",
+                    "id": 1,
+                    "comment": "pagination defines an pagination for the request."
+                  }
+                },
+                "comment": null
+              },
+              "GaugesResponse": {
+                "fields": {
+                  "data": {
+                    "rule": "repeated",
+                    "type": "Gauge",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageResponse",
+                    "id": 2,
+                    "comment": "pagination defines an pagination for the response."
+                  }
+                },
+                "comment": null
+              },
+              "ActiveGaugesRequest": {
+                "fields": {
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageRequest",
+                    "id": 1,
+                    "comment": "pagination defines an pagination for the request."
+                  }
+                },
+                "comment": null
+              },
+              "ActiveGaugesResponse": {
+                "fields": {
+                  "data": {
+                    "rule": "repeated",
+                    "type": "Gauge",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageResponse",
+                    "id": 2,
+                    "comment": "pagination defines an pagination for the response."
+                  }
+                },
+                "comment": null
+              },
+              "ActiveGaugesPerDenomRequest": {
+                "fields": {
+                  "denom": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageRequest",
+                    "id": 2,
+                    "comment": "pagination defines an pagination for the request."
+                  }
+                },
+                "comment": null
+              },
+              "ActiveGaugesPerDenomResponse": {
+                "fields": {
+                  "data": {
+                    "rule": "repeated",
+                    "type": "Gauge",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageResponse",
+                    "id": 2,
+                    "comment": "pagination defines an pagination for the response."
+                  }
+                },
+                "comment": null
+              },
+              "UpcomingGaugesRequest": {
+                "fields": {
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageRequest",
+                    "id": 1,
+                    "comment": "pagination defines an pagination for the request."
+                  }
+                },
+                "comment": null
+              },
+              "UpcomingGaugesResponse": {
+                "fields": {
+                  "data": {
+                    "rule": "repeated",
+                    "type": "Gauge",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageResponse",
+                    "id": 2,
+                    "comment": "pagination defines an pagination for the response."
+                  }
+                },
+                "comment": null
+              },
+              "RewardsEstRequest": {
+                "fields": {
+                  "owner": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:owner"
+                    },
+                    "comment": null
+                  },
+                  "lockIds": {
+                    "rule": "repeated",
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "endEpoch": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RewardsEstResponse": {
+                "fields": {
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "QueryLockableDurationsRequest": {
+                "fields": {},
+                "comment": null
+              },
+              "QueryLockableDurationsResponse": {
+                "fields": {
+                  "lockableDurations": {
+                    "rule": "repeated",
+                    "type": "google.protobuf.Duration",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(gogoproto.moretags)": "yaml:lockable_durations"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

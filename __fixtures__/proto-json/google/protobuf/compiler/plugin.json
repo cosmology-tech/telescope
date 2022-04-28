@@ -1,0 +1,124 @@
+{
+  "package": "google.protobuf.compiler",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto2",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "protobuf": {
+            "nested": {
+              "compiler": {
+                "options": {
+                  "java_package": "com.google.protobuf.compiler",
+                  "java_outer_classname": "PluginProtos",
+                  "go_package": "plugin_go"
+                },
+                "nested": {
+                  "Version": {
+                    "fields": {
+                      "major": {
+                        "type": "int32",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "minor": {
+                        "type": "int32",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "patch": {
+                        "type": "int32",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "suffix": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "A suffix for alpha, beta or rc release, e.g., \"alpha-1\", \"rc2\". It should\nbe empty for mainline stable releases."
+                      }
+                    },
+                    "comment": "The version number of protocol compiler."
+                  },
+                  "CodeGeneratorRequest": {
+                    "fields": {
+                      "fileToGenerate": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The .proto files that were explicitly listed on the command-line.  The\ncode generator should generate code only for these files.  Each file's\ndescriptor will be included in proto_file, below."
+                      },
+                      "parameter": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "The generator parameter passed on the command-line."
+                      },
+                      "protoFile": {
+                        "rule": "repeated",
+                        "type": "FileDescriptorProto",
+                        "id": 15,
+                        "options": {
+                          "packed": false
+                        },
+                        "comment": "FileDescriptorProtos for all files in files_to_generate and everything\nthey import.  The files will appear in topological order, so each file\nappears before any file that imports it.\n\nprotoc guarantees that all proto_files will be written after\nthe fields above, even though this is not technically guaranteed by the\nprotobuf wire format.  This theoretically could allow a plugin to stream\nin the FileDescriptorProtos and handle them one by one rather than read\nthe entire set into memory at once.  However, as of this writing, this\nis not similarly optimized on protoc's end -- it will store all fields in\nmemory at once before sending them to the plugin.\n\nType names of fields and extensions in the FileDescriptorProto are always\nfully qualified."
+                      },
+                      "compilerVersion": {
+                        "type": "Version",
+                        "id": 3,
+                        "comment": "The version number of protocol compiler."
+                      }
+                    },
+                    "comment": "An encoded CodeGeneratorRequest is written to the plugin's stdin."
+                  },
+                  "CodeGeneratorResponse": {
+                    "fields": {
+                      "error": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Error message.  If non-empty, code generation failed.  The plugin process\nshould exit with status code zero even if it reports an error in this way.\n\nThis should be used to indicate errors in .proto files which prevent the\ncode generator from generating correct code.  Errors which indicate a\nproblem in protoc itself -- such as the input CodeGeneratorRequest being\nunparseable -- should be reported by writing a message to stderr and\nexiting with a non-zero status code."
+                      },
+                      "file": {
+                        "rule": "repeated",
+                        "type": "File",
+                        "id": 15,
+                        "options": {
+                          "packed": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "nested": {
+                      "File": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The file name, relative to the output directory.  The name must not\ncontain \".\" or \"..\" components and must be relative, not be absolute (so,\nthe file cannot lie outside the output directory).  \"/\" must be used as\nthe path separator, not \"\\\".\n\nIf the name is omitted, the content will be appended to the previous\nfile.  This allows the generator to break large files into small chunks,\nand allows the generated text to be streamed back to protoc so that large\nfiles need not reside completely in memory at one time.  Note that as of\nthis writing protoc does not optimize for this -- it will read the entire\nCodeGeneratorResponse before writing files to disk."
+                          },
+                          "insertionPoint": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "If non-empty, indicates that the named file should already exist, and the\ncontent here is to be inserted into that file at a defined insertion\npoint.  This feature allows a code generator to extend the output\nproduced by another code generator.  The original generator may provide\ninsertion points by placing special annotations in the file that look\nlike:\n@@protoc_insertion_point(NAME)\nThe annotation can have arbitrary text before and after it on the line,\nwhich allows it to be placed in a comment.  NAME should be replaced with\nan identifier naming the point -- this is what other generators will use\nas the insertion_point.  Code inserted at this point will be placed\nimmediately above the line containing the insertion point (thus multiple\ninsertions to the same point will come out in the order they were added).\nThe double-@ is intended to make it unlikely that the generated code\ncould contain things that look like insertion points by accident.\n\nFor example, the C++ code generator places the following line in the\n.pb.h files that it generates:\n// @@protoc_insertion_point(namespace_scope)\nThis line appears within the scope of the file's package namespace, but\noutside of any particular class.  Another plugin can then specify the\ninsertion_point \"namespace_scope\" to generate additional classes or\nother declarations that should be placed in this scope.\n\nNote that if the line containing the insertion point begins with\nwhitespace, the same whitespace will be added to every line of the\ninserted text.  This is useful for languages like Python, where\nindentation matters.  In these languages, the insertion point comment\nshould be indented the same amount as any inserted code will need to be\nin order to work correctly in that context.\n\nThe code generator that generates the initial file and the one which\ninserts into it must both run as part of a single invocation of protoc.\nCode generators are executed in the order in which they appear on the\ncommand line.\n\nIf |insertion_point| is present, |name| must also be present."
+                          },
+                          "content": {
+                            "type": "string",
+                            "id": 15,
+                            "comment": "The file contents."
+                          }
+                        },
+                        "comment": "Represents a single generated file."
+                      }
+                    },
+                    "comment": "The plugin writes an encoded CodeGeneratorResponse to stdout."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

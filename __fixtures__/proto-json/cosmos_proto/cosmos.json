@@ -1,0 +1,100 @@
+{
+  "package": "cosmos_proto",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos_proto": {
+        "options": {
+          "go_package": "github.com/cosmos/cosmos-proto;cosmos_proto"
+        },
+        "nested": {
+          "implementsInterface": {
+            "rule": "repeated",
+            "type": "string",
+            "id": 93001,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": "implements_interface is used to indicate the type name of the interface\nthat a message implements so that it can be used in google.protobuf.Any\nfields that accept that interface. A message can implement multiple\ninterfaces. Interfaces should be declared using a declare_interface\nfile option."
+          },
+          "acceptsInterface": {
+            "type": "string",
+            "id": 93001,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": "accepts_interface is used to annotate that a google.protobuf.Any\nfield accepts messages that implement the specified interface.\nInterfaces should be declared using a declare_interface file option."
+          },
+          "scalar": {
+            "type": "string",
+            "id": 93002,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": "scalar is used to indicate that this field follows the formatting defined\nby the named scalar which should be declared with declare_scalar. Code\ngenerators may choose to use this information to map this field to a\nlanguage-specific type representing the scalar."
+          },
+          "declareInterface": {
+            "rule": "repeated",
+            "type": "InterfaceDescriptor",
+            "id": 793021,
+            "extend": "google.protobuf.FileOptions",
+            "comment": "declare_interface declares an interface type to be used with\naccepts_interface and implements_interface. Interface names are\nexpected to follow the following convention such that their declaration\ncan be discovered by tools: for a given interface type a.b.C, it is\nexpected that the declaration will be found in a protobuf file named\na/b/interfaces.proto in the file descriptor set."
+          },
+          "declareScalar": {
+            "rule": "repeated",
+            "type": "ScalarDescriptor",
+            "id": 793022,
+            "extend": "google.protobuf.FileOptions",
+            "comment": "declare_scalar declares a scalar type to be used with\nthe scalar field option. Scalar names are\nexpected to follow the following convention such that their declaration\ncan be discovered by tools: for a given scalar type a.b.C, it is\nexpected that the declaration will be found in a protobuf file named\na/b/scalars.proto in the file descriptor set."
+          },
+          "InterfaceDescriptor": {
+            "fields": {
+              "name": {
+                "type": "string",
+                "id": 1,
+                "comment": "name is the name of the interface. It should be a short-name (without\na period) such that the fully qualified name of the interface will be\npackage.name, ex. for the package a.b and interface named C, the\nfully-qualified name will be a.b.C."
+              },
+              "description": {
+                "type": "string",
+                "id": 2,
+                "comment": "description is a human-readable description of the interface and its\npurpose."
+              }
+            },
+            "comment": "InterfaceDescriptor describes an interface type to be used with\naccepts_interface and implements_interface and declared by declare_interface."
+          },
+          "ScalarDescriptor": {
+            "fields": {
+              "name": {
+                "type": "string",
+                "id": 1,
+                "comment": "name is the name of the scalar. It should be a short-name (without\na period) such that the fully qualified name of the scalar will be\npackage.name, ex. for the package a.b and scalar named C, the\nfully-qualified name will be a.b.C."
+              },
+              "description": {
+                "type": "string",
+                "id": 2,
+                "comment": "description is a human-readable description of the scalar and its\nencoding format. For instance a big integer or decimal scalar should\nspecify precisely the expected encoding format."
+              },
+              "fieldType": {
+                "rule": "repeated",
+                "type": "ScalarType",
+                "id": 3,
+                "comment": "field_type is the type of field with which this scalar can be used.\nScalars can be used with one and only one type of field so that\nencoding standards and simple and clear. Currently only string and\nbytes fields are supported for scalars."
+              }
+            },
+            "comment": "ScalarDescriptor describes an scalar type to be used with\nthe scalar field option and declared by declare_scalar.\nScalars extend simple protobuf built-in types with additional\nsyntax and semantics, for instance to represent big integers.\nScalars should ideally define an encoding such that there is only one\nvalid syntactical representation for a given semantic meaning,\ni.e. the encoding should be deterministic."
+          },
+          "ScalarType": {
+            "values": {
+              "SCALAR_TYPE_UNSPECIFIED": 0,
+              "SCALAR_TYPE_STRING": 1,
+              "SCALAR_TYPE_BYTES": 2
+            },
+            "comment": null,
+            "comments": {
+              "SCALAR_TYPE_UNSPECIFIED": null,
+              "SCALAR_TYPE_STRING": null,
+              "SCALAR_TYPE_BYTES": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

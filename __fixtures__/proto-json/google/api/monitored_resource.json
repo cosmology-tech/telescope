@@ -1,0 +1,97 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/api/label.proto",
+    "google/api/launch_stage.proto",
+    "google/protobuf/struct.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "cc_enable_arenas": true,
+              "go_package": "google.golang.org/genproto/googleapis/api/monitoredres;monitoredres",
+              "java_multiple_files": true,
+              "java_outer_classname": "MonitoredResourceProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "MonitoredResourceDescriptor": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 5,
+                    "comment": "Optional. The resource name of the monitored resource descriptor:\n`\"projects/{project_id}/monitoredResourceDescriptors/{type}\"` where\n{type} is the value of the `type` field in this object and\n{project_id} is a project ID that provides API-specific context for\naccessing the type.  APIs that do not use project information can use the\nresource name format `\"monitoredResourceDescriptors/{type}\"`."
+                  },
+                  "type": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Required. The monitored resource type. For example, the type\n`\"cloudsql_database\"` represents databases in Google Cloud SQL."
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Optional. A concise name for the monitored resource type that might be\ndisplayed in user interfaces. It should be a Title Cased Noun Phrase,\nwithout any article or other determiners. For example,\n`\"Google Cloud SQL Database\"`."
+                  },
+                  "description": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Optional. A detailed description of the monitored resource type that might\nbe used in documentation."
+                  },
+                  "labels": {
+                    "rule": "repeated",
+                    "type": "LabelDescriptor",
+                    "id": 4,
+                    "comment": "Required. A set of labels used to describe instances of this monitored\nresource type. For example, an individual Google Cloud SQL database is\nidentified by values for the labels `\"database_id\"` and `\"zone\"`."
+                  },
+                  "launchStage": {
+                    "type": "LaunchStage",
+                    "id": 7,
+                    "comment": "Optional. The launch stage of the monitored resource definition."
+                  }
+                },
+                "comment": "An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a\ntype name and a set of labels.  For example, the monitored resource\ndescriptor for Google Compute Engine VM instances has a type of\n`\"gce_instance\"` and specifies the use of the labels `\"instance_id\"` and\n`\"zone\"` to identify particular VM instances.\n\nDifferent APIs can support different monitored resource types. APIs generally\nprovide a `list` method that returns the monitored resource descriptors used\nby the API."
+              },
+              "MonitoredResource": {
+                "fields": {
+                  "type": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Required. The monitored resource type. This field must match\nthe `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For\nexample, the type of a Compute Engine VM instance is `gce_instance`."
+                  },
+                  "labels": {
+                    "keyType": "string",
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Required. Values for all of the labels listed in the associated monitored\nresource descriptor. For example, Compute Engine VM instances use the\nlabels `\"project_id\"`, `\"instance_id\"`, and `\"zone\"`."
+                  }
+                },
+                "comment": "An object representing a resource that can be used for monitoring, logging,\nbilling, or other purposes. Examples include virtual machine instances,\ndatabases, and storage devices such as disks. The `type` field identifies a\n[MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object that describes the resource's\nschema. Information in the `labels` field identifies the actual resource and\nits attributes according to the schema. For example, a particular Compute\nEngine VM instance could be represented by the following object, because the\n[MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `\"gce_instance\"` has labels\n`\"instance_id\"` and `\"zone\"`:\n\n{ \"type\": \"gce_instance\",\n\"labels\": { \"instance_id\": \"12345678901234\",\n\"zone\": \"us-central1-a\" }}"
+              },
+              "MonitoredResourceMetadata": {
+                "fields": {
+                  "systemLabels": {
+                    "type": "google.protobuf.Struct",
+                    "id": 1,
+                    "comment": "Output only. Values for predefined system metadata labels.\nSystem labels are a kind of metadata extracted by Google, including\n\"machine_image\", \"vpc\", \"subnet_id\",\n\"security_group\", \"name\", etc.\nSystem label values can be only strings, Boolean values, or a list of\nstrings. For example:\n\n{ \"name\": \"my-test-instance\",\n\"security_group\": [\"a\", \"b\", \"c\"],\n\"spot_instance\": false }"
+                  },
+                  "userLabels": {
+                    "keyType": "string",
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Output only. A map of user-defined metadata labels."
+                  }
+                },
+                "comment": "Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.\n[MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to\nuniquely identify a monitored resource instance. There is some other useful\nauxiliary metadata. Monitoring and Logging use an ingestion\npipeline to extract metadata for cloud resources of all types, and store\nthe metadata in this message."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

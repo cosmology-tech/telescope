@@ -1,0 +1,73 @@
+{
+  "package": "osmosis.superfluid",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/superfluid/superfluid.proto",
+    "osmosis/superfluid/params.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "superfluid": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/superfluid/types"
+            },
+            "nested": {
+              "GenesisState": {
+                "fields": {
+                  "params": {
+                    "type": "Params",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "superfluidAssets": {
+                    "rule": "repeated",
+                    "type": "SuperfluidAsset",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "osmoEquivalentMultipliers": {
+                    "rule": "repeated",
+                    "type": "OsmoEquivalentMultiplierRecord",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "intermediaryAccounts": {
+                    "rule": "repeated",
+                    "type": "SuperfluidIntermediaryAccount",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "intemediaryAccountConnections": {
+                    "rule": "repeated",
+                    "type": "LockIdIntermediaryAccountConnection",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "GenesisState defines the module's genesis state."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "package": "tendermint.libs.bits",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "libs": {
+            "nested": {
+              "bits": {
+                "options": {
+                  "go_package": "github.com/tendermint/tendermint/proto/tendermint/libs/bits"
+                },
+                "nested": {
+                  "BitArray": {
+                    "fields": {
+                      "bits": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "elems": {
+                        "rule": "repeated",
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

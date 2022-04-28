@@ -1,0 +1,240 @@
+{
+  "package": "osmosis.claim.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "osmosis/claim/v1beta1/claim.proto",
+    "osmosis/claim/v1beta1/params.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "claim": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/claim/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "ModuleAccountBalance": {
+                        "requestType": "QueryModuleAccountBalanceRequest",
+                        "responseType": "QueryModuleAccountBalanceResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/claim/v1beta1/module_account_balance"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/claim/v1beta1/module_account_balance"
+                            }
+                          }
+                        ]
+                      },
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/claim/v1beta1/params"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/claim/v1beta1/params"
+                            }
+                          }
+                        ]
+                      },
+                      "ClaimRecord": {
+                        "requestType": "QueryClaimRecordRequest",
+                        "responseType": "QueryClaimRecordResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/claim/v1beta1/claim_record/{address}"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/claim/v1beta1/claim_record/{address}"
+                            }
+                          }
+                        ]
+                      },
+                      "ClaimableForAction": {
+                        "requestType": "QueryClaimableForActionRequest",
+                        "responseType": "QueryClaimableForActionResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/claim/v1beta1/claimable_for_action/{address}/{action}"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/claim/v1beta1/claimable_for_action/{address}/{action}"
+                            }
+                          }
+                        ]
+                      },
+                      "TotalClaimable": {
+                        "requestType": "QueryTotalClaimableRequest",
+                        "responseType": "QueryTotalClaimableResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/claim/v1beta1/total_claimable/{address}"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/claim/v1beta1/total_claimable/{address}"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryModuleAccountBalanceRequest": {
+                    "fields": {},
+                    "comment": "QueryParamsRequest is the request type for the Query/Params RPC method."
+                  },
+                  "QueryModuleAccountBalanceResponse": {
+                    "fields": {
+                      "moduleAccountBalance": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:coins",
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "params defines the parameters of the module."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is the response type for the Query/Params RPC method."
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {},
+                    "comment": "QueryParamsRequest is the request type for the Query/Params RPC method."
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines the parameters of the module."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is the response type for the Query/Params RPC method."
+                  },
+                  "QueryClaimRecordRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:sender"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryClaimRecordResponse": {
+                    "fields": {
+                      "claimRecord": {
+                        "type": "ClaimRecord",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:claim_record",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryClaimableForActionRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:address"
+                        },
+                        "comment": null
+                      },
+                      "action": {
+                        "type": "Action",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:action"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryClaimableForActionResponse": {
+                    "fields": {
+                      "coins": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:coins",
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryTotalClaimableRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:address"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryTotalClaimableResponse": {
+                    "fields": {
+                      "coins": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:coins",
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "package": "cosmos.bank.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "bank": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/bank/types"
+                },
+                "nested": {
+                  "Params": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "sendEnabled": {
+                        "rule": "repeated",
+                        "type": "SendEnabled",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "defaultSendEnabled": {
+                        "type": "bool",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Params defines the parameters for the bank module."
+                  },
+                  "SendEnabled": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "denom": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "enabled": {
+                        "type": "bool",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "SendEnabled maps coin denom to a send_enabled status (whether a denom is\nsendable)."
+                  },
+                  "Input": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "coins": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Input models transaction input."
+                  },
+                  "Output": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "coins": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Output models transaction outputs."
+                  },
+                  "Supply": {
+                    "options": {
+                      "deprecated": true,
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_getters)": false,
+                      "(cosmos_proto.implements_interface)": "*github.com/cosmos/cosmos-sdk/x/bank/migrations/v040.SupplyI"
+                    },
+                    "fields": {
+                      "total": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Supply represents a struct that passively keeps track of the total supply\namounts in the network.\nThis message is deprecated now that supply is indexed by denom."
+                  },
+                  "DenomUnit": {
+                    "fields": {
+                      "denom": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "denom represents the string name of the given denom unit (e.g uatom)."
+                      },
+                      "exponent": {
+                        "type": "uint32",
+                        "id": 2,
+                        "comment": "exponent represents power of 10 exponent that one must\nraise the base_denom to in order to equal the given DenomUnit's denom\n1 denom = 10^exponent base_denom\n(e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with\nexponent = 6, thus: 1 atom = 10^6 uatom)."
+                      },
+                      "aliases": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 3,
+                        "comment": "aliases is a list of string aliases for the given denom"
+                      }
+                    },
+                    "comment": "DenomUnit represents a struct that describes a given\ndenomination unit of the basic token."
+                  },
+                  "Metadata": {
+                    "fields": {
+                      "description": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "denomUnits": {
+                        "rule": "repeated",
+                        "type": "DenomUnit",
+                        "id": 2,
+                        "comment": "denom_units represents the list of DenomUnit's for a given coin"
+                      },
+                      "base": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "base represents the base denom (should be the DenomUnit with exponent = 0)."
+                      },
+                      "display": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "display indicates the suggested denom that should be\ndisplayed in clients."
+                      },
+                      "name": {
+                        "type": "string",
+                        "id": 5,
+                        "comment": "name defines the name of the token (eg: Cosmos Atom)\n\nSince: cosmos-sdk 0.43"
+                      },
+                      "symbol": {
+                        "type": "string",
+                        "id": 6,
+                        "comment": "symbol is the token symbol usually shown on exchanges (eg: ATOM). This can\nbe the same as the display.\n\nSince: cosmos-sdk 0.43"
+                      },
+                      "uri": {
+                        "type": "string",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.customname)": "URI"
+                        },
+                        "comment": "URI to a document (on or off-chain) that contains additional information. Optional.\n\nSince: cosmos-sdk 0.46"
+                      },
+                      "uriHash": {
+                        "type": "string",
+                        "id": 8,
+                        "options": {
+                          "(gogoproto.customname)": "URIHash"
+                        },
+                        "comment": "URIHash is a sha256 hash of a document pointed by URI. It's used to verify that\nthe document didn't change. Optional.\n\nSince: cosmos-sdk 0.46"
+                      }
+                    },
+                    "comment": "Metadata represents a struct that describes\na basic token."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

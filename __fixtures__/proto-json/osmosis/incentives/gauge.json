@@ -1,0 +1,105 @@
+{
+  "package": "osmosis.incentives",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "osmosis/lockup/lock.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "incentives": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/incentives/types"
+            },
+            "nested": {
+              "Gauge": {
+                "fields": {
+                  "id": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": "unique ID of a Gauge"
+                  },
+                  "isPerpetual": {
+                    "type": "bool",
+                    "id": 2,
+                    "comment": "flag to show if it's perpetual or multi-epoch\ndistribution incentives by third party"
+                  },
+                  "distributeTo": {
+                    "type": "osmosis.lockup.QueryCondition",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": "Rewards are distributed to lockups that are are returned by at least one of\nthese queries"
+                  },
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": "total amount of Coins that has been in the gauge.\ncan distribute multiple coins"
+                  },
+                  "startTime": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.stdtime)": true,
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.moretags)": "yaml:start_time"
+                    },
+                    "comment": "distribution start time"
+                  },
+                  "numEpochsPaidOver": {
+                    "type": "uint64",
+                    "id": 6,
+                    "comment": "number of epochs distribution will be done"
+                  },
+                  "filledEpochs": {
+                    "type": "uint64",
+                    "id": 7,
+                    "comment": "number of epochs distributed already"
+                  },
+                  "distributedCoins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 8,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": "already distributed coins"
+                  }
+                },
+                "comment": null
+              },
+              "LockableDurationsInfo": {
+                "fields": {
+                  "lockableDurations": {
+                    "rule": "repeated",
+                    "type": "google.protobuf.Duration",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(gogoproto.moretags)": "yaml:lockable_durations"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

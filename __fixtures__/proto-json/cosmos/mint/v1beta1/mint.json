@@ -1,0 +1,110 @@
+{
+  "package": "cosmos.mint.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "mint": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/mint/types"
+                },
+                "nested": {
+                  "Minter": {
+                    "fields": {
+                      "inflation": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "current annual inflation rate"
+                      },
+                      "annualProvisions": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "current annual expected provisions"
+                      }
+                    },
+                    "comment": "Minter represents the minting state."
+                  },
+                  "Params": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "mintDenom": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "type of coin to mint"
+                      },
+                      "inflationRateChange": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "maximum annual change in inflation rate"
+                      },
+                      "inflationMax": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "maximum inflation rate"
+                      },
+                      "inflationMin": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "minimum inflation rate"
+                      },
+                      "goalBonded": {
+                        "type": "string",
+                        "id": 5,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "goal of percent bonded atoms"
+                      },
+                      "blocksPerYear": {
+                        "type": "uint64",
+                        "id": 6,
+                        "comment": "expected blocks per year"
+                      }
+                    },
+                    "comment": "Params holds parameters for the mint module."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

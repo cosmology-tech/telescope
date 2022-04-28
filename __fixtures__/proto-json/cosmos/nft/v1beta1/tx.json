@@ -1,0 +1,68 @@
+{
+  "package": "cosmos.nft.v1beta1",
+  "imports": [
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "nft": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/nft"
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "Send": {
+                        "requestType": "MsgSend",
+                        "responseType": "MsgSendResponse",
+                        "comment": "Send defines a method to send a nft from one account to another account."
+                      }
+                    },
+                    "comment": "Msg defines the nft Msg service."
+                  },
+                  "MsgSend": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "sender"
+                    },
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "id defines the unique identification of nft"
+                      },
+                      "sender": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "sender is the address of the owner of nft"
+                      },
+                      "receiver": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "receiver is the receiver address of nft"
+                      }
+                    },
+                    "comment": "MsgSend represents a message to send a nft from one account to another account."
+                  },
+                  "MsgSendResponse": {
+                    "fields": {},
+                    "comment": "MsgSendResponse defines the Msg/Send response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

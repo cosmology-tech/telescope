@@ -1,0 +1,85 @@
+{
+  "package": "ibc.core.commitment.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "confio/proofs.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "commitment": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/23-commitment/types"
+                    },
+                    "nested": {
+                      "MerkleRoot": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "hash": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MerkleRoot defines a merkle root hash.\nIn the Cosmos SDK, the AppHash of a block header becomes the root."
+                      },
+                      "MerklePrefix": {
+                        "fields": {
+                          "keyPrefix": {
+                            "type": "bytes",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:key_prefix"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "MerklePrefix is merkle path prefixed to the key.\nThe constructed key from the Path and the key will be append(Path.KeyPath,\nappend(Path.KeyPrefix, key...))"
+                      },
+                      "MerklePath": {
+                        "options": {
+                          "(gogoproto.goproto_stringer)": false
+                        },
+                        "fields": {
+                          "keyPath": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:key_path"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "MerklePath is the path used to verify commitment proofs, which can be an\narbitrary structured object (defined by a commitment type).\nMerklePath is represented from root-to-leaf"
+                      },
+                      "MerkleProof": {
+                        "fields": {
+                          "proofs": {
+                            "rule": "repeated",
+                            "type": "ics23.CommitmentProof",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MerkleProof is a wrapper type over a chain of CommitmentProofs.\nIt demonstrates membership or non-membership for an element or set of\nelements, verifiable in conjunction with a known commitment root. Proofs\nshould be succinct.\nMerkleProofs are ordered from leaf-to-root"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

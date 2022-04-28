@@ -1,0 +1,245 @@
+{
+  "package": "google.rpc",
+  "imports": [
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "rpc": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/rpc/errdetails;errdetails",
+              "java_multiple_files": true,
+              "java_outer_classname": "ErrorDetailsProto",
+              "java_package": "com.google.rpc",
+              "objc_class_prefix": "RPC"
+            },
+            "nested": {
+              "RetryInfo": {
+                "fields": {
+                  "retryDelay": {
+                    "type": "google.protobuf.Duration",
+                    "id": 1,
+                    "comment": "Clients should wait at least this long between retrying the same request."
+                  }
+                },
+                "comment": "Describes when the clients can retry a failed request. Clients could ignore\nthe recommendation here or retry when this information is missing from error\nresponses.\n\nIt's always recommended that clients should use exponential backoff when\nretrying.\n\nClients should wait until `retry_delay` amount of time has passed since\nreceiving the error response before retrying.  If retrying requests also\nfail, clients should use an exponential backoff scheme to gradually increase\nthe delay between retries based on `retry_delay`, until either a maximum\nnumber of retries have been reached or a maximum retry delay cap has been\nreached."
+              },
+              "DebugInfo": {
+                "fields": {
+                  "stackEntries": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The stack trace entries indicating where the error occurred."
+                  },
+                  "detail": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Additional debugging information provided by the server."
+                  }
+                },
+                "comment": "Describes additional debugging info."
+              },
+              "QuotaFailure": {
+                "fields": {
+                  "violations": {
+                    "rule": "repeated",
+                    "type": "Violation",
+                    "id": 1,
+                    "comment": "Describes all quota violations."
+                  }
+                },
+                "nested": {
+                  "Violation": {
+                    "fields": {
+                      "subject": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The subject on which the quota check failed.\nFor example, \"clientip:<ip address of client>\" or \"project:<Google\ndeveloper project id>\"."
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "A description of how the quota check failed. Clients can use this\ndescription to find more about the quota configuration in the service's\npublic documentation, or find the relevant quota limit to adjust through\ndeveloper console.\n\nFor example: \"Service disabled\" or \"Daily Limit for read operations\nexceeded\"."
+                      }
+                    },
+                    "comment": "A message type used to describe a single quota violation.  For example, a\ndaily quota or a custom quota that was exceeded."
+                  }
+                },
+                "comment": "Describes how a quota check failed.\n\nFor example if a daily limit was exceeded for the calling project,\na service could respond with a QuotaFailure detail containing the project\nid and the description of the quota limit that was exceeded.  If the\ncalling project hasn't enabled the service in the developer console, then\na service could respond with the project id and set `service_disabled`\nto true.\n\nAlso see RetryInfo and Help types for other details about handling a\nquota failure."
+              },
+              "ErrorInfo": {
+                "fields": {
+                  "reason": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The reason of the error. This is a constant value that identifies the\nproximate cause of the error. Error reasons are unique within a particular\ndomain of errors. This should be at most 63 characters and match\n/[A-Z0-9_]+/."
+                  },
+                  "domain": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The logical grouping to which the \"reason\" belongs. The error domain\nis typically the registered service name of the tool or product that\ngenerates the error. Example: \"pubsub.googleapis.com\". If the error is\ngenerated by some common infrastructure, the error domain must be a\nglobally unique value that identifies the infrastructure. For Google API\ninfrastructure, the error domain is \"googleapis.com\"."
+                  },
+                  "metadata": {
+                    "keyType": "string",
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Additional structured details about this error.\n\nKeys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in\nlength. When identifying the current value of an exceeded limit, the units\nshould be contained in the key, not the value.  For example, rather than\n{\"instanceLimit\": \"100/request\"}, should be returned as,\n{\"instanceLimitPerRequest\": \"100\"}, if the client exceeds the number of\ninstances that can be created in a single (batch) request."
+                  }
+                },
+                "comment": "Describes the cause of the error with structured details.\n\nExample of an error when contacting the \"pubsub.googleapis.com\" API when it\nis not enabled:\n\n{ \"reason\": \"API_DISABLED\"\n\"domain\": \"googleapis.com\"\n\"metadata\": {\n\"resource\": \"projects/123\",\n\"service\": \"pubsub.googleapis.com\"\n}\n}\n\nThis response indicates that the pubsub.googleapis.com API is not enabled.\n\nExample of an error that is returned when attempting to create a Spanner\ninstance in a region that is out of stock:\n\n{ \"reason\": \"STOCKOUT\"\n\"domain\": \"spanner.googleapis.com\",\n\"metadata\": {\n\"availableRegions\": \"us-central1,us-east2\"\n}\n}"
+              },
+              "PreconditionFailure": {
+                "fields": {
+                  "violations": {
+                    "rule": "repeated",
+                    "type": "Violation",
+                    "id": 1,
+                    "comment": "Describes all precondition violations."
+                  }
+                },
+                "nested": {
+                  "Violation": {
+                    "fields": {
+                      "type": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The type of PreconditionFailure. We recommend using a service-specific\nenum type to define the supported precondition violation subjects. For\nexample, \"TOS\" for \"Terms of Service violation\"."
+                      },
+                      "subject": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "The subject, relative to the type, that failed.\nFor example, \"google.com/cloud\" relative to the \"TOS\" type would indicate\nwhich terms of service is being referenced."
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "A description of how the precondition failed. Developers can use this\ndescription to understand how to fix the failure.\n\nFor example: \"Terms of service not accepted\"."
+                      }
+                    },
+                    "comment": "A message type used to describe a single precondition failure."
+                  }
+                },
+                "comment": "Describes what preconditions have failed.\n\nFor example, if an RPC failed because it required the Terms of Service to be\nacknowledged, it could list the terms of service violation in the\nPreconditionFailure message."
+              },
+              "BadRequest": {
+                "fields": {
+                  "fieldViolations": {
+                    "rule": "repeated",
+                    "type": "FieldViolation",
+                    "id": 1,
+                    "comment": "Describes all violations in a client request."
+                  }
+                },
+                "nested": {
+                  "FieldViolation": {
+                    "fields": {
+                      "field": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "A path leading to a field in the request body. The value will be a\nsequence of dot-separated identifiers that identify a protocol buffer\nfield. E.g., \"field_violations.field\" would identify this field."
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "A description of why the request element is bad."
+                      }
+                    },
+                    "comment": "A message type used to describe a single bad request field."
+                  }
+                },
+                "comment": "Describes violations in a client request. This error type focuses on the\nsyntactic aspects of the request."
+              },
+              "RequestInfo": {
+                "fields": {
+                  "requestId": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "An opaque string that should only be interpreted by the service generating\nit. For example, it can be used to identify requests in the service's logs."
+                  },
+                  "servingData": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Any data that was used to serve this request. For example, an encrypted\nstack trace that can be sent back to the service provider for debugging."
+                  }
+                },
+                "comment": "Contains metadata about the request that clients can attach when filing a bug\nor providing other forms of feedback."
+              },
+              "ResourceInfo": {
+                "fields": {
+                  "resourceType": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "A name for the type of resource being accessed, e.g. \"sql table\",\n\"cloud storage bucket\", \"file\", \"Google calendar\"; or the type URL\nof the resource: e.g. \"type.googleapis.com/google.pubsub.v1.Topic\"."
+                  },
+                  "resourceName": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The name of the resource being accessed.  For example, a shared calendar\nname: \"example.com_4fghdhgsrgh@group.calendar.google.com\", if the current\nerror is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED]."
+                  },
+                  "owner": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "The owner of the resource (optional).\nFor example, \"user:<owner email>\" or \"project:<Google developer project\nid>\"."
+                  },
+                  "description": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "Describes what error is encountered when accessing this resource.\nFor example, updating a cloud project may require the `writer` permission\non the developer console project."
+                  }
+                },
+                "comment": "Describes the resource that is being accessed."
+              },
+              "Help": {
+                "fields": {
+                  "links": {
+                    "rule": "repeated",
+                    "type": "Link",
+                    "id": 1,
+                    "comment": "URL(s) pointing to additional information on handling the current error."
+                  }
+                },
+                "nested": {
+                  "Link": {
+                    "fields": {
+                      "description": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Describes what the link offers."
+                      },
+                      "url": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "The URL of the link."
+                      }
+                    },
+                    "comment": "Describes a URL link."
+                  }
+                },
+                "comment": "Provides links to documentation or for performing an out of band action.\n\nFor example, if a quota check failed with an error indicating the calling\nproject hasn't enabled the accessed service, this can contain a URL pointing\ndirectly to the right place in the developer console to flip the bit."
+              },
+              "LocalizedMessage": {
+                "fields": {
+                  "locale": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The locale used following the specification defined at\nhttp://www.rfc-editor.org/rfc/bcp/bcp47.txt.\nExamples are: \"en-US\", \"fr-CH\", \"es-MX\""
+                  },
+                  "message": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The localized error message in the above locale."
+                  }
+                },
+                "comment": "Provides a localized error message that is safe to return to the user\nwhich can be attached to an RPC error."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

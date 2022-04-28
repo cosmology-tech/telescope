@@ -1,0 +1,38 @@
+{
+  "package": "osmosis.superfluid",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "superfluid": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/superfluid/types"
+            },
+            "nested": {
+              "Params": {
+                "fields": {
+                  "minimumRiskFactor": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:minimum_risk_factor",
+                      "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": "the risk_factor is to be cut on OSMO equivalent value of lp tokens for\nsuperfluid staking, default: 5%"
+                  }
+                },
+                "comment": "Params holds parameters for the superfluid module"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

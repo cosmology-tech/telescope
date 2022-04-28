@@ -1,0 +1,87 @@
+{
+  "package": "tendermint.types",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "tendermint/crypto/keys.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "types": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/types"
+            },
+            "nested": {
+              "ValidatorSet": {
+                "fields": {
+                  "validators": {
+                    "rule": "repeated",
+                    "type": "Validator",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "proposer": {
+                    "type": "Validator",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "totalVotingPower": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "Validator": {
+                "fields": {
+                  "address": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "pubKey": {
+                    "type": "tendermint.crypto.PublicKey",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "votingPower": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "proposerPriority": {
+                    "type": "int64",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SimpleValidator": {
+                "fields": {
+                  "pubKey": {
+                    "type": "tendermint.crypto.PublicKey",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "votingPower": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

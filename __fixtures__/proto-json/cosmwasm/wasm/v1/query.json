@@ -1,0 +1,493 @@
+{
+  "package": "cosmwasm.wasm.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmwasm/wasm/v1/types.proto",
+    "google/api/annotations.proto",
+    "cosmos/base/query/v1beta1/pagination.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmwasm": {
+        "nested": {
+          "wasm": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/CosmWasm/wasmd/x/wasm/types",
+                  "(gogoproto.goproto_getters_all)": false,
+                  "(gogoproto.equal_all)": false
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "ContractInfo": {
+                        "requestType": "QueryContractInfoRequest",
+                        "responseType": "QueryContractInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}"
+                        },
+                        "comment": "ContractInfo gets the contract meta data",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/contract/{address}"
+                            }
+                          }
+                        ]
+                      },
+                      "ContractHistory": {
+                        "requestType": "QueryContractHistoryRequest",
+                        "responseType": "QueryContractHistoryResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/history"
+                        },
+                        "comment": "ContractHistory gets the contract code history",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/contract/{address}/history"
+                            }
+                          }
+                        ]
+                      },
+                      "ContractsByCode": {
+                        "requestType": "QueryContractsByCodeRequest",
+                        "responseType": "QueryContractsByCodeResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}/contracts"
+                        },
+                        "comment": "ContractsByCode lists all smart contracts for a code id",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/code/{code_id}/contracts"
+                            }
+                          }
+                        ]
+                      },
+                      "AllContractState": {
+                        "requestType": "QueryAllContractStateRequest",
+                        "responseType": "QueryAllContractStateResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/state"
+                        },
+                        "comment": "AllContractState gets all raw store data for a single contract",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/contract/{address}/state"
+                            }
+                          }
+                        ]
+                      },
+                      "RawContractState": {
+                        "requestType": "QueryRawContractStateRequest",
+                        "responseType": "QueryRawContractStateResponse",
+                        "options": {
+                          "(google.api.http).get": "/wasm/v1/contract/{address}/raw/{query_data}"
+                        },
+                        "comment": "RawContractState gets single key from the raw store data of a contract",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/wasm/v1/contract/{address}/raw/{query_data}"
+                            }
+                          }
+                        ]
+                      },
+                      "SmartContractState": {
+                        "requestType": "QuerySmartContractStateRequest",
+                        "responseType": "QuerySmartContractStateResponse",
+                        "options": {
+                          "(google.api.http).get": "/wasm/v1/contract/{address}/smart/{query_data}"
+                        },
+                        "comment": "SmartContractState get smart query result from the contract",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/wasm/v1/contract/{address}/smart/{query_data}"
+                            }
+                          }
+                        ]
+                      },
+                      "Code": {
+                        "requestType": "QueryCodeRequest",
+                        "responseType": "QueryCodeResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}"
+                        },
+                        "comment": "Code gets the binary code and metadata for a singe wasm code",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/code/{code_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "Codes": {
+                        "requestType": "QueryCodesRequest",
+                        "responseType": "QueryCodesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code"
+                        },
+                        "comment": "Codes gets the metadata for all stored wasm codes",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/code"
+                            }
+                          }
+                        ]
+                      },
+                      "PinnedCodes": {
+                        "requestType": "QueryPinnedCodesRequest",
+                        "responseType": "QueryPinnedCodesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/codes/pinned"
+                        },
+                        "comment": "PinnedCodes gets the pinned code ids",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmwasm/wasm/v1/codes/pinned"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query provides defines the gRPC querier service"
+                  },
+                  "QueryContractInfoRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "address is the address of the contract to query"
+                      }
+                    },
+                    "comment": "QueryContractInfoRequest is the request type for the Query/ContractInfo RPC\nmethod"
+                  },
+                  "QueryContractInfoResponse": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "address is the address of the contract"
+                      },
+                      "contractInfo": {
+                        "type": "ContractInfo",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.embed)": true,
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.jsontag)": ""
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryContractInfoResponse is the response type for the Query/ContractInfo RPC\nmethod"
+                  },
+                  "QueryContractHistoryRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "address is the address of the contract to query"
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryContractHistoryRequest is the request type for the Query/ContractHistory\nRPC method"
+                  },
+                  "QueryContractHistoryResponse": {
+                    "fields": {
+                      "entries": {
+                        "rule": "repeated",
+                        "type": "ContractCodeHistoryEntry",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryContractHistoryResponse is the response type for the\nQuery/ContractHistory RPC method"
+                  },
+                  "QueryContractsByCodeRequest": {
+                    "fields": {
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "grpc-gateway_out does not support Go style CodID\npagination defines an optional pagination for the request."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryContractsByCodeRequest is the request type for the Query/ContractsByCode\nRPC method"
+                  },
+                  "QueryContractsByCodeResponse": {
+                    "fields": {
+                      "contracts": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 1,
+                        "comment": "contracts are a set of contract addresses"
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryContractsByCodeResponse is the response type for the\nQuery/ContractsByCode RPC method"
+                  },
+                  "QueryAllContractStateRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "address is the address of the contract"
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryAllContractStateRequest is the request type for the\nQuery/AllContractState RPC method"
+                  },
+                  "QueryAllContractStateResponse": {
+                    "fields": {
+                      "models": {
+                        "rule": "repeated",
+                        "type": "Model",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryAllContractStateResponse is the response type for the\nQuery/AllContractState RPC method"
+                  },
+                  "QueryRawContractStateRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "address is the address of the contract"
+                      },
+                      "queryData": {
+                        "type": "bytes",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryRawContractStateRequest is the request type for the\nQuery/RawContractState RPC method"
+                  },
+                  "QueryRawContractStateResponse": {
+                    "fields": {
+                      "data": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "Data contains the raw store data"
+                      }
+                    },
+                    "comment": "QueryRawContractStateResponse is the response type for the\nQuery/RawContractState RPC method"
+                  },
+                  "QuerySmartContractStateRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "address is the address of the contract"
+                      },
+                      "queryData": {
+                        "type": "bytes",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "QueryData contains the query data passed to the contract"
+                      }
+                    },
+                    "comment": "QuerySmartContractStateRequest is the request type for the\nQuery/SmartContractState RPC method"
+                  },
+                  "QuerySmartContractStateResponse": {
+                    "fields": {
+                      "data": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Data contains the json data returned from the smart contract"
+                      }
+                    },
+                    "comment": "QuerySmartContractStateResponse is the response type for the\nQuery/SmartContractState RPC method"
+                  },
+                  "QueryCodeRequest": {
+                    "fields": {
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "grpc-gateway_out does not support Go style CodID"
+                      }
+                    },
+                    "comment": "QueryCodeRequest is the request type for the Query/Code RPC method"
+                  },
+                  "CodeInfoResponse": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID",
+                          "(gogoproto.jsontag)": "id"
+                        },
+                        "comment": null
+                      },
+                      "creator": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "dataHash": {
+                        "type": "bytes",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.casttype)": "github.com/tendermint/tendermint/libs/bytes.HexBytes"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "reserved": [
+                      [
+                        4,
+                        4
+                      ],
+                      [
+                        5,
+                        5
+                      ]
+                    ],
+                    "comment": "CodeInfoResponse contains code meta data from CodeInfo"
+                  },
+                  "QueryCodeResponse": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "codeInfo": {
+                        "type": "CodeInfoResponse",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.embed)": true,
+                          "(gogoproto.jsontag)": ""
+                        },
+                        "comment": null
+                      },
+                      "data": {
+                        "type": "bytes",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.jsontag)": "data"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryCodeResponse is the response type for the Query/Code RPC method"
+                  },
+                  "QueryCodesRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 1,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryCodesRequest is the request type for the Query/Codes RPC method"
+                  },
+                  "QueryCodesResponse": {
+                    "fields": {
+                      "codeInfos": {
+                        "rule": "repeated",
+                        "type": "CodeInfoResponse",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryCodesResponse is the response type for the Query/Codes RPC method"
+                  },
+                  "QueryPinnedCodesRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryPinnedCodesRequest is the request type for the Query/PinnedCodes\nRPC method"
+                  },
+                  "QueryPinnedCodesResponse": {
+                    "fields": {
+                      "codeIds": {
+                        "rule": "repeated",
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.customname)": "CodeIDs"
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryPinnedCodesResponse is the response type for the\nQuery/PinnedCodes RPC method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

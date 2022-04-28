@@ -1,0 +1,151 @@
+{
+  "package": "google.api.serviceusage.v1",
+  "imports": [
+    "google/api/auth.proto",
+    "google/api/documentation.proto",
+    "google/api/endpoint.proto",
+    "google/api/monitored_resource.proto",
+    "google/api/monitoring.proto",
+    "google/api/quota.proto",
+    "google/api/usage.proto",
+    "google/protobuf/api.proto",
+    "google/api/annotations.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "serviceusage": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "csharp_namespace": "Google.Cloud.ServiceUsage.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/serviceusage/v1;serviceusage",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ResourcesProto",
+                      "java_package": "com.google.api.serviceusage.v1",
+                      "php_namespace": "Google\\Cloud\\ServiceUsage\\V1",
+                      "ruby_package": "Google::Cloud::ServiceUsage::V1"
+                    },
+                    "nested": {
+                      "Service": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the consumer and service.\n\nA valid name would be:\n- projects/123/services/serviceusage.googleapis.com"
+                          },
+                          "parent": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The resource name of the consumer.\n\nA valid name would be:\n- projects/123"
+                          },
+                          "config": {
+                            "type": "ServiceConfig",
+                            "id": 2,
+                            "comment": "The service configuration of the available service.\nSome fields may be filtered out of the configuration in responses to\nthe `ListServices` method. These fields are present only in responses to\nthe `GetService` method."
+                          },
+                          "state": {
+                            "type": "State",
+                            "id": 4,
+                            "comment": "Whether or not the service has been enabled for use by the consumer."
+                          }
+                        },
+                        "comment": "A service that is available for use by the consumer."
+                      },
+                      "State": {
+                        "values": {
+                          "STATE_UNSPECIFIED": 0,
+                          "DISABLED": 1,
+                          "ENABLED": 2
+                        },
+                        "comment": "Whether or not a service has been enabled for use by a consumer.",
+                        "comments": {
+                          "STATE_UNSPECIFIED": "The default value, which indicates that the enabled state of the service\nis unspecified or not meaningful. Currently, all consumers other than\nprojects (such as folders and organizations) are always in this state.",
+                          "DISABLED": "The service cannot be used by this consumer. It has either been explicitly\ndisabled, or has never been enabled.",
+                          "ENABLED": "The service has been explicitly enabled for use by this consumer."
+                        }
+                      },
+                      "ServiceConfig": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The DNS address at which this service is available.\n\nAn example DNS address would be:\n`calendar.googleapis.com`."
+                          },
+                          "title": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The product title for this service."
+                          },
+                          "apis": {
+                            "rule": "repeated",
+                            "type": "google.protobuf.Api",
+                            "id": 3,
+                            "comment": "A list of API interfaces exported by this service. Contains only the names,\nversions, and method names of the interfaces."
+                          },
+                          "documentation": {
+                            "type": "google.api.Documentation",
+                            "id": 6,
+                            "comment": "Additional API documentation. Contains only the summary and the\ndocumentation URL."
+                          },
+                          "quota": {
+                            "type": "google.api.Quota",
+                            "id": 10,
+                            "comment": "Quota configuration."
+                          },
+                          "authentication": {
+                            "type": "google.api.Authentication",
+                            "id": 11,
+                            "comment": "Auth configuration. Contains only the OAuth rules."
+                          },
+                          "usage": {
+                            "type": "google.api.Usage",
+                            "id": 15,
+                            "comment": "Configuration controlling usage of this service."
+                          },
+                          "endpoints": {
+                            "rule": "repeated",
+                            "type": "google.api.Endpoint",
+                            "id": 18,
+                            "comment": "Configuration for network endpoints. Contains only the names and aliases\nof the endpoints."
+                          },
+                          "monitoredResources": {
+                            "rule": "repeated",
+                            "type": "google.api.MonitoredResourceDescriptor",
+                            "id": 25,
+                            "comment": "Defines the monitored resources used by this service. This is required\nby the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations."
+                          },
+                          "monitoring": {
+                            "type": "google.api.Monitoring",
+                            "id": 28,
+                            "comment": "Monitoring configuration.\nThis should not include the 'producer_destinations' field."
+                          }
+                        },
+                        "comment": "The configuration of the service."
+                      },
+                      "OperationMetadata": {
+                        "fields": {
+                          "resourceNames": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The full name of the resources that this operation is directly\nassociated with."
+                          }
+                        },
+                        "comment": "The operation metadata returned for the batchend services operation."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

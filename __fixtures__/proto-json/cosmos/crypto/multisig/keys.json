@@ -1,0 +1,49 @@
+{
+  "package": "cosmos.crypto.multisig",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crypto": {
+            "nested": {
+              "multisig": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/crypto/keys/multisig"
+                },
+                "nested": {
+                  "LegacyAminoPubKey": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "threshold": {
+                        "type": "uint32",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "publicKeys": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customname)": "PubKeys"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "LegacyAminoPubKey specifies a public key type\nwhich nests multiple public keys and a threshold,\nit uses legacy amino address rules."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

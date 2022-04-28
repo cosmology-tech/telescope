@@ -1,0 +1,310 @@
+{
+  "package": "cosmos.tx.v1beta1",
+  "imports": [
+    "google/api/annotations.proto",
+    "cosmos/base/abci/v1beta1/abci.proto",
+    "cosmos/tx/v1beta1/tx.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "tendermint/types/block.proto",
+    "tendermint/types/types.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "tx": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/types/tx"
+                },
+                "nested": {
+                  "Service": {
+                    "methods": {
+                      "Simulate": {
+                        "requestType": "SimulateRequest",
+                        "responseType": "SimulateResponse",
+                        "options": {
+                          "(google.api.http).post": "/cosmos/tx/v1beta1/simulate",
+                          "(google.api.http).body": "*"
+                        },
+                        "comment": "Simulate simulates executing a transaction for estimating gas usage.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/cosmos/tx/v1beta1/simulate",
+                              "body": "*"
+                            }
+                          }
+                        ]
+                      },
+                      "GetTx": {
+                        "requestType": "GetTxRequest",
+                        "responseType": "GetTxResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/tx/v1beta1/txs/{hash}"
+                        },
+                        "comment": "GetTx fetches a tx by hash.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/tx/v1beta1/txs/{hash}"
+                            }
+                          }
+                        ]
+                      },
+                      "BroadcastTx": {
+                        "requestType": "BroadcastTxRequest",
+                        "responseType": "BroadcastTxResponse",
+                        "options": {
+                          "(google.api.http).post": "/cosmos/tx/v1beta1/txs",
+                          "(google.api.http).body": "*"
+                        },
+                        "comment": "BroadcastTx broadcast transaction.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/cosmos/tx/v1beta1/txs",
+                              "body": "*"
+                            }
+                          }
+                        ]
+                      },
+                      "GetTxsEvent": {
+                        "requestType": "GetTxsEventRequest",
+                        "responseType": "GetTxsEventResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/tx/v1beta1/txs"
+                        },
+                        "comment": "GetTxsEvent fetches txs by event.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/tx/v1beta1/txs"
+                            }
+                          }
+                        ]
+                      },
+                      "GetBlockWithTxs": {
+                        "requestType": "GetBlockWithTxsRequest",
+                        "responseType": "GetBlockWithTxsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/tx/v1beta1/txs/block/{height}"
+                        },
+                        "comment": "GetBlockWithTxs fetches a block with decoded txs.\n\nSince: cosmos-sdk 0.45.2",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/tx/v1beta1/txs/block/{height}"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Service defines a gRPC service for interacting with transactions."
+                  },
+                  "GetTxsEventRequest": {
+                    "fields": {
+                      "events": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 1,
+                        "comment": "events is the list of transaction event type."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines a pagination for the request."
+                      },
+                      "orderBy": {
+                        "type": "OrderBy",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "GetTxsEventRequest is the request type for the Service.TxsByEvents\nRPC method."
+                  },
+                  "OrderBy": {
+                    "values": {
+                      "ORDER_BY_UNSPECIFIED": 0,
+                      "ORDER_BY_ASC": 1,
+                      "ORDER_BY_DESC": 2
+                    },
+                    "comment": "OrderBy defines the sorting order",
+                    "comments": {
+                      "ORDER_BY_UNSPECIFIED": "ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.",
+                      "ORDER_BY_ASC": "ORDER_BY_ASC defines ascending order",
+                      "ORDER_BY_DESC": "ORDER_BY_DESC defines descending order"
+                    }
+                  },
+                  "GetTxsEventResponse": {
+                    "fields": {
+                      "txs": {
+                        "rule": "repeated",
+                        "type": "cosmos.tx.v1beta1.Tx",
+                        "id": 1,
+                        "comment": "txs is the list of queried transactions."
+                      },
+                      "txResponses": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.abci.v1beta1.TxResponse",
+                        "id": 2,
+                        "comment": "tx_responses is the list of queried TxResponses."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 3,
+                        "comment": "pagination defines a pagination for the response."
+                      }
+                    },
+                    "comment": "GetTxsEventResponse is the response type for the Service.TxsByEvents\nRPC method."
+                  },
+                  "BroadcastTxRequest": {
+                    "fields": {
+                      "txBytes": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "tx_bytes is the raw transaction."
+                      },
+                      "mode": {
+                        "type": "BroadcastMode",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "BroadcastTxRequest is the request type for the Service.BroadcastTxRequest\nRPC method."
+                  },
+                  "BroadcastMode": {
+                    "values": {
+                      "BROADCAST_MODE_UNSPECIFIED": 0,
+                      "BROADCAST_MODE_BLOCK": 1,
+                      "BROADCAST_MODE_SYNC": 2,
+                      "BROADCAST_MODE_ASYNC": 3
+                    },
+                    "comment": "BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.",
+                    "comments": {
+                      "BROADCAST_MODE_UNSPECIFIED": "zero-value for mode ordering",
+                      "BROADCAST_MODE_BLOCK": "BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for\nthe tx to be committed in a block.",
+                      "BROADCAST_MODE_SYNC": "BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for\na CheckTx execution response only.",
+                      "BROADCAST_MODE_ASYNC": "BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns\nimmediately."
+                    }
+                  },
+                  "BroadcastTxResponse": {
+                    "fields": {
+                      "txResponse": {
+                        "type": "cosmos.base.abci.v1beta1.TxResponse",
+                        "id": 1,
+                        "comment": "tx_response is the queried TxResponses."
+                      }
+                    },
+                    "comment": "BroadcastTxResponse is the response type for the\nService.BroadcastTx method."
+                  },
+                  "SimulateRequest": {
+                    "fields": {
+                      "tx": {
+                        "type": "cosmos.tx.v1beta1.Tx",
+                        "id": 1,
+                        "options": {
+                          "deprecated": true
+                        },
+                        "comment": "tx is the transaction to simulate.\nDeprecated. Send raw tx bytes instead."
+                      },
+                      "txBytes": {
+                        "type": "bytes",
+                        "id": 2,
+                        "comment": "tx_bytes is the raw transaction.\n\nSince: cosmos-sdk 0.43"
+                      }
+                    },
+                    "comment": "SimulateRequest is the request type for the Service.Simulate\nRPC method."
+                  },
+                  "SimulateResponse": {
+                    "fields": {
+                      "gasInfo": {
+                        "type": "cosmos.base.abci.v1beta1.GasInfo",
+                        "id": 1,
+                        "comment": "gas_info is the information about gas used in the simulation."
+                      },
+                      "result": {
+                        "type": "cosmos.base.abci.v1beta1.Result",
+                        "id": 2,
+                        "comment": "result is the result of the simulation."
+                      }
+                    },
+                    "comment": "SimulateResponse is the response type for the\nService.SimulateRPC method."
+                  },
+                  "GetTxRequest": {
+                    "fields": {
+                      "hash": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "hash is the tx hash to query, encoded as a hex string."
+                      }
+                    },
+                    "comment": "GetTxRequest is the request type for the Service.GetTx\nRPC method."
+                  },
+                  "GetTxResponse": {
+                    "fields": {
+                      "tx": {
+                        "type": "cosmos.tx.v1beta1.Tx",
+                        "id": 1,
+                        "comment": "tx is the queried transaction."
+                      },
+                      "txResponse": {
+                        "type": "cosmos.base.abci.v1beta1.TxResponse",
+                        "id": 2,
+                        "comment": "tx_response is the queried TxResponses."
+                      }
+                    },
+                    "comment": "GetTxResponse is the response type for the Service.GetTx method."
+                  },
+                  "GetBlockWithTxsRequest": {
+                    "fields": {
+                      "height": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": "height is the height of the block to query."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines a pagination for the request."
+                      }
+                    },
+                    "comment": "GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs\nRPC method.\n\nSince: cosmos-sdk 0.45.2"
+                  },
+                  "GetBlockWithTxsResponse": {
+                    "fields": {
+                      "txs": {
+                        "rule": "repeated",
+                        "type": "cosmos.tx.v1beta1.Tx",
+                        "id": 1,
+                        "comment": "txs are the transactions in the block."
+                      },
+                      "blockId": {
+                        "type": ".tendermint.types.BlockID",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "block": {
+                        "type": ".tendermint.types.Block",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 4,
+                        "comment": "pagination defines a pagination for the response."
+                      }
+                    },
+                    "comment": "GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.\n\nSince: cosmos-sdk 0.45.2"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

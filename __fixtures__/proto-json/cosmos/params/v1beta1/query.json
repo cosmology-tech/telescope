@@ -1,0 +1,122 @@
+{
+  "package": "cosmos.params.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/params/v1beta1/params.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "params": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/params/v1beta1/params"
+                        },
+                        "comment": "Params queries a specific parameter of a module, given its subspace and\nkey.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/params/v1beta1/params"
+                            }
+                          }
+                        ]
+                      },
+                      "Subspaces": {
+                        "requestType": "QuerySubspacesRequest",
+                        "responseType": "QuerySubspacesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/params/v1beta1/subspaces"
+                        },
+                        "comment": "Subspaces queries for all registered subspaces and all keys for a subspace.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/params/v1beta1/subspaces"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {
+                      "subspace": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "subspace defines the module to query the parameter for."
+                      },
+                      "key": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "key defines the key of the parameter in the subspace."
+                      }
+                    },
+                    "comment": "QueryParamsRequest is request type for the Query/Params RPC method."
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "param": {
+                        "type": "ParamChange",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "param defines the queried parameter."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is response type for the Query/Params RPC method."
+                  },
+                  "QuerySubspacesRequest": {
+                    "fields": {},
+                    "comment": "QuerySubspacesRequest defines a request type for querying for all registered\nsubspaces and all keys for a subspace."
+                  },
+                  "QuerySubspacesResponse": {
+                    "fields": {
+                      "subspaces": {
+                        "rule": "repeated",
+                        "type": "Subspace",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QuerySubspacesResponse defines the response types for querying for all\nregistered subspaces and all keys for a subspace."
+                  },
+                  "Subspace": {
+                    "fields": {
+                      "subspace": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "keys": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Subspace defines a parameter subspace name and all the keys that exist for\nthe subspace."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

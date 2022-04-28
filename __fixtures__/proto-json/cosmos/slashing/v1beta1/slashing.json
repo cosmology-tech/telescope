@@ -1,0 +1,122 @@
+{
+  "package": "cosmos.slashing.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "slashing": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/slashing/types",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "ValidatorSigningInfo": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "startHeight": {
+                        "type": "int64",
+                        "id": 2,
+                        "comment": "Height at which validator was first a candidate OR was unjailed"
+                      },
+                      "indexOffset": {
+                        "type": "int64",
+                        "id": 3,
+                        "comment": "Index which is incremented each time the validator was a bonded\nin a block and may have signed a precommit or not. This in conjunction with the\n`SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`."
+                      },
+                      "jailedUntil": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.stdtime)": true,
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "Timestamp until which the validator is jailed due to liveness downtime."
+                      },
+                      "tombstoned": {
+                        "type": "bool",
+                        "id": 5,
+                        "comment": "Whether or not a validator has been tombstoned (killed out of validator set). It is set\nonce the validator commits an equivocation or for any other configured misbehiavor."
+                      },
+                      "missedBlocksCounter": {
+                        "type": "int64",
+                        "id": 6,
+                        "comment": "A counter kept to avoid unnecessary array reads.\nNote that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`."
+                      }
+                    },
+                    "comment": "ValidatorSigningInfo defines a validator's signing info for monitoring their\nliveness activity."
+                  },
+                  "Params": {
+                    "fields": {
+                      "signedBlocksWindow": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "minSignedPerWindow": {
+                        "type": "bytes",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "downtimeJailDuration": {
+                        "type": "google.protobuf.Duration",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true
+                        },
+                        "comment": null
+                      },
+                      "slashFractionDoubleSign": {
+                        "type": "bytes",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "slashFractionDowntime": {
+                        "type": "bytes",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Params represents the parameters used for by the slashing module."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "package": "google.api.servicecontrol.v2",
+  "imports": [
+    "google/api/annotations.proto",
+    "google/api/client.proto",
+    "google/rpc/context/attribute_context.proto",
+    "google/rpc/status.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicecontrol": {
+                "nested": {
+                  "v2": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "csharp_namespace": "Google.Cloud.ServiceControl.V2",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v2;servicecontrol",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ServiceControllerProto",
+                      "java_package": "com.google.api.servicecontrol.v2",
+                      "objc_class_prefix": "GASC",
+                      "php_namespace": "Google\\Cloud\\ServiceControl\\V2",
+                      "ruby_package": "Google::Cloud::ServiceControl::V2"
+                    },
+                    "nested": {
+                      "ServiceController": {
+                        "options": {
+                          "(google.api.default_host)": "servicecontrol.googleapis.com",
+                          "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/servicecontrol"
+                        },
+                        "methods": {
+                          "Check": {
+                            "requestType": "CheckRequest",
+                            "responseType": "CheckResponse",
+                            "options": {
+                              "(google.api.http).post": "/v2/services/{service_name}:check",
+                              "(google.api.http).body": "*"
+                            },
+                            "comment": "Private Preview. This feature is only available for approved services.\n\nThis method provides admission control for services that are integrated\nwith [Service\nInfrastructure](https://cloud.google.com/service-infrastructure). It checks\nwhether an operation should be allowed based on the service configuration\nand relevant policies. It must be called before the operation is executed.\nFor more information, see\n[Admission\nControl](https://cloud.google.com/service-infrastructure/docs/admission-control).\n\nNOTE: The admission control has an expected policy propagation delay of\n60s. The caller **must** not depend on the most recent policy changes.\n\nNOTE: The admission control has a hard limit of 1 referenced resources\nper call. If an operation refers to more than 1 resources, the caller\nmust call the Check method multiple times.\n\nThis method requires the `servicemanagement.services.check` permission\non the specified service. For more information, see\n[Service Control API Access\nControl](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v2/services/{service_name}:check",
+                                  "body": "*"
+                                }
+                              }
+                            ]
+                          },
+                          "Report": {
+                            "requestType": "ReportRequest",
+                            "responseType": "ReportResponse",
+                            "options": {
+                              "(google.api.http).post": "/v2/services/{service_name}:report",
+                              "(google.api.http).body": "*"
+                            },
+                            "comment": "Private Preview. This feature is only available for approved services.\n\nThis method provides telemetry reporting for services that are integrated\nwith [Service\nInfrastructure](https://cloud.google.com/service-infrastructure). It\nreports a list of operations that have occurred on a service. It must be\ncalled after the operations have been executed. For more information, see\n[Telemetry\nReporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting).\n\nNOTE: The telemetry reporting has a hard limit of 1000 operations and 1MB\nper Report call. It is recommended to have no more than 100 operations per\ncall.\n\nThis method requires the `servicemanagement.services.report` permission\non the specified service. For more information, see\n[Service Control API Access\nControl](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v2/services/{service_name}:report",
+                                  "body": "*"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "[Service Control API\nv2](https://cloud.google.com/service-infrastructure/docs/service-control/access-control)\n\nPrivate Preview. This feature is only available for approved services.\n\nThis API provides admission control and telemetry reporting for services\nthat are integrated with [Service\nInfrastructure](https://cloud.google.com/service-infrastructure)."
+                      },
+                      "CheckRequest": {
+                        "fields": {
+                          "serviceName": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The service name as specified in its service configuration. For example,\n`\"pubsub.googleapis.com\"`.\n\nSee\n[google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)\nfor the definition of a service name."
+                          },
+                          "serviceConfigId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Specifies the version of the service configuration that should be used to\nprocess the request. Must not be empty. Set this field to 'latest' to\nspecify using the latest configuration."
+                          },
+                          "attributes": {
+                            "type": "google.rpc.context.AttributeContext",
+                            "id": 3,
+                            "comment": "Describes attributes about the operation being executed by the service."
+                          },
+                          "resources": {
+                            "rule": "repeated",
+                            "type": "ResourceInfo",
+                            "id": 4,
+                            "comment": "Describes the resources and the policies applied to each resource."
+                          },
+                          "flags": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "Optional. Contains a comma-separated list of flags."
+                          }
+                        },
+                        "comment": "Request message for the Check method."
+                      },
+                      "ResourceInfo": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The name of the resource referenced in the request."
+                          },
+                          "type": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The resource type in the format of \"{service}/{kind}\"."
+                          },
+                          "permission": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The resource permission needed for this request.\nThe format must be \"{service}/{plural}.{verb}\"."
+                          },
+                          "container": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "Optional. The identifier of the container of this resource. For Google\nCloud APIs, the resource container must be one of the following formats:\n- `projects/<project-id or project-number>`\n- `folders/<folder-id>`\n- `organizations/<organization-id>`\nFor the policy enforcement on the container level (VPCSC and Location\nPolicy check), this field takes precedence on the container extracted from\nname when presents."
+                          },
+                          "location": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "Optional. The location of the resource. The value must be a valid zone,\nregion or multiregion. For example: \"europe-west4\" or\n\"northamerica-northeast1-a\""
+                          }
+                        },
+                        "comment": "Describes a resource referenced in the request."
+                      },
+                      "CheckResponse": {
+                        "fields": {
+                          "status": {
+                            "type": "google.rpc.Status",
+                            "id": 1,
+                            "comment": "Operation is allowed when this field is not set. Any non-'OK' status\nindicates a denial; [google.rpc.Status.details][google.rpc.Status.details]\nwould contain additional details about the denial."
+                          },
+                          "headers": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Returns a set of request contexts generated from the `CheckRequest`."
+                          }
+                        },
+                        "comment": "Response message for the Check method."
+                      },
+                      "ReportRequest": {
+                        "fields": {
+                          "serviceName": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The service name as specified in its service configuration. For example,\n`\"pubsub.googleapis.com\"`.\n\nSee\n[google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)\nfor the definition of a service name."
+                          },
+                          "serviceConfigId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Specifies the version of the service configuration that should be used to\nprocess the request. Must not be empty. Set this field to 'latest' to\nspecify using the latest configuration."
+                          },
+                          "operations": {
+                            "rule": "repeated",
+                            "type": "google.rpc.context.AttributeContext",
+                            "id": 3,
+                            "comment": "Describes the list of operations to be reported. Each operation is\nrepresented as an AttributeContext, and contains all attributes around an\nAPI access."
+                          }
+                        },
+                        "comment": "Request message for the Report method."
+                      },
+                      "ReportResponse": {
+                        "fields": {},
+                        "comment": "Response message for the Report method.\nIf the request contains any invalid data, the server returns an RPC error."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

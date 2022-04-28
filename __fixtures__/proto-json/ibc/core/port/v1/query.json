@@ -1,0 +1,85 @@
+{
+  "package": "ibc.core.port.v1",
+  "imports": [
+    "ibc/core/channel/v1/channel.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "port": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/05-port/types"
+                    },
+                    "nested": {
+                      "Query": {
+                        "methods": {
+                          "AppVersion": {
+                            "requestType": "QueryAppVersionRequest",
+                            "responseType": "QueryAppVersionResponse",
+                            "comment": "AppVersion queries an IBC Port and determines the appropriate application version to be used"
+                          }
+                        },
+                        "comment": "Query defines the gRPC querier service"
+                      },
+                      "QueryAppVersionRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "connectionId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "connection unique identifier"
+                          },
+                          "ordering": {
+                            "type": "ibc.core.channel.v1.Order",
+                            "id": 3,
+                            "comment": "whether the channel is ordered or unordered"
+                          },
+                          "counterparty": {
+                            "type": "ibc.core.channel.v1.Counterparty",
+                            "id": 4,
+                            "comment": "counterparty channel end"
+                          },
+                          "proposedVersion": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "proposed version"
+                          }
+                        },
+                        "comment": "QueryAppVersionRequest is the request type for the Query/AppVersion RPC method"
+                      },
+                      "QueryAppVersionResponse": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port id associated with the request identifiers"
+                          },
+                          "version": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "supported app version"
+                          }
+                        },
+                        "comment": "QueryAppVersionResponse is the response type for the Query/AppVersion RPC method."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

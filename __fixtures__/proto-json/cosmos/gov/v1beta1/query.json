@@ -1,0 +1,432 @@
+{
+  "package": "cosmos.gov.v1beta1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/gov/v1beta1/gov.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "gov": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Proposal": {
+                        "requestType": "QueryProposalRequest",
+                        "responseType": "QueryProposalResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals/{proposal_id}"
+                        },
+                        "comment": "Proposal queries proposal details based on ProposalID.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals/{proposal_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "Proposals": {
+                        "requestType": "QueryProposalsRequest",
+                        "responseType": "QueryProposalsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals"
+                        },
+                        "comment": "Proposals queries all proposals based on given status.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals"
+                            }
+                          }
+                        ]
+                      },
+                      "Vote": {
+                        "requestType": "QueryVoteRequest",
+                        "responseType": "QueryVoteResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}"
+                        },
+                        "comment": "Vote queries voted information based on proposalID, voterAddr.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}"
+                            }
+                          }
+                        ]
+                      },
+                      "Votes": {
+                        "requestType": "QueryVotesRequest",
+                        "responseType": "QueryVotesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/votes"
+                        },
+                        "comment": "Votes queries votes of a given proposal.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/votes"
+                            }
+                          }
+                        ]
+                      },
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/params/{params_type}"
+                        },
+                        "comment": "Params queries all parameters of the gov module.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/params/{params_type}"
+                            }
+                          }
+                        ]
+                      },
+                      "Deposit": {
+                        "requestType": "QueryDepositRequest",
+                        "responseType": "QueryDepositResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits/{depositor}"
+                        },
+                        "comment": "Deposit queries single deposit information based proposalID, depositAddr.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits/{depositor}"
+                            }
+                          }
+                        ]
+                      },
+                      "Deposits": {
+                        "requestType": "QueryDepositsRequest",
+                        "responseType": "QueryDepositsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits"
+                        },
+                        "comment": "Deposits queries all deposits of a single proposal.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits"
+                            }
+                          }
+                        ]
+                      },
+                      "TallyResult": {
+                        "requestType": "QueryTallyResultRequest",
+                        "responseType": "QueryTallyResultResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/tally"
+                        },
+                        "comment": "TallyResult queries the tally of a proposal vote.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/gov/v1beta1/proposals/{proposal_id}/tally"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service for gov module"
+                  },
+                  "QueryProposalRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id defines the unique id of the proposal."
+                      }
+                    },
+                    "comment": "QueryProposalRequest is the request type for the Query/Proposal RPC method."
+                  },
+                  "QueryProposalResponse": {
+                    "fields": {
+                      "proposal": {
+                        "type": "Proposal",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryProposalResponse is the response type for the Query/Proposal RPC method."
+                  },
+                  "QueryProposalsRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "proposalStatus": {
+                        "type": "ProposalStatus",
+                        "id": 1,
+                        "comment": "proposal_status defines the status of the proposals."
+                      },
+                      "voter": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "voter defines the voter address for the proposals."
+                      },
+                      "depositor": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "depositor defines the deposit addresses from the proposals."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 4,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryProposalsRequest is the request type for the Query/Proposals RPC method."
+                  },
+                  "QueryProposalsResponse": {
+                    "fields": {
+                      "proposals": {
+                        "rule": "repeated",
+                        "type": "Proposal",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryProposalsResponse is the response type for the Query/Proposals RPC\nmethod."
+                  },
+                  "QueryVoteRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id defines the unique id of the proposal."
+                      },
+                      "voter": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "voter defines the oter address for the proposals."
+                      }
+                    },
+                    "comment": "QueryVoteRequest is the request type for the Query/Vote RPC method."
+                  },
+                  "QueryVoteResponse": {
+                    "fields": {
+                      "vote": {
+                        "type": "Vote",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "vote defined the queried vote."
+                      }
+                    },
+                    "comment": "QueryVoteResponse is the response type for the Query/Vote RPC method."
+                  },
+                  "QueryVotesRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id defines the unique id of the proposal."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryVotesRequest is the request type for the Query/Votes RPC method."
+                  },
+                  "QueryVotesResponse": {
+                    "fields": {
+                      "votes": {
+                        "rule": "repeated",
+                        "type": "Vote",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "votes defined the queried votes."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryVotesResponse is the response type for the Query/Votes RPC method."
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {
+                      "paramsType": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "params_type defines which parameters to query for, can be one of \"voting\",\n\"tallying\" or \"deposit\"."
+                      }
+                    },
+                    "comment": "QueryParamsRequest is the request type for the Query/Params RPC method."
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "votingParams": {
+                        "type": "VotingParams",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "voting_params defines the parameters related to voting."
+                      },
+                      "depositParams": {
+                        "type": "DepositParams",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "deposit_params defines the parameters related to deposit."
+                      },
+                      "tallyParams": {
+                        "type": "TallyParams",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "tally_params defines the parameters related to tally."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is the response type for the Query/Params RPC method."
+                  },
+                  "QueryDepositRequest": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.equal)": false
+                    },
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id defines the unique id of the proposal."
+                      },
+                      "depositor": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "depositor defines the deposit addresses from the proposals."
+                      }
+                    },
+                    "comment": "QueryDepositRequest is the request type for the Query/Deposit RPC method."
+                  },
+                  "QueryDepositResponse": {
+                    "fields": {
+                      "deposit": {
+                        "type": "Deposit",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "deposit defines the requested deposit."
+                      }
+                    },
+                    "comment": "QueryDepositResponse is the response type for the Query/Deposit RPC method."
+                  },
+                  "QueryDepositsRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id defines the unique id of the proposal."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryDepositsRequest is the request type for the Query/Deposits RPC method."
+                  },
+                  "QueryDepositsResponse": {
+                    "fields": {
+                      "deposits": {
+                        "rule": "repeated",
+                        "type": "Deposit",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryDepositsResponse is the response type for the Query/Deposits RPC method."
+                  },
+                  "QueryTallyResultRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id defines the unique id of the proposal."
+                      }
+                    },
+                    "comment": "QueryTallyResultRequest is the request type for the Query/Tally RPC method."
+                  },
+                  "QueryTallyResultResponse": {
+                    "fields": {
+                      "tally": {
+                        "type": "TallyResult",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "tally defines the requested tally."
+                      }
+                    },
+                    "comment": "QueryTallyResultResponse is the response type for the Query/Tally RPC method."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

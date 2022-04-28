@@ -1,0 +1,271 @@
+{
+  "package": "google.longrunning",
+  "imports": [
+    "google/api/annotations.proto",
+    "google/api/client.proto",
+    "google/protobuf/any.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/empty.proto",
+    "google/rpc/status.proto",
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "longrunning": {
+            "options": {
+              "cc_enable_arenas": true,
+              "csharp_namespace": "Google.LongRunning",
+              "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+              "java_multiple_files": true,
+              "java_outer_classname": "OperationsProto",
+              "java_package": "com.google.longrunning",
+              "php_namespace": "Google\\LongRunning"
+            },
+            "nested": {
+              "operationInfo": {
+                "type": "google.longrunning.OperationInfo",
+                "id": 1049,
+                "extend": "google.protobuf.MethodOptions",
+                "comment": "Additional information regarding long-running operations.\nIn particular, this specifies the types that are returned from\nlong-running operations.\n\nRequired for methods that return `google.longrunning.Operation`; invalid\notherwise."
+              },
+              "Operations": {
+                "options": {
+                  "(google.api.default_host)": "longrunning.googleapis.com"
+                },
+                "methods": {
+                  "ListOperations": {
+                    "requestType": "ListOperationsRequest",
+                    "responseType": "ListOperationsResponse",
+                    "options": {
+                      "(google.api.http).get": "/v1/{name=operations}",
+                      "(google.api.method_signature)": "name,filter"
+                    },
+                    "comment": "Lists operations that match the specified filter in the request. If the\nserver doesn't support this method, it returns `UNIMPLEMENTED`.\n\nNOTE: the `name` binding allows API services to override the binding\nto use different resource name schemes, such as `users/*/operations`. To\noverride the binding, API services can add a binding such as\n`\"/v1/{name=users/*}/operations\"` to their service configuration.\nFor backwards compatibility, the default name includes the operations\ncollection id, however overriding users must ensure the name binding\nis the parent resource, without the operations collection id.",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/v1/{name=operations}"
+                        }
+                      },
+                      {
+                        "(google.api.method_signature)": "name,filter"
+                      }
+                    ]
+                  },
+                  "GetOperation": {
+                    "requestType": "GetOperationRequest",
+                    "responseType": "Operation",
+                    "options": {
+                      "(google.api.http).get": "/v1/{name=operations/**}",
+                      "(google.api.method_signature)": "name"
+                    },
+                    "comment": "Gets the latest state of a long-running operation.  Clients can use this\nmethod to poll the operation result at intervals as recommended by the API\nservice.",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/v1/{name=operations/**}"
+                        }
+                      },
+                      {
+                        "(google.api.method_signature)": "name"
+                      }
+                    ]
+                  },
+                  "DeleteOperation": {
+                    "requestType": "DeleteOperationRequest",
+                    "responseType": "google.protobuf.Empty",
+                    "options": {
+                      "(google.api.http).delete": "/v1/{name=operations/**}",
+                      "(google.api.method_signature)": "name"
+                    },
+                    "comment": "Deletes a long-running operation. This method indicates that the client is\nno longer interested in the operation result. It does not cancel the\noperation. If the server doesn't support this method, it returns\n`google.rpc.Code.UNIMPLEMENTED`.",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "delete": "/v1/{name=operations/**}"
+                        }
+                      },
+                      {
+                        "(google.api.method_signature)": "name"
+                      }
+                    ]
+                  },
+                  "CancelOperation": {
+                    "requestType": "CancelOperationRequest",
+                    "responseType": "google.protobuf.Empty",
+                    "options": {
+                      "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                      "(google.api.http).body": "*",
+                      "(google.api.method_signature)": "name"
+                    },
+                    "comment": "Starts asynchronous cancellation on a long-running operation.  The server\nmakes a best effort to cancel the operation, but success is not\nguaranteed.  If the server doesn't support this method, it returns\n`google.rpc.Code.UNIMPLEMENTED`.  Clients can use\n[Operations.GetOperation][google.longrunning.Operations.GetOperation] or\nother methods to check whether the cancellation succeeded or whether the\noperation completed despite cancellation. On successful cancellation,\nthe operation is not deleted; instead, it becomes an operation with\nan [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,\ncorresponding to `Code.CANCELLED`.",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "post": "/v1/{name=operations/**}:cancel",
+                          "body": "*"
+                        }
+                      },
+                      {
+                        "(google.api.method_signature)": "name"
+                      }
+                    ]
+                  },
+                  "WaitOperation": {
+                    "requestType": "WaitOperationRequest",
+                    "responseType": "Operation",
+                    "comment": "Waits until the specified long-running operation is done or reaches at most\na specified timeout, returning the latest state.  If the operation is\nalready done, the latest state is immediately returned.  If the timeout\nspecified is greater than the default HTTP/RPC timeout, the HTTP/RPC\ntimeout is used.  If the server does not support this method, it returns\n`google.rpc.Code.UNIMPLEMENTED`.\nNote that this method is on a best-effort basis.  It may return the latest\nstate before the specified timeout (including immediately), meaning even an\nimmediate response is no guarantee that the operation is done."
+                  }
+                },
+                "comment": "Manages long-running operations with an API service.\n\nWhen an API method normally takes long time to complete, it can be designed\nto return [Operation][google.longrunning.Operation] to the client, and the client can use this\ninterface to receive the real response asynchronously by polling the\noperation resource, or pass the operation resource to another API (such as\nGoogle Cloud Pub/Sub API) to receive the response.  Any API service that\nreturns long-running operations should implement the `Operations` interface\nso developers can have a consistent client experience."
+              },
+              "Operation": {
+                "oneofs": {
+                  "result": {
+                    "oneof": [
+                      "error",
+                      "response"
+                    ],
+                    "comment": "The operation result, which can be either an `error` or a valid `response`.\nIf `done` == `false`, neither `error` nor `response` is set.\nIf `done` == `true`, exactly one of `error` or `response` is set."
+                  }
+                },
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The server-assigned name, which is only unique within the same service that\noriginally returns it. If you use the default HTTP mapping, the\n`name` should be a resource name ending with `operations/{unique_id}`."
+                  },
+                  "metadata": {
+                    "type": "google.protobuf.Any",
+                    "id": 2,
+                    "comment": "Service-specific metadata associated with the operation.  It typically\ncontains progress information and common metadata such as create time.\nSome services might not provide such metadata.  Any method that returns a\nlong-running operation should document the metadata type, if any."
+                  },
+                  "done": {
+                    "type": "bool",
+                    "id": 3,
+                    "comment": "If the value is `false`, it means the operation is still in progress.\nIf `true`, the operation is completed, and either `error` or `response` is\navailable."
+                  },
+                  "error": {
+                    "type": "google.rpc.Status",
+                    "id": 4,
+                    "comment": "The error result of the operation in case of failure or cancellation."
+                  },
+                  "response": {
+                    "type": "google.protobuf.Any",
+                    "id": 5,
+                    "comment": "The normal response of the operation in case of success.  If the original\nmethod returns no data on success, such as `Delete`, the response is\n`google.protobuf.Empty`.  If the original method is standard\n`Get`/`Create`/`Update`, the response should be the resource.  For other\nmethods, the response should have the type `XxxResponse`, where `Xxx`\nis the original method name.  For example, if the original method name\nis `TakeSnapshot()`, the inferred response type is\n`TakeSnapshotResponse`."
+                  }
+                },
+                "comment": "This resource represents a long-running operation that is the result of a\nnetwork API call."
+              },
+              "GetOperationRequest": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the operation resource."
+                  }
+                },
+                "comment": "The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]."
+              },
+              "ListOperationsRequest": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "The name of the operation's parent resource."
+                  },
+                  "filter": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The standard list filter."
+                  },
+                  "pageSize": {
+                    "type": "int32",
+                    "id": 2,
+                    "comment": "The standard list page size."
+                  },
+                  "pageToken": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "The standard list page token."
+                  }
+                },
+                "comment": "The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]."
+              },
+              "ListOperationsResponse": {
+                "fields": {
+                  "operations": {
+                    "rule": "repeated",
+                    "type": "Operation",
+                    "id": 1,
+                    "comment": "A list of operations that matches the specified filter in the request."
+                  },
+                  "nextPageToken": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The standard List next-page token."
+                  }
+                },
+                "comment": "The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]."
+              },
+              "CancelOperationRequest": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the operation resource to be cancelled."
+                  }
+                },
+                "comment": "The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]."
+              },
+              "DeleteOperationRequest": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the operation resource to be deleted."
+                  }
+                },
+                "comment": "The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]."
+              },
+              "WaitOperationRequest": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the operation resource to wait on."
+                  },
+                  "timeout": {
+                    "type": "google.protobuf.Duration",
+                    "id": 2,
+                    "comment": "The maximum duration to wait before timing out. If left blank, the wait\nwill be at most the time permitted by the underlying HTTP/RPC protocol.\nIf RPC context deadline is also specified, the shorter one will be used."
+                  }
+                },
+                "comment": "The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]."
+              },
+              "OperationInfo": {
+                "fields": {
+                  "responseType": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Required. The message name of the primary return type for this\nlong-running operation.\nThis type will be used to deserialize the LRO's response.\n\nIf the response is in a different package from the rpc, a fully-qualified\nmessage name must be used (e.g. `google.protobuf.Struct`).\n\nNote: Altering this value constitutes a breaking change."
+                  },
+                  "metadataType": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Required. The message name of the metadata type for this long-running\noperation.\n\nIf the response is in a different package from the rpc, a fully-qualified\nmessage name must be used (e.g. `google.protobuf.Struct`).\n\nNote: Altering this value constitutes a breaking change."
+                  }
+                },
+                "comment": "A message representing the message types used by a long-running operation.\n\nExample:\n\nrpc LongRunningRecognize(LongRunningRecognizeRequest)\nreturns (google.longrunning.Operation) {\noption (google.longrunning.operation_info) = {\nresponse_type: \"LongRunningRecognizeResponse\"\nmetadata_type: \"LongRunningRecognizeMetadata\"\n};\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

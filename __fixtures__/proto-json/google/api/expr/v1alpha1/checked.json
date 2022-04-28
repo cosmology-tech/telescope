@@ -1,0 +1,375 @@
+{
+  "package": "google.api.expr.v1alpha1",
+  "imports": [
+    "google/api/expr/v1alpha1/syntax.proto",
+    "google/protobuf/empty.proto",
+    "google/protobuf/struct.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "v1alpha1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1alpha1;expr",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "DeclProto",
+                      "java_package": "com.google.api.expr.v1alpha1"
+                    },
+                    "nested": {
+                      "CheckedExpr": {
+                        "fields": {
+                          "referenceMap": {
+                            "keyType": "int64",
+                            "type": "Reference",
+                            "id": 2,
+                            "comment": "A map from expression ids to resolved references.\n\nThe following entries are in this table:\n\n- An Ident or Select expression is represented here if it resolves to a\ndeclaration. For instance, if `a.b.c` is represented by\n`select(select(id(a), b), c)`, and `a.b` resolves to a declaration,\nwhile `c` is a field selection, then the reference is attached to the\nnested select expression (but not to the id or or the outer select).\nIn turn, if `a` resolves to a declaration and `b.c` are field selections,\nthe reference is attached to the ident expression.\n- Every Call expression has an entry here, identifying the function being\ncalled.\n- Every CreateStruct expression for a message has an entry, identifying\nthe message."
+                          },
+                          "typeMap": {
+                            "keyType": "int64",
+                            "type": "Type",
+                            "id": 3,
+                            "comment": "A map from expression ids to types.\n\nEvery expression node which has a type different than DYN has a mapping\nhere. If an expression has type DYN, it is omitted from this map to save\nspace."
+                          },
+                          "sourceInfo": {
+                            "type": "SourceInfo",
+                            "id": 5,
+                            "comment": "The source info derived from input that generated the parsed `expr` and\nany optimizations made during the type-checking pass."
+                          },
+                          "exprVersion": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The expr version indicates the major / minor version number of the `expr`\nrepresentation.\n\nThe most common reason for a version change will be to indicate to the CEL\nruntimes that transformations have been performed on the expr during static\nanalysis. In some cases, this will save the runtime the work of applying\nthe same or similar transformations prior to evaluation."
+                          },
+                          "expr": {
+                            "type": "Expr",
+                            "id": 4,
+                            "comment": "The checked expression. Semantically equivalent to the parsed `expr`, but\nmay have structural differences."
+                          }
+                        },
+                        "comment": "A CEL expression which has been successfully type checked."
+                      },
+                      "Type": {
+                        "oneofs": {
+                          "typeKind": {
+                            "oneof": [
+                              "dyn",
+                              "null",
+                              "primitive",
+                              "wrapper",
+                              "wellKnown",
+                              "listType",
+                              "mapType",
+                              "function",
+                              "messageType",
+                              "typeParam",
+                              "type",
+                              "error",
+                              "abstractType"
+                            ],
+                            "comment": "The kind of type."
+                          }
+                        },
+                        "fields": {
+                          "dyn": {
+                            "type": "google.protobuf.Empty",
+                            "id": 1,
+                            "comment": "Dynamic type."
+                          },
+                          "null": {
+                            "type": "google.protobuf.NullValue",
+                            "id": 2,
+                            "comment": "Null value."
+                          },
+                          "primitive": {
+                            "type": "PrimitiveType",
+                            "id": 3,
+                            "comment": "Primitive types: `true`, `1u`, `-2.0`, `'string'`, `b'bytes'`."
+                          },
+                          "wrapper": {
+                            "type": "PrimitiveType",
+                            "id": 4,
+                            "comment": "Wrapper of a primitive type, e.g. `google.protobuf.Int64Value`."
+                          },
+                          "wellKnown": {
+                            "type": "WellKnownType",
+                            "id": 5,
+                            "comment": "Well-known protobuf type such as `google.protobuf.Timestamp`."
+                          },
+                          "listType": {
+                            "type": "ListType",
+                            "id": 6,
+                            "comment": "Parameterized list with elements of `list_type`, e.g. `list<timestamp>`."
+                          },
+                          "mapType": {
+                            "type": "MapType",
+                            "id": 7,
+                            "comment": "Parameterized map with typed keys and values."
+                          },
+                          "function": {
+                            "type": "FunctionType",
+                            "id": 8,
+                            "comment": "Function type."
+                          },
+                          "messageType": {
+                            "type": "string",
+                            "id": 9,
+                            "comment": "Protocol buffer message type.\n\nThe `message_type` string specifies the qualified message type name. For\nexample, `google.plus.Profile`."
+                          },
+                          "typeParam": {
+                            "type": "string",
+                            "id": 10,
+                            "comment": "Type param type.\n\nThe `type_param` string specifies the type parameter name, e.g. `list<E>`\nwould be a `list_type` whose element type was a `type_param` type\nnamed `E`."
+                          },
+                          "type": {
+                            "type": "Type",
+                            "id": 11,
+                            "comment": "Type type.\n\nThe `type` value specifies the target type. e.g. int is type with a\ntarget type of `Primitive.INT`."
+                          },
+                          "error": {
+                            "type": "google.protobuf.Empty",
+                            "id": 12,
+                            "comment": "Error type.\n\nDuring type-checking if an expression is an error, its type is propagated\nas the `ERROR` type. This permits the type-checker to discover other\nerrors present in the expression."
+                          },
+                          "abstractType": {
+                            "type": "AbstractType",
+                            "id": 14,
+                            "comment": "Abstract, application defined type."
+                          }
+                        },
+                        "nested": {
+                          "ListType": {
+                            "fields": {
+                              "elemType": {
+                                "type": "Type",
+                                "id": 1,
+                                "comment": "The element type."
+                              }
+                            },
+                            "comment": "List type with typed elements, e.g. `list<example.proto.MyMessage>`."
+                          },
+                          "MapType": {
+                            "fields": {
+                              "keyType": {
+                                "type": "Type",
+                                "id": 1,
+                                "comment": "The type of the key."
+                              },
+                              "valueType": {
+                                "type": "Type",
+                                "id": 2,
+                                "comment": "The type of the value."
+                              }
+                            },
+                            "comment": "Map type with parameterized key and value types, e.g. `map<string, int>`."
+                          },
+                          "FunctionType": {
+                            "fields": {
+                              "resultType": {
+                                "type": "Type",
+                                "id": 1,
+                                "comment": "Result type of the function."
+                              },
+                              "argTypes": {
+                                "rule": "repeated",
+                                "type": "Type",
+                                "id": 2,
+                                "comment": "Argument types of the function."
+                              }
+                            },
+                            "comment": "Function type with result and arg types."
+                          },
+                          "AbstractType": {
+                            "fields": {
+                              "name": {
+                                "type": "string",
+                                "id": 1,
+                                "comment": "The fully qualified name of this abstract type."
+                              },
+                              "parameterTypes": {
+                                "rule": "repeated",
+                                "type": "Type",
+                                "id": 2,
+                                "comment": "Parameter types for this abstract type."
+                              }
+                            },
+                            "comment": "Application defined abstract type."
+                          },
+                          "PrimitiveType": {
+                            "values": {
+                              "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                              "BOOL": 1,
+                              "INT64": 2,
+                              "UINT64": 3,
+                              "DOUBLE": 4,
+                              "STRING": 5,
+                              "BYTES": 6
+                            },
+                            "comment": "CEL primitive types.",
+                            "comments": {
+                              "PRIMITIVE_TYPE_UNSPECIFIED": "Unspecified type.",
+                              "BOOL": "Boolean type.",
+                              "INT64": "Int64 type.\n\nProto-based integer values are widened to int64.",
+                              "UINT64": "Uint64 type.\n\nProto-based unsigned integer values are widened to uint64.",
+                              "DOUBLE": "Double type.\n\nProto-based float values are widened to double values.",
+                              "STRING": "String type.",
+                              "BYTES": "Bytes type."
+                            }
+                          },
+                          "WellKnownType": {
+                            "values": {
+                              "WELL_KNOWN_TYPE_UNSPECIFIED": 0,
+                              "ANY": 1,
+                              "TIMESTAMP": 2,
+                              "DURATION": 3
+                            },
+                            "comment": "Well-known protobuf types treated with first-class support in CEL.",
+                            "comments": {
+                              "WELL_KNOWN_TYPE_UNSPECIFIED": "Unspecified type.",
+                              "ANY": "Well-known protobuf.Any type.\n\nAny types are a polymorphic message type. During type-checking they are\ntreated like `DYN` types, but at runtime they are resolved to a specific\nmessage type specified at evaluation time.",
+                              "TIMESTAMP": "Well-known protobuf.Timestamp type, internally referenced as `timestamp`.",
+                              "DURATION": "Well-known protobuf.Duration type, internally referenced as `duration`."
+                            }
+                          }
+                        },
+                        "comment": "Represents a CEL type."
+                      },
+                      "Decl": {
+                        "oneofs": {
+                          "declKind": {
+                            "oneof": [
+                              "ident",
+                              "function"
+                            ],
+                            "comment": "Required. The declaration kind."
+                          }
+                        },
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The fully qualified name of the declaration.\n\nDeclarations are organized in containers and this represents the full path\nto the declaration in its container, as in `google.api.expr.Decl`.\n\nDeclarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not\nhave a name depending on whether the overload is function declaration or a\nfunction definition containing a result [Expr][google.api.expr.v1alpha1.Expr]."
+                          },
+                          "ident": {
+                            "type": "IdentDecl",
+                            "id": 2,
+                            "comment": "Identifier declaration."
+                          },
+                          "function": {
+                            "type": "FunctionDecl",
+                            "id": 3,
+                            "comment": "Function declaration."
+                          }
+                        },
+                        "nested": {
+                          "IdentDecl": {
+                            "fields": {
+                              "type": {
+                                "type": "Type",
+                                "id": 1,
+                                "comment": "Required. The type of the identifier."
+                              },
+                              "value": {
+                                "type": "Constant",
+                                "id": 2,
+                                "comment": "The constant value of the identifier. If not specified, the identifier\nmust be supplied at evaluation time."
+                              },
+                              "doc": {
+                                "type": "string",
+                                "id": 3,
+                                "comment": "Documentation string for the identifier."
+                              }
+                            },
+                            "comment": "Identifier declaration which specifies its type and optional `Expr` value.\n\nAn identifier without a value is a declaration that must be provided at\nevaluation time. An identifier with a value should resolve to a constant,\nbut may be used in conjunction with other identifiers bound at evaluation\ntime."
+                          },
+                          "FunctionDecl": {
+                            "fields": {
+                              "overloads": {
+                                "rule": "repeated",
+                                "type": "Overload",
+                                "id": 1,
+                                "comment": "Required. List of function overloads, must contain at least one overload."
+                              }
+                            },
+                            "nested": {
+                              "Overload": {
+                                "fields": {
+                                  "overloadId": {
+                                    "type": "string",
+                                    "id": 1,
+                                    "comment": "Required. Globally unique overload name of the function which reflects\nthe function name and argument types.\n\nThis will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indicate the `overload_id` that\nwas resolved for the function `name`."
+                                  },
+                                  "params": {
+                                    "rule": "repeated",
+                                    "type": "Type",
+                                    "id": 2,
+                                    "comment": "List of function parameter [Type][google.api.expr.v1alpha1.Type] values.\n\nParam types are disjoint after generic type parameters have been\nreplaced with the type `DYN`. Since the `DYN` type is compatible with\nany other type, this means that if `A` is a type parameter, the\nfunction types `int<A>` and `int<int>` are not disjoint. Likewise,\n`map<string, string>` is not disjoint from `map<K, V>`.\n\nWhen the `result_type` of a function is a generic type param, the\ntype param name also appears as the `type` of on at least one params."
+                                  },
+                                  "typeParams": {
+                                    "rule": "repeated",
+                                    "type": "string",
+                                    "id": 3,
+                                    "comment": "The type param names associated with the function declaration.\n\nFor example, `function ex<K,V>(K key, map<K, V> map) : V` would yield\nthe type params of `K, V`."
+                                  },
+                                  "resultType": {
+                                    "type": "Type",
+                                    "id": 4,
+                                    "comment": "Required. The result type of the function. For example, the operator\n`string.isEmpty()` would have `result_type` of `kind: BOOL`."
+                                  },
+                                  "isInstanceFunction": {
+                                    "type": "bool",
+                                    "id": 5,
+                                    "comment": "Whether the function is to be used in a method call-style `x.f(...)`\nof a function call-style `f(x, ...)`.\n\nFor methods, the first parameter declaration, `params[0]` is the\nexpected type of the target receiver."
+                                  },
+                                  "doc": {
+                                    "type": "string",
+                                    "id": 6,
+                                    "comment": "Documentation string for the overload."
+                                  }
+                                },
+                                "comment": "An overload indicates a function's parameter types and return type, and\nmay optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]\nvalues.\n\nFunctions overloads are declared in either a function or method\ncall-style. For methods, the `params[0]` is the expected type of the\ntarget receiver.\n\nOverloads must have non-overlapping argument types after erasure of all\nparameterized type variables (similar as type erasure in Java)."
+                              }
+                            },
+                            "comment": "Function declaration specifies one or more overloads which indicate the\nfunction's parameter types and return type.\n\nFunctions have no observable side-effects (there may be side-effects like\nlogging which are not observable from CEL)."
+                          }
+                        },
+                        "comment": "Represents a declaration of a named value or function.\n\nA declaration is part of the contract between the expression, the agent\nevaluating that expression, and the caller requesting evaluation."
+                      },
+                      "Reference": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The fully qualified name of the declaration."
+                          },
+                          "overloadId": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 3,
+                            "comment": "For references to functions, this is a list of `Overload.overload_id`\nvalues which match according to typing rules.\n\nIf the list has more than one element, overload resolution among the\npresented candidates must happen at runtime because of dynamic types. The\ntype checker attempts to narrow down this list as much as possible.\n\nEmpty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl]."
+                          },
+                          "value": {
+                            "type": "Constant",
+                            "id": 4,
+                            "comment": "For references to constants, this may contain the value of the\nconstant if known at compile time."
+                          }
+                        },
+                        "comment": "Describes a resolved reference to a declaration."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

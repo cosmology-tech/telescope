@@ -1,0 +1,52 @@
+{
+  "package": "cosmos.base.store.v1beta1",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "store": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/store/types"
+                    },
+                    "nested": {
+                      "StoreKVPair": {
+                        "fields": {
+                          "storeKey": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "the store key for the KVStore this pair originates from"
+                          },
+                          "delete": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "true indicates a delete operation, false indicates a set operation"
+                          },
+                          "key": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "value": {
+                            "type": "bytes",
+                            "id": 4,
+                            "comment": null
+                          }
+                        },
+                        "comment": "StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)\nIt optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and\nDeletes\n\nSince: cosmos-sdk 0.43"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

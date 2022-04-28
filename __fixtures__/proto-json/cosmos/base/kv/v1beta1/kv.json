@@ -1,0 +1,59 @@
+{
+  "package": "cosmos.base.kv.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "kv": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/types/kv"
+                    },
+                    "nested": {
+                      "Pairs": {
+                        "fields": {
+                          "pairs": {
+                            "rule": "repeated",
+                            "type": "Pair",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Pairs defines a repeated slice of Pair objects."
+                      },
+                      "Pair": {
+                        "fields": {
+                          "key": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "value": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "Pair defines a key/value bytes tuple."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

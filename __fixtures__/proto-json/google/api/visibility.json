@@ -1,0 +1,89 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "cc_enable_arenas": true,
+              "go_package": "google.golang.org/genproto/googleapis/api/visibility;visibility",
+              "java_multiple_files": true,
+              "java_outer_classname": "VisibilityProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "enumVisibility": {
+                "type": "google.api.VisibilityRule",
+                "id": 72295727,
+                "extend": "google.protobuf.EnumOptions",
+                "comment": "See `VisibilityRule`."
+              },
+              "valueVisibility": {
+                "type": "google.api.VisibilityRule",
+                "id": 72295727,
+                "extend": "google.protobuf.EnumValueOptions",
+                "comment": "See `VisibilityRule`."
+              },
+              "fieldVisibility": {
+                "type": "google.api.VisibilityRule",
+                "id": 72295727,
+                "extend": "google.protobuf.FieldOptions",
+                "comment": "See `VisibilityRule`."
+              },
+              "messageVisibility": {
+                "type": "google.api.VisibilityRule",
+                "id": 72295727,
+                "extend": "google.protobuf.MessageOptions",
+                "comment": "See `VisibilityRule`."
+              },
+              "methodVisibility": {
+                "type": "google.api.VisibilityRule",
+                "id": 72295727,
+                "extend": "google.protobuf.MethodOptions",
+                "comment": "See `VisibilityRule`."
+              },
+              "apiVisibility": {
+                "type": "google.api.VisibilityRule",
+                "id": 72295727,
+                "extend": "google.protobuf.ServiceOptions",
+                "comment": "See `VisibilityRule`."
+              },
+              "Visibility": {
+                "fields": {
+                  "rules": {
+                    "rule": "repeated",
+                    "type": "VisibilityRule",
+                    "id": 1,
+                    "comment": "A list of visibility rules that apply to individual API elements.\n\n**NOTE:** All service configuration rules follow \"last one wins\" order."
+                  }
+                },
+                "comment": "`Visibility` defines restrictions for the visibility of service\nelements.  Restrictions are specified using visibility labels\n(e.g., PREVIEW) that are elsewhere linked to users and projects.\n\nUsers and projects can have access to more than one visibility label. The\neffective visibility for multiple labels is the union of each label's\nelements, plus any unrestricted elements.\n\nIf an element and its parents have no restrictions, visibility is\nunconditionally granted.\n\nExample:\n\nvisibility:\nrules:\n- selector: google.calendar.Calendar.EnhancedSearch\nrestriction: PREVIEW\n- selector: google.calendar.Calendar.Delegate\nrestriction: INTERNAL\n\nHere, all methods are publicly visible except for the restricted methods\nEnhancedSearch and Delegate."
+              },
+              "VisibilityRule": {
+                "fields": {
+                  "selector": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Selects methods, messages, fields, enums, etc. to which this rule applies.\n\nRefer to [selector][google.api.DocumentationRule.selector] for syntax details."
+                  },
+                  "restriction": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "A comma-separated list of visibility labels that apply to the `selector`.\nAny of the listed labels can be used to grant the visibility.\n\nIf a rule has multiple labels, removing one of the labels but not all of\nthem can break clients.\n\nExample:\n\nvisibility:\nrules:\n- selector: google.calendar.Calendar.EnhancedSearch\nrestriction: INTERNAL, PREVIEW\n\nRemoving INTERNAL from this restriction will break clients that rely on\nthis method and only had access to it through INTERNAL."
+                  }
+                },
+                "comment": "A visibility rule provides visibility configuration for an individual API\nelement."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

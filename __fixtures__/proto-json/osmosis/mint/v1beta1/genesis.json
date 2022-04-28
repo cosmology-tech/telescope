@@ -1,0 +1,56 @@
+{
+  "package": "osmosis.mint.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/mint/v1beta1/mint.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "mint": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/mint/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "minter": {
+                        "type": "Minter",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "minter is a space for holding current rewards information."
+                      },
+                      "params": {
+                        "type": "Params",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of the module."
+                      },
+                      "halvenStartedEpoch": {
+                        "type": "int64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:halven_started_epoch"
+                        },
+                        "comment": "current halven period start epoch"
+                      }
+                    },
+                    "comment": "GenesisState defines the mint module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

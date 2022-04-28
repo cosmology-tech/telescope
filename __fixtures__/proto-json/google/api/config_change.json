@@ -1,0 +1,79 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/configchange;configchange",
+              "java_multiple_files": true,
+              "java_outer_classname": "ConfigChangeProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "ConfigChange": {
+                "fields": {
+                  "element": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Object hierarchy path to the change, with levels separated by a '.'\ncharacter. For repeated fields, an applicable unique identifier field is\nused for the index (usually selector, name, or id). For maps, the term\n'key' is used. If the field has no unique identifier, the numeric index\nis used.\nExamples:\n- visibility.rules[selector==\"google.LibraryService.ListBooks\"].restriction\n- quota.metric_rules[selector==\"google\"].metric_costs[key==\"reads\"].value\n- logging.producer_destinations[0]"
+                  },
+                  "oldValue": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Value of the changed object in the old Service configuration,\nin JSON format. This field will not be populated if ChangeType == ADDED."
+                  },
+                  "newValue": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Value of the changed object in the new Service configuration,\nin JSON format. This field will not be populated if ChangeType == REMOVED."
+                  },
+                  "changeType": {
+                    "type": "ChangeType",
+                    "id": 4,
+                    "comment": "The type for this change, either ADDED, REMOVED, or MODIFIED."
+                  },
+                  "advices": {
+                    "rule": "repeated",
+                    "type": "Advice",
+                    "id": 5,
+                    "comment": "Collection of advice provided for this change, useful for determining the\npossible impact of this change."
+                  }
+                },
+                "comment": "Output generated from semantically comparing two versions of a service\nconfiguration.\n\nIncludes detailed information about a field that have changed with\napplicable advice about potential consequences for the change, such as\nbackwards-incompatibility."
+              },
+              "Advice": {
+                "fields": {
+                  "description": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Useful description for why this advice was applied and what actions should\nbe taken to mitigate any implied risks."
+                  }
+                },
+                "comment": "Generated advice about this change, used for providing more\ninformation about how a change will affect the existing service."
+              },
+              "ChangeType": {
+                "values": {
+                  "CHANGE_TYPE_UNSPECIFIED": 0,
+                  "ADDED": 1,
+                  "REMOVED": 2,
+                  "MODIFIED": 3
+                },
+                "comment": "Classifies set of possible modifications to an object in the service\nconfiguration.",
+                "comments": {
+                  "CHANGE_TYPE_UNSPECIFIED": "No value was provided.",
+                  "ADDED": "The changed object exists in the 'new' service configuration, but not\nin the 'old' service configuration.",
+                  "REMOVED": "The changed object exists in the 'old' service configuration, but not\nin the 'new' service configuration.",
+                  "MODIFIED": "The changed object exists in both service configurations, but its value\nis different."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

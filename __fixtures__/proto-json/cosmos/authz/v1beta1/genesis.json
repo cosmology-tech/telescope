@@ -1,0 +1,41 @@
+{
+  "package": "cosmos.authz.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/authz/v1beta1/authz.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "authz": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/authz"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "authorization": {
+                        "rule": "repeated",
+                        "type": "GrantAuthorization",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "GenesisState defines the authz module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

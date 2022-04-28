@@ -1,0 +1,1044 @@
+{
+  "package": "google.api.serviceusage.v1beta1",
+  "imports": [
+    "google/api/annotations.proto",
+    "google/api/client.proto",
+    "google/api/field_behavior.proto",
+    "google/api/serviceusage/v1beta1/resources.proto",
+    "google/longrunning/operations.proto",
+    "google/protobuf/field_mask.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "serviceusage": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "csharp_namespace": "Google.Api.ServiceUsage.V1Beta1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/serviceusage/v1beta1;serviceusage",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ServiceUsageProto",
+                      "java_package": "com.google.api.serviceusage.v1beta1",
+                      "php_namespace": "Google\\Api\\ServiceUsage\\V1beta1",
+                      "ruby_package": "Google::Api::ServiceUsage::V1beta1"
+                    },
+                    "nested": {
+                      "ServiceUsage": {
+                        "options": {
+                          "(google.api.default_host)": "serviceusage.googleapis.com",
+                          "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/service.management"
+                        },
+                        "methods": {
+                          "EnableService": {
+                            "requestType": "EnableServiceRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "deprecated": true,
+                              "(google.api.http).post": "/v1beta1/{name=*/*/services/*}:enable",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Enables a service so that it can be used with a project.\n\nOperation response type: `google.protobuf.Empty`",
+                            "parsedOptions": [
+                              {
+                                "deprecated": true
+                              },
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{name=*/*/services/*}:enable",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "google.protobuf.Empty",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "DisableService": {
+                            "requestType": "DisableServiceRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "deprecated": true,
+                              "(google.api.http).post": "/v1beta1/{name=*/*/services/*}:disable",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Disables a service so that it can no longer be used with a project.\nThis prevents unintended usage that may cause unexpected billing\ncharges or security leaks.\n\nIt is not valid to call the disable method on a service that is not\ncurrently enabled. Callers will receive a `FAILED_PRECONDITION` status if\nthe target service is not currently enabled.\n\nOperation response type: `google.protobuf.Empty`",
+                            "parsedOptions": [
+                              {
+                                "deprecated": true
+                              },
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{name=*/*/services/*}:disable",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "google.protobuf.Empty",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "GetService": {
+                            "requestType": "GetServiceRequest",
+                            "responseType": "Service",
+                            "options": {
+                              "deprecated": true,
+                              "(google.api.http).get": "/v1beta1/{name=*/*/services/*}"
+                            },
+                            "comment": "Returns the service configuration and enabled state for a given service.",
+                            "parsedOptions": [
+                              {
+                                "deprecated": true
+                              },
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{name=*/*/services/*}"
+                                }
+                              }
+                            ]
+                          },
+                          "ListServices": {
+                            "requestType": "ListServicesRequest",
+                            "responseType": "ListServicesResponse",
+                            "options": {
+                              "deprecated": true,
+                              "(google.api.http).get": "/v1beta1/{parent=*/*}/services"
+                            },
+                            "comment": "Lists all services available to the specified project, and the current\nstate of those services with respect to the project. The list includes\nall public services, all services for which the calling user has the\n`servicemanagement.services.bind` permission, and all services that have\nalready been enabled on the project. The list can be filtered to\nonly include services in a specific state, for example to only include\nservices enabled on the project.",
+                            "parsedOptions": [
+                              {
+                                "deprecated": true
+                              },
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{parent=*/*}/services"
+                                }
+                              }
+                            ]
+                          },
+                          "BatchEnableServices": {
+                            "requestType": "BatchEnableServicesRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "deprecated": true,
+                              "(google.api.http).post": "/v1beta1/{parent=*/*}/services:batchEnable",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Enables multiple services on a project. The operation is atomic: if\nenabling any service fails, then the entire batch fails, and no state\nchanges occur.\n\nOperation response type: `google.protobuf.Empty`",
+                            "parsedOptions": [
+                              {
+                                "deprecated": true
+                              },
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{parent=*/*}/services:batchEnable",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "google.protobuf.Empty",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "ListConsumerQuotaMetrics": {
+                            "requestType": "ListConsumerQuotaMetricsRequest",
+                            "responseType": "ListConsumerQuotaMetricsResponse",
+                            "options": {
+                              "(google.api.http).get": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics"
+                            },
+                            "comment": "Retrieves a summary of all quota information visible to the service\nconsumer, organized by service metric. Each metric includes information\nabout all of its defined limits. Each limit includes the limit\nconfiguration (quota unit, preciseness, default value), the current\neffective limit value, and all of the overrides applied to the limit.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics"
+                                }
+                              }
+                            ]
+                          },
+                          "GetConsumerQuotaMetric": {
+                            "requestType": "GetConsumerQuotaMetricRequest",
+                            "responseType": "ConsumerQuotaMetric",
+                            "options": {
+                              "(google.api.http).get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*}"
+                            },
+                            "comment": "Retrieves a summary of quota information for a specific quota metric",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*}"
+                                }
+                              }
+                            ]
+                          },
+                          "GetConsumerQuotaLimit": {
+                            "requestType": "GetConsumerQuotaLimitRequest",
+                            "responseType": "ConsumerQuotaLimit",
+                            "options": {
+                              "(google.api.http).get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*}"
+                            },
+                            "comment": "Retrieves a summary of quota information for a specific quota limit.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*}"
+                                }
+                              }
+                            ]
+                          },
+                          "CreateAdminOverride": {
+                            "requestType": "CreateAdminOverrideRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides",
+                              "(google.api.http).body": "override",
+                              "(google.longrunning.operation_info).response_type": "QuotaOverride",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Creates an admin override.\nAn admin override is applied by an administrator of a parent folder or\nparent organization of the consumer receiving the override. An admin\noverride is intended to limit the amount of quota the consumer can use out\nof the total quota pool allocated to all children of the folder or\norganization.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides",
+                                  "body": "override"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "QuotaOverride",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "UpdateAdminOverride": {
+                            "requestType": "UpdateAdminOverrideRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}",
+                              "(google.api.http).body": "override",
+                              "(google.longrunning.operation_info).response_type": "QuotaOverride",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Updates an admin override.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}",
+                                  "body": "override"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "QuotaOverride",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "DeleteAdminOverride": {
+                            "requestType": "DeleteAdminOverrideRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}",
+                              "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Deletes an admin override.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "google.protobuf.Empty",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "ListAdminOverrides": {
+                            "requestType": "ListAdminOverridesRequest",
+                            "responseType": "ListAdminOverridesResponse",
+                            "options": {
+                              "(google.api.http).get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides"
+                            },
+                            "comment": "Lists all admin overrides on this limit.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides"
+                                }
+                              }
+                            ]
+                          },
+                          "ImportAdminOverrides": {
+                            "requestType": "ImportAdminOverridesRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importAdminOverrides",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "ImportAdminOverridesResponse",
+                              "(google.longrunning.operation_info).metadata_type": "ImportAdminOverridesMetadata"
+                            },
+                            "comment": "Creates or updates multiple admin overrides atomically, all on the\nsame consumer, but on many different metrics or limits.\nThe name field in the quota override message should not be set.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importAdminOverrides",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "ImportAdminOverridesResponse",
+                                  "metadata_type": "ImportAdminOverridesMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "CreateConsumerOverride": {
+                            "requestType": "CreateConsumerOverrideRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides",
+                              "(google.api.http).body": "override",
+                              "(google.longrunning.operation_info).response_type": "QuotaOverride",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Creates a consumer override.\nA consumer override is applied to the consumer on its own authority to\nlimit its own quota usage. Consumer overrides cannot be used to grant more\nquota than would be allowed by admin overrides, producer overrides, or the\ndefault limit of the service.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides",
+                                  "body": "override"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "QuotaOverride",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "UpdateConsumerOverride": {
+                            "requestType": "UpdateConsumerOverrideRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}",
+                              "(google.api.http).body": "override",
+                              "(google.longrunning.operation_info).response_type": "QuotaOverride",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Updates a consumer override.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}",
+                                  "body": "override"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "QuotaOverride",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "DeleteConsumerOverride": {
+                            "requestType": "DeleteConsumerOverrideRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}",
+                              "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Deletes a consumer override.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "google.protobuf.Empty",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "ListConsumerOverrides": {
+                            "requestType": "ListConsumerOverridesRequest",
+                            "responseType": "ListConsumerOverridesResponse",
+                            "options": {
+                              "(google.api.http).get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides"
+                            },
+                            "comment": "Lists all consumer overrides on this limit.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides"
+                                }
+                              }
+                            ]
+                          },
+                          "ImportConsumerOverrides": {
+                            "requestType": "ImportConsumerOverridesRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importConsumerOverrides",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "ImportConsumerOverridesResponse",
+                              "(google.longrunning.operation_info).metadata_type": "ImportConsumerOverridesMetadata"
+                            },
+                            "comment": "Creates or updates multiple consumer overrides atomically, all on the\nsame consumer, but on many different metrics or limits.\nThe name field in the quota override message should not be set.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importConsumerOverrides",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "ImportConsumerOverridesResponse",
+                                  "metadata_type": "ImportConsumerOverridesMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "GenerateServiceIdentity": {
+                            "requestType": "GenerateServiceIdentityRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1beta1/{parent=*/*/services/*}:generateServiceIdentity",
+                              "(google.longrunning.operation_info).response_type": "ServiceIdentity",
+                              "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
+                            },
+                            "comment": "Generates service identity for service.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1beta1/{parent=*/*/services/*}:generateServiceIdentity"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "ServiceIdentity",
+                                  "metadata_type": "google.protobuf.Empty"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "[Service Usage API](https://cloud.google.com/service-usage/docs/overview)"
+                      },
+                      "EnableServiceRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to enable the service on.\n\nThe `EnableService` and `DisableService` methods currently only support\nprojects.\n\nEnabling a service requires that the service is public or is shared with\nthe user enabling the service.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com`\nwhere `123` is the project number (not project ID)."
+                          }
+                        },
+                        "comment": "Request message for the `EnableService` method."
+                      },
+                      "DisableServiceRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to disable the service on.\n\nThe enable and disable methods currently only support projects.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com`\nwhere `123` is the project number (not project ID)."
+                          }
+                        },
+                        "comment": "Request message for the `DisableService` method."
+                      },
+                      "GetServiceRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to get the `ConsumerState` for.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com`\nwhere `123` is the project number (not project ID)."
+                          }
+                        },
+                        "comment": "Request message for the `GetService` method."
+                      },
+                      "ListServicesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Parent to search for services on.\n\nAn example name would be:\n`projects/123`\nwhere `123` is the project number (not project ID)."
+                          },
+                          "pageSize": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "Requested size of the next page of data.\nRequested page size cannot exceed 200.\nIf not set, the default page size is 50."
+                          },
+                          "pageToken": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Token identifying which result to start with, which is returned by a\nprevious list call."
+                          },
+                          "filter": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "Only list services that conform to the given filter.\nThe allowed filter strings are `state:ENABLED` and `state:DISABLED`."
+                          }
+                        },
+                        "comment": "Request message for the `ListServices` method."
+                      },
+                      "ListServicesResponse": {
+                        "fields": {
+                          "services": {
+                            "rule": "repeated",
+                            "type": "Service",
+                            "id": 1,
+                            "comment": "The available services for the requested project."
+                          },
+                          "nextPageToken": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Token that can be passed to `ListServices` to resume a paginated\nquery."
+                          }
+                        },
+                        "comment": "Response message for the `ListServices` method."
+                      },
+                      "BatchEnableServicesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Parent to enable services on.\n\nAn example name would be:\n`projects/123`\nwhere `123` is the project number (not project ID).\n\nThe `BatchEnableServices` method currently only supports projects."
+                          },
+                          "serviceIds": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The identifiers of the services to enable on the project.\n\nA valid identifier would be:\nserviceusage.googleapis.com\n\nEnabling services requires that each service is public or is shared with\nthe user enabling the service.\n\nTwo or more services must be specified. To enable a single service,\nuse the `EnableService` method instead.\n\nA single request can enable a maximum of 20 services at a time. If more\nthan 20 services are specified, the request will fail, and no state changes\nwill occur."
+                          }
+                        },
+                        "comment": "Request message for the `BatchEnableServices` method."
+                      },
+                      "ListConsumerQuotaMetricsRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Parent of the quotas resource.\n\nSome example names would be:\n`projects/123/services/serviceconsumermanagement.googleapis.com`\n`folders/345/services/serviceconsumermanagement.googleapis.com`\n`organizations/456/services/serviceconsumermanagement.googleapis.com`"
+                          },
+                          "pageSize": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "Requested size of the next page of data."
+                          },
+                          "pageToken": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Token identifying which result to start with; returned by a previous list\ncall."
+                          },
+                          "view": {
+                            "type": "QuotaView",
+                            "id": 4,
+                            "comment": "Specifies the level of detail for quota information in the response."
+                          }
+                        },
+                        "comment": "Request message for ListConsumerQuotaMetrics"
+                      },
+                      "ListConsumerQuotaMetricsResponse": {
+                        "fields": {
+                          "metrics": {
+                            "rule": "repeated",
+                            "type": "ConsumerQuotaMetric",
+                            "id": 1,
+                            "comment": "Quota settings for the consumer, organized by quota metric."
+                          },
+                          "nextPageToken": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Token identifying which result to start with; returned by a previous list\ncall."
+                          }
+                        },
+                        "comment": "Response message for ListConsumerQuotaMetrics"
+                      },
+                      "GetConsumerQuotaMetricRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the quota limit.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`"
+                          },
+                          "view": {
+                            "type": "QuotaView",
+                            "id": 2,
+                            "comment": "Specifies the level of detail for quota information in the response."
+                          }
+                        },
+                        "comment": "Request message for GetConsumerQuotaMetric"
+                      },
+                      "GetConsumerQuotaLimitRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the quota limit.\n\nUse the quota limit resource name returned by previous\nListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls."
+                          },
+                          "view": {
+                            "type": "QuotaView",
+                            "id": 2,
+                            "comment": "Specifies the level of detail for quota information in the response."
+                          }
+                        },
+                        "comment": "Request message for GetConsumerQuotaLimit"
+                      },
+                      "CreateAdminOverrideRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the parent quota limit, returned by a\nListConsumerQuotaMetrics or GetConsumerQuotaMetric call.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+                          },
+                          "override": {
+                            "type": "QuotaOverride",
+                            "id": 2,
+                            "comment": "The admin override to create."
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether to force the creation of the quota override.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 4,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for CreateAdminOverride."
+                      },
+                      "UpdateAdminOverrideRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the override to update.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`"
+                          },
+                          "override": {
+                            "type": "QuotaOverride",
+                            "id": 2,
+                            "comment": "The new override.\nOnly the override_value is updated; all other fields are ignored."
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether to force the update of the quota override.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "updateMask": {
+                            "type": "google.protobuf.FieldMask",
+                            "id": 4,
+                            "comment": "Update only the specified fields of the override.\nIf unset, all fields will be updated."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 5,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for UpdateAdminOverride."
+                      },
+                      "DeleteAdminOverrideRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the override to delete.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`"
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "Whether to force the deletion of the quota override.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 3,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for DeleteAdminOverride."
+                      },
+                      "ListAdminOverridesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the parent quota limit, returned by a\nListConsumerQuotaMetrics or GetConsumerQuotaMetric call.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+                          },
+                          "pageSize": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "Requested size of the next page of data."
+                          },
+                          "pageToken": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Token identifying which result to start with; returned by a previous list\ncall."
+                          }
+                        },
+                        "comment": "Request message for ListAdminOverrides"
+                      },
+                      "ListAdminOverridesResponse": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "Admin overrides on this limit."
+                          },
+                          "nextPageToken": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Token identifying which result to start with; returned by a previous list\ncall."
+                          }
+                        },
+                        "comment": "Response message for ListAdminOverrides."
+                      },
+                      "BatchCreateAdminOverridesResponse": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "The overrides that were created."
+                          }
+                        },
+                        "comment": "Response message for BatchCreateAdminOverrides"
+                      },
+                      "ImportAdminOverridesRequest": {
+                        "oneofs": {
+                          "source": {
+                            "oneof": [
+                              "inlineSource"
+                            ],
+                            "comment": "Source of import data"
+                          }
+                        },
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the consumer.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com`"
+                          },
+                          "inlineSource": {
+                            "type": "OverrideInlineSource",
+                            "id": 2,
+                            "comment": "The import data is specified in the request message itself"
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether to force the creation of the quota overrides.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 4,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for ImportAdminOverrides"
+                      },
+                      "ImportAdminOverridesResponse": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "The overrides that were created from the imported data."
+                          }
+                        },
+                        "comment": "Response message for ImportAdminOverrides"
+                      },
+                      "ImportAdminOverridesMetadata": {
+                        "fields": {},
+                        "comment": "Metadata message that provides information such as progress,\npartial failures, and similar information on each GetOperation call\nof LRO returned by ImportAdminOverrides."
+                      },
+                      "CreateConsumerOverrideRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the parent quota limit, returned by a\nListConsumerQuotaMetrics or GetConsumerQuotaMetric call.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+                          },
+                          "override": {
+                            "type": "QuotaOverride",
+                            "id": 2,
+                            "comment": "The override to create."
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether to force the creation of the quota override.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 4,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for CreateConsumerOverride."
+                      },
+                      "UpdateConsumerOverrideRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the override to update.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`"
+                          },
+                          "override": {
+                            "type": "QuotaOverride",
+                            "id": 2,
+                            "comment": "The new override.\nOnly the override_value is updated; all other fields are ignored."
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether to force the update of the quota override.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "updateMask": {
+                            "type": "google.protobuf.FieldMask",
+                            "id": 4,
+                            "comment": "Update only the specified fields of the override.\nIf unset, all fields will be updated."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 5,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for UpdateConsumerOverride."
+                      },
+                      "DeleteConsumerOverrideRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the override to delete.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`"
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "Whether to force the deletion of the quota override.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 3,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for DeleteConsumerOverride."
+                      },
+                      "ListConsumerOverridesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the parent quota limit, returned by a\nListConsumerQuotaMetrics or GetConsumerQuotaMetric call.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+                          },
+                          "pageSize": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "Requested size of the next page of data."
+                          },
+                          "pageToken": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Token identifying which result to start with; returned by a previous list\ncall."
+                          }
+                        },
+                        "comment": "Request message for ListConsumerOverrides"
+                      },
+                      "ListConsumerOverridesResponse": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "Consumer overrides on this limit."
+                          },
+                          "nextPageToken": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Token identifying which result to start with; returned by a previous list\ncall."
+                          }
+                        },
+                        "comment": "Response message for ListConsumerOverrides."
+                      },
+                      "BatchCreateConsumerOverridesResponse": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "The overrides that were created."
+                          }
+                        },
+                        "comment": "Response message for BatchCreateConsumerOverrides"
+                      },
+                      "ImportConsumerOverridesRequest": {
+                        "oneofs": {
+                          "source": {
+                            "oneof": [
+                              "inlineSource"
+                            ],
+                            "comment": "Source of import data"
+                          }
+                        },
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the consumer.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com`"
+                          },
+                          "inlineSource": {
+                            "type": "OverrideInlineSource",
+                            "id": 2,
+                            "comment": "The import data is specified in the request message itself"
+                          },
+                          "force": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether to force the creation of the quota overrides.\nSetting the force parameter to 'true' ignores all quota safety checks that\nwould fail the request. QuotaSafetyCheck lists all such validations."
+                          },
+                          "forceOnly": {
+                            "rule": "repeated",
+                            "type": "QuotaSafetyCheck",
+                            "id": 4,
+                            "comment": "The list of quota safety checks to ignore before the override mutation.\nUnlike 'force' field that ignores all the quota safety checks, the\n'force_only' field ignores only the specified checks; other checks are\nstill enforced. The 'force' and 'force_only' fields cannot both be set."
+                          }
+                        },
+                        "comment": "Request message for ImportConsumerOverrides"
+                      },
+                      "ImportConsumerOverridesResponse": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "The overrides that were created from the imported data."
+                          }
+                        },
+                        "comment": "Response message for ImportConsumerOverrides"
+                      },
+                      "ImportConsumerOverridesMetadata": {
+                        "fields": {},
+                        "comment": "Metadata message that provides information such as progress,\npartial failures, and similar information on each GetOperation call\nof LRO returned by ImportConsumerOverrides."
+                      },
+                      "ImportAdminQuotaPoliciesResponse": {
+                        "fields": {
+                          "policies": {
+                            "rule": "repeated",
+                            "type": "AdminQuotaPolicy",
+                            "id": 1,
+                            "comment": "The policies that were created from the imported data."
+                          }
+                        },
+                        "comment": "Response message for ImportAdminQuotaPolicies"
+                      },
+                      "ImportAdminQuotaPoliciesMetadata": {
+                        "fields": {},
+                        "comment": "Metadata message that provides information such as progress,\npartial failures, and similar information on each GetOperation call\nof LRO returned by ImportAdminQuotaPolicies."
+                      },
+                      "CreateAdminQuotaPolicyMetadata": {
+                        "fields": {},
+                        "comment": "Metadata message that provides information such as progress,\npartial failures, and similar information on each GetOperation call\nof LRO returned by CreateAdminQuotaPolicy."
+                      },
+                      "UpdateAdminQuotaPolicyMetadata": {
+                        "fields": {},
+                        "comment": "Metadata message that provides information such as progress,\npartial failures, and similar information on each GetOperation call\nof LRO returned by UpdateAdminQuotaPolicy."
+                      },
+                      "DeleteAdminQuotaPolicyMetadata": {
+                        "fields": {},
+                        "comment": "Metadata message that provides information such as progress,\npartial failures, and similar information on each GetOperation call\nof LRO returned by DeleteAdminQuotaPolicy."
+                      },
+                      "GenerateServiceIdentityRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to generate an identity for.\n\nThe `GenerateServiceIdentity` methods currently only support projects.\n\nAn example name would be:\n`projects/123/services/example.googleapis.com` where `123` is the\nproject number."
+                          }
+                        },
+                        "comment": "Request message for generating service identity."
+                      },
+                      "GetServiceIdentityResponse": {
+                        "fields": {
+                          "identity": {
+                            "type": "ServiceIdentity",
+                            "id": 1,
+                            "comment": "Service identity that service producer can use to access consumer\nresources. If exists is true, it contains email and unique_id. If exists is\nfalse, it contains pre-constructed email and empty unique_id."
+                          },
+                          "state": {
+                            "type": "IdentityState",
+                            "id": 2,
+                            "comment": "Service identity state."
+                          }
+                        },
+                        "nested": {
+                          "IdentityState": {
+                            "values": {
+                              "IDENTITY_STATE_UNSPECIFIED": 0,
+                              "ACTIVE": 1
+                            },
+                            "comment": "Enum for service identity state.",
+                            "comments": {
+                              "IDENTITY_STATE_UNSPECIFIED": "Default service identity state. This value is used if the state is\nomitted.",
+                              "ACTIVE": "Service identity has been created and can be used."
+                            }
+                          }
+                        },
+                        "comment": "Response message for getting service identity."
+                      },
+                      "GetServiceIdentityMetadata": {
+                        "fields": {},
+                        "comment": "Metadata for the `GetServiceIdentity` method."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

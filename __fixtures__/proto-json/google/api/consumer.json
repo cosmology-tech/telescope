@@ -1,0 +1,72 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "ConsumerProto",
+              "java_package": "com.google.api"
+            },
+            "nested": {
+              "ProjectProperties": {
+                "fields": {
+                  "properties": {
+                    "rule": "repeated",
+                    "type": "Property",
+                    "id": 1,
+                    "comment": "List of per consumer project-specific properties."
+                  }
+                },
+                "comment": "A descriptor for defining project properties for a service. One service may\nhave many consumer projects, and the service may want to behave differently\ndepending on some properties on the project. For example, a project may be\nassociated with a school, or a business, or a government agency, a business\ntype property on the project may affect how a service responds to the client.\nThis descriptor defines which properties are allowed to be set on a project.\n\nExample:\n\nproject_properties:\nproperties:\n- name: NO_WATERMARK\ntype: BOOL\ndescription: Allows usage of the API without watermarks.\n- name: EXTENDED_TILE_CACHE_PERIOD\ntype: INT64"
+              },
+              "Property": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the property (a.k.a key)."
+                  },
+                  "type": {
+                    "type": "PropertyType",
+                    "id": 2,
+                    "comment": "The type of this property."
+                  },
+                  "description": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "The description of the property"
+                  }
+                },
+                "nested": {
+                  "PropertyType": {
+                    "values": {
+                      "UNSPECIFIED": 0,
+                      "INT64": 1,
+                      "BOOL": 2,
+                      "STRING": 3,
+                      "DOUBLE": 4
+                    },
+                    "comment": "Supported data type of the property values",
+                    "comments": {
+                      "UNSPECIFIED": "The type is unspecified, and will result in an error.",
+                      "INT64": "The type is `int64`.",
+                      "BOOL": "The type is `bool`.",
+                      "STRING": "The type is `string`.",
+                      "DOUBLE": "The type is 'double'."
+                    }
+                  }
+                },
+                "comment": "Defines project properties.\n\nAPI services can define properties that can be assigned to consumer projects\nso that backends can perform response customization without having to make\nadditional calls or maintain additional storage. For example, Maps API\ndefines properties that controls map tile cache period, or whether to embed a\nwatermark in a result.\n\nThese values can be set via API producer console. Only API providers can\ndefine and set these properties."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

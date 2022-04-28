@@ -1,0 +1,315 @@
+{
+  "package": "cosmos.nft.v1beta1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "google/api/annotations.proto",
+    "cosmos/nft/v1beta1/nft.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "nft": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/nft"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Balance": {
+                        "requestType": "QueryBalanceRequest",
+                        "responseType": "QueryBalanceResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/balance/{owner}/{class_id}"
+                        },
+                        "comment": "Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/balance/{owner}/{class_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "Owner": {
+                        "requestType": "QueryOwnerRequest",
+                        "responseType": "QueryOwnerResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/owner/{class_id}/{id}"
+                        },
+                        "comment": "Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/owner/{class_id}/{id}"
+                            }
+                          }
+                        ]
+                      },
+                      "Supply": {
+                        "requestType": "QuerySupplyRequest",
+                        "responseType": "QuerySupplyResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/supply/{class_id}"
+                        },
+                        "comment": "Supply queries the number of NFTs from the given class, same as totalSupply of ERC721.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/supply/{class_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "NFTs": {
+                        "requestType": "QueryNFTsRequest",
+                        "responseType": "QueryNFTsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/nfts"
+                        },
+                        "comment": "NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in\nERC721Enumerable",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/nfts"
+                            }
+                          }
+                        ]
+                      },
+                      "NFT": {
+                        "requestType": "QueryNFTRequest",
+                        "responseType": "QueryNFTResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/nfts/{class_id}/{id}"
+                        },
+                        "comment": "NFT queries an NFT based on its class and id.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/nfts/{class_id}/{id}"
+                            }
+                          }
+                        ]
+                      },
+                      "Class": {
+                        "requestType": "QueryClassRequest",
+                        "responseType": "QueryClassResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/classes/{class_id}"
+                        },
+                        "comment": "Class queries an NFT class based on its id",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/classes/{class_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "Classes": {
+                        "requestType": "QueryClassesRequest",
+                        "responseType": "QueryClassesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/nft/v1beta1/classes"
+                        },
+                        "comment": "Classes queries all NFT classes",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/nft/v1beta1/classes"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryBalanceRequest": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "owner": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryBalanceRequest is the request type for the Query/Balance RPC method"
+                  },
+                  "QueryBalanceResponse": {
+                    "fields": {
+                      "amount": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryBalanceResponse is the response type for the Query/Balance RPC method"
+                  },
+                  "QueryOwnerRequest": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryOwnerRequest is the request type for the Query/Owner RPC method"
+                  },
+                  "QueryOwnerResponse": {
+                    "fields": {
+                      "owner": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryOwnerResponse is the response type for the Query/Owner RPC method"
+                  },
+                  "QuerySupplyRequest": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QuerySupplyRequest is the request type for the Query/Supply RPC method"
+                  },
+                  "QuerySupplyResponse": {
+                    "fields": {
+                      "amount": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QuerySupplyResponse is the response type for the Query/Supply RPC method"
+                  },
+                  "QueryNFTsRequest": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "owner": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryNFTstRequest is the request type for the Query/NFTs RPC method"
+                  },
+                  "QueryNFTsResponse": {
+                    "fields": {
+                      "nfts": {
+                        "rule": "repeated",
+                        "type": "cosmos.nft.v1beta1.NFT",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryNFTsResponse is the response type for the Query/NFTs RPC methods"
+                  },
+                  "QueryNFTRequest": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryNFTRequest is the request type for the Query/NFT RPC method"
+                  },
+                  "QueryNFTResponse": {
+                    "fields": {
+                      "nft": {
+                        "type": "cosmos.nft.v1beta1.NFT",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryNFTResponse is the response type for the Query/NFT RPC method"
+                  },
+                  "QueryClassRequest": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryClassRequest is the request type for the Query/Class RPC method"
+                  },
+                  "QueryClassResponse": {
+                    "fields": {
+                      "class": {
+                        "type": "cosmos.nft.v1beta1.Class",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryClassResponse is the response type for the Query/Class RPC method"
+                  },
+                  "QueryClassesRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 1,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryClassesRequest is the request type for the Query/Classes RPC method"
+                  },
+                  "QueryClassesResponse": {
+                    "fields": {
+                      "classes": {
+                        "rule": "repeated",
+                        "type": "cosmos.nft.v1beta1.Class",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryClassesResponse is the response type for the Query/Classes RPC method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

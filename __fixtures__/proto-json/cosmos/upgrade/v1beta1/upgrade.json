@@ -1,0 +1,138 @@
+{
+  "package": "cosmos.upgrade.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "upgrade": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/upgrade/types",
+                  "(gogoproto.goproto_getters_all)": false
+                },
+                "nested": {
+                  "Plan": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sets the name for the upgrade. This name will be used by the upgraded\nversion of the software to apply any special \"on-upgrade\" commands during\nthe first BeginBlock method after the upgrade is applied. It is also used\nto detect whether a software version can handle a given upgrade. If no\nupgrade handler with this name has been set in the software, it will be\nassumed that the software is out-of-date when the upgrade Time or Height is\nreached and the software will exit."
+                      },
+                      "time": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "options": {
+                          "deprecated": true,
+                          "(gogoproto.stdtime)": true,
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "Deprecated: Time based upgrades have been deprecated. Time based upgrade logic\nhas been removed from the SDK.\nIf this field is not empty, an error will be thrown."
+                      },
+                      "height": {
+                        "type": "int64",
+                        "id": 3,
+                        "comment": "The height at which the upgrade must be performed.\nOnly used if Time is not set."
+                      },
+                      "info": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Any application specific upgrade info to be included on-chain\nsuch as a git commit that validators could automatically upgrade to"
+                      },
+                      "upgradedClientState": {
+                        "type": "google.protobuf.Any",
+                        "id": 5,
+                        "options": {
+                          "deprecated": true
+                        },
+                        "comment": "Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been\nmoved to the IBC module in the sub module 02-client.\nIf this field is not empty, an error will be thrown."
+                      }
+                    },
+                    "comment": "Plan specifies information about a planned upgrade and when it should occur."
+                  },
+                  "SoftwareUpgradeProposal": {
+                    "options": {
+                      "deprecated": true,
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "plan": {
+                        "type": "Plan",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "SoftwareUpgradeProposal is a gov Content type for initiating a software\nupgrade.\nDeprecated: This legacy proposal is deprecated in favor of Msg-based gov\nproposals, see MsgSoftwareUpgrade."
+                  },
+                  "CancelSoftwareUpgradeProposal": {
+                    "options": {
+                      "deprecated": true,
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software\nupgrade.\nDeprecated: This legacy proposal is deprecated in favor of Msg-based gov\nproposals, see MsgCancelUpgrade."
+                  },
+                  "ModuleVersion": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_stringer)": true
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "name of the app module"
+                      },
+                      "version": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": "consensus version of the app module"
+                      }
+                    },
+                    "comment": "ModuleVersion specifies a module and its consensus version.\n\nSince: cosmos-sdk 0.43"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

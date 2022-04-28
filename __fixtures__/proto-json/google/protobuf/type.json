@@ -1,0 +1,264 @@
+{
+  "package": "google.protobuf",
+  "imports": [
+    "google/protobuf/any.proto",
+    "google/protobuf/source_context.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "protobuf": {
+            "options": {
+              "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+              "cc_enable_arenas": true,
+              "java_package": "com.google.protobuf",
+              "java_outer_classname": "TypeProto",
+              "java_multiple_files": true,
+              "objc_class_prefix": "GPB",
+              "go_package": "types"
+            },
+            "nested": {
+              "Type": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The fully qualified message name."
+                  },
+                  "fields": {
+                    "rule": "repeated",
+                    "type": "Field",
+                    "id": 2,
+                    "comment": "The list of fields."
+                  },
+                  "oneofs": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 3,
+                    "comment": "The list of types appearing in `oneof` definitions in this type."
+                  },
+                  "options": {
+                    "rule": "repeated",
+                    "type": "Option",
+                    "id": 4,
+                    "comment": "The protocol buffer options."
+                  },
+                  "sourceContext": {
+                    "type": "SourceContext",
+                    "id": 5,
+                    "comment": "The source context."
+                  },
+                  "syntax": {
+                    "type": "Syntax",
+                    "id": 6,
+                    "comment": "The source syntax."
+                  }
+                },
+                "comment": "A protocol buffer message type."
+              },
+              "Field": {
+                "fields": {
+                  "kind": {
+                    "type": "Kind",
+                    "id": 1,
+                    "comment": "The field type."
+                  },
+                  "cardinality": {
+                    "type": "Cardinality",
+                    "id": 2,
+                    "comment": "The field cardinality."
+                  },
+                  "number": {
+                    "type": "int32",
+                    "id": 3,
+                    "comment": "The field number."
+                  },
+                  "name": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "The field name."
+                  },
+                  "typeUrl": {
+                    "type": "string",
+                    "id": 6,
+                    "comment": "The field type URL, without the scheme, for message or enumeration\ntypes. Example: `\"type.googleapis.com/google.protobuf.Timestamp\"`."
+                  },
+                  "oneofIndex": {
+                    "type": "int32",
+                    "id": 7,
+                    "comment": "The index of the field type in `Type.oneofs`, for message or enumeration\ntypes. The first type has index 1; zero means the type is not in the list."
+                  },
+                  "packed": {
+                    "type": "bool",
+                    "id": 8,
+                    "comment": "Whether to use alternative packed wire representation."
+                  },
+                  "options": {
+                    "rule": "repeated",
+                    "type": "Option",
+                    "id": 9,
+                    "comment": "The protocol buffer options."
+                  },
+                  "jsonName": {
+                    "type": "string",
+                    "id": 10,
+                    "comment": "The field JSON name."
+                  },
+                  "defaultValue": {
+                    "type": "string",
+                    "id": 11,
+                    "comment": "The string value of the default value of this field. Proto2 syntax only."
+                  }
+                },
+                "nested": {
+                  "Kind": {
+                    "values": {
+                      "TYPE_UNKNOWN": 0,
+                      "TYPE_DOUBLE": 1,
+                      "TYPE_FLOAT": 2,
+                      "TYPE_INT64": 3,
+                      "TYPE_UINT64": 4,
+                      "TYPE_INT32": 5,
+                      "TYPE_FIXED64": 6,
+                      "TYPE_FIXED32": 7,
+                      "TYPE_BOOL": 8,
+                      "TYPE_STRING": 9,
+                      "TYPE_GROUP": 10,
+                      "TYPE_MESSAGE": 11,
+                      "TYPE_BYTES": 12,
+                      "TYPE_UINT32": 13,
+                      "TYPE_ENUM": 14,
+                      "TYPE_SFIXED32": 15,
+                      "TYPE_SFIXED64": 16,
+                      "TYPE_SINT32": 17,
+                      "TYPE_SINT64": 18
+                    },
+                    "comment": "Basic field types.",
+                    "comments": {
+                      "TYPE_UNKNOWN": "Field type unknown.",
+                      "TYPE_DOUBLE": "Field type double.",
+                      "TYPE_FLOAT": "Field type float.",
+                      "TYPE_INT64": "Field type int64.",
+                      "TYPE_UINT64": "Field type uint64.",
+                      "TYPE_INT32": "Field type int32.",
+                      "TYPE_FIXED64": "Field type fixed64.",
+                      "TYPE_FIXED32": "Field type fixed32.",
+                      "TYPE_BOOL": "Field type bool.",
+                      "TYPE_STRING": "Field type string.",
+                      "TYPE_GROUP": "Field type group. Proto2 syntax only, and deprecated.",
+                      "TYPE_MESSAGE": "Field type message.",
+                      "TYPE_BYTES": "Field type bytes.",
+                      "TYPE_UINT32": "Field type uint32.",
+                      "TYPE_ENUM": "Field type enum.",
+                      "TYPE_SFIXED32": "Field type sfixed32.",
+                      "TYPE_SFIXED64": "Field type sfixed64.",
+                      "TYPE_SINT32": "Field type sint32.",
+                      "TYPE_SINT64": "Field type sint64."
+                    }
+                  },
+                  "Cardinality": {
+                    "values": {
+                      "CARDINALITY_UNKNOWN": 0,
+                      "CARDINALITY_OPTIONAL": 1,
+                      "CARDINALITY_REQUIRED": 2,
+                      "CARDINALITY_REPEATED": 3
+                    },
+                    "comment": "Whether a field is optional, required, or repeated.",
+                    "comments": {
+                      "CARDINALITY_UNKNOWN": "For fields with unknown cardinality.",
+                      "CARDINALITY_OPTIONAL": "For optional fields.",
+                      "CARDINALITY_REQUIRED": "For required fields. Proto2 syntax only.",
+                      "CARDINALITY_REPEATED": "For repeated fields."
+                    }
+                  }
+                },
+                "comment": "A single field of a message type."
+              },
+              "Enum": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Enum type name."
+                  },
+                  "enumvalue": {
+                    "rule": "repeated",
+                    "type": "EnumValue",
+                    "id": 2,
+                    "comment": "Enum value definitions."
+                  },
+                  "options": {
+                    "rule": "repeated",
+                    "type": "Option",
+                    "id": 3,
+                    "comment": "Protocol buffer options."
+                  },
+                  "sourceContext": {
+                    "type": "SourceContext",
+                    "id": 4,
+                    "comment": "The source context."
+                  },
+                  "syntax": {
+                    "type": "Syntax",
+                    "id": 5,
+                    "comment": "The source syntax."
+                  }
+                },
+                "comment": "Enum type definition."
+              },
+              "EnumValue": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Enum value name."
+                  },
+                  "number": {
+                    "type": "int32",
+                    "id": 2,
+                    "comment": "Enum value number."
+                  },
+                  "options": {
+                    "rule": "repeated",
+                    "type": "Option",
+                    "id": 3,
+                    "comment": "Protocol buffer options."
+                  }
+                },
+                "comment": "Enum value definition."
+              },
+              "Option": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The option's name. For protobuf built-in options (options defined in\ndescriptor.proto), this is the short name. For example, `\"map_entry\"`.\nFor custom options, it should be the fully-qualified name. For example,\n`\"google.api.http\"`."
+                  },
+                  "value": {
+                    "type": "Any",
+                    "id": 2,
+                    "comment": "The option's value packed in an Any message. If the value is a primitive,\nthe corresponding wrapper type defined in google/protobuf/wrappers.proto\nshould be used. If the value is an enum, it should be stored as an int32\nvalue using the google.protobuf.Int32Value type."
+                  }
+                },
+                "comment": "A protocol buffer option, which can be attached to a message, field,\nenumeration, etc."
+              },
+              "Syntax": {
+                "values": {
+                  "SYNTAX_PROTO2": 0,
+                  "SYNTAX_PROTO3": 1
+                },
+                "comment": "The syntax in which a protocol buffer element is defined.",
+                "comments": {
+                  "SYNTAX_PROTO2": "Syntax `proto2`.",
+                  "SYNTAX_PROTO3": "Syntax `proto3`."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

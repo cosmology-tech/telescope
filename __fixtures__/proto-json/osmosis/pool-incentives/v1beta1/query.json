@@ -1,0 +1,299 @@
+{
+  "package": "osmosis.poolincentives.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/duration.proto",
+    "osmosis/incentives/gauge.proto",
+    "osmosis/pool-incentives/v1beta1/incentives.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "poolincentives": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/pool-incentives/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "GaugeIds": {
+                        "requestType": "QueryGaugeIdsRequest",
+                        "responseType": "QueryGaugeIdsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/pool-incentives/v1beta1/gauge-ids/{pool_id}"
+                        },
+                        "comment": "GaugeIds takes the pool id and returns the matching gauge ids and durations",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/pool-incentives/v1beta1/gauge-ids/{pool_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "DistrInfo": {
+                        "requestType": "QueryDistrInfoRequest",
+                        "responseType": "QueryDistrInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/pool-incentives/v1beta1/distr_info"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/pool-incentives/v1beta1/distr_info"
+                            }
+                          }
+                        ]
+                      },
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/pool-incentives/v1beta1/params"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/pool-incentives/v1beta1/params"
+                            }
+                          }
+                        ]
+                      },
+                      "LockableDurations": {
+                        "requestType": "QueryLockableDurationsRequest",
+                        "responseType": "QueryLockableDurationsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/pool-incentives/v1beta1/lockable_durations"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/pool-incentives/v1beta1/lockable_durations"
+                            }
+                          }
+                        ]
+                      },
+                      "IncentivizedPools": {
+                        "requestType": "QueryIncentivizedPoolsRequest",
+                        "responseType": "QueryIncentivizedPoolsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/pool-incentives/v1beta1/incentivized_pools"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/pool-incentives/v1beta1/incentivized_pools"
+                            }
+                          }
+                        ]
+                      },
+                      "ExternalIncentiveGauges": {
+                        "requestType": "QueryExternalIncentiveGaugesRequest",
+                        "responseType": "QueryExternalIncentiveGaugesResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/pool-incentives/v1beta1/external_incentive_gauges"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/pool-incentives/v1beta1/external_incentive_gauges"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryGaugeIdsRequest": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryGaugeIdsResponse": {
+                    "fields": {
+                      "gaugeIdsWithDuration": {
+                        "rule": "repeated",
+                        "type": "GaugeIdWithDuration",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:gauge_ids_with_duration"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "nested": {
+                      "GaugeIdWithDuration": {
+                        "fields": {
+                          "gaugeId": {
+                            "type": "uint64",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:gauge_id"
+                            },
+                            "comment": null
+                          },
+                          "duration": {
+                            "type": "google.protobuf.Duration",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.stdduration)": true
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryDistrInfoRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryDistrInfoResponse": {
+                    "fields": {
+                      "distrInfo": {
+                        "type": "DistrInfo",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.moretags)": "yaml:distr_info"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryLockableDurationsRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryLockableDurationsResponse": {
+                    "fields": {
+                      "lockableDurations": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Duration",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.moretags)": "yaml:lockable_durations"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryIncentivizedPoolsRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "IncentivizedPool": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      },
+                      "lockableDuration": {
+                        "type": "google.protobuf.Duration",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.moretags)": "yaml:lockable_duration"
+                        },
+                        "comment": null
+                      },
+                      "gaugeId": {
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:gauge_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryIncentivizedPoolsResponse": {
+                    "fields": {
+                      "incentivizedPools": {
+                        "rule": "repeated",
+                        "type": "IncentivizedPool",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.moretags)": "yaml:incentivized_pools"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryExternalIncentiveGaugesRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryExternalIncentiveGaugesResponse": {
+                    "fields": {
+                      "data": {
+                        "rule": "repeated",
+                        "type": "osmosis.incentives.Gauge",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

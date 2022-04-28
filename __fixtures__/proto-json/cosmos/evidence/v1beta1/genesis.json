@@ -1,0 +1,37 @@
+{
+  "package": "cosmos.evidence.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "evidence": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/evidence/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "evidence": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "comment": "evidence defines all the evidence at genesis."
+                      }
+                    },
+                    "comment": "GenesisState defines the evidence module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

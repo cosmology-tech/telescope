@@ -1,0 +1,88 @@
+{
+  "package": "cosmos.nft.v1beta1",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "nft": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/nft"
+                },
+                "nested": {
+                  "EventSend": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "sender": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "receiver": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": null
+                      }
+                    },
+                    "comment": "EventSend is emitted on Msg/Send"
+                  },
+                  "EventMint": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "owner": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "EventMint is emitted on Mint"
+                  },
+                  "EventBurn": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "owner": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "EventBurn is emitted on Burn"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

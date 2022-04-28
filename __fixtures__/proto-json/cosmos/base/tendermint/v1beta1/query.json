@@ -1,0 +1,369 @@
+{
+  "package": "cosmos.base.tendermint.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto",
+    "google/api/annotations.proto",
+    "tendermint/p2p/types.proto",
+    "tendermint/types/block.proto",
+    "tendermint/types/types.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "tendermint": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/client/grpc/tmservice"
+                    },
+                    "nested": {
+                      "Service": {
+                        "methods": {
+                          "GetNodeInfo": {
+                            "requestType": "GetNodeInfoRequest",
+                            "responseType": "GetNodeInfoResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/tendermint/v1beta1/node_info"
+                            },
+                            "comment": "GetNodeInfo queries the current node info.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/tendermint/v1beta1/node_info"
+                                }
+                              }
+                            ]
+                          },
+                          "GetSyncing": {
+                            "requestType": "GetSyncingRequest",
+                            "responseType": "GetSyncingResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/tendermint/v1beta1/syncing"
+                            },
+                            "comment": "GetSyncing queries node syncing.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/tendermint/v1beta1/syncing"
+                                }
+                              }
+                            ]
+                          },
+                          "GetLatestBlock": {
+                            "requestType": "GetLatestBlockRequest",
+                            "responseType": "GetLatestBlockResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/tendermint/v1beta1/blocks/latest"
+                            },
+                            "comment": "GetLatestBlock returns the latest block.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/tendermint/v1beta1/blocks/latest"
+                                }
+                              }
+                            ]
+                          },
+                          "GetBlockByHeight": {
+                            "requestType": "GetBlockByHeightRequest",
+                            "responseType": "GetBlockByHeightResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/tendermint/v1beta1/blocks/{height}"
+                            },
+                            "comment": "GetBlockByHeight queries block for given height.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/tendermint/v1beta1/blocks/{height}"
+                                }
+                              }
+                            ]
+                          },
+                          "GetLatestValidatorSet": {
+                            "requestType": "GetLatestValidatorSetRequest",
+                            "responseType": "GetLatestValidatorSetResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/tendermint/v1beta1/validatorsets/latest"
+                            },
+                            "comment": "GetLatestValidatorSet queries latest validator-set.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/tendermint/v1beta1/validatorsets/latest"
+                                }
+                              }
+                            ]
+                          },
+                          "GetValidatorSetByHeight": {
+                            "requestType": "GetValidatorSetByHeightRequest",
+                            "responseType": "GetValidatorSetByHeightResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/tendermint/v1beta1/validatorsets/{height}"
+                            },
+                            "comment": "GetValidatorSetByHeight queries validator-set at a given height.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/tendermint/v1beta1/validatorsets/{height}"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "Service defines the gRPC querier service for tendermint queries."
+                      },
+                      "GetValidatorSetByHeightRequest": {
+                        "fields": {
+                          "height": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 2,
+                            "comment": "pagination defines an pagination for the request."
+                          }
+                        },
+                        "comment": "GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method."
+                      },
+                      "GetValidatorSetByHeightResponse": {
+                        "fields": {
+                          "blockHeight": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "validators": {
+                            "rule": "repeated",
+                            "type": "Validator",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 3,
+                            "comment": "pagination defines an pagination for the response."
+                          }
+                        },
+                        "comment": "GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method."
+                      },
+                      "GetLatestValidatorSetRequest": {
+                        "fields": {
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 1,
+                            "comment": "pagination defines an pagination for the request."
+                          }
+                        },
+                        "comment": "GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method."
+                      },
+                      "GetLatestValidatorSetResponse": {
+                        "fields": {
+                          "blockHeight": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "validators": {
+                            "rule": "repeated",
+                            "type": "Validator",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 3,
+                            "comment": "pagination defines an pagination for the response."
+                          }
+                        },
+                        "comment": "GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method."
+                      },
+                      "Validator": {
+                        "fields": {
+                          "address": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(cosmos_proto.scalar)": "cosmos.AddressString"
+                            },
+                            "comment": null
+                          },
+                          "pubKey": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "votingPower": {
+                            "type": "int64",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "proposerPriority": {
+                            "type": "int64",
+                            "id": 4,
+                            "comment": null
+                          }
+                        },
+                        "comment": "Validator is the type for the validator-set."
+                      },
+                      "GetBlockByHeightRequest": {
+                        "fields": {
+                          "height": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method."
+                      },
+                      "GetBlockByHeightResponse": {
+                        "fields": {
+                          "blockId": {
+                            "type": ".tendermint.types.BlockID",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "block": {
+                            "type": ".tendermint.types.Block",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method."
+                      },
+                      "GetLatestBlockRequest": {
+                        "fields": {},
+                        "comment": "GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method."
+                      },
+                      "GetLatestBlockResponse": {
+                        "fields": {
+                          "blockId": {
+                            "type": ".tendermint.types.BlockID",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "block": {
+                            "type": ".tendermint.types.Block",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method."
+                      },
+                      "GetSyncingRequest": {
+                        "fields": {},
+                        "comment": "GetSyncingRequest is the request type for the Query/GetSyncing RPC method."
+                      },
+                      "GetSyncingResponse": {
+                        "fields": {
+                          "syncing": {
+                            "type": "bool",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "GetSyncingResponse is the response type for the Query/GetSyncing RPC method."
+                      },
+                      "GetNodeInfoRequest": {
+                        "fields": {},
+                        "comment": "GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method."
+                      },
+                      "GetNodeInfoResponse": {
+                        "fields": {
+                          "nodeInfo": {
+                            "type": ".tendermint.p2p.NodeInfo",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "applicationVersion": {
+                            "type": "VersionInfo",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method."
+                      },
+                      "VersionInfo": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "appName": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "version": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "gitCommit": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": null
+                          },
+                          "buildTags": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": null
+                          },
+                          "goVersion": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": null
+                          },
+                          "buildDeps": {
+                            "rule": "repeated",
+                            "type": "Module",
+                            "id": 7,
+                            "comment": null
+                          },
+                          "cosmosSdkVersion": {
+                            "type": "string",
+                            "id": 8,
+                            "comment": "Since: cosmos-sdk 0.43"
+                          }
+                        },
+                        "comment": "VersionInfo is the type for the GetNodeInfoResponse message."
+                      },
+                      "Module": {
+                        "fields": {
+                          "path": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "module path"
+                          },
+                          "version": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "module version"
+                          },
+                          "sum": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "checksum"
+                          }
+                        },
+                        "comment": "Module is the type for VersionInfo"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

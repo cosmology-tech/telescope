@@ -1,0 +1,67 @@
+{
+  "package": "osmosis.store.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "store": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/store"
+                },
+                "nested": {
+                  "Node": {
+                    "fields": {
+                      "children": {
+                        "rule": "repeated",
+                        "type": "Child",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "Child": {
+                    "fields": {
+                      "index": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "accumulation": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "Leaf": {
+                    "fields": {
+                      "leaf": {
+                        "type": "Child",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

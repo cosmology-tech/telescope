@@ -1,0 +1,50 @@
+{
+  "package": "tendermint.crypto",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "crypto": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/crypto"
+            },
+            "nested": {
+              "PublicKey": {
+                "options": {
+                  "(gogoproto.compare)": true,
+                  "(gogoproto.equal)": true
+                },
+                "oneofs": {
+                  "sum": {
+                    "oneof": [
+                      "ed25519",
+                      "secp256k1"
+                    ],
+                    "comment": null
+                  }
+                },
+                "fields": {
+                  "ed25519": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "secp256k1": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "PublicKey defines the keys available for use with Tendermint Validators"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

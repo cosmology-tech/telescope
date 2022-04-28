@@ -1,0 +1,55 @@
+{
+  "package": "cosmos.crypto.secp256r1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crypto": {
+            "nested": {
+              "secp256r1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/crypto/keys/secp256r1",
+                  "(gogoproto.messagename_all)": true,
+                  "(gogoproto.goproto_stringer_all)": false,
+                  "(gogoproto.goproto_getters_all)": false
+                },
+                "nested": {
+                  "PubKey": {
+                    "fields": {
+                      "key": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "ecdsaPK"
+                        },
+                        "comment": "Point on secp256r1 curve in a compressed representation as specified in section\n4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998"
+                      }
+                    },
+                    "comment": "PubKey defines a secp256r1 ECDSA public key."
+                  },
+                  "PrivKey": {
+                    "fields": {
+                      "secret": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "ecdsaSK"
+                        },
+                        "comment": "secret number serialized using big-endian encoding"
+                      }
+                    },
+                    "comment": "PrivKey defines a secp256r1 ECDSA private key."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

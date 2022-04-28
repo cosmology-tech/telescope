@@ -1,0 +1,132 @@
+{
+  "package": "tendermint.types",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/timestamp.proto",
+    "tendermint/types/types.proto",
+    "tendermint/types/validator.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "types": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/types"
+            },
+            "nested": {
+              "Evidence": {
+                "oneofs": {
+                  "sum": {
+                    "oneof": [
+                      "duplicateVoteEvidence",
+                      "lightClientAttackEvidence"
+                    ],
+                    "comment": null
+                  }
+                },
+                "fields": {
+                  "duplicateVoteEvidence": {
+                    "type": "DuplicateVoteEvidence",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "lightClientAttackEvidence": {
+                    "type": "LightClientAttackEvidence",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "DuplicateVoteEvidence": {
+                "fields": {
+                  "voteA": {
+                    "type": "tendermint.types.Vote",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "voteB": {
+                    "type": "tendermint.types.Vote",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "totalVotingPower": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "validatorPower": {
+                    "type": "int64",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "timestamp": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes."
+              },
+              "LightClientAttackEvidence": {
+                "fields": {
+                  "conflictingBlock": {
+                    "type": "tendermint.types.LightBlock",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "commonHeight": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "byzantineValidators": {
+                    "rule": "repeated",
+                    "type": "tendermint.types.Validator",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "totalVotingPower": {
+                    "type": "int64",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "timestamp": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client."
+              },
+              "EvidenceList": {
+                "fields": {
+                  "evidence": {
+                    "rule": "repeated",
+                    "type": "Evidence",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

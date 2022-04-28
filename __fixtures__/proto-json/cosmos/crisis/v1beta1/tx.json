@@ -1,0 +1,70 @@
+{
+  "package": "cosmos.crisis.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crisis": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/crisis/types"
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "VerifyInvariant": {
+                        "requestType": "MsgVerifyInvariant",
+                        "responseType": "MsgVerifyInvariantResponse",
+                        "comment": "VerifyInvariant defines a method to verify a particular invariance."
+                      }
+                    },
+                    "comment": "Msg defines the bank Msg service."
+                  },
+                  "MsgVerifyInvariant": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "sender",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "invariantModuleName": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "invariantRoute": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgVerifyInvariant represents a message to verify a particular invariance."
+                  },
+                  "MsgVerifyInvariantResponse": {
+                    "fields": {},
+                    "comment": "MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,559 @@
+{
+  "package": "osmosis.superfluid",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/timestamp.proto",
+    "google/protobuf/duration.proto",
+    "osmosis/superfluid/superfluid.proto",
+    "osmosis/superfluid/params.proto",
+    "osmosis/lockup/lock.proto",
+    "cosmos/base/query/v1beta1/pagination.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "superfluid": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/superfluid/types"
+            },
+            "nested": {
+              "Query": {
+                "methods": {
+                  "Params": {
+                    "requestType": "QueryParamsRequest",
+                    "responseType": "QueryParamsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/params"
+                    },
+                    "comment": "Params returns the total set of minting parameters.",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/params"
+                        }
+                      }
+                    ]
+                  },
+                  "AssetType": {
+                    "requestType": "AssetTypeRequest",
+                    "responseType": "AssetTypeResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/asset_type"
+                    },
+                    "comment": "Returns superfluid asset type",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/asset_type"
+                        }
+                      }
+                    ]
+                  },
+                  "AllAssets": {
+                    "requestType": "AllAssetsRequest",
+                    "responseType": "AllAssetsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/all_assets"
+                    },
+                    "comment": "Returns all superfluid asset types",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/all_assets"
+                        }
+                      }
+                    ]
+                  },
+                  "AssetMultiplier": {
+                    "requestType": "AssetMultiplierRequest",
+                    "responseType": "AssetMultiplierResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/asset_multiplier"
+                    },
+                    "comment": "Returns superfluid asset Multiplier",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/asset_multiplier"
+                        }
+                      }
+                    ]
+                  },
+                  "AllIntermediaryAccounts": {
+                    "requestType": "AllIntermediaryAccountsRequest",
+                    "responseType": "AllIntermediaryAccountsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/all_intermediary_accounts"
+                    },
+                    "comment": "Returns all superfluid intermediary account",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/all_intermediary_accounts"
+                        }
+                      }
+                    ]
+                  },
+                  "ConnectedIntermediaryAccount": {
+                    "requestType": "ConnectedIntermediaryAccountRequest",
+                    "responseType": "ConnectedIntermediaryAccountResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/connected_intermediary_account/{lock_id}"
+                    },
+                    "comment": "Returns intermediary account connected to a superfluid staked lock by id",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/connected_intermediary_account/{lock_id}"
+                        }
+                      }
+                    ]
+                  },
+                  "TotalSuperfluidDelegations": {
+                    "requestType": "TotalSuperfluidDelegationsRequest",
+                    "responseType": "TotalSuperfluidDelegationsResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/all_superfluid_delegations"
+                    },
+                    "comment": "Returns the total amount of osmo superfluidly staked\nresponse denominated in uosmo",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/all_superfluid_delegations"
+                        }
+                      }
+                    ]
+                  },
+                  "SuperfluidDelegationAmount": {
+                    "requestType": "SuperfluidDelegationAmountRequest",
+                    "responseType": "SuperfluidDelegationAmountResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/superfluid_delegation_amount"
+                    },
+                    "comment": "Returns the coins superfluid delegated for a delegator, validator, denom\ntriplet",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/superfluid_delegation_amount"
+                        }
+                      }
+                    ]
+                  },
+                  "SuperfluidDelegationsByDelegator": {
+                    "requestType": "SuperfluidDelegationsByDelegatorRequest",
+                    "responseType": "SuperfluidDelegationsByDelegatorResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/superfluid_delegations/{delegator_address}"
+                    },
+                    "comment": "Returns all the superfluid poistions for a specific delegator",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/superfluid_delegations/{delegator_address}"
+                        }
+                      }
+                    ]
+                  },
+                  "SuperfluidUndelegationsByDelegator": {
+                    "requestType": "SuperfluidUndelegationsByDelegatorRequest",
+                    "responseType": "SuperfluidUndelegationsByDelegatorResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/superfluid_undelegations_by_delegator/{delegator_address}"
+                    },
+                    "comment": null,
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/superfluid_undelegations_by_delegator/{delegator_address}"
+                        }
+                      }
+                    ]
+                  },
+                  "SuperfluidDelegationsByValidatorDenom": {
+                    "requestType": "SuperfluidDelegationsByValidatorDenomRequest",
+                    "responseType": "SuperfluidDelegationsByValidatorDenomResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/superfluid_delegations_by_validator_denom"
+                    },
+                    "comment": "Returns all the superfluid positions of a specific denom delegated to one\nvalidator",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/superfluid_delegations_by_validator_denom"
+                        }
+                      }
+                    ]
+                  },
+                  "EstimateSuperfluidDelegatedAmountByValidatorDenom": {
+                    "requestType": "EstimateSuperfluidDelegatedAmountByValidatorDenomRequest",
+                    "responseType": "EstimateSuperfluidDelegatedAmountByValidatorDenomResponse",
+                    "options": {
+                      "(google.api.http).get": "/osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom"
+                    },
+                    "comment": "Returns the amount of a specific denom delegated to a specific validator\nThis is labeled an estimate, because the way it calculates the amount can\nlead rounding errors from the true delegated amount",
+                    "parsedOptions": [
+                      {
+                        "(google.api.http)": {
+                          "get": "/osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "comment": "Query defines the gRPC querier service."
+              },
+              "QueryParamsRequest": {
+                "fields": {},
+                "comment": null
+              },
+              "QueryParamsResponse": {
+                "fields": {
+                  "params": {
+                    "type": "Params",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": "params defines the parameters of the module."
+                  }
+                },
+                "comment": null
+              },
+              "AssetTypeRequest": {
+                "fields": {
+                  "denom": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "AssetTypeResponse": {
+                "fields": {
+                  "assetType": {
+                    "type": "SuperfluidAssetType",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "AllAssetsRequest": {
+                "fields": {},
+                "comment": null
+              },
+              "AllAssetsResponse": {
+                "fields": {
+                  "assets": {
+                    "rule": "repeated",
+                    "type": "SuperfluidAsset",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "AssetMultiplierRequest": {
+                "fields": {
+                  "denom": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "AssetMultiplierResponse": {
+                "fields": {
+                  "osmoEquivalentMultiplier": {
+                    "type": "OsmoEquivalentMultiplierRecord",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidIntermediaryAccountInfo": {
+                "fields": {
+                  "denom": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "valAddr": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "gaugeId": {
+                    "type": "uint64",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "address": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "AllIntermediaryAccountsRequest": {
+                "fields": {
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageRequest",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "AllIntermediaryAccountsResponse": {
+                "fields": {
+                  "accounts": {
+                    "rule": "repeated",
+                    "type": "SuperfluidIntermediaryAccountInfo",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "pagination": {
+                    "type": "cosmos.base.query.v1beta1.PageResponse",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ConnectedIntermediaryAccountRequest": {
+                "fields": {
+                  "lockId": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ConnectedIntermediaryAccountResponse": {
+                "fields": {
+                  "account": {
+                    "type": "SuperfluidIntermediaryAccountInfo",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "TotalSuperfluidDelegationsRequest": {
+                "fields": {},
+                "comment": null
+              },
+              "TotalSuperfluidDelegationsResponse": {
+                "fields": {
+                  "totalDelegations": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                      "(gogoproto.moretags)": "yaml:total_superfluid_delegations",
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidDelegationAmountRequest": {
+                "fields": {
+                  "delegatorAddress": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "validatorAddress": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "denom": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidDelegationAmountResponse": {
+                "fields": {
+                  "amount": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidDelegationsByDelegatorRequest": {
+                "fields": {
+                  "delegatorAddress": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidDelegationsByDelegatorResponse": {
+                "fields": {
+                  "superfluidDelegationRecords": {
+                    "rule": "repeated",
+                    "type": "SuperfluidDelegationRecord",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "totalDelegatedCoins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidUndelegationsByDelegatorRequest": {
+                "fields": {
+                  "delegatorAddress": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "denom": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidUndelegationsByDelegatorResponse": {
+                "fields": {
+                  "superfluidDelegationRecords": {
+                    "rule": "repeated",
+                    "type": "SuperfluidDelegationRecord",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "totalUndelegatedCoins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  },
+                  "syntheticLocks": {
+                    "rule": "repeated",
+                    "type": "osmosis.lockup.SyntheticLock",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidDelegationsByValidatorDenomRequest": {
+                "fields": {
+                  "validatorAddress": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "denom": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SuperfluidDelegationsByValidatorDenomResponse": {
+                "fields": {
+                  "superfluidDelegationRecords": {
+                    "rule": "repeated",
+                    "type": "SuperfluidDelegationRecord",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "EstimateSuperfluidDelegatedAmountByValidatorDenomRequest": {
+                "fields": {
+                  "validatorAddress": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "denom": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "EstimateSuperfluidDelegatedAmountByValidatorDenomResponse": {
+                "fields": {
+                  "totalDelegatedCoins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

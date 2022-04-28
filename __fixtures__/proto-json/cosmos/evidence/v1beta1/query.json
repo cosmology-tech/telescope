@@ -1,0 +1,113 @@
+{
+  "package": "cosmos.evidence.v1beta1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "google/api/annotations.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "evidence": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/evidence/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Evidence": {
+                        "requestType": "QueryEvidenceRequest",
+                        "responseType": "QueryEvidenceResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/evidence/v1beta1/evidence/{evidence_hash}"
+                        },
+                        "comment": "Evidence queries evidence based on evidence hash.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/evidence/v1beta1/evidence/{evidence_hash}"
+                            }
+                          }
+                        ]
+                      },
+                      "AllEvidence": {
+                        "requestType": "QueryAllEvidenceRequest",
+                        "responseType": "QueryAllEvidenceResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/evidence/v1beta1/evidence"
+                        },
+                        "comment": "AllEvidence queries all evidence.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/evidence/v1beta1/evidence"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryEvidenceRequest": {
+                    "fields": {
+                      "evidenceHash": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.casttype)": "github.com/tendermint/tendermint/libs/bytes.HexBytes"
+                        },
+                        "comment": "evidence_hash defines the hash of the requested evidence."
+                      }
+                    },
+                    "comment": "QueryEvidenceRequest is the request type for the Query/Evidence RPC method."
+                  },
+                  "QueryEvidenceResponse": {
+                    "fields": {
+                      "evidence": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "comment": "evidence returns the requested evidence."
+                      }
+                    },
+                    "comment": "QueryEvidenceResponse is the response type for the Query/Evidence RPC method."
+                  },
+                  "QueryAllEvidenceRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 1,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryEvidenceRequest is the request type for the Query/AllEvidence RPC\nmethod."
+                  },
+                  "QueryAllEvidenceResponse": {
+                    "fields": {
+                      "evidence": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "comment": "evidence returns all evidences."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC\nmethod."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

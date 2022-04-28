@@ -1,0 +1,778 @@
+{
+  "package": "ibc.core.channel.v1",
+  "imports": [
+    "ibc/core/client/v1/client.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "ibc/core/channel/v1/channel.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/any.proto",
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "channel": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/04-channel/types"
+                    },
+                    "nested": {
+                      "Query": {
+                        "methods": {
+                          "Channel": {
+                            "requestType": "QueryChannelRequest",
+                            "responseType": "QueryChannelResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}"
+                            },
+                            "comment": "Channel queries an IBC Channel.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}"
+                                }
+                              }
+                            ]
+                          },
+                          "Channels": {
+                            "requestType": "QueryChannelsRequest",
+                            "responseType": "QueryChannelsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels"
+                            },
+                            "comment": "Channels queries all the IBC channels of a chain.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels"
+                                }
+                              }
+                            ]
+                          },
+                          "ConnectionChannels": {
+                            "requestType": "QueryConnectionChannelsRequest",
+                            "responseType": "QueryConnectionChannelsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/connections/{connection}/channels"
+                            },
+                            "comment": "ConnectionChannels queries all the channels associated with a connection\nend.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/connections/{connection}/channels"
+                                }
+                              }
+                            ]
+                          },
+                          "ChannelClientState": {
+                            "requestType": "QueryChannelClientStateRequest",
+                            "responseType": "QueryChannelClientStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/client_state"
+                            },
+                            "comment": "ChannelClientState queries for the client state for the channel associated\nwith the provided channel identifiers.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/client_state"
+                                }
+                              }
+                            ]
+                          },
+                          "ChannelConsensusState": {
+                            "requestType": "QueryChannelConsensusStateRequest",
+                            "responseType": "QueryChannelConsensusStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}"
+                            },
+                            "comment": "ChannelConsensusState queries for the consensus state for the channel\nassociated with the provided channel identifiers.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}"
+                                }
+                              }
+                            ]
+                          },
+                          "PacketCommitment": {
+                            "requestType": "QueryPacketCommitmentRequest",
+                            "responseType": "QueryPacketCommitmentResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{sequence}"
+                            },
+                            "comment": "PacketCommitment queries a stored packet commitment hash.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{sequence}"
+                                }
+                              }
+                            ]
+                          },
+                          "PacketCommitments": {
+                            "requestType": "QueryPacketCommitmentsRequest",
+                            "responseType": "QueryPacketCommitmentsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments"
+                            },
+                            "comment": "PacketCommitments returns all the packet commitments hashes associated\nwith a channel.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments"
+                                }
+                              }
+                            ]
+                          },
+                          "PacketReceipt": {
+                            "requestType": "QueryPacketReceiptRequest",
+                            "responseType": "QueryPacketReceiptResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}"
+                            },
+                            "comment": "PacketReceipt queries if a given packet sequence has been received on the\nqueried chain",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}"
+                                }
+                              }
+                            ]
+                          },
+                          "PacketAcknowledgement": {
+                            "requestType": "QueryPacketAcknowledgementRequest",
+                            "responseType": "QueryPacketAcknowledgementResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}"
+                            },
+                            "comment": "PacketAcknowledgement queries a stored packet acknowledgement hash.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}"
+                                }
+                              }
+                            ]
+                          },
+                          "PacketAcknowledgements": {
+                            "requestType": "QueryPacketAcknowledgementsRequest",
+                            "responseType": "QueryPacketAcknowledgementsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements"
+                            },
+                            "comment": "PacketAcknowledgements returns all the packet acknowledgements associated\nwith a channel.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements"
+                                }
+                              }
+                            ]
+                          },
+                          "UnreceivedPackets": {
+                            "requestType": "QueryUnreceivedPacketsRequest",
+                            "responseType": "QueryUnreceivedPacketsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets"
+                            },
+                            "comment": "UnreceivedPackets returns all the unreceived IBC packets associated with a\nchannel and sequences.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets"
+                                }
+                              }
+                            ]
+                          },
+                          "UnreceivedAcks": {
+                            "requestType": "QueryUnreceivedAcksRequest",
+                            "responseType": "QueryUnreceivedAcksResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks"
+                            },
+                            "comment": "UnreceivedAcks returns all the unreceived IBC acknowledgements associated\nwith a channel and sequences.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks"
+                                }
+                              }
+                            ]
+                          },
+                          "NextSequenceReceive": {
+                            "requestType": "QueryNextSequenceReceiveRequest",
+                            "responseType": "QueryNextSequenceReceiveResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/next_sequence"
+                            },
+                            "comment": "NextSequenceReceive returns the next receive sequence for a given channel.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/next_sequence"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "Query provides defines the gRPC querier service"
+                      },
+                      "QueryChannelRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          }
+                        },
+                        "comment": "QueryChannelRequest is the request type for the Query/Channel RPC method"
+                      },
+                      "QueryChannelResponse": {
+                        "fields": {
+                          "channel": {
+                            "type": "ibc.core.channel.v1.Channel",
+                            "id": 1,
+                            "comment": "channel associated with the request identifiers"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryChannelResponse is the response type for the Query/Channel RPC method.\nBesides the Channel end, it includes a proof and the height from which the\nproof was retrieved."
+                      },
+                      "QueryChannelsRequest": {
+                        "fields": {
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 1,
+                            "comment": "pagination request"
+                          }
+                        },
+                        "comment": "QueryChannelsRequest is the request type for the Query/Channels RPC method"
+                      },
+                      "QueryChannelsResponse": {
+                        "fields": {
+                          "channels": {
+                            "rule": "repeated",
+                            "type": "ibc.core.channel.v1.IdentifiedChannel",
+                            "id": 1,
+                            "comment": "list of stored channels of the chain."
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryChannelsResponse is the response type for the Query/Channels RPC method."
+                      },
+                      "QueryConnectionChannelsRequest": {
+                        "fields": {
+                          "connection": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "connection unique identifier"
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 2,
+                            "comment": "pagination request"
+                          }
+                        },
+                        "comment": "QueryConnectionChannelsRequest is the request type for the\nQuery/QueryConnectionChannels RPC method"
+                      },
+                      "QueryConnectionChannelsResponse": {
+                        "fields": {
+                          "channels": {
+                            "rule": "repeated",
+                            "type": "ibc.core.channel.v1.IdentifiedChannel",
+                            "id": 1,
+                            "comment": "list of channels associated with a connection."
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryConnectionChannelsResponse is the Response type for the\nQuery/QueryConnectionChannels RPC method"
+                      },
+                      "QueryChannelClientStateRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          }
+                        },
+                        "comment": "QueryChannelClientStateRequest is the request type for the Query/ClientState\nRPC method"
+                      },
+                      "QueryChannelClientStateResponse": {
+                        "fields": {
+                          "identifiedClientState": {
+                            "type": "ibc.core.client.v1.IdentifiedClientState",
+                            "id": 1,
+                            "comment": "client state associated with the channel"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryChannelClientStateResponse is the Response type for the\nQuery/QueryChannelClientState RPC method"
+                      },
+                      "QueryChannelConsensusStateRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "revisionNumber": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "revision number of the consensus state"
+                          },
+                          "revisionHeight": {
+                            "type": "uint64",
+                            "id": 4,
+                            "comment": "revision height of the consensus state"
+                          }
+                        },
+                        "comment": "QueryChannelConsensusStateRequest is the request type for the\nQuery/ConsensusState RPC method"
+                      },
+                      "QueryChannelConsensusStateResponse": {
+                        "fields": {
+                          "consensusState": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "consensus state associated with the channel"
+                          },
+                          "clientId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "client ID associated with the consensus state"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryChannelClientStateResponse is the Response type for the\nQuery/QueryChannelClientState RPC method"
+                      },
+                      "QueryPacketCommitmentRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "packet sequence"
+                          }
+                        },
+                        "comment": "QueryPacketCommitmentRequest is the request type for the\nQuery/PacketCommitment RPC method"
+                      },
+                      "QueryPacketCommitmentResponse": {
+                        "fields": {
+                          "commitment": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": "packet associated with the request fields"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryPacketCommitmentResponse defines the client query response for a packet\nwhich also includes a proof and the height from which the proof was\nretrieved"
+                      },
+                      "QueryPacketCommitmentsRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 3,
+                            "comment": "pagination request"
+                          }
+                        },
+                        "comment": "QueryPacketCommitmentsRequest is the request type for the\nQuery/QueryPacketCommitments RPC method"
+                      },
+                      "QueryPacketCommitmentsResponse": {
+                        "fields": {
+                          "commitments": {
+                            "rule": "repeated",
+                            "type": "ibc.core.channel.v1.PacketState",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryPacketCommitmentsResponse is the request type for the\nQuery/QueryPacketCommitments RPC method"
+                      },
+                      "QueryPacketReceiptRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "packet sequence"
+                          }
+                        },
+                        "comment": "QueryPacketReceiptRequest is the request type for the\nQuery/PacketReceipt RPC method"
+                      },
+                      "QueryPacketReceiptResponse": {
+                        "fields": {
+                          "received": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "success flag for if receipt exists"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryPacketReceiptResponse defines the client query response for a packet\nreceipt which also includes a proof, and the height from which the proof was\nretrieved"
+                      },
+                      "QueryPacketAcknowledgementRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "packet sequence"
+                          }
+                        },
+                        "comment": "QueryPacketAcknowledgementRequest is the request type for the\nQuery/PacketAcknowledgement RPC method"
+                      },
+                      "QueryPacketAcknowledgementResponse": {
+                        "fields": {
+                          "acknowledgement": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": "packet associated with the request fields"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryPacketAcknowledgementResponse defines the client query response for a\npacket which also includes a proof and the height from which the\nproof was retrieved"
+                      },
+                      "QueryPacketAcknowledgementsRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 3,
+                            "comment": "pagination request"
+                          },
+                          "packetCommitmentSequences": {
+                            "rule": "repeated",
+                            "type": "uint64",
+                            "id": 4,
+                            "comment": "list of packet sequences"
+                          }
+                        },
+                        "comment": "QueryPacketAcknowledgementsRequest is the request type for the\nQuery/QueryPacketCommitments RPC method"
+                      },
+                      "QueryPacketAcknowledgementsResponse": {
+                        "fields": {
+                          "acknowledgements": {
+                            "rule": "repeated",
+                            "type": "ibc.core.channel.v1.PacketState",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryPacketAcknowledgemetsResponse is the request type for the\nQuery/QueryPacketAcknowledgements RPC method"
+                      },
+                      "QueryUnreceivedPacketsRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "packetCommitmentSequences": {
+                            "rule": "repeated",
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "list of packet sequences"
+                          }
+                        },
+                        "comment": "QueryUnreceivedPacketsRequest is the request type for the\nQuery/UnreceivedPackets RPC method"
+                      },
+                      "QueryUnreceivedPacketsResponse": {
+                        "fields": {
+                          "sequences": {
+                            "rule": "repeated",
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "list of unreceived packet sequences"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryUnreceivedPacketsResponse is the response type for the\nQuery/UnreceivedPacketCommitments RPC method"
+                      },
+                      "QueryUnreceivedAcksRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          },
+                          "packetAckSequences": {
+                            "rule": "repeated",
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "list of acknowledgement sequences"
+                          }
+                        },
+                        "comment": "QueryUnreceivedAcks is the request type for the\nQuery/UnreceivedAcks RPC method"
+                      },
+                      "QueryUnreceivedAcksResponse": {
+                        "fields": {
+                          "sequences": {
+                            "rule": "repeated",
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "list of unreceived acknowledgement sequences"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryUnreceivedAcksResponse is the response type for the\nQuery/UnreceivedAcks RPC method"
+                      },
+                      "QueryNextSequenceReceiveRequest": {
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "port unique identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "channel unique identifier"
+                          }
+                        },
+                        "comment": "QueryNextSequenceReceiveRequest is the request type for the\nQuery/QueryNextSequenceReceiveRequest RPC method"
+                      },
+                      "QueryNextSequenceReceiveResponse": {
+                        "fields": {
+                          "nextSequenceReceive": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "next sequence receive number"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QuerySequenceResponse is the request type for the\nQuery/QueryNextSequenceReceiveResponse RPC method"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

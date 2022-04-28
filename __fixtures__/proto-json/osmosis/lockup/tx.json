@@ -1,0 +1,151 @@
+{
+  "package": "osmosis.lockup",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "osmosis/lockup/lock.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "lockup": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/lockup/types"
+            },
+            "nested": {
+              "Msg": {
+                "methods": {
+                  "LockTokens": {
+                    "requestType": "MsgLockTokens",
+                    "responseType": "MsgLockTokensResponse",
+                    "comment": "LockTokens lock tokens"
+                  },
+                  "BeginUnlockingAll": {
+                    "requestType": "MsgBeginUnlockingAll",
+                    "responseType": "MsgBeginUnlockingAllResponse",
+                    "comment": "BeginUnlockingAll begin unlocking all tokens"
+                  },
+                  "BeginUnlocking": {
+                    "requestType": "MsgBeginUnlocking",
+                    "responseType": "MsgBeginUnlockingResponse",
+                    "comment": "MsgBeginUnlocking begins unlocking tokens by lock ID"
+                  }
+                },
+                "comment": "Msg defines the Msg service."
+              },
+              "MsgLockTokens": {
+                "fields": {
+                  "owner": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:owner"
+                    },
+                    "comment": null
+                  },
+                  "duration": {
+                    "type": "google.protobuf.Duration",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(gogoproto.jsontag)": "duration,omitempty",
+                      "(gogoproto.moretags)": "yaml:duration"
+                    },
+                    "comment": null
+                  },
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgLockTokensResponse": {
+                "fields": {
+                  "ID": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgBeginUnlockingAll": {
+                "fields": {
+                  "owner": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:owner"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgBeginUnlockingAllResponse": {
+                "fields": {
+                  "unlocks": {
+                    "rule": "repeated",
+                    "type": "PeriodLock",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgBeginUnlocking": {
+                "fields": {
+                  "owner": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:owner"
+                    },
+                    "comment": null
+                  },
+                  "ID": {
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": "Amount of unlocking coins. Unlock all if not set."
+                  }
+                },
+                "comment": null
+              },
+              "MsgBeginUnlockingResponse": {
+                "fields": {
+                  "success": {
+                    "type": "bool",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "package": "ibc.applications.transfer.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "ibc/applications/transfer/v1/transfer.proto",
+    "google/api/annotations.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "applications": {
+            "nested": {
+              "transfer": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/apps/transfer/types"
+                    },
+                    "nested": {
+                      "Query": {
+                        "methods": {
+                          "DenomTrace": {
+                            "requestType": "QueryDenomTraceRequest",
+                            "responseType": "QueryDenomTraceResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/apps/transfer/v1/denom_traces/{hash}"
+                            },
+                            "comment": "DenomTrace queries a denomination trace information.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/apps/transfer/v1/denom_traces/{hash}"
+                                }
+                              }
+                            ]
+                          },
+                          "DenomTraces": {
+                            "requestType": "QueryDenomTracesRequest",
+                            "responseType": "QueryDenomTracesResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/apps/transfer/v1/denom_traces"
+                            },
+                            "comment": "DenomTraces queries all denomination traces.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/apps/transfer/v1/denom_traces"
+                                }
+                              }
+                            ]
+                          },
+                          "Params": {
+                            "requestType": "QueryParamsRequest",
+                            "responseType": "QueryParamsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/apps/transfer/v1/params"
+                            },
+                            "comment": "Params queries all parameters of the ibc-transfer module.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/apps/transfer/v1/params"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "Query provides defines the gRPC querier service."
+                      },
+                      "QueryDenomTraceRequest": {
+                        "fields": {
+                          "hash": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "hash (in hex format) of the denomination trace information."
+                          }
+                        },
+                        "comment": "QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC\nmethod"
+                      },
+                      "QueryDenomTraceResponse": {
+                        "fields": {
+                          "denomTrace": {
+                            "type": "DenomTrace",
+                            "id": 1,
+                            "comment": "denom_trace returns the requested denomination trace information."
+                          }
+                        },
+                        "comment": "QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC\nmethod."
+                      },
+                      "QueryDenomTracesRequest": {
+                        "fields": {
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 1,
+                            "comment": "pagination defines an optional pagination for the request."
+                          }
+                        },
+                        "comment": "QueryConnectionsRequest is the request type for the Query/DenomTraces RPC\nmethod"
+                      },
+                      "QueryDenomTracesResponse": {
+                        "fields": {
+                          "denomTraces": {
+                            "rule": "repeated",
+                            "type": "DenomTrace",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.castrepeated)": "Traces",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "denom_traces returns all denominations trace information."
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination defines the pagination in the response."
+                          }
+                        },
+                        "comment": "QueryConnectionsResponse is the response type for the Query/DenomTraces RPC\nmethod."
+                      },
+                      "QueryParamsRequest": {
+                        "fields": {},
+                        "comment": "QueryParamsRequest is the request type for the Query/Params RPC method."
+                      },
+                      "QueryParamsResponse": {
+                        "fields": {
+                          "params": {
+                            "type": "Params",
+                            "id": 1,
+                            "comment": "params defines the parameters of the module."
+                          }
+                        },
+                        "comment": "QueryParamsResponse is the response type for the Query/Params RPC method."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,482 @@
+{
+  "package": "cosmos.group.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos_proto/cosmos.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "group": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/group"
+                },
+                "nested": {
+                  "Member": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the member's account address."
+                      },
+                      "weight": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "weight is the member's voting weight that should be greater than 0."
+                      },
+                      "metadata": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "metadata is any arbitrary metadata to attached to the member."
+                      },
+                      "addedAt": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "added_at is a timestamp specifying when a member was added."
+                      }
+                    },
+                    "comment": "Member represents a group member with an account address,\nnon-zero weight and metadata."
+                  },
+                  "Members": {
+                    "fields": {
+                      "members": {
+                        "rule": "repeated",
+                        "type": "Member",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "members is the list of members."
+                      }
+                    },
+                    "comment": "Members defines a repeated slice of Member objects."
+                  },
+                  "ThresholdDecisionPolicy": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "DecisionPolicy"
+                    },
+                    "fields": {
+                      "threshold": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed."
+                      },
+                      "windows": {
+                        "type": "DecisionPolicyWindows",
+                        "id": 2,
+                        "comment": "windows defines the different windows for voting and execution."
+                      }
+                    },
+                    "comment": "ThresholdDecisionPolicy implements the DecisionPolicy interface"
+                  },
+                  "PercentageDecisionPolicy": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "DecisionPolicy"
+                    },
+                    "fields": {
+                      "percentage": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "percentage is the minimum percentage the weighted sum of yes votes must meet for a proposal to succeed."
+                      },
+                      "windows": {
+                        "type": "DecisionPolicyWindows",
+                        "id": 2,
+                        "comment": "windows defines the different windows for voting and execution."
+                      }
+                    },
+                    "comment": "PercentageDecisionPolicy implements the DecisionPolicy interface"
+                  },
+                  "DecisionPolicyWindows": {
+                    "fields": {
+                      "votingPeriod": {
+                        "type": "google.protobuf.Duration",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "voting_period is the duration from submission of a proposal to the end of voting period\nWithin this times votes can be submitted with MsgVote."
+                      },
+                      "minExecutionPeriod": {
+                        "type": "google.protobuf.Duration",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "min_execution_period is the minimum duration after the proposal submission\nwhere members can start sending MsgExec. This means that the window for\nsending a MsgExec transaction is:\n`[ submission + min_execution_period ; submission + voting_period + max_execution_period]`\nwhere max_execution_period is a app-specific config, defined in the keeper.\nIf not set, min_execution_period will default to 0.\n\nPlease make sure to set a `min_execution_period` that is smaller than\n`voting_period + max_execution_period`, or else the above execution window\nis empty, meaning that all proposals created with this decision policy\nwon't be able to be executed."
+                      }
+                    },
+                    "comment": "DecisionPolicyWindows defines the different windows for voting and execution."
+                  },
+                  "VoteOption": {
+                    "options": {
+                      "(gogoproto.goproto_enum_prefix)": false
+                    },
+                    "values": {
+                      "VOTE_OPTION_UNSPECIFIED": 0,
+                      "VOTE_OPTION_YES": 1,
+                      "VOTE_OPTION_ABSTAIN": 2,
+                      "VOTE_OPTION_NO": 3,
+                      "VOTE_OPTION_NO_WITH_VETO": 4
+                    },
+                    "comment": "VoteOption enumerates the valid vote options for a given proposal.",
+                    "comments": {
+                      "VOTE_OPTION_UNSPECIFIED": "VOTE_OPTION_UNSPECIFIED defines a no-op vote option.",
+                      "VOTE_OPTION_YES": "VOTE_OPTION_YES defines a yes vote option.",
+                      "VOTE_OPTION_ABSTAIN": "VOTE_OPTION_ABSTAIN defines an abstain vote option.",
+                      "VOTE_OPTION_NO": "VOTE_OPTION_NO defines a no vote option.",
+                      "VOTE_OPTION_NO_WITH_VETO": "VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option."
+                    }
+                  },
+                  "GroupInfo": {
+                    "fields": {
+                      "id": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "id is the unique ID of the group."
+                      },
+                      "admin": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "admin is the account address of the group's admin."
+                      },
+                      "metadata": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "metadata is any arbitrary metadata to attached to the group."
+                      },
+                      "version": {
+                        "type": "uint64",
+                        "id": 4,
+                        "comment": "version is used to track changes to a group's membership structure that\nwould break existing proposals. Whenever any members weight is changed,\nor any member is added or removed this version is incremented and will\ncause proposals based on older versions of this group to fail"
+                      },
+                      "totalWeight": {
+                        "type": "string",
+                        "id": 5,
+                        "comment": "total_weight is the sum of the group members' weights."
+                      },
+                      "createdAt": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "created_at is a timestamp specifying when a group was created."
+                      }
+                    },
+                    "comment": "GroupInfo represents the high-level on-chain information for a group."
+                  },
+                  "GroupMember": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group."
+                      },
+                      "member": {
+                        "type": "Member",
+                        "id": 2,
+                        "comment": "member is the member data."
+                      }
+                    },
+                    "comment": "GroupMember represents the relationship between a group and a member."
+                  },
+                  "GroupPolicyInfo": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of group policy."
+                      },
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": "group_id is the unique ID of the group."
+                      },
+                      "admin": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "admin is the account address of the group admin."
+                      },
+                      "metadata": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "metadata is any arbitrary metadata to attached to the group policy."
+                      },
+                      "version": {
+                        "type": "uint64",
+                        "id": 5,
+                        "comment": "version is used to track changes to a group's GroupPolicyInfo structure that\nwould create a different result on a running proposal."
+                      },
+                      "decisionPolicy": {
+                        "type": "google.protobuf.Any",
+                        "id": 6,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "DecisionPolicy"
+                        },
+                        "comment": "decision_policy specifies the group policy's decision policy."
+                      },
+                      "createdAt": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "created_at is a timestamp specifying when a group policy was created."
+                      }
+                    },
+                    "comment": "GroupPolicyInfo represents the high-level on-chain information for a group policy."
+                  },
+                  "Proposal": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "id": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "id is the unique id of the proposal."
+                      },
+                      "address": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of group policy."
+                      },
+                      "metadata": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "metadata is any arbitrary metadata to attached to the proposal."
+                      },
+                      "proposers": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "proposers are the account addresses of the proposers."
+                      },
+                      "submitTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "submit_time is a timestamp specifying when a proposal was submitted."
+                      },
+                      "groupVersion": {
+                        "type": "uint64",
+                        "id": 6,
+                        "comment": "group_version tracks the version of the group that this proposal corresponds to.\nWhen group membership is changed, existing proposals from previous group versions will become invalid."
+                      },
+                      "groupPolicyVersion": {
+                        "type": "uint64",
+                        "id": 7,
+                        "comment": "group_policy_version tracks the version of the group policy that this proposal corresponds to.\nWhen a decision policy is changed, existing proposals from previous policy versions will become invalid."
+                      },
+                      "status": {
+                        "type": "ProposalStatus",
+                        "id": 8,
+                        "comment": "status represents the high level position in the life cycle of the proposal. Initial value is Submitted."
+                      },
+                      "result": {
+                        "type": "ProposalResult",
+                        "id": 9,
+                        "comment": "result is the final result based on the votes and election rule. Initial value is unfinalized.\nThe result is persisted so that clients can always rely on this state and not have to replicate the logic."
+                      },
+                      "finalTallyResult": {
+                        "type": "TallyResult",
+                        "id": 10,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "final_tally_result contains the sums of all weighted votes for this\nproposal for each vote option, after tallying. When querying a proposal\nvia gRPC, this field is not populated until the proposal's voting period\nhas ended."
+                      },
+                      "votingPeriodEnd": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 11,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "voting_period_end is the timestamp before which voting must be done.\nUnless a successfull MsgExec is called before (to execute a proposal whose\ntally is successful before the voting period ends), tallying will be done\nat this point, and the `final_tally_result`, as well\nas `status` and `result` fields will be accordingly updated."
+                      },
+                      "executorResult": {
+                        "type": "ProposalExecutorResult",
+                        "id": 12,
+                        "comment": "executor_result is the final result based on the votes and election rule. Initial value is NotRun."
+                      },
+                      "messages": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 13,
+                        "comment": "messages is a list of Msgs that will be executed if the proposal passes."
+                      }
+                    },
+                    "comment": "Proposal defines a group proposal. Any member of a group can submit a proposal\nfor a group policy to decide upon.\nA proposal consists of a set of `sdk.Msg`s that will be executed if the proposal\npasses as well as some optional metadata associated with the proposal."
+                  },
+                  "ProposalStatus": {
+                    "options": {
+                      "(gogoproto.goproto_enum_prefix)": false
+                    },
+                    "values": {
+                      "PROPOSAL_STATUS_UNSPECIFIED": 0,
+                      "PROPOSAL_STATUS_SUBMITTED": 1,
+                      "PROPOSAL_STATUS_CLOSED": 2,
+                      "PROPOSAL_STATUS_ABORTED": 3,
+                      "PROPOSAL_STATUS_WITHDRAWN": 4
+                    },
+                    "comment": "ProposalStatus defines proposal statuses.",
+                    "comments": {
+                      "PROPOSAL_STATUS_UNSPECIFIED": "An empty value is invalid and not allowed.",
+                      "PROPOSAL_STATUS_SUBMITTED": "Initial status of a proposal when persisted.",
+                      "PROPOSAL_STATUS_CLOSED": "Final status of a proposal when the final tally was executed.",
+                      "PROPOSAL_STATUS_ABORTED": "Final status of a proposal when the group was modified before the final tally.",
+                      "PROPOSAL_STATUS_WITHDRAWN": "A proposal can be deleted before the voting start time by the owner. When this happens the final status\nis Withdrawn."
+                    }
+                  },
+                  "ProposalResult": {
+                    "options": {
+                      "(gogoproto.goproto_enum_prefix)": false
+                    },
+                    "values": {
+                      "PROPOSAL_RESULT_UNSPECIFIED": 0,
+                      "PROPOSAL_RESULT_UNFINALIZED": 1,
+                      "PROPOSAL_RESULT_ACCEPTED": 2,
+                      "PROPOSAL_RESULT_REJECTED": 3
+                    },
+                    "comment": "ProposalResult defines types of proposal results.",
+                    "comments": {
+                      "PROPOSAL_RESULT_UNSPECIFIED": "An empty value is invalid and not allowed",
+                      "PROPOSAL_RESULT_UNFINALIZED": "Until a final tally has happened the status is unfinalized",
+                      "PROPOSAL_RESULT_ACCEPTED": "Final result of the tally",
+                      "PROPOSAL_RESULT_REJECTED": "Final result of the tally"
+                    }
+                  },
+                  "ProposalExecutorResult": {
+                    "options": {
+                      "(gogoproto.goproto_enum_prefix)": false
+                    },
+                    "values": {
+                      "PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED": 0,
+                      "PROPOSAL_EXECUTOR_RESULT_NOT_RUN": 1,
+                      "PROPOSAL_EXECUTOR_RESULT_SUCCESS": 2,
+                      "PROPOSAL_EXECUTOR_RESULT_FAILURE": 3
+                    },
+                    "comment": "ProposalExecutorResult defines types of proposal executor results.",
+                    "comments": {
+                      "PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED": "An empty value is not allowed.",
+                      "PROPOSAL_EXECUTOR_RESULT_NOT_RUN": "We have not yet run the executor.",
+                      "PROPOSAL_EXECUTOR_RESULT_SUCCESS": "The executor was successful and proposed action updated state.",
+                      "PROPOSAL_EXECUTOR_RESULT_FAILURE": "The executor returned an error and proposed action didn't update state."
+                    }
+                  },
+                  "TallyResult": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "yesCount": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "yes_count is the weighted sum of yes votes."
+                      },
+                      "abstainCount": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "abstain_count is the weighted sum of abstainers."
+                      },
+                      "noCount": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "no is the weighted sum of no votes."
+                      },
+                      "noWithVetoCount": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "no_with_veto_count is the weighted sum of veto."
+                      }
+                    },
+                    "comment": "TallyResult represents the sum of weighted votes for each vote option."
+                  },
+                  "Vote": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal is the unique ID of the proposal."
+                      },
+                      "voter": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "voter is the account address of the voter."
+                      },
+                      "option": {
+                        "type": "VoteOption",
+                        "id": 3,
+                        "comment": "option is the voter's choice on the proposal."
+                      },
+                      "metadata": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "metadata is any arbitrary metadata to attached to the vote."
+                      },
+                      "submitTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "submit_time is the timestamp when the vote was submitted."
+                      }
+                    },
+                    "comment": "Vote represents a vote for a proposal."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

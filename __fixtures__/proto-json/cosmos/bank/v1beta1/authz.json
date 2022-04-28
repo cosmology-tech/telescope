@@ -1,0 +1,46 @@
+{
+  "package": "cosmos.bank.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "bank": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/bank/types"
+                },
+                "nested": {
+                  "SendAuthorization": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "Authorization"
+                    },
+                    "fields": {
+                      "spendLimit": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "SendAuthorization allows the grantee to spend up to spend_limit coins from\nthe granter's account.\n\nSince: cosmos-sdk 0.43"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

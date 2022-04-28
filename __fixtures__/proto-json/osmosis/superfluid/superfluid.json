@@ -1,0 +1,142 @@
+{
+  "package": "osmosis.superfluid",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "superfluid": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/superfluid/types"
+            },
+            "nested": {
+              "SuperfluidAssetType": {
+                "options": {
+                  "(gogoproto.goproto_enum_prefix)": false
+                },
+                "values": {
+                  "SuperfluidAssetTypeNative": 0,
+                  "SuperfluidAssetTypeLPShare": 1
+                },
+                "comment": null,
+                "comments": {
+                  "SuperfluidAssetTypeNative": null,
+                  "SuperfluidAssetTypeLPShare": null
+                }
+              },
+              "SuperfluidAsset": {
+                "options": {
+                  "(gogoproto.equal)": true,
+                  "(gogoproto.goproto_getters)": false
+                },
+                "fields": {
+                  "denom": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "assetType": {
+                    "type": "SuperfluidAssetType",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "SuperfluidAsset stores the pair of superfluid asset type and denom pair"
+              },
+              "SuperfluidIntermediaryAccount": {
+                "fields": {
+                  "denom": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "valAddr": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "gaugeId": {
+                    "type": "uint64",
+                    "id": 3,
+                    "comment": "perpetual gauge for rewards distribution"
+                  }
+                },
+                "comment": "SuperfluidIntermediaryAccount takes the role of intermediary between LP token\nand OSMO tokens for superfluid staking"
+              },
+              "OsmoEquivalentMultiplierRecord": {
+                "fields": {
+                  "epochNumber": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "denom": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "superfluid asset denom, can be LP token or native token"
+                  },
+                  "multiplier": {
+                    "type": "string",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:multiplier",
+                      "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we\ntreat an LP share as having, for all of epoch N. Eventually this is intended\nto be set as the Time-weighted-average-osmo-backing for the entire duration\nof epoch N-1. (Thereby locking whats in use for epoch N as based on the prior\nepochs rewards) However for now, this is not the TWAP but instead the spot\nprice at the boundary.  For different types of assets in the future, it could\nchange."
+              },
+              "SuperfluidDelegationRecord": {
+                "fields": {
+                  "delegatorAddress": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "validatorAddress": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "delegationAmount": {
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coin"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "SuperfluidDelegationRecord takes the role of intermediary between LP token\nand OSMO tokens for superfluid staking"
+              },
+              "LockIdIntermediaryAccountConnection": {
+                "fields": {
+                  "lockId": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "intermediaryAccount": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

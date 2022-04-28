@@ -1,0 +1,189 @@
+{
+  "package": "cosmwasm.wasm.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmwasm/wasm/v1/types.proto",
+    "cosmwasm/wasm/v1/tx.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmwasm": {
+        "nested": {
+          "wasm": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/CosmWasm/wasmd/x/wasm/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "codes": {
+                        "rule": "repeated",
+                        "type": "Code",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.jsontag)": "codes,omitempty"
+                        },
+                        "comment": null
+                      },
+                      "contracts": {
+                        "rule": "repeated",
+                        "type": "Contract",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.jsontag)": "contracts,omitempty"
+                        },
+                        "comment": null
+                      },
+                      "sequences": {
+                        "rule": "repeated",
+                        "type": "Sequence",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.jsontag)": "sequences,omitempty"
+                        },
+                        "comment": null
+                      },
+                      "genMsgs": {
+                        "rule": "repeated",
+                        "type": "GenMsgs",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.jsontag)": "gen_msgs,omitempty"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "nested": {
+                      "GenMsgs": {
+                        "oneofs": {
+                          "sum": {
+                            "oneof": [
+                              "storeCode",
+                              "instantiateContract",
+                              "executeContract"
+                            ],
+                            "comment": "sum is a single message"
+                          }
+                        },
+                        "fields": {
+                          "storeCode": {
+                            "type": "MsgStoreCode",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "instantiateContract": {
+                            "type": "MsgInstantiateContract",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "executeContract": {
+                            "type": "MsgExecuteContract",
+                            "id": 3,
+                            "comment": null
+                          }
+                        },
+                        "comment": "GenMsgs define the messages that can be executed during genesis phase in\norder. The intention is to have more human readable data that is auditable."
+                      }
+                    },
+                    "comment": "GenesisState - genesis state of x/wasm"
+                  },
+                  "Code": {
+                    "fields": {
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": null
+                      },
+                      "codeInfo": {
+                        "type": "CodeInfo",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "codeBytes": {
+                        "type": "bytes",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "pinned": {
+                        "type": "bool",
+                        "id": 4,
+                        "comment": "Pinned to wasmvm cache"
+                      }
+                    },
+                    "comment": "Code struct encompasses CodeInfo and CodeBytes"
+                  },
+                  "Contract": {
+                    "fields": {
+                      "contractAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "contractInfo": {
+                        "type": "ContractInfo",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "contractState": {
+                        "rule": "repeated",
+                        "type": "Model",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Contract struct encompasses ContractAddress, ContractInfo, and ContractState"
+                  },
+                  "Sequence": {
+                    "fields": {
+                      "idKey": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customname)": "IDKey"
+                        },
+                        "comment": null
+                      },
+                      "value": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Sequence key and value of an id generation counter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

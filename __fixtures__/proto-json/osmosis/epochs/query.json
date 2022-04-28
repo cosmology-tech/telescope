@@ -1,0 +1,102 @@
+{
+  "package": "osmosis.epochs.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "osmosis/epochs/genesis.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "epochs": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/epochs/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "EpochInfos": {
+                        "requestType": "QueryEpochsInfoRequest",
+                        "responseType": "QueryEpochsInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/epochs/v1beta1/epochs"
+                        },
+                        "comment": "EpochInfos provide running epochInfos",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/epochs/v1beta1/epochs"
+                            }
+                          }
+                        ]
+                      },
+                      "CurrentEpoch": {
+                        "requestType": "QueryCurrentEpochRequest",
+                        "responseType": "QueryCurrentEpochResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/epochs/v1beta1/current_epoch"
+                        },
+                        "comment": "CurrentEpoch provide current epoch of specified identifier",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/epochs/v1beta1/current_epoch"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryEpochsInfoRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryEpochsInfoResponse": {
+                    "fields": {
+                      "epochs": {
+                        "rule": "repeated",
+                        "type": "EpochInfo",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryCurrentEpochRequest": {
+                    "fields": {
+                      "identifier": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryCurrentEpochResponse": {
+                    "fields": {
+                      "currentEpoch": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

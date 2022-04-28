@@ -1,0 +1,515 @@
+{
+  "package": "osmosis.gamm.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/gamm/v1beta1/tx.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/any.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "gamm": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/gamm/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Pools": {
+                        "requestType": "QueryPoolsRequest",
+                        "responseType": "QueryPoolsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/pools"
+                            }
+                          }
+                        ]
+                      },
+                      "NumPools": {
+                        "requestType": "QueryNumPoolsRequest",
+                        "responseType": "QueryNumPoolsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/num_pools"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/num_pools"
+                            }
+                          }
+                        ]
+                      },
+                      "TotalLiquidity": {
+                        "requestType": "QueryTotalLiquidityRequest",
+                        "responseType": "QueryTotalLiquidityResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/total_liquidity"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/total_liquidity"
+                            }
+                          }
+                        ]
+                      },
+                      "Pool": {
+                        "requestType": "QueryPoolRequest",
+                        "responseType": "QueryPoolResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}"
+                        },
+                        "comment": "Per Pool gRPC Endpoints",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/pools/{poolId}"
+                            }
+                          }
+                        ]
+                      },
+                      "PoolParams": {
+                        "requestType": "QueryPoolParamsRequest",
+                        "responseType": "QueryPoolParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/params"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/pools/{poolId}/params"
+                            }
+                          }
+                        ]
+                      },
+                      "TotalPoolLiquidity": {
+                        "requestType": "QueryTotalPoolLiquidityRequest",
+                        "responseType": "QueryTotalPoolLiquidityResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity"
+                            }
+                          }
+                        ]
+                      },
+                      "TotalShares": {
+                        "requestType": "QueryTotalSharesRequest",
+                        "responseType": "QueryTotalSharesResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares"
+                            }
+                          }
+                        ]
+                      },
+                      "SpotPrice": {
+                        "requestType": "QuerySpotPriceRequest",
+                        "responseType": "QuerySpotPriceResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/prices"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/pools/{poolId}/prices"
+                            }
+                          }
+                        ]
+                      },
+                      "EstimateSwapExactAmountIn": {
+                        "requestType": "QuerySwapExactAmountInRequest",
+                        "responseType": "QuerySwapExactAmountInResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in"
+                        },
+                        "comment": "Estimate the swap.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in"
+                            }
+                          }
+                        ]
+                      },
+                      "EstimateSwapExactAmountOut": {
+                        "requestType": "QuerySwapExactAmountOutRequest",
+                        "responseType": "QuerySwapExactAmountOutResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryPoolRequest": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "=============================== Pool"
+                  },
+                  "QueryPoolResponse": {
+                    "fields": {
+                      "pool": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "PoolI"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryPoolsRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "=============================== Pools"
+                  },
+                  "QueryPoolsResponse": {
+                    "fields": {
+                      "pools": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "PoolI"
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryNumPoolsRequest": {
+                    "fields": {},
+                    "comment": "=============================== NumPools"
+                  },
+                  "QueryNumPoolsResponse": {
+                    "fields": {
+                      "numPools": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:num_pools"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryPoolParamsRequest": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "=============================== PoolParams"
+                  },
+                  "QueryPoolParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryTotalPoolLiquidityRequest": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "=============================== PoolLiquidity"
+                  },
+                  "QueryTotalPoolLiquidityResponse": {
+                    "fields": {
+                      "liquidity": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.moretags)": "yaml:liquidity",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryTotalSharesRequest": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "=============================== TotalShares"
+                  },
+                  "QueryTotalSharesResponse": {
+                    "fields": {
+                      "totalShares": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:total_shares",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QuerySpotPriceRequest": {
+                    "fields": {
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      },
+                      "tokenInDenom": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:token_in_denom"
+                        },
+                        "comment": null
+                      },
+                      "tokenOutDenom": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:token_out_denom"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "reserved": [
+                      [
+                        4,
+                        4
+                      ],
+                      "withSwapFee"
+                    ],
+                    "comment": "=============================== SpotPrice"
+                  },
+                  "QuerySpotPriceResponse": {
+                    "fields": {
+                      "spotPrice": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:spot_price"
+                        },
+                        "comment": "String of the Dec. Ex) 10.203uatom"
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QuerySwapExactAmountInRequest": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:sender"
+                        },
+                        "comment": null
+                      },
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      },
+                      "tokenIn": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:token_in"
+                        },
+                        "comment": null
+                      },
+                      "routes": {
+                        "rule": "repeated",
+                        "type": "SwapAmountInRoute",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:routes",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "=============================== EstimateSwapExactAmountIn"
+                  },
+                  "QuerySwapExactAmountInResponse": {
+                    "fields": {
+                      "tokenOutAmount": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_out_amount",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QuerySwapExactAmountOutRequest": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:sender"
+                        },
+                        "comment": null
+                      },
+                      "poolId": {
+                        "type": "uint64",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      },
+                      "routes": {
+                        "rule": "repeated",
+                        "type": "SwapAmountOutRoute",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:routes",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "tokenOut": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:token_out"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "=============================== EstimateSwapExactAmountOut"
+                  },
+                  "QuerySwapExactAmountOutResponse": {
+                    "fields": {
+                      "tokenInAmount": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_in_amount",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryTotalLiquidityRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryTotalLiquidityResponse": {
+                    "fields": {
+                      "liquidity": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.moretags)": "yaml:liquidity",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "package": "cosmos.tx.signing.v1beta1",
+  "imports": [
+    "cosmos/crypto/multisig/v1beta1/multisig.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "tx": {
+            "nested": {
+              "signing": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/types/tx/signing"
+                    },
+                    "nested": {
+                      "SignMode": {
+                        "values": {
+                          "SIGN_MODE_UNSPECIFIED": 0,
+                          "SIGN_MODE_DIRECT": 1,
+                          "SIGN_MODE_TEXTUAL": 2,
+                          "SIGN_MODE_DIRECT_AUX": 3,
+                          "SIGN_MODE_LEGACY_AMINO_JSON": 127
+                        },
+                        "comment": "SignMode represents a signing mode with its own security guarantees.\n\nThis enum should be considered a registry of all known sign modes\nin the Cosmos ecosystem. Apps are not expected to support all known\nsign modes. Apps that would like to support custom  sign modes are\nencouraged to open a small PR against this file to add a new case\nto this SignMode enum describing their sign mode so that different\napps have a consistent version of this enum.",
+                        "comments": {
+                          "SIGN_MODE_UNSPECIFIED": "SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be\nrejected.",
+                          "SIGN_MODE_DIRECT": "SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is\nverified with raw bytes from Tx.",
+                          "SIGN_MODE_TEXTUAL": "SIGN_MODE_TEXTUAL is a future signing mode that will verify some\nhuman-readable textual representation on top of the binary representation\nfrom SIGN_MODE_DIRECT. It is currently not supported.",
+                          "SIGN_MODE_DIRECT_AUX": "SIGN_MODE_DIRECT_AUX specifies a signing mode which uses\nSignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not\nrequire signers signing over other signers' `signer_info`. It also allows\nfor adding Tips in transactions.\n\nSince: cosmos-sdk 0.46",
+                          "SIGN_MODE_LEGACY_AMINO_JSON": "SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses\nAmino JSON and will be removed in the future."
+                        }
+                      },
+                      "SignatureDescriptors": {
+                        "fields": {
+                          "signatures": {
+                            "rule": "repeated",
+                            "type": "SignatureDescriptor",
+                            "id": 1,
+                            "comment": "signatures are the signature descriptors"
+                          }
+                        },
+                        "comment": "SignatureDescriptors wraps multiple SignatureDescriptor's."
+                      },
+                      "SignatureDescriptor": {
+                        "fields": {
+                          "publicKey": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "public_key is the public key of the signer"
+                          },
+                          "data": {
+                            "type": "Data",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "sequence is the sequence of the account, which describes the\nnumber of committed transactions signed by a given address. It is used to prevent\nreplay attacks."
+                          }
+                        },
+                        "nested": {
+                          "Data": {
+                            "oneofs": {
+                              "sum": {
+                                "oneof": [
+                                  "single",
+                                  "multi"
+                                ],
+                                "comment": "sum is the oneof that specifies whether this represents single or multi-signature data"
+                              }
+                            },
+                            "fields": {
+                              "single": {
+                                "type": "Single",
+                                "id": 1,
+                                "comment": "single represents a single signer"
+                              },
+                              "multi": {
+                                "type": "Multi",
+                                "id": 2,
+                                "comment": "multi represents a multisig signer"
+                              }
+                            },
+                            "nested": {
+                              "Single": {
+                                "fields": {
+                                  "mode": {
+                                    "type": "SignMode",
+                                    "id": 1,
+                                    "comment": "mode is the signing mode of the single signer"
+                                  },
+                                  "signature": {
+                                    "type": "bytes",
+                                    "id": 2,
+                                    "comment": "signature is the raw signature bytes"
+                                  }
+                                },
+                                "comment": "Single is the signature data for a single signer"
+                              },
+                              "Multi": {
+                                "fields": {
+                                  "bitarray": {
+                                    "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+                                    "id": 1,
+                                    "comment": "bitarray specifies which keys within the multisig are signing"
+                                  },
+                                  "signatures": {
+                                    "rule": "repeated",
+                                    "type": "Data",
+                                    "id": 2,
+                                    "comment": "signatures is the signatures of the multi-signature"
+                                  }
+                                },
+                                "comment": "Multi is the signature data for a multisig public key"
+                              }
+                            },
+                            "comment": "Data represents signature data"
+                          }
+                        },
+                        "comment": "SignatureDescriptor is a convenience type which represents the full data for\na signature including the public key of the signer, signing modes and the\nsignature itself. It is primarily used for coordinating signatures between\nclients."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

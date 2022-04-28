@@ -1,0 +1,157 @@
+{
+  "package": "google.api.servicecontrol.v1",
+  "imports": [
+    "google/api/distribution.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicecontrol": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "csharp_namespace": "Google.Cloud.ServiceControl.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v1;servicecontrol",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "DistributionProto",
+                      "java_package": "com.google.api.servicecontrol.v1",
+                      "php_namespace": "Google\\Cloud\\ServiceControl\\V1",
+                      "ruby_package": "Google::Cloud::ServiceControl::V1"
+                    },
+                    "nested": {
+                      "Distribution": {
+                        "oneofs": {
+                          "bucketOption": {
+                            "oneof": [
+                              "linearBuckets",
+                              "exponentialBuckets",
+                              "explicitBuckets"
+                            ],
+                            "comment": "Defines the buckets in the histogram. `bucket_option` and `bucket_counts`\nmust be both set, or both unset.\n\nBuckets are numbered in the range of [0, N], with a total of N+1 buckets.\nThere must be at least two buckets (a single-bucket histogram gives\nno information that isn't already provided by `count`).\n\nThe first bucket is the underflow bucket which has a lower bound\nof -inf. The last bucket is the overflow bucket which has an\nupper bound of +inf. All other buckets (if any) are called \"finite\"\nbuckets because they have finite lower and upper bounds. As described\nbelow, there are three ways to define the finite buckets.\n\n(1) Buckets with constant width.\n(2) Buckets with exponentially growing widths.\n(3) Buckets with arbitrary user-provided widths.\n\nIn all cases, the buckets cover the entire real number line (-inf,\n+inf). Bucket upper bounds are exclusive and lower bounds are\ninclusive. The upper bound of the underflow bucket is equal to the\nlower bound of the smallest finite bucket; the lower bound of the\noverflow bucket is equal to the upper bound of the largest finite\nbucket."
+                          }
+                        },
+                        "fields": {
+                          "count": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": "The total number of samples in the distribution. Must be >= 0."
+                          },
+                          "mean": {
+                            "type": "double",
+                            "id": 2,
+                            "comment": "The arithmetic mean of the samples in the distribution. If `count` is\nzero then this field must be zero."
+                          },
+                          "minimum": {
+                            "type": "double",
+                            "id": 3,
+                            "comment": "The minimum of the population of values. Ignored if `count` is zero."
+                          },
+                          "maximum": {
+                            "type": "double",
+                            "id": 4,
+                            "comment": "The maximum of the population of values. Ignored if `count` is zero."
+                          },
+                          "sumOfSquaredDeviation": {
+                            "type": "double",
+                            "id": 5,
+                            "comment": "The sum of squared deviations from the mean:\nSum[i=1..count]((x_i - mean)^2)\nwhere each x_i is a sample values. If `count` is zero then this field\nmust be zero, otherwise validation of the request fails."
+                          },
+                          "bucketCounts": {
+                            "rule": "repeated",
+                            "type": "int64",
+                            "id": 6,
+                            "comment": "The number of samples in each histogram bucket. `bucket_counts` are\noptional. If present, they must sum to the `count` value.\n\nThe buckets are defined below in `bucket_option`. There are N buckets.\n`bucket_counts[0]` is the number of samples in the underflow bucket.\n`bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples\nin each of the finite buckets. And `bucket_counts[N] is the number\nof samples in the overflow bucket. See the comments of `bucket_option`\nbelow for more details.\n\nAny suffix of trailing zeros may be omitted."
+                          },
+                          "linearBuckets": {
+                            "type": "LinearBuckets",
+                            "id": 7,
+                            "comment": "Buckets with constant width."
+                          },
+                          "exponentialBuckets": {
+                            "type": "ExponentialBuckets",
+                            "id": 8,
+                            "comment": "Buckets with exponentially growing width."
+                          },
+                          "explicitBuckets": {
+                            "type": "ExplicitBuckets",
+                            "id": 9,
+                            "comment": "Buckets with arbitrary user-provided width."
+                          },
+                          "exemplars": {
+                            "rule": "repeated",
+                            "type": "google.api.Distribution.Exemplar",
+                            "id": 10,
+                            "comment": "Example points. Must be in increasing order of `value` field."
+                          }
+                        },
+                        "nested": {
+                          "LinearBuckets": {
+                            "fields": {
+                              "numFiniteBuckets": {
+                                "type": "int32",
+                                "id": 1,
+                                "comment": "The number of finite buckets. With the underflow and overflow buckets,\nthe total number of buckets is `num_finite_buckets` + 2.\nSee comments on `bucket_options` for details."
+                              },
+                              "width": {
+                                "type": "double",
+                                "id": 2,
+                                "comment": "The i'th linear bucket covers the interval\n[offset + (i-1) * width, offset + i * width)\nwhere i ranges from 1 to num_finite_buckets, inclusive.\nMust be strictly positive."
+                              },
+                              "offset": {
+                                "type": "double",
+                                "id": 3,
+                                "comment": "The i'th linear bucket covers the interval\n[offset + (i-1) * width, offset + i * width)\nwhere i ranges from 1 to num_finite_buckets, inclusive."
+                              }
+                            },
+                            "comment": "Describing buckets with constant width."
+                          },
+                          "ExponentialBuckets": {
+                            "fields": {
+                              "numFiniteBuckets": {
+                                "type": "int32",
+                                "id": 1,
+                                "comment": "The number of finite buckets. With the underflow and overflow buckets,\nthe total number of buckets is `num_finite_buckets` + 2.\nSee comments on `bucket_options` for details."
+                              },
+                              "growthFactor": {
+                                "type": "double",
+                                "id": 2,
+                                "comment": "The i'th exponential bucket covers the interval\n[scale * growth_factor^(i-1), scale * growth_factor^i)\nwhere i ranges from 1 to num_finite_buckets inclusive.\nMust be larger than 1.0."
+                              },
+                              "scale": {
+                                "type": "double",
+                                "id": 3,
+                                "comment": "The i'th exponential bucket covers the interval\n[scale * growth_factor^(i-1), scale * growth_factor^i)\nwhere i ranges from 1 to num_finite_buckets inclusive.\nMust be > 0."
+                              }
+                            },
+                            "comment": "Describing buckets with exponentially growing width."
+                          },
+                          "ExplicitBuckets": {
+                            "fields": {
+                              "bounds": {
+                                "rule": "repeated",
+                                "type": "double",
+                                "id": 1,
+                                "comment": "'bound' is a list of strictly increasing boundaries between\nbuckets. Note that a list of length N-1 defines N buckets because\nof fenceposting. See comments on `bucket_options` for details.\n\nThe i'th finite bucket covers the interval\n[bound[i-1], bound[i])\nwhere i ranges from 1 to bound_size() - 1. Note that there are no\nfinite buckets at all if 'bound' only contains a single element; in\nthat special case the single bound defines the boundary between the\nunderflow and overflow buckets.\n\nbucket number                   lower bound    upper bound\ni == 0 (underflow)              -inf           bound[i]\n0 < i < bound_size()            bound[i-1]     bound[i]\ni == bound_size() (overflow)    bound[i-1]     +inf"
+                              }
+                            },
+                            "comment": "Describing buckets with arbitrary user-provided width."
+                          }
+                        },
+                        "comment": "Distribution represents a frequency distribution of double-valued sample\npoints. It contains the size of the population of sample points plus\nadditional optional information:\n\n* the arithmetic mean of the samples\n* the minimum and maximum of the samples\n* the sum-squared-deviation of the samples, used to compute variance\n* a histogram of the values of the sample points"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

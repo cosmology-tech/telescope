@@ -1,0 +1,49 @@
+{
+  "package": "cosmos.crypto.secp256k1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crypto": {
+            "nested": {
+              "secp256k1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
+                },
+                "nested": {
+                  "PubKey": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "key": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "PubKey defines a secp256k1 public key\nKey is the compressed form of the pubkey. The first byte depends is a 0x02 byte\nif the y-coordinate is the lexicographically largest of the two associated with\nthe x-coordinate. Otherwise the first byte is a 0x03.\nThis prefix is followed with the x-coordinate."
+                  },
+                  "PrivKey": {
+                    "fields": {
+                      "key": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "PrivKey defines a secp256k1 private key."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

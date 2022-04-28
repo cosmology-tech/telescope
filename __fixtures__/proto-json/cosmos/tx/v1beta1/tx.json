@@ -1,0 +1,346 @@
+{
+  "package": "cosmos.tx.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/crypto/multisig/v1beta1/multisig.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/tx/signing/v1beta1/signing.proto",
+    "google/protobuf/any.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "tx": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/types/tx"
+                },
+                "nested": {
+                  "Tx": {
+                    "fields": {
+                      "body": {
+                        "type": "TxBody",
+                        "id": 1,
+                        "comment": "body is the processable content of the transaction"
+                      },
+                      "authInfo": {
+                        "type": "AuthInfo",
+                        "id": 2,
+                        "comment": "auth_info is the authorization related content of the transaction,\nspecifically signers, signer modes and fee"
+                      },
+                      "signatures": {
+                        "rule": "repeated",
+                        "type": "bytes",
+                        "id": 3,
+                        "comment": "signatures is a list of signatures that matches the length and order of\nAuthInfo's signer_infos to allow connecting signature meta information like\npublic key and signing mode by position."
+                      }
+                    },
+                    "comment": "Tx is the standard type used for broadcasting transactions."
+                  },
+                  "TxRaw": {
+                    "fields": {
+                      "bodyBytes": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "body_bytes is a protobuf serialization of a TxBody that matches the\nrepresentation in SignDoc."
+                      },
+                      "authInfoBytes": {
+                        "type": "bytes",
+                        "id": 2,
+                        "comment": "auth_info_bytes is a protobuf serialization of an AuthInfo that matches the\nrepresentation in SignDoc."
+                      },
+                      "signatures": {
+                        "rule": "repeated",
+                        "type": "bytes",
+                        "id": 3,
+                        "comment": "signatures is a list of signatures that matches the length and order of\nAuthInfo's signer_infos to allow connecting signature meta information like\npublic key and signing mode by position."
+                      }
+                    },
+                    "comment": "TxRaw is a variant of Tx that pins the signer's exact binary representation\nof body and auth_info. This is used for signing, broadcasting and\nverification. The binary `serialize(tx: TxRaw)` is stored in Tendermint and\nthe hash `sha256(serialize(tx: TxRaw))` becomes the \"txhash\", commonly used\nas the transaction ID."
+                  },
+                  "SignDoc": {
+                    "fields": {
+                      "bodyBytes": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "body_bytes is protobuf serialization of a TxBody that matches the\nrepresentation in TxRaw."
+                      },
+                      "authInfoBytes": {
+                        "type": "bytes",
+                        "id": 2,
+                        "comment": "auth_info_bytes is a protobuf serialization of an AuthInfo that matches the\nrepresentation in TxRaw."
+                      },
+                      "chainId": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "chain_id is the unique identifier of the chain this transaction targets.\nIt prevents signed transactions from being used on another chain by an\nattacker"
+                      },
+                      "accountNumber": {
+                        "type": "uint64",
+                        "id": 4,
+                        "comment": "account_number is the account number of the account in state"
+                      }
+                    },
+                    "comment": "SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT."
+                  },
+                  "SignDocDirectAux": {
+                    "fields": {
+                      "bodyBytes": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "body_bytes is protobuf serialization of a TxBody that matches the\nrepresentation in TxRaw."
+                      },
+                      "publicKey": {
+                        "type": "google.protobuf.Any",
+                        "id": 2,
+                        "comment": "public_key is the public key of the signing account."
+                      },
+                      "chainId": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "chain_id is the identifier of the chain this transaction targets.\nIt prevents signed transactions from being used on another chain by an\nattacker."
+                      },
+                      "accountNumber": {
+                        "type": "uint64",
+                        "id": 4,
+                        "comment": "account_number is the account number of the account in state."
+                      },
+                      "sequence": {
+                        "type": "uint64",
+                        "id": 5,
+                        "comment": "sequence is the sequence number of the signing account."
+                      },
+                      "tip": {
+                        "type": "Tip",
+                        "id": 6,
+                        "comment": "Tip is the optional tip used for meta-transactions. It should be left\nempty if the signer is not the tipper for this transaction."
+                      }
+                    },
+                    "comment": "SignDocDirectAux is the type used for generating sign bytes for\nSIGN_MODE_DIRECT_AUX.\n\nSince: cosmos-sdk 0.46"
+                  },
+                  "TxBody": {
+                    "fields": {
+                      "messages": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "comment": "messages is a list of messages to be executed. The required signers of\nthose messages define the number and order of elements in AuthInfo's\nsigner_infos and Tx's signatures. Each required signer address is added to\nthe list only the first time it occurs.\nBy convention, the first required signer (usually from the first message)\nis referred to as the primary signer and pays the fee for the whole\ntransaction."
+                      },
+                      "memo": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "memo is any arbitrary note/comment to be added to the transaction.\nWARNING: in clients, any publicly exposed text should not be called memo,\nbut should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122)."
+                      },
+                      "timeoutHeight": {
+                        "type": "uint64",
+                        "id": 3,
+                        "comment": "timeout is the block height after which this transaction will not\nbe processed by the chain"
+                      },
+                      "extensionOptions": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1023,
+                        "comment": "extension_options are arbitrary options that can be added by chains\nwhen the default options are not sufficient. If any of these are present\nand can't be handled, the transaction will be rejected"
+                      },
+                      "nonCriticalExtensionOptions": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 2047,
+                        "comment": "extension_options are arbitrary options that can be added by chains\nwhen the default options are not sufficient. If any of these are present\nand can't be handled, they will be ignored"
+                      }
+                    },
+                    "comment": "TxBody is the body of a transaction that all signers sign over."
+                  },
+                  "AuthInfo": {
+                    "fields": {
+                      "signerInfos": {
+                        "rule": "repeated",
+                        "type": "SignerInfo",
+                        "id": 1,
+                        "comment": "signer_infos defines the signing modes for the required signers. The number\nand order of elements must match the required signers from TxBody's\nmessages. The first element is the primary signer and the one which pays\nthe fee."
+                      },
+                      "fee": {
+                        "type": "Fee",
+                        "id": 2,
+                        "comment": "Fee is the fee and gas limit for the transaction. The first signer is the\nprimary signer and the one which pays the fee. The fee can be calculated\nbased on the cost of evaluating the body and doing signature verification\nof the signers. This can be estimated via simulation."
+                      },
+                      "tip": {
+                        "type": "Tip",
+                        "id": 3,
+                        "comment": "Tip is the optional tip used for meta-transactions.\n\nSince: cosmos-sdk 0.46"
+                      }
+                    },
+                    "comment": "AuthInfo describes the fee and signer modes that are used to sign a\ntransaction."
+                  },
+                  "SignerInfo": {
+                    "fields": {
+                      "publicKey": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "comment": "public_key is the public key of the signer. It is optional for accounts\nthat already exist in state. If unset, the verifier can use the required \\\nsigner address for this position and lookup the public key."
+                      },
+                      "modeInfo": {
+                        "type": "ModeInfo",
+                        "id": 2,
+                        "comment": "mode_info describes the signing mode of the signer and is a nested\nstructure to support nested multisig pubkey's"
+                      },
+                      "sequence": {
+                        "type": "uint64",
+                        "id": 3,
+                        "comment": "sequence is the sequence of the account, which describes the\nnumber of committed transactions signed by a given address. It is used to\nprevent replay attacks."
+                      }
+                    },
+                    "comment": "SignerInfo describes the public key and signing mode of a single top-level\nsigner."
+                  },
+                  "ModeInfo": {
+                    "oneofs": {
+                      "sum": {
+                        "oneof": [
+                          "single",
+                          "multi"
+                        ],
+                        "comment": "sum is the oneof that specifies whether this represents a single or nested\nmultisig signer"
+                      }
+                    },
+                    "fields": {
+                      "single": {
+                        "type": "Single",
+                        "id": 1,
+                        "comment": "single represents a single signer"
+                      },
+                      "multi": {
+                        "type": "Multi",
+                        "id": 2,
+                        "comment": "multi represents a nested multisig signer"
+                      }
+                    },
+                    "nested": {
+                      "Single": {
+                        "fields": {
+                          "mode": {
+                            "type": "cosmos.tx.signing.v1beta1.SignMode",
+                            "id": 1,
+                            "comment": "mode is the signing mode of the single signer"
+                          }
+                        },
+                        "comment": "Single is the mode info for a single signer. It is structured as a message\nto allow for additional fields such as locale for SIGN_MODE_TEXTUAL in the\nfuture"
+                      },
+                      "Multi": {
+                        "fields": {
+                          "bitarray": {
+                            "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+                            "id": 1,
+                            "comment": "bitarray specifies which keys within the multisig are signing"
+                          },
+                          "modeInfos": {
+                            "rule": "repeated",
+                            "type": "ModeInfo",
+                            "id": 2,
+                            "comment": "mode_infos is the corresponding modes of the signers of the multisig\nwhich could include nested multisig public keys"
+                          }
+                        },
+                        "comment": "Multi is the mode info for a multisig public key"
+                      }
+                    },
+                    "comment": "ModeInfo describes the signing mode of a single or nested multisig signer."
+                  },
+                  "Fee": {
+                    "fields": {
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "amount is the amount of coins to be paid as a fee"
+                      },
+                      "gasLimit": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": "gas_limit is the maximum gas that can be used in transaction processing\nbefore an out of gas error occurs"
+                      },
+                      "payer": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.\nthe payer must be a tx signer (and thus have signed this field in AuthInfo).\nsetting this field does *not* change the ordering of required signers for the transaction."
+                      },
+                      "granter": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used\nto pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does\nnot support fee grants, this will fail"
+                      }
+                    },
+                    "comment": "Fee includes the amount of coins paid in fees and the maximum\ngas to be used by the transaction. The ratio yields an effective \"gasprice\",\nwhich must be above some miminum to be accepted into the mempool."
+                  },
+                  "Tip": {
+                    "fields": {
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "amount is the amount of the tip"
+                      },
+                      "tipper": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "tipper is the address of the account paying for the tip"
+                      }
+                    },
+                    "comment": "Tip is the tip used for meta-transactions.\n\nSince: cosmos-sdk 0.46"
+                  },
+                  "AuxSignerData": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the bech32-encoded address of the auxiliary signer. If using\nAuxSignerData across different chains, the bech32 prefix of the target\nchain (where the final transaction is broadcasted) should be used."
+                      },
+                      "signDoc": {
+                        "type": "SignDocDirectAux",
+                        "id": 2,
+                        "comment": "sign_doc is the SIGN_MOD_DIRECT_AUX sign doc that the auxiliary signer\nsigns. Note: we use the same sign doc even if we're signing with\nLEGACY_AMINO_JSON."
+                      },
+                      "mode": {
+                        "type": "cosmos.tx.signing.v1beta1.SignMode",
+                        "id": 3,
+                        "comment": "mode is the signing mode of the single signer"
+                      },
+                      "sig": {
+                        "type": "bytes",
+                        "id": 4,
+                        "comment": "sig is the signature of the sign doc."
+                      }
+                    },
+                    "comment": "AuxSignerData is the intermediary format that an auxiliary signer (e.g. a\ntipper) builds and sends to the fee payer (who will build and broadcast the\nactual tx). AuxSignerData is not a valid tx in itself, and will be rejected\nby the node if sent directly as-is.\n\nSince: cosmos-sdk 0.46"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "package": "ibc.core.client.v1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "ibc/core/client/v1/client.proto",
+    "google/protobuf/any.proto",
+    "google/api/annotations.proto",
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "client": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/02-client/types"
+                    },
+                    "nested": {
+                      "Query": {
+                        "methods": {
+                          "ClientState": {
+                            "requestType": "QueryClientStateRequest",
+                            "responseType": "QueryClientStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/client_states/{client_id}"
+                            },
+                            "comment": "ClientState queries an IBC light client.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/client_states/{client_id}"
+                                }
+                              }
+                            ]
+                          },
+                          "ClientStates": {
+                            "requestType": "QueryClientStatesRequest",
+                            "responseType": "QueryClientStatesResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/client_states"
+                            },
+                            "comment": "ClientStates queries all the IBC light clients of a chain.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/client_states"
+                                }
+                              }
+                            ]
+                          },
+                          "ConsensusState": {
+                            "requestType": "QueryConsensusStateRequest",
+                            "responseType": "QueryConsensusStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}"
+                            },
+                            "comment": "ConsensusState queries a consensus state associated with a client state at\na given height.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}"
+                                }
+                              }
+                            ]
+                          },
+                          "ConsensusStates": {
+                            "requestType": "QueryConsensusStatesRequest",
+                            "responseType": "QueryConsensusStatesResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/consensus_states/{client_id}"
+                            },
+                            "comment": "ConsensusStates queries all the consensus state associated with a given\nclient.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/consensus_states/{client_id}"
+                                }
+                              }
+                            ]
+                          },
+                          "ClientStatus": {
+                            "requestType": "QueryClientStatusRequest",
+                            "responseType": "QueryClientStatusResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/client_status/{client_id}"
+                            },
+                            "comment": "Status queries the status of an IBC client.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/client_status/{client_id}"
+                                }
+                              }
+                            ]
+                          },
+                          "ClientParams": {
+                            "requestType": "QueryClientParamsRequest",
+                            "responseType": "QueryClientParamsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/client/v1/params"
+                            },
+                            "comment": "ClientParams queries all parameters of the ibc client.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/client/v1/params"
+                                }
+                              }
+                            ]
+                          },
+                          "UpgradedClientState": {
+                            "requestType": "QueryUpgradedClientStateRequest",
+                            "responseType": "QueryUpgradedClientStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/upgraded_client_states"
+                            },
+                            "comment": "UpgradedClientState queries an Upgraded IBC light client.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/upgraded_client_states"
+                                }
+                              }
+                            ]
+                          },
+                          "UpgradedConsensusState": {
+                            "requestType": "QueryUpgradedConsensusStateRequest",
+                            "responseType": "QueryUpgradedConsensusStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/client/v1/upgraded_consensus_states"
+                            },
+                            "comment": "UpgradedConsensusState queries an Upgraded IBC consensus state.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/client/v1/upgraded_consensus_states"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "Query provides defines the gRPC querier service"
+                      },
+                      "QueryClientStateRequest": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "client state unique identifier"
+                          }
+                        },
+                        "comment": "QueryClientStateRequest is the request type for the Query/ClientState RPC\nmethod"
+                      },
+                      "QueryClientStateResponse": {
+                        "fields": {
+                          "clientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "client state associated with the request identifier"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryClientStateResponse is the response type for the Query/ClientState RPC\nmethod. Besides the client state, it includes a proof and the height from\nwhich the proof was retrieved."
+                      },
+                      "QueryClientStatesRequest": {
+                        "fields": {
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 1,
+                            "comment": "pagination request"
+                          }
+                        },
+                        "comment": "QueryClientStatesRequest is the request type for the Query/ClientStates RPC\nmethod"
+                      },
+                      "QueryClientStatesResponse": {
+                        "fields": {
+                          "clientStates": {
+                            "rule": "repeated",
+                            "type": "IdentifiedClientState",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.castrepeated)": "IdentifiedClientStates"
+                            },
+                            "comment": "list of stored ClientStates of the chain."
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          }
+                        },
+                        "comment": "QueryClientStatesResponse is the response type for the Query/ClientStates RPC\nmethod."
+                      },
+                      "QueryConsensusStateRequest": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "client identifier"
+                          },
+                          "revisionNumber": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": "consensus state revision number"
+                          },
+                          "revisionHeight": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "consensus state revision height"
+                          },
+                          "latestHeight": {
+                            "type": "bool",
+                            "id": 4,
+                            "comment": "latest_height overrrides the height field and queries the latest stored\nConsensusState"
+                          }
+                        },
+                        "comment": "QueryConsensusStateRequest is the request type for the Query/ConsensusState\nRPC method. Besides the consensus state, it includes a proof and the height\nfrom which the proof was retrieved."
+                      },
+                      "QueryConsensusStateResponse": {
+                        "fields": {
+                          "consensusState": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "consensus state associated with the client identifier at the given height"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryConsensusStateResponse is the response type for the Query/ConsensusState\nRPC method"
+                      },
+                      "QueryConsensusStatesRequest": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "client identifier"
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 2,
+                            "comment": "pagination request"
+                          }
+                        },
+                        "comment": "QueryConsensusStatesRequest is the request type for the Query/ConsensusStates\nRPC method."
+                      },
+                      "QueryConsensusStatesResponse": {
+                        "fields": {
+                          "consensusStates": {
+                            "rule": "repeated",
+                            "type": "ConsensusStateWithHeight",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "consensus states associated with the identifier"
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          }
+                        },
+                        "comment": "QueryConsensusStatesResponse is the response type for the\nQuery/ConsensusStates RPC method"
+                      },
+                      "QueryClientStatusRequest": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "client unique identifier"
+                          }
+                        },
+                        "comment": "QueryClientStatusRequest is the request type for the Query/ClientStatus RPC\nmethod"
+                      },
+                      "QueryClientStatusResponse": {
+                        "fields": {
+                          "status": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "QueryClientStatusResponse is the response type for the Query/ClientStatus RPC\nmethod. It returns the current status of the IBC client."
+                      },
+                      "QueryClientParamsRequest": {
+                        "fields": {},
+                        "comment": "QueryClientParamsRequest is the request type for the Query/ClientParams RPC\nmethod."
+                      },
+                      "QueryClientParamsResponse": {
+                        "fields": {
+                          "params": {
+                            "type": "Params",
+                            "id": 1,
+                            "comment": "params defines the parameters of the module."
+                          }
+                        },
+                        "comment": "QueryClientParamsResponse is the response type for the Query/ClientParams RPC\nmethod."
+                      },
+                      "QueryUpgradedClientStateRequest": {
+                        "fields": {},
+                        "comment": "QueryUpgradedClientStateRequest is the request type for the\nQuery/UpgradedClientState RPC method"
+                      },
+                      "QueryUpgradedClientStateResponse": {
+                        "fields": {
+                          "upgradedClientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "client state associated with the request identifier"
+                          }
+                        },
+                        "comment": "QueryUpgradedClientStateResponse is the response type for the\nQuery/UpgradedClientState RPC method."
+                      },
+                      "QueryUpgradedConsensusStateRequest": {
+                        "fields": {},
+                        "comment": "QueryUpgradedConsensusStateRequest is the request type for the\nQuery/UpgradedConsensusState RPC method"
+                      },
+                      "QueryUpgradedConsensusStateResponse": {
+                        "fields": {
+                          "upgradedConsensusState": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "Consensus state associated with the request identifier"
+                          }
+                        },
+                        "comment": "QueryUpgradedConsensusStateResponse is the response type for the\nQuery/UpgradedConsensusState RPC method."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

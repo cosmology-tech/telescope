@@ -1,0 +1,85 @@
+{
+  "package": "cosmos.base.store.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "store": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/store/types"
+                    },
+                    "nested": {
+                      "CommitInfo": {
+                        "fields": {
+                          "version": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "storeInfos": {
+                            "rule": "repeated",
+                            "type": "StoreInfo",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "CommitInfo defines commit information used by the multi-store when committing\na version/height."
+                      },
+                      "StoreInfo": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "commitId": {
+                            "type": "CommitID",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "StoreInfo defines store-specific commit information. It contains a reference\nbetween a store name and the commit ID."
+                      },
+                      "CommitID": {
+                        "options": {
+                          "(gogoproto.goproto_stringer)": false
+                        },
+                        "fields": {
+                          "version": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "hash": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "CommitID defines the committment information when a specific store is\ncommitted."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "package": "google.api.servicecontrol.v1",
+  "imports": [
+    "google/api/servicecontrol/v1/log_entry.proto",
+    "google/api/servicecontrol/v1/metric_value.proto",
+    "google/protobuf/any.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicecontrol": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "csharp_namespace": "Google.Cloud.ServiceControl.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v1;servicecontrol",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "OperationProto",
+                      "java_package": "com.google.api.servicecontrol.v1",
+                      "php_namespace": "Google\\Cloud\\ServiceControl\\V1",
+                      "ruby_package": "Google::Cloud::ServiceControl::V1"
+                    },
+                    "nested": {
+                      "Operation": {
+                        "fields": {
+                          "operationId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Identity of the operation. This must be unique within the scope of the\nservice that generated the operation. If the service calls\nCheck() and Report() on the same operation, the two calls should carry\nthe same id.\n\nUUID version 4 is recommended, though not required.\nIn scenarios where an operation is computed from existing information\nand an idempotent id is desirable for deduplication purpose, UUID version 5\nis recommended. See RFC 4122 for details."
+                          },
+                          "operationName": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Fully qualified name of the operation. Reserved for future use."
+                          },
+                          "consumerId": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Identity of the consumer who is using the service.\nThis field should be filled in for the operations initiated by a\nconsumer, but not for service-initiated operations that are\nnot related to a specific consumer.\n\n- This can be in one of the following formats:\n- project:PROJECT_ID,\n- project`_`number:PROJECT_NUMBER,\n- projects/PROJECT_ID or PROJECT_NUMBER,\n- folders/FOLDER_NUMBER,\n- organizations/ORGANIZATION_NUMBER,\n- api`_`key:API_KEY."
+                          },
+                          "startTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 4,
+                            "comment": "Required. Start time of the operation."
+                          },
+                          "endTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 5,
+                            "comment": "End time of the operation.\nRequired when the operation is used in\n[ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],\nbut optional when the operation is used in\n[ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check]."
+                          },
+                          "labels": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 6,
+                            "comment": "Labels describing the operation. Only the following labels are allowed:\n\n- Labels describing monitored resources as defined in\nthe service configuration.\n- Default labels of metric values. When specified, labels defined in the\nmetric value override these default.\n- The following labels defined by Google Cloud Platform:\n- `cloud.googleapis.com/location` describing the location where the\noperation happened,\n- `servicecontrol.googleapis.com/user_agent` describing the user agent\nof the API request,\n- `servicecontrol.googleapis.com/service_agent` describing the service\nused to handle the API request (e.g. ESP),\n- `servicecontrol.googleapis.com/platform` describing the platform\nwhere the API is served, such as App Engine, Compute Engine, or\nKubernetes Engine."
+                          },
+                          "metricValueSets": {
+                            "rule": "repeated",
+                            "type": "MetricValueSet",
+                            "id": 7,
+                            "comment": "Represents information about this operation. Each MetricValueSet\ncorresponds to a metric defined in the service configuration.\nThe data type used in the MetricValueSet must agree with\nthe data type specified in the metric definition.\n\nWithin a single operation, it is not allowed to have more than one\nMetricValue instances that have the same metric names and identical\nlabel value combinations. If a request has such duplicated MetricValue\ninstances, the entire request is rejected with\nan invalid argument error."
+                          },
+                          "logEntries": {
+                            "rule": "repeated",
+                            "type": "LogEntry",
+                            "id": 8,
+                            "comment": "Represents information to be logged."
+                          },
+                          "importance": {
+                            "type": "Importance",
+                            "id": 11,
+                            "comment": "DO NOT USE. This is an experimental field."
+                          },
+                          "extensions": {
+                            "rule": "repeated",
+                            "type": "google.protobuf.Any",
+                            "id": 16,
+                            "comment": "Unimplemented."
+                          }
+                        },
+                        "nested": {
+                          "Importance": {
+                            "values": {
+                              "LOW": 0,
+                              "HIGH": 1
+                            },
+                            "comment": "Defines the importance of the data contained in the operation.",
+                            "comments": {
+                              "LOW": "Allows data caching, batching, and aggregation. It provides\nhigher performance with higher data loss risk.",
+                              "HIGH": "Disables data aggregation to minimize data loss. It is for operations\nthat contains significant monetary value or audit trail. This feature\nonly applies to the client libraries."
+                            }
+                          }
+                        },
+                        "comment": "Represents information regarding an operation."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

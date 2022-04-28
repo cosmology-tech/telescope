@@ -1,0 +1,592 @@
+{
+  "package": "ibc.core.channel.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "ibc/core/client/v1/client.proto",
+    "ibc/core/channel/v1/channel.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "channel": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/04-channel/types"
+                    },
+                    "nested": {
+                      "Msg": {
+                        "methods": {
+                          "ChannelOpenInit": {
+                            "requestType": "MsgChannelOpenInit",
+                            "responseType": "MsgChannelOpenInitResponse",
+                            "comment": "ChannelOpenInit defines a rpc handler method for MsgChannelOpenInit."
+                          },
+                          "ChannelOpenTry": {
+                            "requestType": "MsgChannelOpenTry",
+                            "responseType": "MsgChannelOpenTryResponse",
+                            "comment": "ChannelOpenTry defines a rpc handler method for MsgChannelOpenTry."
+                          },
+                          "ChannelOpenAck": {
+                            "requestType": "MsgChannelOpenAck",
+                            "responseType": "MsgChannelOpenAckResponse",
+                            "comment": "ChannelOpenAck defines a rpc handler method for MsgChannelOpenAck."
+                          },
+                          "ChannelOpenConfirm": {
+                            "requestType": "MsgChannelOpenConfirm",
+                            "responseType": "MsgChannelOpenConfirmResponse",
+                            "comment": "ChannelOpenConfirm defines a rpc handler method for MsgChannelOpenConfirm."
+                          },
+                          "ChannelCloseInit": {
+                            "requestType": "MsgChannelCloseInit",
+                            "responseType": "MsgChannelCloseInitResponse",
+                            "comment": "ChannelCloseInit defines a rpc handler method for MsgChannelCloseInit."
+                          },
+                          "ChannelCloseConfirm": {
+                            "requestType": "MsgChannelCloseConfirm",
+                            "responseType": "MsgChannelCloseConfirmResponse",
+                            "comment": "ChannelCloseConfirm defines a rpc handler method for\nMsgChannelCloseConfirm."
+                          },
+                          "RecvPacket": {
+                            "requestType": "MsgRecvPacket",
+                            "responseType": "MsgRecvPacketResponse",
+                            "comment": "RecvPacket defines a rpc handler method for MsgRecvPacket."
+                          },
+                          "Timeout": {
+                            "requestType": "MsgTimeout",
+                            "responseType": "MsgTimeoutResponse",
+                            "comment": "Timeout defines a rpc handler method for MsgTimeout."
+                          },
+                          "TimeoutOnClose": {
+                            "requestType": "MsgTimeoutOnClose",
+                            "responseType": "MsgTimeoutOnCloseResponse",
+                            "comment": "TimeoutOnClose defines a rpc handler method for MsgTimeoutOnClose."
+                          },
+                          "Acknowledgement": {
+                            "requestType": "MsgAcknowledgement",
+                            "responseType": "MsgAcknowledgementResponse",
+                            "comment": "Acknowledgement defines a rpc handler method for MsgAcknowledgement."
+                          }
+                        },
+                        "comment": "Msg defines the ibc/channel Msg service."
+                      },
+                      "MsgChannelOpenInit": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": null
+                          },
+                          "channel": {
+                            "type": "Channel",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It\nis called by a relayer on Chain A."
+                      },
+                      "MsgChannelOpenInitResponse": {
+                        "fields": {},
+                        "comment": "MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type."
+                      },
+                      "MsgChannelOpenTry": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": null
+                          },
+                          "previousChannelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:previous_channel_id"
+                            },
+                            "comment": "in the case of crossing hello's, when both chains call OpenInit, we need\nthe channel identifier of the previous channel in state INIT"
+                          },
+                          "channel": {
+                            "type": "Channel",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "counterpartyVersion": {
+                            "type": "string",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:counterparty_version"
+                            },
+                            "comment": null
+                          },
+                          "proofInit": {
+                            "type": "bytes",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_init"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel\non Chain B."
+                      },
+                      "MsgChannelOpenTryResponse": {
+                        "fields": {},
+                        "comment": "MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type."
+                      },
+                      "MsgChannelOpenAck": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": null
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:channel_id"
+                            },
+                            "comment": null
+                          },
+                          "counterpartyChannelId": {
+                            "type": "string",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:counterparty_channel_id"
+                            },
+                            "comment": null
+                          },
+                          "counterpartyVersion": {
+                            "type": "string",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:counterparty_version"
+                            },
+                            "comment": null
+                          },
+                          "proofTry": {
+                            "type": "bytes",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_try"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge\nthe change of channel state to TRYOPEN on Chain B."
+                      },
+                      "MsgChannelOpenAckResponse": {
+                        "fields": {},
+                        "comment": "MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type."
+                      },
+                      "MsgChannelOpenConfirm": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": null
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:channel_id"
+                            },
+                            "comment": null
+                          },
+                          "proofAck": {
+                            "type": "bytes",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_ack"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to\nacknowledge the change of channel state to OPEN on Chain A."
+                      },
+                      "MsgChannelOpenConfirmResponse": {
+                        "fields": {},
+                        "comment": "MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response\ntype."
+                      },
+                      "MsgChannelCloseInit": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": null
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:channel_id"
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgChannelCloseInit defines a msg sent by a Relayer to Chain A\nto close a channel with Chain B."
+                      },
+                      "MsgChannelCloseInitResponse": {
+                        "fields": {},
+                        "comment": "MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type."
+                      },
+                      "MsgChannelCloseConfirm": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": null
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:channel_id"
+                            },
+                            "comment": null
+                          },
+                          "proofInit": {
+                            "type": "bytes",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_init"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B\nto acknowledge the change of channel state to CLOSED on Chain A."
+                      },
+                      "MsgChannelCloseConfirmResponse": {
+                        "fields": {},
+                        "comment": "MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response\ntype."
+                      },
+                      "MsgRecvPacket": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "packet": {
+                            "type": "Packet",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "proofCommitment": {
+                            "type": "bytes",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_commitment"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgRecvPacket receives incoming IBC packet"
+                      },
+                      "MsgRecvPacketResponse": {
+                        "fields": {},
+                        "comment": "MsgRecvPacketResponse defines the Msg/RecvPacket response type."
+                      },
+                      "MsgTimeout": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "packet": {
+                            "type": "Packet",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "proofUnreceived": {
+                            "type": "bytes",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_unreceived"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "nextSequenceRecv": {
+                            "type": "uint64",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:next_sequence_recv"
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgTimeout receives timed-out packet"
+                      },
+                      "MsgTimeoutResponse": {
+                        "fields": {},
+                        "comment": "MsgTimeoutResponse defines the Msg/Timeout response type."
+                      },
+                      "MsgTimeoutOnClose": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "packet": {
+                            "type": "Packet",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "proofUnreceived": {
+                            "type": "bytes",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_unreceived"
+                            },
+                            "comment": null
+                          },
+                          "proofClose": {
+                            "type": "bytes",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_close"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "nextSequenceRecv": {
+                            "type": "uint64",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:next_sequence_recv"
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgTimeoutOnClose timed-out packet upon counterparty channel closure."
+                      },
+                      "MsgTimeoutOnCloseResponse": {
+                        "fields": {},
+                        "comment": "MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type."
+                      },
+                      "MsgAcknowledgement": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "packet": {
+                            "type": "Packet",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "acknowledgement": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "proofAcked": {
+                            "type": "bytes",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_acked"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgAcknowledgement receives incoming IBC acknowledgement"
+                      },
+                      "MsgAcknowledgementResponse": {
+                        "fields": {},
+                        "comment": "MsgAcknowledgementResponse defines the Msg/Acknowledgement response type."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

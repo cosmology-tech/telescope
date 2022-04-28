@@ -1,0 +1,384 @@
+{
+  "package": "google.api.serviceusage.v1beta1",
+  "imports": [
+    "google/api/auth.proto",
+    "google/api/documentation.proto",
+    "google/api/endpoint.proto",
+    "google/api/monitored_resource.proto",
+    "google/api/monitoring.proto",
+    "google/api/quota.proto",
+    "google/api/usage.proto",
+    "google/protobuf/api.proto",
+    "google/api/annotations.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "serviceusage": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "csharp_namespace": "Google.Api.ServiceUsage.V1Beta1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/serviceusage/v1beta1;serviceusage",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ResourcesProto",
+                      "java_package": "com.google.api.serviceusage.v1beta1",
+                      "php_namespace": "Google\\Api\\ServiceUsage\\V1beta1",
+                      "ruby_package": "Google::Api::ServiceUsage::V1beta1"
+                    },
+                    "nested": {
+                      "Service": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the consumer and service.\n\nA valid name would be:\n- `projects/123/services/serviceusage.googleapis.com`"
+                          },
+                          "parent": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The resource name of the consumer.\n\nA valid name would be:\n- `projects/123`"
+                          },
+                          "config": {
+                            "type": "ServiceConfig",
+                            "id": 2,
+                            "comment": "The service configuration of the available service.\nSome fields may be filtered out of the configuration in responses to\nthe `ListServices` method. These fields are present only in responses to\nthe `GetService` method."
+                          },
+                          "state": {
+                            "type": "State",
+                            "id": 4,
+                            "comment": "Whether or not the service has been enabled for use by the consumer."
+                          }
+                        },
+                        "comment": "A service that is available for use by the consumer."
+                      },
+                      "State": {
+                        "values": {
+                          "STATE_UNSPECIFIED": 0,
+                          "DISABLED": 1,
+                          "ENABLED": 2
+                        },
+                        "comment": "Whether or not a service has been enabled for use by a consumer.",
+                        "comments": {
+                          "STATE_UNSPECIFIED": "The default value, which indicates that the enabled state of the service\nis unspecified or not meaningful. Currently, all consumers other than\nprojects (such as folders and organizations) are always in this state.",
+                          "DISABLED": "The service cannot be used by this consumer. It has either been explicitly\ndisabled, or has never been enabled.",
+                          "ENABLED": "The service has been explicitly enabled for use by this consumer."
+                        }
+                      },
+                      "ServiceConfig": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The DNS address at which this service is available.\n\nAn example DNS address would be:\n`calendar.googleapis.com`."
+                          },
+                          "title": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The product title for this service."
+                          },
+                          "apis": {
+                            "rule": "repeated",
+                            "type": "google.protobuf.Api",
+                            "id": 3,
+                            "comment": "A list of API interfaces exported by this service. Contains only the names,\nversions, and method names of the interfaces."
+                          },
+                          "documentation": {
+                            "type": "google.api.Documentation",
+                            "id": 6,
+                            "comment": "Additional API documentation. Contains only the summary and the\ndocumentation URL."
+                          },
+                          "quota": {
+                            "type": "google.api.Quota",
+                            "id": 10,
+                            "comment": "Quota configuration."
+                          },
+                          "authentication": {
+                            "type": "google.api.Authentication",
+                            "id": 11,
+                            "comment": "Auth configuration. Contains only the OAuth rules."
+                          },
+                          "usage": {
+                            "type": "google.api.Usage",
+                            "id": 15,
+                            "comment": "Configuration controlling usage of this service."
+                          },
+                          "endpoints": {
+                            "rule": "repeated",
+                            "type": "google.api.Endpoint",
+                            "id": 18,
+                            "comment": "Configuration for network endpoints. Contains only the names and aliases\nof the endpoints."
+                          },
+                          "monitoredResources": {
+                            "rule": "repeated",
+                            "type": "google.api.MonitoredResourceDescriptor",
+                            "id": 25,
+                            "comment": "Defines the monitored resources used by this service. This is required\nby the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations."
+                          },
+                          "monitoring": {
+                            "type": "google.api.Monitoring",
+                            "id": 28,
+                            "comment": "Monitoring configuration.\nThis should not include the 'producer_destinations' field."
+                          }
+                        },
+                        "comment": "The configuration of the service."
+                      },
+                      "OperationMetadata": {
+                        "fields": {
+                          "resourceNames": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The full name of the resources that this operation is directly\nassociated with."
+                          }
+                        },
+                        "comment": "The operation metadata returned for the batchend services operation."
+                      },
+                      "ConsumerQuotaMetric": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the quota settings on this metric for this consumer.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus`\n\nThe resource name is intended to be opaque and should not be parsed for\nits component strings, since its representation could change in the future."
+                          },
+                          "metric": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The name of the metric.\n\nAn example name would be:\n`compute.googleapis.com/cpus`"
+                          },
+                          "displayName": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The display name of the metric.\n\nAn example name would be:\n`CPUs`"
+                          },
+                          "consumerQuotaLimits": {
+                            "rule": "repeated",
+                            "type": "ConsumerQuotaLimit",
+                            "id": 3,
+                            "comment": "The consumer quota for each quota limit defined on the metric."
+                          },
+                          "descendantConsumerQuotaLimits": {
+                            "rule": "repeated",
+                            "type": "ConsumerQuotaLimit",
+                            "id": 6,
+                            "comment": "The quota limits targeting the descendant containers of the\nconsumer in request.\n\nIf the consumer in request is of type `organizations`\nor `folders`, the field will list per-project limits in the metric; if the\nconsumer in request is of type `project`, the field will be empty.\n\nThe `quota_buckets` field of each descendant consumer quota limit will not\nbe populated."
+                          },
+                          "unit": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The units in which the metric value is reported."
+                          }
+                        },
+                        "comment": "Consumer quota settings for a quota metric."
+                      },
+                      "ConsumerQuotaLimit": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the quota limit.\n\nAn example name would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`\n\nThe resource name is intended to be opaque and should not be parsed for\nits component strings, since its representation could change in the future."
+                          },
+                          "metric": {
+                            "type": "string",
+                            "id": 8,
+                            "comment": "The name of the parent metric of this limit.\n\nAn example name would be:\n`compute.googleapis.com/cpus`"
+                          },
+                          "unit": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The limit unit.\n\nAn example unit would be\n`1/{project}/{region}`\nNote that `{project}` and `{region}` are not placeholders in this example;\nthe literal characters `{` and `}` occur in the string."
+                          },
+                          "isPrecise": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Whether this limit is precise or imprecise."
+                          },
+                          "allowsAdminOverrides": {
+                            "type": "bool",
+                            "id": 7,
+                            "comment": "Whether admin overrides are allowed on this limit"
+                          },
+                          "quotaBuckets": {
+                            "rule": "repeated",
+                            "type": "QuotaBucket",
+                            "id": 9,
+                            "comment": "Summary of the enforced quota buckets, organized by quota dimension,\nordered from least specific to most specific (for example, the global\ndefault bucket, with no quota dimensions, will always appear first)."
+                          }
+                        },
+                        "comment": "Consumer quota settings for a quota limit."
+                      },
+                      "QuotaView": {
+                        "values": {
+                          "QUOTA_VIEW_UNSPECIFIED": 0,
+                          "BASIC": 1,
+                          "FULL": 2
+                        },
+                        "comment": "Selected view of quota. Can be used to request more detailed quota\ninformation when retrieving quota metrics and limits.",
+                        "comments": {
+                          "QUOTA_VIEW_UNSPECIFIED": "No quota view specified. Requests that do not specify a quota view will\ntypically default to the BASIC view.",
+                          "BASIC": "Only buckets with overrides are shown in the response.",
+                          "FULL": "Include per-location buckets even if they do not have overrides.\nWhen the view is FULL, and a limit has regional or zonal quota, the limit\nwill include buckets for all regions or zones that could support\noverrides, even if none are currently present. In some cases this will\ncause the response to become very large; callers that do not need this\nextra information should use the BASIC view instead."
+                        }
+                      },
+                      "QuotaBucket": {
+                        "fields": {
+                          "effectiveLimit": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": "The effective limit of this quota bucket. Equal to default_limit if there\nare no overrides."
+                          },
+                          "defaultLimit": {
+                            "type": "int64",
+                            "id": 2,
+                            "comment": "The default limit of this quota bucket, as specified by the service\nconfiguration."
+                          },
+                          "producerOverride": {
+                            "type": "QuotaOverride",
+                            "id": 3,
+                            "comment": "Producer override on this quota bucket."
+                          },
+                          "consumerOverride": {
+                            "type": "QuotaOverride",
+                            "id": 4,
+                            "comment": "Consumer override on this quota bucket."
+                          },
+                          "adminOverride": {
+                            "type": "QuotaOverride",
+                            "id": 5,
+                            "comment": "Admin override on this quota bucket."
+                          },
+                          "dimensions": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The dimensions of this quota bucket.\n\nIf this map is empty, this is the global bucket, which is the default quota\nvalue applied to all requests that do not have a more specific override.\n\nIf this map is nonempty, the default limit, effective limit, and quota\noverrides apply only to requests that have the dimensions given in the map.\n\nFor example, if the map has key `region` and value `us-east-1`, then the\nspecified effective limit is only effective in that region, and the\nspecified overrides apply only in that region."
+                          }
+                        },
+                        "comment": "A quota bucket is a quota provisioning unit for a specific set of dimensions."
+                      },
+                      "QuotaOverride": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the override.\nThis name is generated by the server when the override is created.\n\nExample names would be:\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`\n`projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`\n\nThe resource name is intended to be opaque and should not be parsed for\nits component strings, since its representation could change in the future."
+                          },
+                          "overrideValue": {
+                            "type": "int64",
+                            "id": 2,
+                            "comment": "The overriding quota limit value.\nCan be any nonnegative integer, or -1 (unlimited quota)."
+                          },
+                          "dimensions": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 3,
+                            "comment": "If this map is nonempty, then this override applies only to specific values\nfor dimensions defined in the limit unit.\n\nFor example, an override on a limit with the unit `1/{project}/{region}`\ncould contain an entry with the key `region` and the value `us-east-1`;\nthe override is only applied to quota consumed in that region.\n\nThis map has the following restrictions:\n\n*   Keys that are not defined in the limit's unit are not valid keys.\nAny string appearing in `{brackets}` in the unit (besides `{project}`\nor\n`{user}`) is a defined key.\n*   `project` is not a valid key; the project is already specified in\nthe parent resource name.\n*   `user` is not a valid key; the API does not support quota overrides\nthat apply only to a specific user.\n*   If `region` appears as a key, its value must be a valid Cloud region.\n*   If `zone` appears as a key, its value must be a valid Cloud zone.\n*   If any valid key other than `region` or `zone` appears in the map, then\nall valid keys other than `region` or `zone` must also appear in the\nmap."
+                          },
+                          "metric": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The name of the metric to which this override applies.\n\nAn example name would be:\n`compute.googleapis.com/cpus`"
+                          },
+                          "unit": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The limit unit of the limit to which this override applies.\n\nAn example unit would be:\n`1/{project}/{region}`\nNote that `{project}` and `{region}` are not placeholders in this example;\nthe literal characters `{` and `}` occur in the string."
+                          },
+                          "adminOverrideAncestor": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The resource name of the ancestor that requested the override. For example:\n`organizations/12345` or `folders/67890`.\nUsed by admin overrides only."
+                          }
+                        },
+                        "comment": "A quota override"
+                      },
+                      "OverrideInlineSource": {
+                        "fields": {
+                          "overrides": {
+                            "rule": "repeated",
+                            "type": "QuotaOverride",
+                            "id": 1,
+                            "comment": "The overrides to create.\nEach override must have a value for 'metric' and 'unit', to specify\nwhich metric and which limit the override should be applied to.\nThe 'name' field of the override does not need to be set; it is ignored."
+                          }
+                        },
+                        "comment": "Import data embedded in the request message"
+                      },
+                      "QuotaSafetyCheck": {
+                        "values": {
+                          "QUOTA_SAFETY_CHECK_UNSPECIFIED": 0,
+                          "LIMIT_DECREASE_BELOW_USAGE": 1,
+                          "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH": 2
+                        },
+                        "comment": "Enumerations of quota safety checks.",
+                        "comments": {
+                          "QUOTA_SAFETY_CHECK_UNSPECIFIED": "Unspecified quota safety check.",
+                          "LIMIT_DECREASE_BELOW_USAGE": "Validates that a quota mutation would not cause the consumer's effective\nlimit to be lower than the consumer's quota usage.",
+                          "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH": "Validates that a quota mutation would not cause the consumer's effective\nlimit to decrease by more than 10 percent."
+                        }
+                      },
+                      "AdminQuotaPolicy": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The resource name of the policy.\nThis name is generated by the server when the policy is created.\n\nExample names would be:\n`organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`"
+                          },
+                          "policyValue": {
+                            "type": "int64",
+                            "id": 2,
+                            "comment": "The quota policy value.\nCan be any nonnegative integer, or -1 (unlimited quota)."
+                          },
+                          "dimensions": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 3,
+                            "comment": "If this map is nonempty, then this policy applies only to specific values\nfor dimensions defined in the limit unit.\n\nFor example, an policy on a limit with the unit `1/{project}/{region}`\ncould contain an entry with the key `region` and the value `us-east-1`;\nthe policy is only applied to quota consumed in that region.\n\nThis map has the following restrictions:\n\n*   If `region` appears as a key, its value must be a valid Cloud region.\n*   If `zone` appears as a key, its value must be a valid Cloud zone.\n*   Keys other than `region` or `zone` are not valid."
+                          },
+                          "metric": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The name of the metric to which this policy applies.\n\nAn example name would be:\n`compute.googleapis.com/cpus`"
+                          },
+                          "unit": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The limit unit of the limit to which this policy applies.\n\nAn example unit would be:\n`1/{project}/{region}`\nNote that `{project}` and `{region}` are not placeholders in this example;\nthe literal characters `{` and `}` occur in the string."
+                          },
+                          "container": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The cloud resource container at which the quota policy is created. The\nformat is `{container_type}/{container_number}`"
+                          }
+                        },
+                        "comment": "Quota policy created by quota administrator."
+                      },
+                      "ServiceIdentity": {
+                        "fields": {
+                          "email": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The email address of the service account that a service producer would use\nto access consumer resources."
+                          },
+                          "uniqueId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The unique and stable id of the service account.\nhttps://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount"
+                          }
+                        },
+                        "comment": "Service identity for a service. This is the identity that service producer\nshould use to access consumer resources."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

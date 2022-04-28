@@ -1,0 +1,187 @@
+{
+  "package": "osmosis.mint.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/timestamp.proto",
+    "google/protobuf/any.proto",
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "mint": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/mint/types"
+                },
+                "nested": {
+                  "Minter": {
+                    "fields": {
+                      "epochProvisions": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:epoch_provisions",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "current epoch provisions"
+                      }
+                    },
+                    "comment": "Minter represents the minting state."
+                  },
+                  "WeightedAddress": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:address"
+                        },
+                        "comment": null
+                      },
+                      "weight": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:weight",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "DistributionProportions": {
+                    "fields": {
+                      "staking": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.moretags)": "yaml:staking",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "staking defines the proportion of the minted minted_denom that is to be\nallocated as staking rewards."
+                      },
+                      "poolIncentives": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.moretags)": "yaml:pool_incentives",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "pool_incentives defines the proportion of the minted minted_denom that is\nto be allocated as pool incentives."
+                      },
+                      "developerRewards": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.moretags)": "yaml:developer_rewards",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "developer_rewards defines the proportion of the minted minted_denom that is\nto be allocated to developer rewards address."
+                      },
+                      "communityPool": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.moretags)": "yaml:community_pool",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "community_pool defines the proportion of the minted minted_denom that is\nto be allocated to the community pool."
+                      }
+                    },
+                    "comment": null
+                  },
+                  "Params": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "mintDenom": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "type of coin to mint"
+                      },
+                      "genesisEpochProvisions": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:genesis_epoch_provisions",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "epoch provisions from the first epoch"
+                      },
+                      "epochIdentifier": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:epoch_identifier"
+                        },
+                        "comment": "mint epoch identifier"
+                      },
+                      "reductionPeriodInEpochs": {
+                        "type": "int64",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:reduction_period_in_epochs"
+                        },
+                        "comment": "number of epochs take to reduce rewards"
+                      },
+                      "reductionFactor": {
+                        "type": "string",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:reduction_factor",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "reduction multiplier to execute on each period"
+                      },
+                      "distributionProportions": {
+                        "type": "DistributionProportions",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "distribution_proportions defines the proportion of the minted denom"
+                      },
+                      "weightedDeveloperRewardsReceivers": {
+                        "rule": "repeated",
+                        "type": "WeightedAddress",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:developer_rewards_receiver",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "address to receive developer rewards"
+                      },
+                      "mintingRewardsDistributionStartEpoch": {
+                        "type": "int64",
+                        "id": 8,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:minting_rewards_distribution_start_epoch"
+                        },
+                        "comment": "start epoch to distribute minting rewards"
+                      }
+                    },
+                    "comment": "Params holds parameters for the mint module."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

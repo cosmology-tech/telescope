@@ -1,0 +1,298 @@
+{
+  "package": "cosmwasm.wasm.v1",
+  "imports": [
+    "cosmos/base/v1beta1/coin.proto",
+    "gogoproto/gogo.proto",
+    "cosmwasm/wasm/v1/types.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmwasm": {
+        "nested": {
+          "wasm": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/CosmWasm/wasmd/x/wasm/types",
+                  "(gogoproto.goproto_getters_all)": false
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "StoreCode": {
+                        "requestType": "MsgStoreCode",
+                        "responseType": "MsgStoreCodeResponse",
+                        "comment": "StoreCode to submit Wasm code to the system"
+                      },
+                      "InstantiateContract": {
+                        "requestType": "MsgInstantiateContract",
+                        "responseType": "MsgInstantiateContractResponse",
+                        "comment": "Instantiate creates a new smart contract instance for the given code id."
+                      },
+                      "ExecuteContract": {
+                        "requestType": "MsgExecuteContract",
+                        "responseType": "MsgExecuteContractResponse",
+                        "comment": "Execute submits the given message data to a smart contract"
+                      },
+                      "MigrateContract": {
+                        "requestType": "MsgMigrateContract",
+                        "responseType": "MsgMigrateContractResponse",
+                        "comment": "Migrate runs a code upgrade/ downgrade for a smart contract"
+                      },
+                      "UpdateAdmin": {
+                        "requestType": "MsgUpdateAdmin",
+                        "responseType": "MsgUpdateAdminResponse",
+                        "comment": "UpdateAdmin sets a new   admin for a smart contract"
+                      },
+                      "ClearAdmin": {
+                        "requestType": "MsgClearAdmin",
+                        "responseType": "MsgClearAdminResponse",
+                        "comment": "ClearAdmin removes any admin stored for a smart contract"
+                      }
+                    },
+                    "comment": "Msg defines the wasm Msg service."
+                  },
+                  "MsgStoreCode": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sender is the that actor that signed the messages"
+                      },
+                      "wasmByteCode": {
+                        "type": "bytes",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customname)": "WASMByteCode"
+                        },
+                        "comment": "WASMByteCode can be raw or gzip compressed"
+                      },
+                      "instantiatePermission": {
+                        "type": "AccessConfig",
+                        "id": 5,
+                        "comment": "InstantiatePermission access control to apply on contract creation,\noptional"
+                      }
+                    },
+                    "reserved": [
+                      [
+                        3,
+                        3
+                      ],
+                      [
+                        4,
+                        4
+                      ]
+                    ],
+                    "comment": "MsgStoreCode submit Wasm code to the system"
+                  },
+                  "MsgStoreCodeResponse": {
+                    "fields": {
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID is the reference to the stored WASM code"
+                      }
+                    },
+                    "comment": "MsgStoreCodeResponse returns store result data."
+                  },
+                  "MsgInstantiateContract": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sender is the that actor that signed the messages"
+                      },
+                      "admin": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Admin is an optional address that can execute migrations"
+                      },
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID is the reference to the stored WASM code"
+                      },
+                      "label": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Label is optional metadata to be stored with a contract instance."
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract on instantiation"
+                      },
+                      "funds": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "Funds coins that are transferred to the contract on instantiation"
+                      }
+                    },
+                    "comment": "MsgInstantiateContract create a new smart contract instance for the given\ncode id."
+                  },
+                  "MsgInstantiateContractResponse": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Address is the bech32 address of the new contract instance."
+                      },
+                      "data": {
+                        "type": "bytes",
+                        "id": 2,
+                        "comment": "Data contains base64-encoded bytes to returned from the contract"
+                      }
+                    },
+                    "comment": "MsgInstantiateContractResponse return instantiation result data"
+                  },
+                  "MsgExecuteContract": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sender is the that actor that signed the messages"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Contract is the address of the smart contract"
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract"
+                      },
+                      "funds": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "Funds coins that are transferred to the contract on execution"
+                      }
+                    },
+                    "comment": "MsgExecuteContract submits the given message data to a smart contract"
+                  },
+                  "MsgExecuteContractResponse": {
+                    "fields": {
+                      "data": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "Data contains base64-encoded bytes to returned from the contract"
+                      }
+                    },
+                    "comment": "MsgExecuteContractResponse returns execution result data."
+                  },
+                  "MsgMigrateContract": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sender is the that actor that signed the messages"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Contract is the address of the smart contract"
+                      },
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID references the new WASM code"
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract on migration"
+                      }
+                    },
+                    "comment": "MsgMigrateContract runs a code upgrade/ downgrade for a smart contract"
+                  },
+                  "MsgMigrateContractResponse": {
+                    "fields": {
+                      "data": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "Data contains same raw bytes returned as data from the wasm contract.\n(May be empty)"
+                      }
+                    },
+                    "comment": "MsgMigrateContractResponse returns contract migration result data."
+                  },
+                  "MsgUpdateAdmin": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sender is the that actor that signed the messages"
+                      },
+                      "newAdmin": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "NewAdmin address to be set"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Contract is the address of the smart contract"
+                      }
+                    },
+                    "comment": "MsgUpdateAdmin sets a new admin for a smart contract"
+                  },
+                  "MsgUpdateAdminResponse": {
+                    "fields": {},
+                    "comment": "MsgUpdateAdminResponse returns empty data"
+                  },
+                  "MsgClearAdmin": {
+                    "fields": {
+                      "sender": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Sender is the that actor that signed the messages"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Contract is the address of the smart contract"
+                      }
+                    },
+                    "comment": "MsgClearAdmin removes any admin stored for a smart contract"
+                  },
+                  "MsgClearAdminResponse": {
+                    "fields": {},
+                    "comment": "MsgClearAdminResponse returns empty data"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/any.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/distribution;distribution",
+              "java_multiple_files": true,
+              "java_outer_classname": "DistributionProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Distribution": {
+                "fields": {
+                  "count": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": "The number of values in the population. Must be non-negative. This value\nmust equal the sum of the values in `bucket_counts` if a histogram is\nprovided."
+                  },
+                  "mean": {
+                    "type": "double",
+                    "id": 2,
+                    "comment": "The arithmetic mean of the values in the population. If `count` is zero\nthen this field must be zero."
+                  },
+                  "sumOfSquaredDeviation": {
+                    "type": "double",
+                    "id": 3,
+                    "comment": "The sum of squared deviations from the mean of the values in the\npopulation. For values x_i this is:\n\nSum[i=1..n]((x_i - mean)^2)\n\nKnuth, \"The Art of Computer Programming\", Vol. 2, page 232, 3rd edition\ndescribes Welford's method for accumulating this sum in one pass.\n\nIf `count` is zero then this field must be zero."
+                  },
+                  "range": {
+                    "type": "Range",
+                    "id": 4,
+                    "comment": "If specified, contains the range of the population values. The field\nmust not be present if the `count` is zero."
+                  },
+                  "bucketOptions": {
+                    "type": "BucketOptions",
+                    "id": 6,
+                    "comment": "Defines the histogram bucket boundaries. If the distribution does not\ncontain a histogram, then omit this field."
+                  },
+                  "bucketCounts": {
+                    "rule": "repeated",
+                    "type": "int64",
+                    "id": 7,
+                    "comment": "The number of values in each bucket of the histogram, as described in\n`bucket_options`. If the distribution does not have a histogram, then omit\nthis field. If there is a histogram, then the sum of the values in\n`bucket_counts` must equal the value in the `count` field of the\ndistribution.\n\nIf present, `bucket_counts` should contain N values, where N is the number\nof buckets specified in `bucket_options`. If you supply fewer than N\nvalues, the remaining values are assumed to be 0.\n\nThe order of the values in `bucket_counts` follows the bucket numbering\nschemes described for the three bucket types. The first value must be the\ncount for the underflow bucket (number 0). The next N-2 values are the\ncounts for the finite buckets (number 1 through N-2). The N'th value in\n`bucket_counts` is the count for the overflow bucket (number N-1)."
+                  },
+                  "exemplars": {
+                    "rule": "repeated",
+                    "type": "Exemplar",
+                    "id": 10,
+                    "comment": "Must be in increasing order of `value` field."
+                  }
+                },
+                "nested": {
+                  "Range": {
+                    "fields": {
+                      "min": {
+                        "type": "double",
+                        "id": 1,
+                        "comment": "The minimum of the population values."
+                      },
+                      "max": {
+                        "type": "double",
+                        "id": 2,
+                        "comment": "The maximum of the population values."
+                      }
+                    },
+                    "comment": "The range of the population values."
+                  },
+                  "BucketOptions": {
+                    "oneofs": {
+                      "options": {
+                        "oneof": [
+                          "linearBuckets",
+                          "exponentialBuckets",
+                          "explicitBuckets"
+                        ],
+                        "comment": "Exactly one of these three fields must be set."
+                      }
+                    },
+                    "fields": {
+                      "linearBuckets": {
+                        "type": "Linear",
+                        "id": 1,
+                        "comment": "The linear bucket."
+                      },
+                      "exponentialBuckets": {
+                        "type": "Exponential",
+                        "id": 2,
+                        "comment": "The exponential buckets."
+                      },
+                      "explicitBuckets": {
+                        "type": "Explicit",
+                        "id": 3,
+                        "comment": "The explicit buckets."
+                      }
+                    },
+                    "nested": {
+                      "Linear": {
+                        "fields": {
+                          "numFiniteBuckets": {
+                            "type": "int32",
+                            "id": 1,
+                            "comment": "Must be greater than 0."
+                          },
+                          "width": {
+                            "type": "double",
+                            "id": 2,
+                            "comment": "Must be greater than 0."
+                          },
+                          "offset": {
+                            "type": "double",
+                            "id": 3,
+                            "comment": "Lower bound of the first bucket."
+                          }
+                        },
+                        "comment": "Specifies a linear sequence of buckets that all have the same width\n(except overflow and underflow). Each bucket represents a constant\nabsolute uncertainty on the specific value in the bucket.\n\nThere are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the\nfollowing boundaries:\n\nUpper bound (0 <= i < N-1):     offset + (width * i).\nLower bound (1 <= i < N):       offset + (width * (i - 1))."
+                      },
+                      "Exponential": {
+                        "fields": {
+                          "numFiniteBuckets": {
+                            "type": "int32",
+                            "id": 1,
+                            "comment": "Must be greater than 0."
+                          },
+                          "growthFactor": {
+                            "type": "double",
+                            "id": 2,
+                            "comment": "Must be greater than 1."
+                          },
+                          "scale": {
+                            "type": "double",
+                            "id": 3,
+                            "comment": "Must be greater than 0."
+                          }
+                        },
+                        "comment": "Specifies an exponential sequence of buckets that have a width that is\nproportional to the value of the lower bound. Each bucket represents a\nconstant relative uncertainty on a specific value in the bucket.\n\nThere are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the\nfollowing boundaries:\n\nUpper bound (0 <= i < N-1):     scale * (growth_factor ^ i).\nLower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1))."
+                      },
+                      "Explicit": {
+                        "fields": {
+                          "bounds": {
+                            "rule": "repeated",
+                            "type": "double",
+                            "id": 1,
+                            "comment": "The values must be monotonically increasing."
+                          }
+                        },
+                        "comment": "Specifies a set of buckets with arbitrary widths.\n\nThere are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following\nboundaries:\n\nUpper bound (0 <= i < N-1):     bounds[i]\nLower bound (1 <= i < N);       bounds[i - 1]\n\nThe `bounds` field must contain at least one element. If `bounds` has\nonly one element, then there are no finite buckets, and that single\nelement is the common boundary of the overflow and underflow buckets."
+                      }
+                    },
+                    "comment": "`BucketOptions` describes the bucket boundaries used to create a histogram\nfor the distribution. The buckets can be in a linear sequence, an\nexponential sequence, or each bucket can be specified explicitly.\n`BucketOptions` does not include the number of values in each bucket.\n\nA bucket has an inclusive lower bound and exclusive upper bound for the\nvalues that are counted for that bucket. The upper bound of a bucket must\nbe strictly greater than the lower bound. The sequence of N buckets for a\ndistribution consists of an underflow bucket (number 0), zero or more\nfinite buckets (number 1 through N - 2) and an overflow bucket (number N -\n1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the\nsame as the upper bound of bucket i - 1. The buckets span the whole range\nof finite values: lower bound of the underflow bucket is -infinity and the\nupper bound of the overflow bucket is +infinity. The finite buckets are\nso-called because both bounds are finite."
+                  },
+                  "Exemplar": {
+                    "fields": {
+                      "value": {
+                        "type": "double",
+                        "id": 1,
+                        "comment": "Value of the exemplar point. This value determines to which bucket the\nexemplar belongs."
+                      },
+                      "timestamp": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "comment": "The observation (sampling) time of the above value."
+                      },
+                      "attachments": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 3,
+                        "comment": "Contextual information about the example value. Examples are:\n\nTrace: type.googleapis.com/google.monitoring.v3.SpanContext\n\nLiteral string: type.googleapis.com/google.protobuf.StringValue\n\nLabels dropped during aggregation:\ntype.googleapis.com/google.monitoring.v3.DroppedLabels\n\nThere may be only a single attachment of any given message type in a\nsingle exemplar, and this is enforced by the system."
+                      }
+                    },
+                    "comment": "Exemplars are example points that may be used to annotate aggregated\ndistribution values. They are metadata that gives information about a\nparticular value added to a Distribution bucket, such as a trace ID that\nwas active when a value was added. They may contain further information,\nsuch as a example values and timestamps, origin, etc."
+                  }
+                },
+                "comment": "`Distribution` contains summary statistics for a population of values. It\noptionally contains a histogram representing the distribution of those values\nacross a set of buckets.\n\nThe summary statistics are the count, mean, sum of the squared deviation from\nthe mean, the minimum, and the maximum of the set of population of values.\nThe histogram is based on a sequence of buckets and gives a count of values\nthat fall into each bucket. The boundaries of the buckets are given either\nexplicitly or by formulas for buckets of fixed or exponentially increasing\nwidths.\n\nAlthough it is not forbidden, it is generally a bad idea to include\nnon-finite values (infinities or NaNs) in the population of values, as this\nwill render the `mean` and `sum_of_squared_deviation` fields meaningless."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

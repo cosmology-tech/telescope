@@ -1,0 +1,45 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+              "java_multiple_files": true,
+              "java_outer_classname": "ClientProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "methodSignature": {
+                "rule": "repeated",
+                "type": "string",
+                "id": 1051,
+                "extend": "google.protobuf.MethodOptions",
+                "comment": "A definition of a client library method signature.\n\nIn client libraries, each proto RPC corresponds to one or more methods\nwhich the end user is able to call, and calls the underlying RPC.\nNormally, this method receives a single argument (a struct or instance\ncorresponding to the RPC request object). Defining this field will\nadd one or more overloads providing flattened or simpler method signatures\nin some languages.\n\nThe fields on the method signature are provided as a comma-separated\nstring.\n\nFor example, the proto RPC and annotation:\n\nrpc CreateSubscription(CreateSubscriptionRequest)\nreturns (Subscription) {\noption (google.api.method_signature) = \"name,topic\";\n}\n\nWould add the following Java overload (in addition to the method accepting\nthe request object):\n\npublic final Subscription createSubscription(String name, String topic)\n\nThe following backwards-compatibility guidelines apply:\n\n* Adding this annotation to an unannotated method is backwards\ncompatible.\n* Adding this annotation to a method which already has existing\nmethod signature annotations is backwards compatible if and only if\nthe new method signature annotation is last in the sequence.\n* Modifying or removing an existing method signature annotation is\na breaking change.\n* Re-ordering existing method signature annotations is a breaking\nchange."
+              },
+              "defaultHost": {
+                "type": "string",
+                "id": 1049,
+                "extend": "google.protobuf.ServiceOptions",
+                "comment": "The hostname for this service.\nThis should be specified with no prefix or protocol.\n\nExample:\n\nservice Foo {\noption (google.api.default_host) = \"foo.googleapi.com\";\n...\n}"
+              },
+              "oauthScopes": {
+                "type": "string",
+                "id": 1050,
+                "extend": "google.protobuf.ServiceOptions",
+                "comment": "OAuth scopes needed for the client.\n\nExample:\n\nservice Foo {\noption (google.api.oauth_scopes) = \\\n\"https://www.googleapis.com/auth/cloud-platform\";\n...\n}\n\nIf there is more than one scope, use a comma-separated string:\n\nExample:\n\nservice Foo {\noption (google.api.oauth_scopes) = \\\n\"https://www.googleapis.com/auth/cloud-platform,\"\n\"https://www.googleapis.com/auth/monitoring\";\n...\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

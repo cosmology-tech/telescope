@@ -1,0 +1,98 @@
+{
+  "package": "osmosis.mint.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "osmosis/mint/v1beta1/mint.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "mint": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/mint/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/mint/v1beta1/params"
+                        },
+                        "comment": "Params returns the total set of minting parameters.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/mint/v1beta1/params"
+                            }
+                          }
+                        ]
+                      },
+                      "EpochProvisions": {
+                        "requestType": "QueryEpochProvisionsRequest",
+                        "responseType": "QueryEpochProvisionsResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/mint/v1beta1/epoch_provisions"
+                        },
+                        "comment": "EpochProvisions current minting epoch provisions value.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/mint/v1beta1/epoch_provisions"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query provides defines the gRPC querier service."
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {},
+                    "comment": "QueryParamsRequest is the request type for the Query/Params RPC method."
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines the parameters of the module."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is the response type for the Query/Params RPC method."
+                  },
+                  "QueryEpochProvisionsRequest": {
+                    "fields": {},
+                    "comment": "QueryEpochProvisionsRequest is the request type for the\nQuery/EpochProvisions RPC method."
+                  },
+                  "QueryEpochProvisionsResponse": {
+                    "fields": {
+                      "epochProvisions": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "epoch_provisions is the current minting per epoch provisions value."
+                      }
+                    },
+                    "comment": "QueryEpochProvisionsResponse is the response type for the\nQuery/EpochProvisions RPC method."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

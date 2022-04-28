@@ -1,0 +1,214 @@
+{
+  "package": "cosmos.base.snapshots.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "snapshots": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/snapshots/types"
+                    },
+                    "nested": {
+                      "Snapshot": {
+                        "fields": {
+                          "height": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "format": {
+                            "type": "uint32",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "chunks": {
+                            "type": "uint32",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "hash": {
+                            "type": "bytes",
+                            "id": 4,
+                            "comment": null
+                          },
+                          "metadata": {
+                            "type": "Metadata",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Snapshot contains Tendermint state sync snapshot info."
+                      },
+                      "Metadata": {
+                        "fields": {
+                          "chunkHashes": {
+                            "rule": "repeated",
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": "SHA-256 chunk hashes"
+                          }
+                        },
+                        "comment": "Metadata contains SDK-specific snapshot metadata."
+                      },
+                      "SnapshotItem": {
+                        "oneofs": {
+                          "item": {
+                            "oneof": [
+                              "store",
+                              "iavl",
+                              "extension",
+                              "extensionPayload",
+                              "kv",
+                              "schema"
+                            ],
+                            "comment": "item is the specific type of snapshot item."
+                          }
+                        },
+                        "fields": {
+                          "store": {
+                            "type": "SnapshotStoreItem",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "iavl": {
+                            "type": "SnapshotIAVLItem",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.customname)": "IAVL"
+                            },
+                            "comment": null
+                          },
+                          "extension": {
+                            "type": "SnapshotExtensionMeta",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "extensionPayload": {
+                            "type": "SnapshotExtensionPayload",
+                            "id": 4,
+                            "comment": null
+                          },
+                          "kv": {
+                            "type": "SnapshotKVItem",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.customname)": "KV"
+                            },
+                            "comment": null
+                          },
+                          "schema": {
+                            "type": "SnapshotSchema",
+                            "id": 6,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SnapshotItem is an item contained in a rootmulti.Store snapshot."
+                      },
+                      "SnapshotStoreItem": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SnapshotStoreItem contains metadata about a snapshotted store."
+                      },
+                      "SnapshotIAVLItem": {
+                        "fields": {
+                          "key": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "value": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "version": {
+                            "type": "int64",
+                            "id": 3,
+                            "comment": "version is block height"
+                          },
+                          "height": {
+                            "type": "int32",
+                            "id": 4,
+                            "comment": "height is depth of the tree."
+                          }
+                        },
+                        "comment": "SnapshotIAVLItem is an exported IAVL node."
+                      },
+                      "SnapshotExtensionMeta": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "format": {
+                            "type": "uint32",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SnapshotExtensionMeta contains metadata about an external snapshotter."
+                      },
+                      "SnapshotExtensionPayload": {
+                        "fields": {
+                          "payload": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SnapshotExtensionPayload contains payloads of an external snapshotter."
+                      },
+                      "SnapshotKVItem": {
+                        "fields": {
+                          "key": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "value": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SnapshotKVItem is an exported Key/Value Pair"
+                      },
+                      "SnapshotSchema": {
+                        "fields": {
+                          "keys": {
+                            "rule": "repeated",
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SnapshotSchema is an exported schema of smt store"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

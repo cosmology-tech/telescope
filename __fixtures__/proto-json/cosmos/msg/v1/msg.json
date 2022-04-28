@@ -1,0 +1,33 @@
+{
+  "package": "cosmos.msg.v1",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "msg": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/types/msgservice"
+                },
+                "nested": {
+                  "signer": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 11110000,
+                    "extend": "google.protobuf.MessageOptions",
+                    "comment": "signer must be used in cosmos messages in order\nto signal to external clients which fields in a\ngiven cosmos message must be filled with signer\ninformation (address).\nThe field must be the protobuf name of the message\nfield extended with this MessageOption.\nThe field must either be of string kind, or of message\nkind in case the signer information is contained within\na message inside the cosmos message."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

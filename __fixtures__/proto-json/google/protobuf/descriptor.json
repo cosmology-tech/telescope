@@ -1,0 +1,1169 @@
+{
+  "package": "google.protobuf",
+  "syntax": "proto2",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "protobuf": {
+            "options": {
+              "go_package": "descriptor",
+              "java_package": "com.google.protobuf",
+              "java_outer_classname": "DescriptorProtos",
+              "csharp_namespace": "Google.Protobuf.Reflection",
+              "objc_class_prefix": "GPB",
+              "cc_enable_arenas": true,
+              "optimize_for": "SPEED"
+            },
+            "nested": {
+              "FileDescriptorSet": {
+                "fields": {
+                  "file": {
+                    "rule": "repeated",
+                    "type": "FileDescriptorProto",
+                    "id": 1,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "The protocol compiler can output a FileDescriptorSet containing the .proto\nfiles it parses."
+              },
+              "FileDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "file name, relative to root of source tree"
+                  },
+                  "package": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "dependency": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Names of files imported by this file."
+                  },
+                  "publicDependency": {
+                    "rule": "repeated",
+                    "type": "int32",
+                    "id": 10,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "Indexes of the public imported files in the dependency list above."
+                  },
+                  "weakDependency": {
+                    "rule": "repeated",
+                    "type": "int32",
+                    "id": 11,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "Indexes of the weak imported files in the dependency list.\nFor Google-internal migration only. Do not use."
+                  },
+                  "messageType": {
+                    "rule": "repeated",
+                    "type": "DescriptorProto",
+                    "id": 4,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "All top-level definitions in this file."
+                  },
+                  "enumType": {
+                    "rule": "repeated",
+                    "type": "EnumDescriptorProto",
+                    "id": 5,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "service": {
+                    "rule": "repeated",
+                    "type": "ServiceDescriptorProto",
+                    "id": 6,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "extension": {
+                    "rule": "repeated",
+                    "type": "FieldDescriptorProto",
+                    "id": 7,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "FileOptions",
+                    "id": 8,
+                    "comment": null
+                  },
+                  "sourceCodeInfo": {
+                    "type": "SourceCodeInfo",
+                    "id": 9,
+                    "comment": "This field contains optional information about the original source code.\nYou may safely remove this entire field without harming runtime\nfunctionality of the descriptors -- the information is needed only by\ndevelopment tools."
+                  },
+                  "syntax": {
+                    "type": "string",
+                    "id": 12,
+                    "comment": "The syntax of the proto file.\nThe supported values are \"proto2\" and \"proto3\"."
+                  }
+                },
+                "comment": "Describes a complete .proto file."
+              },
+              "DescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "field": {
+                    "rule": "repeated",
+                    "type": "FieldDescriptorProto",
+                    "id": 2,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "extension": {
+                    "rule": "repeated",
+                    "type": "FieldDescriptorProto",
+                    "id": 6,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "nestedType": {
+                    "rule": "repeated",
+                    "type": "DescriptorProto",
+                    "id": 3,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "enumType": {
+                    "rule": "repeated",
+                    "type": "EnumDescriptorProto",
+                    "id": 4,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "extensionRange": {
+                    "rule": "repeated",
+                    "type": "ExtensionRange",
+                    "id": 5,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "oneofDecl": {
+                    "rule": "repeated",
+                    "type": "OneofDescriptorProto",
+                    "id": 8,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "MessageOptions",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "reservedRange": {
+                    "rule": "repeated",
+                    "type": "ReservedRange",
+                    "id": 9,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "reservedName": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 10,
+                    "comment": "Reserved field names, which may not be used by fields in the same message.\nA given name may only be reserved once."
+                  }
+                },
+                "nested": {
+                  "ExtensionRange": {
+                    "fields": {
+                      "start": {
+                        "type": "int32",
+                        "id": 1,
+                        "comment": "Inclusive."
+                      },
+                      "end": {
+                        "type": "int32",
+                        "id": 2,
+                        "comment": "Exclusive."
+                      },
+                      "options": {
+                        "type": "ExtensionRangeOptions",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "ReservedRange": {
+                    "fields": {
+                      "start": {
+                        "type": "int32",
+                        "id": 1,
+                        "comment": "Inclusive."
+                      },
+                      "end": {
+                        "type": "int32",
+                        "id": 2,
+                        "comment": "Exclusive."
+                      }
+                    },
+                    "comment": "Range of reserved tag numbers. Reserved tag numbers may not be used by\nfields or extension ranges in the same message. Reserved ranges may\nnot overlap."
+                  }
+                },
+                "comment": "Describes a message type."
+              },
+              "ExtensionRangeOptions": {
+                "fields": {
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "comment": null
+              },
+              "FieldDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "number": {
+                    "type": "int32",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "label": {
+                    "type": "Label",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "type": {
+                    "type": "Type",
+                    "id": 5,
+                    "comment": "If type_name is set, this need not be set.  If both this and type_name\nare set, this must be one of TYPE_ENUM, TYPE_MESSAGE or TYPE_GROUP."
+                  },
+                  "typeName": {
+                    "type": "string",
+                    "id": 6,
+                    "comment": "For message and enum types, this is the name of the type.  If the name\nstarts with a '.', it is fully-qualified.  Otherwise, C++-like scoping\nrules are used to find the type (i.e. first the nested types within this\nmessage are searched, then within the parent, on up to the root\nnamespace)."
+                  },
+                  "extendee": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "For extensions, this is the name of the type being extended.  It is\nresolved in the same manner as type_name."
+                  },
+                  "defaultValue": {
+                    "type": "string",
+                    "id": 7,
+                    "comment": "For numeric types, contains the original text representation of the value.\nFor booleans, \"true\" or \"false\".\nFor strings, contains the default text contents (not escaped in any way).\nFor bytes, contains the C escaped value.  All bytes >= 128 are escaped.\nTODO(kenton):  Base-64 encode?"
+                  },
+                  "oneofIndex": {
+                    "type": "int32",
+                    "id": 9,
+                    "comment": "If set, gives the index of a oneof in the containing type's oneof_decl\nlist.  This field is a member of that oneof."
+                  },
+                  "jsonName": {
+                    "type": "string",
+                    "id": 10,
+                    "comment": "JSON name of this field. The value is set by protocol compiler. If the\nuser has set a \"json_name\" option on this field, that option's value\nwill be used. Otherwise, it's deduced from the field's name by converting\nit to camelCase."
+                  },
+                  "options": {
+                    "type": "FieldOptions",
+                    "id": 8,
+                    "comment": null
+                  }
+                },
+                "nested": {
+                  "Type": {
+                    "values": {
+                      "TYPE_DOUBLE": 1,
+                      "TYPE_FLOAT": 2,
+                      "TYPE_INT64": 3,
+                      "TYPE_UINT64": 4,
+                      "TYPE_INT32": 5,
+                      "TYPE_FIXED64": 6,
+                      "TYPE_FIXED32": 7,
+                      "TYPE_BOOL": 8,
+                      "TYPE_STRING": 9,
+                      "TYPE_GROUP": 10,
+                      "TYPE_MESSAGE": 11,
+                      "TYPE_BYTES": 12,
+                      "TYPE_UINT32": 13,
+                      "TYPE_ENUM": 14,
+                      "TYPE_SFIXED32": 15,
+                      "TYPE_SFIXED64": 16,
+                      "TYPE_SINT32": 17,
+                      "TYPE_SINT64": 18
+                    },
+                    "comment": null,
+                    "comments": {
+                      "TYPE_DOUBLE": "0 is reserved for errors.\nOrder is weird for historical reasons.",
+                      "TYPE_FLOAT": null,
+                      "TYPE_INT64": "Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if\nnegative values are likely.",
+                      "TYPE_UINT64": null,
+                      "TYPE_INT32": "Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if\nnegative values are likely.",
+                      "TYPE_FIXED64": null,
+                      "TYPE_FIXED32": null,
+                      "TYPE_BOOL": null,
+                      "TYPE_STRING": null,
+                      "TYPE_GROUP": "Tag-delimited aggregate.\nGroup type is deprecated and not supported in proto3. However, Proto3\nimplementations should still be able to parse the group wire format and\ntreat group fields as unknown fields.",
+                      "TYPE_MESSAGE": null,
+                      "TYPE_BYTES": "New in version 2.",
+                      "TYPE_UINT32": null,
+                      "TYPE_ENUM": null,
+                      "TYPE_SFIXED32": null,
+                      "TYPE_SFIXED64": null,
+                      "TYPE_SINT32": "Uses ZigZag encoding.",
+                      "TYPE_SINT64": "Uses ZigZag encoding."
+                    }
+                  },
+                  "Label": {
+                    "values": {
+                      "LABEL_OPTIONAL": 1,
+                      "LABEL_REQUIRED": 2,
+                      "LABEL_REPEATED": 3
+                    },
+                    "comment": null,
+                    "comments": {
+                      "LABEL_OPTIONAL": "0 is reserved for errors",
+                      "LABEL_REQUIRED": null,
+                      "LABEL_REPEATED": null
+                    }
+                  }
+                },
+                "comment": "Describes a field within a message."
+              },
+              "OneofDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "OneofOptions",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "Describes a oneof."
+              },
+              "EnumDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "value": {
+                    "rule": "repeated",
+                    "type": "EnumValueDescriptorProto",
+                    "id": 2,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "EnumOptions",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "reservedRange": {
+                    "rule": "repeated",
+                    "type": "EnumReservedRange",
+                    "id": 4,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "Range of reserved numeric values. Reserved numeric values may not be used\nby enum values in the same enum declaration. Reserved ranges may not\noverlap."
+                  },
+                  "reservedName": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 5,
+                    "comment": "Reserved enum value names, which may not be reused. A given name may only\nbe reserved once."
+                  }
+                },
+                "nested": {
+                  "EnumReservedRange": {
+                    "fields": {
+                      "start": {
+                        "type": "int32",
+                        "id": 1,
+                        "comment": "Inclusive."
+                      },
+                      "end": {
+                        "type": "int32",
+                        "id": 2,
+                        "comment": "Inclusive."
+                      }
+                    },
+                    "comment": "Range of reserved numeric values. Reserved values may not be used by\nentries in the same enum. Reserved ranges may not overlap.\n\nNote that this is distinct from DescriptorProto.ReservedRange in that it\nis inclusive such that it can appropriately represent the entire int32\ndomain."
+                  }
+                },
+                "comment": "Describes an enum type."
+              },
+              "EnumValueDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "number": {
+                    "type": "int32",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "EnumValueOptions",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "Describes a value within an enum."
+              },
+              "ServiceDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "method": {
+                    "rule": "repeated",
+                    "type": "MethodDescriptorProto",
+                    "id": 2,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "ServiceOptions",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "Describes a service."
+              },
+              "MethodDescriptorProto": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "inputType": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Input and output type names.  These are resolved in the same way as\nFieldDescriptorProto.type_name, but must refer to a message type."
+                  },
+                  "outputType": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "options": {
+                    "type": "MethodOptions",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "clientStreaming": {
+                    "type": "bool",
+                    "id": 5,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Identifies if client streams multiple client messages"
+                  },
+                  "serverStreaming": {
+                    "type": "bool",
+                    "id": 6,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Identifies if server streams multiple server messages"
+                  }
+                },
+                "comment": "Describes a method of a service."
+              },
+              "FileOptions": {
+                "fields": {
+                  "javaPackage": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Sets the Java package where classes generated from this .proto will be\nplaced.  By default, the proto package is used, but this is often\ninappropriate because proto packages do not normally start with backwards\ndomain names."
+                  },
+                  "javaOuterClassname": {
+                    "type": "string",
+                    "id": 8,
+                    "comment": "If set, all the classes from the .proto file are wrapped in a single\nouter class with the given name.  This applies to both Proto1\n(equivalent to the old \"--one_java_file\" option) and Proto2 (where\na .proto always translates to a single class, but you may want to\nexplicitly choose the class name)."
+                  },
+                  "javaMultipleFiles": {
+                    "type": "bool",
+                    "id": 10,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "If set true, then the Java code generator will generate a separate .java\nfile for each top-level message, enum, and service defined in the .proto\nfile.  Thus, these types will *not* be nested inside the outer class\nnamed by java_outer_classname.  However, the outer class will still be\ngenerated to contain the file's getDescriptor() method as well as any\ntop-level extensions defined in the file."
+                  },
+                  "javaGenerateEqualsAndHash": {
+                    "type": "bool",
+                    "id": 20,
+                    "options": {
+                      "deprecated": true
+                    },
+                    "comment": "This option does nothing."
+                  },
+                  "javaStringCheckUtf8": {
+                    "type": "bool",
+                    "id": 27,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "If set true, then the Java2 code generator will generate code that\nthrows an exception whenever an attempt is made to assign a non-UTF-8\nbyte sequence to a string field.\nMessage reflection will do the same.\nHowever, an extension field still accepts non-UTF-8 byte sequences.\nThis option has no effect on when used with the lite runtime."
+                  },
+                  "optimizeFor": {
+                    "type": "OptimizeMode",
+                    "id": 9,
+                    "options": {
+                      "default": "SPEED"
+                    },
+                    "comment": null
+                  },
+                  "goPackage": {
+                    "type": "string",
+                    "id": 11,
+                    "comment": "Sets the Go package where structs generated from this .proto will be\nplaced. If omitted, the Go package will be derived from the following:\n- The basename of the package import path, if provided.\n- Otherwise, the package statement in the .proto file, if present.\n- Otherwise, the basename of the .proto file, without extension."
+                  },
+                  "ccGenericServices": {
+                    "type": "bool",
+                    "id": 16,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Should generic services be generated in each language?  \"Generic\" services\nare not specific to any particular RPC system.  They are generated by the\nmain code generators in each language (without additional plugins).\nGeneric services were the only kind of service generation supported by\nearly versions of google.protobuf.\n\nGeneric services are now considered deprecated in favor of using plugins\nthat generate code specific to your particular RPC system.  Therefore,\nthese default to false.  Old code which depends on generic services should\nexplicitly set them to true."
+                  },
+                  "javaGenericServices": {
+                    "type": "bool",
+                    "id": 17,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": null
+                  },
+                  "pyGenericServices": {
+                    "type": "bool",
+                    "id": 18,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": null
+                  },
+                  "phpGenericServices": {
+                    "type": "bool",
+                    "id": 42,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": null
+                  },
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 23,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this file deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor everything in the file, or it will be completely ignored; in the very\nleast, this is a formalization for deprecating files."
+                  },
+                  "ccEnableArenas": {
+                    "type": "bool",
+                    "id": 31,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Enables the use of arenas for the proto messages in this file. This applies\nonly to generated classes for C++."
+                  },
+                  "objcClassPrefix": {
+                    "type": "string",
+                    "id": 36,
+                    "comment": "Sets the objective c class prefix which is prepended to all objective c\ngenerated classes from this .proto. There is no default."
+                  },
+                  "csharpNamespace": {
+                    "type": "string",
+                    "id": 37,
+                    "comment": "Namespace for generated classes; defaults to the package."
+                  },
+                  "swiftPrefix": {
+                    "type": "string",
+                    "id": 39,
+                    "comment": "By default Swift generators will take the proto package and CamelCase it\nreplacing '.' with underscore and use that to prefix the types/symbols\ndefined. When this options is provided, they will use this value instead\nto prefix the types/symbols defined."
+                  },
+                  "phpClassPrefix": {
+                    "type": "string",
+                    "id": 40,
+                    "comment": "Sets the php class prefix which is prepended to all php generated classes\nfrom this .proto. Default is empty."
+                  },
+                  "phpNamespace": {
+                    "type": "string",
+                    "id": 41,
+                    "comment": "Use this option to change the namespace of php generated classes. Default\nis empty. When this option is empty, the package name will be used for\ndetermining the namespace."
+                  },
+                  "phpMetadataNamespace": {
+                    "type": "string",
+                    "id": 44,
+                    "comment": "Use this option to change the namespace of php generated metadata classes.\nDefault is empty. When this option is empty, the proto file name will be\nused for determining the namespace."
+                  },
+                  "rubyPackage": {
+                    "type": "string",
+                    "id": 45,
+                    "comment": "Use this option to change the package of ruby generated classes. Default\nis empty. When this option is not set, the package name will be used for\ndetermining the ruby package."
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here.\nSee the documentation for the \"Options\" section above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "nested": {
+                  "OptimizeMode": {
+                    "values": {
+                      "SPEED": 1,
+                      "CODE_SIZE": 2,
+                      "LITE_RUNTIME": 3
+                    },
+                    "comment": "Generated classes can be optimized for speed or code size.",
+                    "comments": {
+                      "SPEED": "Generate complete code for parsing, serialization,\netc.",
+                      "CODE_SIZE": "Use ReflectionOps to implement these methods.",
+                      "LITE_RUNTIME": "Generate code using MessageLite and the lite runtime."
+                    }
+                  }
+                },
+                "comment": null
+              },
+              "MessageOptions": {
+                "fields": {
+                  "messageSetWireFormat": {
+                    "type": "bool",
+                    "id": 1,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Set true to use the old proto1 MessageSet wire format for extensions.\nThis is provided for backwards-compatibility with the MessageSet wire\nformat.  You should not use this for any other reason:  It's less\nefficient, has fewer features, and is more complicated.\n\nThe message must be defined exactly as follows:\nmessage Foo {\noption message_set_wire_format = true;\nextensions 4 to max;\n}\nNote that the message cannot have any defined fields; MessageSets only\nhave extensions.\n\nAll extensions of your type must be singular messages; e.g. they cannot\nbe int32s, enums, or repeated messages.\n\nBecause this is an option, the above two restrictions are not enforced by\nthe protocol compiler."
+                  },
+                  "noStandardDescriptorAccessor": {
+                    "type": "bool",
+                    "id": 2,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Disables the generation of the standard \"descriptor()\" accessor, which can\nconflict with a field of the same name.  This is meant to make migration\nfrom proto1 easier; new code should avoid fields named \"descriptor\"."
+                  },
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 3,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this message deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor the message, or it will be completely ignored; in the very least,\nthis is a formalization for deprecating messages."
+                  },
+                  "mapEntry": {
+                    "type": "bool",
+                    "id": 7,
+                    "comment": "Whether the message is an automatically generated map entry type for the\nmaps field.\n\nFor maps fields:\nmap<KeyType, ValueType> map_field = 1;\nThe parsed descriptor looks like:\nmessage MapFieldEntry {\noption map_entry = true;\noptional KeyType key = 1;\noptional ValueType value = 2;\n}\nrepeated MapFieldEntry map_field = 1;\n\nImplementations may choose not to generate the map_entry=true message, but\nuse a native map in the target language to hold the keys and values.\nThe reflection APIs in such implementations still need to work as\nif the field is a repeated message field.\n\nNOTE: Do not set the option in .proto files. Always use the maps syntax\ninstead. The option should only be implicitly set by the proto compiler\nparser."
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "comment": null
+              },
+              "FieldOptions": {
+                "fields": {
+                  "ctype": {
+                    "type": "CType",
+                    "id": 1,
+                    "options": {
+                      "default": "STRING"
+                    },
+                    "comment": "The ctype option instructs the C++ code generator to use a different\nrepresentation of the field than it normally would.  See the specific\noptions below.  This option is not yet implemented in the open source\nrelease -- sorry, we'll try to include it in a future version!"
+                  },
+                  "packed": {
+                    "type": "bool",
+                    "id": 2,
+                    "comment": "The packed option can be enabled for repeated primitive fields to enable\na more efficient representation on the wire. Rather than repeatedly\nwriting the tag and type for each element, the entire array is encoded as\na single length-delimited blob. In proto3, only explicit setting it to\nfalse will avoid using packed encoding."
+                  },
+                  "jstype": {
+                    "type": "JSType",
+                    "id": 6,
+                    "options": {
+                      "default": "JS_NORMAL"
+                    },
+                    "comment": "The jstype option determines the JavaScript type used for values of the\nfield.  The option is permitted only for 64 bit integral and fixed types\n(int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING\nis represented as JavaScript string, which avoids loss of precision that\ncan happen when a large value is converted to a floating point JavaScript.\nSpecifying JS_NUMBER for the jstype causes the generated JavaScript code to\nuse the JavaScript \"number\" type.  The behavior of the default option\nJS_NORMAL is implementation dependent.\n\nThis option is an enum to permit additional types to be added, e.g.\ngoog.math.Integer."
+                  },
+                  "lazy": {
+                    "type": "bool",
+                    "id": 5,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Should this field be parsed lazily?  Lazy applies only to message-type\nfields.  It means that when the outer message is initially parsed, the\ninner message's contents will not be parsed but instead stored in encoded\nform.  The inner message will actually be parsed when it is first accessed.\n\nThis is only a hint.  Implementations are free to choose whether to use\neager or lazy parsing regardless of the value of this option.  However,\nsetting this option true suggests that the protocol author believes that\nusing lazy parsing on this field is worth the additional bookkeeping\noverhead typically needed to implement it.\n\nThis option does not affect the public interface of any generated code;\nall method signatures remain the same.  Furthermore, thread-safety of the\ninterface is not affected by this option; const methods remain safe to\ncall from multiple threads concurrently, while non-const methods continue\nto require exclusive access.\n\n\nNote that implementations may choose not to check required fields within\na lazy sub-message.  That is, calling IsInitialized() on the outer message\nmay return true even if the inner message has missing required fields.\nThis is necessary because otherwise the inner message would have to be\nparsed in order to perform the check, defeating the purpose of lazy\nparsing.  An implementation which chooses not to check required fields\nmust be consistent about it.  That is, for any particular sub-message, the\nimplementation must either *always* check its required fields, or *never*\ncheck its required fields, regardless of whether or not the message has\nbeen parsed."
+                  },
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 3,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this field deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor accessors, or it will be completely ignored; in the very least, this\nis a formalization for deprecating fields."
+                  },
+                  "weak": {
+                    "type": "bool",
+                    "id": 10,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "For Google-internal migration only. Do not use."
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "nested": {
+                  "CType": {
+                    "values": {
+                      "STRING": 0,
+                      "CORD": 1,
+                      "STRING_PIECE": 2
+                    },
+                    "comment": null,
+                    "comments": {
+                      "STRING": "Default mode.",
+                      "CORD": null,
+                      "STRING_PIECE": null
+                    }
+                  },
+                  "JSType": {
+                    "values": {
+                      "JS_NORMAL": 0,
+                      "JS_STRING": 1,
+                      "JS_NUMBER": 2
+                    },
+                    "comment": null,
+                    "comments": {
+                      "JS_NORMAL": "Use the default type.",
+                      "JS_STRING": "Use JavaScript strings.",
+                      "JS_NUMBER": "Use JavaScript numbers."
+                    }
+                  }
+                },
+                "comment": null
+              },
+              "OneofOptions": {
+                "fields": {
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "comment": null
+              },
+              "EnumOptions": {
+                "fields": {
+                  "allowAlias": {
+                    "type": "bool",
+                    "id": 2,
+                    "comment": "Set this option to true to allow mapping different tag names to the same\nvalue."
+                  },
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 3,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this enum deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor the enum, or it will be completely ignored; in the very least, this\nis a formalization for deprecating enums."
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "comment": null
+              },
+              "EnumValueOptions": {
+                "fields": {
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 1,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this enum value deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor the enum value, or it will be completely ignored; in the very least,\nthis is a formalization for deprecating enum values."
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "comment": null
+              },
+              "ServiceOptions": {
+                "fields": {
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 33,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this service deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor the service, or it will be completely ignored; in the very least,\nthis is a formalization for deprecating services."
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "comment": null
+              },
+              "MethodOptions": {
+                "fields": {
+                  "deprecated": {
+                    "type": "bool",
+                    "id": 33,
+                    "options": {
+                      "default": false
+                    },
+                    "comment": "Is this method deprecated?\nDepending on the target platform, this can emit Deprecated annotations\nfor the method, or it will be completely ignored; in the very least,\nthis is a formalization for deprecating methods."
+                  },
+                  "idempotencyLevel": {
+                    "type": "IdempotencyLevel",
+                    "id": 34,
+                    "options": {
+                      "default": "IDEMPOTENCY_UNKNOWN"
+                    },
+                    "comment": null
+                  },
+                  "uninterpretedOption": {
+                    "rule": "repeated",
+                    "type": "UninterpretedOption",
+                    "id": 999,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "The parser stores options it doesn't recognize here. See above."
+                  }
+                },
+                "extensions": [
+                  [
+                    1000,
+                    536870911
+                  ]
+                ],
+                "nested": {
+                  "IdempotencyLevel": {
+                    "values": {
+                      "IDEMPOTENCY_UNKNOWN": 0,
+                      "NO_SIDE_EFFECTS": 1,
+                      "IDEMPOTENT": 2
+                    },
+                    "comment": "Is this method side-effect-free (or safe in HTTP parlance), or idempotent,\nor neither? HTTP based RPC implementation may choose GET verb for safe\nmethods, and PUT verb for idempotent methods instead of the default POST.",
+                    "comments": {
+                      "IDEMPOTENCY_UNKNOWN": null,
+                      "NO_SIDE_EFFECTS": "implies idempotent",
+                      "IDEMPOTENT": "idempotent, but may have side effects"
+                    }
+                  }
+                },
+                "comment": null
+              },
+              "UninterpretedOption": {
+                "fields": {
+                  "name": {
+                    "rule": "repeated",
+                    "type": "NamePart",
+                    "id": 2,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": null
+                  },
+                  "identifierValue": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "The value of the uninterpreted option, in whatever type the tokenizer\nidentified it as during parsing. Exactly one of these should be set."
+                  },
+                  "positiveIntValue": {
+                    "type": "uint64",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "negativeIntValue": {
+                    "type": "int64",
+                    "id": 5,
+                    "comment": null
+                  },
+                  "doubleValue": {
+                    "type": "double",
+                    "id": 6,
+                    "comment": null
+                  },
+                  "stringValue": {
+                    "type": "bytes",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "aggregateValue": {
+                    "type": "string",
+                    "id": 8,
+                    "comment": null
+                  }
+                },
+                "nested": {
+                  "NamePart": {
+                    "fields": {
+                      "namePart": {
+                        "rule": "required",
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "isExtension": {
+                        "rule": "required",
+                        "type": "bool",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "The name of the uninterpreted option.  Each string represents a segment in\na dot-separated name.  is_extension is true iff a segment represents an\nextension (denoted with parentheses in options specs in .proto files).\nE.g.,{ [\"foo\", false], [\"bar.baz\", true], [\"qux\", false] } represents\n\"foo.(bar.baz).qux\"."
+                  }
+                },
+                "comment": "A message representing a option the parser does not recognize. This only\nappears in options protos created by the compiler::Parser class.\nDescriptorPool resolves these when building Descriptor objects. Therefore,\noptions protos in descriptor objects (e.g. returned by Descriptor::options(),\nor produced by Descriptor::CopyTo()) will never have UninterpretedOptions\nin them."
+              },
+              "SourceCodeInfo": {
+                "fields": {
+                  "location": {
+                    "rule": "repeated",
+                    "type": "Location",
+                    "id": 1,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "A Location identifies a piece of source code in a .proto file which\ncorresponds to a particular definition.  This information is intended\nto be useful to IDEs, code indexers, documentation generators, and similar\ntools.\n\nFor example, say we have a file like:\nmessage Foo {\noptional string foo = 1;\n}\nLet's look at just the field definition:\noptional string foo = 1;\n^       ^^     ^^  ^  ^^^\na       bc     de  f  ghi\nWe have the following locations:\nspan   path               represents\n[a,i)  [ 4, 0, 2, 0 ]     The whole field definition.\n[a,b)  [ 4, 0, 2, 0, 4 ]  The label (optional).\n[c,d)  [ 4, 0, 2, 0, 5 ]  The type (string).\n[e,f)  [ 4, 0, 2, 0, 1 ]  The name (foo).\n[g,h)  [ 4, 0, 2, 0, 3 ]  The number (1).\n\nNotes:\n- A location may refer to a repeated field itself (i.e. not to any\nparticular index within it).  This is used whenever a set of elements are\nlogically enclosed in a single code segment.  For example, an entire\nextend block (possibly containing multiple extension definitions) will\nhave an outer location whose path refers to the \"extensions\" repeated\nfield without an index.\n- Multiple locations may have the same path.  This happens when a single\nlogical declaration is spread out across multiple places.  The most\nobvious example is the \"extend\" block again -- there may be multiple\nextend blocks in the same scope, each of which will have the same path.\n- A location's span is not always a subset of its parent's span.  For\nexample, the \"extendee\" of an extension declaration appears at the\nbeginning of the \"extend\" block and is shared by all extensions within\nthe block.\n- Just because a location's span is a subset of some other location's span\ndoes not mean that it is a descendant.  For example, a \"group\" defines\nboth a type and a field in a single declaration.  Thus, the locations\ncorresponding to the type and field and their components will overlap.\n- Code which tries to interpret locations should probably be designed to\nignore those that it doesn't understand, as more types of locations could\nbe recorded in the future."
+                  }
+                },
+                "nested": {
+                  "Location": {
+                    "fields": {
+                      "path": {
+                        "rule": "repeated",
+                        "type": "int32",
+                        "id": 1,
+                        "options": {
+                          "packed": true
+                        },
+                        "comment": "Identifies which part of the FileDescriptorProto was defined at this\nlocation.\n\nEach element is a field number or an index.  They form a path from\nthe root FileDescriptorProto to the place where the definition.  For\nexample, this path:\n[ 4, 3, 2, 7, 1 ]\nrefers to:\nfile.message_type(3)  // 4, 3\n.field(7)         // 2, 7\n.name()           // 1\nThis is because FileDescriptorProto.message_type has field number 4:\nrepeated DescriptorProto message_type = 4;\nand DescriptorProto.field has field number 2:\nrepeated FieldDescriptorProto field = 2;\nand FieldDescriptorProto.name has field number 1:\noptional string name = 1;\n\nThus, the above path gives the location of a field name.  If we removed\nthe last element:\n[ 4, 3, 2, 7 ]\nthis path refers to the whole field declaration (from the beginning\nof the label to the terminating semicolon)."
+                      },
+                      "span": {
+                        "rule": "repeated",
+                        "type": "int32",
+                        "id": 2,
+                        "options": {
+                          "packed": true
+                        },
+                        "comment": "Always has exactly three or four elements: start line, start column,\nend line (optional, otherwise assumed same as start line), end column.\nThese are packed into a single field for efficiency.  Note that line\nand column numbers are zero-based -- typically you will want to add\n1 to each before displaying to a user."
+                      },
+                      "leadingComments": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "If this SourceCodeInfo represents a complete declaration, these are any\ncomments appearing before and after the declaration which appear to be\nattached to the declaration.\n\nA series of line comments appearing on consecutive lines, with no other\ntokens appearing on those lines, will be treated as a single comment.\n\nleading_detached_comments will keep paragraphs of comments that appear\nbefore (but not connected to) the current element. Each paragraph,\nseparated by empty lines, will be one comment element in the repeated\nfield.\n\nOnly the comment content is provided; comment markers (e.g. //) are\nstripped out.  For block comments, leading whitespace and an asterisk\nwill be stripped from the beginning of each line other than the first.\nNewlines are included in the output.\n\nExamples:\n\noptional int32 foo = 1;  // Comment attached to foo.\n// Comment attached to bar.\noptional int32 bar = 2;\n\noptional string baz = 3;\n// Comment attached to baz.\n// Another line attached to baz.\n\n// Comment attached to qux.\n//\n// Another line attached to qux.\noptional double qux = 4;\n\n// Detached comment for corge. This is not leading or trailing comments\n// to qux or corge because there are blank lines separating it from\n// both.\n\n// Detached comment for corge paragraph 2.\n\noptional string corge = 5;\n/* Block comment attached\n* to corge.  Leading asterisks\n* will be removed. */\n/* Block comment attached to\n* grault. */\noptional int32 grault = 6;\n\n// ignored detached comments."
+                      },
+                      "trailingComments": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": null
+                      },
+                      "leadingDetachedComments": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 6,
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "Encapsulates information about the original source file from which a\nFileDescriptorProto was generated."
+              },
+              "GeneratedCodeInfo": {
+                "fields": {
+                  "annotation": {
+                    "rule": "repeated",
+                    "type": "Annotation",
+                    "id": 1,
+                    "options": {
+                      "packed": false
+                    },
+                    "comment": "An Annotation connects some span of text in generated code to an element\nof its generating .proto file."
+                  }
+                },
+                "nested": {
+                  "Annotation": {
+                    "fields": {
+                      "path": {
+                        "rule": "repeated",
+                        "type": "int32",
+                        "id": 1,
+                        "options": {
+                          "packed": true
+                        },
+                        "comment": "Identifies the element in the original source .proto file. This field\nis formatted the same as SourceCodeInfo.Location.path."
+                      },
+                      "sourceFile": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Identifies the filesystem path to the original source .proto."
+                      },
+                      "begin": {
+                        "type": "int32",
+                        "id": 3,
+                        "comment": "Identifies the starting offset in bytes in the generated code\nthat relates to the identified object."
+                      },
+                      "end": {
+                        "type": "int32",
+                        "id": 4,
+                        "comment": "Identifies the ending offset in bytes in the generated code that\nrelates to the identified offset. The end offset should be one past\nthe last relevant byte (so the length of the text = end - begin)."
+                      }
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "Describes the relationship between generated code and its original source\nfile. A GeneratedCodeInfo message is associated with only one generated\nsource file, but may contain references to different source .proto files."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

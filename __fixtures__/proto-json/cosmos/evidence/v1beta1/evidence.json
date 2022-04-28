@@ -1,0 +1,66 @@
+{
+  "package": "cosmos.evidence.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "evidence": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/evidence/types",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "Equivocation": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false,
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.equal)": false
+                    },
+                    "fields": {
+                      "height": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "time": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": null
+                      },
+                      "power": {
+                        "type": "int64",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "consensusAddress": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Equivocation implements the Evidence interface and defines evidence of double\nsigning misbehavior."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

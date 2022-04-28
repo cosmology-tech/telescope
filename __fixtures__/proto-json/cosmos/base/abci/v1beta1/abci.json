@@ -1,0 +1,337 @@
+{
+  "package": "cosmos.base.abci.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "tendermint/abci/types.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "abci": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/types",
+                      "(gogoproto.goproto_stringer_all)": false
+                    },
+                    "nested": {
+                      "TxResponse": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "height": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": "The block height"
+                          },
+                          "txhash": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.customname)": "TxHash"
+                            },
+                            "comment": "The transaction hash."
+                          },
+                          "codespace": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Namespace for the Code"
+                          },
+                          "code": {
+                            "type": "uint32",
+                            "id": 4,
+                            "comment": "Response code."
+                          },
+                          "data": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "Result bytes, if any."
+                          },
+                          "rawLog": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The output of the application's logger (raw string). May be\nnon-deterministic."
+                          },
+                          "logs": {
+                            "rule": "repeated",
+                            "type": "ABCIMessageLog",
+                            "id": 7,
+                            "options": {
+                              "(gogoproto.castrepeated)": "ABCIMessageLogs",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "The output of the application's logger (typed). May be non-deterministic."
+                          },
+                          "info": {
+                            "type": "string",
+                            "id": 8,
+                            "comment": "Additional information. May be non-deterministic."
+                          },
+                          "gasWanted": {
+                            "type": "int64",
+                            "id": 9,
+                            "comment": "Amount of gas requested for transaction."
+                          },
+                          "gasUsed": {
+                            "type": "int64",
+                            "id": 10,
+                            "comment": "Amount of gas consumed by transaction."
+                          },
+                          "tx": {
+                            "type": "google.protobuf.Any",
+                            "id": 11,
+                            "comment": "The request transaction bytes."
+                          },
+                          "timestamp": {
+                            "type": "string",
+                            "id": 12,
+                            "comment": "Time of the previous block. For heights > 1, it's the weighted median of\nthe timestamps of the valid votes in the block.LastCommit. For height == 1,\nit's genesis time."
+                          },
+                          "events": {
+                            "rule": "repeated",
+                            "type": "tendermint.abci.Event",
+                            "id": 13,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "Events defines all the events emitted by processing a transaction. Note,\nthese events include those emitted by processing all the messages and those\nemitted from the ante handler. Whereas Logs contains the events, with\nadditional metadata, emitted only by processing the messages.\n\nSince: cosmos-sdk 0.42.11, 0.44.5, 0.45"
+                          }
+                        },
+                        "comment": "TxResponse defines a structure containing relevant tx data and metadata. The\ntags are stringified and the log is JSON decoded."
+                      },
+                      "ABCIMessageLog": {
+                        "options": {
+                          "(gogoproto.stringer)": true
+                        },
+                        "fields": {
+                          "msgIndex": {
+                            "type": "uint32",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.jsontag)": "msg_index"
+                            },
+                            "comment": null
+                          },
+                          "log": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "events": {
+                            "rule": "repeated",
+                            "type": "StringEvent",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.castrepeated)": "StringEvents",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "Events contains a slice of Event objects that were emitted during some\nexecution."
+                          }
+                        },
+                        "comment": "ABCIMessageLog defines a structure containing an indexed tx ABCI message log."
+                      },
+                      "StringEvent": {
+                        "options": {
+                          "(gogoproto.stringer)": true
+                        },
+                        "fields": {
+                          "type": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "attributes": {
+                            "rule": "repeated",
+                            "type": "Attribute",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "StringEvent defines en Event object wrapper where all the attributes\ncontain key/value pairs that are strings instead of raw bytes."
+                      },
+                      "Attribute": {
+                        "fields": {
+                          "key": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "value": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "Attribute defines an attribute wrapper where the key and value are\nstrings instead of raw bytes."
+                      },
+                      "GasInfo": {
+                        "fields": {
+                          "gasWanted": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "GasWanted is the maximum units of work we allow this tx to perform."
+                          },
+                          "gasUsed": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": "GasUsed is the amount of gas actually consumed."
+                          }
+                        },
+                        "comment": "GasInfo defines tx execution gas context."
+                      },
+                      "Result": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "data": {
+                            "type": "bytes",
+                            "id": 1,
+                            "options": {
+                              "deprecated": true
+                            },
+                            "comment": "Data is any data returned from message or handler execution. It MUST be\nlength prefixed in order to separate data from multiple message executions.\nDeprecated. This field is still populated, but prefer msg_response instead\nbecause it also contains the Msg response typeURL."
+                          },
+                          "log": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Log contains the log information from message or handler execution."
+                          },
+                          "events": {
+                            "rule": "repeated",
+                            "type": "tendermint.abci.Event",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "Events contains a slice of Event objects that were emitted during message\nor handler execution."
+                          },
+                          "msgResponses": {
+                            "rule": "repeated",
+                            "type": "google.protobuf.Any",
+                            "id": 4,
+                            "comment": "msg_responses contains the Msg handler responses type packed in Anys.\n\nSince: cosmos-sdk 0.46"
+                          }
+                        },
+                        "comment": "Result is the union of ResponseFormat and ResponseCheckTx."
+                      },
+                      "SimulationResponse": {
+                        "fields": {
+                          "gasInfo": {
+                            "type": "GasInfo",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.embed)": true,
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "result": {
+                            "type": "Result",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SimulationResponse defines the response generated when a transaction is\nsuccessfully simulated."
+                      },
+                      "MsgData": {
+                        "options": {
+                          "deprecated": true,
+                          "(gogoproto.stringer)": true
+                        },
+                        "fields": {
+                          "msgType": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "data": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgData defines the data returned in a Result object during message\nexecution."
+                      },
+                      "TxMsgData": {
+                        "options": {
+                          "(gogoproto.stringer)": true
+                        },
+                        "fields": {
+                          "data": {
+                            "rule": "repeated",
+                            "type": "MsgData",
+                            "id": 1,
+                            "options": {
+                              "deprecated": true
+                            },
+                            "comment": "data field is deprecated and not populated."
+                          },
+                          "msgResponses": {
+                            "rule": "repeated",
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "comment": "msg_responses contains the Msg handler responses packed into Anys.\n\nSince: cosmos-sdk 0.46"
+                          }
+                        },
+                        "comment": "TxMsgData defines a list of MsgData. A transaction will have a MsgData object\nfor each message."
+                      },
+                      "SearchTxsResult": {
+                        "options": {
+                          "(gogoproto.stringer)": true
+                        },
+                        "fields": {
+                          "totalCount": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "Count of all txs"
+                          },
+                          "count": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": "Count of txs in current page"
+                          },
+                          "pageNumber": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "Index of current page, start from 1"
+                          },
+                          "pageTotal": {
+                            "type": "uint64",
+                            "id": 4,
+                            "comment": "Count of total pages"
+                          },
+                          "limit": {
+                            "type": "uint64",
+                            "id": 5,
+                            "comment": "Max count txs per page"
+                          },
+                          "txs": {
+                            "rule": "repeated",
+                            "type": "TxResponse",
+                            "id": 6,
+                            "comment": "List of txs in current page"
+                          }
+                        },
+                        "comment": "SearchTxsResult defines a structure for querying txs pageable"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "package": "cosmos.nft.v1beta1",
+  "imports": [
+    "cosmos/nft/v1beta1/nft.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "nft": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/nft"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "classes": {
+                        "rule": "repeated",
+                        "type": "cosmos.nft.v1beta1.Class",
+                        "id": 1,
+                        "comment": "class defines the class of the nft type."
+                      },
+                      "entries": {
+                        "rule": "repeated",
+                        "type": "Entry",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "GenesisState defines the nft module's genesis state."
+                  },
+                  "Entry": {
+                    "fields": {
+                      "owner": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "owner is the owner address of the following nft"
+                      },
+                      "nfts": {
+                        "rule": "repeated",
+                        "type": "cosmos.nft.v1beta1.NFT",
+                        "id": 2,
+                        "comment": "nfts is a group of nfts of the same owner"
+                      }
+                    },
+                    "comment": "Entry Defines all nft owned by a person"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

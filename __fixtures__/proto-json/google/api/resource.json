@@ -1,0 +1,129 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "cc_enable_arenas": true,
+              "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+              "java_multiple_files": true,
+              "java_outer_classname": "ResourceProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "resourceReference": {
+                "type": "google.api.ResourceReference",
+                "id": 1055,
+                "extend": "google.protobuf.FieldOptions",
+                "comment": "An annotation that describes a resource reference, see\n[ResourceReference][]."
+              },
+              "resourceDefinition": {
+                "rule": "repeated",
+                "type": "google.api.ResourceDescriptor",
+                "id": 1053,
+                "extend": "google.protobuf.FileOptions",
+                "comment": "An annotation that describes a resource definition without a corresponding\nmessage; see [ResourceDescriptor][]."
+              },
+              "resource": {
+                "type": "google.api.ResourceDescriptor",
+                "id": 1053,
+                "extend": "google.protobuf.MessageOptions",
+                "comment": "An annotation that describes a resource definition, see\n[ResourceDescriptor][]."
+              },
+              "ResourceDescriptor": {
+                "fields": {
+                  "type": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The resource type. It must be in the format of\n{service_name}/{resource_type_kind}. The `resource_type_kind` must be\nsingular and must not include version numbers.\n\nExample: `storage.googleapis.com/Bucket`\n\nThe value of the resource_type_kind must follow the regular expression\n/[A-Za-z][a-zA-Z0-9]+/. It should start with an upper case character and\nshould use PascalCase (UpperCamelCase). The maximum number of\ncharacters allowed for the `resource_type_kind` is 100."
+                  },
+                  "pattern": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Optional. The relative resource name pattern associated with this resource\ntype. The DNS prefix of the full resource name shouldn't be specified here.\n\nThe path pattern must follow the syntax, which aligns with HTTP binding\nsyntax:\n\nTemplate = Segment { \"/\" Segment } ;\nSegment = LITERAL | Variable ;\nVariable = \"{\" LITERAL \"}\" ;\n\nExamples:\n\n- \"projects/{project}/topics/{topic}\"\n- \"projects/{project}/knowledgeBases/{knowledge_base}\"\n\nThe components in braces correspond to the IDs for each resource in the\nhierarchy. It is expected that, if multiple patterns are provided,\nthe same component name (e.g. \"project\") refers to IDs of the same\ntype of resource."
+                  },
+                  "nameField": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Optional. The field on the resource that designates the resource name\nfield. If omitted, this is assumed to be \"name\"."
+                  },
+                  "history": {
+                    "type": "History",
+                    "id": 4,
+                    "comment": "Optional. The historical or future-looking state of the resource pattern.\n\nExample:\n\n// The InspectTemplate message originally only supported resource\n// names with organization, and project was added later.\nmessage InspectTemplate {\noption (google.api.resource) = {\ntype: \"dlp.googleapis.com/InspectTemplate\"\npattern:\n\"organizations/{organization}/inspectTemplates/{inspect_template}\"\npattern: \"projects/{project}/inspectTemplates/{inspect_template}\"\nhistory: ORIGINALLY_SINGLE_PATTERN\n};\n}"
+                  },
+                  "plural": {
+                    "type": "string",
+                    "id": 5,
+                    "comment": "The plural name used in the resource name and permission names, such as\n'projects' for the resource name of 'projects/{project}' and the permission\nname of 'cloudresourcemanager.googleapis.com/projects.get'. It is the same\nconcept of the `plural` field in k8s CRD spec\nhttps://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/\n\nNote: The plural form is required even for singleton resources. See\nhttps://aip.dev/156"
+                  },
+                  "singular": {
+                    "type": "string",
+                    "id": 6,
+                    "comment": "The same concept of the `singular` field in k8s CRD spec\nhttps://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/\nSuch as \"project\" for the `resourcemanager.googleapis.com/Project` type."
+                  },
+                  "style": {
+                    "rule": "repeated",
+                    "type": "Style",
+                    "id": 10,
+                    "comment": "Style flag(s) for this resource.\nThese indicate that a resource is expected to conform to a given\nstyle. See the specific style flags for additional information."
+                  }
+                },
+                "nested": {
+                  "History": {
+                    "values": {
+                      "HISTORY_UNSPECIFIED": 0,
+                      "ORIGINALLY_SINGLE_PATTERN": 1,
+                      "FUTURE_MULTI_PATTERN": 2
+                    },
+                    "comment": "A description of the historical or future-looking state of the\nresource pattern.",
+                    "comments": {
+                      "HISTORY_UNSPECIFIED": "The \"unset\" value.",
+                      "ORIGINALLY_SINGLE_PATTERN": "The resource originally had one pattern and launched as such, and\nadditional patterns were added later.",
+                      "FUTURE_MULTI_PATTERN": "The resource has one pattern, but the API owner expects to add more\nlater. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents\nthat from being necessary once there are multiple patterns.)"
+                    }
+                  },
+                  "Style": {
+                    "values": {
+                      "STYLE_UNSPECIFIED": 0,
+                      "DECLARATIVE_FRIENDLY": 1
+                    },
+                    "comment": "A flag representing a specific style that a resource claims to conform to.",
+                    "comments": {
+                      "STYLE_UNSPECIFIED": "The unspecified value. Do not use.",
+                      "DECLARATIVE_FRIENDLY": "This resource is intended to be \"declarative-friendly\".\n\nDeclarative-friendly resources must be more strictly consistent, and\nsetting this to true communicates to tools that this resource should\nadhere to declarative-friendly expectations.\n\nNote: This is used by the API linter (linter.aip.dev) to enable\nadditional checks."
+                    }
+                  }
+                },
+                "comment": "A simple descriptor of a resource type.\n\nResourceDescriptor annotates a resource message (either by means of a\nprotobuf annotation or use in the service config), and associates the\nresource's schema, the resource type, and the pattern of the resource name.\n\nExample:\n\nmessage Topic {\n// Indicates this message defines a resource schema.\n// Declares the resource type in the format of {service}/{kind}.\n// For Kubernetes resources, the format is {api group}/{kind}.\noption (google.api.resource) = {\ntype: \"pubsub.googleapis.com/Topic\"\npattern: \"projects/{project}/topics/{topic}\"\n};\n}\n\nThe ResourceDescriptor Yaml config will look like:\n\nresources:\n- type: \"pubsub.googleapis.com/Topic\"\npattern: \"projects/{project}/topics/{topic}\"\n\nSometimes, resources have multiple patterns, typically because they can\nlive under multiple parents.\n\nExample:\n\nmessage LogEntry {\noption (google.api.resource) = {\ntype: \"logging.googleapis.com/LogEntry\"\npattern: \"projects/{project}/logs/{log}\"\npattern: \"folders/{folder}/logs/{log}\"\npattern: \"organizations/{organization}/logs/{log}\"\npattern: \"billingAccounts/{billing_account}/logs/{log}\"\n};\n}\n\nThe ResourceDescriptor Yaml config will look like:\n\nresources:\n- type: 'logging.googleapis.com/LogEntry'\npattern: \"projects/{project}/logs/{log}\"\npattern: \"folders/{folder}/logs/{log}\"\npattern: \"organizations/{organization}/logs/{log}\"\npattern: \"billingAccounts/{billing_account}/logs/{log}\""
+              },
+              "ResourceReference": {
+                "fields": {
+                  "type": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The resource type that the annotated field references.\n\nExample:\n\nmessage Subscription {\nstring topic = 2 [(google.api.resource_reference) = {\ntype: \"pubsub.googleapis.com/Topic\"\n}];\n}\n\nOccasionally, a field may reference an arbitrary resource. In this case,\nAPIs use the special value * in their resource reference.\n\nExample:\n\nmessage GetIamPolicyRequest {\nstring resource = 2 [(google.api.resource_reference) = {\ntype: \"*\"\n}];\n}"
+                  },
+                  "childType": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The resource type of a child collection that the annotated field\nreferences. This is useful for annotating the `parent` field that\ndoesn't have a fixed resource type.\n\nExample:\n\nmessage ListLogEntriesRequest {\nstring parent = 1 [(google.api.resource_reference) = {\nchild_type: \"logging.googleapis.com/LogEntry\"\n};\n}"
+                  }
+                },
+                "comment": "Defines a proto annotation that describes a string field that refers to\nan API resource."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

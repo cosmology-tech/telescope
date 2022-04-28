@@ -1,0 +1,178 @@
+{
+  "package": "cosmos.feegrant.v1beta1",
+  "imports": [
+    "cosmos/feegrant/v1beta1/feegrant.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "google/api/annotations.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "feegrant": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/feegrant"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Allowance": {
+                        "requestType": "QueryAllowanceRequest",
+                        "responseType": "QueryAllowanceResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}"
+                        },
+                        "comment": "Allowance returns fee granted to the grantee by the granter.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}"
+                            }
+                          }
+                        ]
+                      },
+                      "Allowances": {
+                        "requestType": "QueryAllowancesRequest",
+                        "responseType": "QueryAllowancesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/feegrant/v1beta1/allowances/{grantee}"
+                        },
+                        "comment": "Allowances returns all the grants for address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/feegrant/v1beta1/allowances/{grantee}"
+                            }
+                          }
+                        ]
+                      },
+                      "AllowancesByGranter": {
+                        "requestType": "QueryAllowancesByGranterRequest",
+                        "responseType": "QueryAllowancesByGranterResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/feegrant/v1beta1/issued/{granter}"
+                        },
+                        "comment": "AllowancesByGranter returns all the grants given by an address\nSince v0.46",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/feegrant/v1beta1/issued/{granter}"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryAllowanceRequest": {
+                    "fields": {
+                      "granter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "granter is the address of the user granting an allowance of their funds."
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "grantee is the address of the user being granted an allowance of another user's funds."
+                      }
+                    },
+                    "comment": "QueryAllowanceRequest is the request type for the Query/Allowance RPC method."
+                  },
+                  "QueryAllowanceResponse": {
+                    "fields": {
+                      "allowance": {
+                        "type": "cosmos.feegrant.v1beta1.Grant",
+                        "id": 1,
+                        "comment": "allowance is a allowance granted for grantee by granter."
+                      }
+                    },
+                    "comment": "QueryAllowanceResponse is the response type for the Query/Allowance RPC method."
+                  },
+                  "QueryAllowancesRequest": {
+                    "fields": {
+                      "grantee": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an pagination for the request."
+                      }
+                    },
+                    "comment": "QueryAllowancesRequest is the request type for the Query/Allowances RPC method."
+                  },
+                  "QueryAllowancesResponse": {
+                    "fields": {
+                      "allowances": {
+                        "rule": "repeated",
+                        "type": "cosmos.feegrant.v1beta1.Grant",
+                        "id": 1,
+                        "comment": "allowances are allowance's granted for grantee by granter."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines an pagination for the response."
+                      }
+                    },
+                    "comment": "QueryAllowancesResponse is the response type for the Query/Allowances RPC method."
+                  },
+                  "QueryAllowancesByGranterRequest": {
+                    "fields": {
+                      "granter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an pagination for the request."
+                      }
+                    },
+                    "comment": "QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method."
+                  },
+                  "QueryAllowancesByGranterResponse": {
+                    "fields": {
+                      "allowances": {
+                        "rule": "repeated",
+                        "type": "cosmos.feegrant.v1beta1.Grant",
+                        "id": 1,
+                        "comment": "allowances that have been issued by the granter."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines an pagination for the response."
+                      }
+                    },
+                    "comment": "QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

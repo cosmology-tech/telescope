@@ -1,0 +1,106 @@
+{
+  "package": "ibc.applications.transfer.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "ibc/core/client/v1/client.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "applications": {
+            "nested": {
+              "transfer": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/apps/transfer/types"
+                    },
+                    "nested": {
+                      "Msg": {
+                        "methods": {
+                          "Transfer": {
+                            "requestType": "MsgTransfer",
+                            "responseType": "MsgTransferResponse",
+                            "comment": "Transfer defines a rpc handler method for MsgTransfer."
+                          }
+                        },
+                        "comment": "Msg defines the ibc/transfer Msg service."
+                      },
+                      "MsgTransfer": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "sourcePort": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:source_port"
+                            },
+                            "comment": "the port on which the packet will be sent"
+                          },
+                          "sourceChannel": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:source_channel"
+                            },
+                            "comment": "the channel by which the packet will be sent"
+                          },
+                          "token": {
+                            "type": "cosmos.base.v1beta1.Coin",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "the tokens to be transferred"
+                          },
+                          "sender": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "the sender address"
+                          },
+                          "receiver": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "the recipient address on the destination chain"
+                          },
+                          "timeoutHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:timeout_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "Timeout height relative to the current block height.\nThe timeout is disabled when set to 0."
+                          },
+                          "timeoutTimestamp": {
+                            "type": "uint64",
+                            "id": 7,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:timeout_timestamp"
+                            },
+                            "comment": "Timeout timestamp (in nanoseconds) relative to the current block timestamp.\nThe timeout is disabled when set to 0."
+                          }
+                        },
+                        "comment": "MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between\nICS20 enabled chains. See ICS Spec here:\nhttps://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures"
+                      },
+                      "MsgTransferResponse": {
+                        "fields": {},
+                        "comment": "MsgTransferResponse defines the Msg/Transfer response type."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

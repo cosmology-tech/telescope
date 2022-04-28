@@ -1,0 +1,52 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "EndpointProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Endpoint": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The canonical name of this endpoint."
+                  },
+                  "aliases": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 2,
+                    "options": {
+                      "deprecated": true
+                    },
+                    "comment": "Unimplemented. Dot not use.\n\nDEPRECATED: This field is no longer supported. Instead of using aliases,\nplease specify multiple [google.api.Endpoint][google.api.Endpoint] for each of the intended\naliases.\n\nAdditional names that this endpoint will be hosted on."
+                  },
+                  "target": {
+                    "type": "string",
+                    "id": 101,
+                    "comment": "The specification of an Internet routable address of API frontend that will\nhandle requests to this [API\nEndpoint](https://cloud.google.com/apis/design/glossary). It should be\neither a valid IPv4 address or a fully-qualified domain name. For example,\n\"8.8.8.8\" or \"myservice.appspot.com\"."
+                  },
+                  "allowCors": {
+                    "type": "bool",
+                    "id": 5,
+                    "comment": "Allowing\n[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), aka\ncross-domain traffic, would allow the backends served from this endpoint to\nreceive and respond to HTTP OPTIONS requests. The response will be used by\nthe browser to determine whether the subsequent cross-origin request is\nallowed to proceed."
+                  }
+                },
+                "comment": "`Endpoint` describes a network endpoint of a service that serves a set of\nAPIs. It is commonly known as a service endpoint. A service may expose\nany number of service endpoints, and all service endpoints share the same\nservice definition, such as quota limits and monitoring metrics.\n\nExample service configuration:\n\nname: library-example.googleapis.com\nendpoints:\n# Below entry makes 'google.example.library.v1.Library'\n# API be served from endpoint address library-example.googleapis.com.\n# It also allows HTTP OPTIONS calls to be passed to the backend, for\n# it to decide whether the subsequent cross-origin request is\n# allowed to proceed.\n- name: library-example.googleapis.com\nallow_cors: true"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

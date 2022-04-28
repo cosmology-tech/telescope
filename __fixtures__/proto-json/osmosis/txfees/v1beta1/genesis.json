@@ -1,0 +1,46 @@
+{
+  "package": "osmosis.txfees.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/txfees/v1beta1/feetoken.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "txfees": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/txfees/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "basedenom": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "feetokens": {
+                        "rule": "repeated",
+                        "type": "FeeToken",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "GenesisState defines the txfees module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

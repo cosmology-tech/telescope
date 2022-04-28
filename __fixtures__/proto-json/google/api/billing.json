@@ -1,0 +1,55 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/api/metric.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "BillingProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Billing": {
+                "fields": {
+                  "consumerDestinations": {
+                    "rule": "repeated",
+                    "type": "BillingDestination",
+                    "id": 8,
+                    "comment": "Billing configurations for sending metrics to the consumer project.\nThere can be multiple consumer destinations per service, each one must have\na different monitored resource type. A metric can be used in at most\none consumer destination."
+                  }
+                },
+                "nested": {
+                  "BillingDestination": {
+                    "fields": {
+                      "monitoredResource": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The monitored resource type. The type must be defined in\n[Service.monitored_resources][google.api.Service.monitored_resources] section."
+                      },
+                      "metrics": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Names of the metrics to report to this billing destination.\nEach name must be defined in [Service.metrics][google.api.Service.metrics] section."
+                      }
+                    },
+                    "comment": "Configuration of a specific billing destination (Currently only support\nbill against consumer project)."
+                  }
+                },
+                "comment": "Billing related configuration of the service.\n\nThe following example shows how to configure monitored resources and metrics\nfor billing, `consumer_destinations` is the only supported destination and\nthe monitored resources need at least one label key\n`cloud.googleapis.com/location` to indicate the location of the billing\nusage, using different monitored resources between monitoring and billing is\nrecommended so they can be evolved independently:\n\n\nmonitored_resources:\n- type: library.googleapis.com/billing_branch\nlabels:\n- key: cloud.googleapis.com/location\ndescription: |\nPredefined label to support billing location restriction.\n- key: city\ndescription: |\nCustom label to define the city where the library branch is located\nin.\n- key: name\ndescription: Custom label to define the name of the library branch.\nmetrics:\n- name: library.googleapis.com/book/borrowed_count\nmetric_kind: DELTA\nvalue_type: INT64\nunit: \"1\"\nbilling:\nconsumer_destinations:\n- monitored_resource: library.googleapis.com/billing_branch\nmetrics:\n- library.googleapis.com/book/borrowed_count"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

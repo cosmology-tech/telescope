@@ -1,0 +1,318 @@
+{
+  "package": "cosmos.distribution.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "distribution": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/distribution/types",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "Params": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "communityTax": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "baseProposerReward": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "bonusProposerReward": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "withdrawAddrEnabled": {
+                        "type": "bool",
+                        "id": 4,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Params defines the set of params for the distribution module."
+                  },
+                  "ValidatorHistoricalRewards": {
+                    "fields": {
+                      "cumulativeRewardRatio": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "referenceCount": {
+                        "type": "uint32",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "ValidatorHistoricalRewards represents historical rewards for a validator.\nHeight is implicit within the store key.\nCumulative reward ratio is the sum from the zeroeth period\nuntil this period of rewards / tokens, per the spec.\nThe reference count indicates the number of objects\nwhich might need to reference this historical entry at any point.\nReferenceCount =\nnumber of outstanding delegations which ended the associated period (and\nmight need to read that record)\n+ number of slashes which ended the associated period (and might need to\nread that record)\n+ one per validator for the zeroeth period, set on initialization"
+                  },
+                  "ValidatorCurrentRewards": {
+                    "fields": {
+                      "rewards": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "period": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "ValidatorCurrentRewards represents current rewards and current\nperiod for a validator kept as a running counter and incremented\neach block as long as the validator's tokens remain constant."
+                  },
+                  "ValidatorAccumulatedCommission": {
+                    "fields": {
+                      "commission": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "ValidatorAccumulatedCommission represents accumulated commission\nfor a validator kept as a running counter, can be withdrawn at any time."
+                  },
+                  "ValidatorOutstandingRewards": {
+                    "fields": {
+                      "rewards": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards\nfor a validator inexpensive to track, allows simple sanity checks."
+                  },
+                  "ValidatorSlashEvent": {
+                    "fields": {
+                      "validatorPeriod": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "fraction": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "ValidatorSlashEvent represents a validator slash event.\nHeight is implicit within the store key.\nThis is needed to calculate appropriate amount of staking tokens\nfor delegations which are withdrawn after a slash has occurred."
+                  },
+                  "ValidatorSlashEvents": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "validatorSlashEvents": {
+                        "rule": "repeated",
+                        "type": "ValidatorSlashEvent",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "ValidatorSlashEvents is a collection of ValidatorSlashEvent messages."
+                  },
+                  "FeePool": {
+                    "fields": {
+                      "communityPool": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "FeePool is the global fee pool for distribution."
+                  },
+                  "CommunityPoolSpendProposal": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "recipient": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "CommunityPoolSpendProposal details a proposal for use of community funds,\ntogether with how many coins are proposed to be spent, and to which\nrecipient account."
+                  },
+                  "DelegatorStartingInfo": {
+                    "fields": {
+                      "previousPeriod": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "stake": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "height": {
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.jsontag)": "creation_height"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "DelegatorStartingInfo represents the starting info for a delegator reward\nperiod. It tracks the previous validator period, the delegation's amount of\nstaking token, and the creation height (to check later on if any slashes have\noccurred). NOTE: Even though validators are slashed to whole staking tokens,\nthe delegators within the validator may be left with less than a full token,\nthus sdk.Dec is used."
+                  },
+                  "DelegationDelegatorReward": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": true
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "reward": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "DelegationDelegatorReward represents the properties\nof a delegator's delegation reward."
+                  },
+                  "CommunityPoolSpendProposalWithDeposit": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": true
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "recipient": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "amount": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": null
+                      },
+                      "deposit": {
+                        "type": "string",
+                        "id": 5,
+                        "comment": null
+                      }
+                    },
+                    "comment": "CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal\nwith a deposit"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

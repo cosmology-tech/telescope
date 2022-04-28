@@ -1,0 +1,161 @@
+{
+  "package": "google.api.servicecontrol.v1",
+  "imports": [
+    "google/api/servicecontrol/v1/http_request.proto",
+    "google/logging/type/log_severity.proto",
+    "google/protobuf/any.proto",
+    "google/protobuf/struct.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicecontrol": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "csharp_namespace": "Google.Cloud.ServiceControl.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v1;servicecontrol",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "LogEntryProto",
+                      "java_package": "com.google.api.servicecontrol.v1",
+                      "php_namespace": "Google\\Cloud\\ServiceControl\\V1",
+                      "ruby_package": "Google::Cloud::ServiceControl::V1"
+                    },
+                    "nested": {
+                      "LogEntry": {
+                        "oneofs": {
+                          "payload": {
+                            "oneof": [
+                              "protoPayload",
+                              "textPayload",
+                              "structPayload"
+                            ],
+                            "comment": "The log entry payload, which can be one of multiple types."
+                          }
+                        },
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 10,
+                            "comment": "Required. The log to which this log entry belongs. Examples: `\"syslog\"`,\n`\"book_log\"`."
+                          },
+                          "timestamp": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 11,
+                            "comment": "The time the event described by the log entry occurred. If\nomitted, defaults to operation start time."
+                          },
+                          "severity": {
+                            "type": "google.logging.type.LogSeverity",
+                            "id": 12,
+                            "comment": "The severity of the log entry. The default value is\n`LogSeverity.DEFAULT`."
+                          },
+                          "httpRequest": {
+                            "type": "HttpRequest",
+                            "id": 14,
+                            "comment": "Optional. Information about the HTTP request associated with this\nlog entry, if applicable."
+                          },
+                          "trace": {
+                            "type": "string",
+                            "id": 15,
+                            "comment": "Optional. Resource name of the trace associated with the log entry, if any.\nIf this field contains a relative resource name, you can assume the name is\nrelative to `//tracing.googleapis.com`. Example:\n`projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`"
+                          },
+                          "insertId": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "A unique ID for the log entry used for deduplication. If omitted,\nthe implementation will generate one based on operation_id."
+                          },
+                          "labels": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 13,
+                            "comment": "A set of user-defined (key, value) data that provides additional\ninformation about the log entry."
+                          },
+                          "protoPayload": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "comment": "The log entry payload, represented as a protocol buffer that is\nexpressed as a JSON object. The only accepted type currently is\n[AuditLog][google.cloud.audit.AuditLog]."
+                          },
+                          "textPayload": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The log entry payload, represented as a Unicode string (UTF-8)."
+                          },
+                          "structPayload": {
+                            "type": "google.protobuf.Struct",
+                            "id": 6,
+                            "comment": "The log entry payload, represented as a structure that\nis expressed as a JSON object."
+                          },
+                          "operation": {
+                            "type": "LogEntryOperation",
+                            "id": 16,
+                            "comment": "Optional. Information about an operation associated with the log entry, if\napplicable."
+                          },
+                          "sourceLocation": {
+                            "type": "LogEntrySourceLocation",
+                            "id": 17,
+                            "comment": "Optional. Source code location information associated with the log entry,\nif any."
+                          }
+                        },
+                        "comment": "An individual log entry."
+                      },
+                      "LogEntryOperation": {
+                        "fields": {
+                          "id": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Optional. An arbitrary operation identifier. Log entries with the\nsame identifier are assumed to be part of the same operation."
+                          },
+                          "producer": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Optional. An arbitrary producer identifier. The combination of\n`id` and `producer` must be globally unique.  Examples for `producer`:\n`\"MyDivision.MyBigCompany.com\"`, `\"github.com/MyProject/MyApplication\"`."
+                          },
+                          "first": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "Optional. Set this to True if this is the first log entry in the operation."
+                          },
+                          "last": {
+                            "type": "bool",
+                            "id": 4,
+                            "comment": "Optional. Set this to True if this is the last log entry in the operation."
+                          }
+                        },
+                        "comment": "Additional information about a potentially long-running operation with which\na log entry is associated."
+                      },
+                      "LogEntrySourceLocation": {
+                        "fields": {
+                          "file": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Optional. Source file name. Depending on the runtime environment, this\nmight be a simple name or a fully-qualified name."
+                          },
+                          "line": {
+                            "type": "int64",
+                            "id": 2,
+                            "comment": "Optional. Line within the source file. 1-based; 0 indicates no line number\navailable."
+                          },
+                          "function": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Optional. Human-readable name of the function or method being invoked, with\noptional context such as the class or package name. This information may be\nused in contexts such as the logs viewer, where a file and line number are\nless meaningful. The format can vary by language. For example:\n`qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`\n(Python)."
+                          }
+                        },
+                        "comment": "Additional information about the source code location that produced the log\nentry."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
