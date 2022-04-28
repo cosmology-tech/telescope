@@ -119,21 +119,26 @@ const protoEncodeMethod = (name: string, proto: ProtoType) => {
                 ])
             ),
 
+
             /*
-            REPEAT OF FIRST PROP
-            if (message.shareOutAmount !== "") {
-                writer.uint32(26).string(message.shareOutAmount);
-            }
+
+        if (message.queryData.length !== 0) {
+          writer.uint32(18).bytes(message.queryData);
+        }
+        
             */
 
             t.ifStatement(
                 t.binaryExpression(
                     '!==',
                     t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier('shareOutAmount')
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('queryData')
+                        ),
+                        t.identifier('length')
                     ),
-                    t.stringLiteral('')
+                    t.numericLiteral(0)
                 ),
                 t.blockStatement([
                     t.expressionStatement(
@@ -145,15 +150,15 @@ const protoEncodeMethod = (name: string, proto: ProtoType) => {
                                         t.identifier('uint32')
                                     ),
                                     [
-                                        t.numericLiteral(26)
+                                        t.numericLiteral(18)
                                     ]
                                 ),
-                                t.identifier('string')
+                                t.identifier('bytes')
                             ),
                             [
                                 t.memberExpression(
                                     t.identifier('message'),
-                                    t.identifier('shareOutAmount')
+                                    t.identifier('queryData')
                                 )
                             ]
                         )
@@ -484,6 +489,34 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
                             ),
 
                             /*
+                             case:
+                                 message.queryData = reader.bytes();
+                           */
+
+                            t.switchCase(
+                                t.numericLiteral(333),
+                                [
+                                    t.expressionStatement(
+                                        t.assignmentExpression(
+                                            '=',
+                                            t.memberExpression(
+                                                t.identifier('message'),
+                                                t.identifier('queryData')
+                                            ),
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('reader'),
+                                                    t.identifier('bytes')
+                                                ),
+                                                []
+                                            )
+                                        )
+                                    ),
+                                    t.breakStatement()
+                                ]
+                            ),
+
+                            /*
                              case 4:
                                           message.tokenInMaxs.push(Coin.decode(reader, reader.unint32()));
                                           break;
@@ -661,6 +694,43 @@ export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
                         ),
 
                         /*
+
+            queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
+                        
+                        */
+
+                        // TODO register import!
+                        // bytesFromBase64
+
+                        t.objectProperty(
+                            t.identifier('queryData'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.identifier('isSet'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('queryData')
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.identifier('bytesFromBase64'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('queryData')
+                                        )
+                                    ]
+                                ),
+                                t.newExpression(
+                                    t.identifier('Uint8Array'),
+                                    []
+                                )
+                            )
+                        ),
+
+                        /*
         
                         tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
 
@@ -829,6 +899,57 @@ export const protoToJSONMethod = (name: string, proto: ProtoType) => {
                 )
             ),
 
+
+            /*
+    
+             message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+            */
+
+            t.expressionStatement(
+                t.logicalExpression(
+                    '&&',
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('queryData')
+                        ),
+                        t.identifier('undefined')
+                    ),
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier('queryData'),
+                            false,
+                            false
+                        ),
+                        t.callExpression(
+                            t.identifier('base64FromBytes'),
+                            [
+                                t.conditionalExpression(
+                                    t.binaryExpression(
+                                        '!==',
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('queryData')
+                                        ),
+                                        t.identifier('undefined')
+                                    ),
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('queryData')
+                                    ),
+                                    t.newExpression(t.identifier('Uint8Array'), []))
+                            ]
+                        )
+                    )
+                )
+            ),
+
+
+
             /*
 
             if (message.tokenInMaxs) {
@@ -964,6 +1085,31 @@ export const protoFromPartialMethod = (name: string, proto: ProtoType) => {
                             t.identifier('sender')
                         ),
                         t.stringLiteral('')
+                    )
+                )
+            ),
+
+            /*
+                message.queryData = object.queryData ?? new Uint8Array()
+            */
+
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('queryData')
+                    ),
+                    t.logicalExpression(
+                        '??',
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier('queryData')
+                        ),
+                        t.newExpression(
+                            t.identifier('Uint8Array'),
+                            []
+                        )
                     )
                 )
             ),
