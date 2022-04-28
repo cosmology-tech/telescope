@@ -167,12 +167,13 @@ export const getObjectName = (name: string, scope: string[] = []) => {
 export const traverse = (store: ProtoStore, root: ProtoRoot) => {
     const imports = {};
 
-    const obj: ProtoRoot = {
+    const obj: ProtoRoot & { parsedImports: Record<string, string[]> } = {
         imports: root.imports,
         package: root.package,
-        root: recursiveTraversal(store, root, root.root, imports)
+        root: recursiveTraversal(store, root, root.root, imports),
+        parsedImports: null
     };
-    obj.actualImports = imports;
+    obj.parsedImports = imports;
     return obj;
 };
 
@@ -184,13 +185,18 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
 
         found = importLookup(store, root, field.type);
         if (found) {
-            m[key] = field;
-            m[key].importedName = found.importedName
+            console.log('IMPORT LOOKUP', field.type)
+            imports[found.import] = imports[found.import] || [];
+            imports[found.import] = [...new Set([...imports[found.import], found.importedName])];
+            m[key] = {
+                ...field.toJSON({ keepComments: true }),
+                importedName: found.importedName,
+                import: found.import,
+            };
             return m;
         }
 
         found = protoImportLookup(store, root, field.type);
-        console.log('protoImportLookup', field.type)
         if (found) {
             imports[found.import] = imports[found.import] || [];
             imports[found.import] = [...new Set([...imports[found.import], found.importedName])];
@@ -204,8 +210,9 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
 
         found = lookup(store, root, field.type);
         if (found) {
-            console.log('regular lookup', field.type)
-            m[key] = field;
+            m[key] = {
+                ...field.toJSON({ keepComments: true }),
+            };
             return m;
         }
 

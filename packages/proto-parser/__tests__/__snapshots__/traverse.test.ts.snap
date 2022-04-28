@@ -2,7 +2,13 @@
 
 exports[`imports lookup 1`] = `
 Object {
-  "actualImports": Object {
+  "imports": Array [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+  ],
+  "package": "osmosis.claim.v1beta1",
+  "parsedImports": Object {
     "google/protobuf/duration.proto": Array [
       "google.protobuf.Duration",
     ],
@@ -10,12 +16,6 @@ Object {
       "google.protobuf.Timestamp",
     ],
   },
-  "imports": Array [
-    "gogoproto/gogo.proto",
-    "google/protobuf/duration.proto",
-    "google/protobuf/timestamp.proto",
-  ],
-  "package": "osmosis.claim.v1beta1",
   "root": Object {
     "nested": Object {
       "osmosis": Object {

@@ -31,3 +31,34 @@ exports[`oneofs Value 1`] = `
   listValue?: ListValue;
 }"
 `;
+
+exports[`traversed cosmos/app/v1alpha1/config 1`] = `
+"export interface Config {
+  modules: ModuleConfig[];
+}"
+`;
+
+exports[`traversed cosmos/app/v1alpha1/config 2`] = `
+"export interface ModuleConfig {
+  name: string;
+  config: Any;
+}"
+`;
+
+exports[`traversed usingosmosis/claim/v1beta1/params 1`] = `
+"export interface Params {
+  airdropStartTime: Date;
+  durationUntilDecay: string;
+  durationOfDecay: string;
+  claimDenom: string;
+}"
+`;
+
+exports[`using fixtures 1`] = `
+"export interface Params {
+  airdropStartTime: Date;
+  durationUntilDecay: string;
+  durationOfDecay: string;
+  claimDenom: string;
+}"
+`;
