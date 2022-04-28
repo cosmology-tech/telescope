@@ -90,3 +90,19 @@ export const objectPattern = (
     return obj;
 }
 
+export const objectMethod =
+    (
+        kind: "method" | "get" | "set",
+        key: t.Expression,
+        params: (t.Identifier | t.Pattern | t.RestElement)[],
+        body: t.BlockStatement,
+        computed?: boolean,
+        generator?: boolean,
+        async?: boolean,
+        returnType?: t.TSTypeAnnotation | t.TypeAnnotation | t.Noop
+    ): t.ObjectMethod => {
+        const obj = t.objectMethod(kind, key, params, body, computed, generator, async);
+        obj.returnType = returnType;
+        return obj;
+    }
+

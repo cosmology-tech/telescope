@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListValue 1`] = `
+"export interface ListValue {
+  values: Value[];
+}"
+`;
+
+exports[`Struct 1`] = `
+"export interface Struct {
+  fields: {
+    [key: string]: Value;
+  };
+}"
+`;
+
+exports[`authz 1`] = `
+"export interface authz {
+  authorization: Any;
+  expiration?: Date;
+}"
+`;
+
+exports[`oneofs Value 1`] = `
+"export interface Value {
+  nullValue?: NullValue;
+  numberValue?: number;
+  stringValue?: string;
+  boolValue?: boolean;
+  structValue?: Struct;
+  listValue?: ListValue;
+}"
+`;
+
+exports[`traversed cosmos/app/v1alpha1/config 1`] = `
+"export interface Config {
+  modules: ModuleConfig[];
+}"
+`;
+
+exports[`traversed cosmos/app/v1alpha1/config 2`] = `
+"export interface ModuleConfig {
+  name: string;
+  config: Any;
+}"
+`;
+
+exports[`traversed osmosis/claim/v1beta1/params 1`] = `
+"export interface Params {
+  airdropStartTime: Date;
+  durationUntilDecay: string;
+  durationOfDecay: string;
+  claimDenom: string;
+}"
+`;
