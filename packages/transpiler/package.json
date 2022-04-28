@@ -78,10 +78,6 @@
     "@babel/runtime": "^7.11.2",
     "@babel/traverse": "7.17.3",
     "@babel/types": "7.17.0",
-    "@cosmjs/amino": "0.28.4",
-    "@cosmjs/proto-signing": "0.28.4",
-    "@cosmjs/stargate": "0.28.4",
-    "@cosmjs/tendermint-rpc": "^0.28.4",
     "@osmonauts/ast": "0.2.1",
     "@osmonauts/proto-parser": "0.3.0",
     "case": "1.6.3",
@@ -93,7 +89,6 @@
     "long": "^5.2.0",
     "minimist": "1.2.6",
     "mkdirp": "1.0.4",
-    "mobx": "6.5.0",
     "shelljs": "0.8.5"
   }
 }

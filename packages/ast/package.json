@@ -63,34 +63,26 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/traverse": "7.17.3",
     "@types/jest": "^27.4.1",
-    "axios": "^0.26.1",
+    "ast-stringify": "0.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "27.5.1",
     "babel-watch": "^7.0.0",
     "cross-env": "^7.0.2",
-    "eslint": "8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint": "8.12.0",
     "glob": "7.2.0",
-    "jest": "^27.5.1",
     "jest-in-case": "^1.0.2",
+    "jest": "^27.5.1",
     "mkdirp": "1.0.4",
     "prettier": "^2.6.2",
-    "protoc": "^1.0.4",
     "regenerator-runtime": "^0.13.7",
     "ts-jest": "^27.1.4",
-    "ts-proto": "^1.110.2",
     "typescript": "^4.6.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@babel/types": "7.17.0",
-    "@cosmjs/amino": "0.28.4",
-    "@cosmjs/proto-signing": "0.28.4",
-    "@cosmjs/stargate": "0.28.4",
-    "@cosmjs/tendermint-rpc": "^0.28.4",
-    "ast-stringify": "0.1.0",
-    "case": "1.6.3",
-    "long": "^5.2.0"
+    "case": "1.6.3"
   }
 }
