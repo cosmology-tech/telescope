@@ -1,5 +1,15 @@
 import * as t from '@babel/types';
 
+export const tsEnumMember = (
+    id: t.Identifier | t.StringLiteral,
+    initializer?: t.Expression,
+    leadingComments?: any[]
+) => {
+    const obj = t.tsEnumMember(id, initializer);
+    obj.leadingComments = leadingComments;
+    return obj;
+};
+
 export const tsPropertySignature = (
     key: t.Expression,
     typeAnnotation: t.TSTypeAnnotation,
@@ -10,6 +20,18 @@ export const tsPropertySignature = (
     return obj
 };
 
+export const functionDeclaration = (
+    id: t.Identifier,
+    params: (t.Identifier | t.Pattern | t.RestElement)[],
+    body: t.BlockStatement,
+    generator?: boolean,
+    async?: boolean,
+    returnType?: t.TSTypeAnnotation
+): t.FunctionDeclaration => {
+    const func = t.functionDeclaration(id, params, body, generator, async);
+    func.returnType = returnType;
+    return func;
+};
 export const callExpression = (
     callee: t.Expression | t.V8IntrinsicIdentifier,
     _arguments: (t.Expression | t.SpreadElement | t.ArgumentPlaceholder)[],

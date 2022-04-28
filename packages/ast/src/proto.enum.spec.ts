@@ -1,7 +1,9 @@
-import { createProtoInterface } from './proto';
+import { createProtoEnum, createProtoEnumFromJSON, createProtoEnumToJSON } from './proto';
 import struct from '../../../__fixtures__/proto-json/google/protobuf/struct.json'
-
+import { getNestedProto } from '@osmonauts/proto-parser';
 import generate from '@babel/generator';
+
+
 
 const expectCode = (ast) => {
     expect(
@@ -14,8 +16,14 @@ const printCode = (ast) => {
     );
 }
 
+it('createProtoEnum', async () => {
+    printCode(createProtoEnum('NullValue', getNestedProto(struct).NullValue));
+});
 
-it('createEnum', async () => {
-    console.log(struct.root.nested.google.nested.protobuf.nested.NullValue);
-    // printCode(createEnum('NullValue', struct.root.nested.google.nested.protobuf.nested.NullValue));
+it('createProtoEnumFromJSON', async () => {
+    printCode(createProtoEnumFromJSON('NullValue', getNestedProto(struct).NullValue));
+});
+
+it('createProtoEnumToJSON', async () => {
+    printCode(createProtoEnumToJSON('NullValue', getNestedProto(struct).NullValue));
 });

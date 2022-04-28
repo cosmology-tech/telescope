@@ -1,5 +1,6 @@
 import * as t from '@babel/types';
-import { identifier, tsPropertySignature } from './utils';
+import { camel } from 'case';
+import { identifier, tsEnumMember, tsPropertySignature, functionDeclaration } from './utils';
 
 const NATIVE_TYPES = [
     'string',
@@ -41,6 +42,13 @@ export const getTSTypeFromProtoType = (type) => {
     };
 };
 
+
+
+export interface ProtoEnum {
+    values: { [key: string]: number };
+    comment?: string;
+    comments?: { [key: string]: string };
+}
 
 export interface ProtoType {
     oneofs?: { [key: string]: { oneof: string[], comment: string | undefined } },
@@ -127,7 +135,7 @@ const getProtoField = (field: ProtoField) => {
     }
 
     return ast;
-}
+};
 
 export const createProtoType = (name: string, proto: ProtoType) => {
     const oneOfs = getOneOfs(proto);
@@ -149,4 +157,166 @@ export const createProtoType = (name: string, proto: ProtoType) => {
             })
         )
     ))
+};
+
+
+export const createProtoEnum = (name: string, proto: ProtoEnum) => {
+    return t.exportNamedDeclaration(
+        t.tsEnumDeclaration(
+            t.identifier('IssueDetails_Severity'),
+            [
+                tsEnumMember(
+                    t.identifier('SEVERITY_UNSPECIFIED'),
+                    t.numericLiteral(0),
+                    [{
+                        type: 'CommentBlock',
+                        value: 'SEVERITY_UNSPECIFIED is ....'
+                    }]
+                ),
+                tsEnumMember(
+                    t.identifier('DEPRECATION'),
+                    t.numericLiteral(1),
+                    [{
+                        type: 'CommentBlock',
+                        value: '@DEPRECATION'
+                    }]
+                ),
+                tsEnumMember(
+                    t.identifier('WARNING'),
+                    t.numericLiteral(2),
+                    null
+                ),
+                tsEnumMember(
+                    t.identifier('ERROR'),
+                    t.numericLiteral(3),
+                    null
+                ),
+                // unrecognized
+                tsEnumMember(
+                    t.identifier('UNRECOGNIZED'),
+                    t.unaryExpression('-', t.numericLiteral(1)),
+                    null
+                ),
+            ]
+        )
+    )
+};
+
+export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
+
+    const enums = Object.keys(proto.values).map(key => {
+        const e = {
+            name: key,
+            comment: null,
+            value: null
+        };
+        e.value = proto.values[key];
+        if (proto.comments[key]) {
+            e.comment = proto.comments[key];
+        }
+        return e;
+    });
+
+    const switches = enums.map(e => {
+        return t.switchCase(t.numericLiteral(e.value), []),
+            t.switchCase(t.stringLiteral(e.name), [
+                t.returnStatement(t.memberExpression(
+                    t.identifier(name),
+                    t.identifier(e.name)
+                ))
+            ]);
+    });
+
+    return t.exportNamedDeclaration(
+        functionDeclaration(
+            t.identifier(`${camel(name)}FromJSON`),
+            [
+                identifier('object', t.tsTypeAnnotation(t.tsAnyKeyword()))
+            ],
+            t.blockStatement([
+                t.switchStatement(
+                    t.identifier('object'),
+                    [
+                        ...switches,
+                        // default
+                        t.switchCase(t.unaryExpression('-', t.numericLiteral(1)), []),
+                        t.switchCase(t.stringLiteral('UNRECOGNIZED'), []),
+                        t.switchCase(
+                            null, [
+                            t.returnStatement(t.memberExpression(
+                                t.identifier(name),
+                                t.identifier('UNRECOGNIZED')
+                            ))
+                        ])
+                    ]
+                )
+            ]),
+            false,
+            false,
+            t.tsTypeAnnotation(t.tsTypeReference(
+                t.identifier(name)
+            ))
+        )
+    )
+};
+
+export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
+
+    const enums = Object.keys(proto.values).map(key => {
+        const e = {
+            name: key,
+            comment: null
+        };
+        if (proto.comments[key]) {
+            e.comment = proto.comments[key];
+        }
+        return e;
+    });
+
+    const switches = enums.map(e => {
+        return t.switchCase(
+            t.memberExpression(
+                t.identifier(name),
+                t.identifier(e.name)
+            ),
+            [
+                t.returnStatement(
+                    t.stringLiteral(e.name)
+                )
+            ]
+        )
+    });
+
+    return t.exportNamedDeclaration(
+        functionDeclaration(
+            t.identifier(`${camel(name)}ToJSON`),
+            [
+                identifier('object', t.tsTypeAnnotation(
+                    t.tsTypeReference(t.identifier(name))
+                ))
+            ],
+            t.blockStatement([
+                t.switchStatement(
+                    t.identifier('object'),
+                    [
+                        ...switches,
+                        // default
+                        t.switchCase(
+                            null,
+                            [
+                                t.returnStatement(
+                                    t.stringLiteral('UNKNOWN')
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]),
+            false,
+            false,
+            t.tsTypeAnnotation(
+                t.tsStringKeyword()
+            )
+        )
+    )
 };

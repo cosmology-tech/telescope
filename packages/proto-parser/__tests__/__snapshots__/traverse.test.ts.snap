@@ -39,6 +39,7 @@ Object {
                         "type": "google.protobuf.Timestamp",
                       },
                       "claimDenom": Object {
+                        "comment": "denom of claimable asset",
                         "id": 4,
                         "type": "string",
                       },

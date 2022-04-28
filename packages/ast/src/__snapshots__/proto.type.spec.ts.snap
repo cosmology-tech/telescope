@@ -53,12 +53,3 @@ exports[`traversed usingosmosis/claim/v1beta1/params 1`] = `
   claimDenom: string;
 }"
 `;
-
-exports[`using fixtures 1`] = `
-"export interface Params {
-  airdropStartTime: Date;
-  durationUntilDecay: string;
-  durationOfDecay: string;
-  claimDenom: string;
-}"
-`;
