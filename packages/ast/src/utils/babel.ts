@@ -99,10 +99,12 @@ export const objectMethod =
         computed?: boolean,
         generator?: boolean,
         async?: boolean,
-        returnType?: t.TSTypeAnnotation | t.TypeAnnotation | t.Noop
+        returnType?: t.TSTypeAnnotation | t.TypeAnnotation | t.Noop,
+        typeParameters?: t.TypeParameterDeclaration | t.TSTypeParameterDeclaration | t.Noop
     ): t.ObjectMethod => {
         const obj = t.objectMethod(kind, key, params, body, computed, generator, async);
         obj.returnType = returnType;
+        obj.typeParameters = typeParameters;
         return obj;
     }
 
