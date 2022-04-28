@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListValue 1`] = `
+"export interface ListValue {
+  values: Value[];
+}"
+`;
+
+exports[`Struct 1`] = `
+"export interface Struct {
+  fields: {
+    [key: string]: Value;
+  };
+}"
+`;
+
+exports[`oneofs Value 1`] = `
+"export interface Value {
+  nullValue: NullValue | undefined;
+  numberValue: number | undefined;
+  stringValue: string | undefined;
+  boolValue: boolean | undefined;
+  structValue: Struct | undefined;
+  listValue: ListValue | undefined;
+}"
+`;

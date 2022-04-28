@@ -1,9 +1,5 @@
-import {
-    createClient
-} from './client';
+import { createClient } from './client';
 import generate from '@babel/generator';
-
-import { mutations } from './__fixtures__';
 
 const expectCode = (ast) => {
     expect(
@@ -17,7 +13,7 @@ const printCode = (ast) => {
 }
 
 it('createClient', async () => {
-    printCode(createClient({
+    expectCode(createClient({
         name: 'getSigningOsmosisClient',
         registries: [
             'osmosis.gamm.v1beta1',

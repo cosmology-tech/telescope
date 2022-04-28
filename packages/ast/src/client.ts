@@ -1,15 +1,7 @@
 
 import * as t from '@babel/types';
-import { memberExpressionOrIdentifier } from './utils';
+import { memberExpressionOrIdentifier, objectPattern } from './utils';
 
-const tsObjectPattern = (
-  properties: (t.RestElement | t.ObjectProperty)[],
-  typeAnnotation: t.TSTypeAnnotation
-) => {
-  const obj = t.objectPattern(properties);
-  obj.typeAnnotation = typeAnnotation;
-  return obj;
-}
 interface CreateClient {
   name: string;
   registries: string[];
@@ -42,7 +34,7 @@ export const createClient = ({ name, registries, aminos }: CreateClient) => {
           t.identifier(name),
           t.arrowFunctionExpression(
             [
-              tsObjectPattern(
+              objectPattern(
                 [
                   t.objectProperty(
                     t.identifier('rpcEndpoint'),

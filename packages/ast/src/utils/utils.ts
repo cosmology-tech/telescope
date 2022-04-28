@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { kebab } from "case";
-import { Field, DEFAULT_AMINO_EXCEPTIONS } from './types';
+import { Field, DEFAULT_AMINO_EXCEPTIONS } from '../types';
 
 const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
@@ -18,6 +18,28 @@ export const recursiveNamespace = (names, moduleBlockBody) => {
         )
     ];
     return body;
+};
+
+export const bindMethod = (name: string) => {
+    return t.expressionStatement(
+        t.assignmentExpression('=', t.memberExpression(
+            t.thisExpression(),
+            t.identifier(name)
+        ),
+            t.callExpression(
+                t.memberExpression(
+                    t.memberExpression(
+                        t.thisExpression(),
+                        t.identifier(name)
+                    ),
+                    t.identifier('bind')
+                ),
+                [
+                    t.thisExpression()
+                ]
+            )
+        )
+    )
 };
 
 export const arrayTypeNDimensions = (body, n) => {
@@ -139,3 +161,16 @@ export const memberExpressionOrIdentifierAminoCasing = (names, aminoCasingFn: Fu
         t.identifier(aminoCasingFn(name))
     )
 };
+
+export const promiseTypeAnnotation = (name) => {
+    return t.tsTypeAnnotation(
+        t.tsTypeReference(
+            t.identifier('Promise'),
+            t.tsTypeParameterInstantiation(
+                [
+                    t.tsTypeReference(t.identifier(name))
+                ]
+            )
+        )
+    );
+}
