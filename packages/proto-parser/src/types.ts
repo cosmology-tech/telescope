@@ -13,5 +13,5 @@ export interface ProtoRef {
 export interface ProtoRoot {
     package: string;
     imports: string[];
-    nested: any;
+    root: any;
 };

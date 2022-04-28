@@ -124,4 +124,5 @@ describe('imports lookup', () => {
         expect(obj.scope).toEqual(['ibc.core.client.v1'])
         expect(Height).toMatchSnapshot();
     });
+
 });

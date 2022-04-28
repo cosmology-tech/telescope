@@ -10,6 +10,9 @@ const NATIVE_TYPES = [
     'double',
     'bytes',
     'bool',
+    'google.protobuf.Timestamp',
+    'google.protobuf.Duration',
+    'google.protobuf.Any',
 ]
 
 export const getTSTypeFromProtoType = (type) => {
@@ -27,6 +30,12 @@ export const getTSTypeFromProtoType = (type) => {
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
             return t.tsBooleanKeyword();
+        case 'google.protobuf.Timestamp':
+            return t.tsTypeReference(t.identifier('Date'));
+        case 'google.protobuf.Duration':
+            return t.tsStringKeyword();
+        case 'google.protobuf.Any':
+            return t.tsTypeReference(t.identifier('Any'));
         default:
             throw new Error('getTSTypeFromProtoType() type not found');
     };
@@ -75,6 +84,14 @@ const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
     return isOneOf || field?.options?.['(gogoproto.nullable)'];
 };
 
+const getProtoNameSafe = (name: string) => {
+    if (name.includes('.')) {
+        const parts = name.split('.');
+        return parts[parts.length];
+    }
+    return name;
+};
+
 const getProtoField = (field: ProtoField) => {
     let ast: any = null;
     let optional = false;
@@ -86,13 +103,12 @@ const getProtoField = (field: ProtoField) => {
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeFromProtoType(field.type);
     } else {
-        ast = t.tsTypeReference(t.identifier(field.type));
+        ast = t.tsTypeReference(t.identifier(getProtoNameSafe(field.type)));
     }
 
     if (field.rule === 'repeated') {
         ast = t.tsArrayType(ast);
     }
-
 
     if (field.keyType) {
         ast = t.tsUnionType([

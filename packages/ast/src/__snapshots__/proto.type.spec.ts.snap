@@ -16,8 +16,8 @@ exports[`Struct 1`] = `
 
 exports[`authz 1`] = `
 "export interface authz {
-  authorization: google.protobuf.Any;
-  expiration?: google.protobuf.Timestamp;
+  authorization: Any;
+  expiration?: Date;
 }"
 `;
 

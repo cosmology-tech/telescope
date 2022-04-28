@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`imports lookup 1`] = `
+Object {
+  "actualImports": Object {
+    "google/protobuf/duration.proto": Array [
+      "google.protobuf.Duration",
+    ],
+    "google/protobuf/timestamp.proto": Array [
+      "google.protobuf.Timestamp",
+    ],
+  },
+  "imports": Array [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+  ],
+  "package": "osmosis.claim.v1beta1",
+  "root": Object {
+    "nested": Object {
+      "osmosis": Object {
+        "nested": Object {
+          "claim": Object {
+            "nested": Object {
+              "v1beta1": Object {
+                "nested": Object {
+                  "Params": Object {
+                    "fields": Object {
+                      "airdropStartTime": Object {
+                        "comment": null,
+                        "id": 1,
+                        "import": "google/protobuf/timestamp.proto",
+                        "importedName": "google.protobuf.Timestamp",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:airdrop_start_time",
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true,
+                        },
+                        "type": "google.protobuf.Timestamp",
+                      },
+                      "claimDenom": Object {
+                        "id": 4,
+                        "type": "string",
+                      },
+                      "durationOfDecay": Object {
+                        "comment": null,
+                        "id": 3,
+                        "import": "google/protobuf/duration.proto",
+                        "importedName": "google.protobuf.Duration",
+                        "options": Object {
+                          "(gogoproto.jsontag)": "duration_of_decay,omitempty",
+                          "(gogoproto.moretags)": "yaml:duration_of_decay",
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true,
+                        },
+                        "type": "google.protobuf.Duration",
+                      },
+                      "durationUntilDecay": Object {
+                        "comment": null,
+                        "id": 2,
+                        "import": "google/protobuf/duration.proto",
+                        "importedName": "google.protobuf.Duration",
+                        "options": Object {
+                          "(gogoproto.jsontag)": "duration_until_decay,omitempty",
+                          "(gogoproto.moretags)": "yaml:duration_until_decay",
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true,
+                        },
+                        "type": "google.protobuf.Duration",
+                      },
+                    },
+                    "options": undefined,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;

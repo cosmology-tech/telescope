@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deps 1`] = `
+ProtoResolver {
+  "deps": Array [
+    Object {
+      "filename": "github.com/gnolang/gno/pkgs/bft/abci/types/abci.proto",
+      "imports": Array [
+        "google/protobuf/timestamp.proto",
+        "google/protobuf/any.proto",
+        "github.com/gnolang/gno/pkgs/crypto/merkle/merkle.proto",
+      ],
+      "package": "abci",
+    },
+    Object {
+      "filename": "github.com/gnolang/gno/pkgs/crypto/ed25519/ed25519.proto",
+      "imports": undefined,
+      "package": "tm",
+    },
+    Object {
+      "filename": "github.com/gnolang/gno/pkgs/crypto/merkle/merkle.proto",
+      "imports": undefined,
+      "package": "tm",
+    },
+    Object {
+      "filename": "github.com/gnolang/gno/pkgs/crypto/multisig/multisig.proto",
+      "imports": Array [
+        "google/protobuf/any.proto",
+      ],
+      "package": "tm",
+    },
+    Object {
+      "filename": "github.com/gnolang/gno/pkgs/crypto/secp256k1/secp256k1.proto",
+      "imports": undefined,
+      "package": "tm",
+    },
+  ],
+}
+`;
+
+exports[`ref 1`] = `
+Object {
+  "absolute": "/Users/pyramation/code/osmosis/telescope/__fixtures__/gno/github.com/gnolang/gno/pkgs/crypto/multisig/multisig.proto",
+  "filename": "github.com/gnolang/gno/pkgs/crypto/multisig/multisig.proto",
+  "proto": Object {
+    "imports": Array [
+      "google/protobuf/any.proto",
+    ],
+    "package": "tm",
+    "root": Object {
+      "nested": Object {
+        "tm": Object {
+          "nested": Object {
+            "PubKeyMultisig": Object {
+              "fields": Object {
+                "K": Object {
+                  "id": 1,
+                  "type": "uint64",
+                },
+                "PubKeys": Object {
+                  "id": 2,
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                },
+              },
+            },
+          },
+          "options": Object {
+            "go_package": "github.com/gnolang/gno/pkgs/crypto/multisig/pb",
+          },
+        },
+      },
+    },
+    "syntax": "proto3",
+    "weakImports": undefined,
+  },
+}
+`;

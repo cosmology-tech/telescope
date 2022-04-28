@@ -1,5 +1,5 @@
 import dotty from 'dotty';
-import { Service, Type, Enum } from 'protobufjs';
+import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
 import { ProtoStore } from './store';
 import { ProtoRef, ProtoRoot } from './types';
 
@@ -161,4 +161,96 @@ export const getObjectName = (name: string, scope: string[] = []) => {
     if (!scope.length || scope.length === 1) return name;
     const [_pkg, ...scopes] = scope;
     return [...scopes, name].join('_')
+};
+
+
+export const traverse = (store: ProtoStore, root: ProtoRoot) => {
+    const imports = {};
+
+    const obj: ProtoRoot = {
+        imports: root.imports,
+        package: root.package,
+        root: recursiveTraversal(store, root, root.root, imports)
+    };
+    obj.actualImports = imports;
+    return obj;
+};
+
+const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    return Object.keys(obj.fields).reduce((m, key) => {
+
+        const field = obj.fields[key];
+        let found: any = null;
+
+        found = importLookup(store, root, field.type);
+        if (found) {
+            m[key] = field;
+            m[key].importedName = found.importedName
+            return m;
+        }
+
+        found = protoImportLookup(store, root, field.type);
+        console.log('protoImportLookup', field.type)
+        if (found) {
+            imports[found.import] = imports[found.import] || [];
+            imports[found.import] = [...new Set([...imports[found.import], found.importedName])];
+            m[key] = {
+                ...field.toJSON({ keepComments: true }),
+                importedName: found.importedName,
+                import: found.import,
+            };
+            return m;
+        }
+
+        found = lookup(store, root, field.type);
+        if (found) {
+            console.log('regular lookup', field.type)
+            m[key] = field;
+            return m;
+        }
+
+        return m;
+    }, {});
+};
+
+const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    return {
+        options: obj.options,
+        fields: parseFields(store, root, obj, imports)
+    }
+
+
+    let result: any = lookup(store, root, obj.type);
+    if (result) {
+        return {
+            lookup: true,
+            result,
+            name: obj.name,
+            json: obj.toJSON({ keepComments: true })
+        };
+    }
+    return result;
+};
+
+export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    if (obj instanceof Type) {
+        return parseType(store, root, obj, imports);
+    }
+    if (obj instanceof Enum) {
+        return 'Enum';
+    }
+    if (obj instanceof Service) {
+        return 'Service';
+    }
+    if (obj instanceof Root || obj instanceof Namespace) {
+        if (obj.nested) {
+            return Object.keys(obj.nested).reduce((m, key) => {
+                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports);
+                return m;
+            }, { nested: {} });
+        } else {
+            throw new Error('recursiveTraversal() cannot find protobufjs Type')
+        }
+    }
+    throw new Error('recursiveTraversal() cannot find protobufjs Type')
 };
