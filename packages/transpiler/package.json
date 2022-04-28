@@ -82,7 +82,7 @@
     "@cosmjs/proto-signing": "0.28.4",
     "@cosmjs/stargate": "0.28.4",
     "@cosmjs/tendermint-rpc": "^0.28.4",
-    "@osmonauts/ast-gen": "^0.2.0",
+    "@osmonauts/ast": "0.2.1",
     "@osmonauts/proto-parser": "0.3.0",
     "case": "1.6.3",
     "dargs": "7.0.0",
@@ -94,8 +94,6 @@
     "minimist": "1.2.6",
     "mkdirp": "1.0.4",
     "mobx": "6.5.0",
-    "protoc": "^1.0.4",
-    "shelljs": "0.8.5",
-    "ts-proto": "^1.110.2"
+    "shelljs": "0.8.5"
   }
 }
