@@ -14,13 +14,20 @@ exports[`Struct 1`] = `
 }"
 `;
 
+exports[`authz 1`] = `
+"export interface authz {
+  authorization: google.protobuf.Any;
+  expiration?: google.protobuf.Timestamp;
+}"
+`;
+
 exports[`oneofs Value 1`] = `
 "export interface Value {
-  nullValue: NullValue | undefined;
-  numberValue: number | undefined;
-  stringValue: string | undefined;
-  boolValue: boolean | undefined;
-  structValue: Struct | undefined;
-  listValue: ListValue | undefined;
+  nullValue?: NullValue;
+  numberValue?: number;
+  stringValue?: string;
+  boolValue?: boolean;
+  structValue?: Struct;
+  listValue?: ListValue;
 }"
 `;

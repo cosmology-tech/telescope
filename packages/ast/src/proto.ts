@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { identifier } from './utils';
+import { identifier, tsPropertySignature } from './utils';
 
 const NATIVE_TYPES = [
     'string',
@@ -46,6 +46,10 @@ export interface ProtoField {
     rule?: string;
     type: string;
     id: number;
+    options: {
+        [key: string]: any;
+        "(gogoproto.nullable)": boolean;
+    }
     comment: string | undefined;
 }
 
@@ -67,8 +71,17 @@ const getOneOfs = (type: ProtoType) => {
     return type.oneofs[keys[0]].oneof;
 };
 
-const getProtoType = (field: ProtoField, isOneOf: boolean = false) => {
+const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
+    return isOneOf || field?.options?.['(gogoproto.nullable)'];
+};
+
+const getProtoField = (field: ProtoField) => {
     let ast: any = null;
+    let optional = false;
+
+    if (field?.options?.['(gogoproto.nullable)']) {
+        optional = true;
+    }
 
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeFromProtoType(field.type);
@@ -80,13 +93,16 @@ const getProtoType = (field: ProtoField, isOneOf: boolean = false) => {
         ast = t.tsArrayType(ast);
     }
 
+
     if (field.keyType) {
         ast = t.tsUnionType([
             t.tsTypeLiteral([
                 t.tsIndexSignature([
-                    identifier('key', t.tsTypeAnnotation(
-                        getTSTypeFromProtoType(field.keyType)
-                    ))
+                    identifier('key',
+                        t.tsTypeAnnotation(
+                            getTSTypeFromProtoType(field.keyType)
+                        )
+                    )
                 ],
                     t.tsTypeAnnotation(ast)
                 )
@@ -94,7 +110,6 @@ const getProtoType = (field: ProtoField, isOneOf: boolean = false) => {
         ]);
     }
 
-    if (isOneOf) return optionalType(ast);
     return ast;
 }
 
@@ -106,12 +121,14 @@ export const createProtoType = (name: string, proto: ProtoType) => {
         null,
         [],
         t.tsInterfaceBody(
-            Object.keys(proto.fields).map(field => {
-                return t.tsPropertySignature(
-                    t.identifier(field),
+            Object.keys(proto.fields).map(fieldName => {
+                const isOneOf = oneOfs.includes(fieldName);
+                return tsPropertySignature(
+                    t.identifier(fieldName),
                     t.tsTypeAnnotation(
-                        getProtoType(proto.fields[field], oneOfs.includes(field))
-                    )
+                        getProtoField(proto.fields[fieldName])
+                    ),
+                    getFieldOptionality(proto.fields[fieldName], isOneOf)
                 )
             })
         )

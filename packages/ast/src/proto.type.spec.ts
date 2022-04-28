@@ -1,5 +1,6 @@
 import { createProtoType } from './proto';
 import struct from '../../../__fixtures__/proto-json/google/protobuf/struct.json'
+import authz from '../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json'
 
 import generate from '@babel/generator';
 
@@ -27,3 +28,11 @@ describe('oneofs', () => {
         expectCode(createProtoType('Value', struct.root.nested.google.nested.protobuf.nested.Value));
     });
 });
+
+
+it('authz', async () => {
+    expectCode(createProtoType('authz',
+        authz.root.nested.cosmos.nested.authz.nested.v1beta1.nested.Grant
+    ));
+});
+
