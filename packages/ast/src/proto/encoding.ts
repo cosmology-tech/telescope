@@ -730,6 +730,190 @@ export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
     )
 };
 
+export const protoToJSONMethod = (name: string, proto: ProtoType) => {
+    return objectMethod('method',
+        t.identifier('toJSON'),
+        [
+            identifier(
+                'message',
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier('MsgJoinPool')
+                    )
+                )
+            )
+        ],
+        t.blockStatement([
+            t.variableDeclaration(
+                'const',
+                [
+                    t.variableDeclarator(
+                        identifier('obj', t.tsTypeAnnotation(t.tsAnyKeyword())),
+                        t.objectExpression([])
+                    )
+                ]
+            ),
+
+            /*
+                message.sender !== undefined && (obj.sender = message.sender);
+            */
+
+            t.expressionStatement(
+                t.logicalExpression(
+                    '&&',
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('sender')
+                        ),
+                        t.identifier('undefined')
+                    ),
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier('sender')
+                        ),
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('sender')
+                        )
+                    )
+                )
+            ),
+
+            /*
+    
+            message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+            */
+
+            t.expressionStatement(
+                t.logicalExpression(
+                    '&&',
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('poolId')
+                        ),
+                        t.identifier('undefined')
+                    ),
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier('poolId'),
+                            false,
+                            false
+                        ),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.logicalExpression(
+                                    '||',
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('poolId')
+                                    ),
+                                    t.memberExpression(
+                                        t.identifier('Long'),
+                                        t.identifier('UZERO')
+                                    )
+                                ),
+                                t.identifier('toString')
+                            ),
+                            []
+                        )
+                    )
+                )
+            ),
+
+            /*
+
+            if (message.tokenInMaxs) {
+                obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+            } else {
+                obj.tokenInMaxs = [];
+            }
+
+            */
+
+            t.ifStatement(
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier('tokenInMaxs')
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.assignmentExpression(
+                            '=',
+                            t.memberExpression(
+                                t.identifier('obj'),
+                                t.identifier('tokenInMaxs')
+                            ),
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('tokenInMaxs')
+                                    ),
+                                    t.identifier('map')
+                                ),
+                                [
+                                    t.arrowFunctionExpression(
+                                        [
+                                            t.identifier('e')
+                                        ],
+                                        t.conditionalExpression(
+                                            t.identifier('e'),
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('Coin'),
+                                                    t.identifier('toJSON')
+                                                ),
+                                                [
+                                                    t.identifier('e')
+                                                ]
+                                            ),
+                                            t.identifier('undefined')
+                                        )
+                                    )
+                                ]
+                            )
+                        )
+                    )
+                ]),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.assignmentExpression(
+                            '=',
+                            t.memberExpression(
+                                t.identifier('obj'),
+                                t.identifier('tokenInMaxs'),
+                                false,
+                                false
+                            ),
+                            t.arrayExpression([])
+                        )
+                    )
+                ])
+            ),
+
+            // RETURN 
+
+            t.returnStatement(t.identifier('obj'))
+
+        ]),
+        false,
+        false,
+        false,
+        t.tsTypeAnnotation(
+            t.tsUnknownKeyword()
+        )
+    );
+};
+
 export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration('const',
@@ -740,6 +924,7 @@ export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => 
                         protoEncodeMethod(name, proto),
                         protoDecodeMethod(name, proto),
                         protoFromJSONMethod(name, proto),
+                        protoToJSONMethod(name, proto),
                     ]
                 )
             )]
