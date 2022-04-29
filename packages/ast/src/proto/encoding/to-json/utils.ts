@@ -31,7 +31,7 @@ export const toJsonTypes = {
     },
 
     // message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    Long(prop: string) {
+    long(prop: string) {
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -74,7 +74,7 @@ export const toJsonTypes = {
     },
 
     // message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
-    Type(prop: string, name: string) {
+    type(prop: string, name: string) {
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -117,7 +117,7 @@ export const toJsonTypes = {
     },
 
     // message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    Enum(prop: string, enumFuncName: string) {
+    enum(prop: string, enumFuncName: string) {
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -193,6 +193,61 @@ export const toJsonTypes = {
                 )
             )
         );
+    },
+
+    // if (message.codeIds) {
+    //     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    // } else {
+    //     obj.codeIds = [];
+    // }
+
+    array(prop: string, expr: t.Expression) {
+        return t.ifStatement(
+            t.memberExpression(
+                t.identifier('message'),
+                t.identifier(prop)
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier(prop)
+                        ),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(prop)
+                                ),
+                                t.identifier('map')
+                            ),
+                            [
+                                t.arrowFunctionExpression(
+                                    [
+                                        t.identifier('e')
+                                    ],
+                                    expr
+                                )
+                            ]
+                        )
+                    )
+                )
+            ]),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier(prop)
+                        ),
+                        t.arrayExpression([])
+                    )
+                )
+            ])
+        );
     }
 
 };
@@ -204,7 +259,7 @@ export const arrayTypes = {
     //     obj.codeIds = [];
     // }
 
-    Long() {
+    long() {
         return t.callExpression(
             t.memberExpression(
                 t.logicalExpression(
@@ -227,12 +282,12 @@ export const arrayTypes = {
     //     obj.tokenInMaxs = [];
     // }
 
-    Type(name: string) {
+    type(name: string) {
         return t.conditionalExpression(
             t.identifier('e'),
             t.callExpression(
                 t.memberExpression(
-                    t.identifier('Coin'),
+                    t.identifier(name),
                     t.identifier('toJSON')
                 ),
                 [
@@ -244,57 +299,3 @@ export const arrayTypes = {
     }
 }
 
-// if (message.codeIds) {
-//     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
-// } else {
-//     obj.codeIds = [];
-// }
-
-export const arrayToJson = (prop: string, expr: t.Expression) => {
-    return t.ifStatement(
-        t.memberExpression(
-            t.identifier('message'),
-            t.identifier(prop)
-        ),
-        t.blockStatement([
-            t.expressionStatement(
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('obj'),
-                        t.identifier(prop)
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            ),
-                            t.identifier('map')
-                        ),
-                        [
-                            t.arrowFunctionExpression(
-                                [
-                                    t.identifier('e')
-                                ],
-                                expr
-                            )
-                        ]
-                    )
-                )
-            )
-        ]),
-        t.blockStatement([
-            t.expressionStatement(
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('obj'),
-                        t.identifier(prop)
-                    ),
-                    t.arrayExpression([])
-                )
-            )
-        ])
-    );
-};

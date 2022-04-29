@@ -2,20 +2,18 @@ import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
-import { arrayFromPartial, arrayTypes, fromPartialTypes } from './utils';
+import { arrayTypes, fromPartialTypes } from './utils';
 
 export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => {
-
     const fields = [
         fromPartialTypes.string('sender'),
         fromPartialTypes.bytes('queryData'),
-        fromPartialTypes.Type('signDoc', 'SignDocDirectAux'),
-        fromPartialTypes.Enum('mode'),
-        arrayFromPartial('codeIds', arrayTypes.Long()),
-        fromPartialTypes.Long('poolId'),
-        arrayFromPartial('tokenInMaxs', arrayTypes.Type('Coin')),
+        fromPartialTypes.type('signDoc', 'SignDocDirectAux'),
+        fromPartialTypes.enum('mode'),
+        fromPartialTypes.array('codeIds', arrayTypes.long()),
+        fromPartialTypes.long('poolId'),
+        fromPartialTypes.array('tokenInMaxs', arrayTypes.type('Coin')),
     ];
-
     return fields;
 };
 export const protoFromPartialMethod = (name: string, proto: ProtoType) => {

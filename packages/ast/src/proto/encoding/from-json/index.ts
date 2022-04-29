@@ -1,23 +1,17 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
-import { fromJsonTypes, mapArray, arrayTypes } from './utils';
+import { fromJsonTypes, arrayTypes } from './utils';
 
 export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
     const fields = [
-        fromJsonTypes.Type('signDoc', 'SignDocDirectAux'),
-
-        fromJsonTypes.Enum('mode', 'signModeFromJSON'),
-
+        fromJsonTypes.type('signDoc', 'SignDocDirectAux'),
+        fromJsonTypes.enum('mode', 'signModeFromJSON'),
         fromJsonTypes.string('sender'),
-
-        fromJsonTypes.Long('poolId'),
-
+        fromJsonTypes.long('poolId'),
         fromJsonTypes.bytes('queryData'),
-
-        mapArray('codeIds', arrayTypes.Long()),
-
-        mapArray('tokenInMaxs', arrayTypes.Type('Coin'))
+        fromJsonTypes.array('codeIds', arrayTypes.long()),
+        fromJsonTypes.array('tokenInMaxs', arrayTypes.type('Coin'))
     ];
     return fields;
 };

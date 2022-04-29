@@ -228,9 +228,130 @@ if (message.queryData.length !== 0) {
                 )
             ])
         );
+    },
 
+    /*
+    
+                ARRAY!
+                
+                Long[]
+    
+                writer.uint32(10).fork();
+    
+                for (const v of message.codeIds) {
+                    writer.uint64(v);
+                }
+    
+                writer.ldelim();
+    
+    
+            */
+
+    scalarArray(num: number, prop: string, expr: t.Statement) {
+        return [
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('writer'),
+                                t.identifier('uint32')
+                            ),
+                            [
+                                t.numericLiteral(num)
+                            ]
+                        ),
+                        t.identifier('fork')
+                    ),
+                    []
+                )
+            ),
+            t.forOfStatement(
+                t.variableDeclaration(
+                    'const',
+                    [
+                        t.variableDeclarator(
+                            t.identifier('v'),
+                            null
+                        )
+                    ]
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.blockStatement([
+                    expr
+                ])
+            ),
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('writer'),
+                        t.identifier('ldelim')
+                    ),
+                    []
+                )
+            )
+        ];
+    },
+
+    typeArray(num: number, prop: string, name: string) {
+        return [
+            t.forOfStatement(
+                t.variableDeclaration('const',
+                    [
+                        t.variableDeclarator(
+                            t.identifier('v'),
+                            null
+                        )
+                    ]
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.blockStatement(
+                    [
+                        t.expressionStatement(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.identifier(name),
+                                            t.identifier('encode')
+                                        ),
+                                        [
+                                            // "v!" just means it's NOT NULLABLE
+                                            t.tsNonNullExpression(
+                                                t.identifier('v')
+                                            ),
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.callExpression(
+                                                        t.memberExpression(
+                                                            t.identifier('writer'),
+                                                            t.identifier('uint32')
+                                                        ),
+                                                        [
+                                                            t.numericLiteral(num)
+                                                        ]
+                                                    ),
+                                                    t.identifier('fork')
+                                                ),
+                                                []
+                                            )
+                                        ]
+                                    ),
+                                    t.identifier('ldelim')
+                                ),
+                                []
+                            )
+                        )
+                    ]
+                )
+            )];
     }
-
 };
 
 export const arrayTypes = {
@@ -249,125 +370,3 @@ export const arrayTypes = {
     }
 };
 
-/*
-
-            ARRAY!
-            
-            Long[]
-
-            writer.uint32(10).fork();
-
-            for (const v of message.codeIds) {
-                writer.uint64(v);
-            }
-
-            writer.ldelim();
-
-
-        */
-
-export const scalarTypeArray = (num: number, prop: string, expr: t.Statement) => {
-    return [
-        t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('writer'),
-                            t.identifier('uint32')
-                        ),
-                        [
-                            t.numericLiteral(num)
-                        ]
-                    ),
-                    t.identifier('fork')
-                ),
-                []
-            )
-        ),
-        t.forOfStatement(
-            t.variableDeclaration(
-                'const',
-                [
-                    t.variableDeclarator(
-                        t.identifier('v'),
-                        null
-                    )
-                ]
-            ),
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(prop)
-            ),
-            t.blockStatement([
-                expr
-            ])
-        ),
-        t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('writer'),
-                    t.identifier('ldelim')
-                ),
-                []
-            )
-        )
-    ];
-};
-
-export const protoTypeArray = (num: number, prop: string, name: string) => {
-    return [
-        t.forOfStatement(
-            t.variableDeclaration('const',
-                [
-                    t.variableDeclarator(
-                        t.identifier('v'),
-                        null
-                    )
-                ]
-            ),
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(prop)
-            ),
-            t.blockStatement(
-                [
-                    t.expressionStatement(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.callExpression(
-                                    t.memberExpression(
-                                        t.identifier(name),
-                                        t.identifier('encode')
-                                    ),
-                                    [
-                                        // "v!" just means it's NOT NULLABLE
-                                        t.tsNonNullExpression(
-                                            t.identifier('v')
-                                        ),
-                                        t.callExpression(
-                                            t.memberExpression(
-                                                t.callExpression(
-                                                    t.memberExpression(
-                                                        t.identifier('writer'),
-                                                        t.identifier('uint32')
-                                                    ),
-                                                    [
-                                                        t.numericLiteral(num)
-                                                    ]
-                                                ),
-                                                t.identifier('fork')
-                                            ),
-                                            []
-                                        )
-                                    ]
-                                ),
-                                t.identifier('ldelim')
-                            ),
-                            []
-                        )
-                    )
-                ]
-            )
-        )];
-};

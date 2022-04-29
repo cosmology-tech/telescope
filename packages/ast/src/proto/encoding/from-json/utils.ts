@@ -32,7 +32,7 @@ export const fromJsonTypes = {
     },
 
     // poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
-    Long(prop: string) {
+    long(prop: string) {
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -66,7 +66,7 @@ export const fromJsonTypes = {
     },
 
     // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-    Type(prop: string, name: string) {
+    type(prop: string, name: string) {
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -97,7 +97,7 @@ export const fromJsonTypes = {
     },
 
     // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-    Enum(prop: string, fromJSONFuncName: string) {
+    enum(prop: string, fromJSONFuncName: string) {
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -156,13 +156,56 @@ export const fromJsonTypes = {
                 )
             )
         );
-    }
+    },
 
+    // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+    array(prop: string, expr: t.Expression) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Array'),
+                        t.identifier('isArray')
+                    ),
+                    [
+                        t.optionalMemberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop),
+                            false,
+                            true
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.memberExpression(
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        ),
+                        t.identifier('map')
+                    ),
+                    [
+                        t.arrowFunctionExpression(
+                            [
+                                identifier('e', t.tsTypeAnnotation(
+                                    t.tsAnyKeyword()
+                                ))
+                            ],
+                            expr,
+                            false
+                        )
+                    ]
+                ),
+                t.arrayExpression([])
+            )
+        )
+    }
 };
 
 export const arrayTypes = {
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-    Long() {
+    long() {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('Long'),
@@ -174,7 +217,7 @@ export const arrayTypes = {
         );
     },
     // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
-    Type(name) {
+    type(name) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),
@@ -187,46 +230,3 @@ export const arrayTypes = {
     }
 };
 
-// codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-export const mapArray = (prop: string, expr: t.Expression) => {
-    return t.objectProperty(
-        t.identifier(prop),
-        t.conditionalExpression(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('Array'),
-                    t.identifier('isArray')
-                ),
-                [
-                    t.optionalMemberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop),
-                        false,
-                        true
-                    )
-                ]
-            ),
-            t.callExpression(
-                t.memberExpression(
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('map')
-                ),
-                [
-                    t.arrowFunctionExpression(
-                        [
-                            identifier('e', t.tsTypeAnnotation(
-                                t.tsAnyKeyword()
-                            ))
-                        ],
-                        expr,
-                        false
-                    )
-                ]
-            ),
-            t.arrayExpression([])
-        )
-    )
-};

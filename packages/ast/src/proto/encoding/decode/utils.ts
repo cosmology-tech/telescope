@@ -1,6 +1,37 @@
 import * as t from '@babel/types';
 
 export const encodeTypes = {
+    string(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.string())
+    },
+    long(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.long());
+    },
+    type(num: number, prop: string, name: string) {
+        return switchOnTag(num, prop, baseTypes.type(name));
+    },
+    enum(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.enum());
+    },
+    bytes(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.bytes());
+    },
+    scalarArray(num: number, prop: string, expr: t.Expression) {
+        return switchScalarArray(num,
+            prop,
+            expr
+        )
+    },
+    typeArray(num: number, prop: string, name: string) {
+        return switchTypeArray(num,
+            prop,
+            name
+        )
+    }
+
+};
+
+export const baseTypes = {
 
     // message.sender = reader.string();
     string() {
@@ -14,7 +45,7 @@ export const encodeTypes = {
     },
 
     // message.poolId = (reader.uint64() as Long);
-    Long() {
+    long() {
         return t.tsAsExpression(
             t.callExpression(
                 t.memberExpression(
@@ -30,7 +61,7 @@ export const encodeTypes = {
     },
 
     // message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-    Type(name: string) {
+    type(name: string) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),
@@ -50,7 +81,7 @@ export const encodeTypes = {
     },
 
     // message.mode = (reader.int32() as any);
-    Enum() {
+    enum() {
         return t.tsAsExpression(
             t.callExpression(
                 t.memberExpression(
@@ -95,9 +126,10 @@ export const switchOnTag = (num: number, prop: string, expr: t.Expression) => {
     );
 };
 
-export const switchOnTagTypeArray = (num: number, prop: string, Type: string) => {
+//    message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+export const switchTypeArray = (num: number, prop: string, name: string) => {
     return t.switchCase(
-        t.numericLiteral(4),
+        t.numericLiteral(num),
         [
             t.expressionStatement(
                 t.callExpression(
@@ -111,7 +143,7 @@ export const switchOnTagTypeArray = (num: number, prop: string, Type: string) =>
                     [
                         t.callExpression(
                             t.memberExpression(
-                                t.identifier(Type),
+                                t.identifier(name),
                                 t.identifier('decode')
                             ),
                             [
@@ -133,7 +165,17 @@ export const switchOnTagTypeArray = (num: number, prop: string, Type: string) =>
     )
 };
 
-export const switchOnTagArray = (num: number, prop: string, expr: t.Expression) => {
+// if ((tag & 7) === 2) {
+//     const end2 = reader.uint32() + reader.pos;
+
+//     while (reader.pos < end2) {
+//         message.codeIds.push((reader.uint64() as Long));
+//     }
+// } else {
+//     message.codeIds.push((reader.uint64() as Long));
+// }
+
+export const switchScalarArray = (num: number, prop: string, expr: t.Expression) => {
     return t.switchCase(
         t.numericLiteral(num),
         [

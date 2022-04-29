@@ -2,47 +2,18 @@ import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
-import { encodeTypes, switchOnTag, switchOnTagArray, switchOnTagTypeArray } from './utils';
+import { baseTypes, encodeTypes, switchOnTag, switchOnTagArray, switchOnTagTypeArray } from './utils';
 
 export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
     const fields = [
-        switchOnTag(
-            1,
-            'sender',
-            encodeTypes.string()
-        ),
-        switchOnTag(
-            2,
-            'poolId',
-            encodeTypes.Long()
-        ),
-        switchOnTag(
-            2,
-            'signDoc',
-            encodeTypes.Type('SignDocDirectAux')
-        ),
-        switchOnTag(
-            2,
-            'mode',
-            encodeTypes.Enum()
-        ),
-        switchOnTagArray(2,
-            'codeIds',
-            encodeTypes.Long()
-        ),
-        switchOnTag(3,
-            'shareOutAmount',
-            encodeTypes.string()
-        ),
-        switchOnTag(333,
-            'queryData',
-            encodeTypes.bytes()
-        ),
-        switchOnTagTypeArray(
-            4,
-            'tokenInMaxs',
-            'Coin'
-        )
+        encodeTypes.string(1, 'sender'),
+        encodeTypes.long(2, 'poolId'),
+        encodeTypes.type(2, 'signDoc', 'SignDocDirectAux'),
+        encodeTypes.enum(2, 'mode'),
+        encodeTypes.scalarArray(2, 'codeIds', baseTypes.long()),
+        encodeTypes.string(3, 'shareOutAmount'),
+        encodeTypes.bytes(333, 'queryData'),
+        encodeTypes.typeArray(4, 'tokenInMaxs', 'Coin')
     ];
     return fields;
 };

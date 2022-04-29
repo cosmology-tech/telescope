@@ -24,7 +24,7 @@ export const fromPartialTypes = {
     },
 
     // message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    Long(prop: string) {
+    long(prop: string) {
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -74,7 +74,7 @@ export const fromPartialTypes = {
     },
 
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    Type(prop: string, name: string) {
+    type(prop: string, name: string) {
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -121,7 +121,7 @@ export const fromPartialTypes = {
     },
 
     // message.mode = object.mode ?? 0;
-    Enum(prop: string) {
+    enum(prop: string) {
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -163,13 +163,50 @@ export const fromPartialTypes = {
                 )
             )
         );
+    },
+
+    // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    array(prop: string, expr: t.Expression) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.logicalExpression(
+                    '||',
+                    t.optionalCallExpression(
+                        t.optionalMemberExpression(
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            ),
+                            t.identifier('map'),
+                            false,
+                            true
+                        ),
+                        [
+                            t.arrowFunctionExpression(
+                                [
+                                    t.identifier('e')
+                                ],
+                                expr
+                            )
+                        ],
+                        false
+                    ),
+                    t.arrayExpression([])
+                )
+            )
+        );
     }
 
 };
 
 export const arrayTypes = {
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    Long() {
+    long() {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('Long'),
@@ -181,7 +218,7 @@ export const arrayTypes = {
         );
     },
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
-    Type(name: string) {
+    type(name: string) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),
@@ -192,41 +229,4 @@ export const arrayTypes = {
             ]
         );
     }
-}
-
-// message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-export const arrayFromPartial = (prop: string, expr: t.Expression) => {
-    return t.expressionStatement(
-        t.assignmentExpression(
-            '=',
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(prop)
-            ),
-            t.logicalExpression(
-                '||',
-                t.optionalCallExpression(
-                    t.optionalMemberExpression(
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('map'),
-                        false,
-                        true
-                    ),
-                    [
-                        t.arrowFunctionExpression(
-                            [
-                                t.identifier('e')
-                            ],
-                            expr
-                        )
-                    ],
-                    false
-                ),
-                t.arrayExpression([])
-            )
-        )
-    );
 }
