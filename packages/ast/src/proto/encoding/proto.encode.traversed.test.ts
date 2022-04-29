@@ -31,19 +31,32 @@ it('osmosis/gamm/v1beta1/tx', () => {
 it('cosmos/tx/signing/v1beta1/signing', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
     const res = traverse(store, ref.proto);
+    expectCode(createProtoObjectWithMethods(
+        'SignatureDescriptors', getNestedProto(res).SignatureDescriptors
+    ))
 });
 
 it('cosmos/tx/v1beta1/tx', () => {
     const ref = store.findProto('cosmos/tx/v1beta1/tx.proto');
     const res = traverse(store, ref.proto);
+    expectCode(createProtoObjectWithMethods(
+        'AuxSignerData', getNestedProto(res).AuxSignerData
+    ))
+
 });
 
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref.proto);
+    expectCode(createProtoObjectWithMethods(
+        'PinCodesProposal', getNestedProto(res).PinCodesProposal
+    ))
 });
 
 it('cosmwasm/wasm/v1/query', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/query.proto');
     const res = traverse(store, ref.proto);
+    expectCode(createProtoObjectWithMethods(
+        'QueryRawContractStateRequest', getNestedProto(res).QueryRawContractStateRequest
+    ))
 });
