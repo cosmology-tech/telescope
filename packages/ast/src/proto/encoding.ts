@@ -167,6 +167,79 @@ const protoEncodeMethod = (name: string, proto: ProtoType) => {
             ),
 
             /*
+
+                ARRAY!
+                
+                Long[]
+
+                 writer.uint32(10).fork();
+
+                for (const v of message.codeIds) {
+                    writer.uint64(v);
+                }
+
+                writer.ldelim();
+
+
+            */
+
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('writer'),
+                                t.identifier('uint32')
+                            ),
+                            [
+                                t.numericLiteral(10)
+                            ]
+                        ),
+                        t.identifier('fork')
+                    ),
+                    []
+                )
+            ),
+            t.forOfStatement(
+                t.variableDeclaration(
+                    'const',
+                    [
+                        t.variableDeclarator(
+                            t.identifier('v'),
+                            null
+                        )
+                    ]
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier('codeIds')
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('writer'),
+                                t.identifier('uint64')
+                            ),
+                            [
+                                t.identifier('v')
+                            ]
+                        )
+                    )
+                ])
+            ),
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('writer'),
+                        t.identifier('ldelim')
+                    ),
+                    []
+                )
+            ),
+
+
+            /*
                 LOOP (ARRAY)
             */
 
@@ -387,11 +460,6 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
                         ]
                     ),
 
-                    /*
-           message.sender = reader.string();
-              break;
-                    */
-
 
                     t.switchStatement(
                         t.binaryExpression(
@@ -400,7 +468,14 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
                             t.numericLiteral(3)
                         ),
                         [
-                            //
+
+
+                            /*
+                   message.sender = reader.string();
+                      break;
+                            */
+
+
                             t.switchCase(
                                 t.numericLiteral(1),
                                 [
@@ -455,6 +530,126 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
                                         )
                                     ),
                                     t.breakStatement()
+                                ]
+                            ),
+
+                            /*
+                               case Long[]:
+
+              if ((tag & 7) === 2) {
+                const end2 = reader.uint32() + reader.pos;
+
+                while (reader.pos < end2) {
+                  message.codeIds.push((reader.uint64() as Long));
+                }
+              } else {
+                message.codeIds.push((reader.uint64() as Long));
+              }
+
+                               */
+
+                            t.switchCase(
+                                t.numericLiteral(2),
+                                [
+                                    t.ifStatement(
+                                        t.binaryExpression(
+                                            '===',
+                                            t.binaryExpression(
+                                                '&',
+                                                t.identifier('tag'),
+                                                t.numericLiteral(7)
+                                            ),
+                                            t.numericLiteral(2)
+                                        ),
+                                        t.blockStatement([
+                                            t.variableDeclaration('const', [
+                                                t.variableDeclarator(
+                                                    t.identifier('end2'),
+                                                    t.binaryExpression(
+                                                        '+',
+                                                        t.callExpression(
+                                                            t.memberExpression(
+                                                                t.identifier('reader'),
+                                                                t.identifier('uint32')
+                                                            ),
+                                                            []
+                                                        ),
+                                                        t.memberExpression(
+                                                            t.identifier('reader'),
+                                                            t.identifier('pos')
+                                                        )
+                                                    )
+                                                )
+                                            ]),
+                                            // while loop
+
+                                            t.whileStatement(
+                                                t.binaryExpression(
+                                                    '<',
+                                                    t.memberExpression(
+                                                        t.identifier('reader'),
+                                                        t.identifier('pos')
+                                                    ),
+                                                    t.identifier('end2')
+                                                ),
+                                                t.blockStatement([
+                                                    t.expressionStatement(
+                                                        t.callExpression(
+                                                            t.memberExpression(
+                                                                t.memberExpression(
+                                                                    t.identifier('message'),
+                                                                    t.identifier('codeIds')
+                                                                ),
+                                                                t.identifier('push')
+                                                            ),
+                                                            [
+                                                                t.tsAsExpression(
+                                                                    t.callExpression(
+                                                                        t.memberExpression(
+                                                                            t.identifier('reader'),
+                                                                            t.identifier('uint64')
+                                                                        ),
+                                                                        []
+                                                                    ),
+                                                                    t.tsTypeReference(
+                                                                        t.identifier('Long')
+                                                                    )
+                                                                )
+                                                            ]
+                                                        )
+                                                    )
+                                                ])
+                                            )
+
+                                        ]),
+                                        t.blockStatement([
+                                            t.expressionStatement(
+                                                t.callExpression(
+                                                    t.memberExpression(
+                                                        t.memberExpression(
+                                                            t.identifier('message'),
+                                                            t.identifier('codeIds')
+                                                        ),
+                                                        t.identifier('push')
+                                                    ),
+                                                    [
+                                                        t.tsAsExpression(
+                                                            t.callExpression(
+                                                                t.memberExpression(
+                                                                    t.identifier('reader'),
+                                                                    t.identifier('uint64')
+                                                                ),
+                                                                []
+                                                            ),
+                                                            t.tsTypeReference(
+                                                                t.identifier('Long')
+                                                            )
+                                                        )
+                                                    ]
+                                                )
+                                            )
+                                        ])
+                                    )
                                 ]
                             ),
 
@@ -518,7 +713,7 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
 
                             /*
                              case 4:
-                                          message.tokenInMaxs.push(Coin.decode(reader, reader.unint32()));
+                                          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
                                           break;
                             */
 
@@ -545,7 +740,7 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
                                                         t.callExpression(
                                                             t.memberExpression(
                                                                 t.identifier('reader'),
-                                                                t.identifier('unint32')
+                                                                t.identifier('uint32')
                                                             ),
                                                             []
                                                         )
@@ -731,6 +926,66 @@ export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
                         ),
 
                         /*
+
+                        Long[]
+
+codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+
+                        */
+
+
+                        t.objectProperty(
+                            t.identifier('codeIds'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('Array'),
+                                        t.identifier('isArray')
+                                    ),
+                                    [
+                                        t.optionalMemberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('codeIds'),
+                                            false,
+                                            true
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('codeIds')
+                                        ),
+                                        t.identifier('map')
+                                    ),
+                                    [
+                                        t.arrowFunctionExpression(
+                                            [
+                                                identifier('e', t.tsTypeAnnotation(
+                                                    t.tsAnyKeyword()
+                                                ))
+                                            ],
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('Long'),
+                                                    t.identifier('fromString')
+                                                ),
+                                                [
+                                                    t.identifier('e')
+                                                ]
+                                            ),
+                                            false
+                                        )
+                                    ]
+                                ),
+                                t.arrayExpression([])
+                            )
+                        ),
+
+
+
+                        /*
         
                         tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
 
@@ -898,6 +1153,71 @@ export const protoToJSONMethod = (name: string, proto: ProtoType) => {
                     )
                 )
             ),
+
+            /*
+                Long[]
+            */
+
+            t.ifStatement(
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier('codeIds')
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.assignmentExpression(
+                            '=',
+                            t.memberExpression(
+                                t.identifier('obj'),
+                                t.identifier('codeIds')
+                            ),
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('codeIds')
+                                    ),
+                                    t.identifier('map')
+                                ),
+                                [
+                                    t.arrowFunctionExpression(
+                                        [
+                                            t.identifier('e')
+                                        ],
+                                        t.callExpression(
+                                            t.memberExpression(
+                                                t.logicalExpression(
+                                                    '||',
+                                                    t.identifier('e'),
+                                                    t.memberExpression(
+                                                        t.identifier('Long'),
+                                                        t.identifier('UZERO')
+                                                    )
+                                                ),
+                                                t.identifier('toString')
+                                            ),
+                                            []
+                                        )
+                                    )
+                                ]
+                            )
+                        )
+                    )
+                ]),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.assignmentExpression(
+                            '=',
+                            t.memberExpression(
+                                t.identifier('obj'),
+                                t.identifier('codeIds')
+                            ),
+                            t.arrayExpression([])
+                        )
+                    )
+                ])
+            ),
+
 
 
             /*
@@ -1110,6 +1430,52 @@ export const protoFromPartialMethod = (name: string, proto: ProtoType) => {
                             t.identifier('Uint8Array'),
                             []
                         )
+                    )
+                )
+            ),
+
+            /*
+            Long[]
+            */
+
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('codeIds')
+                    ),
+                    t.logicalExpression(
+                        '||',
+                        t.optionalCallExpression(
+                            t.optionalMemberExpression(
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier('codeIds')
+                                ),
+                                t.identifier('map'),
+                                false,
+                                true
+                            ),
+                            [
+                                t.arrowFunctionExpression(
+                                    [
+                                        t.identifier('e')
+                                    ],
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.identifier('Long'),
+                                            t.identifier('fromValue')
+                                        ),
+                                        [
+                                            t.identifier('e')
+                                        ]
+                                    )
+                                )
+                            ],
+                            false
+                        ),
+                        t.arrayExpression([])
                     )
                 )
             ),
