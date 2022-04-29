@@ -5,6 +5,49 @@ import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
 import { encodeTypes, switchOnTag, switchOnTagArray, switchOnTagTypeArray } from './utils';
 
+export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
+    const fields = [
+        switchOnTag(
+            1,
+            'sender',
+            encodeTypes.string()
+        ),
+        switchOnTag(
+            2,
+            'poolId',
+            encodeTypes.Long()
+        ),
+        switchOnTag(
+            2,
+            'signDoc',
+            encodeTypes.Type('SignDocDirectAux')
+        ),
+        switchOnTag(
+            2,
+            'mode',
+            encodeTypes.Enum()
+        ),
+        switchOnTagArray(2,
+            'codeIds',
+            encodeTypes.Long()
+        ),
+        switchOnTag(3,
+            'shareOutAmount',
+            encodeTypes.string()
+        ),
+        switchOnTag(333,
+            'queryData',
+            encodeTypes.bytes()
+        ),
+        switchOnTagTypeArray(
+            4,
+            'tokenInMaxs',
+            'Coin'
+        )
+    ];
+    return fields;
+};
+
 export const protoDecodeMethod = (name: string, proto: ProtoType) => {
     return objectMethod(
         'method',
@@ -156,111 +199,13 @@ export const protoDecodeMethod = (name: string, proto: ProtoType) => {
                         [
 
 
-                            /*
-                   message.sender = reader.string();
-                      break;
-                            */
-
-
-                            switchOnTag(
-                                1,
-                                'sender',
-                                encodeTypes.string()
-                            ),
-
-
-                            /*
-                               case 2:
-                                          message.poolId = (reader.uint64() as Long);
-                                          break;
-                            */
-
-                            switchOnTag(
-                                2,
-                                'poolId',
-                                encodeTypes.Long()
-                            ),
-
-                            /*
-                                          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-                            */
-
-                            switchOnTag(
-                                2,
-                                'signDoc',
-                                encodeTypes.Type('SignDocDirectAux')
-                            ),
-
-                            // message.mode = (reader.int32() as any);
-
-                            switchOnTag(
-                                2,
-                                'mode',
-                                encodeTypes.Enum()
-                            ),
-
-
-                            /*
-                               case Long[]:
-
-              if ((tag & 7) === 2) {
-                const end2 = reader.uint32() + reader.pos;
-
-                while (reader.pos < end2) {
-                  message.codeIds.push((reader.uint64() as Long));
-                }
-              } else {
-                message.codeIds.push((reader.uint64() as Long));
-              }
-
-                               */
-
-                            switchOnTagArray(2,
-                                'codeIds',
-                                encodeTypes.Long()
-                            ),
-
-
-                            /*
-                             case 3:
-                                          message.shareOutAmount = reader.string();
-                                          break
-                            */
-
-                            switchOnTag(3,
-                                'shareOutAmount',
-                                encodeTypes.string()
-                            ),
-
-                            /*
-                             case:
-                                 message.queryData = reader.bytes();
-                           */
-
-                            switchOnTag(333,
-                                'queryData',
-                                encodeTypes.bytes()
-                            ),
-
-                            /*
-                             case 4:
-                                          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
-                                          break;
-                            */
-
-                            switchOnTagTypeArray(
-                                4,
-                                'tokenInMaxs',
-                                'Coin'
-                            ),
-
+                            ...protoDecodeMethodFields(name, proto),
 
                             /*
                             default:
                                     reader.skipType(tag & 7);
                                     break;
                             */
-
                             t.switchCase(
                                 null,
                                 [
@@ -289,7 +234,6 @@ export const protoDecodeMethod = (name: string, proto: ProtoType) => {
             ),
 
             // RETURN STATEMENT
-
             t.returnStatement(
                 t.identifier('message')
             )
