@@ -240,6 +240,98 @@ const protoEncodeMethod = (name: string, proto: ProtoType) => {
 
 
             /*
+
+            */
+
+            t.ifStatement(
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('signDoc')
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('SignDocDirectAux'),
+                                        t.identifier('encode')
+                                    ),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('signDoc')
+                                        ),
+                                        t.callExpression(
+                                            t.memberExpression(
+                                                t.callExpression(
+                                                    t.memberExpression(
+                                                        t.identifier('writer'),
+                                                        t.identifier('uint32')
+                                                    ),
+                                                    [
+                                                        t.numericLiteral(18)
+                                                    ]
+                                                ),
+                                                t.identifier('fork')
+                                            ),
+                                            []
+                                        )
+
+                                    ]
+                                ),
+                                t.identifier('ldelim')
+                            ),
+                            []
+                        )
+                    )
+                ])
+            ),
+
+            /*
+mode
+            */
+
+            t.ifStatement(
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('mode')
+                    ),
+                    t.numericLiteral(0)
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('writer'),
+                                        t.identifier('uint32')
+                                    ),
+                                    [
+                                        t.numericLiteral(24)
+                                    ]
+                                ),
+                                t.identifier('int32')
+                            ),
+                            [
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier('mode')
+                                )
+                            ]
+                        )
+                    )
+                ])
+            ),
+
+            /*
                 LOOP (ARRAY)
             */
 
@@ -533,6 +625,74 @@ const protoDecodeMethod = (name: string, proto: ProtoType) => {
                                 ]
                             ),
 
+
+                            /*
+                                          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+                            */
+
+                            t.switchCase(
+                                t.numericLiteral(2),
+                                [
+                                    t.expressionStatement(
+                                        t.assignmentExpression(
+                                            '=',
+                                            t.memberExpression(
+                                                t.identifier('message'),
+                                                t.identifier('signDoc')
+                                            ),
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('SignDocDirectAux'),
+                                                    t.identifier('decode')
+                                                ),
+                                                [
+                                                    t.identifier('reader'),
+                                                    t.callExpression(
+                                                        t.memberExpression(
+                                                            t.identifier('reader'),
+                                                            t.identifier('uint32')
+                                                        ),
+                                                        []
+                                                    )
+                                                ]
+                                            )
+                                        )
+                                    ),
+                                    t.breakStatement()
+                                ]
+                            ),
+
+                            // message.mode = (reader.int32() as any);
+
+                            t.switchCase(
+                                t.numericLiteral(2),
+                                [
+                                    t.expressionStatement(
+                                        t.assignmentExpression(
+                                            '=',
+                                            t.memberExpression(
+                                                t.identifier('message'),
+                                                t.identifier('mode')
+                                            ),
+                                            t.tsAsExpression(
+                                                t.callExpression(
+                                                    t.memberExpression(
+                                                        t.identifier('reader'),
+                                                        t.identifier('int32')
+                                                    ),
+                                                    []
+                                                ),
+                                                t.tsAnyKeyword()
+                                            )
+                                        )
+                                    ),
+                                    t.breakStatement()
+                                ]
+                            ),
+
+
+
+
                             /*
                                case Long[]:
 
@@ -823,6 +983,67 @@ export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
 
                         /*
 
+                        signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+
+                        */
+                        t.objectProperty(
+                            t.identifier('signDoc'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.identifier('isSet'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('signDoc')
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('SignDocDirectAux'),
+                                        t.identifier('fromJSON')
+                                    ),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('signDoc')
+                                        )
+                                    ]
+                                ),
+                                t.identifier('undefined')
+                            )
+                        ),
+
+                        // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+
+                        t.objectProperty(
+                            t.identifier('mode'),
+                            t.conditionalExpression(
+                                t.callExpression(
+                                    t.identifier('isSet'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('mode')
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.identifier('signModeFromJSON'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('object'),
+                                            t.identifier('mode')
+                                        )
+                                    ]
+                                ),
+                                t.numericLiteral(0)
+                            )
+                        ),
+
+
+                        /*
+
                         sender: isSet(object.sender) ? String(object.sender) : ""
 
                         */
@@ -1109,9 +1330,88 @@ export const protoToJSONMethod = (name: string, proto: ProtoType) => {
             ),
 
             /*
-    
-            message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+                
+                message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+            */
 
+            t.expressionStatement(
+                t.logicalExpression(
+                    '&&',
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('signDoc')
+                        ),
+                        t.identifier('undefined')
+                    ),
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier('signDoc')
+                        ),
+                        t.conditionalExpression(
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier('signDoc')
+                            ),
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('SignDocDirectAux'),
+                                    t.identifier('toJSON')
+                                ),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('signDoc')
+                                    )
+                                ]
+                            ),
+                            t.identifier('undefined')
+                        )
+                    )
+                )
+            ),
+
+            // message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+
+            t.expressionStatement(
+                t.logicalExpression(
+                    '&&',
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('mode')
+                        ),
+                        t.identifier('undefined')
+                    ),
+                    t.assignmentExpression(
+                        '=',
+                        t.memberExpression(
+                            t.identifier('obj'),
+                            t.identifier('mode')
+                        ),
+                        t.callExpression(
+                            t.identifier('signModeToJSON'),
+                            [
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier('mode')
+                                )
+                            ]
+                        )
+
+                    )
+                )
+            ),
+
+
+            /*
+     
+            message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    
             */
 
             t.expressionStatement(
@@ -1221,9 +1521,9 @@ export const protoToJSONMethod = (name: string, proto: ProtoType) => {
 
 
             /*
-    
+     
              message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
-
+    
             */
 
             t.expressionStatement(
@@ -1271,13 +1571,13 @@ export const protoToJSONMethod = (name: string, proto: ProtoType) => {
 
 
             /*
-
+    
             if (message.tokenInMaxs) {
                 obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
             } else {
                 obj.tokenInMaxs = [];
             }
-
+    
             */
 
             t.ifStatement(
@@ -1430,6 +1730,74 @@ export const protoFromPartialMethod = (name: string, proto: ProtoType) => {
                             t.identifier('Uint8Array'),
                             []
                         )
+                    )
+                )
+            ),
+
+            /*
+        message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+            */
+
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('signDoc')
+                    ),
+                    t.conditionalExpression(
+                        t.logicalExpression(
+                            '&&',
+                            t.binaryExpression(
+                                '!==',
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier('signDoc')
+                                ),
+                                t.identifier('undefined')
+                            ),
+                            t.binaryExpression(
+                                '!==',
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier('signDoc')
+                                ),
+                                t.nullLiteral()
+                            )
+                        ),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('SignDocDirectAux'),
+                                t.identifier('fromPartial')
+                            ),
+                            [
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier('signDoc')
+                                )
+                            ]
+                        ),
+                        t.identifier('undefined')
+                    )
+                )
+            ),
+
+            // message.mode = object.mode ?? 0;
+
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('mode')
+                    ),
+                    t.logicalExpression(
+                        '??',
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier('mode')
+                        ),
+                        t.numericLiteral(0)
                     )
                 )
             ),
