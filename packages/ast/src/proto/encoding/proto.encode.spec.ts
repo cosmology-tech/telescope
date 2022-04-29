@@ -1,7 +1,7 @@
 import { createProtoObjectWithMethods } from './encoding';
-import struct from '../../../../__fixtures__/proto-json/google/protobuf/struct.json';
-import authz from '../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
-import gamm from '../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
+import struct from '../../../../../__fixtures__/proto-json/google/protobuf/struct.json';
+import authz from '../../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
+import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
 import generate from '@babel/generator';
 
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
@@ -20,5 +20,6 @@ const printCode = (ast) => {
 }
 
 it('createProtoObjectWithMethods', async () => {
-    printCode(createProtoObjectWithMethods('MsgJoinPool', getNestedProto(gamm).MsgJoinPool));
+    expectCode(createProtoObjectWithMethods('MsgJoinPool', getNestedProto(gamm).MsgJoinPool));
+    // printCode(createProtoObjectWithMethods('MsgJoinPool', getNestedProto(gamm).MsgJoinPool));
 });
