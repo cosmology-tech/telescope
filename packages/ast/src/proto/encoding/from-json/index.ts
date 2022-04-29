@@ -1,10 +1,7 @@
 import * as t from '@babel/types';
-import { camel, pascal } from 'case';
-import { identifier, tsEnumMember, tsPropertySignature, functionDeclaration, objectMethod } from '../../../utils';
-
+import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
 import { fromJsonTypes, mapArray, arrayTypes } from './utils';
-
 
 export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
     const fields = [

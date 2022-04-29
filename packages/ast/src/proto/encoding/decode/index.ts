@@ -1,7 +1,6 @@
 import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
-
 import { ProtoType } from '../../types';
 import { encodeTypes, switchOnTag, switchOnTagArray, switchOnTagTypeArray } from './utils';
 
