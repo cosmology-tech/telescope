@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 
-export const toJsonTypes = {
+export const toJSON = {
 
     //  message.sender !== undefined && (obj.sender = message.sender);
     string(prop: string) {

@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 
-export const encodeTypes = {
+export const decode = {
     string(num: number, prop: string) {
         return switchOnTag(num, prop, baseTypes.string())
     },

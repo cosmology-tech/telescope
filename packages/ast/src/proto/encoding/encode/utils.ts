@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 
-export const decodeTypes = {
+export const encode = {
 
     /*
         if (message.sender !== "") {
@@ -51,7 +51,7 @@ export const decodeTypes = {
     */
 
 
-    Long(num: number, prop: string) {
+    long(num: number, prop: string) {
         return t.ifStatement(
             t.unaryExpression('!',
                 t.callExpression(
@@ -92,7 +92,7 @@ export const decodeTypes = {
         )
     },
 
-    Type(num: number, prop: string, name: string) {
+    type(num: number, prop: string, name: string) {
         return t.ifStatement(
             t.binaryExpression(
                 '!==',
@@ -144,7 +144,7 @@ export const decodeTypes = {
     },
 
     // message.mode = (reader.int32() as any);
-    Enum(num: number, prop: string) {
+    enum(num: number, prop: string) {
         return t.ifStatement(
             t.binaryExpression(
                 '!==',
@@ -355,7 +355,7 @@ if (message.queryData.length !== 0) {
 };
 
 export const arrayTypes = {
-    Long() {
+    long() {
         return t.expressionStatement(
             t.callExpression(
                 t.memberExpression(

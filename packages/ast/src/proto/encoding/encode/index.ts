@@ -1,17 +1,17 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
-import { decodeTypes, arrayTypes } from './utils';
+import { encode, arrayTypes } from './utils';
 
 export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
     const fields = [
-        decodeTypes.string(10, 'sender'),
-        decodeTypes.Long(16, 'poolId'),
-        decodeTypes.bytes(18, 'queryData'),
-        ...decodeTypes.scalarArray(10, 'codeIds', arrayTypes.Long()),
-        decodeTypes.Type(18, 'signDoc', 'SignDocDirectAux'),
-        decodeTypes.Enum(24, 'mode'),
-        ...decodeTypes.typeArray(34, 'tokenInMaxs', 'Coin')
+        encode.string(10, 'sender'),
+        encode.long(16, 'poolId'),
+        encode.bytes(18, 'queryData'),
+        ...encode.scalarArray(10, 'codeIds', arrayTypes.long()),
+        encode.type(18, 'signDoc', 'SignDocDirectAux'),
+        encode.enum(24, 'mode'),
+        ...encode.typeArray(34, 'tokenInMaxs', 'Coin')
     ];
     return fields;
 };

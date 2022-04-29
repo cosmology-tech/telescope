@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { identifier } from '../../../utils';
 
-export const fromJsonTypes = {
+export const fromJSON = {
 
     // sender: isSet(object.sender) ? String(object.sender) : ""
     string(prop: string) {

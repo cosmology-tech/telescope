@@ -2,18 +2,18 @@ import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoType } from '../../types';
-import { baseTypes, encodeTypes, switchOnTag, switchOnTagArray, switchOnTagTypeArray } from './utils';
+import { baseTypes, decode } from './utils';
 
 export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
     const fields = [
-        encodeTypes.string(1, 'sender'),
-        encodeTypes.long(2, 'poolId'),
-        encodeTypes.type(2, 'signDoc', 'SignDocDirectAux'),
-        encodeTypes.enum(2, 'mode'),
-        encodeTypes.scalarArray(2, 'codeIds', baseTypes.long()),
-        encodeTypes.string(3, 'shareOutAmount'),
-        encodeTypes.bytes(333, 'queryData'),
-        encodeTypes.typeArray(4, 'tokenInMaxs', 'Coin')
+        decode.string(1, 'sender'),
+        decode.long(2, 'poolId'),
+        decode.type(2, 'signDoc', 'SignDocDirectAux'),
+        decode.enum(2, 'mode'),
+        decode.scalarArray(2, 'codeIds', baseTypes.long()),
+        decode.string(3, 'shareOutAmount'),
+        decode.bytes(333, 'queryData'),
+        decode.typeArray(4, 'tokenInMaxs', 'Coin')
     ];
     return fields;
 };

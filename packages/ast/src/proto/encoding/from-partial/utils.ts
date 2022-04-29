@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 
-export const fromPartialTypes = {
+export const fromPartial = {
 
     // message.sender = object.sender ?? "";
     string(prop: string) {
