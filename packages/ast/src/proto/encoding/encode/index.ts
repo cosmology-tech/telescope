@@ -6,8 +6,7 @@ import { ProtoType } from '../../types';
 
 import { decodeTypes, scalarTypeArray, arrayTypes, protoTypeArray } from './utils';
 
-export const protoEncodeMethod = (name: string, proto: ProtoType) => {
-
+export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
     const fields = [
 
         decodeTypes.string(
@@ -46,6 +45,10 @@ export const protoEncodeMethod = (name: string, proto: ProtoType) => {
 
     ];
 
+    return fields;
+};
+
+export const protoEncodeMethod = (name: string, proto: ProtoType) => {
     return objectMethod(
         'method',
         t.identifier('encode'),
@@ -78,7 +81,7 @@ export const protoEncodeMethod = (name: string, proto: ProtoType) => {
         // body 
         t.blockStatement([
 
-            ...fields,
+            ...protoEncodeMethodFields(name, proto),
 
             /* RETURN writer */
 
