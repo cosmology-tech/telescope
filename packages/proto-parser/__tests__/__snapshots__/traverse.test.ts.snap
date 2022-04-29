@@ -1,6 +1,2155 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`imports lookup 1`] = `
+exports[`cosmos/authz/v1beta1/authz 1`] = `
+Object {
+  "imports": Array [
+    "cosmos_proto/cosmos.proto",
+    "google/protobuf/timestamp.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+  ],
+  "package": "cosmos.authz.v1beta1",
+  "parsedImports": Object {
+    "google/protobuf/any.proto": Array [
+      "google.protobuf.Any",
+    ],
+    "google/protobuf/timestamp.proto": Array [
+      "google.protobuf.Timestamp",
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "cosmos": Object {
+        "nested": Object {
+          "authz": Object {
+            "nested": Object {
+              "v1beta1": Object {
+                "nested": Object {
+                  "GenericAuthorization": Object {
+                    "fields": Object {
+                      "msg": Object {
+                        "comment": "Msg, identified by it's type URL, to grant unrestricted permissions to execute",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": Object {
+                      "(cosmos_proto.implements_interface)": "Authorization",
+                    },
+                    "type": "Type",
+                  },
+                  "Grant": Object {
+                    "fields": Object {
+                      "authorization": Object {
+                        "comment": null,
+                        "id": 1,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(cosmos_proto.accepts_interface)": "Authorization",
+                        },
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "expiration": Object {
+                        "comment": "time when the grant will expire and will be pruned. If null, then the grant
+doesn't have a time expiration (other conditions  in \`authorization\`
+may apply to invalidate the grant)",
+                        "id": 2,
+                        "import": "google/protobuf/timestamp.proto",
+                        "importedName": "google.protobuf.Timestamp",
+                        "options": Object {
+                          "(gogoproto.nullable)": true,
+                          "(gogoproto.stdtime)": true,
+                        },
+                        "parsedType": Object {
+                          "name": "Timestamp",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Timestamp",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "GrantAuthorization": Object {
+                    "fields": Object {
+                      "authorization": Object {
+                        "comment": null,
+                        "id": 3,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(cosmos_proto.accepts_interface)": "Authorization",
+                        },
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "expiration": Object {
+                        "comment": null,
+                        "id": 4,
+                        "import": "google/protobuf/timestamp.proto",
+                        "importedName": "google.protobuf.Timestamp",
+                        "options": Object {
+                          "(gogoproto.stdtime)": true,
+                        },
+                        "parsedType": Object {
+                          "name": "Timestamp",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Timestamp",
+                      },
+                      "grantee": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "granter": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "GrantQueueItem": Object {
+                    "fields": Object {
+                      "msgTypeUrls": Object {
+                        "comment": "msg_type_urls contains the list of TypeURL of a sdk.Msg.",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
+Object {
+  "imports": Array [
+    "cosmos/crypto/multisig/v1beta1/multisig.proto",
+    "google/protobuf/any.proto",
+  ],
+  "package": "cosmos.tx.signing.v1beta1",
+  "parsedImports": Object {
+    "google/protobuf/any.proto": Array [
+      "google.protobuf.Any",
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "cosmos": Object {
+        "nested": Object {
+          "tx": Object {
+            "nested": Object {
+              "signing": Object {
+                "nested": Object {
+                  "v1beta1": Object {
+                    "nested": Object {
+                      "SignMode": Object {
+                        "comment": "SignMode represents a signing mode with its own security guarantees.
+
+This enum should be considered a registry of all known sign modes
+in the Cosmos ecosystem. Apps are not expected to support all known
+sign modes. Apps that would like to support custom  sign modes are
+encouraged to open a small PR against this file to add a new case
+to this SignMode enum describing their sign mode so that different
+apps have a consistent version of this enum.",
+                        "comments": Object {
+                          "SIGN_MODE_DIRECT": "SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
+verified with raw bytes from Tx.",
+                          "SIGN_MODE_DIRECT_AUX": "SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
+SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+require signers signing over other signers' \`signer_info\`. It also allows
+for adding Tips in transactions.
+
+Since: cosmos-sdk 0.46",
+                          "SIGN_MODE_LEGACY_AMINO_JSON": "SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
+Amino JSON and will be removed in the future.",
+                          "SIGN_MODE_TEXTUAL": "SIGN_MODE_TEXTUAL is a future signing mode that will verify some
+human-readable textual representation on top of the binary representation
+from SIGN_MODE_DIRECT. It is currently not supported.",
+                          "SIGN_MODE_UNSPECIFIED": "SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
+rejected.",
+                        },
+                        "type": "Enum",
+                        "values": Object {
+                          "SIGN_MODE_DIRECT": 1,
+                          "SIGN_MODE_DIRECT_AUX": 3,
+                          "SIGN_MODE_LEGACY_AMINO_JSON": 127,
+                          "SIGN_MODE_TEXTUAL": 2,
+                          "SIGN_MODE_UNSPECIFIED": 0,
+                        },
+                      },
+                      "SignatureDescriptor": Object {
+                        "fields": Object {
+                          "data": Object {
+                            "comment": null,
+                            "id": 2,
+                            "parsedType": Object {
+                              "name": "Data",
+                              "type": "Type",
+                            },
+                            "scopeType": "local",
+                            "type": "Data",
+                          },
+                          "publicKey": Object {
+                            "comment": "public_key is the public key of the signer",
+                            "id": 1,
+                            "import": "google/protobuf/any.proto",
+                            "importedName": "google.protobuf.Any",
+                            "parsedType": Object {
+                              "name": "Any",
+                              "type": "Type",
+                            },
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.Any",
+                          },
+                          "sequence": Object {
+                            "comment": "sequence is the sequence of the account, which describes the
+number of committed transactions signed by a given address. It is used to prevent
+replay attacks.",
+                            "id": 3,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                          },
+                        },
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "SignatureDescriptors": Object {
+                        "fields": Object {
+                          "signatures": Object {
+                            "comment": "signatures are the signature descriptors",
+                            "id": 1,
+                            "parsedType": Object {
+                              "name": "SignatureDescriptor",
+                              "type": "Type",
+                            },
+                            "rule": "repeated",
+                            "scopeType": "local",
+                            "type": "SignatureDescriptor",
+                          },
+                        },
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`cosmos/tx/v1beta1/tx 1`] = `
+Object {
+  "imports": Array [
+    "gogoproto/gogo.proto",
+    "cosmos/crypto/multisig/v1beta1/multisig.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/tx/signing/v1beta1/signing.proto",
+    "google/protobuf/any.proto",
+    "cosmos_proto/cosmos.proto",
+  ],
+  "package": "cosmos.tx.v1beta1",
+  "parsedImports": Object {
+    "cosmos/base/v1beta1/coin.proto": Array [
+      "cosmos.base.v1beta1.Coin",
+    ],
+    "cosmos/tx/signing/v1beta1/signing.proto": Array [
+      "cosmos.tx.signing.v1beta1.SignMode",
+    ],
+    "google/protobuf/any.proto": Array [
+      "google.protobuf.Any",
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "cosmos": Object {
+        "nested": Object {
+          "tx": Object {
+            "nested": Object {
+              "v1beta1": Object {
+                "nested": Object {
+                  "AuthInfo": Object {
+                    "fields": Object {
+                      "fee": Object {
+                        "comment": "Fee is the fee and gas limit for the transaction. The first signer is the
+primary signer and the one which pays the fee. The fee can be calculated
+based on the cost of evaluating the body and doing signature verification
+of the signers. This can be estimated via simulation.",
+                        "id": 2,
+                        "parsedType": Object {
+                          "name": "Fee",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "Fee",
+                      },
+                      "signerInfos": Object {
+                        "comment": "signer_infos defines the signing modes for the required signers. The number
+and order of elements must match the required signers from TxBody's
+messages. The first element is the primary signer and the one which pays
+the fee.",
+                        "id": 1,
+                        "parsedType": Object {
+                          "name": "SignerInfo",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "local",
+                        "type": "SignerInfo",
+                      },
+                      "tip": Object {
+                        "comment": "Tip is the optional tip used for meta-transactions.
+
+Since: cosmos-sdk 0.46",
+                        "id": 3,
+                        "parsedType": Object {
+                          "name": "Tip",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "Tip",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "AuxSignerData": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the bech32-encoded address of the auxiliary signer. If using
+AuxSignerData across different chains, the bech32 prefix of the target
+chain (where the final transaction is broadcasted) should be used.",
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "mode": Object {
+                        "comment": "mode is the signing mode of the single signer",
+                        "id": 3,
+                        "import": "cosmos/tx/signing/v1beta1/signing.proto",
+                        "importedName": "cosmos.tx.signing.v1beta1.SignMode",
+                        "parsedType": Object {
+                          "name": "SignMode",
+                          "type": "Enum",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.tx.signing.v1beta1.SignMode",
+                      },
+                      "sig": Object {
+                        "comment": "sig is the signature of the sign doc.",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "signDoc": Object {
+                        "comment": "sign_doc is the SIGN_MOD_DIRECT_AUX sign doc that the auxiliary signer
+signs. Note: we use the same sign doc even if we're signing with
+LEGACY_AMINO_JSON.",
+                        "id": 2,
+                        "parsedType": Object {
+                          "name": "SignDocDirectAux",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "SignDocDirectAux",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "Fee": Object {
+                    "fields": Object {
+                      "amount": Object {
+                        "comment": "amount is the amount of coins to be paid as a fee",
+                        "id": 1,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                      "gasLimit": Object {
+                        "comment": "gas_limit is the maximum gas that can be used in transaction processing
+before an out of gas error occurs",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "granter": Object {
+                        "comment": "if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used
+to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
+not support fee grants, this will fail",
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "payer": Object {
+                        "comment": "if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
+the payer must be a tx signer (and thus have signed this field in AuthInfo).
+setting this field does *not* change the ordering of required signers for the transaction.",
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "ModeInfo": Object {
+                    "fields": Object {
+                      "multi": Object {
+                        "comment": "multi represents a nested multisig signer",
+                        "id": 2,
+                        "parsedType": Object {
+                          "name": "Multi",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "Multi",
+                      },
+                      "single": Object {
+                        "comment": "single represents a single signer",
+                        "id": 1,
+                        "parsedType": Object {
+                          "name": "Single",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "Single",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "SignDoc": Object {
+                    "fields": Object {
+                      "accountNumber": Object {
+                        "comment": "account_number is the account number of the account in state",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "authInfoBytes": Object {
+                        "comment": "auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
+representation in TxRaw.",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "bodyBytes": Object {
+                        "comment": "body_bytes is protobuf serialization of a TxBody that matches the
+representation in TxRaw.",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "chainId": Object {
+                        "comment": "chain_id is the unique identifier of the chain this transaction targets.
+It prevents signed transactions from being used on another chain by an
+attacker",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "SignDocDirectAux": Object {
+                    "fields": Object {
+                      "accountNumber": Object {
+                        "comment": "account_number is the account number of the account in state.",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "bodyBytes": Object {
+                        "comment": "body_bytes is protobuf serialization of a TxBody that matches the
+representation in TxRaw.",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "chainId": Object {
+                        "comment": "chain_id is the identifier of the chain this transaction targets.
+It prevents signed transactions from being used on another chain by an
+attacker.",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "publicKey": Object {
+                        "comment": "public_key is the public key of the signing account.",
+                        "id": 2,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "sequence": Object {
+                        "comment": "sequence is the sequence number of the signing account.",
+                        "id": 5,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "tip": Object {
+                        "comment": "Tip is the optional tip used for meta-transactions. It should be left
+empty if the signer is not the tipper for this transaction.",
+                        "id": 6,
+                        "parsedType": Object {
+                          "name": "Tip",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "Tip",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "SignerInfo": Object {
+                    "fields": Object {
+                      "modeInfo": Object {
+                        "comment": "mode_info describes the signing mode of the signer and is a nested
+structure to support nested multisig pubkey's",
+                        "id": 2,
+                        "parsedType": Object {
+                          "name": "ModeInfo",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "ModeInfo",
+                      },
+                      "publicKey": Object {
+                        "comment": "public_key is the public key of the signer. It is optional for accounts
+that already exist in state. If unset, the verifier can use the required \\\\
+signer address for this position and lookup the public key.",
+                        "id": 1,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "sequence": Object {
+                        "comment": "sequence is the sequence of the account, which describes the
+number of committed transactions signed by a given address. It is used to
+prevent replay attacks.",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "Tip": Object {
+                    "fields": Object {
+                      "amount": Object {
+                        "comment": "amount is the amount of the tip",
+                        "id": 1,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                      "tipper": Object {
+                        "comment": "tipper is the address of the account paying for the tip",
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "Tx": Object {
+                    "fields": Object {
+                      "authInfo": Object {
+                        "comment": "auth_info is the authorization related content of the transaction,
+specifically signers, signer modes and fee",
+                        "id": 2,
+                        "parsedType": Object {
+                          "name": "AuthInfo",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "AuthInfo",
+                      },
+                      "body": Object {
+                        "comment": "body is the processable content of the transaction",
+                        "id": 1,
+                        "parsedType": Object {
+                          "name": "TxBody",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "TxBody",
+                      },
+                      "signatures": Object {
+                        "comment": "signatures is a list of signatures that matches the length and order of
+AuthInfo's signer_infos to allow connecting signature meta information like
+public key and signing mode by position.",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "TxBody": Object {
+                    "fields": Object {
+                      "extensionOptions": Object {
+                        "comment": "extension_options are arbitrary options that can be added by chains
+when the default options are not sufficient. If any of these are present
+and can't be handled, the transaction will be rejected",
+                        "id": 1023,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "memo": Object {
+                        "comment": "memo is any arbitrary note/comment to be added to the transaction.
+WARNING: in clients, any publicly exposed text should not be called memo,
+but should be called \`note\` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "messages": Object {
+                        "comment": "messages is a list of messages to be executed. The required signers of
+those messages define the number and order of elements in AuthInfo's
+signer_infos and Tx's signatures. Each required signer address is added to
+the list only the first time it occurs.
+By convention, the first required signer (usually from the first message)
+is referred to as the primary signer and pays the fee for the whole
+transaction.",
+                        "id": 1,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "nonCriticalExtensionOptions": Object {
+                        "comment": "extension_options are arbitrary options that can be added by chains
+when the default options are not sufficient. If any of these are present
+and can't be handled, they will be ignored",
+                        "id": 2047,
+                        "import": "google/protobuf/any.proto",
+                        "importedName": "google.protobuf.Any",
+                        "parsedType": Object {
+                          "name": "Any",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "google.protobuf.Any",
+                      },
+                      "timeoutHeight": Object {
+                        "comment": "timeout is the block height after which this transaction will not
+be processed by the chain",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "TxRaw": Object {
+                    "fields": Object {
+                      "authInfoBytes": Object {
+                        "comment": "auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
+representation in SignDoc.",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "bodyBytes": Object {
+                        "comment": "body_bytes is a protobuf serialization of a TxBody that matches the
+representation in SignDoc.",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "signatures": Object {
+                        "comment": "signatures is a list of signatures that matches the length and order of
+AuthInfo's signer_infos to allow connecting signature meta information like
+public key and signing mode by position.",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`cosmwasm/wasm/v1/proposal 1`] = `
+Object {
+  "imports": Array [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmwasm/wasm/v1/types.proto",
+  ],
+  "package": "cosmwasm.wasm.v1",
+  "parsedImports": Object {
+    "cosmos/base/v1beta1/coin.proto": Array [
+      "cosmos.base.v1beta1.Coin",
+    ],
+    "cosmwasm/wasm/v1/types.proto": Array [
+      undefined,
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "cosmwasm": Object {
+        "nested": Object {
+          "wasm": Object {
+            "nested": Object {
+              "v1": Object {
+                "nested": Object {
+                  "ClearAdminProposal": Object {
+                    "fields": Object {
+                      "contract": Object {
+                        "comment": "Contract is the address of the smart contract",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "ExecuteContractProposal": Object {
+                    "fields": Object {
+                      "contract": Object {
+                        "comment": "Contract is the address of the smart contract",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "funds": Object {
+                        "comment": "Funds coins that are transferred to the contract on instantiation",
+                        "id": 6,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                      "msg": Object {
+                        "comment": "Msg json encoded message to be passed to the contract as execute",
+                        "id": 5,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "RawContractMessage",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "runAs": Object {
+                        "comment": "RunAs is the address that is passed to the contract's environment as sender",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "InstantiateContractProposal": Object {
+                    "fields": Object {
+                      "admin": Object {
+                        "comment": "Admin is an optional address that can execute migrations",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "codeId": Object {
+                        "comment": "CodeID is the reference to the stored WASM code",
+                        "id": 5,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "CodeID",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "funds": Object {
+                        "comment": "Funds coins that are transferred to the contract on instantiation",
+                        "id": 8,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                      "label": Object {
+                        "comment": "Label is optional metadata to be stored with a constract instance.",
+                        "id": 6,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "msg": Object {
+                        "comment": "Msg json encoded message to be passed to the contract on instantiation",
+                        "id": 7,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "RawContractMessage",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "runAs": Object {
+                        "comment": "RunAs is the address that is passed to the contract's environment as sender",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MigrateContractProposal": Object {
+                    "fields": Object {
+                      "codeId": Object {
+                        "comment": "CodeID references the new WASM codesudo",
+                        "id": 5,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "CodeID",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "contract": Object {
+                        "comment": "Contract is the address of the smart contract",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "msg": Object {
+                        "comment": "Msg json encoded message to be passed to the contract on migration",
+                        "id": 6,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "RawContractMessage",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "PinCodesProposal": Object {
+                    "fields": Object {
+                      "codeIds": Object {
+                        "comment": "CodeIDs references the new WASM codes",
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "CodeIDs",
+                          "(gogoproto.moretags)": "yaml:code_ids",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "uint64",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:description",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:title",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "StoreCodeProposal": Object {
+                    "fields": Object {
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "instantiatePermission": Object {
+                        "comment": "InstantiatePermission to apply on contract creation, optional",
+                        "id": 7,
+                        "import": "cosmwasm/wasm/v1/types.proto",
+                        "importedName": undefined,
+                        "parsedType": Object {
+                          "name": "AccessConfig",
+                          "type": "Type",
+                        },
+                        "scopeType": "import",
+                        "type": "AccessConfig",
+                      },
+                      "runAs": Object {
+                        "comment": "RunAs is the address that is passed to the contract's environment as sender",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "wasmByteCode": Object {
+                        "comment": "WASMByteCode can be raw or gzip compressed",
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "WASMByteCode",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "SudoContractProposal": Object {
+                    "fields": Object {
+                      "contract": Object {
+                        "comment": "Contract is the address of the smart contract",
+                        "id": 3,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "msg": Object {
+                        "comment": "Msg json encoded message to be passed to the contract as sudo",
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "RawContractMessage",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "UnpinCodesProposal": Object {
+                    "fields": Object {
+                      "codeIds": Object {
+                        "comment": "CodeIDs references the WASM codes",
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "CodeIDs",
+                          "(gogoproto.moretags)": "yaml:code_ids",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "uint64",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:description",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:title",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "UpdateAdminProposal": Object {
+                    "fields": Object {
+                      "contract": Object {
+                        "comment": "Contract is the address of the smart contract",
+                        "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "comment": "Description is a human readable text",
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "newAdmin": Object {
+                        "comment": "NewAdmin address to be set",
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:new_admin",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "comment": "Title is a short summary",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`cosmwasm/wasm/v1/query 1`] = `
+Object {
+  "imports": Array [
+    "gogoproto/gogo.proto",
+    "cosmwasm/wasm/v1/types.proto",
+    "google/api/annotations.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+  ],
+  "package": "cosmwasm.wasm.v1",
+  "parsedImports": Object {
+    "cosmos/base/query/v1beta1/pagination.proto": Array [
+      "cosmos.base.query.v1beta1.PageRequest",
+      "cosmos.base.query.v1beta1.PageResponse",
+    ],
+    "cosmwasm/wasm/v1/types.proto": Array [
+      undefined,
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "cosmwasm": Object {
+        "nested": Object {
+          "wasm": Object {
+            "nested": Object {
+              "v1": Object {
+                "nested": Object {
+                  "CodeInfoResponse": Object {
+                    "fields": Object {
+                      "codeId": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "CodeID",
+                          "(gogoproto.jsontag)": "id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "creator": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "dataHash": Object {
+                        "comment": null,
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "github.com/tendermint/tendermint/libs/bytes.HexBytes",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": Object {
+                      "(gogoproto.equal)": true,
+                    },
+                    "type": "Type",
+                  },
+                  "Query": Object {
+                    "comment": "Query provides defines the gRPC querier service",
+                    "methods": Object {
+                      "AllContractState": Object {
+                        "comment": "AllContractState gets all raw store data for a single contract",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/state",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/contract/{address}/state",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryAllContractStateRequest",
+                        "responseType": "QueryAllContractStateResponse",
+                      },
+                      "Code": Object {
+                        "comment": "Code gets the binary code and metadata for a singe wasm code",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/code/{code_id}",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryCodeRequest",
+                        "responseType": "QueryCodeResponse",
+                      },
+                      "Codes": Object {
+                        "comment": "Codes gets the metadata for all stored wasm codes",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/code",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryCodesRequest",
+                        "responseType": "QueryCodesResponse",
+                      },
+                      "ContractHistory": Object {
+                        "comment": "ContractHistory gets the contract code history",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/history",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/contract/{address}/history",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryContractHistoryRequest",
+                        "responseType": "QueryContractHistoryResponse",
+                      },
+                      "ContractInfo": Object {
+                        "comment": "ContractInfo gets the contract meta data",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/contract/{address}",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryContractInfoRequest",
+                        "responseType": "QueryContractInfoResponse",
+                      },
+                      "ContractsByCode": Object {
+                        "comment": "ContractsByCode lists all smart contracts for a code id",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryContractsByCodeRequest",
+                        "responseType": "QueryContractsByCodeResponse",
+                      },
+                      "PinnedCodes": Object {
+                        "comment": "PinnedCodes gets the pinned code ids",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/codes/pinned",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/cosmwasm/wasm/v1/codes/pinned",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryPinnedCodesRequest",
+                        "responseType": "QueryPinnedCodesResponse",
+                      },
+                      "RawContractState": Object {
+                        "comment": "RawContractState gets single key from the raw store data of a contract",
+                        "options": Object {
+                          "(google.api.http).get": "/wasm/v1/contract/{address}/raw/{query_data}",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/wasm/v1/contract/{address}/raw/{query_data}",
+                            },
+                          },
+                        ],
+                        "requestType": "QueryRawContractStateRequest",
+                        "responseType": "QueryRawContractStateResponse",
+                      },
+                      "SmartContractState": Object {
+                        "comment": "SmartContractState get smart query result from the contract",
+                        "options": Object {
+                          "(google.api.http).get": "/wasm/v1/contract/{address}/smart/{query_data}",
+                        },
+                        "parsedOptions": Array [
+                          Object {
+                            "(google.api.http)": Object {
+                              "get": "/wasm/v1/contract/{address}/smart/{query_data}",
+                            },
+                          },
+                        ],
+                        "requestType": "QuerySmartContractStateRequest",
+                        "responseType": "QuerySmartContractStateResponse",
+                      },
+                    },
+                    "type": "Service",
+                  },
+                  "QueryAllContractStateRequest": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the address of the contract",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines an optional pagination for the request.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "parsedType": Object {
+                          "name": "PageRequest",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryAllContractStateResponse": Object {
+                    "fields": Object {
+                      "models": Object {
+                        "comment": null,
+                        "id": 1,
+                        "import": "cosmwasm/wasm/v1/types.proto",
+                        "importedName": undefined,
+                        "options": Object {
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Model",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "import",
+                        "type": "Model",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines the pagination in the response.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "parsedType": Object {
+                          "name": "PageResponse",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryCodeRequest": Object {
+                    "fields": Object {
+                      "codeId": Object {
+                        "comment": "grpc-gateway_out does not support Go style CodID",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryCodeResponse": Object {
+                    "fields": Object {
+                      "codeInfo": Object {
+                        "comment": null,
+                        "id": 1,
+                        "options": Object {
+                          "(gogoproto.embed)": true,
+                          "(gogoproto.jsontag)": "",
+                        },
+                        "parsedType": Object {
+                          "name": "CodeInfoResponse",
+                          "type": "Type",
+                        },
+                        "scopeType": "local",
+                        "type": "CodeInfoResponse",
+                      },
+                      "data": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.jsontag)": "data",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": Object {
+                      "(gogoproto.equal)": true,
+                    },
+                    "type": "Type",
+                  },
+                  "QueryCodesRequest": Object {
+                    "fields": Object {
+                      "pagination": Object {
+                        "comment": "pagination defines an optional pagination for the request.",
+                        "id": 1,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "parsedType": Object {
+                          "name": "PageRequest",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryCodesResponse": Object {
+                    "fields": Object {
+                      "codeInfos": Object {
+                        "comment": null,
+                        "id": 1,
+                        "options": Object {
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "CodeInfoResponse",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "local",
+                        "type": "CodeInfoResponse",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines the pagination in the response.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "parsedType": Object {
+                          "name": "PageResponse",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryContractHistoryRequest": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the address of the contract to query",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines an optional pagination for the request.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "parsedType": Object {
+                          "name": "PageRequest",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryContractHistoryResponse": Object {
+                    "fields": Object {
+                      "entries": Object {
+                        "comment": null,
+                        "id": 1,
+                        "import": "cosmwasm/wasm/v1/types.proto",
+                        "importedName": undefined,
+                        "options": Object {
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "ContractCodeHistoryEntry",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "import",
+                        "type": "ContractCodeHistoryEntry",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines the pagination in the response.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "parsedType": Object {
+                          "name": "PageResponse",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryContractInfoRequest": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the address of the contract to query",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryContractInfoResponse": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the address of the contract",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "contractInfo": Object {
+                        "comment": null,
+                        "id": 2,
+                        "import": "cosmwasm/wasm/v1/types.proto",
+                        "importedName": undefined,
+                        "options": Object {
+                          "(gogoproto.embed)": true,
+                          "(gogoproto.jsontag)": "",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "ContractInfo",
+                          "type": "Type",
+                        },
+                        "scopeType": "import",
+                        "type": "ContractInfo",
+                      },
+                    },
+                    "options": Object {
+                      "(gogoproto.equal)": true,
+                    },
+                    "type": "Type",
+                  },
+                  "QueryContractsByCodeRequest": Object {
+                    "fields": Object {
+                      "codeId": Object {
+                        "comment": "grpc-gateway_out does not support Go style CodID
+pagination defines an optional pagination for the request.",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "pagination": Object {
+                        "comment": null,
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "parsedType": Object {
+                          "name": "PageRequest",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryContractsByCodeResponse": Object {
+                    "fields": Object {
+                      "contracts": Object {
+                        "comment": "contracts are a set of contract addresses",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "string",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines the pagination in the response.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "parsedType": Object {
+                          "name": "PageResponse",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryPinnedCodesRequest": Object {
+                    "fields": Object {
+                      "pagination": Object {
+                        "comment": "pagination defines an optional pagination for the request.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "parsedType": Object {
+                          "name": "PageRequest",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryPinnedCodesResponse": Object {
+                    "fields": Object {
+                      "codeIds": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customname)": "CodeIDs",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "rule": "repeated",
+                        "type": "uint64",
+                      },
+                      "pagination": Object {
+                        "comment": "pagination defines the pagination in the response.",
+                        "id": 2,
+                        "import": "cosmos/base/query/v1beta1/pagination.proto",
+                        "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "parsedType": Object {
+                          "name": "PageResponse",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryRawContractStateRequest": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the address of the contract",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "queryData": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QueryRawContractStateResponse": Object {
+                    "fields": Object {
+                      "data": Object {
+                        "comment": "Data contains the raw store data",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QuerySmartContractStateRequest": Object {
+                    "fields": Object {
+                      "address": Object {
+                        "comment": "address is the address of the contract",
+                        "id": 1,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "queryData": Object {
+                        "comment": "QueryData contains the query data passed to the contract",
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "RawContractMessage",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "QuerySmartContractStateResponse": Object {
+                    "fields": Object {
+                      "data": Object {
+                        "comment": "Data contains the json data returned from the smart contract",
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.casttype)": "RawContractMessage",
+                        },
+                        "parsedType": Object {
+                          "name": "bytes",
+                          "type": "native",
+                        },
+                        "type": "bytes",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`osmosis/claim/v1beta1/params 1`] = `
 Object {
   "imports": Array [
     "gogoproto/gogo.proto",
@@ -36,11 +2185,21 @@ Object {
                           "(gogoproto.nullable)": false,
                           "(gogoproto.stdtime)": true,
                         },
+                        "parsedType": Object {
+                          "name": "Timestamp",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
                         "type": "google.protobuf.Timestamp",
                       },
                       "claimDenom": Object {
                         "comment": "denom of claimable asset",
                         "id": 4,
+                        "isScalar": true,
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
                         "type": "string",
                       },
                       "durationOfDecay": Object {
@@ -54,6 +2213,11 @@ Object {
                           "(gogoproto.nullable)": false,
                           "(gogoproto.stdduration)": true,
                         },
+                        "parsedType": Object {
+                          "name": "Duration",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
                         "type": "google.protobuf.Duration",
                       },
                       "durationUntilDecay": Object {
@@ -67,10 +2231,826 @@ Object {
                           "(gogoproto.nullable)": false,
                           "(gogoproto.stdduration)": true,
                         },
+                        "parsedType": Object {
+                          "name": "Duration",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
                         "type": "google.protobuf.Duration",
                       },
                     },
                     "options": undefined,
+                    "type": "Type",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`osmosis/gamm/v1beta1/tx 1`] = `
+Object {
+  "imports": Array [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+  ],
+  "package": "osmosis.gamm.v1beta1",
+  "parsedImports": Object {
+    "cosmos/base/v1beta1/coin.proto": Array [
+      "cosmos.base.v1beta1.Coin",
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "osmosis": Object {
+        "nested": Object {
+          "gamm": Object {
+            "nested": Object {
+              "v1beta1": Object {
+                "nested": Object {
+                  "Msg": Object {
+                    "comment": null,
+                    "methods": Object {
+                      "ExitPool": Object {
+                        "comment": null,
+                        "requestType": "MsgExitPool",
+                        "responseType": "MsgExitPoolResponse",
+                      },
+                      "ExitSwapExternAmountOut": Object {
+                        "comment": null,
+                        "requestType": "MsgExitSwapExternAmountOut",
+                        "responseType": "MsgExitSwapExternAmountOutResponse",
+                      },
+                      "ExitSwapShareAmountIn": Object {
+                        "comment": null,
+                        "requestType": "MsgExitSwapShareAmountIn",
+                        "responseType": "MsgExitSwapShareAmountInResponse",
+                      },
+                      "JoinPool": Object {
+                        "comment": null,
+                        "requestType": "MsgJoinPool",
+                        "responseType": "MsgJoinPoolResponse",
+                      },
+                      "JoinSwapExternAmountIn": Object {
+                        "comment": null,
+                        "requestType": "MsgJoinSwapExternAmountIn",
+                        "responseType": "MsgJoinSwapExternAmountInResponse",
+                      },
+                      "JoinSwapShareAmountOut": Object {
+                        "comment": null,
+                        "requestType": "MsgJoinSwapShareAmountOut",
+                        "responseType": "MsgJoinSwapShareAmountOutResponse",
+                      },
+                      "SwapExactAmountIn": Object {
+                        "comment": null,
+                        "requestType": "MsgSwapExactAmountIn",
+                        "responseType": "MsgSwapExactAmountInResponse",
+                      },
+                      "SwapExactAmountOut": Object {
+                        "comment": null,
+                        "requestType": "MsgSwapExactAmountOut",
+                        "responseType": "MsgSwapExactAmountOutResponse",
+                      },
+                    },
+                    "type": "Service",
+                  },
+                  "MsgExitPool": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "shareInAmount": Object {
+                        "comment": null,
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_in_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenOutMins": Object {
+                        "comment": null,
+                        "id": 4,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_out_min_amounts",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgExitPoolResponse": Object {
+                    "fields": Object {},
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgExitSwapExternAmountOut": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "shareInMaxAmount": Object {
+                        "comment": null,
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_in_max_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenOut": Object {
+                        "comment": null,
+                        "id": 3,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_out",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgExitSwapExternAmountOutResponse": Object {
+                    "fields": Object {
+                      "shareInAmount": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_in_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgExitSwapShareAmountIn": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "shareInAmount": Object {
+                        "comment": null,
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_in_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenOutDenom": Object {
+                        "comment": null,
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_out_denom",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenOutMinAmount": Object {
+                        "comment": null,
+                        "id": 5,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_out_min_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgExitSwapShareAmountInResponse": Object {
+                    "fields": Object {
+                      "tokenOutAmount": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_out_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgJoinPool": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "shareOutAmount": Object {
+                        "comment": null,
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:pool_amount_out",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenInMaxs": Object {
+                        "comment": null,
+                        "id": 4,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_in_max_amounts",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgJoinPoolResponse": Object {
+                    "fields": Object {},
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgJoinSwapExternAmountIn": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "shareOutMinAmount": Object {
+                        "comment": "reserved 3;
+reserved \\"token_in\\";",
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_out_min_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenIn": Object {
+                        "comment": null,
+                        "id": 3,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_in",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgJoinSwapExternAmountInResponse": Object {
+                    "fields": Object {
+                      "shareOutAmount": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_out_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgJoinSwapShareAmountOut": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "shareOutAmount": Object {
+                        "comment": null,
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_out_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenInDenom": Object {
+                        "comment": null,
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_in_denom",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenInMaxAmount": Object {
+                        "comment": null,
+                        "id": 5,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_in_max_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgJoinSwapShareAmountOutResponse": Object {
+                    "fields": Object {
+                      "tokenInAmount": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_in_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgSwapExactAmountIn": Object {
+                    "fields": Object {
+                      "routes": Object {
+                        "comment": null,
+                        "id": 2,
+                        "options": Object {
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "SwapAmountInRoute",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "local",
+                        "type": "SwapAmountInRoute",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenIn": Object {
+                        "comment": null,
+                        "id": 3,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_in",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                      "tokenOutMinAmount": Object {
+                        "comment": null,
+                        "id": 4,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_out_min_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgSwapExactAmountInResponse": Object {
+                    "fields": Object {
+                      "tokenOutAmount": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_out_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgSwapExactAmountOut": Object {
+                    "fields": Object {
+                      "routes": Object {
+                        "comment": null,
+                        "id": 2,
+                        "options": Object {
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "SwapAmountOutRoute",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scopeType": "local",
+                        "type": "SwapAmountOutRoute",
+                      },
+                      "sender": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:sender",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenInMaxAmount": Object {
+                        "comment": null,
+                        "id": 3,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_in_max_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                      "tokenOut": Object {
+                        "comment": null,
+                        "id": 4,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_out",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "MsgSwapExactAmountOutResponse": Object {
+                    "fields": Object {
+                      "tokenInAmount": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:token_in_amount",
+                          "(gogoproto.nullable)": false,
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "SwapAmountInRoute": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "tokenOutDenom": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_out_denom",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
+                  },
+                  "SwapAmountOutRoute": Object {
+                    "fields": Object {
+                      "poolId": Object {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:pool_id",
+                        },
+                        "parsedType": Object {
+                          "name": "uint64",
+                          "type": "native",
+                        },
+                        "type": "uint64",
+                      },
+                      "tokenInDenom": Object {
+                        "comment": null,
+                        "id": 2,
+                        "isScalar": true,
+                        "options": Object {
+                          "(gogoproto.moretags)": "yaml:token_out_denom",
+                        },
+                        "parsedType": Object {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                      },
+                    },
+                    "options": undefined,
+                    "type": "Type",
                   },
                 },
               },

@@ -17,6 +17,11 @@ export interface ProtoType {
 }
 
 export interface ProtoField {
+    parsedType?: {
+        name: string;
+        type: string;
+    },
+
     keyType?: string;
     rule?: string;
     type: string;

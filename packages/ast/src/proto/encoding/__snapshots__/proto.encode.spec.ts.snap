@@ -1,5 +1,1027 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AuxSignerData 1`] = `
+"export const MsgJoinPool = {
+  encode(message: AuxSignerData, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): AuxSignerData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuxSignerData();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): AuxSignerData {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: AuxSignerData): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<AuxSignerData>, I>>(object: I): AuxSignerData {
+    const message = createBaseAuxSignerData();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`MsgJoinPool 1`] = `
+"export const MsgJoinPool = {
+  encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): MsgJoinPool {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgJoinPool();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgJoinPool {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: MsgJoinPool): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgJoinPool>, I>>(object: I): MsgJoinPool {
+    const message = createBaseMsgJoinPool();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`PinCodesProposal 1`] = `
+"export const MsgJoinPool = {
+  encode(message: PinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): PinCodesProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePinCodesProposal();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): PinCodesProposal {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: PinCodesProposal): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PinCodesProposal>, I>>(object: I): PinCodesProposal {
+    const message = createBasePinCodesProposal();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`QueryRawContractStateRequest 1`] = `
+"export const MsgJoinPool = {
+  encode(message: QueryRawContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryRawContractStateRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryRawContractStateRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryRawContractStateRequest {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryRawContractStateRequest): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryRawContractStateRequest>, I>>(object: I): QueryRawContractStateRequest {
+    const message = createBaseQueryRawContractStateRequest();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`QueryRawContractStateRequest 2`] = `
+"export const MsgJoinPool = {
+  encode(message: QueryRawContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryRawContractStateRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryRawContractStateRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryRawContractStateRequest {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryRawContractStateRequest): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryRawContractStateRequest>, I>>(object: I): QueryRawContractStateRequest {
+    const message = createBaseQueryRawContractStateRequest();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`SignDocDirectAux 1`] = `
+"export const MsgJoinPool = {
+  encode(message: SignDocDirectAux, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): SignDocDirectAux {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSignDocDirectAux();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): SignDocDirectAux {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: SignDocDirectAux): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<SignDocDirectAux>, I>>(object: I): SignDocDirectAux {
+    const message = createBaseSignDocDirectAux();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`SignatureDescriptors 1`] = `
+"export const MsgJoinPool = {
+  encode(message: SignatureDescriptors, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.queryData.length !== 0) {
+      writer.uint32(18).bytes(message.queryData);
+    }
+
+    writer.uint32(10).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): SignatureDescriptors {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSignatureDescriptors();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 2:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 333:
+          message.queryData = reader.bytes();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): SignatureDescriptors {
+    return {
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: SignatureDescriptors): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<SignatureDescriptors>, I>>(object: I): SignatureDescriptors {
+    const message = createBaseSignatureDescriptors();
+    message.sender = object.sender ?? \\"\\";
+    message.queryData = object.queryData ?? new Uint8Array();
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
 exports[`createProtoObjectWithMethods 1`] = `
 "export const MsgJoinPool = {
   encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {

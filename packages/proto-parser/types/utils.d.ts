@@ -23,3 +23,10 @@ export declare const traverse: (store: ProtoStore, root: ProtoRoot) => ProtoRoot
     parsedImports: Record<string, string[]>;
 };
 export declare const recursiveTraversal: (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => any;
+export declare const instanceType: (obj: any) => {
+    type: string;
+    name?: undefined;
+} | {
+    name: any;
+    type: string;
+};

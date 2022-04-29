@@ -183,12 +183,27 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
         const field = obj.fields[key];
         let found: any = null;
 
+        switch (field.type) {
+            case 'string':
+            case 'uint64':
+            case 'int64':
+            case 'bytes':
+                m[key] = {
+                    parsedType: { name: field.type, type: 'native' },
+                    isScalar: true,
+                    ...field.toJSON({ keepComments: true })
+                }
+                return m;
+            default:
+        }
+
         found = importLookup(store, root, field.type);
         if (found) {
-            console.log('IMPORT LOOKUP', field.type)
             imports[found.import] = imports[found.import] || [];
             imports[found.import] = [...new Set([...imports[found.import], found.importedName])];
             m[key] = {
+                parsedType: instanceType(found.obj),
+                scopeType: 'import',
                 ...field.toJSON({ keepComments: true }),
                 importedName: found.importedName,
                 import: found.import,
@@ -201,6 +216,9 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
             imports[found.import] = imports[found.import] || [];
             imports[found.import] = [...new Set([...imports[found.import], found.importedName])];
             m[key] = {
+
+                parsedType: instanceType(found.obj),
+                scopeType: 'protoImport',
                 ...field.toJSON({ keepComments: true }),
                 importedName: found.importedName,
                 import: found.import,
@@ -211,6 +229,8 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
         found = lookup(store, root, field.type);
         if (found) {
             m[key] = {
+                scopeType: 'local',
+                parsedType: instanceType(found),
                 ...field.toJSON({ keepComments: true }),
             };
             return m;
@@ -222,21 +242,24 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
 
 const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
     return {
+        type: 'Type',
         options: obj.options,
         fields: parseFields(store, root, obj, imports)
     }
+};
 
-
-    let result: any = lookup(store, root, obj.type);
-    if (result) {
-        return {
-            lookup: true,
-            result,
-            name: obj.name,
-            json: obj.toJSON({ keepComments: true })
-        };
+const parseEnum = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    return {
+        type: 'Enum',
+        ...obj.toJSON({ keepComments: true })
     }
-    return result;
+};
+
+const parseService = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    return {
+        type: 'Service',
+        ...obj.toJSON({ keepComments: true })
+    }
 };
 
 export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
@@ -244,10 +267,10 @@ export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any,
         return parseType(store, root, obj, imports);
     }
     if (obj instanceof Enum) {
-        return 'Enum';
+        return parseEnum(store, root, obj, imports);
     }
     if (obj instanceof Service) {
-        return 'Service';
+        return parseService(store, root, obj, imports);
     }
     if (obj instanceof Root || obj instanceof Namespace) {
         if (obj.nested) {
@@ -260,4 +283,65 @@ export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any,
         }
     }
     throw new Error('recursiveTraversal() cannot find protobufjs Type')
+};
+
+export const instanceType = (obj: any) => {
+    if (obj instanceof Type) {
+        return {
+            name: obj.name,
+            type: 'Type'
+        };
+    }
+    if (obj instanceof Enum) {
+        return {
+            name: obj.name,
+            type: 'Enum'
+        };
+    }
+    if (obj instanceof Service) {
+        return {
+            name: obj.name,
+            type: 'Service'
+        };
+    }
+    if (obj instanceof Root) {
+        return {
+            type: 'Root'
+        };
+    }
+    if (obj instanceof Namespace) {
+        return {
+            type: 'Namespace'
+        };
+    }
+    // if (obj.name === 'Timestamp') {
+    //     return {
+    //         name: obj.name,
+    //         type: 'google'
+    //     };
+    // }
+    // if (obj.name === 'Duration') {
+    //     return {
+    //         name: obj.name,
+    //         type: 'google'
+    //     };
+    // }
+    if (obj.name.match(/^[a-z]/)) {
+        throw new Error('instanceType() cannot find protobufjs Type')
+    }
+    // duck typing... 
+    // TODO why did we loose instance tyeps/names?
+    if (obj.fields) {
+        return {
+            name: obj.name,
+            type: 'Type'
+        };
+    }
+    if (obj.values) {
+        return {
+            name: obj.name,
+            type: 'Enum'
+        };
+    }
+    throw new Error('instanceType() cannot find protobufjs Type')
 };
