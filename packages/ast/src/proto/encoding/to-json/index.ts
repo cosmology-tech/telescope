@@ -15,9 +15,12 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
                 case 'string':
                     return needsImplementation(fieldName, field);
                 case 'uint64':
-                    return [...m, toJSON.array(fieldName, arrayTypes.long())];
+                    return [...m, toJSON.array(fieldName, arrayTypes.uint64())];
                 case 'int64':
-                    return needsImplementation(fieldName, field);
+                    return [...m, toJSON.array(fieldName, arrayTypes.int64())];
+                case 'uint32':
+                case 'int32':
+                    return [...m, toJSON.array(fieldName, arrayTypes.number())];
                 case 'bytes':
                     return needsImplementation(fieldName, field);
                 default:
@@ -35,6 +38,9 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
             switch (field.keyType) {
                 case 'string':
                 case 'int64':
+                case 'uint64':
+                case 'int32':
+                case 'uint32':
                     return [...m, ...toJSON.keyHash(fieldName, field.keyType, field.parsedType.name)];
                 default:
                     return needsImplementation(fieldName, field);

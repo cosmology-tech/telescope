@@ -101,6 +101,16 @@ export const baseTypes = {
         );
     },
 
+    int32() {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('int32')
+            ),
+            []
+        );
+    },
+
     // message.poolId = (reader.uint64() as Long);
     long() {
         return t.tsAsExpression(
@@ -225,7 +235,7 @@ export const baseTypes = {
                 'const',
                 [
                     t.variableDeclarator(
-                        t.identifier('entry13TODO'),
+                        t.identifier('entry123'),
                         t.callExpression(
                             t.memberExpression(
                                 t.identifier(`${name}_${pascal(prop)}Entry`),
@@ -249,7 +259,7 @@ export const baseTypes = {
                 t.binaryExpression(
                     '!==',
                     t.memberExpression(
-                        t.identifier('entry13TODO'),
+                        t.identifier('entry123'),
                         t.identifier('value')
                     ),
                     t.identifier('undefined')
@@ -264,13 +274,13 @@ export const baseTypes = {
                                     t.identifier('labels')
                                 ),
                                 t.memberExpression(
-                                    t.identifier('entry13TODO'),
+                                    t.identifier('entry123'),
                                     t.identifier('key')
                                 ),
                                 true
                             ),
                             t.memberExpression(
-                                t.identifier('entry13TODO'),
+                                t.identifier('entry123'),
                                 t.identifier('value')
                             )
                         )

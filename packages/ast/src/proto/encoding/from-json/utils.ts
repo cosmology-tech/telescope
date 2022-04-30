@@ -31,6 +31,33 @@ export const fromJSON = {
         )
     },
 
+    number(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.numericLiteral(0)
+            )
+        )
+    },
+
 
     // doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
     double(prop: string) {
@@ -357,9 +384,16 @@ export const fromJSON = {
 
     keyHash(prop: string, keyType: string, valueType: string) {
         let fromJSON = null;
+        let valueTypeType = valueType;
         switch (valueType) {
             case 'string':
                 fromJSON = t.identifier('String');
+                break;
+            case 'int32':
+            case 'uint32':
+                // is this right?
+                valueTypeType = 'number';
+                fromJSON = t.identifier('Number');
                 break;
             default:
                 fromJSON = t.memberExpression(
@@ -376,6 +410,7 @@ export const fromJSON = {
                 keyTypeType = t.tsStringKeyword();
                 break;
             case 'int64':
+            case 'uint64':
                 wrapKey = (a) => t.callExpression(
                     t.identifier('Number'),
                     [
@@ -383,6 +418,16 @@ export const fromJSON = {
                     ]
                 );
                 keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                break;
+            case 'uint32':
+            case 'int32':
+                wrapKey = (a) => t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        a
+                    ]
+                );
+                keyTypeType = t.tsTypeReference(t.identifier('number'));
                 break;
             default:
                 throw new Error('keyHash requires new type. Ask maintainers.');
@@ -465,7 +510,7 @@ export const fromJSON = {
                                         ],
                                         t.tsTypeAnnotation(
                                             t.tsTypeReference(
-                                                t.identifier(valueType)
+                                                t.identifier(valueTypeType)
                                             )
                                         )
                                     )
@@ -532,6 +577,14 @@ export const arrayTypes = {
                 t.identifier('Long'),
                 t.identifier('fromString')
             ),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+    number() {
+        return t.callExpression(
+            t.identifier('Number'),
             [
                 t.identifier('e')
             ]

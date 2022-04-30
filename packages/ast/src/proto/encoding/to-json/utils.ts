@@ -420,6 +420,18 @@ export const toJSON = {
             case 'string':
                 toJSON = a => a;
                 break;
+            case 'uint32':
+            case 'int32':
+                toJSON = a => t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Math'),
+                        t.identifier('round')
+                    ),
+                    [
+                        a
+                    ]
+                )
+                break;
             default:
                 toJSON = a => t.callExpression(
                     t.memberExpression(
@@ -567,7 +579,7 @@ export const arrayTypes = {
     //     obj.codeIds = [];
     // }
 
-    long() {
+    uint64() {
         return t.callExpression(
             t.memberExpression(
                 t.logicalExpression(
@@ -575,12 +587,47 @@ export const arrayTypes = {
                     t.identifier('e'),
                     t.memberExpression(
                         t.identifier('Long'),
-                        t.identifier('UZERO')
+                        t.identifier('ZERO')
                     )
                 ),
                 t.identifier('toString')
             ),
             []
+        )
+    },
+
+    int64() {
+        return t.callExpression(
+            t.memberExpression(
+                t.logicalExpression(
+                    '||',
+                    t.identifier('e'),
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('ZERO')
+                    )
+                ),
+                t.identifier('toString')
+            ),
+            []
+        )
+    },
+
+    //   if (message.lineOffsets) {
+    //     obj.lineOffsets = message.lineOffsets.map(e => Math.round(e));
+    //   } else {
+    //     obj.lineOffsets = [];
+    //   }
+
+    number() {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('Math'),
+                t.identifier('round')
+            ),
+            [
+                t.identifier('e')
+            ]
         )
     },
 

@@ -694,5 +694,18 @@ export const arrayTypes = {
                 ]
             )
         );
+    },
+    int32() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('int32')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
     }
 };

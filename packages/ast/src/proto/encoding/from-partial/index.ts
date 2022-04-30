@@ -16,9 +16,11 @@ export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => 
                 case 'string':
                     return needsImplementation(fieldName, field);
                 case 'uint64':
-                    return fromPartial.array(fieldName, arrayTypes.long());
                 case 'int64':
-                    return needsImplementation(fieldName, field);
+                    return fromPartial.array(fieldName, arrayTypes.long());
+                case 'uint32':
+                case 'int32':
+                    return fromPartial.array(fieldName, arrayTypes.number());
                 case 'bytes':
                     return needsImplementation(fieldName, field);
                 default:
@@ -36,6 +38,9 @@ export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => 
             switch (field.keyType) {
                 case 'string':
                 case 'int64':
+                case 'uint64':
+                case 'int32':
+                case 'uint32':
                     return fromPartial.keyHash(fieldName, field.keyType, field.parsedType.name);
                 default:
                     return needsImplementation(fieldName, field);

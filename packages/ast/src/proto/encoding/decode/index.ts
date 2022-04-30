@@ -16,6 +16,8 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
                     return needsImplementation(fieldName, field);
                 case 'uint64':
                     return decode.scalarArray(field.id, fieldName, baseTypes.long());
+                case 'int32':
+                    return decode.scalarArray(field.id, fieldName, baseTypes.int32());
                 case 'int64':
                     return needsImplementation(fieldName, field);
                 case 'bytes':

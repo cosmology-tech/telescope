@@ -16,6 +16,9 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
                     return needsImplementation(fieldName, field);
                 case 'uint64':
                     return fromJSON.array(fieldName, arrayTypes.long());
+                case 'uint32':
+                case 'int32':
+                    return fromJSON.array(fieldName, arrayTypes.number());
                 case 'int64':
                     return needsImplementation(fieldName, field);
                 case 'bytes':
@@ -36,6 +39,9 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
             switch (field.keyType) {
                 case 'string':
                 case 'int64':
+                case 'uint64':
+                case 'int32':
+                case 'uint32':
                     return fromJSON.keyHash(fieldName, field.keyType, field.parsedType.name);
                 default:
                     return needsImplementation(fieldName, field);
@@ -52,6 +58,9 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
                 return fromJSON.double(fieldName);
             case 'int64':
                 return fromJSON.int64(fieldName);
+            case 'int32':
+            case 'uint32':
+                return fromJSON.number(fieldName);
             case 'bytes':
                 return fromJSON.bytes(fieldName);
             case 'bool':

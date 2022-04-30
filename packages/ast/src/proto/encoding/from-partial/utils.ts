@@ -327,9 +327,15 @@ export const fromPartial = {
 
     keyHash(prop: string, keyType: string, valueType: string) {
         let fromPartial = null;
+        let valueTypeType = valueType;
         switch (valueType) {
             case 'string':
                 fromPartial = t.identifier('String');
+                break;
+            case 'int32':
+            case 'uint32':
+                valueTypeType = 'number';
+                fromPartial = t.identifier('Number');
                 break;
             default:
                 fromPartial = t.memberExpression(
@@ -346,6 +352,7 @@ export const fromPartial = {
                 keyTypeType = t.tsStringKeyword();
                 break;
             case 'int64':
+            case 'uint64':
                 wrapKey = (a) => t.callExpression(
                     t.identifier('Number'),
                     [
@@ -353,6 +360,16 @@ export const fromPartial = {
                     ]
                 );
                 keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                break;
+            case 'int32':
+            case 'uint32':
+                wrapKey = (a) => t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        a
+                    ]
+                );
+                keyTypeType = t.tsNumberKeyword()
                 break;
             default:
                 throw new Error('keyHash requires new type. Ask maintainers.');
@@ -440,7 +457,7 @@ export const fromPartial = {
                                         ],
                                         t.tsTypeAnnotation(
                                             t.tsTypeReference(
-                                                t.identifier(valueType)
+                                                t.identifier(valueTypeType)
                                             )
                                         )
                                     )
@@ -506,6 +523,16 @@ export const arrayTypes = {
             ]
         );
     },
+
+    // message.lineOffsets = object.lineOffsets?.map(e => e) || [];
+
+    number() {
+        return t.callExpression(
+            t.identifier('e'),
+            []
+        )
+    },
+
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     type(name: string) {
         return t.callExpression(

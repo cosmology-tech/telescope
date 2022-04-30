@@ -125,6 +125,14 @@ describe('google/api/expr/v1alpha1/checked', () => {
     })
 });
 
+it('google/api/expr/v1beta1/source', () => {
+    const ref = store.findProto('google/api/expr/v1beta1/source.proto');
+    const res = traverse(store, ref.proto);
+    expectCode(createProtoObjectWithMethods(
+        'SourceInfo', getNestedProto(res).SourceInfo
+    ))
+});
+
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref.proto);

@@ -17,6 +17,8 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                     return needsImplementation(fieldName, field);
                 case 'uint64':
                     return [...m, ...encode.scalarArray(getTagNumber(field), fieldName, arrayTypes.long())];
+                case 'int32':
+                    return [...m, ...encode.scalarArray(getTagNumber(field), fieldName, arrayTypes.int32())];
                 case 'int64':
                     return needsImplementation(fieldName, field);
                 case 'bytes':
