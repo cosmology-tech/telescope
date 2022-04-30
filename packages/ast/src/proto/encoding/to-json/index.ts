@@ -8,14 +8,14 @@ const needsImplementation = (name: string, field: ProtoField) => {
 }
 
 export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
-    const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
+    const fields = Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
         const field = proto.fields[fieldName];
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
                     return needsImplementation(fieldName, field);
                 case 'uint64':
-                    return toJSON.array(fieldName, arrayTypes.long());
+                    return [...m, toJSON.array(fieldName, arrayTypes.long())];
                 case 'int64':
                     return needsImplementation(fieldName, field);
                 case 'bytes':
@@ -24,7 +24,7 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
                     switch (field.parsedType.type) {
                         case 'Enum':
                         case 'Type':
-                            return toJSON.array(fieldName, arrayTypes.type(getFieldsTypeName(field)));
+                            return [...m, toJSON.array(fieldName, arrayTypes.type(getFieldsTypeName(field)))];
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -32,39 +32,45 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
         }
 
         if (field.keyType) {
-            return toJSON.keyHash(fieldName, name);
+            switch (field.keyType) {
+                case 'string':
+                case 'int64':
+                    return [...m, ...toJSON.keyHash(fieldName, field.keyType, field.parsedType.name)];
+                default:
+                    return needsImplementation(fieldName, field);
+            }
         }
 
         switch (field.type) {
             case 'string':
-                return toJSON.string(fieldName);
+                return [...m, toJSON.string(fieldName)];
             case 'uint64':
-                return toJSON.long(fieldName);
-            // return toJSON.uint64(fieldName);
+                return [...m, toJSON.long(fieldName)];
+            // return [...m, toJSON.uint64(fieldName)];
             case 'int64':
-                return toJSON.int64(fieldName);
+                return [...m, toJSON.int64(fieldName)];
             case 'double':
-                return toJSON.double(fieldName);
+                return [...m, toJSON.double(fieldName)];
             case 'bytes':
-                return toJSON.bytes(fieldName);
+                return [...m, toJSON.bytes(fieldName)];
             case 'bool':
-                return toJSON.bool(fieldName);
+                return [...m, toJSON.bool(fieldName)];
             case 'google.protobuf.Duration':
             case 'Duration':
-                return toJSON.duration(fieldName);
+                return [...m, toJSON.duration(fieldName)];
             case 'google.protobuf.Timestamp':
             case 'Timestamp':
-                return toJSON.timestamp(fieldName);
+                return [...m, toJSON.timestamp(fieldName)];
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':
-                        return toJSON.enum(fieldName, getEnumToJsonName(getFieldsTypeName(field)));
+                        return [...m, toJSON.enum(fieldName, getEnumToJsonName(getFieldsTypeName(field)))];
                     case 'Type':
-                        return toJSON.type(fieldName, getFieldsTypeName(field));
+                        return [...m, toJSON.type(fieldName, getFieldsTypeName(field))];
                 }
                 return needsImplementation(fieldName, field);
         }
-    });
+    }, []);
     return fields;
 };
 

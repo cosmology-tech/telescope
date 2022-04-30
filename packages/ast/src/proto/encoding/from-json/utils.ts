@@ -340,15 +340,54 @@ export const fromJSON = {
         );
     },
 
-    // labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+    //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
     //     [key: string]: string;
     //   }>((acc, [key, value]) => {
     //     acc[key] = String(value);
     //     return acc;
     //   }, {}) : {},
 
+    //   referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
+    //     [key: Long]: Reference;
+    //   }>((acc, [key, value]) => {
+    //     acc[Number(key)] = Reference.fromJSON(value);
+    //     return acc;
+    //   }, {}) : {},
 
-    keyHash(prop: string, name: string) {
+
+    keyHash(prop: string, keyType: string, valueType: string) {
+        let fromJSON = null;
+        switch (valueType) {
+            case 'string':
+                fromJSON = t.identifier('String');
+                break;
+            default:
+                fromJSON = t.memberExpression(
+                    t.identifier(valueType),
+                    t.identifier('fromJSON')
+                );
+        }
+
+        let wrapKey = null;
+        let keyTypeType = null;
+        switch (keyType) {
+            case 'string':
+                wrapKey = (a) => a;
+                keyTypeType = t.tsStringKeyword();
+                break;
+            case 'int64':
+                wrapKey = (a) => t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        a
+                    ]
+                );
+                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                break;
+            default:
+                throw new Error('keyHash requires new type. Ask maintainers.');
+        }
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -394,11 +433,11 @@ export const fromJSON = {
                                         '=',
                                         t.memberExpression(
                                             t.identifier('acc'),
-                                            t.identifier('key'),
+                                            wrapKey(t.identifier('key')),
                                             true
                                         ),
                                         t.callExpression(
-                                            t.identifier('String'),
+                                            fromJSON,
                                             [
                                                 t.identifier('value')
                                             ]
@@ -421,11 +460,13 @@ export const fromJSON = {
                                     t.tsIndexSignature(
                                         [
                                             identifier('key', t.tsTypeAnnotation(
-                                                t.tsStringKeyword()
+                                                keyTypeType
                                             ))
                                         ],
                                         t.tsTypeAnnotation(
-                                            t.tsStringKeyword()
+                                            t.tsTypeReference(
+                                                t.identifier(valueType)
+                                            )
                                         )
                                     )
                                 ]

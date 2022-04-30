@@ -34,6 +34,7 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
         }
 
         if (field.keyType) {
+            // currently they all look the same for encode()
             return [...m, encode.keyHash(getTagNumber(field), fieldName, name)];
         }
 

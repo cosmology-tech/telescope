@@ -947,15 +947,15 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
-        [key: string]: string;
+        [key: Long]: Reference;
       }>((acc, [key, value]) => {
-        acc[key] = String(value);
+        acc[Number(key)] = Reference.fromJSON(value);
         return acc;
       }, {}) : {},
       typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
-        [key: string]: string;
+        [key: Long]: Type;
       }>((acc, [key, value]) => {
-        acc[key] = String(value);
+        acc[Number(key)] = Type.fromJSON(value);
         return acc;
       }, {}) : {},
       sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
@@ -966,16 +966,19 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 
   toJSON(message: CheckedExpr): unknown {
     const obj: any = {};
+    obj.referenceMap = {};
 
     if (message.referenceMap) {
       Object.entries(message.labels).forEach(([k, v]) => {
-        obj.referenceMap[k] = v;
+        obj.referenceMap[k] = Reference.toJSON(v);
       });
     }
 
+    obj.typeMap = {};
+
     if (message.typeMap) {
       Object.entries(message.labels).forEach(([k, v]) => {
-        obj.typeMap[k] = v;
+        obj.typeMap[k] = Type.toJSON(v);
       });
     }
 
@@ -1305,6 +1308,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.httpRequest !== undefined && (obj.httpRequest = message.httpRequest ? HttpRequest.toJSON(message.httpRequest) : undefined);
     message.trace !== undefined && (obj.trace = message.trace);
     message.insertId !== undefined && (obj.insertId = message.insertId);
+    obj.labels = {};
 
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {

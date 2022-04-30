@@ -30,11 +30,16 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
                     }
                     return needsImplementation(fieldName, field);
             }
-
         }
 
         if (field.keyType) {
-            return fromJSON.keyHash(fieldName, name);
+            switch (field.keyType) {
+                case 'string':
+                case 'int64':
+                    return fromJSON.keyHash(fieldName, field.keyType, field.parsedType.name);
+                default:
+                    return needsImplementation(fieldName, field);
+            }
         }
 
         switch (field.type) {

@@ -116,6 +116,13 @@ describe('google/api/expr/v1alpha1/checked', () => {
             ))
         })
     })
+    describe('typeHash (Long)', () => {
+        it('CheckedExpr', () => {
+            expectCode(createProtoObjectWithMethods(
+                'CheckedExpr', getNestedProto(res).CheckedExpr
+            ))
+        })
+    })
 });
 
 it('cosmwasm/wasm/v1/proposal', () => {

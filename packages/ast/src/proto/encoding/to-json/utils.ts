@@ -396,68 +396,111 @@ export const toJSON = {
 
 
 
+    // obj.labels = {};
+
     //   if (message.labels) {
     //     Object.entries(message.labels).forEach(([k, v]) => {
     //       obj.labels[k] = v;
     //     });
     //   }
 
-    keyHash(prop: string, name: string) {
-        return t.ifStatement(
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(prop)
-            ),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('Object'),
-                                    t.identifier('entries')
-                                ),
-                                [
-                                    t.memberExpression(
-                                        t.identifier('message'),
-                                        t.identifier('labels')
-                                    )
-                                ]
-                            ),
-                            t.identifier('forEach')
-                        ),
-                        [
-                            t.arrowFunctionExpression(
-                                [
-                                    t.arrayPattern(
-                                        [
-                                            t.identifier('k'),
-                                            t.identifier('v')
-                                        ]
-                                    )
-                                ],
-                                t.blockStatement([
-                                    t.expressionStatement(
-                                        t.assignmentExpression(
-                                            '=',
-                                            t.memberExpression(
-                                                t.memberExpression(
-                                                    t.identifier('obj'),
-                                                    t.identifier(prop)
-                                                ),
-                                                t.identifier('k'),
-                                                true
-                                            ),
-                                            t.identifier('v')
-                                        )
-                                    )
-                                ])
-                            )
-                        ]
-                    )
+
+    // obj.typeMap = {};
+
+    // if (message.typeMap) {
+    //   Object.entries(message.typeMap).forEach(([k, v]) => {
+    //     obj.typeMap[k] = Type.toJSON(v);
+    //   });
+    // }
+
+    keyHash(prop: string, keyType: string, valueType: string) {
+
+        let toJSON = null;
+        switch (valueType) {
+            case 'string':
+                toJSON = a => a;
+                break;
+            default:
+                toJSON = a => t.callExpression(
+                    t.memberExpression(
+                        t.identifier(valueType),
+                        t.identifier('toJSON')
+                    ),
+                    [
+                        a
+                    ]
                 )
-            ])
-        )
+        }
+
+
+        return [
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.objectExpression([])
+                )
+            ),
+            //
+            t.ifStatement(
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('Object'),
+                                        t.identifier('entries')
+                                    ),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('labels')
+                                        )
+                                    ]
+                                ),
+                                t.identifier('forEach')
+                            ),
+                            [
+                                t.arrowFunctionExpression(
+                                    [
+                                        t.arrayPattern(
+                                            [
+                                                t.identifier('k'),
+                                                t.identifier('v')
+                                            ]
+                                        )
+                                    ],
+                                    t.blockStatement([
+                                        t.expressionStatement(
+                                            t.assignmentExpression(
+                                                '=',
+                                                t.memberExpression(
+                                                    t.memberExpression(
+                                                        t.identifier('obj'),
+                                                        t.identifier(prop)
+                                                    ),
+                                                    t.identifier('k'),
+                                                    true
+                                                ),
+                                                toJSON(t.identifier('v'))
+                                            )
+                                        )
+                                    ])
+                                )
+                            ]
+                        )
+                    )
+                ])
+            )
+        ]
     },
 
     // if (message.codeIds) {
