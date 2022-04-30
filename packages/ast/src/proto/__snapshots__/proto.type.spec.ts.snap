@@ -21,6 +21,26 @@ exports[`authz 1`] = `
 }"
 `;
 
+exports[`createCreateProtoType Grant 1`] = `
+"function createBaseGrant(): Grant {
+  return {
+    authorization: undefined,
+    expiration: undefined
+  };
+}"
+`;
+
+exports[`createCreateProtoType MsgJoinPool 1`] = `
+"function createBaseMsgJoinPool(): MsgJoinPool {
+  return {
+    sender: \\"\\",
+    poolId: Long.UZERO,
+    shareOutAmount: \\"\\",
+    tokenInMaxs: []
+  };
+}"
+`;
+
 exports[`oneofs Value 1`] = `
 "export interface Value {
   nullValue?: NullValue;

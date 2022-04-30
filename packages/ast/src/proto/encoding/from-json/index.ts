@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField, getEnumFromJsonName } from '../../types';
+import { ProtoType, ProtoField, getEnumFromJsonName, getFieldsTypeName } from '../../types';
 import { fromJSON, arrayTypes } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -26,7 +26,7 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
                             // could be same as Type likely...
                             return needsImplementation(fieldName, field);
                         case 'Type':
-                            return fromJSON.array(fieldName, arrayTypes.type(field.parsedType.name));
+                            return fromJSON.array(fieldName, arrayTypes.type(getFieldsTypeName(field)));
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -45,9 +45,9 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':
-                        return fromJSON.enum(fieldName, getEnumFromJsonName(field.parsedType.name));
+                        return fromJSON.enum(fieldName, getEnumFromJsonName(getFieldsTypeName(field)));
                     case 'Type':
-                        return fromJSON.type(fieldName, field.parsedType.name);
+                        return fromJSON.type(fieldName, getFieldsTypeName(field));
                 }
                 return needsImplementation(fieldName, field);
         }

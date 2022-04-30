@@ -17,6 +17,7 @@ export interface ProtoType {
 }
 
 export interface ProtoField {
+    scope?: string[];
     parsedType?: {
         name: string;
         type: string;
@@ -377,3 +378,10 @@ export const getEnumToJsonName = (name) => {
 export const getEnumFromJsonName = (name) => {
     return lowerFirst(name) + 'FromJSON';
 };
+
+export const getFieldsTypeName = (field: ProtoField) => {
+    if (field?.scope.length <= 1) return field.parsedType.name;
+    const [_first, ...rest] = field.scope;
+    return [...rest.reverse(), field.parsedType.name].join('_');
+
+}

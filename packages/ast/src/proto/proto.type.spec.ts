@@ -41,12 +41,12 @@ it('authz', async () => {
 
 describe('createCreateProtoType', () => {
     it('Grant', () => {
-        printCode(createCreateProtoType('Grant',
+        expectCode(createCreateProtoType('Grant',
             getNestedProto(authz).Grant
         ));
     });
     it('MsgJoinPool', () => {
-        printCode(createCreateProtoType('MsgJoinPool',
+        expectCode(createCreateProtoType('MsgJoinPool',
             getNestedProto(gamm).MsgJoinPool
         ));
     });

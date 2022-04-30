@@ -59,51 +59,43 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 };"
 `;
 
-exports[`cosmos/tx/v1beta1/tx 1`] = `
-"export const AuxSignerData = {
-  encode(message: AuxSignerData, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.address !== \\"\\") {
-      writer.uint32(10).string(message.address);
+exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
+"export const SignatureDescriptor = {
+  encode(message: SignatureDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.publicKey !== undefined) {
+      Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    if (message.data !== undefined) {
+      Data.encode(message.data, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.mode !== 0) {
-      writer.uint32(24).int32(message.mode);
-    }
-
-    if (message.sig.length !== 0) {
-      writer.uint32(34).bytes(message.sig);
+    if (!message.sequence.isZero()) {
+      writer.uint32(24).uint64(message.sequence);
     }
 
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuxSignerData {
+  decode(input: _m0.Reader | Uint8Array): SignatureDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAuxSignerData();
+    const message = createBaseSignatureDescriptor();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
 
       switch (tag >>> 3) {
         case 1:
-          message.address = reader.string();
+          message.publicKey = Any.decode(reader, reader.uint32());
           break;
 
         case 2:
-          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          message.data = Data.decode(reader, reader.uint32());
           break;
 
         case 3:
-          message.mode = (reader.int32() as any);
-          break;
-
-        case 4:
-          message.sig = reader.bytes();
+          message.sequence = (reader.uint64() as Long);
           break;
 
         default:
@@ -115,30 +107,86 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
     return message;
   },
 
-  fromJSON(object: any): AuxSignerData {
+  fromJSON(object: any): SignatureDescriptor {
     return {
-      address: isSet(object.address) ? String(object.address) : \\"\\",
-      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
+      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
+      data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
+      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
     };
   },
 
-  toJSON(message: AuxSignerData): unknown {
+  toJSON(message: SignatureDescriptor): unknown {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
-    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig !== undefined ? message.sig : new Uint8Array()));
+    message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
+    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuxSignerData>, I>>(object: I): AuxSignerData {
-    const message = createBaseAuxSignerData();
-    message.address = object.address ?? \\"\\";
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
-    message.sig = object.sig ?? new Uint8Array();
+  fromPartial<I extends Exact<DeepPartial<SignatureDescriptor>, I>>(object: I): SignatureDescriptor {
+    const message = createBaseSignatureDescriptor();
+    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
+    message.data = object.data !== undefined && object.data !== null ? Data.fromPartial(object.data) : undefined;
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    return message;
+  }
+
+};"
+`;
+
+exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
+"export const SignatureDescriptors = {
+  encode(message: SignatureDescriptors, writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.signatures) {
+      SignatureDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): SignatureDescriptors {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSignatureDescriptors();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.signatures.push(SignatureDescriptor.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): SignatureDescriptors {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: SignatureDescriptors): unknown {
+    const obj: any = {};
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toJSON(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<SignatureDescriptors>, I>>(object: I): SignatureDescriptors {
+    const message = createBaseSignatureDescriptors();
+    message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
   }
 
@@ -273,15 +321,15 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
 
   fromJSON(object: any): ModeInfo_Multi {
     return {
-      single: isSet(object.single) ? Single.fromJSON(object.single) : undefined,
-      multi: isSet(object.multi) ? Multi.fromJSON(object.multi) : undefined
+      single: isSet(object.single) ? ModeInfo_Single.fromJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
     };
   },
 
   toJSON(message: ModeInfo_Multi): unknown {
     const obj: any = {};
-    message.single !== undefined && (obj.single = message.single ? Single.toJSON(message.single) : undefined);
-    message.multi !== undefined && (obj.multi = message.multi ? Multi.toJSON(message.multi) : undefined);
+    message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toJSON(message.single) : undefined);
+    message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toJSON(message.multi) : undefined);
     return obj;
   },
 

@@ -177,24 +177,40 @@ export const traverse = (store: ProtoStore, root: ProtoRoot) => {
     return obj;
 };
 
+
+const NATIVE_TYPES = [
+    "double",   // 0
+    "float",    // 1
+    "int32",    // 2
+    "uint32",   // 3
+    "sint32",   // 4
+    "fixed32",  // 5
+    "sfixed32", // 6
+    "int64",    // 7
+    "uint64",   // 8
+    "sint64",   // 9
+    "fixed64",  // 10
+    "sfixed64", // 11
+    "bool",     // 12
+    "string",   // 13
+    "bytes"     // 14
+];
+
+
 const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
     return Object.keys(obj.fields).reduce((m, key) => {
 
         const field = obj.fields[key];
         let found: any = null;
 
-        switch (field.type) {
-            case 'string':
-            case 'uint64':
-            case 'int64':
-            case 'bytes':
-                m[key] = {
-                    parsedType: { name: field.type, type: 'native' },
-                    isScalar: true,
-                    ...field.toJSON({ keepComments: true })
-                }
-                return m;
-            default:
+        if (NATIVE_TYPES.includes(field.type)) {
+            m[key] = {
+                parsedType: { name: field.type, type: 'native' },
+                isScalar: true,
+                typeNum: NATIVE_TYPES.indexOf(field.type),
+                ...field.toJSON({ keepComments: true })
+            }
+            return m;
         }
 
         found = importLookup(store, root, field.type);
@@ -204,6 +220,7 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
             m[key] = {
                 parsedType: instanceType(found.obj),
                 scopeType: 'import',
+                scop: [found.obj.scope],
                 ...field.toJSON({ keepComments: true }),
                 importedName: found.importedName,
                 import: found.import,
@@ -219,6 +236,7 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
 
                 parsedType: instanceType(found.obj),
                 scopeType: 'protoImport',
+                scope: [found.package],
                 ...field.toJSON({ keepComments: true }),
                 importedName: found.importedName,
                 import: found.import,
@@ -229,7 +247,7 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
         found = lookup(store, root, field.type);
         if (found) {
             m[key] = {
-                scopeType: 'local',
+                scope: found.scope,
                 parsedType: instanceType(found),
                 ...field.toJSON({ keepComments: true }),
             };

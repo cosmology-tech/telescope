@@ -28,12 +28,19 @@ it('osmosis/gamm/v1beta1/tx', () => {
     ))
 });
 
-it('cosmos/tx/signing/v1beta1/signing', () => {
+describe('cosmos/tx/signing/v1beta1/signing', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
     const res = traverse(store, ref.proto);
-    expectCode(createProtoObjectWithMethods(
-        'SignatureDescriptors', getNestedProto(res).SignatureDescriptors
-    ))
+    it('SignatureDescriptors', () => {
+        expectCode(createProtoObjectWithMethods(
+            'SignatureDescriptors', getNestedProto(res).SignatureDescriptors
+        ))
+    })
+    it('SignatureDescriptor', () => {
+        expectCode(createProtoObjectWithMethods(
+            'SignatureDescriptor', getNestedProto(res).SignatureDescriptor
+        ))
+    })
 });
 
 describe('cosmos/tx/v1beta1/tx', () => {
@@ -44,9 +51,7 @@ describe('cosmos/tx/v1beta1/tx', () => {
             'AuxSignerData', getNestedProto(res).AuxSignerData
         ))
     })
-    // TODO
     it('ModeInfo_Multi', () => {
-        console.log(JSON.stringify(getNestedProto(res).ModeInfo, null, 2))
         expectCode(createProtoObjectWithMethods(
             'ModeInfo_Multi', getNestedProto(res).ModeInfo
         ))
