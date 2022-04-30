@@ -88,7 +88,7 @@ export const fromJSON = {
         )
     },
 
-    // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+    // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.UZERO,
     int64(prop: string) {
         return t.objectProperty(
             t.identifier(prop),
@@ -114,12 +114,15 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.identifier('undefined')
+                t.memberExpression(
+                    t.identifier('Long'),
+                    t.identifier('ZERO')
+                )
             )
         );
     },
 
-    // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+    // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
     uint64(prop: string) {
         return t.objectProperty(
             t.identifier(prop),
@@ -145,7 +148,10 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.identifier('undefined')
+                t.memberExpression(
+                    t.identifier('Long'),
+                    t.identifier('UZERO')
+                )
             )
         );
     },
@@ -273,6 +279,63 @@ export const fromJSON = {
                     t.identifier('Uint8Array'),
                     []
                 )
+            )
+        );
+    },
+
+    // period: isSet(object.period) ? String(object.period) : undefined,
+    duration(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.identifier('String'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        );
+    },
+
+    // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
+
+    timestamp(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.identifier('fromJsonTimestamp'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
             )
         );
     },

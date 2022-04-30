@@ -47,6 +47,12 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                 return [...m, encode.bool(getTagNumber(field), fieldName)];
             case 'bytes':
                 return [...m, encode.bytes(getTagNumber(field), fieldName)];
+            case 'Duration':
+            case 'google.protobuf.Duration':
+                return [...m, encode.duration(getTagNumber(field), fieldName)];
+            case 'Timestamp':
+            case 'google.protobuf.Timestamp':
+                return [...m, encode.timestamp(getTagNumber(field), fieldName)];
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':

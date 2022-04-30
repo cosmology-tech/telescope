@@ -330,6 +330,70 @@ export const toJSON = {
         );
     },
 
+    // message.period !== undefined && (obj.period = message.period);
+
+    duration(prop: string) {
+        return t.expressionStatement(
+            t.logicalExpression(
+                '&&',
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    )
+                )
+            )
+        );
+    },
+
+    // message.periodReset !== undefined && (obj.periodReset = message.periodReset.toISOString());
+
+    timestamp(prop: string) {
+        return t.expressionStatement(
+            t.logicalExpression(
+                '&&',
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            ),
+                            t.identifier('toISOString')
+                        ),
+                        []
+                    )
+                )
+            )
+        );
+    },
+
     // if (message.codeIds) {
     //     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
     // } else {

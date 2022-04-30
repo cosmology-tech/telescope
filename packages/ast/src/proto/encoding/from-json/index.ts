@@ -47,6 +47,12 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
                 return fromJSON.bytes(fieldName);
             case 'bool':
                 return fromJSON.bool(fieldName);
+            case 'Duration':
+            case 'google.protobuf.Duration':
+                return fromJSON.duration(fieldName);
+            case 'Timestamp':
+            case 'google.protobuf.Timestamp':
+                return fromJSON.timestamp(fieldName);
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':

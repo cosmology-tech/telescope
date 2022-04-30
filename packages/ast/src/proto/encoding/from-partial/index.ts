@@ -45,6 +45,12 @@ export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => 
                 return fromPartial.bytes(fieldName);
             case 'bool':
                 return fromPartial.bool(fieldName);
+            case 'google.protobuf.Duration':
+            case 'Duration':
+                return fromPartial.duration(fieldName);
+            case 'google.protobuf.Timestamp':
+            case 'Timestamp':
+                return fromPartial.timestamp(fieldName);
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':

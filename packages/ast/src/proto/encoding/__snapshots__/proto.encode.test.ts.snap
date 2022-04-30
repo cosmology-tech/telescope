@@ -896,14 +896,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       writer.uint32(58).bytes(message.bytesValue);
     }
 
-    if (message.durationValue !== undefined) {
-      Duration.encode(message.durationValue, writer.uint32(66).fork()).ldelim();
-    }
-
-    if (message.timestampValue !== undefined) {
-      Timestamp.encode(message.timestampValue, writer.uint32(74).fork()).ldelim();
-    }
-
+    if (message.durationValue !== undefined) Duration.encode(toDuration(message.durationValue), writer.uint32(66).fork()).ldelim();
+    if (message.timestampValue !== undefined) Timestamp.encode(toTimestamp(message.timestampValue), writer.uint32(74).fork()).ldelim();
     return writer;
   },
 
@@ -945,11 +939,11 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
           break;
 
         case 8:
-          message.durationValue = Duration.decode(reader, reader.uint32());
+          message.durationValue = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 9:
-          message.timestampValue = Timestamp.decode(reader, reader.uint32());
+          message.timestampValue = fromTimestamp(Timestampt.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -965,13 +959,13 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : 0,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.ZERO,
       uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.UZERO,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : \\"\\",
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : new Uint8Array(),
-      durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
-      timestampValue: isSet(object.timestampValue) ? Timestamp.fromJSON(object.timestampValue) : undefined
+      durationValue: isSet(object.durationValue) ? String(object.durationValue) : undefined,
+      timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
   },
 
@@ -984,8 +978,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : new Uint8Array()));
-    message.durationValue !== undefined && (obj.durationValue = message.durationValue ? Duration.toJSON(message.durationValue) : undefined);
-    message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue ? Timestamp.toJSON(message.timestampValue) : undefined);
+    message.durationValue !== undefined && (obj.durationValue = message.durationValue);
+    message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;
   },
 
@@ -993,13 +987,13 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? 0;
     message.boolValue = object.boolValue ?? false;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : Long.ZERO;
     message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : Long.UZERO;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? \\"\\";
     message.bytesValue = object.bytesValue ?? new Uint8Array();
-    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : undefined;
-    message.timestampValue = object.timestampValue !== undefined && object.timestampValue !== null ? Timestamp.fromPartial(object.timestampValue) : undefined;
+    message.durationValue = object.durationValue ?? undefined;
+    message.timestampValue = object.timestampValue ?? undefined;
     return message;
   }
 

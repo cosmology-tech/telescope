@@ -16,6 +16,12 @@ export const decode = {
     int64(num: number, prop: string) {
         return switchOnTag(num, prop, baseTypes.int64());
     },
+    duration(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.duration());
+    },
+    timestamp(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.timestamp());
+    },
     type(num: number, prop: string, name: string) {
         return switchOnTag(num, prop, baseTypes.type(name));
     },
@@ -149,7 +155,59 @@ export const baseTypes = {
             ),
             []
         );
-    }
+    },
+
+    // message.period = fromDuration(Duration.decode(reader, reader.uint32()));
+
+    duration() {
+        return t.callExpression(
+            t.identifier('fromDuration'),
+            [
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Duration'),
+                        t.identifier('decode')
+                    ),
+                    [
+                        t.identifier('reader'),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('reader'),
+                                t.identifier('uint32')
+                            ),
+                            []
+                        )
+                    ]
+                )
+            ]
+        )
+    },
+
+    // message.periodReset = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+
+    timestamp() {
+        return t.callExpression(
+            t.identifier('fromTimestamp'),
+            [
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Timestampt'),
+                        t.identifier('decode')
+                    ),
+                    [
+                        t.identifier('reader'),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('reader'),
+                                t.identifier('uint32')
+                            ),
+                            []
+                        )
+                    ]
+                )
+            ]
+        )
+    },
 
 };
 

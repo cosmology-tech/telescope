@@ -66,6 +66,7 @@ export const fromPartial = {
         );
     },
 
+
     // message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
     int64(prop: string) {
         return t.expressionStatement(
@@ -107,7 +108,10 @@ export const fromPartial = {
                             )
                         ]
                     ),
-                    t.identifier('undefined')
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('ZERO')
+                    )
                 )
             )
         );
@@ -255,6 +259,52 @@ export const fromPartial = {
             )
         );
     },
+
+    // message.period = object.period ?? undefined;
+
+    duration(prop: string) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.logicalExpression(
+                    '??',
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    // message.periodReset = object.periodReset ?? undefined;
+
+    timestamp(prop: string) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.logicalExpression(
+                    '??',
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+
 
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     array(prop: string, expr: t.Expression) {

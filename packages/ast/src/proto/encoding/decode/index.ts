@@ -44,6 +44,12 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
                 return decode.bytes(field.id, fieldName);
             case 'bool':
                 return decode.bool(field.id, fieldName);
+            case 'google.protobuf.Duration':
+            case 'Duration':
+                return decode.duration(field.id, fieldName);
+            case 'google.protobuf.Timestamp':
+            case 'Timestamp':
+                return decode.timestamp(field.id, fieldName);
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':

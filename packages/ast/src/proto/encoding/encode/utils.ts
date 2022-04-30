@@ -353,6 +353,120 @@ if (message.queryData.length !== 0) {
         );
     },
 
+    // if (message.periodReset !== undefined) {
+    //     Timestamp.encode(toTimestamp(message.periodReset), writer.uint32(18).fork()).ldelim();
+    //   }  
+
+    timestamp(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression(
+                '!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.identifier('undefined')
+            ),
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Timestamp'),
+                                t.identifier('encode')
+                            ),
+                            [
+                                t.callExpression(
+                                    t.identifier('toTimestamp'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier(prop)
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.callExpression(
+                                            t.memberExpression(
+                                                t.identifier('writer'),
+                                                t.identifier('uint32')
+                                            ),
+                                            [
+                                                t.numericLiteral(num)
+                                            ]
+                                        ),
+                                        t.identifier('fork')
+                                    ),
+                                    []
+                                )
+                            ]
+                        ),
+                        t.identifier('ldelim')
+                    ),
+                    []
+                )
+            )
+        );
+    },
+
+    // if (message.period !== undefined) {
+    //     Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
+    //   }
+
+    duration(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression(
+                '!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.identifier('undefined')
+            ),
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Duration'),
+                                t.identifier('encode')
+                            ),
+                            [
+                                t.callExpression(
+                                    t.identifier('toDuration'),
+                                    [
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier(prop)
+                                        )
+                                    ]
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.callExpression(
+                                            t.memberExpression(
+                                                t.identifier('writer'),
+                                                t.identifier('uint32')
+                                            ),
+                                            [
+                                                t.numericLiteral(num)
+                                            ]
+                                        ),
+                                        t.identifier('fork')
+                                    ),
+                                    []
+                                )
+                            ]
+                        ),
+                        t.identifier('ldelim')
+                    ),
+                    []
+                )
+            )
+        );
+    },
+
     /*
     
                 ARRAY!
