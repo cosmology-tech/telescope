@@ -1,5 +1,776 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`google/api/expr/v1alpha1/checked Decl 1`] = `
+Object {
+  "FunctionDecl": Object {
+    "fields": Object {
+      "overloads": Object {
+        "id": 1,
+        "rule": "repeated",
+        "type": "Overload",
+      },
+    },
+    "nested": Object {
+      "Overload": Object {
+        "fields": Object {
+          "doc": Object {
+            "id": 6,
+            "type": "string",
+          },
+          "isInstanceFunction": Object {
+            "id": 5,
+            "type": "bool",
+          },
+          "overloadId": Object {
+            "id": 1,
+            "type": "string",
+          },
+          "params": Object {
+            "id": 2,
+            "rule": "repeated",
+            "type": "Type",
+          },
+          "resultType": Object {
+            "id": 4,
+            "type": "Type",
+          },
+          "typeParams": Object {
+            "id": 3,
+            "rule": "repeated",
+            "type": "string",
+          },
+        },
+      },
+    },
+  },
+  "IdentDecl": Object {
+    "fields": Object {
+      "doc": Object {
+        "id": 3,
+        "type": "string",
+      },
+      "type": Object {
+        "id": 1,
+        "type": "Type",
+      },
+      "value": Object {
+        "id": 2,
+        "type": "Constant",
+      },
+    },
+  },
+  "_ctor": null,
+  "_fieldsArray": null,
+  "_fieldsById": null,
+  "_nestedArray": Array [
+    Object {
+      "fields": Object {
+        "doc": Object {
+          "id": 3,
+          "type": "string",
+        },
+        "type": Object {
+          "id": 1,
+          "type": "Type",
+        },
+        "value": Object {
+          "id": 2,
+          "type": "Constant",
+        },
+      },
+    },
+    Object {
+      "fields": Object {
+        "overloads": Object {
+          "id": 1,
+          "rule": "repeated",
+          "type": "Overload",
+        },
+      },
+      "nested": Object {
+        "Overload": Object {
+          "fields": Object {
+            "doc": Object {
+              "id": 6,
+              "type": "string",
+            },
+            "isInstanceFunction": Object {
+              "id": 5,
+              "type": "bool",
+            },
+            "overloadId": Object {
+              "id": 1,
+              "type": "string",
+            },
+            "params": Object {
+              "id": 2,
+              "rule": "repeated",
+              "type": "Type",
+            },
+            "resultType": Object {
+              "id": 4,
+              "type": "Type",
+            },
+            "typeParams": Object {
+              "id": 3,
+              "rule": "repeated",
+              "type": "string",
+            },
+          },
+        },
+      },
+    },
+  ],
+  "_oneofsArray": null,
+  "comment": "Represents a declaration of a named value or function.
+
+A declaration is part of the contract between the expression, the agent
+evaluating that expression, and the caller requesting evaluation.",
+  "extensions": undefined,
+  "fields": Object {
+    "function": Object {
+      "id": 3,
+      "type": "FunctionDecl",
+    },
+    "ident": Object {
+      "id": 2,
+      "type": "IdentDecl",
+    },
+    "name": Object {
+      "id": 1,
+      "type": "string",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "Decl",
+  "nested": Object {
+    "FunctionDecl": Object {
+      "fields": Object {
+        "overloads": Object {
+          "id": 1,
+          "rule": "repeated",
+          "type": "Overload",
+        },
+      },
+      "nested": Object {
+        "Overload": Object {
+          "fields": Object {
+            "doc": Object {
+              "id": 6,
+              "type": "string",
+            },
+            "isInstanceFunction": Object {
+              "id": 5,
+              "type": "bool",
+            },
+            "overloadId": Object {
+              "id": 1,
+              "type": "string",
+            },
+            "params": Object {
+              "id": 2,
+              "rule": "repeated",
+              "type": "Type",
+            },
+            "resultType": Object {
+              "id": 4,
+              "type": "Type",
+            },
+            "typeParams": Object {
+              "id": 3,
+              "rule": "repeated",
+              "type": "string",
+            },
+          },
+        },
+      },
+    },
+    "IdentDecl": Object {
+      "fields": Object {
+        "doc": Object {
+          "id": 3,
+          "type": "string",
+        },
+        "type": Object {
+          "id": 1,
+          "type": "Type",
+        },
+        "value": Object {
+          "id": 2,
+          "type": "Constant",
+        },
+      },
+    },
+  },
+  "oneofs": Object {
+    "declKind": Object {
+      "oneof": Array [
+        "ident",
+        "function",
+      ],
+    },
+  },
+  "options": undefined,
+  "parent": Object {
+    "nested": Object {
+      "CheckedExpr": Object {
+        "fields": Object {
+          "expr": Object {
+            "id": 4,
+            "type": "Expr",
+          },
+          "exprVersion": Object {
+            "id": 6,
+            "type": "string",
+          },
+          "referenceMap": Object {
+            "id": 2,
+            "keyType": "int64",
+            "type": "Reference",
+          },
+          "sourceInfo": Object {
+            "id": 5,
+            "type": "SourceInfo",
+          },
+          "typeMap": Object {
+            "id": 3,
+            "keyType": "int64",
+            "type": "Type",
+          },
+        },
+      },
+      "Decl": Object {
+        "fields": Object {
+          "function": Object {
+            "id": 3,
+            "type": "FunctionDecl",
+          },
+          "ident": Object {
+            "id": 2,
+            "type": "IdentDecl",
+          },
+          "name": Object {
+            "id": 1,
+            "type": "string",
+          },
+        },
+        "nested": Object {
+          "FunctionDecl": Object {
+            "fields": Object {
+              "overloads": Object {
+                "id": 1,
+                "rule": "repeated",
+                "type": "Overload",
+              },
+            },
+            "nested": Object {
+              "Overload": Object {
+                "fields": Object {
+                  "doc": Object {
+                    "id": 6,
+                    "type": "string",
+                  },
+                  "isInstanceFunction": Object {
+                    "id": 5,
+                    "type": "bool",
+                  },
+                  "overloadId": Object {
+                    "id": 1,
+                    "type": "string",
+                  },
+                  "params": Object {
+                    "id": 2,
+                    "rule": "repeated",
+                    "type": "Type",
+                  },
+                  "resultType": Object {
+                    "id": 4,
+                    "type": "Type",
+                  },
+                  "typeParams": Object {
+                    "id": 3,
+                    "rule": "repeated",
+                    "type": "string",
+                  },
+                },
+              },
+            },
+          },
+          "IdentDecl": Object {
+            "fields": Object {
+              "doc": Object {
+                "id": 3,
+                "type": "string",
+              },
+              "type": Object {
+                "id": 1,
+                "type": "Type",
+              },
+              "value": Object {
+                "id": 2,
+                "type": "Constant",
+              },
+            },
+          },
+        },
+        "oneofs": Object {
+          "declKind": Object {
+            "oneof": Array [
+              "ident",
+              "function",
+            ],
+          },
+        },
+      },
+      "Reference": Object {
+        "fields": Object {
+          "name": Object {
+            "id": 1,
+            "type": "string",
+          },
+          "overloadId": Object {
+            "id": 3,
+            "rule": "repeated",
+            "type": "string",
+          },
+          "value": Object {
+            "id": 4,
+            "type": "Constant",
+          },
+        },
+      },
+      "Type": Object {
+        "fields": Object {
+          "abstractType": Object {
+            "id": 14,
+            "type": "AbstractType",
+          },
+          "dyn": Object {
+            "id": 1,
+            "type": "google.protobuf.Empty",
+          },
+          "error": Object {
+            "id": 12,
+            "type": "google.protobuf.Empty",
+          },
+          "function": Object {
+            "id": 8,
+            "type": "FunctionType",
+          },
+          "listType": Object {
+            "id": 6,
+            "type": "ListType",
+          },
+          "mapType": Object {
+            "id": 7,
+            "type": "MapType",
+          },
+          "messageType": Object {
+            "id": 9,
+            "type": "string",
+          },
+          "null": Object {
+            "id": 2,
+            "type": "google.protobuf.NullValue",
+          },
+          "primitive": Object {
+            "id": 3,
+            "type": "PrimitiveType",
+          },
+          "type": Object {
+            "id": 11,
+            "type": "Type",
+          },
+          "typeParam": Object {
+            "id": 10,
+            "type": "string",
+          },
+          "wellKnown": Object {
+            "id": 5,
+            "type": "WellKnownType",
+          },
+          "wrapper": Object {
+            "id": 4,
+            "type": "PrimitiveType",
+          },
+        },
+        "nested": Object {
+          "AbstractType": Object {
+            "fields": Object {
+              "name": Object {
+                "id": 1,
+                "type": "string",
+              },
+              "parameterTypes": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Type",
+              },
+            },
+          },
+          "FunctionType": Object {
+            "fields": Object {
+              "argTypes": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Type",
+              },
+              "resultType": Object {
+                "id": 1,
+                "type": "Type",
+              },
+            },
+          },
+          "ListType": Object {
+            "fields": Object {
+              "elemType": Object {
+                "id": 1,
+                "type": "Type",
+              },
+            },
+          },
+          "MapType": Object {
+            "fields": Object {
+              "keyType": Object {
+                "id": 1,
+                "type": "Type",
+              },
+              "valueType": Object {
+                "id": 2,
+                "type": "Type",
+              },
+            },
+          },
+          "PrimitiveType": Object {
+            "values": Object {
+              "BOOL": 1,
+              "BYTES": 6,
+              "DOUBLE": 4,
+              "INT64": 2,
+              "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+              "STRING": 5,
+              "UINT64": 3,
+            },
+          },
+          "WellKnownType": Object {
+            "values": Object {
+              "ANY": 1,
+              "DURATION": 3,
+              "TIMESTAMP": 2,
+              "WELL_KNOWN_TYPE_UNSPECIFIED": 0,
+            },
+          },
+        },
+        "oneofs": Object {
+          "typeKind": Object {
+            "oneof": Array [
+              "dyn",
+              "null",
+              "primitive",
+              "wrapper",
+              "wellKnown",
+              "listType",
+              "mapType",
+              "function",
+              "messageType",
+              "typeParam",
+              "type",
+              "error",
+              "abstractType",
+            ],
+          },
+        },
+      },
+    },
+    "options": Object {
+      "cc_enable_arenas": true,
+      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1alpha1;expr",
+      "java_multiple_files": true,
+      "java_outer_classname": "DeclProto",
+      "java_package": "com.google.api.expr.v1alpha1",
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.v1alpha1",
+  ],
+}
+`;
+
+exports[`google/api/expr/v1alpha1/checked IdentDecl 1`] = `
+Object {
+  "_ctor": null,
+  "_fieldsArray": Array [
+    Object {
+      "id": 1,
+      "type": "Type",
+    },
+    Object {
+      "id": 2,
+      "type": "Constant",
+    },
+    Object {
+      "id": 3,
+      "type": "string",
+    },
+  ],
+  "_fieldsById": null,
+  "_nestedArray": Array [],
+  "_oneofsArray": Array [],
+  "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
+
+An identifier without a value is a declaration that must be provided at
+evaluation time. An identifier with a value should resolve to a constant,
+but may be used in conjunction with other identifiers bound at evaluation
+time.",
+  "extensions": undefined,
+  "fields": Object {
+    "doc": Object {
+      "id": 3,
+      "type": "string",
+    },
+    "type": Object {
+      "id": 1,
+      "type": "Type",
+    },
+    "value": Object {
+      "id": 2,
+      "type": "Constant",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "IdentDecl",
+  "nested": undefined,
+  "oneofs": undefined,
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "function": Object {
+        "id": 3,
+        "type": "FunctionDecl",
+      },
+      "ident": Object {
+        "id": 2,
+        "type": "IdentDecl",
+      },
+      "name": Object {
+        "id": 1,
+        "type": "string",
+      },
+    },
+    "nested": Object {
+      "FunctionDecl": Object {
+        "fields": Object {
+          "overloads": Object {
+            "id": 1,
+            "rule": "repeated",
+            "type": "Overload",
+          },
+        },
+        "nested": Object {
+          "Overload": Object {
+            "fields": Object {
+              "doc": Object {
+                "id": 6,
+                "type": "string",
+              },
+              "isInstanceFunction": Object {
+                "id": 5,
+                "type": "bool",
+              },
+              "overloadId": Object {
+                "id": 1,
+                "type": "string",
+              },
+              "params": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Type",
+              },
+              "resultType": Object {
+                "id": 4,
+                "type": "Type",
+              },
+              "typeParams": Object {
+                "id": 3,
+                "rule": "repeated",
+                "type": "string",
+              },
+            },
+          },
+        },
+      },
+      "IdentDecl": Object {
+        "fields": Object {
+          "doc": Object {
+            "id": 3,
+            "type": "string",
+          },
+          "type": Object {
+            "id": 1,
+            "type": "Type",
+          },
+          "value": Object {
+            "id": 2,
+            "type": "Constant",
+          },
+        },
+      },
+    },
+    "oneofs": Object {
+      "declKind": Object {
+        "oneof": Array [
+          "ident",
+          "function",
+        ],
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.v1alpha1",
+    "Decl",
+  ],
+}
+`;
+
+exports[`google/api/expr/v1alpha1/checked Overload 1`] = `
+Object {
+  "_ctor": null,
+  "_fieldsArray": Array [
+    Object {
+      "id": 1,
+      "type": "string",
+    },
+    Object {
+      "id": 2,
+      "rule": "repeated",
+      "type": "Type",
+    },
+    Object {
+      "id": 3,
+      "rule": "repeated",
+      "type": "string",
+    },
+    Object {
+      "id": 4,
+      "type": "Type",
+    },
+    Object {
+      "id": 5,
+      "type": "bool",
+    },
+    Object {
+      "id": 6,
+      "type": "string",
+    },
+  ],
+  "_fieldsById": null,
+  "_nestedArray": Array [],
+  "_oneofsArray": Array [],
+  "comment": "An overload indicates a function's parameter types and return type, and
+may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+values.
+
+Functions overloads are declared in either a function or method
+call-style. For methods, the \`params[0]\` is the expected type of the
+target receiver.
+
+Overloads must have non-overlapping argument types after erasure of all
+parameterized type variables (similar as type erasure in Java).",
+  "extensions": undefined,
+  "fields": Object {
+    "doc": Object {
+      "id": 6,
+      "type": "string",
+    },
+    "isInstanceFunction": Object {
+      "id": 5,
+      "type": "bool",
+    },
+    "overloadId": Object {
+      "id": 1,
+      "type": "string",
+    },
+    "params": Object {
+      "id": 2,
+      "rule": "repeated",
+      "type": "Type",
+    },
+    "resultType": Object {
+      "id": 4,
+      "type": "Type",
+    },
+    "typeParams": Object {
+      "id": 3,
+      "rule": "repeated",
+      "type": "string",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "Overload",
+  "nested": undefined,
+  "oneofs": undefined,
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "overloads": Object {
+        "id": 1,
+        "rule": "repeated",
+        "type": "Overload",
+      },
+    },
+    "nested": Object {
+      "Overload": Object {
+        "fields": Object {
+          "doc": Object {
+            "id": 6,
+            "type": "string",
+          },
+          "isInstanceFunction": Object {
+            "id": 5,
+            "type": "bool",
+          },
+          "overloadId": Object {
+            "id": 1,
+            "type": "string",
+          },
+          "params": Object {
+            "id": 2,
+            "rule": "repeated",
+            "type": "Type",
+          },
+          "resultType": Object {
+            "id": 4,
+            "type": "Type",
+          },
+          "typeParams": Object {
+            "id": 3,
+            "rule": "repeated",
+            "type": "string",
+          },
+        },
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.v1alpha1",
+    "Decl",
+    "FunctionDecl",
+  ],
+}
+`;
+
 exports[`nested lookup 1`] = `
 Object {
   "comment": "Severities of issues.",

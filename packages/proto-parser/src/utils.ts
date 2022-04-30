@@ -51,28 +51,21 @@ export const getEnums = (root: ProtoRoot) => {
 };
 
 export const recursiveLookup = (proto: any, name: string, scope: string[] = [], allowNested = true) => {
-    const found = Object.keys(proto).filter(key => {
-        if (key === name) return true;
-    }).map(key => proto[key]);
-    if (found.length) return {
+    if (!proto) return;
+
+    if (proto.hasOwnProperty(name)) return {
         name,
         scope,
-        ...found[0]
+        ...proto[name]
     }
 
     if (allowNested && proto) {
-        const children = Object.keys(proto).map(key => {
-            if (proto[key].nested) {
-                return recursiveLookup(proto[key].nested, name, [...scope, key])
-            }
-        }).filter(Boolean)
-        if (children) return {
-            name,
-            scope,
-            ...children[0]
+        const keys = Object.keys(proto);
+        for (let k = 0; k < keys.length; k++) {
+            const found = recursiveLookup(proto[keys[k]].nested, name, [...scope, keys[k]], allowNested);
+            if (found) return found;
         }
     }
-
 };
 
 /*
@@ -220,7 +213,7 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
             m[key] = {
                 parsedType: instanceType(found.obj),
                 scopeType: 'import',
-                scop: [found.obj.scope],
+                scope: [found.obj.scope],
                 ...field.toJSON({ keepComments: true }),
                 importedName: found.importedName,
                 import: found.import,

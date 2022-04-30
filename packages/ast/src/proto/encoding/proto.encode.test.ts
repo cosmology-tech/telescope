@@ -58,6 +58,16 @@ describe('cosmos/tx/v1beta1/tx', () => {
     })
 });
 
+describe('google/api/expr/v1alpha1/checked', () => {
+    const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
+    const res = traverse(store, ref.proto);
+    it('Type', () => {
+        expectCode(createProtoObjectWithMethods(
+            'Type', getNestedProto(res).Type
+        ))
+    })
+});
+
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref.proto);

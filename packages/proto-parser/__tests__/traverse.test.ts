@@ -49,3 +49,9 @@ it('cosmwasm/wasm/v1/query', () => {
   const res = traverse(store, ref.proto);
   expect(res).toMatchSnapshot();
 });
+
+it('google/api/expr/v1alpha1/checked', () => {
+  const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
+  const res = traverse(store, ref.proto);
+  expect(res).toMatchSnapshot();
+});

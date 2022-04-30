@@ -19,6 +19,27 @@ it('nested lookup', () => {
     expect(name).toEqual('IssueDetails_Severity')
 });
 
+describe('google/api/expr/v1alpha1/checked', () => {
+    const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
+    it('Decl', () => {
+        const Decl = lookup(store, ref.proto, 'Decl');
+        expect(Decl).toMatchSnapshot();
+        const name = getObjectName('Decl', Decl.scope);
+        expect(name).toEqual('Decl')
+    });
+    it('IdentDecl', () => {
+        const IdentDecl = lookup(store, ref.proto, 'IdentDecl');
+        expect(IdentDecl).toMatchSnapshot();
+        const name = getObjectName('IdentDecl', IdentDecl.scope);
+        expect(name).toEqual('Decl_IdentDecl')
+    })
+    it('Overload', () => {
+        const Overload = lookup(store, ref.proto, 'Overload');
+        expect(Overload).toMatchSnapshot();
+        const name = getObjectName('Overload', Overload.scope);
+        expect(name).toEqual('Decl_FunctionDecl_Overload')
+    })
+});
 describe('recursive nested lookup', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
     it('Multi', () => {
