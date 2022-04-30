@@ -20,42 +20,7 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 
       switch (tag >>> 3) {
         case 1:
-          message.sender = reader.string();
-          break;
-
-        case 2:
-          message.poolId = (reader.uint64() as Long);
-          break;
-
-        case 2:
-          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-          break;
-
-        case 2:
-          message.mode = (reader.int32() as any);
-          break;
-
-        case 2:
-          if ((tag & 7) === 2) {
-            const end2 = reader.uint32() + reader.pos;
-
-            while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
-            }
-          } else {
-            message.codeIds.push((reader.uint64() as Long));
-          }
-
-        case 3:
-          message.shareOutAmount = reader.string();
-          break;
-
-        case 333:
-          message.queryData = reader.bytes();
-          break;
-
-        case 4:
-          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          message.signatures.push(SignatureDescriptor.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -126,42 +91,19 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 
       switch (tag >>> 3) {
         case 1:
-          message.sender = reader.string();
-          break;
-
-        case 2:
-          message.poolId = (reader.uint64() as Long);
+          message.address = reader.string();
           break;
 
         case 2:
           message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
           break;
 
-        case 2:
+        case 3:
           message.mode = (reader.int32() as any);
           break;
 
-        case 2:
-          if ((tag & 7) === 2) {
-            const end2 = reader.uint32() + reader.pos;
-
-            while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
-            }
-          } else {
-            message.codeIds.push((reader.uint64() as Long));
-          }
-
-        case 3:
-          message.shareOutAmount = reader.string();
-          break;
-
-        case 333:
-          message.queryData = reader.bytes();
-          break;
-
         case 4:
-          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          message.sig = reader.bytes();
           break;
 
         default:
@@ -234,22 +176,14 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
       switch (tag >>> 3) {
         case 1:
-          message.sender = reader.string();
+          message.title = reader.string();
           break;
 
         case 2:
-          message.poolId = (reader.uint64() as Long);
+          message.description = reader.string();
           break;
 
-        case 2:
-          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-          break;
-
-        case 2:
-          message.mode = (reader.int32() as any);
-          break;
-
-        case 2:
+        case 3:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
 
@@ -259,18 +193,6 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
           } else {
             message.codeIds.push((reader.uint64() as Long));
           }
-
-        case 3:
-          message.shareOutAmount = reader.string();
-          break;
-
-        case 333:
-          message.queryData = reader.bytes();
-          break;
-
-        case 4:
-          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
-          break;
 
         default:
           reader.skipType(tag & 7);
@@ -338,42 +260,11 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
       switch (tag >>> 3) {
         case 1:
-          message.sender = reader.string();
+          message.address = reader.string();
           break;
 
         case 2:
-          message.poolId = (reader.uint64() as Long);
-          break;
-
-        case 2:
-          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-          break;
-
-        case 2:
-          message.mode = (reader.int32() as any);
-          break;
-
-        case 2:
-          if ((tag & 7) === 2) {
-            const end2 = reader.uint32() + reader.pos;
-
-            while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
-            }
-          } else {
-            message.codeIds.push((reader.uint64() as Long));
-          }
-
-        case 3:
-          message.shareOutAmount = reader.string();
-          break;
-
-        case 333:
           message.queryData = reader.bytes();
-          break;
-
-        case 4:
-          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -448,31 +339,8 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
           message.poolId = (reader.uint64() as Long);
           break;
 
-        case 2:
-          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-          break;
-
-        case 2:
-          message.mode = (reader.int32() as any);
-          break;
-
-        case 2:
-          if ((tag & 7) === 2) {
-            const end2 = reader.uint32() + reader.pos;
-
-            while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
-            }
-          } else {
-            message.codeIds.push((reader.uint64() as Long));
-          }
-
         case 3:
           message.shareOutAmount = reader.string();
-          break;
-
-        case 333:
-          message.queryData = reader.bytes();
           break;
 
         case 4:

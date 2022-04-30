@@ -1,21 +1,56 @@
 import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType } from '../../types';
+import { ProtoType, ProtoField } from '../../types';
 import { baseTypes, decode } from './utils';
 
+const needsImplementation = (name: string, field: ProtoField) => {
+    throw new Error(`need to implement decode (${field.type} rules[${field.rule}] name[${name}])`);
+}
+
 export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
-    const fields = [
-        decode.string(1, 'sender'),
-        decode.long(2, 'poolId'),
-        decode.type(2, 'signDoc', 'SignDocDirectAux'),
-        decode.enum(2, 'mode'),
-        decode.scalarArray(2, 'codeIds', baseTypes.long()),
-        decode.string(3, 'shareOutAmount'),
-        decode.bytes(333, 'queryData'),
-        decode.typeArray(4, 'tokenInMaxs', 'Coin')
-    ];
-    return fields;
+    return Object.keys(proto.fields ?? {}).map(fieldName => {
+        const field = proto.fields[fieldName];
+        if (field.rule === 'repeated') {
+            switch (field.type) {
+                case 'string':
+                    return needsImplementation(fieldName, field);
+                case 'uint64':
+                    return decode.scalarArray(field.id, fieldName, baseTypes.long());
+                case 'int64':
+                    return needsImplementation(fieldName, field);
+                case 'bytes':
+                    return needsImplementation(fieldName, field);
+                default:
+                    switch (field.parsedType.type) {
+                        case 'Enum':
+                        case 'Type':
+                            return decode.typeArray(field.id, fieldName, field.parsedType.name);
+                    }
+                    return needsImplementation(fieldName, field);
+            }
+
+        }
+
+        switch (field.type) {
+            case 'string':
+                return decode.string(field.id, fieldName);
+            case 'uint64':
+                return decode.long(field.id, fieldName);
+            case 'int64':
+                return needsImplementation(fieldName, field);
+            case 'bytes':
+                return decode.bytes(field.id, fieldName);
+            default:
+                switch (field.parsedType.type) {
+                    case 'Enum':
+                        return decode.enum(field.id, fieldName);
+                    case 'Type':
+                        return decode.type(field.id, fieldName, field.parsedType.name);
+                }
+                return needsImplementation(fieldName, field);
+        }
+    });
 };
 
 export const protoDecodeMethod = (name: string, proto: ProtoType) => {
