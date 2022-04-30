@@ -10,7 +10,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
 export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
 
     return Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
-        const field = proto.fields[fieldName];
+        const field: ProtoField = proto.fields[fieldName];
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
@@ -31,7 +31,10 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                     }
                     return needsImplementation(fieldName, field);
             }
+        }
 
+        if (field.keyType) {
+            return [...m, encode.keyHash(getTagNumber(field), fieldName, name)];
         }
 
         switch (field.type) {

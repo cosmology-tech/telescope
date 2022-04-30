@@ -51,6 +51,16 @@ describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
     })
 });
 
+describe('google/api/servicecontrol/v1/log_entry', () => {
+    const ref = store.findProto('google/api/servicecontrol/v1/log_entry.proto');
+    const res = traverse(store, ref.proto);
+    it('LogEntry', () => {
+        expectCode(createProtoObjectWithMethods(
+            'LogEntry', getNestedProto(res).LogEntry
+        ))
+    })
+});
+
 describe('google/api/expr/v1alpha1/syntax', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/syntax.proto');
     const res = traverse(store, ref.proto);

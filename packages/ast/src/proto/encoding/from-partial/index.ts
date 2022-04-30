@@ -32,6 +32,10 @@ export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => 
 
         }
 
+        if (field.keyType) {
+            return fromPartial.keyHash(fieldName, name);
+        }
+
         switch (field.type) {
             case 'string':
                 return fromPartial.string(fieldName);

@@ -31,6 +31,10 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
 
         }
 
+        if (field.keyType) {
+            return decode.keyHash(field.id, fieldName, name);
+        }
+
         switch (field.type) {
             case 'string':
                 return decode.string(field.id, fieldName);

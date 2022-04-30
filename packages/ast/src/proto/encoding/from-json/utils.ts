@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { identifier } from '../../../utils';
+import { callExpression, identifier } from '../../../utils';
 
 export const fromJSON = {
 
@@ -338,6 +338,104 @@ export const fromJSON = {
                 t.identifier('undefined')
             )
         );
+    },
+
+    // labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+    //     [key: string]: string;
+    //   }>((acc, [key, value]) => {
+    //     acc[key] = String(value);
+    //     return acc;
+    //   }, {}) : {},
+
+
+    keyHash(prop: string, name: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isObject'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Object'),
+                                t.identifier('entries')
+                            ),
+                            [
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier(prop)
+                                )
+                            ]
+                        ),
+                        t.identifier('reduce')
+                    ),
+                    [
+                        t.arrowFunctionExpression(
+                            [
+                                t.identifier('acc'),
+                                t.arrayPattern(
+                                    [
+                                        t.identifier('key'),
+                                        t.identifier('value')
+                                    ]
+                                )
+                            ],
+                            t.blockStatement([
+                                t.expressionStatement(
+                                    t.assignmentExpression(
+                                        '=',
+                                        t.memberExpression(
+                                            t.identifier('acc'),
+                                            t.identifier('key'),
+                                            true
+                                        ),
+                                        t.callExpression(
+                                            t.identifier('String'),
+                                            [
+                                                t.identifier('value')
+                                            ]
+                                        )
+                                    )
+                                ),
+                                t.returnStatement(
+                                    t.identifier('acc')
+                                )
+                            ])
+                        ),
+                        t.objectExpression(
+                            []
+                        )
+                    ],
+                    t.tsTypeParameterInstantiation(
+                        [
+                            t.tsTypeLiteral(
+                                [
+                                    t.tsIndexSignature(
+                                        [
+                                            identifier('key', t.tsTypeAnnotation(
+                                                t.tsStringKeyword()
+                                            ))
+                                        ],
+                                        t.tsTypeAnnotation(
+                                            t.tsStringKeyword()
+                                        )
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                ),
+                t.objectExpression([])
+            )
+        )
     },
 
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],

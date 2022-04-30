@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { identifier, callExpression } from '../../../utils';
 
 export const fromPartial = {
 
@@ -305,6 +306,100 @@ export const fromPartial = {
     },
 
 
+    keyHash(prop: string, name: string) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier('labels')
+                ),
+                callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Object'),
+                                t.identifier('entries')
+                            ),
+                            [
+                                t.logicalExpression(
+                                    '??',
+                                    t.memberExpression(
+                                        t.identifier('object'),
+                                        t.identifier(prop)
+                                    ),
+                                    t.objectExpression([])
+                                )
+                            ]
+                        ),
+                        t.identifier('reduce')
+                    ),
+                    [
+                        t.arrowFunctionExpression(
+                            [
+                                t.identifier('acc'),
+                                t.arrayPattern([
+                                    t.identifier('key'),
+                                    t.identifier('value')
+                                ])
+
+                            ],
+                            t.blockStatement([
+                                t.ifStatement(
+                                    t.binaryExpression(
+                                        '!==',
+                                        t.identifier('value'),
+                                        t.identifier('undefined')
+                                    ),
+                                    t.blockStatement([
+                                        t.expressionStatement(
+                                            t.assignmentExpression(
+                                                '=',
+                                                t.memberExpression(
+                                                    t.identifier('acc'),
+                                                    t.identifier('key'),
+                                                    true
+                                                ),
+                                                t.callExpression(
+                                                    t.identifier('String'),
+                                                    [
+                                                        t.identifier('value')
+                                                    ]
+                                                )
+                                            )
+                                        )
+                                    ])
+                                ),
+                                t.returnStatement(
+                                    t.identifier('acc')
+                                )
+                            ])
+                        ),
+                        t.objectExpression([]),
+                    ],
+                    t.tsTypeParameterInstantiation(
+                        [
+                            t.tsTypeLiteral(
+                                [
+                                    t.tsIndexSignature(
+                                        [
+                                            identifier('key', t.tsTypeAnnotation(
+                                                t.tsStringKeyword()
+                                            ))
+                                        ],
+                                        t.tsTypeAnnotation(
+                                            t.tsStringKeyword()
+                                        )
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+
+                )
+            )
+        )
+    },
 
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     array(prop: string, expr: t.Expression) {

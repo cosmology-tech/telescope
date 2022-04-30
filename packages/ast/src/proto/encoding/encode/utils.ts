@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-
+import { pascal } from 'case';
 export const encode = {
 
     /*
@@ -588,6 +588,96 @@ if (message.queryData.length !== 0) {
                     ]
                 )
             )];
+    },
+
+    // Object.entries(message.labels).forEach(([key, value]) => {
+    //     LogEntry_LabelsEntry.encode({
+    //       key: (key as any),
+    //       value
+    //     }, writer.uint32(106).fork()).ldelim();
+    //   });
+
+    keyHash(num: number, prop: string, name: string) {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Object'),
+                            t.identifier('entries')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    ),
+                    t.identifier('forEach')
+                ),
+                [
+                    t.arrowFunctionExpression(
+                        [
+                            t.arrayPattern([
+                                t.identifier('key'),
+                                t.identifier('value')
+                            ]
+                            ),
+                        ],
+                        t.blockStatement([
+                            t.expressionStatement(
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.callExpression(
+                                            t.memberExpression(
+                                                t.identifier(`${name}_${pascal(prop)}Entry`),
+                                                t.identifier('encode')
+                                            ),
+                                            [
+                                                t.objectExpression(
+                                                    [
+                                                        t.objectProperty(
+                                                            t.identifier('key'),
+                                                            t.tsAsExpression(
+                                                                t.identifier('key'),
+                                                                t.tsAnyKeyword()
+                                                            )
+                                                        ),
+                                                        t.objectProperty(
+                                                            t.identifier('value'),
+                                                            t.identifier('value'),
+                                                            false,
+                                                            true
+                                                        )
+                                                    ]
+                                                ),
+                                                t.callExpression(
+                                                    t.memberExpression(
+                                                        t.callExpression(
+                                                            t.memberExpression(
+                                                                t.identifier('writer'),
+                                                                t.identifier('uint32')
+                                                            ),
+                                                            [
+                                                                t.numericLiteral(num)
+                                                            ]
+                                                        ),
+                                                        t.identifier('fork')
+                                                    ),
+                                                    []
+                                                )
+                                            ]
+                                        ),
+                                        t.identifier('ldelim')
+                                    ),
+                                    []
+                                )
+                            )
+                        ])
+                    )
+                ]
+            )
+        )
     }
 };
 
@@ -606,4 +696,3 @@ export const arrayTypes = {
         );
     }
 };
-

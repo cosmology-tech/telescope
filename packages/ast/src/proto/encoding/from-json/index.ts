@@ -33,6 +33,10 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
 
         }
 
+        if (field.keyType) {
+            return fromJSON.keyHash(fieldName, name);
+        }
+
         switch (field.type) {
             case 'string':
                 return fromJSON.string(fieldName);

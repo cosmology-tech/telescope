@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { pascal } from 'case';
 
 export const decode = {
     string(num: number, prop: string) {
@@ -30,6 +31,9 @@ export const decode = {
     },
     bytes(num: number, prop: string) {
         return switchOnTag(num, prop, baseTypes.bytes());
+    },
+    keyHash(num: number, prop: string, name: string) {
+        return switchOnTagTakesArray(num, prop, baseTypes.keyHash(prop, name));
     },
     scalarArray(num: number, prop: string, expr: t.Expression) {
         return switchScalarArray(num,
@@ -209,6 +213,73 @@ export const baseTypes = {
         )
     },
 
+    // const entry13 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
+
+    // if (entry13.value !== undefined) {
+    //     message.labels[entry13.key] = entry13.value;
+    // }
+
+    keyHash(prop: string, name: string) {
+        return [
+            t.variableDeclaration(
+                'const',
+                [
+                    t.variableDeclarator(
+                        t.identifier('entry13TODO'),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier(`${name}_${pascal(prop)}Entry`),
+                                t.identifier('decode')
+                            ),
+                            [
+                                t.identifier('reader'),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('reader'),
+                                        t.identifier('uint32')
+                                    ),
+                                    []
+                                )
+                            ]
+                        )
+                    )
+                ]
+            ),
+            t.ifStatement(
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('entry13TODO'),
+                        t.identifier('value')
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.blockStatement([
+                    t.expressionStatement(
+                        t.assignmentExpression(
+                            '=',
+                            t.memberExpression(
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier('labels')
+                                ),
+                                t.memberExpression(
+                                    t.identifier('entry13TODO'),
+                                    t.identifier('key')
+                                ),
+                                true
+                            ),
+                            t.memberExpression(
+                                t.identifier('entry13TODO'),
+                                t.identifier('value')
+                            )
+                        )
+                    )
+                ])
+            )
+        ]
+    }
+
 };
 
 
@@ -226,6 +297,16 @@ export const switchOnTag = (num: number, prop: string, expr: t.Expression) => {
                     expr
                 )
             ),
+            t.breakStatement()
+        ]
+    );
+};
+
+export const switchOnTagTakesArray = (num: number, prop: string, expr: t.Statement[]) => {
+    return t.switchCase(
+        t.numericLiteral(num),
+        [
+            ...expr,
             t.breakStatement()
         ]
     );
