@@ -40,6 +40,8 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
                 return needsImplementation(fieldName, field);
             case 'bytes':
                 return toJSON.bytes(fieldName);
+            case 'bool':
+                return toJSON.bool(fieldName);
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':

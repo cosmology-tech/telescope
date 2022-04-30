@@ -31,6 +31,34 @@ export const fromJSON = {
         )
     },
 
+    // disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
+    bool(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.identifier('Boolean'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.booleanLiteral(false)
+            )
+        )
+    },
+
     // poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
     long(prop: string) {
         return t.objectProperty(

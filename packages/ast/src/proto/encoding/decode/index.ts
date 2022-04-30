@@ -40,6 +40,8 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
                 return needsImplementation(fieldName, field);
             case 'bytes':
                 return decode.bytes(field.id, fieldName);
+            case 'bool':
+                return decode.bool(field.id, fieldName);
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':

@@ -4,6 +4,9 @@ export const decode = {
     string(num: number, prop: string) {
         return switchOnTag(num, prop, baseTypes.string())
     },
+    bool(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.bool())
+    },
     long(num: number, prop: string) {
         return switchOnTag(num, prop, baseTypes.long());
     },
@@ -39,6 +42,17 @@ export const baseTypes = {
             t.memberExpression(
                 t.identifier('reader'),
                 t.identifier('string')
+            ),
+            []
+        );
+    },
+
+    // message.sender = reader.bool();
+    bool() {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('bool')
             ),
             []
         );

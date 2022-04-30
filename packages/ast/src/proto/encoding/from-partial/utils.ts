@@ -23,6 +23,27 @@ export const fromPartial = {
         );
     },
 
+    // message.disableMacros = object.disableMacros ?? false;
+    bool(prop: string) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.logicalExpression(
+                    '??',
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(prop)
+                    ),
+                    t.booleanLiteral(false)
+                )
+            )
+        );
+    },
+
     // message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     long(prop: string) {
         return t.expressionStatement(

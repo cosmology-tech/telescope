@@ -530,6 +530,92 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 };"
 `;
 
+exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1`] = `
+"export const ParseRequest = {
+  encode(message: ParseRequest, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.celSource !== \\"\\") {
+      writer.uint32(10).string(message.celSource);
+    }
+
+    if (message.syntaxVersion !== \\"\\") {
+      writer.uint32(18).string(message.syntaxVersion);
+    }
+
+    if (message.sourceLocation !== \\"\\") {
+      writer.uint32(26).string(message.sourceLocation);
+    }
+
+    if (message.disableMacros === true) {
+      writer.uint32(32).bool(message.disableMacros);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): ParseRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseParseRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.celSource = reader.string();
+          break;
+
+        case 2:
+          message.syntaxVersion = reader.string();
+          break;
+
+        case 3:
+          message.sourceLocation = reader.string();
+          break;
+
+        case 4:
+          message.disableMacros = reader.bool();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ParseRequest {
+    return {
+      celSource: isSet(object.celSource) ? String(object.celSource) : \\"\\",
+      syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : \\"\\",
+      sourceLocation: isSet(object.sourceLocation) ? String(object.sourceLocation) : \\"\\",
+      disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
+    };
+  },
+
+  toJSON(message: ParseRequest): unknown {
+    const obj: any = {};
+    message.celSource !== undefined && (obj.celSource = message.celSource);
+    message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
+    message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation);
+    message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ParseRequest>, I>>(object: I): ParseRequest {
+    const message = createBaseParseRequest();
+    message.celSource = object.celSource ?? \\"\\";
+    message.syntaxVersion = object.syntaxVersion ?? \\"\\";
+    message.sourceLocation = object.sourceLocation ?? \\"\\";
+    message.disableMacros = object.disableMacros ?? false;
+    return message;
+  }
+
+};"
+`;
+
 exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 "export const Type = {
   encode(message: Type, writer = _m0.Writer.create()): _m0.Writer {

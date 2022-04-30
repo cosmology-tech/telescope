@@ -44,6 +44,48 @@ export const encode = {
         )
     },
 
+
+    //   if (message.disableMacros === true) {
+    //     writer.uint32(32).bool(message.disableMacros);
+    //   }
+
+    bool(num: number, prop: string) {
+
+        return t.ifStatement(
+            t.binaryExpression('===',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.booleanLiteral(true)
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('bool')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        )
+    },
+
     /*
     if (!message.poolId.isZero()) {
         writer.uint32(16).uint64(message.poolId);

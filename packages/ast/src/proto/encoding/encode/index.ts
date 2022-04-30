@@ -41,6 +41,8 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                 return [...m, encode.long(getTagNumber(field), fieldName)];
             case 'int64':
                 return needsImplementation(fieldName, field);
+            case 'bool':
+                return [...m, encode.bool(getTagNumber(field), fieldName)];
             case 'bytes':
                 return [...m, encode.bytes(getTagNumber(field), fieldName)];
             default:

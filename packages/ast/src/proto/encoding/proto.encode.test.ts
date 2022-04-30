@@ -38,6 +38,17 @@ describe('osmosis/gamm/v1beta1/tx', () => {
             'MsgSwapExactAmountIn', getNestedProto(res).MsgSwapExactAmountIn
         ))
     })
+
+});
+
+describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
+    const ref = store.findProto('google/api/expr/conformance/v1alpha1/conformance_service.proto');
+    const res = traverse(store, ref.proto);
+    it('ParseRequest', () => {
+        expectCode(createProtoObjectWithMethods(
+            'ParseRequest', getNestedProto(res).ParseRequest
+        ))
+    })
 });
 
 describe('cosmos/tx/signing/v1beta1/signing', () => {
