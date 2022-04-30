@@ -1,18 +1,57 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType } from '../../types';
+import { ProtoType, ProtoField } from '../../types';
 import { fromJSON, arrayTypes } from './utils';
 
+const needsImplementation = (name: string, field: ProtoField) => {
+    throw new Error(`need to implement fromJSON (${field.type} rules[${field.rule}] name[${name}])`);
+}
+
 export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
-    const fields = [
-        fromJSON.type('signDoc', 'SignDocDirectAux'),
-        fromJSON.enum('mode', 'signModeFromJSON'),
-        fromJSON.string('sender'),
-        fromJSON.long('poolId'),
-        fromJSON.bytes('queryData'),
-        fromJSON.array('codeIds', arrayTypes.long()),
-        fromJSON.array('tokenInMaxs', arrayTypes.type('Coin'))
-    ];
+    const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
+        const field = proto.fields[fieldName];
+        if (field.rule === 'repeated') {
+            switch (field.type) {
+                case 'string':
+                    return needsImplementation(fieldName, field);
+                case 'uint64':
+                    return fromJSON.array(fieldName, arrayTypes.long());
+                case 'int64':
+                    return needsImplementation(fieldName, field);
+                case 'bytes':
+                    return needsImplementation(fieldName, field);
+                default:
+                    switch (field.parsedType.type) {
+                        case 'Enum':
+                            // could be same as Type likely...
+                            return needsImplementation(fieldName, field);
+                        case 'Type':
+                            return fromJSON.array(fieldName, arrayTypes.type(field.parsedType.name));
+                    }
+                    return needsImplementation(fieldName, field);
+            }
+
+        }
+
+        switch (field.type) {
+            case 'string':
+                return fromJSON.string(fieldName);
+            case 'uint64':
+                return fromJSON.long(fieldName);
+            case 'int64':
+                return needsImplementation(fieldName, field);
+            case 'bytes':
+                return fromJSON.bytes(fieldName);
+            default:
+                switch (field.parsedType.type) {
+                    case 'Enum':
+                        return fromJSON.enum(fieldName, 'myEnumFunction');
+                    case 'Type':
+                        return fromJSON.type(fieldName, field.parsedType.name);
+                }
+                return needsImplementation(fieldName, field);
+        }
+    });
     return fields;
 };
 
