@@ -305,8 +305,59 @@ export const fromPartial = {
         );
     },
 
+    // message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
+    //     [key: Long]: Reference;
+    //   }>((acc, [key, value]) => {
+    //     if (value !== undefined) {
+    //       acc[Number(key)] = Reference.fromPartial(value);
+    //     }
 
-    keyHash(prop: string, name: string) {
+    //     return acc;
+    //   }, {});
+
+    // message.labels = Object.entries(object.typeMap ?? {}).reduce<{
+    //     [key: string]: string;
+    // }>((acc, [key, value]) => {
+    //     if (value !== undefined) {
+    //         acc[key] = String(value);
+    //     }
+
+    //     return acc;
+    // }, {});
+
+    keyHash(prop: string, keyType: string, valueType: string) {
+        let fromPartial = null;
+        switch (valueType) {
+            case 'string':
+                fromPartial = t.identifier('String');
+                break;
+            default:
+                fromPartial = t.memberExpression(
+                    t.identifier(valueType),
+                    t.identifier('fromPartial')
+                );
+        }
+
+        let wrapKey = null;
+        let keyTypeType = null;
+        switch (keyType) {
+            case 'string':
+                wrapKey = (a) => a;
+                keyTypeType = t.tsStringKeyword();
+                break;
+            case 'int64':
+                wrapKey = (a) => t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        a
+                    ]
+                );
+                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                break;
+            default:
+                throw new Error('keyHash requires new type. Ask maintainers.');
+        }
+
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -357,11 +408,11 @@ export const fromPartial = {
                                                 '=',
                                                 t.memberExpression(
                                                     t.identifier('acc'),
-                                                    t.identifier('key'),
+                                                    wrapKey(t.identifier('key')),
                                                     true
                                                 ),
                                                 t.callExpression(
-                                                    t.identifier('String'),
+                                                    fromPartial,
                                                     [
                                                         t.identifier('value')
                                                     ]
@@ -384,11 +435,13 @@ export const fromPartial = {
                                     t.tsIndexSignature(
                                         [
                                             identifier('key', t.tsTypeAnnotation(
-                                                t.tsStringKeyword()
+                                                keyTypeType
                                             ))
                                         ],
                                         t.tsTypeAnnotation(
-                                            t.tsStringKeyword()
+                                            t.tsTypeReference(
+                                                t.identifier(valueType)
+                                            )
                                         )
                                     )
                                 ]

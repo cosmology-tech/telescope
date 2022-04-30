@@ -991,19 +991,19 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
   fromPartial<I extends Exact<DeepPartial<CheckedExpr>, I>>(object: I): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.labels = Object.entries(object.referenceMap ?? {}).reduce<{
-      [key: string]: string;
+      [key: Long]: Reference;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = String(value);
+        acc[Number(key)] = Reference.fromPartial(value);
       }
 
       return acc;
     }, {});
     message.labels = Object.entries(object.typeMap ?? {}).reduce<{
-      [key: string]: string;
+      [key: Long]: Type;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = String(value);
+        acc[Number(key)] = Type.fromPartial(value);
       }
 
       return acc;
