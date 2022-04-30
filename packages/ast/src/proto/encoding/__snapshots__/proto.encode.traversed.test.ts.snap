@@ -3,36 +3,8 @@
 exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 "export const MsgJoinPool = {
   encode(message: SignatureDescriptors, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sender !== \\"\\") {
-      writer.uint32(10).string(message.sender);
-    }
-
-    if (!message.poolId.isZero()) {
-      writer.uint32(16).uint64(message.poolId);
-    }
-
-    if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
-    }
-
-    writer.uint32(10).fork();
-
-    for (const v of message.codeIds) {
-      writer.uint64(v);
-    }
-
-    writer.ldelim();
-
-    if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
-    }
-
-    if (message.mode !== 0) {
-      writer.uint32(24).int32(message.mode);
-    }
-
-    for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    for (const v of message.signatures) {
+      SignatureDescriptor.encode(v!, writer.uint32(11).fork()).ldelim();
     }
 
     return writer;
@@ -97,13 +69,7 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 
   fromJSON(object: any): SignatureDescriptors {
     return {
-      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e)) : []
     };
   },
 
@@ -121,13 +87,7 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptors>, I>>(object: I): SignatureDescriptors {
     const message = createBaseSignatureDescriptors();
-    message.sender = object.sender ?? \\"\\";
-    message.queryData = object.queryData ?? new Uint8Array();
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
   }
 
@@ -137,36 +97,20 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 exports[`cosmos/tx/v1beta1/tx 1`] = `
 "export const MsgJoinPool = {
   encode(message: AuxSignerData, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sender !== \\"\\") {
-      writer.uint32(10).string(message.sender);
+    if (message.address !== \\"\\") {
+      writer.uint32(11).string(message.address);
     }
-
-    if (!message.poolId.isZero()) {
-      writer.uint32(16).uint64(message.poolId);
-    }
-
-    if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
-    }
-
-    writer.uint32(10).fork();
-
-    for (const v of message.codeIds) {
-      writer.uint64(v);
-    }
-
-    writer.ldelim();
 
     if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(12).fork()).ldelim();
     }
 
     if (message.mode !== 0) {
-      writer.uint32(24).int32(message.mode);
+      writer.uint32(13).int32(message.mode);
     }
 
-    for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    if (message.sig.length !== 0) {
+      writer.uint32(14).bytes(message.sig);
     }
 
     return writer;
@@ -231,13 +175,10 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 
   fromJSON(object: any): AuxSignerData {
     return {
+      address: isSet(object.address) ? String(object.address) : \\"\\",
       signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+      mode: isSet(object.mode) ? myEnumFunction(object.mode) : 0,
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
 
@@ -252,13 +193,10 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<AuxSignerData>, I>>(object: I): AuxSignerData {
     const message = createBaseAuxSignerData();
-    message.sender = object.sender ?? \\"\\";
-    message.queryData = object.queryData ?? new Uint8Array();
+    message.address = object.address ?? \\"\\";
     message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
     message.mode = object.mode ?? 0;
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    message.sig = object.sig ?? new Uint8Array();
     return message;
   }
 
@@ -268,38 +206,21 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
 "export const MsgJoinPool = {
   encode(message: PinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sender !== \\"\\") {
-      writer.uint32(10).string(message.sender);
+    if (message.title !== \\"\\") {
+      writer.uint32(11).string(message.title);
     }
 
-    if (!message.poolId.isZero()) {
-      writer.uint32(16).uint64(message.poolId);
+    if (message.description !== \\"\\") {
+      writer.uint32(12).string(message.description);
     }
 
-    if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
-    }
-
-    writer.uint32(10).fork();
+    writer.uint32(13).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);
     }
 
     writer.ldelim();
-
-    if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
-    }
-
-    if (message.mode !== 0) {
-      writer.uint32(24).int32(message.mode);
-    }
-
-    for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
-    }
-
     return writer;
   },
 
@@ -362,13 +283,9 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
   fromJSON(object: any): PinCodesProposal {
     return {
-      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+      title: isSet(object.title) ? String(object.title) : \\"\\",
+      description: isSet(object.description) ? String(object.description) : \\"\\",
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : []
     };
   },
 
@@ -388,13 +305,9 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<PinCodesProposal>, I>>(object: I): PinCodesProposal {
     const message = createBasePinCodesProposal();
-    message.sender = object.sender ?? \\"\\";
-    message.queryData = object.queryData ?? new Uint8Array();
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
+    message.title = object.title ?? \\"\\";
+    message.description = object.description ?? \\"\\";
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
 
@@ -404,36 +317,12 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 exports[`cosmwasm/wasm/v1/query 1`] = `
 "export const MsgJoinPool = {
   encode(message: QueryRawContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sender !== \\"\\") {
-      writer.uint32(10).string(message.sender);
-    }
-
-    if (!message.poolId.isZero()) {
-      writer.uint32(16).uint64(message.poolId);
+    if (message.address !== \\"\\") {
+      writer.uint32(11).string(message.address);
     }
 
     if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
-    }
-
-    writer.uint32(10).fork();
-
-    for (const v of message.codeIds) {
-      writer.uint64(v);
-    }
-
-    writer.ldelim();
-
-    if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
-    }
-
-    if (message.mode !== 0) {
-      writer.uint32(24).int32(message.mode);
-    }
-
-    for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+      writer.uint32(12).bytes(message.queryData);
     }
 
     return writer;
@@ -498,13 +387,8 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
   fromJSON(object: any): QueryRawContractStateRequest {
     return {
-      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+      address: isSet(object.address) ? String(object.address) : \\"\\",
+      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
     };
   },
 
@@ -517,13 +401,8 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<QueryRawContractStateRequest>, I>>(object: I): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
-    message.sender = object.sender ?? \\"\\";
+    message.address = object.address ?? \\"\\";
     message.queryData = object.queryData ?? new Uint8Array();
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
 
@@ -534,35 +413,19 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
 "export const MsgJoinPool = {
   encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== \\"\\") {
-      writer.uint32(10).string(message.sender);
+      writer.uint32(11).string(message.sender);
     }
 
     if (!message.poolId.isZero()) {
-      writer.uint32(16).uint64(message.poolId);
+      writer.uint32(12).uint64(message.poolId);
     }
 
-    if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
-    }
-
-    writer.uint32(10).fork();
-
-    for (const v of message.codeIds) {
-      writer.uint64(v);
-    }
-
-    writer.ldelim();
-
-    if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
-    }
-
-    if (message.mode !== 0) {
-      writer.uint32(24).int32(message.mode);
+    if (message.shareOutAmount !== \\"\\") {
+      writer.uint32(13).string(message.shareOutAmount);
     }
 
     for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+      Coin.encode(v!, writer.uint32(14).fork()).ldelim();
     }
 
     return writer;
@@ -627,12 +490,9 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
 
   fromJSON(object: any): MsgJoinPool {
     return {
-      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sender: isSet(object.sender) ? String(object.sender) : \\"\\",
       poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(),
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : \\"\\",
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -655,11 +515,8 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
   fromPartial<I extends Exact<DeepPartial<MsgJoinPool>, I>>(object: I): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? \\"\\";
-    message.queryData = object.queryData ?? new Uint8Array();
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.shareOutAmount = object.shareOutAmount ?? \\"\\";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
