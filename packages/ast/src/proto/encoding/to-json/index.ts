@@ -27,12 +27,6 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
                             return toJSON.array(fieldName, arrayTypes.type(field.parsedType.name));
                     }
                     return needsImplementation(fieldName, field);
-
-                // if (field.type.match(/^[a-z]/)) {
-                //     // lower case is not a type...
-                //     return needsImplementation(fieldName, field);
-                // }
-                // return toJSON.array(fieldName, arrayTypes.type(field.type));
             }
 
         }
