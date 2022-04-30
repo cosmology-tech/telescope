@@ -119,7 +119,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
     return {
       address: isSet(object.address) ? String(object.address) : \\"\\",
       signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? myEnumFunction(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
@@ -128,7 +128,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
-    message.mode !== undefined && (obj.mode = myEnumFunction(message.mode));
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     message.sig !== undefined && (obj.sig = base64FromBytes(message.sig !== undefined ? message.sig : new Uint8Array()));
     return obj;
   },

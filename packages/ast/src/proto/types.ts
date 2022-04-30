@@ -365,3 +365,15 @@ export const createCreateProtoType = (name: string, proto: ProtoType) => {
             t.tsTypeReference(t.identifier(name))
         ))
 };
+
+function lowerFirst(str: string) {
+    return str.charAt(0).toLowerCase() + str.substring(1);
+}
+
+export const getEnumToJsonName = (name) => {
+    return lowerFirst(name) + 'ToJSON';
+};
+
+export const getEnumFromJsonName = (name) => {
+    return lowerFirst(name) + 'FromJSON';
+};
