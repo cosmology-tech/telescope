@@ -865,6 +865,155 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
 };"
 `;
 
+exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
+"export const CheckedExpr = {
+  encode(message: CheckedExpr, writer = _m0.Writer.create()): _m0.Writer {
+    Object.entries(message.referenceMap).forEach(([key, value]) => {
+      CheckedExpr_ReferenceMapEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(18).fork()).ldelim();
+    });
+    Object.entries(message.typeMap).forEach(([key, value]) => {
+      CheckedExpr_TypeMapEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(26).fork()).ldelim();
+    });
+
+    if (message.sourceInfo !== undefined) {
+      SourceInfo.encode(message.sourceInfo, writer.uint32(42).fork()).ldelim();
+    }
+
+    if (message.exprVersion !== \\"\\") {
+      writer.uint32(50).string(message.exprVersion);
+    }
+
+    if (message.expr !== undefined) {
+      Expr.encode(message.expr, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): CheckedExpr {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCheckedExpr();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 2:
+          const entry13TODO = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
+
+          if (entry13TODO.value !== undefined) {
+            message.labels[entry13TODO.key] = entry13TODO.value;
+          }
+
+          break;
+
+        case 3:
+          const entry13TODO = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
+
+          if (entry13TODO.value !== undefined) {
+            message.labels[entry13TODO.key] = entry13TODO.value;
+          }
+
+          break;
+
+        case 5:
+          message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
+          break;
+
+        case 6:
+          message.exprVersion = reader.string();
+          break;
+
+        case 4:
+          message.expr = Expr.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): CheckedExpr {
+    return {
+      referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
+      exprVersion: isSet(object.exprVersion) ? String(object.exprVersion) : \\"\\",
+      expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
+    };
+  },
+
+  toJSON(message: CheckedExpr): unknown {
+    const obj: any = {};
+
+    if (message.referenceMap) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.referenceMap[k] = v;
+      });
+    }
+
+    if (message.typeMap) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.typeMap[k] = v;
+      });
+    }
+
+    message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
+    message.exprVersion !== undefined && (obj.exprVersion = message.exprVersion);
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr>, I>>(object: I): CheckedExpr {
+    const message = createBaseCheckedExpr();
+    message.labels = Object.entries(object.referenceMap ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+
+      return acc;
+    }, {});
+    message.labels = Object.entries(object.typeMap ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+
+      return acc;
+    }, {});
+    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
+    message.exprVersion = object.exprVersion ?? \\"\\";
+    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
+    return message;
+  }
+
+};"
+`;
+
 exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 "export const Constant = {
   encode(message: Constant, writer = _m0.Writer.create()): _m0.Writer {
