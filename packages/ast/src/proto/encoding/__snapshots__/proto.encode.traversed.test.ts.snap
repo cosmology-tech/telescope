@@ -156,7 +156,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(26).fork();
+    writer.uint32(24).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);
@@ -247,7 +247,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(26).fork();
+    writer.uint32(24).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);

@@ -94,48 +94,100 @@ export const getTSTypeFromProtoType = (type) => {
 };
 
 // https://github.com/protobufjs/protobuf.js/blob/master/src/types.js#L38-L54
+export const types = {
+    basic: {
+        double: 1,
+        float: 5,
+        int32: 0,
+        uint32: 0,
+        sint32: 0,
+        fixed32: 5,
+        sfixed32: 5,
+        int64: 0,
+        uint64: 0,
+        sint64: 0,
+        fixed64: 1,
+        sfixed64: 1,
+        bool: 0,
+        string: 2,
+        bytes: 2
+    },
+    defaults: {
+        double: 0,
+        float: 0,
+        int32: 0,
+        uint32: 0,
+        sint32: 0,
+        fixed32: 0,
+        sfixed32: 0,
+        int64: 0,
+        uint64: 0,
+        sint64: 0,
+        fixed64: 0,
+        sfixed64: 0,
+        bool: false,
+        string: '',
+        bytes: [],
+        undefined: null
+    },
+    long: { int64: 0, uint64: 0, sint64: 0, fixed64: 1, sfixed64: 1 },
+    mapKey: {
+        int32: 0,
+        uint32: 0,
+        sint32: 0,
+        fixed32: 5,
+        sfixed32: 5,
+        int64: 0,
+        uint64: 0,
+        sint64: 0,
+        fixed64: 1,
+        sfixed64: 1,
+        bool: 0,
+        string: 2
+    },
+    packed: {
+        double: 1,
+        float: 5,
+        int32: 0,
+        uint32: 0,
+        sint32: 0,
+        fixed32: 5,
+        sfixed32: 5,
+        int64: 0,
+        uint64: 0,
+        sint64: 0,
+        fixed64: 1,
+        sfixed64: 1,
+        bool: 0
+    }
+};
 export const getWireNumber = (type) => {
-    switch (type) {
+    if (types.basic.hasOwnProperty(type)) {
+        return types.basic[type];
+    }
+    return 2;
+};
 
-        case 'double':
-        case 'fixed64':
-        case 'sfixed64':
-            return 1;
-
-        case 'float':
-            return 5;
-
-        case 'fixed32':
-        case 'sfixed32':
-            return 5;
-
-        case 'bool':
-        case 'int32':
-        case 'uint32':
-        case 'sint32':
-        case 'int64':
-        case 'uint64':
-        case 'sint64':
-            return 0;
-
-        case 'string':
-        case 'bytes':
-        default:
-            return 2;
-    };
+export const getPackedWireNumber = (type) => {
+    if (types.packed.hasOwnProperty(type)) {
+        return types.packed[type];
+    }
+    return 2;
 };
 
 export const getTagNumber = (field: ProtoField) => {
-    let wire = field.parsedType.type === 'Enum' ? 0 : getWireNumber(field.type);
+    let wire = getWireNumber(field.type);
+    if (field.rule === 'repeated') {
+        wire = getPackedWireNumber(field.type);
+    }
+    if (field.parsedType.type === 'Enum') {
+        wire = 0;
+    }
 
-
-    // for some reason I had to set this... for a certain message, why?
-    if (field.rule === 'repeated') wire = 2;
+    // for some reason I had to set wire = 2 for 
+    // if (field.rule === 'repeated') wire = 2;
     // PinCodesProposal
-    // maybe because it's repeated?
-    // case 'uint64':
-    // return 2;
-
+    // maybe it's a big in ts-proto, and we're correct?
 
     return ((field.id << 3) | wire) >>> 0;
 };
