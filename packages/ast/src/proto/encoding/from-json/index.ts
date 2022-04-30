@@ -38,8 +38,11 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
                 return fromJSON.string(fieldName);
             case 'uint64':
                 return fromJSON.long(fieldName);
+            // return fromJSON.uint64(fieldName);
+            case 'double':
+                return fromJSON.double(fieldName);
             case 'int64':
-                return needsImplementation(fieldName, field);
+                return fromJSON.int64(fieldName);
             case 'bytes':
                 return fromJSON.bytes(fieldName);
             case 'bool':

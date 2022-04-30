@@ -37,7 +37,9 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
             case 'uint64':
                 return decode.long(field.id, fieldName);
             case 'int64':
-                return needsImplementation(fieldName, field);
+                return decode.int64(field.id, fieldName);
+            case 'double':
+                return decode.double(field.id, fieldName);
             case 'bytes':
                 return decode.bytes(field.id, fieldName);
             case 'bool':

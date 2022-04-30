@@ -3,6 +3,7 @@ import * as t from '@babel/types';
 export const toJSON = {
 
     //  message.sender !== undefined && (obj.sender = message.sender);
+
     string(prop: string) {
         return t.expressionStatement(
             t.logicalExpression(
@@ -29,6 +30,112 @@ export const toJSON = {
             )
         );
     },
+
+    // message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
+
+    double(prop: string) {
+        return t.expressionStatement(
+            t.logicalExpression(
+                '&&',
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    )
+                )
+            )
+        );
+    },
+
+    // message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    int64(prop: string) {
+        return t.expressionStatement(
+            t.logicalExpression(
+                '&&',
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.logicalExpression(
+                                '||',
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(prop)
+                                ),
+                                t.identifier('undefined')
+                            ),
+                            t.identifier('toString')
+                        ),
+                        []
+                    )
+                )
+            )
+        )
+    },
+
+    // message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
+    uint64(prop: string) {
+        return t.expressionStatement(
+            t.logicalExpression(
+                '&&',
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.logicalExpression(
+                                '||',
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(prop)
+                                ),
+                                t.identifier('undefined')
+                            ),
+                            t.identifier('toString')
+                        ),
+                        []
+                    )
+                )
+            )
+        )
+    },
+
 
     //   message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
     bool(prop: string) {

@@ -51,6 +51,16 @@ describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
     })
 });
 
+describe('google/api/expr/v1alpha1/syntax', () => {
+    const ref = store.findProto('google/api/expr/v1alpha1/syntax.proto');
+    const res = traverse(store, ref.proto);
+    it('Constant', () => {
+        expectCode(createProtoObjectWithMethods(
+            'Constant', getNestedProto(res).Constant
+        ))
+    })
+});
+
 describe('cosmos/tx/signing/v1beta1/signing', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
     const res = traverse(store, ref.proto);

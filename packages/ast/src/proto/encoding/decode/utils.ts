@@ -10,6 +10,12 @@ export const decode = {
     long(num: number, prop: string) {
         return switchOnTag(num, prop, baseTypes.long());
     },
+    double(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.double());
+    },
+    int64(num: number, prop: string) {
+        return switchOnTag(num, prop, baseTypes.int64());
+    },
     type(num: number, prop: string, name: string) {
         return switchOnTag(num, prop, baseTypes.type(name));
     },
@@ -55,6 +61,33 @@ export const baseTypes = {
                 t.identifier('bool')
             ),
             []
+        );
+    },
+
+    // message.doubleValue = reader.double();
+    double() {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('double')
+            ),
+            []
+        );
+    },
+
+    // message.int64Value = (reader.int64() as Long);
+    int64() {
+        return t.tsAsExpression(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('reader'),
+                    t.identifier('int64')
+                ),
+                []
+            ),
+            t.tsTypeReference(
+                t.identifier('Long')
+            )
         );
     },
 

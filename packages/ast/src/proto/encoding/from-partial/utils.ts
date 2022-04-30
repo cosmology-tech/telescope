@@ -44,6 +44,76 @@ export const fromPartial = {
         );
     },
 
+    // message.doubleValue = object.doubleValue ?? undefined;
+
+    double(prop: string) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.logicalExpression(
+                    '??',
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    // message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    int64(prop: string) {
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.conditionalExpression(
+                    t.logicalExpression(
+                        '&&',
+                        t.binaryExpression(
+                            '!==',
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            ),
+                            t.identifier('undefined')
+                        ),
+                        t.binaryExpression(
+                            '!==',
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            ),
+                            t.nullLiteral()
+                        )
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Long'),
+                            t.identifier('fromValue')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+
     // message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     long(prop: string) {
         return t.expressionStatement(

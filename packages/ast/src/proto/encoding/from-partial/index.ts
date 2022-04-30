@@ -38,7 +38,9 @@ export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => 
             case 'uint64':
                 return fromPartial.long(fieldName);
             case 'int64':
-                return needsImplementation(fieldName, field);
+                return fromPartial.int64(fieldName);
+            case 'double':
+                return fromPartial.double(fieldName);
             case 'bytes':
                 return fromPartial.bytes(fieldName);
             case 'bool':

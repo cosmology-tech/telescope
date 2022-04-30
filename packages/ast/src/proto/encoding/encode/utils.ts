@@ -44,6 +44,87 @@ export const encode = {
         )
     },
 
+    /*
+        if (message.doubleValue !== undefined) {
+          writer.uint32(41).double(message.doubleValue);
+        }
+    */
+
+    double(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression('!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.identifier('undefined')
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('double')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        )
+    },
+
+    //   if (message.int64Value !== undefined) {
+    //     writer.uint32(24).int64(message.int64Value);
+    //   }
+
+    int64(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression('!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.identifier('undefined')
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('double')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        )
+    },
 
     //   if (message.disableMacros === true) {
     //     writer.uint32(32).bool(message.disableMacros);

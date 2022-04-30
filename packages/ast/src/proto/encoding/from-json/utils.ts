@@ -31,6 +31,35 @@ export const fromJSON = {
         )
     },
 
+
+    // doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+    double(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        )
+    },
+
     // disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
     bool(prop: string) {
         return t.objectProperty(
@@ -57,6 +86,68 @@ export const fromJSON = {
                 t.booleanLiteral(false)
             )
         )
+    },
+
+    // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+    int64(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('fromString')
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        );
+    },
+
+    // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+    uint64(prop: string) {
+        return t.objectProperty(
+            t.identifier(prop),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('fromString')
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        );
     },
 
     // poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
