@@ -10,7 +10,7 @@ export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => 
     return t.exportNamedDeclaration(
         t.variableDeclaration('const',
             [t.variableDeclarator(
-                t.identifier('MsgJoinPool'),
+                t.identifier(name),
                 t.objectExpression(
                     [
                         protoEncodeMethod(name, proto),

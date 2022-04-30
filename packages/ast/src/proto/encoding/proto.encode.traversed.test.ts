@@ -53,6 +53,14 @@ it('cosmwasm/wasm/v1/proposal', () => {
     ))
 });
 
+it('cosmwasm/wasm/v1/proposal', () => {
+    const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
+    const res = traverse(store, ref.proto);
+    expectCode(createProtoObjectWithMethods(
+        'UnpinCodesProposal', getNestedProto(res).UnpinCodesProposal
+    ))
+});
+
 it('cosmwasm/wasm/v1/query', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/query.proto');
     const res = traverse(store, ref.proto);

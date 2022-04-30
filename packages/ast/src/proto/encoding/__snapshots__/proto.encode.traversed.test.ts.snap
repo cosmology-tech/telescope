@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
-"export const MsgJoinPool = {
+"export const SignatureDescriptors = {
   encode(message: SignatureDescriptors, writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signatures) {
-      SignatureDescriptor.encode(v!, writer.uint32(11).fork()).ldelim();
+      SignatureDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -60,22 +60,22 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 `;
 
 exports[`cosmos/tx/v1beta1/tx 1`] = `
-"export const MsgJoinPool = {
+"export const AuxSignerData = {
   encode(message: AuxSignerData, writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== \\"\\") {
-      writer.uint32(11).string(message.address);
+      writer.uint32(10).string(message.address);
     }
 
     if (message.signDoc !== undefined) {
-      SignDocDirectAux.encode(message.signDoc, writer.uint32(12).fork()).ldelim();
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.mode !== 0) {
-      writer.uint32(13).int32(message.mode);
+      writer.uint32(24).int32(message.mode);
     }
 
     if (message.sig.length !== 0) {
-      writer.uint32(14).bytes(message.sig);
+      writer.uint32(34).bytes(message.sig);
     }
 
     return writer;
@@ -146,17 +146,17 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 `;
 
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
-"export const MsgJoinPool = {
+"export const PinCodesProposal = {
   encode(message: PinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== \\"\\") {
-      writer.uint32(11).string(message.title);
+      writer.uint32(10).string(message.title);
     }
 
     if (message.description !== \\"\\") {
-      writer.uint32(12).string(message.description);
+      writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(13).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);
@@ -236,15 +236,106 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 };"
 `;
 
+exports[`cosmwasm/wasm/v1/proposal 2`] = `
+"export const UnpinCodesProposal = {
+  encode(message: UnpinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.title !== \\"\\") {
+      writer.uint32(10).string(message.title);
+    }
+
+    if (message.description !== \\"\\") {
+      writer.uint32(18).string(message.description);
+    }
+
+    writer.uint32(26).fork();
+
+    for (const v of message.codeIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): UnpinCodesProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUnpinCodesProposal();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.title = reader.string();
+          break;
+
+        case 2:
+          message.description = reader.string();
+          break;
+
+        case 3:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.codeIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.codeIds.push((reader.uint64() as Long));
+          }
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): UnpinCodesProposal {
+    return {
+      title: isSet(object.title) ? String(object.title) : \\"\\",
+      description: isSet(object.description) ? String(object.description) : \\"\\",
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : []
+    };
+  },
+
+  toJSON(message: UnpinCodesProposal): unknown {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.codeIds) {
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.codeIds = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<UnpinCodesProposal>, I>>(object: I): UnpinCodesProposal {
+    const message = createBaseUnpinCodesProposal();
+    message.title = object.title ?? \\"\\";
+    message.description = object.description ?? \\"\\";
+    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
 exports[`cosmwasm/wasm/v1/query 1`] = `
-"export const MsgJoinPool = {
+"export const QueryRawContractStateRequest = {
   encode(message: QueryRawContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== \\"\\") {
-      writer.uint32(11).string(message.address);
+      writer.uint32(10).string(message.address);
     }
 
     if (message.queryData.length !== 0) {
-      writer.uint32(12).bytes(message.queryData);
+      writer.uint32(18).bytes(message.queryData);
     }
 
     return writer;
@@ -304,19 +395,19 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
 "export const MsgJoinPool = {
   encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== \\"\\") {
-      writer.uint32(11).string(message.sender);
+      writer.uint32(10).string(message.sender);
     }
 
     if (!message.poolId.isZero()) {
-      writer.uint32(12).uint64(message.poolId);
+      writer.uint32(16).uint64(message.poolId);
     }
 
     if (message.shareOutAmount !== \\"\\") {
-      writer.uint32(13).string(message.shareOutAmount);
+      writer.uint32(26).string(message.shareOutAmount);
     }
 
     for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(14).fork()).ldelim();
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;

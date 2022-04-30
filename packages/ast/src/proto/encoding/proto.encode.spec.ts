@@ -51,9 +51,22 @@ it('PinCodesProposal', async () => {
   );
 });
 
+it('UnPinCodesProposal', async () => {
+  expectCode(createProtoObjectWithMethods(
+    'UnPinCodesProposal',
+    getNestedProto(wasmprops).UnPinCodesProposal)
+  );
+});
+
 it('QueryRawContractStateRequest', async () => {
   expectCode(createProtoObjectWithMethods(
     'QueryRawContractStateRequest',
     getNestedProto(wasm).QueryRawContractStateRequest)
   );
 });
+
+it('generatesNums', () => {
+  for (let i = 0; i < 100; i++) {
+    console.log(`${i} >>> 3 => ${i >>> 3}`)
+  }
+})

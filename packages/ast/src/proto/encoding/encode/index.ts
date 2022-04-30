@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField } from '../../types';
+import { ProtoType, ProtoField, getTagNumber } from '../../types';
 import { encode, arrayTypes } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -9,11 +9,6 @@ const needsImplementation = (name: string, field: ProtoField) => {
 
 export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
 
-    // TODO figure this out
-    const calcTagId = (fieldId) => {
-        return fieldId + 10;
-    }
-
     return Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
         const field = proto.fields[fieldName];
         if (field.rule === 'repeated') {
@@ -21,7 +16,7 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                 case 'string':
                     return needsImplementation(fieldName, field);
                 case 'uint64':
-                    return [...m, ...encode.scalarArray(calcTagId(field.id), fieldName, arrayTypes.long())];
+                    return [...m, ...encode.scalarArray(getTagNumber(field), fieldName, arrayTypes.long())];
                 case 'int64':
                     return needsImplementation(fieldName, field);
                 case 'bytes':
@@ -32,7 +27,7 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                             // could be same as Type?
                             return needsImplementation(fieldName, field);
                         case 'Type':
-                            return [...m, ...encode.typeArray(calcTagId(field.id), fieldName, field.parsedType.name)];
+                            return [...m, ...encode.typeArray(getTagNumber(field), fieldName, field.parsedType.name)];
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -41,19 +36,19 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
 
         switch (field.type) {
             case 'string':
-                return [...m, encode.string(calcTagId(field.id), fieldName)];
+                return [...m, encode.string(getTagNumber(field), fieldName)];
             case 'uint64':
-                return [...m, encode.long(calcTagId(field.id), fieldName)];
+                return [...m, encode.long(getTagNumber(field), fieldName)];
             case 'int64':
                 return needsImplementation(fieldName, field);
             case 'bytes':
-                return [...m, encode.bytes(calcTagId(field.id), fieldName)];
+                return [...m, encode.bytes(getTagNumber(field), fieldName)];
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':
-                        return [...m, encode.enum(calcTagId(field.id), fieldName)];
+                        return [...m, encode.enum(getTagNumber(field), fieldName)];
                     case 'Type':
-                        return [...m, encode.type(calcTagId(field.id), fieldName, field.parsedType.name)];
+                        return [...m, encode.type(getTagNumber(field), fieldName, field.parsedType.name)];
                 }
                 return needsImplementation(fieldName, field);
         }

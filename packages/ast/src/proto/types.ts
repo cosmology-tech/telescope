@@ -33,15 +33,28 @@ export interface ProtoField {
     comment: string | undefined;
 }
 
-export const NATIVE_TYPES = [
+export const SCALAR_TYPES = [
     'string',
+    'double',
+    'float',
     'int32',
     'uint32',
+    'sint32',
+    'fixed32',
+    'sfixed32',
     'int64',
     'uint64',
-    'double',
+    'sint64',
+    'fixed64',
+    'sfixed64',
     'bytes',
-    'bool',
+    'bool'
+];
+
+export const NATIVE_TYPES = [
+    ...SCALAR_TYPES,
+
+    // TODO move these out
     'google.protobuf.Timestamp',
     'google.protobuf.Duration',
     'google.protobuf.Any',
@@ -51,12 +64,19 @@ export const getTSTypeFromProtoType = (type) => {
     switch (type) {
         case 'string':
             return t.tsStringKeyword();
+        case 'double':
+        case 'float':
         case 'int32':
         case 'uint32':
-        case 'double':
+        case 'sint32':
+        case 'fixed32':
+        case 'sfixed32':
             return t.tsNumberKeyword();
         case 'int64':
         case 'uint64':
+        case 'sint64':
+        case 'fixed64':
+        case 'sfixed64':
             return t.tsTypeReference(t.identifier('Long'))
         case 'bytes':
             return t.tsTypeReference(t.identifier('Uint8Array'));
@@ -73,6 +93,53 @@ export const getTSTypeFromProtoType = (type) => {
     };
 };
 
+// https://github.com/protobufjs/protobuf.js/blob/master/src/types.js#L38-L54
+export const getWireNumber = (type) => {
+    switch (type) {
+
+        case 'double':
+        case 'fixed64':
+        case 'sfixed64':
+            return 1;
+
+        case 'float':
+            return 5;
+
+        case 'fixed32':
+        case 'sfixed32':
+            return 5;
+
+        case 'bool':
+        case 'int32':
+        case 'uint32':
+        case 'sint32':
+        case 'int64':
+        case 'uint64':
+        case 'sint64':
+            return 0;
+
+        case 'string':
+        case 'bytes':
+        default:
+            return 2;
+    };
+};
+
+export const getTagNumber = (field: ProtoField) => {
+    let wire = field.parsedType.type === 'Enum' ? 0 : getWireNumber(field.type);
+
+
+    // for some reason I had to set this... for a certain message, why?
+    if (field.rule === 'repeated') wire = 2;
+    // PinCodesProposal
+    // maybe because it's repeated?
+    // case 'uint64':
+    // return 2;
+
+
+    return ((field.id << 3) | wire) >>> 0;
+};
+
 
 export const getDefaultTSTypeFromProtoType = (type, isArray) => {
 
@@ -83,12 +150,19 @@ export const getDefaultTSTypeFromProtoType = (type, isArray) => {
     switch (type) {
         case 'string':
             return t.stringLiteral('');
+        case 'double':
+        case 'float':
         case 'int32':
         case 'uint32':
-        case 'double':
+        case 'sint32':
+        case 'fixed32':
+        case 'sfixed32':
             return t.numericLiteral(0);
         case 'int64':
         case 'uint64':
+        case 'sint64':
+        case 'fixed64':
+        case 'sfixed64':
             return t.memberExpression(
                 t.identifier('Long'),
                 t.identifier('UZERO')
@@ -99,7 +173,9 @@ export const getDefaultTSTypeFromProtoType = (type, isArray) => {
                 []
             );
         case 'bool':
-            return t.booleanLiteral(false)
+            return t.booleanLiteral(false);
+
+        // OTHER TYPES
         case 'google.protobuf.Timestamp':
             return t.identifier('undefined');
         case 'google.protobuf.Duration':
