@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField } from '../../types';
+import { ProtoType, ProtoField, getFieldsTypeName } from '../../types';
 import { baseTypes, decode } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -25,7 +25,7 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
                     switch (field.parsedType.type) {
                         case 'Enum':
                         case 'Type':
-                            return decode.typeArray(field.id, fieldName, field.parsedType.name);
+                            return decode.typeArray(field.id, fieldName, getFieldsTypeName(field));
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -46,7 +46,7 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
                     case 'Enum':
                         return decode.enum(field.id, fieldName);
                     case 'Type':
-                        return decode.type(field.id, fieldName, field.parsedType.name);
+                        return decode.type(field.id, fieldName, getFieldsTypeName(field));
                 }
                 return needsImplementation(fieldName, field);
         }

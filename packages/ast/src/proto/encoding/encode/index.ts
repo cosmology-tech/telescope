@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField, getTagNumber } from '../../types';
+import { ProtoType, ProtoField, getTagNumber, getFieldsTypeName } from '../../types';
 import { encode, arrayTypes } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -27,7 +27,7 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                             // could be same as Type?
                             return needsImplementation(fieldName, field);
                         case 'Type':
-                            return [...m, ...encode.typeArray(getTagNumber(field), fieldName, field.parsedType.name)];
+                            return [...m, ...encode.typeArray(getTagNumber(field), fieldName, getFieldsTypeName(field))];
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -48,7 +48,7 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
                     case 'Enum':
                         return [...m, encode.enum(getTagNumber(field), fieldName)];
                     case 'Type':
-                        return [...m, encode.type(getTagNumber(field), fieldName, field.parsedType.name)];
+                        return [...m, encode.type(getTagNumber(field), fieldName, getFieldsTypeName(field))];
                 }
                 return needsImplementation(fieldName, field);
         }
