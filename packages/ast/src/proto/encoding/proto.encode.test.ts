@@ -36,13 +36,21 @@ it('cosmos/tx/signing/v1beta1/signing', () => {
     ))
 });
 
-it('cosmos/tx/v1beta1/tx', () => {
+describe('cosmos/tx/v1beta1/tx', () => {
     const ref = store.findProto('cosmos/tx/v1beta1/tx.proto');
     const res = traverse(store, ref.proto);
-    expectCode(createProtoObjectWithMethods(
-        'AuxSignerData', getNestedProto(res).AuxSignerData
-    ))
-
+    it('AuxSignerData', () => {
+        expectCode(createProtoObjectWithMethods(
+            'AuxSignerData', getNestedProto(res).AuxSignerData
+        ))
+    })
+    // TODO
+    it('ModeInfo_Multi', () => {
+        console.log(JSON.stringify(getNestedProto(res).ModeInfo, null, 2))
+        expectCode(createProtoObjectWithMethods(
+            'ModeInfo_Multi', getNestedProto(res).ModeInfo
+        ))
+    })
 });
 
 it('cosmwasm/wasm/v1/proposal', () => {

@@ -145,6 +145,156 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 };"
 `;
 
+exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
+"export const AuxSignerData = {
+  encode(message: AuxSignerData, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== \\"\\") {
+      writer.uint32(10).string(message.address);
+    }
+
+    if (message.signDoc !== undefined) {
+      SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+
+    if (message.sig.length !== 0) {
+      writer.uint32(34).bytes(message.sig);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): AuxSignerData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuxSignerData();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.address = reader.string();
+          break;
+
+        case 2:
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.mode = (reader.int32() as any);
+          break;
+
+        case 4:
+          message.sig = reader.bytes();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): AuxSignerData {
+    return {
+      address: isSet(object.address) ? String(object.address) : \\"\\",
+      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
+    };
+  },
+
+  toJSON(message: AuxSignerData): unknown {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig !== undefined ? message.sig : new Uint8Array()));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<AuxSignerData>, I>>(object: I): AuxSignerData {
+    const message = createBaseAuxSignerData();
+    message.address = object.address ?? \\"\\";
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.mode = object.mode ?? 0;
+    message.sig = object.sig ?? new Uint8Array();
+    return message;
+  }
+
+};"
+`;
+
+exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
+"export const ModeInfo_Multi = {
+  encode(message: ModeInfo_Multi, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.single !== undefined) {
+      Single.encode(message.single, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.multi !== undefined) {
+      Multi.encode(message.multi, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): ModeInfo_Multi {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseModeInfoMulti();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.single = Single.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.multi = Multi.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ModeInfo_Multi {
+    return {
+      single: isSet(object.single) ? Single.fromJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? Multi.fromJSON(object.multi) : undefined
+    };
+  },
+
+  toJSON(message: ModeInfo_Multi): unknown {
+    const obj: any = {};
+    message.single !== undefined && (obj.single = message.single ? Single.toJSON(message.single) : undefined);
+    message.multi !== undefined && (obj.multi = message.multi ? Multi.toJSON(message.multi) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ModeInfo_Multi>, I>>(object: I): ModeInfo_Multi {
+    const message = createBaseModeInfoMulti();
+    message.single = object.single !== undefined && object.single !== null ? Single.fromPartial(object.single) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? Multi.fromPartial(object.multi) : undefined;
+    return message;
+  }
+
+};"
+`;
+
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
 "export const PinCodesProposal = {
   encode(message: PinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
