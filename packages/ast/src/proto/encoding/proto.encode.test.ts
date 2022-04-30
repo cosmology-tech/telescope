@@ -15,17 +15,29 @@ const printCode = (ast) => {
     );
 }
 
-it('cosmos/authz/v1beta1/authz', () => {
-    const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
-    const res = traverse(store, ref.proto);
-});
+// it('cosmos/authz/v1beta1/authz', () => {
+//     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
+//     const res = traverse(store, ref.proto);
+// });
 
-it('osmosis/gamm/v1beta1/tx', () => {
+describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const res = traverse(store, ref.proto);
-    expectCode(createProtoObjectWithMethods(
-        'MsgJoinPool', getNestedProto(res).MsgJoinPool
-    ))
+    it('MsgJoinPool', () => {
+        expectCode(createProtoObjectWithMethods(
+            'MsgJoinPool', getNestedProto(res).MsgJoinPool
+        ))
+    })
+    it('MsgSwapExactAmountOut', () => {
+        expectCode(createProtoObjectWithMethods(
+            'MsgSwapExactAmountOut', getNestedProto(res).MsgSwapExactAmountOut
+        ))
+    })
+    it('MsgSwapExactAmountIn', () => {
+        expectCode(createProtoObjectWithMethods(
+            'MsgSwapExactAmountIn', getNestedProto(res).MsgSwapExactAmountIn
+        ))
+    })
 });
 
 describe('cosmos/tx/signing/v1beta1/signing', () => {

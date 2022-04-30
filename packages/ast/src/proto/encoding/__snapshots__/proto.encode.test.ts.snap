@@ -806,3 +806,279 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
 
 };"
 `;
+
+exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
+"export const MsgJoinPool = {
+  encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (!message.poolId.isZero()) {
+      writer.uint32(16).uint64(message.poolId);
+    }
+
+    if (message.shareOutAmount !== \\"\\") {
+      writer.uint32(26).string(message.shareOutAmount);
+    }
+
+    for (const v of message.tokenInMaxs) {
+      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): MsgJoinPool {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgJoinPool();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 3:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 4:
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgJoinPool {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : \\"\\",
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: MsgJoinPool): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgJoinPool>, I>>(object: I): MsgJoinPool {
+    const message = createBaseMsgJoinPool();
+    message.sender = object.sender ?? \\"\\";
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.shareOutAmount = object.shareOutAmount ?? \\"\\";
+    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
+"export const MsgSwapExactAmountIn = {
+  encode(message: MsgSwapExactAmountIn, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    for (const v of message.routes) {
+      SwapAmountInRoute.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.tokenIn !== undefined) {
+      Coin.encode(message.tokenIn, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.tokenOutMinAmount !== \\"\\") {
+      writer.uint32(34).string(message.tokenOutMinAmount);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountIn {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSwapExactAmountIn();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.routes.push(SwapAmountInRoute.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.tokenIn = Coin.decode(reader, reader.uint32());
+          break;
+
+        case 4:
+          message.tokenOutMinAmount = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgSwapExactAmountIn {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : [],
+      tokenIn: isSet(object.tokenIn) ? Coin.fromJSON(object.tokenIn) : undefined,
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : \\"\\"
+    };
+  },
+
+  toJSON(message: MsgSwapExactAmountIn): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toJSON(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+
+    message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn ? Coin.toJSON(message.tokenIn) : undefined);
+    message.tokenOutMinAmount !== undefined && (obj.tokenOutMinAmount = message.tokenOutMinAmount);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountIn>, I>>(object: I): MsgSwapExactAmountIn {
+    const message = createBaseMsgSwapExactAmountIn();
+    message.sender = object.sender ?? \\"\\";
+    message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
+    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : undefined;
+    message.tokenOutMinAmount = object.tokenOutMinAmount ?? \\"\\";
+    return message;
+  }
+
+};"
+`;
+
+exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
+"export const MsgSwapExactAmountOut = {
+  encode(message: MsgSwapExactAmountOut, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== \\"\\") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    for (const v of message.routes) {
+      SwapAmountOutRoute.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.tokenInMaxAmount !== \\"\\") {
+      writer.uint32(26).string(message.tokenInMaxAmount);
+    }
+
+    if (message.tokenOut !== undefined) {
+      Coin.encode(message.tokenOut, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountOut {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSwapExactAmountOut();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.tokenInMaxAmount = reader.string();
+          break;
+
+        case 4:
+          message.tokenOut = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgSwapExactAmountOut {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? String(object.tokenInMaxAmount) : \\"\\",
+      tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
+    };
+  },
+
+  toJSON(message: MsgSwapExactAmountOut): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+
+    message.tokenInMaxAmount !== undefined && (obj.tokenInMaxAmount = message.tokenInMaxAmount);
+    message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut ? Coin.toJSON(message.tokenOut) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountOut>, I>>(object: I): MsgSwapExactAmountOut {
+    const message = createBaseMsgSwapExactAmountOut();
+    message.sender = object.sender ?? \\"\\";
+    message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
+    message.tokenInMaxAmount = object.tokenInMaxAmount ?? \\"\\";
+    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
+    return message;
+  }
+
+};"
+`;
