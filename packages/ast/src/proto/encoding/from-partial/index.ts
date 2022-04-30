@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField } from '../../types';
+import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../../types';
 import { arrayTypes, fromPartial } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -76,7 +76,7 @@ export const protoFromPartialMethod = (name: string, proto: ProtoType) => {
                     t.variableDeclarator(
                         t.identifier('message'),
                         t.callExpression(
-                            t.identifier(`createBase${pascal(name)}`),
+                            t.identifier(getBaseCreateTypeFuncName(name)),
                             []
                         )
                     )

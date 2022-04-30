@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
-import { camel, pascal } from 'case';
-import { identifier, tsEnumMember, tsPropertySignature, functionDeclaration } from '../utils';
+import { identifier, tsPropertySignature, functionDeclaration } from '../utils';
 
 export interface ProtoEnum {
     values: { [key: string]: number };
@@ -247,6 +246,31 @@ export const getDefaultTSTypeFromProtoType = (type, isArray) => {
     };
 };
 
+const lowerFirst = (str: string) => {
+    return str.charAt(0).toLowerCase() + str.substring(1);
+};
+const upperFirst = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.substring(1);
+};
+
+export const getEnumToJsonName = (name) => {
+    return lowerFirst(name) + 'ToJSON';
+};
+
+export const getEnumFromJsonName = (name) => {
+    return lowerFirst(name) + 'FromJSON';
+};
+
+export const getFieldsTypeName = (field: ProtoField) => {
+    if (field?.scope.length <= 1) return field.parsedType.name;
+    const [_first, ...rest] = field.scope;
+    return [...rest.reverse(), field.parsedType.name].join('_');
+};
+
+export const getBaseCreateTypeFuncName = (name) => {
+    return `createBase${upperFirst(name)}`;
+};
+
 /*
   returns "Type | undefined"
 */
@@ -354,7 +378,7 @@ export const createCreateProtoType = (name: string, proto: ProtoType) => {
         })
 
 
-    return functionDeclaration(t.identifier(`createBase${pascal(name)}`),
+    return functionDeclaration(t.identifier(getBaseCreateTypeFuncName(name)),
         [],
         t.blockStatement([
             t.returnStatement(t.objectExpression(
@@ -367,21 +391,3 @@ export const createCreateProtoType = (name: string, proto: ProtoType) => {
         ))
 };
 
-function lowerFirst(str: string) {
-    return str.charAt(0).toLowerCase() + str.substring(1);
-}
-
-export const getEnumToJsonName = (name) => {
-    return lowerFirst(name) + 'ToJSON';
-};
-
-export const getEnumFromJsonName = (name) => {
-    return lowerFirst(name) + 'FromJSON';
-};
-
-export const getFieldsTypeName = (field: ProtoField) => {
-    if (field?.scope.length <= 1) return field.parsedType.name;
-    const [_first, ...rest] = field.scope;
-    return [...rest.reverse(), field.parsedType.name].join('_');
-
-}

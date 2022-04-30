@@ -78,6 +78,13 @@ describe('google/api/expr/v1alpha1/checked', () => {
             'Type', getNestedProto(res).Type
         ))
     })
+    describe('nested', () => {
+        it('MapType', () => {
+            expectCode(createProtoObjectWithMethods(
+                'Type_MapType', getNestedProto(res).Type.nested.MapType
+            ))
+        })
+    })
 });
 
 it('cosmwasm/wasm/v1/proposal', () => {

@@ -252,10 +252,18 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
 };
 
 const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    let nested = null;
+    if (obj.nested) {
+        nested = Object.keys(obj.nested).reduce((m, key) => {
+            m[key] = recursiveTraversal(store, root, obj.nested[key], imports);
+            return m;
+        }, {});
+    }
     return {
         type: 'Type',
         options: obj.options,
-        fields: parseFields(store, root, obj, imports)
+        fields: parseFields(store, root, obj, imports),
+        nested
     }
 };
 
@@ -267,9 +275,18 @@ const parseEnum = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object
 };
 
 const parseService = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    let nested = null;
+    if (obj.nested) {
+        nested = Object.keys(obj.nested).reduce((m, key) => {
+            m[key] = recursiveTraversal(store, root, obj.nested[key], imports);
+            return m;
+        }, {});
+    }
+
     return {
         type: 'Service',
-        ...obj.toJSON({ keepComments: true })
+        ...obj.toJSON({ keepComments: true }),
+        nested
     }
 };
 

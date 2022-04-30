@@ -237,7 +237,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
   decode(input: _m0.Reader | Uint8Array): ModeInfo_Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseModeInfoMulti();
+    const message = createBaseModeInfo_Multi();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -275,7 +275,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
   },
 
   fromPartial<I extends Exact<DeepPartial<ModeInfo_Multi>, I>>(object: I): ModeInfo_Multi {
-    const message = createBaseModeInfoMulti();
+    const message = createBaseModeInfo_Multi();
     message.single = object.single !== undefined && object.single !== null ? Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? Multi.fromPartial(object.multi) : undefined;
     return message;
@@ -715,51 +715,35 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 };"
 `;
 
-exports[`osmosis/gamm/v1beta1/tx 1`] = `
-"export const MsgJoinPool = {
-  encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sender !== \\"\\") {
-      writer.uint32(10).string(message.sender);
+exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
+"export const Type_MapType = {
+  encode(message: Type_MapType, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.keyType !== undefined) {
+      Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
 
-    if (!message.poolId.isZero()) {
-      writer.uint32(16).uint64(message.poolId);
-    }
-
-    if (message.shareOutAmount !== \\"\\") {
-      writer.uint32(26).string(message.shareOutAmount);
-    }
-
-    for (const v of message.tokenInMaxs) {
-      Coin.encode(v!, writer.uint32(34).fork()).ldelim();
+    if (message.valueType !== undefined) {
+      Type.encode(message.valueType, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinPool {
+  decode(input: _m0.Reader | Uint8Array): Type_MapType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgJoinPool();
+    const message = createBaseType_MapType();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
 
       switch (tag >>> 3) {
         case 1:
-          message.sender = reader.string();
+          message.keyType = Type.decode(reader, reader.uint32());
           break;
 
         case 2:
-          message.poolId = (reader.uint64() as Long);
-          break;
-
-        case 3:
-          message.shareOutAmount = reader.string();
-          break;
-
-        case 4:
-          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          message.valueType = Type.decode(reader, reader.uint32());
           break;
 
         default:
@@ -771,36 +755,24 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
     return message;
   },
 
-  fromJSON(object: any): MsgJoinPool {
+  fromJSON(object: any): Type_MapType {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : \\"\\",
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
+      keyType: isSet(object.keyType) ? Type.fromJSON(object.keyType) : undefined,
+      valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
     };
   },
 
-  toJSON(message: MsgJoinPool): unknown {
+  toJSON(message: Type_MapType): unknown {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
-
-    if (message.tokenInMaxs) {
-      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.tokenInMaxs = [];
-    }
-
+    message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
+    message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinPool>, I>>(object: I): MsgJoinPool {
-    const message = createBaseMsgJoinPool();
-    message.sender = object.sender ?? \\"\\";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.shareOutAmount = object.shareOutAmount ?? \\"\\";
-    message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
+  fromPartial<I extends Exact<DeepPartial<Type_MapType>, I>>(object: I): Type_MapType {
+    const message = createBaseType_MapType();
+    message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
+    message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
   }
 
