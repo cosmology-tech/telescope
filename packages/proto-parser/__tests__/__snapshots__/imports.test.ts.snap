@@ -3,6 +3,7 @@
 exports[`imports lookup Any 1`] = `
 Object {
   "import": "google/protobuf/any.proto",
+  "importedName": "Any",
   "name": "Any",
 }
 `;
@@ -42,6 +43,7 @@ Object {
 exports[`imports lookup google/api/expr/v1alpha1/checked Empty 1`] = `
 Object {
   "import": "google/protobuf/empty.proto",
+  "importedName": "Empty",
   "name": "Empty",
 }
 `;
@@ -49,6 +51,7 @@ Object {
 exports[`imports lookup google/api/expr/v1alpha1/checked NullValue 1`] = `
 Object {
   "import": "google/protobuf/struct.proto",
+  "importedName": "NullValue",
   "name": "NullValue",
 }
 `;
@@ -80,6 +83,7 @@ Object {
 exports[`imports lookup osmosis/claim/v1beta1/params.proto Duration 1`] = `
 Object {
   "import": "google/protobuf/duration.proto",
+  "importedName": "Duration",
   "name": "Duration",
 }
 `;
