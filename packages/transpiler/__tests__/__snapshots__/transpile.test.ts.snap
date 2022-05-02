@@ -1,0 +1,1915 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nested google/api/expr/v1alpha1/checked 1`] = `
+Object {
+  "imports": Array [
+    "google/api/expr/v1alpha1/syntax.proto",
+    "google/protobuf/empty.proto",
+    "google/protobuf/struct.proto",
+  ],
+  "package": "google.api.expr.v1alpha1",
+  "parsedImports": Object {
+    "google/api/expr/v1alpha1/syntax.proto": Array [
+      "SourceInfo",
+      "Expr",
+      "Constant",
+    ],
+    "google/protobuf/empty.proto": Array [
+      "Empty",
+    ],
+    "google/protobuf/struct.proto": Array [
+      "NullValue",
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "google": Object {
+        "nested": Object {
+          "api": Object {
+            "nested": Object {
+              "expr": Object {
+                "nested": Object {
+                  "v1alpha1": Object {
+                    "nested": Object {
+                      "CheckedExpr": Object {
+                        "fields": Object {
+                          "expr": Object {
+                            "id": 4,
+                            "import": "google/api/expr/v1alpha1/syntax.proto",
+                            "importedName": "Expr",
+                            "parsedType": Object {
+                              "name": "Expr",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              Array [
+                                "google.api.expr.v1alpha1",
+                              ],
+                            ],
+                            "scopeType": "import",
+                            "type": "Expr",
+                          },
+                          "exprVersion": Object {
+                            "id": 6,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "referenceMap": Object {
+                            "id": 2,
+                            "keyType": "int64",
+                            "parsedType": Object {
+                              "name": "Reference",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Reference",
+                          },
+                          "sourceInfo": Object {
+                            "id": 5,
+                            "import": "google/api/expr/v1alpha1/syntax.proto",
+                            "importedName": "SourceInfo",
+                            "parsedType": Object {
+                              "name": "SourceInfo",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              Array [
+                                "google.api.expr.v1alpha1",
+                              ],
+                            ],
+                            "scopeType": "import",
+                            "type": "SourceInfo",
+                          },
+                          "typeMap": Object {
+                            "id": 3,
+                            "keyType": "int64",
+                            "parsedType": Object {
+                              "name": "Type",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Type",
+                          },
+                        },
+                        "name": "CheckedExpr",
+                        "nested": null,
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "Decl": Object {
+                        "fields": Object {
+                          "function": Object {
+                            "id": 3,
+                            "parsedType": Object {
+                              "name": "FunctionDecl",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Decl",
+                            ],
+                            "type": "FunctionDecl",
+                          },
+                          "ident": Object {
+                            "id": 2,
+                            "parsedType": Object {
+                              "name": "IdentDecl",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Decl",
+                            ],
+                            "type": "IdentDecl",
+                          },
+                          "name": Object {
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                        },
+                        "name": "Decl",
+                        "nested": Object {
+                          "FunctionDecl": Object {
+                            "fields": Object {
+                              "overloads": Object {
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Overload",
+                                  "type": "Type",
+                                },
+                                "rule": "repeated",
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                  "Decl",
+                                  "FunctionDecl",
+                                ],
+                                "type": "Overload",
+                              },
+                            },
+                            "name": "FunctionDecl",
+                            "nested": Object {
+                              "Overload": Object {
+                                "fields": Object {
+                                  "doc": Object {
+                                    "id": 6,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "string",
+                                      "type": "native",
+                                    },
+                                    "type": "string",
+                                    "typeNum": 13,
+                                  },
+                                  "isInstanceFunction": Object {
+                                    "id": 5,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "bool",
+                                      "type": "native",
+                                    },
+                                    "type": "bool",
+                                    "typeNum": 12,
+                                  },
+                                  "overloadId": Object {
+                                    "id": 1,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "string",
+                                      "type": "native",
+                                    },
+                                    "type": "string",
+                                    "typeNum": 13,
+                                  },
+                                  "params": Object {
+                                    "id": 2,
+                                    "parsedType": Object {
+                                      "name": "Type",
+                                      "type": "Type",
+                                    },
+                                    "rule": "repeated",
+                                    "scope": Array [
+                                      "google.api.expr.v1alpha1",
+                                    ],
+                                    "type": "Type",
+                                  },
+                                  "resultType": Object {
+                                    "id": 4,
+                                    "parsedType": Object {
+                                      "name": "Type",
+                                      "type": "Type",
+                                    },
+                                    "scope": Array [
+                                      "google.api.expr.v1alpha1",
+                                    ],
+                                    "type": "Type",
+                                  },
+                                  "typeParams": Object {
+                                    "id": 3,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "string",
+                                      "type": "native",
+                                    },
+                                    "rule": "repeated",
+                                    "type": "string",
+                                    "typeNum": 13,
+                                  },
+                                },
+                                "name": "Overload",
+                                "nested": null,
+                                "options": undefined,
+                                "type": "Type",
+                              },
+                            },
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "IdentDecl": Object {
+                            "fields": Object {
+                              "doc": Object {
+                                "id": 3,
+                                "isScalar": true,
+                                "parsedType": Object {
+                                  "name": "string",
+                                  "type": "native",
+                                },
+                                "type": "string",
+                                "typeNum": 13,
+                              },
+                              "type": Object {
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                              "value": Object {
+                                "id": 2,
+                                "import": "google/api/expr/v1alpha1/syntax.proto",
+                                "importedName": "Constant",
+                                "parsedType": Object {
+                                  "name": "Constant",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  Array [
+                                    "google.api.expr.v1alpha1",
+                                  ],
+                                ],
+                                "scopeType": "import",
+                                "type": "Constant",
+                              },
+                            },
+                            "name": "IdentDecl",
+                            "nested": null,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                        },
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "Reference": Object {
+                        "fields": Object {
+                          "name": Object {
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "overloadId": Object {
+                            "id": 3,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "rule": "repeated",
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "value": Object {
+                            "id": 4,
+                            "import": "google/api/expr/v1alpha1/syntax.proto",
+                            "importedName": "Constant",
+                            "parsedType": Object {
+                              "name": "Constant",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              Array [
+                                "google.api.expr.v1alpha1",
+                              ],
+                            ],
+                            "scopeType": "import",
+                            "type": "Constant",
+                          },
+                        },
+                        "name": "Reference",
+                        "nested": null,
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "Type": Object {
+                        "fields": Object {
+                          "abstractType": Object {
+                            "id": 14,
+                            "parsedType": Object {
+                              "name": "AbstractType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "AbstractType",
+                          },
+                          "dyn": Object {
+                            "id": 1,
+                            "import": "google/protobuf/empty.proto",
+                            "importedName": "google.protobuf.Empty",
+                            "parsedType": Object {
+                              "name": "Empty",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.protobuf",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.Empty",
+                          },
+                          "error": Object {
+                            "id": 12,
+                            "import": "google/protobuf/empty.proto",
+                            "importedName": "google.protobuf.Empty",
+                            "parsedType": Object {
+                              "name": "Empty",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.protobuf",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.Empty",
+                          },
+                          "function": Object {
+                            "id": 8,
+                            "parsedType": Object {
+                              "name": "FunctionType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "FunctionType",
+                          },
+                          "listType": Object {
+                            "id": 6,
+                            "parsedType": Object {
+                              "name": "ListType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "ListType",
+                          },
+                          "mapType": Object {
+                            "id": 7,
+                            "parsedType": Object {
+                              "name": "MapType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "MapType",
+                          },
+                          "messageType": Object {
+                            "id": 9,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "null": Object {
+                            "id": 2,
+                            "import": "google/protobuf/struct.proto",
+                            "importedName": "google.protobuf.NullValue",
+                            "parsedType": Object {
+                              "name": "NullValue",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.protobuf",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.NullValue",
+                          },
+                          "primitive": Object {
+                            "id": 3,
+                            "parsedType": Object {
+                              "name": "PrimitiveType",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "PrimitiveType",
+                          },
+                          "type": Object {
+                            "id": 11,
+                            "parsedType": Object {
+                              "name": "Type",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Type",
+                          },
+                          "typeParam": Object {
+                            "id": 10,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "wellKnown": Object {
+                            "id": 5,
+                            "parsedType": Object {
+                              "name": "WellKnownType",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "WellKnownType",
+                          },
+                          "wrapper": Object {
+                            "id": 4,
+                            "parsedType": Object {
+                              "name": "PrimitiveType",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "PrimitiveType",
+                          },
+                        },
+                        "name": "Type",
+                        "nested": Object {
+                          "AbstractType": Object {
+                            "fields": Object {
+                              "name": Object {
+                                "id": 1,
+                                "isScalar": true,
+                                "parsedType": Object {
+                                  "name": "string",
+                                  "type": "native",
+                                },
+                                "type": "string",
+                                "typeNum": 13,
+                              },
+                              "parameterTypes": Object {
+                                "id": 2,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "rule": "repeated",
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "name": "AbstractType",
+                            "nested": null,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "FunctionType": Object {
+                            "fields": Object {
+                              "argTypes": Object {
+                                "id": 2,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "rule": "repeated",
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                              "resultType": Object {
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "name": "FunctionType",
+                            "nested": null,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "ListType": Object {
+                            "fields": Object {
+                              "elemType": Object {
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "name": "ListType",
+                            "nested": null,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "MapType": Object {
+                            "fields": Object {
+                              "keyType": Object {
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                              "valueType": Object {
+                                "id": 2,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "name": "MapType",
+                            "nested": null,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "PrimitiveType": Object {
+                            "comments": Object {
+                              "BOOL": "Boolean type.",
+                              "BYTES": "Bytes type.",
+                              "DOUBLE": "Double type.
+
+Proto-based float values are widened to double values.",
+                              "INT64": "Int64 type.
+
+Proto-based integer values are widened to int64.",
+                              "PRIMITIVE_TYPE_UNSPECIFIED": "Unspecified type.",
+                              "STRING": "String type.",
+                              "UINT64": "Uint64 type.
+
+Proto-based unsigned integer values are widened to uint64.",
+                            },
+                            "name": "PrimitiveType",
+                            "type": "Enum",
+                            "values": Object {
+                              "0": "PRIMITIVE_TYPE_UNSPECIFIED",
+                              "1": "BOOL",
+                              "2": "INT64",
+                              "3": "UINT64",
+                              "4": "DOUBLE",
+                              "5": "STRING",
+                              "6": "BYTES",
+                              "BOOL": 1,
+                              "BYTES": 6,
+                              "DOUBLE": 4,
+                              "INT64": 2,
+                              "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                              "STRING": 5,
+                              "UINT64": 3,
+                            },
+                          },
+                          "WellKnownType": Object {
+                            "comments": Object {
+                              "ANY": "Well-known protobuf.Any type.
+
+Any types are a polymorphic message type. During type-checking they are
+treated like \`DYN\` types, but at runtime they are resolved to a specific
+message type specified at evaluation time.",
+                              "DURATION": "Well-known protobuf.Duration type, internally referenced as \`duration\`.",
+                              "TIMESTAMP": "Well-known protobuf.Timestamp type, internally referenced as \`timestamp\`.",
+                              "WELL_KNOWN_TYPE_UNSPECIFIED": "Unspecified type.",
+                            },
+                            "name": "WellKnownType",
+                            "type": "Enum",
+                            "values": Object {
+                              "0": "WELL_KNOWN_TYPE_UNSPECIFIED",
+                              "1": "ANY",
+                              "2": "TIMESTAMP",
+                              "3": "DURATION",
+                              "ANY": 1,
+                              "DURATION": 3,
+                              "TIMESTAMP": 2,
+                              "WELL_KNOWN_TYPE_UNSPECIFIED": 0,
+                            },
+                          },
+                        },
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                    },
+                    "type": "Namespace",
+                  },
+                },
+                "type": "Namespace",
+              },
+            },
+            "type": "Namespace",
+          },
+        },
+        "type": "Namespace",
+      },
+    },
+    "type": "Root",
+  },
+}
+`;
+
+exports[`nested google/api/expr/v1alpha1/checked 2`] = `
+Object {
+  "body": Array [
+    Object {
+      "declaration": Object {
+        "body": Object {
+          "body": Array [
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "referenceMap",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSUnionType",
+                  "types": Array [
+                    Object {
+                      "members": Array [
+                        Object {
+                          "parameters": Array [
+                            Object {
+                              "name": "key",
+                              "optional": false,
+                              "type": "Identifier",
+                              "typeAnnotation": Object {
+                                "type": "TSTypeAnnotation",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeReference",
+                                  "typeName": Object {
+                                    "name": "Long",
+                                    "type": "Identifier",
+                                  },
+                                  "typeParameters": null,
+                                },
+                              },
+                            },
+                          ],
+                          "type": "TSIndexSignature",
+                          "typeAnnotation": Object {
+                            "type": "TSTypeAnnotation",
+                            "typeAnnotation": Object {
+                              "type": "TSTypeReference",
+                              "typeName": Object {
+                                "name": "Reference",
+                                "type": "Identifier",
+                              },
+                              "typeParameters": null,
+                            },
+                          },
+                        },
+                      ],
+                      "type": "TSTypeLiteral",
+                    },
+                  ],
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "typeMap",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSUnionType",
+                  "types": Array [
+                    Object {
+                      "members": Array [
+                        Object {
+                          "parameters": Array [
+                            Object {
+                              "name": "key",
+                              "optional": false,
+                              "type": "Identifier",
+                              "typeAnnotation": Object {
+                                "type": "TSTypeAnnotation",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeReference",
+                                  "typeName": Object {
+                                    "name": "Long",
+                                    "type": "Identifier",
+                                  },
+                                  "typeParameters": null,
+                                },
+                              },
+                            },
+                          ],
+                          "type": "TSIndexSignature",
+                          "typeAnnotation": Object {
+                            "type": "TSTypeAnnotation",
+                            "typeAnnotation": Object {
+                              "type": "TSTypeReference",
+                              "typeName": Object {
+                                "name": "Type",
+                                "type": "Identifier",
+                              },
+                              "typeParameters": null,
+                            },
+                          },
+                        },
+                      ],
+                      "type": "TSTypeLiteral",
+                    },
+                  ],
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "sourceInfo",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "SourceInfo",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "exprVersion",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSStringKeyword",
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "expr",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "Expr",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+          ],
+          "type": "TSInterfaceBody",
+        },
+        "extends": Array [],
+        "id": Object {
+          "name": "CheckedExpr",
+          "type": "Identifier",
+        },
+        "type": "TSInterfaceDeclaration",
+        "typeParameters": null,
+      },
+      "source": null,
+      "specifiers": Array [],
+      "type": "ExportNamedDeclaration",
+    },
+    Object {
+      "declaration": Object {
+        "body": Object {
+          "body": Array [
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "dyn",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "Empty",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "null",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "NullValue",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "primitive",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "PrimitiveType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "wrapper",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "PrimitiveType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "wellKnown",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "WellKnownType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "listType",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "ListType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "mapType",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "MapType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "function",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "FunctionType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "messageType",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSStringKeyword",
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "typeParam",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSStringKeyword",
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "type",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "Type",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "error",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "Empty",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "abstractType",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "AbstractType",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+          ],
+          "type": "TSInterfaceBody",
+        },
+        "extends": Array [],
+        "id": Object {
+          "name": "Type",
+          "type": "Identifier",
+        },
+        "type": "TSInterfaceDeclaration",
+        "typeParameters": null,
+      },
+      "source": null,
+      "specifiers": Array [],
+      "type": "ExportNamedDeclaration",
+    },
+    Object {
+      "declaration": Object {
+        "body": Object {
+          "body": Array [
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "name",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSStringKeyword",
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "ident",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "IdentDecl",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "function",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "FunctionDecl",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+          ],
+          "type": "TSInterfaceBody",
+        },
+        "extends": Array [],
+        "id": Object {
+          "name": "Decl",
+          "type": "Identifier",
+        },
+        "type": "TSInterfaceDeclaration",
+        "typeParameters": null,
+      },
+      "source": null,
+      "specifiers": Array [],
+      "type": "ExportNamedDeclaration",
+    },
+    Object {
+      "declaration": Object {
+        "body": Object {
+          "body": Array [
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "name",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSStringKeyword",
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "overloadId",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "elementType": Object {
+                    "type": "TSStringKeyword",
+                  },
+                  "type": "TSArrayType",
+                },
+              },
+            },
+            Object {
+              "initializer": null,
+              "key": Object {
+                "name": "value",
+                "type": "Identifier",
+              },
+              "optional": undefined,
+              "type": "TSPropertySignature",
+              "typeAnnotation": Object {
+                "type": "TSTypeAnnotation",
+                "typeAnnotation": Object {
+                  "type": "TSTypeReference",
+                  "typeName": Object {
+                    "name": "Constant",
+                    "type": "Identifier",
+                  },
+                  "typeParameters": null,
+                },
+              },
+            },
+          ],
+          "type": "TSInterfaceBody",
+        },
+        "extends": Array [],
+        "id": Object {
+          "name": "Reference",
+          "type": "Identifier",
+        },
+        "type": "TSInterfaceDeclaration",
+        "typeParameters": null,
+      },
+      "source": null,
+      "specifiers": Array [],
+      "type": "ExportNamedDeclaration",
+    },
+  ],
+  "imports": Array [
+    "google/api/expr/v1alpha1/syntax.proto",
+    "google/protobuf/empty.proto",
+    "google/protobuf/struct.proto",
+  ],
+  "package": "google.api.expr.v1alpha1",
+  "parsedImports": Object {},
+  "root": Object {
+    "nested": Object {
+      "google": Object {
+        "nested": Object {
+          "api": Object {
+            "nested": Object {
+              "expr": Object {
+                "nested": Object {
+                  "v1alpha1": Object {
+                    "nested": Object {
+                      "CheckedExpr": Object {
+                        "declaration": Object {
+                          "body": Object {
+                            "body": Array [
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "referenceMap",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSUnionType",
+                                    "types": Array [
+                                      Object {
+                                        "members": Array [
+                                          Object {
+                                            "parameters": Array [
+                                              Object {
+                                                "name": "key",
+                                                "optional": false,
+                                                "type": "Identifier",
+                                                "typeAnnotation": Object {
+                                                  "type": "TSTypeAnnotation",
+                                                  "typeAnnotation": Object {
+                                                    "type": "TSTypeReference",
+                                                    "typeName": Object {
+                                                      "name": "Long",
+                                                      "type": "Identifier",
+                                                    },
+                                                    "typeParameters": null,
+                                                  },
+                                                },
+                                              },
+                                            ],
+                                            "type": "TSIndexSignature",
+                                            "typeAnnotation": Object {
+                                              "type": "TSTypeAnnotation",
+                                              "typeAnnotation": Object {
+                                                "type": "TSTypeReference",
+                                                "typeName": Object {
+                                                  "name": "Reference",
+                                                  "type": "Identifier",
+                                                },
+                                                "typeParameters": null,
+                                              },
+                                            },
+                                          },
+                                        ],
+                                        "type": "TSTypeLiteral",
+                                      },
+                                    ],
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "typeMap",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSUnionType",
+                                    "types": Array [
+                                      Object {
+                                        "members": Array [
+                                          Object {
+                                            "parameters": Array [
+                                              Object {
+                                                "name": "key",
+                                                "optional": false,
+                                                "type": "Identifier",
+                                                "typeAnnotation": Object {
+                                                  "type": "TSTypeAnnotation",
+                                                  "typeAnnotation": Object {
+                                                    "type": "TSTypeReference",
+                                                    "typeName": Object {
+                                                      "name": "Long",
+                                                      "type": "Identifier",
+                                                    },
+                                                    "typeParameters": null,
+                                                  },
+                                                },
+                                              },
+                                            ],
+                                            "type": "TSIndexSignature",
+                                            "typeAnnotation": Object {
+                                              "type": "TSTypeAnnotation",
+                                              "typeAnnotation": Object {
+                                                "type": "TSTypeReference",
+                                                "typeName": Object {
+                                                  "name": "Type",
+                                                  "type": "Identifier",
+                                                },
+                                                "typeParameters": null,
+                                              },
+                                            },
+                                          },
+                                        ],
+                                        "type": "TSTypeLiteral",
+                                      },
+                                    ],
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "sourceInfo",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "SourceInfo",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "exprVersion",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSStringKeyword",
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "expr",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "Expr",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                            ],
+                            "type": "TSInterfaceBody",
+                          },
+                          "extends": Array [],
+                          "id": Object {
+                            "name": "CheckedExpr",
+                            "type": "Identifier",
+                          },
+                          "type": "TSInterfaceDeclaration",
+                          "typeParameters": null,
+                        },
+                        "source": null,
+                        "specifiers": Array [],
+                        "type": "ExportNamedDeclaration",
+                      },
+                      "Decl": Object {
+                        "declaration": Object {
+                          "body": Object {
+                            "body": Array [
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "name",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSStringKeyword",
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "ident",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "IdentDecl",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "function",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "FunctionDecl",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                            ],
+                            "type": "TSInterfaceBody",
+                          },
+                          "extends": Array [],
+                          "id": Object {
+                            "name": "Decl",
+                            "type": "Identifier",
+                          },
+                          "type": "TSInterfaceDeclaration",
+                          "typeParameters": null,
+                        },
+                        "source": null,
+                        "specifiers": Array [],
+                        "type": "ExportNamedDeclaration",
+                      },
+                      "Reference": Object {
+                        "declaration": Object {
+                          "body": Object {
+                            "body": Array [
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "name",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSStringKeyword",
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "overloadId",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "elementType": Object {
+                                      "type": "TSStringKeyword",
+                                    },
+                                    "type": "TSArrayType",
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "value",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "Constant",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                            ],
+                            "type": "TSInterfaceBody",
+                          },
+                          "extends": Array [],
+                          "id": Object {
+                            "name": "Reference",
+                            "type": "Identifier",
+                          },
+                          "type": "TSInterfaceDeclaration",
+                          "typeParameters": null,
+                        },
+                        "source": null,
+                        "specifiers": Array [],
+                        "type": "ExportNamedDeclaration",
+                      },
+                      "Type": Object {
+                        "declaration": Object {
+                          "body": Object {
+                            "body": Array [
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "dyn",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "Empty",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "null",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "NullValue",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "primitive",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "PrimitiveType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "wrapper",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "PrimitiveType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "wellKnown",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "WellKnownType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "listType",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "ListType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "mapType",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "MapType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "function",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "FunctionType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "messageType",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSStringKeyword",
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "typeParam",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSStringKeyword",
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "type",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "Type",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "error",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "Empty",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                              Object {
+                                "initializer": null,
+                                "key": Object {
+                                  "name": "abstractType",
+                                  "type": "Identifier",
+                                },
+                                "optional": undefined,
+                                "type": "TSPropertySignature",
+                                "typeAnnotation": Object {
+                                  "type": "TSTypeAnnotation",
+                                  "typeAnnotation": Object {
+                                    "type": "TSTypeReference",
+                                    "typeName": Object {
+                                      "name": "AbstractType",
+                                      "type": "Identifier",
+                                    },
+                                    "typeParameters": null,
+                                  },
+                                },
+                              },
+                            ],
+                            "type": "TSInterfaceBody",
+                          },
+                          "extends": Array [],
+                          "id": Object {
+                            "name": "Type",
+                            "type": "Identifier",
+                          },
+                          "type": "TSInterfaceDeclaration",
+                          "typeParameters": null,
+                        },
+                        "source": null,
+                        "specifiers": Array [],
+                        "type": "ExportNamedDeclaration",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;

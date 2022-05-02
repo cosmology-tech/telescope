@@ -6,3 +6,4 @@ interface TelescopeInput {
 export default (input: TelescopeInput) => {
     console.log(input);
 };
+
