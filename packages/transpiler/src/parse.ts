@@ -1,6 +1,6 @@
 import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
 import { ProtoStore, ProtoRoot } from '@osmonauts/proto-parser';
-import { createProtoType, createCreateProtoType, createProtoEnum } from '@osmonauts/ast';
+import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods } from '@osmonauts/ast';
 
 export const parse = (
     store: ProtoStore,
@@ -40,22 +40,24 @@ export const parseRecur = (
 ) => {
     if (obj.type === 'Type') {
         body.push(createProtoType(obj.name, obj));
-        return createProtoType(obj.name, obj);
+        body.push(createCreateProtoType(obj.name, obj));
+        body.push(createProtoObjectWithMethods(obj.name, obj));
+
+        return;
     }
     if (obj.type === 'Enum') {
         body.push(createProtoEnum(obj.name, obj));
-        return createProtoEnum(obj.name, obj);
+        return;
     }
     if (obj.type === 'Service') {
         // todo return empty ast element.
-        return 'Service';
+        return;
     }
     if (obj.type === 'Root' || obj.type === 'Namespace') {
         if (obj.nested) {
-            return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = parseRecur(store, root, obj.nested[key], imports, body, [...scope, key]);
-                return m;
-            }, { nested: {} });
+            return Object.keys(obj.nested).forEach(key => {
+                parseRecur(store, root, obj.nested[key], imports, body, [...scope, key]);
+            });
         } else {
             throw new Error('parseRecur() cannot find protobufjs Type')
         }
