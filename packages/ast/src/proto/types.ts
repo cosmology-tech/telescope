@@ -295,7 +295,7 @@ const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
 const getProtoNameSafe = (name: string) => {
     if (name.includes('.')) {
         const parts = name.split('.');
-        return parts[parts.length];
+        return parts[parts.length - 1];
     }
     return name;
 };

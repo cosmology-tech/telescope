@@ -65,6 +65,28 @@ exports[`traversed cosmos/app/v1alpha1/config 2`] = `
 }"
 `;
 
+exports[`traversed google/api/expr/v1alpha1/checked 1`] = `
+"export interface CheckedExpr {
+  referenceMap: {
+    [key: Long]: Reference;
+  };
+  typeMap: {
+    [key: Long]: Type;
+  };
+  sourceInfo: SourceInfo;
+  exprVersion: string;
+  expr: Expr;
+}"
+`;
+
+exports[`traversed google/api/expr/v1alpha1/checked 2`] = `
+"export interface Reference {
+  name: string;
+  overloadId: string[];
+  value: Constant;
+}"
+`;
+
 exports[`traversed osmosis/claim/v1beta1/params 1`] = `
 "export interface Params {
   airdropStartTime: Date;
