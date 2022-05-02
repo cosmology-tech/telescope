@@ -1,5 +1,5 @@
 import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
-import { ProtoStore, ProtoRoot } from '@osmonauts/proto-parser';
+import { ProtoStore, ProtoRoot, getObjectName } from '@osmonauts/proto-parser';
 import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods } from '@osmonauts/ast';
 
 export const parse = (
@@ -36,17 +36,48 @@ export const parseRecur = (
     obj: any,
     imports: object,
     body: any[],
-    scope: string[]
+    scope: string[],
+    isNested: boolean = false
 ) => {
     if (obj.type === 'Type') {
-        body.push(createProtoType(obj.name, obj));
-        body.push(createCreateProtoType(obj.name, obj));
-        body.push(createProtoObjectWithMethods(obj.name, obj));
+        if (obj.nested) {
+            return Object.keys(obj.nested).forEach(key => {
+                // isNested = true;
+                parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], true);
+            });
+        }
+
+        // MARKED AS NOT DRY 
+        // parse nested names
+        let name = obj.name;
+        if (isNested) {
+            const allButPackage = scope.splice(root.package.split('.').length);
+            // pull off "this" name
+            allButPackage.pop();
+            name = getObjectName(obj.name, [root.package, ...allButPackage]);
+        }
+
+        body.push(createProtoType(name, obj));
+        body.push(createCreateProtoType(name, obj));
+        body.push(createProtoObjectWithMethods(name, obj));
+
 
         return;
     }
     if (obj.type === 'Enum') {
-        body.push(createProtoEnum(obj.name, obj));
+
+
+        // MARKED AS NOT DRY 
+        // parse nested names
+        let name = obj.name;
+        if (isNested) {
+            const allButPackage = scope.splice(root.package.split('.').length);
+            // pull off "this" name
+            allButPackage.pop();
+            name = getObjectName(obj.name, [root.package, ...allButPackage]);
+        }
+
+        body.push(createProtoEnum(name, obj));
         return;
     }
     if (obj.type === 'Service') {
@@ -56,7 +87,7 @@ export const parseRecur = (
     if (obj.type === 'Root' || obj.type === 'Namespace') {
         if (obj.nested) {
             return Object.keys(obj.nested).forEach(key => {
-                parseRecur(store, root, obj.nested[key], imports, body, [...scope, key]);
+                parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], isNested);
             });
         } else {
             throw new Error('parseRecur() cannot find protobufjs Type')

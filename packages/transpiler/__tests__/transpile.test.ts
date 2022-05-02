@@ -109,7 +109,7 @@ describe('nested', () => {
         const parsed = parse(store, ref.proto, res);
 
         const gen = generate(t.program(parsed.body));
-        console.log(gen.code);
+        // console.log(gen.code);
         expect(gen.code).toMatchSnapshot();
     });
 });
