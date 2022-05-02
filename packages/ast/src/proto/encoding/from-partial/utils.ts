@@ -511,6 +511,11 @@ export const fromPartial = {
 };
 
 export const arrayTypes = {
+    // message.overloadId = object.overloadId?.map(e => e) || [];
+    string() {
+        return t.identifier('e');
+    },
+
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     long() {
         return t.callExpression(

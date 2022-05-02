@@ -13,7 +13,7 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    return needsImplementation(fieldName, field);
+                    return [...m, toJSON.array(fieldName, arrayTypes.string())];
                 case 'uint64':
                     return [...m, toJSON.array(fieldName, arrayTypes.uint64())];
                 case 'int64':

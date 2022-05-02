@@ -695,6 +695,19 @@ export const arrayTypes = {
             )
         );
     },
+    string() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('string')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
     int32() {
         return t.expressionStatement(
             t.callExpression(

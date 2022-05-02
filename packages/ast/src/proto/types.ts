@@ -241,7 +241,7 @@ export const getDefaultTSTypeFromProtoType = (type, isArray) => {
             return t.identifier('undefined');
 
         default:
-            console.warn('getDefaultTSTypeFromProtoType() type not found: ' + type);
+            // console.warn('getDefaultTSTypeFromProtoType() type not found: ' + type);
             return t.identifier('undefined');
     };
 };

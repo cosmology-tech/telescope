@@ -573,6 +573,17 @@ export const toJSON = {
 };
 
 export const arrayTypes = {
+
+    // if (message.overloadId) {
+    //     obj.overloadId = message.overloadId.map(e => e);
+    // } else {
+    //     obj.overloadId = [];
+    // }
+
+    string() {
+        return t.identifier('e');
+    },
+
     // if (message.codeIds) {
     //     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
     // } else {

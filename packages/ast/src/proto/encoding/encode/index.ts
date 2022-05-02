@@ -14,7 +14,8 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    return needsImplementation(fieldName, field);
+                    // TODO double check string[]
+                    return [...m, ...encode.scalarArray(getTagNumber(field), fieldName, arrayTypes.string())];
                 case 'uint64':
                     return [...m, ...encode.scalarArray(getTagNumber(field), fieldName, arrayTypes.long())];
                 case 'int32':

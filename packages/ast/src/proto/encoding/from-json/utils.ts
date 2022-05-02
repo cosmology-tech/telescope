@@ -570,6 +570,14 @@ export const fromJSON = {
 };
 
 export const arrayTypes = {
+    string() {
+        return t.callExpression(
+            t.identifier('String'),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
     long() {
         return t.callExpression(

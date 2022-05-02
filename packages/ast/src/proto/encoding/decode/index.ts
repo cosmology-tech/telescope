@@ -13,7 +13,7 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    return needsImplementation(fieldName, field);
+                    return decode.scalarArray(field.id, fieldName, baseTypes.string());
                 case 'uint64':
                     return decode.scalarArray(field.id, fieldName, baseTypes.long());
                 case 'int32':
