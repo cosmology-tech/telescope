@@ -69,7 +69,7 @@ describe('traversed', () => {
         const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
         const res = traverse(store, ref.proto);
         const node = getNestedProto(res)
-        console.log(JSON.stringify(res, null, 2))
+        // console.log(JSON.stringify(res, null, 2))
         expectCode(createProtoType('CheckedExpr', node.CheckedExpr));
         expectCode(createProtoType('Reference', node.Reference));
     });

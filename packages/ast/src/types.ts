@@ -1,21 +1,33 @@
-export declare type fieldType = 'Long' | 'Coin' | 'Duration' | 'Height' | string;
+// export declare type fieldType = 'Long' | 'Coin' | 'Duration' | 'Height' | string;
 
-export interface Field {
-    name: string;
-    type: fieldType;
-    node: any;
-};
-export interface Interface {
-    name: string;
-    fields: Field[]
+// export interface Field {
+//     name: string;
+//     type: fieldType;
+//     node: any;
+// };
+// export interface Interface {
+//     name: string;
+//     fields: Field[]
+// };
+
+// export interface MessageSchema extends Interface {
+//     typeUrl: string;
+//     name: string;
+//     fields: Field[]
+// };
+
+// DUPLICATE: proto-parser
+export interface ProtoRoot {
+    package: string;
+    imports: string[];
+    root: any;
 };
 
-export interface MessageSchema extends Interface {
-    typeUrl: string;
+export interface ProtoAny {
+    type: string;
     name: string;
-    fields: Field[]
+    [key: string]: any;
 };
-
 export interface AminoException {
     aminoType?: string;
     toAmino?: object;

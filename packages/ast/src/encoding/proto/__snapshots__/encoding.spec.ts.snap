@@ -1028,8 +1028,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       writer.uint32(16).bool(message.boolValue);
     }
 
-    if (message.int64Value !== undefined) {
-      writer.uint32(24).double(message.int64Value);
+    if (!message.int64Value.isZero()) {
+      writer.uint32(24).int64(message.int64Value);
     }
 
     if (!message.uint64Value.isZero()) {

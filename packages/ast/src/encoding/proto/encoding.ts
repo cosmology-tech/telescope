@@ -5,8 +5,6 @@ import { decodeMethod } from './decode';
 import { encodeMethod } from './encode';
 import { fromJSONMethod } from './from-json';
 import { toJSONMethod } from './to-json';
-import { toAminoJsonMethod } from './to-amino-json';
-import { fromAminoJsonMethod } from './from-amino-json';
 
 export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => {
 
@@ -17,9 +15,6 @@ export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => 
         toJSONMethod(name, proto),
         fromPartialMethod(name, proto),
     ];
-
-    methods.push(toAminoJsonMethod(name, proto));
-    methods.push(fromAminoJsonMethod(name, proto));
 
     return t.exportNamedDeclaration(
         t.variableDeclaration('const',

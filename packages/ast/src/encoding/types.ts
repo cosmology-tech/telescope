@@ -2,12 +2,14 @@ import * as t from '@babel/types';
 import { identifier, tsPropertySignature, functionDeclaration } from '../utils';
 
 export interface ProtoEnum {
+    name?: string;
     values: { [key: string]: number };
     comment?: string;
     comments?: { [key: string]: string };
 }
 
 export interface ProtoType {
+    name?: string;
     oneofs?: { [key: string]: { oneof: string[], comment: string | undefined } },
     fields: {
         [key: string]: ProtoField;
@@ -16,6 +18,7 @@ export interface ProtoType {
 }
 
 export interface ProtoField {
+    name?: string;
     scope?: string[];
     parsedType?: {
         name: string;
