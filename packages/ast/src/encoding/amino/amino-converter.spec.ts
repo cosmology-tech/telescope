@@ -67,7 +67,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
             return m;
         }, {
-            types: protoTypes, // hacky
+            types: Object.values(proto), // hacky
             enums: []
         })
 
