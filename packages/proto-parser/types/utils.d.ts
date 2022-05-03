@@ -8,6 +8,7 @@ export declare const recursiveLookup: (proto: any, name: string, scope?: string[
 export declare const importLookup: (store: ProtoStore, root: ProtoRoot, name: string) => {
     name: string;
     import: string;
+    importedName: string;
     obj: any;
 };
 export declare const protoImportLookup: (store: ProtoStore, root: ProtoRoot, name: string) => {
