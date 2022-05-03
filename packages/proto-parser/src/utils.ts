@@ -173,8 +173,7 @@ export const traverse = (store: ProtoStore, root: ProtoRoot) => {
             store,
             root,
             root.root,
-            imports,
-            []
+            imports
         ),
         parsedImports: null,
     };
@@ -263,18 +262,11 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
     }, {});
 };
 
-export const getKeyTypeObjectName = (
-    obj: any,
-    field: any // ProtoField
-) => {
-    return obj.name + '_' + field.parsedType.name + 'MapEntry';
-}
-
-const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object, scope: string[]) => {
+const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
     let nested = null;
     if (obj.nested) {
         nested = Object.keys(obj.nested).reduce((m, key) => {
-            m[key] = recursiveTraversal(store, root, obj.nested[key], imports, [...scope, key]);
+            m[key] = recursiveTraversal(store, root, obj.nested[key], imports);
             return m;
         }, {});
     }
@@ -358,9 +350,9 @@ const parseService = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obj
     }
 };
 
-export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object, scope: string[]) => {
+export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
     if (obj instanceof Type) {
-        return parseType(store, root, obj, imports, scope);
+        return parseType(store, root, obj, imports);
     }
     if (obj instanceof Enum) {
         return parseEnum(store, root, obj, imports);
@@ -371,7 +363,7 @@ export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any,
     if (obj instanceof Root) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports, [...scope, key]);
+                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports);
                 return m;
             }, {
                 type: 'Root',
@@ -384,7 +376,7 @@ export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any,
     if (obj instanceof Namespace) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports, [...scope, key]);
+                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports);
                 return m;
             }, {
                 type: 'Namespace',
