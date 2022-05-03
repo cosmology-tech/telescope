@@ -7,7 +7,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement encode (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
+export const encodeMethodFields = (name: string, proto: ProtoType) => {
 
     return Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
         const field: ProtoField = proto.fields[fieldName];
@@ -72,11 +72,8 @@ export const protoEncodeMethodFields = (name: string, proto: ProtoType) => {
     }, []);
 };
 
-export const protoEncodeMethod = (name: string, proto: ProtoType) => {
-    const fields = protoEncodeMethodFields(name, proto);
-    if (!fields.length) {
-        console.log('no fields?');
-    }
+export const encodeMethod = (name: string, proto: ProtoType) => {
+    const fields = encodeMethodFields(name, proto);
     const body = [
         ...fields,
         /* RETURN writer */

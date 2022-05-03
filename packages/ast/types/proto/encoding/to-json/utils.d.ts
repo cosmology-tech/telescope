@@ -15,6 +15,7 @@ export declare const toJSON: {
     array(prop: string, expr: t.Expression): t.IfStatement;
 };
 export declare const arrayTypes: {
+    string(): t.Identifier;
     uint64(): t.CallExpression;
     int64(): t.CallExpression;
     number(): t.CallExpression;

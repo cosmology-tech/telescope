@@ -7,7 +7,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement toJSON (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
+export const toJSONMethodFields = (name: string, proto: ProtoType) => {
     const fields = Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
         const field = proto.fields[fieldName];
         if (field.rule === 'repeated') {
@@ -80,7 +80,7 @@ export const protoToJSONMethodFields = (name: string, proto: ProtoType) => {
     return fields;
 };
 
-export const protoToJSONMethod = (name: string, proto: ProtoType) => {
+export const toJSONMethod = (name: string, proto: ProtoType) => {
     return objectMethod('method',
         t.identifier('toJSON'),
         [
@@ -104,7 +104,7 @@ export const protoToJSONMethod = (name: string, proto: ProtoType) => {
                 ]
             ),
 
-            ...protoToJSONMethodFields(name, proto),
+            ...toJSONMethodFields(name, proto),
 
             // RETURN 
             t.returnStatement(t.identifier('obj'))

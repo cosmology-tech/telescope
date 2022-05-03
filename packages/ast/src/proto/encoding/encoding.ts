@@ -1,24 +1,32 @@
 import * as t from '@babel/types';
 import { ProtoType } from '../types';
-import { protoFromPartialMethod } from './from-partial';
-import { protoDecodeMethod } from './decode';
-import { protoEncodeMethod } from './encode';
-import { protoFromJSONMethod } from './from-json';
-import { protoToJSONMethod } from './to-json';
+import { fromPartialMethod } from './from-partial';
+import { decodeMethod } from './decode';
+import { encodeMethod } from './encode';
+import { fromJSONMethod } from './from-json';
+import { toJSONMethod } from './to-json';
+import { toAminoJsonMethod } from './to-amino-json';
+import { fromAminoJsonMethod } from './from-amino-json';
 
 export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => {
+
+    const methods = [
+        encodeMethod(name, proto),
+        decodeMethod(name, proto),
+        fromJSONMethod(name, proto),
+        toJSONMethod(name, proto),
+        fromPartialMethod(name, proto),
+    ];
+
+    methods.push(toAminoJsonMethod(name, proto));
+    methods.push(fromAminoJsonMethod(name, proto));
+
     return t.exportNamedDeclaration(
         t.variableDeclaration('const',
             [t.variableDeclarator(
                 t.identifier(name),
                 t.objectExpression(
-                    [
-                        protoEncodeMethod(name, proto),
-                        protoDecodeMethod(name, proto),
-                        protoFromJSONMethod(name, proto),
-                        protoToJSONMethod(name, proto),
-                        protoFromPartialMethod(name, proto),
-                    ]
+                    methods
                 )
             )]
         )

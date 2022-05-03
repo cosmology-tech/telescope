@@ -26,6 +26,7 @@ export const strip = (obj) => {
             if (obj.hasOwnProperty(attr)) {
                 switch (attr) {
                     case 'comment':
+                    case 'comments':
                         break;
                     default:
                         copy[attr] = strip(obj[attr]);

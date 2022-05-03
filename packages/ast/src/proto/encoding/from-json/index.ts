@@ -7,7 +7,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromJSON (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
+export const fromJSONMethodFields = (name: string, proto: ProtoType) => {
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = proto.fields[fieldName];
         if (field.rule === 'repeated') {
@@ -84,7 +84,7 @@ export const protoFromJSONMethodFields = (name: string, proto: ProtoType) => {
     return fields;
 };
 
-export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
+export const fromJSONMethod = (name: string, proto: ProtoType) => {
     return objectMethod('method',
         t.identifier('fromJSON'),
         [
@@ -99,7 +99,7 @@ export const protoFromJSONMethod = (name: string, proto: ProtoType) => {
         t.blockStatement(
             [
                 t.returnStatement(
-                    t.objectExpression(protoFromJSONMethodFields(name, proto))
+                    t.objectExpression(fromJSONMethodFields(name, proto))
                 )
             ]
         ),

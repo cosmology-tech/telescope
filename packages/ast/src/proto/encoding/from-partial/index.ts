@@ -8,7 +8,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromPartial (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => {
+export const fromPartialMethodFields = (name: string, proto: ProtoType) => {
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = proto.fields[fieldName];
         if (field.rule === 'repeated') {
@@ -78,7 +78,7 @@ export const protoFromPartialMethodFields = (name: string, proto: ProtoType) => 
     });
     return fields;
 };
-export const protoFromPartialMethod = (name: string, proto: ProtoType) => {
+export const fromPartialMethod = (name: string, proto: ProtoType) => {
     return objectMethod(
         'method',
         t.identifier('fromPartial'),
@@ -108,7 +108,7 @@ export const protoFromPartialMethod = (name: string, proto: ProtoType) => {
                 ]
             ),
 
-            ...protoFromPartialMethodFields(name, proto),
+            ...fromPartialMethodFields(name, proto),
 
             // RETURN 
             t.returnStatement(

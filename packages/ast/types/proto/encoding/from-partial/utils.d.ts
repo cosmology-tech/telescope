@@ -14,6 +14,7 @@ export declare const fromPartial: {
     array(prop: string, expr: t.Expression): t.ExpressionStatement;
 };
 export declare const arrayTypes: {
+    string(): t.Identifier;
     long(): t.CallExpression;
     number(): t.CallExpression;
     type(name: string): t.CallExpression;

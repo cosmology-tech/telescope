@@ -16,5 +16,6 @@ export declare const encode: {
 };
 export declare const arrayTypes: {
     long(): t.ExpressionStatement;
+    string(): t.ExpressionStatement;
     int32(): t.ExpressionStatement;
 };

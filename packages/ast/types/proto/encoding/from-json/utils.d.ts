@@ -16,6 +16,7 @@ export declare const fromJSON: {
     array(prop: string, expr: t.Expression): t.ObjectProperty;
 };
 export declare const arrayTypes: {
+    string(): t.CallExpression;
     long(): t.CallExpression;
     number(): t.CallExpression;
     type(name: any): t.CallExpression;

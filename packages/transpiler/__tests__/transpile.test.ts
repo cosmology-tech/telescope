@@ -85,18 +85,14 @@ const printCode = (ast) => {
 //     })
 // });
 
-
-
-
-
-xdescribe('services', () => {
+describe('services', () => {
     it('osmosis/gamm/v1beta1/tx', () => {
         const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
         const res = traverse(store, ref.proto);
+        // expect(strip(res)).toMatchSnapshot();
         const parsed = parse(store, ref.proto, res);
-        // parsed.body;
-        // generate(t.program(parsed.body))
-        expect(parsed).toMatchSnapshot();
+        const gen = generate(t.program(parsed.body));
+        expect(gen.code).toMatchSnapshot();
     });
 });
 
@@ -107,9 +103,7 @@ describe('nested', () => {
         const res = traverse(store, ref.proto);
         expect(strip(res)).toMatchSnapshot();
         const parsed = parse(store, ref.proto, res);
-
         const gen = generate(t.program(parsed.body));
-        // console.log(gen.code);
         expect(gen.code).toMatchSnapshot();
     });
 });

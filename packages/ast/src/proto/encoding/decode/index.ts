@@ -7,7 +7,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement decode (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
+export const decodeMethodFields = (name: string, proto: ProtoType) => {
     return Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = proto.fields[fieldName];
         if (field.rule === 'repeated') {
@@ -70,7 +70,7 @@ export const protoDecodeMethodFields = (name: string, proto: ProtoType) => {
     });
 };
 
-export const protoDecodeMethod = (name: string, proto: ProtoType) => {
+export const decodeMethod = (name: string, proto: ProtoType) => {
     return objectMethod(
         'method',
         t.identifier('decode'),
@@ -221,7 +221,7 @@ export const protoDecodeMethod = (name: string, proto: ProtoType) => {
                         [
 
 
-                            ...protoDecodeMethodFields(name, proto),
+                            ...decodeMethodFields(name, proto),
 
                             /*
                             default:
