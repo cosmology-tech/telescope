@@ -92,12 +92,17 @@ export const encode = {
 
     int64(num: number, prop: string) {
         return t.ifStatement(
-            t.binaryExpression('!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.identifier('undefined')
+            t.unaryExpression('!',
+                t.callExpression(
+                    t.memberExpression(
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(prop)
+                        ),
+                        t.identifier('isZero')
+                    ),
+                    []
+                )
             ),
             t.blockStatement([
                 t.expressionStatement(
@@ -112,7 +117,7 @@ export const encode = {
                                     t.numericLiteral(num)
                                 ]
                             ),
-                            t.identifier('double')
+                            t.identifier('int64')
                         ),
                         [
                             t.memberExpression(

@@ -1,6 +1,6 @@
 import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
 import { ProtoStore, ProtoRoot, getObjectName } from '@osmonauts/proto-parser';
-import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods } from '@osmonauts/ast';
+import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods, ProtoField, ProtoType } from '@osmonauts/ast';
 
 export const parse = (
     store: ProtoStore,
@@ -40,11 +40,61 @@ export const parseRecur = (
     isNested: boolean = false
 ) => {
     if (obj.type === 'Type') {
+
         if (obj.nested) {
-            return Object.keys(obj.nested).forEach(key => {
+            Object.keys(obj.nested).forEach(key => {
                 // isNested = true;
                 parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], true);
             });
+        }
+
+        const hasKeyType = Object.keys(obj.fields).some(field => !!obj.fields[field].keyType);
+        let keyTypes = [];
+        if (hasKeyType) {
+            keyTypes = Object.keys(obj.fields)
+                .filter(field => !!obj.fields[field].keyType)
+                .map(field => {
+                    return {
+                        name: field,
+                        ...obj.fields[field]
+                    };
+                })
+
+            keyTypes.forEach(field => {
+                // TODO move name generation to method
+                const name = obj.name + '_' + field.parsedType.name + 'MapEntry';
+                const scoped = scope.splice(root.package.split('.').length);
+                const adhocObj: ProtoType = {
+                    comment: undefined,
+                    fields: {
+                        key: {
+                            id: 1,
+                            type: field.keyType,
+                            scope: [...scoped],
+                            parsedType: {
+                                name: field.keyType,
+                                type: field.keyType
+                            },
+                            comment: undefined,
+                            options: undefined
+                        },
+                        value: {
+                            id: 2,
+                            type: field.parsedType.name,
+                            scope: [...scoped],
+                            parsedType: {
+                                name: field.type,
+                                type: field.parsedType.type
+                            },
+                            comment: undefined,
+                            options: undefined
+                        }
+                    }
+                };
+                body.push(createProtoType(name, adhocObj));
+                body.push(createCreateProtoType(name, adhocObj));
+                body.push(createProtoObjectWithMethods(name, adhocObj));
+            })
         }
 
         // MARKED AS NOT DRY 
@@ -65,8 +115,6 @@ export const parseRecur = (
         return;
     }
     if (obj.type === 'Enum') {
-
-
         // MARKED AS NOT DRY 
         // parse nested names
         let name = obj.name;

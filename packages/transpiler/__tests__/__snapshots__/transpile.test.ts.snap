@@ -687,7 +687,153 @@ message type specified at evaluation time.",
 `;
 
 exports[`nested google/api/expr/v1alpha1/checked 2`] = `
-"export interface CheckedExpr {
+"export interface CheckedExpr_ReferenceMapEntry {
+  key: Long;
+  value: Reference;
+}
+
+function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
+  return {
+    key: Long.UZERO,
+    value: undefined
+  };
+}
+
+export const CheckedExpr_ReferenceMapEntry = {
+  encode(message: CheckedExpr_ReferenceMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.key.isZero()) {
+      writer.uint32(8).int64(message.key);
+    }
+
+    if (message.value !== undefined) {
+      Reference.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): CheckedExpr_ReferenceMapEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCheckedExpr_ReferenceMapEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = (reader.int64() as Long);
+          break;
+
+        case 2:
+          message.value = Reference.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
+    return {
+      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
+    };
+  },
+
+  toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = (message.key || undefined).toString());
+    message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr_ReferenceMapEntry>, I>>(object: I): CheckedExpr_ReferenceMapEntry {
+    const message = createBaseCheckedExpr_ReferenceMapEntry();
+    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
+    message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
+    return message;
+  }
+
+};
+export interface CheckedExpr_TypeMapEntry {
+  key: Long;
+  value: Type;
+}
+
+function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
+  return {
+    key: Long.UZERO,
+    value: undefined
+  };
+}
+
+export const CheckedExpr_TypeMapEntry = {
+  encode(message: CheckedExpr_TypeMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.key.isZero()) {
+      writer.uint32(8).int64(message.key);
+    }
+
+    if (message.value !== undefined) {
+      Type.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): CheckedExpr_TypeMapEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCheckedExpr_TypeMapEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = (reader.int64() as Long);
+          break;
+
+        case 2:
+          message.value = Type.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): CheckedExpr_TypeMapEntry {
+    return {
+      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
+    };
+  },
+
+  toJSON(message: CheckedExpr_TypeMapEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = (message.key || undefined).toString());
+    message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr_TypeMapEntry>, I>>(object: I): CheckedExpr_TypeMapEntry {
+    const message = createBaseCheckedExpr_TypeMapEntry();
+    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
+    message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
+    return message;
+  }
+
+};
+export interface CheckedExpr {
   referenceMap: {
     [key: Long]: Reference;
   };
@@ -1196,6 +1342,222 @@ export enum Type_WellKnownType {
   DURATION = 3,
   UNRECOGNIZED = -1,
 }
+export interface Type {
+  dyn: Empty;
+  null: NullValue;
+  primitive: PrimitiveType;
+  wrapper: PrimitiveType;
+  wellKnown: WellKnownType;
+  listType: ListType;
+  mapType: MapType;
+  function: FunctionType;
+  messageType: string;
+  typeParam: string;
+  type: Type;
+  error: Empty;
+  abstractType: AbstractType;
+}
+
+function createBaseType(): Type {
+  return {
+    dyn: undefined,
+    null: undefined,
+    primitive: undefined,
+    wrapper: undefined,
+    wellKnown: undefined,
+    listType: undefined,
+    mapType: undefined,
+    function: undefined,
+    messageType: \\"\\",
+    typeParam: \\"\\",
+    type: undefined,
+    error: undefined,
+    abstractType: undefined
+  };
+}
+
+export const Type = {
+  encode(message: Type, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.dyn !== undefined) {
+      Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.null !== 0) {
+      writer.uint32(16).int32(message.null);
+    }
+
+    if (message.primitive !== 0) {
+      writer.uint32(24).int32(message.primitive);
+    }
+
+    if (message.wrapper !== 0) {
+      writer.uint32(32).int32(message.wrapper);
+    }
+
+    if (message.wellKnown !== 0) {
+      writer.uint32(40).int32(message.wellKnown);
+    }
+
+    if (message.listType !== undefined) {
+      Type_ListType.encode(message.listType, writer.uint32(50).fork()).ldelim();
+    }
+
+    if (message.mapType !== undefined) {
+      Type_MapType.encode(message.mapType, writer.uint32(58).fork()).ldelim();
+    }
+
+    if (message.function !== undefined) {
+      Type_FunctionType.encode(message.function, writer.uint32(66).fork()).ldelim();
+    }
+
+    if (message.messageType !== \\"\\") {
+      writer.uint32(74).string(message.messageType);
+    }
+
+    if (message.typeParam !== \\"\\") {
+      writer.uint32(82).string(message.typeParam);
+    }
+
+    if (message.type !== undefined) {
+      Type.encode(message.type, writer.uint32(90).fork()).ldelim();
+    }
+
+    if (message.error !== undefined) {
+      Empty.encode(message.error, writer.uint32(98).fork()).ldelim();
+    }
+
+    if (message.abstractType !== undefined) {
+      Type_AbstractType.encode(message.abstractType, writer.uint32(114).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): Type {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseType();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.dyn = Empty.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.null = (reader.int32() as any);
+          break;
+
+        case 3:
+          message.primitive = (reader.int32() as any);
+          break;
+
+        case 4:
+          message.wrapper = (reader.int32() as any);
+          break;
+
+        case 5:
+          message.wellKnown = (reader.int32() as any);
+          break;
+
+        case 6:
+          message.listType = Type_ListType.decode(reader, reader.uint32());
+          break;
+
+        case 7:
+          message.mapType = Type_MapType.decode(reader, reader.uint32());
+          break;
+
+        case 8:
+          message.function = Type_FunctionType.decode(reader, reader.uint32());
+          break;
+
+        case 9:
+          message.messageType = reader.string();
+          break;
+
+        case 10:
+          message.typeParam = reader.string();
+          break;
+
+        case 11:
+          message.type = Type.decode(reader, reader.uint32());
+          break;
+
+        case 12:
+          message.error = Empty.decode(reader, reader.uint32());
+          break;
+
+        case 14:
+          message.abstractType = Type_AbstractType.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Type {
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : 0,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : 0,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : 0,
+      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : 0,
+      listType: isSet(object.listType) ? Type_ListType.fromJSON(object.listType) : undefined,
+      mapType: isSet(object.mapType) ? Type_MapType.fromJSON(object.mapType) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromJSON(object.function) : undefined,
+      messageType: isSet(object.messageType) ? String(object.messageType) : \\"\\",
+      typeParam: isSet(object.typeParam) ? String(object.typeParam) : \\"\\",
+      type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromJSON(object.error) : undefined,
+      abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
+    };
+  },
+
+  toJSON(message: Type): unknown {
+    const obj: any = {};
+    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
+    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
+    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
+    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
+    message.wellKnown !== undefined && (obj.wellKnown = type_WellKnownTypeToJSON(message.wellKnown));
+    message.listType !== undefined && (obj.listType = message.listType ? Type_ListType.toJSON(message.listType) : undefined);
+    message.mapType !== undefined && (obj.mapType = message.mapType ? Type_MapType.toJSON(message.mapType) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toJSON(message.function) : undefined);
+    message.messageType !== undefined && (obj.messageType = message.messageType);
+    message.typeParam !== undefined && (obj.typeParam = message.typeParam);
+    message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
+    message.error !== undefined && (obj.error = message.error ? Empty.toJSON(message.error) : undefined);
+    message.abstractType !== undefined && (obj.abstractType = message.abstractType ? Type_AbstractType.toJSON(message.abstractType) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
+    const message = createBaseType();
+    message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
+    message.null = object.null ?? 0;
+    message.primitive = object.primitive ?? 0;
+    message.wrapper = object.wrapper ?? 0;
+    message.wellKnown = object.wellKnown ?? 0;
+    message.listType = object.listType !== undefined && object.listType !== null ? ListType.fromPartial(object.listType) : undefined;
+    message.mapType = object.mapType !== undefined && object.mapType !== null ? MapType.fromPartial(object.mapType) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? FunctionType.fromPartial(object.function) : undefined;
+    message.messageType = object.messageType ?? \\"\\";
+    message.typeParam = object.typeParam ?? \\"\\";
+    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
+    message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
+    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? AbstractType.fromPartial(object.abstractType) : undefined;
+    return message;
+  }
+
+};
 export interface Decl_IdentDecl {
   type: Type;
   value: Constant;
@@ -1425,6 +1787,158 @@ export const Decl_FunctionDecl_Overload = {
     message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? \\"\\";
+    return message;
+  }
+
+};
+export interface Decl_FunctionDecl {
+  overloads: Overload[];
+}
+
+function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
+  return {
+    overloads: []
+  };
+}
+
+export const Decl_FunctionDecl = {
+  encode(message: Decl_FunctionDecl, writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.overloads) {
+      FunctionDecl_Decl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): Decl_FunctionDecl {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDecl_FunctionDecl();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.overloads.push(FunctionDecl_Decl_Overload.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Decl_FunctionDecl {
+    return {
+      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => FunctionDecl_Decl_Overload.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: Decl_FunctionDecl): unknown {
+    const obj: any = {};
+
+    if (message.overloads) {
+      obj.overloads = message.overloads.map(e => e ? FunctionDecl_Decl_Overload.toJSON(e) : undefined);
+    } else {
+      obj.overloads = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Decl_FunctionDecl>, I>>(object: I): Decl_FunctionDecl {
+    const message = createBaseDecl_FunctionDecl();
+    message.overloads = object.overloads?.map(e => Overload.fromPartial(e)) || [];
+    return message;
+  }
+
+};
+export interface Decl {
+  name: string;
+  ident: IdentDecl;
+  function: FunctionDecl;
+}
+
+function createBaseDecl(): Decl {
+  return {
+    name: \\"\\",
+    ident: undefined,
+    function: undefined
+  };
+}
+
+export const Decl = {
+  encode(message: Decl, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== \\"\\") {
+      writer.uint32(10).string(message.name);
+    }
+
+    if (message.ident !== undefined) {
+      Decl_IdentDecl.encode(message.ident, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.function !== undefined) {
+      Decl_FunctionDecl.encode(message.function, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): Decl {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDecl();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.name = reader.string();
+          break;
+
+        case 2:
+          message.ident = Decl_IdentDecl.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.function = Decl_FunctionDecl.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Decl {
+    return {
+      name: isSet(object.name) ? String(object.name) : \\"\\",
+      ident: isSet(object.ident) ? Decl_IdentDecl.fromJSON(object.ident) : undefined,
+      function: isSet(object.function) ? Decl_FunctionDecl.fromJSON(object.function) : undefined
+    };
+  },
+
+  toJSON(message: Decl): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toJSON(message.ident) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toJSON(message.function) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Decl>, I>>(object: I): Decl {
+    const message = createBaseDecl();
+    message.name = object.name ?? \\"\\";
+    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
     return message;
   }
 
