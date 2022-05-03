@@ -102,6 +102,7 @@ Object {
                         },
                         "name": "CheckedExpr",
                         "nested": null,
+                        "oneofs": undefined,
                         "options": undefined,
                         "type": "Type",
                       },
@@ -232,10 +233,12 @@ Object {
                                 },
                                 "name": "Overload",
                                 "nested": null,
+                                "oneofs": undefined,
                                 "options": undefined,
                                 "type": "Type",
                               },
                             },
+                            "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
@@ -281,8 +284,17 @@ Object {
                             },
                             "name": "IdentDecl",
                             "nested": null,
+                            "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
+                          },
+                        },
+                        "oneofs": Object {
+                          "declKind": Object {
+                            "oneof": Array [
+                              "ident",
+                              "function",
+                            ],
                           },
                         },
                         "options": undefined,
@@ -330,6 +342,7 @@ Object {
                         },
                         "name": "Reference",
                         "nested": null,
+                        "oneofs": undefined,
                         "options": undefined,
                         "type": "Type",
                       },
@@ -522,6 +535,7 @@ Object {
                             },
                             "name": "AbstractType",
                             "nested": null,
+                            "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
@@ -553,6 +567,7 @@ Object {
                             },
                             "name": "FunctionType",
                             "nested": null,
+                            "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
@@ -572,6 +587,7 @@ Object {
                             },
                             "name": "ListType",
                             "nested": null,
+                            "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
@@ -602,6 +618,7 @@ Object {
                             },
                             "name": "MapType",
                             "nested": null,
+                            "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
@@ -663,6 +680,25 @@ message type specified at evaluation time.",
                               "TIMESTAMP": 2,
                               "WELL_KNOWN_TYPE_UNSPECIFIED": 0,
                             },
+                          },
+                        },
+                        "oneofs": Object {
+                          "typeKind": Object {
+                            "oneof": Array [
+                              "dyn",
+                              "null",
+                              "primitive",
+                              "wrapper",
+                              "wellKnown",
+                              "listType",
+                              "mapType",
+                              "function",
+                              "messageType",
+                              "typeParam",
+                              "type",
+                              "error",
+                              "abstractType",
+                            ],
                           },
                         },
                         "options": undefined,
@@ -1343,19 +1379,19 @@ export enum Type_WellKnownType {
   UNRECOGNIZED = -1,
 }
 export interface Type {
-  dyn: Empty;
-  null: NullValue;
-  primitive: PrimitiveType;
-  wrapper: PrimitiveType;
-  wellKnown: WellKnownType;
-  listType: ListType;
-  mapType: MapType;
-  function: FunctionType;
-  messageType: string;
-  typeParam: string;
-  type: Type;
-  error: Empty;
-  abstractType: AbstractType;
+  dyn?: Empty;
+  null?: NullValue;
+  primitive?: PrimitiveType;
+  wrapper?: PrimitiveType;
+  wellKnown?: WellKnownType;
+  listType?: ListType;
+  mapType?: MapType;
+  function?: FunctionType;
+  messageType?: string;
+  typeParam?: string;
+  type?: Type;
+  error?: Empty;
+  abstractType?: AbstractType;
 }
 
 function createBaseType(): Type {
@@ -1859,8 +1895,8 @@ export const Decl_FunctionDecl = {
 };
 export interface Decl {
   name: string;
-  ident: IdentDecl;
-  function: FunctionDecl;
+  ident?: IdentDecl;
+  function?: FunctionDecl;
 }
 
 function createBaseDecl(): Decl {

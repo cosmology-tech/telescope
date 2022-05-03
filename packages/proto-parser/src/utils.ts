@@ -269,6 +269,13 @@ const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object
         type: 'Type',
         name: obj.name,
         options: obj.options,
+        oneofs: obj.oneofs ? Object.keys(obj.oneofs).reduce((m, v) => {
+            m[v] = {
+                // TODO verify oneof syntax
+                oneof: obj.oneofs[v].oneof.map(name => name)
+            };
+            return m;
+        }, {}) : undefined,
         fields: parseFields(store, root, obj, imports),
         nested
     }
