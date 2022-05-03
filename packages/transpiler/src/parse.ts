@@ -1,4 +1,3 @@
-import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
 import { ProtoStore, ProtoRoot, getObjectName, lookup } from '@osmonauts/proto-parser';
 import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods, ProtoField, ProtoType } from '@osmonauts/ast';
 
