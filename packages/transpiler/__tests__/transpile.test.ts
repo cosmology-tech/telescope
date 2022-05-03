@@ -102,7 +102,10 @@ describe('nested', () => {
         const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
         const res = traverse(store, ref.proto);
         expect(strip(res)).toMatchSnapshot();
-        const parsed = parse(store, ref.proto, res);
+        // const parsed = parse(store, ref.proto, res);
+
+        // NOTICE using the traversed parse!
+        const parsed = parse(store, res, res);
         const gen = generate(t.program(parsed.body));
         expect(gen.code).toMatchSnapshot();
     });

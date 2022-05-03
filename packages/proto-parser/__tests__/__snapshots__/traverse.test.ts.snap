@@ -2098,7 +2098,251 @@ Object {
                         "responseType": "QuerySmartContractStateResponse",
                       },
                     },
-                    "nested": null,
+                    "name": "Query",
+                    "parsedMethods": Object {
+                      "AllContractState": Object {
+                        "fields": Object {
+                          "address": Object {
+                            "comment": "address is the address of the contract",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "pagination": Object {
+                            "comment": "pagination defines an optional pagination for the request.",
+                            "id": 2,
+                            "import": "cosmos/base/query/v1beta1/pagination.proto",
+                            "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "parsedType": Object {
+                              "name": "PageRequest",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.query.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                          },
+                        },
+                        "name": "AllContractState",
+                        "requestType": "QueryAllContractStateRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "Code": Object {
+                        "fields": Object {
+                          "codeId": Object {
+                            "comment": "grpc-gateway_out does not support Go style CodID",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                        },
+                        "name": "Code",
+                        "requestType": "QueryCodeRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "Codes": Object {
+                        "fields": Object {
+                          "pagination": Object {
+                            "comment": "pagination defines an optional pagination for the request.",
+                            "id": 1,
+                            "import": "cosmos/base/query/v1beta1/pagination.proto",
+                            "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "parsedType": Object {
+                              "name": "PageRequest",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.query.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                          },
+                        },
+                        "name": "Codes",
+                        "requestType": "QueryCodesRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "ContractHistory": Object {
+                        "fields": Object {
+                          "address": Object {
+                            "comment": "address is the address of the contract to query",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "pagination": Object {
+                            "comment": "pagination defines an optional pagination for the request.",
+                            "id": 2,
+                            "import": "cosmos/base/query/v1beta1/pagination.proto",
+                            "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "parsedType": Object {
+                              "name": "PageRequest",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.query.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                          },
+                        },
+                        "name": "ContractHistory",
+                        "requestType": "QueryContractHistoryRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "ContractInfo": Object {
+                        "fields": Object {
+                          "address": Object {
+                            "comment": "address is the address of the contract to query",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                        },
+                        "name": "ContractInfo",
+                        "requestType": "QueryContractInfoRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "ContractsByCode": Object {
+                        "fields": Object {
+                          "codeId": Object {
+                            "comment": "grpc-gateway_out does not support Go style CodID
+pagination defines an optional pagination for the request.",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "pagination": Object {
+                            "comment": null,
+                            "id": 2,
+                            "import": "cosmos/base/query/v1beta1/pagination.proto",
+                            "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "parsedType": Object {
+                              "name": "PageRequest",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.query.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                          },
+                        },
+                        "name": "ContractsByCode",
+                        "requestType": "QueryContractsByCodeRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "PinnedCodes": Object {
+                        "fields": Object {
+                          "pagination": Object {
+                            "comment": "pagination defines an optional pagination for the request.",
+                            "id": 2,
+                            "import": "cosmos/base/query/v1beta1/pagination.proto",
+                            "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "parsedType": Object {
+                              "name": "PageRequest",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.query.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                          },
+                        },
+                        "name": "PinnedCodes",
+                        "requestType": "QueryPinnedCodesRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "RawContractState": Object {
+                        "fields": Object {
+                          "address": Object {
+                            "comment": "address is the address of the contract",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "queryData": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "bytes",
+                              "type": "native",
+                            },
+                            "type": "bytes",
+                            "typeNum": 14,
+                          },
+                        },
+                        "name": "RawContractState",
+                        "requestType": "QueryRawContractStateRequest",
+                        "type": "ServiceMethod",
+                      },
+                      "SmartContractState": Object {
+                        "fields": Object {
+                          "address": Object {
+                            "comment": "address is the address of the contract",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "queryData": Object {
+                            "comment": "QueryData contains the query data passed to the contract",
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.casttype)": "RawContractMessage",
+                            },
+                            "parsedType": Object {
+                              "name": "bytes",
+                              "type": "native",
+                            },
+                            "type": "bytes",
+                            "typeNum": 14,
+                          },
+                        },
+                        "name": "SmartContractState",
+                        "requestType": "QuerySmartContractStateRequest",
+                        "type": "ServiceMethod",
+                      },
+                    },
+                    "serviceType": "Query",
                     "type": "Service",
                   },
                   "QueryAllContractStateRequest": Object {
@@ -3725,7 +3969,599 @@ Object {
                         "responseType": "MsgSwapExactAmountOutResponse",
                       },
                     },
-                    "nested": null,
+                    "name": "Msg",
+                    "parsedMethods": Object {
+                      "ExitPool": Object {
+                        "fields": Object {
+                          "poolId": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:pool_id",
+                            },
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "shareInAmount": Object {
+                            "comment": null,
+                            "id": 3,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:share_in_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenOutMins": Object {
+                            "comment": null,
+                            "id": 4,
+                            "import": "cosmos/base/v1beta1/coin.proto",
+                            "importedName": "cosmos.base.v1beta1.Coin",
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_out_min_amounts",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "Coin",
+                              "type": "Type",
+                            },
+                            "rule": "repeated",
+                            "scope": Array [
+                              "cosmos.base.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.v1beta1.Coin",
+                          },
+                        },
+                        "name": "ExitPool",
+                        "requestType": "MsgExitPool",
+                        "type": "ServiceMethod",
+                      },
+                      "ExitSwapExternAmountOut": Object {
+                        "fields": Object {
+                          "poolId": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:pool_id",
+                            },
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "shareInMaxAmount": Object {
+                            "comment": null,
+                            "id": 4,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:share_in_max_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenOut": Object {
+                            "comment": null,
+                            "id": 3,
+                            "import": "cosmos/base/v1beta1/coin.proto",
+                            "importedName": "cosmos.base.v1beta1.Coin",
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_out",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "Coin",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.v1beta1.Coin",
+                          },
+                        },
+                        "name": "ExitSwapExternAmountOut",
+                        "requestType": "MsgExitSwapExternAmountOut",
+                        "type": "ServiceMethod",
+                      },
+                      "ExitSwapShareAmountIn": Object {
+                        "fields": Object {
+                          "poolId": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:pool_id",
+                            },
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "shareInAmount": Object {
+                            "comment": null,
+                            "id": 4,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:share_in_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenOutDenom": Object {
+                            "comment": null,
+                            "id": 3,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_out_denom",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenOutMinAmount": Object {
+                            "comment": null,
+                            "id": 5,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:token_out_min_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                        },
+                        "name": "ExitSwapShareAmountIn",
+                        "requestType": "MsgExitSwapShareAmountIn",
+                        "type": "ServiceMethod",
+                      },
+                      "JoinPool": Object {
+                        "fields": Object {
+                          "poolId": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:pool_id",
+                            },
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "shareOutAmount": Object {
+                            "comment": null,
+                            "id": 3,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:pool_amount_out",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenInMaxs": Object {
+                            "comment": null,
+                            "id": 4,
+                            "import": "cosmos/base/v1beta1/coin.proto",
+                            "importedName": "cosmos.base.v1beta1.Coin",
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_in_max_amounts",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "Coin",
+                              "type": "Type",
+                            },
+                            "rule": "repeated",
+                            "scope": Array [
+                              "cosmos.base.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.v1beta1.Coin",
+                          },
+                        },
+                        "name": "JoinPool",
+                        "requestType": "MsgJoinPool",
+                        "type": "ServiceMethod",
+                      },
+                      "JoinSwapExternAmountIn": Object {
+                        "fields": Object {
+                          "poolId": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:pool_id",
+                            },
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "shareOutMinAmount": Object {
+                            "comment": "reserved 3;
+reserved \\"token_in\\";",
+                            "id": 4,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:share_out_min_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenIn": Object {
+                            "comment": null,
+                            "id": 3,
+                            "import": "cosmos/base/v1beta1/coin.proto",
+                            "importedName": "cosmos.base.v1beta1.Coin",
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_in",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "Coin",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.v1beta1.Coin",
+                          },
+                        },
+                        "name": "JoinSwapExternAmountIn",
+                        "requestType": "MsgJoinSwapExternAmountIn",
+                        "type": "ServiceMethod",
+                      },
+                      "JoinSwapShareAmountOut": Object {
+                        "fields": Object {
+                          "poolId": Object {
+                            "comment": null,
+                            "id": 2,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:pool_id",
+                            },
+                            "parsedType": Object {
+                              "name": "uint64",
+                              "type": "native",
+                            },
+                            "type": "uint64",
+                            "typeNum": 8,
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "shareOutAmount": Object {
+                            "comment": null,
+                            "id": 4,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:share_out_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenInDenom": Object {
+                            "comment": null,
+                            "id": 3,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_in_denom",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenInMaxAmount": Object {
+                            "comment": null,
+                            "id": 5,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:token_in_max_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                        },
+                        "name": "JoinSwapShareAmountOut",
+                        "requestType": "MsgJoinSwapShareAmountOut",
+                        "type": "ServiceMethod",
+                      },
+                      "SwapExactAmountIn": Object {
+                        "fields": Object {
+                          "routes": Object {
+                            "comment": null,
+                            "id": 2,
+                            "options": Object {
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "SwapAmountInRoute",
+                              "type": "Type",
+                            },
+                            "rule": "repeated",
+                            "scope": Array [
+                              "osmosis.gamm.v1beta1",
+                            ],
+                            "type": "SwapAmountInRoute",
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenIn": Object {
+                            "comment": null,
+                            "id": 3,
+                            "import": "cosmos/base/v1beta1/coin.proto",
+                            "importedName": "cosmos.base.v1beta1.Coin",
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_in",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "Coin",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.v1beta1.Coin",
+                          },
+                          "tokenOutMinAmount": Object {
+                            "comment": null,
+                            "id": 4,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:token_out_min_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                        },
+                        "name": "SwapExactAmountIn",
+                        "requestType": "MsgSwapExactAmountIn",
+                        "type": "ServiceMethod",
+                      },
+                      "SwapExactAmountOut": Object {
+                        "fields": Object {
+                          "routes": Object {
+                            "comment": null,
+                            "id": 2,
+                            "options": Object {
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "SwapAmountOutRoute",
+                              "type": "Type",
+                            },
+                            "rule": "repeated",
+                            "scope": Array [
+                              "osmosis.gamm.v1beta1",
+                            ],
+                            "type": "SwapAmountOutRoute",
+                          },
+                          "sender": Object {
+                            "comment": null,
+                            "id": 1,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:sender",
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenInMaxAmount": Object {
+                            "comment": null,
+                            "id": 3,
+                            "isScalar": true,
+                            "options": Object {
+                              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                              "(gogoproto.moretags)": "yaml:token_in_max_amount",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "tokenOut": Object {
+                            "comment": null,
+                            "id": 4,
+                            "import": "cosmos/base/v1beta1/coin.proto",
+                            "importedName": "cosmos.base.v1beta1.Coin",
+                            "options": Object {
+                              "(gogoproto.moretags)": "yaml:token_out",
+                              "(gogoproto.nullable)": false,
+                            },
+                            "parsedType": Object {
+                              "name": "Coin",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "cosmos.base.v1beta1",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "cosmos.base.v1beta1.Coin",
+                          },
+                        },
+                        "name": "SwapExactAmountOut",
+                        "requestType": "MsgSwapExactAmountOut",
+                        "type": "ServiceMethod",
+                      },
+                    },
+                    "serviceType": "Mutation",
                     "type": "Service",
                   },
                   "MsgExitPool": Object {

@@ -1,5 +1,5 @@
 import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
-import { ProtoStore, ProtoRoot, getObjectName } from '@osmonauts/proto-parser';
+import { ProtoStore, ProtoRoot, getObjectName, lookup } from '@osmonauts/proto-parser';
 import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods, ProtoField, ProtoType } from '@osmonauts/ast';
 
 export const parse = (
@@ -30,6 +30,120 @@ export const parse = (
     return obj;
 };
 
+export const getParsedObjectName = (
+    root: ProtoRoot,
+    obj: any,
+    scope: string[],
+) => {
+    const allButPackage = scope.splice(root.package.split('.').length);
+    // pull off "this" name
+    allButPackage.pop();
+    return getObjectName(obj.name, [root.package, ...allButPackage]);
+};
+
+export const getKeyTypeObjectName = (
+    obj: any,
+    field: ProtoField
+) => {
+    return obj.name + '_' + field.parsedType.name + 'MapEntry';
+}
+
+
+// TODO should this be moved to parseType in proto-parser?
+export const parseType = (
+    store: ProtoStore,
+    root: ProtoRoot,
+    obj: any,
+    imports: object,
+    body: any[],
+    scope: string[],
+    isNested: boolean = false
+) => {
+
+    if (obj.nested) {
+        Object.keys(obj.nested).forEach(key => {
+            // isNested = true;
+            parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], true);
+        });
+    }
+
+    const hasKeyType = Object.keys(obj.fields).some(field => !!obj.fields[field].keyType);
+    let keyTypes = [];
+    if (hasKeyType) {
+        keyTypes = Object.keys(obj.fields)
+            .filter(field => !!obj.fields[field].keyType)
+            .map(field => {
+                return {
+                    name: field,
+                    ...obj.fields[field]
+                };
+            })
+
+        keyTypes.forEach(field => {
+            // TODO move name generation to method
+            const name = getKeyTypeObjectName(obj, field);
+            const scoped = scope.splice(root.package.split('.').length);
+            const adhocObj: ProtoType = {
+                comment: undefined,
+                fields: {
+                    key: {
+                        id: 1,
+                        type: field.keyType,
+                        scope: [...scoped],
+                        parsedType: {
+                            name: field.keyType,
+                            type: field.keyType
+                        },
+                        comment: undefined,
+                        options: undefined
+                    },
+                    value: {
+                        id: 2,
+                        type: field.parsedType.name,
+                        scope: [...scoped],
+                        parsedType: {
+                            name: field.type,
+                            type: field.parsedType.type
+                        },
+                        comment: undefined,
+                        options: undefined
+                    }
+                }
+            };
+            body.push(createProtoType(name, adhocObj));
+            body.push(createCreateProtoType(name, adhocObj));
+            body.push(createProtoObjectWithMethods(name, adhocObj));
+        })
+    }
+
+    // parse nested names
+    let name = obj.name;
+    if (isNested) {
+        name = getParsedObjectName(root, obj, scope);
+    }
+
+    body.push(createProtoType(name, obj));
+    body.push(createCreateProtoType(name, obj));
+    body.push(createProtoObjectWithMethods(name, obj));
+};
+
+export const parseEnum = (
+    store: ProtoStore,
+    root: ProtoRoot,
+    obj: any,
+    imports: object,
+    body: any[],
+    scope: string[],
+    isNested: boolean = false
+) => {
+    let name = obj.name;
+    // parse nested names
+    if (isNested) {
+        name = getParsedObjectName(root, obj, scope);
+    }
+    body.push(createProtoEnum(name, obj));
+};
+
 export const parseRecur = (
     store: ProtoStore,
     root: ProtoRoot,
@@ -40,96 +154,17 @@ export const parseRecur = (
     isNested: boolean = false
 ) => {
     if (obj.type === 'Type') {
-
-        if (obj.nested) {
-            Object.keys(obj.nested).forEach(key => {
-                // isNested = true;
-                parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], true);
-            });
-        }
-
-        const hasKeyType = Object.keys(obj.fields).some(field => !!obj.fields[field].keyType);
-        let keyTypes = [];
-        if (hasKeyType) {
-            keyTypes = Object.keys(obj.fields)
-                .filter(field => !!obj.fields[field].keyType)
-                .map(field => {
-                    return {
-                        name: field,
-                        ...obj.fields[field]
-                    };
-                })
-
-            keyTypes.forEach(field => {
-                // TODO move name generation to method
-                const name = obj.name + '_' + field.parsedType.name + 'MapEntry';
-                const scoped = scope.splice(root.package.split('.').length);
-                const adhocObj: ProtoType = {
-                    comment: undefined,
-                    fields: {
-                        key: {
-                            id: 1,
-                            type: field.keyType,
-                            scope: [...scoped],
-                            parsedType: {
-                                name: field.keyType,
-                                type: field.keyType
-                            },
-                            comment: undefined,
-                            options: undefined
-                        },
-                        value: {
-                            id: 2,
-                            type: field.parsedType.name,
-                            scope: [...scoped],
-                            parsedType: {
-                                name: field.type,
-                                type: field.parsedType.type
-                            },
-                            comment: undefined,
-                            options: undefined
-                        }
-                    }
-                };
-                body.push(createProtoType(name, adhocObj));
-                body.push(createCreateProtoType(name, adhocObj));
-                body.push(createProtoObjectWithMethods(name, adhocObj));
-            })
-        }
-
-        // MARKED AS NOT DRY 
-        // parse nested names
-        let name = obj.name;
-        if (isNested) {
-            const allButPackage = scope.splice(root.package.split('.').length);
-            // pull off "this" name
-            allButPackage.pop();
-            name = getObjectName(obj.name, [root.package, ...allButPackage]);
-        }
-
-        body.push(createProtoType(name, obj));
-        body.push(createCreateProtoType(name, obj));
-        body.push(createProtoObjectWithMethods(name, obj));
-
-
-        return;
+        return parseType(
+            store, root, obj, imports, body, scope, isNested
+        );
     }
     if (obj.type === 'Enum') {
-        // MARKED AS NOT DRY 
-        // parse nested names
-        let name = obj.name;
-        if (isNested) {
-            const allButPackage = scope.splice(root.package.split('.').length);
-            // pull off "this" name
-            allButPackage.pop();
-            name = getObjectName(obj.name, [root.package, ...allButPackage]);
-        }
-
-        body.push(createProtoEnum(name, obj));
-        return;
+        return parseEnum(
+            store, root, obj, imports, body, scope, isNested
+        );
     }
     if (obj.type === 'Service') {
-        // todo return empty ast element.
+        console.log(obj);
         return;
     }
     if (obj.type === 'Root' || obj.type === 'Namespace') {

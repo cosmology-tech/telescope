@@ -289,19 +289,40 @@ const parseEnum = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object
     }
 };
 
+const parseServiceMethod = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object, name: string) => {
+
+    const service = obj.methods[name];
+    const { requestType } = service;
+    const refObject = lookup(store, root, requestType);
+
+    return {
+        type: 'ServiceMethod',
+        name,
+        requestType,
+        fields: parseFields(store, root, refObject, imports)
+    };
+};
+
+const getServiceType = (obj) => {
+    if (obj.name === 'Msg') return 'Mutation';
+    if (obj.name === 'Query') return 'Query';
+    return 'Unknown';
+}
+
 const parseService = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
-    let nested = null;
-    if (obj.nested) {
-        nested = Object.keys(obj.nested).reduce((m, key) => {
-            m[key] = recursiveTraversal(store, root, obj.nested[key], imports);
-            return m;
-        }, {});
-    }
+    const methods = Object.keys(obj.methods).reduce((m, key) => {
+        m[key] = parseServiceMethod(
+            store, root, obj, imports, key
+        );
+        return m;
+    }, {})
 
     return {
         type: 'Service',
+        name: obj.name,
+        serviceType: getServiceType(obj),
         ...obj.toJSON({ keepComments: true }),
-        nested
+        parsedMethods: methods
     }
 };
 
