@@ -47,8 +47,6 @@ export const getKeyTypeObjectName = (
     return obj.name + '_' + field.parsedType.name + 'MapEntry';
 }
 
-
-// TODO should this be moved to parseType in proto-parser?
 export const parseType = (
     store: ProtoStore,
     root: ProtoRoot,
@@ -66,53 +64,45 @@ export const parseType = (
         });
     }
 
-    const hasKeyType = Object.keys(obj.fields).some(field => !!obj.fields[field].keyType);
-    let keyTypes = [];
-    if (hasKeyType) {
-        keyTypes = Object.keys(obj.fields)
-            .filter(field => !!obj.fields[field].keyType)
-            .map(field => {
-                return {
-                    name: field,
-                    ...obj.fields[field]
-                };
-            })
+    obj.keyTypes.forEach(field => {
+        // const name = getKeyTypeObjectName(obj, field);
+        const name = getParsedObjectName(root, {
+            name: getKeyTypeObjectName(obj, field)
+        }, scope);
 
-        keyTypes.forEach(field => {
-            const name = getKeyTypeObjectName(obj, field);
-            const scoped = scope.splice(root.package.split('.').length);
-            const adhocObj: ProtoType = {
-                comment: undefined,
-                fields: {
-                    key: {
-                        id: 1,
-                        type: field.keyType,
-                        scope: [...scoped],
-                        parsedType: {
-                            name: field.keyType,
-                            type: field.keyType
-                        },
-                        comment: undefined,
-                        options: undefined
+        const scoped = scope.splice(root.package.split('.').length);
+        // TODO should this be moved to parseType in proto-parser?
+        const adhocObj: ProtoType = {
+            comment: undefined,
+            fields: {
+                key: {
+                    id: 1,
+                    type: field.keyType,
+                    scope: [...scoped],
+                    parsedType: {
+                        name: field.keyType,
+                        type: field.keyType
                     },
-                    value: {
-                        id: 2,
-                        type: field.parsedType.name,
-                        scope: [...scoped],
-                        parsedType: {
-                            name: field.type,
-                            type: field.parsedType.type
-                        },
-                        comment: undefined,
-                        options: undefined
-                    }
+                    comment: undefined,
+                    options: undefined
+                },
+                value: {
+                    id: 2,
+                    type: field.parsedType.name,
+                    scope: [...scoped],
+                    parsedType: {
+                        name: field.type,
+                        type: field.parsedType.type
+                    },
+                    comment: undefined,
+                    options: undefined
                 }
-            };
-            body.push(createProtoType(name, adhocObj));
-            body.push(createCreateProtoType(name, adhocObj));
-            body.push(createProtoObjectWithMethods(name, adhocObj));
-        })
-    }
+            }
+        };
+        body.push(createProtoType(name, adhocObj));
+        body.push(createCreateProtoType(name, adhocObj));
+        body.push(createProtoObjectWithMethods(name, adhocObj));
+    })
 
     // parse nested names
     let name = obj.name;

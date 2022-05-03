@@ -257,6 +257,14 @@ const parseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: obje
     }, {});
 };
 
+
+export const getKeyTypeObjectName = (
+    obj: any,
+    field: any // ProtoField
+) => {
+    return obj.name + '_' + field.parsedType.name + 'MapEntry';
+}
+
 const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
     let nested = null;
     if (obj.nested) {
@@ -265,20 +273,39 @@ const parseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object
             return m;
         }, {});
     }
-    return {
+
+    const traversed = {
         type: 'Type',
         name: obj.name,
         options: obj.options,
         oneofs: obj.oneofs ? Object.keys(obj.oneofs).reduce((m, v) => {
             m[v] = {
-                // TODO verify oneof syntax
+                // parse oneof
                 oneof: obj.oneofs[v].oneof.map(name => name)
             };
             return m;
         }, {}) : undefined,
         fields: parseFields(store, root, obj, imports),
-        nested
+        nested,
+        keyTypes: []
+    };
+
+    // parse keyType
+    const hasKeyType = Object.keys(traversed.fields).some(field => !!traversed.fields[field].keyType);
+    let keyTypes = [];
+    if (hasKeyType) {
+        keyTypes = Object.keys(traversed.fields)
+            .filter(field => !!traversed.fields[field].keyType)
+            .map(field => {
+                return {
+                    name: field,
+                    ...traversed.fields[field]
+                };
+            });
     }
+
+    traversed.keyTypes = keyTypes;
+    return traversed;
 };
 
 const parseEnum = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {

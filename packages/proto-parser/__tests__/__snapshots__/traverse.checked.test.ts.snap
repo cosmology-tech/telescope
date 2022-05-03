@@ -131,6 +131,54 @@ space.",
                             "type": "Type",
                           },
                         },
+                        "keyTypes": Array [
+                          Object {
+                            "comment": "A map from expression ids to resolved references.
+
+The following entries are in this table:
+
+- An Ident or Select expression is represented here if it resolves to a
+declaration. For instance, if \`a.b.c\` is represented by
+\`select(select(id(a), b), c)\`, and \`a.b\` resolves to a declaration,
+while \`c\` is a field selection, then the reference is attached to the
+nested select expression (but not to the id or or the outer select).
+In turn, if \`a\` resolves to a declaration and \`b.c\` are field selections,
+the reference is attached to the ident expression.
+- Every Call expression has an entry here, identifying the function being
+called.
+- Every CreateStruct expression for a message has an entry, identifying
+the message.",
+                            "id": 2,
+                            "keyType": "int64",
+                            "name": "referenceMap",
+                            "parsedType": Object {
+                              "name": "Reference",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Reference",
+                          },
+                          Object {
+                            "comment": "A map from expression ids to types.
+
+Every expression node which has a type different than DYN has a mapping
+here. If an expression has type DYN, it is omitted from this map to save
+space.",
+                            "id": 3,
+                            "keyType": "int64",
+                            "name": "typeMap",
+                            "parsedType": Object {
+                              "name": "Type",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Type",
+                          },
+                        ],
                         "name": "CheckedExpr",
                         "nested": null,
                         "oneofs": undefined,
@@ -184,6 +232,7 @@ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                             "typeNum": 13,
                           },
                         },
+                        "keyTypes": Array [],
                         "name": "Decl",
                         "nested": Object {
                           "FunctionDecl": Object {
@@ -204,6 +253,7 @@ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                                 "type": "Overload",
                               },
                             },
+                            "keyTypes": Array [],
                             "name": "FunctionDecl",
                             "nested": Object {
                               "Overload": Object {
@@ -300,6 +350,7 @@ the type params of \`K, V\`.",
                                     "typeNum": 13,
                                   },
                                 },
+                                "keyTypes": Array [],
                                 "name": "Overload",
                                 "nested": null,
                                 "oneofs": undefined,
@@ -355,6 +406,7 @@ must be supplied at evaluation time.",
                                 "type": "Constant",
                               },
                             },
+                            "keyTypes": Array [],
                             "name": "IdentDecl",
                             "nested": null,
                             "oneofs": undefined,
@@ -424,6 +476,7 @@ constant if known at compile time.",
                             "type": "Constant",
                           },
                         },
+                        "keyTypes": Array [],
                         "name": "Reference",
                         "nested": null,
                         "oneofs": undefined,
@@ -617,6 +670,7 @@ named \`E\`.",
                             "type": "PrimitiveType",
                           },
                         },
+                        "keyTypes": Array [],
                         "name": "Type",
                         "nested": Object {
                           "AbstractType": Object {
@@ -646,6 +700,7 @@ named \`E\`.",
                                 "type": "Type",
                               },
                             },
+                            "keyTypes": Array [],
                             "name": "AbstractType",
                             "nested": null,
                             "oneofs": undefined,
@@ -680,6 +735,7 @@ named \`E\`.",
                                 "type": "Type",
                               },
                             },
+                            "keyTypes": Array [],
                             "name": "FunctionType",
                             "nested": null,
                             "oneofs": undefined,
@@ -701,6 +757,7 @@ named \`E\`.",
                                 "type": "Type",
                               },
                             },
+                            "keyTypes": Array [],
                             "name": "ListType",
                             "nested": null,
                             "oneofs": undefined,
@@ -734,6 +791,7 @@ named \`E\`.",
                                 "type": "Type",
                               },
                             },
+                            "keyTypes": Array [],
                             "name": "MapType",
                             "nested": null,
                             "oneofs": undefined,
