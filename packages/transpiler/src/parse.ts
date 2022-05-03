@@ -80,7 +80,6 @@ export const parseType = (
             })
 
         keyTypes.forEach(field => {
-            // TODO move name generation to method
             const name = getKeyTypeObjectName(obj, field);
             const scoped = scope.splice(root.package.split('.').length);
             const adhocObj: ProtoType = {
@@ -153,28 +152,28 @@ export const parseRecur = (
     scope: string[],
     isNested: boolean = false
 ) => {
-    if (obj.type === 'Type') {
-        return parseType(
-            store, root, obj, imports, body, scope, isNested
-        );
-    }
-    if (obj.type === 'Enum') {
-        return parseEnum(
-            store, root, obj, imports, body, scope, isNested
-        );
-    }
-    if (obj.type === 'Service') {
-        console.log(obj);
-        return;
-    }
-    if (obj.type === 'Root' || obj.type === 'Namespace') {
-        if (obj.nested) {
-            return Object.keys(obj.nested).forEach(key => {
-                parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], isNested);
-            });
-        } else {
+    switch (obj.type) {
+        case 'Type':
+            return parseType(
+                store, root, obj, imports, body, scope, isNested
+            );
+        case 'Enum':
+            return parseEnum(
+                store, root, obj, imports, body, scope, isNested
+            );
+        case 'Service':
+            console.log(obj);
+            return;
+        case 'Root':
+        case 'Namespace':
+            if (obj.nested) {
+                return Object.keys(obj.nested).forEach(key => {
+                    parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], isNested);
+                });
+            } else {
+                throw new Error('parseRecur() cannot find protobufjs Type')
+            }
+        default:
             throw new Error('parseRecur() cannot find protobufjs Type')
-        }
     }
-    throw new Error('parseRecur() cannot find protobufjs Type')
 };
