@@ -1,5 +1,5 @@
 import { ProtoResolver, ProtoStore } from '../src/index'
-import { importLookup, lookup, protoImportLookup } from '../src/utils';
+import { importLookup, lookup, protoImportLookup } from '../src/';
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/gno');
 const parser = new ProtoResolver(store.getDeps())
 it('deps', () => {

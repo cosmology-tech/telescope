@@ -1,5 +1,5 @@
 import { ProtoResolver, ProtoStore } from '../src/index';
-import { getObjectName, importLookup, lookup } from '../src/utils';
+import { getObjectName, importLookup, lookup } from '../src/';
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 
 it('nested lookup', () => {

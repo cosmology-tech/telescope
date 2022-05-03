@@ -1,5 +1,5 @@
 import { ProtoResolver, ProtoStore } from '../src/index'
-import { importLookup, lookup, protoImportLookup, traverse } from '../src/utils';
+import { importLookup, lookup, protoImportLookup, traverse } from '../src/';
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 
 it('osmosis/claim/v1beta1/params', () => {

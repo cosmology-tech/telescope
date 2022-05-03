@@ -1,0 +1,211 @@
+import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
+import { importLookup, protoImportLookup, lookup } from './lookup';
+import { ProtoStore } from './store';
+import { ProtoRoot } from './types';
+import { instanceType, NATIVE_TYPES } from './utils';
+
+export const traverse = (store: ProtoStore, root: ProtoRoot) => {
+    const imports = {};
+
+    const obj: ProtoRoot & { parsedImports: Record<string, string[]> } = {
+        imports: root.imports,
+        package: root.package,
+        root: recursiveTraversal(
+            store,
+            root,
+            root.root,
+            imports
+        ),
+        parsedImports: null,
+    };
+    obj.parsedImports = imports;
+    return obj;
+};
+
+const traverseFields = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    return Object.keys(obj.fields).reduce((m, key) => {
+
+        const field = obj.fields[key];
+        let found: any = null;
+
+        if (NATIVE_TYPES.includes(field.type)) {
+            m[key] = {
+                parsedType: { name: field.type, type: 'native' },
+                isScalar: true,
+                typeNum: NATIVE_TYPES.indexOf(field.type),
+                ...field.toJSON({ keepComments: true })
+            }
+            return m;
+        }
+
+        found = importLookup(store, root, field.type);
+        if (found) {
+            imports[found.import] = imports[found.import] || [];
+            imports[found.import] = [...new Set([...imports[found.import], found.name])];
+            m[key] = {
+                parsedType: instanceType(found.obj),
+                scopeType: 'import',
+                scope: [found.obj.scope],
+                ...field.toJSON({ keepComments: true }),
+                importedName: found.importedName,
+                import: found.import,
+            };
+            return m;
+        }
+
+        found = protoImportLookup(store, root, field.type);
+        if (found) {
+            imports[found.import] = imports[found.import] || [];
+            imports[found.import] = [...new Set([...imports[found.import], found.name])];
+            m[key] = {
+
+                parsedType: instanceType(found.obj),
+                scopeType: 'protoImport',
+                scope: [found.package],
+                ...field.toJSON({ keepComments: true }),
+                importedName: found.importedName,
+                import: found.import,
+            };
+            return m;
+        }
+
+        found = lookup(store, root, field.type);
+        if (found) {
+            m[key] = {
+                scope: found.scope,
+                parsedType: instanceType(found),
+                ...field.toJSON({ keepComments: true }),
+            };
+            return m;
+        }
+
+        return m;
+    }, {});
+};
+
+const traverseType = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    let nested = null;
+    if (obj.nested) {
+        nested = Object.keys(obj.nested).reduce((m, key) => {
+            m[key] = recursiveTraversal(store, root, obj.nested[key], imports);
+            return m;
+        }, {});
+    }
+
+    const traversed = {
+        type: 'Type',
+        name: obj.name,
+        options: obj.options,
+        oneofs: obj.oneofs ? Object.keys(obj.oneofs).reduce((m, v) => {
+            m[v] = {
+                // parse oneof
+                oneof: obj.oneofs[v].oneof.map(name => name)
+            };
+            return m;
+        }, {}) : undefined,
+        fields: traverseFields(store, root, obj, imports),
+        nested,
+        keyTypes: []
+    };
+
+    // parse keyType
+    const hasKeyType = Object.keys(traversed.fields).some(field => !!traversed.fields[field].keyType);
+    let keyTypes = [];
+    if (hasKeyType) {
+        keyTypes = Object.keys(traversed.fields)
+            .filter(field => !!traversed.fields[field].keyType)
+            .map(field => {
+                return {
+                    name: field,
+                    ...traversed.fields[field]
+                };
+            });
+    }
+
+    traversed.keyTypes = keyTypes;
+    return traversed;
+};
+
+const traverseEnum = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    return {
+        type: 'Enum',
+        name: obj.name,
+        ...obj.toJSON({ keepComments: true })
+    }
+};
+
+const traverseServiceMethod = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object, name: string) => {
+
+    const service = obj.methods[name];
+    const { requestType } = service;
+    const refObject = lookup(store, root, requestType);
+
+    return {
+        type: 'ServiceMethod',
+        name,
+        requestType,
+        fields: traverseFields(store, root, refObject, imports)
+    };
+};
+
+const getServiceType = (obj) => {
+    if (obj.name === 'Msg') return 'Mutation';
+    if (obj.name === 'Query') return 'Query';
+    return 'Unknown';
+}
+
+const traverseService = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    const methods = Object.keys(obj.methods).reduce((m, key) => {
+        m[key] = traverseServiceMethod(
+            store, root, obj, imports, key
+        );
+        return m;
+    }, {})
+
+    return {
+        type: 'Service',
+        name: obj.name,
+        serviceType: getServiceType(obj),
+        ...obj.toJSON({ keepComments: true }),
+        parsedMethods: methods
+    }
+};
+
+export const recursiveTraversal = (store: ProtoStore, root: ProtoRoot, obj: any, imports: object) => {
+    if (obj instanceof Type) {
+        return traverseType(store, root, obj, imports);
+    }
+    if (obj instanceof Enum) {
+        return traverseEnum(store, root, obj, imports);
+    }
+    if (obj instanceof Service) {
+        return traverseService(store, root, obj, imports);
+    }
+    if (obj instanceof Root) {
+        if (obj.nested) {
+            return Object.keys(obj.nested).reduce((m, key) => {
+                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports);
+                return m;
+            }, {
+                type: 'Root',
+                nested: {}
+            });
+        } else {
+            throw new Error('recursiveTraversal() cannot find protobufjs Type')
+        }
+    }
+    if (obj instanceof Namespace) {
+        if (obj.nested) {
+            return Object.keys(obj.nested).reduce((m, key) => {
+                m.nested[key] = recursiveTraversal(store, root, obj.nested[key], imports);
+                return m;
+            }, {
+                type: 'Namespace',
+                nested: {}
+            });
+        } else {
+            throw new Error('recursiveTraversal() cannot find protobufjs Type')
+        }
+    }
+    throw new Error('recursiveTraversal() cannot find protobufjs Type')
+};
