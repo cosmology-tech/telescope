@@ -8,7 +8,7 @@ export interface ToAminoParseField {
     nested: number;
     options: AminoOptions;
 }
-export declare const toAminoParseField: ({ context, field, scope, nested, options }: ToAminoParseField) => any;
+export declare const toAminoParseField: ({ context, field, scope: previousScope, nested, options }: ToAminoParseField) => any;
 interface toAminoJSON {
     context: AminoParseContext;
     proto: ProtoType;

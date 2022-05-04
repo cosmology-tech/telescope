@@ -10,4 +10,5 @@ export declare const toAmino: {
     coin(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
     type({ context, field, scope, nested, options }: ToAminoParseField): any;
     typeArray({ context, field, scope, nested, options }: ToAminoParseField): t.ObjectProperty;
+    pubkey({ context, field, scope, nested, options }: ToAminoParseField): t.ObjectProperty;
 };

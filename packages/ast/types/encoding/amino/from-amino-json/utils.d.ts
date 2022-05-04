@@ -12,4 +12,5 @@ export declare const fromAmino: {
     type({ context, field, scope, nested, options }: FromAminoParseField): any;
     typeArray({ context, field, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
     arrayFrom(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
+    pubkey({ context, field, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
 };

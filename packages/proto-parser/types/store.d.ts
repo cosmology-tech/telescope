@@ -1,4 +1,5 @@
 import { ProtoDep, ProtoRef } from './types';
+export declare const parseProto: (content: any) => import("protobufjs").IParserResult;
 export declare class ProtoStore {
     files: string[];
     protoDir: string;

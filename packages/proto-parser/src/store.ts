@@ -7,6 +7,14 @@ import { getNestedProto } from './utils';
 import { traverse } from './traverse';
 import { lookupAny } from './lookup';
 
+export const parseProto = (content) => {
+    return parse(content, {
+        keepCase: false,
+        alternateCommentMode: true,
+        preferTrailingComment: false
+    });
+};
+
 export class ProtoStore {
     files: string[];
     protoDir: string;
@@ -40,12 +48,11 @@ export class ProtoStore {
             content: readFileSync(filename, 'utf-8')
         }))
         const protos = contents.map(({ absolute, filename, content }) => {
+            const proto = parseProto(content);
             return {
-                proto: parse(content, {
-                    keepCase: false,
-                    alternateCommentMode: true,
-                    preferTrailingComment: false
-                }), absolute, filename
+                absolute,
+                filename,
+                proto,
             };
         });
         this.protos = protos;

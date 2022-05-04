@@ -41,7 +41,10 @@ export interface ProtoField {
     options: {
         [key: string]: any;
         "(gogoproto.nullable)"?: boolean;
+        "(cosmos_proto.scalar)"?: string;
+        "(gogoproto.customtype)"?: string;
         "(gogoproto.moretags)"?: string;
+        "(cosmos_proto.accepts_interface)"?: string;
     };
     comment?: string;
     import?: string;
