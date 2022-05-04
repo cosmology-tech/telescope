@@ -221,9 +221,42 @@ export const fromAmino = {
                     memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn)
                 ]
             ));
+    },
+
+    pubkey({ context, field, scope, nested, options }: FromAminoParseField) {
+        // context.imports.push('toBase64')
+
+        return t.objectProperty(
+            t.identifier(field.name),
+            t.callExpression(
+                t.identifier('encodeBech32PubKey'),
+                [
+                    t.objectExpression([
+                        t.objectProperty(
+                            t.identifier('type'),
+                            t.stringLiteral('tendermint/PubKeySecp256k1')
+                        ),
+                        t.objectProperty(
+                            t.identifier('value'),
+                            t.callExpression(
+                                t.identifier('toBase64'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('pubkey'),
+                                        t.identifier('value')
+                                    )
+                                ]
+                            )
+                        )
+                    ]),
+                    // TODO how to manage this?
+                    // 1. options.prefix
+                    // 2. look into prefix and how it's used across chains
+                    // 3. maybe AminoConverter is a class and has this.prefix!
+                    t.stringLiteral('cosmos')
+                ]
+            )
+        )
     }
-
-
-
 
 };

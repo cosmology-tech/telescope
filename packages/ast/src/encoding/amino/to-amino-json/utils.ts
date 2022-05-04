@@ -134,6 +134,8 @@ export const toAmino = {
     },
 
     type({ context, field, scope, nested, options }: ToAminoParseField) {
+        /// TODO (can this be refactored out? e.g. no recursive calls in this file?)
+        /// BEGIN
         const Type = getTypeFromContext(field, context);
         const properties = protoFieldsToArray(Type).map(field => {
             return toAminoParseField({
@@ -144,6 +146,7 @@ export const toAmino = {
                 options
             })
         });
+        /// END 
         return t.objectProperty(t.identifier(options.aminoCasingFn(field.name)),
             t.objectExpression(
                 properties
@@ -192,6 +195,40 @@ export const toAmino = {
         return t.objectProperty(t.identifier(options.aminoCasingFn(field.name)),
             expr
         );
+    },
+
+    pubkey({ context, field, scope, nested, options }: ToAminoParseField) {
+        // context.imports.push( 'fromBase64' )   
+        // context.imports.push( 'encodeBech32Pubkey' )   
+
+        return t.objectProperty(
+            t.identifier(field.name),
+            t.objectExpression([
+                t.objectProperty(
+                    t.identifier('typeUrl'),
+                    t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
+                ),
+                t.objectProperty(
+                    t.identifier('value'),
+                    t.callExpression(
+                        t.identifier('fromBase64'),
+                        [
+                            t.memberExpression(
+                                t.callExpression(
+                                    t.identifier('decodeBech32Pubkey'),
+                                    [
+                                        t.identifier('pubkey')
+                                    ]
+                                ),
+                                t.identifier('value')
+                            )
+
+                        ]
+                    )
+                )
+            ])
+        )
+
     }
 
 

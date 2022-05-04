@@ -55,6 +55,15 @@ export const fromAminoParseField = ({
         // return needsImplementation(field.name, field);
     }
 
+    // casting special types
+
+    if (field.type === 'google.protobuf.Any') {
+        switch (field.options['(cosmos_proto.accepts_interface)']) {
+            case 'cosmos.crypto.PubKey':
+                return fromAmino.pubkey({ context, field, scope, nested, options });
+        }
+    }
+
     switch (field.parsedType.type) {
         case 'Type':
             return fromAmino.type({

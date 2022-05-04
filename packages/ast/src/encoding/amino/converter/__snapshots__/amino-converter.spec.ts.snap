@@ -30,8 +30,8 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
         pubkey: {
-          type_url: pubkey.typeUrl,
-          value: pubkey.value
+          typeUrl: \\"/cosmos.crypto.secp256k1.PubKey\\",
+          value: fromBase64(decodeBech32Pubkey(pubkey).value)
         },
         value: {
           denom: value.denom,
@@ -64,10 +64,10 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         minSelfDelegation: min_self_delegation,
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        pubkey: {
-          typeUrl: pubkey.type_url,
-          value: pubkey.value
-        },
+        pubkey: encodeBech32PubKey({
+          type: \\"tendermint/PubKeySecp256k1\\",
+          value: toBase64(pubkey.value)
+        }, \\"cosmos\\"),
         value: {
           denom: value.denom,
           amount: value.amount
