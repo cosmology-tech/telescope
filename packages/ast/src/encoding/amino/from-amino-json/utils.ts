@@ -121,7 +121,7 @@ export const fromAmino = {
     enum({ context, field, scope, nested, options }: FromAminoParseField) {
         const Enum = getTypeFromContext(field, context);
         if (!Enum) throw new Error('Undefined symbol: ' + field.type);
-        const enumFunction = getEnumFromJsonName(getObjectName(field.name, field.scope));
+        const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
         const value = t.callExpression(
             t.identifier(enumFunction), [
             memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn)
@@ -132,7 +132,7 @@ export const fromAmino = {
     enumArray({ context, field, scope, nested, options }: FromAminoParseField) {
         const Enum = getTypeFromContext(field, context);
         if (!Enum) throw new Error('Undefined symbol: ' + field.type);
-        const enumFunction = getEnumFromJsonName(getObjectName(field.name, field.scope));
+        const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
         const value = t.callExpression(
             t.memberExpression(
                 memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn),
