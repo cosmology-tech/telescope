@@ -59,7 +59,6 @@ describe('osmosis/gamm/v1beta1/tx', () => {
                 const elem = store.findProtoObject(key, sym);
                 // console.log({ elem })
                 // console.log(traversed)
-                ;
                 m.types.push({
                     name: elem.name,
                     ...elem.toJSON()
@@ -68,15 +67,14 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
             return m;
         }, {
+            store,
+            ref,
             types: Object.values(proto), // hacky
             enums: []
         })
 
     it('MsgJoinPool', () => {
         printCode(aminoConverter({
-            store,
-            ref,
-
             context,
             root: traversed,
             name: 'AminoConverter',

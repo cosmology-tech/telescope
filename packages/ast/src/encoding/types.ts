@@ -1,6 +1,11 @@
 import * as t from '@babel/types';
 import { identifier, tsPropertySignature, functionDeclaration } from '../utils';
 
+export interface ProtoAny {
+    type: string;
+    name: string;
+    [key: string]: any;
+};
 export interface ProtoEnum {
     name?: string;
     values: { [key: string]: number };

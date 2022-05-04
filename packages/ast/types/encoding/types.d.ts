@@ -1,4 +1,9 @@
 import * as t from '@babel/types';
+export interface ProtoAny {
+    type: string;
+    name: string;
+    [key: string]: any;
+}
 export interface ProtoEnum {
     name?: string;
     values: {

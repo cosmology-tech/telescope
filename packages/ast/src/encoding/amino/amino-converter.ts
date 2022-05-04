@@ -1,26 +1,15 @@
 import * as t from '@babel/types';
 import { ProtoType } from '../types';
-import { ProtoRoot, ProtoAny, AminoException, AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from '../../types';
+import { ProtoAny, } from '../types';
+import { ProtoRoot } from '@osmonauts/proto-parser';
+import { AminoExceptions, AminoParseContext, AminoOptions } from './types';
 import { toAminoJsonMethod } from './to-amino-json';
 import { fromAminoJsonMethod } from './from-amino-json';
-import { kebab } from 'case';
 import { getTypeUrl, typeUrlToAmino } from './utils';
 
-export interface AminoOptions {
-    aminoCasingFn: Function,
-    exceptions?: AminoExceptions
-}
-
-
-// MARKED AS NOT DRY
-interface Context {
-    enums: any[];
-    types: any[];
-}
-
-export interface AminoConverterItemParams {
+interface AminoConverterItemParams {
     root: ProtoRoot,
-    context: Context,
+    context: AminoParseContext,
     proto: ProtoType,
     options: AminoOptions,
 }
@@ -42,23 +31,26 @@ export const makeAminoConverterItem = (
                 t.objectProperty(t.identifier('aminoType'), t.stringLiteral(typeUrlToAmino(typeUrl, options.exceptions))),
                 t.objectProperty(
                     t.identifier('toAmino'),
-                    toAminoJsonMethod(
+                    toAminoJsonMethod({
                         context,
                         proto,
                         options
-                    )
+                    })
                 ),
                 t.objectProperty(
                     t.identifier('fromAmino'),
-                    fromAminoJsonMethod(
+                    fromAminoJsonMethod({
+                        context,
                         proto,
                         options
-                    )
+                    })
                 )
             ]
         )
     );
 };
+
+
 
 
 interface AminoConverterParams {

@@ -1,4 +1,3 @@
-import { AminoOptions } from "../amino-converter";
 import * as t from '@babel/types';
 import { AminoParseField } from './index';
 export declare const toAmino: {

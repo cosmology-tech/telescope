@@ -1,9 +1,11 @@
 import * as t from '@babel/types';
+import { ProtoRef, ProtoStore } from '@osmonauts/proto-parser';
 import { pascal } from 'case';
 import { AminoExceptions } from '../../../types';
 import { arrowFunctionExpression, identifier, objectMethod } from '../../../utils';
 import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../../types';
 import { AminoOptions } from '../amino-converter';
+import { AminoParseContext } from '../utils';
 import { arrayTypes, toAmino } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -19,20 +21,21 @@ const protoFieldsToArray = (proto: ProtoType) => {
     })
 }
 
-interface Context {
-    enums: any[];
-    types: any[];
-}
-
 export interface AminoParseField {
-    context: Context;
+    context: AminoParseContext;
     field: ProtoField;
     scope: string[];
     nested: number;
     options: AminoOptions;
 };
 
-export const toAminoParseField = ({ context, field, scope, nested, options }: AminoParseField) => {
+export const toAminoParseField = ({
+    context,
+    field,
+    scope,
+    nested,
+    options
+}: AminoParseField) => {
 
     const newScope = [field.name, ...scope];
 
@@ -83,11 +86,17 @@ export const toAminoParseField = ({ context, field, scope, nested, options }: Am
 };
 
 
-export const toAminoJsonMethod = (
-    context: Context,
-    proto: ProtoType,
-    options: AminoOptions
-) => {
+interface toAminoJSON {
+    context: AminoParseContext;
+    proto: ProtoType;
+    options: AminoOptions;
+}
+
+export const toAminoJsonMethod = ({
+    context,
+    proto,
+    options
+}: toAminoJSON) => {
 
     const toAminoParams = t.objectPattern(
         protoFieldsToArray(proto).map((field) =>

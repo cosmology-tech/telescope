@@ -4,13 +4,23 @@ import { AminoExceptions } from '../../../types';
 import { arrowFunctionExpression, identifier, objectMethod } from '../../../utils';
 import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../../types';
 import { AminoOptions } from '../amino-converter';
+import { AminoParseContext } from '../utils';
 import { arrayTypes, fromAmino } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement toAmino (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export const fromAminoJsonMethod = (proto: ProtoType, options: AminoOptions) => {
+interface fromAminoJSON {
+    context: AminoParseContext;
+    proto: ProtoType;
+    options: AminoOptions;
+}
+export const fromAminoJsonMethod = ({
+    context,
+    proto,
+    options
+}: fromAminoJSON) => {
 
     const fromAminoParams = t.objectPattern(
         Object.keys(proto.fields).map((field) => t.objectProperty(
