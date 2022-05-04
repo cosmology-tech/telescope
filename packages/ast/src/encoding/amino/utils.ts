@@ -4,11 +4,6 @@ import { ProtoType, ProtoAny, ProtoField } from '../types';
 import { ProtoRoot } from '@osmonauts/proto-parser'
 import { AminoParseContext, DEFAULT_AMINO_EXCEPTIONS } from './types';
 
-const BILLION = t.numericLiteral(1_000_000_000);
-BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
-export { BILLION };
-
-
 export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
     return `/${root.package}.${proto.name}`;
 }

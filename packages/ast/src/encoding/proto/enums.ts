@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import { camel } from 'case';
-import { identifier, tsEnumMember, functionDeclaration } from '../utils';
+import { identifier, tsEnumMember, functionDeclaration } from '../../utils';
 
-import { ProtoEnum } from './types';
+import { ProtoEnum } from '../types';
 
 const getEnumValues = (proto: ProtoEnum) => {
     const enums = Object.keys(proto.values).map(key => {

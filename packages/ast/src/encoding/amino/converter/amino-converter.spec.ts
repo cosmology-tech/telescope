@@ -1,10 +1,10 @@
-import { aminoConverter } from './amino-converter';
+import { aminoConverter } from './index';
 import generate from '@babel/generator';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { camel, snake } from 'case';
-import { ProtoType } from '../types';
+import { ProtoType } from '../../types';
 
-const store = new ProtoStore(__dirname + '/../../../../../__fixtures__/chain1');
+const store = new ProtoStore(__dirname + '/../../../../../../__fixtures__/chain1');
 store.traverseAll();
 
 const expectCode = (ast) => {

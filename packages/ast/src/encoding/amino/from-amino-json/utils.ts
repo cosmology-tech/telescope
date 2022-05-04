@@ -1,7 +1,6 @@
 import * as t from '@babel/types';
-import { memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
+import { BILLION, memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
 import { AminoOptions } from '../types';
-import { BILLION } from '../utils';
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { getTypeFromContext, protoFieldsToArray } from '../utils';
 

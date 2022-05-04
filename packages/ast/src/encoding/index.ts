@@ -1,3 +1,3 @@
 export * from './types';
-export * from './enums';
-export * from './proto/encoding';
+export * from './amino';
+export * from './proto';

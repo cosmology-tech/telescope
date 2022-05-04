@@ -40,9 +40,13 @@ export interface ProtoField {
     id: number;
     options: {
         [key: string]: any;
-        "(gogoproto.nullable)": boolean;
+        "(gogoproto.nullable)"?: boolean;
+        "(gogoproto.moretags)"?: string;
     };
-    comment: string | undefined;
+    comment?: string;
+    import?: string;
+    importedName?: string;
+    scopeType?: string;
 }
 export declare const SCALAR_TYPES: string[];
 export declare const NATIVE_TYPES: string[];
