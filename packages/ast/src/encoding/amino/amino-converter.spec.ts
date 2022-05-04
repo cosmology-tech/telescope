@@ -5,7 +5,7 @@ import { ProtoType } from '../types';
 import { camel } from 'case';
 
 const store = new ProtoStore(__dirname + '/../../../../../__fixtures__/chain1');
-
+store.traverseAll();
 const expectCode = (ast) => {
     expect(
         generate(ast).code

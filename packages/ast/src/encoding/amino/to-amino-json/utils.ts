@@ -1,6 +1,6 @@
-import { AminoOptions } from "../amino-converter";
 import * as t from '@babel/types';
 import { BILLION, memberExpressionOrIdentifier, shorthandProperty } from "../../../utils";
+import { AminoOptions } from '../types';
 import { AminoParseField, toAminoParseField } from './index'
 
 export const toAmino = {
@@ -72,13 +72,35 @@ export const toAmino = {
         const variable = 'el' + nested;
 
         if (field.parsedType.type !== 'Type') {
-            throw new Error('NOT HANDLED YET');
+            throw new Error('Arrays only support types[Type] right now.');
         }
-        const Type = context.types.find(type => type.name === field.parsedType.name);
 
-        if (!Type) {
-            throw new Error('NOT HANDLED YET');
+        // TODO can we move this out somewhere else?
+        // NOTE this is the only place in ast codebase that uses store...
+        let lookup;
+        if (context.current) {
+            // if we're recursing, use the current
+            lookup = context.store.get(context.current, field.parsedType.name);
         }
+        if (!lookup) {
+            // also check the context ref
+            lookup = context.store.get(context.ref, field.parsedType.name);
+        }
+        if (!lookup) {
+            // try the Ref by looking inside of the file that the field was imported from
+            const innerRef = context.store.findProto(field.import)
+            lookup = context.store.get(innerRef, field.parsedType.name);
+            if (lookup) {
+                // TODO test super-nested types imported from other .proto files
+                // and use this innerRef in recursion
+                context.current = innerRef;
+            }
+            if (!lookup) {
+                throw new Error('Undefined Symbol: ' + field.parsedType.name);
+            }
+        }
+
+        const Type = lookup.obj;
 
         const protoFieldsToArray = (proto) => {
             return Object.keys(proto.fields).map(name => {
