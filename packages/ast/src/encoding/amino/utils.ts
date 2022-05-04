@@ -13,10 +13,10 @@ export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
     return `/${root.package}.${proto.name}`;
 }
 
-export const arrayTypeNDimensions = (body, n) => {
-    if (!n) return t.tsArrayType(body);
+export const arrayTypeNDim = (body, n) => {
+    if (!n || n <= 1) return t.tsArrayType(body);
     return t.tsArrayType(
-        arrayTypeNDimensions(body, n - 1)
+        arrayTypeNDim(body, n - 1)
     );
 };
 

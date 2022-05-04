@@ -42,6 +42,7 @@ export const toAminoParseField = ({
                     options
                 });
         }
+        // TODO test case
         return needsImplementation(field.name, field);
     }
 
@@ -72,7 +73,6 @@ export const toAminoParseField = ({
         case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
-            warningDefaultImplementation(field.name, field);
             return toAmino.defaultType(field.name, newScope, options)
 
         case 'cosmos.base.v1beta1.Coin':

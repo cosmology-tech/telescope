@@ -1,6 +1,222 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
+exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
+"export const AminoConverter = {
+  \\"/cosmos.staking.v1beta1.MsgCreateValidator\\": {
+    aminoType: \\"cosmos-sdk/MsgCreateValidator\\",
+    toAmino: ({
+      description,
+      commission,
+      minSelfDelegation,
+      delegatorAddress,
+      validatorAddress,
+      pubkey,
+      value
+    }: MsgCreateValidator): AminoMsgCreateValidator[\\"value\\"] => {
+      return {
+        description: {
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          security_contact: description.securityContact,
+          details: description.details
+        },
+        commission: {
+          rate: commission.rate,
+          max_rate: commission.maxRate,
+          max_change_rate: commission.maxChangeRate
+        },
+        min_self_delegation: minSelfDelegation,
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
+        pubkey: {
+          type_url: pubkey.typeUrl,
+          value: pubkey.value
+        },
+        value: {
+          denom: value.denom,
+          amount: value.amount
+        }
+      };
+    },
+    fromAmino: ({
+      description,
+      commission,
+      min_self_delegation,
+      delegator_address,
+      validator_address,
+      pubkey,
+      value
+    }: AminoMsgCreateValidator[\\"value\\"]): MsgCreateValidator => {
+      return {
+        description: {
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          securityContact: description.security_contact,
+          details: description.details
+        },
+        commission: {
+          rate: commission.rate,
+          maxRate: commission.max_rate,
+          maxChangeRate: commission.max_change_rate
+        },
+        minSelfDelegation: min_self_delegation,
+        delegatorAddress: delegator_address,
+        validatorAddress: validator_address,
+        pubkey: {
+          typeUrl: pubkey.type_url,
+          value: pubkey.value
+        },
+        value: {
+          denom: value.denom,
+          amount: value.amount
+        }
+      };
+    }
+  },
+  \\"/cosmos.staking.v1beta1.MsgEditValidator\\": {
+    aminoType: \\"cosmos-sdk/MsgEditValidator\\",
+    toAmino: ({
+      description,
+      validatorAddress,
+      commissionRate,
+      minSelfDelegation
+    }: MsgEditValidator): AminoMsgEditValidator[\\"value\\"] => {
+      return {
+        description: {
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          security_contact: description.securityContact,
+          details: description.details
+        },
+        validator_address: validatorAddress,
+        commission_rate: commissionRate,
+        min_self_delegation: minSelfDelegation
+      };
+    },
+    fromAmino: ({
+      description,
+      validator_address,
+      commission_rate,
+      min_self_delegation
+    }: AminoMsgEditValidator[\\"value\\"]): MsgEditValidator => {
+      return {
+        description: {
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          securityContact: description.security_contact,
+          details: description.details
+        },
+        validatorAddress: validator_address,
+        commissionRate: commission_rate,
+        minSelfDelegation: min_self_delegation
+      };
+    }
+  },
+  \\"/cosmos.staking.v1beta1.MsgDelegate\\": {
+    aminoType: \\"cosmos-sdk/MsgDelegate\\",
+    toAmino: ({
+      delegatorAddress,
+      validatorAddress,
+      amount
+    }: MsgDelegate): AminoMsgDelegate[\\"value\\"] => {
+      return {
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
+        amount: {
+          denom: amount.denom,
+          amount: amount.amount
+        }
+      };
+    },
+    fromAmino: ({
+      delegator_address,
+      validator_address,
+      amount
+    }: AminoMsgDelegate[\\"value\\"]): MsgDelegate => {
+      return {
+        delegatorAddress: delegator_address,
+        validatorAddress: validator_address,
+        amount: {
+          denom: amount.denom,
+          amount: amount.amount
+        }
+      };
+    }
+  },
+  \\"/cosmos.staking.v1beta1.MsgBeginRedelegate\\": {
+    aminoType: \\"cosmos-sdk/MsgBeginRedelegate\\",
+    toAmino: ({
+      delegatorAddress,
+      validatorSrcAddress,
+      validatorDstAddress,
+      amount
+    }: MsgBeginRedelegate): AminoMsgBeginRedelegate[\\"value\\"] => {
+      return {
+        delegator_address: delegatorAddress,
+        validator_src_address: validatorSrcAddress,
+        validator_dst_address: validatorDstAddress,
+        amount: {
+          denom: amount.denom,
+          amount: amount.amount
+        }
+      };
+    },
+    fromAmino: ({
+      delegator_address,
+      validator_src_address,
+      validator_dst_address,
+      amount
+    }: AminoMsgBeginRedelegate[\\"value\\"]): MsgBeginRedelegate => {
+      return {
+        delegatorAddress: delegator_address,
+        validatorSrcAddress: validator_src_address,
+        validatorDstAddress: validator_dst_address,
+        amount: {
+          denom: amount.denom,
+          amount: amount.amount
+        }
+      };
+    }
+  },
+  \\"/cosmos.staking.v1beta1.MsgUndelegate\\": {
+    aminoType: \\"cosmos-sdk/MsgUndelegate\\",
+    toAmino: ({
+      delegatorAddress,
+      validatorAddress,
+      amount
+    }: MsgUndelegate): AminoMsgUndelegate[\\"value\\"] => {
+      return {
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
+        amount: {
+          denom: amount.denom,
+          amount: amount.amount
+        }
+      };
+    },
+    fromAmino: ({
+      delegator_address,
+      validator_address,
+      amount
+    }: AminoMsgUndelegate[\\"value\\"]): MsgUndelegate => {
+      return {
+        delegatorAddress: delegator_address,
+        validatorAddress: validator_address,
+        amount: {
+          denom: amount.denom,
+          amount: amount.amount
+        }
+      };
+    }
+  }
+};"
+`;
+
+exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
 "export const AminoConverter = {
   \\"/osmosis.gamm.v1beta1.MsgJoinPool\\": {
     aminoType: \\"osmosis/gamm/join-pool\\",
