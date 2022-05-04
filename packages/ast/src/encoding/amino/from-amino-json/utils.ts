@@ -3,6 +3,8 @@ import { BILLION, memberExpressionOrIdentifierAminoCasing, shorthandProperty } f
 import { AminoOptions } from '../types';
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { getTypeFromContext, protoFieldsToArray } from '../utils';
+import { getEnumFromJsonName } from '../../proto';
+import { getObjectName } from '@osmonauts/proto-parser';
 
 export const fromAmino = {
     defaultType(prop: string, scope: string[], options: AminoOptions) {
@@ -117,21 +119,20 @@ export const fromAmino = {
     },
 
     enum({ context, field, scope, nested, options }: FromAminoParseField) {
-        const toFunc = 'enumToFunction';
-        console.log({ toFunc })
-        console.log({ toFunc })
+        const Enum = getTypeFromContext(field, context);
+        if (!Enum) throw new Error('Undefined symbol: ' + field.type);
+        const enumFunction = getEnumFromJsonName(getObjectName(field.name, field.scope));
         const value = t.callExpression(
-            t.identifier(toFunc), [
+            t.identifier(enumFunction), [
             memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn)
         ]);
         return t.objectProperty(t.identifier(field.name), value);
     },
 
     enumArray({ context, field, scope, nested, options }: FromAminoParseField) {
-        const toFunc = 'enumToFunctionArray';
-        console.log({ toFunc })
-        console.log({ toFunc })
-
+        const Enum = getTypeFromContext(field, context);
+        if (!Enum) throw new Error('Undefined symbol: ' + field.type);
+        const enumFunction = getEnumFromJsonName(getObjectName(field.name, field.scope));
         const value = t.callExpression(
             t.memberExpression(
                 memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn),
@@ -143,7 +144,7 @@ export const fromAmino = {
                         t.identifier('el')
                     ],
                     t.callExpression(
-                        t.identifier(toFunc),
+                        t.identifier(enumFunction),
                         [
                             t.identifier('el')
                         ]

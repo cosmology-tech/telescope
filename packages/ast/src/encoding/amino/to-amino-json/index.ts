@@ -58,8 +58,8 @@ export const toAminoParseField = ({
 
     // Types/Enums
     switch (field.parsedType.type) {
-        // case 'Enum':
-        // return needsImplementation(field.name, field);
+        case 'Enum':
+            return toAmino.defaultType(field.name, scope, options);
         case 'Type':
             return toAmino.type({
                 context,
