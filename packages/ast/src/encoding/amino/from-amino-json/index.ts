@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
-import { ProtoType, ProtoField } from '../../types';
+import { ProtoType, ProtoField } from '../../proto/types';
 import { AminoOptions, AminoParseContext } from '../types';
 import { protoFieldsToArray } from '../utils';
 import { fromAmino } from './utils';

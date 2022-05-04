@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../../types';
+import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../types';
 import { arrayTypes, fromPartial } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {

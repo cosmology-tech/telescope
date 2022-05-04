@@ -1,9 +1,8 @@
 import * as t from '@babel/types';
-import { memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
 import { AminoOptions } from '../types';
-import { arrayTypeNDim, BILLION } from '../utils';
+import { arrayTypeNDim } from '../utils';
 import { getTypeFromContext, protoFieldsToArray } from '../utils';
-import { getTSTypeFromProtoType, ProtoField } from '../../types';
+import { getTSTypeFromProtoType, ProtoField } from '../../proto/types';
 import { RenderAminoField, renderAminoField } from '.';
 
 export const aminoInterface = {

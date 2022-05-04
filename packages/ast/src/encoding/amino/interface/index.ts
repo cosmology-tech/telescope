@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { getTSTypeFromProtoType, ProtoField, ProtoType } from '../../types';
+import { getTSTypeFromProtoType, ProtoField, ProtoType } from '../../proto/types';
 import { AminoOptions, AminoParseContext } from '../types';
 import { getTypeUrl, protoFieldsToArray, typeUrlToAmino } from '../utils';
 import { aminoInterface } from './utils';

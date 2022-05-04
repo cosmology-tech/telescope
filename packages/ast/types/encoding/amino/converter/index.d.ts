@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '../../types';
+import { ProtoType } from '../../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser';
 import { AminoParseContext, AminoOptions } from '../types';
 interface AminoConverterItemParams {

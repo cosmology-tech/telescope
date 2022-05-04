@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { AminoOptions } from '../types';
-import { ProtoField } from '../../types';
+import { ProtoField } from '../../proto/types';
 import { RenderAminoField } from '.';
 export declare const aminoInterface: {
     defaultType(field: ProtoField, options: AminoOptions, ast: any): t.TSPropertySignature;

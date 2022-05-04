@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '../types';
+import { ProtoType } from './types';
 import { fromPartialMethod } from './from-partial';
 import { decodeMethod } from './decode';
 import { encodeMethod } from './encode';

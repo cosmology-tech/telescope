@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { kebab } from "case";
-import { ProtoType, ProtoAny, ProtoField } from '../types';
+import { ProtoType, ProtoAny, ProtoField } from '../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser'
 import { AminoParseContext, DEFAULT_AMINO_EXCEPTIONS } from './types';
 

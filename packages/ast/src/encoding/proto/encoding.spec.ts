@@ -17,12 +17,12 @@ const printCode = (ast) => {
 
 // it('cosmos/authz/v1beta1/authz', () => {
 //     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
-//     const res = traverse(store, ref.proto);
+//     const res = traverse(store, ref);
 // });
 
 describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('MsgJoinPool', () => {
         expectCode(createProtoObjectWithMethods(
             'MsgJoinPool', getNestedProto(res).MsgJoinPool
@@ -43,7 +43,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
 describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
     const ref = store.findProto('google/api/expr/conformance/v1alpha1/conformance_service.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('ParseRequest', () => {
         expectCode(createProtoObjectWithMethods(
             'ParseRequest', getNestedProto(res).ParseRequest
@@ -53,7 +53,7 @@ describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
 
 describe('google/api/servicecontrol/v1/log_entry', () => {
     const ref = store.findProto('google/api/servicecontrol/v1/log_entry.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('LogEntry', () => {
         expectCode(createProtoObjectWithMethods(
             'LogEntry', getNestedProto(res).LogEntry
@@ -63,7 +63,7 @@ describe('google/api/servicecontrol/v1/log_entry', () => {
 
 describe('google/api/expr/v1alpha1/syntax', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/syntax.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('Constant', () => {
         expectCode(createProtoObjectWithMethods(
             'Constant', getNestedProto(res).Constant
@@ -73,7 +73,7 @@ describe('google/api/expr/v1alpha1/syntax', () => {
 
 describe('cosmos/tx/signing/v1beta1/signing', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('SignatureDescriptors', () => {
         expectCode(createProtoObjectWithMethods(
             'SignatureDescriptors', getNestedProto(res).SignatureDescriptors
@@ -88,7 +88,7 @@ describe('cosmos/tx/signing/v1beta1/signing', () => {
 
 describe('cosmos/tx/v1beta1/tx', () => {
     const ref = store.findProto('cosmos/tx/v1beta1/tx.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('AuxSignerData', () => {
         expectCode(createProtoObjectWithMethods(
             'AuxSignerData', getNestedProto(res).AuxSignerData
@@ -103,7 +103,7 @@ describe('cosmos/tx/v1beta1/tx', () => {
 
 describe('google/api/expr/v1alpha1/checked', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     it('Type', () => {
         expectCode(createProtoObjectWithMethods(
             'Type', getNestedProto(res).Type
@@ -127,7 +127,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
 
 it('google/api/expr/v1beta1/source', () => {
     const ref = store.findProto('google/api/expr/v1beta1/source.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     expectCode(createProtoObjectWithMethods(
         'SourceInfo', getNestedProto(res).SourceInfo
     ))
@@ -135,7 +135,7 @@ it('google/api/expr/v1beta1/source', () => {
 
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     expectCode(createProtoObjectWithMethods(
         'PinCodesProposal', getNestedProto(res).PinCodesProposal
     ))
@@ -143,7 +143,7 @@ it('cosmwasm/wasm/v1/proposal', () => {
 
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     expectCode(createProtoObjectWithMethods(
         'UnpinCodesProposal', getNestedProto(res).UnpinCodesProposal
     ))
@@ -151,7 +151,7 @@ it('cosmwasm/wasm/v1/proposal', () => {
 
 it('cosmwasm/wasm/v1/query', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/query.proto');
-    const res = traverse(store, ref.proto);
+    const res = traverse(store, ref);
     expectCode(createProtoObjectWithMethods(
         'QueryRawContractStateRequest', getNestedProto(res).QueryRawContractStateRequest
     ))

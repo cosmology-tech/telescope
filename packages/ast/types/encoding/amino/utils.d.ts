@@ -1,4 +1,4 @@
-import { ProtoType, ProtoAny, ProtoField } from '../types';
+import { ProtoType, ProtoAny, ProtoField } from '../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser';
 import { AminoParseContext } from './types';
 export declare const getTypeUrl: (root: ProtoRoot, proto: ProtoAny | ProtoType) => string;

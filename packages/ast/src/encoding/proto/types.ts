@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { identifier, tsPropertySignature, functionDeclaration } from '../utils';
+import { identifier, tsPropertySignature, functionDeclaration } from '../../utils';
 
 export interface ProtoAny {
     type: string;

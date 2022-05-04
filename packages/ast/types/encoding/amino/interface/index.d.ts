@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField, ProtoType } from '../../types';
+import { ProtoField, ProtoType } from '../../proto/types';
 import { AminoOptions, AminoParseContext } from '../types';
 export interface RenderAminoField {
     context: AminoParseContext;

@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField, getFieldsTypeName, getBaseCreateTypeFuncName } from '../../types';
+import { ProtoType, ProtoField, getFieldsTypeName, getBaseCreateTypeFuncName } from '../types';
 import { baseTypes, decode } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {

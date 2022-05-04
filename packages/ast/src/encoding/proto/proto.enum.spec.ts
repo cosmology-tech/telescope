@@ -3,11 +3,9 @@ import {
     createProtoEnumFromJSON,
     createProtoEnumToJSON
 } from './enums';
-import struct from '../../../../__fixtures__/proto-json/google/protobuf/struct.json'
+import struct from '../../../../../__fixtures__/proto-json/google/protobuf/struct.json'
 import { getNestedProto } from '@osmonauts/proto-parser';
 import generate from '@babel/generator';
-
-
 
 const expectCode = (ast) => {
     expect(
