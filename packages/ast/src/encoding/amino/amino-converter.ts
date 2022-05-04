@@ -11,7 +11,7 @@ interface AminoConverterItemParams {
     root: ProtoRoot,
     context: AminoParseContext,
     proto: ProtoType,
-    options: AminoOptions,
+    options: AminoOptions
 }
 export const makeAminoConverterItem = (
     {
@@ -56,10 +56,9 @@ export const makeAminoConverterItem = (
 interface AminoConverterParams {
     name: string,
     root: ProtoRoot,
-    context: Context,
-    protos: ProtoAny[],
-    options: AminoOptions,
-    exceptions?: AminoExceptions
+    context: AminoParseContext,
+    protos: ProtoType[],
+    options: AminoOptions
 }
 export const aminoConverter = (
     {
@@ -67,8 +66,7 @@ export const aminoConverter = (
         root,
         context,
         protos,
-        options,
-        exceptions
+        options
     }: AminoConverterParams) => {
 
     const items = protos.map(proto => {
@@ -76,8 +74,7 @@ export const aminoConverter = (
             context,
             root,
             proto,
-            options,
-            exceptions
+            options
         })
     })
 

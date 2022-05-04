@@ -1,11 +1,7 @@
 import * as t from '@babel/types';
-import { ProtoRef, ProtoStore } from '@osmonauts/proto-parser';
-import { pascal } from 'case';
-import { AminoExceptions } from '../../../types';
-import { arrowFunctionExpression, identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../../types';
-import { AminoOptions } from '../amino-converter';
-import { AminoParseContext } from '../utils';
+import { arrowFunctionExpression } from '../../../utils';
+import { ProtoType, ProtoField } from '../../types';
+import { AminoOptions, AminoParseContext } from '../types';
 import { arrayTypes, toAmino } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
