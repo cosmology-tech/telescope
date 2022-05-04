@@ -2,22 +2,18 @@ import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
 import { ProtoType, ProtoField } from '../../types';
 import { AminoOptions, AminoParseContext } from '../types';
-import { arrayTypes, toAmino } from './utils';
+import { protoFieldsToArray } from '../utils';
+import { toAmino } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement toAmino (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-const protoFieldsToArray = (proto: ProtoType) => {
-    return Object.keys(proto.fields).map(name => {
-        return {
-            name,
-            ...proto.fields[name]
-        };
-    })
+const warningDefaultImplementation = (name: string, field: ProtoField) => {
+    console.warn(`need to implement toAmino (${field.type} rules[${field.rule}] name[${name}])`);
 }
 
-export interface AminoParseField {
+export interface ToAminoParseField {
     context: AminoParseContext;
     field: ProtoField;
     scope: string[];
@@ -31,19 +27,38 @@ export const toAminoParseField = ({
     scope,
     nested,
     options
-}: AminoParseField) => {
+}: ToAminoParseField) => {
 
     const newScope = [field.name, ...scope];
 
     if (field.rule === 'repeated') {
-        return toAmino.array({
-            context,
-            field,
-            scope: newScope,
-            nested,
-            options
-        });
+        switch (field.parsedType.type) {
+            case 'Type':
+                return toAmino.typeArray({
+                    context,
+                    field,
+                    scope: newScope,
+                    nested,
+                    options
+                });
+        }
+        return needsImplementation(field.name, field);
     }
+
+    switch (field.parsedType.type) {
+        // case 'Enum':
+        // return needsImplementation(field.name, field);
+        case 'Type':
+            return toAmino.type({
+                context,
+                field,
+                scope: newScope,
+                nested,
+                options
+            });
+    }
+
+    // scalar types...
 
     switch (field.type) {
         case 'string':
@@ -52,32 +67,30 @@ export const toAminoParseField = ({
         case 'uint64':
             return toAmino.long(field.name, newScope, options);
         case 'double':
-            return needsImplementation(field.name, field);
         case 'int64':
-            return needsImplementation(field.name, field);
         case 'bool':
-            return needsImplementation(field.name, field);
         case 'bytes':
-            return needsImplementation(field.name, field);
+        case 'Timestamp':
+        case 'google.protobuf.Timestamp':
+            warningDefaultImplementation(field.name, field);
+            return toAmino.defaultType(field.name, newScope, options)
+
+        case 'cosmos.base.v1beta1.Coin':
+            return toAmino.coin(field.name, newScope, options);
+
+        // TODO check can we just
+        // make pieces optional and avoid hard-coding this type?
+        case 'ibc.core.client.v1.Height':
+        case 'Height':
+            return toAmino.height(field.name, newScope, options);
 
         case 'Duration':
         case 'google.protobuf.Duration':
             return toAmino.duration(field.name, newScope, options);
-        case 'Timestamp':
-        case 'google.protobuf.Timestamp':
-            return needsImplementation(field.name, field);
-        case 'cosmos.base.v1beta1.Coin':
-            return toAmino.coin(field.name, newScope, options);
 
         default:
-            switch (field.parsedType.type) {
-                case 'Enum':
-                    return needsImplementation(field.name, field);
-                case 'Type':
-                    return needsImplementation(field.name, field);
-
-            }
-            return needsImplementation(field.name, field);
+            warningDefaultImplementation(field.name, field);
+            return toAmino.defaultType(field.name, newScope, options)
     }
 };
 
@@ -120,7 +133,9 @@ export const toAminoJsonMethod = ({
                             nested: 0,
                             options
                         })
-                    )))
+                    )
+                )
+            )
         ]),
         t.tsTypeAnnotation(t.tsIndexedAccessType(
             t.tsTypeReference(t.identifier('Amino' + proto.name)),

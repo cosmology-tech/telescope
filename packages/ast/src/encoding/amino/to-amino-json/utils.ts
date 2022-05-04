@@ -1,9 +1,17 @@
 import * as t from '@babel/types';
 import { BILLION, memberExpressionOrIdentifier, shorthandProperty } from "../../../utils";
-import { AminoOptions } from '../types';
-import { AminoParseField, toAminoParseField } from './index'
+import { ProtoField } from '../../types';
+import { AminoOptions, AminoParseContext } from '../types';
+import { getTypeFromContext, protoFieldsToArray } from '../utils';
+import { ToAminoParseField, toAminoParseField } from './index'
 
 export const toAmino = {
+    defaultType(prop: string, scope: string[], options: AminoOptions) {
+        if (prop === options.aminoCasingFn(prop) && scope.length === 1) {
+            return shorthandProperty(prop);
+        }
+        return t.objectProperty(t.identifier(options.aminoCasingFn(prop)), memberExpressionOrIdentifier(scope))
+    },
 
     long(prop: string, scope: string[], options: AminoOptions) {
         return t.objectProperty(t.identifier(options.aminoCasingFn(prop)),
@@ -37,6 +45,64 @@ export const toAmino = {
         return t.objectProperty(t.identifier(options.aminoCasingFn(prop)), value);
     },
 
+    height(prop: string, scope: string[], options: AminoOptions) {
+        const value = t.objectExpression(
+            [
+                t.objectProperty(
+                    t.identifier(options.aminoCasingFn('revision_height')),
+                    t.optionalCallExpression(
+                        t.optionalMemberExpression(
+                            t.callExpression(
+                                t.identifier('omitDefault'),
+                                [
+                                    t.memberExpression(
+                                        memberExpressionOrIdentifier(scope),
+                                        t.identifier('revisionHeight')
+                                    )
+                                ]
+                            ),
+                            t.identifier('toString'),
+                            false,
+                            true
+                        ),
+                        [],
+                        false
+                    )
+                ),
+                //
+                t.objectProperty(
+                    t.identifier(options.aminoCasingFn('revision_number')),
+                    t.optionalCallExpression(
+                        t.optionalMemberExpression(
+                            t.callExpression(
+                                t.identifier('omitDefault'),
+                                [
+                                    t.memberExpression(
+                                        memberExpressionOrIdentifier(scope),
+                                        t.identifier('revisionNumber')
+                                    )
+                                ]
+                            ),
+                            t.identifier('toString'),
+                            false,
+                            true
+                        ),
+                        [],
+                        false
+                    )
+                )
+            ]
+        );
+
+        const cond = t.conditionalExpression(
+            memberExpressionOrIdentifier(scope),
+            value,
+            t.objectExpression([])
+        );
+
+        return t.objectProperty(t.identifier(options.aminoCasingFn(prop)), cond);
+    },
+
     coin(prop: string, scope: string[], options: AminoOptions) {
         const value = t.objectExpression([
             t.objectProperty(t.identifier('denom'), t.memberExpression(
@@ -68,48 +134,33 @@ export const toAmino = {
         return t.objectProperty(t.identifier(options.aminoCasingFn(prop)), value);
     },
 
-    array({ context, field, scope, nested, options }: AminoParseField) {
+    type({ context, field, scope, nested, options }: ToAminoParseField) {
+        const Type = getTypeFromContext(field, context);
+        const properties = protoFieldsToArray(Type).map(field => {
+            return toAminoParseField({
+                context,
+                field,
+                scope: [...scope],
+                nested: nested,
+                options
+            })
+        });
+        return t.objectProperty(t.identifier(options.aminoCasingFn(field.name)),
+            t.objectExpression(
+                properties
+            )
+        );
+    },
+
+
+    typeArray({ context, field, scope, nested, options }: ToAminoParseField) {
         const variable = 'el' + nested;
 
         if (field.parsedType.type !== 'Type') {
             throw new Error('Arrays only support types[Type] right now.');
         }
 
-        // TODO can we move this out somewhere else?
-        // NOTE this is the only place in ast codebase that uses store...
-        let lookup;
-        if (context.current) {
-            // if we're recursing, use the current
-            lookup = context.store.get(context.current, field.parsedType.name);
-        }
-        if (!lookup) {
-            // also check the context ref
-            lookup = context.store.get(context.ref, field.parsedType.name);
-        }
-        if (!lookup) {
-            // try the Ref by looking inside of the file that the field was imported from
-            const innerRef = context.store.findProto(field.import)
-            lookup = context.store.get(innerRef, field.parsedType.name);
-            if (lookup) {
-                // TODO test super-nested types imported from other .proto files
-                // and use this innerRef in recursion
-                context.current = innerRef;
-            }
-            if (!lookup) {
-                throw new Error('Undefined Symbol: ' + field.parsedType.name);
-            }
-        }
-
-        const Type = lookup.obj;
-
-        const protoFieldsToArray = (proto) => {
-            return Object.keys(proto.fields).map(name => {
-                return {
-                    name,
-                    ...proto.fields[name]
-                };
-            })
-        }
+        const Type = getTypeFromContext(field, context);
 
         const properties = protoFieldsToArray(Type).map(field => {
             return toAminoParseField({
@@ -118,7 +169,7 @@ export const toAmino = {
                 scope: [variable],
                 nested: nested + 1,
                 options
-            })
+            });
         });
 
 
@@ -146,8 +197,3 @@ export const toAmino = {
 
 
 };
-
-export const arrayTypes = {
-
-};
-

@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import { kebab } from "case";
-import { ProtoType, ProtoAny } from '../types';
+import { ProtoType, ProtoAny, ProtoField } from '../types';
 import { ProtoRoot } from '@osmonauts/proto-parser'
-import { DEFAULT_AMINO_EXCEPTIONS } from './types';
+import { AminoParseContext, DEFAULT_AMINO_EXCEPTIONS } from './types';
 
 const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
@@ -44,3 +44,41 @@ export const typeUrlToAmino = (typeUrl, exceptions = {}) => {
             return typeUrl;
     }
 }
+
+export const protoFieldsToArray = (proto: ProtoType) => {
+    return Object.keys(proto.fields).map(name => {
+        return {
+            name,
+            ...proto.fields[name]
+        };
+    })
+}
+
+export const getTypeFromContext = (field: ProtoField, context: AminoParseContext) => {
+    // TODO can we move this out somewhere else?
+    // NOTE this is the only place in ast codebase that uses store...
+    let lookup;
+    if (context.current) {
+        // if we're recursing, use the current
+        lookup = context.store.get(context.current, field.parsedType.name);
+    }
+    if (!lookup) {
+        // also check the context ref
+        lookup = context.store.get(context.ref, field.parsedType.name);
+    }
+    if (!lookup) {
+        // try the Ref by looking inside of the file that the field was imported from
+        const innerRef = context.store.findProto(field.import)
+        lookup = context.store.get(innerRef, field.parsedType.name);
+        if (lookup) {
+            // TODO test super-nested types imported from other .proto files
+            // and use this innerRef in recursion
+            context.current = innerRef;
+        }
+        if (!lookup) {
+            throw new Error('Undefined Symbol: ' + field.parsedType.name);
+        }
+    }
+
+    return lookup.obj;
+};
