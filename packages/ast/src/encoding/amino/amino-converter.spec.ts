@@ -2,6 +2,7 @@ import { aminoConverter } from './amino-converter';
 import generate from '@babel/generator';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { camel } from 'case';
+import { ProtoType } from '../types';
 
 const store = new ProtoStore(__dirname + '/../../../../../__fixtures__/chain1');
 store.traverseAll();
@@ -20,10 +21,8 @@ const printCode = (ast) => {
 describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const traversed = traverse(store, ref);
-
-    const proto = getNestedProto(traversed);
-
-    const protos = Object.values(proto).filter(
+    const proto: Record<string, ProtoType> = getNestedProto(traversed);
+    const protos: ProtoType[] = Object.values(proto).filter(
         proto => proto.name.startsWith('Msg')
             &&
             !proto.name.endsWith('Response')
