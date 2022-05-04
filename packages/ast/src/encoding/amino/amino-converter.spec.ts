@@ -19,7 +19,7 @@ const printCode = (ast) => {
 
 describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
-    const traversed = traverse(store, ref.proto);
+    const traversed = traverse(store, ref);
 
     const proto = getNestedProto(traversed);
 
@@ -54,11 +54,12 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
             symbols.forEach(sym => {
                 const ref = store.findProto(key);
-                const traversed = traverse(store, ref.proto);
+                const traversed = traverse(store, ref);
                 console.log(traversed);
                 const elem = store.findProtoObject(key, sym);
                 // console.log({ elem })
-                // console.log(traversed);
+                // console.log(traversed)
+                ;
                 m.types.push({
                     name: elem.name,
                     ...elem.toJSON()
@@ -73,6 +74,9 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
     it('MsgJoinPool', () => {
         printCode(aminoConverter({
+            store,
+            ref,
+
             context,
             root: traversed,
             name: 'AminoConverter',

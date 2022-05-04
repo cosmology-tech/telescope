@@ -7,7 +7,7 @@ it('nested lookup', () => {
   const ref = store.findProto(
     'google/api/expr/conformance/v1alpha1/conformance_service.proto'
   );
-  const result = lookup(store, ref.proto, 'Severity');
+  const result = lookup(store, ref, 'Severity');
   expect(result).toMatchSnapshot();
   const name = getObjectName('Severity', result.scope);
   expect(name).toEqual('IssueDetails_Severity');

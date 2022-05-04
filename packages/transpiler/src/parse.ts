@@ -1,26 +1,33 @@
-import { ProtoStore, ProtoRoot, getObjectName, lookup } from '@osmonauts/proto-parser';
+import { ProtoStore, ProtoRoot, ProtoRef, getObjectName, lookup } from '@osmonauts/proto-parser';
 import { createProtoType, createCreateProtoType, createProtoEnum, createProtoObjectWithMethods, ProtoField, ProtoType } from '@osmonauts/ast';
+
+const getRoot = (ref: ProtoRef): ProtoRoot => {
+    if (ref.traversed) return ref.traversed;
+    return ref.proto;
+};
 
 export const parse = (
     store: ProtoStore,
-    root: ProtoRoot,
-    traversed: any
+    ref: ProtoRef
 ) => {
     const imports = {};
     const body = []
+
+    const root = getRoot(ref);
 
     // TODO type any
     const obj: any & { parsedImports: Record<string, string[]> } = {
         imports: root.imports,
         package: root.package,
-        root: parseRecur(
+        root: parseRecur({
             store,
-            root,
-            traversed.root,
+            ref,
+            obj: root.root,
             imports,
             body,
-            []
-        ),
+            scope: [],
+            isNested: false
+        }),
         parsedImports: null
     };
     obj.parsedImports = imports;
@@ -30,10 +37,11 @@ export const parse = (
 };
 
 export const getParsedObjectName = (
-    root: ProtoRoot,
+    ref: ProtoRef,
     obj: any,
     scope: string[],
 ) => {
+    const root = getRoot(ref);
     const allButPackage = scope.splice(root.package.split('.').length);
     // pull off "this" name
     allButPackage.pop();
@@ -47,7 +55,8 @@ export const getKeyTypeObjectName = (
     return obj.name + '_' + field.parsedType.name + 'MapEntry';
 }
 
-const makeKeyTypeObj = (root: ProtoRoot, field: any, scope: string[]) => {
+const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
+    const root = getRoot(ref);
     const scoped = scope.splice(root.package.split('.').length);
     const adhocObj: ProtoType = {
         comment: undefined,
@@ -81,7 +90,7 @@ const makeKeyTypeObj = (root: ProtoRoot, field: any, scope: string[]) => {
 
 export const parseType = (
     store: ProtoStore,
-    root: ProtoRoot,
+    ref: ProtoRef,
     obj: any,
     imports: object,
     body: any[],
@@ -92,13 +101,21 @@ export const parseType = (
     if (obj.nested) {
         Object.keys(obj.nested).forEach(key => {
             // isNested = true;
-            parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], true);
+            parseRecur({
+                store,
+                ref,
+                obj: obj.nested[key],
+                imports,
+                body,
+                scope: [...scope, key],
+                isNested: true
+            });
         });
     }
 
     obj.keyTypes.forEach(field => {
-        const keyTypeObject = makeKeyTypeObj(root, field, scope);
-        const name = getParsedObjectName(root, {
+        const keyTypeObject = makeKeyTypeObj(ref, field, scope);
+        const name = getParsedObjectName(ref, {
             name: getKeyTypeObjectName(obj, field)
         }, scope);
         body.push(createProtoType(name, keyTypeObject));
@@ -109,7 +126,7 @@ export const parseType = (
     // parse nested names
     let name = obj.name;
     if (isNested) {
-        name = getParsedObjectName(root, obj, scope);
+        name = getParsedObjectName(ref, obj, scope);
     }
 
     body.push(createProtoType(name, obj));
@@ -119,7 +136,7 @@ export const parseType = (
 
 export const parseEnum = (
     store: ProtoStore,
-    root: ProtoRoot,
+    ref: ProtoRef,
     obj: any,
     imports: object,
     body: any[],
@@ -129,42 +146,63 @@ export const parseEnum = (
     let name = obj.name;
     // parse nested names
     if (isNested) {
-        name = getParsedObjectName(root, obj, scope);
+        name = getParsedObjectName(ref, obj, scope);
     }
     body.push(createProtoEnum(name, obj));
 };
 
-export const parseRecur = (
-    store: ProtoStore,
-    root: ProtoRoot,
-    obj: any,
-    imports: object,
-    body: any[],
-    scope: string[],
-    isNested: boolean = false
-) => {
+interface ParseRecur {
+    store: ProtoStore;
+    ref: ProtoRef;
+    obj: any;
+    imports: object;
+    body: any[];
+    scope: string[];
+    isNested: boolean;
+}
+export const parseRecur = ({
+    store,
+    ref,
+    obj,
+    imports,
+    body,
+    scope,
+    isNested
+}: ParseRecur) => {
     switch (obj.type) {
         case 'Type':
             return parseType(
-                store, root, obj, imports, body, scope, isNested
+                store, ref, obj, imports, body, scope, isNested
             );
         case 'Enum':
             return parseEnum(
-                store, root, obj, imports, body, scope, isNested
+                store, ref, obj, imports, body, scope, isNested
             );
         case 'Service':
+            console.log(obj);
+            return;
+        case 'Field':
             console.log(obj);
             return;
         case 'Root':
         case 'Namespace':
             if (obj.nested) {
                 return Object.keys(obj.nested).forEach(key => {
-                    parseRecur(store, root, obj.nested[key], imports, body, [...scope, key], isNested);
+                    parseRecur({
+                        store,
+                        ref,
+                        obj: obj.nested[key],
+                        imports,
+                        body,
+                        scope: [...scope, key],
+                        isNested
+                    });
                 });
             } else {
                 throw new Error('parseRecur() cannot find protobufjs Type')
             }
         default:
+            console.log({ obj });
             throw new Error('parseRecur() cannot find protobufjs Type')
     }
 };

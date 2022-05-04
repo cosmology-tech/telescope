@@ -2,14 +2,18 @@ import { sync as glob } from 'glob';
 import { parse } from 'protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ProtoDep, ProtoRef } from './types';
+import { ProtoDep, ProtoRef, ProtoRoot } from './types';
 import { getNestedProto } from './utils';
+import { traverse } from './traverse';
+import { lookupAny } from './lookup';
 
 export class ProtoStore {
     files: string[];
     protoDir: string;
     deps: ProtoDep[];
     protos: ProtoRef[];
+
+    _traversed: boolean = false;
 
     constructor(protoDir) {
         this.protoDir = pathResolve(protoDir);
@@ -66,6 +70,24 @@ export class ProtoStore {
         });
         this.deps = deps;
         return deps;
+    }
+
+    traverseAll(): void {
+        if (this._traversed) return;
+        this.protos = this.getProtos().map((ref: ProtoRef) => {
+            return {
+                absolute: ref.absolute,
+                filename: ref.filename,
+                proto: ref.proto,
+                traversed: traverse(this, ref)
+            };
+        })
+        this._traversed = true;
+    }
+
+    get(from: ProtoRef, name: string) {
+        if (!this._traversed) throw new Error('get() requires traversal')
+        return lookupAny(this, from, name);
     }
 
 }

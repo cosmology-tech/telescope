@@ -1,6 +1,16 @@
+import { traverse } from '@babel/core';
 import { ProtoStore } from './store';
 import { ProtoRef, ProtoRoot } from './types';
 import { getNestedProto } from './utils';
+
+export interface Lookup {
+    obj: any;
+    name: string;
+    import: string;
+    importType: string;
+    importedName: string;
+    package: string;
+}
 
 export const recursiveLookup = (proto: any, name: string, scope: string[] = [], allowNested = true) => {
     if (!proto) return;
@@ -25,6 +35,11 @@ export const recursiveLookup = (proto: any, name: string, scope: string[] = [], 
     }
 };
 
+const getRoot = (ref: ProtoRef) => {
+    if (ref.traversed) return ref.traversed;
+    return ref.proto;
+};
+
 /*
 
   "imports": [
@@ -40,16 +55,18 @@ export const recursiveLookup = (proto: any, name: string, scope: string[] = [], 
   finds Empty inside of the import
 
 */
-export const importLookup = (store: ProtoStore, root: ProtoRoot, name: string) => {
-    const objectsFromImports = root.imports.map(imp => {
+export const importLookup = (store: ProtoStore, ref: ProtoRef, name: string) => {
+    const root = getRoot(ref);
+    const objectsFromImports = root?.imports?.map(imp => {
         const ref = store.findProto(imp);
         return {
             name,
+            importType: 'import',
             import: imp,
             importedName: name,
-            obj: lookup(store, ref.proto, name, false),
+            obj: lookup(store, ref, name, false),
         };
-    }).filter(a => !!a.obj);
+    }).filter(a => !!a.obj) ?? []
     if (objectsFromImports.length) return objectsFromImports[0];
 };
 
@@ -70,7 +87,12 @@ export const importLookup = (store: ProtoStore, root: ProtoRoot, name: string) =
 
 */
 
-export const protoImportLookup = (store: ProtoStore, root: ProtoRoot, name: string) => {
+export const protoImportLookup = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string
+): Lookup => {
+    const root = getRoot(ref);
     if (name.startsWith('.')) name = name.replace(/^\./, '');
     const nameAsArray = name.split('.');
     const objectName = nameAsArray.pop();
@@ -83,13 +105,14 @@ export const protoImportLookup = (store: ProtoStore, root: ProtoRoot, name: stri
         .map((ref: ProtoRef) => {
             return {
                 import: ref.filename,
-                obj: lookup(store, ref.proto, objectName, false)
+                obj: lookup(store, ref, objectName, false)
             }
         })
         .filter(a => !!a.obj);
     if (objs.length) {
         return {
             import: objs[0].import,
+            importType: 'protoImport',
             obj: objs[0].obj,
             importedName: name,
             name: objectName,
@@ -98,7 +121,44 @@ export const protoImportLookup = (store: ProtoStore, root: ProtoRoot, name: stri
     }
 };
 
-export const lookup = (store: ProtoStore, root: ProtoRoot, name: string, allowNested = true) => {
+export const lookup = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string,
+    allowNested = true
+) => {
+    const root = getRoot(ref);
     const nested = getNestedProto(root);
     return recursiveLookup(nested, name, [root.package], allowNested);
+};
+
+export const lookupAny = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string
+): Lookup => {
+    const root = getRoot(ref);
+    let refObject = lookup(store, ref, name);
+
+    if (refObject) {
+        return {
+            name,
+            import: null,
+            importType: 'local',
+            importedName: name,
+            package: root.package,
+            obj: refObject
+        }
+    }
+
+    refObject = protoImportLookup(store, ref, name);
+    if (refObject) {
+        return refObject;
+    }
+
+    refObject = importLookup(store, ref, name);
+    if (refObject) {
+        return refObject;
+    }
+
 };

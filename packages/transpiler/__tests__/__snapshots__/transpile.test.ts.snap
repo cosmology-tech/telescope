@@ -806,11 +806,7 @@ export const CheckedExpr_ReferenceMapEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface CheckedExpr_TypeMapEntry {
@@ -883,11 +879,7 @@ export const CheckedExpr_TypeMapEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface CheckedExpr {
@@ -1058,11 +1050,7 @@ export const CheckedExpr = {
     message.exprVersion = object.exprVersion ?? \\"\\";
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Type_ListType {
@@ -1122,11 +1110,7 @@ export const Type_ListType = {
     const message = createBaseType_ListType();
     message.elemType = object.elemType !== undefined && object.elemType !== null ? Type.fromPartial(object.elemType) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Type_MapType {
@@ -1199,11 +1183,7 @@ export const Type_MapType = {
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Type_FunctionType {
@@ -1282,11 +1262,7 @@ export const Type_FunctionType = {
     message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Type_AbstractType {
@@ -1365,11 +1341,7 @@ export const Type_AbstractType = {
     message.name = object.name ?? \\"\\";
     message.parameterTypes = object.parameterTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export enum Type_PrimitiveType {
@@ -1632,11 +1604,7 @@ export const Type = {
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Decl_IdentDecl {
@@ -1722,11 +1690,7 @@ export const Decl_IdentDecl = {
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     message.doc = object.doc ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Decl_FunctionDecl_Overload {
@@ -1873,11 +1837,7 @@ export const Decl_FunctionDecl_Overload = {
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Decl_FunctionDecl {
@@ -1943,11 +1903,7 @@ export const Decl_FunctionDecl = {
     const message = createBaseDecl_FunctionDecl();
     message.overloads = object.overloads?.map(e => Overload.fromPartial(e)) || [];
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Decl {
@@ -2033,11 +1989,7 @@ export const Decl = {
     message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
     message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface Reference {
@@ -2140,11 +2092,7 @@ export const Reference = {
     message.overloadId = object.overloadId?.map(e => e) || [];
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };"
 `;
@@ -2252,11 +2200,7 @@ export const MsgJoinPool = {
     message.shareOutAmount = object.shareOutAmount ?? \\"\\";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgJoinPoolResponse {}
@@ -2300,11 +2244,7 @@ export const MsgJoinPoolResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgJoinPoolResponse>, I>>(object: I): MsgJoinPoolResponse {
     const message = createBaseMsgJoinPoolResponse();
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgExitPool {
@@ -2409,11 +2349,7 @@ export const MsgExitPool = {
     message.shareInAmount = object.shareInAmount ?? \\"\\";
     message.tokenOutMins = object.tokenOutMins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgExitPoolResponse {}
@@ -2457,11 +2393,7 @@ export const MsgExitPoolResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgExitPoolResponse>, I>>(object: I): MsgExitPoolResponse {
     const message = createBaseMsgExitPoolResponse();
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface SwapAmountInRoute {
@@ -2534,11 +2466,7 @@ export const SwapAmountInRoute = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokenOutDenom = object.tokenOutDenom ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgSwapExactAmountIn {
@@ -2643,11 +2571,7 @@ export const MsgSwapExactAmountIn = {
     message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : undefined;
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgSwapExactAmountInResponse {
@@ -2707,11 +2631,7 @@ export const MsgSwapExactAmountInResponse = {
     const message = createBaseMsgSwapExactAmountInResponse();
     message.tokenOutAmount = object.tokenOutAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface SwapAmountOutRoute {
@@ -2784,11 +2704,7 @@ export const SwapAmountOutRoute = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokenInDenom = object.tokenInDenom ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgSwapExactAmountOut {
@@ -2893,11 +2809,7 @@ export const MsgSwapExactAmountOut = {
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? \\"\\";
     message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgSwapExactAmountOutResponse {
@@ -2957,11 +2869,7 @@ export const MsgSwapExactAmountOutResponse = {
     const message = createBaseMsgSwapExactAmountOutResponse();
     message.tokenInAmount = object.tokenInAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgJoinSwapExternAmountIn {
@@ -3060,11 +2968,7 @@ export const MsgJoinSwapExternAmountIn = {
     message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : undefined;
     message.shareOutMinAmount = object.shareOutMinAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgJoinSwapExternAmountInResponse {
@@ -3124,11 +3028,7 @@ export const MsgJoinSwapExternAmountInResponse = {
     const message = createBaseMsgJoinSwapExternAmountInResponse();
     message.shareOutAmount = object.shareOutAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgJoinSwapShareAmountOut {
@@ -3240,11 +3140,7 @@ export const MsgJoinSwapShareAmountOut = {
     message.shareOutAmount = object.shareOutAmount ?? \\"\\";
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgJoinSwapShareAmountOutResponse {
@@ -3304,11 +3200,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
     const message = createBaseMsgJoinSwapShareAmountOutResponse();
     message.tokenInAmount = object.tokenInAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgExitSwapShareAmountIn {
@@ -3420,11 +3312,7 @@ export const MsgExitSwapShareAmountIn = {
     message.shareInAmount = object.shareInAmount ?? \\"\\";
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgExitSwapShareAmountInResponse {
@@ -3484,11 +3372,7 @@ export const MsgExitSwapShareAmountInResponse = {
     const message = createBaseMsgExitSwapShareAmountInResponse();
     message.tokenOutAmount = object.tokenOutAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgExitSwapExternAmountOut {
@@ -3587,11 +3471,7 @@ export const MsgExitSwapExternAmountOut = {
     message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
     message.shareInMaxAmount = object.shareInMaxAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };
 export interface MsgExitSwapExternAmountOutResponse {
@@ -3651,11 +3531,7 @@ export const MsgExitSwapExternAmountOutResponse = {
     const message = createBaseMsgExitSwapExternAmountOutResponse();
     message.shareInAmount = object.shareInAmount ?? \\"\\";
     return message;
-  },
-
-  toAmino() {},
-
-  fromAmino() {}
+  }
 
 };"
 `;

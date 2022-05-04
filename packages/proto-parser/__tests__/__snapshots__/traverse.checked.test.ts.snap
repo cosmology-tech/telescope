@@ -892,6 +892,7 @@ message type specified at evaluation time.",
 exports[`google/api/expr/v1alpha1/checked 2`] = `
 Object {
   "import": "google/protobuf/empty.proto",
+  "importType": "protoImport",
   "importedName": "google.protobuf.Empty",
   "name": "Empty",
   "obj": Object {
@@ -947,6 +948,7 @@ The JSON representation for \`Empty\` is empty JSON object \`{}\`.",
 exports[`google/api/expr/v1alpha1/checked 3`] = `
 Object {
   "import": "google/api/expr/v1alpha1/syntax.proto",
+  "importType": "import",
   "importedName": "Constant",
   "name": "Constant",
   "obj": Object {

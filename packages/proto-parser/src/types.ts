@@ -8,6 +8,7 @@ export interface ProtoRef {
     absolute: string;
     filename: string;
     proto: ProtoRoot;
+    traversed?: ProtoRoot;
 }
 
 export interface ProtoRoot {
