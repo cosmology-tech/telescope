@@ -24,20 +24,21 @@ export interface ToAminoParseField {
 export const toAminoParseField = ({
     context,
     field,
-    scope,
+    scope: previousScope,
     nested,
     options
 }: ToAminoParseField) => {
 
-    const newScope = [field.name, ...scope];
+    const scope = [field.name, ...previousScope];
 
+    // arrays
     if (field.rule === 'repeated') {
         switch (field.parsedType.type) {
             case 'Type':
                 return toAmino.typeArray({
                     context,
                     field,
-                    scope: newScope,
+                    scope,
                     nested,
                     options
                 });
@@ -51,10 +52,11 @@ export const toAminoParseField = ({
     if (field.type === 'google.protobuf.Any') {
         switch (field.options['(cosmos_proto.accepts_interface)']) {
             case 'cosmos.crypto.PubKey':
-                return toAmino.pubkey({ context, field, scope: newScope, nested, options });
+                return toAmino.pubkey({ context, field, scope, nested, options });
         }
     }
 
+    // Types/Enums
     switch (field.parsedType.type) {
         // case 'Enum':
         // return needsImplementation(field.name, field);
@@ -62,7 +64,7 @@ export const toAminoParseField = ({
             return toAmino.type({
                 context,
                 field,
-                scope: newScope,
+                scope,
                 nested,
                 options
             });
@@ -72,34 +74,34 @@ export const toAminoParseField = ({
     // scalar types...
     switch (field.type) {
         case 'string':
-            return toAmino.string(field.name, newScope, options);
+            return toAmino.string(field.name, scope, options);
         case 'int64':
         case 'uint64':
-            return toAmino.long(field.name, newScope, options);
+            return toAmino.long(field.name, scope, options);
         case 'double':
         case 'int64':
         case 'bool':
         case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
-            return toAmino.defaultType(field.name, newScope, options)
+            return toAmino.defaultType(field.name, scope, options)
 
         case 'cosmos.base.v1beta1.Coin':
-            return toAmino.coin(field.name, newScope, options);
+            return toAmino.coin(field.name, scope, options);
 
         // TODO check can we just
         // make pieces optional and avoid hard-coding this type?
         case 'ibc.core.client.v1.Height':
         case 'Height':
-            return toAmino.height(field.name, newScope, options);
+            return toAmino.height(field.name, scope, options);
 
         case 'Duration':
         case 'google.protobuf.Duration':
-            return toAmino.duration(field.name, newScope, options);
+            return toAmino.duration(field.name, scope, options);
 
         default:
             warningDefaultImplementation(field.name, field);
-            return toAmino.defaultType(field.name, newScope, options)
+            return toAmino.defaultType(field.name, scope, options)
     }
 };
 

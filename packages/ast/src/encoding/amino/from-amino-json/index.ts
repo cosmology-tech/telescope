@@ -5,13 +5,6 @@ import { AminoOptions, AminoParseContext } from '../types';
 import { protoFieldsToArray } from '../utils';
 import { fromAmino } from './utils';
 
-const needsImplementation = (name: string, field: ProtoField) => {
-    throw new Error(`need to implement fromAmino (${field.type} rules[${field.rule}] name[${name}])`);
-}
-
-const warningDefaultImplementation = (name: string, field: ProtoField) => {
-    // console.warn(`need to implement fromAmino (${field.type} rules[${field.rule}] name[${name}])`);
-}
 export interface FromAminoParseField {
     context: AminoParseContext;
     field: ProtoField;
@@ -30,6 +23,7 @@ export const fromAminoParseField = ({
 
     const scope = [field.name, ...previousScope];
 
+    // arrays
     if (field.rule === 'repeated') {
         switch (field.parsedType.type) {
             case 'Type':
@@ -52,11 +46,9 @@ export const fromAminoParseField = ({
                 return fromAmino.arrayFrom(field.name, scope, options);
 
         }
-        // return needsImplementation(field.name, field);
     }
 
     // casting special types
-
     if (field.type === 'google.protobuf.Any') {
         switch (field.options['(cosmos_proto.accepts_interface)']) {
             case 'cosmos.crypto.PubKey':
@@ -64,6 +56,7 @@ export const fromAminoParseField = ({
         }
     }
 
+    // Types/Enums
     switch (field.parsedType.type) {
         case 'Type':
             return fromAmino.type({
@@ -98,7 +91,6 @@ export const fromAminoParseField = ({
         case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
-            warningDefaultImplementation(field.name, field);
             return fromAmino.defaultType(field.name, scope, options)
 
         // TODO check can we just
@@ -112,7 +104,6 @@ export const fromAminoParseField = ({
             return fromAmino.duration(field.name, scope, options);
 
         default:
-            warningDefaultImplementation(field.name, field);
             return fromAmino.defaultType(field.name, scope, options)
     }
 };
