@@ -49,6 +49,33 @@ export const protoFieldsToArray = (proto: ProtoType) => {
     })
 }
 
+
+export const getTypeFromFieldViaImport = (field: ProtoField, context: AminoParseContext, importPath: string) => {
+    const innerRef = context.store.findProto(importPath);
+    if (innerRef) {
+        const lookup = context.store.get(innerRef, field.parsedType.name);
+        if (lookup) {
+            // TODO test super-nested types imported from other .proto files
+            // and use this innerRef in recursion
+            context.current = innerRef;
+            return lookup;
+        }
+    }
+};
+
+export const getTypeFromNestedContext = (field: ProtoField, context: AminoParseContext) => {
+    const imports = context.ref.proto.imports ?? [];
+    if (!imports.length) return;
+
+    for (let i = 0; i < imports.length; i++) {
+        const imp = imports[i];
+        const lookup = getTypeFromFieldViaImport(field, context, imp);
+        if (lookup) {
+            return lookup;
+        }
+    }
+};
+
 export const getTypeFromContext = (field: ProtoField, context: AminoParseContext) => {
     // TODO can we move this out somewhere else?
     // NOTE this is the only place in ast codebase that uses store...
@@ -58,17 +85,13 @@ export const getTypeFromContext = (field: ProtoField, context: AminoParseContext
         lookup = context.store.get(context.current, field.parsedType.name);
     }
     if (!lookup) {
-        // also check the context ref
         lookup = context.store.get(context.ref, field.parsedType.name);
     }
     if (!lookup) {
-        // try the Ref by looking inside of the file that the field was imported from
-        const innerRef = context.store.findProto(field.import)
-        lookup = context.store.get(innerRef, field.parsedType.name);
-        if (lookup) {
-            // TODO test super-nested types imported from other .proto files
-            // and use this innerRef in recursion
-            context.current = innerRef;
+        if (field.import) {
+            lookup = getTypeFromFieldViaImport(field, context, field.import);
+        } else {
+            lookup = getTypeFromNestedContext(field, context);
         }
         if (!lookup) {
             throw new Error('Undefined Symbol: ' + field.parsedType.name);

@@ -1,8 +1,8 @@
-import { aminoConverter } from './index';
+import { aminoConverter } from '../index';
 import generate from '@babel/generator';
 import { ProtoRef, ProtoStore, traverse, getNestedProto, parseProto } from '@osmonauts/proto-parser'
 import { camel, snake } from 'case';
-import { ProtoType } from './proto/types';
+import { ProtoType } from '../../../proto/types';
 
 const store = new ProtoStore('');
 store.protos = [];
@@ -22,14 +22,20 @@ syntax = "proto3";
 package cosmology.finance;
 option go_package = "github.com/cosmology-finance/go";
 
-enum FancyEnumType {
-    NO_HASH = 0;
-    SHA256 = 1;
-    SHA512 = 2;
-    KECCAK = 3;
-    RIPEMD160 = 4;
-    BITCOIN = 5;
+message MyAwesomeType {
+    enum FancyEnumType {
+        NO_HASH = 0;
+        SHA256 = 1;
+        SHA512 = 2;
+        KECCAK = 3;
+        RIPEMD160 = 4;
+        BITCOIN = 5;
+    }
+
+    string address = 1;
+    FancyEnumType myYolo0 = 2;
 }
+
 `});
 addRef({
     filename: 'cosmology/example/msg.proto',
@@ -42,7 +48,7 @@ import "cosmology/example/tx.proto";
 
 message MsgDoFunThing {
     string                              address        = 1;
-    cosmology.finance.FancyEnumType     myEnumField    = 2;
+    cosmology.finance.MyAwesomeType     awesome    = 2;
 }
 
 service Msg {
