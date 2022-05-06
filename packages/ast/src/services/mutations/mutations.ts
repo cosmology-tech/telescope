@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { identifier } from '../../utils';
 
 export interface Mutation {
   methodName: string;
@@ -6,15 +7,9 @@ export interface Mutation {
   TypeName: string;
 }
 
-const tsIdentifier = (name: string, typeAnnotation: t.TSTypeAnnotation) => {
-  const el = t.identifier(name);
-  el.typeAnnotation = typeAnnotation;
-  return el;
-}
-
 export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    tsIdentifier('value', t.tsTypeAnnotation(
+    identifier('value', t.tsTypeAnnotation(
       t.tsTypeReference(
         t.identifier(TypeName)
       )
@@ -42,7 +37,7 @@ export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) =>
 
 export const addFromJSONMethod = ({ methodName, typeUrl, TypeName }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    tsIdentifier('value', t.tsTypeAnnotation(
+    identifier('value', t.tsTypeAnnotation(
       t.tsTypeReference(
         t.identifier('any')
       )
@@ -79,7 +74,7 @@ export const addToJSONMethod = ({ methodName, typeUrl, TypeName }) => {
 
 export const addJsonMethod = ({ methodName, typeUrl, TypeName }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    tsIdentifier('value', t.tsTypeAnnotation(
+    identifier('value', t.tsTypeAnnotation(
       t.tsTypeReference(
         t.identifier(TypeName)
       )
@@ -103,7 +98,7 @@ export const addJsonMethod = ({ methodName, typeUrl, TypeName }) => {
 
 export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
   return t.objectMethod('method', t.identifier(methodName), [
-    tsIdentifier('value', t.tsTypeAnnotation(
+    identifier('value', t.tsTypeAnnotation(
       t.tsTypeReference(
         t.identifier(TypeName)
       )

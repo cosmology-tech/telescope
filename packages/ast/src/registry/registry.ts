@@ -1,15 +1,10 @@
 import * as t from '@babel/types';
+import { identifier } from '../utils';
 
 export interface ServiceMethod {
   methodName: string;
   typeUrl: string;
   TypeName: string;
-}
-
-const tsIdentifier = (name: string, typeAnnotation: t.TSTypeAnnotation) => {
-  const el = t.identifier(name);
-  el.typeAnnotation = typeAnnotation;
-  return el;
 }
 
 export const createTypeRegistryObject = (mutation: ServiceMethod) => {
@@ -21,7 +16,7 @@ export const createTypeRegistryObject = (mutation: ServiceMethod) => {
 
 export const createTypeRegistry = (mutations: ServiceMethod[]) => t.exportNamedDeclaration(
   t.variableDeclaration('const', [
-    t.variableDeclarator(tsIdentifier(
+    t.variableDeclarator(identifier(
       'registry',
       t.tsTypeAnnotation(
         t.tsTypeReference(t.identifier('ReadonlyArray'), t.tsTypeParameterInstantiation(
@@ -55,7 +50,7 @@ export const createRegistryLoader = () => {
         t.identifier('load'),
         t.arrowFunctionExpression(
           [
-            tsIdentifier('protoRegistry', t.tsTypeAnnotation(
+            identifier('protoRegistry', t.tsTypeAnnotation(
               t.tsTypeReference(
                 t.identifier('Registry')
               )
