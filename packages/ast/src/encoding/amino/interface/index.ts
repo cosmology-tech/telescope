@@ -86,6 +86,7 @@ export const makeAminoTypeInterface = ({
     proto,
     options
 }: MakeAminoTypeInterface) => {
+    context.addUtil('AminoMsg');
 
     const TypeName = proto.name;
     const typeUrl = getTypeUrl(context.ref.proto, proto);

@@ -26,6 +26,8 @@ export const aminoInterface = {
         )
     },
     height(args: RenderAminoField) {
+        args.context.addUtil('AminoHeight');
+
         return t.tsPropertySignature(
             t.identifier(args.options.aminoCasingFn(args.field.name)),
             t.tsTypeAnnotation(
