@@ -1,5 +1,5 @@
 import { recursiveNamespace } from './utils';
-import { createClient } from '../client';
+import { createClient } from '../client/client';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../encoding';
 

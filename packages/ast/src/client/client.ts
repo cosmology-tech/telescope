@@ -1,7 +1,7 @@
 
 import * as t from '@babel/types';
-import { GenericParseContext } from './encoding';
-import { memberExpressionOrIdentifier, objectPattern } from './utils';
+import { GenericParseContext } from '../encoding';
+import { memberExpressionOrIdentifier, objectPattern } from '../utils';
 
 interface CreateClient {
   name: string;
@@ -20,6 +20,7 @@ export const createClient = ({ name, registries, aminos, context }: CreateClient
   context.addUtil('Registry')
   context.addUtil('AminoTypes')
   context.addUtil('SigningStargateClient')
+  context.addUtil('ReadonlyArray')
 
   const prop = t.tsPropertySignature(
     t.identifier('defaultTypes'),

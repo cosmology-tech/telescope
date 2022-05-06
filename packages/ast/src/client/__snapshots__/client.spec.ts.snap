@@ -28,6 +28,7 @@ Object {
   "AminoTypes": true,
   "GeneratedType": true,
   "OfflineSigner": true,
+  "ReadonlyArray": true,
   "Registry": true,
   "SigningStargateClient": true,
   "defaultRegistryTypes": true,

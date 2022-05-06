@@ -1,6 +1,6 @@
 import { createClient } from './client';
 import generate from '@babel/generator';
-import { GenericParseContext } from './encoding';
+import { GenericParseContext } from '../encoding';
 
 const expectCode = (ast) => {
     expect(
