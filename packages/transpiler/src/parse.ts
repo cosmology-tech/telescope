@@ -39,6 +39,7 @@ export interface TelescopeParseContext {
     body: any[];
     mutations: any[];
     queries: any[];
+    types: any[];
 }
 
 export const parse = (
@@ -106,18 +107,6 @@ export const parseType = (
     isNested: boolean = false
 ) => {
 
-    if (obj.nested) {
-        Object.keys(obj.nested).forEach(key => {
-            // isNested = true;
-            parseRecur({
-                context,
-                obj: obj.nested[key],
-                scope: [...scope, key],
-                isNested: true
-            });
-        });
-    }
-
     obj.keyTypes.forEach(field => {
         const keyTypeObject = makeKeyTypeObj(context.ref, field, scope);
         const name = getParsedObjectName(context.ref, {
@@ -134,9 +123,31 @@ export const parseType = (
         name = getParsedObjectName(context.ref, obj, scope);
     }
 
+    // context for types that can be exported
+    if (!isNested) {
+        context.types.push(
+            {
+                [name]: obj
+            }
+        );
+    }
+
     context.body.push(createProtoType(name, obj));
     context.body.push(createCreateProtoType(name, obj));
     context.body.push(createProtoObjectWithMethods(context.proto, name, obj));
+
+    // render nested LAST
+    if (obj.nested) {
+        Object.keys(obj.nested).forEach(key => {
+            // isNested = true;
+            parseRecur({
+                context,
+                obj: obj.nested[key],
+                scope: [...scope, key],
+                isNested: true
+            });
+        });
+    }
 
 };
 
@@ -184,19 +195,20 @@ export const parseService = (
                 console.warn(`cannot find ${value.requestType}`);
                 throw new Error('undefined symbol for service.');
             }
-            if (lookup.importType && lookup.importType !== 'local') {
-                (isMutation ? context.mutations : context.queries).push({
-                    methodName: key,
-                    import: lookup.import,
-                    message: lookup.importedName
-                })
-            } else {
-                (isMutation ? context.mutations : context.queries).push({
-                    methodName: key,
-                    import: context.ref.filename,
-                    message: lookup.importedName
-                })
+            const lookupResponse = context.store.get(context.ref, value.responseType);
+            if (!lookupResponse) {
+                console.warn(`cannot find ${value.requestType}`);
+                throw new Error('undefined symbol for service.');
             }
+            (isMutation ? context.mutations : context.queries).push({
+                methodName: key,
+                package: context.ref.proto.package,
+                message: lookup.importedName,
+                messageImport: lookup.import ?? context.ref.filename,
+                response: lookupResponse.importedName,
+                responseImport: lookupResponse.import ?? context.ref.filename,
+                comment: value.comment
+            })
             return lookup;
         });
 

@@ -117,6 +117,7 @@ describe('cosmology/example/c', () => {
         body: [],
         mutations: [],
         queries: [],
+        types: []
     };
 
     // aggregate service information
@@ -126,25 +127,8 @@ describe('cosmology/example/c', () => {
 
     it('works', () => {
         parse(context);
-        expect(context.mutations).toEqual([
-            {
-                methodName: 'ActionFromPackageC',
-                import: 'cosmology/example/c.proto',
-                message: 'MsgTypePackageC'
-            },
-            {
-                methodName: 'ActionFromPackageB',
-                import: 'cosmology/example/b.proto',
-                message: 'MsgTypePackageB'
-            }
-        ]);
-        expect(context.queries).toEqual([
-            {
-                methodName: 'Config',
-                import: 'cosmology/example/c.proto',
-                message: 'QueryConfigRequest'
-            }
-        ]);
+        expect(context.mutations).toMatchSnapshot();
+        expect(context.queries).toMatchSnapshot();
     });
 
 });

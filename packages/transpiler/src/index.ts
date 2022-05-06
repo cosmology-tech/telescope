@@ -62,7 +62,8 @@ export class TelescopeBuilder {
             parsedImports: {},
             body: [],
             queries: [],
-            mutations: []
+            mutations: [],
+            types: []
         };
 
         parse(context);
