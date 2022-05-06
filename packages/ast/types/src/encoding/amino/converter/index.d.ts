@@ -2,10 +2,10 @@ import * as t from '@babel/types';
 import { ProtoType } from '../../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser';
 import { AminoOptions } from '../types';
-import { ParseContext } from '../../context';
+import { AminoParseContext } from '../../context';
 interface AminoConverterItemParams {
     root: ProtoRoot;
-    context: ParseContext;
+    context: AminoParseContext;
     proto: ProtoType;
     options: AminoOptions;
 }
@@ -13,7 +13,7 @@ export declare const makeAminoConverterItem: ({ root, context, proto, options }:
 interface AminoConverterParams {
     name: string;
     root: ProtoRoot;
-    context: ParseContext;
+    context: AminoParseContext;
     protos: ProtoType[];
     options: AminoOptions;
 }

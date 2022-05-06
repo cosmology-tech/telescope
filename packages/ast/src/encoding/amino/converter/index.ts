@@ -5,11 +5,11 @@ import { AminoOptions } from '../types';
 import { toAminoJsonMethod } from '../to-amino-json';
 import { fromAminoJsonMethod } from '../from-amino-json';
 import { getTypeUrl, typeUrlToAmino } from '../utils';
-import { ParseContext } from '../../context';
+import { AminoParseContext } from '../../context';
 
 interface AminoConverterItemParams {
     root: ProtoRoot,
-    context: ParseContext,
+    context: AminoParseContext,
     proto: ProtoType,
     options: AminoOptions
 }
@@ -56,7 +56,7 @@ export const makeAminoConverterItem = (
 interface AminoConverterParams {
     name: string,
     root: ProtoRoot,
-    context: ParseContext,
+    context: AminoParseContext,
     protos: ProtoType[],
     options: AminoOptions
 }

@@ -1,6 +1,6 @@
 import { ProtoType, ProtoAny, ProtoField } from '../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser';
-import { ParseContext } from '../context';
+import { AminoParseContext } from '../context';
 export declare const getTypeUrl: (root: ProtoRoot, proto: ProtoAny | ProtoType) => string;
 export declare const arrayTypeNDim: (body: any, n: any) => any;
 export declare const typeUrlToAmino: (typeUrl: any, exceptions?: {}) => any;
@@ -28,4 +28,4 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
     importedName?: string;
     scopeType?: string;
 }[];
-export declare const getTypeFromCurrentProtoPath: (field: ProtoField, currentProtoPath: string, context: ParseContext) => any;
+export declare const getTypeFromCurrentProtoPath: (field: ProtoField, currentProtoPath: string, context: AminoParseContext) => any;

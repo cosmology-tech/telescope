@@ -2,7 +2,6 @@ import { aminoConverter } from './index';
 import { ProtoStore } from '@osmonauts/proto-parser'
 import { camel, snake } from 'case';
 import { prepareContext, expectCode } from '../../../../test-utils'
-
 const store = new ProtoStore(__dirname + '/../../../../../../__fixtures__/chain1');
 store.traverseAll();
 

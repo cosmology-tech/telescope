@@ -1,9 +1,9 @@
 import * as t from '@babel/types';
-import { ParseContext } from '../../context';
+import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
 import { AminoOptions } from '../types';
 export interface FromAminoParseField {
-    context: ParseContext;
+    context: AminoParseContext;
     field: ProtoField;
     currentProtoPath: string;
     scope: string[];
@@ -12,7 +12,7 @@ export interface FromAminoParseField {
 }
 export declare const fromAminoParseField: ({ context, field, currentProtoPath, scope: previousScope, nested, options }: FromAminoParseField) => any;
 interface fromAminoJSON {
-    context: ParseContext;
+    context: AminoParseContext;
     proto: ProtoType;
     options: AminoOptions;
 }

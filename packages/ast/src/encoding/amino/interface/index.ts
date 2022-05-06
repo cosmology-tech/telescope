@@ -1,12 +1,12 @@
 import * as t from '@babel/types';
-import { ParseContext } from '../../context';
+import { AminoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '../../proto/types';
 import { AminoOptions } from '../types';
 import { getTypeUrl, protoFieldsToArray, typeUrlToAmino } from '../utils';
 import { aminoInterface } from './utils';
 
 export interface RenderAminoField {
-    context: ParseContext;
+    context: AminoParseContext;
     field: ProtoField;
     currentProtoPath: string;
     options: AminoOptions;
@@ -76,7 +76,7 @@ export const renderAminoField = ({
 };
 
 export interface MakeAminoTypeInterface {
-    context: ParseContext;
+    context: AminoParseContext;
     proto: ProtoType;
     options: AminoOptions;
 };
@@ -92,15 +92,14 @@ export const makeAminoTypeInterface = ({
     const aminoType = typeUrlToAmino(typeUrl, options.exceptions);
 
     const fields = protoFieldsToArray(proto).map((field) => {
-        const ctx = context.spawn();
         const aminoField = renderAminoField({
-            context: ctx,
+            context,
             field,
-            currentProtoPath: ctx.ref.filename,
+            currentProtoPath: context.ref.filename,
             options
         });
         return {
-            ctx,
+            ctx: context,
             field: aminoField
         }
     });

@@ -4,7 +4,7 @@ import { ProtoStore } from '@osmonauts/proto-parser';
 import { parse, TelescopeParseContext } from './parse';
 import {
     ProtoParseContext,
-    ParseContext as AminoParseContext
+    AminoParseContext
 } from '@osmonauts/ast';
 export interface TelescopeInput {
     protoDir: string;
@@ -31,12 +31,17 @@ export class TelescopeBuilder {
                 ref, this.store
             ),
             ref,
-            store: this.store
+            store: this.store,
+            parsedImports: {},
+            body: []
         };
 
-        const parsed = parse(context);
-        const gen = generate(t.program(parsed.body));
-        return gen.code;
+        parse(context);
+        const gen = generate(t.program(context.body));
+        return {
+            gen,
+            context
+        }
     }
 }
 

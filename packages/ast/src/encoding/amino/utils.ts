@@ -3,7 +3,7 @@ import { kebab } from "case";
 import { ProtoType, ProtoAny, ProtoField } from '../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser'
 import { DEFAULT_AMINO_EXCEPTIONS } from './types';
-import { ParseContext } from '../context';
+import { AminoParseContext } from '../context';
 
 export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
     return `/${root.package}.${proto.name}`;
@@ -52,7 +52,7 @@ export const protoFieldsToArray = (proto: ProtoType) => {
 
 // IMPORTS 
 // TODO can we move this out of ast pkg? only amino uses it.
-export const getTypeFromCurrentProtoPath = (field: ProtoField, currentProtoPath: string, context: ParseContext) => {
+export const getTypeFromCurrentProtoPath = (field: ProtoField, currentProtoPath: string, context: AminoParseContext) => {
     const ref = context.store.findProto(currentProtoPath);
     const lookup = context.store.get(ref, field.parsedType.name);
     if (!lookup) {

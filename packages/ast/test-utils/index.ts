@@ -1,7 +1,7 @@
 import generate from '@babel/generator';
-import { ProtoStore, getNestedProto, parseProto } from '@osmonauts/proto-parser'
+import { ProtoStore, getNestedProto } from '@osmonauts/proto-parser'
 import { ProtoType } from '../src/encoding/proto/types';
-import { ParseContext } from '../src/encoding/context';
+import { AminoParseContext } from '../src/encoding/context';
 
 export const expectCode = (ast) => {
     expect(
@@ -29,7 +29,7 @@ export const prepareContext = (store: ProtoStore, protoFile: string) => {
             proto.name !== 'Msg'
     );
 
-    const context = new ParseContext(ref, store);
+    const context = new AminoParseContext(ref, store);
 
     return {
         context,

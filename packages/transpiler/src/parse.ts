@@ -7,7 +7,7 @@ import {
     ProtoField,
     ProtoType,
     ProtoParseContext,
-    ParseContext as AminoParseContext,
+    AminoParseContext,
     makeAminoTypeInterface,
     aminoConverter
 } from '@osmonauts/ast';
@@ -23,34 +23,20 @@ export interface TelescopeParseContext {
     amino: AminoParseContext;
     store: ProtoStore;
     ref: ProtoRef;
+    parsedImports: Record<string, any>;
+    body: any[];
 }
 
 export const parse = (
     context: TelescopeParseContext,
-) => {
-    const imports = {};
-    const body = []
-
+): void => {
     const root = getRoot(context.ref);
-
-    // TODO type any
-    const obj: any & { parsedImports: Record<string, string[]> } = {
-        imports: root.imports,
-        package: root.package,
-        root: parseRecur({
-            context,
-            obj: root.root,
-            imports,
-            body,
-            scope: [],
-            isNested: false
-        }),
-        parsedImports: null
-    };
-    obj.parsedImports = imports;
-    obj.body = body;
-
-    return obj;
+    parseRecur({
+        context,
+        obj: root.root,
+        scope: [],
+        isNested: false
+    });
 };
 
 export const getParsedObjectName = (
@@ -109,8 +95,6 @@ const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
 export const parseType = (
     context: TelescopeParseContext,
     obj: any,
-    imports: object,
-    body: any[],
     scope: string[],
     isNested: boolean = false
 ) => {
@@ -121,8 +105,6 @@ export const parseType = (
             parseRecur({
                 context,
                 obj: obj.nested[key],
-                imports,
-                body,
                 scope: [...scope, key],
                 isNested: true
             });
@@ -134,9 +116,9 @@ export const parseType = (
         const name = getParsedObjectName(context.ref, {
             name: getKeyTypeObjectName(obj, field)
         }, scope);
-        body.push(createProtoType(name, keyTypeObject));
-        body.push(createCreateProtoType(name, keyTypeObject));
-        body.push(createProtoObjectWithMethods(context.proto, name, keyTypeObject));
+        context.body.push(createProtoType(name, keyTypeObject));
+        context.body.push(createCreateProtoType(name, keyTypeObject));
+        context.body.push(createProtoObjectWithMethods(context.proto, name, keyTypeObject));
     })
 
     // parse nested names
@@ -145,17 +127,15 @@ export const parseType = (
         name = getParsedObjectName(context.ref, obj, scope);
     }
 
-    body.push(createProtoType(name, obj));
-    body.push(createCreateProtoType(name, obj));
-    body.push(createProtoObjectWithMethods(context.proto, name, obj));
+    context.body.push(createProtoType(name, obj));
+    context.body.push(createCreateProtoType(name, obj));
+    context.body.push(createProtoObjectWithMethods(context.proto, name, obj));
 
 };
 
 export const parseEnum = (
     context: TelescopeParseContext,
     obj: any,
-    imports: object,
-    body: any[],
     scope: string[],
     isNested: boolean = false
 ) => {
@@ -164,14 +144,12 @@ export const parseEnum = (
     if (isNested) {
         name = getParsedObjectName(context.ref, obj, scope);
     }
-    body.push(createProtoEnum(name, obj));
+    context.body.push(createProtoEnum(name, obj));
 };
 
 export const parseService = (
     context: TelescopeParseContext,
     obj: any,
-    imports: object,
-    body: any[],
     scope: string[],
     isNested: boolean = false
 ) => {
@@ -188,12 +166,25 @@ export const parseService = (
             const obj = context.store.findProtoObject(context.ref.filename, value.requestType);
             if (!obj) {
                 console.warn(`cannot find ${value.requestType}`);
-                throw new Error('undefined symbol.')
+                throw new Error('undefined symbol. maybe service is referencing another file. Maintainers can likely fix this.');
             }
             return obj;
         });
 
-    body.push(aminoConverter({
+    if (!protos.length) return;
+
+    // AMINO INTERFACES
+    protos.forEach(proto => {
+        context.body.push(makeAminoTypeInterface({
+            context: context.amino,
+            proto,
+            options: {
+                aminoCasingFn: snake
+            }
+        }));
+    });
+    // AMINO CONVERTER
+    context.body.push(aminoConverter({
         name: 'AminoConverter',
         context: context.amino,
         root: context.ref.traversed,
@@ -203,37 +194,36 @@ export const parseService = (
         }
     }))
 
+    // add registry
+
+    // add client
 
 };
 
 interface ParseRecur {
     context: TelescopeParseContext,
     obj: any;
-    imports: object;
-    body: any[];
     scope: string[];
     isNested: boolean;
 }
 export const parseRecur = ({
     context,
     obj,
-    imports,
-    body,
     scope,
     isNested
 }: ParseRecur) => {
     switch (obj.type) {
         case 'Type':
             return parseType(
-                context, obj, imports, body, scope, isNested
+                context, obj, scope, isNested
             );
         case 'Enum':
             return parseEnum(
-                context, obj, imports, body, scope, isNested
+                context, obj, scope, isNested
             );
         case 'Service':
             return parseService(
-                context, obj, imports, body, scope, isNested
+                context, obj, scope, isNested
             );
         case 'Field':
             console.log(obj);
@@ -245,8 +235,6 @@ export const parseRecur = ({
                     parseRecur({
                         context,
                         obj: obj.nested[key],
-                        imports,
-                        body,
                         scope: [...scope, key],
                         isNested
                     });

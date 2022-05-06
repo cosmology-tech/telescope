@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
-import { ParseContext } from '../../context';
+import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
 import { AminoOptions } from '../types';
 import { protoFieldsToArray } from '../utils';
@@ -15,7 +15,7 @@ const warningDefaultImplementation = (name: string, field: ProtoField) => {
 }
 
 export interface ToAminoParseField {
-    context: ParseContext;
+    context: AminoParseContext;
     field: ProtoField;
     currentProtoPath: string;
     scope: string[];
@@ -108,7 +108,7 @@ export const toAminoParseField = ({
 
 
 interface toAminoJSON {
-    context: ParseContext;
+    context: AminoParseContext;
     proto: ProtoType;
     options: AminoOptions;
 }
@@ -131,17 +131,16 @@ export const toAminoJsonMethod = ({
     toAminoParams.typeAnnotation = t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
 
     const fields = protoFieldsToArray(proto).map((field) => {
-        const ctx = context.spawn();
         const aminoField = toAminoParseField({
-            context: ctx,
+            context,
             field,
-            currentProtoPath: ctx.ref.filename,
+            currentProtoPath: context.ref.filename,
             scope: [],
             nested: 0,
             options
         });
         return {
-            ctx,
+            ctx: context,
             field: aminoField
         }
     });

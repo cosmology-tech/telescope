@@ -1,23 +1,18 @@
 import { ProtoStore, ProtoRef } from '@osmonauts/proto-parser';
 import { ProtoField } from './proto';
 
-export interface PContext {
-    store: ProtoStore;
-    ref: ProtoRef;
-
-    scope: string[];
-
-    imports: string[];
-    utils: string[];
+export interface ParseContext {
+    imports: Record<string, object>;
+    utils: Record<string, boolean>;
+    addImport: Function;
+    addUtil: Function;
 }
-
-export class ParseContext implements PContext {
+export class AminoParseContext implements ParseContext {
     store: ProtoStore;
     ref: ProtoRef;
 
-    scope: string[] = [];
-    imports: string[] = []
-    utils: string[] = []
+    imports: Record<string, object> = {};
+    utils: Record<string, boolean> = {};
 
     constructor(
         ref: ProtoRef,
@@ -27,30 +22,24 @@ export class ParseContext implements PContext {
         this.store = store;
     }
 
-    spawn() {
-        return new ParseContext(this.ref, this.store);
-    }
-
     addImport(imp) {
-        this.imports.push(imp);
-        console.log({ imp });
+        // TODO
+        this.imports[imp] = imp;
     }
     addUtil(util) {
-        this.utils.push(util);
-        console.log({ util });
+        this.utils[util] = true;
     }
 }
 
-export class ProtoParseContext {
-    imports: string[] = []
-    utils: string[] = []
+export class ProtoParseContext implements ParseContext {
+    imports: Record<string, object> = {};
+    utils: Record<string, boolean> = {};
 
     addImport(imp) {
-        this.imports.push(imp);
-        console.log({ imp });
+        // TODO
+        this.imports[imp] = imp;
     }
     addUtil(util) {
-        this.utils.push(util);
-        console.log({ util });
+        this.utils[util] = true;
     }
 }
