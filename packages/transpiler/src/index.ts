@@ -21,6 +21,7 @@ const UTILS = {
     toTimestamp: '@osmonauts/helpers',
     fromTimestamp: '@osmonauts/helpers',
     fromJsonTimestamp: '@osmonauts/helpers',
+    omitDefault: '@osmonauts/helpers',
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
     fromHex: '@cosmjs/encoding',
@@ -58,32 +59,61 @@ export class TelescopeBuilder {
 
         parse(context);
 
+        // maybe we can do something like this to separate out the context..
+        // parse(context1, {
+        //     amino: true
+        // });
+
+        // parse(context2, {
+        //     registry: true
+        // });
+
+        // messages = c.toObjectWithPartialMethods(this.mutations);
+        // registry = c.createTypeRegistry(this.mutations);
+        // json = c.toObjectWithJsonMethods(this.mutations);
+        // toJSON = c.toObjectWithToJSONMethods(this.mutations);
+        // fromJSON = c.toObjectWithFromJSONMethods(this.mutations);
+        // encoded = c.toObjectWithEncodedMethods(this.mutations);
+
+        // this.outFiles = [];
+
+
         const utils = Object.keys({
             ...context.amino.utils,
             ...context.proto.utils
         });
 
-        const utilImports = utils.map(util => {
+        const allImports = {};
+
+        utils.forEach(util => {
             if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
-            return a.importStmt([util], UTILS[util]);
+            allImports[UTILS[util]] = allImports[UTILS[util]] || [];
+            if (!allImports[UTILS[util]].includes(util)) {
+                allImports[UTILS[util]].push(util);
+            }
         });
 
-        const parsedImports = Object.entries(
-            context.amino.ref.traversed.parsedImports ?? {}
-        )
-            .map(([filename, names]) => {
+        Object.entries(context.amino.ref.traversed.parsedImports ?? {})
+            .forEach(([filename, names]) => {
                 const f = context.ref.filename;
                 const rel = relative(dirname(f), filename);
                 let importPath = rel.replace(extname(rel), '');
                 if (!/\//.test(importPath)) importPath = `./${importPath}`;
-                return a.importStmt(names, importPath);
+                allImports[importPath] = allImports[importPath] || [];
+                names.forEach(name => {
+                    if (!allImports[importPath].includes(name)) {
+                        allImports[importPath].push(name);
+                    }
+                })
             });
 
-
+        const importStmts = Object.entries(allImports)
+            .map(([pth, names]) => {
+                return a.importStmt(names, pth);
+            })
 
         const prog = []
-            .concat(parsedImports)
-            .concat(utilImports)
+            .concat(importStmts)
             .concat(context.body);
 
         const gen = generate(t.program(prog));
