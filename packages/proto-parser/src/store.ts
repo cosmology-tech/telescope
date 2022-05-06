@@ -35,7 +35,7 @@ export class ProtoStore {
 
     findProtoObject(filename, name): any {
         const proto = this.findProto(filename);
-        return getNestedProto(proto.proto)[name];
+        return getNestedProto(proto.traversed ?? proto.proto)[name];
     }
 
     getProtos(): ProtoRef[] {

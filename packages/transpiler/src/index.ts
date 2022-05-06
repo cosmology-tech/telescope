@@ -3,7 +3,8 @@ import generate from '@babel/generator';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { parse, TelescopeParseContext } from './parse';
 import {
-    ProtoParseContext
+    ProtoParseContext,
+    ParseContext as AminoParseContext
 } from '@osmonauts/ast';
 export interface TelescopeInput {
     protoDir: string;
@@ -25,7 +26,10 @@ export class TelescopeBuilder {
         const ref = this.store.findProto(path);
 
         const context: TelescopeParseContext = {
-            context: new ProtoParseContext(),
+            proto: new ProtoParseContext(),
+            amino: new AminoParseContext(
+                ref, this.store
+            ),
             ref,
             store: this.store
         };
