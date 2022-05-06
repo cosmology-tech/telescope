@@ -37,6 +37,8 @@ export interface TelescopeParseContext {
     ref: ProtoRef;
     parsedImports: Record<string, any>;
     body: any[];
+    mutations: any[];
+    queries: any[];
 }
 
 export const parse = (
@@ -165,19 +167,41 @@ export const parseService = (
         comment?: string;
     }> = obj.methods;
 
+    if (!['Msg', 'Query'].includes(obj.name)) {
+        throw new Error('unsupported Service type. Contact Maintainers.');
+    }
 
-    const protos = Object.entries(methodHash)
+    const isMutation = obj.name === 'Msg';
+
+    // NOTE
+    // in future this can get hoisted up and we could theoretically aggregate multiple 
+    // proto files in the same package for same-named services, e.g. two files with `service Msg`
+
+    const lookups = Object.entries(methodHash)
         .map(([key, value]) => {
-            const obj = context.store.findProtoObject(context.ref.filename, value.requestType);
-            if (!obj) {
+            const lookup = context.store.get(context.ref, value.requestType);
+            if (!lookup) {
                 console.warn(`cannot find ${value.requestType}`);
-                throw new Error('undefined symbol. maybe service is referencing another file. Maintainers can likely fix this.');
+                throw new Error('undefined symbol for service.');
             }
-            return obj;
+            if (lookup.importType && lookup.importType !== 'local') {
+                (isMutation ? context.mutations : context.queries).push({
+                    methodName: key,
+                    import: lookup.import,
+                    message: lookup.importedName
+                })
+            } else {
+                (isMutation ? context.mutations : context.queries).push({
+                    methodName: key,
+                    import: context.ref.filename,
+                    message: lookup.importedName
+                })
+            }
+            return lookup;
         });
 
 
-    if (!protos.length) return;
+    if (!lookups.length) return;
 
     const methods = Object.entries(methodHash)
         .map(([key, value]) => {
@@ -189,7 +213,8 @@ export const parseService = (
         });
 
     // AMINO INTERFACES
-    protos.forEach(proto => {
+    lookups.forEach(lookup => {
+        const proto = lookup.obj;
         context.body.push(makeAminoTypeInterface({
             context: context.amino,
             proto,
@@ -198,6 +223,8 @@ export const parseService = (
             }
         }));
     });
+    const protos = lookups.map(lookup => lookup.obj);
+
     // AMINO CONVERTER
     context.body.push(aminoConverter({
         name: 'AminoConverter',

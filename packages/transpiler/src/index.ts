@@ -60,7 +60,9 @@ export class TelescopeBuilder {
             ref,
             store: this.store,
             parsedImports: {},
-            body: []
+            body: [],
+            queries: [],
+            mutations: []
         };
 
         parse(context);
