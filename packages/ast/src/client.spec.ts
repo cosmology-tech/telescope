@@ -1,5 +1,6 @@
 import { createClient } from './client';
 import generate from '@babel/generator';
+import { GenericParseContext } from './encoding';
 
 const expectCode = (ast) => {
     expect(
@@ -13,7 +14,9 @@ const printCode = (ast) => {
 }
 
 it('createClient', async () => {
+    const context = new GenericParseContext();
     expectCode(createClient({
+        context,
         name: 'getSigningOsmosisClient',
         registries: [
             'osmosis.gamm.v1beta1',
@@ -26,4 +29,5 @@ it('createClient', async () => {
             'osmosis.lockup'
         ]
     }));
+    expect(context.utils).toMatchSnapshot();
 });

@@ -1,6 +1,7 @@
 import { recursiveNamespace } from './utils';
 import { createClient } from '../client';
 import generate from '@babel/generator';
+import { GenericParseContext } from '../encoding';
 
 const expectCode = (ast) => {
     expect(
@@ -13,6 +14,7 @@ it('recursiveNamespace', async () => {
         recursiveNamespace(['osmosis', 'gamm', 'v1beta', 'pools'].reverse(), [
 
             createClient({
+                context: new GenericParseContext(),
                 name: 'getSigningOsmosisClient',
                 registries: [
                     'osmosis.gamm.v1beta1',

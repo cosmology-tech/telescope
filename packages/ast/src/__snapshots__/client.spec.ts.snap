@@ -22,3 +22,14 @@ exports[`createClient 1`] = `
   return client;
 };"
 `;
+
+exports[`createClient 2`] = `
+Object {
+  "AminoTypes": true,
+  "GeneratedType": true,
+  "OfflineSigner": true,
+  "Registry": true,
+  "SigningStargateClient": true,
+  "defaultRegistryTypes": true,
+}
+`;

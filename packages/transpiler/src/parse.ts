@@ -4,7 +4,6 @@ import {
     createCreateProtoType,
     createProtoEnum,
     createProtoObjectWithMethods,
-    ProtoField,
     ProtoType,
     ProtoParseContext,
     AminoParseContext,
@@ -189,9 +188,7 @@ export const parseService = (
     }))
 
     // add registry
-
     // add client
-
 };
 
 interface ParseRecur {
