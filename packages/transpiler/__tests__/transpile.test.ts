@@ -19,6 +19,7 @@ describe('services', () => {
     it('osmosis/gamm/v1beta1/tx', () => {
         const result = telescope.buildProto('osmosis/gamm/v1beta1/tx.proto');
         expectUtils(result.context);
+
     });
     it('osmosis/lockup/tx', () => {
         const result = telescope.buildProto('osmosis/lockup/tx.proto');
@@ -37,5 +38,7 @@ describe('utils', () => {
     it('cosmos/staking/v1beta1/tx', () => {
         const result = telescope.buildProto('cosmos/staking/v1beta1/tx.proto');
         expectUtils(result.context);
+        console.log(result.gen.code)
+
     });
 });

@@ -224,7 +224,7 @@ export const toAmino = {
                                 t.callExpression(
                                     t.identifier('decodeBech32Pubkey'),
                                     [
-                                        t.identifier('pubkey')
+                                        t.identifier(args.field.name)
                                     ]
                                 ),
                                 t.identifier('value')

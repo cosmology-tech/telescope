@@ -9,7 +9,8 @@ import {
     ProtoParseContext,
     AminoParseContext,
     makeAminoTypeInterface,
-    aminoConverter
+    aminoConverter,
+    getKeyTypeEntryName
 } from '@osmonauts/ast';
 import { snake } from 'case';
 
@@ -50,13 +51,6 @@ export const getParsedObjectName = (
     allButPackage.pop();
     return getObjectName(obj.name, [root.package, ...allButPackage]);
 };
-
-export const getKeyTypeObjectName = (
-    obj: any,
-    field: ProtoField
-) => {
-    return obj.name + '_' + field.parsedType.name + 'MapEntry';
-}
 
 // TODO potentially move this back to ast or proto bc the ast lib references MapEntries...
 const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
@@ -114,7 +108,7 @@ export const parseType = (
     obj.keyTypes.forEach(field => {
         const keyTypeObject = makeKeyTypeObj(context.ref, field, scope);
         const name = getParsedObjectName(context.ref, {
-            name: getKeyTypeObjectName(obj, field)
+            name: getKeyTypeEntryName(obj.name, field.parsedType.name)
         }, scope);
         context.body.push(createProtoType(name, keyTypeObject));
         context.body.push(createCreateProtoType(name, keyTypeObject));

@@ -285,7 +285,7 @@ export const getFieldsTypeName = (field: ProtoField) => {
 };
 
 export const getKeyTypeEntryName = (typeName: string, prop: string) => {
-    return `${typeName}_${pascal(prop)}Entry`;
+    return `${typeName}_${pascal(prop)}MapEntry`;
 };
 
 export const getBaseCreateTypeFuncName = (name) => {
