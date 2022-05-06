@@ -38,7 +38,6 @@ describe('utils', () => {
     it('cosmos/staking/v1beta1/tx', () => {
         const result = telescope.buildProto('cosmos/staking/v1beta1/tx.proto');
         expectUtils(result.context);
-        console.log(result.gen.code)
-
+        // console.log(result.gen.code)
     });
 });

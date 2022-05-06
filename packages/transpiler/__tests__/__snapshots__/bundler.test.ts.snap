@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bundle osmosis/gamm/v1beta1/tx 1`] = `
+Object {
+  "amino": Object {
+    "AminoMsg": true,
+  },
+  "proto": Object {
+    "Long": true,
+    "isSet": true,
+  },
+}
+`;

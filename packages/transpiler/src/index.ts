@@ -14,22 +14,28 @@ export interface TelescopeInput {
 }
 
 const UTILS = {
-    isSet: '@osmonauts/helpers',
-    Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
-    toDuration: '@osmonauts/helpers',
-    fromDuration: '@osmonauts/helpers',
-    toTimestamp: '@osmonauts/helpers',
-    fromTimestamp: '@osmonauts/helpers',
-    fromJsonTimestamp: '@osmonauts/helpers',
-    omitDefault: '@osmonauts/helpers',
+    AminoHeight: '@osmonauts/helpers',
+    AminoMsg: '@cosmjs/amino',
+    AminoTypes: '@cosmjs/stargate',
+    decodeBech32Pubkey: '@cosmjs/amino',
+    defaultRegistryTypes: '@cosmjs/stargate',
+    encodeBech32PubKey: '@cosmjs/amino',
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
+    fromDuration: '@osmonauts/helpers',
     fromHex: '@cosmjs/encoding',
+    fromJsonTimestamp: '@osmonauts/helpers',
+    fromTimestamp: '@osmonauts/helpers',
+    GeneratedType: '@cosmjs/proto-signing',
+    isSet: '@osmonauts/helpers',
+    Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
+    OfflineSigner: '@cosmjs/proto-signing',
+    omitDefault: '@osmonauts/helpers',
+    Registry: '@cosmjs/proto-signing',
+    SigningStargateClient: '@cosmjs/stargate',
     toBase64: '@cosmjs/encoding',
-    AminoMsg: '@cosmjs/amino',
-    AminoHeight: '@osmonauts/helpers',
-    encodeBech32PubKey: '@cosmjs/amino',
-    decodeBech32Pubkey: '@cosmjs/amino'
+    toDuration: '@osmonauts/helpers',
+    toTimestamp: '@osmonauts/helpers',
 };
 export class TelescopeBuilder {
     store: ProtoStore;
