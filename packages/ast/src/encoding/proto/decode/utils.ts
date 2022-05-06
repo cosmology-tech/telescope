@@ -1,47 +1,76 @@
 import * as t from '@babel/types';
-import { pascal } from 'case';
+import { DecodeMethod } from './index';
+import { getKeyTypeEntryName } from '..';
+import { getFieldsTypeName } from '../types';
 
 export const decode = {
-    string(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.string())
+    string(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.string(args));
     },
-    bool(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.bool())
+    bool(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.bool(args));
     },
-    long(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.long());
+    long(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.long(args));
     },
-    double(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.double());
+    double(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.double(args));
     },
-    int64(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.int64());
+    int64(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.int64(args));
     },
-    duration(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.duration());
+    duration(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.duration(args));
     },
-    timestamp(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.timestamp());
+    timestamp(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.timestamp(args));
     },
-    type(num: number, prop: string, name: string) {
-        return switchOnTag(num, prop, baseTypes.type(name));
+    type(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.type(args));
     },
-    enum(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.enum());
+    enum(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.enum(args));
     },
-    bytes(num: number, prop: string) {
-        return switchOnTag(num, prop, baseTypes.bytes());
+    bytes(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.bytes(args));
     },
-    keyHash(num: number, prop: string, name: string) {
-        return switchOnTagTakesArray(num, prop, baseTypes.keyHash(prop, name));
+    keyHash(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTagTakesArray(num, prop, baseTypes.keyHash(args));
     },
-    scalarArray(num: number, prop: string, expr: t.Expression) {
+    scalarArray(args: DecodeMethod, expr: t.Expression) {
+        const num = args.field.id;
+        const prop = args.field.name;
         return switchScalarArray(num,
             prop,
             expr
         )
     },
-    typeArray(num: number, prop: string, name: string) {
+    typeArray(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        const name = getFieldsTypeName(args.field);
         return switchTypeArray(num,
             prop,
             name
@@ -53,7 +82,7 @@ export const decode = {
 export const baseTypes = {
 
     // message.sender = reader.string();
-    string() {
+    string(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('reader'),
@@ -64,7 +93,7 @@ export const baseTypes = {
     },
 
     // message.sender = reader.bool();
-    bool() {
+    bool(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('reader'),
@@ -75,7 +104,7 @@ export const baseTypes = {
     },
 
     // message.doubleValue = reader.double();
-    double() {
+    double(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('reader'),
@@ -86,7 +115,9 @@ export const baseTypes = {
     },
 
     // message.int64Value = (reader.int64() as Long);
-    int64() {
+    int64(args: DecodeMethod) {
+        args.context.addUtil('Long');
+
         return t.tsAsExpression(
             t.callExpression(
                 t.memberExpression(
@@ -101,7 +132,7 @@ export const baseTypes = {
         );
     },
 
-    int32() {
+    int32(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('reader'),
@@ -112,7 +143,9 @@ export const baseTypes = {
     },
 
     // message.poolId = (reader.uint64() as Long);
-    long() {
+    long(args: DecodeMethod) {
+        args.context.addUtil('Long');
+
         return t.tsAsExpression(
             t.callExpression(
                 t.memberExpression(
@@ -128,7 +161,8 @@ export const baseTypes = {
     },
 
     // message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
-    type(name: string) {
+    type(args: DecodeMethod) {
+        const name = getFieldsTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),
@@ -148,7 +182,7 @@ export const baseTypes = {
     },
 
     // message.mode = (reader.int32() as any);
-    enum() {
+    enum(args: DecodeMethod) {
         return t.tsAsExpression(
             t.callExpression(
                 t.memberExpression(
@@ -161,7 +195,7 @@ export const baseTypes = {
         )
     },
 
-    bytes() {
+    bytes(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('reader'),
@@ -173,7 +207,9 @@ export const baseTypes = {
 
     // message.period = fromDuration(Duration.decode(reader, reader.uint32()));
 
-    duration() {
+    duration(args: DecodeMethod) {
+        args.context.addUtil('fromDuration');
+
         return t.callExpression(
             t.identifier('fromDuration'),
             [
@@ -199,13 +235,15 @@ export const baseTypes = {
 
     // message.periodReset = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
 
-    timestamp() {
+    timestamp(args: DecodeMethod) {
+        args.context.addUtil('fromTimestamp');
+
         return t.callExpression(
             t.identifier('fromTimestamp'),
             [
                 t.callExpression(
                     t.memberExpression(
-                        t.identifier('Timestampt'),
+                        t.identifier('Timestamp'),
                         t.identifier('decode')
                     ),
                     [
@@ -223,22 +261,26 @@ export const baseTypes = {
         )
     },
 
-    // const entry13 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
+    // const entry1 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
 
-    // if (entry13.value !== undefined) {
+    // if (entry1.value !== undefined) {
     //     message.labels[entry13.key] = entry13.value;
     // }
 
-    keyHash(prop: string, name: string) {
+    keyHash(args: DecodeMethod) {
+        const prop = args.field.name;
+        const name = args.typeName;
+        const id = args.field.id;
+        const entryVariable = `entry${id}`;
         return [
             t.variableDeclaration(
                 'const',
                 [
                     t.variableDeclarator(
-                        t.identifier('entry123'),
+                        t.identifier(entryVariable),
                         t.callExpression(
                             t.memberExpression(
-                                t.identifier(`${name}_${pascal(prop)}Entry`),
+                                t.identifier(getKeyTypeEntryName(name, prop)),
                                 t.identifier('decode')
                             ),
                             [
@@ -259,7 +301,7 @@ export const baseTypes = {
                 t.binaryExpression(
                     '!==',
                     t.memberExpression(
-                        t.identifier('entry123'),
+                        t.identifier(entryVariable),
                         t.identifier('value')
                     ),
                     t.identifier('undefined')
@@ -271,16 +313,16 @@ export const baseTypes = {
                             t.memberExpression(
                                 t.memberExpression(
                                     t.identifier('message'),
-                                    t.identifier('labels')
+                                    t.identifier(prop)
                                 ),
                                 t.memberExpression(
-                                    t.identifier('entry123'),
+                                    t.identifier(entryVariable),
                                     t.identifier('key')
                                 ),
                                 true
                             ),
                             t.memberExpression(
-                                t.identifier('entry123'),
+                                t.identifier(entryVariable),
                                 t.identifier('value')
                             )
                         )

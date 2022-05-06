@@ -1,6 +1,17 @@
 import generate from '@babel/generator';
-import { ProtoRef, ProtoStore, traverse, getNestedProto, parseProto } from '../src/'
+import { ProtoRef, ProtoStore, traverse, getNestedProtoGeneric, parseProto } from '../src/'
 import { camel, snake } from 'case';
+
+/*
+
+WIP
+
+this is a test to build a recursive lookup method that navigates through the fields
+and their imports, taking into account the possibility of duplicate nested names in
+certain proto files. It's unfinished because it was solved by passing a context 
+around. Leaving this here in case it needs to be picked back up.
+
+*/
 
 const store = new ProtoStore('');
 store.protos = [];
@@ -30,9 +41,18 @@ message MsgTypePackageA {
         BITCOIN = 5;
     }
 
+    
+    enum EnumDuplicateName {
+      A = 0;
+      B = 1;
+      C = 2;
+    }
+    
     string address = 1;
-    EnumPackageA someCoolField = 2;
-}
+    EnumPackageA someCoolField    = 2;
+    EnumDuplicateName otherField  = 3;
+
+  }
 
 `});
 addRef({
@@ -63,6 +83,15 @@ message MsgTypePackageB {
     }
 
     AnotherType anotherField = 4;
+
+    enum EnumDuplicateName {
+      D = 0;
+      E = 1;
+      F = 2;
+    }
+
+    EnumDuplicateName otherField  = 5;
+
 }
 
 `});
@@ -121,27 +150,7 @@ class Context implements Context {
     this.visited = [];
   }
 }
-
-
-// // MOVE THIS TO proto-parser ProtoStore
-// export const getAllImportsOfField = (field, context) => {
-//   const imports = context.ref.proto.imports ?? [];
-
-//   // look if field is nested, and find the files of those imports, and get their paths...
-
-//   if (field.import) {
-//     const ref = context.store.findProto(field.import);
-//     // technicall NOT all of them, technically only of the relevant field...
-//     // [].push.apply(imports, ref.proto.imports);
-
-
-//   }
-
-// };
-
-
-
-const fieldLookupRecurse = (
+const recursiveLookup = (
   context: Context,
   ref: any,
   findFieldName: string,
@@ -163,7 +172,7 @@ const fieldLookupRecurse = (
     if (context.visited.includes(imp)) continue;
     ref = store.findProto(imp);
     context.scope.push(imp); // scope = visited - 1 ?
-    const found = fieldLookupRecurse(context, ref, findFieldName);
+    const found = recursiveLookup(context, ref, findFieldName);
     if (found) {
       return {
         ...found,
@@ -174,14 +183,84 @@ const fieldLookupRecurse = (
   }
 }
 
+const lookupRecur = (
+  context: Context,
+  ref: any,
+  findFieldName: string,
+  objectScope: string[]
+) => {
+
+  if (!objectScope.length) {
+    context.visited.push(ref.filename);
+    let field = store.get(ref, findFieldName);
+    if (field) {
+      return {
+        ...field,
+        lookupPath: ref.filename,
+        lookupScope: context.scope
+      };
+    }
+
+    const imports = ref.proto.imports;
+    for (let i = 0; i < imports.length; i++) {
+      const imp = imports[i];
+      if (context.visited.includes(imp)) continue;
+      ref = store.findProto(imp);
+      context.scope.push(imp); // scope = visited - 1 ?
+      const found = lookupRecur(context, ref, findFieldName, objectScope);
+      if (found) {
+        return {
+          name: findFieldName,
+          import: null,
+          // importType: 'local',
+          importedName: findFieldName,
+          package: context.rootRef.proto.package,
+          obj: found,
+          lookupPath: ref.filename,
+          lookupScope: context.scope
+        };
+      }
+    }
+  }
+
+  /// WITH SCOPE
+  context.visited.push(ref.filename);
+  console.log(ref.traversed);
+  const res = getNestedProtoGeneric(ref.traversed, objectScope);
+  // should we loop through objectScope instead of passing it all in?
+  // and then lookup?
+  if (res[findFieldName]) {
+    return {
+      name: findFieldName,
+      import: null,
+      // importType: 'local',
+      importedName: findFieldName,
+      package: context.rootRef.proto.package,
+      obj: res[findFieldName],
+      lookupPath: ref.filename,
+      lookupScope: context.scope
+    }
+  }
+
+  const topLevel = objectScope[0];
+  let parent = store.get(ref, topLevel);
+  if (parent) {
+    // console.log(objectScope);
+    // console.log(parent);
+    return parent;
+  }
+
+
+
+}
+
 
 
 
 const fieldLookupRecur = (
   context: Context,
   findFieldName: string,
-  forField: any | null, // ProtoField
-  currentRef: ProtoRef | null
+  forField: any | null // ProtoField
 ) => {
 
   let ref = context.rootRef;
@@ -227,7 +306,7 @@ const fieldLookupRecur = (
     // now recur
     // if you knew the parent object of forField's type, then you could do a proto lookup, but that may get complex, so for simplicity, we simply look through all imports of the ref proto
 
-    const found = fieldLookupRecurse(context, ref, findFieldName);
+    const found = recursiveLookup(context, ref, findFieldName);
     if (found) {
       return {
         ...found,
@@ -238,14 +317,8 @@ const fieldLookupRecur = (
       }
     }
   }
-
-
-
-
-
-
-
 };
+
 
 describe('cosmology/example/c', () => {
   store.traverseAll();
@@ -253,7 +326,7 @@ describe('cosmology/example/c', () => {
   it('no field, just ask if enum/type exists in package', () => {
     const ref = store.findProto('cosmology/example/c.proto');
     const ctx = new Context(ref, store);
-    const result = fieldLookupRecur(ctx, 'MsgTypePackageC', null, null);
+    const result = fieldLookupRecur(ctx, 'MsgTypePackageC', null);
     expect(result.lookupType).toEqual('local');
     expect(result.lookupPath).toEqual('cosmology/example/c.proto');
     expect(result.name).toEqual('MsgTypePackageC');
@@ -266,7 +339,7 @@ describe('cosmology/example/c', () => {
     const ref = store.findProto('cosmology/example/c.proto');
     const ctx = new Context(ref, store);
 
-    const result = fieldLookupRecur(ctx, 'MsgTypePackageA', null, null);
+    const result = fieldLookupRecur(ctx, 'MsgTypePackageA', null);
     expect(result).toBeUndefined()
   });
 
@@ -274,7 +347,7 @@ describe('cosmology/example/c', () => {
     const ref = store.findProto('cosmology/example/c.proto');
     const ctx = new Context(ref, store);
     const field = store.get(ref, 'MsgTypePackageC').obj.fields.awesome;
-    const result = fieldLookupRecur(ctx, 'MsgTypePackageA', field, null);
+    const result = fieldLookupRecur(ctx, 'MsgTypePackageA', field);
     delete result.obj;
     expect(result).toEqual({
       lookupType: 'import',
@@ -293,7 +366,7 @@ describe('cosmology/example/c', () => {
     const ref = store.findProto('cosmology/example/c.proto');
     const ctx = new Context(ref, store);
     const field = store.get(ref, 'MsgTypePackageC').obj.fields.awesome;
-    const result = fieldLookupRecur(ctx, 'EnumPackageA', field, null);
+    const result = fieldLookupRecur(ctx, 'EnumPackageA', field);
     expect(field.import).toEqual('cosmology/example/b.proto')
     expect(result).toEqual({
       name: 'EnumPackageA',
@@ -328,15 +401,14 @@ describe('cosmology/example/c', () => {
       lookupFrom: 'cosmology/example/c.proto',
       lookupType: 'import'
     });
-
   });
 
   it('MsgTypePackageA', () => {
     const ref = store.findProto('cosmology/example/a.proto');
     const ctx = new Context(ref, store);
-    const result = fieldLookupRecur(ctx, 'EnumPackageA', null, null);
-    delete result.obj;
-    expect(result).toEqual({
+    const EnumPackageA = fieldLookupRecur(ctx, 'EnumPackageA', null);
+    delete EnumPackageA.obj;
+    expect(EnumPackageA).toEqual({
       lookupType: 'local',
       lookupPath: 'cosmology/example/a.proto',
       lookupFrom: 'cosmology/example/a.proto',
@@ -347,6 +419,58 @@ describe('cosmology/example/c', () => {
       importedName: 'EnumPackageA',
       package: 'cosmology.finance',
     })
+    const EnumDuplicateName = fieldLookupRecur(ctx, 'EnumDuplicateName', null);
+    delete EnumDuplicateName.obj;
+    expect(EnumDuplicateName).toEqual({
+      lookupType: 'local',
+      lookupPath: 'cosmology/example/a.proto',
+      lookupFrom: 'cosmology/example/a.proto',
+      lookupScope: [],
+      name: 'EnumDuplicateName',
+      import: null,
+      importType: 'local',
+      importedName: 'EnumDuplicateName',
+      package: 'cosmology.finance',
+    })
+  });
+
+  describe('MsgTypePackageB', () => {
+    describe('EnumDuplicateName', () => {
+      it('fieldLookupRecur', () => {
+        const ref = store.findProto('cosmology/example/b.proto');
+        const ctx = new Context(ref, store);
+        const EnumDuplicateName = fieldLookupRecur(ctx, 'EnumDuplicateName', null);
+        delete EnumDuplicateName.obj;
+        expect(EnumDuplicateName).toEqual({
+          lookupType: 'local',
+          lookupPath: 'cosmology/example/b.proto',
+          lookupFrom: 'cosmology/example/b.proto',
+          lookupScope: [],
+          name: 'EnumDuplicateName',
+          import: null,
+          importType: 'local',
+          importedName: 'EnumDuplicateName',
+          package: 'cosmology.finance',
+        })
+      });
+      xit('lookupRecur', () => {
+        const ref = store.findProto('cosmology/example/b.proto');
+        const ctx = new Context(ref, store);
+        const EnumDuplicateName = lookupRecur(ctx, ref, 'EnumDuplicateName', ['MsgTypePackageB']);
+        delete EnumDuplicateName.obj;
+        expect(EnumDuplicateName).toEqual({
+          // lookupType: 'local',
+          lookupPath: 'cosmology/example/b.proto',
+          // lookupFrom: 'cosmology/example/b.proto',
+          lookupScope: [],
+          name: 'EnumDuplicateName',
+          import: null,
+          importType: 'local',
+          importedName: 'EnumDuplicateName',
+          package: 'cosmology.finance',
+        })
+      });
+    });
   });
 
   xit('MsgTypePackageC', () => {

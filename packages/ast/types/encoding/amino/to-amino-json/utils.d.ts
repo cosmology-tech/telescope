@@ -8,7 +8,7 @@ export declare const toAmino: {
     duration(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
     height(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
     coin(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
-    type({ context, field, scope, nested, options }: ToAminoParseField): any;
-    typeArray({ context, field, scope, nested, options }: ToAminoParseField): t.ObjectProperty;
+    type({ context, field, currentProtoPath, scope, nested, options }: ToAminoParseField): any;
+    typeArray({ context, field, currentProtoPath, scope, nested, options }: ToAminoParseField): t.ObjectProperty;
     pubkey({ context, field, scope, nested, options }: ToAminoParseField): t.ObjectProperty;
 };

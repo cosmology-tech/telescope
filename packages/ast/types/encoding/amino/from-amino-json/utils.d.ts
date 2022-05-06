@@ -7,10 +7,10 @@ export declare const fromAmino: {
     long(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
     duration(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
     height(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
-    enum({ context, field, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
-    enumArray({ context, field, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
-    type({ context, field, scope, nested, options }: FromAminoParseField): any;
-    typeArray({ context, field, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
+    enum({ context, field, currentProtoPath, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
+    enumArray({ context, field, currentProtoPath, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
+    type({ context, field, currentProtoPath, scope, objectScope, nested, options }: FromAminoParseField): any;
+    typeArray({ context, field, currentProtoPath, scope, objectScope, nested, options }: FromAminoParseField): t.ObjectProperty;
     arrayFrom(prop: string, scope: string[], options: AminoOptions): t.ObjectProperty;
     pubkey({ context, field, scope, nested, options }: FromAminoParseField): t.ObjectProperty;
 };

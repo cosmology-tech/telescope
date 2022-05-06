@@ -1,50 +1,66 @@
 import * as t from '@babel/types';
 import { AminoOptions } from '../types';
-import { arrayTypeNDim } from '../utils';
-import { getTypeFromContext, protoFieldsToArray } from '../utils';
+import { arrayTypeNDim, getTypeFromCurrentProtoPath } from '../utils';
+import { protoFieldsToArray } from '../utils';
 import { getTSTypeFromProtoType, ProtoField } from '../../proto/types';
 import { RenderAminoField, renderAminoField } from '.';
 
 export const aminoInterface = {
-    defaultType(field: ProtoField, options: AminoOptions, ast: any) {
+    defaultType(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(options.aminoCasingFn(field.name)),
-            t.tsTypeAnnotation(ast)
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
+            t.tsTypeAnnotation(getTSTypeFromProtoType(args.field.type))
         );
     },
-    long(field: ProtoField, options: AminoOptions) {
+    string(args: RenderAminoField) {
+        return t.tsPropertySignature(
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
+            t.tsTypeAnnotation(t.tsStringKeyword())
+        );
+    },
+    long(args: RenderAminoField) {
         // longs become strings...
         return t.tsPropertySignature(
-            t.identifier(options.aminoCasingFn(field.name)),
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
             t.tsTypeAnnotation(t.tSStringKeyword())
         )
     },
-    height(field: ProtoField, options: AminoOptions) {
+    height(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(options.aminoCasingFn(field.name)),
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
             t.tsTypeAnnotation(
                 t.tsTypeReference(t.identifier('AminoHeight'))
             )
         );
     },
-    enum(field: ProtoField, options: AminoOptions) {
+    // durations are strings
+    duration(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(options.aminoCasingFn(field.name)),
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
+            t.tsTypeAnnotation(t.tsStringKeyword())
+        );
+    },
+    enum(args: RenderAminoField) {
+        return t.tsPropertySignature(
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
             t.tsTypeAnnotation(t.tSNumberKeyword())
         );
     },
-    enumArray(field: ProtoField, options: AminoOptions) {
+    enumArray(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(options.aminoCasingFn(field.name)),
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
             t.tsTypeAnnotation(arrayTypeNDim(t.tSNumberKeyword(), 1))
         );
     },
-    type({ context, field, options }: RenderAminoField) {
-        const Type = getTypeFromContext(field, context);
+    type({ context, field, currentProtoPath, options }: RenderAminoField) {
+        const parentField = field;
+        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const properties = protoFieldsToArray(Type).map(field => {
+            if (parentField.import) currentProtoPath = parentField.import;
             return renderAminoField({
                 context,
                 field,
+                currentProtoPath,
                 options
             })
         });
@@ -59,12 +75,15 @@ export const aminoInterface = {
             )
         );
     },
-    typeArray({ context, field, options }: RenderAminoField) {
-        const Type = getTypeFromContext(field, context);
+    typeArray({ context, field, currentProtoPath, options }: RenderAminoField) {
+        const parentField = field;
+        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const properties = protoFieldsToArray(Type).map(field => {
+            if (parentField.import) currentProtoPath = parentField.import;
             return renderAminoField({
                 context,
                 field,
+                currentProtoPath,
                 options
             })
         });
@@ -80,7 +99,7 @@ export const aminoInterface = {
         );
     },
 
-    array(field: ProtoField, options: AminoOptions) {
+    array(args: RenderAminoField) {
         // TODO write test case 
 
         // return t.tsPropertySignature(
@@ -92,10 +111,10 @@ export const aminoInterface = {
         //     )
         // );
         return t.tsPropertySignature(
-            t.identifier(options.aminoCasingFn(field.name)),
+            t.identifier(args.options.aminoCasingFn(args.field.name)),
             t.tsTypeAnnotation(
                 arrayTypeNDim(
-                    getTSTypeFromProtoType(field.type),
+                    getTSTypeFromProtoType(args.field.type),
                     1
                 )
             )

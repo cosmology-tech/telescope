@@ -1,7 +1,8 @@
 import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
+import { ParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
-import { AminoOptions, AminoParseContext } from '../types';
+import { AminoOptions } from '../types';
 import { protoFieldsToArray } from '../utils';
 import { toAmino } from './utils';
 
@@ -14,8 +15,9 @@ const warningDefaultImplementation = (name: string, field: ProtoField) => {
 }
 
 export interface ToAminoParseField {
-    context: AminoParseContext;
+    context: ParseContext;
     field: ProtoField;
+    currentProtoPath: string;
     scope: string[];
     nested: number;
     options: AminoOptions;
@@ -24,6 +26,7 @@ export interface ToAminoParseField {
 export const toAminoParseField = ({
     context,
     field,
+    currentProtoPath,
     scope: previousScope,
     nested,
     options
@@ -31,17 +34,21 @@ export const toAminoParseField = ({
 
     const scope = [field.name, ...previousScope];
 
+    const args = {
+        context,
+        field,
+        currentProtoPath,
+        scope,
+        nested,
+        options
+    };
+
+
     // arrays
     if (field.rule === 'repeated') {
         switch (field.parsedType.type) {
             case 'Type':
-                return toAmino.typeArray({
-                    context,
-                    field,
-                    scope,
-                    nested,
-                    options
-                });
+                return toAmino.typeArray(args);
         }
         // TODO test case
         return needsImplementation(field.name, field);
@@ -52,62 +59,56 @@ export const toAminoParseField = ({
     if (field.type === 'google.protobuf.Any') {
         switch (field.options['(cosmos_proto.accepts_interface)']) {
             case 'cosmos.crypto.PubKey':
-                return toAmino.pubkey({ context, field, scope, nested, options });
+                return toAmino.pubkey(args);
         }
     }
 
     // Types/Enums
     switch (field.parsedType.type) {
         case 'Enum':
-            return toAmino.defaultType(field.name, scope, options);
+            return toAmino.defaultType(args);
         case 'Type':
-            return toAmino.type({
-                context,
-                field,
-                scope,
-                nested,
-                options
-            });
+            return toAmino.type(args);
     }
 
 
     // scalar types...
     switch (field.type) {
         case 'string':
-            return toAmino.string(field.name, scope, options);
+            return toAmino.string(args);
         case 'int64':
         case 'uint64':
-            return toAmino.long(field.name, scope, options);
+            return toAmino.long(args);
         case 'double':
         case 'int64':
         case 'bool':
         case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
-            return toAmino.defaultType(field.name, scope, options)
+            return toAmino.defaultType(args)
 
         case 'cosmos.base.v1beta1.Coin':
-            return toAmino.coin(field.name, scope, options);
+            return toAmino.coin(args);
 
         // TODO check can we just
         // make pieces optional and avoid hard-coding this type?
         case 'ibc.core.client.v1.Height':
         case 'Height':
-            return toAmino.height(field.name, scope, options);
+            return toAmino.height(args);
 
         case 'Duration':
         case 'google.protobuf.Duration':
-            return toAmino.duration(field.name, scope, options);
+            return toAmino.duration(args);
 
         default:
             warningDefaultImplementation(field.name, field);
-            return toAmino.defaultType(field.name, scope, options)
+            return toAmino.defaultType(args)
     }
 };
 
 
 interface toAminoJSON {
-    context: AminoParseContext;
+    context: ParseContext;
     proto: ProtoType;
     options: AminoOptions;
 }
@@ -129,6 +130,27 @@ export const toAminoJsonMethod = ({
     );
     toAminoParams.typeAnnotation = t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
 
+    const fields = protoFieldsToArray(proto).map((field) => {
+        const ctx = context.spawn();
+        const aminoField = toAminoParseField({
+            context: ctx,
+            field,
+            currentProtoPath: ctx.ref.filename,
+            scope: [],
+            nested: 0,
+            options
+        });
+        return {
+            ctx,
+            field: aminoField
+        }
+    });
+
+    const ctxs = fields.map(({ ctx }) => ctx);
+    ctxs.forEach(ctx => {
+        // console.log('imports, ', ctx.imports)
+    })
+
     return arrowFunctionExpression(
         [
             toAminoParams
@@ -136,15 +158,7 @@ export const toAminoJsonMethod = ({
         t.blockStatement([
             t.returnStatement(
                 t.objectExpression(
-                    protoFieldsToArray(proto).map((field) =>
-                        toAminoParseField({
-                            context,
-                            field,
-                            scope: [],
-                            nested: 0,
-                            options
-                        })
-                    )
+                    fields.map(({ field }) => field)
                 )
             )
         ]),

@@ -1,10 +1,15 @@
 import * as t from '@babel/types';
+import { FromJSONMethod } from './index';
 import { callExpression, identifier } from '../../../utils';
+import { getEnumFromJsonName, getFieldsTypeName } from '../types';
 
 export const fromJSON = {
 
     // sender: isSet(object.sender) ? String(object.sender) : ""
-    string(prop: string) {
+    string(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -31,7 +36,10 @@ export const fromJSON = {
         )
     },
 
-    number(prop: string) {
+    number(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -60,7 +68,10 @@ export const fromJSON = {
 
 
     // doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
-    double(prop: string) {
+    double(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -88,7 +99,10 @@ export const fromJSON = {
     },
 
     // disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
-    bool(prop: string) {
+    bool(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -116,7 +130,11 @@ export const fromJSON = {
     },
 
     // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.UZERO,
-    int64(prop: string) {
+    int64(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+        args.context.addUtil('Long');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -150,7 +168,11 @@ export const fromJSON = {
     },
 
     // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
-    uint64(prop: string) {
+    uint64(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+        args.context.addUtil('Long');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -184,7 +206,11 @@ export const fromJSON = {
     },
 
     // poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
-    long(prop: string) {
+    long(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+        args.context.addUtil('Long');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -218,7 +244,11 @@ export const fromJSON = {
     },
 
     // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-    type(prop: string, name: string) {
+    type(args: FromJSONMethod) {
+        const prop = args.field.name;
+        const name = getFieldsTypeName(args.field)
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -249,7 +279,11 @@ export const fromJSON = {
     },
 
     // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-    enum(prop: string, fromJSONFuncName: string) {
+    enum(args: FromJSONMethod) {
+        const prop = args.field.name;
+        const fromJSONFuncName = getEnumFromJsonName(getFieldsTypeName(args.field));
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -276,11 +310,12 @@ export const fromJSON = {
         );
     },
 
-    // TODO register import!
-    // bytesFromBase64
     // queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
+    bytes(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+        args.context.addUtil('bytesFromBase64');
 
-    bytes(prop: string) {
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -311,7 +346,10 @@ export const fromJSON = {
     },
 
     // period: isSet(object.period) ? String(object.period) : undefined,
-    duration(prop: string) {
+    duration(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -340,7 +378,11 @@ export const fromJSON = {
 
     // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
 
-    timestamp(prop: string) {
+    timestamp(args: FromJSONMethod) {
+        const prop = args.field.name;
+        args.context.addUtil('isSet');
+        args.context.addUtil('fromJsonTimestamp');
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
@@ -382,7 +424,11 @@ export const fromJSON = {
     //   }, {}) : {},
 
 
-    keyHash(prop: string, keyType: string, valueType: string) {
+    keyHash(args: FromJSONMethod) {
+        const prop = args.field.name;
+        const keyType = args.field.keyType;
+        const valueType = args.field.parsedType.name;
+
         let fromJSON = null;
         let valueTypeType = valueType;
         switch (valueType) {
@@ -525,7 +571,9 @@ export const fromJSON = {
     },
 
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
-    array(prop: string, expr: t.Expression) {
+    array(args: FromJSONMethod, expr: t.Expression) {
+        const prop = args.field.name;
+
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(

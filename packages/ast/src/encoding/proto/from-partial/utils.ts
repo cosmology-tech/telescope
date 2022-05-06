@@ -1,10 +1,12 @@
 import * as t from '@babel/types';
+import { FromPartialMethod } from './index';
 import { identifier, callExpression } from '../../../utils';
 
 export const fromPartial = {
 
     // message.sender = object.sender ?? "";
-    string(prop: string) {
+    string(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -25,7 +27,8 @@ export const fromPartial = {
     },
 
     // message.disableMacros = object.disableMacros ?? false;
-    bool(prop: string) {
+    bool(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -47,7 +50,8 @@ export const fromPartial = {
 
     // message.doubleValue = object.doubleValue ?? undefined;
 
-    double(prop: string) {
+    double(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -69,7 +73,8 @@ export const fromPartial = {
 
 
     // message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
-    int64(prop: string) {
+    int64(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -120,7 +125,8 @@ export const fromPartial = {
 
 
     // message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    long(prop: string) {
+    long(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -170,7 +176,9 @@ export const fromPartial = {
     },
 
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    type(prop: string, name: string) {
+    type(args: FromPartialMethod) {
+        const prop = args.field.name;
+        const name = args.field.parsedType.name
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -217,7 +225,8 @@ export const fromPartial = {
     },
 
     // message.mode = object.mode ?? 0;
-    enum(prop: string) {
+    enum(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -238,7 +247,8 @@ export const fromPartial = {
     },
 
     // message.queryData = object.queryData ?? new Uint8Array()
-    bytes(prop: string) {
+    bytes(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -263,7 +273,8 @@ export const fromPartial = {
 
     // message.period = object.period ?? undefined;
 
-    duration(prop: string) {
+    duration(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -285,7 +296,8 @@ export const fromPartial = {
 
     // message.periodReset = object.periodReset ?? undefined;
 
-    timestamp(prop: string) {
+    timestamp(args: FromPartialMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -325,7 +337,11 @@ export const fromPartial = {
     //     return acc;
     // }, {});
 
-    keyHash(prop: string, keyType: string, valueType: string) {
+    keyHash(args: FromPartialMethod) {
+        const prop = args.field.name;
+        const keyType = args.field.keyType;
+        const valueType = args.field.parsedType.name
+
         let fromPartial = null;
         let valueTypeType = valueType;
         switch (valueType) {
@@ -380,7 +396,7 @@ export const fromPartial = {
                 '=',
                 t.memberExpression(
                     t.identifier('message'),
-                    t.identifier('labels')
+                    t.identifier(prop)
                 ),
                 callExpression(
                     t.memberExpression(
@@ -472,7 +488,8 @@ export const fromPartial = {
     },
 
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    array(prop: string, expr: t.Expression) {
+    array(args: FromPartialMethod, expr: t.Expression) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',

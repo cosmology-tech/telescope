@@ -1,6 +1,10 @@
 import * as t from '@babel/types';
 import { pascal } from 'case';
-export const encode = {
+import { EncodeMethod } from './index';
+import { getFieldsTypeName, getTagNumber } from '../types';
+import { getKeyTypeEntryName } from '..';
+
+export const types = {
 
     /*
         if (message.sender !== "") {
@@ -635,7 +639,7 @@ if (message.queryData.length !== 0) {
                                     t.memberExpression(
                                         t.callExpression(
                                             t.memberExpression(
-                                                t.identifier(`${name}_${pascal(prop)}Entry`),
+                                                t.identifier(getKeyTypeEntryName(name, prop)),
                                                 t.identifier('encode')
                                             ),
                                             [
@@ -686,6 +690,158 @@ if (message.queryData.length !== 0) {
     }
 };
 
+export const encode = {
+
+    /*
+        if (message.sender !== "") {
+            writer.uint32(10).string(message.sender);
+        }
+    */
+    string(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.string(num, prop);
+    },
+
+    /*
+        if (message.doubleValue !== undefined) {
+          writer.uint32(41).double(message.doubleValue);
+        }
+    */
+
+    double(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.double(num, prop);
+    },
+
+    //   if (message.int64Value !== undefined) {
+    //     writer.uint32(24).int64(message.int64Value);
+    //   }
+
+    int64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.int64(num, prop);
+    },
+
+    //   if (message.disableMacros === true) {
+    //     writer.uint32(32).bool(message.disableMacros);
+    //   }
+
+    bool(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.bool(num, prop);
+    },
+
+    /*
+    if (!message.poolId.isZero()) {
+        writer.uint32(16).uint64(message.poolId);
+    }
+    */
+
+
+    long(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.long(num, prop);
+    },
+
+    type(args: EncodeMethod) {
+        const prop = args.field.name;
+        const name = getFieldsTypeName(args.field);
+        const num = getTagNumber(args.field);
+        return types.type(num, prop, name);
+    },
+
+    // message.mode = (reader.int32() as any);
+    enum(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.enum(num, prop);
+    },
+
+    /*
+
+if (message.queryData.length !== 0) {
+  writer.uint32(18).bytes(message.queryData);
+}
+    */
+
+    bytes(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.bytes(num, prop);
+    },
+
+    // if (message.periodReset !== undefined) {
+    //     Timestamp.encode(toTimestamp(message.periodReset), writer.uint32(18).fork()).ldelim();
+    //   }  
+
+    timestamp(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        args.context.addUtil('toTimestamp');
+        return types.timestamp(num, prop);
+    },
+
+    // if (message.period !== undefined) {
+    //     Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
+    //   }
+
+    duration(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        args.context.addUtil('toDuration');
+        return types.duration(num, prop);
+    },
+
+    /*
+    
+                ARRAY!
+                
+                Long[]
+    
+                writer.uint32(10).fork();
+    
+                for (const v of message.codeIds) {
+                    writer.uint64(v);
+                }
+    
+                writer.ldelim();
+    
+    
+            */
+
+    scalarArray(args: EncodeMethod, expr: t.Statement) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.scalarArray(num, prop, expr);
+    },
+
+    typeArray(args: EncodeMethod) {
+        const prop = args.field.name;
+        const name = getFieldsTypeName(args.field);
+        const num = getTagNumber(args.field);
+        return types.typeArray(num, prop, name);
+    },
+
+    // Object.entries(message.labels).forEach(([key, value]) => {
+    //     LogEntry_LabelsEntry.encode({
+    //       key: (key as any),
+    //       value
+    //     }, writer.uint32(106).fork()).ldelim();
+    //   });
+
+    keyHash(args: EncodeMethod) {
+        const prop = args.field.name;
+        const name = args.typeName;
+        const num = getTagNumber(args.field);
+        return types.keyHash(num, prop, name);
+    }
+};
+
 export const arrayTypes = {
     long() {
         return t.expressionStatement(
@@ -727,3 +883,4 @@ export const arrayTypes = {
         );
     }
 };
+

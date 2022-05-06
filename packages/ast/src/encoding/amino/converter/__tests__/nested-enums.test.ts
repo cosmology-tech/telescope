@@ -1,8 +1,7 @@
 import { aminoConverter } from '../index';
-import generate from '@babel/generator';
-import { ProtoRef, ProtoStore, traverse, getNestedProto, parseProto } from '@osmonauts/proto-parser'
-import { camel, snake } from 'case';
-import { ProtoType } from '../../../proto/types';
+import { ProtoStore, parseProto } from '@osmonauts/proto-parser'
+import { camel } from 'case';
+import { prepareContext, expectCode } from '../../../../../test-utils/';
 
 const store = new ProtoStore('');
 store.protos = [];
@@ -60,45 +59,10 @@ message MsgDoFunThingResponse {}
 
 store.traverseAll();
 
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
-
-const prepareContext = (protoFile: string) => {
-    const ref = store.findProto(protoFile);
-    const traversed = traverse(store, ref);
-    const proto: Record<string, ProtoType> = getNestedProto(traversed);
-    const protos: ProtoType[] = Object.values(proto).filter(
-        proto => proto.name.startsWith('Msg')
-            &&
-            !proto.name.endsWith('Response')
-            &&
-            proto.name !== 'Msg'
-    );
-
-    const context = {
-        store,
-        ref
-    }
-
-    return {
-        context,
-        root: traversed,
-        protos
-    };
-}
-
 describe('cosmology/example/msg', () => {
     const {
         context, root, protos
-    } = prepareContext('cosmology/example/msg.proto')
+    } = prepareContext(store, 'cosmology/example/msg.proto')
 
     it('AminoConverter', () => {
         expectCode(aminoConverter({

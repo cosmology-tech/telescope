@@ -7,6 +7,12 @@ export const getNestedProto = (root: ProtoRoot) => {
     return dotty.get(root, nestedPath);
 };
 
+export const getNestedProtoGeneric = (root: ProtoRoot, path: string[]) => {
+    path = root.package.split('.').concat(path);
+    const nestedPath = 'root.nested.' + path.join('.nested.') + '.nested';
+    return dotty.get(root, nestedPath);
+};
+
 export const getServices = (root: ProtoRoot) => {
     const nested = getNestedProto(root);
     return Object.keys(nested).map(key => {

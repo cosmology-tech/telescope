@@ -1,86 +1,82 @@
 import * as t from '@babel/types';
-import { getTSTypeFromProtoType, ProtoField, ProtoType } from '../../proto/types';
-import { AminoOptions, AminoParseContext } from '../types';
+import { ParseContext } from '../../context';
+import { ProtoField, ProtoType } from '../../proto/types';
+import { AminoOptions } from '../types';
 import { getTypeUrl, protoFieldsToArray, typeUrlToAmino } from '../utils';
 import { aminoInterface } from './utils';
 
 export interface RenderAminoField {
-    context: AminoParseContext;
+    context: ParseContext;
     field: ProtoField;
+    currentProtoPath: string;
     options: AminoOptions;
 };
 
 export const renderAminoField = ({
     context,
     field,
+    currentProtoPath,
     options
 }: RenderAminoField) => {
+
+    const args = {
+        context,
+        field,
+        currentProtoPath,
+        options
+    }
 
     if (field.rule === 'repeated') {
         switch (field.parsedType.type) {
             case 'Type':
-                return aminoInterface.typeArray({
-                    context,
-                    field,
-                    options
-                });
+                return aminoInterface.typeArray(args);
             case 'Enum':
-                return aminoInterface.enumArray(
-                    field,
-                    options
-                );
+                return aminoInterface.enumArray(args);
             default:
-                return aminoInterface.array(field, options);
+                return aminoInterface.array(args);
         }
     }
 
     switch (field.parsedType.type) {
         case 'Type':
-            return aminoInterface.type({
-                context,
-                field,
-                options
-            });
+            return aminoInterface.type(args);
 
         case 'Enum':
-            return aminoInterface.enum(
-                field,
-                options
-            );
+            return aminoInterface.enum(args);
     }
 
     // scalar types...
     switch (field.type) {
         case 'string':
-            return aminoInterface.defaultType(field, options, getTSTypeFromProtoType(field.type));
+            return aminoInterface.defaultType(args);
         case 'int64':
         case 'uint64':
-            return aminoInterface.long(field, options);
+            return aminoInterface.long(args);
         case 'double':
         case 'int64':
         case 'bool':
         case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
-            return aminoInterface.defaultType(field, options, getTSTypeFromProtoType(field.type));
+            return aminoInterface.defaultType(args);
 
         // TODO check can we just
         // make pieces optional and avoid hard-coding this type?
         case 'ibc.core.client.v1.Height':
         case 'Height':
-            return aminoInterface.height(field, options);
+            return aminoInterface.height(args);
 
         case 'Duration':
         case 'google.protobuf.Duration':
-            return aminoInterface.defaultType(field, options, t.tsStringKeyword());
+            return aminoInterface.duration(args);
 
         default:
-            return aminoInterface.defaultType(field, options, getTSTypeFromProtoType(field.type));
+            return aminoInterface.defaultType(args);
     }
 };
 
 export interface MakeAminoTypeInterface {
-    context: AminoParseContext;
+    context: ParseContext;
     proto: ProtoType;
     options: AminoOptions;
 };
@@ -91,10 +87,23 @@ export const makeAminoTypeInterface = ({
     options
 }: MakeAminoTypeInterface) => {
 
-
     const TypeName = proto.name;
     const typeUrl = getTypeUrl(context.ref.proto, proto);
     const aminoType = typeUrlToAmino(typeUrl, options.exceptions);
+
+    const fields = protoFieldsToArray(proto).map((field) => {
+        const ctx = context.spawn();
+        const aminoField = renderAminoField({
+            context: ctx,
+            field,
+            currentProtoPath: ctx.ref.filename,
+            options
+        });
+        return {
+            ctx,
+            field: aminoField
+        }
+    });
 
     return t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
@@ -106,13 +115,7 @@ export const makeAminoTypeInterface = ({
                     t.tSLiteralType(t.stringLiteral(aminoType))
                 )),
                 t.tSPropertySignature(t.identifier('value'), t.tsTypeAnnotation(t.tsTypeLiteral(
-                    protoFieldsToArray(proto).map((field) => {
-                        return renderAminoField({
-                            context,
-                            field,
-                            options
-                        });
-                    })
+                    fields.map(({ field }) => field)
                 )))
             ])
         )

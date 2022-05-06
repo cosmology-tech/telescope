@@ -2,7 +2,8 @@ import * as t from '@babel/types';
 import { kebab } from "case";
 import { ProtoType, ProtoAny, ProtoField } from '../proto/types';
 import { ProtoRoot } from '@osmonauts/proto-parser'
-import { AminoParseContext, DEFAULT_AMINO_EXCEPTIONS } from './types';
+import { DEFAULT_AMINO_EXCEPTIONS } from './types';
+import { ParseContext } from '../context';
 
 export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
     return `/${root.package}.${proto.name}`;
@@ -49,54 +50,13 @@ export const protoFieldsToArray = (proto: ProtoType) => {
     })
 }
 
-
-export const getTypeFromFieldViaImport = (field: ProtoField, context: AminoParseContext, importPath: string) => {
-    const innerRef = context.store.findProto(importPath);
-    if (innerRef) {
-        const lookup = context.store.get(innerRef, field.parsedType.name);
-        if (lookup) {
-            // TODO test super-nested types imported from other .proto files
-            // and use this innerRef in recursion
-            context.current = innerRef;
-            return lookup;
-        }
-    }
-};
-
-export const getTypeFromNestedContext = (field: ProtoField, context: AminoParseContext) => {
-    const imports = context.ref.proto.imports ?? [];
-    if (!imports.length) return;
-
-    for (let i = 0; i < imports.length; i++) {
-        const imp = imports[i];
-        const lookup = getTypeFromFieldViaImport(field, context, imp);
-        if (lookup) {
-            return lookup;
-        }
-    }
-};
-
-export const getTypeFromContext = (field: ProtoField, context: AminoParseContext) => {
-    // TODO can we move this out somewhere else?
-    // NOTE this is the only place in ast codebase that uses store...
-    let lookup;
-    if (context.current) {
-        // if we're recursing, use the current
-        lookup = context.store.get(context.current, field.parsedType.name);
-    }
+// IMPORTS 
+// TODO can we move this out of ast pkg? only amino uses it.
+export const getTypeFromCurrentProtoPath = (field: ProtoField, currentProtoPath: string, context: ParseContext) => {
+    const ref = context.store.findProto(currentProtoPath);
+    const lookup = context.store.get(ref, field.parsedType.name);
     if (!lookup) {
-        lookup = context.store.get(context.ref, field.parsedType.name);
+        throw new Error('Undefined Symbol: ' + field.parsedType.name);
     }
-    if (!lookup) {
-        if (field.import) {
-            lookup = getTypeFromFieldViaImport(field, context, field.import);
-        } else {
-            lookup = getTypeFromNestedContext(field, context);
-        }
-        if (!lookup) {
-            throw new Error('Undefined Symbol: ' + field.parsedType.name);
-        }
-    }
-
     return lookup.obj;
 };

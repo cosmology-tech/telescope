@@ -137,6 +137,24 @@ export const lookupAny = (
     ref: ProtoRef,
     name: string
 ): Lookup => {
+    let refObject = lookupLocal(store, ref, name);
+
+    if (refObject) {
+        return refObject;
+    }
+
+    refObject = externalLookup(store, ref, name);
+    if (refObject) {
+        return refObject;
+    }
+
+};
+
+export const lookupLocal = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string
+): Lookup => {
     const root = getRoot(ref);
     let refObject = lookup(store, ref, name);
 
@@ -150,6 +168,14 @@ export const lookupAny = (
             obj: refObject
         }
     }
+};
+
+export const externalLookup = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string
+): Lookup => {
+    let refObject;
 
     refObject = protoImportLookup(store, ref, name);
     if (refObject) {

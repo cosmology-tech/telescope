@@ -1,42 +1,15 @@
 import { makeAminoTypeInterface } from './index';
-import generate from '@babel/generator';
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
+import { ProtoStore } from '@osmonauts/proto-parser'
 import { camel, snake } from 'case';
-import { ProtoType } from '../../types';
-
+import { prepareContext, expectCode, printCode } from '../../../../test-utils';
 const store = new ProtoStore(__dirname + '/../../../../../../__fixtures__/chain1');
 store.traverseAll();
 
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
-
 describe('osmosis/gamm/v1beta1/tx', () => {
-    const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
-    // TODO get traverseAll() to work
-    // const proto: Record<string, ProtoType> = getNestedProto(ref.proto);
-    const traversed = traverse(store, ref);
-    const proto: Record<string, ProtoType> = getNestedProto(traversed);
 
-    const protos: ProtoType[] = Object.values(proto).filter(
-        proto => proto.name.startsWith('Msg')
-            &&
-            !proto.name.endsWith('Response')
-            &&
-            proto.name !== 'Msg'
-    );
-
-    const context = {
-        store,
-        ref
-    }
+    const {
+        context, protos
+    } = prepareContext(store, 'osmosis/gamm/v1beta1/tx.proto')
 
     it('Interfaces', () => {
         expectCode(makeAminoTypeInterface(
@@ -53,24 +26,9 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
 
 describe('cosmos/staking/v1beta1/tx', () => {
-    const ref = store.findProto('cosmos/staking/v1beta1/tx.proto');
-    // TODO get traverseAll() to work
-    // const proto: Record<string, ProtoType> = getNestedProto(ref.proto);
-    const traversed = traverse(store, ref);
-    const proto: Record<string, ProtoType> = getNestedProto(traversed);
-
-    const protos: ProtoType[] = Object.values(proto).filter(
-        proto => proto.name.startsWith('Msg')
-            &&
-            !proto.name.endsWith('Response')
-            &&
-            proto.name !== 'Msg'
-    );
-
-    const context = {
-        store,
-        ref
-    }
+    const {
+        context, protos
+    } = prepareContext(store, 'cosmos/staking/v1beta1/tx.proto')
 
     it('MsgCreateValidator', () => {
         expectCode(makeAminoTypeInterface(

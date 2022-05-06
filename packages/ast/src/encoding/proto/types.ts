@@ -1,5 +1,7 @@
 import * as t from '@babel/types';
+import { pascal } from 'case';
 import { identifier, tsPropertySignature, functionDeclaration } from '../../utils';
+import { ProtoParseContext } from '../context';
 
 export interface ProtoAny {
     type: string;
@@ -280,6 +282,10 @@ export const getFieldsTypeName = (field: ProtoField) => {
     if (field?.scope.length <= 1) return field.parsedType.name;
     const [_first, ...rest] = field.scope;
     return [...rest.reverse(), field.parsedType.name].join('_');
+};
+
+export const getKeyTypeEntryName = (typeName: string, prop: string) => {
+    return `${typeName}_${pascal(prop)}Entry`;
 };
 
 export const getBaseCreateTypeFuncName = (name) => {

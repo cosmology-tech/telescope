@@ -1,24 +1,38 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoType, ProtoField, getEnumFromJsonName, getFieldsTypeName } from '../types';
+import { ProtoParseContext } from '../../context';
+import { ProtoType, ProtoField, getFieldsTypeName } from '../types';
 import { fromJSON, arrayTypes } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromJSON (${field.type} rules[${field.rule}] name[${name}])`);
 }
+export interface FromJSONMethod {
+    context: ProtoParseContext;
+    field: ProtoField;
+}
 
-export const fromJSONMethodFields = (name: string, proto: ProtoType) => {
+export const fromJSONMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
-        const field = proto.fields[fieldName];
+        const field = {
+            name: fieldName,
+            ...proto.fields[fieldName]
+        };
+
+        const args: FromJSONMethod = {
+            context,
+            field
+        };
+
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    return fromJSON.array(fieldName, arrayTypes.string());
+                    return fromJSON.array(args, arrayTypes.string());
                 case 'uint64':
-                    return fromJSON.array(fieldName, arrayTypes.long());
+                    return fromJSON.array(args, arrayTypes.long());
                 case 'uint32':
                 case 'int32':
-                    return fromJSON.array(fieldName, arrayTypes.number());
+                    return fromJSON.array(args, arrayTypes.number());
                 case 'int64':
                     return needsImplementation(fieldName, field);
                 case 'bytes':
@@ -29,7 +43,7 @@ export const fromJSONMethodFields = (name: string, proto: ProtoType) => {
                             // could be same as Type likely...
                             return needsImplementation(fieldName, field);
                         case 'Type':
-                            return fromJSON.array(fieldName, arrayTypes.type(getFieldsTypeName(field)));
+                            return fromJSON.array(args, arrayTypes.type(getFieldsTypeName(field)));
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -42,7 +56,7 @@ export const fromJSONMethodFields = (name: string, proto: ProtoType) => {
                 case 'uint64':
                 case 'int32':
                 case 'uint32':
-                    return fromJSON.keyHash(fieldName, field.keyType, field.parsedType.name);
+                    return fromJSON.keyHash(args);
                 default:
                     return needsImplementation(fieldName, field);
             }
@@ -50,33 +64,33 @@ export const fromJSONMethodFields = (name: string, proto: ProtoType) => {
 
         switch (field.type) {
             case 'string':
-                return fromJSON.string(fieldName);
+                return fromJSON.string(args);
             case 'uint64':
-                return fromJSON.long(fieldName);
-            // return fromJSON.uint64(fieldName);
+                return fromJSON.long(args);
+            // return fromJSON.uint64(args);
             case 'double':
-                return fromJSON.double(fieldName);
+                return fromJSON.double(args);
             case 'int64':
-                return fromJSON.int64(fieldName);
+                return fromJSON.int64(args);
             case 'int32':
             case 'uint32':
-                return fromJSON.number(fieldName);
+                return fromJSON.number(args);
             case 'bytes':
-                return fromJSON.bytes(fieldName);
+                return fromJSON.bytes(args);
             case 'bool':
-                return fromJSON.bool(fieldName);
+                return fromJSON.bool(args);
             case 'Duration':
             case 'google.protobuf.Duration':
-                return fromJSON.duration(fieldName);
+                return fromJSON.duration(args);
             case 'Timestamp':
             case 'google.protobuf.Timestamp':
-                return fromJSON.timestamp(fieldName);
+                return fromJSON.timestamp(args);
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':
-                        return fromJSON.enum(fieldName, getEnumFromJsonName(getFieldsTypeName(field)));
+                        return fromJSON.enum(args);
                     case 'Type':
-                        return fromJSON.type(fieldName, getFieldsTypeName(field));
+                        return fromJSON.type(args);
                 }
                 return needsImplementation(fieldName, field);
         }
@@ -84,7 +98,7 @@ export const fromJSONMethodFields = (name: string, proto: ProtoType) => {
     return fields;
 };
 
-export const fromJSONMethod = (name: string, proto: ProtoType) => {
+export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     return objectMethod('method',
         t.identifier('fromJSON'),
         [
@@ -99,7 +113,7 @@ export const fromJSONMethod = (name: string, proto: ProtoType) => {
         t.blockStatement(
             [
                 t.returnStatement(
-                    t.objectExpression(fromJSONMethodFields(name, proto))
+                    t.objectExpression(fromJSONMethodFields(context, name, proto))
                 )
             ]
         ),

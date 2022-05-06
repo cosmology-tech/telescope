@@ -34,7 +34,8 @@
   "jest": {
     "testPathIgnorePatterns": [
       "main/",
-      "module/"
+      "module/",
+      "types/"
     ]
   },
   "publishConfig": {

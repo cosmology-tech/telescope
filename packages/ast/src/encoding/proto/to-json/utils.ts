@@ -1,10 +1,13 @@
 import * as t from '@babel/types';
+import { ToJSONMethod } from '.';
+import { getEnumToJsonName, getFieldsTypeName } from '../types';
 
 export const toJSON = {
 
     //  message.sender !== undefined && (obj.sender = message.sender);
 
-    string(prop: string) {
+    string(args: ToJSONMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -33,7 +36,8 @@ export const toJSON = {
 
     // message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
 
-    double(prop: string) {
+    double(args: ToJSONMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -61,7 +65,8 @@ export const toJSON = {
     },
 
     // message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
-    int64(prop: string) {
+    int64(args: ToJSONMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -99,7 +104,8 @@ export const toJSON = {
     },
 
     // message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
-    uint64(prop: string) {
+    uint64(args: ToJSONMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -138,7 +144,8 @@ export const toJSON = {
 
 
     //   message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
-    bool(prop: string) {
+    bool(args: ToJSONMethod) {
+        const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -166,7 +173,9 @@ export const toJSON = {
     },
 
     // message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    long(prop: string) {
+    long(args: ToJSONMethod) {
+        args.context.addUtil('Long');
+        const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -209,7 +218,10 @@ export const toJSON = {
     },
 
     // message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
-    type(prop: string, name: string) {
+    type(args: ToJSONMethod) {
+        const prop = args.field.name;
+        const name = getFieldsTypeName(args.field);
+
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -252,7 +264,10 @@ export const toJSON = {
     },
 
     // message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    enum(prop: string, enumFuncName: string) {
+    enum(args: ToJSONMethod) {
+        const prop = args.field.name;
+        const enumFuncName = getEnumToJsonName(getFieldsTypeName(args.field));
+
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -286,7 +301,9 @@ export const toJSON = {
     },
 
     // message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
-    bytes(prop: string) {
+    bytes(args: ToJSONMethod) {
+        args.context.addUtil('base64FromBytes');
+
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -294,7 +311,7 @@ export const toJSON = {
                     '!==',
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(prop)
+                        t.identifier(args.field.name)
                     ),
                     t.identifier('undefined')
                 ),
@@ -302,7 +319,7 @@ export const toJSON = {
                     '=',
                     t.memberExpression(
                         t.identifier('obj'),
-                        t.identifier(prop),
+                        t.identifier(args.field.name),
                         false,
                         false
                     ),
@@ -314,13 +331,13 @@ export const toJSON = {
                                     '!==',
                                     t.memberExpression(
                                         t.identifier('message'),
-                                        t.identifier(prop)
+                                        t.identifier(args.field.name)
                                     ),
                                     t.identifier('undefined')
                                 ),
                                 t.memberExpression(
                                     t.identifier('message'),
-                                    t.identifier(prop)
+                                    t.identifier(args.field.name)
                                 ),
                                 t.newExpression(t.identifier('Uint8Array'), []))
                         ]
@@ -332,7 +349,7 @@ export const toJSON = {
 
     // message.period !== undefined && (obj.period = message.period);
 
-    duration(prop: string) {
+    duration(args: ToJSONMethod) {
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -340,7 +357,7 @@ export const toJSON = {
                     '!==',
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(prop)
+                        t.identifier(args.field.name)
                     ),
                     t.identifier('undefined')
                 ),
@@ -348,11 +365,11 @@ export const toJSON = {
                     '=',
                     t.memberExpression(
                         t.identifier('obj'),
-                        t.identifier(prop)
+                        t.identifier(args.field.name)
                     ),
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(prop)
+                        t.identifier(args.field.name)
                     )
                 )
             )
@@ -361,7 +378,7 @@ export const toJSON = {
 
     // message.periodReset !== undefined && (obj.periodReset = message.periodReset.toISOString());
 
-    timestamp(prop: string) {
+    timestamp(args: ToJSONMethod) {
         return t.expressionStatement(
             t.logicalExpression(
                 '&&',
@@ -369,7 +386,7 @@ export const toJSON = {
                     '!==',
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(prop)
+                        t.identifier(args.field.name)
                     ),
                     t.identifier('undefined')
                 ),
@@ -377,13 +394,13 @@ export const toJSON = {
                     '=',
                     t.memberExpression(
                         t.identifier('obj'),
-                        t.identifier(prop)
+                        t.identifier(args.field.name)
                     ),
                     t.callExpression(
                         t.memberExpression(
                             t.memberExpression(
                                 t.identifier('message'),
-                                t.identifier(prop)
+                                t.identifier(args.field.name)
                             ),
                             t.identifier('toISOString')
                         ),
@@ -413,7 +430,11 @@ export const toJSON = {
     //   });
     // }
 
-    keyHash(prop: string, keyType: string, valueType: string) {
+    keyHash(args: ToJSONMethod) {
+
+        const prop = args.field.name;
+        const keyType = args.field.keyType;
+        const valueType = args.field.parsedType.name;
 
         let toJSON = null;
         switch (valueType) {
@@ -474,7 +495,7 @@ export const toJSON = {
                                     [
                                         t.memberExpression(
                                             t.identifier('message'),
-                                            t.identifier('labels')
+                                            t.identifier(prop)
                                         )
                                     ]
                                 ),
@@ -521,7 +542,8 @@ export const toJSON = {
     //     obj.codeIds = [];
     // }
 
-    array(prop: string, expr: t.Expression) {
+    array(args: ToJSONMethod, expr: t.Expression) {
+        const prop = args.field.name;
         return t.ifStatement(
             t.memberExpression(
                 t.identifier('message'),

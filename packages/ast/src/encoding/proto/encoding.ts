@@ -5,15 +5,20 @@ import { decodeMethod } from './decode';
 import { encodeMethod } from './encode';
 import { fromJSONMethod } from './from-json';
 import { toJSONMethod } from './to-json';
+import { ProtoParseContext } from '../context';
 
-export const createProtoObjectWithMethods = (name: string, proto: ProtoType) => {
+export const createProtoObjectWithMethods = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
 
     const methods = [
-        encodeMethod(name, proto),
-        decodeMethod(name, proto),
-        fromJSONMethod(name, proto),
-        toJSONMethod(name, proto),
-        fromPartialMethod(name, proto),
+        encodeMethod(context, name, proto),
+        decodeMethod(context, name, proto),
+        fromJSONMethod(context, name, proto),
+        toJSONMethod(context, name, proto),
+        fromPartialMethod(context, name, proto),
     ];
 
     return t.exportNamedDeclaration(

@@ -1,5 +1,7 @@
 import * as t from '@babel/types';
 
+// TODO move to @osmonauts/utils package
+
 export const tsEnumMember = (
     id: t.Identifier | t.StringLiteral,
     initializer?: t.Expression,

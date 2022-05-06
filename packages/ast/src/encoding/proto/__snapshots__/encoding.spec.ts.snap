@@ -906,19 +906,19 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 
       switch (tag >>> 3) {
         case 2:
-          const entry123 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
+          const entry2 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
 
-          if (entry123.value !== undefined) {
-            message.labels[entry123.key] = entry123.value;
+          if (entry2.value !== undefined) {
+            message.referenceMap[entry2.key] = entry2.value;
           }
 
           break;
 
         case 3:
-          const entry123 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
+          const entry3 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
 
-          if (entry123.value !== undefined) {
-            message.labels[entry123.key] = entry123.value;
+          if (entry3.value !== undefined) {
+            message.typeMap[entry3.key] = entry3.value;
           }
 
           break;
@@ -969,7 +969,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     obj.referenceMap = {};
 
     if (message.referenceMap) {
-      Object.entries(message.labels).forEach(([k, v]) => {
+      Object.entries(message.referenceMap).forEach(([k, v]) => {
         obj.referenceMap[k] = Reference.toJSON(v);
       });
     }
@@ -977,7 +977,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     obj.typeMap = {};
 
     if (message.typeMap) {
-      Object.entries(message.labels).forEach(([k, v]) => {
+      Object.entries(message.typeMap).forEach(([k, v]) => {
         obj.typeMap[k] = Type.toJSON(v);
       });
     }
@@ -990,7 +990,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<CheckedExpr>, I>>(object: I): CheckedExpr {
     const message = createBaseCheckedExpr();
-    message.labels = Object.entries(object.referenceMap ?? {}).reduce<{
+    message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
       [key: Long]: Reference;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
@@ -999,7 +999,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 
       return acc;
     }, {});
-    message.labels = Object.entries(object.typeMap ?? {}).reduce<{
+    message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
       [key: Long]: Type;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
@@ -1095,7 +1095,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
           break;
 
         case 9:
-          message.timestampValue = fromTimestamp(Timestampt.decode(reader, reader.uint32()));
+          message.timestampValue = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -1200,10 +1200,10 @@ exports[`google/api/expr/v1beta1/source 1`] = `
           }
 
         case 4:
-          const entry123 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
+          const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
 
-          if (entry123.value !== undefined) {
-            message.labels[entry123.key] = entry123.value;
+          if (entry4.value !== undefined) {
+            message.positions[entry4.key] = entry4.value;
           }
 
           break;
@@ -1243,7 +1243,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     obj.positions = {};
 
     if (message.positions) {
-      Object.entries(message.labels).forEach(([k, v]) => {
+      Object.entries(message.positions).forEach(([k, v]) => {
         obj.positions[k] = Math.round(v);
       });
     }
@@ -1255,7 +1255,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     const message = createBaseSourceInfo();
     message.location = object.location ?? \\"\\";
     message.lineOffsets = object.lineOffsets?.map(e => e()) || [];
-    message.labels = Object.entries(object.positions ?? {}).reduce<{
+    message.positions = Object.entries(object.positions ?? {}).reduce<{
       [key: number]: number;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
@@ -1339,7 +1339,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
           break;
 
         case 11:
-          message.timestamp = fromTimestamp(Timestampt.decode(reader, reader.uint32()));
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
 
         case 12:
@@ -1359,10 +1359,10 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
           break;
 
         case 13:
-          const entry123 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
+          const entry13 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
 
-          if (entry123.value !== undefined) {
-            message.labels[entry123.key] = entry123.value;
+          if (entry13.value !== undefined) {
+            message.labels[entry13.key] = entry13.value;
           }
 
           break;

@@ -1,5 +1,6 @@
 import { ProtoRoot } from './types';
 export declare const getNestedProto: (root: ProtoRoot) => any;
+export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
 export declare const getServices: (root: ProtoRoot) => any[];
 export declare const getTypes: (root: ProtoRoot) => any[];
 export declare const getEnums: (root: ProtoRoot) => any[];

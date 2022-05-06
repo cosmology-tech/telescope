@@ -28,4 +28,8 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
     importedName?: string;
     scopeType?: string;
 }[];
+export declare const getTypeFromFieldViaImport: (field: ProtoField, context: AminoParseContext, importPath: string) => import("@osmonauts/proto-parser").Lookup;
+export declare const getAllImportsOfField: (field: ProtoField, context: AminoParseContext) => void;
+export declare const getTypeFromNestedContext: (field: ProtoField, context: AminoParseContext) => import("@osmonauts/proto-parser").Lookup;
 export declare const getTypeFromContext: (field: ProtoField, context: AminoParseContext) => any;
+export declare const getTypeFromCurrentProtoPath: (field: ProtoField, currentProtoPath: string, context: AminoParseContext) => any;

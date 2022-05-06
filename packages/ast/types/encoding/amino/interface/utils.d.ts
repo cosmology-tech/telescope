@@ -8,7 +8,7 @@ export declare const aminoInterface: {
     height(field: ProtoField, options: AminoOptions): t.TSPropertySignature;
     enum(field: ProtoField, options: AminoOptions): t.TSPropertySignature;
     enumArray(field: ProtoField, options: AminoOptions): t.TSPropertySignature;
-    type({ context, field, options }: RenderAminoField): any;
-    typeArray({ context, field, options }: RenderAminoField): any;
+    type({ context, field, currentProtoPath, options }: RenderAminoField): any;
+    typeArray({ context, field, currentProtoPath, options }: RenderAminoField): any;
     array(field: ProtoField, options: AminoOptions): t.TSPropertySignature;
 };

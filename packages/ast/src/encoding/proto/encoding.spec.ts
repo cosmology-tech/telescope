@@ -1,6 +1,7 @@
-import { createProtoObjectWithMethods } from './encoding';
+import { createProtoObjectWithMethods as create } from './encoding';
 import generate from '@babel/generator';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
+import { ProtoParseContext } from '../context';
 
 const store = new ProtoStore(__dirname + '/../../../../../__fixtures__/chain1');
 
@@ -15,10 +16,10 @@ const printCode = (ast) => {
     );
 }
 
-// it('cosmos/authz/v1beta1/authz', () => {
-//     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
-//     const res = traverse(store, ref);
-// });
+const createProtoObjectWithMethods = (name: string, proto: any) => {
+    return create(new ProtoParseContext(), name, proto);
+}
+
 
 describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');

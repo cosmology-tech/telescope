@@ -1,13 +1,15 @@
 import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
+import { ParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
-import { AminoOptions, AminoParseContext } from '../types';
+import { AminoOptions } from '../types';
 import { protoFieldsToArray } from '../utils';
 import { fromAmino } from './utils';
 
 export interface FromAminoParseField {
-    context: AminoParseContext;
+    context: ParseContext;
     field: ProtoField;
+    currentProtoPath: string;
     scope: string[];
     nested: number;
     options: AminoOptions;
@@ -16,6 +18,7 @@ export interface FromAminoParseField {
 export const fromAminoParseField = ({
     context,
     field,
+    currentProtoPath,
     scope: previousScope,
     nested,
     options
@@ -23,27 +26,24 @@ export const fromAminoParseField = ({
 
     const scope = [field.name, ...previousScope];
 
+    const args = {
+        context,
+        field,
+        currentProtoPath,
+        scope,
+        nested,
+        options
+    };
+
     // arrays
     if (field.rule === 'repeated') {
         switch (field.parsedType.type) {
             case 'Type':
-                return fromAmino.typeArray({
-                    context,
-                    field,
-                    scope,
-                    nested,
-                    options
-                });
+                return fromAmino.typeArray(args);
             case 'Enum':
-                return fromAmino.enumArray({
-                    context,
-                    field,
-                    scope,
-                    nested,
-                    options
-                });
+                return fromAmino.enumArray(args);
             case 'cosmos.base.v1beta1.Coin':
-                return fromAmino.arrayFrom(field.name, scope, options);
+                return fromAmino.arrayFrom(args);
 
         }
     }
@@ -52,64 +52,52 @@ export const fromAminoParseField = ({
     if (field.type === 'google.protobuf.Any') {
         switch (field.options['(cosmos_proto.accepts_interface)']) {
             case 'cosmos.crypto.PubKey':
-                return fromAmino.pubkey({ context, field, scope, nested, options });
+                return fromAmino.pubkey(args);
         }
     }
 
     // Types/Enums
     switch (field.parsedType.type) {
         case 'Type':
-            return fromAmino.type({
-                context,
-                field,
-                scope,
-                nested,
-                options
-            });
+            return fromAmino.type(args);
 
         case 'Enum':
-            return fromAmino.enum({
-                context,
-                field,
-                scope,
-                nested,
-                options
-            });
+            return fromAmino.enum(args);
     }
 
     // scalar types...
 
     switch (field.type) {
         case 'string':
-            return fromAmino.string(field.name, scope, options);
+            return fromAmino.string(args);
         case 'int64':
         case 'uint64':
-            return fromAmino.long(field.name, scope, options);
+            return fromAmino.long(args);
         case 'double':
         case 'int64':
         case 'bool':
         case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
-            return fromAmino.defaultType(field.name, scope, options)
+            return fromAmino.defaultType(args)
 
         // TODO check can we just
         // make pieces optional and avoid hard-coding this type?
         case 'ibc.core.client.v1.Height':
         case 'Height':
-            return fromAmino.height(field.name, scope, options);
+            return fromAmino.height(args);
 
         case 'Duration':
         case 'google.protobuf.Duration':
-            return fromAmino.duration(field.name, scope, options);
+            return fromAmino.duration(args);
 
         default:
-            return fromAmino.defaultType(field.name, scope, options)
+            return fromAmino.defaultType(args)
     }
 };
 
 interface fromAminoJSON {
-    context: AminoParseContext;
+    context: ParseContext;
     proto: ProtoType;
     options: AminoOptions;
 }
@@ -132,6 +120,27 @@ export const fromAminoJsonMethod = ({
         t.tsLiteralType(t.stringLiteral('value'))
     ));
 
+    const fields = protoFieldsToArray(proto).map((field) => {
+        const ctx = context.spawn();
+        const aminoField = fromAminoParseField({
+            context: ctx,
+            field,
+            currentProtoPath: ctx.ref.filename,
+            scope: [],
+            nested: 0,
+            options
+        });
+        return {
+            ctx,
+            field: aminoField
+        }
+    });
+
+    const ctxs = fields.map(({ ctx }) => ctx);
+    ctxs.forEach(ctx => {
+        // console.log('imports, ', ctx.imports)
+    })
+
     return arrowFunctionExpression(
         [
             fromAminoParams
@@ -139,15 +148,7 @@ export const fromAminoJsonMethod = ({
         t.blockStatement([
             t.returnStatement(
                 t.objectExpression(
-                    protoFieldsToArray(proto).map((field) =>
-                        fromAminoParseField({
-                            context,
-                            field,
-                            scope: [],
-                            nested: 0,
-                            options
-                        })
-                    )
+                    fields.map(({ field }) => field)
                 )
             )
         ]),

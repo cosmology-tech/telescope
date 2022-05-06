@@ -4,11 +4,12 @@ import { AminoOptions, AminoParseContext } from '../types';
 export interface ToAminoParseField {
     context: AminoParseContext;
     field: ProtoField;
+    currentProtoPath: string;
     scope: string[];
     nested: number;
     options: AminoOptions;
 }
-export declare const toAminoParseField: ({ context, field, scope: previousScope, nested, options }: ToAminoParseField) => any;
+export declare const toAminoParseField: ({ context, field, currentProtoPath, scope: previousScope, nested, options }: ToAminoParseField) => any;
 interface toAminoJSON {
     context: AminoParseContext;
     proto: ProtoType;
