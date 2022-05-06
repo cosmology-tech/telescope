@@ -9,9 +9,21 @@ import {
     AminoParseContext,
     makeAminoTypeInterface,
     aminoConverter,
-    getKeyTypeEntryName
+    getKeyTypeEntryName,
+    // client
+    createClient,
+    GenericParseContext,
+    // registry 
+    createTypeRegistry,
+    createRegistryLoader,
+    // methods (needs refactor)
+    toObjectWithPartialMethods,
+    toObjectWithEncodedMethods,
+    toObjectWithJsonMethods,
+    toObjectWithToJSONMethods,
+    toObjectWithFromJSONMethods
 } from '@osmonauts/ast';
-import { snake } from 'case';
+import { camel, snake } from 'case';
 
 const getRoot = (ref: ProtoRef): ProtoRoot => {
     if (ref.traversed) return ref.traversed;
@@ -164,7 +176,17 @@ export const parseService = (
             return obj;
         });
 
+
     if (!protos.length) return;
+
+    const methods = Object.entries(methodHash)
+        .map(([key, value]) => {
+            return {
+                typeUrl: `/${context.ref.proto.package}.${value.requestType}`,
+                TypeName: value.requestType,
+                methodName: camel(key)
+            }
+        });
 
     // AMINO INTERFACES
     protos.forEach(proto => {
@@ -188,7 +210,35 @@ export const parseService = (
     }))
 
     // add registry
+
+    context.body.push(createTypeRegistry(methods));
+    context.body.push(createRegistryLoader());
+
+    // add methods
+    context.body.push(
+        toObjectWithPartialMethods(methods)
+    );
+    context.body.push(
+        toObjectWithEncodedMethods(methods)
+    );
+    context.body.push(
+        toObjectWithJsonMethods(methods)
+    );
+    context.body.push(
+        toObjectWithToJSONMethods(methods)
+    );
+    context.body.push(
+        toObjectWithFromJSONMethods(methods)
+    );
+    context.body.push(
+        toObjectWithEncodedMethods(methods)
+    );
+
     // add client
+
+    // NEED BUNDLE
+    // BUNDLE needs planning FILES/FILE structure
+
 };
 
 interface ParseRecur {
