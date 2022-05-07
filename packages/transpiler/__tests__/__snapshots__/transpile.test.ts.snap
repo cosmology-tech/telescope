@@ -12,9 +12,7 @@ Object {
 
 exports[`services osmosis/gamm/v1beta1/tx 1`] = `
 Object {
-  "amino": Object {
-    "AminoMsg": true,
-  },
+  "amino": Object {},
   "proto": Object {
     "Long": true,
     "isSet": true,
@@ -24,9 +22,7 @@ Object {
 
 exports[`services osmosis/lockup/tx 1`] = `
 Object {
-  "amino": Object {
-    "AminoMsg": true,
-  },
+  "amino": Object {},
   "proto": Object {
     "Long": true,
     "fromDuration": true,
@@ -38,13 +34,7 @@ Object {
 
 exports[`utils cosmos/staking/v1beta1/tx 1`] = `
 Object {
-  "amino": Object {
-    "AminoMsg": true,
-    "decodeBech32Pubkey": true,
-    "encodeBech32PubKey": true,
-    "fromBase64": true,
-    "toBase64": true,
-  },
+  "amino": Object {},
   "proto": Object {
     "fromJsonTimestamp": true,
     "fromTimestamp": true,

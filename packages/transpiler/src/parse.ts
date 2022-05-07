@@ -21,8 +21,10 @@ import {
     toObjectWithEncodedMethods,
     toObjectWithJsonMethods,
     toObjectWithToJSONMethods,
-    toObjectWithFromJSONMethods
+    toObjectWithFromJSONMethods,
+    importStmt
 } from '@osmonauts/ast';
+import { extname, relative, dirname } from 'path';
 import { camel, snake } from 'case';
 
 const getRoot = (ref: ProtoRef): ProtoRoot => {
@@ -30,6 +32,15 @@ const getRoot = (ref: ProtoRef): ProtoRoot => {
     return ref.proto;
 };
 
+export interface ServiceMutation {
+    methodName: string;
+    package: string;
+    message: string;
+    messageImport: string;
+    response: string;
+    responseImport: string;
+    comment?: string;
+}
 export interface TelescopeParseContext {
     proto: ProtoParseContext;
     amino: AminoParseContext;
@@ -37,9 +48,194 @@ export interface TelescopeParseContext {
     ref: ProtoRef;
     parsedImports: Record<string, any>;
     body: any[];
-    mutations: any[];
+    mutations: ServiceMutation[];
     queries: any[];
     types: any[];
+}
+
+const UTILS = {
+    AminoHeight: '@osmonauts/helpers',
+    AminoMsg: '@cosmjs/amino',
+    AminoTypes: '@cosmjs/stargate',
+    decodeBech32Pubkey: '@cosmjs/amino',
+    defaultRegistryTypes: '@cosmjs/stargate',
+    encodeBech32PubKey: '@cosmjs/amino',
+    fromBase64: '@cosmjs/encoding',
+    fromBech32: '@cosmjs/encoding',
+    fromDuration: '@osmonauts/helpers',
+    fromHex: '@cosmjs/encoding',
+    fromJsonTimestamp: '@osmonauts/helpers',
+    fromTimestamp: '@osmonauts/helpers',
+    GeneratedType: '@cosmjs/proto-signing',
+    isSet: '@osmonauts/helpers',
+    Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
+    OfflineSigner: '@cosmjs/proto-signing',
+    omitDefault: '@osmonauts/helpers',
+    Registry: '@cosmjs/proto-signing',
+    SigningStargateClient: '@cosmjs/stargate',
+    toBase64: '@cosmjs/encoding',
+    toDuration: '@osmonauts/helpers',
+    toTimestamp: '@osmonauts/helpers',
+};
+
+export interface ImportHash {
+    [key: string]: string[];
+}
+
+export const buildAllImports = (context: TelescopeParseContext, allImports: ImportHash = {}) => {
+
+    const utils = Object.keys({
+        ...context.amino.utils,
+        ...context.proto.utils
+    });
+
+    utils.forEach(util => {
+        if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
+        allImports[UTILS[util]] = allImports[UTILS[util]] || [];
+        if (!allImports[UTILS[util]].includes(util)) {
+            allImports[UTILS[util]].push(util);
+        }
+    });
+
+    Object.entries(context.amino.ref.traversed.parsedImports ?? {})
+        .forEach(([filename, names]) => {
+            const f = context.ref.filename;
+            const rel = relative(dirname(f), filename);
+            let importPath = rel.replace(extname(rel), '');
+            if (!/\//.test(importPath)) importPath = `./${importPath}`;
+            allImports[importPath] = allImports[importPath] || [];
+            names.forEach(name => {
+                if (!allImports[importPath].includes(name)) {
+                    allImports[importPath].push(name);
+                }
+            })
+        });
+
+    const importStmts = Object.entries(allImports)
+        .map(([pth, names]) => {
+            return importStmt(names, pth);
+        })
+
+    return importStmts;
+}
+
+export const getMutations = (mutations: ServiceMutation[]) => {
+    return mutations.map((mutation: ServiceMutation) => {
+        return {
+            typeUrl: `/${mutation.package}.${mutation.message}`,
+            TypeName: mutation.message,
+            methodName: mutation.methodName
+        }
+    });
+};
+
+export const getAminoProtos = (mutations: ServiceMutation[], store: ProtoStore) => {
+    return mutations.map(mutation => {
+        const ref = store.findProto(mutation.messageImport);
+        return store.get(ref, mutation.message).obj;
+    });
+};
+
+export const getAminoImports = (mutations: ServiceMutation[]) => {
+    return mutations.map(mutation => {
+        return {
+            import: mutation.messageImport,
+            name: mutation.message
+        };
+    });
+};
+
+export const getAminoRelativeDeps = (mutations: ServiceMutation[], filename: string) => {
+    return getAminoImports(mutations)
+        .map(imp => {
+            const f = filename;
+            const f2 = imp.import;
+            if (f === f2) return;
+            const rel = relative(dirname(f), f2);
+            let importPath = rel.replace(extname(rel), '');
+            if (!/\//.test(importPath)) importPath = `./${importPath}`;
+            return {
+                ...imp,
+                importPath
+            };
+        })
+        .filter(Boolean)
+        .reduce((m, v) => {
+            m[v.importPath] = m[v.importPath] ?? [];
+            if (!m[v.importPath].includes(v.name)) {
+                m[v.importPath].push(v.name);
+            }
+            return m;
+        }, {});
+};
+export class TelescopeParseContext implements TelescopeParseContext {
+    constructor(ref: ProtoRef, store: ProtoStore) {
+        this.proto = new ProtoParseContext();
+        this.amino = new AminoParseContext(
+            ref, store
+        );
+        this.ref = ref;
+        this.store = store;
+        this.parsedImports = {};
+        this.body = [];
+        this.queries = [];
+        this.mutations = [];
+        this.types = [];
+    }
+
+    buildRegistry() {
+        this.body.push(createTypeRegistry(getMutations(this.mutations)));
+    }
+    buildRegistryLoader() {
+        this.body.push(createRegistryLoader());
+    }
+    buildAminoInterfaces() {
+        const protos = getAminoProtos(this.mutations, this.store);
+        protos.forEach(proto => {
+            this.body.push(makeAminoTypeInterface({
+                context: this.amino,
+                proto,
+                options: {
+                    aminoCasingFn: snake
+                }
+            }));
+        });
+    }
+    buildAminoConverter() {
+        const protos = getAminoProtos(this.mutations, this.store);
+        this.body.push(aminoConverter({
+            name: 'AminoConverter',
+            context: this.amino,
+            root: this.ref.traversed,
+            protos,
+            options: {
+                aminoCasingFn: snake
+            }
+        }));
+    }
+    buildAuxMethods() {
+        const methods = getMutations(this.mutations);
+        // add methods
+        this.body.push(
+            toObjectWithPartialMethods(methods)
+        );
+        this.body.push(
+            toObjectWithEncodedMethods(methods)
+        );
+        this.body.push(
+            toObjectWithJsonMethods(methods)
+        );
+        this.body.push(
+            toObjectWithToJSONMethods(methods)
+        );
+        this.body.push(
+            toObjectWithFromJSONMethods(methods)
+        );
+        this.body.push(
+            toObjectWithEncodedMethods(methods)
+        );
+    }
+
 }
 
 export const parse = (
@@ -183,13 +379,8 @@ export const parseService = (
     }
 
     const isMutation = obj.name === 'Msg';
-
-    // NOTE
-    // in future this can get hoisted up and we could theoretically aggregate multiple 
-    // proto files in the same package for same-named services, e.g. two files with `service Msg`
-
-    const lookups = Object.entries(methodHash)
-        .map(([key, value]) => {
+    Object.entries(methodHash)
+        .forEach(([key, value]) => {
             const lookup = context.store.get(context.ref, value.requestType);
             if (!lookup) {
                 console.warn(`cannot find ${value.requestType}`);
@@ -208,76 +399,8 @@ export const parseService = (
                 response: lookupResponse.importedName,
                 responseImport: lookupResponse.import ?? context.ref.filename,
                 comment: value.comment
-            })
-            return lookup;
+            });
         });
-
-
-    if (!lookups.length) return;
-
-    const methods = Object.entries(methodHash)
-        .map(([key, value]) => {
-            return {
-                typeUrl: `/${context.ref.proto.package}.${value.requestType}`,
-                TypeName: value.requestType,
-                methodName: camel(key)
-            }
-        });
-
-    // AMINO INTERFACES
-    lookups.forEach(lookup => {
-        const proto = lookup.obj;
-        context.body.push(makeAminoTypeInterface({
-            context: context.amino,
-            proto,
-            options: {
-                aminoCasingFn: snake
-            }
-        }));
-    });
-    const protos = lookups.map(lookup => lookup.obj);
-
-    // AMINO CONVERTER
-    context.body.push(aminoConverter({
-        name: 'AminoConverter',
-        context: context.amino,
-        root: context.ref.traversed,
-        protos,
-        options: {
-            aminoCasingFn: snake
-        }
-    }))
-
-    // add registry
-
-    context.body.push(createTypeRegistry(methods));
-    context.body.push(createRegistryLoader());
-
-    // add methods
-    context.body.push(
-        toObjectWithPartialMethods(methods)
-    );
-    context.body.push(
-        toObjectWithEncodedMethods(methods)
-    );
-    context.body.push(
-        toObjectWithJsonMethods(methods)
-    );
-    context.body.push(
-        toObjectWithToJSONMethods(methods)
-    );
-    context.body.push(
-        toObjectWithFromJSONMethods(methods)
-    );
-    context.body.push(
-        toObjectWithEncodedMethods(methods)
-    );
-
-    // add client
-
-    // NEED BUNDLE
-    // BUNDLE needs planning FILES/FILE structure
-
 };
 
 interface ParseRecur {

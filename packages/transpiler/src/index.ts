@@ -42,29 +42,21 @@ export class TelescopeBuilder {
     protoDir: string;
     outPath: string;
 
-    constructor({ protoDir, outPath }: TelescopeInput) {
+    constructor({ protoDir, outPath, store }: TelescopeInput & { store?: ProtoStore }) {
         this.protoDir = protoDir;
         this.outPath = outPath;
-        this.store = new ProtoStore(protoDir);
+
+        this.store = store ?? new ProtoStore(protoDir);
         this.store.traverseAll();
     }
+
 
     buildProto(path) {
         const ref = this.store.findProto(path);
 
-        const context: TelescopeParseContext = {
-            proto: new ProtoParseContext(),
-            amino: new AminoParseContext(
-                ref, this.store
-            ),
-            ref,
-            store: this.store,
-            parsedImports: {},
-            body: [],
-            queries: [],
-            mutations: [],
-            types: []
-        };
+        const context = new TelescopeParseContext(
+            ref, this.store
+        );
 
         parse(context);
 
