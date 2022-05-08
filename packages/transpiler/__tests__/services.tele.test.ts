@@ -1,14 +1,9 @@
-import {
-    ProtoParseContext,
-    AminoParseContext
-} from '@osmonauts/ast';
+import { buildAllImports, getAminoRelativeDeps } from '../src/build';
 import { dirname, join } from 'path';
+import { ProtoStore, parseProto } from '@osmonauts/proto-parser'
+import { TelescopeBuilder } from '../src';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
-import { ProtoRef, ProtoStore, traverse, getNestedProtoGeneric, parseProto } from '@osmonauts/proto-parser'
-import { camel, snake } from 'case';
-import { buildAllImports, getAminoRelativeDeps, parse, TelescopeParseContext } from '../src/parse';
-import { TelescopeBuilder } from '../src';
 
 const store = new ProtoStore('');
 store.protos = [];
@@ -162,8 +157,7 @@ it('bundle deps', () => {
     );
     expect(imports2).toMatchSnapshot();
 
-
     const evenMoreImports = buildAllImports(res.context, imports2);
-    console.log(generate(t.program(evenMoreImports)).code)
+    // console.log(generate(t.program(evenMoreImports)).code)
     expectCode(t.program(evenMoreImports))
 });

@@ -48,9 +48,9 @@ export const fromPartial = {
         );
     },
 
-    // message.doubleValue = object.doubleValue ?? undefined;
+    // message.doubleValue = object.doubleValue ?? 0;
 
-    double(args: FromPartialMethod) {
+    number(args: FromPartialMethod) {
         const prop = args.field.name;
         return t.expressionStatement(
             t.assignmentExpression(
@@ -65,114 +65,82 @@ export const fromPartial = {
                         t.identifier('object'),
                         t.identifier(prop)
                     ),
-                    t.identifier('undefined')
+                    t.numericLiteral(0)
                 )
             )
         );
     },
 
+    int32(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
+    uint32(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
+    double(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
+    float(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
 
-    // message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+
+    // message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
+    long(args: FromPartialMethod, defaultMethod: 'ZERO' | 'UZERO') {
+        const prop = args.field.name;
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.conditionalExpression(
+                    t.logicalExpression(
+                        '&&',
+                        t.binaryExpression(
+                            '!==',
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            ),
+                            t.identifier('undefined')
+                        ),
+                        t.binaryExpression(
+                            '!==',
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            ),
+                            t.nullLiteral()
+                        )
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Long'),
+                            t.identifier('fromValue')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    ),
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier(defaultMethod)
+                    )
+                )
+            )
+        );
+    },
+
     int64(args: FromPartialMethod) {
-        const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.conditionalExpression(
-                    t.logicalExpression(
-                        '&&',
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.identifier('undefined')
-                        ),
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.nullLiteral()
-                        )
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('Long'),
-                            t.identifier('fromValue')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    ),
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('ZERO')
-                    )
-                )
-            )
-        );
+        return fromPartial.long(args, 'ZERO');
     },
-
-
-    // message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    long(args: FromPartialMethod) {
-        const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.conditionalExpression(
-                    t.logicalExpression(
-                        '&&',
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.identifier('undefined')
-                        ),
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.nullLiteral()
-                        )
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('Long'),
-                            t.identifier('fromValue')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    ),
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('UZERO')
-                    )
-                )
-            )
-        );
+    uint64(args: FromPartialMethod) {
+        return fromPartial.long(args, 'UZERO');
     },
 
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
@@ -529,8 +497,32 @@ export const fromPartial = {
 
 export const arrayTypes = {
     // message.overloadId = object.overloadId?.map(e => e) || [];
-    string() {
+    identity() {
         return t.identifier('e');
+    },
+    string() {
+        return arrayTypes.identity();
+    },
+    bool() {
+        return arrayTypes.identity();
+    },
+    bytes() {
+        return arrayTypes.identity();
+    },
+    double() {
+        return arrayTypes.identity();
+    },
+    float() {
+        return arrayTypes.identity();
+    },
+    int32() {
+        return arrayTypes.identity();
+    },
+    uint32() {
+        return arrayTypes.identity();
+    },
+    enum() {
+        return arrayTypes.identity();
     },
 
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
@@ -545,18 +537,16 @@ export const arrayTypes = {
             ]
         );
     },
-
-    // message.lineOffsets = object.lineOffsets?.map(e => e) || [];
-
-    number() {
-        return t.callExpression(
-            t.identifier('e'),
-            []
-        )
+    int64() {
+        return arrayTypes.long();
+    },
+    uint64() {
+        return arrayTypes.long();
     },
 
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
-    type(name: string) {
+    type(args: FromPartialMethod) {
+        const name = args.field.parsedType.name;
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),

@@ -29,18 +29,27 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    return decode.scalarArray(args, baseTypes.string(args));
-                case 'uint64':
-                    return decode.scalarArray(args, baseTypes.long(args));
-                case 'int32':
-                    return decode.scalarArray(args, baseTypes.int32(args));
-                case 'int64':
-                    return needsImplementation(fieldName, field);
+                    return decode.array(args, baseTypes.string(args));
                 case 'bytes':
-                    return needsImplementation(fieldName, field);
+                    return decode.array(args, baseTypes.bytes(args));
+                case 'double':
+                    return decode.tagDelimArray(args, baseTypes.double(args));
+                case 'bool':
+                    return decode.tagDelimArray(args, baseTypes.bool(args));
+                case 'float':
+                    return decode.tagDelimArray(args, baseTypes.float(args));
+                case 'int32':
+                    return decode.tagDelimArray(args, baseTypes.int32(args));
+                case 'uint32':
+                    return decode.tagDelimArray(args, baseTypes.uint32(args));
+                case 'int64':
+                    return decode.tagDelimArray(args, baseTypes.int64(args));
+                case 'uint64':
+                    return decode.tagDelimArray(args, baseTypes.uint64(args));
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
+                            return decode.tagDelimArray(args, baseTypes.enum(args));
                         case 'Type':
                             return decode.typeArray(args);
                     }
@@ -58,12 +67,18 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
         switch (field.type) {
             case 'string':
                 return decode.string(args);
-            case 'uint64':
-                return decode.long(args);
+            case 'int32':
+                return decode.int32(args);
+            case 'uint32':
+                return decode.uint32(args);
             case 'int64':
                 return decode.int64(args);
+            case 'uint64':
+                return decode.uint64(args);
             case 'double':
                 return decode.double(args);
+            case 'float':
+                return decode.float(args);
             case 'bytes':
                 return decode.bytes(args);
             case 'bool':

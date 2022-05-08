@@ -66,36 +66,17 @@ export const fromJSON = {
         )
     },
 
-
-    // doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
     double(args: FromJSONMethod) {
-        const prop = args.field.name;
-        args.context.addUtil('isSet');
-
-        return t.objectProperty(
-            t.identifier(prop),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier('Number'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        )
-                    ]
-                ),
-                t.identifier('undefined')
-            )
-        )
+        return fromJSON.number(args);
+    },
+    float(args: FromJSONMethod) {
+        return fromJSON.number(args);
+    },
+    int32(args: FromJSONMethod) {
+        return fromJSON.number(args);
+    },
+    uint32(args: FromJSONMethod) {
+        return fromJSON.number(args);
     },
 
     // disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
@@ -130,7 +111,7 @@ export const fromJSON = {
     },
 
     // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.UZERO,
-    int64(args: FromJSONMethod) {
+    long(args: FromJSONMethod, defaultMethod: 'ZERO' | 'UZERO') {
         const prop = args.field.name;
         args.context.addUtil('isSet');
         args.context.addUtil('Long');
@@ -161,86 +142,19 @@ export const fromJSON = {
                 ),
                 t.memberExpression(
                     t.identifier('Long'),
-                    t.identifier('ZERO')
+                    t.identifier(defaultMethod)
                 )
             )
         );
+    },
+
+    int64(args: FromJSONMethod) {
+        return fromJSON.long(args, 'ZERO');
     },
 
     // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
     uint64(args: FromJSONMethod) {
-        const prop = args.field.name;
-        args.context.addUtil('isSet');
-        args.context.addUtil('Long');
-
-        return t.objectProperty(
-            t.identifier(prop),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromString')
-                    ),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        )
-                    ]
-                ),
-                t.memberExpression(
-                    t.identifier('Long'),
-                    t.identifier('UZERO')
-                )
-            )
-        );
-    },
-
-    // poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
-    long(args: FromJSONMethod) {
-        const prop = args.field.name;
-        args.context.addUtil('isSet');
-        args.context.addUtil('Long');
-
-        return t.objectProperty(
-            t.identifier(prop),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromString')
-                    ),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        )
-                    ]
-                ),
-                t.memberExpression(
-                    t.identifier('Long'),
-                    t.identifier('UZERO')
-                )
-            )
-        );
+        return fromJSON.long(args, 'UZERO');
     },
 
     // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
@@ -626,6 +540,26 @@ export const arrayTypes = {
             ]
         );
     },
+
+    bool() {
+        return t.callExpression(
+            t.identifier('Boolean'),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+
+    // myBytesArray: Array.isArray(object?.myBytesArray) ? object.myBytesArray.map((e: any) => bytesFromBase64(e)) : [],
+    bytes(args: FromJSONMethod) {
+        args.context.addUtil('bytesFromBase64');
+        return t.callExpression(
+            t.identifier('bytesFromBase64'),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
     long() {
         return t.callExpression(
@@ -638,6 +572,13 @@ export const arrayTypes = {
             ]
         );
     },
+    uint64() {
+        return arrayTypes.long();
+    },
+    int64() {
+        return arrayTypes.long();
+    },
+    // myUint32Array: Array.isArray(object?.myUint32Array) ? object.myUint32Array.map((e: any) => Number(e)) : [],
     number() {
         return t.callExpression(
             t.identifier('Number'),
@@ -646,6 +587,32 @@ export const arrayTypes = {
             ]
         );
     },
+
+    // myDoubleArray: Array.isArray(object?.myDoubleArray) ? object.myDoubleArray.map((e: any) => Number(e)) : [],
+    uint32() {
+        return arrayTypes.number();
+    },
+    int32() {
+        return arrayTypes.number();
+    },
+    double() {
+        return arrayTypes.number();
+    },
+    float() {
+        return arrayTypes.number();
+    },
+
+    // arrayField: Array.isArray(object?.arrayField) ? object.arrayField.map((e: any) => scalarTypeFromJSON(e)) : []
+    enum(args: FromJSONMethod) {
+        const fromJSONFuncName = getEnumFromJsonName(getFieldsTypeName(args.field));
+        return t.callExpression(
+            t.identifier(fromJSONFuncName),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+
     // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     type(name) {
         return t.callExpression(

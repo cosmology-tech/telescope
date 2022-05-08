@@ -14,20 +14,35 @@ export const decode = {
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.bool(args));
     },
-    long(args: DecodeMethod) {
-        const num = args.field.id;
-        const prop = args.field.name;
-        return switchOnTag(num, prop, baseTypes.long(args));
-    },
     double(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.double(args));
     },
+    float(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.float(args));
+    },
+    int32(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.int32(args));
+    },
+    uint32(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.uint32(args));
+    },
     int64(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.int64(args));
+    },
+    uint64(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.uint64(args));
     },
     duration(args: DecodeMethod) {
         const num = args.field.id;
@@ -59,10 +74,18 @@ export const decode = {
         const prop = args.field.name;
         return switchOnTagTakesArray(num, prop, baseTypes.keyHash(args));
     },
-    scalarArray(args: DecodeMethod, expr: t.Expression) {
+    tagDelimArray(args: DecodeMethod, expr: t.Expression) {
         const num = args.field.id;
         const prop = args.field.name;
-        return switchScalarArray(num,
+        return switchTagDelimArray(num,
+            prop,
+            expr
+        )
+    },
+    array(args: DecodeMethod, expr: t.Expression) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchArray(num,
             prop,
             expr
         )
@@ -81,7 +104,7 @@ export const decode = {
 
 export const baseTypes = {
 
-    // message.sender = reader.string();
+    // reader.string();
     string(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
@@ -92,7 +115,7 @@ export const baseTypes = {
         );
     },
 
-    // message.sender = reader.bool();
+    // reader.bool();
     bool(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
@@ -103,7 +126,7 @@ export const baseTypes = {
         );
     },
 
-    // message.doubleValue = reader.double();
+    // reader.double();
     double(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
@@ -114,7 +137,40 @@ export const baseTypes = {
         );
     },
 
-    // message.int64Value = (reader.int64() as Long);
+    // reader.float();
+    float(args: DecodeMethod) {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('float')
+            ),
+            []
+        );
+    },
+
+    // reader.int32();
+    int32(args: DecodeMethod) {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('int32')
+            ),
+            []
+        );
+    },
+
+    // reader.uint32();
+    uint32(args: DecodeMethod) {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('uint32')
+            ),
+            []
+        );
+    },
+
+    // (reader.int64() as Long);
     int64(args: DecodeMethod) {
         args.context.addUtil('Long');
 
@@ -132,18 +188,8 @@ export const baseTypes = {
         );
     },
 
-    int32(args: DecodeMethod) {
-        return t.callExpression(
-            t.memberExpression(
-                t.identifier('reader'),
-                t.identifier('int32')
-            ),
-            []
-        );
-    },
-
-    // message.poolId = (reader.uint64() as Long);
-    long(args: DecodeMethod) {
+    // (reader.uint64() as Long);
+    uint64(args: DecodeMethod) {
         args.context.addUtil('Long');
 
         return t.tsAsExpression(
@@ -160,7 +206,7 @@ export const baseTypes = {
         );
     },
 
-    // message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+    // SignDocDirectAux.decode(reader, reader.uint32());
     type(args: DecodeMethod) {
         const name = getFieldsTypeName(args.field);
         return t.callExpression(
@@ -181,7 +227,7 @@ export const baseTypes = {
         )
     },
 
-    // message.mode = (reader.int32() as any);
+    // (reader.int32() as any);
     enum(args: DecodeMethod) {
         return t.tsAsExpression(
             t.callExpression(
@@ -195,6 +241,7 @@ export const baseTypes = {
         )
     },
 
+    // reader.bytes()
     bytes(args: DecodeMethod) {
         return t.callExpression(
             t.memberExpression(
@@ -413,7 +460,23 @@ export const switchTypeArray = (num: number, prop: string, name: string) => {
 //     message.codeIds.push((reader.uint64() as Long));
 // }
 
-export const switchScalarArray = (num: number, prop: string, expr: t.Expression) => {
+export const switchTagDelimArray = (num: number, prop: string, expr: t.Expression) => {
+    const blockStmt = t.blockStatement([
+        t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('push')
+                ),
+                [
+                    expr
+                ]
+            )
+        )
+    ]);
     return t.switchCase(
         t.numericLiteral(num),
         [
@@ -458,43 +521,35 @@ export const switchScalarArray = (num: number, prop: string, expr: t.Expression)
                             ),
                             t.identifier('end2')
                         ),
-                        t.blockStatement([
-                            t.expressionStatement(
-                                t.callExpression(
-                                    t.memberExpression(
-                                        t.memberExpression(
-                                            t.identifier('message'),
-                                            t.identifier(prop)
-                                        ),
-                                        t.identifier('push')
-                                    ),
-                                    [
-                                        expr
-                                    ]
-                                )
-                            )
-                        ])
+                        blockStmt
                     )
 
                 ]),
-                t.blockStatement([
-                    t.expressionStatement(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.memberExpression(
-                                    t.identifier('message'),
-                                    t.identifier(prop)
-                                ),
-                                t.identifier('push')
-                            ),
-                            [
-                                expr
-                            ]
-                        )
-                    )
-                ])
+                blockStmt
             )
         ]
     )
+};
+
+export const switchArray = (num: number, prop: string, expr: t.Expression) => {
+    return t.switchCase(
+        t.numericLiteral(num),
+        [
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(prop)
+                        ),
+                        t.identifier('push')
+                    ),
+                    [
+                        expr
+                    ]
+                )
+            )
+        ]
+    );
 };
 

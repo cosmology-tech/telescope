@@ -29,19 +29,30 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
             switch (field.type) {
                 case 'string':
                     return fromPartial.array(args, arrayTypes.string());
-                case 'uint64':
-                case 'int64':
-                    return fromPartial.array(args, arrayTypes.long());
-                case 'uint32':
-                case 'int32':
-                    return fromPartial.array(args, arrayTypes.number());
+                case 'bool':
+                    return fromPartial.array(args, arrayTypes.bool());
                 case 'bytes':
-                    return needsImplementation(fieldName, field);
+                    return fromPartial.array(args, arrayTypes.bytes());
+                case 'float':
+                    return fromPartial.array(args, arrayTypes.float());
+                case 'float':
+                    return fromPartial.array(args, arrayTypes.float());
+                case 'double':
+                    return fromPartial.array(args, arrayTypes.double());
+                case 'int32':
+                    return fromPartial.array(args, arrayTypes.int32());
+                case 'uint32':
+                    return fromPartial.array(args, arrayTypes.uint32());
+                case 'int64':
+                    return fromPartial.array(args, arrayTypes.int64());
+                case 'uint64':
+                    return fromPartial.array(args, arrayTypes.uint64());
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
+                            return fromPartial.array(args, arrayTypes.enum());
                         case 'Type':
-                            return fromPartial.array(args, arrayTypes.type(field.parsedType.name));
+                            return fromPartial.array(args, arrayTypes.type(args));
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -64,16 +75,22 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
         switch (field.type) {
             case 'string':
                 return fromPartial.string(args);
-            case 'uint64':
-                return fromPartial.long(args);
-            case 'int64':
-                return fromPartial.int64(args);
-            case 'double':
-                return fromPartial.double(args);
             case 'bytes':
                 return fromPartial.bytes(args);
             case 'bool':
                 return fromPartial.bool(args);
+            case 'double':
+                return fromPartial.double(args);
+            case 'float':
+                return fromPartial.float(args);
+            case 'int32':
+                return fromPartial.int32(args);
+            case 'uint32':
+                return fromPartial.uint32(args);
+            case 'int64':
+                return fromPartial.int64(args);
+            case 'uint64':
+                return fromPartial.uint64(args);
             case 'google.protobuf.Duration':
             case 'Duration':
                 return fromPartial.duration(args);

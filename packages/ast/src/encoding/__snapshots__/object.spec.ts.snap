@@ -356,7 +356,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     message.description !== undefined && (obj.description = message.description);
 
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || Long.ZERO).toString());
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
     } else {
       obj.codeIds = [];
     }
@@ -447,7 +447,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     message.description !== undefined && (obj.description = message.description);
 
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || Long.ZERO).toString());
+      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
     } else {
       obj.codeIds = [];
     }
@@ -1036,7 +1036,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       writer.uint32(32).uint64(message.uint64Value);
     }
 
-    if (message.doubleValue !== undefined) {
+    if (message.doubleValue !== 0) {
       writer.uint32(41).double(message.doubleValue);
     }
 
@@ -1113,7 +1113,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
       int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.ZERO,
       uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.UZERO,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : \\"\\",
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : new Uint8Array(),
       durationValue: isSet(object.durationValue) ? String(object.durationValue) : undefined,
@@ -1125,7 +1125,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || Long.ZERO).toString());
     message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || Long.UZERO).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
@@ -1141,7 +1141,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.boolValue = object.boolValue ?? false;
     message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : Long.ZERO;
     message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : Long.UZERO;
-    message.doubleValue = object.doubleValue ?? undefined;
+    message.doubleValue = object.doubleValue ?? 0;
     message.stringValue = object.stringValue ?? \\"\\";
     message.bytesValue = object.bytesValue ?? new Uint8Array();
     message.durationValue = object.durationValue ?? undefined;
@@ -1254,7 +1254,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
   fromPartial<I extends Exact<DeepPartial<SourceInfo>, I>>(object: I): SourceInfo {
     const message = createBaseSourceInfo();
     message.location = object.location ?? \\"\\";
-    message.lineOffsets = object.lineOffsets?.map(e => e()) || [];
+    message.lineOffsets = object.lineOffsets?.map(e => e) || [];
     message.positions = Object.entries(object.positions ?? {}).reduce<{
       [key: number]: number;
     }>((acc, [key, value]) => {

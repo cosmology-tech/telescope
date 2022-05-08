@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { pascal } from 'case';
 import { EncodeMethod } from './index';
 import { getFieldsTypeName, getTagNumber } from '../types';
 import { getKeyTypeEntryName } from '..';
@@ -49,7 +48,7 @@ export const types = {
     },
 
     /*
-        if (message.doubleValue !== undefined) {
+        if (message.doubleValue !== 0) {
           writer.uint32(41).double(message.doubleValue);
         }
     */
@@ -61,7 +60,7 @@ export const types = {
                     t.identifier('message'),
                     t.identifier(prop)
                 ),
-                t.identifier('undefined')
+                t.numericLiteral(0)
             ),
             t.blockStatement([
                 t.expressionStatement(
@@ -90,7 +89,133 @@ export const types = {
         )
     },
 
-    //   if (message.int64Value !== undefined) {
+    /*
+        if (message.floatValue !== 0) {
+          writer.uint32(41).float(message.floatValue);
+        }
+    */
+
+    float(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression('!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.numericLiteral(0)
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('float')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        )
+    },
+
+
+    //   if (message.int32Value !== 0) {
+    //     writer.uint32(24).int32(message.int32Value);
+    //   }
+
+    int32(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression(
+                '!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.numericLiteral(0)
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('int32')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        );
+    },
+
+    //   if (message.int32Value !== 0) {
+    //     writer.uint32(24).uint32(message.int32Value);
+    //   }
+
+    uint32(num: number, prop: string) {
+        return t.ifStatement(
+            t.binaryExpression(
+                '!==',
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.numericLiteral(0)
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('uint32')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        );
+    },
+
+
+    //   if (!message.int64Value.isZero()) {
     //     writer.uint32(24).int64(message.int64Value);
     //   }
 
@@ -135,6 +260,51 @@ export const types = {
         )
     },
 
+    //   if (!message.int64Value.isZero()) {
+    //     writer.uint32(24).uint64(message.int64Value);
+    //   }
+
+    uint64(num: number, prop: string) {
+        return t.ifStatement(
+            t.unaryExpression('!',
+                t.callExpression(
+                    t.memberExpression(
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(prop)
+                        ),
+                        t.identifier('isZero')
+                    ),
+                    []
+                )
+            ),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('uint64')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        )
+    },
+
     //   if (message.disableMacros === true) {
     //     writer.uint32(32).bool(message.disableMacros);
     //   }
@@ -163,54 +333,6 @@ export const types = {
                                 ]
                             ),
                             t.identifier('bool')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
-        )
-    },
-
-    /*
-    if (!message.poolId.isZero()) {
-        writer.uint32(16).uint64(message.poolId);
-    }
-    */
-
-
-    long(num: number, prop: string) {
-        return t.ifStatement(
-            t.unaryExpression('!',
-                t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('isZero')
-                    ),
-                    []
-                )
-            ),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('uint64')
                         ),
                         [
                             t.memberExpression(
@@ -275,7 +397,10 @@ export const types = {
         );
     },
 
-    // message.mode = (reader.int32() as any);
+    //   if (message.singleField !== 0) {
+    //     writer.uint32(24).int32(message.singleField);
+    //   }
+
     enum(num: number, prop: string) {
         return t.ifStatement(
             t.binaryExpression(
@@ -314,11 +439,9 @@ export const types = {
     },
 
     /*
-
-if (message.queryData.length !== 0) {
-  writer.uint32(18).bytes(message.queryData);
-}
- 
+    if (message.queryData.length !== 0) {
+    writer.uint32(18).bytes(message.queryData);
+    }
     */
 
 
@@ -477,23 +600,16 @@ if (message.queryData.length !== 0) {
     },
 
     /*
-    
-                ARRAY!
-                
-                Long[]
-    
-                writer.uint32(10).fork();
-    
-                for (const v of message.codeIds) {
-                    writer.uint64(v);
-                }
-    
-                writer.ldelim();
-    
-    
-            */
+    writer.uint32(10).fork();
 
-    scalarArray(num: number, prop: string, expr: t.Statement) {
+    for (const v of message.codeIds) {
+        writer.uint64(v);
+    }
+
+    writer.ldelim();
+    */
+
+    forkDelimArray(num: number, prop: string, expr: t.Statement) {
         return [
             t.expressionStatement(
                 t.callExpression(
@@ -538,6 +654,29 @@ if (message.queryData.length !== 0) {
                     ),
                     []
                 )
+            )
+        ];
+    },
+
+    array(num: number, prop: string, expr: t.Statement) {
+        return [
+            t.forOfStatement(
+                t.variableDeclaration(
+                    'const',
+                    [
+                        t.variableDeclarator(
+                            t.identifier('v'),
+                            null
+                        )
+                    ]
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.blockStatement([
+                    expr
+                ])
             )
         ];
     },
@@ -692,22 +831,11 @@ if (message.queryData.length !== 0) {
 
 export const encode = {
 
-    /*
-        if (message.sender !== "") {
-            writer.uint32(10).string(message.sender);
-        }
-    */
     string(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
         return types.string(num, prop);
     },
-
-    /*
-        if (message.doubleValue !== undefined) {
-          writer.uint32(41).double(message.doubleValue);
-        }
-    */
 
     double(args: EncodeMethod) {
         const prop = args.field.name;
@@ -715,9 +843,23 @@ export const encode = {
         return types.double(num, prop);
     },
 
-    //   if (message.int64Value !== undefined) {
-    //     writer.uint32(24).int64(message.int64Value);
-    //   }
+    float(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.float(num, prop);
+    },
+
+    int32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.int32(num, prop);
+    },
+
+    uint32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.uint32(num, prop);
+    },
 
     int64(args: EncodeMethod) {
         const prop = args.field.name;
@@ -725,27 +867,16 @@ export const encode = {
         return types.int64(num, prop);
     },
 
-    //   if (message.disableMacros === true) {
-    //     writer.uint32(32).bool(message.disableMacros);
-    //   }
+    uint64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.uint64(num, prop);
+    },
 
     bool(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
         return types.bool(num, prop);
-    },
-
-    /*
-    if (!message.poolId.isZero()) {
-        writer.uint32(16).uint64(message.poolId);
-    }
-    */
-
-
-    long(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.long(num, prop);
     },
 
     type(args: EncodeMethod) {
@@ -755,29 +886,17 @@ export const encode = {
         return types.type(num, prop, name);
     },
 
-    // message.mode = (reader.int32() as any);
     enum(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
         return types.enum(num, prop);
     },
 
-    /*
-
-if (message.queryData.length !== 0) {
-  writer.uint32(18).bytes(message.queryData);
-}
-    */
-
     bytes(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
         return types.bytes(num, prop);
     },
-
-    // if (message.periodReset !== undefined) {
-    //     Timestamp.encode(toTimestamp(message.periodReset), writer.uint32(18).fork()).ldelim();
-    //   }  
 
     timestamp(args: EncodeMethod) {
         const prop = args.field.name;
@@ -786,10 +905,6 @@ if (message.queryData.length !== 0) {
         return types.timestamp(num, prop);
     },
 
-    // if (message.period !== undefined) {
-    //     Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
-    //   }
-
     duration(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
@@ -797,27 +912,16 @@ if (message.queryData.length !== 0) {
         return types.duration(num, prop);
     },
 
-    /*
-    
-                ARRAY!
-                
-                Long[]
-    
-                writer.uint32(10).fork();
-    
-                for (const v of message.codeIds) {
-                    writer.uint64(v);
-                }
-    
-                writer.ldelim();
-    
-    
-            */
-
-    scalarArray(args: EncodeMethod, expr: t.Statement) {
+    forkDelimArray(args: EncodeMethod, expr: t.Statement) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.scalarArray(num, prop, expr);
+        return types.forkDelimArray(num, prop, expr);
+    },
+
+    array(args: EncodeMethod, expr: t.Statement) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.array(num, prop, expr);
     },
 
     typeArray(args: EncodeMethod) {
@@ -826,13 +930,6 @@ if (message.queryData.length !== 0) {
         const num = getTagNumber(args.field);
         return types.typeArray(num, prop, name);
     },
-
-    // Object.entries(message.labels).forEach(([key, value]) => {
-    //     LogEntry_LabelsEntry.encode({
-    //       key: (key as any),
-    //       value
-    //     }, writer.uint32(106).fork()).ldelim();
-    //   });
 
     keyHash(args: EncodeMethod) {
         const prop = args.field.name;
@@ -843,12 +940,12 @@ if (message.queryData.length !== 0) {
 };
 
 export const arrayTypes = {
-    long() {
+    double() {
         return t.expressionStatement(
             t.callExpression(
                 t.memberExpression(
                     t.identifier('writer'),
-                    t.identifier('uint64')
+                    t.identifier('double')
                 ),
                 [
                     t.identifier('v')
@@ -856,12 +953,25 @@ export const arrayTypes = {
             )
         );
     },
-    string() {
+    bool() {
         return t.expressionStatement(
             t.callExpression(
                 t.memberExpression(
                     t.identifier('writer'),
-                    t.identifier('string')
+                    t.identifier('bool')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    float() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('float')
                 ),
                 [
                     t.identifier('v')
@@ -881,6 +991,95 @@ export const arrayTypes = {
                 ]
             )
         );
+    },
+    uint32() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('uint32')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    int64() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('int64')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    uint64() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('uint64')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    string(args: EncodeMethod) {
+        const num = getTagNumber(args.field);
+
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('writer'),
+                            t.identifier('uint32')
+                        ),
+                        [
+                            t.numericLiteral(num)
+                        ]
+                    ),
+                    t.identifier('string')
+                ),
+                [
+                    t.tsNonNullExpression(t.identifier('v'))
+                ]
+            )
+        );
+    },
+    bytes(args: EncodeMethod) {
+        const num = getTagNumber(args.field);
+
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('writer'),
+                            t.identifier('uint32')
+                        ),
+                        [
+                            t.numericLiteral(num)
+                        ]
+                    ),
+                    t.identifier('bytes')
+                ),
+                [
+                    t.tsNonNullExpression(t.identifier('v'))
+                ]
+            )
+        );
+    },
+    enum() {
+        return arrayTypes.int32();
     }
+
 };
 

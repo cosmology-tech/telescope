@@ -30,21 +30,27 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    // TODO double check string[]
-                    return [...m, ...encode.scalarArray(args, arrayTypes.string())];
-                case 'uint64':
-                    return [...m, ...encode.scalarArray(args, arrayTypes.long())];
-                case 'int32':
-                    return [...m, ...encode.scalarArray(args, arrayTypes.int32())];
-                case 'int64':
-                    return needsImplementation(fieldName, field);
+                    return [...m, ...encode.array(args, arrayTypes.string(args))];
                 case 'bytes':
-                    return needsImplementation(fieldName, field);
+                    return [...m, ...encode.array(args, arrayTypes.bytes(args))];
+                case 'bool':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.bool())];
+                case 'double':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.double())];
+                case 'float':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.float())];
+                case 'int32':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.int32())];
+                case 'uint32':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.uint32())];
+                case 'int64':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.int64())];
+                case 'uint64':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.uint64())];
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
-                            // could be same as Type?
-                            return needsImplementation(fieldName, field);
+                            return [...m, ...encode.forkDelimArray(args, arrayTypes.enum())];
                         case 'Type':
                             return [...m, ...encode.typeArray(args)];
                     }
@@ -60,12 +66,18 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
         switch (field.type) {
             case 'string':
                 return [...m, encode.string(args)];
-            case 'uint64':
-                return [...m, encode.long(args)];
-            case 'double':
-                return [...m, encode.double(args)];
+            case 'int32':
+                return [...m, encode.int32(args)];
+            case 'uint32':
+                return [...m, encode.uint32(args)];
             case 'int64':
                 return [...m, encode.int64(args)];
+            case 'uint64':
+                return [...m, encode.uint64(args)];
+            case 'double':
+                return [...m, encode.double(args)];
+            case 'float':
+                return [...m, encode.float(args)];
             case 'bool':
                 return [...m, encode.bool(args)];
             case 'bytes':

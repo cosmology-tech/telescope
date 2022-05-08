@@ -1,289 +1,8 @@
-import { ProtoStore, ProtoRoot, ProtoRef, getObjectName } from '@osmonauts/proto-parser';
-import {
-    importStmt,
-    createProtoType,
-    createCreateProtoType,
-    createProtoEnum,
-    createObjectWithMethods,
-    ProtoType,
-    ProtoParseContext,
-    AminoParseContext,
-    makeAminoTypeInterface,
-    createAminoConverter,
-    getKeyTypeEntryName,
-    // client
-    createClient,
-    GenericParseContext,
-    // registry 
-    createTypeRegistry,
-    createRegistryLoader,
-    // helper
-    createHelperObject,
-} from '@osmonauts/ast';
-import { extname, relative, dirname } from 'path';
-import { camel, snake } from 'case';
-
-const getRoot = (ref: ProtoRef): ProtoRoot => {
-    if (ref.traversed) return ref.traversed;
-    return ref.proto;
-};
-
-export interface ServiceInfo {
-    methodName: string;
-    package: string;
-    message: string;
-    messageImport: string;
-    response: string;
-    responseImport: string;
-    comment?: string;
-}
-export interface ServiceMutation extends ServiceInfo {
-}
-export interface ServiceQuery extends ServiceInfo {
-}
-
-const UTILS = {
-    AminoHeight: '@osmonauts/helpers',
-    AminoMsg: '@cosmjs/amino',
-    AminoTypes: '@cosmjs/stargate',
-    decodeBech32Pubkey: '@cosmjs/amino',
-    defaultRegistryTypes: '@cosmjs/stargate',
-    encodeBech32PubKey: '@cosmjs/amino',
-    fromBase64: '@cosmjs/encoding',
-    fromBech32: '@cosmjs/encoding',
-    fromDuration: '@osmonauts/helpers',
-    fromHex: '@cosmjs/encoding',
-    fromJsonTimestamp: '@osmonauts/helpers',
-    fromTimestamp: '@osmonauts/helpers',
-    GeneratedType: '@cosmjs/proto-signing',
-    isSet: '@osmonauts/helpers',
-    Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
-    OfflineSigner: '@cosmjs/proto-signing',
-    omitDefault: '@osmonauts/helpers',
-    Registry: '@cosmjs/proto-signing',
-    SigningStargateClient: '@cosmjs/stargate',
-    toBase64: '@cosmjs/encoding',
-    toDuration: '@osmonauts/helpers',
-    toTimestamp: '@osmonauts/helpers',
-};
-
-export interface ImportHash {
-    [key: string]: string[];
-}
-
-export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
-
-    if (!allImports) allImports = {};
-
-    const utils = Object.keys({
-        ...context.amino.utils,
-        ...context.proto.utils
-    });
-
-    utils.forEach(util => {
-        if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
-        allImports[UTILS[util]] = allImports[UTILS[util]] || [];
-        if (!allImports[UTILS[util]].includes(util)) {
-            allImports[UTILS[util]].push(util);
-        }
-    });
-
-    Object.entries(context.amino.ref.traversed.parsedImports ?? {})
-        .forEach(([filename, names]) => {
-            const f = context.ref.filename;
-            const rel = relative(dirname(f), filename);
-            let importPath = rel.replace(extname(rel), '');
-            if (!/\//.test(importPath)) importPath = `./${importPath}`;
-            allImports[importPath] = allImports[importPath] || [];
-            names.forEach(name => {
-                if (!allImports[importPath].includes(name)) {
-                    allImports[importPath].push(name);
-                }
-            })
-        });
-
-    const importStmts = Object.entries(allImports)
-        .map(([pth, names]) => {
-            return importStmt(names, pth);
-        })
-
-    return importStmts;
-}
-
-export const getMutations = (mutations: ServiceMutation[]) => {
-    return mutations.map((mutation: ServiceMutation) => {
-        return {
-            typeUrl: `/${mutation.package}.${mutation.message}`,
-            TypeName: mutation.message,
-            methodName: mutation.methodName
-        }
-    });
-};
-
-export const getAminoProtos = (mutations: ServiceMutation[], store: ProtoStore) => {
-    return mutations.map(mutation => {
-        const ref = store.findProto(mutation.messageImport);
-        return store.get(ref, mutation.message).obj;
-    });
-};
-
-export const getAminoImports = (mutations: ServiceMutation[]) => {
-    return mutations.map(mutation => {
-        return {
-            import: mutation.messageImport,
-            name: mutation.message
-        };
-    });
-};
-
-interface BuildBaseTSClass {
-    includeEncode: boolean;
-    includeDecode: boolean;
-    includeFromPartial: boolean;
-    includeFromJSON: boolean;
-    includeToJSON: boolean;
-}
-
-
-export interface TelescopeOptions {
-    animo: {
-
-    }
-}
-export interface TelescopeParseContext {
-    proto: ProtoParseContext;
-    amino: AminoParseContext;
-    store: ProtoStore;
-    ref: ProtoRef;
-    parsedImports: Record<string, any>;
-    body: any[];
-    mutations: ServiceMutation[];
-    queries: any[];
-    types: any[];
-    options: any;
-}
-
-export const buildBaseTypeScriptClass = (
-    context: TelescopeParseContext,
-    name: string,
-    obj: any,
-    {
-        includeEncode,
-        includeDecode,
-        includeFromPartial,
-        includeFromJSON,
-        includeToJSON
-    }: BuildBaseTSClass = {
-            includeEncode: true,
-            includeDecode: true,
-            includeFromPartial: true,
-            includeFromJSON: true,
-            includeToJSON: true
-        }) => {
-
-    context.body.push(createProtoType(name, obj));
-    context.body.push(createCreateProtoType(name, obj));
-    context.body.push(createObjectWithMethods(context.proto, name, obj));
-};
-
-export const getAminoRelativeDeps = (mutations: ServiceMutation[], filename: string) => {
-    return getAminoImports(mutations)
-        .map(imp => {
-            const f = filename;
-            const f2 = imp.import;
-            if (f === f2) return;
-            const rel = relative(dirname(f), f2);
-            let importPath = rel.replace(extname(rel), '');
-            if (!/\//.test(importPath)) importPath = `./${importPath}`;
-            return {
-                ...imp,
-                importPath
-            };
-        })
-        .filter(Boolean)
-        .reduce((m, v) => {
-            m[v.importPath] = m[v.importPath] ?? [];
-            if (!m[v.importPath].includes(v.name)) {
-                m[v.importPath].push(v.name);
-            }
-            return m;
-        }, {});
-};
-export class TelescopeParseContext implements TelescopeParseContext {
-    constructor(ref: ProtoRef, store: ProtoStore) {
-        this.proto = new ProtoParseContext();
-        this.amino = new AminoParseContext(
-            ref, store
-        );
-        this.ref = ref;
-        this.store = store;
-        this.parsedImports = {};
-        this.body = [];
-        this.queries = [];
-        this.mutations = [];
-        this.types = [];
-    }
-
-    hasMutations() {
-        return this.mutations.length > 0;
-    }
-
-    addType(name: string, obj: any) {
-        this.types.push({
-            name,
-            obj
-        });
-    }
-    addMutation(mutation: ServiceMutation) {
-        this.mutations.push(mutation);
-    }
-    addQuery(query: ServiceQuery) {
-        this.queries.push(query);
-    }
-
-    // build main Class with methods
-    buildBase() {
-        this.types.forEach(typeReg => {
-            const { name, obj } = typeReg;
-            if (obj.type === 'Type') {
-                buildBaseTypeScriptClass(this, name, obj);
-            } else if (obj.type === 'Enum') {
-                this.body.push(createProtoEnum(name, obj));
-            } else {
-                throw new Error('buildBase(): unknown type');
-            }
-        })
-    }
-
-    buildRegistry() {
-        this.body.push(createTypeRegistry(getMutations(this.mutations)));
-    }
-    buildRegistryLoader() {
-        this.body.push(createRegistryLoader());
-    }
-    buildAminoInterfaces() {
-        const protos = getAminoProtos(this.mutations, this.store);
-        protos.forEach(proto => {
-            this.body.push(makeAminoTypeInterface({
-                context: this.amino,
-                proto
-            }));
-        });
-    }
-    buildAminoConverter() {
-        this.body.push(createAminoConverter({
-            name: 'AminoConverter',
-            context: this.amino,
-            root: this.ref.traversed,
-            protos: getAminoProtos(this.mutations, this.store)
-        }));
-    }
-    buildHelperObject() {
-        // add methods
-        this.body.push(createHelperObject({ mutations: getMutations(this.mutations) }));
-    }
-
-}
+import { getRoot } from './utils';
+import { ProtoRef, getObjectName } from '@osmonauts/proto-parser';
+import { ProtoType, getKeyTypeEntryName, } from '@osmonauts/ast';
+import { ServiceInfo } from './types';
+import { TelescopeParseContext } from './build';
 
 export const parse = (
     context: TelescopeParseContext,
@@ -410,6 +129,19 @@ export const parseService = (
     }> = obj.methods;
 
     if (!['Msg', 'Query'].includes(obj.name)) {
+        if (obj.name === 'ReflectionService') return;
+        if (obj.name === 'ConformanceService') return;
+        if (obj.name === 'QuotaController') return;
+        if (obj.name === 'ServiceController') return;
+        if (obj.name === 'ServiceManager') return;
+        if (obj.name === 'ServiceUsage') return;
+        if (obj.name === 'ConfigServiceV2') return;
+        if (obj.name === 'MetricsServiceV2') return;
+        if (obj.name === 'LoggingServiceV2') return;
+        if (obj.name === 'Operations') return;
+        if (obj.name === 'BalancerMsg') return;
+        if (obj.name === 'ABCIApplication') return;
+        if (obj.name === 'Service') return;
         throw new Error('unsupported Service type. Contact Maintainers.');
     }
 
@@ -486,7 +218,21 @@ export const parseRecur = ({
                 throw new Error('parseRecur() cannot find protobufjs Type')
             }
         default:
-            console.log({ obj });
+            if (obj.type === 'string') return;
+            if (obj.type === 'bool') return;
+            if (obj.type === 'HttpRule') return;
+            if (obj.type === 'InterfaceDescriptor') return;
+            if (obj.type === 'ScalarDescriptor') return;
+            if (obj.type === 'ModuleDescriptor') return;
+            if (obj.type === 'TableDescriptor') return;
+            if (obj.type === 'SingletonDescriptor') return;
+            if (obj.type === 'ModuleSchemaDescriptor') return;
+            if (obj.type === 'google.api.FieldBehavior') return;
+            if (obj.type === 'google.api.ResourceReference') return;
+            if (obj.type === 'google.api.ResourceDescriptor') return;
+            if (obj.type === 'google.api.RoutingRule') return;
+            if (obj.type === 'google.api.VisibilityRule') return;
+            if (obj.type === 'google.longrunning.OperationInfo') return;
             throw new Error('parseRecur() cannot find protobufjs Type')
     }
 };

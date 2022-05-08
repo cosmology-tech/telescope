@@ -5,146 +5,49 @@ import { getEnumToJsonName, getFieldsTypeName } from '../types';
 export const toJSON = {
 
     //  message.sender !== undefined && (obj.sender = message.sender);
+    identity(args: ToJSONMethod) {
+        const prop = args.field.name;
+        return t.expressionStatement(
+            t.logicalExpression(
+                '&&',
+                t.binaryExpression(
+                    '!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    t.identifier('undefined')
+                ),
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(prop)
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    )
+                )
+            )
+        );
+    },
 
     string(args: ToJSONMethod) {
-        const prop = args.field.name;
-        return t.expressionStatement(
-            t.logicalExpression(
-                '&&',
-                t.binaryExpression(
-                    '!==',
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('undefined')
-                ),
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('obj'),
-                        t.identifier(prop)
-                    ),
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    )
-                )
-            )
-        );
+        return toJSON.identity(args);
     },
-
-    // message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-
     double(args: ToJSONMethod) {
-        const prop = args.field.name;
-        return t.expressionStatement(
-            t.logicalExpression(
-                '&&',
-                t.binaryExpression(
-                    '!==',
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('undefined')
-                ),
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('obj'),
-                        t.identifier(prop)
-                    ),
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    )
-                )
-            )
-        );
+        return toJSON.identity(args);
     },
-
-    // message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
-    int64(args: ToJSONMethod) {
-        const prop = args.field.name;
-        return t.expressionStatement(
-            t.logicalExpression(
-                '&&',
-                t.binaryExpression(
-                    '!==',
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('undefined')
-                ),
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('obj'),
-                        t.identifier(prop)
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.logicalExpression(
-                                '||',
-                                t.memberExpression(
-                                    t.identifier('message'),
-                                    t.identifier(prop)
-                                ),
-                                t.identifier('undefined')
-                            ),
-                            t.identifier('toString')
-                        ),
-                        []
-                    )
-                )
-            )
-        )
+    float(args: ToJSONMethod) {
+        return toJSON.identity(args);
     },
-
-    // message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
-    uint64(args: ToJSONMethod) {
-        const prop = args.field.name;
-        return t.expressionStatement(
-            t.logicalExpression(
-                '&&',
-                t.binaryExpression(
-                    '!==',
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('undefined')
-                ),
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.identifier('obj'),
-                        t.identifier(prop)
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.logicalExpression(
-                                '||',
-                                t.memberExpression(
-                                    t.identifier('message'),
-                                    t.identifier(prop)
-                                ),
-                                t.identifier('undefined')
-                            ),
-                            t.identifier('toString')
-                        ),
-                        []
-                    )
-                )
-            )
-        )
-    },
-
-
-    //   message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
     bool(args: ToJSONMethod) {
+        return toJSON.identity(args);
+    },
+
+    // message.maxDepth !== undefined && (obj.maxDepth = Math.round(message.maxDepth));
+    number(args: ToJSONMethod) {
         const prop = args.field.name;
         return t.expressionStatement(
             t.logicalExpression(
@@ -163,17 +66,33 @@ export const toJSON = {
                         t.identifier('obj'),
                         t.identifier(prop)
                     ),
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Math'),
+                            t.identifier('round')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
                     )
                 )
             )
-        );
+        )
+    },
+    // message.maxDepth !== undefined && (obj.maxDepth = Math.round(message.maxDepth));
+    int32(args: ToJSONMethod) {
+        return toJSON.number(args);
+    },
+
+    uint32(args: ToJSONMethod) {
+        return toJSON.number(args);
     },
 
     // message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    long(args: ToJSONMethod) {
+    long(args: ToJSONMethod, defaultMethod: 'UZERO' | 'ZERO') {
         args.context.addUtil('Long');
         const prop = args.field.name;
         return t.expressionStatement(
@@ -205,7 +124,7 @@ export const toJSON = {
                                 ),
                                 t.memberExpression(
                                     t.identifier('Long'),
-                                    t.identifier('UZERO')
+                                    t.identifier(defaultMethod)
                                 )
                             ),
                             t.identifier('toString')
@@ -215,6 +134,14 @@ export const toJSON = {
                 )
             )
         );
+    },
+
+    int64(args: ToJSONMethod) {
+        return toJSON.long(args, 'ZERO');
+    },
+
+    uint64(args: ToJSONMethod) {
+        return toJSON.long(args, 'UZERO');
     },
 
     // message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
@@ -596,6 +523,11 @@ export const toJSON = {
 
 export const arrayTypes = {
 
+    identity() {
+        return t.identifier('e');
+    },
+
+
     // if (message.overloadId) {
     //     obj.overloadId = message.overloadId.map(e => e);
     // } else {
@@ -603,47 +535,16 @@ export const arrayTypes = {
     // }
 
     string() {
-        return t.identifier('e');
+        return arrayTypes.identity();
     },
-
-    // if (message.codeIds) {
-    //     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
-    // } else {
-    //     obj.codeIds = [];
-    // }
-
-    uint64() {
-        return t.callExpression(
-            t.memberExpression(
-                t.logicalExpression(
-                    '||',
-                    t.identifier('e'),
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('ZERO')
-                    )
-                ),
-                t.identifier('toString')
-            ),
-            []
-        )
+    double() {
+        return arrayTypes.identity();
     },
-
-    int64() {
-        return t.callExpression(
-            t.memberExpression(
-                t.logicalExpression(
-                    '||',
-                    t.identifier('e'),
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('ZERO')
-                    )
-                ),
-                t.identifier('toString')
-            ),
-            []
-        )
+    float() {
+        return arrayTypes.identity();
+    },
+    bool() {
+        return arrayTypes.identity();
     },
 
     //   if (message.lineOffsets) {
@@ -664,18 +565,95 @@ export const arrayTypes = {
         )
     },
 
+    uint32() {
+        return arrayTypes.number();
+    },
+
+    int32() {
+        return arrayTypes.number();
+    },
+
+    // if (message.codeIds) {
+    //     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+    // } else {
+    //     obj.codeIds = [];
+    // }
+
+    long(defaultMethod: 'ZERO' | 'UZERO') {
+        return t.callExpression(
+            t.memberExpression(
+                t.logicalExpression(
+                    '||',
+                    t.identifier('e'),
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier(defaultMethod)
+                    )
+                ),
+                t.identifier('toString')
+            ),
+            []
+        )
+    },
+
+    uint64() {
+        return arrayTypes.long('UZERO');
+    },
+
+    int64() {
+        return arrayTypes.long('ZERO');
+    },
+
+    //   if (message.myBytesArray) {
+    //     obj.myBytesArray = message.myBytesArray.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+    //   } else {
+    //     obj.myBytesArray = [];
+    //   }
+
+    bytes(args: ToJSONMethod) {
+        args.context.addUtil('base64FromBytes');
+        return t.callExpression(
+            t.identifier('base64FromBytes'),
+            [
+                t.conditionalExpression(
+                    t.binaryExpression(
+                        '!==',
+                        t.identifier('e'),
+                        t.identifier('undefined')
+                    ),
+                    t.identifier('e'),
+                    t.newExpression(
+                        t.identifier('Uint8Array'),
+                        []
+                    )
+                )
+            ]
+        );
+    },
+
+    enum(args: ToJSONMethod) {
+        const prop = args.field.name;
+        const enumFuncName = getEnumToJsonName(getFieldsTypeName(args.field));
+        return t.callExpression(
+            t.identifier(enumFuncName),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+
     // if (message.tokenInMaxs) {
     //     obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
     // } else {
     //     obj.tokenInMaxs = [];
     // }
 
-    type(name: string) {
+    type(args: ToJSONMethod) {
         return t.conditionalExpression(
             t.identifier('e'),
             t.callExpression(
                 t.memberExpression(
-                    t.identifier(name),
+                    t.identifier(getFieldsTypeName(args.field)),
                     t.identifier('toJSON')
                 ),
                 [

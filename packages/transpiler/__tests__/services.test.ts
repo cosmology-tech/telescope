@@ -1,10 +1,6 @@
-import {
-    ProtoParseContext,
-    AminoParseContext
-} from '@osmonauts/ast';
-import generate from '@babel/generator';
-import { ProtoRef, ProtoStore, traverse, getNestedProtoGeneric, parseProto } from '@osmonauts/proto-parser'
-import { parse, TelescopeParseContext } from '../src/parse';
+import { ProtoStore, parseProto } from '@osmonauts/proto-parser';
+import { parse } from '../src/parse';
+import { TelescopeParseContext } from '../src/build';
 
 const store = new ProtoStore('');
 store.protos = [];

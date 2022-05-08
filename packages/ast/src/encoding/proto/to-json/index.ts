@@ -29,20 +29,28 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
             switch (field.type) {
                 case 'string':
                     return [...m, toJSON.array(args, arrayTypes.string())];
-                case 'uint64':
-                    return [...m, toJSON.array(args, arrayTypes.uint64())];
+                case 'bytes':
+                    return [...m, toJSON.array(args, arrayTypes.bytes(args))];
+                case 'bool':
+                    return [...m, toJSON.array(args, arrayTypes.bool())];
+                case 'double':
+                    return [...m, toJSON.array(args, arrayTypes.double())];
+                case 'float':
+                    return [...m, toJSON.array(args, arrayTypes.float())];
+                case 'int32':
+                    return [...m, toJSON.array(args, arrayTypes.int32())];
+                case 'uint32':
+                    return [...m, toJSON.array(args, arrayTypes.uint32())];
                 case 'int64':
                     return [...m, toJSON.array(args, arrayTypes.int64())];
-                case 'uint32':
-                case 'int32':
-                    return [...m, toJSON.array(args, arrayTypes.number())];
-                case 'bytes':
-                    return needsImplementation(fieldName, field);
+                case 'uint64':
+                    return [...m, toJSON.array(args, arrayTypes.uint64())];
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
+                            return [...m, toJSON.array(args, arrayTypes.enum(args))];
                         case 'Type':
-                            return [...m, toJSON.array(args, arrayTypes.type(getFieldsTypeName(field)))];
+                            return [...m, toJSON.array(args, arrayTypes.type(args))];
                     }
                     return needsImplementation(fieldName, field);
             }
@@ -65,17 +73,22 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
         switch (field.type) {
             case 'string':
                 return [...m, toJSON.string(args)];
-            case 'uint64':
-                return [...m, toJSON.long(args)];
-            // return [...m, toJSON.uint64(args)];
-            case 'int64':
-                return [...m, toJSON.int64(args)];
             case 'double':
                 return [...m, toJSON.double(args)];
+            case 'float':
+                return [...m, toJSON.float(args)];
             case 'bytes':
                 return [...m, toJSON.bytes(args)];
             case 'bool':
                 return [...m, toJSON.bool(args)];
+            case 'int32':
+                return [...m, toJSON.int32(args)];
+            case 'uint32':
+                return [...m, toJSON.uint32(args)];
+            case 'int64':
+                return [...m, toJSON.int64(args)];
+            case 'uint64':
+                return [...m, toJSON.uint64(args)];
             case 'google.protobuf.Duration':
             case 'Duration':
                 return [...m, toJSON.duration(args)];

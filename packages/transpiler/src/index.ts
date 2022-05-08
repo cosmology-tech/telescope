@@ -1,9 +1,8 @@
-import * as a from '@osmonauts/ast';
 import * as t from '@babel/types';
-import { extname, relative, dirname } from 'path';
 import generate from '@babel/generator';
 import { ProtoStore } from '@osmonauts/proto-parser';
-import { buildAllImports, parse, TelescopeParseContext } from './parse';
+import { buildAllImports, TelescopeParseContext } from './build';
+import { parse } from './parse';
 export interface TelescopeInput {
     protoDir: string;
     outPath: string;
@@ -29,7 +28,7 @@ export class TelescopeBuilder {
     }
 
     buildAll() {
-        this.store.getProtos().map(ref => {
+        const hash = this.store.getProtos().map(ref => {
             const context = this.context(ref);
             parse(context);
             context.buildBase();
@@ -40,8 +39,14 @@ export class TelescopeBuilder {
                 .concat(context.body);
 
             const gen = generate(t.program(prog));
-            console.log(gen.code);
+
+            const filename = ref.filename.replace(/\.proto/, '.ts');
+            return {
+                filename,
+                content: gen.code
+            };
         });
+        return hash;
     }
 
     buildProto(path) {
