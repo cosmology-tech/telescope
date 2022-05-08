@@ -134,7 +134,7 @@ it('aminos', () => {
 
 it('basic imports', () => {
     const allImports = buildAllImports(res.context);
-    console.log(generate(t.program(allImports)).code)
+    // console.log(generate(t.program(allImports)).code)
     expectCode(t.program(allImports))
 });
 
@@ -143,10 +143,11 @@ it('from package c deps', () => {
         res.context.mutations,
         res.context.ref.filename
     );
+
     expect(imports1).toMatchSnapshot();
 
     const moreImports = buildAllImports(res.context, imports1);
-    console.log(generate(t.program(moreImports)).code)
+    // console.log(generate(t.program(moreImports)).code)
     expectCode(t.program(moreImports))
 });
 

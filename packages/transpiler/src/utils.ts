@@ -22,7 +22,7 @@ export const UTILS = {
     GeneratedType: '@cosmjs/proto-signing',
     isSet: '@osmonauts/helpers',
     Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
-    // Long: {type: 'default', 'long'}
+    // Long: { type: 'default', path: 'long', name: 'Long ' },
     OfflineSigner: '@cosmjs/proto-signing',
     omitDefault: '@osmonauts/helpers',
     Registry: '@cosmjs/proto-signing',
@@ -32,8 +32,7 @@ export const UTILS = {
     toTimestamp: '@osmonauts/helpers',
     bytesFromBase64: '@osmonauts/helpers',
     base64FromBytes: '@osmonauts/helpers',
-    _m0: 'protobuf/minimal'
-    // _m0: { type: 'namespace', path: 'protobuf/minimal' }
+    _m0: { type: 'namespace', path: 'protobuf/minimal', name: '_m0' }
 };
 
 
@@ -42,10 +41,4 @@ export const getRelativePath = (f1: string, f2: string) => {
     let importPath = rel.replace(extname(rel), '');
     if (!/\//.test(importPath)) importPath = `./${importPath}`;
     return importPath;
-}
-
-export const insertUniq = (array: string[], el: string) => {
-    if (!array.includes(el)) {
-        array.push(el);
-    }
 }

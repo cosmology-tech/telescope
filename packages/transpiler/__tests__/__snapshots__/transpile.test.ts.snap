@@ -5,6 +5,7 @@ Object {
   "amino": Object {},
   "proto": Object {
     "Long": true,
+    "_m0": true,
     "isSet": true,
   },
 }
@@ -15,6 +16,7 @@ Object {
   "amino": Object {},
   "proto": Object {
     "Long": true,
+    "_m0": true,
     "isSet": true,
   },
 }
@@ -25,6 +27,7 @@ Object {
   "amino": Object {},
   "proto": Object {
     "Long": true,
+    "_m0": true,
     "fromDuration": true,
     "isSet": true,
     "toDuration": true,
@@ -36,6 +39,7 @@ exports[`utils cosmos/staking/v1beta1/tx 1`] = `
 Object {
   "amino": Object {},
   "proto": Object {
+    "_m0": true,
     "fromJsonTimestamp": true,
     "fromTimestamp": true,
     "isSet": true,

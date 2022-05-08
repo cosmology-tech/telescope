@@ -1,40 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`bundle package registries and root file names 1`] = `
-Object {
-  "cosmos": Object {
-    "bundle": "./chain1/cosmos/pkg.registry.ts",
-  },
-  "cosmos_proto": Object {
-    "bundle": "./chain1/cosmos_proto/pkg.registry.ts",
-  },
-  "cosmwasm": Object {
-    "bundle": "./chain1/cosmwasm/pkg.registry.ts",
-  },
-  "gogoproto": Object {
-    "bundle": "./chain1/gogoproto/pkg.registry.ts",
-  },
-  "google": Object {
-    "bundle": "./chain1/google/pkg.registry.ts",
-  },
-  "ibc": Object {
-    "bundle": "./chain1/ibc/pkg.registry.ts",
-  },
-  "ics23": Object {
-    "bundle": "./chain1/ics23/pkg.registry.ts",
-  },
-  "osmosis": Object {
-    "bundle": "./chain1/osmosis/pkg.registry.ts",
-  },
-  "secret": Object {
-    "bundle": "./chain1/secret/pkg.registry.ts",
-  },
-  "tendermint": Object {
-    "bundle": "./chain1/tendermint/pkg.registry.ts",
-  },
-}
-`;
-
 exports[`bundle packages root file names 1`] = `
 Object {
   "cosmos": Object {

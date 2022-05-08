@@ -19,12 +19,27 @@ import {
     createHelperObject,
 } from '@osmonauts/ast';
 import { extname, relative, dirname } from 'path';
-import { ImportHash, ServiceMutation, ServiceQuery } from './types';
-import { UTILS, getRelativePath, insertUniq, getRoot } from './utils';
+import { ImportHash, ImportObj, ServiceMutation, ServiceQuery } from './types';
+import { UTILS, getRelativePath, getRoot } from './utils';
+import * as t from '@babel/types';
+
+const importHashToArray = (hash: ImportHash) => {
+    return Object.entries(hash ?? {})
+        .reduce((m, [path, names]) => {
+            names.forEach(name => {
+                m.push({
+                    type: 'import',
+                    name,
+                    path
+                })
+            })
+            return m;
+        }, [])
+};
 
 export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
 
-    if (!allImports) allImports = {};
+    const list: ImportObj[] = importHashToArray(allImports);
 
     const utils = Object.keys({
         ...context.amino.utils,
@@ -33,25 +48,82 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
 
     utils.forEach(util => {
         if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
-        allImports[UTILS[util]] = allImports[UTILS[util]] || [];
-        insertUniq(allImports[UTILS[util]], util);
+        if (typeof UTILS[util] === 'string') {
+            list.push({
+                type: 'import',
+                path: UTILS[util],
+                name: util
+            });
+        } else {
+            list.push(UTILS[util]);
+        }
     });
 
     const parsedImports: ImportHash = context.amino.ref.traversed.parsedImports ?? {};
 
     Object.entries(parsedImports)
-        .forEach(([filename, names]) => {
-            const importPath = getRelativePath(context.ref.filename, filename);
-            allImports[importPath] = allImports[importPath] || [];
-            names.forEach(name => insertUniq(allImports[importPath], name));
+        .forEach(([path, names]) => {
+            const importPath = getRelativePath(context.ref.filename, path);
+            names.forEach(name => {
+                list.push({
+                    type: 'import',
+                    name,
+                    path: importPath
+                })
+            });
         });
 
-    const importStmts = Object.entries(allImports)
-        .map(([importPath, names]) => {
-            return importStmt(names, importPath);
-        })
+    const imports = list.reduce((m, obj) => {
+        m[obj.path] = m[obj.path] || [];
+        const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
+        if (!exists) m[obj.path].push(obj);
+        return m;
+    }, {});
+
+    // console.log(JSON.stringify(imports, null, 2));
+
+    const importStmts = Object.entries(imports)
+        .reduce((m, [importPath, imports]: [string, ImportObj[]]) => {
+            const defaultImports = imports.filter(a => a.type === 'default');
+            if (defaultImports.length) {
+                if (defaultImports.length > 1) throw new Error('more than one default name NOT allowed.')
+                m.push(
+                    t.importDeclaration(
+                        [
+                            t.importDefaultSpecifier(
+                                t.identifier(defaultImports[0].name)
+                            )
+                        ],
+                        t.stringLiteral(defaultImports[0].path)
+                    )
+                )
+            }
+            const namedImports = imports.filter(a => a.type === 'import');
+            if (namedImports.length) {
+                m.push(importStmt(namedImports.map(i => i.name), namedImports[0].path));
+            }
+            const namespaced = imports.filter(a => a.type === 'namespace');
+            if (namespaced.length) {
+                if (namespaced.length > 1) throw new Error('more than one namespaced name NOT allowed.')
+                m.push(
+                    t.importDeclaration(
+                        [
+                            t.importNamespaceSpecifier(
+                                t.identifier(namespaced[0].name)
+                            )
+                        ],
+                        t.stringLiteral(namespaced[0].path)
+                    )
+                )
+            }
+            return m;
+        }, [])
 
     return importStmts;
+    // console.log(objs);
+    // const imports = objs.filter(o => typeof o === 'string');
+    // return importStmt(imports, importPath);
+    // return importStmts;
 }
 
 export const getMutations = (mutations: ServiceMutation[]) => {

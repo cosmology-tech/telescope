@@ -14,6 +14,12 @@ export interface ServiceQuery extends ServiceInfo {
 }
 
 
+export interface ImportObj {
+    type: 'import' | 'default' | 'namespace';
+    name: string;
+    path: string;
+
+}
 export interface ImportHash {
     [key: string]: string[];
 }
