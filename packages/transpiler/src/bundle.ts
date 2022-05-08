@@ -1,8 +1,9 @@
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoRef, ProtoStore } from '@osmonauts/proto-parser';
 import { recursiveModuleBundle, importNamespace } from '@osmonauts/ast';
 import * as dotty from 'dotty';
-import { TelescopeInput } from './index';
+import { TelescopeBuilder, TelescopeInput } from './index';
 import { join, relative, dirname } from 'path';
+import { TelescopeParseContext } from './build';
 
 // TODO move to store
 export const getPackages = (store: ProtoStore) => {
@@ -34,7 +35,7 @@ export const bundlePackages = (store: ProtoStore, input: TelescopeInput) => {
     return Object.keys(allPackages).map(base => {
         const pkgs = allPackages[base];
         const bundleVariables = {};
-        const bundleFile = join(input.protoDir, base, 'bundle.ts');
+        const bundleFile = join(input.protoDir, base, 'pkg.bundle.ts');
         const importPaths = [];
         parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
         const body = recursiveModuleBundle(bundleVariables);
@@ -46,16 +47,81 @@ export const bundlePackages = (store: ProtoStore, input: TelescopeInput) => {
         };
     });
 }
+export const bundleRegistries = (telescope: TelescopeBuilder) => {
+    const withMutations = telescope.contexts.filter(
+        ctx => ctx.mutations.length
+    );
+    const obj = withMutations.reduce((m, ctx) => {
+        m[ctx.ref.proto.package] = m[ctx.ref.proto.package] ?? [];
+        m[ctx.ref.proto.package].push(ctx);
+        return m;
+    }, {});
+
+    return Object.entries(obj)
+        .map(([pkg, serviceProtos]) => {
+            return {
+                package: pkg,
+                contexts: serviceProtos
+            };
+        });
+}
+
+export const bundleBaseRegistries = (telescope: TelescopeBuilder) => {
+    const withMutations = telescope.contexts.filter(
+        ctx => ctx.mutations.length
+    );
+    const obj = withMutations.reduce((m, ctx) => {
+        const base = ctx.ref.proto.package.split('.')[0];
+        m[base] = m[base] ?? {};
+        m[base][ctx.ref.proto.package] = m[base][ctx.ref.proto.package] ?? [];
+        m[base][ctx.ref.proto.package].push(ctx);
+        return m;
+    }, {});
+
+    return Object.entries(obj)
+        .map(([pkg, withServices]) => {
+
+            const serviceProtos = Object.entries(withServices)
+                .map(([pkg, withServices]) => {
+                    return {
+                        package: pkg,
+                        contexts: withServices
+                    }
+                });
+
+
+            return {
+                base: pkg,
+                pkgs: serviceProtos
+            };
+        });
+};
+
+export const parseContextsForRegistry = (contexts: TelescopeParseContext[]) => {
+    return contexts.map((ctx: TelescopeParseContext) => {
+        const responses = ctx.mutations.map(m => m.response)
+        const imports = ctx.mutations.reduce((m, msg) => {
+            m[msg.messageImport] = m[msg.messageImport] ?? [];
+            m[msg.messageImport].push(msg.message);
+            return m;
+        }, {})
+
+        return {
+            filename: ctx.ref.filename,
+            imports,
+            objects: ctx.types
+                .filter(type => !type.isNested)
+                .filter(type => !responses.includes(type.name))
+                .map(type => type.name)
+        }
+    });
+};
 
 export const parsePackage = (obj, bundleFile, importPaths, bundleVariables) => {
     if (!obj) return;
     if (obj.pkg && obj.files) {
         obj.files.forEach(file => {
             createFileBundle(obj, file.filename, bundleFile, importPaths, bundleVariables);
-            // TODO better namespacing for aminos/messages/encoding:
-            // file.outFiles.forEach(outFile =>
-            //     createFileBundle(obj, outFile.filename, bundleFile, importPaths, bundleVariables)
-            // );
         });
         return;
     }

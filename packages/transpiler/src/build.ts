@@ -166,10 +166,11 @@ export class TelescopeParseContext implements TelescopeParseContext {
         return this.mutations.length > 0;
     }
 
-    addType(name: string, obj: any) {
+    addType(name: string, obj: any, isNested: boolean) {
         this.types.push({
             name,
-            obj
+            obj,
+            isNested
         });
     }
     addMutation(mutation: ServiceMutation) {

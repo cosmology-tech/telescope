@@ -24,6 +24,8 @@ import { AminoMsg } from \\"@cosmjs/amino\\";
 import { isSet } from \\"@osmonauts/helpers\\";"
 `;
 
+exports[`bundle package registries and root file names 1`] = `undefined`;
+
 exports[`from package c deps 1`] = `
 Object {
   "./b": Array [

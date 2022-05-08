@@ -1,10 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`bundle package registries and root file names 1`] = `
+Object {
+  "cosmos": Object {
+    "bundle": "./chain1/cosmos/pkg.registry.ts",
+  },
+  "cosmos_proto": Object {
+    "bundle": "./chain1/cosmos_proto/pkg.registry.ts",
+  },
+  "cosmwasm": Object {
+    "bundle": "./chain1/cosmwasm/pkg.registry.ts",
+  },
+  "gogoproto": Object {
+    "bundle": "./chain1/gogoproto/pkg.registry.ts",
+  },
+  "google": Object {
+    "bundle": "./chain1/google/pkg.registry.ts",
+  },
+  "ibc": Object {
+    "bundle": "./chain1/ibc/pkg.registry.ts",
+  },
+  "ics23": Object {
+    "bundle": "./chain1/ics23/pkg.registry.ts",
+  },
+  "osmosis": Object {
+    "bundle": "./chain1/osmosis/pkg.registry.ts",
+  },
+  "secret": Object {
+    "bundle": "./chain1/secret/pkg.registry.ts",
+  },
+  "tendermint": Object {
+    "bundle": "./chain1/tendermint/pkg.registry.ts",
+  },
+}
+`;
+
+exports[`bundle packages root file names 1`] = `
+Object {
+  "cosmos": Object {
+    "bundle": "./chain1/cosmos/pkg.bundle.ts",
+  },
+  "cosmos_proto": Object {
+    "bundle": "./chain1/cosmos_proto/pkg.bundle.ts",
+  },
+  "cosmwasm": Object {
+    "bundle": "./chain1/cosmwasm/pkg.bundle.ts",
+  },
+  "gogoproto": Object {
+    "bundle": "./chain1/gogoproto/pkg.bundle.ts",
+  },
+  "google": Object {
+    "bundle": "./chain1/google/pkg.bundle.ts",
+  },
+  "ibc": Object {
+    "bundle": "./chain1/ibc/pkg.bundle.ts",
+  },
+  "ics23": Object {
+    "bundle": "./chain1/ics23/pkg.bundle.ts",
+  },
+  "osmosis": Object {
+    "bundle": "./chain1/osmosis/pkg.bundle.ts",
+  },
+  "secret": Object {
+    "bundle": "./chain1/secret/pkg.bundle.ts",
+  },
+  "tendermint": Object {
+    "bundle": "./chain1/tendermint/pkg.bundle.ts",
+  },
+}
+`;
+
 exports[`bundlePackages 1`] = `
 Object {
   "cosmos": Object {
     "base": "cosmos",
-    "bundle": "./chain1/cosmos/bundle.ts",
+    "bundle": "./chain1/cosmos/pkg.bundle.ts",
     "code": "import * as _2 from \\"../../../packages/transpiler/cosmos/app/v1alpha1/config\\";
 import * as _3 from \\"../../../packages/transpiler/cosmos/app/v1alpha1/module\\";
 import * as _4 from \\"../../../packages/transpiler/cosmos/app/v1alpha1/query\\";
@@ -302,14 +372,14 @@ export namespace cosmos {
   },
   "cosmos_proto": Object {
     "base": "cosmos_proto",
-    "bundle": "./chain1/cosmos_proto/bundle.ts",
+    "bundle": "./chain1/cosmos_proto/pkg.bundle.ts",
     "code": "import * as _1 from \\"../../../packages/transpiler/cosmos_proto/cosmos\\";
 export const cosmos_proto = { ..._1
 };",
   },
   "cosmwasm": Object {
     "base": "cosmwasm",
-    "bundle": "./chain1/cosmwasm/bundle.ts",
+    "bundle": "./chain1/cosmwasm/pkg.bundle.ts",
     "code": "import * as _94 from \\"../../../packages/transpiler/cosmwasm/wasm/v1/genesis\\";
 import * as _95 from \\"../../../packages/transpiler/cosmwasm/wasm/v1/ibc\\";
 import * as _96 from \\"../../../packages/transpiler/cosmwasm/wasm/v1/proposal\\";
@@ -330,14 +400,14 @@ export namespace cosmwasm {
   },
   "gogoproto": Object {
     "base": "gogoproto",
-    "bundle": "./chain1/gogoproto/bundle.ts",
+    "bundle": "./chain1/gogoproto/pkg.bundle.ts",
     "code": "import * as _100 from \\"../../../packages/transpiler/gogoproto/gogo\\";
 export const gogoproto = { ..._100
 };",
   },
   "google": Object {
     "base": "google",
-    "bundle": "./chain1/google/bundle.ts",
+    "bundle": "./chain1/google/pkg.bundle.ts",
     "code": "import * as _101 from \\"../../../packages/transpiler/google/api/annotations\\";
 import * as _102 from \\"../../../packages/transpiler/google/api/auth\\";
 import * as _103 from \\"../../../packages/transpiler/google/api/backend\\";
@@ -455,7 +525,7 @@ export namespace google {
   },
   "ibc": Object {
     "base": "ibc",
-    "bundle": "./chain1/ibc/bundle.ts",
+    "bundle": "./chain1/ibc/pkg.bundle.ts",
     "code": "import * as _153 from \\"../../../packages/transpiler/ibc/applications/transfer/v1/genesis\\";
 import * as _154 from \\"../../../packages/transpiler/ibc/applications/transfer/v1/query\\";
 import * as _155 from \\"../../../packages/transpiler/ibc/applications/transfer/v1/transfer\\";
@@ -547,14 +617,14 @@ export namespace ibc {
   },
   "ics23": Object {
     "base": "ics23",
-    "bundle": "./chain1/ics23/bundle.ts",
+    "bundle": "./chain1/ics23/pkg.bundle.ts",
     "code": "import * as _0 from \\"../../../packages/transpiler/confio/proofs\\";
 export const ics23 = { ..._0
 };",
   },
   "osmosis": Object {
     "base": "osmosis",
-    "bundle": "./chain1/osmosis/bundle.ts",
+    "bundle": "./chain1/osmosis/pkg.bundle.ts",
     "code": "import * as _177 from \\"../../../packages/transpiler/osmosis/claim/v1beta1/claim\\";
 import * as _178 from \\"../../../packages/transpiler/osmosis/claim/v1beta1/genesis\\";
 import * as _179 from \\"../../../packages/transpiler/osmosis/claim/v1beta1/params\\";
@@ -658,7 +728,7 @@ export namespace osmosis {
   },
   "secret": Object {
     "base": "secret",
-    "bundle": "./chain1/secret/bundle.ts",
+    "bundle": "./chain1/secret/pkg.bundle.ts",
     "code": "import * as _214 from \\"../../../packages/transpiler/secret/compute/v1beta1/genesis\\";
 import * as _215 from \\"../../../packages/transpiler/secret/compute/v1beta1/msg\\";
 import * as _216 from \\"../../../packages/transpiler/secret/compute/v1beta1/query\\";
@@ -691,7 +761,7 @@ export namespace secret {
   },
   "tendermint": Object {
     "base": "tendermint",
-    "bundle": "./chain1/tendermint/bundle.ts",
+    "bundle": "./chain1/tendermint/pkg.bundle.ts",
     "code": "import * as _223 from \\"../../../packages/transpiler/tendermint/abci/types\\";
 import * as _224 from \\"../../../packages/transpiler/tendermint/crypto/keys\\";
 import * as _225 from \\"../../../packages/transpiler/tendermint/crypto/proof\\";

@@ -2,7 +2,7 @@ import { TelescopeBuilder } from '../src';
 import * as t from '@babel/types';
 
 import { ProtoStore } from '@osmonauts/proto-parser'
-import { bundlePackages, getPackagesBundled } from '../src/bundle'
+import { bundlePackages, bundleRegistries, getPackagesBundled } from '../src/bundle'
 import generate from '@babel/generator';
 
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
@@ -29,6 +29,17 @@ it('bundlePackages', () => {
                 ...bundle.importPaths,
                 ...bundle.body
             ])).code
+        };
+        return m;
+    }, {});
+    expect(packaged).toMatchSnapshot();
+})
+
+it('bundle packages root file names', () => {
+    const bundled = bundlePackages(store, input);
+    const packaged = bundled.reduce((m, bundle) => {
+        m[bundle.base] = {
+            bundle: '.' + bundle.bundleFile.split('__fixtures__')[1],
         };
         return m;
     }, {});

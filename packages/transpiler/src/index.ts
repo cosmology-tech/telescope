@@ -13,6 +13,8 @@ export class TelescopeBuilder {
     protoDir: string;
     outPath: string;
 
+    contexts: TelescopeParseContext[] = [];
+
     constructor({ protoDir, outPath, store }: TelescopeInput & { store?: ProtoStore }) {
         this.protoDir = protoDir;
         this.outPath = outPath;
@@ -22,9 +24,11 @@ export class TelescopeBuilder {
     }
 
     context(ref) {
-        return new TelescopeParseContext(
+        const ctx = new TelescopeParseContext(
             ref, this.store
         );
+        this.contexts.push(ctx);
+        return ctx;
     }
 
     buildAll() {

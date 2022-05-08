@@ -75,7 +75,7 @@ export const parseType = (
         const name = getParsedObjectName(context.ref, {
             name: getKeyTypeEntryName(obj.name, field.parsedType.name)
         }, scope);
-        context.addType(name, keyTypeObject);
+        context.addType(name, keyTypeObject, true);
     });
 
     // parse nested names
@@ -84,7 +84,7 @@ export const parseType = (
         name = getParsedObjectName(context.ref, obj, scope);
     }
 
-    context.addType(name, obj);
+    context.addType(name, obj, isNested);
 
     // render nested LAST
     if (obj.nested) {
@@ -112,7 +112,7 @@ export const parseEnum = (
     if (isNested) {
         name = getParsedObjectName(context.ref, obj, scope);
     }
-    context.addType(name, obj);
+    context.addType(name, obj, isNested);
 };
 
 export const parseService = (
