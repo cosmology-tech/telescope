@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { SourceInfo } from "./source";
 import { NullValue } from "../../../protobuf/struct";
 export interface ParsedExpr {
@@ -33,7 +33,7 @@ export const ParsedExpr = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ParsedExpr {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParsedExpr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParsedExpr();
@@ -149,7 +149,7 @@ export const Expr = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr();
@@ -258,7 +258,7 @@ export const Expr_Ident = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr_Ident {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Ident {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Ident();
@@ -330,7 +330,7 @@ export const Expr_Select = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr_Select {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Select {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Select();
@@ -416,7 +416,7 @@ export const Expr_Call = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr_Call {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Call {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Call();
@@ -496,7 +496,7 @@ export const Expr_CreateList = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr_CreateList {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateList {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateList();
@@ -568,7 +568,7 @@ export const Expr_CreateStruct = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr_CreateStruct {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct();
@@ -659,7 +659,7 @@ export const Entry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Entry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
@@ -776,7 +776,7 @@ export const Expr_Comprehension = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Expr_Comprehension {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Comprehension {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Comprehension();
@@ -914,7 +914,7 @@ export const Literal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Literal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Literal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLiteral();

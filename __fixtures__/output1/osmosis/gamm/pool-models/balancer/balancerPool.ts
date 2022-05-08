@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
@@ -22,7 +22,7 @@ export const SmoothWeightChangeParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SmoothWeightChangeParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SmoothWeightChangeParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSmoothWeightChangeParams();
@@ -101,7 +101,7 @@ export const PoolParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PoolParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PoolParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
@@ -181,7 +181,7 @@ export const PoolAsset = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PoolAsset {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PoolAsset {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolAsset();
@@ -278,7 +278,7 @@ export const Pool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Pool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Pool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();

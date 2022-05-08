@@ -1,4 +1,5 @@
 import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 export interface SendAuthorization {
   spendLimit: Coin[];
@@ -19,7 +20,7 @@ export const SendAuthorization = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SendAuthorization {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SendAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendAuthorization();

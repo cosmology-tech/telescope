@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 export interface MsgSetWithdrawAddress {
   delegatorAddress: string;
@@ -26,7 +26,7 @@ export const MsgSetWithdrawAddress = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSetWithdrawAddress {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetWithdrawAddress {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetWithdrawAddress();
@@ -85,7 +85,7 @@ export const MsgSetWithdrawAddressResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSetWithdrawAddressResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetWithdrawAddressResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetWithdrawAddressResponse();
@@ -143,7 +143,7 @@ export const MsgWithdrawDelegatorReward = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgWithdrawDelegatorReward {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawDelegatorReward {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegatorReward();
@@ -210,7 +210,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgWithdrawDelegatorRewardResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawDelegatorRewardResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
@@ -276,7 +276,7 @@ export const MsgWithdrawValidatorCommission = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgWithdrawValidatorCommission {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawValidatorCommission {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawValidatorCommission();
@@ -336,7 +336,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgWithdrawValidatorCommissionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawValidatorCommissionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
@@ -408,7 +408,7 @@ export const MsgFundCommunityPool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgFundCommunityPool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgFundCommunityPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFundCommunityPool();
@@ -473,7 +473,7 @@ export const MsgFundCommunityPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgFundCommunityPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgFundCommunityPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFundCommunityPoolResponse();

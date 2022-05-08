@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Coin } from "../../base/v1beta1/coin";
 import { Params, Metadata } from "./bank";
@@ -28,7 +28,7 @@ export const QueryBalanceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryBalanceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceRequest();
@@ -95,7 +95,7 @@ export const QueryBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceResponse();
@@ -161,7 +161,7 @@ export const QueryAllBalancesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllBalancesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllBalancesRequest();
@@ -234,7 +234,7 @@ export const QueryAllBalancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllBalancesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllBalancesResponse();
@@ -313,7 +313,7 @@ export const QuerySpendableBalancesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySpendableBalancesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpendableBalancesRequest();
@@ -386,7 +386,7 @@ export const QuerySpendableBalancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySpendableBalancesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpendableBalancesResponse();
@@ -459,7 +459,7 @@ export const QueryTotalSupplyRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryTotalSupplyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSupplyRequest();
@@ -525,7 +525,7 @@ export const QueryTotalSupplyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryTotalSupplyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSupplyResponse();
@@ -598,7 +598,7 @@ export const QuerySupplyOfRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySupplyOfRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyOfRequest();
@@ -658,7 +658,7 @@ export const QuerySupplyOfResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySupplyOfResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyOfResponse();
@@ -710,7 +710,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -762,7 +762,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -822,7 +822,7 @@ export const QueryDenomsMetadataRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomsMetadataRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsMetadataRequest();
@@ -888,7 +888,7 @@ export const QueryDenomsMetadataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomsMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsMetadataResponse();
@@ -961,7 +961,7 @@ export const QueryDenomMetadataRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomMetadataRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomMetadataRequest();
@@ -1021,7 +1021,7 @@ export const QueryDenomMetadataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomMetadataResponse();
@@ -1087,7 +1087,7 @@ export const QueryDenomOwnersRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomOwnersRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomOwnersRequest();
@@ -1160,7 +1160,7 @@ export const DenomOwner = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DenomOwner {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DenomOwner {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomOwner();
@@ -1233,7 +1233,7 @@ export const QueryDenomOwnersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomOwnersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomOwnersResponse();

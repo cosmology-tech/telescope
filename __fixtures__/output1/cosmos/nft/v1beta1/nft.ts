@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 export interface Class {
   id: string;
@@ -56,7 +56,7 @@ export const Class = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Class {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Class {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClass();
@@ -182,7 +182,7 @@ export const NFT = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): NFT {
+  decode(input: _m0.Reader | Uint8Array, length?: number): NFT {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNFT();

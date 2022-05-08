@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Snapshot {
   height: Long;
   format: number;
@@ -43,7 +43,7 @@ export const Snapshot = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Snapshot {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Snapshot {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshot();
@@ -131,7 +131,7 @@ export const Metadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Metadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();
@@ -226,7 +226,7 @@ export const SnapshotItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotItem {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotItem {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotItem();
@@ -321,7 +321,7 @@ export const SnapshotStoreItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotStoreItem {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotStoreItem {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotStoreItem();
@@ -399,7 +399,7 @@ export const SnapshotIAVLItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotIAVLItem {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotIAVLItem {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotIAVLItem();
@@ -486,7 +486,7 @@ export const SnapshotExtensionMeta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotExtensionMeta {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotExtensionMeta {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotExtensionMeta();
@@ -553,7 +553,7 @@ export const SnapshotExtensionPayload = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotExtensionPayload {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotExtensionPayload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotExtensionPayload();
@@ -619,7 +619,7 @@ export const SnapshotKVItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotKVItem {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotKVItem {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotKVItem();
@@ -686,7 +686,7 @@ export const SnapshotSchema = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SnapshotSchema {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotSchema {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSnapshotSchema();

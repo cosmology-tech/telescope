@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { FeeToken } from "./feetoken";
 export interface UpdateFeeTokenProposal {
   title: string;
@@ -32,7 +32,7 @@ export const UpdateFeeTokenProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateFeeTokenProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateFeeTokenProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateFeeTokenProposal();

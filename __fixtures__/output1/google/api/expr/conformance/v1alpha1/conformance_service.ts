@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { ParsedExpr, SourcePosition } from "../../v1alpha1/syntax";
 import { Decl, CheckedExpr } from "../../v1alpha1/checked";
 import { ExprValue } from "../../v1alpha1/eval";
@@ -41,7 +41,7 @@ export const ParseRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ParseRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParseRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
@@ -128,7 +128,7 @@ export const ParseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ParseResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseResponse();
@@ -219,7 +219,7 @@ export const CheckRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -312,7 +312,7 @@ export const CheckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -391,7 +391,7 @@ export const EvalRequest_ExprValueMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvalRequest_ExprValueMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_ExprValueMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest_ExprValueMapEntry();
@@ -481,7 +481,7 @@ export const EvalRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvalRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest();
@@ -593,7 +593,7 @@ export const EvalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalResponse();
@@ -678,7 +678,7 @@ export const IssueDetails = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IssueDetails {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IssueDetails {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIssueDetails();

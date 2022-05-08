@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Struct_ValueMapEntry {
   key: string;
   value: Value;
@@ -25,7 +25,7 @@ export const Struct_ValueMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Struct_ValueMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Struct_ValueMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct_ValueMapEntry();
@@ -96,7 +96,7 @@ export const Struct = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Struct {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Struct {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct();
@@ -211,7 +211,7 @@ export const Value = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Value {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
@@ -311,7 +311,7 @@ export const ListValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();

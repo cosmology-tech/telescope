@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 export interface StakeAuthorization {
   maxTokens: Coin;
@@ -38,7 +38,7 @@ export const StakeAuthorization = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): StakeAuthorization {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StakeAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization();
@@ -119,7 +119,7 @@ export const StakeAuthorization_Validators = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): StakeAuthorization_Validators {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StakeAuthorization_Validators {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization_Validators();

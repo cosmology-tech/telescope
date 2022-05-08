@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface MsgSend {
   classId: string;
   id: string;
@@ -37,7 +37,7 @@ export const MsgSend = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSend {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSend {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
@@ -110,7 +110,7 @@ export const MsgSendResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSendResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();

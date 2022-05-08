@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 import { Input, Output } from "./bank";
 export interface MsgSend {
@@ -33,7 +33,7 @@ export const MsgSend = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSend {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSend {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
@@ -105,7 +105,7 @@ export const MsgSendResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSendResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();
@@ -163,7 +163,7 @@ export const MsgMultiSend = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgMultiSend {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMultiSend {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMultiSend();
@@ -233,7 +233,7 @@ export const MsgMultiSendResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgMultiSendResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMultiSendResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMultiSendResponse();

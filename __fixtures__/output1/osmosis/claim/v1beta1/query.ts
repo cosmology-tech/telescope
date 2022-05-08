@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 import { Action, ClaimRecord } from "./claim";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
@@ -14,7 +14,7 @@ export const QueryModuleAccountBalanceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryModuleAccountBalanceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountBalanceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceRequest();
@@ -66,7 +66,7 @@ export const QueryModuleAccountBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryModuleAccountBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountBalanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceResponse();
@@ -124,7 +124,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -176,7 +176,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -236,7 +236,7 @@ export const QueryClaimRecordRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClaimRecordRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimRecordRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordRequest();
@@ -296,7 +296,7 @@ export const QueryClaimRecordResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClaimRecordResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimRecordResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordResponse();
@@ -362,7 +362,7 @@ export const QueryClaimableForActionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClaimableForActionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableForActionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionRequest();
@@ -429,7 +429,7 @@ export const QueryClaimableForActionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClaimableForActionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableForActionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionResponse();
@@ -495,7 +495,7 @@ export const QueryTotalClaimableRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryTotalClaimableRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalClaimableRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableRequest();
@@ -555,7 +555,7 @@ export const QueryTotalClaimableResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryTotalClaimableResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalClaimableResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableResponse();

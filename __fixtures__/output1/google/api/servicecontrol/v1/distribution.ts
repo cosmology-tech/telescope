@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Distribution {
   count: Long;
   mean: number;
@@ -71,7 +71,7 @@ export const Distribution = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
@@ -212,7 +212,7 @@ export const Distribution_LinearBuckets = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution_LinearBuckets {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_LinearBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_LinearBuckets();
@@ -298,7 +298,7 @@ export const Distribution_ExponentialBuckets = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution_ExponentialBuckets {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExponentialBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExponentialBuckets();
@@ -375,7 +375,7 @@ export const Distribution_ExplicitBuckets = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution_ExplicitBuckets {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExplicitBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExplicitBuckets();

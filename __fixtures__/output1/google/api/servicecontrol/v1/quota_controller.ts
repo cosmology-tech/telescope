@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { MetricValueSet } from "./metric_value";
 import { Status } from "../../../rpc/status";
 export interface AllocateQuotaRequest {
@@ -33,7 +33,7 @@ export const AllocateQuotaRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllocateQuotaRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllocateQuotaRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllocateQuotaRequest();
@@ -113,7 +113,7 @@ export const QuotaOperation_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaOperation_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOperation_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOperation_StringMapEntry();
@@ -215,7 +215,7 @@ export const QuotaOperation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaOperation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOperation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOperation();
@@ -400,7 +400,7 @@ export const AllocateQuotaResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllocateQuotaResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllocateQuotaResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllocateQuotaResponse();
@@ -510,7 +510,7 @@ export const QuotaError = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaError {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaError {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaError();

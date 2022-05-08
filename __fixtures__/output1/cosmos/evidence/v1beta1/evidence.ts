@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 export interface Equivocation {
   height: Long;
@@ -36,7 +36,7 @@ export const Equivocation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Equivocation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Equivocation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEquivocation();

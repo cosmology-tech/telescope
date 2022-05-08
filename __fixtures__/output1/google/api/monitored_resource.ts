@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { LabelDescriptor } from "./label";
 import { LaunchStage } from "./launch_stage";
 import { Struct } from "../protobuf/struct";
@@ -52,7 +52,7 @@ export const MonitoredResourceDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MonitoredResourceDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceDescriptor();
@@ -159,7 +159,7 @@ export const MonitoredResource_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MonitoredResource_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResource_StringMapEntry();
@@ -236,7 +236,7 @@ export const MonitoredResource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MonitoredResource {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResource();
@@ -334,7 +334,7 @@ export const MonitoredResourceMetadata_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MonitoredResourceMetadata_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceMetadata_StringMapEntry();
@@ -411,7 +411,7 @@ export const MonitoredResourceMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MonitoredResourceMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceMetadata();

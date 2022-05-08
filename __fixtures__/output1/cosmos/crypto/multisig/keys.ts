@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 export interface LegacyAminoPubKey {
   threshold: number;
@@ -26,7 +26,7 @@ export const LegacyAminoPubKey = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LegacyAminoPubKey {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LegacyAminoPubKey {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLegacyAminoPubKey();

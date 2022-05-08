@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface StoreKVPair {
   storeKey: string;
   delete: boolean;
@@ -37,7 +37,7 @@ export const StoreKVPair = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): StoreKVPair {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StoreKVPair {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreKVPair();

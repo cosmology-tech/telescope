@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Params, Validator, Delegation, UnbondingDelegation, Redelegation } from "./staking";
 export interface GenesisState {
   params: Params;
@@ -62,7 +62,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -203,7 +203,7 @@ export const LastValidatorPower = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LastValidatorPower {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LastValidatorPower {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLastValidatorPower();

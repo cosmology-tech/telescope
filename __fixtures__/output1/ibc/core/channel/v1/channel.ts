@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Height } from "../../client/v1/client";
 export interface Channel {
   state: State;
@@ -44,7 +44,7 @@ export const Channel = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Channel {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Channel {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChannel();
@@ -173,7 +173,7 @@ export const IdentifiedChannel = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IdentifiedChannel {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedChannel {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedChannel();
@@ -317,7 +317,7 @@ export const Counterparty = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Counterparty {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Counterparty {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCounterparty();
@@ -426,7 +426,7 @@ export const Packet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Packet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Packet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacket();
@@ -553,7 +553,7 @@ export const PacketState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PacketState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PacketState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketState();
@@ -640,7 +640,7 @@ export const Acknowledgement = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Acknowledgement {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Acknowledgement {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAcknowledgement();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../protobuf/timestamp";
 import { Any } from "../protobuf/any";
 export interface Distribution {
@@ -61,7 +61,7 @@ export const Distribution = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
@@ -187,7 +187,7 @@ export const Distribution_Range = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution_Range {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_Range {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_Range();
@@ -266,7 +266,7 @@ export const Distribution_BucketOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution_BucketOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_BucketOptions();
@@ -352,7 +352,7 @@ export const Linear = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Linear {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Linear {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLinear();
@@ -438,7 +438,7 @@ export const Exponential = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Exponential {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Exponential {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExponential();
@@ -515,7 +515,7 @@ export const Explicit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Explicit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Explicit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplicit();
@@ -598,7 +598,7 @@ export const Distribution_Exemplar = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Distribution_Exemplar {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_Exemplar {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_Exemplar();

@@ -1,4 +1,5 @@
 import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { GrantAuthorization } from "./authz";
 export interface GenesisState {
   authorization: GrantAuthorization[];
@@ -19,7 +20,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();

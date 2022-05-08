@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Any } from "../../../../google/protobuf/any";
 import { ConnectionEnd } from "../../../core/connection/v1/connection";
 import { Channel } from "../../../core/channel/v1/channel";
@@ -40,7 +40,7 @@ export const ClientState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClientState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -133,7 +133,7 @@ export const ConsensusState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsensusState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusState();
@@ -231,7 +231,7 @@ export const Header = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Header {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Header {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
@@ -337,7 +337,7 @@ export const Misbehaviour = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Misbehaviour {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Misbehaviour {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMisbehaviour();
@@ -436,7 +436,7 @@ export const SignatureAndData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignatureAndData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureAndData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureAndData();
@@ -523,7 +523,7 @@ export const TimestampedSignatureData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TimestampedSignatureData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TimestampedSignatureData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTimestampedSignatureData();
@@ -614,7 +614,7 @@ export const SignBytes = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignBytes {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignBytes {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignBytes();
@@ -740,7 +740,7 @@ export const HeaderData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): HeaderData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): HeaderData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeaderData();
@@ -813,7 +813,7 @@ export const ClientStateData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClientStateData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientStateData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientStateData();
@@ -886,7 +886,7 @@ export const ConsensusStateData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsensusStateData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusStateData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusStateData();
@@ -959,7 +959,7 @@ export const ConnectionStateData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConnectionStateData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionStateData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionStateData();
@@ -1032,7 +1032,7 @@ export const ChannelStateData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ChannelStateData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ChannelStateData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChannelStateData();
@@ -1105,7 +1105,7 @@ export const PacketCommitmentData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PacketCommitmentData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PacketCommitmentData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketCommitmentData();
@@ -1178,7 +1178,7 @@ export const PacketAcknowledgementData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PacketAcknowledgementData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PacketAcknowledgementData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketAcknowledgementData();
@@ -1245,7 +1245,7 @@ export const PacketReceiptAbsenceData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PacketReceiptAbsenceData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PacketReceiptAbsenceData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketReceiptAbsenceData();
@@ -1311,7 +1311,7 @@ export const NextSequenceRecvData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): NextSequenceRecvData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): NextSequenceRecvData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNextSequenceRecvData();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { ProposalExecutorResult } from "./types";
 export interface EventCreateGroup {
   groupId: Long;
@@ -20,7 +20,7 @@ export const EventCreateGroup = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventCreateGroup {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreateGroup();
@@ -80,7 +80,7 @@ export const EventUpdateGroup = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventUpdateGroup {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateGroup();
@@ -140,7 +140,7 @@ export const EventCreateGroupPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventCreateGroupPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateGroupPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreateGroupPolicy();
@@ -200,7 +200,7 @@ export const EventUpdateGroupPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventUpdateGroupPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateGroupPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateGroupPolicy();
@@ -260,7 +260,7 @@ export const EventSubmitProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventSubmitProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventSubmitProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventSubmitProposal();
@@ -320,7 +320,7 @@ export const EventWithdrawProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventWithdrawProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventWithdrawProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventWithdrawProposal();
@@ -380,7 +380,7 @@ export const EventVote = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventVote {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventVote {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventVote();
@@ -446,7 +446,7 @@ export const EventExec = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventExec {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventExec {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventExec();
@@ -519,7 +519,7 @@ export const EventLeaveGroup = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventLeaveGroup {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventLeaveGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventLeaveGroup();

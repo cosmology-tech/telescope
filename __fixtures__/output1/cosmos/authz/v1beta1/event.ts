@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface EventGrant {
   msgTypeUrl: string;
   granter: string;
@@ -31,7 +31,7 @@ export const EventGrant = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventGrant {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventGrant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventGrant();
@@ -117,7 +117,7 @@ export const EventRevoke = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EventRevoke {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventRevoke {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventRevoke();

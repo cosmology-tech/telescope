@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface MsgStoreCode {
   sender: Uint8Array;
@@ -38,7 +38,7 @@ export const MsgStoreCode = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgStoreCode {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCode {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCode();
@@ -155,7 +155,7 @@ export const MsgInstantiateContract = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgInstantiateContract {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgInstantiateContract {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgInstantiateContract();
@@ -293,7 +293,7 @@ export const MsgExecuteContract = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExecuteContract {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecuteContract {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContract();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface AppDescriptor {
   authn: AuthnDescriptor;
   chain: ChainDescriptor;
@@ -49,7 +49,7 @@ export const AppDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AppDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AppDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAppDescriptor();
@@ -150,7 +150,7 @@ export const TxDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TxDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TxDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxDescriptor();
@@ -223,7 +223,7 @@ export const AuthnDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuthnDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuthnDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthnDescriptor();
@@ -301,7 +301,7 @@ export const SigningModeDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SigningModeDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SigningModeDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningModeDescriptor();
@@ -375,7 +375,7 @@ export const ChainDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ChainDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ChainDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChainDescriptor();
@@ -435,7 +435,7 @@ export const CodecDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CodecDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CodecDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodecDescriptor();
@@ -513,7 +513,7 @@ export const InterfaceDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): InterfaceDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceDescriptor();
@@ -604,7 +604,7 @@ export const InterfaceImplementerDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): InterfaceImplementerDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceImplementerDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceImplementerDescriptor();
@@ -677,7 +677,7 @@ export const InterfaceAcceptingMessageDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): InterfaceAcceptingMessageDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceAcceptingMessageDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceAcceptingMessageDescriptor();
@@ -749,7 +749,7 @@ export const ConfigurationDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConfigurationDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigurationDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigurationDescriptor();
@@ -809,7 +809,7 @@ export const MsgDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDescriptor();
@@ -861,7 +861,7 @@ export const GetAuthnDescriptorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetAuthnDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorRequest();
@@ -913,7 +913,7 @@ export const GetAuthnDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetAuthnDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorResponse();
@@ -965,7 +965,7 @@ export const GetChainDescriptorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetChainDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorRequest();
@@ -1017,7 +1017,7 @@ export const GetChainDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetChainDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorResponse();
@@ -1069,7 +1069,7 @@ export const GetCodecDescriptorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetCodecDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorRequest();
@@ -1121,7 +1121,7 @@ export const GetCodecDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetCodecDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorResponse();
@@ -1173,7 +1173,7 @@ export const GetConfigurationDescriptorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetConfigurationDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorRequest();
@@ -1225,7 +1225,7 @@ export const GetConfigurationDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetConfigurationDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorResponse();
@@ -1277,7 +1277,7 @@ export const GetQueryServicesDescriptorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetQueryServicesDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorRequest();
@@ -1329,7 +1329,7 @@ export const GetQueryServicesDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetQueryServicesDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorResponse();
@@ -1381,7 +1381,7 @@ export const GetTxDescriptorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetTxDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorRequest();
@@ -1433,7 +1433,7 @@ export const GetTxDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetTxDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorResponse();
@@ -1493,7 +1493,7 @@ export const QueryServicesDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryServicesDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryServicesDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryServicesDescriptor();
@@ -1571,7 +1571,7 @@ export const QueryServiceDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryServiceDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryServiceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryServiceDescriptor();
@@ -1657,7 +1657,7 @@ export const QueryMethodDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryMethodDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryMethodDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryMethodDescriptor();

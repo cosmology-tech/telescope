@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 export interface MsgSuperfluidDelegate {
   sender: string;
@@ -32,7 +32,7 @@ export const MsgSuperfluidDelegate = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSuperfluidDelegate {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidDelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegate();
@@ -98,7 +98,7 @@ export const MsgSuperfluidDelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSuperfluidDelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidDelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegateResponse();
@@ -156,7 +156,7 @@ export const MsgSuperfluidUndelegate = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSuperfluidUndelegate {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUndelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegate();
@@ -215,7 +215,7 @@ export const MsgSuperfluidUndelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSuperfluidUndelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUndelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegateResponse();
@@ -273,7 +273,7 @@ export const MsgSuperfluidUnbondLock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSuperfluidUnbondLock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUnbondLock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLock();
@@ -332,7 +332,7 @@ export const MsgSuperfluidUnbondLockResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSuperfluidUnbondLockResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUnbondLockResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLockResponse();
@@ -396,7 +396,7 @@ export const MsgLockAndSuperfluidDelegate = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgLockAndSuperfluidDelegate {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegate();
@@ -476,7 +476,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgLockAndSuperfluidDelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();

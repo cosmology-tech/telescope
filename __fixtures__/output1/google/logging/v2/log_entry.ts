@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
 import { MonitoredResource } from "../../api/monitored_resource";
 import { Any } from "../../protobuf/any";
 import { Struct } from "../../protobuf/struct";
@@ -31,7 +31,7 @@ export const LogEntry_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogEntry_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry_StringMapEntry();
@@ -194,7 +194,7 @@ export const LogEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
@@ -409,7 +409,7 @@ export const LogEntryOperation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogEntryOperation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntryOperation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntryOperation();
@@ -502,7 +502,7 @@ export const LogEntrySourceLocation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogEntrySourceLocation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntrySourceLocation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntrySourceLocation();
@@ -588,7 +588,7 @@ export const LogSplit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogSplit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogSplit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSplit();

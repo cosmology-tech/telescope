@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Counterparty, Version } from "./connection";
 import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
@@ -46,7 +46,7 @@ export const MsgConnectionOpenInit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenInit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenInit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInit();
@@ -126,7 +126,7 @@ export const MsgConnectionOpenInitResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenInitResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenInitResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInitResponse();
@@ -244,7 +244,7 @@ export const MsgConnectionOpenTry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenTry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenTry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTry();
@@ -379,7 +379,7 @@ export const MsgConnectionOpenTryResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenTryResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenTryResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTryResponse();
@@ -485,7 +485,7 @@ export const MsgConnectionOpenAck = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenAck {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenAck {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAck();
@@ -600,7 +600,7 @@ export const MsgConnectionOpenAckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenAckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenAckResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAckResponse();
@@ -670,7 +670,7 @@ export const MsgConnectionOpenConfirm = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenConfirm {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenConfirm {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirm();
@@ -743,7 +743,7 @@ export const MsgConnectionOpenConfirmResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgConnectionOpenConfirmResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenConfirmResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirmResponse();

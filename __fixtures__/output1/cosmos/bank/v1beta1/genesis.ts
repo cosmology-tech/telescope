@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Params, Metadata } from "./bank";
 import { Coin } from "../../base/v1beta1/coin";
 export interface GenesisState {
@@ -39,7 +39,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -142,7 +142,7 @@ export const Balance = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Balance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Balance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalance();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
 import { Params } from "./auth";
@@ -22,7 +22,7 @@ export const QueryAccountsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAccountsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsRequest();
@@ -88,7 +88,7 @@ export const QueryAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -161,7 +161,7 @@ export const QueryAccountRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAccountRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountRequest();
@@ -213,7 +213,7 @@ export const QueryModuleAccountsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryModuleAccountsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsRequest();
@@ -265,7 +265,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -325,7 +325,7 @@ export const QueryAccountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountResponse();
@@ -377,7 +377,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -429,7 +429,7 @@ export const QueryModuleAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryModuleAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsResponse();
@@ -487,7 +487,7 @@ export const Bech32PrefixRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Bech32PrefixRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixRequest();
@@ -539,7 +539,7 @@ export const Bech32PrefixResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Bech32PrefixResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixResponse();
@@ -599,7 +599,7 @@ export const AddressBytesToStringRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AddressBytesToStringRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringRequest();
@@ -659,7 +659,7 @@ export const AddressBytesToStringResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AddressBytesToStringResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringResponse();
@@ -719,7 +719,7 @@ export const AddressStringToBytesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AddressStringToBytesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesRequest();
@@ -779,7 +779,7 @@ export const AddressStringToBytesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AddressStringToBytesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesResponse();

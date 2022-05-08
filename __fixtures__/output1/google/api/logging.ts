@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface Logging {
   producerDestinations: LoggingDestination[];
   consumerDestinations: LoggingDestination[];
@@ -25,7 +25,7 @@ export const Logging = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Logging {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Logging {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging();
@@ -109,7 +109,7 @@ export const Logging_LoggingDestination = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Logging_LoggingDestination {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Logging_LoggingDestination {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging_LoggingDestination();

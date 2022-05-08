@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet } from "@osmonauts/helpers";
 import { Value } from "./value";
 import { Status } from "../../../rpc/status";
 export interface EvalState {
@@ -27,7 +27,7 @@ export const EvalState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvalState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState();
@@ -111,7 +111,7 @@ export const EvalState_Result = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvalState_Result {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalState_Result {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState_Result();
@@ -190,7 +190,7 @@ export const ExprValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ExprValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExprValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExprValue();
@@ -264,7 +264,7 @@ export const ErrorSet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ErrorSet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorSet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorSet();
@@ -333,7 +333,7 @@ export const UnknownSet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UnknownSet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UnknownSet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnknownSet();

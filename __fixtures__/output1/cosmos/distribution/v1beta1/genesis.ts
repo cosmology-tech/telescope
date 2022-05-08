@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { DecCoin } from "../../base/v1beta1/coin";
 import { ValidatorAccumulatedCommission, ValidatorHistoricalRewards, ValidatorCurrentRewards, DelegatorStartingInfo, ValidatorSlashEvent, Params, FeePool } from "./distribution";
 export interface DelegatorWithdrawInfo {
@@ -27,7 +27,7 @@ export const DelegatorWithdrawInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DelegatorWithdrawInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorWithdrawInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorWithdrawInfo();
@@ -100,7 +100,7 @@ export const ValidatorOutstandingRewardsRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorOutstandingRewardsRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorOutstandingRewardsRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewardsRecord();
@@ -179,7 +179,7 @@ export const ValidatorAccumulatedCommissionRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorAccumulatedCommissionRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorAccumulatedCommissionRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommissionRecord();
@@ -258,7 +258,7 @@ export const ValidatorHistoricalRewardsRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorHistoricalRewardsRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorHistoricalRewardsRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewardsRecord();
@@ -338,7 +338,7 @@ export const ValidatorCurrentRewardsRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorCurrentRewardsRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorCurrentRewardsRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewardsRecord();
@@ -417,7 +417,7 @@ export const DelegatorStartingInfoRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DelegatorStartingInfoRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorStartingInfoRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfoRecord();
@@ -509,7 +509,7 @@ export const ValidatorSlashEventRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorSlashEventRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSlashEventRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEventRecord();
@@ -644,7 +644,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();

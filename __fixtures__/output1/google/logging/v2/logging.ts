@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration } from "@osmonauts/helpers";
 import { MonitoredResource, MonitoredResourceDescriptor } from "../../api/monitored_resource";
 import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
@@ -23,7 +23,7 @@ export const DeleteLogRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteLogRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteLogRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteLogRequest();
@@ -89,7 +89,7 @@ export const WriteLogEntriesRequest_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WriteLogEntriesRequest_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesRequest_StringMapEntry();
@@ -191,7 +191,7 @@ export const WriteLogEntriesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WriteLogEntriesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesRequest();
@@ -308,7 +308,7 @@ export const WriteLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WriteLogEntriesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesResponse();
@@ -366,7 +366,7 @@ export const WriteLogEntriesPartialErrors_StatusMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WriteLogEntriesPartialErrors_StatusMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors_StatusMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesPartialErrors_StatusMapEntry();
@@ -437,7 +437,7 @@ export const WriteLogEntriesPartialErrors = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WriteLogEntriesPartialErrors {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesPartialErrors();
@@ -546,7 +546,7 @@ export const ListLogEntriesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListLogEntriesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogEntriesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogEntriesRequest();
@@ -645,7 +645,7 @@ export const ListLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListLogEntriesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogEntriesResponse();
@@ -724,7 +724,7 @@ export const ListMonitoredResourceDescriptorsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListMonitoredResourceDescriptorsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListMonitoredResourceDescriptorsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListMonitoredResourceDescriptorsRequest();
@@ -797,7 +797,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListMonitoredResourceDescriptorsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListMonitoredResourceDescriptorsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListMonitoredResourceDescriptorsResponse();
@@ -888,7 +888,7 @@ export const ListLogsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListLogsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogsRequest();
@@ -980,7 +980,7 @@ export const ListLogsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListLogsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogsResponse();
@@ -1061,7 +1061,7 @@ export const TailLogEntriesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TailLogEntriesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesRequest();
@@ -1146,7 +1146,7 @@ export const TailLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TailLogEntriesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesResponse();
@@ -1230,7 +1230,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TailLogEntriesResponse_SuppressionInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesResponse_SuppressionInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();

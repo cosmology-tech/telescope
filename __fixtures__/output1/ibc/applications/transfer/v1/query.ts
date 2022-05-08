@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { DenomTrace, Params } from "./transfer";
 export interface QueryDenomTraceRequest {
@@ -21,7 +21,7 @@ export const QueryDenomTraceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomTraceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTraceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTraceRequest();
@@ -81,7 +81,7 @@ export const QueryDenomTraceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomTraceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTraceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTraceResponse();
@@ -141,7 +141,7 @@ export const QueryDenomTracesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomTracesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTracesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTracesRequest();
@@ -207,7 +207,7 @@ export const QueryDenomTracesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomTracesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomTracesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTracesResponse();
@@ -272,7 +272,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -324,7 +324,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Any } from "../../../../google/protobuf/any";
 import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
@@ -22,7 +22,7 @@ export const QueryClientStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStateRequest();
@@ -94,7 +94,7 @@ export const QueryClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStateResponse();
@@ -168,7 +168,7 @@ export const QueryClientStatesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientStatesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStatesRequest();
@@ -234,7 +234,7 @@ export const QueryClientStatesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientStatesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStatesResponse();
@@ -325,7 +325,7 @@ export const QueryConsensusStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConsensusStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConsensusStateRequest();
@@ -418,7 +418,7 @@ export const QueryConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConsensusStateResponse();
@@ -498,7 +498,7 @@ export const QueryConsensusStatesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConsensusStatesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStatesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConsensusStatesRequest();
@@ -571,7 +571,7 @@ export const QueryConsensusStatesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConsensusStatesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStatesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConsensusStatesResponse();
@@ -644,7 +644,7 @@ export const QueryClientStatusRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientStatusRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatusRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStatusRequest();
@@ -704,7 +704,7 @@ export const QueryClientStatusResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientStatusResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatusResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStatusResponse();
@@ -756,7 +756,7 @@ export const QueryClientParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientParamsRequest();
@@ -808,7 +808,7 @@ export const QueryClientParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientParamsResponse();
@@ -860,7 +860,7 @@ export const QueryUpgradedClientStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUpgradedClientStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedClientStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedClientStateRequest();
@@ -912,7 +912,7 @@ export const QueryUpgradedClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUpgradedClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedClientStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedClientStateResponse();
@@ -964,7 +964,7 @@ export const QueryUpgradedConsensusStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUpgradedConsensusStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateRequest();
@@ -1016,7 +1016,7 @@ export const QueryUpgradedConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUpgradedConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateResponse();

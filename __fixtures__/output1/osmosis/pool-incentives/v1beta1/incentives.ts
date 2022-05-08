@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Duration } from "../../../google/protobuf/duration";
 export interface Params {
   mintedDenom: string;
@@ -20,7 +20,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -80,7 +80,7 @@ export const LockableDurationsInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockableDurationsInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockableDurationsInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();
@@ -152,7 +152,7 @@ export const DistrInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DistrInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DistrInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrInfo();
@@ -231,7 +231,7 @@ export const DistrRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DistrRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DistrRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrRecord();

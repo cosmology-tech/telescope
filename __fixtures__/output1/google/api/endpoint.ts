@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Endpoint {
   name: string;
   aliases: string[];
@@ -37,7 +37,7 @@ export const Endpoint = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Endpoint {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Endpoint {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndpoint();

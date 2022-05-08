@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
 export interface Plan {
@@ -43,7 +43,7 @@ export const Plan = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Plan {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Plan {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlan();
@@ -143,7 +143,7 @@ export const SoftwareUpgradeProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SoftwareUpgradeProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SoftwareUpgradeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSoftwareUpgradeProposal();
@@ -223,7 +223,7 @@ export const CancelSoftwareUpgradeProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CancelSoftwareUpgradeProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelSoftwareUpgradeProposal();
@@ -296,7 +296,7 @@ export const ModuleVersion = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleVersion {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleVersion {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleVersion();

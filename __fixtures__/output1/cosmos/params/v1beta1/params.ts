@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface ParameterChangeProposal {
   title: string;
   description: string;
@@ -31,7 +31,7 @@ export const ParameterChangeProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ParameterChangeProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParameterChangeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParameterChangeProposal();
@@ -123,7 +123,7 @@ export const ParamChange = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ParamChange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParamChange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamChange();

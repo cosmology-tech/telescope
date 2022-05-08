@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Params } from "./mint";
 export interface QueryParamsRequest {}
 
@@ -12,7 +12,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -64,7 +64,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -116,7 +116,7 @@ export const QueryEpochProvisionsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryEpochProvisionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochProvisionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochProvisionsRequest();
@@ -168,7 +168,7 @@ export const QueryEpochProvisionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryEpochProvisionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochProvisionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochProvisionsResponse();

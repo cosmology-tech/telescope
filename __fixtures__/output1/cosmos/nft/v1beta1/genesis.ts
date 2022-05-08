@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 import { Class, NFT } from "./nft";
 export interface GenesisState {
   classes: Class[];
@@ -26,7 +26,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -110,7 +110,7 @@ export const Entry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Entry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();

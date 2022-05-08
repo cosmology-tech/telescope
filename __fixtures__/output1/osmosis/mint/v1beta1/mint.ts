@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 export interface Minter {
   epochProvisions: string;
 }
@@ -19,7 +19,7 @@ export const Minter = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Minter {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Minter {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
@@ -85,7 +85,7 @@ export const WeightedAddress = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WeightedAddress {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WeightedAddress {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedAddress();
@@ -170,7 +170,7 @@ export const DistributionProportions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DistributionProportions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DistributionProportions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistributionProportions();
@@ -293,7 +293,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface Monitoring {
   producerDestinations: MonitoringDestination[];
   consumerDestinations: MonitoringDestination[];
@@ -25,7 +25,7 @@ export const Monitoring = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Monitoring {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Monitoring {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoring();
@@ -109,7 +109,7 @@ export const Monitoring_MonitoringDestination = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Monitoring_MonitoringDestination {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Monitoring_MonitoringDestination {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoring_MonitoringDestination();

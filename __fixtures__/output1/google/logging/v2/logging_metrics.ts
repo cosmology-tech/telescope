@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { MetricDescriptor } from "../../api/metric";
 import { Timestamp } from "../../protobuf/timestamp";
 export interface LogMetric_StringMapEntry {
@@ -27,7 +27,7 @@ export const LogMetric_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogMetric_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric_StringMapEntry();
@@ -147,7 +147,7 @@ export const LogMetric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogMetric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric();
@@ -315,7 +315,7 @@ export const ListLogMetricsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListLogMetricsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsRequest();
@@ -395,7 +395,7 @@ export const ListLogMetricsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListLogMetricsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsResponse();
@@ -468,7 +468,7 @@ export const GetLogMetricRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetLogMetricRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLogMetricRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLogMetricRequest();
@@ -534,7 +534,7 @@ export const CreateLogMetricRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateLogMetricRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateLogMetricRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateLogMetricRequest();
@@ -607,7 +607,7 @@ export const UpdateLogMetricRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateLogMetricRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateLogMetricRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateLogMetricRequest();
@@ -674,7 +674,7 @@ export const DeleteLogMetricRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteLogMetricRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteLogMetricRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteLogMetricRequest();

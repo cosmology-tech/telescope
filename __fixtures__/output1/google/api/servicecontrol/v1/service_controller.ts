@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Operation } from "./operation";
 import { CheckError } from "./check_error";
 import { Status } from "../../../rpc/status";
@@ -34,7 +34,7 @@ export const CheckRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -132,7 +132,7 @@ export const CheckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -232,7 +232,7 @@ export const CheckResponse_CheckInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckResponse_CheckInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_CheckInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse_CheckInfo();
@@ -316,7 +316,7 @@ export const CheckResponse_ConsumerInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckResponse_ConsumerInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_ConsumerInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse_ConsumerInfo();
@@ -421,7 +421,7 @@ export const ReportRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ReportRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReportRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportRequest();
@@ -513,7 +513,7 @@ export const ReportResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ReportResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse();
@@ -599,7 +599,7 @@ export const ReportResponse_ReportError = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ReportResponse_ReportError {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReportResponse_ReportError {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse_ReportError();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "./resources";
 import { Service } from "../../service";
 import { Any } from "../../../protobuf/any";
@@ -40,7 +40,7 @@ export const ListServicesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServicesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesRequest();
@@ -127,7 +127,7 @@ export const ListServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -200,7 +200,7 @@ export const GetServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRequest();
@@ -260,7 +260,7 @@ export const CreateServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateServiceRequest();
@@ -320,7 +320,7 @@ export const DeleteServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteServiceRequest();
@@ -380,7 +380,7 @@ export const UndeleteServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UndeleteServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteServiceRequest();
@@ -440,7 +440,7 @@ export const UndeleteServiceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UndeleteServiceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteServiceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteServiceResponse();
@@ -512,7 +512,7 @@ export const GetServiceConfigRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceConfigRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceConfigRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceConfigRequest();
@@ -609,7 +609,7 @@ export const ListServiceConfigsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServiceConfigsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceConfigsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceConfigsRequest();
@@ -689,7 +689,7 @@ export const ListServiceConfigsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServiceConfigsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceConfigsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceConfigsResponse();
@@ -768,7 +768,7 @@ export const CreateServiceConfigRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateServiceConfigRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateServiceConfigRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateServiceConfigRequest();
@@ -847,7 +847,7 @@ export const SubmitConfigSourceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SubmitConfigSourceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SubmitConfigSourceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubmitConfigSourceRequest();
@@ -921,7 +921,7 @@ export const SubmitConfigSourceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SubmitConfigSourceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SubmitConfigSourceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubmitConfigSourceResponse();
@@ -987,7 +987,7 @@ export const CreateServiceRolloutRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateServiceRolloutRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateServiceRolloutRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateServiceRolloutRequest();
@@ -1072,7 +1072,7 @@ export const ListServiceRolloutsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServiceRolloutsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceRolloutsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceRolloutsRequest();
@@ -1159,7 +1159,7 @@ export const ListServiceRolloutsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServiceRolloutsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceRolloutsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceRolloutsResponse();
@@ -1238,7 +1238,7 @@ export const GetServiceRolloutRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceRolloutRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRolloutRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRolloutRequest();
@@ -1311,7 +1311,7 @@ export const GenerateConfigReportRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenerateConfigReportRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenerateConfigReportRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateConfigReportRequest();
@@ -1396,7 +1396,7 @@ export const GenerateConfigReportResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenerateConfigReportResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenerateConfigReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateConfigReportResponse();

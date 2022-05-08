@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface MsgVerifyInvariant {
   sender: string;
   invariantModuleName: string;
@@ -31,7 +31,7 @@ export const MsgVerifyInvariant = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVerifyInvariant {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariant();
@@ -97,7 +97,7 @@ export const MsgVerifyInvariantResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVerifyInvariantResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariantResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariantResponse();

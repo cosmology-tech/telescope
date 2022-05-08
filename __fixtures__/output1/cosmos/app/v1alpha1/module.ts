@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface ModuleDescriptor {
   goImport: string;
   usePackage: PackageReference[];
@@ -31,7 +31,7 @@ export const ModuleDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleDescriptor();
@@ -122,7 +122,7 @@ export const PackageReference = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PackageReference {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PackageReference {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePackageReference();
@@ -189,7 +189,7 @@ export const MigrateFromInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MigrateFromInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MigrateFromInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMigrateFromInfo();

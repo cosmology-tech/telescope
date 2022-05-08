@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 export interface Params {
   sendEnabled: SendEnabled[];
@@ -26,7 +26,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -105,7 +105,7 @@ export const SendEnabled = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SendEnabled {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SendEnabled {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendEnabled();
@@ -178,7 +178,7 @@ export const Input = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Input {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Input {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInput();
@@ -257,7 +257,7 @@ export const Output = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Output {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Output {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutput();
@@ -330,7 +330,7 @@ export const Supply = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Supply {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Supply {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSupply();
@@ -408,7 +408,7 @@ export const DenomUnit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DenomUnit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DenomUnit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomUnit();
@@ -529,7 +529,7 @@ export const Metadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Metadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();

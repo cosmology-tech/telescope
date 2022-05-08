@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { ParamChange } from "./params";
 export interface QueryParamsRequest {
   subspace: string;
@@ -26,7 +26,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -93,7 +93,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -145,7 +145,7 @@ export const QuerySubspacesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySubspacesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacesRequest();
@@ -197,7 +197,7 @@ export const QuerySubspacesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySubspacesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacesResponse();
@@ -269,7 +269,7 @@ export const Subspace = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Subspace {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Subspace {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubspace();

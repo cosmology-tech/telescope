@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 export interface Params {
@@ -31,7 +31,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

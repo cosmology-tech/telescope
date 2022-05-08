@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { CommitmentProof } from "../../../../confio/proofs";
 export interface MerkleRoot {
   hash: Uint8Array;
@@ -20,7 +20,7 @@ export const MerkleRoot = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MerkleRoot {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MerkleRoot {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerkleRoot();
@@ -80,7 +80,7 @@ export const MerklePrefix = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MerklePrefix {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MerklePrefix {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerklePrefix();
@@ -140,7 +140,7 @@ export const MerklePath = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MerklePath {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MerklePath {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerklePath();
@@ -205,7 +205,7 @@ export const MerkleProof = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MerkleProof {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MerkleProof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerkleProof();

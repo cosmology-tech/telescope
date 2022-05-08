@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Params } from "./params";
 import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, SuperfluidDelegationRecord } from "./superfluid";
@@ -16,7 +16,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -68,7 +68,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -128,7 +128,7 @@ export const AssetTypeRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AssetTypeRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AssetTypeRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetTypeRequest();
@@ -188,7 +188,7 @@ export const AssetTypeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AssetTypeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AssetTypeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetTypeResponse();
@@ -240,7 +240,7 @@ export const AllAssetsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllAssetsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllAssetsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllAssetsRequest();
@@ -292,7 +292,7 @@ export const AllAssetsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllAssetsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllAssetsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllAssetsResponse();
@@ -358,7 +358,7 @@ export const AssetMultiplierRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AssetMultiplierRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AssetMultiplierRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetMultiplierRequest();
@@ -418,7 +418,7 @@ export const AssetMultiplierResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AssetMultiplierResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AssetMultiplierResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetMultiplierResponse();
@@ -496,7 +496,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidIntermediaryAccountInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidIntermediaryAccountInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidIntermediaryAccountInfo();
@@ -577,7 +577,7 @@ export const AllIntermediaryAccountsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllIntermediaryAccountsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllIntermediaryAccountsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllIntermediaryAccountsRequest();
@@ -643,7 +643,7 @@ export const AllIntermediaryAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllIntermediaryAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllIntermediaryAccountsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllIntermediaryAccountsResponse();
@@ -716,7 +716,7 @@ export const ConnectedIntermediaryAccountRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConnectedIntermediaryAccountRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectedIntermediaryAccountRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectedIntermediaryAccountRequest();
@@ -776,7 +776,7 @@ export const ConnectedIntermediaryAccountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConnectedIntermediaryAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectedIntermediaryAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectedIntermediaryAccountResponse();
@@ -828,7 +828,7 @@ export const TotalSuperfluidDelegationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TotalSuperfluidDelegationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TotalSuperfluidDelegationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTotalSuperfluidDelegationsRequest();
@@ -880,7 +880,7 @@ export const TotalSuperfluidDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TotalSuperfluidDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TotalSuperfluidDelegationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTotalSuperfluidDelegationsResponse();
@@ -952,7 +952,7 @@ export const SuperfluidDelegationAmountRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationAmountRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationAmountRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationAmountRequest();
@@ -1026,7 +1026,7 @@ export const SuperfluidDelegationAmountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationAmountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationAmountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationAmountResponse();
@@ -1092,7 +1092,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationsByDelegatorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationsByDelegatorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByDelegatorRequest();
@@ -1158,7 +1158,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationsByDelegatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationsByDelegatorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByDelegatorResponse();
@@ -1242,7 +1242,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidUndelegationsByDelegatorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidUndelegationsByDelegatorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidUndelegationsByDelegatorRequest();
@@ -1321,7 +1321,7 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidUndelegationsByDelegatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidUndelegationsByDelegatorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidUndelegationsByDelegatorResponse();
@@ -1417,7 +1417,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationsByValidatorDenomRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationsByValidatorDenomRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByValidatorDenomRequest();
@@ -1484,7 +1484,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationsByValidatorDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationsByValidatorDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByValidatorDenomResponse();
@@ -1556,7 +1556,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest();
@@ -1623,7 +1623,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();

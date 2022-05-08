@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface MsgStoreCode {
@@ -33,7 +33,7 @@ export const MsgStoreCode = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgStoreCode {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCode {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCode();
@@ -107,7 +107,7 @@ export const MsgStoreCodeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgStoreCodeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCodeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCodeResponse();
@@ -197,7 +197,7 @@ export const MsgInstantiateContract = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgInstantiateContract {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgInstantiateContract {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgInstantiateContract();
@@ -304,7 +304,7 @@ export const MsgInstantiateContractResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgInstantiateContractResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgInstantiateContractResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgInstantiateContractResponse();
@@ -389,7 +389,7 @@ export const MsgExecuteContract = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExecuteContract {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecuteContract {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContract();
@@ -476,7 +476,7 @@ export const MsgExecuteContractResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExecuteContractResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecuteContractResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContractResponse();
@@ -554,7 +554,7 @@ export const MsgMigrateContract = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgMigrateContract {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMigrateContract {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMigrateContract();
@@ -635,7 +635,7 @@ export const MsgMigrateContractResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgMigrateContractResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMigrateContractResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMigrateContractResponse();
@@ -707,7 +707,7 @@ export const MsgUpdateAdmin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateAdmin();
@@ -773,7 +773,7 @@ export const MsgUpdateAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateAdminResponse();
@@ -831,7 +831,7 @@ export const MsgClearAdmin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgClearAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgClearAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClearAdmin();
@@ -890,7 +890,7 @@ export const MsgClearAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgClearAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgClearAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClearAdminResponse();

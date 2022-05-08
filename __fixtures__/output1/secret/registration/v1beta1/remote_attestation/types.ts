@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface QuoteReport {
   id: string;
   timestamp: string;
@@ -55,7 +55,7 @@ export const QuoteReport = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuoteReport {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuoteReport {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuoteReport();
@@ -174,7 +174,7 @@ export const QuoteReportBody = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuoteReportBody {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuoteReportBody {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuoteReportBody();
@@ -260,7 +260,7 @@ export const QuoteReportData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuoteReportData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuoteReportData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuoteReportData();
@@ -346,7 +346,7 @@ export const EndorsedAttestationReport = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EndorsedAttestationReport {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EndorsedAttestationReport {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndorsedAttestationReport();
@@ -426,7 +426,7 @@ export const SGXEC256Signature = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SGXEC256Signature {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SGXEC256Signature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSGXEC256Signature();
@@ -541,7 +541,7 @@ export const PlatformInfoBlob = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PlatformInfoBlob {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlatformInfoBlob {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlatformInfoBlob();

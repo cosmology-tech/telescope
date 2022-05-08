@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface SeedConfig {
   masterCert: string;
   encryptedKey: string;
@@ -25,7 +25,7 @@ export const SeedConfig = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SeedConfig {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SeedConfig {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSeedConfig();
@@ -98,7 +98,7 @@ export const RegistrationNodeInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RegistrationNodeInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RegistrationNodeInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegistrationNodeInfo();

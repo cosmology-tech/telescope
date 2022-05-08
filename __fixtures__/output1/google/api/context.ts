@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface Context {
   rules: ContextRule[];
 }
@@ -19,7 +19,7 @@ export const Context = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Context {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Context {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContext();
@@ -109,7 +109,7 @@ export const ContextRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ContextRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ContextRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContextRule();

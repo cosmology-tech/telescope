@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { ConnectionEnd, IdentifiedConnection } from "./connection";
 import { Height, IdentifiedClientState } from "../../client/v1/client";
@@ -23,7 +23,7 @@ export const QueryConnectionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionRequest();
@@ -95,7 +95,7 @@ export const QueryConnectionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionResponse();
@@ -169,7 +169,7 @@ export const QueryConnectionsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsRequest();
@@ -241,7 +241,7 @@ export const QueryConnectionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsResponse();
@@ -321,7 +321,7 @@ export const QueryClientConnectionsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientConnectionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientConnectionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsRequest();
@@ -393,7 +393,7 @@ export const QueryClientConnectionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClientConnectionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientConnectionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsResponse();
@@ -472,7 +472,7 @@ export const QueryConnectionClientStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionClientStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionClientStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateRequest();
@@ -544,7 +544,7 @@ export const QueryConnectionClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionClientStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateResponse();
@@ -630,7 +630,7 @@ export const QueryConnectionConsensusStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionConsensusStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateRequest();
@@ -722,7 +722,7 @@ export const QueryConnectionConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateResponse();

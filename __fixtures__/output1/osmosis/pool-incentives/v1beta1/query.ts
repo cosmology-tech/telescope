@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, toDuration, fromDuration } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Duration } from "../../../google/protobuf/duration";
 import { DistrInfo, Params } from "./incentives";
 import { Gauge } from "../../incentives/gauge";
@@ -22,7 +22,7 @@ export const QueryGaugeIdsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGaugeIdsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsRequest();
@@ -82,7 +82,7 @@ export const QueryGaugeIdsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGaugeIdsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse();
@@ -151,7 +151,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGaugeIdsResponse_GaugeIdWithDuration {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
@@ -210,7 +210,7 @@ export const QueryDistrInfoRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDistrInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDistrInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoRequest();
@@ -262,7 +262,7 @@ export const QueryDistrInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDistrInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDistrInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoResponse();
@@ -314,7 +314,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -366,7 +366,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -418,7 +418,7 @@ export const QueryLockableDurationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryLockableDurationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLockableDurationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsRequest();
@@ -470,7 +470,7 @@ export const QueryLockableDurationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryLockableDurationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLockableDurationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsResponse();
@@ -528,7 +528,7 @@ export const QueryIncentivizedPoolsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryIncentivizedPoolsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivizedPoolsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsRequest();
@@ -590,7 +590,7 @@ export const IncentivizedPool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IncentivizedPool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IncentivizedPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentivizedPool();
@@ -664,7 +664,7 @@ export const QueryIncentivizedPoolsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryIncentivizedPoolsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivizedPoolsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsResponse();
@@ -722,7 +722,7 @@ export const QueryExternalIncentiveGaugesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryExternalIncentiveGaugesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryExternalIncentiveGaugesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesRequest();
@@ -774,7 +774,7 @@ export const QueryExternalIncentiveGaugesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryExternalIncentiveGaugesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryExternalIncentiveGaugesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesResponse();

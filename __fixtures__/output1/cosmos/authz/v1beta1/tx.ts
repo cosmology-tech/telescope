@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
 export interface MsgGrant {
@@ -33,7 +33,7 @@ export const MsgGrant = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgGrant {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrant();
@@ -107,7 +107,7 @@ export const MsgExecResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExecResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecResponse();
@@ -178,7 +178,7 @@ export const MsgExec = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExec {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExec {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExec();
@@ -243,7 +243,7 @@ export const MsgGrantResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgGrantResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantResponse();
@@ -307,7 +307,7 @@ export const MsgRevoke = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgRevoke {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevoke {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevoke();
@@ -373,7 +373,7 @@ export const MsgRevokeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgRevokeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeResponse();

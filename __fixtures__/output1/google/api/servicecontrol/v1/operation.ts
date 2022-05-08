@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../../../protobuf/timestamp";
 import { MetricValueSet } from "./metric_value";
 import { LogEntry } from "./log_entry";
@@ -29,7 +29,7 @@ export const Operation_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Operation_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_StringMapEntry();
@@ -149,7 +149,7 @@ export const Operation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Operation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toDuration, fromDuration, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { toDuration, fromDuration, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Height } from "../../../core/client/v1/client";
 import { ProofSpec } from "../../../../confio/proofs";
@@ -78,7 +78,7 @@ export const ClientState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClientState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -228,7 +228,7 @@ export const ConsensusState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsensusState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusState();
@@ -314,7 +314,7 @@ export const Misbehaviour = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Misbehaviour {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Misbehaviour {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMisbehaviour();
@@ -406,7 +406,7 @@ export const Header = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Header {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Header {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
@@ -493,7 +493,7 @@ export const Fraction = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Fraction {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Fraction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFraction();

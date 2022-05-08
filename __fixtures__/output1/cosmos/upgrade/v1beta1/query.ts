@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Plan, ModuleVersion } from "./upgrade";
 export interface QueryCurrentPlanRequest {}
 
@@ -12,7 +12,7 @@ export const QueryCurrentPlanRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCurrentPlanRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentPlanRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentPlanRequest();
@@ -64,7 +64,7 @@ export const QueryCurrentPlanResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCurrentPlanResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentPlanResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentPlanResponse();
@@ -124,7 +124,7 @@ export const QueryAppliedPlanRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAppliedPlanRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppliedPlanRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppliedPlanRequest();
@@ -184,7 +184,7 @@ export const QueryAppliedPlanResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAppliedPlanResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppliedPlanResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppliedPlanResponse();
@@ -244,7 +244,7 @@ export const QueryUpgradedConsensusStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUpgradedConsensusStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateRequest();
@@ -304,7 +304,7 @@ export const QueryUpgradedConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUpgradedConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateResponse();
@@ -364,7 +364,7 @@ export const QueryModuleVersionsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryModuleVersionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleVersionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleVersionsRequest();
@@ -424,7 +424,7 @@ export const QueryModuleVersionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryModuleVersionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleVersionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleVersionsResponse();
@@ -482,7 +482,7 @@ export const QueryAuthorityRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAuthorityRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAuthorityRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuthorityRequest();
@@ -534,7 +534,7 @@ export const QueryAuthorityResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAuthorityResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAuthorityResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuthorityResponse();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface SourceInfo_Int32MapEntry {
   key: number;
   value: number;
@@ -25,7 +25,7 @@ export const SourceInfo_Int32MapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourceInfo_Int32MapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_Int32MapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_Int32MapEntry();
@@ -111,7 +111,7 @@ export const SourceInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourceInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -241,7 +241,7 @@ export const SourcePosition = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourcePosition {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourcePosition {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourcePosition();

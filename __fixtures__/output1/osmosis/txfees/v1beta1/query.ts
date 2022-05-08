@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long } from "@osmonauts/helpers";
 import { FeeToken } from "./feetoken";
 export interface QueryFeeTokensRequest {}
 
@@ -12,7 +12,7 @@ export const QueryFeeTokensRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryFeeTokensRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensRequest();
@@ -64,7 +64,7 @@ export const QueryFeeTokensResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryFeeTokensResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensResponse();
@@ -130,7 +130,7 @@ export const QueryDenomPoolIdRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomPoolIdRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdRequest();
@@ -190,7 +190,7 @@ export const QueryDenomPoolIdResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDenomPoolIdResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdResponse();
@@ -242,7 +242,7 @@ export const QueryBaseDenomRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryBaseDenomRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomRequest();
@@ -294,7 +294,7 @@ export const QueryBaseDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryBaseDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomResponse();

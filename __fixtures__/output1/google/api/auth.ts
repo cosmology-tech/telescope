@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface Authentication {
   rules: AuthenticationRule[];
   providers: AuthProvider[];
@@ -25,7 +25,7 @@ export const Authentication = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Authentication {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Authentication {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthentication();
@@ -121,7 +121,7 @@ export const AuthenticationRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuthenticationRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticationRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthenticationRule();
@@ -220,7 +220,7 @@ export const JwtLocation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): JwtLocation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): JwtLocation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseJwtLocation();
@@ -324,7 +324,7 @@ export const AuthProvider = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuthProvider {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuthProvider {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthProvider();
@@ -425,7 +425,7 @@ export const OAuthRequirements = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OAuthRequirements {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OAuthRequirements {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOAuthRequirements();
@@ -491,7 +491,7 @@ export const AuthRequirement = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuthRequirement {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuthRequirement {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthRequirement();

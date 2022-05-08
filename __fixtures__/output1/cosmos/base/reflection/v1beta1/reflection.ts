@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface ListAllInterfacesRequest {}
 
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
@@ -11,7 +11,7 @@ export const ListAllInterfacesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListAllInterfacesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesRequest();
@@ -63,7 +63,7 @@ export const ListAllInterfacesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListAllInterfacesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesResponse();
@@ -128,7 +128,7 @@ export const ListImplementationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListImplementationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsRequest();
@@ -188,7 +188,7 @@ export const ListImplementationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListImplementationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsResponse();

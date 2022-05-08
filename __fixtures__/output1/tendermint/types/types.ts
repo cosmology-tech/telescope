@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Proof } from "../crypto/proof";
 import { Consensus } from "../version/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
@@ -47,7 +47,7 @@ export const PartSetHeader = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PartSetHeader {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PartSetHeader {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePartSetHeader();
@@ -126,7 +126,7 @@ export const Part = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Part {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Part {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePart();
@@ -206,7 +206,7 @@ export const BlockID = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BlockID {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BlockID {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockID();
@@ -349,7 +349,7 @@ export const Header = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Header {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Header {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
@@ -500,7 +500,7 @@ export const Data = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Data {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Data {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseData();
@@ -605,7 +605,7 @@ export const Vote = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Vote {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Vote {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVote();
@@ -732,7 +732,7 @@ export const Commit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Commit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Commit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommit();
@@ -835,7 +835,7 @@ export const CommitSig = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CommitSig {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CommitSig {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitSig();
@@ -950,7 +950,7 @@ export const Proposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Proposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Proposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProposal();
@@ -1058,7 +1058,7 @@ export const SignedHeader = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignedHeader {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignedHeader {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignedHeader();
@@ -1131,7 +1131,7 @@ export const LightBlock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LightBlock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LightBlock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLightBlock();
@@ -1216,7 +1216,7 @@ export const BlockMeta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BlockMeta {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BlockMeta {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockMeta();
@@ -1309,7 +1309,7 @@ export const TxProof = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TxProof {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TxProof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxProof();

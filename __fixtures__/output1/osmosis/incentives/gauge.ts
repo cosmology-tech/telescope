@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { QueryCondition } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
@@ -63,7 +63,7 @@ export const Gauge = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Gauge {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Gauge {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGauge();
@@ -184,7 +184,7 @@ export const LockableDurationsInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockableDurationsInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockableDurationsInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 export interface ValidatorSigningInfo {
@@ -49,7 +49,7 @@ export const ValidatorSigningInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorSigningInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSigningInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSigningInfo();
@@ -166,7 +166,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
 export interface LogBucket {
@@ -64,7 +64,7 @@ export const LogBucket = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogBucket {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogBucket {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogBucket();
@@ -204,7 +204,7 @@ export const LogView = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogView {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogView {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogView();
@@ -352,7 +352,7 @@ export const LogSink = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogSink {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogSink {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSink();
@@ -512,7 +512,7 @@ export const BigQueryOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BigQueryOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BigQueryOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBigQueryOptions();
@@ -591,7 +591,7 @@ export const ListBucketsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListBucketsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsRequest();
@@ -671,7 +671,7 @@ export const ListBucketsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListBucketsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsResponse();
@@ -756,7 +756,7 @@ export const CreateBucketRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateBucketRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateBucketRequest();
@@ -842,7 +842,7 @@ export const UpdateBucketRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateBucketRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateBucketRequest();
@@ -916,7 +916,7 @@ export const GetBucketRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetBucketRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBucketRequest();
@@ -976,7 +976,7 @@ export const DeleteBucketRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteBucketRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteBucketRequest();
@@ -1036,7 +1036,7 @@ export const UndeleteBucketRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UndeleteBucketRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteBucketRequest();
@@ -1108,7 +1108,7 @@ export const ListViewsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListViewsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsRequest();
@@ -1188,7 +1188,7 @@ export const ListViewsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListViewsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsResponse();
@@ -1273,7 +1273,7 @@ export const CreateViewRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateViewRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateViewRequest();
@@ -1359,7 +1359,7 @@ export const UpdateViewRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateViewRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateViewRequest();
@@ -1433,7 +1433,7 @@ export const GetViewRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetViewRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetViewRequest();
@@ -1493,7 +1493,7 @@ export const DeleteViewRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteViewRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteViewRequest();
@@ -1565,7 +1565,7 @@ export const ListSinksRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListSinksRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksRequest();
@@ -1645,7 +1645,7 @@ export const ListSinksResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListSinksResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksResponse();
@@ -1718,7 +1718,7 @@ export const GetSinkRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetSinkRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSinkRequest();
@@ -1790,7 +1790,7 @@ export const CreateSinkRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateSinkRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateSinkRequest();
@@ -1882,7 +1882,7 @@ export const UpdateSinkRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateSinkRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSinkRequest();
@@ -1963,7 +1963,7 @@ export const DeleteSinkRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteSinkRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSinkRequest();
@@ -2047,7 +2047,7 @@ export const LogExclusion = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogExclusion {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusion {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogExclusion();
@@ -2154,7 +2154,7 @@ export const ListExclusionsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListExclusionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsRequest();
@@ -2234,7 +2234,7 @@ export const ListExclusionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListExclusionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsResponse();
@@ -2307,7 +2307,7 @@ export const GetExclusionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetExclusionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetExclusionRequest();
@@ -2373,7 +2373,7 @@ export const CreateExclusionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateExclusionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateExclusionRequest();
@@ -2452,7 +2452,7 @@ export const UpdateExclusionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateExclusionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateExclusionRequest();
@@ -2526,7 +2526,7 @@ export const DeleteExclusionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteExclusionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteExclusionRequest();
@@ -2586,7 +2586,7 @@ export const GetCmekSettingsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetCmekSettingsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetCmekSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCmekSettingsRequest();
@@ -2658,7 +2658,7 @@ export const UpdateCmekSettingsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateCmekSettingsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateCmekSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateCmekSettingsRequest();
@@ -2744,7 +2744,7 @@ export const CmekSettings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CmekSettings {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettings {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCmekSettings();
@@ -2818,7 +2818,7 @@ export const GetSettingsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetSettingsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSettingsRequest();
@@ -2890,7 +2890,7 @@ export const UpdateSettingsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateSettingsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSettingsRequest();
@@ -2988,7 +2988,7 @@ export const Settings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Settings {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Settings {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettings();
@@ -3088,7 +3088,7 @@ export const CopyLogEntriesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CopyLogEntriesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesRequest();
@@ -3193,7 +3193,7 @@ export const CopyLogEntriesMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CopyLogEntriesMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesMetadata();
@@ -3295,7 +3295,7 @@ export const CopyLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CopyLogEntriesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesResponse();

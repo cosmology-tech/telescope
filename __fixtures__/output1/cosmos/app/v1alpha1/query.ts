@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 import { Config } from "./config";
 export interface QueryConfigRequest {}
 
@@ -12,7 +12,7 @@ export const QueryConfigRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConfigRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConfigRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigRequest();
@@ -64,7 +64,7 @@ export const QueryConfigResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConfigResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConfigResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigResponse();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 export interface BaseAccount {
   address: string;
@@ -38,7 +38,7 @@ export const BaseAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BaseAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BaseAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseAccount();
@@ -131,7 +131,7 @@ export const ModuleAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleAccount();
@@ -234,7 +234,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { SuperfluidAsset } from "./superfluid";
 export interface SetSuperfluidAssetsProposal {
   title: string;
@@ -32,7 +32,7 @@ export const SetSuperfluidAssetsProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SetSuperfluidAssetsProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SetSuperfluidAssetsProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSetSuperfluidAssetsProposal();
@@ -124,7 +124,7 @@ export const RemoveSuperfluidAssetsProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RemoveSuperfluidAssetsProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RemoveSuperfluidAssetsProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRemoveSuperfluidAssetsProposal();

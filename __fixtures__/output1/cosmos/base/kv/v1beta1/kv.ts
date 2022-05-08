@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface Pairs {
   pairs: Pair[];
 }
@@ -19,7 +19,7 @@ export const Pairs = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Pairs {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Pairs {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePairs();
@@ -91,7 +91,7 @@ export const Pair = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Pair {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Pair {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePair();

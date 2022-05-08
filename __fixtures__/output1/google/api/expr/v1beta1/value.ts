@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { NullValue, ListValue, Value } from "../../../protobuf/struct";
 import { Any } from "../../../protobuf/any";
 export interface Value {
@@ -87,7 +87,7 @@ export const Value = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Value {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
@@ -230,7 +230,7 @@ export const EnumValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValue();
@@ -297,7 +297,7 @@ export const ListValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
@@ -363,7 +363,7 @@ export const MapValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MapValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MapValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
@@ -435,7 +435,7 @@ export const MapValue_Entry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MapValue_Entry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MapValue_Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue_Entry();

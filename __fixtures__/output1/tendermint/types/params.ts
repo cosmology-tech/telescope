@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Duration } from "../../google/protobuf/duration";
 export interface ConsensusParams {
   block: BlockParams;
@@ -38,7 +38,7 @@ export const ConsensusParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsensusParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusParams();
@@ -131,7 +131,7 @@ export const BlockParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BlockParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BlockParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockParams();
@@ -215,7 +215,7 @@ export const EvidenceParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvidenceParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvidenceParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidenceParams();
@@ -289,7 +289,7 @@ export const ValidatorParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorParams();
@@ -354,7 +354,7 @@ export const VersionParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): VersionParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): VersionParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionParams();
@@ -420,7 +420,7 @@ export const HashedParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): HashedParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): HashedParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHashedParams();

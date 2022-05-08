@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long } from "@osmonauts/helpers";
 import { EpochInfo } from "./genesis";
 export interface QueryEpochsInfoRequest {}
 
@@ -12,7 +12,7 @@ export const QueryEpochsInfoRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryEpochsInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoRequest();
@@ -64,7 +64,7 @@ export const QueryEpochsInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryEpochsInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoResponse();
@@ -130,7 +130,7 @@ export const QueryCurrentEpochRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCurrentEpochRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochRequest();
@@ -190,7 +190,7 @@ export const QueryCurrentEpochResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCurrentEpochResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochResponse();

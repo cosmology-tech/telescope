@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Control {
   environment: string;
 }
@@ -19,7 +19,7 @@ export const Control = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Control {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Control {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseControl();

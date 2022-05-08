@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface MsgUnjail {
   validatorAddr: string;
 }
@@ -19,7 +19,7 @@ export const MsgUnjail = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUnjail {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjail {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjail();
@@ -71,7 +71,7 @@ export const MsgUnjailResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUnjailResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjailResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjailResponse();

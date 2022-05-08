@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface App {
   protocol: Long;
   software: string;
@@ -25,7 +25,7 @@ export const App = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): App {
+  decode(input: _m0.Reader | Uint8Array, length?: number): App {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
@@ -98,7 +98,7 @@ export const Consensus = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Consensus {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Consensus {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Order, Counterparty } from "../../channel/v1/channel";
 export interface QueryAppVersionRequest {
   portId: string;
@@ -44,7 +44,7 @@ export const QueryAppVersionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAppVersionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppVersionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionRequest();
@@ -138,7 +138,7 @@ export const QueryAppVersionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAppVersionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppVersionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionResponse();

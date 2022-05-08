@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { PoolParams, PoolAsset } from "./balancerPool";
 export interface MsgCreateBalancerPool {
   sender: string;
@@ -38,7 +38,7 @@ export const MsgCreateBalancerPool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateBalancerPool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBalancerPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBalancerPool();
@@ -125,7 +125,7 @@ export const MsgCreateBalancerPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateBalancerPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBalancerPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBalancerPoolResponse();

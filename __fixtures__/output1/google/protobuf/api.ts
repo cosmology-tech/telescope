@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Option, Syntax } from "./type";
 import { SourceContext } from "./source_context";
 export interface Api {
@@ -57,7 +57,7 @@ export const Api = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Api {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Api {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApi();
@@ -212,7 +212,7 @@ export const Method = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Method {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Method {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethod();
@@ -326,7 +326,7 @@ export const Mixin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Mixin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Mixin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMixin();

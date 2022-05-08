@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Expr } from "./expr";
 export interface Decl {
   id: number;
@@ -44,7 +44,7 @@ export const Decl = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Decl {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
@@ -144,7 +144,7 @@ export const DeclType = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeclType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeclType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeclType();
@@ -230,7 +230,7 @@ export const IdentDecl = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IdentDecl {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IdentDecl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentDecl();
@@ -309,7 +309,7 @@ export const FunctionDecl = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FunctionDecl {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FunctionDecl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFunctionDecl();

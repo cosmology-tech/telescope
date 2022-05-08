@@ -1,4 +1,5 @@
 import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../protobuf/any";
 export interface SourceInfo {
   sourceFiles: Any[];
@@ -19,7 +20,7 @@ export const SourceInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourceInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();

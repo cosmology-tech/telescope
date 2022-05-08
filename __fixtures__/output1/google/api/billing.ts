@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface Billing {
   consumerDestinations: BillingDestination[];
 }
@@ -19,7 +19,7 @@ export const Billing = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Billing {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Billing {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBilling();
@@ -91,7 +91,7 @@ export const Billing_BillingDestination = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Billing_BillingDestination {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Billing_BillingDestination {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBilling_BillingDestination();

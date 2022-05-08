@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 import { SignMode } from "../signing/v1beta1/signing";
 import { CompactBitArray } from "../../crypto/multisig/v1beta1/multisig";
@@ -35,7 +35,7 @@ export const Tx = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Tx {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Tx {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTx();
@@ -126,7 +126,7 @@ export const TxRaw = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TxRaw {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TxRaw {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxRaw();
@@ -223,7 +223,7 @@ export const SignDoc = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignDoc {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignDoc {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignDoc();
@@ -334,7 +334,7 @@ export const SignDocDirectAux = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignDocDirectAux {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignDocDirectAux {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignDocDirectAux();
@@ -453,7 +453,7 @@ export const TxBody = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TxBody {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TxBody {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxBody();
@@ -570,7 +570,7 @@ export const AuthInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuthInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuthInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthInfo();
@@ -662,7 +662,7 @@ export const SignerInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignerInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignerInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignerInfo();
@@ -742,7 +742,7 @@ export const ModeInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModeInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo();
@@ -809,7 +809,7 @@ export const ModeInfo_Single = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModeInfo_Single {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Single {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Single();
@@ -875,7 +875,7 @@ export const ModeInfo_Multi = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModeInfo_Multi {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Multi();
@@ -966,7 +966,7 @@ export const Fee = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Fee {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Fee {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFee();
@@ -1059,7 +1059,7 @@ export const Tip = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Tip {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Tip {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTip();
@@ -1150,7 +1150,7 @@ export const AuxSignerData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuxSignerData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuxSignerData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxSignerData();

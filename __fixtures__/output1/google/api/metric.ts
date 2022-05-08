@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration } from "@osmonauts/helpers";
 import { LaunchStage } from "./launch_stage";
 import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
@@ -82,7 +82,7 @@ export const MetricDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricDescriptor();
@@ -229,7 +229,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricDescriptor_MetricDescriptorMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor_MetricDescriptorMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
@@ -352,7 +352,7 @@ export const Metric_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Metric_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metric_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetric_StringMapEntry();
@@ -429,7 +429,7 @@ export const Metric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Metric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metric {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetric();

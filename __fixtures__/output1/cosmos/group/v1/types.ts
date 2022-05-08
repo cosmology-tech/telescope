@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
@@ -37,7 +37,7 @@ export const Member = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Member {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Member {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMember();
@@ -118,7 +118,7 @@ export const Members = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Members {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Members {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMembers();
@@ -190,7 +190,7 @@ export const ThresholdDecisionPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ThresholdDecisionPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ThresholdDecisionPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseThresholdDecisionPolicy();
@@ -263,7 +263,7 @@ export const PercentageDecisionPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PercentageDecisionPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PercentageDecisionPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePercentageDecisionPolicy();
@@ -330,7 +330,7 @@ export const DecisionPolicyWindows = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DecisionPolicyWindows {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DecisionPolicyWindows {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionPolicyWindows();
@@ -441,7 +441,7 @@ export const GroupInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GroupInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GroupInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupInfo();
@@ -542,7 +542,7 @@ export const GroupMember = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GroupMember {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GroupMember {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupMember();
@@ -642,7 +642,7 @@ export const GroupPolicyInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GroupPolicyInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GroupPolicyInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupPolicyInfo();
@@ -812,7 +812,7 @@ export const Proposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Proposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Proposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProposal();
@@ -1031,7 +1031,7 @@ export const TallyResult = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TallyResult {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TallyResult {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTallyResult();
@@ -1133,7 +1133,7 @@ export const Vote = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Vote {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Vote {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVote();

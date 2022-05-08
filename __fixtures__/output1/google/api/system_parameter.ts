@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface SystemParameters {
   rules: SystemParameterRule[];
 }
@@ -19,7 +19,7 @@ export const SystemParameters = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SystemParameters {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SystemParameters {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameters();
@@ -91,7 +91,7 @@ export const SystemParameterRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SystemParameterRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SystemParameterRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameterRule();
@@ -176,7 +176,7 @@ export const SystemParameter = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SystemParameter {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SystemParameter {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameter();

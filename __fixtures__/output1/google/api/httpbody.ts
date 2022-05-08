@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../protobuf/any";
 export interface HttpBody {
   contentType: string;
@@ -32,7 +32,7 @@ export const HttpBody = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): HttpBody {
+  decode(input: _m0.Reader | Uint8Array, length?: number): HttpBody {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpBody();

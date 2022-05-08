@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { LabelDescriptor } from "./label";
 export interface LogDescriptor {
   name: string;
@@ -38,7 +38,7 @@ export const LogDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogDescriptor();

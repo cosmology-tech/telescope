@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 export interface MsgGrantAllowance {
   granter: string;
@@ -32,7 +32,7 @@ export const MsgGrantAllowance = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgGrantAllowance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowance();
@@ -98,7 +98,7 @@ export const MsgGrantAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgGrantAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowanceResponse();
@@ -156,7 +156,7 @@ export const MsgRevokeAllowance = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgRevokeAllowance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowance();
@@ -215,7 +215,7 @@ export const MsgRevokeAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgRevokeAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowanceResponse();

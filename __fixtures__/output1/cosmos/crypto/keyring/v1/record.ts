@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Any } from "../../../../google/protobuf/any";
 export interface Record {
   name: string;
@@ -50,7 +50,7 @@ export const Record = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Record {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Record {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord();
@@ -151,7 +151,7 @@ export const Record_Local = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Record_Local {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Record_Local {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Local();
@@ -210,7 +210,7 @@ export const Record_Ledger = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Record_Ledger {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Record_Ledger {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Ledger();
@@ -254,7 +254,7 @@ export const Record_Multi = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Record_Multi {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Record_Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Multi();
@@ -298,7 +298,7 @@ export const Record_Offline = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Record_Offline {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Record_Offline {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Offline();

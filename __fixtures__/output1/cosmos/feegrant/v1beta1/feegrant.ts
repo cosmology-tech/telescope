@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
@@ -26,7 +26,7 @@ export const BasicAllowance = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BasicAllowance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BasicAllowance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBasicAllowance();
@@ -118,7 +118,7 @@ export const PeriodicAllowance = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PeriodicAllowance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PeriodicAllowance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodicAllowance();
@@ -223,7 +223,7 @@ export const AllowedMsgAllowance = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AllowedMsgAllowance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedMsgAllowance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedMsgAllowance();
@@ -307,7 +307,7 @@ export const Grant = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Grant {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Grant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();

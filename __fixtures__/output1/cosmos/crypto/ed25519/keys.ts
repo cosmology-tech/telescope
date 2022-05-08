@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface PubKey {
   key: Uint8Array;
 }
@@ -19,7 +19,7 @@ export const PubKey = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PubKey {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PubKey {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePubKey();
@@ -79,7 +79,7 @@ export const PrivKey = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PrivKey {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PrivKey {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrivKey();

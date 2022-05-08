@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Proof {
   total: Long;
   index: Long;
@@ -37,7 +37,7 @@ export const Proof = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Proof {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Proof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProof();
@@ -129,7 +129,7 @@ export const ValueOp = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValueOp {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValueOp {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValueOp();
@@ -208,7 +208,7 @@ export const DominoOp = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DominoOp {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DominoOp {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDominoOp();
@@ -294,7 +294,7 @@ export const ProofOp = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ProofOp {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProofOp {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOp();
@@ -368,7 +368,7 @@ export const ProofOps = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ProofOps {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProofOps {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOps();

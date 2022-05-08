@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { Tx } from "./tx";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { TxResponse, GasInfo, Result } from "../../base/abci/v1beta1/abci";
@@ -36,7 +36,7 @@ export const GetTxsEventRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetTxsEventRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxsEventRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventRequest();
@@ -138,7 +138,7 @@ export const GetTxsEventResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetTxsEventResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxsEventResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventResponse();
@@ -229,7 +229,7 @@ export const BroadcastTxRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BroadcastTxRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BroadcastTxRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxRequest();
@@ -313,7 +313,7 @@ export const BroadcastTxResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BroadcastTxResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BroadcastTxResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxResponse();
@@ -379,7 +379,7 @@ export const SimulateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SimulateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SimulateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateRequest();
@@ -452,7 +452,7 @@ export const SimulateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SimulateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SimulateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateResponse();
@@ -519,7 +519,7 @@ export const GetTxRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetTxRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxRequest();
@@ -585,7 +585,7 @@ export const GetTxResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetTxResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxResponse();
@@ -658,7 +658,7 @@ export const GetBlockWithTxsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetBlockWithTxsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockWithTxsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsRequest();
@@ -743,7 +743,7 @@ export const GetBlockWithTxsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetBlockWithTxsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockWithTxsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsResponse();

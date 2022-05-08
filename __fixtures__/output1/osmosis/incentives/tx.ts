@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { QueryCondition } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
@@ -50,7 +50,7 @@ export const MsgCreateGauge = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGauge {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGauge {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGauge();
@@ -143,7 +143,7 @@ export const MsgCreateGaugeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGaugeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGaugeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGaugeResponse();
@@ -207,7 +207,7 @@ export const MsgAddToGauge = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgAddToGauge {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGauge {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGauge();
@@ -279,7 +279,7 @@ export const MsgAddToGaugeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgAddToGaugeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGaugeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGaugeResponse();

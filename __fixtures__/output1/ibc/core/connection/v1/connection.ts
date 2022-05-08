@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { MerklePrefix } from "../../commitment/v1/commitment";
 export interface ConnectionEnd {
   clientId: string;
@@ -44,7 +44,7 @@ export const ConnectionEnd = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConnectionEnd {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionEnd {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionEnd();
@@ -168,7 +168,7 @@ export const IdentifiedConnection = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IdentifiedConnection {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedConnection {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedConnection();
@@ -296,7 +296,7 @@ export const Counterparty = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Counterparty {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Counterparty {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCounterparty();
@@ -370,7 +370,7 @@ export const ClientPaths = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClientPaths {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientPaths {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientPaths();
@@ -441,7 +441,7 @@ export const ConnectionPaths = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConnectionPaths {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionPaths {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionPaths();
@@ -519,7 +519,7 @@ export const Version = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Version {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Version {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersion();
@@ -591,7 +591,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

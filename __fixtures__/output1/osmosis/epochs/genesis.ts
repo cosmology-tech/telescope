@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, Long, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toTimestamp, toDuration, fromTimestamp, fromDuration, Long, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 export interface EpochInfo {
@@ -50,7 +50,7 @@ export const EpochInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EpochInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EpochInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEpochInfo();
@@ -152,7 +152,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();

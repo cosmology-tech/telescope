@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface GenesisState {
   genTxs: Uint8Array[];
 }
@@ -19,7 +19,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();

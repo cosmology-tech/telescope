@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Documentation {
   summary: string;
   pages: Page[];
@@ -49,7 +49,7 @@ export const Documentation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Documentation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Documentation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentation();
@@ -167,7 +167,7 @@ export const DocumentationRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DocumentationRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DocumentationRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentationRule();
@@ -253,7 +253,7 @@ export const Page = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Page {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Page {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePage();

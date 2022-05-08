@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toDuration, Long, fromDuration, isSet } from "@osmonauts/helpers";
+import { toDuration, Long, fromDuration, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Duration } from "../../protobuf/duration";
 export interface HttpRequest {
   requestMethod: string;
@@ -102,7 +102,7 @@ export const HttpRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): HttpRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): HttpRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRequest();

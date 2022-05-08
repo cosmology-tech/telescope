@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface ResourceDescriptor {
   type: string;
   pattern: string[];
@@ -58,7 +58,7 @@ export const ResourceDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ResourceDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceDescriptor();
@@ -213,7 +213,7 @@ export const ResourceReference = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ResourceReference {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceReference {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceReference();

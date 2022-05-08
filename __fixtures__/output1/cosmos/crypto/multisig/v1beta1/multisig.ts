@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { bytesFromBase64, base64FromBytes, isSet } from "@osmonauts/helpers";
+import { bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface MultiSignature {
   signatures: Uint8Array[];
 }
@@ -19,7 +19,7 @@ export const MultiSignature = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MultiSignature {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MultiSignature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMultiSignature();
@@ -90,7 +90,7 @@ export const CompactBitArray = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CompactBitArray {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CompactBitArray {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCompactBitArray();

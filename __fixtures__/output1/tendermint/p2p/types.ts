@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../../google/protobuf/timestamp";
 export interface ProtocolVersion {
   p2p: Long;
@@ -32,7 +32,7 @@ export const ProtocolVersion = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ProtocolVersion {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProtocolVersion {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProtocolVersion();
@@ -148,7 +148,7 @@ export const NodeInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): NodeInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): NodeInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNodeInfo();
@@ -263,7 +263,7 @@ export const NodeInfoOther = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): NodeInfoOther {
+  decode(input: _m0.Reader | Uint8Array, length?: number): NodeInfoOther {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNodeInfoOther();
@@ -339,7 +339,7 @@ export const PeerInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PeerInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PeerInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeerInfo();
@@ -432,7 +432,7 @@ export const PeerAddressInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PeerAddressInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PeerAddressInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeerAddressInfo();

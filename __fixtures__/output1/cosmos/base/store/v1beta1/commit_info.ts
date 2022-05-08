@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface CommitInfo {
   version: Long;
   storeInfos: StoreInfo[];
@@ -25,7 +25,7 @@ export const CommitInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CommitInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CommitInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitInfo();
@@ -104,7 +104,7 @@ export const StoreInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): StoreInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StoreInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreInfo();
@@ -177,7 +177,7 @@ export const CommitID = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CommitID {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CommitID {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitID();

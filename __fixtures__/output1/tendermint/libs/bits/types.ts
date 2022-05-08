@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface BitArray {
   bits: Long;
   elems: Long[];
@@ -28,7 +28,7 @@ export const BitArray = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BitArray {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BitArray {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBitArray();

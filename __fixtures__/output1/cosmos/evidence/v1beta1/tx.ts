@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 export interface MsgSubmitEvidence {
   submitter: string;
@@ -26,7 +26,7 @@ export const MsgSubmitEvidence = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitEvidence {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitEvidence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidence();
@@ -93,7 +93,7 @@ export const MsgSubmitEvidenceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitEvidenceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitEvidenceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidenceResponse();

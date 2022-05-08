@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Params, ValidatorOutstandingRewards, ValidatorAccumulatedCommission, ValidatorSlashEvent, DelegationDelegatorReward } from "./distribution";
 import { DecCoin } from "../../base/v1beta1/coin";
@@ -14,7 +14,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -66,7 +66,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -126,7 +126,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorOutstandingRewardsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorOutstandingRewardsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorOutstandingRewardsRequest();
@@ -186,7 +186,7 @@ export const QueryValidatorOutstandingRewardsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorOutstandingRewardsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorOutstandingRewardsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorOutstandingRewardsResponse();
@@ -246,7 +246,7 @@ export const QueryValidatorCommissionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorCommissionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorCommissionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorCommissionRequest();
@@ -306,7 +306,7 @@ export const QueryValidatorCommissionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorCommissionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorCommissionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorCommissionResponse();
@@ -384,7 +384,7 @@ export const QueryValidatorSlashesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorSlashesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorSlashesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorSlashesRequest();
@@ -471,7 +471,7 @@ export const QueryValidatorSlashesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorSlashesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorSlashesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorSlashesResponse();
@@ -550,7 +550,7 @@ export const QueryDelegationRewardsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegationRewardsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationRewardsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationRewardsRequest();
@@ -617,7 +617,7 @@ export const QueryDelegationRewardsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegationRewardsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationRewardsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationRewardsResponse();
@@ -683,7 +683,7 @@ export const QueryDelegationTotalRewardsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegationTotalRewardsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationTotalRewardsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationTotalRewardsRequest();
@@ -749,7 +749,7 @@ export const QueryDelegationTotalRewardsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegationTotalRewardsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationTotalRewardsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationTotalRewardsResponse();
@@ -827,7 +827,7 @@ export const QueryDelegatorValidatorsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorValidatorsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsRequest();
@@ -887,7 +887,7 @@ export const QueryDelegatorValidatorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorValidatorsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsResponse();
@@ -952,7 +952,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorWithdrawAddressRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorWithdrawAddressRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorWithdrawAddressRequest();
@@ -1012,7 +1012,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorWithdrawAddressResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorWithdrawAddressResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorWithdrawAddressResponse();
@@ -1064,7 +1064,7 @@ export const QueryCommunityPoolRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCommunityPoolRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCommunityPoolRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCommunityPoolRequest();
@@ -1116,7 +1116,7 @@ export const QueryCommunityPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCommunityPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCommunityPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCommunityPoolResponse();

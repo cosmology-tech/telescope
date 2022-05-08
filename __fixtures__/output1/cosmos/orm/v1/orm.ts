@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface TableDescriptor {
   primaryKey: PrimaryKeyDescriptor;
   index: SecondaryIndexDescriptor[];
@@ -31,7 +31,7 @@ export const TableDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TableDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TableDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTableDescriptor();
@@ -117,7 +117,7 @@ export const PrimaryKeyDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PrimaryKeyDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PrimaryKeyDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrimaryKeyDescriptor();
@@ -196,7 +196,7 @@ export const SecondaryIndexDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SecondaryIndexDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SecondaryIndexDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecondaryIndexDescriptor();
@@ -270,7 +270,7 @@ export const SingletonDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SingletonDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SingletonDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSingletonDescriptor();

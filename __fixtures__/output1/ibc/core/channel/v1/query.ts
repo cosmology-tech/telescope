@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Channel, IdentifiedChannel, PacketState } from "./channel";
 import { Height, IdentifiedClientState } from "../../client/v1/client";
@@ -29,7 +29,7 @@ export const QueryChannelRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelRequest();
@@ -108,7 +108,7 @@ export const QueryChannelResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelResponse();
@@ -182,7 +182,7 @@ export const QueryChannelsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelsRequest();
@@ -254,7 +254,7 @@ export const QueryChannelsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelsResponse();
@@ -340,7 +340,7 @@ export const QueryConnectionChannelsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionChannelsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionChannelsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionChannelsRequest();
@@ -419,7 +419,7 @@ export const QueryConnectionChannelsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryConnectionChannelsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionChannelsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionChannelsResponse();
@@ -505,7 +505,7 @@ export const QueryChannelClientStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelClientStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelClientStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelClientStateRequest();
@@ -584,7 +584,7 @@ export const QueryChannelClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelClientStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelClientStateResponse();
@@ -676,7 +676,7 @@ export const QueryChannelConsensusStateRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelConsensusStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelConsensusStateRequest();
@@ -775,7 +775,7 @@ export const QueryChannelConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryChannelConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChannelConsensusStateResponse();
@@ -868,7 +868,7 @@ export const QueryPacketCommitmentRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketCommitmentRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketCommitmentRequest();
@@ -954,7 +954,7 @@ export const QueryPacketCommitmentResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketCommitmentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketCommitmentResponse();
@@ -1040,7 +1040,7 @@ export const QueryPacketCommitmentsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketCommitmentsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketCommitmentsRequest();
@@ -1126,7 +1126,7 @@ export const QueryPacketCommitmentsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketCommitmentsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketCommitmentsResponse();
@@ -1218,7 +1218,7 @@ export const QueryPacketReceiptRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketReceiptRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketReceiptRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketReceiptRequest();
@@ -1304,7 +1304,7 @@ export const QueryPacketReceiptResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketReceiptResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketReceiptResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketReceiptResponse();
@@ -1390,7 +1390,7 @@ export const QueryPacketAcknowledgementRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketAcknowledgementRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketAcknowledgementRequest();
@@ -1476,7 +1476,7 @@ export const QueryPacketAcknowledgementResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketAcknowledgementResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketAcknowledgementResponse();
@@ -1571,7 +1571,7 @@ export const QueryPacketAcknowledgementsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketAcknowledgementsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketAcknowledgementsRequest();
@@ -1677,7 +1677,7 @@ export const QueryPacketAcknowledgementsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPacketAcknowledgementsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPacketAcknowledgementsResponse();
@@ -1772,7 +1772,7 @@ export const QueryUnreceivedPacketsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUnreceivedPacketsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedPacketsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnreceivedPacketsRequest();
@@ -1869,7 +1869,7 @@ export const QueryUnreceivedPacketsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUnreceivedPacketsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedPacketsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnreceivedPacketsResponse();
@@ -1964,7 +1964,7 @@ export const QueryUnreceivedAcksRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUnreceivedAcksRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedAcksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnreceivedAcksRequest();
@@ -2061,7 +2061,7 @@ export const QueryUnreceivedAcksResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUnreceivedAcksResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedAcksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnreceivedAcksResponse();
@@ -2147,7 +2147,7 @@ export const QueryNextSequenceReceiveRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryNextSequenceReceiveRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNextSequenceReceiveRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNextSequenceReceiveRequest();
@@ -2226,7 +2226,7 @@ export const QueryNextSequenceReceiveResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryNextSequenceReceiveResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNextSequenceReceiveResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNextSequenceReceiveResponse();

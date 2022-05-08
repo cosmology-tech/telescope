@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Duration } from "../protobuf/duration";
 import { Any } from "../protobuf/any";
 import { Status } from "../rpc/status";
@@ -46,7 +46,7 @@ export const Operation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Operation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -134,7 +134,7 @@ export const GetOperationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetOperationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationRequest();
@@ -212,7 +212,7 @@ export const ListOperationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListOperationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsRequest();
@@ -299,7 +299,7 @@ export const ListOperationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListOperationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsResponse();
@@ -372,7 +372,7 @@ export const CancelOperationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CancelOperationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CancelOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelOperationRequest();
@@ -432,7 +432,7 @@ export const DeleteOperationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteOperationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteOperationRequest();
@@ -495,7 +495,7 @@ export const WaitOperationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WaitOperationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WaitOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWaitOperationRequest();
@@ -568,7 +568,7 @@ export const OperationInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OperationInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationInfo();

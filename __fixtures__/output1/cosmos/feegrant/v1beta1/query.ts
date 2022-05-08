@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Grant } from "./feegrant";
 export interface QueryAllowanceRequest {
@@ -27,7 +27,7 @@ export const QueryAllowanceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllowanceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceRequest();
@@ -94,7 +94,7 @@ export const QueryAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceResponse();
@@ -160,7 +160,7 @@ export const QueryAllowancesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllowancesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesRequest();
@@ -233,7 +233,7 @@ export const QueryAllowancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllowancesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesResponse();
@@ -312,7 +312,7 @@ export const QueryAllowancesByGranterRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllowancesByGranterRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterRequest();
@@ -385,7 +385,7 @@ export const QueryAllowancesByGranterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllowancesByGranterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterResponse();

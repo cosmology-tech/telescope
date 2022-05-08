@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { AttributeContext } from "../../../rpc/context/attribute_context";
 import { Status } from "../../../rpc/status";
 export interface CheckRequest {
@@ -45,7 +45,7 @@ export const CheckRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -163,7 +163,7 @@ export const ResourceInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ResourceInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceInfo();
@@ -257,7 +257,7 @@ export const CheckResponse_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckResponse_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse_StringMapEntry();
@@ -334,7 +334,7 @@ export const CheckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -438,7 +438,7 @@ export const ReportRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ReportRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReportRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportRequest();
@@ -510,7 +510,7 @@ export const ReportResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ReportResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse();

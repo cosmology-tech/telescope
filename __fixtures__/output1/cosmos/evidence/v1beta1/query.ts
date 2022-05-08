@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
 export interface QueryEvidenceRequest {
@@ -21,7 +21,7 @@ export const QueryEvidenceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryEvidenceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEvidenceRequest();
@@ -81,7 +81,7 @@ export const QueryEvidenceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryEvidenceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEvidenceResponse();
@@ -141,7 +141,7 @@ export const QueryAllEvidenceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllEvidenceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllEvidenceRequest();
@@ -207,7 +207,7 @@ export const QueryAllEvidenceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAllEvidenceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllEvidenceResponse();

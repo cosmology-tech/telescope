@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { CapabilityOwners } from "./capability";
 export interface GenesisOwners {
   index: Long;
@@ -26,7 +26,7 @@ export const GenesisOwners = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisOwners {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisOwners {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisOwners();
@@ -99,7 +99,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();

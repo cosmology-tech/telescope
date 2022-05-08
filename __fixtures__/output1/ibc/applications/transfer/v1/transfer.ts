@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface DenomTrace {
   path: string;
   baseDenom: string;
@@ -25,7 +25,7 @@ export const DenomTrace = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DenomTrace {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DenomTrace {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomTrace();
@@ -98,7 +98,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

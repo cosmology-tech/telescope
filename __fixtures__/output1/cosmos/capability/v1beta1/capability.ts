@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Capability {
   index: Long;
 }
@@ -19,7 +19,7 @@ export const Capability = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Capability {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Capability {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapability();
@@ -85,7 +85,7 @@ export const Owner = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Owner {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Owner {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOwner();
@@ -152,7 +152,7 @@ export const CapabilityOwners = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CapabilityOwners {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CapabilityOwners {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapabilityOwners();

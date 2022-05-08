@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { Channel, Packet } from "./channel";
 import { Height } from "../../client/v1/client";
 export interface MsgChannelOpenInit {
@@ -33,7 +33,7 @@ export const MsgChannelOpenInit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenInit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenInit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInit();
@@ -99,7 +99,7 @@ export const MsgChannelOpenInitResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenInitResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenInitResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInitResponse();
@@ -187,7 +187,7 @@ export const MsgChannelOpenTry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenTry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenTry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTry();
@@ -281,7 +281,7 @@ export const MsgChannelOpenTryResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenTryResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenTryResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTryResponse();
@@ -369,7 +369,7 @@ export const MsgChannelOpenAck = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenAck {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenAck {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAck();
@@ -463,7 +463,7 @@ export const MsgChannelOpenAckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenAckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenAckResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAckResponse();
@@ -539,7 +539,7 @@ export const MsgChannelOpenConfirm = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenConfirm {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenConfirm {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirm();
@@ -619,7 +619,7 @@ export const MsgChannelOpenConfirmResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelOpenConfirmResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenConfirmResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirmResponse();
@@ -683,7 +683,7 @@ export const MsgChannelCloseInit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelCloseInit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseInit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInit();
@@ -749,7 +749,7 @@ export const MsgChannelCloseInitResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelCloseInitResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseInitResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInitResponse();
@@ -825,7 +825,7 @@ export const MsgChannelCloseConfirm = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelCloseConfirm {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseConfirm {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirm();
@@ -905,7 +905,7 @@ export const MsgChannelCloseConfirmResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgChannelCloseConfirmResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseConfirmResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirmResponse();
@@ -975,7 +975,7 @@ export const MsgRecvPacket = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgRecvPacket {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecvPacket {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacket();
@@ -1048,7 +1048,7 @@ export const MsgRecvPacketResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgRecvPacketResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecvPacketResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacketResponse();
@@ -1124,7 +1124,7 @@ export const MsgTimeout = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgTimeout {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeout {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeout();
@@ -1204,7 +1204,7 @@ export const MsgTimeoutResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgTimeoutResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutResponse();
@@ -1286,7 +1286,7 @@ export const MsgTimeoutOnClose = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgTimeoutOnClose {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutOnClose {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnClose();
@@ -1373,7 +1373,7 @@ export const MsgTimeoutOnCloseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgTimeoutOnCloseResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutOnCloseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnCloseResponse();
@@ -1449,7 +1449,7 @@ export const MsgAcknowledgement = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgAcknowledgement {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAcknowledgement {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgement();
@@ -1529,7 +1529,7 @@ export const MsgAcknowledgementResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgAcknowledgementResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAcknowledgementResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgementResponse();

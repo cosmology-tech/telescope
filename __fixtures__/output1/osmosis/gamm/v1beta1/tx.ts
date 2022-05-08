@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface MsgJoinPool {
   sender: string;
@@ -38,7 +38,7 @@ export const MsgJoinPool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinPool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPool();
@@ -117,7 +117,7 @@ export const MsgJoinPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPoolResponse();
@@ -187,7 +187,7 @@ export const MsgExitPool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExitPool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExitPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitPool();
@@ -266,7 +266,7 @@ export const MsgExitPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExitPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExitPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitPoolResponse();
@@ -324,7 +324,7 @@ export const SwapAmountInRoute = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SwapAmountInRoute {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SwapAmountInRoute {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwapAmountInRoute();
@@ -409,7 +409,7 @@ export const MsgSwapExactAmountIn = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountIn {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountIn {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountIn();
@@ -496,7 +496,7 @@ export const MsgSwapExactAmountInResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountInResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountInResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountInResponse();
@@ -562,7 +562,7 @@ export const SwapAmountOutRoute = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SwapAmountOutRoute {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SwapAmountOutRoute {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwapAmountOutRoute();
@@ -647,7 +647,7 @@ export const MsgSwapExactAmountOut = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountOut {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountOut {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOut();
@@ -734,7 +734,7 @@ export const MsgSwapExactAmountOutResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountOutResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountOutResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOutResponse();
@@ -812,7 +812,7 @@ export const MsgJoinSwapExternAmountIn = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinSwapExternAmountIn {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinSwapExternAmountIn {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapExternAmountIn();
@@ -893,7 +893,7 @@ export const MsgJoinSwapExternAmountInResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinSwapExternAmountInResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinSwapExternAmountInResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapExternAmountInResponse();
@@ -977,7 +977,7 @@ export const MsgJoinSwapShareAmountOut = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinSwapShareAmountOut {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinSwapShareAmountOut {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapShareAmountOut();
@@ -1065,7 +1065,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinSwapShareAmountOutResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinSwapShareAmountOutResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapShareAmountOutResponse();
@@ -1149,7 +1149,7 @@ export const MsgExitSwapShareAmountIn = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExitSwapShareAmountIn {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExitSwapShareAmountIn {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapShareAmountIn();
@@ -1237,7 +1237,7 @@ export const MsgExitSwapShareAmountInResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExitSwapShareAmountInResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExitSwapShareAmountInResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapShareAmountInResponse();
@@ -1315,7 +1315,7 @@ export const MsgExitSwapExternAmountOut = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExitSwapExternAmountOut {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExitSwapExternAmountOut {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapExternAmountOut();
@@ -1396,7 +1396,7 @@ export const MsgExitSwapExternAmountOutResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExitSwapExternAmountOutResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExitSwapExternAmountOutResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapExternAmountOutResponse();

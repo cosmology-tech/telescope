@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 export interface GenesisState {
   codes: Code[];
@@ -32,7 +32,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -134,7 +134,7 @@ export const Code = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Code {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Code {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCode();
@@ -226,7 +226,7 @@ export const Contract = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Contract {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Contract {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContract();
@@ -319,7 +319,7 @@ export const Sequence = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Sequence {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Sequence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequence();

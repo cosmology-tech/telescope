@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Any } from "../../../../google/protobuf/any";
 import { Plan } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 export interface IdentifiedClientState {
@@ -27,7 +27,7 @@ export const IdentifiedClientState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IdentifiedClientState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedClientState();
@@ -100,7 +100,7 @@ export const ConsensusStateWithHeight = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsensusStateWithHeight {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusStateWithHeight {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusStateWithHeight();
@@ -173,7 +173,7 @@ export const ClientConsensusStates = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClientConsensusStates {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientConsensusStates {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientConsensusStates();
@@ -264,7 +264,7 @@ export const ClientUpdateProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClientUpdateProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientUpdateProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientUpdateProposal();
@@ -363,7 +363,7 @@ export const UpgradeProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpgradeProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpgradeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpgradeProposal();
@@ -450,7 +450,7 @@ export const Height = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Height {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Height {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeight();
@@ -517,7 +517,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();

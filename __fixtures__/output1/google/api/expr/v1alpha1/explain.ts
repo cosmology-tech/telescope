@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet } from "@osmonauts/helpers";
 import { Value } from "./value";
 export interface Explain {
   values: Value[];
@@ -26,7 +26,7 @@ export const Explain = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Explain {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Explain {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplain();
@@ -110,7 +110,7 @@ export const Explain_ExprStep = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Explain_ExprStep {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Explain_ExprStep {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplain_ExprStep();

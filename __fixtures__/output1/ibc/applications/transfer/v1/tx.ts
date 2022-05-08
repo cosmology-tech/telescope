@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
 export interface MsgTransfer {
@@ -57,7 +57,7 @@ export const MsgTransfer = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgTransfer {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransfer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransfer();
@@ -151,7 +151,7 @@ export const MsgTransferResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgTransferResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransferResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransferResponse();

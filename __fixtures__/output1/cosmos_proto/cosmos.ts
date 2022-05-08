@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface InterfaceDescriptor {
   name: string;
   description: string;
@@ -25,7 +25,7 @@ export const InterfaceDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): InterfaceDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceDescriptor();
@@ -107,7 +107,7 @@ export const ScalarDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ScalarDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ScalarDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScalarDescriptor();

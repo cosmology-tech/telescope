@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface Visibility {
   rules: VisibilityRule[];
 }
@@ -19,7 +19,7 @@ export const Visibility = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Visibility {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Visibility {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVisibility();
@@ -91,7 +91,7 @@ export const VisibilityRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): VisibilityRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): VisibilityRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVisibilityRule();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toDuration, fromDuration, isSet } from "@osmonauts/helpers";
+import { toDuration, fromDuration, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Duration } from "../protobuf/duration";
 export interface RetryInfo {
   retryDelay: string;
@@ -17,7 +17,7 @@ export const RetryInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RetryInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RetryInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRetryInfo();
@@ -83,7 +83,7 @@ export const DebugInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DebugInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DebugInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDebugInfo();
@@ -155,7 +155,7 @@ export const QuotaFailure = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaFailure {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure();
@@ -227,7 +227,7 @@ export const QuotaFailure_Violation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaFailure_Violation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure_Violation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure_Violation();
@@ -300,7 +300,7 @@ export const ErrorInfo_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ErrorInfo_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo_StringMapEntry();
@@ -383,7 +383,7 @@ export const ErrorInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ErrorInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo();
@@ -482,7 +482,7 @@ export const PreconditionFailure = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PreconditionFailure {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
@@ -560,7 +560,7 @@ export const PreconditionFailure_Violation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PreconditionFailure_Violation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure_Violation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure_Violation();
@@ -634,7 +634,7 @@ export const BadRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BadRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest();
@@ -706,7 +706,7 @@ export const BadRequest_FieldViolation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BadRequest_FieldViolation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest_FieldViolation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest_FieldViolation();
@@ -779,7 +779,7 @@ export const RequestInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RequestInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RequestInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequestInfo();
@@ -864,7 +864,7 @@ export const ResourceInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ResourceInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceInfo();
@@ -945,7 +945,7 @@ export const Help = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Help {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Help {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp();
@@ -1017,7 +1017,7 @@ export const Help_Link = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Help_Link {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Help_Link {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp_Link();
@@ -1090,7 +1090,7 @@ export const LocalizedMessage = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LocalizedMessage {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LocalizedMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLocalizedMessage();

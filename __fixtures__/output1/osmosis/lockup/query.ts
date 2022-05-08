@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
@@ -15,7 +15,7 @@ export const ModuleBalanceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleBalanceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleBalanceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleBalanceRequest();
@@ -67,7 +67,7 @@ export const ModuleBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleBalanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleBalanceResponse();
@@ -125,7 +125,7 @@ export const ModuleLockedAmountRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleLockedAmountRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleLockedAmountRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleLockedAmountRequest();
@@ -177,7 +177,7 @@ export const ModuleLockedAmountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModuleLockedAmountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleLockedAmountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleLockedAmountResponse();
@@ -243,7 +243,7 @@ export const AccountUnlockableCoinsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountUnlockableCoinsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockableCoinsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockableCoinsRequest();
@@ -303,7 +303,7 @@ export const AccountUnlockableCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountUnlockableCoinsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockableCoinsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockableCoinsResponse();
@@ -369,7 +369,7 @@ export const AccountUnlockingCoinsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountUnlockingCoinsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockingCoinsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockingCoinsRequest();
@@ -429,7 +429,7 @@ export const AccountUnlockingCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountUnlockingCoinsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockingCoinsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockingCoinsResponse();
@@ -495,7 +495,7 @@ export const AccountLockedCoinsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedCoinsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedCoinsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedCoinsRequest();
@@ -555,7 +555,7 @@ export const AccountLockedCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedCoinsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedCoinsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedCoinsResponse();
@@ -624,7 +624,7 @@ export const AccountLockedPastTimeRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedPastTimeRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeRequest();
@@ -691,7 +691,7 @@ export const AccountLockedPastTimeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedPastTimeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeResponse();
@@ -760,7 +760,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedPastTimeNotUnlockingOnlyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
@@ -827,7 +827,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedPastTimeNotUnlockingOnlyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
@@ -896,7 +896,7 @@ export const AccountUnlockedBeforeTimeRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountUnlockedBeforeTimeRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockedBeforeTimeRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockedBeforeTimeRequest();
@@ -963,7 +963,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountUnlockedBeforeTimeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockedBeforeTimeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockedBeforeTimeResponse();
@@ -1039,7 +1039,7 @@ export const AccountLockedPastTimeDenomRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedPastTimeDenomRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeDenomRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeDenomRequest();
@@ -1113,7 +1113,7 @@ export const AccountLockedPastTimeDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedPastTimeDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeDenomResponse();
@@ -1182,7 +1182,7 @@ export const LockedDenomRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockedDenomRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedDenomRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedDenomRequest();
@@ -1249,7 +1249,7 @@ export const LockedDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockedDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedDenomResponse();
@@ -1309,7 +1309,7 @@ export const LockedRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockedRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedRequest();
@@ -1369,7 +1369,7 @@ export const LockedResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockedResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedResponse();
@@ -1429,7 +1429,7 @@ export const SyntheticLockupsByLockupIDRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SyntheticLockupsByLockupIDRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLockupsByLockupIDRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLockupsByLockupIDRequest();
@@ -1489,7 +1489,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SyntheticLockupsByLockupIDResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLockupsByLockupIDResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLockupsByLockupIDResponse();
@@ -1558,7 +1558,7 @@ export const AccountLockedLongerDurationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedLongerDurationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationRequest();
@@ -1625,7 +1625,7 @@ export const AccountLockedLongerDurationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedLongerDurationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationResponse();
@@ -1694,7 +1694,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
@@ -1761,7 +1761,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
@@ -1837,7 +1837,7 @@ export const AccountLockedLongerDurationDenomRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedLongerDurationDenomRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationDenomRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationDenomRequest();
@@ -1911,7 +1911,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AccountLockedLongerDurationDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationDenomResponse();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Any } from "../../../../google/protobuf/any";
 export interface MsgCreateClient {
   clientState: Any;
@@ -32,7 +32,7 @@ export const MsgCreateClient = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateClient {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClient {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClient();
@@ -98,7 +98,7 @@ export const MsgCreateClientResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateClientResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClientResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClientResponse();
@@ -162,7 +162,7 @@ export const MsgUpdateClient = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateClient {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClient {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClient();
@@ -228,7 +228,7 @@ export const MsgUpdateClientResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateClientResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClientResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClientResponse();
@@ -310,7 +310,7 @@ export const MsgUpgradeClient = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpgradeClient {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClient {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClient();
@@ -397,7 +397,7 @@ export const MsgUpgradeClientResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpgradeClientResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClientResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClientResponse();
@@ -461,7 +461,7 @@ export const MsgSubmitMisbehaviour = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitMisbehaviour {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviour {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviour();
@@ -527,7 +527,7 @@ export const MsgSubmitMisbehaviourResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitMisbehaviourResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviourResponse();

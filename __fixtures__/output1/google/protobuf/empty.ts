@@ -1,4 +1,5 @@
 import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Empty {}
 
 function createBaseEmpty(): Empty {
@@ -10,7 +11,7 @@ export const Empty = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Empty {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Empty {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEmpty();

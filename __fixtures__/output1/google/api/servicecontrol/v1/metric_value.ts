@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, Long, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, Long, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 export interface MetricValue_StringMapEntry {
@@ -27,7 +27,7 @@ export const MetricValue_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricValue_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue_StringMapEntry();
@@ -135,7 +135,7 @@ export const MetricValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue();
@@ -275,7 +275,7 @@ export const MetricValueSet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricValueSet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValueSet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValueSet();

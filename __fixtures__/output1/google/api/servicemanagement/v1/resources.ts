@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 export interface ManagedService {
@@ -27,7 +27,7 @@ export const ManagedService = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ManagedService {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseManagedService();
@@ -109,7 +109,7 @@ export const OperationMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OperationMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
@@ -206,7 +206,7 @@ export const OperationMetadata_Step = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OperationMetadata_Step {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata_Step {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata_Step();
@@ -306,7 +306,7 @@ export const Diagnostic = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Diagnostic {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Diagnostic {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDiagnostic();
@@ -394,7 +394,7 @@ export const ConfigSource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConfigSource {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigSource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigSource();
@@ -479,7 +479,7 @@ export const ConfigFile = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConfigFile {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigFile {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigFile();
@@ -583,7 +583,7 @@ export const ConfigRef = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConfigRef {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigRef {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigRef();
@@ -643,7 +643,7 @@ export const ChangeReport = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ChangeReport {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ChangeReport {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangeReport();
@@ -743,7 +743,7 @@ export const Rollout = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Rollout {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout();
@@ -851,7 +851,7 @@ export const TrafficPercentStrategy_DoubleMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TrafficPercentStrategy_DoubleMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TrafficPercentStrategy_DoubleMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTrafficPercentStrategy_DoubleMapEntry();
@@ -922,7 +922,7 @@ export const TrafficPercentStrategy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TrafficPercentStrategy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TrafficPercentStrategy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTrafficPercentStrategy();
@@ -999,7 +999,7 @@ export const Rollout_DeleteServiceStrategy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Rollout_DeleteServiceStrategy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_DeleteServiceStrategy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_DeleteServiceStrategy();

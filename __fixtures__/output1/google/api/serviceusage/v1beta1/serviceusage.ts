@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { QuotaView, QuotaOverride, QuotaSafetyCheck, OverrideInlineSource, Service, ConsumerQuotaMetric, AdminQuotaPolicy, ServiceIdentity } from "./resources";
 import { FieldMask } from "../../../protobuf/field_mask";
 export interface EnableServiceRequest {
@@ -21,7 +21,7 @@ export const EnableServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnableServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnableServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnableServiceRequest();
@@ -81,7 +81,7 @@ export const DisableServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DisableServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DisableServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisableServiceRequest();
@@ -141,7 +141,7 @@ export const GetServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRequest();
@@ -219,7 +219,7 @@ export const ListServicesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServicesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesRequest();
@@ -306,7 +306,7 @@ export const ListServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -385,7 +385,7 @@ export const BatchEnableServicesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchEnableServicesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchEnableServicesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchEnableServicesRequest();
@@ -475,7 +475,7 @@ export const ListConsumerQuotaMetricsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListConsumerQuotaMetricsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerQuotaMetricsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerQuotaMetricsRequest();
@@ -562,7 +562,7 @@ export const ListConsumerQuotaMetricsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListConsumerQuotaMetricsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerQuotaMetricsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerQuotaMetricsResponse();
@@ -641,7 +641,7 @@ export const GetConsumerQuotaMetricRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetConsumerQuotaMetricRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConsumerQuotaMetricRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConsumerQuotaMetricRequest();
@@ -714,7 +714,7 @@ export const GetConsumerQuotaLimitRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetConsumerQuotaLimitRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConsumerQuotaLimitRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConsumerQuotaLimitRequest();
@@ -802,7 +802,7 @@ export const CreateAdminOverrideRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateAdminOverrideRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateAdminOverrideRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateAdminOverrideRequest();
@@ -923,7 +923,7 @@ export const UpdateAdminOverrideRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateAdminOverrideRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminOverrideRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminOverrideRequest();
@@ -1039,7 +1039,7 @@ export const DeleteAdminOverrideRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteAdminOverrideRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteAdminOverrideRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteAdminOverrideRequest();
@@ -1138,7 +1138,7 @@ export const ListAdminOverridesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListAdminOverridesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAdminOverridesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAdminOverridesRequest();
@@ -1218,7 +1218,7 @@ export const ListAdminOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListAdminOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAdminOverridesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAdminOverridesResponse();
@@ -1291,7 +1291,7 @@ export const BatchCreateAdminOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchCreateAdminOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchCreateAdminOverridesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchCreateAdminOverridesResponse();
@@ -1378,7 +1378,7 @@ export const ImportAdminOverridesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportAdminOverridesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminOverridesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminOverridesRequest();
@@ -1472,7 +1472,7 @@ export const ImportAdminOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportAdminOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminOverridesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminOverridesResponse();
@@ -1530,7 +1530,7 @@ export const ImportAdminOverridesMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportAdminOverridesMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminOverridesMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminOverridesMetadata();
@@ -1603,7 +1603,7 @@ export const CreateConsumerOverrideRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateConsumerOverrideRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateConsumerOverrideRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateConsumerOverrideRequest();
@@ -1724,7 +1724,7 @@ export const UpdateConsumerOverrideRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateConsumerOverrideRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateConsumerOverrideRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateConsumerOverrideRequest();
@@ -1840,7 +1840,7 @@ export const DeleteConsumerOverrideRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteConsumerOverrideRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteConsumerOverrideRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteConsumerOverrideRequest();
@@ -1939,7 +1939,7 @@ export const ListConsumerOverridesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListConsumerOverridesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerOverridesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerOverridesRequest();
@@ -2019,7 +2019,7 @@ export const ListConsumerOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListConsumerOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerOverridesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerOverridesResponse();
@@ -2092,7 +2092,7 @@ export const BatchCreateConsumerOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchCreateConsumerOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchCreateConsumerOverridesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchCreateConsumerOverridesResponse();
@@ -2179,7 +2179,7 @@ export const ImportConsumerOverridesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportConsumerOverridesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportConsumerOverridesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportConsumerOverridesRequest();
@@ -2273,7 +2273,7 @@ export const ImportConsumerOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportConsumerOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportConsumerOverridesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportConsumerOverridesResponse();
@@ -2331,7 +2331,7 @@ export const ImportConsumerOverridesMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportConsumerOverridesMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportConsumerOverridesMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportConsumerOverridesMetadata();
@@ -2383,7 +2383,7 @@ export const ImportAdminQuotaPoliciesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportAdminQuotaPoliciesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminQuotaPoliciesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminQuotaPoliciesResponse();
@@ -2441,7 +2441,7 @@ export const ImportAdminQuotaPoliciesMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ImportAdminQuotaPoliciesMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminQuotaPoliciesMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminQuotaPoliciesMetadata();
@@ -2485,7 +2485,7 @@ export const CreateAdminQuotaPolicyMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CreateAdminQuotaPolicyMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateAdminQuotaPolicyMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateAdminQuotaPolicyMetadata();
@@ -2529,7 +2529,7 @@ export const UpdateAdminQuotaPolicyMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateAdminQuotaPolicyMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminQuotaPolicyMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
@@ -2573,7 +2573,7 @@ export const DeleteAdminQuotaPolicyMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DeleteAdminQuotaPolicyMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteAdminQuotaPolicyMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteAdminQuotaPolicyMetadata();
@@ -2625,7 +2625,7 @@ export const GenerateServiceIdentityRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenerateServiceIdentityRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenerateServiceIdentityRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateServiceIdentityRequest();
@@ -2691,7 +2691,7 @@ export const GetServiceIdentityResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceIdentityResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceIdentityResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceIdentityResponse();
@@ -2759,7 +2759,7 @@ export const GetServiceIdentityMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceIdentityMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceIdentityMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceIdentityMetadata();

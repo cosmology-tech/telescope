@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { SourceInfo, Expr, Constant } from "./syntax";
 import { Empty } from "../../../protobuf/empty";
 import { NullValue } from "../../../protobuf/struct";
@@ -28,7 +28,7 @@ export const CheckedExpr_ReferenceMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckedExpr_ReferenceMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_ReferenceMapEntry();
@@ -101,7 +101,7 @@ export const CheckedExpr_TypeMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckedExpr_TypeMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_TypeMapEntry();
@@ -201,7 +201,7 @@ export const CheckedExpr = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckedExpr {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
@@ -411,7 +411,7 @@ export const Type = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
@@ -555,7 +555,7 @@ export const Type_ListType = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type_ListType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type_ListType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_ListType();
@@ -621,7 +621,7 @@ export const Type_MapType = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type_MapType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type_MapType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
@@ -694,7 +694,7 @@ export const Type_FunctionType = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type_FunctionType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type_FunctionType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_FunctionType();
@@ -773,7 +773,7 @@ export const Type_AbstractType = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type_AbstractType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type_AbstractType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_AbstractType();
@@ -905,7 +905,7 @@ export const Decl = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Decl {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
@@ -991,7 +991,7 @@ export const Decl_IdentDecl = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Decl_IdentDecl {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_IdentDecl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_IdentDecl();
@@ -1065,7 +1065,7 @@ export const Decl_FunctionDecl = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Decl_FunctionDecl {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl();
@@ -1161,7 +1161,7 @@ export const Overload = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Overload {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Overload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOverload();
@@ -1278,7 +1278,7 @@ export const Reference = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Reference {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Reference {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReference();

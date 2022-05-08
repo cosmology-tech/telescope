@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupPolicyInfo, GroupMember, Proposal, Vote, TallyResult } from "./types";
 export interface QueryGroupInfoRequest {
@@ -21,7 +21,7 @@ export const QueryGroupInfoRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoRequest();
@@ -81,7 +81,7 @@ export const QueryGroupInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoResponse();
@@ -141,7 +141,7 @@ export const QueryGroupPolicyInfoRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupPolicyInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPolicyInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPolicyInfoRequest();
@@ -201,7 +201,7 @@ export const QueryGroupPolicyInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupPolicyInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPolicyInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPolicyInfoResponse();
@@ -267,7 +267,7 @@ export const QueryGroupMembersRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupMembersRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupMembersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersRequest();
@@ -340,7 +340,7 @@ export const QueryGroupMembersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupMembersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersResponse();
@@ -419,7 +419,7 @@ export const QueryGroupsByAdminRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupsByAdminRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByAdminRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminRequest();
@@ -492,7 +492,7 @@ export const QueryGroupsByAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupsByAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminResponse();
@@ -571,7 +571,7 @@ export const QueryGroupPoliciesByGroupRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupPoliciesByGroupRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByGroupRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByGroupRequest();
@@ -644,7 +644,7 @@ export const QueryGroupPoliciesByGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupPoliciesByGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByGroupResponse();
@@ -723,7 +723,7 @@ export const QueryGroupPoliciesByAdminRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupPoliciesByAdminRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByAdminRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByAdminRequest();
@@ -796,7 +796,7 @@ export const QueryGroupPoliciesByAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupPoliciesByAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByAdminResponse();
@@ -869,7 +869,7 @@ export const QueryProposalRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryProposalRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalRequest();
@@ -929,7 +929,7 @@ export const QueryProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalResponse();
@@ -995,7 +995,7 @@ export const QueryProposalsByGroupPolicyRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryProposalsByGroupPolicyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsByGroupPolicyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupPolicyRequest();
@@ -1068,7 +1068,7 @@ export const QueryProposalsByGroupPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryProposalsByGroupPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsByGroupPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupPolicyResponse();
@@ -1147,7 +1147,7 @@ export const QueryVoteByProposalVoterRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryVoteByProposalVoterRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteByProposalVoterRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterRequest();
@@ -1214,7 +1214,7 @@ export const QueryVoteByProposalVoterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryVoteByProposalVoterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteByProposalVoterResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterResponse();
@@ -1280,7 +1280,7 @@ export const QueryVotesByProposalRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryVotesByProposalRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByProposalRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalRequest();
@@ -1353,7 +1353,7 @@ export const QueryVotesByProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryVotesByProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalResponse();
@@ -1432,7 +1432,7 @@ export const QueryVotesByVoterRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryVotesByVoterRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByVoterRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterRequest();
@@ -1505,7 +1505,7 @@ export const QueryVotesByVoterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryVotesByVoterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByVoterResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterResponse();
@@ -1584,7 +1584,7 @@ export const QueryGroupsByMemberRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupsByMemberRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByMemberRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByMemberRequest();
@@ -1657,7 +1657,7 @@ export const QueryGroupsByMemberResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryGroupsByMemberResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByMemberResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByMemberResponse();
@@ -1730,7 +1730,7 @@ export const QueryTallyResultRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryTallyResultRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultRequest();
@@ -1790,7 +1790,7 @@ export const QueryTallyResultResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryTallyResultResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultResponse();

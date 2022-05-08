@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Api } from "../../../protobuf/api";
 import { Documentation } from "../../documentation";
 import { Quota } from "../../quota";
@@ -45,7 +45,7 @@ export const Service = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Service {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -194,7 +194,7 @@ export const ServiceConfig = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ServiceConfig {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceConfig {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceConfig();
@@ -334,7 +334,7 @@ export const OperationMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OperationMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
@@ -429,7 +429,7 @@ export const ConsumerQuotaMetric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsumerQuotaMetric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetric {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaMetric();
@@ -565,7 +565,7 @@ export const ConsumerQuotaLimit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConsumerQuotaLimit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaLimit();
@@ -689,7 +689,7 @@ export const QuotaBucket_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaBucket_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaBucket_StringMapEntry();
@@ -790,7 +790,7 @@ export const QuotaBucket = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaBucket {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaBucket();
@@ -916,7 +916,7 @@ export const QuotaOverride_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaOverride_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOverride_StringMapEntry();
@@ -1018,7 +1018,7 @@ export const QuotaOverride = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaOverride {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOverride();
@@ -1138,7 +1138,7 @@ export const OverrideInlineSource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OverrideInlineSource {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OverrideInlineSource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOverrideInlineSource();
@@ -1223,7 +1223,7 @@ export const AdminQuotaPolicy_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AdminQuotaPolicy_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminQuotaPolicy_StringMapEntry();
@@ -1325,7 +1325,7 @@ export const AdminQuotaPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AdminQuotaPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminQuotaPolicy();
@@ -1451,7 +1451,7 @@ export const ServiceIdentity = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ServiceIdentity {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceIdentity {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceIdentity();

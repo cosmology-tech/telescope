@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Http {
   rules: HttpRule[];
   fullyDecodeReservedExpansion: boolean;
@@ -25,7 +25,7 @@ export const Http = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Http {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Http {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttp();
@@ -152,7 +152,7 @@ export const HttpRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): HttpRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): HttpRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRule();
@@ -287,7 +287,7 @@ export const CustomHttpPattern = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CustomHttpPattern {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CustomHttpPattern {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCustomHttpPattern();

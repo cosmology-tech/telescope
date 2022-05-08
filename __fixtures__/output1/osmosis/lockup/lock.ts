@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toDuration, toTimestamp, Long, fromDuration, fromTimestamp, isSet, fromJsonTimestamp } from "@osmonauts/helpers";
+import { toDuration, toTimestamp, Long, fromDuration, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
@@ -41,7 +41,7 @@ export const PeriodLock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PeriodLock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PeriodLock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodLock();
@@ -155,7 +155,7 @@ export const QueryCondition = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryCondition {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCondition {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCondition();
@@ -248,7 +248,7 @@ export const SyntheticLock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SyntheticLock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLock();

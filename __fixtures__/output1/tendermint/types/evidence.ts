@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Vote, LightBlock } from "./types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Validator } from "./validator";
@@ -28,7 +28,7 @@ export const Evidence = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Evidence {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Evidence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidence();
@@ -116,7 +116,7 @@ export const DuplicateVoteEvidence = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DuplicateVoteEvidence {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DuplicateVoteEvidence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuplicateVoteEvidence();
@@ -225,7 +225,7 @@ export const LightClientAttackEvidence = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LightClientAttackEvidence {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LightClientAttackEvidence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLightClientAttackEvidence();
@@ -319,7 +319,7 @@ export const EvidenceList = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EvidenceList {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvidenceList {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidenceList();

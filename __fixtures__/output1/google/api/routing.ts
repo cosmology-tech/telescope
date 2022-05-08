@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 export interface RoutingRule {
   routingParameters: RoutingParameter[];
 }
@@ -19,7 +19,7 @@ export const RoutingRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RoutingRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RoutingRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoutingRule();
@@ -91,7 +91,7 @@ export const RoutingParameter = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RoutingParameter {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RoutingParameter {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoutingParameter();

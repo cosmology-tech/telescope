@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface ConfigChange {
   element: string;
   oldValue: string;
@@ -43,7 +43,7 @@ export const ConfigChange = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ConfigChange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigChange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigChange();
@@ -137,7 +137,7 @@ export const Advice = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Advice {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Advice {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdvice();

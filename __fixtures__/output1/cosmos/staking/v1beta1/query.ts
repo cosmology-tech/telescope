@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Validator, DelegationResponse, UnbondingDelegation, RedelegationResponse, HistoricalInfo, Pool, Params } from "./staking";
 export interface QueryValidatorsRequest {
@@ -27,7 +27,7 @@ export const QueryValidatorsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorsRequest();
@@ -100,7 +100,7 @@ export const QueryValidatorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorsResponse();
@@ -173,7 +173,7 @@ export const QueryValidatorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorRequest();
@@ -233,7 +233,7 @@ export const QueryValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorResponse();
@@ -299,7 +299,7 @@ export const QueryValidatorDelegationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorDelegationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorDelegationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorDelegationsRequest();
@@ -372,7 +372,7 @@ export const QueryValidatorDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorDelegationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorDelegationsResponse();
@@ -451,7 +451,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorUnbondingDelegationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorUnbondingDelegationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorUnbondingDelegationsRequest();
@@ -524,7 +524,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryValidatorUnbondingDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorUnbondingDelegationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorUnbondingDelegationsResponse();
@@ -603,7 +603,7 @@ export const QueryDelegationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationRequest();
@@ -670,7 +670,7 @@ export const QueryDelegationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationResponse();
@@ -736,7 +736,7 @@ export const QueryUnbondingDelegationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUnbondingDelegationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnbondingDelegationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnbondingDelegationRequest();
@@ -803,7 +803,7 @@ export const QueryUnbondingDelegationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryUnbondingDelegationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnbondingDelegationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnbondingDelegationResponse();
@@ -869,7 +869,7 @@ export const QueryDelegatorDelegationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorDelegationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorDelegationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorDelegationsRequest();
@@ -942,7 +942,7 @@ export const QueryDelegatorDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorDelegationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorDelegationsResponse();
@@ -1021,7 +1021,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorUnbondingDelegationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorUnbondingDelegationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorUnbondingDelegationsRequest();
@@ -1094,7 +1094,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorUnbondingDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorUnbondingDelegationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorUnbondingDelegationsResponse();
@@ -1185,7 +1185,7 @@ export const QueryRedelegationsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryRedelegationsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRedelegationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRedelegationsRequest();
@@ -1272,7 +1272,7 @@ export const QueryRedelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryRedelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRedelegationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRedelegationsResponse();
@@ -1351,7 +1351,7 @@ export const QueryDelegatorValidatorsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorValidatorsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsRequest();
@@ -1424,7 +1424,7 @@ export const QueryDelegatorValidatorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorValidatorsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsResponse();
@@ -1503,7 +1503,7 @@ export const QueryDelegatorValidatorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorValidatorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorRequest();
@@ -1570,7 +1570,7 @@ export const QueryDelegatorValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryDelegatorValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorResponse();
@@ -1630,7 +1630,7 @@ export const QueryHistoricalInfoRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryHistoricalInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHistoricalInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryHistoricalInfoRequest();
@@ -1690,7 +1690,7 @@ export const QueryHistoricalInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryHistoricalInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHistoricalInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryHistoricalInfoResponse();
@@ -1742,7 +1742,7 @@ export const QueryPoolRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPoolRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolRequest();
@@ -1794,7 +1794,7 @@ export const QueryPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolResponse();
@@ -1846,7 +1846,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -1898,7 +1898,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();

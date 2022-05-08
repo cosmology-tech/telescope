@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { BaseAccount } from "../../auth/v1beta1/auth";
 import { Coin } from "../../base/v1beta1/coin";
 export interface BaseVestingAccount {
@@ -45,7 +45,7 @@ export const BaseVestingAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BaseVestingAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BaseVestingAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseVestingAccount();
@@ -155,7 +155,7 @@ export const ContinuousVestingAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ContinuousVestingAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ContinuousVestingAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContinuousVestingAccount();
@@ -222,7 +222,7 @@ export const DelayedVestingAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DelayedVestingAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DelayedVestingAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelayedVestingAccount();
@@ -288,7 +288,7 @@ export const Period = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Period {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Period {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriod();
@@ -373,7 +373,7 @@ export const PeriodicVestingAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PeriodicVestingAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PeriodicVestingAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodicVestingAccount();
@@ -453,7 +453,7 @@ export const PermanentLockedAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PermanentLockedAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PermanentLockedAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePermanentLockedAccount();

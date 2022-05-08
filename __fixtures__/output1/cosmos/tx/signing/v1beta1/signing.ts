@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { CompactBitArray } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any } from "../../../../google/protobuf/any";
 export enum SignMode {
@@ -48,7 +48,7 @@ export const SignatureDescriptors = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignatureDescriptors {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptors {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptors();
@@ -126,7 +126,7 @@ export const SignatureDescriptor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignatureDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor();
@@ -206,7 +206,7 @@ export const SignatureDescriptor_Data = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignatureDescriptor_Data {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor_Data {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor_Data();
@@ -279,7 +279,7 @@ export const Single = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Single {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Single {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSingle();
@@ -352,7 +352,7 @@ export const Multi = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Multi {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMulti();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp, Long, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Header } from "../../../tendermint/types/types";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
@@ -30,7 +30,7 @@ export const HistoricalInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): HistoricalInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): HistoricalInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalInfo();
@@ -115,7 +115,7 @@ export const CommissionRates = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CommissionRates {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CommissionRates {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommissionRates();
@@ -192,7 +192,7 @@ export const Commission = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Commission {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Commission {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommission();
@@ -283,7 +283,7 @@ export const Description = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Description {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Description {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescription();
@@ -429,7 +429,7 @@ export const Validator = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Validator {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Validator {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
@@ -573,7 +573,7 @@ export const ValAddresses = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValAddresses {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValAddresses {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValAddresses();
@@ -644,7 +644,7 @@ export const DVPair = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DVPair {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DVPair {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVPair();
@@ -711,7 +711,7 @@ export const DVPairs = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DVPairs {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DVPairs {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVPairs();
@@ -789,7 +789,7 @@ export const DVVTriplet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DVVTriplet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DVVTriplet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVVTriplet();
@@ -863,7 +863,7 @@ export const DVVTriplets = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DVVTriplets {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DVVTriplets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVVTriplets();
@@ -941,7 +941,7 @@ export const Delegation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Delegation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Delegation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegation();
@@ -1027,7 +1027,7 @@ export const UnbondingDelegation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UnbondingDelegation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UnbondingDelegation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnbondingDelegation();
@@ -1123,7 +1123,7 @@ export const UnbondingDelegationEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UnbondingDelegationEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UnbondingDelegationEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnbondingDelegationEntry();
@@ -1220,7 +1220,7 @@ export const RedelegationEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RedelegationEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RedelegationEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegationEntry();
@@ -1319,7 +1319,7 @@ export const Redelegation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Redelegation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Redelegation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegation();
@@ -1434,7 +1434,7 @@ export const Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -1535,7 +1535,7 @@ export const DelegationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DelegationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DelegationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegationResponse();
@@ -1608,7 +1608,7 @@ export const RedelegationEntryResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RedelegationEntryResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RedelegationEntryResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegationEntryResponse();
@@ -1681,7 +1681,7 @@ export const RedelegationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): RedelegationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RedelegationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegationResponse();
@@ -1760,7 +1760,7 @@ export const Pool = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Pool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Pool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();

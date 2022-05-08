@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Params, ValidatorSigningInfo } from "./slashing";
 export interface GenesisState {
   params: Params;
@@ -32,7 +32,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -123,7 +123,7 @@ export const SigningInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SigningInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SigningInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningInfo();
@@ -196,7 +196,7 @@ export const ValidatorMissedBlocks = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorMissedBlocks {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorMissedBlocks {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorMissedBlocks();
@@ -275,7 +275,7 @@ export const MissedBlock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MissedBlock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MissedBlock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMissedBlock();

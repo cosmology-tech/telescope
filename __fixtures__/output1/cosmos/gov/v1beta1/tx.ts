@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../base/v1beta1/coin";
 import { VoteOption, WeightedVoteOption } from "./gov";
@@ -34,7 +34,7 @@ export const MsgSubmitProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposal();
@@ -114,7 +114,7 @@ export const MsgSubmitProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -186,7 +186,7 @@ export const MsgVote = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVote {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVote {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVote();
@@ -252,7 +252,7 @@ export const MsgVoteResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVoteResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -316,7 +316,7 @@ export const MsgVoteWeighted = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVoteWeighted {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteWeighted {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeighted();
@@ -388,7 +388,7 @@ export const MsgVoteWeightedResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVoteWeightedResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteWeightedResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeightedResponse();
@@ -452,7 +452,7 @@ export const MsgDeposit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgDeposit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeposit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeposit();
@@ -524,7 +524,7 @@ export const MsgDepositResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgDepositResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositResponse();

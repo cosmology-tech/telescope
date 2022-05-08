@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Coin {
   denom: string;
   amount: string;
@@ -25,7 +25,7 @@ export const Coin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Coin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Coin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCoin();
@@ -98,7 +98,7 @@ export const DecCoin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DecCoin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DecCoin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecCoin();
@@ -165,7 +165,7 @@ export const IntProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IntProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IntProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIntProto();
@@ -225,7 +225,7 @@ export const DecProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DecProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DecProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecProto();

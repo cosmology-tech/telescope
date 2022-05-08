@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Member, VoteOption } from "./types";
 import { Any } from "../../../google/protobuf/any";
 export interface MsgCreateGroup {
@@ -33,7 +33,7 @@ export const MsgCreateGroup = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGroup {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroup();
@@ -113,7 +113,7 @@ export const MsgCreateGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupResponse();
@@ -185,7 +185,7 @@ export const MsgUpdateGroupMembers = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupMembers {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembers {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembers();
@@ -257,7 +257,7 @@ export const MsgUpdateGroupMembersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembersResponse();
@@ -321,7 +321,7 @@ export const MsgUpdateGroupAdmin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdmin();
@@ -387,7 +387,7 @@ export const MsgUpdateGroupAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdminResponse();
@@ -451,7 +451,7 @@ export const MsgUpdateGroupMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadata();
@@ -517,7 +517,7 @@ export const MsgUpdateGroupMetadataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadataResponse();
@@ -587,7 +587,7 @@ export const MsgCreateGroupPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGroupPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicy();
@@ -668,7 +668,7 @@ export const MsgCreateGroupPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGroupPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicyResponse();
@@ -740,7 +740,7 @@ export const MsgUpdateGroupPolicyAdmin = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupPolicyAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdmin();
@@ -844,7 +844,7 @@ export const MsgCreateGroupWithPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGroupWithPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicy();
@@ -951,7 +951,7 @@ export const MsgCreateGroupWithPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateGroupWithPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicyResponse();
@@ -1010,7 +1010,7 @@ export const MsgUpdateGroupPolicyAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupPolicyAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
@@ -1074,7 +1074,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupPolicyDecisionPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
@@ -1140,7 +1140,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
@@ -1204,7 +1204,7 @@ export const MsgUpdateGroupPolicyMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupPolicyMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadata();
@@ -1270,7 +1270,7 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUpdateGroupPolicyMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
@@ -1358,7 +1358,7 @@ export const MsgSubmitProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposal();
@@ -1457,7 +1457,7 @@ export const MsgSubmitProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSubmitProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -1523,7 +1523,7 @@ export const MsgWithdrawProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgWithdrawProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawProposal();
@@ -1582,7 +1582,7 @@ export const MsgWithdrawProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgWithdrawProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawProposalResponse();
@@ -1658,7 +1658,7 @@ export const MsgVote = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVote {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVote {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVote();
@@ -1738,7 +1738,7 @@ export const MsgVoteResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgVoteResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -1796,7 +1796,7 @@ export const MsgExec = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExec {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExec {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExec();
@@ -1855,7 +1855,7 @@ export const MsgExecResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgExecResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecResponse();
@@ -1913,7 +1913,7 @@ export const MsgLeaveGroup = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgLeaveGroup {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLeaveGroup();
@@ -1972,7 +1972,7 @@ export const MsgLeaveGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgLeaveGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLeaveGroupResponse();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { PublicKey } from "../crypto/keys";
 export interface ValidatorSet {
   validators: Validator[];
@@ -32,7 +32,7 @@ export const ValidatorSet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ValidatorSet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSet();
@@ -130,7 +130,7 @@ export const Validator = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Validator {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Validator {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
@@ -217,7 +217,7 @@ export const SimpleValidator = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SimpleValidator {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SimpleValidator {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimpleValidator();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface DoubleValue {
   value: number;
 }
@@ -19,7 +19,7 @@ export const DoubleValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DoubleValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DoubleValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDoubleValue();
@@ -79,7 +79,7 @@ export const FloatValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FloatValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FloatValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFloatValue();
@@ -139,7 +139,7 @@ export const Int64Value = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Int64Value {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Int64Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt64Value();
@@ -199,7 +199,7 @@ export const UInt64Value = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UInt64Value {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UInt64Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Value();
@@ -259,7 +259,7 @@ export const Int32Value = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Int32Value {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Int32Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt32Value();
@@ -319,7 +319,7 @@ export const UInt32Value = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UInt32Value {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UInt32Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt32Value();
@@ -379,7 +379,7 @@ export const BoolValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BoolValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BoolValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBoolValue();
@@ -439,7 +439,7 @@ export const StringValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): StringValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StringValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringValue();
@@ -499,7 +499,7 @@ export const BytesValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BytesValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BytesValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBytesValue();

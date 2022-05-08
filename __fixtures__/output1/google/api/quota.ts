@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet } from "@osmonauts/helpers";
 export interface Quota {
   limits: QuotaLimit[];
   metricRules: MetricRule[];
@@ -25,7 +25,7 @@ export const Quota = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Quota {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Quota {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuota();
@@ -109,7 +109,7 @@ export const MetricRule_Int64MapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricRule_Int64MapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule_Int64MapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule_Int64MapEntry();
@@ -186,7 +186,7 @@ export const MetricRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MetricRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
@@ -284,7 +284,7 @@ export const QuotaLimit_Int64MapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaLimit_Int64MapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit_Int64MapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit_Int64MapEntry();
@@ -410,7 +410,7 @@ export const QuotaLimit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuotaLimit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit();

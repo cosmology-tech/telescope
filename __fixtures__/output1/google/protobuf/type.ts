@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { SourceContext } from "./source_context";
 import { Any } from "./any";
 export interface Type {
@@ -51,7 +51,7 @@ export const Type = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
@@ -215,7 +215,7 @@ export const Field = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Field {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Field {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseField();
@@ -441,7 +441,7 @@ export const Enum = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Enum {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Enum {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnum();
@@ -552,7 +552,7 @@ export const EnumValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValue();
@@ -638,7 +638,7 @@ export const Option = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Option {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Option {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOption();

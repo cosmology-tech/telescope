@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Params, ValidatorSigningInfo } from "./slashing";
 export interface QueryParamsRequest {}
@@ -13,7 +13,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -65,7 +65,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -125,7 +125,7 @@ export const QuerySigningInfoRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySigningInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfoRequest();
@@ -185,7 +185,7 @@ export const QuerySigningInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySigningInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfoResponse();
@@ -245,7 +245,7 @@ export const QuerySigningInfosRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySigningInfosRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfosRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfosRequest();
@@ -311,7 +311,7 @@ export const QuerySigningInfosResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySigningInfosResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfosResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfosResponse();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Params } from "./mint";
 export interface QueryParamsRequest {}
 
@@ -12,7 +12,7 @@ export const QueryParamsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -64,7 +64,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -116,7 +116,7 @@ export const QueryInflationRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryInflationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInflationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationRequest();
@@ -168,7 +168,7 @@ export const QueryInflationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryInflationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInflationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationResponse();
@@ -220,7 +220,7 @@ export const QueryAnnualProvisionsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAnnualProvisionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnnualProvisionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAnnualProvisionsRequest();
@@ -272,7 +272,7 @@ export const QueryAnnualProvisionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryAnnualProvisionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnnualProvisionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAnnualProvisionsResponse();

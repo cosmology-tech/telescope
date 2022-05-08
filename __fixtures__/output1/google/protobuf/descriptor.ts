@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface FileDescriptorSet {
   file: FileDescriptorProto[];
 }
@@ -19,7 +19,7 @@ export const FileDescriptorSet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FileDescriptorSet {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FileDescriptorSet {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileDescriptorSet();
@@ -158,7 +158,7 @@ export const FileDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FileDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FileDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileDescriptorProto();
@@ -398,7 +398,7 @@ export const DescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto();
@@ -574,7 +574,7 @@ export const DescriptorProto_ExtensionRange = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DescriptorProto_ExtensionRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DescriptorProto_ExtensionRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto_ExtensionRange();
@@ -654,7 +654,7 @@ export const DescriptorProto_ReservedRange = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DescriptorProto_ReservedRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DescriptorProto_ReservedRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto_ReservedRange();
@@ -721,7 +721,7 @@ export const ExtensionRangeOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ExtensionRangeOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExtensionRangeOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExtensionRangeOptions();
@@ -841,7 +841,7 @@ export const FieldDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FieldDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FieldDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldDescriptorProto();
@@ -1017,7 +1017,7 @@ export const OneofDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OneofDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OneofDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofDescriptorProto();
@@ -1108,7 +1108,7 @@ export const EnumDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumDescriptorProto();
@@ -1218,7 +1218,7 @@ export const EnumDescriptorProto_EnumReservedRange = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumDescriptorProto_EnumReservedRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumDescriptorProto_EnumReservedRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumDescriptorProto_EnumReservedRange();
@@ -1297,7 +1297,7 @@ export const EnumValueDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumValueDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumValueDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValueDescriptorProto();
@@ -1383,7 +1383,7 @@ export const ServiceDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ServiceDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceDescriptorProto();
@@ -1493,7 +1493,7 @@ export const MethodDescriptorProto = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MethodDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MethodDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethodDescriptorProto();
@@ -1708,7 +1708,7 @@ export const FileOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FileOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FileOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileOptions();
@@ -1950,7 +1950,7 @@ export const MessageOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MessageOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MessageOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessageOptions();
@@ -2080,7 +2080,7 @@ export const FieldOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): FieldOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FieldOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldOptions();
@@ -2206,7 +2206,7 @@ export const OneofOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OneofOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OneofOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofOptions();
@@ -2284,7 +2284,7 @@ export const EnumOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumOptions();
@@ -2370,7 +2370,7 @@ export const EnumValueOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnumValueOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumValueOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValueOptions();
@@ -2449,7 +2449,7 @@ export const ServiceOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ServiceOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceOptions();
@@ -2534,7 +2534,7 @@ export const MethodOptions = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MethodOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MethodOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethodOptions();
@@ -2660,7 +2660,7 @@ export const UninterpretedOption = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UninterpretedOption {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UninterpretedOption {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUninterpretedOption();
@@ -2774,7 +2774,7 @@ export const UninterpretedOption_NamePart = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UninterpretedOption_NamePart {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UninterpretedOption_NamePart {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUninterpretedOption_NamePart();
@@ -2841,7 +2841,7 @@ export const SourceCodeInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourceCodeInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceCodeInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceCodeInfo();
@@ -2938,7 +2938,7 @@ export const SourceCodeInfo_Location = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourceCodeInfo_Location {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceCodeInfo_Location {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceCodeInfo_Location();
@@ -3056,7 +3056,7 @@ export const GeneratedCodeInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GeneratedCodeInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GeneratedCodeInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGeneratedCodeInfo();
@@ -3144,7 +3144,7 @@ export const GeneratedCodeInfo_Annotation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GeneratedCodeInfo_Annotation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GeneratedCodeInfo_Annotation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGeneratedCodeInfo_Annotation();

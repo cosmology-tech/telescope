@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 export enum SuperfluidAssetType {
   SuperfluidAssetTypeNative = 0,
@@ -31,7 +31,7 @@ export const SuperfluidAsset = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidAsset {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidAsset {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidAsset();
@@ -110,7 +110,7 @@ export const SuperfluidIntermediaryAccount = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidIntermediaryAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidIntermediaryAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidIntermediaryAccount();
@@ -196,7 +196,7 @@ export const OsmoEquivalentMultiplierRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OsmoEquivalentMultiplierRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OsmoEquivalentMultiplierRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOsmoEquivalentMultiplierRecord();
@@ -282,7 +282,7 @@ export const SuperfluidDelegationRecord = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SuperfluidDelegationRecord {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationRecord {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationRecord();
@@ -362,7 +362,7 @@ export const LockIdIntermediaryAccountConnection = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LockIdIntermediaryAccountConnection {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockIdIntermediaryAccountConnection {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockIdIntermediaryAccountConnection();

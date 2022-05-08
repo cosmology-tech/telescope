@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Struct } from "../../protobuf/struct";
 import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
@@ -65,7 +65,7 @@ export const AttributeContext = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AttributeContext {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext();
@@ -186,7 +186,7 @@ export const Peer_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Peer_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Peer_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeer_StringMapEntry();
@@ -282,7 +282,7 @@ export const Peer = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Peer {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Peer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeer();
@@ -413,7 +413,7 @@ export const AttributeContext_Api = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AttributeContext_Api {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Api {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Api();
@@ -518,7 +518,7 @@ export const AttributeContext_Auth = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AttributeContext_Auth {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Auth {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Auth();
@@ -622,7 +622,7 @@ export const Request_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Request_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Request_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequest_StringMapEntry();
@@ -758,7 +758,7 @@ export const Request = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Request {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Request {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequest();
@@ -926,7 +926,7 @@ export const Response_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Response_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Response_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_StringMapEntry();
@@ -1015,7 +1015,7 @@ export const Response = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Response {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Response {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse();
@@ -1134,7 +1134,7 @@ export const Resource_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Resource_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Resource_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource_StringMapEntry();
@@ -1207,7 +1207,7 @@ export const Resource_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Resource_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Resource_StringMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource_StringMapEntry();
@@ -1342,7 +1342,7 @@ export const Resource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Resource {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Resource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource();

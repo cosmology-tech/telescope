@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Service } from "./resources";
 export interface EnableServiceRequest {
   name: string;
@@ -20,7 +20,7 @@ export const EnableServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnableServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnableServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnableServiceRequest();
@@ -80,7 +80,7 @@ export const EnableServiceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): EnableServiceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnableServiceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnableServiceResponse();
@@ -152,7 +152,7 @@ export const DisableServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DisableServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DisableServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisableServiceRequest();
@@ -239,7 +239,7 @@ export const DisableServiceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DisableServiceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DisableServiceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisableServiceResponse();
@@ -299,7 +299,7 @@ export const GetServiceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GetServiceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRequest();
@@ -377,7 +377,7 @@ export const ListServicesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServicesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesRequest();
@@ -464,7 +464,7 @@ export const ListServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ListServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -543,7 +543,7 @@ export const BatchEnableServicesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchEnableServicesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchEnableServicesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchEnableServicesRequest();
@@ -621,7 +621,7 @@ export const BatchEnableServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchEnableServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchEnableServicesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchEnableServicesResponse();
@@ -705,7 +705,7 @@ export const BatchEnableServicesResponse_EnableFailure = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchEnableServicesResponse_EnableFailure {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchEnableServicesResponse_EnableFailure {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchEnableServicesResponse_EnableFailure();
@@ -778,7 +778,7 @@ export const BatchGetServicesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchGetServicesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchGetServicesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchGetServicesRequest();
@@ -850,7 +850,7 @@ export const BatchGetServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BatchGetServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchGetServicesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchGetServicesResponse();

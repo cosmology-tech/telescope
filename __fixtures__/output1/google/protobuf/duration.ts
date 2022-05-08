@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Duration {
   seconds: Long;
   nanos: number;
@@ -25,7 +25,7 @@ export const Duration = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Duration {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Duration {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuration();

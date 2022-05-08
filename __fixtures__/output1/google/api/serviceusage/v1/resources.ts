@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Api } from "../../../protobuf/api";
 import { Documentation } from "../../documentation";
 import { Quota } from "../../quota";
@@ -45,7 +45,7 @@ export const Service = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Service {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -194,7 +194,7 @@ export const ServiceConfig = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ServiceConfig {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceConfig {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceConfig();
@@ -334,7 +334,7 @@ export const OperationMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): OperationMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();

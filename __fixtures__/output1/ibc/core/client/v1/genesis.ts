@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { IdentifiedClientState, ClientConsensusStates, Params } from "./client";
 export interface GenesisState {
   clients: IdentifiedClientState[];
@@ -50,7 +50,7 @@ export const GenesisState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisState {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -167,7 +167,7 @@ export const GenesisMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenesisMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisMetadata();
@@ -240,7 +240,7 @@ export const IdentifiedGenesisMetadata = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): IdentifiedGenesisMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedGenesisMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedGenesisMetadata();

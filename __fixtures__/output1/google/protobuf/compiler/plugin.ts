@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { FileDescriptorProto } from "../descriptor";
 export interface Version {
   major: number;
@@ -38,7 +38,7 @@ export const Version = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Version {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Version {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersion();
@@ -137,7 +137,7 @@ export const CodeGeneratorRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CodeGeneratorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CodeGeneratorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeGeneratorRequest();
@@ -235,7 +235,7 @@ export const CodeGeneratorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CodeGeneratorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CodeGeneratorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeGeneratorResponse();
@@ -320,7 +320,7 @@ export const CodeGeneratorResponse_File = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CodeGeneratorResponse_File {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CodeGeneratorResponse_File {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeGeneratorResponse_File();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface BIP44Params {
   purpose: number;
   coinType: number;
@@ -43,7 +43,7 @@ export const BIP44Params = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): BIP44Params {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BIP44Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBIP44Params();

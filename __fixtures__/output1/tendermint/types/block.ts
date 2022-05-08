@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Header, Data, Commit } from "./types";
 import { EvidenceList } from "./evidence";
 export interface Block {
@@ -39,7 +39,7 @@ export const Block = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Block {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Block {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlock();

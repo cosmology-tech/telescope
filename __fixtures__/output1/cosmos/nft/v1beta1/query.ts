@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { NFT, Class } from "./nft";
 export interface QueryBalanceRequest {
@@ -27,7 +27,7 @@ export const QueryBalanceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryBalanceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceRequest();
@@ -94,7 +94,7 @@ export const QueryBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceResponse();
@@ -160,7 +160,7 @@ export const QueryOwnerRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryOwnerRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOwnerRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOwnerRequest();
@@ -227,7 +227,7 @@ export const QueryOwnerResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryOwnerResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOwnerResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOwnerResponse();
@@ -287,7 +287,7 @@ export const QuerySupplyRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySupplyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyRequest();
@@ -347,7 +347,7 @@ export const QuerySupplyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QuerySupplyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyResponse();
@@ -419,7 +419,7 @@ export const QueryNFTsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryNFTsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNFTsRequest();
@@ -499,7 +499,7 @@ export const QueryNFTsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryNFTsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNFTsResponse();
@@ -578,7 +578,7 @@ export const QueryNFTRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryNFTRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNFTRequest();
@@ -645,7 +645,7 @@ export const QueryNFTResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryNFTResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNFTResponse();
@@ -705,7 +705,7 @@ export const QueryClassRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClassRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassRequest();
@@ -765,7 +765,7 @@ export const QueryClassResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClassResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassResponse();
@@ -825,7 +825,7 @@ export const QueryClassesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClassesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassesRequest();
@@ -891,7 +891,7 @@ export const QueryClassesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryClassesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassesResponse();

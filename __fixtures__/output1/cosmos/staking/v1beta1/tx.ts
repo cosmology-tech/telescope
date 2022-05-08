@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Description, CommissionRates } from "./staking";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../base/v1beta1/coin";
@@ -59,7 +59,7 @@ export const MsgCreateValidator = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateValidator {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateValidator {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateValidator();
@@ -153,7 +153,7 @@ export const MsgCreateValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCreateValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateValidatorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateValidatorResponse();
@@ -223,7 +223,7 @@ export const MsgEditValidator = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgEditValidator {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditValidator {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditValidator();
@@ -296,7 +296,7 @@ export const MsgEditValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgEditValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditValidatorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditValidatorResponse();
@@ -360,7 +360,7 @@ export const MsgDelegate = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgDelegate {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegate();
@@ -426,7 +426,7 @@ export const MsgDelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgDelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateResponse();
@@ -496,7 +496,7 @@ export const MsgBeginRedelegate = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgBeginRedelegate {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginRedelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginRedelegate();
@@ -574,7 +574,7 @@ export const MsgBeginRedelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgBeginRedelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginRedelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginRedelegateResponse();
@@ -646,7 +646,7 @@ export const MsgUndelegate = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUndelegate {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUndelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegate();
@@ -717,7 +717,7 @@ export const MsgUndelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgUndelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUndelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegateResponse();

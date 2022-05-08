@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 export interface Usage {
   requirements: string[];
   rules: UsageRule[];
@@ -31,7 +31,7 @@ export const Usage = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Usage {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Usage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsage();
@@ -127,7 +127,7 @@ export const UsageRule = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UsageRule {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UsageRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsageRule();

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
 import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface StoreCodeProposal {
@@ -45,7 +45,7 @@ export const StoreCodeProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): StoreCodeProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StoreCodeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreCodeProposal();
@@ -175,7 +175,7 @@ export const InstantiateContractProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): InstantiateContractProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InstantiateContractProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInstantiateContractProposal();
@@ -314,7 +314,7 @@ export const MigrateContractProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MigrateContractProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MigrateContractProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMigrateContractProposal();
@@ -420,7 +420,7 @@ export const SudoContractProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SudoContractProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SudoContractProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSudoContractProposal();
@@ -531,7 +531,7 @@ export const ExecuteContractProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ExecuteContractProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExecuteContractProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExecuteContractProposal();
@@ -650,7 +650,7 @@ export const UpdateAdminProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UpdateAdminProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminProposal();
@@ -743,7 +743,7 @@ export const ClearAdminProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ClearAdminProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClearAdminProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClearAdminProposal();
@@ -832,7 +832,7 @@ export const PinCodesProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PinCodesProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PinCodesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
@@ -934,7 +934,7 @@ export const UnpinCodesProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UnpinCodesProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UnpinCodesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();

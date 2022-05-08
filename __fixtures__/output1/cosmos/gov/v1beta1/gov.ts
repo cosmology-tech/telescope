@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
@@ -46,7 +46,7 @@ export const WeightedVoteOption = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): WeightedVoteOption {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WeightedVoteOption {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedVoteOption();
@@ -119,7 +119,7 @@ export const TextProposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TextProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TextProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTextProposal();
@@ -198,7 +198,7 @@ export const Deposit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Deposit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Deposit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeposit();
@@ -315,7 +315,7 @@ export const Proposal = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Proposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Proposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProposal();
@@ -480,7 +480,7 @@ export const TallyResult = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TallyResult {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TallyResult {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTallyResult();
@@ -579,7 +579,7 @@ export const Vote = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Vote {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Vote {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVote();
@@ -669,7 +669,7 @@ export const DepositParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): DepositParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DepositParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositParams();
@@ -739,7 +739,7 @@ export const VotingParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): VotingParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): VotingParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVotingParams();
@@ -811,7 +811,7 @@ export const TallyParams = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): TallyParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TallyParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTallyParams();

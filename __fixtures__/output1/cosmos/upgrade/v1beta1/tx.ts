@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
 import { Plan } from "./upgrade";
 export interface MsgSoftwareUpgrade {
   authority: string;
@@ -26,7 +26,7 @@ export const MsgSoftwareUpgrade = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSoftwareUpgrade {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgrade {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgrade();
@@ -85,7 +85,7 @@ export const MsgSoftwareUpgradeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSoftwareUpgradeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgradeResponse();
@@ -137,7 +137,7 @@ export const MsgCancelUpgrade = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCancelUpgrade {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgrade {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgrade();
@@ -189,7 +189,7 @@ export const MsgCancelUpgradeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgCancelUpgradeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgradeResponse();

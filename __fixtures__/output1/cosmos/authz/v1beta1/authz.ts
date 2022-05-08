@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 export interface GenericAuthorization {
@@ -21,7 +21,7 @@ export const GenericAuthorization = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GenericAuthorization {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenericAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenericAuthorization();
@@ -84,7 +84,7 @@ export const Grant = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Grant {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Grant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
@@ -166,7 +166,7 @@ export const GrantAuthorization = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GrantAuthorization {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GrantAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrantAuthorization();
@@ -247,7 +247,7 @@ export const GrantQueueItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): GrantQueueItem {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GrantQueueItem {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrantQueueItem();
