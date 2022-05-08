@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
 import { BILLION, memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
-import { AminoOptions } from '../types';
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { getTypeFromCurrentProtoPath, protoFieldsToArray } from '../utils';
 import { getEnumFromJsonName } from '../../proto';
@@ -8,17 +7,17 @@ import { getObjectName } from '@osmonauts/proto-parser';
 
 export const fromAmino = {
     defaultType(args: FromAminoParseField) {
-        if (args.field.name === args.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
+        if (args.field.name === args.context.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
             return shorthandProperty(args.field.name);
         }
-        return t.objectProperty(t.identifier(args.field.name), memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn))
+        return t.objectProperty(t.identifier(args.field.name), memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn))
     },
 
     string(args: FromAminoParseField) {
-        if (args.field.name === args.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
+        if (args.field.name === args.context.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
             return shorthandProperty(args.field.name);
         }
-        return t.objectProperty(t.identifier(args.field.name), memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn))
+        return t.objectProperty(t.identifier(args.field.name), memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn))
     },
 
     long(args: FromAminoParseField) {
@@ -29,7 +28,7 @@ export const fromAmino = {
                     t.identifier('fromString')
                 ),
                 [
-                    memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn)
+                    memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn)
                 ]
             ));
     },
@@ -49,7 +48,7 @@ export const fromAmino = {
                                 t.callExpression(
                                     t.identifier('parseInt'),
                                     [
-                                        memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn)
+                                        memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn)
                                     ]
                                 ),
                                 BILLION
@@ -64,7 +63,7 @@ export const fromAmino = {
                         t.callExpression(
                             t.identifier('parseInt'),
                             [
-                                memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn)
+                                memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn)
                             ]
                         ),
                         BILLION
@@ -79,7 +78,7 @@ export const fromAmino = {
         return t.objectProperty(
             t.identifier(args.field.name),
             t.conditionalExpression(
-                memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn),
+                memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn),
                 t.objectExpression([
                     t.objectProperty(t.identifier('revisionHeight'),
                         t.callExpression(
@@ -88,8 +87,8 @@ export const fromAmino = {
                                 t.logicalExpression(
                                     '||',
                                     t.memberExpression(
-                                        memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn),
-                                        t.identifier(args.options.aminoCasingFn('revision_height'))
+                                        memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn),
+                                        t.identifier(args.context.options.aminoCasingFn('revision_height'))
                                     ),
                                     t.stringLiteral('0')
                                 ),
@@ -104,8 +103,8 @@ export const fromAmino = {
                                 t.logicalExpression(
                                     '||',
                                     t.memberExpression(
-                                        memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn),
-                                        t.identifier(args.options.aminoCasingFn('revision_number'))
+                                        memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn),
+                                        t.identifier(args.context.options.aminoCasingFn('revision_number'))
                                     ),
                                     t.stringLiteral('0')
                                 ),
@@ -118,24 +117,24 @@ export const fromAmino = {
         )
     },
 
-    enum({ context, field, currentProtoPath, scope, nested, options }: FromAminoParseField) {
+    enum({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
         const Enum = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
 
         const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
         const value = t.callExpression(
             t.identifier(enumFunction), [
-            memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn)
+            memberExpressionOrIdentifierAminoCasing(scope, context.options.aminoCasingFn)
         ]);
         return t.objectProperty(t.identifier(field.name), value);
     },
 
-    enumArray({ context, field, currentProtoPath, scope, nested, options }: FromAminoParseField) {
+    enumArray({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
         const Enum = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
 
         const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
         const value = t.callExpression(
             t.memberExpression(
-                memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn),
+                memberExpressionOrIdentifierAminoCasing(scope, context.options.aminoCasingFn),
                 t.identifier('map')
             ),
             [
@@ -155,7 +154,7 @@ export const fromAmino = {
         return t.objectProperty(t.identifier(field.name), value);
     },
 
-    type({ context, field, currentProtoPath, scope, nested, options }: FromAminoParseField) {
+    type({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const properties = protoFieldsToArray(Type).map(field => {
@@ -165,8 +164,7 @@ export const fromAmino = {
                 field,
                 currentProtoPath,
                 scope: [...scope],
-                nested: nested + 1,
-                options
+                nested: nested + 1
             })
         });
         return t.objectProperty(t.identifier(field.name),
@@ -176,7 +174,7 @@ export const fromAmino = {
         );
     },
 
-    typeArray({ context, field, currentProtoPath, scope, nested, options }: FromAminoParseField) {
+    typeArray({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
         const variable = 'el' + nested;
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
@@ -188,14 +186,13 @@ export const fromAmino = {
                 field,
                 currentProtoPath,
                 scope: [variable],
-                nested: nested + 1,
-                options
+                nested: nested + 1
             })
         });
 
         const expr = t.callExpression(
             t.memberExpression(
-                memberExpressionOrIdentifierAminoCasing(scope, options.aminoCasingFn),
+                memberExpressionOrIdentifierAminoCasing(scope, context.options.aminoCasingFn),
                 t.identifier('map')
             ),
             [
@@ -223,7 +220,7 @@ export const fromAmino = {
                     t.identifier('from')
                 ),
                 [
-                    memberExpressionOrIdentifierAminoCasing(args.scope, args.options.aminoCasingFn)
+                    memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn)
                 ]
             ));
     },

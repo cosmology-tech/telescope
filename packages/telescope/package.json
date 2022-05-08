@@ -1,7 +1,7 @@
 {
   "name": "@osmonauts/telescope",
   "version": "0.3.0",
-  "description": "A TypeScript Transpiler for Comsos Protobufs",
+  "description": "A TypeScript Transpiler for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope#readme",
   "license": "SEE LICENSE IN LICENSE",

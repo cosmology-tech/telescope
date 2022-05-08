@@ -2,7 +2,6 @@ import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
-import { AminoOptions } from '../types';
 import { protoFieldsToArray } from '../utils';
 import { fromAmino } from './utils';
 
@@ -12,7 +11,6 @@ export interface FromAminoParseField {
     currentProtoPath: string;
     scope: string[];
     nested: number;
-    options: AminoOptions;
 };
 
 export const fromAminoParseField = ({
@@ -20,8 +18,7 @@ export const fromAminoParseField = ({
     field,
     currentProtoPath,
     scope: previousScope,
-    nested,
-    options
+    nested
 }: FromAminoParseField) => {
 
     const scope = [field.name, ...previousScope];
@@ -31,8 +28,7 @@ export const fromAminoParseField = ({
         field,
         currentProtoPath,
         scope,
-        nested,
-        options
+        nested
     };
 
     // arrays
@@ -99,18 +95,16 @@ export const fromAminoParseField = ({
 interface fromAminoJSON {
     context: AminoParseContext;
     proto: ProtoType;
-    options: AminoOptions;
 }
 export const fromAminoJsonMethod = ({
     context,
-    proto,
-    options
+    proto
 }: fromAminoJSON) => {
 
     const fromAminoParams = t.objectPattern(
         Object.keys(proto.fields).map((field) => t.objectProperty(
-            t.identifier(options.aminoCasingFn(field)),
-            t.identifier(options.aminoCasingFn(field)),
+            t.identifier(context.options.aminoCasingFn(field)),
+            t.identifier(context.options.aminoCasingFn(field)),
             false,
             true)
         )
@@ -126,8 +120,7 @@ export const fromAminoJsonMethod = ({
             field,
             currentProtoPath: context.ref.filename,
             scope: [],
-            nested: 0,
-            options
+            nested: 0
         });
         return {
             ctx: context,

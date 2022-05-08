@@ -12,13 +12,13 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     } = prepareContext(store, 'osmosis/gamm/v1beta1/tx.proto')
 
     it('Interfaces', () => {
+        context.options = {
+            aminoCasingFn: camel
+        };
         expectCode(makeAminoTypeInterface(
             {
                 context,
                 proto: protos.find(p => p.name === 'MsgJoinPool'),
-                options: {
-                    aminoCasingFn: camel
-                }
             }
         ))
     })
@@ -31,35 +31,38 @@ describe('cosmos/staking/v1beta1/tx', () => {
     } = prepareContext(store, 'cosmos/staking/v1beta1/tx.proto')
 
     it('MsgCreateValidator', () => {
+        context.options = {
+            aminoCasingFn: snake
+        }
+
         expectCode(makeAminoTypeInterface(
             {
                 context,
                 proto: protos.find(p => p.name === 'MsgCreateValidator'),
-                options: {
-                    aminoCasingFn: snake
-                }
             }
         ))
     })
     it('MsgEditValidator', () => {
+        context.options = {
+            aminoCasingFn: snake
+        }
+
         expectCode(makeAminoTypeInterface(
             {
                 context,
                 proto: protos.find(p => p.name === 'MsgEditValidator'),
-                options: {
-                    aminoCasingFn: snake
-                }
             }
         ))
     })
     it('MsgUndelegate', () => {
+        context.options = {
+            aminoCasingFn: snake
+        }
+
         expectCode(makeAminoTypeInterface(
             {
                 context,
                 proto: protos.find(p => p.name === 'MsgUndelegate'),
-                options: {
-                    aminoCasingFn: snake
-                }
             }
         ))
     })

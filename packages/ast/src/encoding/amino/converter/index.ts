@@ -10,15 +10,13 @@ import { AminoParseContext } from '../../context';
 interface AminoConverterItemParams {
     root: ProtoRoot,
     context: AminoParseContext,
-    proto: ProtoType,
-    options: AminoOptions
+    proto: ProtoType
 }
-export const makeAminoConverterItem = (
+export const createAminoConverterItem = (
     {
         root,
         context,
-        proto,
-        options
+        proto
     }: AminoConverterItemParams
 ) => {
 
@@ -28,21 +26,19 @@ export const makeAminoConverterItem = (
         t.stringLiteral(typeUrl),
         t.objectExpression(
             [
-                t.objectProperty(t.identifier('aminoType'), t.stringLiteral(typeUrlToAmino(typeUrl, options.exceptions))),
+                t.objectProperty(t.identifier('aminoType'), t.stringLiteral(typeUrlToAmino(typeUrl, context.options.exceptions))),
                 t.objectProperty(
                     t.identifier('toAmino'),
                     toAminoJsonMethod({
                         context,
-                        proto,
-                        options
+                        proto
                     })
                 ),
                 t.objectProperty(
                     t.identifier('fromAmino'),
                     fromAminoJsonMethod({
                         context,
-                        proto,
-                        options
+                        proto
                     })
                 )
             ]
@@ -57,24 +53,21 @@ interface AminoConverterParams {
     name: string,
     root: ProtoRoot,
     context: AminoParseContext,
-    protos: ProtoType[],
-    options: AminoOptions
+    protos: ProtoType[]
 }
-export const aminoConverter = (
+export const createAminoConverter = (
     {
         name,
         root,
         context,
-        protos,
-        options
+        protos
     }: AminoConverterParams) => {
 
     const items = protos.map(proto => {
-        return makeAminoConverterItem({
+        return createAminoConverterItem({
             context,
             root,
-            proto,
-            options
+            proto
         })
     })
 

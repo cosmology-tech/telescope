@@ -1,4 +1,4 @@
-import { aminoConverter } from './index';
+import { createAminoConverter } from './index';
 import { ProtoStore } from '@osmonauts/proto-parser'
 import { camel, snake } from 'case';
 import { prepareContext, expectCode } from '../../../../test-utils'
@@ -11,14 +11,15 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     } = prepareContext(store, 'osmosis/gamm/v1beta1/tx.proto')
 
     it('AminoConverter', () => {
-        expectCode(aminoConverter({
+        context.options = {
+            aminoCasingFn: camel
+        };
+
+        expectCode(createAminoConverter({
             context,
             root,
             name: 'AminoConverter',
-            protos,
-            options: {
-                aminoCasingFn: camel
-            }
+            protos
         }))
     })
 });
@@ -29,14 +30,15 @@ describe('cosmos/staking/v1beta1/tx', () => {
     } = prepareContext(store, 'cosmos/staking/v1beta1/tx.proto')
 
     it('AminoConverter', () => {
-        expectCode(aminoConverter({
+        context.options = {
+            aminoCasingFn: snake
+        };
+
+        expectCode(createAminoConverter({
             context,
             root,
             name: 'AminoConverter',
-            protos,
-            options: {
-                aminoCasingFn: snake
-            }
+            protos
         }))
     })
 });

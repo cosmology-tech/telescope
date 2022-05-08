@@ -120,6 +120,7 @@ const tele = new TelescopeBuilder({
 // - [ ] get all aminos into one bundle per package!
 
 const res = tele.buildProto('cosmology/example/c.proto');
+res.context.buildBase();
 
 it('mutations', () => {
     expect(res.context.mutations).toMatchSnapshot();

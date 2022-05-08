@@ -1,4 +1,6 @@
 import { ProtoStore, ProtoRef } from '@osmonauts/proto-parser';
+import { snake } from 'case';
+import { AminoOptions } from './amino';
 
 export interface ParseContext {
     utils: Record<string, boolean>;
@@ -13,18 +15,27 @@ export class GenericParseContext implements ParseContext {
         this.utils[util] = true;
     }
 }
+
+const createDefaultAminoOptions = () => {
+    return {
+        aminoCasingFn: snake
+    };
+};
 export class AminoParseContext implements ParseContext {
     store: ProtoStore;
     ref: ProtoRef;
-
+    options: AminoOptions;
     utils: Record<string, boolean> = {};
 
     constructor(
         ref: ProtoRef,
-        store: ProtoStore
+        store: ProtoStore,
+        options?: AminoOptions
     ) {
         this.ref = ref;
         this.store = store;
+        if (options) this.options = options;
+        else this.options = createDefaultAminoOptions()
     }
 
     addUtil(util) {

@@ -1,7 +1,6 @@
 import * as t from '@babel/types';
 import { AminoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '../../proto/types';
-import { AminoOptions } from '../types';
 import { getTypeUrl, protoFieldsToArray, typeUrlToAmino } from '../utils';
 import { aminoInterface } from './utils';
 
@@ -9,21 +8,18 @@ export interface RenderAminoField {
     context: AminoParseContext;
     field: ProtoField;
     currentProtoPath: string;
-    options: AminoOptions;
 };
 
 export const renderAminoField = ({
     context,
     field,
-    currentProtoPath,
-    options
+    currentProtoPath
 }: RenderAminoField) => {
 
     const args = {
         context,
         field,
-        currentProtoPath,
-        options
+        currentProtoPath
     }
 
     if (field.rule === 'repeated') {
@@ -78,26 +74,23 @@ export const renderAminoField = ({
 export interface MakeAminoTypeInterface {
     context: AminoParseContext;
     proto: ProtoType;
-    options: AminoOptions;
 };
 
 export const makeAminoTypeInterface = ({
     context,
-    proto,
-    options
+    proto
 }: MakeAminoTypeInterface) => {
     context.addUtil('AminoMsg');
 
     const TypeName = proto.name;
     const typeUrl = getTypeUrl(context.ref.proto, proto);
-    const aminoType = typeUrlToAmino(typeUrl, options.exceptions);
+    const aminoType = typeUrlToAmino(typeUrl, context.options.exceptions);
 
     const fields = protoFieldsToArray(proto).map((field) => {
         const aminoField = renderAminoField({
             context,
             field,
-            currentProtoPath: context.ref.filename,
-            options
+            currentProtoPath: context.ref.filename
         });
         return {
             ctx: context,

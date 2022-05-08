@@ -93,49 +93,17 @@ store.traverseAll();
 describe('cosmology/example/c', () => {
 
     const ref = store.findProto('cosmology/example/c.proto');
-    const context: TelescopeParseContext = {
-        proto: new ProtoParseContext(),
-        amino: new AminoParseContext(
-            ref, store
-        ),
-        ref,
-        store: store,
-        parsedImports: {},
-        body: [],
-        mutations: [],
-        queries: [],
-        types: []
-    };
+    const context = new TelescopeParseContext(ref, store);
 
     // aggregate service information
     // - [ ] get dependent objects of service and their paths
     // aggregate amino information
     // - [ ] get all aminos into one bundle per package!
 
-    interface ServiceMutation {
-        methodName: string;
-        package: string;
-        message: string;
-        messageImport: string;
-        response: string;
-        responseImport: string;
-        comment?: string;
-    }
-
-    it('works', () => {
+    it('context', () => {
         parse(context);
         expect(context.mutations).toMatchSnapshot();
         expect(context.queries).toMatchSnapshot();
-
-        const methods = context.mutations.map((mutation: ServiceMutation) => {
-            return {
-                typeUrl: `/${mutation.package}.${mutation.message}`,
-                TypeName: mutation.message,
-                methodName: mutation.methodName
-            }
-        });
-        expect(methods).toMatchSnapshot();
-
     });
 
 });

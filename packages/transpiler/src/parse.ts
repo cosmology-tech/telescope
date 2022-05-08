@@ -1,14 +1,15 @@
 import { ProtoStore, ProtoRoot, ProtoRef, getObjectName } from '@osmonauts/proto-parser';
 import {
+    importStmt,
     createProtoType,
     createCreateProtoType,
     createProtoEnum,
-    createProtoObjectWithMethods,
+    createObjectWithMethods,
     ProtoType,
     ProtoParseContext,
     AminoParseContext,
     makeAminoTypeInterface,
-    aminoConverter,
+    createAminoConverter,
     getKeyTypeEntryName,
     // client
     createClient,
@@ -16,13 +17,8 @@ import {
     // registry 
     createTypeRegistry,
     createRegistryLoader,
-    // methods (needs refactor)
-    toObjectWithPartialMethods,
-    toObjectWithEncodedMethods,
-    toObjectWithJsonMethods,
-    toObjectWithToJSONMethods,
-    toObjectWithFromJSONMethods,
-    importStmt
+    // helper
+    createHelperObject,
 } from '@osmonauts/ast';
 import { extname, relative, dirname } from 'path';
 import { camel, snake } from 'case';
@@ -32,7 +28,7 @@ const getRoot = (ref: ProtoRef): ProtoRoot => {
     return ref.proto;
 };
 
-export interface ServiceMutation {
+export interface ServiceInfo {
     methodName: string;
     package: string;
     message: string;
@@ -41,16 +37,9 @@ export interface ServiceMutation {
     responseImport: string;
     comment?: string;
 }
-export interface TelescopeParseContext {
-    proto: ProtoParseContext;
-    amino: AminoParseContext;
-    store: ProtoStore;
-    ref: ProtoRef;
-    parsedImports: Record<string, any>;
-    body: any[];
-    mutations: ServiceMutation[];
-    queries: any[];
-    types: any[];
+export interface ServiceMutation extends ServiceInfo {
+}
+export interface ServiceQuery extends ServiceInfo {
 }
 
 const UTILS = {
@@ -82,7 +71,9 @@ export interface ImportHash {
     [key: string]: string[];
 }
 
-export const buildAllImports = (context: TelescopeParseContext, allImports: ImportHash = {}) => {
+export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
+
+    if (!allImports) allImports = {};
 
     const utils = Object.keys({
         ...context.amino.utils,
@@ -145,6 +136,56 @@ export const getAminoImports = (mutations: ServiceMutation[]) => {
     });
 };
 
+interface BuildBaseTSClass {
+    includeEncode: boolean;
+    includeDecode: boolean;
+    includeFromPartial: boolean;
+    includeFromJSON: boolean;
+    includeToJSON: boolean;
+}
+
+
+export interface TelescopeOptions {
+    animo: {
+
+    }
+}
+export interface TelescopeParseContext {
+    proto: ProtoParseContext;
+    amino: AminoParseContext;
+    store: ProtoStore;
+    ref: ProtoRef;
+    parsedImports: Record<string, any>;
+    body: any[];
+    mutations: ServiceMutation[];
+    queries: any[];
+    types: any[];
+    options: any;
+}
+
+export const buildBaseTypeScriptClass = (
+    context: TelescopeParseContext,
+    name: string,
+    obj: any,
+    {
+        includeEncode,
+        includeDecode,
+        includeFromPartial,
+        includeFromJSON,
+        includeToJSON
+    }: BuildBaseTSClass = {
+            includeEncode: true,
+            includeDecode: true,
+            includeFromPartial: true,
+            includeFromJSON: true,
+            includeToJSON: true
+        }) => {
+
+    context.body.push(createProtoType(name, obj));
+    context.body.push(createCreateProtoType(name, obj));
+    context.body.push(createObjectWithMethods(context.proto, name, obj));
+};
+
 export const getAminoRelativeDeps = (mutations: ServiceMutation[], filename: string) => {
     return getAminoImports(mutations)
         .map(imp => {
@@ -183,6 +224,37 @@ export class TelescopeParseContext implements TelescopeParseContext {
         this.types = [];
     }
 
+    hasMutations() {
+        return this.mutations.length > 0;
+    }
+
+    addType(name: string, obj: any) {
+        this.types.push({
+            name,
+            obj
+        });
+    }
+    addMutation(mutation: ServiceMutation) {
+        this.mutations.push(mutation);
+    }
+    addQuery(query: ServiceQuery) {
+        this.queries.push(query);
+    }
+
+    // build main Class with methods
+    buildBase() {
+        this.types.forEach(typeReg => {
+            const { name, obj } = typeReg;
+            if (obj.type === 'Type') {
+                buildBaseTypeScriptClass(this, name, obj);
+            } else if (obj.type === 'Enum') {
+                this.body.push(createProtoEnum(name, obj));
+            } else {
+                throw new Error('buildBase(): unknown type');
+            }
+        })
+    }
+
     buildRegistry() {
         this.body.push(createTypeRegistry(getMutations(this.mutations)));
     }
@@ -194,46 +266,21 @@ export class TelescopeParseContext implements TelescopeParseContext {
         protos.forEach(proto => {
             this.body.push(makeAminoTypeInterface({
                 context: this.amino,
-                proto,
-                options: {
-                    aminoCasingFn: snake
-                }
+                proto
             }));
         });
     }
     buildAminoConverter() {
-        const protos = getAminoProtos(this.mutations, this.store);
-        this.body.push(aminoConverter({
+        this.body.push(createAminoConverter({
             name: 'AminoConverter',
             context: this.amino,
             root: this.ref.traversed,
-            protos,
-            options: {
-                aminoCasingFn: snake
-            }
+            protos: getAminoProtos(this.mutations, this.store)
         }));
     }
-    buildAuxMethods() {
-        const methods = getMutations(this.mutations);
+    buildHelperObject() {
         // add methods
-        this.body.push(
-            toObjectWithPartialMethods(methods)
-        );
-        this.body.push(
-            toObjectWithEncodedMethods(methods)
-        );
-        this.body.push(
-            toObjectWithJsonMethods(methods)
-        );
-        this.body.push(
-            toObjectWithToJSONMethods(methods)
-        );
-        this.body.push(
-            toObjectWithFromJSONMethods(methods)
-        );
-        this.body.push(
-            toObjectWithEncodedMethods(methods)
-        );
+        this.body.push(createHelperObject({ mutations: getMutations(this.mutations) }));
     }
 
 }
@@ -267,6 +314,7 @@ const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
     const root = getRoot(ref);
     const scoped = scope.splice(root.package.split('.').length);
     const adhocObj: ProtoType = {
+        type: 'Type',
         comment: undefined,
         fields: {
             key: {
@@ -308,10 +356,8 @@ export const parseType = (
         const name = getParsedObjectName(context.ref, {
             name: getKeyTypeEntryName(obj.name, field.parsedType.name)
         }, scope);
-        context.body.push(createProtoType(name, keyTypeObject));
-        context.body.push(createCreateProtoType(name, keyTypeObject));
-        context.body.push(createProtoObjectWithMethods(context.proto, name, keyTypeObject));
-    })
+        context.addType(name, keyTypeObject);
+    });
 
     // parse nested names
     let name = obj.name;
@@ -319,18 +365,7 @@ export const parseType = (
         name = getParsedObjectName(context.ref, obj, scope);
     }
 
-    // context for types that can be exported
-    if (!isNested) {
-        context.types.push(
-            {
-                [name]: obj
-            }
-        );
-    }
-
-    context.body.push(createProtoType(name, obj));
-    context.body.push(createCreateProtoType(name, obj));
-    context.body.push(createProtoObjectWithMethods(context.proto, name, obj));
+    context.addType(name, obj);
 
     // render nested LAST
     if (obj.nested) {
@@ -358,7 +393,7 @@ export const parseEnum = (
     if (isNested) {
         name = getParsedObjectName(context.ref, obj, scope);
     }
-    context.body.push(createProtoEnum(name, obj));
+    context.addType(name, obj);
 };
 
 export const parseService = (
@@ -391,7 +426,7 @@ export const parseService = (
                 console.warn(`cannot find ${value.requestType}`);
                 throw new Error('undefined symbol for service.');
             }
-            (isMutation ? context.mutations : context.queries).push({
+            const serviceInfo: ServiceInfo = {
                 methodName: key,
                 package: context.ref.proto.package,
                 message: lookup.importedName,
@@ -399,7 +434,12 @@ export const parseService = (
                 response: lookupResponse.importedName,
                 responseImport: lookupResponse.import ?? context.ref.filename,
                 comment: value.comment
-            });
+            };
+            if (isMutation) {
+                context.addMutation(serviceInfo);
+            } else {
+                context.addQuery(serviceInfo);
+            }
         });
 };
 

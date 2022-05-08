@@ -1,4 +1,4 @@
-import { aminoConverter } from './index';
+import { createAminoConverter } from './index';
 import { ProtoStore, parseProto } from '@osmonauts/proto-parser';
 import { prepareContext, expectCode } from '../../test-utils';
 import { camel } from 'case';
@@ -59,14 +59,14 @@ describe('cosmology/example/msg', () => {
     } = prepareContext(store, 'cosmology/example/msg.proto')
 
     it('AminoConverter', () => {
-        expectCode(aminoConverter({
+        context.options = {
+            aminoCasingFn: camel
+        };
+        expectCode(createAminoConverter({
             context,
             root,
             name: 'AminoConverter',
-            protos,
-            options: {
-                aminoCasingFn: camel
-            }
+            protos
         }))
     })
 });

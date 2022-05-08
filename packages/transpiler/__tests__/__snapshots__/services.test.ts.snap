@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cosmology/example/c works 1`] = `
+exports[`cosmology/example/c context 1`] = `
 Array [
   Object {
     "comment": null,
@@ -23,7 +23,7 @@ Array [
 ]
 `;
 
-exports[`cosmology/example/c works 2`] = `
+exports[`cosmology/example/c context 2`] = `
 Array [
   Object {
     "comment": "Config returns the current app config.",
@@ -33,21 +33,6 @@ Array [
     "package": "cosmology.finance",
     "response": "QueryConfigResponse",
     "responseImport": "cosmology/example/c.proto",
-  },
-]
-`;
-
-exports[`cosmology/example/c works 3`] = `
-Array [
-  Object {
-    "TypeName": "MsgTypePackageC",
-    "methodName": "ActionFromPackageC",
-    "typeUrl": "/cosmology.finance.MsgTypePackageC",
-  },
-  Object {
-    "TypeName": "MsgTypePackageB",
-    "methodName": "ActionFromPackageB",
-    "typeUrl": "/cosmology.finance.MsgTypePackageB",
   },
 ]
 `;

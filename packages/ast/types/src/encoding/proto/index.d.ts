@@ -1,6 +1,5 @@
 export * from './decode';
 export * from './encode';
-export * from './encoding';
 export * from './enums';
 export * from './types';
 export * from './from-json';
