@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet } from "@osmonauts/helpers";
 import { Header, Data, Commit } from "./types";
 import { EvidenceList } from "./evidence";

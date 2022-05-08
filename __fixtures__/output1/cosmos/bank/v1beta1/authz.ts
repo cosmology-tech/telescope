@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Coin } from "../../base/v1beta1/coin";
 export interface SendAuthorization {
   spendLimit: Coin[];

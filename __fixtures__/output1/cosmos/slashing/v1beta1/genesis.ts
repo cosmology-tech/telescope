@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, Long } from "@osmonauts/helpers";
 import { Params, ValidatorSigningInfo } from "./slashing";
 export interface GenesisState {

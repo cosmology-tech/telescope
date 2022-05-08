@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Long, isSet } from "@osmonauts/helpers";
 import { ProposalStatus, Proposal, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult } from "./gov";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";

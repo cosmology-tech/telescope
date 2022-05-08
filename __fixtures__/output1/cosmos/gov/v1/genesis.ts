@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Long, isSet } from "@osmonauts/helpers";
 import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from "./gov";
 export interface GenesisState {

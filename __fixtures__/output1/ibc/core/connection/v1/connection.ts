@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Long, isSet } from "@osmonauts/helpers";
 import { MerklePrefix } from "../../commitment/v1/commitment";
 export interface ConnectionEnd {

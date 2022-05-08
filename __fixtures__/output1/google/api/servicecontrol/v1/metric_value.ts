@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, toTimestamp, fromTimestamp, Long, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";

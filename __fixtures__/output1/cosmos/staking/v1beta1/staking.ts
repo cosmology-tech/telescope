@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Header } from "../../../tendermint/types/types";
 import { Timestamp } from "../../../google/protobuf/timestamp";

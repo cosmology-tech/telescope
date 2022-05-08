@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { Params, Validator, Delegation, UnbondingDelegation, Redelegation } from "./staking";
 export interface GenesisState {

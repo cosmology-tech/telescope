@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 export interface GenesisState {

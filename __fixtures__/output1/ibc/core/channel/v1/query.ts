@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Channel, IdentifiedChannel, PacketState } from "./channel";

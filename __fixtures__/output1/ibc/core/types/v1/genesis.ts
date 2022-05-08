@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet } from "@osmonauts/helpers";
 import { GenesisState } from "../../client/v1/genesis";
 import { GenesisState } from "../../connection/v1/genesis";

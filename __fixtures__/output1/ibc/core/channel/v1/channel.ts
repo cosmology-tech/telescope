@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Height } from "../../client/v1/client";
 export interface Channel {

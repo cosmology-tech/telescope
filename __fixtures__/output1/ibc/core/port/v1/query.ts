@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet } from "@osmonauts/helpers";
 import { Order, Counterparty } from "../../channel/v1/channel";
 export interface QueryAppVersionRequest {

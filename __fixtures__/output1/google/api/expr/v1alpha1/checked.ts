@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Long, isSet } from "@osmonauts/helpers";
 import { SourceInfo, Expr, Constant } from "./syntax";
 import { Empty } from "../../../protobuf/empty";

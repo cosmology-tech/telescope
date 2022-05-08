@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { toDuration, fromDuration, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Height } from "../../../core/client/v1/client";

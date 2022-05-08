@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet } from "@osmonauts/helpers";
 import { MetricValueSet } from "./metric_value";
 import { Status } from "../../../rpc/status";

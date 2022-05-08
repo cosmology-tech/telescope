@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet } from "@osmonauts/helpers";
 import { Params, Metadata } from "./bank";
 import { Coin } from "../../base/v1beta1/coin";

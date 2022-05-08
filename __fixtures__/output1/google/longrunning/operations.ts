@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Duration } from "../protobuf/duration";
 import { Any } from "../protobuf/any";

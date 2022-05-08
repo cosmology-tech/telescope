@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export enum HashOp {
   /*NO_HASH is the default if no data passed. Note this is an illegal argument some places.*/

@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Long, isSet, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Duration } from "../../../google/protobuf/duration";
 import { DistrInfo, Params } from "./incentives";

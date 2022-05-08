@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { Any } from "../../../google/protobuf/any";
 export interface GenesisState {
   evidence: Any[];

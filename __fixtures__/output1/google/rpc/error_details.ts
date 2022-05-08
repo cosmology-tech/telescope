@@ -1,4 +1,4 @@
-import { _m0 } from "protobuf/minimal";
+import * as _m0 from "protobuf/minimal";
 import { toDuration, fromDuration, isSet } from "@osmonauts/helpers";
 import { Duration } from "../protobuf/duration";
 export interface RetryInfo {
