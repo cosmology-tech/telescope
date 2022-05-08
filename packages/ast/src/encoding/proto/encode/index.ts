@@ -101,6 +101,8 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
 };
 
 export const encodeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    context.addUtil('_m0');
+
     const fields = encodeMethodFields(context, name, proto);
     const body = [
         ...fields,

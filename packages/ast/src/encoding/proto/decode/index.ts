@@ -102,6 +102,8 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
 };
 
 export const decodeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    context.addUtil('_m0');
+
     return objectMethod(
         'method',
         t.identifier('decode'),

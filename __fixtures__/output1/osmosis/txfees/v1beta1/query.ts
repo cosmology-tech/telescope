@@ -1,0 +1,337 @@
+import { _m0 } from "protobuf/minimal";
+import { isSet, Long } from "@osmonauts/helpers";
+import { FeeToken } from "./feetoken";
+export interface QueryFeeTokensRequest {}
+
+function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
+  return {};
+}
+
+export const QueryFeeTokensRequest = {
+  encode(message: QueryFeeTokensRequest, writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryFeeTokensRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryFeeTokensRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryFeeTokensRequest {
+    return {};
+  },
+
+  toJSON(message: QueryFeeTokensRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryFeeTokensRequest>, I>>(object: I): QueryFeeTokensRequest {
+    const message = createBaseQueryFeeTokensRequest();
+    return message;
+  }
+
+};
+export interface QueryFeeTokensResponse {
+  feeTokens: FeeToken[];
+}
+
+function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
+  return {
+    feeTokens: []
+  };
+}
+
+export const QueryFeeTokensResponse = {
+  encode(message: QueryFeeTokensResponse, writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.feeTokens) {
+      FeeToken.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryFeeTokensResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryFeeTokensResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.feeTokens.push(FeeToken.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryFeeTokensResponse {
+    return {
+      feeTokens: Array.isArray(object?.feeTokens) ? object.feeTokens.map((e: any) => FeeToken.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryFeeTokensResponse): unknown {
+    const obj: any = {};
+
+    if (message.feeTokens) {
+      obj.feeTokens = message.feeTokens.map(e => e ? FeeToken.toJSON(e) : undefined);
+    } else {
+      obj.feeTokens = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryFeeTokensResponse>, I>>(object: I): QueryFeeTokensResponse {
+    const message = createBaseQueryFeeTokensResponse();
+    message.feeTokens = object.feeTokens?.map(e => FeeToken.fromPartial(e)) || [];
+    return message;
+  }
+
+};
+export interface QueryDenomPoolIdRequest {
+  denom: string;
+}
+
+function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
+  return {
+    denom: ""
+  };
+}
+
+export const QueryDenomPoolIdRequest = {
+  encode(message: QueryDenomPoolIdRequest, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryDenomPoolIdRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomPoolIdRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomPoolIdRequest {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
+  toJSON(message: QueryDenomPoolIdRequest): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomPoolIdRequest>, I>>(object: I): QueryDenomPoolIdRequest {
+    const message = createBaseQueryDenomPoolIdRequest();
+    message.denom = object.denom ?? "";
+    return message;
+  }
+
+};
+export interface QueryDenomPoolIdResponse {
+  poolID: Long;
+}
+
+function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
+  return {
+    poolID: Long.UZERO
+  };
+}
+
+export const QueryDenomPoolIdResponse = {
+  encode(message: QueryDenomPoolIdResponse, writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolID.isZero()) {
+      writer.uint32(8).uint64(message.poolID);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryDenomPoolIdResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomPoolIdResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.poolID = (reader.uint64() as Long);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomPoolIdResponse {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromString(object.poolID) : Long.UZERO
+    };
+  },
+
+  toJSON(message: QueryDenomPoolIdResponse): unknown {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomPoolIdResponse>, I>>(object: I): QueryDenomPoolIdResponse {
+    const message = createBaseQueryDenomPoolIdResponse();
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
+    return message;
+  }
+
+};
+export interface QueryBaseDenomRequest {}
+
+function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
+  return {};
+}
+
+export const QueryBaseDenomRequest = {
+  encode(message: QueryBaseDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryBaseDenomRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryBaseDenomRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryBaseDenomRequest {
+    return {};
+  },
+
+  toJSON(message: QueryBaseDenomRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryBaseDenomRequest>, I>>(object: I): QueryBaseDenomRequest {
+    const message = createBaseQueryBaseDenomRequest();
+    return message;
+  }
+
+};
+export interface QueryBaseDenomResponse {
+  baseDenom: string;
+}
+
+function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
+  return {
+    baseDenom: ""
+  };
+}
+
+export const QueryBaseDenomResponse = {
+  encode(message: QueryBaseDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.baseDenom !== "") {
+      writer.uint32(10).string(message.baseDenom);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array): QueryBaseDenomResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryBaseDenomResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.baseDenom = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryBaseDenomResponse {
+    return {
+      baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : ""
+    };
+  },
+
+  toJSON(message: QueryBaseDenomResponse): unknown {
+    const obj: any = {};
+    message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryBaseDenomResponse>, I>>(object: I): QueryBaseDenomResponse {
+    const message = createBaseQueryBaseDenomResponse();
+    message.baseDenom = object.baseDenom ?? "";
+    return message;
+  }
+
+};
