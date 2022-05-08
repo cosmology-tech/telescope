@@ -32,7 +32,11 @@ export const UTILS = {
     toTimestamp: '@osmonauts/helpers',
     bytesFromBase64: '@osmonauts/helpers',
     base64FromBytes: '@osmonauts/helpers',
-    _m0: { type: 'namespace', path: 'protobuf/minimal', name: '_m0' }
+    _m0: { type: 'namespace', path: 'protobuf/minimal', name: '_m0' },
+    Exact: '@osmonauts/helpers',
+    DeepPartial: '@osmonauts/helpers',
+    Builtin: '@osmonauts/helpers',
+    KeysOfUnion: '@osmonauts/helpers',
 };
 
 

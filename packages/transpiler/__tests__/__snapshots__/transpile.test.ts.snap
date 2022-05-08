@@ -4,6 +4,10 @@ exports[`nested google/api/expr/v1alpha1/checked 1`] = `
 Object {
   "amino": Object {},
   "proto": Object {
+    "Builtin": true,
+    "DeepPartial": true,
+    "Exact": true,
+    "KeysOfUnion": true,
     "Long": true,
     "_m0": true,
     "isSet": true,
@@ -15,6 +19,10 @@ exports[`services osmosis/gamm/v1beta1/tx 1`] = `
 Object {
   "amino": Object {},
   "proto": Object {
+    "Builtin": true,
+    "DeepPartial": true,
+    "Exact": true,
+    "KeysOfUnion": true,
     "Long": true,
     "_m0": true,
     "isSet": true,
@@ -26,6 +34,10 @@ exports[`services osmosis/lockup/tx 1`] = `
 Object {
   "amino": Object {},
   "proto": Object {
+    "Builtin": true,
+    "DeepPartial": true,
+    "Exact": true,
+    "KeysOfUnion": true,
     "Long": true,
     "_m0": true,
     "fromDuration": true,
@@ -39,6 +51,10 @@ exports[`utils cosmos/staking/v1beta1/tx 1`] = `
 Object {
   "amino": Object {},
   "proto": Object {
+    "Builtin": true,
+    "DeepPartial": true,
+    "Exact": true,
+    "KeysOfUnion": true,
     "_m0": true,
     "fromJsonTimestamp": true,
     "fromTimestamp": true,

@@ -126,7 +126,10 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                     )
                 ),
                 false
-            )
+            ),
+            identifier('length', t.tsTypeAnnotation(
+                t.tsNumberKeyword()
+            ), true)
         ],
         t.blockStatement([
 

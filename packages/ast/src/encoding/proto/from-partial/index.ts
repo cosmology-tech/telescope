@@ -110,6 +110,11 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
     return fields;
 };
 export const fromPartialMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    context.addUtil('Exact');
+    context.addUtil('DeepPartial');
+    context.addUtil('KeysOfUnion');
+    context.addUtil('Builtin');
+
     const fields = fromPartialMethodFields(context, name, proto);
 
     return objectMethod(

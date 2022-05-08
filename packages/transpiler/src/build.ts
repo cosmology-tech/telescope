@@ -80,8 +80,6 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
         return m;
     }, {});
 
-    // console.log(JSON.stringify(imports, null, 2));
-
     const importStmts = Object.entries(imports)
         .reduce((m, [importPath, imports]: [string, ImportObj[]]) => {
             const defaultImports = imports.filter(a => a.type === 'default');
@@ -120,10 +118,6 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
         }, [])
 
     return importStmts;
-    // console.log(objs);
-    // const imports = objs.filter(o => typeof o === 'string');
-    // return importStmt(imports, importPath);
-    // return importStmts;
 }
 
 export const getMutations = (mutations: ServiceMutation[]) => {
