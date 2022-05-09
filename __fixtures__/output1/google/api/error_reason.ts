@@ -362,3 +362,137 @@ export enum ErrorReason {
   ACCESS_TOKEN_TYPE_UNSUPPORTED = 19,
   UNRECOGNIZED = -1,
 }
+export function errorReasonFromJSON(object: any): ErrorReason {
+  switch (object) {
+    case "ERROR_REASON_UNSPECIFIED":
+      return ErrorReason.ERROR_REASON_UNSPECIFIED;
+
+    case "SERVICE_DISABLED":
+      return ErrorReason.SERVICE_DISABLED;
+
+    case "BILLING_DISABLED":
+      return ErrorReason.BILLING_DISABLED;
+
+    case "API_KEY_INVALID":
+      return ErrorReason.API_KEY_INVALID;
+
+    case "API_KEY_SERVICE_BLOCKED":
+      return ErrorReason.API_KEY_SERVICE_BLOCKED;
+
+    case "API_KEY_HTTP_REFERRER_BLOCKED":
+      return ErrorReason.API_KEY_HTTP_REFERRER_BLOCKED;
+
+    case "API_KEY_IP_ADDRESS_BLOCKED":
+      return ErrorReason.API_KEY_IP_ADDRESS_BLOCKED;
+
+    case "API_KEY_ANDROID_APP_BLOCKED":
+      return ErrorReason.API_KEY_ANDROID_APP_BLOCKED;
+
+    case "API_KEY_IOS_APP_BLOCKED":
+      return ErrorReason.API_KEY_IOS_APP_BLOCKED;
+
+    case "RATE_LIMIT_EXCEEDED":
+      return ErrorReason.RATE_LIMIT_EXCEEDED;
+
+    case "RESOURCE_QUOTA_EXCEEDED":
+      return ErrorReason.RESOURCE_QUOTA_EXCEEDED;
+
+    case "LOCATION_TAX_POLICY_VIOLATED":
+      return ErrorReason.LOCATION_TAX_POLICY_VIOLATED;
+
+    case "USER_PROJECT_DENIED":
+      return ErrorReason.USER_PROJECT_DENIED;
+
+    case "CONSUMER_SUSPENDED":
+      return ErrorReason.CONSUMER_SUSPENDED;
+
+    case "CONSUMER_INVALID":
+      return ErrorReason.CONSUMER_INVALID;
+
+    case "SECURITY_POLICY_VIOLATED":
+      return ErrorReason.SECURITY_POLICY_VIOLATED;
+
+    case "ACCESS_TOKEN_EXPIRED":
+      return ErrorReason.ACCESS_TOKEN_EXPIRED;
+
+    case "ACCESS_TOKEN_SCOPE_INSUFFICIENT":
+      return ErrorReason.ACCESS_TOKEN_SCOPE_INSUFFICIENT;
+
+    case "ACCOUNT_STATE_INVALID":
+      return ErrorReason.ACCOUNT_STATE_INVALID;
+
+    case "ACCESS_TOKEN_TYPE_UNSUPPORTED":
+      return ErrorReason.ACCESS_TOKEN_TYPE_UNSUPPORTED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ErrorReason.UNRECOGNIZED;
+  }
+}
+export function errorReasonToJSON(object: ErrorReason): string {
+  switch (object) {
+    case ErrorReason.ERROR_REASON_UNSPECIFIED:
+      return "ERROR_REASON_UNSPECIFIED";
+
+    case ErrorReason.SERVICE_DISABLED:
+      return "SERVICE_DISABLED";
+
+    case ErrorReason.BILLING_DISABLED:
+      return "BILLING_DISABLED";
+
+    case ErrorReason.API_KEY_INVALID:
+      return "API_KEY_INVALID";
+
+    case ErrorReason.API_KEY_SERVICE_BLOCKED:
+      return "API_KEY_SERVICE_BLOCKED";
+
+    case ErrorReason.API_KEY_HTTP_REFERRER_BLOCKED:
+      return "API_KEY_HTTP_REFERRER_BLOCKED";
+
+    case ErrorReason.API_KEY_IP_ADDRESS_BLOCKED:
+      return "API_KEY_IP_ADDRESS_BLOCKED";
+
+    case ErrorReason.API_KEY_ANDROID_APP_BLOCKED:
+      return "API_KEY_ANDROID_APP_BLOCKED";
+
+    case ErrorReason.API_KEY_IOS_APP_BLOCKED:
+      return "API_KEY_IOS_APP_BLOCKED";
+
+    case ErrorReason.RATE_LIMIT_EXCEEDED:
+      return "RATE_LIMIT_EXCEEDED";
+
+    case ErrorReason.RESOURCE_QUOTA_EXCEEDED:
+      return "RESOURCE_QUOTA_EXCEEDED";
+
+    case ErrorReason.LOCATION_TAX_POLICY_VIOLATED:
+      return "LOCATION_TAX_POLICY_VIOLATED";
+
+    case ErrorReason.USER_PROJECT_DENIED:
+      return "USER_PROJECT_DENIED";
+
+    case ErrorReason.CONSUMER_SUSPENDED:
+      return "CONSUMER_SUSPENDED";
+
+    case ErrorReason.CONSUMER_INVALID:
+      return "CONSUMER_INVALID";
+
+    case ErrorReason.SECURITY_POLICY_VIOLATED:
+      return "SECURITY_POLICY_VIOLATED";
+
+    case ErrorReason.ACCESS_TOKEN_EXPIRED:
+      return "ACCESS_TOKEN_EXPIRED";
+
+    case ErrorReason.ACCESS_TOKEN_SCOPE_INSUFFICIENT:
+      return "ACCESS_TOKEN_SCOPE_INSUFFICIENT";
+
+    case ErrorReason.ACCOUNT_STATE_INVALID:
+      return "ACCOUNT_STATE_INVALID";
+
+    case ErrorReason.ACCESS_TOKEN_TYPE_UNSUPPORTED:
+      return "ACCESS_TOKEN_TYPE_UNSUPPORTED";
+
+    default:
+      return "UNKNOWN";
+  }
+}

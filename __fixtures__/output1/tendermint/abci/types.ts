@@ -848,6 +848,32 @@ export enum CheckTxType {
   RECHECK = 1,
   UNRECOGNIZED = -1,
 }
+export function checkTxTypeFromJSON(object: any): CheckTxType {
+  switch (object) {
+    case "NEW":
+      return CheckTxType.NEW;
+
+    case "RECHECK":
+      return CheckTxType.RECHECK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CheckTxType.UNRECOGNIZED;
+  }
+}
+export function checkTxTypeToJSON(object: CheckTxType): string {
+  switch (object) {
+    case CheckTxType.NEW:
+      return "NEW";
+
+    case CheckTxType.RECHECK:
+      return "RECHECK";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface RequestCheckTx {
   tx: Uint8Array;
   type: CheckTxType;
@@ -2944,6 +2970,56 @@ export enum ResponseOfferSnapshot_Result {
   REJECT_SENDER = 5,
   UNRECOGNIZED = -1,
 }
+export function responseOfferSnapshotResultFromJSON(object: any): ResponseOfferSnapshot_Result {
+  switch (object) {
+    case "UNKNOWN":
+      return ResponseOfferSnapshot_Result.UNKNOWN;
+
+    case "ACCEPT":
+      return ResponseOfferSnapshot_Result.ACCEPT;
+
+    case "ABORT":
+      return ResponseOfferSnapshot_Result.ABORT;
+
+    case "REJECT":
+      return ResponseOfferSnapshot_Result.REJECT;
+
+    case "REJECT_FORMAT":
+      return ResponseOfferSnapshot_Result.REJECT_FORMAT;
+
+    case "REJECT_SENDER":
+      return ResponseOfferSnapshot_Result.REJECT_SENDER;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResponseOfferSnapshot_Result.UNRECOGNIZED;
+  }
+}
+export function responseOfferSnapshotResultToJSON(object: ResponseOfferSnapshot_Result): string {
+  switch (object) {
+    case ResponseOfferSnapshot_Result.UNKNOWN:
+      return "UNKNOWN";
+
+    case ResponseOfferSnapshot_Result.ACCEPT:
+      return "ACCEPT";
+
+    case ResponseOfferSnapshot_Result.ABORT:
+      return "ABORT";
+
+    case ResponseOfferSnapshot_Result.REJECT:
+      return "REJECT";
+
+    case ResponseOfferSnapshot_Result.REJECT_FORMAT:
+      return "REJECT_FORMAT";
+
+    case ResponseOfferSnapshot_Result.REJECT_SENDER:
+      return "REJECT_SENDER";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ResponseLoadSnapshotChunk {
   chunk: Uint8Array;
 }
@@ -3130,6 +3206,56 @@ export enum ResponseApplySnapshotChunk_Result {
   /*Reject this snapshot, try others*/
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
+}
+export function responseApplySnapshotChunkResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
+  switch (object) {
+    case "UNKNOWN":
+      return ResponseApplySnapshotChunk_Result.UNKNOWN;
+
+    case "ACCEPT":
+      return ResponseApplySnapshotChunk_Result.ACCEPT;
+
+    case "ABORT":
+      return ResponseApplySnapshotChunk_Result.ABORT;
+
+    case "RETRY":
+      return ResponseApplySnapshotChunk_Result.RETRY;
+
+    case "RETRY_SNAPSHOT":
+      return ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT;
+
+    case "REJECT_SNAPSHOT":
+      return ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResponseApplySnapshotChunk_Result.UNRECOGNIZED;
+  }
+}
+export function responseApplySnapshotChunkResultToJSON(object: ResponseApplySnapshotChunk_Result): string {
+  switch (object) {
+    case ResponseApplySnapshotChunk_Result.UNKNOWN:
+      return "UNKNOWN";
+
+    case ResponseApplySnapshotChunk_Result.ACCEPT:
+      return "ACCEPT";
+
+    case ResponseApplySnapshotChunk_Result.ABORT:
+      return "ABORT";
+
+    case ResponseApplySnapshotChunk_Result.RETRY:
+      return "RETRY";
+
+    case ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT:
+      return "RETRY_SNAPSHOT";
+
+    case ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT:
+      return "REJECT_SNAPSHOT";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface ConsensusParams {
   block: BlockParams;
@@ -3870,6 +3996,38 @@ export enum EvidenceType {
   DUPLICATE_VOTE = 1,
   LIGHT_CLIENT_ATTACK = 2,
   UNRECOGNIZED = -1,
+}
+export function evidenceTypeFromJSON(object: any): EvidenceType {
+  switch (object) {
+    case "UNKNOWN":
+      return EvidenceType.UNKNOWN;
+
+    case "DUPLICATE_VOTE":
+      return EvidenceType.DUPLICATE_VOTE;
+
+    case "LIGHT_CLIENT_ATTACK":
+      return EvidenceType.LIGHT_CLIENT_ATTACK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return EvidenceType.UNRECOGNIZED;
+  }
+}
+export function evidenceTypeToJSON(object: EvidenceType): string {
+  switch (object) {
+    case EvidenceType.UNKNOWN:
+      return "UNKNOWN";
+
+    case EvidenceType.DUPLICATE_VOTE:
+      return "DUPLICATE_VOTE";
+
+    case EvidenceType.LIGHT_CLIENT_ATTACK:
+      return "LIGHT_CLIENT_ATTACK";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface Evidence {
   type: EvidenceType;

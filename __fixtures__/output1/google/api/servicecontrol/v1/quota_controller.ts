@@ -363,6 +363,56 @@ export enum QuotaMode {
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
 }
+export function quotaModeFromJSON(object: any): QuotaMode {
+  switch (object) {
+    case "UNSPECIFIED":
+      return QuotaMode.UNSPECIFIED;
+
+    case "NORMAL":
+      return QuotaMode.NORMAL;
+
+    case "BEST_EFFORT":
+      return QuotaMode.BEST_EFFORT;
+
+    case "CHECK_ONLY":
+      return QuotaMode.CHECK_ONLY;
+
+    case "QUERY_ONLY":
+      return QuotaMode.QUERY_ONLY;
+
+    case "ADJUST_ONLY":
+      return QuotaMode.ADJUST_ONLY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return QuotaMode.UNRECOGNIZED;
+  }
+}
+export function quotaModeToJSON(object: QuotaMode): string {
+  switch (object) {
+    case QuotaMode.UNSPECIFIED:
+      return "UNSPECIFIED";
+
+    case QuotaMode.NORMAL:
+      return "NORMAL";
+
+    case QuotaMode.BEST_EFFORT:
+      return "BEST_EFFORT";
+
+    case QuotaMode.CHECK_ONLY:
+      return "CHECK_ONLY";
+
+    case QuotaMode.QUERY_ONLY:
+      return "QUERY_ONLY";
+
+    case QuotaMode.ADJUST_ONLY:
+      return "ADJUST_ONLY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface AllocateQuotaResponse {
   operationId: string;
   allocateErrors: QuotaError[];
@@ -593,4 +643,54 @@ export enum QuotaError_Code {
   /*Specified API Key has expired.*/
   API_KEY_EXPIRED = 112,
   UNRECOGNIZED = -1,
+}
+export function quotaErrorCodeFromJSON(object: any): QuotaError_Code {
+  switch (object) {
+    case "UNSPECIFIED":
+      return QuotaError_Code.UNSPECIFIED;
+
+    case "RESOURCE_EXHAUSTED":
+      return QuotaError_Code.RESOURCE_EXHAUSTED;
+
+    case "BILLING_NOT_ACTIVE":
+      return QuotaError_Code.BILLING_NOT_ACTIVE;
+
+    case "PROJECT_DELETED":
+      return QuotaError_Code.PROJECT_DELETED;
+
+    case "API_KEY_INVALID":
+      return QuotaError_Code.API_KEY_INVALID;
+
+    case "API_KEY_EXPIRED":
+      return QuotaError_Code.API_KEY_EXPIRED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return QuotaError_Code.UNRECOGNIZED;
+  }
+}
+export function quotaErrorCodeToJSON(object: QuotaError_Code): string {
+  switch (object) {
+    case QuotaError_Code.UNSPECIFIED:
+      return "UNSPECIFIED";
+
+    case QuotaError_Code.RESOURCE_EXHAUSTED:
+      return "RESOURCE_EXHAUSTED";
+
+    case QuotaError_Code.BILLING_NOT_ACTIVE:
+      return "BILLING_NOT_ACTIVE";
+
+    case QuotaError_Code.PROJECT_DELETED:
+      return "PROJECT_DELETED";
+
+    case QuotaError_Code.API_KEY_INVALID:
+      return "API_KEY_INVALID";
+
+    case QuotaError_Code.API_KEY_EXPIRED:
+      return "API_KEY_EXPIRED";
+
+    default:
+      return "UNKNOWN";
+  }
 }

@@ -487,6 +487,38 @@ export enum LogSink_VersionFormat {
   V1 = 2,
   UNRECOGNIZED = -1,
 }
+export function logSinkVersionFormatFromJSON(object: any): LogSink_VersionFormat {
+  switch (object) {
+    case "VERSION_FORMAT_UNSPECIFIED":
+      return LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED;
+
+    case "V2":
+      return LogSink_VersionFormat.V2;
+
+    case "V1":
+      return LogSink_VersionFormat.V1;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LogSink_VersionFormat.UNRECOGNIZED;
+  }
+}
+export function logSinkVersionFormatToJSON(object: LogSink_VersionFormat): string {
+  switch (object) {
+    case LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED:
+      return "VERSION_FORMAT_UNSPECIFIED";
+
+    case LogSink_VersionFormat.V2:
+      return "V2";
+
+    case LogSink_VersionFormat.V1:
+      return "V1";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface BigQueryOptions {
   usePartitionedTables: boolean;
   usesTimestampColumnPartitioning: boolean;
@@ -3349,6 +3381,38 @@ export enum LifecycleState {
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
 }
+export function lifecycleStateFromJSON(object: any): LifecycleState {
+  switch (object) {
+    case "LIFECYCLE_STATE_UNSPECIFIED":
+      return LifecycleState.LIFECYCLE_STATE_UNSPECIFIED;
+
+    case "ACTIVE":
+      return LifecycleState.ACTIVE;
+
+    case "DELETE_REQUESTED":
+      return LifecycleState.DELETE_REQUESTED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LifecycleState.UNRECOGNIZED;
+  }
+}
+export function lifecycleStateToJSON(object: LifecycleState): string {
+  switch (object) {
+    case LifecycleState.LIFECYCLE_STATE_UNSPECIFIED:
+      return "LIFECYCLE_STATE_UNSPECIFIED";
+
+    case LifecycleState.ACTIVE:
+      return "ACTIVE";
+
+    case LifecycleState.DELETE_REQUESTED:
+      return "DELETE_REQUESTED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum OperationState {
   /*Should not be used.*/
   OPERATION_STATE_UNSPECIFIED = 0,
@@ -3371,4 +3435,60 @@ export enum OperationState {
   /*The operation was cancelled by the user.*/
   OPERATION_STATE_CANCELLED = 6,
   UNRECOGNIZED = -1,
+}
+export function operationStateFromJSON(object: any): OperationState {
+  switch (object) {
+    case "OPERATION_STATE_UNSPECIFIED":
+      return OperationState.OPERATION_STATE_UNSPECIFIED;
+
+    case "OPERATION_STATE_SCHEDULED":
+      return OperationState.OPERATION_STATE_SCHEDULED;
+
+    case "OPERATION_STATE_WAITING_FOR_PERMISSIONS":
+      return OperationState.OPERATION_STATE_WAITING_FOR_PERMISSIONS;
+
+    case "OPERATION_STATE_RUNNING":
+      return OperationState.OPERATION_STATE_RUNNING;
+
+    case "OPERATION_STATE_SUCCEEDED":
+      return OperationState.OPERATION_STATE_SUCCEEDED;
+
+    case "OPERATION_STATE_FAILED":
+      return OperationState.OPERATION_STATE_FAILED;
+
+    case "OPERATION_STATE_CANCELLED":
+      return OperationState.OPERATION_STATE_CANCELLED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return OperationState.UNRECOGNIZED;
+  }
+}
+export function operationStateToJSON(object: OperationState): string {
+  switch (object) {
+    case OperationState.OPERATION_STATE_UNSPECIFIED:
+      return "OPERATION_STATE_UNSPECIFIED";
+
+    case OperationState.OPERATION_STATE_SCHEDULED:
+      return "OPERATION_STATE_SCHEDULED";
+
+    case OperationState.OPERATION_STATE_WAITING_FOR_PERMISSIONS:
+      return "OPERATION_STATE_WAITING_FOR_PERMISSIONS";
+
+    case OperationState.OPERATION_STATE_RUNNING:
+      return "OPERATION_STATE_RUNNING";
+
+    case OperationState.OPERATION_STATE_SUCCEEDED:
+      return "OPERATION_STATE_SUCCEEDED";
+
+    case OperationState.OPERATION_STATE_FAILED:
+      return "OPERATION_STATE_FAILED";
+
+    case OperationState.OPERATION_STATE_CANCELLED:
+      return "OPERATION_STATE_CANCELLED";
+
+    default:
+      return "UNKNOWN";
+  }
 }

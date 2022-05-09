@@ -1293,3 +1293,35 @@ export enum Reason {
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }
+export function reasonFromJSON(object: any): Reason {
+  switch (object) {
+    case "REASON_UNSPECIFIED":
+      return Reason.REASON_UNSPECIFIED;
+
+    case "RATE_LIMIT":
+      return Reason.RATE_LIMIT;
+
+    case "NOT_CONSUMED":
+      return Reason.NOT_CONSUMED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Reason.UNRECOGNIZED;
+  }
+}
+export function reasonToJSON(object: Reason): string {
+  switch (object) {
+    case Reason.REASON_UNSPECIFIED:
+      return "REASON_UNSPECIFIED";
+
+    case Reason.RATE_LIMIT:
+      return "RATE_LIMIT";
+
+    case Reason.NOT_CONSUMED:
+      return "NOT_CONSUMED";
+
+    default:
+      return "UNKNOWN";
+  }
+}

@@ -172,3 +172,143 @@ export enum CheckError_Code {
   CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE = 305,
   UNRECOGNIZED = -1,
 }
+export function checkErrorCodeFromJSON(object: any): CheckError_Code {
+  switch (object) {
+    case "ERROR_CODE_UNSPECIFIED":
+      return CheckError_Code.ERROR_CODE_UNSPECIFIED;
+
+    case "NOT_FOUND":
+      return CheckError_Code.NOT_FOUND;
+
+    case "PERMISSION_DENIED":
+      return CheckError_Code.PERMISSION_DENIED;
+
+    case "RESOURCE_EXHAUSTED":
+      return CheckError_Code.RESOURCE_EXHAUSTED;
+
+    case "SERVICE_NOT_ACTIVATED":
+      return CheckError_Code.SERVICE_NOT_ACTIVATED;
+
+    case "BILLING_DISABLED":
+      return CheckError_Code.BILLING_DISABLED;
+
+    case "PROJECT_DELETED":
+      return CheckError_Code.PROJECT_DELETED;
+
+    case "PROJECT_INVALID":
+      return CheckError_Code.PROJECT_INVALID;
+
+    case "CONSUMER_INVALID":
+      return CheckError_Code.CONSUMER_INVALID;
+
+    case "IP_ADDRESS_BLOCKED":
+      return CheckError_Code.IP_ADDRESS_BLOCKED;
+
+    case "REFERER_BLOCKED":
+      return CheckError_Code.REFERER_BLOCKED;
+
+    case "CLIENT_APP_BLOCKED":
+      return CheckError_Code.CLIENT_APP_BLOCKED;
+
+    case "API_TARGET_BLOCKED":
+      return CheckError_Code.API_TARGET_BLOCKED;
+
+    case "API_KEY_INVALID":
+      return CheckError_Code.API_KEY_INVALID;
+
+    case "API_KEY_EXPIRED":
+      return CheckError_Code.API_KEY_EXPIRED;
+
+    case "API_KEY_NOT_FOUND":
+      return CheckError_Code.API_KEY_NOT_FOUND;
+
+    case "INVALID_CREDENTIAL":
+      return CheckError_Code.INVALID_CREDENTIAL;
+
+    case "NAMESPACE_LOOKUP_UNAVAILABLE":
+      return CheckError_Code.NAMESPACE_LOOKUP_UNAVAILABLE;
+
+    case "SERVICE_STATUS_UNAVAILABLE":
+      return CheckError_Code.SERVICE_STATUS_UNAVAILABLE;
+
+    case "BILLING_STATUS_UNAVAILABLE":
+      return CheckError_Code.BILLING_STATUS_UNAVAILABLE;
+
+    case "CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE":
+      return CheckError_Code.CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CheckError_Code.UNRECOGNIZED;
+  }
+}
+export function checkErrorCodeToJSON(object: CheckError_Code): string {
+  switch (object) {
+    case CheckError_Code.ERROR_CODE_UNSPECIFIED:
+      return "ERROR_CODE_UNSPECIFIED";
+
+    case CheckError_Code.NOT_FOUND:
+      return "NOT_FOUND";
+
+    case CheckError_Code.PERMISSION_DENIED:
+      return "PERMISSION_DENIED";
+
+    case CheckError_Code.RESOURCE_EXHAUSTED:
+      return "RESOURCE_EXHAUSTED";
+
+    case CheckError_Code.SERVICE_NOT_ACTIVATED:
+      return "SERVICE_NOT_ACTIVATED";
+
+    case CheckError_Code.BILLING_DISABLED:
+      return "BILLING_DISABLED";
+
+    case CheckError_Code.PROJECT_DELETED:
+      return "PROJECT_DELETED";
+
+    case CheckError_Code.PROJECT_INVALID:
+      return "PROJECT_INVALID";
+
+    case CheckError_Code.CONSUMER_INVALID:
+      return "CONSUMER_INVALID";
+
+    case CheckError_Code.IP_ADDRESS_BLOCKED:
+      return "IP_ADDRESS_BLOCKED";
+
+    case CheckError_Code.REFERER_BLOCKED:
+      return "REFERER_BLOCKED";
+
+    case CheckError_Code.CLIENT_APP_BLOCKED:
+      return "CLIENT_APP_BLOCKED";
+
+    case CheckError_Code.API_TARGET_BLOCKED:
+      return "API_TARGET_BLOCKED";
+
+    case CheckError_Code.API_KEY_INVALID:
+      return "API_KEY_INVALID";
+
+    case CheckError_Code.API_KEY_EXPIRED:
+      return "API_KEY_EXPIRED";
+
+    case CheckError_Code.API_KEY_NOT_FOUND:
+      return "API_KEY_NOT_FOUND";
+
+    case CheckError_Code.INVALID_CREDENTIAL:
+      return "INVALID_CREDENTIAL";
+
+    case CheckError_Code.NAMESPACE_LOOKUP_UNAVAILABLE:
+      return "NAMESPACE_LOOKUP_UNAVAILABLE";
+
+    case CheckError_Code.SERVICE_STATUS_UNAVAILABLE:
+      return "SERVICE_STATUS_UNAVAILABLE";
+
+    case CheckError_Code.BILLING_STATUS_UNAVAILABLE:
+      return "BILLING_STATUS_UNAVAILABLE";
+
+    case CheckError_Code.CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE:
+      return "CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE";
+
+    default:
+      return "UNKNOWN";
+  }
+}

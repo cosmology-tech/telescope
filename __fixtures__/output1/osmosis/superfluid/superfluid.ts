@@ -6,6 +6,32 @@ export enum SuperfluidAssetType {
   SuperfluidAssetTypeLPShare = 1,
   UNRECOGNIZED = -1,
 }
+export function superfluidAssetTypeFromJSON(object: any): SuperfluidAssetType {
+  switch (object) {
+    case "SuperfluidAssetTypeNative":
+      return SuperfluidAssetType.SuperfluidAssetTypeNative;
+
+    case "SuperfluidAssetTypeLPShare":
+      return SuperfluidAssetType.SuperfluidAssetTypeLPShare;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SuperfluidAssetType.UNRECOGNIZED;
+  }
+}
+export function superfluidAssetTypeToJSON(object: SuperfluidAssetType): string {
+  switch (object) {
+    case SuperfluidAssetType.SuperfluidAssetTypeNative:
+      return "SuperfluidAssetTypeNative";
+
+    case SuperfluidAssetType.SuperfluidAssetTypeLPShare:
+      return "SuperfluidAssetTypeLPShare";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface SuperfluidAsset {
   denom: string;
   assetType: SuperfluidAssetType;

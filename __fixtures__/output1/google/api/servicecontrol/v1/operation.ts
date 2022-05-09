@@ -305,3 +305,29 @@ export enum Importance {
   HIGH = 1,
   UNRECOGNIZED = -1,
 }
+export function importanceFromJSON(object: any): Importance {
+  switch (object) {
+    case "LOW":
+      return Importance.LOW;
+
+    case "HIGH":
+      return Importance.HIGH;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Importance.UNRECOGNIZED;
+  }
+}
+export function importanceToJSON(object: Importance): string {
+  switch (object) {
+    case Importance.LOW:
+      return "LOW";
+
+    case Importance.HIGH:
+      return "HIGH";
+
+    default:
+      return "UNKNOWN";
+  }
+}

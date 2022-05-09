@@ -985,12 +985,166 @@ export enum FieldDescriptorProto_Type {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
+export function fieldDescriptorProtoTypeFromJSON(object: any): FieldDescriptorProto_Type {
+  switch (object) {
+    case "TYPE_DOUBLE":
+      return FieldDescriptorProto_Type.TYPE_DOUBLE;
+
+    case "TYPE_FLOAT":
+      return FieldDescriptorProto_Type.TYPE_FLOAT;
+
+    case "TYPE_INT64":
+      return FieldDescriptorProto_Type.TYPE_INT64;
+
+    case "TYPE_UINT64":
+      return FieldDescriptorProto_Type.TYPE_UINT64;
+
+    case "TYPE_INT32":
+      return FieldDescriptorProto_Type.TYPE_INT32;
+
+    case "TYPE_FIXED64":
+      return FieldDescriptorProto_Type.TYPE_FIXED64;
+
+    case "TYPE_FIXED32":
+      return FieldDescriptorProto_Type.TYPE_FIXED32;
+
+    case "TYPE_BOOL":
+      return FieldDescriptorProto_Type.TYPE_BOOL;
+
+    case "TYPE_STRING":
+      return FieldDescriptorProto_Type.TYPE_STRING;
+
+    case "TYPE_GROUP":
+      return FieldDescriptorProto_Type.TYPE_GROUP;
+
+    case "TYPE_MESSAGE":
+      return FieldDescriptorProto_Type.TYPE_MESSAGE;
+
+    case "TYPE_BYTES":
+      return FieldDescriptorProto_Type.TYPE_BYTES;
+
+    case "TYPE_UINT32":
+      return FieldDescriptorProto_Type.TYPE_UINT32;
+
+    case "TYPE_ENUM":
+      return FieldDescriptorProto_Type.TYPE_ENUM;
+
+    case "TYPE_SFIXED32":
+      return FieldDescriptorProto_Type.TYPE_SFIXED32;
+
+    case "TYPE_SFIXED64":
+      return FieldDescriptorProto_Type.TYPE_SFIXED64;
+
+    case "TYPE_SINT32":
+      return FieldDescriptorProto_Type.TYPE_SINT32;
+
+    case "TYPE_SINT64":
+      return FieldDescriptorProto_Type.TYPE_SINT64;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldDescriptorProto_Type.UNRECOGNIZED;
+  }
+}
+export function fieldDescriptorProtoTypeToJSON(object: FieldDescriptorProto_Type): string {
+  switch (object) {
+    case FieldDescriptorProto_Type.TYPE_DOUBLE:
+      return "TYPE_DOUBLE";
+
+    case FieldDescriptorProto_Type.TYPE_FLOAT:
+      return "TYPE_FLOAT";
+
+    case FieldDescriptorProto_Type.TYPE_INT64:
+      return "TYPE_INT64";
+
+    case FieldDescriptorProto_Type.TYPE_UINT64:
+      return "TYPE_UINT64";
+
+    case FieldDescriptorProto_Type.TYPE_INT32:
+      return "TYPE_INT32";
+
+    case FieldDescriptorProto_Type.TYPE_FIXED64:
+      return "TYPE_FIXED64";
+
+    case FieldDescriptorProto_Type.TYPE_FIXED32:
+      return "TYPE_FIXED32";
+
+    case FieldDescriptorProto_Type.TYPE_BOOL:
+      return "TYPE_BOOL";
+
+    case FieldDescriptorProto_Type.TYPE_STRING:
+      return "TYPE_STRING";
+
+    case FieldDescriptorProto_Type.TYPE_GROUP:
+      return "TYPE_GROUP";
+
+    case FieldDescriptorProto_Type.TYPE_MESSAGE:
+      return "TYPE_MESSAGE";
+
+    case FieldDescriptorProto_Type.TYPE_BYTES:
+      return "TYPE_BYTES";
+
+    case FieldDescriptorProto_Type.TYPE_UINT32:
+      return "TYPE_UINT32";
+
+    case FieldDescriptorProto_Type.TYPE_ENUM:
+      return "TYPE_ENUM";
+
+    case FieldDescriptorProto_Type.TYPE_SFIXED32:
+      return "TYPE_SFIXED32";
+
+    case FieldDescriptorProto_Type.TYPE_SFIXED64:
+      return "TYPE_SFIXED64";
+
+    case FieldDescriptorProto_Type.TYPE_SINT32:
+      return "TYPE_SINT32";
+
+    case FieldDescriptorProto_Type.TYPE_SINT64:
+      return "TYPE_SINT64";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum FieldDescriptorProto_Label {
   /*0 is reserved for errors*/
   LABEL_OPTIONAL = 1,
   LABEL_REQUIRED = 2,
   LABEL_REPEATED = 3,
   UNRECOGNIZED = -1,
+}
+export function fieldDescriptorProtoLabelFromJSON(object: any): FieldDescriptorProto_Label {
+  switch (object) {
+    case "LABEL_OPTIONAL":
+      return FieldDescriptorProto_Label.LABEL_OPTIONAL;
+
+    case "LABEL_REQUIRED":
+      return FieldDescriptorProto_Label.LABEL_REQUIRED;
+
+    case "LABEL_REPEATED":
+      return FieldDescriptorProto_Label.LABEL_REPEATED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldDescriptorProto_Label.UNRECOGNIZED;
+  }
+}
+export function fieldDescriptorProtoLabelToJSON(object: FieldDescriptorProto_Label): string {
+  switch (object) {
+    case FieldDescriptorProto_Label.LABEL_OPTIONAL:
+      return "LABEL_OPTIONAL";
+
+    case FieldDescriptorProto_Label.LABEL_REQUIRED:
+      return "LABEL_REQUIRED";
+
+    case FieldDescriptorProto_Label.LABEL_REPEATED:
+      return "LABEL_REPEATED";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface OneofDescriptorProto {
   name: string;
@@ -1907,6 +2061,38 @@ export enum FileOptions_OptimizeMode {
   LITE_RUNTIME = 3,
   UNRECOGNIZED = -1,
 }
+export function fileOptionsOptimizeModeFromJSON(object: any): FileOptions_OptimizeMode {
+  switch (object) {
+    case "SPEED":
+      return FileOptions_OptimizeMode.SPEED;
+
+    case "CODE_SIZE":
+      return FileOptions_OptimizeMode.CODE_SIZE;
+
+    case "LITE_RUNTIME":
+      return FileOptions_OptimizeMode.LITE_RUNTIME;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FileOptions_OptimizeMode.UNRECOGNIZED;
+  }
+}
+export function fileOptionsOptimizeModeToJSON(object: FileOptions_OptimizeMode): string {
+  switch (object) {
+    case FileOptions_OptimizeMode.SPEED:
+      return "SPEED";
+
+    case FileOptions_OptimizeMode.CODE_SIZE:
+      return "CODE_SIZE";
+
+    case FileOptions_OptimizeMode.LITE_RUNTIME:
+      return "LITE_RUNTIME";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface MessageOptions {
   messageSetWireFormat: boolean;
   noStandardDescriptorAccessor: boolean;
@@ -2176,6 +2362,38 @@ export enum FieldOptions_CType {
   STRING_PIECE = 2,
   UNRECOGNIZED = -1,
 }
+export function fieldOptionsCTypeFromJSON(object: any): FieldOptions_CType {
+  switch (object) {
+    case "STRING":
+      return FieldOptions_CType.STRING;
+
+    case "CORD":
+      return FieldOptions_CType.CORD;
+
+    case "STRING_PIECE":
+      return FieldOptions_CType.STRING_PIECE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldOptions_CType.UNRECOGNIZED;
+  }
+}
+export function fieldOptionsCTypeToJSON(object: FieldOptions_CType): string {
+  switch (object) {
+    case FieldOptions_CType.STRING:
+      return "STRING";
+
+    case FieldOptions_CType.CORD:
+      return "CORD";
+
+    case FieldOptions_CType.STRING_PIECE:
+      return "STRING_PIECE";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum FieldOptions_JSType {
   /*Use the default type.*/
   JS_NORMAL = 0,
@@ -2186,6 +2404,38 @@ export enum FieldOptions_JSType {
   /*Use JavaScript numbers.*/
   JS_NUMBER = 2,
   UNRECOGNIZED = -1,
+}
+export function fieldOptionsJSTypeFromJSON(object: any): FieldOptions_JSType {
+  switch (object) {
+    case "JS_NORMAL":
+      return FieldOptions_JSType.JS_NORMAL;
+
+    case "JS_STRING":
+      return FieldOptions_JSType.JS_STRING;
+
+    case "JS_NUMBER":
+      return FieldOptions_JSType.JS_NUMBER;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldOptions_JSType.UNRECOGNIZED;
+  }
+}
+export function fieldOptionsJSTypeToJSON(object: FieldOptions_JSType): string {
+  switch (object) {
+    case FieldOptions_JSType.JS_NORMAL:
+      return "JS_NORMAL";
+
+    case FieldOptions_JSType.JS_STRING:
+      return "JS_STRING";
+
+    case FieldOptions_JSType.JS_NUMBER:
+      return "JS_NUMBER";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface OneofOptions {
   uninterpretedOption: UninterpretedOption[];
@@ -2604,6 +2854,38 @@ export enum MethodOptions_IdempotencyLevel {
   /*idempotent, but may have side effects*/
   IDEMPOTENT = 2,
   UNRECOGNIZED = -1,
+}
+export function methodOptionsIdempotencyLevelFromJSON(object: any): MethodOptions_IdempotencyLevel {
+  switch (object) {
+    case "IDEMPOTENCY_UNKNOWN":
+      return MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN;
+
+    case "NO_SIDE_EFFECTS":
+      return MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS;
+
+    case "IDEMPOTENT":
+      return MethodOptions_IdempotencyLevel.IDEMPOTENT;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MethodOptions_IdempotencyLevel.UNRECOGNIZED;
+  }
+}
+export function methodOptionsIdempotencyLevelToJSON(object: MethodOptions_IdempotencyLevel): string {
+  switch (object) {
+    case MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN:
+      return "IDEMPOTENCY_UNKNOWN";
+
+    case MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS:
+      return "NO_SIDE_EFFECTS";
+
+    case MethodOptions_IdempotencyLevel.IDEMPOTENT:
+      return "IDEMPOTENT";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface UninterpretedOption {
   name: NamePart[];

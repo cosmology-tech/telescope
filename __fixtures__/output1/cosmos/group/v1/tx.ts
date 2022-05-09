@@ -1315,6 +1315,32 @@ export enum Exec {
   EXEC_TRY = 1,
   UNRECOGNIZED = -1,
 }
+export function execFromJSON(object: any): Exec {
+  switch (object) {
+    case "EXEC_UNSPECIFIED":
+      return Exec.EXEC_UNSPECIFIED;
+
+    case "EXEC_TRY":
+      return Exec.EXEC_TRY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Exec.UNRECOGNIZED;
+  }
+}
+export function execToJSON(object: Exec): string {
+  switch (object) {
+    case Exec.EXEC_UNSPECIFIED:
+      return "EXEC_UNSPECIFIED";
+
+    case Exec.EXEC_TRY:
+      return "EXEC_TRY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface MsgSubmitProposal {
   address: string;
   proposers: string[];

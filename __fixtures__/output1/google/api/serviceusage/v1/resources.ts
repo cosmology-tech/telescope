@@ -121,6 +121,38 @@ export enum State {
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
+export function stateFromJSON(object: any): State {
+  switch (object) {
+    case "STATE_UNSPECIFIED":
+      return State.STATE_UNSPECIFIED;
+
+    case "DISABLED":
+      return State.DISABLED;
+
+    case "ENABLED":
+      return State.ENABLED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return State.UNRECOGNIZED;
+  }
+}
+export function stateToJSON(object: State): string {
+  switch (object) {
+    case State.STATE_UNSPECIFIED:
+      return "STATE_UNSPECIFIED";
+
+    case State.DISABLED:
+      return "DISABLED";
+
+    case State.ENABLED:
+      return "ENABLED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ServiceConfig {
   name: string;
   title: string;

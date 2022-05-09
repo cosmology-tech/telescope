@@ -195,3 +195,41 @@ export enum ChangeType {
   MODIFIED = 3,
   UNRECOGNIZED = -1,
 }
+export function changeTypeFromJSON(object: any): ChangeType {
+  switch (object) {
+    case "CHANGE_TYPE_UNSPECIFIED":
+      return ChangeType.CHANGE_TYPE_UNSPECIFIED;
+
+    case "ADDED":
+      return ChangeType.ADDED;
+
+    case "REMOVED":
+      return ChangeType.REMOVED;
+
+    case "MODIFIED":
+      return ChangeType.MODIFIED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ChangeType.UNRECOGNIZED;
+  }
+}
+export function changeTypeToJSON(object: ChangeType): string {
+  switch (object) {
+    case ChangeType.CHANGE_TYPE_UNSPECIFIED:
+      return "CHANGE_TYPE_UNSPECIFIED";
+
+    case ChangeType.ADDED:
+      return "ADDED";
+
+    case ChangeType.REMOVED:
+      return "REMOVED";
+
+    case ChangeType.MODIFIED:
+      return "MODIFIED";
+
+    default:
+      return "UNKNOWN";
+  }
+}

@@ -41,3 +41,65 @@ export enum FieldBehavior {
   NON_EMPTY_DEFAULT = 7,
   UNRECOGNIZED = -1,
 }
+export function fieldBehaviorFromJSON(object: any): FieldBehavior {
+  switch (object) {
+    case "FIELD_BEHAVIOR_UNSPECIFIED":
+      return FieldBehavior.FIELD_BEHAVIOR_UNSPECIFIED;
+
+    case "OPTIONAL":
+      return FieldBehavior.OPTIONAL;
+
+    case "REQUIRED":
+      return FieldBehavior.REQUIRED;
+
+    case "OUTPUT_ONLY":
+      return FieldBehavior.OUTPUT_ONLY;
+
+    case "INPUT_ONLY":
+      return FieldBehavior.INPUT_ONLY;
+
+    case "IMMUTABLE":
+      return FieldBehavior.IMMUTABLE;
+
+    case "UNORDERED_LIST":
+      return FieldBehavior.UNORDERED_LIST;
+
+    case "NON_EMPTY_DEFAULT":
+      return FieldBehavior.NON_EMPTY_DEFAULT;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldBehavior.UNRECOGNIZED;
+  }
+}
+export function fieldBehaviorToJSON(object: FieldBehavior): string {
+  switch (object) {
+    case FieldBehavior.FIELD_BEHAVIOR_UNSPECIFIED:
+      return "FIELD_BEHAVIOR_UNSPECIFIED";
+
+    case FieldBehavior.OPTIONAL:
+      return "OPTIONAL";
+
+    case FieldBehavior.REQUIRED:
+      return "REQUIRED";
+
+    case FieldBehavior.OUTPUT_ONLY:
+      return "OUTPUT_ONLY";
+
+    case FieldBehavior.INPUT_ONLY:
+      return "INPUT_ONLY";
+
+    case FieldBehavior.IMMUTABLE:
+      return "IMMUTABLE";
+
+    case FieldBehavior.UNORDERED_LIST:
+      return "UNORDERED_LIST";
+
+    case FieldBehavior.NON_EMPTY_DEFAULT:
+      return "NON_EMPTY_DEFAULT";
+
+    default:
+      return "UNKNOWN";
+  }
+}

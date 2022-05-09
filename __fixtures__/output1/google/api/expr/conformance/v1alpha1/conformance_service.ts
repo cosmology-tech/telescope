@@ -748,3 +748,41 @@ export enum IssueDetails_Severity {
   ERROR = 3,
   UNRECOGNIZED = -1,
 }
+export function issueDetailsSeverityFromJSON(object: any): IssueDetails_Severity {
+  switch (object) {
+    case "SEVERITY_UNSPECIFIED":
+      return IssueDetails_Severity.SEVERITY_UNSPECIFIED;
+
+    case "DEPRECATION":
+      return IssueDetails_Severity.DEPRECATION;
+
+    case "WARNING":
+      return IssueDetails_Severity.WARNING;
+
+    case "ERROR":
+      return IssueDetails_Severity.ERROR;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return IssueDetails_Severity.UNRECOGNIZED;
+  }
+}
+export function issueDetailsSeverityToJSON(object: IssueDetails_Severity): string {
+  switch (object) {
+    case IssueDetails_Severity.SEVERITY_UNSPECIFIED:
+      return "SEVERITY_UNSPECIFIED";
+
+    case IssueDetails_Severity.DEPRECATION:
+      return "DEPRECATION";
+
+    case IssueDetails_Severity.WARNING:
+      return "WARNING";
+
+    case IssueDetails_Severity.ERROR:
+      return "ERROR";
+
+    default:
+      return "UNKNOWN";
+  }
+}

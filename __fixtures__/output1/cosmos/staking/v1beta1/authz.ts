@@ -179,3 +179,41 @@ export enum AuthorizationType {
   AUTHORIZATION_TYPE_REDELEGATE = 3,
   UNRECOGNIZED = -1,
 }
+export function authorizationTypeFromJSON(object: any): AuthorizationType {
+  switch (object) {
+    case "AUTHORIZATION_TYPE_UNSPECIFIED":
+      return AuthorizationType.AUTHORIZATION_TYPE_UNSPECIFIED;
+
+    case "AUTHORIZATION_TYPE_DELEGATE":
+      return AuthorizationType.AUTHORIZATION_TYPE_DELEGATE;
+
+    case "AUTHORIZATION_TYPE_UNDELEGATE":
+      return AuthorizationType.AUTHORIZATION_TYPE_UNDELEGATE;
+
+    case "AUTHORIZATION_TYPE_REDELEGATE":
+      return AuthorizationType.AUTHORIZATION_TYPE_REDELEGATE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AuthorizationType.UNRECOGNIZED;
+  }
+}
+export function authorizationTypeToJSON(object: AuthorizationType): string {
+  switch (object) {
+    case AuthorizationType.AUTHORIZATION_TYPE_UNSPECIFIED:
+      return "AUTHORIZATION_TYPE_UNSPECIFIED";
+
+    case AuthorizationType.AUTHORIZATION_TYPE_DELEGATE:
+      return "AUTHORIZATION_TYPE_DELEGATE";
+
+    case AuthorizationType.AUTHORIZATION_TYPE_UNDELEGATE:
+      return "AUTHORIZATION_TYPE_UNDELEGATE";
+
+    case AuthorizationType.AUTHORIZATION_TYPE_REDELEGATE:
+      return "AUTHORIZATION_TYPE_REDELEGATE";
+
+    default:
+      return "UNKNOWN";
+  }
+}

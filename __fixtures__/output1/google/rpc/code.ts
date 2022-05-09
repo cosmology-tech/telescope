@@ -154,3 +154,119 @@ export enum Code {
   DATA_LOSS = 15,
   UNRECOGNIZED = -1,
 }
+export function codeFromJSON(object: any): Code {
+  switch (object) {
+    case "OK":
+      return Code.OK;
+
+    case "CANCELLED":
+      return Code.CANCELLED;
+
+    case "UNKNOWN":
+      return Code.UNKNOWN;
+
+    case "INVALID_ARGUMENT":
+      return Code.INVALID_ARGUMENT;
+
+    case "DEADLINE_EXCEEDED":
+      return Code.DEADLINE_EXCEEDED;
+
+    case "NOT_FOUND":
+      return Code.NOT_FOUND;
+
+    case "ALREADY_EXISTS":
+      return Code.ALREADY_EXISTS;
+
+    case "PERMISSION_DENIED":
+      return Code.PERMISSION_DENIED;
+
+    case "UNAUTHENTICATED":
+      return Code.UNAUTHENTICATED;
+
+    case "RESOURCE_EXHAUSTED":
+      return Code.RESOURCE_EXHAUSTED;
+
+    case "FAILED_PRECONDITION":
+      return Code.FAILED_PRECONDITION;
+
+    case "ABORTED":
+      return Code.ABORTED;
+
+    case "OUT_OF_RANGE":
+      return Code.OUT_OF_RANGE;
+
+    case "UNIMPLEMENTED":
+      return Code.UNIMPLEMENTED;
+
+    case "INTERNAL":
+      return Code.INTERNAL;
+
+    case "UNAVAILABLE":
+      return Code.UNAVAILABLE;
+
+    case "DATA_LOSS":
+      return Code.DATA_LOSS;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Code.UNRECOGNIZED;
+  }
+}
+export function codeToJSON(object: Code): string {
+  switch (object) {
+    case Code.OK:
+      return "OK";
+
+    case Code.CANCELLED:
+      return "CANCELLED";
+
+    case Code.UNKNOWN:
+      return "UNKNOWN";
+
+    case Code.INVALID_ARGUMENT:
+      return "INVALID_ARGUMENT";
+
+    case Code.DEADLINE_EXCEEDED:
+      return "DEADLINE_EXCEEDED";
+
+    case Code.NOT_FOUND:
+      return "NOT_FOUND";
+
+    case Code.ALREADY_EXISTS:
+      return "ALREADY_EXISTS";
+
+    case Code.PERMISSION_DENIED:
+      return "PERMISSION_DENIED";
+
+    case Code.UNAUTHENTICATED:
+      return "UNAUTHENTICATED";
+
+    case Code.RESOURCE_EXHAUSTED:
+      return "RESOURCE_EXHAUSTED";
+
+    case Code.FAILED_PRECONDITION:
+      return "FAILED_PRECONDITION";
+
+    case Code.ABORTED:
+      return "ABORTED";
+
+    case Code.OUT_OF_RANGE:
+      return "OUT_OF_RANGE";
+
+    case Code.UNIMPLEMENTED:
+      return "UNIMPLEMENTED";
+
+    case Code.INTERNAL:
+      return "INTERNAL";
+
+    case Code.UNAVAILABLE:
+      return "UNAVAILABLE";
+
+    case Code.DATA_LOSS:
+      return "DATA_LOSS";
+
+    default:
+      return "UNKNOWN";
+  }
+}

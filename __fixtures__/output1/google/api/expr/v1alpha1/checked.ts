@@ -856,6 +856,62 @@ export enum Type_PrimitiveType {
   BYTES = 6,
   UNRECOGNIZED = -1,
 }
+export function typePrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
+  switch (object) {
+    case "PRIMITIVE_TYPE_UNSPECIFIED":
+      return Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED;
+
+    case "BOOL":
+      return Type_PrimitiveType.BOOL;
+
+    case "INT64":
+      return Type_PrimitiveType.INT64;
+
+    case "UINT64":
+      return Type_PrimitiveType.UINT64;
+
+    case "DOUBLE":
+      return Type_PrimitiveType.DOUBLE;
+
+    case "STRING":
+      return Type_PrimitiveType.STRING;
+
+    case "BYTES":
+      return Type_PrimitiveType.BYTES;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Type_PrimitiveType.UNRECOGNIZED;
+  }
+}
+export function typePrimitiveTypeToJSON(object: Type_PrimitiveType): string {
+  switch (object) {
+    case Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED:
+      return "PRIMITIVE_TYPE_UNSPECIFIED";
+
+    case Type_PrimitiveType.BOOL:
+      return "BOOL";
+
+    case Type_PrimitiveType.INT64:
+      return "INT64";
+
+    case Type_PrimitiveType.UINT64:
+      return "UINT64";
+
+    case Type_PrimitiveType.DOUBLE:
+      return "DOUBLE";
+
+    case Type_PrimitiveType.STRING:
+      return "STRING";
+
+    case Type_PrimitiveType.BYTES:
+      return "BYTES";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum Type_WellKnownType {
   /*Unspecified type.*/
   WELL_KNOWN_TYPE_UNSPECIFIED = 0,
@@ -873,6 +929,44 @@ export enum Type_WellKnownType {
   /*Well-known protobuf.Duration type, internally referenced as `duration`.*/
   DURATION = 3,
   UNRECOGNIZED = -1,
+}
+export function typeWellKnownTypeFromJSON(object: any): Type_WellKnownType {
+  switch (object) {
+    case "WELL_KNOWN_TYPE_UNSPECIFIED":
+      return Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED;
+
+    case "ANY":
+      return Type_WellKnownType.ANY;
+
+    case "TIMESTAMP":
+      return Type_WellKnownType.TIMESTAMP;
+
+    case "DURATION":
+      return Type_WellKnownType.DURATION;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Type_WellKnownType.UNRECOGNIZED;
+  }
+}
+export function typeWellKnownTypeToJSON(object: Type_WellKnownType): string {
+  switch (object) {
+    case Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED:
+      return "WELL_KNOWN_TYPE_UNSPECIFIED";
+
+    case Type_WellKnownType.ANY:
+      return "ANY";
+
+    case Type_WellKnownType.TIMESTAMP:
+      return "TIMESTAMP";
+
+    case Type_WellKnownType.DURATION:
+      return "DURATION";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface Decl {
   name: string;

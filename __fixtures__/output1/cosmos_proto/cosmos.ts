@@ -181,3 +181,35 @@ export enum ScalarType {
   SCALAR_TYPE_BYTES = 2,
   UNRECOGNIZED = -1,
 }
+export function scalarTypeFromJSON(object: any): ScalarType {
+  switch (object) {
+    case "SCALAR_TYPE_UNSPECIFIED":
+      return ScalarType.SCALAR_TYPE_UNSPECIFIED;
+
+    case "SCALAR_TYPE_STRING":
+      return ScalarType.SCALAR_TYPE_STRING;
+
+    case "SCALAR_TYPE_BYTES":
+      return ScalarType.SCALAR_TYPE_BYTES;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ScalarType.UNRECOGNIZED;
+  }
+}
+export function scalarTypeToJSON(object: ScalarType): string {
+  switch (object) {
+    case ScalarType.SCALAR_TYPE_UNSPECIFIED:
+      return "SCALAR_TYPE_UNSPECIFIED";
+
+    case ScalarType.SCALAR_TYPE_STRING:
+      return "SCALAR_TYPE_STRING";
+
+    case ScalarType.SCALAR_TYPE_BYTES:
+      return "SCALAR_TYPE_BYTES";
+
+    default:
+      return "UNKNOWN";
+  }
+}

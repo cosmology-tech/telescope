@@ -97,3 +97,35 @@ export enum LabelDescriptor_ValueType {
   INT64 = 2,
   UNRECOGNIZED = -1,
 }
+export function labelDescriptorValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
+  switch (object) {
+    case "STRING":
+      return LabelDescriptor_ValueType.STRING;
+
+    case "BOOL":
+      return LabelDescriptor_ValueType.BOOL;
+
+    case "INT64":
+      return LabelDescriptor_ValueType.INT64;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LabelDescriptor_ValueType.UNRECOGNIZED;
+  }
+}
+export function labelDescriptorValueTypeToJSON(object: LabelDescriptor_ValueType): string {
+  switch (object) {
+    case LabelDescriptor_ValueType.STRING:
+      return "STRING";
+
+    case LabelDescriptor_ValueType.BOOL:
+      return "BOOL";
+
+    case LabelDescriptor_ValueType.INT64:
+      return "INT64";
+
+    default:
+      return "UNKNOWN";
+  }
+}

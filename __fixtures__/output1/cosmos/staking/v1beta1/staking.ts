@@ -554,6 +554,44 @@ export enum BondStatus {
   BOND_STATUS_BONDED = 3,
   UNRECOGNIZED = -1,
 }
+export function bondStatusFromJSON(object: any): BondStatus {
+  switch (object) {
+    case "BOND_STATUS_UNSPECIFIED":
+      return BondStatus.BOND_STATUS_UNSPECIFIED;
+
+    case "BOND_STATUS_UNBONDED":
+      return BondStatus.BOND_STATUS_UNBONDED;
+
+    case "BOND_STATUS_UNBONDING":
+      return BondStatus.BOND_STATUS_UNBONDING;
+
+    case "BOND_STATUS_BONDED":
+      return BondStatus.BOND_STATUS_BONDED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BondStatus.UNRECOGNIZED;
+  }
+}
+export function bondStatusToJSON(object: BondStatus): string {
+  switch (object) {
+    case BondStatus.BOND_STATUS_UNSPECIFIED:
+      return "BOND_STATUS_UNSPECIFIED";
+
+    case BondStatus.BOND_STATUS_UNBONDED:
+      return "BOND_STATUS_UNBONDED";
+
+    case BondStatus.BOND_STATUS_UNBONDING:
+      return "BOND_STATUS_UNBONDING";
+
+    case BondStatus.BOND_STATUS_BONDED:
+      return "BOND_STATUS_BONDED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ValAddresses {
   addresses: string[];
 }

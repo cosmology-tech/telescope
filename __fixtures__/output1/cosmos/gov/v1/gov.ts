@@ -21,6 +21,50 @@ export enum VoteOption {
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
+export function voteOptionFromJSON(object: any): VoteOption {
+  switch (object) {
+    case "VOTE_OPTION_UNSPECIFIED":
+      return VoteOption.VOTE_OPTION_UNSPECIFIED;
+
+    case "VOTE_OPTION_YES":
+      return VoteOption.VOTE_OPTION_YES;
+
+    case "VOTE_OPTION_ABSTAIN":
+      return VoteOption.VOTE_OPTION_ABSTAIN;
+
+    case "VOTE_OPTION_NO":
+      return VoteOption.VOTE_OPTION_NO;
+
+    case "VOTE_OPTION_NO_WITH_VETO":
+      return VoteOption.VOTE_OPTION_NO_WITH_VETO;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return VoteOption.UNRECOGNIZED;
+  }
+}
+export function voteOptionToJSON(object: VoteOption): string {
+  switch (object) {
+    case VoteOption.VOTE_OPTION_UNSPECIFIED:
+      return "VOTE_OPTION_UNSPECIFIED";
+
+    case VoteOption.VOTE_OPTION_YES:
+      return "VOTE_OPTION_YES";
+
+    case VoteOption.VOTE_OPTION_ABSTAIN:
+      return "VOTE_OPTION_ABSTAIN";
+
+    case VoteOption.VOTE_OPTION_NO:
+      return "VOTE_OPTION_NO";
+
+    case VoteOption.VOTE_OPTION_NO_WITH_VETO:
+      return "VOTE_OPTION_NO_WITH_VETO";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
@@ -389,6 +433,56 @@ export enum ProposalStatus {
   failed.*/
   PROPOSAL_STATUS_FAILED = 5,
   UNRECOGNIZED = -1,
+}
+export function proposalStatusFromJSON(object: any): ProposalStatus {
+  switch (object) {
+    case "PROPOSAL_STATUS_UNSPECIFIED":
+      return ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED;
+
+    case "PROPOSAL_STATUS_DEPOSIT_PERIOD":
+      return ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD;
+
+    case "PROPOSAL_STATUS_VOTING_PERIOD":
+      return ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD;
+
+    case "PROPOSAL_STATUS_PASSED":
+      return ProposalStatus.PROPOSAL_STATUS_PASSED;
+
+    case "PROPOSAL_STATUS_REJECTED":
+      return ProposalStatus.PROPOSAL_STATUS_REJECTED;
+
+    case "PROPOSAL_STATUS_FAILED":
+      return ProposalStatus.PROPOSAL_STATUS_FAILED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ProposalStatus.UNRECOGNIZED;
+  }
+}
+export function proposalStatusToJSON(object: ProposalStatus): string {
+  switch (object) {
+    case ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED:
+      return "PROPOSAL_STATUS_UNSPECIFIED";
+
+    case ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD:
+      return "PROPOSAL_STATUS_DEPOSIT_PERIOD";
+
+    case ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD:
+      return "PROPOSAL_STATUS_VOTING_PERIOD";
+
+    case ProposalStatus.PROPOSAL_STATUS_PASSED:
+      return "PROPOSAL_STATUS_PASSED";
+
+    case ProposalStatus.PROPOSAL_STATUS_REJECTED:
+      return "PROPOSAL_STATUS_REJECTED";
+
+    case ProposalStatus.PROPOSAL_STATUS_FAILED:
+      return "PROPOSAL_STATUS_FAILED";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface TallyResult {
   yesCount: string;

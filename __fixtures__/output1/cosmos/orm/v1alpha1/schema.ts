@@ -201,3 +201,47 @@ export enum StorageType {
   STORAGE_TYPE_COMMITMENT = 4,
   UNRECOGNIZED = -1,
 }
+export function storageTypeFromJSON(object: any): StorageType {
+  switch (object) {
+    case "STORAGE_TYPE_DEFAULT_UNSPECIFIED":
+      return StorageType.STORAGE_TYPE_DEFAULT_UNSPECIFIED;
+
+    case "STORAGE_TYPE_MEMORY":
+      return StorageType.STORAGE_TYPE_MEMORY;
+
+    case "STORAGE_TYPE_TRANSIENT":
+      return StorageType.STORAGE_TYPE_TRANSIENT;
+
+    case "STORAGE_TYPE_INDEX":
+      return StorageType.STORAGE_TYPE_INDEX;
+
+    case "STORAGE_TYPE_COMMITMENT":
+      return StorageType.STORAGE_TYPE_COMMITMENT;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return StorageType.UNRECOGNIZED;
+  }
+}
+export function storageTypeToJSON(object: StorageType): string {
+  switch (object) {
+    case StorageType.STORAGE_TYPE_DEFAULT_UNSPECIFIED:
+      return "STORAGE_TYPE_DEFAULT_UNSPECIFIED";
+
+    case StorageType.STORAGE_TYPE_MEMORY:
+      return "STORAGE_TYPE_MEMORY";
+
+    case StorageType.STORAGE_TYPE_TRANSIENT:
+      return "STORAGE_TYPE_TRANSIENT";
+
+    case StorageType.STORAGE_TYPE_INDEX:
+      return "STORAGE_TYPE_INDEX";
+
+    case StorageType.STORAGE_TYPE_COMMITMENT:
+      return "STORAGE_TYPE_COMMITMENT";
+
+    default:
+      return "UNKNOWN";
+  }
+}

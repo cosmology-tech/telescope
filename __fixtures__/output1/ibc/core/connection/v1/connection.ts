@@ -265,6 +265,44 @@ export enum State {
   STATE_OPEN = 3,
   UNRECOGNIZED = -1,
 }
+export function stateFromJSON(object: any): State {
+  switch (object) {
+    case "STATE_UNINITIALIZED_UNSPECIFIED":
+      return State.STATE_UNINITIALIZED_UNSPECIFIED;
+
+    case "STATE_INIT":
+      return State.STATE_INIT;
+
+    case "STATE_TRYOPEN":
+      return State.STATE_TRYOPEN;
+
+    case "STATE_OPEN":
+      return State.STATE_OPEN;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return State.UNRECOGNIZED;
+  }
+}
+export function stateToJSON(object: State): string {
+  switch (object) {
+    case State.STATE_UNINITIALIZED_UNSPECIFIED:
+      return "STATE_UNINITIALIZED_UNSPECIFIED";
+
+    case State.STATE_INIT:
+      return "STATE_INIT";
+
+    case State.STATE_TRYOPEN:
+      return "STATE_TRYOPEN";
+
+    case State.STATE_OPEN:
+      return "STATE_OPEN";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface Counterparty {
   clientId: string;
   connectionId: string;

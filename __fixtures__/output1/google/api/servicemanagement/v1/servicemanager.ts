@@ -578,6 +578,32 @@ export enum GetServiceConfigRequest_ConfigView {
   FULL = 1,
   UNRECOGNIZED = -1,
 }
+export function getServiceConfigRequestConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
+  switch (object) {
+    case "BASIC":
+      return GetServiceConfigRequest_ConfigView.BASIC;
+
+    case "FULL":
+      return GetServiceConfigRequest_ConfigView.FULL;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GetServiceConfigRequest_ConfigView.UNRECOGNIZED;
+  }
+}
+export function getServiceConfigRequestConfigViewToJSON(object: GetServiceConfigRequest_ConfigView): string {
+  switch (object) {
+    case GetServiceConfigRequest_ConfigView.BASIC:
+      return "BASIC";
+
+    case GetServiceConfigRequest_ConfigView.FULL:
+      return "FULL";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ListServiceConfigsRequest {
   serviceName: string;
   pageToken: string;

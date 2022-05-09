@@ -715,6 +715,80 @@ export enum DataType {
   DATA_TYPE_HEADER = 9,
   UNRECOGNIZED = -1,
 }
+export function dataTypeFromJSON(object: any): DataType {
+  switch (object) {
+    case "DATA_TYPE_UNINITIALIZED_UNSPECIFIED":
+      return DataType.DATA_TYPE_UNINITIALIZED_UNSPECIFIED;
+
+    case "DATA_TYPE_CLIENT_STATE":
+      return DataType.DATA_TYPE_CLIENT_STATE;
+
+    case "DATA_TYPE_CONSENSUS_STATE":
+      return DataType.DATA_TYPE_CONSENSUS_STATE;
+
+    case "DATA_TYPE_CONNECTION_STATE":
+      return DataType.DATA_TYPE_CONNECTION_STATE;
+
+    case "DATA_TYPE_CHANNEL_STATE":
+      return DataType.DATA_TYPE_CHANNEL_STATE;
+
+    case "DATA_TYPE_PACKET_COMMITMENT":
+      return DataType.DATA_TYPE_PACKET_COMMITMENT;
+
+    case "DATA_TYPE_PACKET_ACKNOWLEDGEMENT":
+      return DataType.DATA_TYPE_PACKET_ACKNOWLEDGEMENT;
+
+    case "DATA_TYPE_PACKET_RECEIPT_ABSENCE":
+      return DataType.DATA_TYPE_PACKET_RECEIPT_ABSENCE;
+
+    case "DATA_TYPE_NEXT_SEQUENCE_RECV":
+      return DataType.DATA_TYPE_NEXT_SEQUENCE_RECV;
+
+    case "DATA_TYPE_HEADER":
+      return DataType.DATA_TYPE_HEADER;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return DataType.UNRECOGNIZED;
+  }
+}
+export function dataTypeToJSON(object: DataType): string {
+  switch (object) {
+    case DataType.DATA_TYPE_UNINITIALIZED_UNSPECIFIED:
+      return "DATA_TYPE_UNINITIALIZED_UNSPECIFIED";
+
+    case DataType.DATA_TYPE_CLIENT_STATE:
+      return "DATA_TYPE_CLIENT_STATE";
+
+    case DataType.DATA_TYPE_CONSENSUS_STATE:
+      return "DATA_TYPE_CONSENSUS_STATE";
+
+    case DataType.DATA_TYPE_CONNECTION_STATE:
+      return "DATA_TYPE_CONNECTION_STATE";
+
+    case DataType.DATA_TYPE_CHANNEL_STATE:
+      return "DATA_TYPE_CHANNEL_STATE";
+
+    case DataType.DATA_TYPE_PACKET_COMMITMENT:
+      return "DATA_TYPE_PACKET_COMMITMENT";
+
+    case DataType.DATA_TYPE_PACKET_ACKNOWLEDGEMENT:
+      return "DATA_TYPE_PACKET_ACKNOWLEDGEMENT";
+
+    case DataType.DATA_TYPE_PACKET_RECEIPT_ABSENCE:
+      return "DATA_TYPE_PACKET_RECEIPT_ABSENCE";
+
+    case DataType.DATA_TYPE_NEXT_SEQUENCE_RECV:
+      return "DATA_TYPE_NEXT_SEQUENCE_RECV";
+
+    case DataType.DATA_TYPE_HEADER:
+      return "DATA_TYPE_HEADER";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface HeaderData {
   newPubKey: Any;
   newDiversifier: string;

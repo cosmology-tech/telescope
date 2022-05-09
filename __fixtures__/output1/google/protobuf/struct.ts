@@ -292,6 +292,26 @@ export enum NullValue {
   NULL_VALUE = 0,
   UNRECOGNIZED = -1,
 }
+export function nullValueFromJSON(object: any): NullValue {
+  switch (object) {
+    case "NULL_VALUE":
+      return NullValue.NULL_VALUE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return NullValue.UNRECOGNIZED;
+  }
+}
+export function nullValueToJSON(object: NullValue): string {
+  switch (object) {
+    case NullValue.NULL_VALUE:
+      return "NULL_VALUE";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ListValue {
   values: Value[];
 }

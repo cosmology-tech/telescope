@@ -390,6 +390,50 @@ export enum ConsumerType {
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }
+export function consumerTypeFromJSON(object: any): ConsumerType {
+  switch (object) {
+    case "CONSUMER_TYPE_UNSPECIFIED":
+      return ConsumerType.CONSUMER_TYPE_UNSPECIFIED;
+
+    case "PROJECT":
+      return ConsumerType.PROJECT;
+
+    case "FOLDER":
+      return ConsumerType.FOLDER;
+
+    case "ORGANIZATION":
+      return ConsumerType.ORGANIZATION;
+
+    case "SERVICE_SPECIFIC":
+      return ConsumerType.SERVICE_SPECIFIC;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ConsumerType.UNRECOGNIZED;
+  }
+}
+export function consumerTypeToJSON(object: ConsumerType): string {
+  switch (object) {
+    case ConsumerType.CONSUMER_TYPE_UNSPECIFIED:
+      return "CONSUMER_TYPE_UNSPECIFIED";
+
+    case ConsumerType.PROJECT:
+      return "PROJECT";
+
+    case ConsumerType.FOLDER:
+      return "FOLDER";
+
+    case ConsumerType.ORGANIZATION:
+      return "ORGANIZATION";
+
+    case ConsumerType.SERVICE_SPECIFIC:
+      return "SERVICE_SPECIFIC";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ReportRequest {
   serviceName: string;
   operations: Operation[];

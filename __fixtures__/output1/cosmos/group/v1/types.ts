@@ -395,6 +395,50 @@ export enum VoteOption {
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
+export function voteOptionFromJSON(object: any): VoteOption {
+  switch (object) {
+    case "VOTE_OPTION_UNSPECIFIED":
+      return VoteOption.VOTE_OPTION_UNSPECIFIED;
+
+    case "VOTE_OPTION_YES":
+      return VoteOption.VOTE_OPTION_YES;
+
+    case "VOTE_OPTION_ABSTAIN":
+      return VoteOption.VOTE_OPTION_ABSTAIN;
+
+    case "VOTE_OPTION_NO":
+      return VoteOption.VOTE_OPTION_NO;
+
+    case "VOTE_OPTION_NO_WITH_VETO":
+      return VoteOption.VOTE_OPTION_NO_WITH_VETO;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return VoteOption.UNRECOGNIZED;
+  }
+}
+export function voteOptionToJSON(object: VoteOption): string {
+  switch (object) {
+    case VoteOption.VOTE_OPTION_UNSPECIFIED:
+      return "VOTE_OPTION_UNSPECIFIED";
+
+    case VoteOption.VOTE_OPTION_YES:
+      return "VOTE_OPTION_YES";
+
+    case VoteOption.VOTE_OPTION_ABSTAIN:
+      return "VOTE_OPTION_ABSTAIN";
+
+    case VoteOption.VOTE_OPTION_NO:
+      return "VOTE_OPTION_NO";
+
+    case VoteOption.VOTE_OPTION_NO_WITH_VETO:
+      return "VOTE_OPTION_NO_WITH_VETO";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface GroupInfo {
   id: Long;
   admin: string;
@@ -966,6 +1010,50 @@ export enum ProposalStatus {
   PROPOSAL_STATUS_WITHDRAWN = 4,
   UNRECOGNIZED = -1,
 }
+export function proposalStatusFromJSON(object: any): ProposalStatus {
+  switch (object) {
+    case "PROPOSAL_STATUS_UNSPECIFIED":
+      return ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED;
+
+    case "PROPOSAL_STATUS_SUBMITTED":
+      return ProposalStatus.PROPOSAL_STATUS_SUBMITTED;
+
+    case "PROPOSAL_STATUS_CLOSED":
+      return ProposalStatus.PROPOSAL_STATUS_CLOSED;
+
+    case "PROPOSAL_STATUS_ABORTED":
+      return ProposalStatus.PROPOSAL_STATUS_ABORTED;
+
+    case "PROPOSAL_STATUS_WITHDRAWN":
+      return ProposalStatus.PROPOSAL_STATUS_WITHDRAWN;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ProposalStatus.UNRECOGNIZED;
+  }
+}
+export function proposalStatusToJSON(object: ProposalStatus): string {
+  switch (object) {
+    case ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED:
+      return "PROPOSAL_STATUS_UNSPECIFIED";
+
+    case ProposalStatus.PROPOSAL_STATUS_SUBMITTED:
+      return "PROPOSAL_STATUS_SUBMITTED";
+
+    case ProposalStatus.PROPOSAL_STATUS_CLOSED:
+      return "PROPOSAL_STATUS_CLOSED";
+
+    case ProposalStatus.PROPOSAL_STATUS_ABORTED:
+      return "PROPOSAL_STATUS_ABORTED";
+
+    case ProposalStatus.PROPOSAL_STATUS_WITHDRAWN:
+      return "PROPOSAL_STATUS_WITHDRAWN";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum ProposalResult {
   /*An empty value is invalid and not allowed*/
   PROPOSAL_RESULT_UNSPECIFIED = 0,
@@ -980,6 +1068,44 @@ export enum ProposalResult {
   PROPOSAL_RESULT_REJECTED = 3,
   UNRECOGNIZED = -1,
 }
+export function proposalResultFromJSON(object: any): ProposalResult {
+  switch (object) {
+    case "PROPOSAL_RESULT_UNSPECIFIED":
+      return ProposalResult.PROPOSAL_RESULT_UNSPECIFIED;
+
+    case "PROPOSAL_RESULT_UNFINALIZED":
+      return ProposalResult.PROPOSAL_RESULT_UNFINALIZED;
+
+    case "PROPOSAL_RESULT_ACCEPTED":
+      return ProposalResult.PROPOSAL_RESULT_ACCEPTED;
+
+    case "PROPOSAL_RESULT_REJECTED":
+      return ProposalResult.PROPOSAL_RESULT_REJECTED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ProposalResult.UNRECOGNIZED;
+  }
+}
+export function proposalResultToJSON(object: ProposalResult): string {
+  switch (object) {
+    case ProposalResult.PROPOSAL_RESULT_UNSPECIFIED:
+      return "PROPOSAL_RESULT_UNSPECIFIED";
+
+    case ProposalResult.PROPOSAL_RESULT_UNFINALIZED:
+      return "PROPOSAL_RESULT_UNFINALIZED";
+
+    case ProposalResult.PROPOSAL_RESULT_ACCEPTED:
+      return "PROPOSAL_RESULT_ACCEPTED";
+
+    case ProposalResult.PROPOSAL_RESULT_REJECTED:
+      return "PROPOSAL_RESULT_REJECTED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum ProposalExecutorResult {
   /*An empty value is not allowed.*/
   PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED = 0,
@@ -993,6 +1119,44 @@ export enum ProposalExecutorResult {
   /*The executor returned an error and proposed action didn't update state.*/
   PROPOSAL_EXECUTOR_RESULT_FAILURE = 3,
   UNRECOGNIZED = -1,
+}
+export function proposalExecutorResultFromJSON(object: any): ProposalExecutorResult {
+  switch (object) {
+    case "PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED":
+      return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED;
+
+    case "PROPOSAL_EXECUTOR_RESULT_NOT_RUN":
+      return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_NOT_RUN;
+
+    case "PROPOSAL_EXECUTOR_RESULT_SUCCESS":
+      return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_SUCCESS;
+
+    case "PROPOSAL_EXECUTOR_RESULT_FAILURE":
+      return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_FAILURE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ProposalExecutorResult.UNRECOGNIZED;
+  }
+}
+export function proposalExecutorResultToJSON(object: ProposalExecutorResult): string {
+  switch (object) {
+    case ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED:
+      return "PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED";
+
+    case ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_NOT_RUN:
+      return "PROPOSAL_EXECUTOR_RESULT_NOT_RUN";
+
+    case ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_SUCCESS:
+      return "PROPOSAL_EXECUTOR_RESULT_SUCCESS";
+
+    case ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_FAILURE:
+      return "PROPOSAL_EXECUTOR_RESULT_FAILURE";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface TallyResult {
   yesCount: string;

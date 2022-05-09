@@ -124,6 +124,32 @@ export enum LockQueryType {
   ByTime = 1,
   UNRECOGNIZED = -1,
 }
+export function lockQueryTypeFromJSON(object: any): LockQueryType {
+  switch (object) {
+    case "ByDuration":
+      return LockQueryType.ByDuration;
+
+    case "ByTime":
+      return LockQueryType.ByTime;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LockQueryType.UNRECOGNIZED;
+  }
+}
+export function lockQueryTypeToJSON(object: LockQueryType): string {
+  switch (object) {
+    case LockQueryType.ByDuration:
+      return "ByDuration";
+
+    case LockQueryType.ByTime:
+      return "ByTime";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface QueryCondition {
   lockQueryType: LockQueryType;
   denom: string;

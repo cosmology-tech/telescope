@@ -169,3 +169,47 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
+export function propertyPropertyTypeFromJSON(object: any): Property_PropertyType {
+  switch (object) {
+    case "UNSPECIFIED":
+      return Property_PropertyType.UNSPECIFIED;
+
+    case "INT64":
+      return Property_PropertyType.INT64;
+
+    case "BOOL":
+      return Property_PropertyType.BOOL;
+
+    case "STRING":
+      return Property_PropertyType.STRING;
+
+    case "DOUBLE":
+      return Property_PropertyType.DOUBLE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Property_PropertyType.UNRECOGNIZED;
+  }
+}
+export function propertyPropertyTypeToJSON(object: Property_PropertyType): string {
+  switch (object) {
+    case Property_PropertyType.UNSPECIFIED:
+      return "UNSPECIFIED";
+
+    case Property_PropertyType.INT64:
+      return "INT64";
+
+    case Property_PropertyType.BOOL:
+      return "BOOL";
+
+    case Property_PropertyType.STRING:
+      return "STRING";
+
+    case Property_PropertyType.DOUBLE:
+      return "DOUBLE";
+
+    default:
+      return "UNKNOWN";
+  }
+}

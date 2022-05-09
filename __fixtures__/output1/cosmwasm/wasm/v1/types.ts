@@ -15,6 +15,44 @@ export enum AccessType {
   ACCESS_TYPE_EVERYBODY = 3,
   UNRECOGNIZED = -1,
 }
+export function accessTypeFromJSON(object: any): AccessType {
+  switch (object) {
+    case "ACCESS_TYPE_UNSPECIFIED":
+      return AccessType.ACCESS_TYPE_UNSPECIFIED;
+
+    case "ACCESS_TYPE_NOBODY":
+      return AccessType.ACCESS_TYPE_NOBODY;
+
+    case "ACCESS_TYPE_ONLY_ADDRESS":
+      return AccessType.ACCESS_TYPE_ONLY_ADDRESS;
+
+    case "ACCESS_TYPE_EVERYBODY":
+      return AccessType.ACCESS_TYPE_EVERYBODY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AccessType.UNRECOGNIZED;
+  }
+}
+export function accessTypeToJSON(object: AccessType): string {
+  switch (object) {
+    case AccessType.ACCESS_TYPE_UNSPECIFIED:
+      return "ACCESS_TYPE_UNSPECIFIED";
+
+    case AccessType.ACCESS_TYPE_NOBODY:
+      return "ACCESS_TYPE_NOBODY";
+
+    case AccessType.ACCESS_TYPE_ONLY_ADDRESS:
+      return "ACCESS_TYPE_ONLY_ADDRESS";
+
+    case AccessType.ACCESS_TYPE_EVERYBODY:
+      return "ACCESS_TYPE_EVERYBODY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface AccessTypeParam {
   value: AccessType;
 }
@@ -471,6 +509,44 @@ export enum ContractCodeHistoryOperationType {
   /*ContractCodeHistoryOperationTypeGenesis based on genesis data*/
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
   UNRECOGNIZED = -1,
+}
+export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
+  switch (object) {
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED;
+
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT;
+
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE;
+
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ContractCodeHistoryOperationType.UNRECOGNIZED;
+  }
+}
+export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHistoryOperationType): string {
+  switch (object) {
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED";
+
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT";
+
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE";
+
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface ContractCodeHistoryEntry {
   operation: ContractCodeHistoryOperationType;

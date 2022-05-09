@@ -7,6 +7,44 @@ export enum AccessType {
   EVERYBODY = 3,
   UNRECOGNIZED = -1,
 }
+export function accessTypeFromJSON(object: any): AccessType {
+  switch (object) {
+    case "UNDEFINED":
+      return AccessType.UNDEFINED;
+
+    case "NOBODY":
+      return AccessType.NOBODY;
+
+    case "ONLY_ADDRESS":
+      return AccessType.ONLY_ADDRESS;
+
+    case "EVERYBODY":
+      return AccessType.EVERYBODY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AccessType.UNRECOGNIZED;
+  }
+}
+export function accessTypeToJSON(object: AccessType): string {
+  switch (object) {
+    case AccessType.UNDEFINED:
+      return "UNDEFINED";
+
+    case AccessType.NOBODY:
+      return "NOBODY";
+
+    case AccessType.ONLY_ADDRESS:
+      return "ONLY_ADDRESS";
+
+    case AccessType.EVERYBODY:
+      return "EVERYBODY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface AccessTypeParam {
   value: AccessType;
 }

@@ -275,6 +275,56 @@ export enum OperationMetadata_Status {
   CANCELLED = 5,
   UNRECOGNIZED = -1,
 }
+export function operationMetadataStatusFromJSON(object: any): OperationMetadata_Status {
+  switch (object) {
+    case "STATUS_UNSPECIFIED":
+      return OperationMetadata_Status.STATUS_UNSPECIFIED;
+
+    case "DONE":
+      return OperationMetadata_Status.DONE;
+
+    case "NOT_STARTED":
+      return OperationMetadata_Status.NOT_STARTED;
+
+    case "IN_PROGRESS":
+      return OperationMetadata_Status.IN_PROGRESS;
+
+    case "FAILED":
+      return OperationMetadata_Status.FAILED;
+
+    case "CANCELLED":
+      return OperationMetadata_Status.CANCELLED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return OperationMetadata_Status.UNRECOGNIZED;
+  }
+}
+export function operationMetadataStatusToJSON(object: OperationMetadata_Status): string {
+  switch (object) {
+    case OperationMetadata_Status.STATUS_UNSPECIFIED:
+      return "STATUS_UNSPECIFIED";
+
+    case OperationMetadata_Status.DONE:
+      return "DONE";
+
+    case OperationMetadata_Status.NOT_STARTED:
+      return "NOT_STARTED";
+
+    case OperationMetadata_Status.IN_PROGRESS:
+      return "IN_PROGRESS";
+
+    case OperationMetadata_Status.FAILED:
+      return "FAILED";
+
+    case OperationMetadata_Status.CANCELLED:
+      return "CANCELLED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface Diagnostic {
   location: string;
   kind: Kind;
@@ -368,6 +418,32 @@ export enum Diagnostic_Kind {
   /*Only errors*/
   ERROR = 1,
   UNRECOGNIZED = -1,
+}
+export function diagnosticKindFromJSON(object: any): Diagnostic_Kind {
+  switch (object) {
+    case "WARNING":
+      return Diagnostic_Kind.WARNING;
+
+    case "ERROR":
+      return Diagnostic_Kind.ERROR;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Diagnostic_Kind.UNRECOGNIZED;
+  }
+}
+export function diagnosticKindToJSON(object: Diagnostic_Kind): string {
+  switch (object) {
+    case Diagnostic_Kind.WARNING:
+      return "WARNING";
+
+    case Diagnostic_Kind.ERROR:
+      return "ERROR";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface ConfigSource {
   id: string;
@@ -563,6 +639,56 @@ export enum ConfigFile_FileType {
   FILE_DESCRIPTOR_SET_PROTO is included.*/
   PROTO_FILE = 6,
   UNRECOGNIZED = -1,
+}
+export function configFileFileTypeFromJSON(object: any): ConfigFile_FileType {
+  switch (object) {
+    case "FILE_TYPE_UNSPECIFIED":
+      return ConfigFile_FileType.FILE_TYPE_UNSPECIFIED;
+
+    case "SERVICE_CONFIG_YAML":
+      return ConfigFile_FileType.SERVICE_CONFIG_YAML;
+
+    case "OPEN_API_JSON":
+      return ConfigFile_FileType.OPEN_API_JSON;
+
+    case "OPEN_API_YAML":
+      return ConfigFile_FileType.OPEN_API_YAML;
+
+    case "FILE_DESCRIPTOR_SET_PROTO":
+      return ConfigFile_FileType.FILE_DESCRIPTOR_SET_PROTO;
+
+    case "PROTO_FILE":
+      return ConfigFile_FileType.PROTO_FILE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ConfigFile_FileType.UNRECOGNIZED;
+  }
+}
+export function configFileFileTypeToJSON(object: ConfigFile_FileType): string {
+  switch (object) {
+    case ConfigFile_FileType.FILE_TYPE_UNSPECIFIED:
+      return "FILE_TYPE_UNSPECIFIED";
+
+    case ConfigFile_FileType.SERVICE_CONFIG_YAML:
+      return "SERVICE_CONFIG_YAML";
+
+    case ConfigFile_FileType.OPEN_API_JSON:
+      return "OPEN_API_JSON";
+
+    case ConfigFile_FileType.OPEN_API_YAML:
+      return "OPEN_API_YAML";
+
+    case ConfigFile_FileType.FILE_DESCRIPTOR_SET_PROTO:
+      return "FILE_DESCRIPTOR_SET_PROTO";
+
+    case ConfigFile_FileType.PROTO_FILE:
+      return "PROTO_FILE";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface ConfigRef {
   name: string;
@@ -1056,4 +1182,60 @@ export enum Rollout_RolloutStatus {
   Rollout.*/
   FAILED_ROLLED_BACK = 6,
   UNRECOGNIZED = -1,
+}
+export function rolloutRolloutStatusFromJSON(object: any): Rollout_RolloutStatus {
+  switch (object) {
+    case "ROLLOUT_STATUS_UNSPECIFIED":
+      return Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED;
+
+    case "IN_PROGRESS":
+      return Rollout_RolloutStatus.IN_PROGRESS;
+
+    case "SUCCESS":
+      return Rollout_RolloutStatus.SUCCESS;
+
+    case "CANCELLED":
+      return Rollout_RolloutStatus.CANCELLED;
+
+    case "FAILED":
+      return Rollout_RolloutStatus.FAILED;
+
+    case "PENDING":
+      return Rollout_RolloutStatus.PENDING;
+
+    case "FAILED_ROLLED_BACK":
+      return Rollout_RolloutStatus.FAILED_ROLLED_BACK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Rollout_RolloutStatus.UNRECOGNIZED;
+  }
+}
+export function rolloutRolloutStatusToJSON(object: Rollout_RolloutStatus): string {
+  switch (object) {
+    case Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED:
+      return "ROLLOUT_STATUS_UNSPECIFIED";
+
+    case Rollout_RolloutStatus.IN_PROGRESS:
+      return "IN_PROGRESS";
+
+    case Rollout_RolloutStatus.SUCCESS:
+      return "SUCCESS";
+
+    case Rollout_RolloutStatus.CANCELLED:
+      return "CANCELLED";
+
+    case Rollout_RolloutStatus.FAILED:
+      return "FAILED";
+
+    case Rollout_RolloutStatus.PENDING:
+      return "PENDING";
+
+    case Rollout_RolloutStatus.FAILED_ROLLED_BACK:
+      return "FAILED_ROLLED_BACK";
+
+    default:
+      return "UNKNOWN";
+  }
 }

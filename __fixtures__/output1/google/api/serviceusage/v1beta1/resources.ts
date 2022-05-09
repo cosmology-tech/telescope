@@ -121,6 +121,38 @@ export enum State {
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
+export function stateFromJSON(object: any): State {
+  switch (object) {
+    case "STATE_UNSPECIFIED":
+      return State.STATE_UNSPECIFIED;
+
+    case "DISABLED":
+      return State.DISABLED;
+
+    case "ENABLED":
+      return State.ENABLED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return State.UNRECOGNIZED;
+  }
+}
+export function stateToJSON(object: State): string {
+  switch (object) {
+    case State.STATE_UNSPECIFIED:
+      return "STATE_UNSPECIFIED";
+
+    case State.DISABLED:
+      return "DISABLED";
+
+    case State.ENABLED:
+      return "ENABLED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ServiceConfig {
   name: string;
   title: string;
@@ -664,6 +696,38 @@ export enum QuotaView {
   FULL = 2,
   UNRECOGNIZED = -1,
 }
+export function quotaViewFromJSON(object: any): QuotaView {
+  switch (object) {
+    case "QUOTA_VIEW_UNSPECIFIED":
+      return QuotaView.QUOTA_VIEW_UNSPECIFIED;
+
+    case "BASIC":
+      return QuotaView.BASIC;
+
+    case "FULL":
+      return QuotaView.FULL;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return QuotaView.UNRECOGNIZED;
+  }
+}
+export function quotaViewToJSON(object: QuotaView): string {
+  switch (object) {
+    case QuotaView.QUOTA_VIEW_UNSPECIFIED:
+      return "QUOTA_VIEW_UNSPECIFIED";
+
+    case QuotaView.BASIC:
+      return "BASIC";
+
+    case QuotaView.FULL:
+      return "FULL";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface QuotaBucket_StringMapEntry {
   key: string;
   value: string;
@@ -1197,6 +1261,38 @@ export enum QuotaSafetyCheck {
   limit to decrease by more than 10 percent.*/
   LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
   UNRECOGNIZED = -1,
+}
+export function quotaSafetyCheckFromJSON(object: any): QuotaSafetyCheck {
+  switch (object) {
+    case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
+      return QuotaSafetyCheck.QUOTA_SAFETY_CHECK_UNSPECIFIED;
+
+    case "LIMIT_DECREASE_BELOW_USAGE":
+      return QuotaSafetyCheck.LIMIT_DECREASE_BELOW_USAGE;
+
+    case "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH":
+      return QuotaSafetyCheck.LIMIT_DECREASE_PERCENTAGE_TOO_HIGH;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return QuotaSafetyCheck.UNRECOGNIZED;
+  }
+}
+export function quotaSafetyCheckToJSON(object: QuotaSafetyCheck): string {
+  switch (object) {
+    case QuotaSafetyCheck.QUOTA_SAFETY_CHECK_UNSPECIFIED:
+      return "QUOTA_SAFETY_CHECK_UNSPECIFIED";
+
+    case QuotaSafetyCheck.LIMIT_DECREASE_BELOW_USAGE:
+      return "LIMIT_DECREASE_BELOW_USAGE";
+
+    case QuotaSafetyCheck.LIMIT_DECREASE_PERCENTAGE_TOO_HIGH:
+      return "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface AdminQuotaPolicy_StringMapEntry {
   key: string;

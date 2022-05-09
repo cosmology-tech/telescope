@@ -173,6 +173,38 @@ export enum ResourceDescriptor_History {
   FUTURE_MULTI_PATTERN = 2,
   UNRECOGNIZED = -1,
 }
+export function resourceDescriptorHistoryFromJSON(object: any): ResourceDescriptor_History {
+  switch (object) {
+    case "HISTORY_UNSPECIFIED":
+      return ResourceDescriptor_History.HISTORY_UNSPECIFIED;
+
+    case "ORIGINALLY_SINGLE_PATTERN":
+      return ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN;
+
+    case "FUTURE_MULTI_PATTERN":
+      return ResourceDescriptor_History.FUTURE_MULTI_PATTERN;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResourceDescriptor_History.UNRECOGNIZED;
+  }
+}
+export function resourceDescriptorHistoryToJSON(object: ResourceDescriptor_History): string {
+  switch (object) {
+    case ResourceDescriptor_History.HISTORY_UNSPECIFIED:
+      return "HISTORY_UNSPECIFIED";
+
+    case ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN:
+      return "ORIGINALLY_SINGLE_PATTERN";
+
+    case ResourceDescriptor_History.FUTURE_MULTI_PATTERN:
+      return "FUTURE_MULTI_PATTERN";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum ResourceDescriptor_Style {
   /*The unspecified value. Do not use.*/
   STYLE_UNSPECIFIED = 0,
@@ -187,6 +219,32 @@ export enum ResourceDescriptor_Style {
   additional checks.*/
   DECLARATIVE_FRIENDLY = 1,
   UNRECOGNIZED = -1,
+}
+export function resourceDescriptorStyleFromJSON(object: any): ResourceDescriptor_Style {
+  switch (object) {
+    case "STYLE_UNSPECIFIED":
+      return ResourceDescriptor_Style.STYLE_UNSPECIFIED;
+
+    case "DECLARATIVE_FRIENDLY":
+      return ResourceDescriptor_Style.DECLARATIVE_FRIENDLY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResourceDescriptor_Style.UNRECOGNIZED;
+  }
+}
+export function resourceDescriptorStyleToJSON(object: ResourceDescriptor_Style): string {
+  switch (object) {
+    case ResourceDescriptor_Style.STYLE_UNSPECIFIED:
+      return "STYLE_UNSPECIFIED";
+
+    case ResourceDescriptor_Style.DECLARATIVE_FRIENDLY:
+      return "DECLARATIVE_FRIENDLY";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface ResourceReference {
   type: string;

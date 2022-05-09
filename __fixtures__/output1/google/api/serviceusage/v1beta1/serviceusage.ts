@@ -2748,6 +2748,32 @@ export enum GetServiceIdentityResponse_IdentityState {
   ACTIVE = 1,
   UNRECOGNIZED = -1,
 }
+export function getServiceIdentityResponseIdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState {
+  switch (object) {
+    case "IDENTITY_STATE_UNSPECIFIED":
+      return GetServiceIdentityResponse_IdentityState.IDENTITY_STATE_UNSPECIFIED;
+
+    case "ACTIVE":
+      return GetServiceIdentityResponse_IdentityState.ACTIVE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GetServiceIdentityResponse_IdentityState.UNRECOGNIZED;
+  }
+}
+export function getServiceIdentityResponseIdentityStateToJSON(object: GetServiceIdentityResponse_IdentityState): string {
+  switch (object) {
+    case GetServiceIdentityResponse_IdentityState.IDENTITY_STATE_UNSPECIFIED:
+      return "IDENTITY_STATE_UNSPECIFIED";
+
+    case GetServiceIdentityResponse_IdentityState.ACTIVE:
+      return "ACTIVE";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface GetServiceIdentityMetadata {}
 
 function createBaseGetServiceIdentityMetadata(): GetServiceIdentityMetadata {

@@ -280,6 +280,50 @@ export enum State {
   STATE_CLOSED = 4,
   UNRECOGNIZED = -1,
 }
+export function stateFromJSON(object: any): State {
+  switch (object) {
+    case "STATE_UNINITIALIZED_UNSPECIFIED":
+      return State.STATE_UNINITIALIZED_UNSPECIFIED;
+
+    case "STATE_INIT":
+      return State.STATE_INIT;
+
+    case "STATE_TRYOPEN":
+      return State.STATE_TRYOPEN;
+
+    case "STATE_OPEN":
+      return State.STATE_OPEN;
+
+    case "STATE_CLOSED":
+      return State.STATE_CLOSED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return State.UNRECOGNIZED;
+  }
+}
+export function stateToJSON(object: State): string {
+  switch (object) {
+    case State.STATE_UNINITIALIZED_UNSPECIFIED:
+      return "STATE_UNINITIALIZED_UNSPECIFIED";
+
+    case State.STATE_INIT:
+      return "STATE_INIT";
+
+    case State.STATE_TRYOPEN:
+      return "STATE_TRYOPEN";
+
+    case State.STATE_OPEN:
+      return "STATE_OPEN";
+
+    case State.STATE_CLOSED:
+      return "STATE_CLOSED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum Order {
   /*zero-value for channel ordering*/
   ORDER_NONE_UNSPECIFIED = 0,
@@ -291,6 +335,38 @@ export enum Order {
   /*packets are delivered exactly in the order which they were sent*/
   ORDER_ORDERED = 2,
   UNRECOGNIZED = -1,
+}
+export function orderFromJSON(object: any): Order {
+  switch (object) {
+    case "ORDER_NONE_UNSPECIFIED":
+      return Order.ORDER_NONE_UNSPECIFIED;
+
+    case "ORDER_UNORDERED":
+      return Order.ORDER_UNORDERED;
+
+    case "ORDER_ORDERED":
+      return Order.ORDER_ORDERED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Order.UNRECOGNIZED;
+  }
+}
+export function orderToJSON(object: Order): string {
+  switch (object) {
+    case Order.ORDER_NONE_UNSPECIFIED:
+      return "ORDER_NONE_UNSPECIFIED";
+
+    case Order.ORDER_UNORDERED:
+      return "ORDER_UNORDERED";
+
+    case Order.ORDER_ORDERED:
+      return "ORDER_ORDERED";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface Counterparty {
   portId: string;

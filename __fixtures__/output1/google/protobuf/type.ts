@@ -384,6 +384,134 @@ export enum Field_Kind {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
+export function fieldKindFromJSON(object: any): Field_Kind {
+  switch (object) {
+    case "TYPE_UNKNOWN":
+      return Field_Kind.TYPE_UNKNOWN;
+
+    case "TYPE_DOUBLE":
+      return Field_Kind.TYPE_DOUBLE;
+
+    case "TYPE_FLOAT":
+      return Field_Kind.TYPE_FLOAT;
+
+    case "TYPE_INT64":
+      return Field_Kind.TYPE_INT64;
+
+    case "TYPE_UINT64":
+      return Field_Kind.TYPE_UINT64;
+
+    case "TYPE_INT32":
+      return Field_Kind.TYPE_INT32;
+
+    case "TYPE_FIXED64":
+      return Field_Kind.TYPE_FIXED64;
+
+    case "TYPE_FIXED32":
+      return Field_Kind.TYPE_FIXED32;
+
+    case "TYPE_BOOL":
+      return Field_Kind.TYPE_BOOL;
+
+    case "TYPE_STRING":
+      return Field_Kind.TYPE_STRING;
+
+    case "TYPE_GROUP":
+      return Field_Kind.TYPE_GROUP;
+
+    case "TYPE_MESSAGE":
+      return Field_Kind.TYPE_MESSAGE;
+
+    case "TYPE_BYTES":
+      return Field_Kind.TYPE_BYTES;
+
+    case "TYPE_UINT32":
+      return Field_Kind.TYPE_UINT32;
+
+    case "TYPE_ENUM":
+      return Field_Kind.TYPE_ENUM;
+
+    case "TYPE_SFIXED32":
+      return Field_Kind.TYPE_SFIXED32;
+
+    case "TYPE_SFIXED64":
+      return Field_Kind.TYPE_SFIXED64;
+
+    case "TYPE_SINT32":
+      return Field_Kind.TYPE_SINT32;
+
+    case "TYPE_SINT64":
+      return Field_Kind.TYPE_SINT64;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Field_Kind.UNRECOGNIZED;
+  }
+}
+export function fieldKindToJSON(object: Field_Kind): string {
+  switch (object) {
+    case Field_Kind.TYPE_UNKNOWN:
+      return "TYPE_UNKNOWN";
+
+    case Field_Kind.TYPE_DOUBLE:
+      return "TYPE_DOUBLE";
+
+    case Field_Kind.TYPE_FLOAT:
+      return "TYPE_FLOAT";
+
+    case Field_Kind.TYPE_INT64:
+      return "TYPE_INT64";
+
+    case Field_Kind.TYPE_UINT64:
+      return "TYPE_UINT64";
+
+    case Field_Kind.TYPE_INT32:
+      return "TYPE_INT32";
+
+    case Field_Kind.TYPE_FIXED64:
+      return "TYPE_FIXED64";
+
+    case Field_Kind.TYPE_FIXED32:
+      return "TYPE_FIXED32";
+
+    case Field_Kind.TYPE_BOOL:
+      return "TYPE_BOOL";
+
+    case Field_Kind.TYPE_STRING:
+      return "TYPE_STRING";
+
+    case Field_Kind.TYPE_GROUP:
+      return "TYPE_GROUP";
+
+    case Field_Kind.TYPE_MESSAGE:
+      return "TYPE_MESSAGE";
+
+    case Field_Kind.TYPE_BYTES:
+      return "TYPE_BYTES";
+
+    case Field_Kind.TYPE_UINT32:
+      return "TYPE_UINT32";
+
+    case Field_Kind.TYPE_ENUM:
+      return "TYPE_ENUM";
+
+    case Field_Kind.TYPE_SFIXED32:
+      return "TYPE_SFIXED32";
+
+    case Field_Kind.TYPE_SFIXED64:
+      return "TYPE_SFIXED64";
+
+    case Field_Kind.TYPE_SINT32:
+      return "TYPE_SINT32";
+
+    case Field_Kind.TYPE_SINT64:
+      return "TYPE_SINT64";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum Field_Cardinality {
   /*For fields with unknown cardinality.*/
   CARDINALITY_UNKNOWN = 0,
@@ -397,6 +525,44 @@ export enum Field_Cardinality {
   /*For repeated fields.*/
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
+}
+export function fieldCardinalityFromJSON(object: any): Field_Cardinality {
+  switch (object) {
+    case "CARDINALITY_UNKNOWN":
+      return Field_Cardinality.CARDINALITY_UNKNOWN;
+
+    case "CARDINALITY_OPTIONAL":
+      return Field_Cardinality.CARDINALITY_OPTIONAL;
+
+    case "CARDINALITY_REQUIRED":
+      return Field_Cardinality.CARDINALITY_REQUIRED;
+
+    case "CARDINALITY_REPEATED":
+      return Field_Cardinality.CARDINALITY_REPEATED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Field_Cardinality.UNRECOGNIZED;
+  }
+}
+export function fieldCardinalityToJSON(object: Field_Cardinality): string {
+  switch (object) {
+    case Field_Cardinality.CARDINALITY_UNKNOWN:
+      return "CARDINALITY_UNKNOWN";
+
+    case Field_Cardinality.CARDINALITY_OPTIONAL:
+      return "CARDINALITY_OPTIONAL";
+
+    case Field_Cardinality.CARDINALITY_REQUIRED:
+      return "CARDINALITY_REQUIRED";
+
+    case Field_Cardinality.CARDINALITY_REPEATED:
+      return "CARDINALITY_REPEATED";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface Enum {
   name: string;
@@ -693,4 +859,30 @@ export enum Syntax {
   /*Syntax `proto3`.*/
   SYNTAX_PROTO3 = 1,
   UNRECOGNIZED = -1,
+}
+export function syntaxFromJSON(object: any): Syntax {
+  switch (object) {
+    case "SYNTAX_PROTO2":
+      return Syntax.SYNTAX_PROTO2;
+
+    case "SYNTAX_PROTO3":
+      return Syntax.SYNTAX_PROTO3;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Syntax.UNRECOGNIZED;
+  }
+}
+export function syntaxToJSON(object: Syntax): string {
+  switch (object) {
+    case Syntax.SYNTAX_PROTO2:
+      return "SYNTAX_PROTO2";
+
+    case Syntax.SYNTAX_PROTO3:
+      return "SYNTAX_PROTO3";
+
+    default:
+      return "UNKNOWN";
+  }
 }

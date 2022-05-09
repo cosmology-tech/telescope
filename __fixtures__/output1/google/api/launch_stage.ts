@@ -45,3 +45,65 @@ export enum LaunchStage {
   DEPRECATED = 5,
   UNRECOGNIZED = -1,
 }
+export function launchStageFromJSON(object: any): LaunchStage {
+  switch (object) {
+    case "LAUNCH_STAGE_UNSPECIFIED":
+      return LaunchStage.LAUNCH_STAGE_UNSPECIFIED;
+
+    case "UNIMPLEMENTED":
+      return LaunchStage.UNIMPLEMENTED;
+
+    case "PRELAUNCH":
+      return LaunchStage.PRELAUNCH;
+
+    case "EARLY_ACCESS":
+      return LaunchStage.EARLY_ACCESS;
+
+    case "ALPHA":
+      return LaunchStage.ALPHA;
+
+    case "BETA":
+      return LaunchStage.BETA;
+
+    case "GA":
+      return LaunchStage.GA;
+
+    case "DEPRECATED":
+      return LaunchStage.DEPRECATED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LaunchStage.UNRECOGNIZED;
+  }
+}
+export function launchStageToJSON(object: LaunchStage): string {
+  switch (object) {
+    case LaunchStage.LAUNCH_STAGE_UNSPECIFIED:
+      return "LAUNCH_STAGE_UNSPECIFIED";
+
+    case LaunchStage.UNIMPLEMENTED:
+      return "UNIMPLEMENTED";
+
+    case LaunchStage.PRELAUNCH:
+      return "PRELAUNCH";
+
+    case LaunchStage.EARLY_ACCESS:
+      return "EARLY_ACCESS";
+
+    case LaunchStage.ALPHA:
+      return "ALPHA";
+
+    case LaunchStage.BETA:
+      return "BETA";
+
+    case LaunchStage.GA:
+      return "GA";
+
+    case LaunchStage.DEPRECATED:
+      return "DEPRECATED";
+
+    default:
+      return "UNKNOWN";
+  }
+}

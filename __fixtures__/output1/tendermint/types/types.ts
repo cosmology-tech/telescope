@@ -11,6 +11,44 @@ export enum BlockIDFlag {
   BLOCK_ID_FLAG_NIL = 3,
   UNRECOGNIZED = -1,
 }
+export function blockIDFlagFromJSON(object: any): BlockIDFlag {
+  switch (object) {
+    case "BLOCK_ID_FLAG_UNKNOWN":
+      return BlockIDFlag.BLOCK_ID_FLAG_UNKNOWN;
+
+    case "BLOCK_ID_FLAG_ABSENT":
+      return BlockIDFlag.BLOCK_ID_FLAG_ABSENT;
+
+    case "BLOCK_ID_FLAG_COMMIT":
+      return BlockIDFlag.BLOCK_ID_FLAG_COMMIT;
+
+    case "BLOCK_ID_FLAG_NIL":
+      return BlockIDFlag.BLOCK_ID_FLAG_NIL;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BlockIDFlag.UNRECOGNIZED;
+  }
+}
+export function blockIDFlagToJSON(object: BlockIDFlag): string {
+  switch (object) {
+    case BlockIDFlag.BLOCK_ID_FLAG_UNKNOWN:
+      return "BLOCK_ID_FLAG_UNKNOWN";
+
+    case BlockIDFlag.BLOCK_ID_FLAG_ABSENT:
+      return "BLOCK_ID_FLAG_ABSENT";
+
+    case BlockIDFlag.BLOCK_ID_FLAG_COMMIT:
+      return "BLOCK_ID_FLAG_COMMIT";
+
+    case BlockIDFlag.BLOCK_ID_FLAG_NIL:
+      return "BLOCK_ID_FLAG_NIL";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum SignedMsgType {
   SIGNED_MSG_TYPE_UNKNOWN = 0,
 
@@ -21,6 +59,44 @@ export enum SignedMsgType {
   /*Proposals*/
   SIGNED_MSG_TYPE_PROPOSAL = 32,
   UNRECOGNIZED = -1,
+}
+export function signedMsgTypeFromJSON(object: any): SignedMsgType {
+  switch (object) {
+    case "SIGNED_MSG_TYPE_UNKNOWN":
+      return SignedMsgType.SIGNED_MSG_TYPE_UNKNOWN;
+
+    case "SIGNED_MSG_TYPE_PREVOTE":
+      return SignedMsgType.SIGNED_MSG_TYPE_PREVOTE;
+
+    case "SIGNED_MSG_TYPE_PRECOMMIT":
+      return SignedMsgType.SIGNED_MSG_TYPE_PRECOMMIT;
+
+    case "SIGNED_MSG_TYPE_PROPOSAL":
+      return SignedMsgType.SIGNED_MSG_TYPE_PROPOSAL;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SignedMsgType.UNRECOGNIZED;
+  }
+}
+export function signedMsgTypeToJSON(object: SignedMsgType): string {
+  switch (object) {
+    case SignedMsgType.SIGNED_MSG_TYPE_UNKNOWN:
+      return "SIGNED_MSG_TYPE_UNKNOWN";
+
+    case SignedMsgType.SIGNED_MSG_TYPE_PREVOTE:
+      return "SIGNED_MSG_TYPE_PREVOTE";
+
+    case SignedMsgType.SIGNED_MSG_TYPE_PRECOMMIT:
+      return "SIGNED_MSG_TYPE_PRECOMMIT";
+
+    case SignedMsgType.SIGNED_MSG_TYPE_PROPOSAL:
+      return "SIGNED_MSG_TYPE_PROPOSAL";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface PartSetHeader {
   total: number;

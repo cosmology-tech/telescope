@@ -12,6 +12,56 @@ export enum HashOp {
   BITCOIN = 5,
   UNRECOGNIZED = -1,
 }
+export function hashOpFromJSON(object: any): HashOp {
+  switch (object) {
+    case "NO_HASH":
+      return HashOp.NO_HASH;
+
+    case "SHA256":
+      return HashOp.SHA256;
+
+    case "SHA512":
+      return HashOp.SHA512;
+
+    case "KECCAK":
+      return HashOp.KECCAK;
+
+    case "RIPEMD160":
+      return HashOp.RIPEMD160;
+
+    case "BITCOIN":
+      return HashOp.BITCOIN;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return HashOp.UNRECOGNIZED;
+  }
+}
+export function hashOpToJSON(object: HashOp): string {
+  switch (object) {
+    case HashOp.NO_HASH:
+      return "NO_HASH";
+
+    case HashOp.SHA256:
+      return "SHA256";
+
+    case HashOp.SHA512:
+      return "SHA512";
+
+    case HashOp.KECCAK:
+      return "KECCAK";
+
+    case HashOp.RIPEMD160:
+      return "RIPEMD160";
+
+    case HashOp.BITCOIN:
+      return "BITCOIN";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum LengthOp {
   /*NO_PREFIX don't include any length info*/
   NO_PREFIX = 0,
@@ -40,6 +90,74 @@ export enum LengthOp {
   /*REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output)*/
   REQUIRE_64_BYTES = 8,
   UNRECOGNIZED = -1,
+}
+export function lengthOpFromJSON(object: any): LengthOp {
+  switch (object) {
+    case "NO_PREFIX":
+      return LengthOp.NO_PREFIX;
+
+    case "VAR_PROTO":
+      return LengthOp.VAR_PROTO;
+
+    case "VAR_RLP":
+      return LengthOp.VAR_RLP;
+
+    case "FIXED32_BIG":
+      return LengthOp.FIXED32_BIG;
+
+    case "FIXED32_LITTLE":
+      return LengthOp.FIXED32_LITTLE;
+
+    case "FIXED64_BIG":
+      return LengthOp.FIXED64_BIG;
+
+    case "FIXED64_LITTLE":
+      return LengthOp.FIXED64_LITTLE;
+
+    case "REQUIRE_32_BYTES":
+      return LengthOp.REQUIRE_32_BYTES;
+
+    case "REQUIRE_64_BYTES":
+      return LengthOp.REQUIRE_64_BYTES;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LengthOp.UNRECOGNIZED;
+  }
+}
+export function lengthOpToJSON(object: LengthOp): string {
+  switch (object) {
+    case LengthOp.NO_PREFIX:
+      return "NO_PREFIX";
+
+    case LengthOp.VAR_PROTO:
+      return "VAR_PROTO";
+
+    case LengthOp.VAR_RLP:
+      return "VAR_RLP";
+
+    case LengthOp.FIXED32_BIG:
+      return "FIXED32_BIG";
+
+    case LengthOp.FIXED32_LITTLE:
+      return "FIXED32_LITTLE";
+
+    case LengthOp.FIXED64_BIG:
+      return "FIXED64_BIG";
+
+    case LengthOp.FIXED64_LITTLE:
+      return "FIXED64_LITTLE";
+
+    case LengthOp.REQUIRE_32_BYTES:
+      return "REQUIRE_32_BYTES";
+
+    case LengthOp.REQUIRE_64_BYTES:
+      return "REQUIRE_64_BYTES";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface ExistenceProof {
   key: Uint8Array;

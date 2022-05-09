@@ -8,6 +8,44 @@ export enum Action {
   ActionDelegateStake = 3,
   UNRECOGNIZED = -1,
 }
+export function actionFromJSON(object: any): Action {
+  switch (object) {
+    case "ActionAddLiquidity":
+      return Action.ActionAddLiquidity;
+
+    case "ActionSwap":
+      return Action.ActionSwap;
+
+    case "ActionVote":
+      return Action.ActionVote;
+
+    case "ActionDelegateStake":
+      return Action.ActionDelegateStake;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Action.UNRECOGNIZED;
+  }
+}
+export function actionToJSON(object: Action): string {
+  switch (object) {
+    case Action.ActionAddLiquidity:
+      return "ActionAddLiquidity";
+
+    case Action.ActionSwap:
+      return "ActionSwap";
+
+    case Action.ActionVote:
+      return "ActionVote";
+
+    case Action.ActionDelegateStake:
+      return "ActionDelegateStake";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ClaimRecord {
   address: string;
   initialClaimableAmount: Coin[];

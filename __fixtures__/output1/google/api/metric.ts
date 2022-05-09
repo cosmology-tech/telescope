@@ -302,6 +302,44 @@ export enum MetricDescriptor_MetricKind {
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
 }
+export function metricDescriptorMetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
+  switch (object) {
+    case "METRIC_KIND_UNSPECIFIED":
+      return MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED;
+
+    case "GAUGE":
+      return MetricDescriptor_MetricKind.GAUGE;
+
+    case "DELTA":
+      return MetricDescriptor_MetricKind.DELTA;
+
+    case "CUMULATIVE":
+      return MetricDescriptor_MetricKind.CUMULATIVE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MetricDescriptor_MetricKind.UNRECOGNIZED;
+  }
+}
+export function metricDescriptorMetricKindToJSON(object: MetricDescriptor_MetricKind): string {
+  switch (object) {
+    case MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED:
+      return "METRIC_KIND_UNSPECIFIED";
+
+    case MetricDescriptor_MetricKind.GAUGE:
+      return "GAUGE";
+
+    case MetricDescriptor_MetricKind.DELTA:
+      return "DELTA";
+
+    case MetricDescriptor_MetricKind.CUMULATIVE:
+      return "CUMULATIVE";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export enum MetricDescriptor_ValueType {
   /*Do not use this default value.*/
   VALUE_TYPE_UNSPECIFIED = 0,
@@ -326,6 +364,62 @@ export enum MetricDescriptor_ValueType {
   /*The value is money.*/
   MONEY = 6,
   UNRECOGNIZED = -1,
+}
+export function metricDescriptorValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
+  switch (object) {
+    case "VALUE_TYPE_UNSPECIFIED":
+      return MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED;
+
+    case "BOOL":
+      return MetricDescriptor_ValueType.BOOL;
+
+    case "INT64":
+      return MetricDescriptor_ValueType.INT64;
+
+    case "DOUBLE":
+      return MetricDescriptor_ValueType.DOUBLE;
+
+    case "STRING":
+      return MetricDescriptor_ValueType.STRING;
+
+    case "DISTRIBUTION":
+      return MetricDescriptor_ValueType.DISTRIBUTION;
+
+    case "MONEY":
+      return MetricDescriptor_ValueType.MONEY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MetricDescriptor_ValueType.UNRECOGNIZED;
+  }
+}
+export function metricDescriptorValueTypeToJSON(object: MetricDescriptor_ValueType): string {
+  switch (object) {
+    case MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED:
+      return "VALUE_TYPE_UNSPECIFIED";
+
+    case MetricDescriptor_ValueType.BOOL:
+      return "BOOL";
+
+    case MetricDescriptor_ValueType.INT64:
+      return "INT64";
+
+    case MetricDescriptor_ValueType.DOUBLE:
+      return "DOUBLE";
+
+    case MetricDescriptor_ValueType.STRING:
+      return "STRING";
+
+    case MetricDescriptor_ValueType.DISTRIBUTION:
+      return "DISTRIBUTION";
+
+    case MetricDescriptor_ValueType.MONEY:
+      return "MONEY";
+
+    default:
+      return "UNKNOWN";
+  }
 }
 export interface Metric_StringMapEntry {
   key: string;

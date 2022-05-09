@@ -28,3 +28,71 @@ export enum LogSeverity {
   EMERGENCY = 800,
   UNRECOGNIZED = -1,
 }
+export function logSeverityFromJSON(object: any): LogSeverity {
+  switch (object) {
+    case "DEFAULT":
+      return LogSeverity.DEFAULT;
+
+    case "DEBUG":
+      return LogSeverity.DEBUG;
+
+    case "INFO":
+      return LogSeverity.INFO;
+
+    case "NOTICE":
+      return LogSeverity.NOTICE;
+
+    case "WARNING":
+      return LogSeverity.WARNING;
+
+    case "ERROR":
+      return LogSeverity.ERROR;
+
+    case "CRITICAL":
+      return LogSeverity.CRITICAL;
+
+    case "ALERT":
+      return LogSeverity.ALERT;
+
+    case "EMERGENCY":
+      return LogSeverity.EMERGENCY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LogSeverity.UNRECOGNIZED;
+  }
+}
+export function logSeverityToJSON(object: LogSeverity): string {
+  switch (object) {
+    case LogSeverity.DEFAULT:
+      return "DEFAULT";
+
+    case LogSeverity.DEBUG:
+      return "DEBUG";
+
+    case LogSeverity.INFO:
+      return "INFO";
+
+    case LogSeverity.NOTICE:
+      return "NOTICE";
+
+    case LogSeverity.WARNING:
+      return "WARNING";
+
+    case LogSeverity.ERROR:
+      return "ERROR";
+
+    case LogSeverity.CRITICAL:
+      return "CRITICAL";
+
+    case LogSeverity.ALERT:
+      return "ALERT";
+
+    case LogSeverity.EMERGENCY:
+      return "EMERGENCY";
+
+    default:
+      return "UNKNOWN";
+  }
+}

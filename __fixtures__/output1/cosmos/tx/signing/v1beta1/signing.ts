@@ -29,6 +29,50 @@ export enum SignMode {
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
 }
+export function signModeFromJSON(object: any): SignMode {
+  switch (object) {
+    case "SIGN_MODE_UNSPECIFIED":
+      return SignMode.SIGN_MODE_UNSPECIFIED;
+
+    case "SIGN_MODE_DIRECT":
+      return SignMode.SIGN_MODE_DIRECT;
+
+    case "SIGN_MODE_TEXTUAL":
+      return SignMode.SIGN_MODE_TEXTUAL;
+
+    case "SIGN_MODE_DIRECT_AUX":
+      return SignMode.SIGN_MODE_DIRECT_AUX;
+
+    case "SIGN_MODE_LEGACY_AMINO_JSON":
+      return SignMode.SIGN_MODE_LEGACY_AMINO_JSON;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SignMode.UNRECOGNIZED;
+  }
+}
+export function signModeToJSON(object: SignMode): string {
+  switch (object) {
+    case SignMode.SIGN_MODE_UNSPECIFIED:
+      return "SIGN_MODE_UNSPECIFIED";
+
+    case SignMode.SIGN_MODE_DIRECT:
+      return "SIGN_MODE_DIRECT";
+
+    case SignMode.SIGN_MODE_TEXTUAL:
+      return "SIGN_MODE_TEXTUAL";
+
+    case SignMode.SIGN_MODE_DIRECT_AUX:
+      return "SIGN_MODE_DIRECT_AUX";
+
+    case SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
+      return "SIGN_MODE_LEGACY_AMINO_JSON";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface SignatureDescriptors {
   signatures: SignatureDescriptor[];
 }

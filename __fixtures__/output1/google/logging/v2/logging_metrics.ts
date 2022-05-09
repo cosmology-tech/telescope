@@ -284,6 +284,32 @@ export enum ApiVersion {
   V1 = 1,
   UNRECOGNIZED = -1,
 }
+export function apiVersionFromJSON(object: any): ApiVersion {
+  switch (object) {
+    case "V2":
+      return ApiVersion.V2;
+
+    case "V1":
+      return ApiVersion.V1;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ApiVersion.UNRECOGNIZED;
+  }
+}
+export function apiVersionToJSON(object: ApiVersion): string {
+  switch (object) {
+    case ApiVersion.V2:
+      return "V2";
+
+    case ApiVersion.V1:
+      return "V1";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface ListLogMetricsRequest {
   parent: string;
   pageToken: string;
