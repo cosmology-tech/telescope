@@ -1,4 +1,4 @@
-import { buildAllImports, getAminoRelativeDeps } from '../src/build';
+import { buildAllImports, getAminoRelativeDeps } from '../src/imports';
 import { dirname, join } from 'path';
 import { ProtoStore, parseProto } from '@osmonauts/proto-parser'
 import { TelescopeBuilder } from '../src';

@@ -1,7 +1,8 @@
 import * as t from '@babel/types';
 import generate from '@babel/generator';
 import { ProtoStore } from '@osmonauts/proto-parser';
-import { buildAllImports, TelescopeParseContext } from './build';
+import { buildAllImports } from './imports';
+import { TelescopeParseContext } from './build';
 import { parse } from './parse';
 export interface TelescopeInput {
     protoDir: string;
