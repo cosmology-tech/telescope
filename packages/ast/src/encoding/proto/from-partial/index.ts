@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { pascal } from 'case';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../types';
@@ -112,8 +111,6 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
 export const fromPartialMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     context.addUtil('Exact');
     context.addUtil('DeepPartial');
-    context.addUtil('KeysOfUnion');
-    context.addUtil('Builtin');
 
     const fields = fromPartialMethodFields(context, name, proto);
 

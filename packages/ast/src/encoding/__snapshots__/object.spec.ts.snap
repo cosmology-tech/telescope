@@ -18,7 +18,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignatureDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor();
@@ -85,7 +85,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SignatureDescriptors {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptors {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptors();
@@ -156,7 +156,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): AuxSignerData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuxSignerData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxSignerData();
@@ -234,7 +234,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ModeInfo_Multi {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Multi();
@@ -305,7 +305,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): PinCodesProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PinCodesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
@@ -396,7 +396,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): UnpinCodesProposal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UnpinCodesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
@@ -480,7 +480,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): QueryRawContractStateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRawContractStateRequest();
@@ -552,7 +552,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): ParseRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ParseRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
@@ -674,7 +674,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
@@ -815,7 +815,7 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Type_MapType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type_MapType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
@@ -896,7 +896,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): CheckedExpr {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
@@ -1053,7 +1053,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): Constant {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Constant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstant();
@@ -1175,7 +1175,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): SourceInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -1325,7 +1325,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): LogEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
@@ -1492,7 +1492,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgJoinPool {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPool();
@@ -1584,7 +1584,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountIn {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountIn {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountIn();
@@ -1676,7 +1676,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array): MsgSwapExactAmountOut {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountOut {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOut();

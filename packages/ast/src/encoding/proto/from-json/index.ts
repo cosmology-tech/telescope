@@ -49,7 +49,7 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
                         case 'Enum':
                             return fromJSON.array(args, arrayTypes.enum(args));
                         case 'Type':
-                            return fromJSON.array(args, arrayTypes.type(getFieldsTypeName(field)));
+                            return fromJSON.array(args, arrayTypes.type(args));
                     }
                     return needsImplementation(fieldName, field);
             }

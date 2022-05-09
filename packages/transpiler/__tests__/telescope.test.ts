@@ -23,7 +23,7 @@ describe('bundle package registries and root file names', () => {
     const outPath = resolve(input.outPath);
     hash.forEach(({ filename, content }) => {
         const out = join(outPath, filename);
-        console.log(out);
+        // console.log(out);
         mkdirp(dirname(out));
         writeFileSync(out, content);
     })

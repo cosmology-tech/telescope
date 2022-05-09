@@ -3,7 +3,7 @@
 exports[`basic imports 1`] = `
 "import { AminoMsg } from \\"@cosmjs/amino\\";
 import * as _m0 from \\"protobuf/minimal\\";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from \\"@osmonauts/helpers\\";
+import { isSet, Exact, DeepPartial } from \\"@osmonauts/helpers\\";
 import { MsgTypePackageB } from \\"./b\\";"
 `;
 
@@ -23,7 +23,7 @@ exports[`bundle deps 2`] = `
 import { MsgTypePackageB } from \\"./b\\";
 import { AminoMsg } from \\"@cosmjs/amino\\";
 import * as _m0 from \\"protobuf/minimal\\";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from \\"@osmonauts/helpers\\";"
+import { isSet, Exact, DeepPartial } from \\"@osmonauts/helpers\\";"
 `;
 
 exports[`from package c deps 1`] = `
@@ -38,7 +38,7 @@ exports[`from package c deps 2`] = `
 "import { MsgTypePackageB } from \\"./b\\";
 import { AminoMsg } from \\"@cosmjs/amino\\";
 import * as _m0 from \\"protobuf/minimal\\";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from \\"@osmonauts/helpers\\";"
+import { isSet, Exact, DeepPartial } from \\"@osmonauts/helpers\\";"
 `;
 
 exports[`mutations 1`] = `

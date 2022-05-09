@@ -614,7 +614,8 @@ export const arrayTypes = {
     },
 
     // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
-    type(name) {
+    type(args: FromJSONMethod) {
+        const name = getFieldsTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),
