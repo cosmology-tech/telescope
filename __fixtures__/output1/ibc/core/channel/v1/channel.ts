@@ -744,14 +744,14 @@ export const Acknowledgement = {
 
   fromJSON(object: any): Acknowledgement {
     return {
-      result: isSet(object.result) ? bytesFromBase64(object.result) : new Uint8Array(),
-      error: isSet(object.error) ? String(object.error) : ""
+      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
+      error: isSet(object.error) ? String(object.error) : undefined
     };
   },
 
   toJSON(message: Acknowledgement): unknown {
     const obj: any = {};
-    message.result !== undefined && (obj.result = base64FromBytes(message.result !== undefined ? message.result : new Uint8Array()));
+    message.result !== undefined && (obj.result = base64FromBytes(message.result !== undefined ? message.result : undefined));
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },

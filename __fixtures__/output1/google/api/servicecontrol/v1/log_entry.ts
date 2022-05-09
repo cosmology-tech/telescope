@@ -252,7 +252,7 @@ export const LogEntry = {
         return acc;
       }, {}) : {},
       protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
-      textPayload: isSet(object.textPayload) ? String(object.textPayload) : "",
+      textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
       structPayload: isSet(object.structPayload) ? Struct.fromJSON(object.structPayload) : undefined,
       operation: isSet(object.operation) ? LogEntryOperation.fromJSON(object.operation) : undefined,
       sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined

@@ -290,7 +290,7 @@ export const LogEntry = {
       logName: isSet(object.logName) ? String(object.logName) : "",
       resource: isSet(object.resource) ? MonitoredResource.fromJSON(object.resource) : undefined,
       protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
-      textPayload: isSet(object.textPayload) ? String(object.textPayload) : "",
+      textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
       jsonPayload: isSet(object.jsonPayload) ? Struct.fromJSON(object.jsonPayload) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       receiveTimestamp: isSet(object.receiveTimestamp) ? fromJsonTimestamp(object.receiveTimestamp) : undefined,

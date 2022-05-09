@@ -200,10 +200,10 @@ export const MetricValue = {
       }, {}) : {},
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.ZERO,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : "",
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       distributionValue: isSet(object.distributionValue) ? Distribution.fromJSON(object.distributionValue) : undefined
     };
   },
@@ -221,7 +221,7 @@ export const MetricValue = {
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || Long.ZERO).toString());
+    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.distributionValue !== undefined && (obj.distributionValue = message.distributionValue ? Distribution.toJSON(message.distributionValue) : undefined);

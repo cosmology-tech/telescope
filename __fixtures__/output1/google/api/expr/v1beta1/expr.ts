@@ -696,7 +696,7 @@ export const Expr_CreateStruct_Entry = {
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
-      fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : "",
+      fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
@@ -962,13 +962,13 @@ export const Literal = {
 
   fromJSON(object: any): Literal {
     return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : 0,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.ZERO,
-      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.UZERO,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : "",
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : new Uint8Array()
+      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined
     };
   },
 
@@ -976,11 +976,11 @@ export const Literal = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || Long.ZERO).toString());
-    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || Long.UZERO).toString());
+    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : new Uint8Array()));
+    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : undefined));
     return obj;
   },
 

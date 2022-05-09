@@ -484,15 +484,15 @@ export const Type = {
   fromJSON(object: any): Type {
     return {
       dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : 0,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : 0,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : 0,
-      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : 0,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : undefined,
       listType: isSet(object.listType) ? Type_ListType.fromJSON(object.listType) : undefined,
       mapType: isSet(object.mapType) ? Type_MapType.fromJSON(object.mapType) : undefined,
       function: isSet(object.function) ? Type_FunctionType.fromJSON(object.function) : undefined,
-      messageType: isSet(object.messageType) ? String(object.messageType) : "",
-      typeParam: isSet(object.typeParam) ? String(object.typeParam) : "",
+      messageType: isSet(object.messageType) ? String(object.messageType) : undefined,
+      typeParam: isSet(object.typeParam) ? String(object.typeParam) : undefined,
       type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
       error: isSet(object.error) ? Empty.fromJSON(object.error) : undefined,
       abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined

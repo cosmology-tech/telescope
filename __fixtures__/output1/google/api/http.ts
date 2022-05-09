@@ -213,11 +213,11 @@ export const HttpRule = {
   fromJSON(object: any): HttpRule {
     return {
       selector: isSet(object.selector) ? String(object.selector) : "",
-      get: isSet(object.get) ? String(object.get) : "",
-      put: isSet(object.put) ? String(object.put) : "",
-      post: isSet(object.post) ? String(object.post) : "",
-      delete: isSet(object.delete) ? String(object.delete) : "",
-      patch: isSet(object.patch) ? String(object.patch) : "",
+      get: isSet(object.get) ? String(object.get) : undefined,
+      put: isSet(object.put) ? String(object.put) : undefined,
+      post: isSet(object.post) ? String(object.post) : undefined,
+      delete: isSet(object.delete) ? String(object.delete) : undefined,
+      patch: isSet(object.patch) ? String(object.patch) : undefined,
       custom: isSet(object.custom) ? CustomHttpPattern.fromJSON(object.custom) : undefined,
       body: isSet(object.body) ? String(object.body) : "",
       responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",

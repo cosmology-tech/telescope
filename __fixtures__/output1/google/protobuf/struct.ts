@@ -255,10 +255,10 @@ export const Value = {
 
   fromJSON(object: any): Value {
     return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : 0,
-      numberValue: isSet(object.numberValue) ? Number(object.numberValue) : 0,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : "",
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
+      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
+      numberValue: isSet(object.numberValue) ? Number(object.numberValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
       structValue: isSet(object.structValue) ? Struct.fromJSON(object.structValue) : undefined,
       listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined
     };

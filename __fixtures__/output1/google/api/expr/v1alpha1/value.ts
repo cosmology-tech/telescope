@@ -155,18 +155,18 @@ export const Value = {
 
   fromJSON(object: any): Value {
     return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : 0,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.ZERO,
-      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.UZERO,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : "",
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : new Uint8Array(),
+      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
       enumValue: isSet(object.enumValue) ? EnumValue.fromJSON(object.enumValue) : undefined,
       objectValue: isSet(object.objectValue) ? Any.fromJSON(object.objectValue) : undefined,
       mapValue: isSet(object.mapValue) ? MapValue.fromJSON(object.mapValue) : undefined,
       listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined,
-      typeValue: isSet(object.typeValue) ? String(object.typeValue) : ""
+      typeValue: isSet(object.typeValue) ? String(object.typeValue) : undefined
     };
   },
 
@@ -174,11 +174,11 @@ export const Value = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || Long.ZERO).toString());
-    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || Long.UZERO).toString());
+    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : new Uint8Array()));
+    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : undefined));
     message.enumValue !== undefined && (obj.enumValue = message.enumValue ? EnumValue.toJSON(message.enumValue) : undefined);
     message.objectValue !== undefined && (obj.objectValue = message.objectValue ? Any.toJSON(message.objectValue) : undefined);
     message.mapValue !== undefined && (obj.mapValue = message.mapValue ? MapValue.toJSON(message.mapValue) : undefined);

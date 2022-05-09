@@ -252,8 +252,8 @@ export const JwtLocation = {
 
   fromJSON(object: any): JwtLocation {
     return {
-      header: isSet(object.header) ? String(object.header) : "",
-      query: isSet(object.query) ? String(object.query) : "",
+      header: isSet(object.header) ? String(object.header) : undefined,
+      query: isSet(object.query) ? String(object.query) : undefined,
       valuePrefix: isSet(object.valuePrefix) ? String(object.valuePrefix) : ""
     };
   },

@@ -53,15 +53,15 @@ export const PublicKey = {
 
   fromJSON(object: any): PublicKey {
     return {
-      ed25519: isSet(object.ed25519) ? bytesFromBase64(object.ed25519) : new Uint8Array(),
-      secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : new Uint8Array()
+      ed25519: isSet(object.ed25519) ? bytesFromBase64(object.ed25519) : undefined,
+      secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : undefined
     };
   },
 
   toJSON(message: PublicKey): unknown {
     const obj: any = {};
-    message.ed25519 !== undefined && (obj.ed25519 = base64FromBytes(message.ed25519 !== undefined ? message.ed25519 : new Uint8Array()));
-    message.secp256k1 !== undefined && (obj.secp256k1 = base64FromBytes(message.secp256k1 !== undefined ? message.secp256k1 : new Uint8Array()));
+    message.ed25519 !== undefined && (obj.ed25519 = base64FromBytes(message.ed25519 !== undefined ? message.ed25519 : undefined));
+    message.secp256k1 !== undefined && (obj.secp256k1 = base64FromBytes(message.secp256k1 !== undefined ? message.secp256k1 : undefined));
     return obj;
   },
 
