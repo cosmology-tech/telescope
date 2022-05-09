@@ -113,23 +113,23 @@ export const HttpRule = {
       writer.uint32(10).string(message.selector);
     }
 
-    if (message.get !== "") {
+    if (message.get !== undefined) {
       writer.uint32(18).string(message.get);
     }
 
-    if (message.put !== "") {
+    if (message.put !== undefined) {
       writer.uint32(26).string(message.put);
     }
 
-    if (message.post !== "") {
+    if (message.post !== undefined) {
       writer.uint32(34).string(message.post);
     }
 
-    if (message.delete !== "") {
+    if (message.delete !== undefined) {
       writer.uint32(42).string(message.delete);
     }
 
-    if (message.patch !== "") {
+    if (message.patch !== undefined) {
       writer.uint32(50).string(message.patch);
     }
 

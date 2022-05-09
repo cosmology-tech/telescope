@@ -112,19 +112,19 @@ export const MetricValue = {
     if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(18).fork()).ldelim();
     if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(26).fork()).ldelim();
 
-    if (message.boolValue === true) {
+    if (message.boolValue !== undefined) {
       writer.uint32(32).bool(message.boolValue);
     }
 
-    if (!message.int64Value.isZero()) {
+    if (message.int64Value !== undefined) {
       writer.uint32(40).int64(message.int64Value);
     }
 
-    if (message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined) {
       writer.uint32(49).double(message.doubleValue);
     }
 
-    if (message.stringValue !== "") {
+    if (message.stringValue !== undefined) {
       writer.uint32(58).string(message.stringValue);
     }
 

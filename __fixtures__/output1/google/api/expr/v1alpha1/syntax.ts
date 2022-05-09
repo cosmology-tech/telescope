@@ -632,7 +632,7 @@ export const Expr_CreateStruct_Entry = {
       writer.uint32(8).int64(message.id);
     }
 
-    if (message.fieldKey !== "") {
+    if (message.fieldKey !== undefined) {
       writer.uint32(18).string(message.fieldKey);
     }
 
@@ -875,31 +875,31 @@ function createBaseConstant(): Constant {
 
 export const Constant = {
   encode(message: Constant, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.nullValue !== 0) {
+    if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
 
-    if (message.boolValue === true) {
+    if (message.boolValue !== undefined) {
       writer.uint32(16).bool(message.boolValue);
     }
 
-    if (!message.int64Value.isZero()) {
+    if (message.int64Value !== undefined) {
       writer.uint32(24).int64(message.int64Value);
     }
 
-    if (!message.uint64Value.isZero()) {
+    if (message.uint64Value !== undefined) {
       writer.uint32(32).uint64(message.uint64Value);
     }
 
-    if (message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined) {
       writer.uint32(41).double(message.doubleValue);
     }
 
-    if (message.stringValue !== "") {
+    if (message.stringValue !== undefined) {
       writer.uint32(50).string(message.stringValue);
     }
 
-    if (message.bytesValue.length !== 0) {
+    if (message.bytesValue !== undefined) {
       writer.uint32(58).bytes(message.bytesValue);
     }
 

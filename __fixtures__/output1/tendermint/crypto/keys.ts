@@ -14,11 +14,11 @@ function createBasePublicKey(): PublicKey {
 
 export const PublicKey = {
   encode(message: PublicKey, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ed25519.length !== 0) {
+    if (message.ed25519 !== undefined) {
       writer.uint32(10).bytes(message.ed25519);
     }
 
-    if (message.secp256k1.length !== 0) {
+    if (message.secp256k1 !== undefined) {
       writer.uint32(18).bytes(message.secp256k1);
     }
 

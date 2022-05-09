@@ -18,16 +18,15 @@ export interface EncodeMethod {
 export const encodeMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
 
     const oneOfs = getOneOfs(proto);
-
     return Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
 
-        const isOneOf = oneOfs.includes(fieldName);
 
         const field = {
             name: fieldName,
             ...proto.fields[fieldName]
         };
 
+        const isOneOf = oneOfs.includes(fieldName);
         const isOptional = getFieldOptionality(field, isOneOf);
 
         const args: EncodeMethod = {

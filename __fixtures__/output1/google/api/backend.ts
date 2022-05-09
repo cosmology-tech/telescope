@@ -118,11 +118,11 @@ export const BackendRule = {
       writer.uint32(48).int32(message.pathTranslation);
     }
 
-    if (message.jwtAudience !== "") {
+    if (message.jwtAudience !== undefined) {
       writer.uint32(58).string(message.jwtAudience);
     }
 
-    if (message.disableAuth === true) {
+    if (message.disableAuth !== undefined) {
       writer.uint32(64).bool(message.disableAuth);
     }
 

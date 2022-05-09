@@ -205,11 +205,11 @@ function createBaseJwtLocation(): JwtLocation {
 
 export const JwtLocation = {
   encode(message: JwtLocation, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.header !== "") {
+    if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
     }
 
-    if (message.query !== "") {
+    if (message.query !== undefined) {
       writer.uint32(18).string(message.query);
     }
 

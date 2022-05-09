@@ -147,7 +147,7 @@ export const LogEntry = {
       Any.encode(message.protoPayload, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.textPayload !== "") {
+    if (message.textPayload !== undefined) {
       writer.uint32(26).string(message.textPayload);
     }
 

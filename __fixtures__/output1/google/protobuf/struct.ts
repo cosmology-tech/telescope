@@ -184,19 +184,19 @@ function createBaseValue(): Value {
 
 export const Value = {
   encode(message: Value, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.nullValue !== 0) {
+    if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
 
-    if (message.numberValue !== 0) {
+    if (message.numberValue !== undefined) {
       writer.uint32(17).double(message.numberValue);
     }
 
-    if (message.stringValue !== "") {
+    if (message.stringValue !== undefined) {
       writer.uint32(26).string(message.stringValue);
     }
 
-    if (message.boolValue === true) {
+    if (message.boolValue !== undefined) {
       writer.uint32(32).bool(message.boolValue);
     }
 

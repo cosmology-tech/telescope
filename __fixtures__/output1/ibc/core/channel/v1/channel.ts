@@ -705,11 +705,11 @@ function createBaseAcknowledgement(): Acknowledgement {
 
 export const Acknowledgement = {
   encode(message: Acknowledgement, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.result.length !== 0) {
+    if (message.result !== undefined) {
       writer.uint32(170).bytes(message.result);
     }
 
-    if (message.error !== "") {
+    if (message.error !== undefined) {
       writer.uint32(178).string(message.error);
     }
 

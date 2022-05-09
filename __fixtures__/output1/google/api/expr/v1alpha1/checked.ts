@@ -360,19 +360,19 @@ export const Type = {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.null !== 0) {
+    if (message.null !== undefined) {
       writer.uint32(16).int32(message.null);
     }
 
-    if (message.primitive !== 0) {
+    if (message.primitive !== undefined) {
       writer.uint32(24).int32(message.primitive);
     }
 
-    if (message.wrapper !== 0) {
+    if (message.wrapper !== undefined) {
       writer.uint32(32).int32(message.wrapper);
     }
 
-    if (message.wellKnown !== 0) {
+    if (message.wellKnown !== undefined) {
       writer.uint32(40).int32(message.wellKnown);
     }
 
@@ -388,11 +388,11 @@ export const Type = {
       Type_FunctionType.encode(message.function, writer.uint32(66).fork()).ldelim();
     }
 
-    if (message.messageType !== "") {
+    if (message.messageType !== undefined) {
       writer.uint32(74).string(message.messageType);
     }
 
-    if (message.typeParam !== "") {
+    if (message.typeParam !== undefined) {
       writer.uint32(82).string(message.typeParam);
     }
 
