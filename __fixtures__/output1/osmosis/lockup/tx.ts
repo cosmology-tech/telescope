@@ -550,3 +550,9 @@ export const AminoConverter = {
     }
   }
 };
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.lockup.MsgLockTokens", MsgLockTokens], ["/osmosis.lockup.MsgBeginUnlockingAll", MsgBeginUnlockingAll], ["/osmosis.lockup.MsgBeginUnlocking", MsgBeginUnlocking]];
+export const load = (protoRegistry: Registry) => {
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
+  });
+};

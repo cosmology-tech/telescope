@@ -130,3 +130,9 @@ export const AminoConverter = {
     }
   }
 };
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.slashing.v1beta1.MsgUnjail", MsgUnjail]];
+export const load = (protoRegistry: Registry) => {
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
+  });
+};

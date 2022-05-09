@@ -941,3 +941,9 @@ export const AminoConverter = {
     }
   }
 };
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.gov.v1.MsgSubmitProposal", MsgSubmitProposal], ["/cosmos.gov.v1.MsgExecLegacyContent", MsgExecLegacyContent], ["/cosmos.gov.v1.MsgVote", MsgVote], ["/cosmos.gov.v1.MsgVoteWeighted", MsgVoteWeighted], ["/cosmos.gov.v1.MsgDeposit", MsgDeposit]];
+export const load = (protoRegistry: Registry) => {
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
+  });
+};

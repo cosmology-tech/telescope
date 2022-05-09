@@ -258,3 +258,9 @@ export const AminoConverter = {
     }
   }
 };
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/ibc.applications.transfer.v1.MsgTransfer", MsgTransfer]];
+export const load = (protoRegistry: Registry) => {
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
+  });
+};

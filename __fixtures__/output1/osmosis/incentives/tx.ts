@@ -456,3 +456,9 @@ export const AminoConverter = {
     }
   }
 };
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.incentives.MsgCreateGauge", MsgCreateGauge], ["/osmosis.incentives.MsgAddToGauge", MsgAddToGauge]];
+export const load = (protoRegistry: Registry) => {
+  registry.forEach(([typeUrl, mod]) => {
+    protoRegistry.register(typeUrl, mod);
+  });
+};

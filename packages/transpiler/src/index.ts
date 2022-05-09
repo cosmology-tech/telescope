@@ -40,6 +40,8 @@ export class TelescopeBuilder {
             if (context.mutations.length) {
                 context.buildAminoInterfaces();
                 context.buildAminoConverter();
+                context.buildRegistry();
+                context.buildRegistryLoader();
             }
 
             const importStmts = buildAllImports(context);
