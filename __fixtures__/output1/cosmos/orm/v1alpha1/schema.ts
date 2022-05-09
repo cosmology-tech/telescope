@@ -73,7 +73,7 @@ export const ModuleSchemaDescriptor = {
 
   fromPartial<I extends Exact<DeepPartial<ModuleSchemaDescriptor>, I>>(object: I): ModuleSchemaDescriptor {
     const message = createBaseModuleSchemaDescriptor();
-    message.schemaFile = object.schemaFile?.map(e => FileEntry.fromPartial(e)) || [];
+    message.schemaFile = object.schemaFile?.map(e => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
     message.prefix = object.prefix ?? new Uint8Array();
     return message;
   }

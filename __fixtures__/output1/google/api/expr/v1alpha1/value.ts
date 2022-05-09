@@ -405,7 +405,7 @@ export const MapValue = {
 
   fromPartial<I extends Exact<DeepPartial<MapValue>, I>>(object: I): MapValue {
     const message = createBaseMapValue();
-    message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
+    message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
   }
 

@@ -78,8 +78,8 @@ export const Monitoring = {
 
   fromPartial<I extends Exact<DeepPartial<Monitoring>, I>>(object: I): Monitoring {
     const message = createBaseMonitoring();
-    message.producerDestinations = object.producerDestinations?.map(e => MonitoringDestination.fromPartial(e)) || [];
-    message.consumerDestinations = object.consumerDestinations?.map(e => MonitoringDestination.fromPartial(e)) || [];
+    message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
+    message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     return message;
   }
 

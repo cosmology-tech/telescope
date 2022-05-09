@@ -124,7 +124,7 @@ export const QueryGaugeIdsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryGaugeIdsResponse>, I>>(object: I): QueryGaugeIdsResponse {
     const message = createBaseQueryGaugeIdsResponse();
-    message.gaugeIdsWithDuration = object.gaugeIdsWithDuration?.map(e => GaugeIdWithDuration.fromPartial(e)) || [];
+    message.gaugeIdsWithDuration = object.gaugeIdsWithDuration?.map(e => QueryGaugeIdsResponse_GaugeIdWithDuration.fromPartial(e)) || [];
     return message;
   }
 

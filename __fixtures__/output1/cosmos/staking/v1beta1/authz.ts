@@ -93,8 +93,8 @@ export const StakeAuthorization = {
   fromPartial<I extends Exact<DeepPartial<StakeAuthorization>, I>>(object: I): StakeAuthorization {
     const message = createBaseStakeAuthorization();
     message.maxTokens = object.maxTokens !== undefined && object.maxTokens !== null ? Coin.fromPartial(object.maxTokens) : undefined;
-    message.allowList = object.allowList !== undefined && object.allowList !== null ? Validators.fromPartial(object.allowList) : undefined;
-    message.denyList = object.denyList !== undefined && object.denyList !== null ? Validators.fromPartial(object.denyList) : undefined;
+    message.allowList = object.allowList !== undefined && object.allowList !== null ? StakeAuthorization_Validators.fromPartial(object.allowList) : undefined;
+    message.denyList = object.denyList !== undefined && object.denyList !== null ? StakeAuthorization_Validators.fromPartial(object.denyList) : undefined;
     message.authorizationType = object.authorizationType ?? 0;
     return message;
   }

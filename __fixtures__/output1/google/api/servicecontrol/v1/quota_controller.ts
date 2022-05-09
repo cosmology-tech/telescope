@@ -88,20 +88,20 @@ export const AllocateQuotaRequest = {
   }
 
 };
-export interface QuotaOperation_StringMapEntry {
+export interface QuotaOperation_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseQuotaOperation_StringMapEntry(): QuotaOperation_StringMapEntry {
+function createBaseQuotaOperation_LabelsMapEntry(): QuotaOperation_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const QuotaOperation_StringMapEntry = {
-  encode(message: QuotaOperation_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const QuotaOperation_LabelsMapEntry = {
+  encode(message: QuotaOperation_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -113,10 +113,10 @@ export const QuotaOperation_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOperation_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOperation_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuotaOperation_StringMapEntry();
+    const message = createBaseQuotaOperation_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -139,22 +139,22 @@ export const QuotaOperation_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): QuotaOperation_StringMapEntry {
+  fromJSON(object: any): QuotaOperation_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: QuotaOperation_StringMapEntry): unknown {
+  toJSON(message: QuotaOperation_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaOperation_StringMapEntry>, I>>(object: I): QuotaOperation_StringMapEntry {
-    const message = createBaseQuotaOperation_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<QuotaOperation_LabelsMapEntry>, I>>(object: I): QuotaOperation_LabelsMapEntry {
+    const message = createBaseQuotaOperation_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

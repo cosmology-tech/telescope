@@ -284,7 +284,7 @@ export const CodeGeneratorResponse = {
   fromPartial<I extends Exact<DeepPartial<CodeGeneratorResponse>, I>>(object: I): CodeGeneratorResponse {
     const message = createBaseCodeGeneratorResponse();
     message.error = object.error ?? "";
-    message.file = object.file?.map(e => File.fromPartial(e)) || [];
+    message.file = object.file?.map(e => CodeGeneratorResponse_File.fromPartial(e)) || [];
     return message;
   }
 

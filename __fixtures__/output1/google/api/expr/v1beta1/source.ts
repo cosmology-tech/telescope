@@ -1,19 +1,19 @@
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
-export interface SourceInfo_Int32MapEntry {
+export interface SourceInfo_PositionsMapEntry {
   key: number;
   value: number;
 }
 
-function createBaseSourceInfo_Int32MapEntry(): SourceInfo_Int32MapEntry {
+function createBaseSourceInfo_PositionsMapEntry(): SourceInfo_PositionsMapEntry {
   return {
     key: 0,
     value: 0
   };
 }
 
-export const SourceInfo_Int32MapEntry = {
-  encode(message: SourceInfo_Int32MapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const SourceInfo_PositionsMapEntry = {
+  encode(message: SourceInfo_PositionsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== 0) {
       writer.uint32(8).int32(message.key);
     }
@@ -25,10 +25,10 @@ export const SourceInfo_Int32MapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_Int32MapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSourceInfo_Int32MapEntry();
+    const message = createBaseSourceInfo_PositionsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -51,22 +51,22 @@ export const SourceInfo_Int32MapEntry = {
     return message;
   },
 
-  fromJSON(object: any): SourceInfo_Int32MapEntry {
+  fromJSON(object: any): SourceInfo_PositionsMapEntry {
     return {
       key: isSet(object.key) ? Number(object.key) : 0,
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
-  toJSON(message: SourceInfo_Int32MapEntry): unknown {
+  toJSON(message: SourceInfo_PositionsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceInfo_Int32MapEntry>, I>>(object: I): SourceInfo_Int32MapEntry {
-    const message = createBaseSourceInfo_Int32MapEntry();
+  fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsMapEntry>, I>>(object: I): SourceInfo_PositionsMapEntry {
+    const message = createBaseSourceInfo_PositionsMapEntry();
     message.key = object.key ?? 0;
     message.value = object.value ?? 0;
     return message;

@@ -118,10 +118,10 @@ export const Record = {
     const message = createBaseRecord();
     message.name = object.name ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.local = object.local !== undefined && object.local !== null ? Local.fromPartial(object.local) : undefined;
-    message.ledger = object.ledger !== undefined && object.ledger !== null ? Ledger.fromPartial(object.ledger) : undefined;
-    message.multi = object.multi !== undefined && object.multi !== null ? Multi.fromPartial(object.multi) : undefined;
-    message.offline = object.offline !== undefined && object.offline !== null ? Offline.fromPartial(object.offline) : undefined;
+    message.local = object.local !== undefined && object.local !== null ? Record_Local.fromPartial(object.local) : undefined;
+    message.ledger = object.ledger !== undefined && object.ledger !== null ? Record_Ledger.fromPartial(object.ledger) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? Record_Multi.fromPartial(object.multi) : undefined;
+    message.offline = object.offline !== undefined && object.offline !== null ? Record_Offline.fromPartial(object.offline) : undefined;
     return message;
   }
 

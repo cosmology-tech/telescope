@@ -534,10 +534,10 @@ export const DescriptorProto = {
     message.extension = object.extension?.map(e => FieldDescriptorProto.fromPartial(e)) || [];
     message.nestedType = object.nestedType?.map(e => DescriptorProto.fromPartial(e)) || [];
     message.enumType = object.enumType?.map(e => EnumDescriptorProto.fromPartial(e)) || [];
-    message.extensionRange = object.extensionRange?.map(e => ExtensionRange.fromPartial(e)) || [];
+    message.extensionRange = object.extensionRange?.map(e => DescriptorProto_ExtensionRange.fromPartial(e)) || [];
     message.oneofDecl = object.oneofDecl?.map(e => OneofDescriptorProto.fromPartial(e)) || [];
     message.options = object.options !== undefined && object.options !== null ? MessageOptions.fromPartial(object.options) : undefined;
-    message.reservedRange = object.reservedRange?.map(e => ReservedRange.fromPartial(e)) || [];
+    message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
   }
@@ -1341,7 +1341,7 @@ export const EnumDescriptorProto = {
     message.name = object.name ?? "";
     message.value = object.value?.map(e => EnumValueDescriptorProto.fromPartial(e)) || [];
     message.options = object.options !== undefined && object.options !== null ? EnumOptions.fromPartial(object.options) : undefined;
-    message.reservedRange = object.reservedRange?.map(e => EnumReservedRange.fromPartial(e)) || [];
+    message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
   }
@@ -3020,7 +3020,7 @@ export const UninterpretedOption = {
 
   fromPartial<I extends Exact<DeepPartial<UninterpretedOption>, I>>(object: I): UninterpretedOption {
     const message = createBaseUninterpretedOption();
-    message.name = object.name?.map(e => NamePart.fromPartial(e)) || [];
+    message.name = object.name?.map(e => UninterpretedOption_NamePart.fromPartial(e)) || [];
     message.identifierValue = object.identifierValue ?? "";
     message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? Long.fromValue(object.positiveIntValue) : Long.UZERO;
     message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? Long.fromValue(object.negativeIntValue) : Long.ZERO;
@@ -3165,7 +3165,7 @@ export const SourceCodeInfo = {
 
   fromPartial<I extends Exact<DeepPartial<SourceCodeInfo>, I>>(object: I): SourceCodeInfo {
     const message = createBaseSourceCodeInfo();
-    message.location = object.location?.map(e => Location.fromPartial(e)) || [];
+    message.location = object.location?.map(e => SourceCodeInfo_Location.fromPartial(e)) || [];
     return message;
   }
 
@@ -3380,7 +3380,7 @@ export const GeneratedCodeInfo = {
 
   fromPartial<I extends Exact<DeepPartial<GeneratedCodeInfo>, I>>(object: I): GeneratedCodeInfo {
     const message = createBaseGeneratedCodeInfo();
-    message.annotation = object.annotation?.map(e => Annotation.fromPartial(e)) || [];
+    message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.fromPartial(e)) || [];
     return message;
   }
 

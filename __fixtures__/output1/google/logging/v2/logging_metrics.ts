@@ -2,20 +2,20 @@ import { MetricDescriptor } from "../../api/metric";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
-export interface LogMetric_StringMapEntry {
+export interface LogMetric_LabelExtractorsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseLogMetric_StringMapEntry(): LogMetric_StringMapEntry {
+function createBaseLogMetric_LabelExtractorsMapEntry(): LogMetric_LabelExtractorsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const LogMetric_StringMapEntry = {
-  encode(message: LogMetric_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const LogMetric_LabelExtractorsMapEntry = {
+  encode(message: LogMetric_LabelExtractorsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -27,10 +27,10 @@ export const LogMetric_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLogMetric_StringMapEntry();
+    const message = createBaseLogMetric_LabelExtractorsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -53,22 +53,22 @@ export const LogMetric_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): LogMetric_StringMapEntry {
+  fromJSON(object: any): LogMetric_LabelExtractorsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: LogMetric_StringMapEntry): unknown {
+  toJSON(message: LogMetric_LabelExtractorsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogMetric_StringMapEntry>, I>>(object: I): LogMetric_StringMapEntry {
-    const message = createBaseLogMetric_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<LogMetric_LabelExtractorsMapEntry>, I>>(object: I): LogMetric_LabelExtractorsMapEntry {
+    const message = createBaseLogMetric_LabelExtractorsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

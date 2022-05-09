@@ -707,7 +707,7 @@ export const BatchEnableServicesResponse = {
   fromPartial<I extends Exact<DeepPartial<BatchEnableServicesResponse>, I>>(object: I): BatchEnableServicesResponse {
     const message = createBaseBatchEnableServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
-    message.failures = object.failures?.map(e => EnableFailure.fromPartial(e)) || [];
+    message.failures = object.failures?.map(e => BatchEnableServicesResponse_EnableFailure.fromPartial(e)) || [];
     return message;
   }
 

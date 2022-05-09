@@ -784,8 +784,8 @@ export const ModeInfo = {
 
   fromPartial<I extends Exact<DeepPartial<ModeInfo>, I>>(object: I): ModeInfo {
     const message = createBaseModeInfo();
-    message.single = object.single !== undefined && object.single !== null ? Single.fromPartial(object.single) : undefined;
-    message.multi = object.multi !== undefined && object.multi !== null ? Multi.fromPartial(object.multi) : undefined;
+    message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
     return message;
   }
 

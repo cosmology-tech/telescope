@@ -202,7 +202,7 @@ export const CheckResponse = {
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
-    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckInfo.fromPartial(object.checkInfo) : undefined;
+    message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : undefined;
     return message;
   }
 
@@ -280,7 +280,7 @@ export const CheckResponse_CheckInfo = {
   fromPartial<I extends Exact<DeepPartial<CheckResponse_CheckInfo>, I>>(object: I): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
-    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
+    message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
     return message;
   }
 
@@ -611,7 +611,7 @@ export const ReportResponse = {
 
   fromPartial<I extends Exact<DeepPartial<ReportResponse>, I>>(object: I): ReportResponse {
     const message = createBaseReportResponse();
-    message.reportErrors = object.reportErrors?.map(e => ReportError.fromPartial(e)) || [];
+    message.reportErrors = object.reportErrors?.map(e => ReportResponse_ReportError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
     return message;

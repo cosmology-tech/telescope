@@ -197,7 +197,7 @@ export const MetricDescriptor = {
     message.unit = object.unit ?? "";
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptorMetadata.fromPartial(object.metadata) : undefined;
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata) : undefined;
     message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
@@ -421,20 +421,20 @@ export function metricDescriptorValueTypeToJSON(object: MetricDescriptor_ValueTy
       return "UNKNOWN";
   }
 }
-export interface Metric_StringMapEntry {
+export interface Metric_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseMetric_StringMapEntry(): Metric_StringMapEntry {
+function createBaseMetric_LabelsMapEntry(): Metric_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Metric_StringMapEntry = {
-  encode(message: Metric_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Metric_LabelsMapEntry = {
+  encode(message: Metric_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -446,10 +446,10 @@ export const Metric_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Metric_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metric_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetric_StringMapEntry();
+    const message = createBaseMetric_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -472,22 +472,22 @@ export const Metric_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Metric_StringMapEntry {
+  fromJSON(object: any): Metric_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Metric_StringMapEntry): unknown {
+  toJSON(message: Metric_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Metric_StringMapEntry>, I>>(object: I): Metric_StringMapEntry {
-    const message = createBaseMetric_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Metric_LabelsMapEntry>, I>>(object: I): Metric_LabelsMapEntry {
+    const message = createBaseMetric_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

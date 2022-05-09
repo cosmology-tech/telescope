@@ -64,20 +64,20 @@ export const DeleteLogRequest = {
   }
 
 };
-export interface WriteLogEntriesRequest_StringMapEntry {
+export interface WriteLogEntriesRequest_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseWriteLogEntriesRequest_StringMapEntry(): WriteLogEntriesRequest_StringMapEntry {
+function createBaseWriteLogEntriesRequest_LabelsMapEntry(): WriteLogEntriesRequest_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const WriteLogEntriesRequest_StringMapEntry = {
-  encode(message: WriteLogEntriesRequest_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const WriteLogEntriesRequest_LabelsMapEntry = {
+  encode(message: WriteLogEntriesRequest_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -89,10 +89,10 @@ export const WriteLogEntriesRequest_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseWriteLogEntriesRequest_StringMapEntry();
+    const message = createBaseWriteLogEntriesRequest_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -115,22 +115,22 @@ export const WriteLogEntriesRequest_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): WriteLogEntriesRequest_StringMapEntry {
+  fromJSON(object: any): WriteLogEntriesRequest_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: WriteLogEntriesRequest_StringMapEntry): unknown {
+  toJSON(message: WriteLogEntriesRequest_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesRequest_StringMapEntry>, I>>(object: I): WriteLogEntriesRequest_StringMapEntry {
-    const message = createBaseWriteLogEntriesRequest_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesRequest_LabelsMapEntry>, I>>(object: I): WriteLogEntriesRequest_LabelsMapEntry {
+    const message = createBaseWriteLogEntriesRequest_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -341,20 +341,20 @@ export const WriteLogEntriesResponse = {
   }
 
 };
-export interface WriteLogEntriesPartialErrors_StatusMapEntry {
+export interface WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
   key: number;
   value: Status;
 }
 
-function createBaseWriteLogEntriesPartialErrors_StatusMapEntry(): WriteLogEntriesPartialErrors_StatusMapEntry {
+function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsMapEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
   return {
     key: 0,
     value: undefined
   };
 }
 
-export const WriteLogEntriesPartialErrors_StatusMapEntry = {
-  encode(message: WriteLogEntriesPartialErrors_StatusMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry = {
+  encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== 0) {
       writer.uint32(8).int32(message.key);
     }
@@ -366,10 +366,10 @@ export const WriteLogEntriesPartialErrors_StatusMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors_StatusMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseWriteLogEntriesPartialErrors_StatusMapEntry();
+    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -392,22 +392,22 @@ export const WriteLogEntriesPartialErrors_StatusMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): WriteLogEntriesPartialErrors_StatusMapEntry {
+  fromJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
     return {
       key: isSet(object.key) ? Number(object.key) : 0,
       value: isSet(object.value) ? google.rpc.Status.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: WriteLogEntriesPartialErrors_StatusMapEntry): unknown {
+  toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
     message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesPartialErrors_StatusMapEntry>, I>>(object: I): WriteLogEntriesPartialErrors_StatusMapEntry {
-    const message = createBaseWriteLogEntriesPartialErrors_StatusMapEntry();
+  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry>, I>>(object: I): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
+    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsMapEntry();
     message.key = object.key ?? 0;
     message.value = object.value !== undefined && object.value !== null ? google.rpc.Status.fromPartial(object.value) : undefined;
     return message;
@@ -1200,7 +1200,7 @@ export const TailLogEntriesResponse = {
   fromPartial<I extends Exact<DeepPartial<TailLogEntriesResponse>, I>>(object: I): TailLogEntriesResponse {
     const message = createBaseTailLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
-    message.suppressionInfo = object.suppressionInfo?.map(e => SuppressionInfo.fromPartial(e)) || [];
+    message.suppressionInfo = object.suppressionInfo?.map(e => TailLogEntriesResponse_SuppressionInfo.fromPartial(e)) || [];
     return message;
   }
 

@@ -149,32 +149,32 @@ export const AttributeContext = {
 
   fromPartial<I extends Exact<DeepPartial<AttributeContext>, I>>(object: I): AttributeContext {
     const message = createBaseAttributeContext();
-    message.origin = object.origin !== undefined && object.origin !== null ? Peer.fromPartial(object.origin) : undefined;
-    message.source = object.source !== undefined && object.source !== null ? Peer.fromPartial(object.source) : undefined;
-    message.destination = object.destination !== undefined && object.destination !== null ? Peer.fromPartial(object.destination) : undefined;
-    message.request = object.request !== undefined && object.request !== null ? Request.fromPartial(object.request) : undefined;
-    message.response = object.response !== undefined && object.response !== null ? Response.fromPartial(object.response) : undefined;
-    message.resource = object.resource !== undefined && object.resource !== null ? Resource.fromPartial(object.resource) : undefined;
-    message.api = object.api !== undefined && object.api !== null ? Api.fromPartial(object.api) : undefined;
+    message.origin = object.origin !== undefined && object.origin !== null ? AttributeContext_Peer.fromPartial(object.origin) : undefined;
+    message.source = object.source !== undefined && object.source !== null ? AttributeContext_Peer.fromPartial(object.source) : undefined;
+    message.destination = object.destination !== undefined && object.destination !== null ? AttributeContext_Peer.fromPartial(object.destination) : undefined;
+    message.request = object.request !== undefined && object.request !== null ? AttributeContext_Request.fromPartial(object.request) : undefined;
+    message.response = object.response !== undefined && object.response !== null ? AttributeContext_Response.fromPartial(object.response) : undefined;
+    message.resource = object.resource !== undefined && object.resource !== null ? AttributeContext_Resource.fromPartial(object.resource) : undefined;
+    message.api = object.api !== undefined && object.api !== null ? AttributeContext_Api.fromPartial(object.api) : undefined;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   }
 
 };
-export interface Peer_StringMapEntry {
+export interface Peer_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBasePeer_StringMapEntry(): Peer_StringMapEntry {
+function createBasePeer_LabelsMapEntry(): Peer_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Peer_StringMapEntry = {
-  encode(message: Peer_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Peer_LabelsMapEntry = {
+  encode(message: Peer_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -186,10 +186,10 @@ export const Peer_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Peer_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Peer_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePeer_StringMapEntry();
+    const message = createBasePeer_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -212,22 +212,22 @@ export const Peer_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Peer_StringMapEntry {
+  fromJSON(object: any): Peer_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Peer_StringMapEntry): unknown {
+  toJSON(message: Peer_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Peer_StringMapEntry>, I>>(object: I): Peer_StringMapEntry {
-    const message = createBasePeer_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Peer_LabelsMapEntry>, I>>(object: I): Peer_LabelsMapEntry {
+    const message = createBasePeer_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -597,20 +597,20 @@ export const AttributeContext_Auth = {
   }
 
 };
-export interface Request_StringMapEntry {
+export interface Request_HeadersMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseRequest_StringMapEntry(): Request_StringMapEntry {
+function createBaseRequest_HeadersMapEntry(): Request_HeadersMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Request_StringMapEntry = {
-  encode(message: Request_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Request_HeadersMapEntry = {
+  encode(message: Request_HeadersMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -622,10 +622,10 @@ export const Request_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Request_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Request_HeadersMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseRequest_StringMapEntry();
+    const message = createBaseRequest_HeadersMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -648,22 +648,22 @@ export const Request_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Request_StringMapEntry {
+  fromJSON(object: any): Request_HeadersMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Request_StringMapEntry): unknown {
+  toJSON(message: Request_HeadersMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Request_StringMapEntry>, I>>(object: I): Request_StringMapEntry {
-    const message = createBaseRequest_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Request_HeadersMapEntry>, I>>(object: I): Request_HeadersMapEntry {
+    const message = createBaseRequest_HeadersMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -896,25 +896,25 @@ export const Request = {
     message.size = object.size !== undefined && object.size !== null ? Long.fromValue(object.size) : Long.ZERO;
     message.protocol = object.protocol ?? "";
     message.reason = object.reason ?? "";
-    message.auth = object.auth !== undefined && object.auth !== null ? Auth.fromPartial(object.auth) : undefined;
+    message.auth = object.auth !== undefined && object.auth !== null ? AttributeContext_Auth.fromPartial(object.auth) : undefined;
     return message;
   }
 
 };
-export interface Response_StringMapEntry {
+export interface Response_HeadersMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseResponse_StringMapEntry(): Response_StringMapEntry {
+function createBaseResponse_HeadersMapEntry(): Response_HeadersMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Response_StringMapEntry = {
-  encode(message: Response_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Response_HeadersMapEntry = {
+  encode(message: Response_HeadersMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -926,10 +926,10 @@ export const Response_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Response_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Response_HeadersMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResponse_StringMapEntry();
+    const message = createBaseResponse_HeadersMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -952,22 +952,22 @@ export const Response_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Response_StringMapEntry {
+  fromJSON(object: any): Response_HeadersMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Response_StringMapEntry): unknown {
+  toJSON(message: Response_HeadersMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Response_StringMapEntry>, I>>(object: I): Response_StringMapEntry {
-    const message = createBaseResponse_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Response_HeadersMapEntry>, I>>(object: I): Response_HeadersMapEntry {
+    const message = createBaseResponse_HeadersMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -1109,20 +1109,20 @@ export const Response = {
   }
 
 };
-export interface Resource_StringMapEntry {
+export interface Resource_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseResource_StringMapEntry(): Resource_StringMapEntry {
+function createBaseResource_LabelsMapEntry(): Resource_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Resource_StringMapEntry = {
-  encode(message: Resource_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Resource_LabelsMapEntry = {
+  encode(message: Resource_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1134,10 +1134,10 @@ export const Resource_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Resource_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Resource_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResource_StringMapEntry();
+    const message = createBaseResource_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1160,42 +1160,42 @@ export const Resource_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Resource_StringMapEntry {
+  fromJSON(object: any): Resource_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Resource_StringMapEntry): unknown {
+  toJSON(message: Resource_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Resource_StringMapEntry>, I>>(object: I): Resource_StringMapEntry {
-    const message = createBaseResource_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Resource_LabelsMapEntry>, I>>(object: I): Resource_LabelsMapEntry {
+    const message = createBaseResource_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
   }
 
 };
-export interface Resource_StringMapEntry {
+export interface Resource_AnnotationsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseResource_StringMapEntry(): Resource_StringMapEntry {
+function createBaseResource_AnnotationsMapEntry(): Resource_AnnotationsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Resource_StringMapEntry = {
-  encode(message: Resource_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Resource_AnnotationsMapEntry = {
+  encode(message: Resource_AnnotationsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1207,10 +1207,10 @@ export const Resource_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Resource_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Resource_AnnotationsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResource_StringMapEntry();
+    const message = createBaseResource_AnnotationsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1233,22 +1233,22 @@ export const Resource_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Resource_StringMapEntry {
+  fromJSON(object: any): Resource_AnnotationsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Resource_StringMapEntry): unknown {
+  toJSON(message: Resource_AnnotationsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Resource_StringMapEntry>, I>>(object: I): Resource_StringMapEntry {
-    const message = createBaseResource_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Resource_AnnotationsMapEntry>, I>>(object: I): Resource_AnnotationsMapEntry {
+    const message = createBaseResource_AnnotationsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

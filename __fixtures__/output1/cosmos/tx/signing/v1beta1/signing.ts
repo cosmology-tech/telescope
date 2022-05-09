@@ -219,7 +219,7 @@ export const SignatureDescriptor = {
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptor>, I>>(object: I): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
-    message.data = object.data !== undefined && object.data !== null ? Data.fromPartial(object.data) : undefined;
+    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
   }
@@ -292,8 +292,8 @@ export const SignatureDescriptor_Data = {
 
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptor_Data>, I>>(object: I): SignatureDescriptor_Data {
     const message = createBaseSignatureDescriptor_Data();
-    message.single = object.single !== undefined && object.single !== null ? Single.fromPartial(object.single) : undefined;
-    message.multi = object.multi !== undefined && object.multi !== null ? Multi.fromPartial(object.multi) : undefined;
+    message.single = object.single !== undefined && object.single !== null ? Data_SignatureDescriptor_Single.fromPartial(object.single) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? Data_SignatureDescriptor_Multi.fromPartial(object.multi) : undefined;
     return message;
   }
 
@@ -445,7 +445,7 @@ export const Multi = {
   fromPartial<I extends Exact<DeepPartial<Multi>, I>>(object: I): Multi {
     const message = createBaseMulti();
     message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
-    message.signatures = object.signatures?.map(e => Data.fromPartial(e)) || [];
+    message.signatures = object.signatures?.map(e => SignatureDescriptor_Data.fromPartial(e)) || [];
     return message;
   }
 

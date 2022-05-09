@@ -217,12 +217,12 @@ export const Expr = {
     const message = createBaseExpr();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.constExpr = object.constExpr !== undefined && object.constExpr !== null ? Constant.fromPartial(object.constExpr) : undefined;
-    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Ident.fromPartial(object.identExpr) : undefined;
-    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Select.fromPartial(object.selectExpr) : undefined;
-    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Call.fromPartial(object.callExpr) : undefined;
-    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? CreateList.fromPartial(object.listExpr) : undefined;
-    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? CreateStruct.fromPartial(object.structExpr) : undefined;
-    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Comprehension.fromPartial(object.comprehensionExpr) : undefined;
+    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
+    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
+    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Expr_Call.fromPartial(object.callExpr) : undefined;
+    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? Expr_CreateList.fromPartial(object.listExpr) : undefined;
+    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : undefined;
+    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
     return message;
   }
 
@@ -605,7 +605,7 @@ export const Expr_CreateStruct = {
   fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct>, I>>(object: I): Expr_CreateStruct {
     const message = createBaseExpr_CreateStruct();
     message.messageName = object.messageName ?? "";
-    message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
+    message.entries = object.entries?.map(e => CreateStruct_Expr_Entry.fromPartial(e)) || [];
     return message;
   }
 
@@ -1005,20 +1005,20 @@ export const Constant = {
   }
 
 };
-export interface SourceInfo_Int32MapEntry {
+export interface SourceInfo_PositionsMapEntry {
   key: Long;
   value: number;
 }
 
-function createBaseSourceInfo_Int32MapEntry(): SourceInfo_Int32MapEntry {
+function createBaseSourceInfo_PositionsMapEntry(): SourceInfo_PositionsMapEntry {
   return {
     key: Long.UZERO,
     value: 0
   };
 }
 
-export const SourceInfo_Int32MapEntry = {
-  encode(message: SourceInfo_Int32MapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const SourceInfo_PositionsMapEntry = {
+  encode(message: SourceInfo_PositionsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -1030,10 +1030,10 @@ export const SourceInfo_Int32MapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_Int32MapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSourceInfo_Int32MapEntry();
+    const message = createBaseSourceInfo_PositionsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1056,42 +1056,42 @@ export const SourceInfo_Int32MapEntry = {
     return message;
   },
 
-  fromJSON(object: any): SourceInfo_Int32MapEntry {
+  fromJSON(object: any): SourceInfo_PositionsMapEntry {
     return {
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
-  toJSON(message: SourceInfo_Int32MapEntry): unknown {
+  toJSON(message: SourceInfo_PositionsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceInfo_Int32MapEntry>, I>>(object: I): SourceInfo_Int32MapEntry {
-    const message = createBaseSourceInfo_Int32MapEntry();
+  fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsMapEntry>, I>>(object: I): SourceInfo_PositionsMapEntry {
+    const message = createBaseSourceInfo_PositionsMapEntry();
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value ?? 0;
     return message;
   }
 
 };
-export interface SourceInfo_ExprMapEntry {
+export interface SourceInfo_MacroCallsMapEntry {
   key: Long;
   value: Expr;
 }
 
-function createBaseSourceInfo_ExprMapEntry(): SourceInfo_ExprMapEntry {
+function createBaseSourceInfo_MacroCallsMapEntry(): SourceInfo_MacroCallsMapEntry {
   return {
     key: Long.UZERO,
     value: undefined
   };
 }
 
-export const SourceInfo_ExprMapEntry = {
-  encode(message: SourceInfo_ExprMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const SourceInfo_MacroCallsMapEntry = {
+  encode(message: SourceInfo_MacroCallsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -1103,10 +1103,10 @@ export const SourceInfo_ExprMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_ExprMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_MacroCallsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSourceInfo_ExprMapEntry();
+    const message = createBaseSourceInfo_MacroCallsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1129,22 +1129,22 @@ export const SourceInfo_ExprMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): SourceInfo_ExprMapEntry {
+  fromJSON(object: any): SourceInfo_MacroCallsMapEntry {
     return {
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: SourceInfo_ExprMapEntry): unknown {
+  toJSON(message: SourceInfo_MacroCallsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceInfo_ExprMapEntry>, I>>(object: I): SourceInfo_ExprMapEntry {
-    const message = createBaseSourceInfo_ExprMapEntry();
+  fromPartial<I extends Exact<DeepPartial<SourceInfo_MacroCallsMapEntry>, I>>(object: I): SourceInfo_MacroCallsMapEntry {
+    const message = createBaseSourceInfo_MacroCallsMapEntry();
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;

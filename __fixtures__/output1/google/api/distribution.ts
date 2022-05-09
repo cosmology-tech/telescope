@@ -154,10 +154,10 @@ export const Distribution = {
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
     message.mean = object.mean ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
-    message.range = object.range !== undefined && object.range !== null ? Range.fromPartial(object.range) : undefined;
-    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? BucketOptions.fromPartial(object.bucketOptions) : undefined;
+    message.range = object.range !== undefined && object.range !== null ? Distribution_Range.fromPartial(object.range) : undefined;
+    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
     message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
-    message.exemplars = object.exemplars?.map(e => Exemplar.fromPartial(e)) || [];
+    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   }
 
@@ -314,9 +314,9 @@ export const Distribution_BucketOptions = {
 
   fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions>, I>>(object: I): Distribution_BucketOptions {
     const message = createBaseDistribution_BucketOptions();
-    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Linear.fromPartial(object.linearBuckets) : undefined;
-    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Exponential.fromPartial(object.exponentialBuckets) : undefined;
-    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Explicit.fromPartial(object.explicitBuckets) : undefined;
+    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? BucketOptions_Distribution_Linear.fromPartial(object.linearBuckets) : undefined;
+    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? BucketOptions_Distribution_Exponential.fromPartial(object.exponentialBuckets) : undefined;
+    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? BucketOptions_Distribution_Explicit.fromPartial(object.explicitBuckets) : undefined;
     return message;
   }
 

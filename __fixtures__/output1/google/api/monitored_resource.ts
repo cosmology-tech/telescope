@@ -134,20 +134,20 @@ export const MonitoredResourceDescriptor = {
   }
 
 };
-export interface MonitoredResource_StringMapEntry {
+export interface MonitoredResource_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseMonitoredResource_StringMapEntry(): MonitoredResource_StringMapEntry {
+function createBaseMonitoredResource_LabelsMapEntry(): MonitoredResource_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const MonitoredResource_StringMapEntry = {
-  encode(message: MonitoredResource_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const MonitoredResource_LabelsMapEntry = {
+  encode(message: MonitoredResource_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -159,10 +159,10 @@ export const MonitoredResource_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMonitoredResource_StringMapEntry();
+    const message = createBaseMonitoredResource_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -185,22 +185,22 @@ export const MonitoredResource_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): MonitoredResource_StringMapEntry {
+  fromJSON(object: any): MonitoredResource_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: MonitoredResource_StringMapEntry): unknown {
+  toJSON(message: MonitoredResource_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResource_StringMapEntry>, I>>(object: I): MonitoredResource_StringMapEntry {
-    const message = createBaseMonitoredResource_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<MonitoredResource_LabelsMapEntry>, I>>(object: I): MonitoredResource_LabelsMapEntry {
+    const message = createBaseMonitoredResource_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -309,20 +309,20 @@ export const MonitoredResource = {
   }
 
 };
-export interface MonitoredResourceMetadata_StringMapEntry {
+export interface MonitoredResourceMetadata_UserLabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseMonitoredResourceMetadata_StringMapEntry(): MonitoredResourceMetadata_StringMapEntry {
+function createBaseMonitoredResourceMetadata_UserLabelsMapEntry(): MonitoredResourceMetadata_UserLabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const MonitoredResourceMetadata_StringMapEntry = {
-  encode(message: MonitoredResourceMetadata_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const MonitoredResourceMetadata_UserLabelsMapEntry = {
+  encode(message: MonitoredResourceMetadata_UserLabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -334,10 +334,10 @@ export const MonitoredResourceMetadata_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata_UserLabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMonitoredResourceMetadata_StringMapEntry();
+    const message = createBaseMonitoredResourceMetadata_UserLabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -360,22 +360,22 @@ export const MonitoredResourceMetadata_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): MonitoredResourceMetadata_StringMapEntry {
+  fromJSON(object: any): MonitoredResourceMetadata_UserLabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: MonitoredResourceMetadata_StringMapEntry): unknown {
+  toJSON(message: MonitoredResourceMetadata_UserLabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResourceMetadata_StringMapEntry>, I>>(object: I): MonitoredResourceMetadata_StringMapEntry {
-    const message = createBaseMonitoredResourceMetadata_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<MonitoredResourceMetadata_UserLabelsMapEntry>, I>>(object: I): MonitoredResourceMetadata_UserLabelsMapEntry {
+    const message = createBaseMonitoredResourceMetadata_UserLabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

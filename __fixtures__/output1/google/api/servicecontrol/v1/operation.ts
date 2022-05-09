@@ -4,20 +4,20 @@ import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
-export interface Operation_StringMapEntry {
+export interface Operation_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseOperation_StringMapEntry(): Operation_StringMapEntry {
+function createBaseOperation_LabelsMapEntry(): Operation_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Operation_StringMapEntry = {
-  encode(message: Operation_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Operation_LabelsMapEntry = {
+  encode(message: Operation_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -29,10 +29,10 @@ export const Operation_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOperation_StringMapEntry();
+    const message = createBaseOperation_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -55,22 +55,22 @@ export const Operation_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Operation_StringMapEntry {
+  fromJSON(object: any): Operation_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Operation_StringMapEntry): unknown {
+  toJSON(message: Operation_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Operation_StringMapEntry>, I>>(object: I): Operation_StringMapEntry {
-    const message = createBaseOperation_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Operation_LabelsMapEntry>, I>>(object: I): Operation_LabelsMapEntry {
+    const message = createBaseOperation_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

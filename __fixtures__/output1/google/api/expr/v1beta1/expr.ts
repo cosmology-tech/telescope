@@ -229,12 +229,12 @@ export const Expr = {
     const message = createBaseExpr();
     message.id = object.id ?? 0;
     message.literalExpr = object.literalExpr !== undefined && object.literalExpr !== null ? Literal.fromPartial(object.literalExpr) : undefined;
-    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Ident.fromPartial(object.identExpr) : undefined;
-    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Select.fromPartial(object.selectExpr) : undefined;
-    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Call.fromPartial(object.callExpr) : undefined;
-    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? CreateList.fromPartial(object.listExpr) : undefined;
-    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? CreateStruct.fromPartial(object.structExpr) : undefined;
-    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Comprehension.fromPartial(object.comprehensionExpr) : undefined;
+    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
+    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
+    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Expr_Call.fromPartial(object.callExpr) : undefined;
+    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? Expr_CreateList.fromPartial(object.listExpr) : undefined;
+    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : undefined;
+    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
     return message;
   }
 
@@ -617,7 +617,7 @@ export const Expr_CreateStruct = {
   fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct>, I>>(object: I): Expr_CreateStruct {
     const message = createBaseExpr_CreateStruct();
     message.type = object.type ?? "";
-    message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
+    message.entries = object.entries?.map(e => CreateStruct_Expr_Entry.fromPartial(e)) || [];
     return message;
   }
 

@@ -1,19 +1,19 @@
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
-export interface Struct_ValueMapEntry {
+export interface Struct_FieldsMapEntry {
   key: string;
   value: Value;
 }
 
-function createBaseStruct_ValueMapEntry(): Struct_ValueMapEntry {
+function createBaseStruct_FieldsMapEntry(): Struct_FieldsMapEntry {
   return {
     key: "",
     value: undefined
   };
 }
 
-export const Struct_ValueMapEntry = {
-  encode(message: Struct_ValueMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Struct_FieldsMapEntry = {
+  encode(message: Struct_FieldsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -25,10 +25,10 @@ export const Struct_ValueMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Struct_ValueMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStruct_ValueMapEntry();
+    const message = createBaseStruct_FieldsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -51,22 +51,22 @@ export const Struct_ValueMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Struct_ValueMapEntry {
+  fromJSON(object: any): Struct_FieldsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: Struct_ValueMapEntry): unknown {
+  toJSON(message: Struct_FieldsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Struct_ValueMapEntry>, I>>(object: I): Struct_ValueMapEntry {
-    const message = createBaseStruct_ValueMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Struct_FieldsMapEntry>, I>>(object: I): Struct_FieldsMapEntry {
+    const message = createBaseStruct_FieldsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;

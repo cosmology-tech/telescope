@@ -80,7 +80,7 @@ export const Explain = {
   fromPartial<I extends Exact<DeepPartial<Explain>, I>>(object: I): Explain {
     const message = createBaseExplain();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
-    message.exprSteps = object.exprSteps?.map(e => ExprStep.fromPartial(e)) || [];
+    message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
     return message;
   }
 

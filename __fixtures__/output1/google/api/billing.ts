@@ -61,7 +61,7 @@ export const Billing = {
 
   fromPartial<I extends Exact<DeepPartial<Billing>, I>>(object: I): Billing {
     const message = createBaseBilling();
-    message.consumerDestinations = object.consumerDestinations?.map(e => BillingDestination.fromPartial(e)) || [];
+    message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
     return message;
   }
 

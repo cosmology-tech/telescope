@@ -174,7 +174,7 @@ export const OperationMetadata = {
   fromPartial<I extends Exact<DeepPartial<OperationMetadata>, I>>(object: I): OperationMetadata {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
-    message.steps = object.steps?.map(e => Step.fromPartial(e)) || [];
+    message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
     message.progressPercentage = object.progressPercentage ?? 0;
     message.startTime = object.startTime ?? undefined;
     return message;
@@ -945,27 +945,27 @@ export const Rollout = {
     message.createTime = object.createTime ?? undefined;
     message.createdBy = object.createdBy ?? "";
     message.status = object.status ?? 0;
-    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : undefined;
-    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
+    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : undefined;
+    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
     message.serviceName = object.serviceName ?? "";
     return message;
   }
 
 };
-export interface TrafficPercentStrategy_DoubleMapEntry {
+export interface TrafficPercentStrategy_PercentagesMapEntry {
   key: string;
   value: number;
 }
 
-function createBaseTrafficPercentStrategy_DoubleMapEntry(): TrafficPercentStrategy_DoubleMapEntry {
+function createBaseTrafficPercentStrategy_PercentagesMapEntry(): TrafficPercentStrategy_PercentagesMapEntry {
   return {
     key: "",
     value: 0
   };
 }
 
-export const TrafficPercentStrategy_DoubleMapEntry = {
-  encode(message: TrafficPercentStrategy_DoubleMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const TrafficPercentStrategy_PercentagesMapEntry = {
+  encode(message: TrafficPercentStrategy_PercentagesMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -977,10 +977,10 @@ export const TrafficPercentStrategy_DoubleMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TrafficPercentStrategy_DoubleMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TrafficPercentStrategy_PercentagesMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTrafficPercentStrategy_DoubleMapEntry();
+    const message = createBaseTrafficPercentStrategy_PercentagesMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1003,22 +1003,22 @@ export const TrafficPercentStrategy_DoubleMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): TrafficPercentStrategy_DoubleMapEntry {
+  fromJSON(object: any): TrafficPercentStrategy_PercentagesMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
-  toJSON(message: TrafficPercentStrategy_DoubleMapEntry): unknown {
+  toJSON(message: TrafficPercentStrategy_PercentagesMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TrafficPercentStrategy_DoubleMapEntry>, I>>(object: I): TrafficPercentStrategy_DoubleMapEntry {
-    const message = createBaseTrafficPercentStrategy_DoubleMapEntry();
+  fromPartial<I extends Exact<DeepPartial<TrafficPercentStrategy_PercentagesMapEntry>, I>>(object: I): TrafficPercentStrategy_PercentagesMapEntry {
+    const message = createBaseTrafficPercentStrategy_PercentagesMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
     return message;

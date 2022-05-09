@@ -174,9 +174,9 @@ export const Distribution = {
     message.maximum = object.maximum ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
     message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
-    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? LinearBuckets.fromPartial(object.linearBuckets) : undefined;
-    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? ExponentialBuckets.fromPartial(object.exponentialBuckets) : undefined;
-    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? ExplicitBuckets.fromPartial(object.explicitBuckets) : undefined;
+    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_LinearBuckets.fromPartial(object.linearBuckets) : undefined;
+    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets) : undefined;
+    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : undefined;
     return message;
   }
 

@@ -728,20 +728,20 @@ export function quotaViewToJSON(object: QuotaView): string {
       return "UNKNOWN";
   }
 }
-export interface QuotaBucket_StringMapEntry {
+export interface QuotaBucket_DimensionsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseQuotaBucket_StringMapEntry(): QuotaBucket_StringMapEntry {
+function createBaseQuotaBucket_DimensionsMapEntry(): QuotaBucket_DimensionsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const QuotaBucket_StringMapEntry = {
-  encode(message: QuotaBucket_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const QuotaBucket_DimensionsMapEntry = {
+  encode(message: QuotaBucket_DimensionsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -753,10 +753,10 @@ export const QuotaBucket_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket_DimensionsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuotaBucket_StringMapEntry();
+    const message = createBaseQuotaBucket_DimensionsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -779,22 +779,22 @@ export const QuotaBucket_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): QuotaBucket_StringMapEntry {
+  fromJSON(object: any): QuotaBucket_DimensionsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: QuotaBucket_StringMapEntry): unknown {
+  toJSON(message: QuotaBucket_DimensionsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaBucket_StringMapEntry>, I>>(object: I): QuotaBucket_StringMapEntry {
-    const message = createBaseQuotaBucket_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<QuotaBucket_DimensionsMapEntry>, I>>(object: I): QuotaBucket_DimensionsMapEntry {
+    const message = createBaseQuotaBucket_DimensionsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -955,20 +955,20 @@ export const QuotaBucket = {
   }
 
 };
-export interface QuotaOverride_StringMapEntry {
+export interface QuotaOverride_DimensionsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseQuotaOverride_StringMapEntry(): QuotaOverride_StringMapEntry {
+function createBaseQuotaOverride_DimensionsMapEntry(): QuotaOverride_DimensionsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const QuotaOverride_StringMapEntry = {
-  encode(message: QuotaOverride_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const QuotaOverride_DimensionsMapEntry = {
+  encode(message: QuotaOverride_DimensionsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -980,10 +980,10 @@ export const QuotaOverride_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride_DimensionsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuotaOverride_StringMapEntry();
+    const message = createBaseQuotaOverride_DimensionsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1006,22 +1006,22 @@ export const QuotaOverride_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): QuotaOverride_StringMapEntry {
+  fromJSON(object: any): QuotaOverride_DimensionsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: QuotaOverride_StringMapEntry): unknown {
+  toJSON(message: QuotaOverride_DimensionsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaOverride_StringMapEntry>, I>>(object: I): QuotaOverride_StringMapEntry {
-    const message = createBaseQuotaOverride_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<QuotaOverride_DimensionsMapEntry>, I>>(object: I): QuotaOverride_DimensionsMapEntry {
+    const message = createBaseQuotaOverride_DimensionsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -1294,20 +1294,20 @@ export function quotaSafetyCheckToJSON(object: QuotaSafetyCheck): string {
       return "UNKNOWN";
   }
 }
-export interface AdminQuotaPolicy_StringMapEntry {
+export interface AdminQuotaPolicy_DimensionsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseAdminQuotaPolicy_StringMapEntry(): AdminQuotaPolicy_StringMapEntry {
+function createBaseAdminQuotaPolicy_DimensionsMapEntry(): AdminQuotaPolicy_DimensionsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const AdminQuotaPolicy_StringMapEntry = {
-  encode(message: AdminQuotaPolicy_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const AdminQuotaPolicy_DimensionsMapEntry = {
+  encode(message: AdminQuotaPolicy_DimensionsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1319,10 +1319,10 @@ export const AdminQuotaPolicy_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy_DimensionsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAdminQuotaPolicy_StringMapEntry();
+    const message = createBaseAdminQuotaPolicy_DimensionsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1345,22 +1345,22 @@ export const AdminQuotaPolicy_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): AdminQuotaPolicy_StringMapEntry {
+  fromJSON(object: any): AdminQuotaPolicy_DimensionsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: AdminQuotaPolicy_StringMapEntry): unknown {
+  toJSON(message: AdminQuotaPolicy_DimensionsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AdminQuotaPolicy_StringMapEntry>, I>>(object: I): AdminQuotaPolicy_StringMapEntry {
-    const message = createBaseAdminQuotaPolicy_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<AdminQuotaPolicy_DimensionsMapEntry>, I>>(object: I): AdminQuotaPolicy_DimensionsMapEntry {
+    const message = createBaseAdminQuotaPolicy_DimensionsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

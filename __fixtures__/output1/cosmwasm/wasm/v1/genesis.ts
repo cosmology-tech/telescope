@@ -130,7 +130,7 @@ export const GenesisState = {
     message.codes = object.codes?.map(e => Code.fromPartial(e)) || [];
     message.contracts = object.contracts?.map(e => Contract.fromPartial(e)) || [];
     message.sequences = object.sequences?.map(e => Sequence.fromPartial(e)) || [];
-    message.genMsgs = object.genMsgs?.map(e => GenMsgs.fromPartial(e)) || [];
+    message.genMsgs = object.genMsgs?.map(e => GenesisState_GenMsgs.fromPartial(e)) || [];
     return message;
   }
 

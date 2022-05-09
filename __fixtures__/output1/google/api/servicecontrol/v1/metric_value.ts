@@ -2,20 +2,20 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
-export interface MetricValue_StringMapEntry {
+export interface MetricValue_LabelsMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseMetricValue_StringMapEntry(): MetricValue_StringMapEntry {
+function createBaseMetricValue_LabelsMapEntry(): MetricValue_LabelsMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const MetricValue_StringMapEntry = {
-  encode(message: MetricValue_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const MetricValue_LabelsMapEntry = {
+  encode(message: MetricValue_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -27,10 +27,10 @@ export const MetricValue_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetricValue_StringMapEntry();
+    const message = createBaseMetricValue_LabelsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -53,22 +53,22 @@ export const MetricValue_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): MetricValue_StringMapEntry {
+  fromJSON(object: any): MetricValue_LabelsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: MetricValue_StringMapEntry): unknown {
+  toJSON(message: MetricValue_LabelsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricValue_StringMapEntry>, I>>(object: I): MetricValue_StringMapEntry {
-    const message = createBaseMetricValue_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<MetricValue_LabelsMapEntry>, I>>(object: I): MetricValue_LabelsMapEntry {
+    const message = createBaseMetricValue_LabelsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

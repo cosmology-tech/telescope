@@ -232,20 +232,20 @@ export const ResourceInfo = {
   }
 
 };
-export interface CheckResponse_StringMapEntry {
+export interface CheckResponse_HeadersMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseCheckResponse_StringMapEntry(): CheckResponse_StringMapEntry {
+function createBaseCheckResponse_HeadersMapEntry(): CheckResponse_HeadersMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const CheckResponse_StringMapEntry = {
-  encode(message: CheckResponse_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const CheckResponse_HeadersMapEntry = {
+  encode(message: CheckResponse_HeadersMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -257,10 +257,10 @@ export const CheckResponse_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_HeadersMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResponse_StringMapEntry();
+    const message = createBaseCheckResponse_HeadersMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -283,22 +283,22 @@ export const CheckResponse_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): CheckResponse_StringMapEntry {
+  fromJSON(object: any): CheckResponse_HeadersMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: CheckResponse_StringMapEntry): unknown {
+  toJSON(message: CheckResponse_HeadersMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse_StringMapEntry>, I>>(object: I): CheckResponse_StringMapEntry {
-    const message = createBaseCheckResponse_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<CheckResponse_HeadersMapEntry>, I>>(object: I): CheckResponse_HeadersMapEntry {
+    const message = createBaseCheckResponse_HeadersMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;

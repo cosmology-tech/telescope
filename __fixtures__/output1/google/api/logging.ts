@@ -78,8 +78,8 @@ export const Logging = {
 
   fromPartial<I extends Exact<DeepPartial<Logging>, I>>(object: I): Logging {
     const message = createBaseLogging();
-    message.producerDestinations = object.producerDestinations?.map(e => LoggingDestination.fromPartial(e)) || [];
-    message.consumerDestinations = object.consumerDestinations?.map(e => LoggingDestination.fromPartial(e)) || [];
+    message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
+    message.consumerDestinations = object.consumerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     return message;
   }
 

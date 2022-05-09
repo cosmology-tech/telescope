@@ -366,20 +366,20 @@ export const CheckResponse = {
   }
 
 };
-export interface EvalRequest_ExprValueMapEntry {
+export interface EvalRequest_BindingsMapEntry {
   key: string;
   value: ExprValue;
 }
 
-function createBaseEvalRequest_ExprValueMapEntry(): EvalRequest_ExprValueMapEntry {
+function createBaseEvalRequest_BindingsMapEntry(): EvalRequest_BindingsMapEntry {
   return {
     key: "",
     value: undefined
   };
 }
 
-export const EvalRequest_ExprValueMapEntry = {
-  encode(message: EvalRequest_ExprValueMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const EvalRequest_BindingsMapEntry = {
+  encode(message: EvalRequest_BindingsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -391,10 +391,10 @@ export const EvalRequest_ExprValueMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_ExprValueMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_BindingsMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEvalRequest_ExprValueMapEntry();
+    const message = createBaseEvalRequest_BindingsMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -417,22 +417,22 @@ export const EvalRequest_ExprValueMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): EvalRequest_ExprValueMapEntry {
+  fromJSON(object: any): EvalRequest_BindingsMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: EvalRequest_ExprValueMapEntry): unknown {
+  toJSON(message: EvalRequest_BindingsMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalRequest_ExprValueMapEntry>, I>>(object: I): EvalRequest_ExprValueMapEntry {
-    const message = createBaseEvalRequest_ExprValueMapEntry();
+  fromPartial<I extends Exact<DeepPartial<EvalRequest_BindingsMapEntry>, I>>(object: I): EvalRequest_BindingsMapEntry {
+    const message = createBaseEvalRequest_BindingsMapEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
     return message;

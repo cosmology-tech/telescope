@@ -81,7 +81,7 @@ export const EvalState = {
   fromPartial<I extends Exact<DeepPartial<EvalState>, I>>(object: I): EvalState {
     const message = createBaseEvalState();
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
-    message.results = object.results?.map(e => Result.fromPartial(e)) || [];
+    message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
     return message;
   }
 

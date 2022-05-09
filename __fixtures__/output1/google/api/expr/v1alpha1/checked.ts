@@ -3,20 +3,20 @@ import { Empty } from "../../../protobuf/empty";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
-export interface CheckedExpr_ReferenceMapEntry {
+export interface CheckedExpr_ReferenceMapMapEntry {
   key: Long;
   value: Reference;
 }
 
-function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
+function createBaseCheckedExpr_ReferenceMapMapEntry(): CheckedExpr_ReferenceMapMapEntry {
   return {
     key: Long.UZERO,
     value: undefined
   };
 }
 
-export const CheckedExpr_ReferenceMapEntry = {
-  encode(message: CheckedExpr_ReferenceMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const CheckedExpr_ReferenceMapMapEntry = {
+  encode(message: CheckedExpr_ReferenceMapMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -28,10 +28,10 @@ export const CheckedExpr_ReferenceMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckedExpr_ReferenceMapEntry();
+    const message = createBaseCheckedExpr_ReferenceMapMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -54,42 +54,42 @@ export const CheckedExpr_ReferenceMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
+  fromJSON(object: any): CheckedExpr_ReferenceMapMapEntry {
     return {
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
+  toJSON(message: CheckedExpr_ReferenceMapMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckedExpr_ReferenceMapEntry>, I>>(object: I): CheckedExpr_ReferenceMapEntry {
-    const message = createBaseCheckedExpr_ReferenceMapEntry();
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr_ReferenceMapMapEntry>, I>>(object: I): CheckedExpr_ReferenceMapMapEntry {
+    const message = createBaseCheckedExpr_ReferenceMapMapEntry();
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   }
 
 };
-export interface CheckedExpr_TypeMapEntry {
+export interface CheckedExpr_TypeMapMapEntry {
   key: Long;
   value: Type;
 }
 
-function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
+function createBaseCheckedExpr_TypeMapMapEntry(): CheckedExpr_TypeMapMapEntry {
   return {
     key: Long.UZERO,
     value: undefined
   };
 }
 
-export const CheckedExpr_TypeMapEntry = {
-  encode(message: CheckedExpr_TypeMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const CheckedExpr_TypeMapMapEntry = {
+  encode(message: CheckedExpr_TypeMapMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -101,10 +101,10 @@ export const CheckedExpr_TypeMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckedExpr_TypeMapEntry();
+    const message = createBaseCheckedExpr_TypeMapMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -127,22 +127,22 @@ export const CheckedExpr_TypeMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): CheckedExpr_TypeMapEntry {
+  fromJSON(object: any): CheckedExpr_TypeMapMapEntry {
     return {
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: CheckedExpr_TypeMapEntry): unknown {
+  toJSON(message: CheckedExpr_TypeMapMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckedExpr_TypeMapEntry>, I>>(object: I): CheckedExpr_TypeMapEntry {
-    const message = createBaseCheckedExpr_TypeMapEntry();
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr_TypeMapMapEntry>, I>>(object: I): CheckedExpr_TypeMapMapEntry {
+    const message = createBaseCheckedExpr_TypeMapMapEntry();
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
@@ -524,14 +524,14 @@ export const Type = {
     message.primitive = object.primitive ?? 0;
     message.wrapper = object.wrapper ?? 0;
     message.wellKnown = object.wellKnown ?? 0;
-    message.listType = object.listType !== undefined && object.listType !== null ? ListType.fromPartial(object.listType) : undefined;
-    message.mapType = object.mapType !== undefined && object.mapType !== null ? MapType.fromPartial(object.mapType) : undefined;
-    message.function = object.function !== undefined && object.function !== null ? FunctionType.fromPartial(object.function) : undefined;
+    message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : undefined;
+    message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : undefined;
     message.messageType = object.messageType ?? "";
     message.typeParam = object.typeParam ?? "";
     message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
-    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? AbstractType.fromPartial(object.abstractType) : undefined;
+    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
   }
 
@@ -1048,8 +1048,8 @@ export const Decl = {
   fromPartial<I extends Exact<DeepPartial<Decl>, I>>(object: I): Decl {
     const message = createBaseDecl();
     message.name = object.name ?? "";
-    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
-    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
+    message.ident = object.ident !== undefined && object.ident !== null ? Decl_IdentDecl.fromPartial(object.ident) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? Decl_FunctionDecl.fromPartial(object.function) : undefined;
     return message;
   }
 
@@ -1201,7 +1201,7 @@ export const Decl_FunctionDecl = {
 
   fromPartial<I extends Exact<DeepPartial<Decl_FunctionDecl>, I>>(object: I): Decl_FunctionDecl {
     const message = createBaseDecl_FunctionDecl();
-    message.overloads = object.overloads?.map(e => Overload.fromPartial(e)) || [];
+    message.overloads = object.overloads?.map(e => FunctionDecl_Decl_Overload.fromPartial(e)) || [];
     return message;
   }
 

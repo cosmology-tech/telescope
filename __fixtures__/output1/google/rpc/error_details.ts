@@ -197,7 +197,7 @@ export const QuotaFailure = {
 
   fromPartial<I extends Exact<DeepPartial<QuotaFailure>, I>>(object: I): QuotaFailure {
     const message = createBaseQuotaFailure();
-    message.violations = object.violations?.map(e => Violation.fromPartial(e)) || [];
+    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
   }
 
@@ -275,20 +275,20 @@ export const QuotaFailure_Violation = {
   }
 
 };
-export interface ErrorInfo_StringMapEntry {
+export interface ErrorInfo_MetadataMapEntry {
   key: string;
   value: string;
 }
 
-function createBaseErrorInfo_StringMapEntry(): ErrorInfo_StringMapEntry {
+function createBaseErrorInfo_MetadataMapEntry(): ErrorInfo_MetadataMapEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const ErrorInfo_StringMapEntry = {
-  encode(message: ErrorInfo_StringMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const ErrorInfo_MetadataMapEntry = {
+  encode(message: ErrorInfo_MetadataMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -300,10 +300,10 @@ export const ErrorInfo_StringMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_StringMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseErrorInfo_StringMapEntry();
+    const message = createBaseErrorInfo_MetadataMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -326,22 +326,22 @@ export const ErrorInfo_StringMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): ErrorInfo_StringMapEntry {
+  fromJSON(object: any): ErrorInfo_MetadataMapEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: ErrorInfo_StringMapEntry): unknown {
+  toJSON(message: ErrorInfo_MetadataMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ErrorInfo_StringMapEntry>, I>>(object: I): ErrorInfo_StringMapEntry {
-    const message = createBaseErrorInfo_StringMapEntry();
+  fromPartial<I extends Exact<DeepPartial<ErrorInfo_MetadataMapEntry>, I>>(object: I): ErrorInfo_MetadataMapEntry {
+    const message = createBaseErrorInfo_MetadataMapEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -524,7 +524,7 @@ export const PreconditionFailure = {
 
   fromPartial<I extends Exact<DeepPartial<PreconditionFailure>, I>>(object: I): PreconditionFailure {
     const message = createBasePreconditionFailure();
-    message.violations = object.violations?.map(e => Violation.fromPartial(e)) || [];
+    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
   }
 
@@ -676,7 +676,7 @@ export const BadRequest = {
 
   fromPartial<I extends Exact<DeepPartial<BadRequest>, I>>(object: I): BadRequest {
     const message = createBaseBadRequest();
-    message.fieldViolations = object.fieldViolations?.map(e => FieldViolation.fromPartial(e)) || [];
+    message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
     return message;
   }
 
@@ -987,7 +987,7 @@ export const Help = {
 
   fromPartial<I extends Exact<DeepPartial<Help>, I>>(object: I): Help {
     const message = createBaseHelp();
-    message.links = object.links?.map(e => Link.fromPartial(e)) || [];
+    message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
     return message;
   }
 
