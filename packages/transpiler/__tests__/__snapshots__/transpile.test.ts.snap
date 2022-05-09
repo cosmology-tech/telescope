@@ -8,6 +8,7 @@ Object {
     "Exact": true,
     "Long": true,
     "_m0": true,
+    "isObject": true,
     "isSet": true,
   },
 }

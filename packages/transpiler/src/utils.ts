@@ -21,6 +21,7 @@ export const UTILS = {
     fromTimestamp: '@osmonauts/helpers',
     GeneratedType: '@cosmjs/proto-signing',
     isSet: '@osmonauts/helpers',
+    isObject: '@osmonauts/helpers',
     Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
     // Long: { type: 'default', path: 'long', name: 'Long ' },
     OfflineSigner: '@cosmjs/proto-signing',
