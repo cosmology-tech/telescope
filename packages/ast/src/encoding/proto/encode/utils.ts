@@ -3,6 +3,86 @@ import { EncodeMethod } from './index';
 import { getTagNumber } from '../types';
 import { getKeyTypeEntryName } from '..';
 
+const notUndefined = (prop: string): t.Expression => {
+    return t.binaryExpression(
+        '!==',
+        t.memberExpression(
+            t.identifier('message'),
+            t.identifier(prop)
+        ),
+        t.identifier('undefined')
+    );
+};
+
+const notEmptyString = (prop: string): t.Expression => {
+    return t.binaryExpression('!==',
+        t.memberExpression(
+            t.identifier('message'),
+            t.identifier(prop)
+        ),
+        t.stringLiteral('')
+    )
+};
+
+const longNotZero = (prop: string): t.Expression => {
+    return t.unaryExpression('!',
+        t.callExpression(
+            t.memberExpression(
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(prop)
+                ),
+                t.identifier('isZero')
+            ),
+            []
+        )
+    );
+};
+
+const lengthNotZero = (prop: string): t.Expression => {
+    return t.binaryExpression(
+        '!==',
+        t.memberExpression(
+            t.memberExpression(
+                t.identifier('message'),
+                t.identifier(prop)
+            ),
+            t.identifier('length')
+        ),
+        t.numericLiteral(0)
+    );
+}
+
+const ifTrue = (prop: string): t.Expression => {
+    return t.binaryExpression('===',
+        t.memberExpression(
+            t.identifier('message'),
+            t.identifier(prop)
+        ),
+        t.booleanLiteral(true)
+    );
+};
+
+const notZero = (prop: string): t.Expression => {
+    return t.binaryExpression('!==',
+        t.memberExpression(
+            t.identifier('message'),
+            t.identifier(prop)
+        ),
+        t.numericLiteral(0)
+    )
+};
+
+
+// TODO research, shouldn't we AND these two tests?
+const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean) => {
+    if (isOptional) {
+        return notUndefined(prop);
+    }
+    return test;
+}
+
+
 export const types = {
 
     /*
@@ -10,16 +90,10 @@ export const types = {
             writer.uint32(10).string(message.sender);
         }
     */
-    string(num: number, prop: string) {
+    string(num: number, prop: string, isOptional: boolean) {
 
         return t.ifStatement(
-            t.binaryExpression('!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.stringLiteral('')
-            ),
+            wrapOptional(prop, notEmptyString(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -53,15 +127,9 @@ export const types = {
         }
     */
 
-    double(num: number, prop: string) {
+    double(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.binaryExpression('!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.numericLiteral(0)
-            ),
+            wrapOptional(prop, notZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -95,15 +163,9 @@ export const types = {
         }
     */
 
-    float(num: number, prop: string) {
+    float(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.binaryExpression('!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.numericLiteral(0)
-            ),
+            wrapOptional(prop, notZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -136,16 +198,9 @@ export const types = {
     //     writer.uint32(24).int32(message.int32Value);
     //   }
 
-    int32(num: number, prop: string) {
+    int32(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.numericLiteral(0)
-            ),
+            wrapOptional(prop, notZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -177,16 +232,9 @@ export const types = {
     //     writer.uint32(24).uint32(message.int32Value);
     //   }
 
-    uint32(num: number, prop: string) {
+    uint32(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.numericLiteral(0)
-            ),
+            wrapOptional(prop, notZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -219,20 +267,9 @@ export const types = {
     //     writer.uint32(24).int64(message.int64Value);
     //   }
 
-    int64(num: number, prop: string) {
+    int64(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.unaryExpression('!',
-                t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('isZero')
-                    ),
-                    []
-                )
-            ),
+            wrapOptional(prop, longNotZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -264,20 +301,9 @@ export const types = {
     //     writer.uint32(24).uint64(message.int64Value);
     //   }
 
-    uint64(num: number, prop: string) {
+    uint64(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.unaryExpression('!',
-                t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('isZero')
-                    ),
-                    []
-                )
-            ),
+            wrapOptional(prop, longNotZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -309,16 +335,10 @@ export const types = {
     //     writer.uint32(32).bool(message.disableMacros);
     //   }
 
-    bool(num: number, prop: string) {
+    bool(num: number, prop: string, isOptional: boolean) {
 
         return t.ifStatement(
-            t.binaryExpression('===',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.booleanLiteral(true)
-            ),
+            wrapOptional(prop, ifTrue(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -348,14 +368,7 @@ export const types = {
 
     type(num: number, prop: string, name: string) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.identifier('undefined')
-            ),
+            notUndefined(prop),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -401,16 +414,9 @@ export const types = {
     //     writer.uint32(24).int32(message.singleField);
     //   }
 
-    enum(num: number, prop: string) {
+    enum(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.numericLiteral(0)
-            ),
+            wrapOptional(prop, notZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -445,19 +451,9 @@ export const types = {
     */
 
 
-    bytes(num: number, prop: string) {
+    bytes(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('length')
-                ),
-                t.numericLiteral(0)
-            ),
+            wrapOptional(prop, lengthNotZero(prop), isOptional),
             t.blockStatement([
                 t.expressionStatement(
                     t.callExpression(
@@ -491,14 +487,7 @@ export const types = {
 
     timestamp(num: number, prop: string) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.identifier('undefined')
-            ),
+            notUndefined(prop),
             t.expressionStatement(
                 t.callExpression(
                     t.memberExpression(
@@ -548,14 +537,7 @@ export const types = {
 
     duration(num: number, prop: string) {
         return t.ifStatement(
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.identifier('undefined')
-            ),
+            notUndefined(prop),
             t.expressionStatement(
                 t.callExpression(
                     t.memberExpression(
@@ -834,49 +816,49 @@ export const encode = {
     string(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.string(num, prop);
+        return types.string(num, prop, args.isOptional);
     },
 
     double(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.double(num, prop);
+        return types.double(num, prop, args.isOptional);
     },
 
     float(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.float(num, prop);
+        return types.float(num, prop, args.isOptional);
     },
 
     int32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.int32(num, prop);
+        return types.int32(num, prop, args.isOptional);
     },
 
     uint32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.uint32(num, prop);
+        return types.uint32(num, prop, args.isOptional);
     },
 
     int64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.int64(num, prop);
+        return types.int64(num, prop, args.isOptional);
     },
 
     uint64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.uint64(num, prop);
+        return types.uint64(num, prop, args.isOptional);
     },
 
     bool(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.bool(num, prop);
+        return types.bool(num, prop, args.isOptional);
     },
 
     type(args: EncodeMethod) {
@@ -889,13 +871,13 @@ export const encode = {
     enum(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.enum(num, prop);
+        return types.enum(num, prop, args.isOptional);
     },
 
     bytes(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.bytes(num, prop);
+        return types.bytes(num, prop, args.isOptional);
     },
 
     timestamp(args: EncodeMethod) {

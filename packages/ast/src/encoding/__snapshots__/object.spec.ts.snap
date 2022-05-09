@@ -741,19 +741,19 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.null !== 0) {
+    if (message.null !== undefined) {
       writer.uint32(16).int32(message.null);
     }
 
-    if (message.primitive !== 0) {
+    if (message.primitive !== undefined) {
       writer.uint32(24).int32(message.primitive);
     }
 
-    if (message.wrapper !== 0) {
+    if (message.wrapper !== undefined) {
       writer.uint32(32).int32(message.wrapper);
     }
 
-    if (message.wellKnown !== 0) {
+    if (message.wellKnown !== undefined) {
       writer.uint32(40).int32(message.wellKnown);
     }
 
@@ -769,11 +769,11 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       Type_FunctionType.encode(message.function, writer.uint32(66).fork()).ldelim();
     }
 
-    if (message.messageType !== \\"\\") {
+    if (message.messageType !== undefined) {
       writer.uint32(74).string(message.messageType);
     }
 
-    if (message.typeParam !== \\"\\") {
+    if (message.typeParam !== undefined) {
       writer.uint32(82).string(message.typeParam);
     }
 
@@ -1138,31 +1138,31 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 "export const Constant = {
   encode(message: Constant, writer = _m0.Writer.create()): _m0.Writer {
-    if (message.nullValue !== 0) {
+    if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
 
-    if (message.boolValue === true) {
+    if (message.boolValue !== undefined) {
       writer.uint32(16).bool(message.boolValue);
     }
 
-    if (!message.int64Value.isZero()) {
+    if (message.int64Value !== undefined) {
       writer.uint32(24).int64(message.int64Value);
     }
 
-    if (!message.uint64Value.isZero()) {
+    if (message.uint64Value !== undefined) {
       writer.uint32(32).uint64(message.uint64Value);
     }
 
-    if (message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined) {
       writer.uint32(41).double(message.doubleValue);
     }
 
-    if (message.stringValue !== \\"\\") {
+    if (message.stringValue !== undefined) {
       writer.uint32(50).string(message.stringValue);
     }
 
-    if (message.bytesValue.length !== 0) {
+    if (message.bytesValue !== undefined) {
       writer.uint32(58).bytes(message.bytesValue);
     }
 
@@ -1517,7 +1517,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       Any.encode(message.protoPayload, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.textPayload !== \\"\\") {
+    if (message.textPayload !== undefined) {
       writer.uint32(26).string(message.textPayload);
     }
 
