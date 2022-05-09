@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { camel } from 'case';
+import { getEnumFromJsonName, getEnumToJsonName } from './types';
 import { identifier, tsEnumMember, functionDeclaration } from '../../utils';
 
 import { ProtoEnum } from './types';
@@ -63,7 +63,7 @@ export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
 
     return t.exportNamedDeclaration(
         functionDeclaration(
-            t.identifier(`${camel(name)}FromJSON`),
+            t.identifier(getEnumFromJsonName(name)),
             [
                 identifier('object', t.tsTypeAnnotation(t.tsAnyKeyword()))
             ],
@@ -113,7 +113,7 @@ export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
 
     return t.exportNamedDeclaration(
         functionDeclaration(
-            t.identifier(`${camel(name)}ToJSON`),
+            t.identifier(getEnumToJsonName(name)),
             [
                 identifier('object', t.tsTypeAnnotation(
                     t.tsTypeReference(t.identifier(name))
