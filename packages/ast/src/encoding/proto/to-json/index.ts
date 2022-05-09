@@ -49,9 +49,9 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
                 case 'uint32':
                     return [...m, toJSON.array(args, arrayTypes.uint32())];
                 case 'int64':
-                    return [...m, toJSON.array(args, arrayTypes.int64())];
+                    return [...m, toJSON.array(args, arrayTypes.int64(args))];
                 case 'uint64':
-                    return [...m, toJSON.array(args, arrayTypes.uint64())];
+                    return [...m, toJSON.array(args, arrayTypes.uint64(args))];
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
