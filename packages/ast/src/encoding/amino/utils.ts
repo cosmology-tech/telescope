@@ -49,14 +49,3 @@ export const protoFieldsToArray = (proto: ProtoType) => {
         };
     })
 }
-
-// IMPORTS 
-// TODO can we move this out of ast pkg? only amino uses it.
-export const getTypeFromCurrentProtoPath = (field: ProtoField, currentProtoPath: string, context: AminoParseContext) => {
-    const ref = context.store.findProto(currentProtoPath);
-    const lookup = context.store.get(ref, field.parsedType.name);
-    if (!lookup) {
-        throw new Error('Undefined Symbol: ' + field.parsedType.name);
-    }
-    return lookup.obj;
-};

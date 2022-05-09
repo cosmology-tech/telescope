@@ -1,10 +1,8 @@
 import * as t from '@babel/types';
 import { BILLION, memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
 import { FromAminoParseField, fromAminoParseField } from './index'
-import { getTypeFromCurrentProtoPath, protoFieldsToArray } from '../utils';
-import { getEnumFromJsonName } from '../../proto';
+import { protoFieldsToArray } from '../utils';
 import { getOneOfs, getFieldOptionality } from '../../proto';
-import { getObjectName } from '@osmonauts/proto-parser';
 
 export const fromAmino = {
     defaultType(args: FromAminoParseField) {
@@ -119,9 +117,7 @@ export const fromAmino = {
     },
 
     enum({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
-        const Enum = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
-
-        const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
+        const enumFunction = context.lookupEnumFromJson(field, currentProtoPath);
         const value = t.callExpression(
             t.identifier(enumFunction), [
             memberExpressionOrIdentifierAminoCasing(scope, context.options.aminoCasingFn)
@@ -130,9 +126,7 @@ export const fromAmino = {
     },
 
     enumArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
-        const Enum = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
-
-        const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
+        const enumFunction = context.lookupEnumFromJson(field, currentProtoPath);
         const value = t.callExpression(
             t.memberExpression(
                 memberExpressionOrIdentifierAminoCasing(scope, context.options.aminoCasingFn),
@@ -157,9 +151,8 @@ export const fromAmino = {
 
     type({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const parentField = field;
-        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const oneOfs = getOneOfs(Type);
-
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
             const isOptional = getFieldOptionality(field, isOneOf);
@@ -184,7 +177,7 @@ export const fromAmino = {
     typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const variable = 'el' + nested;
         const parentField = field;
-        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);

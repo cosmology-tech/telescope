@@ -1,10 +1,9 @@
 import * as t from '@babel/types';
-import { arrayTypeNDim, getTypeFromCurrentProtoPath } from '../utils';
+import { arrayTypeNDim } from '../utils';
 import { protoFieldsToArray } from '../utils';
 import { getTSTypeFromProtoType } from '../../proto/types';
 import { getOneOfs, getFieldOptionality } from '../../proto';
 import { RenderAminoField, renderAminoField } from '.';
-
 
 export const aminoInterface = {
     defaultType(args: RenderAminoField) {
@@ -57,7 +56,8 @@ export const aminoInterface = {
     },
     type({ context, field, currentProtoPath, isOptional }: RenderAminoField) {
         const parentField = field;
-        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+
+        const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
@@ -84,7 +84,7 @@ export const aminoInterface = {
     },
     typeArray({ context, field, currentProtoPath, isOptional }: RenderAminoField) {
         const parentField = field;
-        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
 
         // TODO how to handle isOptional from parent to child... 
         const oneOfs = getOneOfs(Type);

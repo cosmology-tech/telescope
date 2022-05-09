@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { BILLION, memberExpressionOrIdentifier, shorthandProperty } from "../../../utils";
-import { getTypeFromCurrentProtoPath, protoFieldsToArray } from '../utils';
+import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getOneOfs, getFieldOptionality } from '../../proto';
 
@@ -138,7 +138,7 @@ export const toAmino = {
     type({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField) {
         /// TODO (can this be refactored out? e.g. no recursive calls in this file?)
         /// BEGIN
-        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const parentField = field;
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
@@ -171,7 +171,7 @@ export const toAmino = {
             throw new Error('Arrays only support types[Type] right now.');
         }
 
-        const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const parentField = field;
         const oneOfs = getOneOfs(Type);
 
