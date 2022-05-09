@@ -6,6 +6,8 @@ import {
     createCreateProtoType,
     createObjectWithMethods,
     createProtoEnum,
+    createProtoEnumToJSON,
+    createProtoEnumFromJSON,
     createProtoType,
     makeAminoTypeInterface,
     ProtoParseContext,
@@ -287,6 +289,8 @@ export class TelescopeParseContext implements TelescopeParseContext {
                 buildBaseTypeScriptClass(this, name, obj);
             } else if (obj.type === 'Enum') {
                 this.body.push(createProtoEnum(name, obj));
+                this.body.push(createProtoEnumFromJSON(name, obj));
+                this.body.push(createProtoEnumToJSON(name, obj));
             } else {
                 throw new Error('buildBase(): unknown type');
             }
