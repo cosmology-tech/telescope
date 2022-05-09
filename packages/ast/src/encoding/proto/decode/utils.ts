@@ -1,7 +1,6 @@
 import * as t from '@babel/types';
 import { DecodeMethod } from './index';
 import { getKeyTypeEntryName } from '..';
-import { getFieldsTypeName } from '../types';
 
 export const decode = {
     string(args: DecodeMethod) {
@@ -93,7 +92,7 @@ export const decode = {
     typeArray(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         return switchTypeArray(num,
             prop,
             name
@@ -208,7 +207,7 @@ export const baseTypes = {
 
     // SignDocDirectAux.decode(reader, reader.uint32());
     type(args: DecodeMethod) {
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),

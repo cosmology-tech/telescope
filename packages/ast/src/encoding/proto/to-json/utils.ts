@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
-import { ToJSONMethod } from '.';
-import { getEnumToJsonName, getFieldsTypeName } from '../types';
+import { ToJSONMethod } from './index';
 
 export const toJSON = {
 
@@ -147,7 +146,7 @@ export const toJSON = {
     // message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
     type(args: ToJSONMethod) {
         const prop = args.field.name;
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
 
         return t.expressionStatement(
             t.logicalExpression(
@@ -193,7 +192,7 @@ export const toJSON = {
     // message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     enum(args: ToJSONMethod) {
         const prop = args.field.name;
-        const enumFuncName = getEnumToJsonName(getFieldsTypeName(args.field));
+        const enumFuncName = args.context.getToEnum(args.field);
 
         return t.expressionStatement(
             t.logicalExpression(
@@ -632,8 +631,7 @@ export const arrayTypes = {
     },
 
     enum(args: ToJSONMethod) {
-        const prop = args.field.name;
-        const enumFuncName = getEnumToJsonName(getFieldsTypeName(args.field));
+        const enumFuncName = args.context.getToEnum(args.field);
         return t.callExpression(
             t.identifier(enumFuncName),
             [
@@ -649,11 +647,12 @@ export const arrayTypes = {
     // }
 
     type(args: ToJSONMethod) {
+        const name = args.context.getTypeName(args.field);
         return t.conditionalExpression(
             t.identifier('e'),
             t.callExpression(
                 t.memberExpression(
-                    t.identifier(getFieldsTypeName(args.field)),
+                    t.identifier(name),
                     t.identifier('toJSON')
                 ),
                 [

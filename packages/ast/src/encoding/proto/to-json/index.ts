@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoField, ProtoType, getFieldsTypeName } from '../types';
+import { ProtoField, ProtoType } from '../types';
 import { arrayTypes, toJSON } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {

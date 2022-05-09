@@ -17,13 +17,14 @@ import {
     createRegistryLoader,
     // helper
     createHelperObject,
+    ImportUsage
 } from '@osmonauts/ast';
 import { extname, relative, dirname } from 'path';
 import { ImportHash, ImportObj, ServiceMutation, ServiceQuery } from './types';
 import { UTILS, getRelativePath, getRoot } from './utils';
 import * as t from '@babel/types';
 
-const importHashToArray = (hash: ImportHash) => {
+const importHashToArray = (hash: ImportHash): ImportObj[] => {
     return Object.entries(hash ?? {})
         .reduce((m, [path, names]) => {
             names.forEach(name => {
@@ -37,42 +38,35 @@ const importHashToArray = (hash: ImportHash) => {
         }, [])
 };
 
-export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
-
-    const list: ImportObj[] = importHashToArray(allImports);
-
-    const utils = Object.keys({
-        ...context.amino.utils,
-        ...context.proto.utils
-    });
-
-    utils.forEach(util => {
-        if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
-        if (typeof UTILS[util] === 'string') {
-            list.push({
+const getProtoImports = (context: TelescopeParseContext): ImportObj[] => {
+    return context.proto.imports
+        .map(usage => {
+            const importPath = getRelativePath(context.ref.filename, usage.import);
+            return {
                 type: 'import',
-                path: UTILS[util],
-                name: util
-            });
-        } else {
-            list.push(UTILS[util]);
-        }
-    });
+                name: usage.name,
+                path: importPath
+            }
+        });
+};
 
-    const parsedImports: ImportHash = context.amino.ref.traversed.parsedImports ?? {};
-
-    Object.entries(parsedImports)
+const getParsedImports = (context: TelescopeParseContext, parsedImports: ImportHash): ImportObj[] => {
+    const imports = [];
+    Object.entries(parsedImports ?? {})
         .forEach(([path, names]) => {
             const importPath = getRelativePath(context.ref.filename, path);
             names.forEach(name => {
-                list.push({
+                imports.push({
                     type: 'import',
                     name,
                     path: importPath
                 })
             });
         });
+    return imports;
+};
 
+const getImportStatments = (list: ImportObj[]) => {
     const imports = list.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
         const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
@@ -80,7 +74,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
         return m;
     }, {});
 
-    const importStmts = Object.entries(imports)
+    return Object.entries(imports)
         .reduce((m, [importPath, imports]: [string, ImportObj[]]) => {
             const defaultImports = imports.filter(a => a.type === 'default');
             if (defaultImports.length) {
@@ -116,6 +110,45 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
             }
             return m;
         }, [])
+};
+
+const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
+    const list = [];
+    const utils = Object.keys({
+        ...context.amino.utils,
+        ...context.proto.utils
+    });
+
+    utils.forEach(util => {
+        if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
+        if (typeof UTILS[util] === 'string') {
+            list.push({
+                type: 'import',
+                path: UTILS[util],
+                name: util
+            });
+        } else {
+            list.push(UTILS[util]);
+        }
+    });
+    return list;
+};
+
+export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
+
+    const protoImports: ImportObj[] = getProtoImports(context);
+    const parsedImports: ImportObj[] = getParsedImports(context, context.amino.ref.traversed.parsedImports);
+    const additionalImports: ImportObj[] = importHashToArray(allImports);
+    const utilities: ImportObj[] = convertUtilsToImports(context);
+
+    const list = []
+        .concat(parsedImports)
+        .concat(utilities)
+        .concat(protoImports)
+        .concat(additionalImports);
+
+
+    const importStmts = getImportStatments(list);
 
     return importStmts;
 }

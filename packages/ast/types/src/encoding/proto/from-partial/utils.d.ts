@@ -3,9 +3,14 @@ import { FromPartialMethod } from './index';
 export declare const fromPartial: {
     string(args: FromPartialMethod): t.ExpressionStatement;
     bool(args: FromPartialMethod): t.ExpressionStatement;
+    number(args: FromPartialMethod): t.ExpressionStatement;
+    int32(args: FromPartialMethod): t.ExpressionStatement;
+    uint32(args: FromPartialMethod): t.ExpressionStatement;
     double(args: FromPartialMethod): t.ExpressionStatement;
+    float(args: FromPartialMethod): t.ExpressionStatement;
+    long(args: FromPartialMethod, defaultMethod: 'ZERO' | 'UZERO'): t.ExpressionStatement;
     int64(args: FromPartialMethod): t.ExpressionStatement;
-    long(args: FromPartialMethod): t.ExpressionStatement;
+    uint64(args: FromPartialMethod): t.ExpressionStatement;
     type(args: FromPartialMethod): t.ExpressionStatement;
     enum(args: FromPartialMethod): t.ExpressionStatement;
     bytes(args: FromPartialMethod): t.ExpressionStatement;
@@ -15,8 +20,17 @@ export declare const fromPartial: {
     array(args: FromPartialMethod, expr: t.Expression): t.ExpressionStatement;
 };
 export declare const arrayTypes: {
+    identity(): t.Identifier;
     string(): t.Identifier;
+    bool(): t.Identifier;
+    bytes(): t.Identifier;
+    double(): t.Identifier;
+    float(): t.Identifier;
+    int32(): t.Identifier;
+    uint32(): t.Identifier;
+    enum(): t.Identifier;
     long(): t.CallExpression;
-    number(): t.CallExpression;
-    type(name: string): t.CallExpression;
+    int64(): t.CallExpression;
+    uint64(): t.CallExpression;
+    type(args: FromPartialMethod): t.CallExpression;
 };

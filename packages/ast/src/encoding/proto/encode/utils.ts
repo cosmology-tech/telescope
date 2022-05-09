@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { EncodeMethod } from './index';
-import { getFieldsTypeName, getTagNumber } from '../types';
+import { getTagNumber } from '../types';
 import { getKeyTypeEntryName } from '..';
 
 export const types = {
@@ -881,7 +881,7 @@ export const encode = {
 
     type(args: EncodeMethod) {
         const prop = args.field.name;
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         const num = getTagNumber(args.field);
         return types.type(num, prop, name);
     },
@@ -926,7 +926,7 @@ export const encode = {
 
     typeArray(args: EncodeMethod) {
         const prop = args.field.name;
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         const num = getTagNumber(args.field);
         return types.typeArray(num, prop, name);
     },

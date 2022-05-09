@@ -1,7 +1,6 @@
 import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
 import { callExpression, identifier } from '../../../utils';
-import { getEnumFromJsonName, getFieldsTypeName } from '../types';
 
 export const fromJSON = {
 
@@ -160,7 +159,7 @@ export const fromJSON = {
     // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
     type(args: FromJSONMethod) {
         const prop = args.field.name;
-        const name = getFieldsTypeName(args.field)
+        const name = args.context.getTypeName(args.field);
         args.context.addUtil('isSet');
 
         return t.objectProperty(
@@ -195,8 +194,8 @@ export const fromJSON = {
     // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
     enum(args: FromJSONMethod) {
         const prop = args.field.name;
-        const fromJSONFuncName = getEnumFromJsonName(getFieldsTypeName(args.field));
         args.context.addUtil('isSet');
+        const fromJSONFuncName = args.context.getFromEnum(args.field);
 
         return t.objectProperty(
             t.identifier(prop),
@@ -604,7 +603,7 @@ export const arrayTypes = {
 
     // arrayField: Array.isArray(object?.arrayField) ? object.arrayField.map((e: any) => scalarTypeFromJSON(e)) : []
     enum(args: FromJSONMethod) {
-        const fromJSONFuncName = getEnumFromJsonName(getFieldsTypeName(args.field));
+        const fromJSONFuncName = args.context.getFromEnum(args.field);
         return t.callExpression(
             t.identifier(fromJSONFuncName),
             [
@@ -615,7 +614,7 @@ export const arrayTypes = {
 
     // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     type(args: FromJSONMethod) {
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),

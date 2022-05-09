@@ -76,7 +76,9 @@ export const toAminoParseField = ({
         case 'uint64':
             return toAmino.long(args);
         case 'double':
-        case 'int64':
+        case 'float':
+        case 'int32':
+        case 'uint32':
         case 'bool':
         case 'bytes':
         case 'Timestamp':
@@ -138,10 +140,10 @@ export const toAminoJsonMethod = ({
         }
     });
 
-    const ctxs = fields.map(({ ctx }) => ctx);
-    ctxs.forEach(ctx => {
-        // console.log('imports, ', ctx.imports)
-    })
+    // const ctxs = fields.map(({ ctx }) => ctx);
+    // ctxs.forEach(ctx => {
+    //     // console.log('imports, ', ctx)
+    // })
 
     return arrowFunctionExpression(
         [

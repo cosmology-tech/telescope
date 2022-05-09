@@ -157,3 +157,16 @@ it('cosmwasm/wasm/v1/query', () => {
         'QueryRawContractStateRequest', getNestedProto(res).QueryRawContractStateRequest
     ))
 });
+
+it('ibc/core/port/v1/query', () => {
+    const ref = store.findProto('ibc/core/port/v1/query.proto');
+    const res = traverse(store, ref);
+    const context = new ProtoParseContext();
+    expectCode(create(
+        context,
+        'QueryAppVersionRequest',
+        getNestedProto(res).QueryAppVersionRequest
+    ))
+    expect(context.imports).toMatchSnapshot();
+    console.log(context.imports);
+});
