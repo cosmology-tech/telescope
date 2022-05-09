@@ -2970,7 +2970,7 @@ export enum ResponseOfferSnapshot_Result {
   REJECT_SENDER = 5,
   UNRECOGNIZED = -1,
 }
-export function responseOfferSnapshotResultFromJSON(object: any): ResponseOfferSnapshot_Result {
+export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
   switch (object) {
     case "UNKNOWN":
       return ResponseOfferSnapshot_Result.UNKNOWN;
@@ -2996,7 +2996,7 @@ export function responseOfferSnapshotResultFromJSON(object: any): ResponseOfferS
       return ResponseOfferSnapshot_Result.UNRECOGNIZED;
   }
 }
-export function responseOfferSnapshotResultToJSON(object: ResponseOfferSnapshot_Result): string {
+export function responseOfferSnapshot_ResultToJSON(object: ResponseOfferSnapshot_Result): string {
   switch (object) {
     case ResponseOfferSnapshot_Result.UNKNOWN:
       return "UNKNOWN";
@@ -3207,7 +3207,7 @@ export enum ResponseApplySnapshotChunk_Result {
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
 }
-export function responseApplySnapshotChunkResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
+export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
   switch (object) {
     case "UNKNOWN":
       return ResponseApplySnapshotChunk_Result.UNKNOWN;
@@ -3233,7 +3233,7 @@ export function responseApplySnapshotChunkResultFromJSON(object: any): ResponseA
       return ResponseApplySnapshotChunk_Result.UNRECOGNIZED;
   }
 }
-export function responseApplySnapshotChunkResultToJSON(object: ResponseApplySnapshotChunk_Result): string {
+export function responseApplySnapshotChunk_ResultToJSON(object: ResponseApplySnapshotChunk_Result): string {
   switch (object) {
     case ResponseApplySnapshotChunk_Result.UNKNOWN:
       return "UNKNOWN";

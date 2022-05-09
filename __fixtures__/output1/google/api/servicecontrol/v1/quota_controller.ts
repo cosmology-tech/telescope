@@ -644,7 +644,7 @@ export enum QuotaError_Code {
   API_KEY_EXPIRED = 112,
   UNRECOGNIZED = -1,
 }
-export function quotaErrorCodeFromJSON(object: any): QuotaError_Code {
+export function quotaError_CodeFromJSON(object: any): QuotaError_Code {
   switch (object) {
     case "UNSPECIFIED":
       return QuotaError_Code.UNSPECIFIED;
@@ -670,7 +670,7 @@ export function quotaErrorCodeFromJSON(object: any): QuotaError_Code {
       return QuotaError_Code.UNRECOGNIZED;
   }
 }
-export function quotaErrorCodeToJSON(object: QuotaError_Code): string {
+export function quotaError_CodeToJSON(object: QuotaError_Code): string {
   switch (object) {
     case QuotaError_Code.UNSPECIFIED:
       return "UNSPECIFIED";

@@ -487,7 +487,7 @@ export enum LogSink_VersionFormat {
   V1 = 2,
   UNRECOGNIZED = -1,
 }
-export function logSinkVersionFormatFromJSON(object: any): LogSink_VersionFormat {
+export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
   switch (object) {
     case "VERSION_FORMAT_UNSPECIFIED":
       return LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED;
@@ -504,7 +504,7 @@ export function logSinkVersionFormatFromJSON(object: any): LogSink_VersionFormat
       return LogSink_VersionFormat.UNRECOGNIZED;
   }
 }
-export function logSinkVersionFormatToJSON(object: LogSink_VersionFormat): string {
+export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): string {
   switch (object) {
     case LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED:
       return "VERSION_FORMAT_UNSPECIFIED";

@@ -985,7 +985,7 @@ export enum FieldDescriptorProto_Type {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
-export function fieldDescriptorProtoTypeFromJSON(object: any): FieldDescriptorProto_Type {
+export function fieldDescriptorProto_TypeFromJSON(object: any): FieldDescriptorProto_Type {
   switch (object) {
     case "TYPE_DOUBLE":
       return FieldDescriptorProto_Type.TYPE_DOUBLE;
@@ -1047,7 +1047,7 @@ export function fieldDescriptorProtoTypeFromJSON(object: any): FieldDescriptorPr
       return FieldDescriptorProto_Type.UNRECOGNIZED;
   }
 }
-export function fieldDescriptorProtoTypeToJSON(object: FieldDescriptorProto_Type): string {
+export function fieldDescriptorProto_TypeToJSON(object: FieldDescriptorProto_Type): string {
   switch (object) {
     case FieldDescriptorProto_Type.TYPE_DOUBLE:
       return "TYPE_DOUBLE";
@@ -1114,7 +1114,7 @@ export enum FieldDescriptorProto_Label {
   LABEL_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
-export function fieldDescriptorProtoLabelFromJSON(object: any): FieldDescriptorProto_Label {
+export function fieldDescriptorProto_LabelFromJSON(object: any): FieldDescriptorProto_Label {
   switch (object) {
     case "LABEL_OPTIONAL":
       return FieldDescriptorProto_Label.LABEL_OPTIONAL;
@@ -1131,7 +1131,7 @@ export function fieldDescriptorProtoLabelFromJSON(object: any): FieldDescriptorP
       return FieldDescriptorProto_Label.UNRECOGNIZED;
   }
 }
-export function fieldDescriptorProtoLabelToJSON(object: FieldDescriptorProto_Label): string {
+export function fieldDescriptorProto_LabelToJSON(object: FieldDescriptorProto_Label): string {
   switch (object) {
     case FieldDescriptorProto_Label.LABEL_OPTIONAL:
       return "LABEL_OPTIONAL";
@@ -2061,7 +2061,7 @@ export enum FileOptions_OptimizeMode {
   LITE_RUNTIME = 3,
   UNRECOGNIZED = -1,
 }
-export function fileOptionsOptimizeModeFromJSON(object: any): FileOptions_OptimizeMode {
+export function fileOptions_OptimizeModeFromJSON(object: any): FileOptions_OptimizeMode {
   switch (object) {
     case "SPEED":
       return FileOptions_OptimizeMode.SPEED;
@@ -2078,7 +2078,7 @@ export function fileOptionsOptimizeModeFromJSON(object: any): FileOptions_Optimi
       return FileOptions_OptimizeMode.UNRECOGNIZED;
   }
 }
-export function fileOptionsOptimizeModeToJSON(object: FileOptions_OptimizeMode): string {
+export function fileOptions_OptimizeModeToJSON(object: FileOptions_OptimizeMode): string {
   switch (object) {
     case FileOptions_OptimizeMode.SPEED:
       return "SPEED";
@@ -2362,7 +2362,7 @@ export enum FieldOptions_CType {
   STRING_PIECE = 2,
   UNRECOGNIZED = -1,
 }
-export function fieldOptionsCTypeFromJSON(object: any): FieldOptions_CType {
+export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
   switch (object) {
     case "STRING":
       return FieldOptions_CType.STRING;
@@ -2379,7 +2379,7 @@ export function fieldOptionsCTypeFromJSON(object: any): FieldOptions_CType {
       return FieldOptions_CType.UNRECOGNIZED;
   }
 }
-export function fieldOptionsCTypeToJSON(object: FieldOptions_CType): string {
+export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
   switch (object) {
     case FieldOptions_CType.STRING:
       return "STRING";
@@ -2405,7 +2405,7 @@ export enum FieldOptions_JSType {
   JS_NUMBER = 2,
   UNRECOGNIZED = -1,
 }
-export function fieldOptionsJSTypeFromJSON(object: any): FieldOptions_JSType {
+export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
   switch (object) {
     case "JS_NORMAL":
       return FieldOptions_JSType.JS_NORMAL;
@@ -2422,7 +2422,7 @@ export function fieldOptionsJSTypeFromJSON(object: any): FieldOptions_JSType {
       return FieldOptions_JSType.UNRECOGNIZED;
   }
 }
-export function fieldOptionsJSTypeToJSON(object: FieldOptions_JSType): string {
+export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
   switch (object) {
     case FieldOptions_JSType.JS_NORMAL:
       return "JS_NORMAL";
@@ -2855,7 +2855,7 @@ export enum MethodOptions_IdempotencyLevel {
   IDEMPOTENT = 2,
   UNRECOGNIZED = -1,
 }
-export function methodOptionsIdempotencyLevelFromJSON(object: any): MethodOptions_IdempotencyLevel {
+export function methodOptions_IdempotencyLevelFromJSON(object: any): MethodOptions_IdempotencyLevel {
   switch (object) {
     case "IDEMPOTENCY_UNKNOWN":
       return MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN;
@@ -2872,7 +2872,7 @@ export function methodOptionsIdempotencyLevelFromJSON(object: any): MethodOption
       return MethodOptions_IdempotencyLevel.UNRECOGNIZED;
   }
 }
-export function methodOptionsIdempotencyLevelToJSON(object: MethodOptions_IdempotencyLevel): string {
+export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_IdempotencyLevel): string {
   switch (object) {
     case MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN:
       return "IDEMPOTENCY_UNKNOWN";

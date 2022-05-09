@@ -856,7 +856,7 @@ export enum Type_PrimitiveType {
   BYTES = 6,
   UNRECOGNIZED = -1,
 }
-export function typePrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
+export function type_PrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
   switch (object) {
     case "PRIMITIVE_TYPE_UNSPECIFIED":
       return Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED;
@@ -885,7 +885,7 @@ export function typePrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
       return Type_PrimitiveType.UNRECOGNIZED;
   }
 }
-export function typePrimitiveTypeToJSON(object: Type_PrimitiveType): string {
+export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
   switch (object) {
     case Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED:
       return "PRIMITIVE_TYPE_UNSPECIFIED";
@@ -930,7 +930,7 @@ export enum Type_WellKnownType {
   DURATION = 3,
   UNRECOGNIZED = -1,
 }
-export function typeWellKnownTypeFromJSON(object: any): Type_WellKnownType {
+export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
   switch (object) {
     case "WELL_KNOWN_TYPE_UNSPECIFIED":
       return Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED;
@@ -950,7 +950,7 @@ export function typeWellKnownTypeFromJSON(object: any): Type_WellKnownType {
       return Type_WellKnownType.UNRECOGNIZED;
   }
 }
-export function typeWellKnownTypeToJSON(object: Type_WellKnownType): string {
+export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
   switch (object) {
     case Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED:
       return "WELL_KNOWN_TYPE_UNSPECIFIED";

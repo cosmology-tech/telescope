@@ -2748,7 +2748,7 @@ export enum GetServiceIdentityResponse_IdentityState {
   ACTIVE = 1,
   UNRECOGNIZED = -1,
 }
-export function getServiceIdentityResponseIdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState {
+export function getServiceIdentityResponse_IdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState {
   switch (object) {
     case "IDENTITY_STATE_UNSPECIFIED":
       return GetServiceIdentityResponse_IdentityState.IDENTITY_STATE_UNSPECIFIED;
@@ -2762,7 +2762,7 @@ export function getServiceIdentityResponseIdentityStateFromJSON(object: any): Ge
       return GetServiceIdentityResponse_IdentityState.UNRECOGNIZED;
   }
 }
-export function getServiceIdentityResponseIdentityStateToJSON(object: GetServiceIdentityResponse_IdentityState): string {
+export function getServiceIdentityResponse_IdentityStateToJSON(object: GetServiceIdentityResponse_IdentityState): string {
   switch (object) {
     case GetServiceIdentityResponse_IdentityState.IDENTITY_STATE_UNSPECIFIED:
       return "IDENTITY_STATE_UNSPECIFIED";

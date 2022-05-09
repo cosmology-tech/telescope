@@ -275,7 +275,7 @@ export enum OperationMetadata_Status {
   CANCELLED = 5,
   UNRECOGNIZED = -1,
 }
-export function operationMetadataStatusFromJSON(object: any): OperationMetadata_Status {
+export function operationMetadata_StatusFromJSON(object: any): OperationMetadata_Status {
   switch (object) {
     case "STATUS_UNSPECIFIED":
       return OperationMetadata_Status.STATUS_UNSPECIFIED;
@@ -301,7 +301,7 @@ export function operationMetadataStatusFromJSON(object: any): OperationMetadata_
       return OperationMetadata_Status.UNRECOGNIZED;
   }
 }
-export function operationMetadataStatusToJSON(object: OperationMetadata_Status): string {
+export function operationMetadata_StatusToJSON(object: OperationMetadata_Status): string {
   switch (object) {
     case OperationMetadata_Status.STATUS_UNSPECIFIED:
       return "STATUS_UNSPECIFIED";
@@ -419,7 +419,7 @@ export enum Diagnostic_Kind {
   ERROR = 1,
   UNRECOGNIZED = -1,
 }
-export function diagnosticKindFromJSON(object: any): Diagnostic_Kind {
+export function diagnostic_KindFromJSON(object: any): Diagnostic_Kind {
   switch (object) {
     case "WARNING":
       return Diagnostic_Kind.WARNING;
@@ -433,7 +433,7 @@ export function diagnosticKindFromJSON(object: any): Diagnostic_Kind {
       return Diagnostic_Kind.UNRECOGNIZED;
   }
 }
-export function diagnosticKindToJSON(object: Diagnostic_Kind): string {
+export function diagnostic_KindToJSON(object: Diagnostic_Kind): string {
   switch (object) {
     case Diagnostic_Kind.WARNING:
       return "WARNING";
@@ -640,7 +640,7 @@ export enum ConfigFile_FileType {
   PROTO_FILE = 6,
   UNRECOGNIZED = -1,
 }
-export function configFileFileTypeFromJSON(object: any): ConfigFile_FileType {
+export function configFile_FileTypeFromJSON(object: any): ConfigFile_FileType {
   switch (object) {
     case "FILE_TYPE_UNSPECIFIED":
       return ConfigFile_FileType.FILE_TYPE_UNSPECIFIED;
@@ -666,7 +666,7 @@ export function configFileFileTypeFromJSON(object: any): ConfigFile_FileType {
       return ConfigFile_FileType.UNRECOGNIZED;
   }
 }
-export function configFileFileTypeToJSON(object: ConfigFile_FileType): string {
+export function configFile_FileTypeToJSON(object: ConfigFile_FileType): string {
   switch (object) {
     case ConfigFile_FileType.FILE_TYPE_UNSPECIFIED:
       return "FILE_TYPE_UNSPECIFIED";
@@ -1183,7 +1183,7 @@ export enum Rollout_RolloutStatus {
   FAILED_ROLLED_BACK = 6,
   UNRECOGNIZED = -1,
 }
-export function rolloutRolloutStatusFromJSON(object: any): Rollout_RolloutStatus {
+export function rollout_RolloutStatusFromJSON(object: any): Rollout_RolloutStatus {
   switch (object) {
     case "ROLLOUT_STATUS_UNSPECIFIED":
       return Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED;
@@ -1212,7 +1212,7 @@ export function rolloutRolloutStatusFromJSON(object: any): Rollout_RolloutStatus
       return Rollout_RolloutStatus.UNRECOGNIZED;
   }
 }
-export function rolloutRolloutStatusToJSON(object: Rollout_RolloutStatus): string {
+export function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): string {
   switch (object) {
     case Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED:
       return "ROLLOUT_STATUS_UNSPECIFIED";

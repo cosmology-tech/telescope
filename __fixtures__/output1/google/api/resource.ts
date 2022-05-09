@@ -173,7 +173,7 @@ export enum ResourceDescriptor_History {
   FUTURE_MULTI_PATTERN = 2,
   UNRECOGNIZED = -1,
 }
-export function resourceDescriptorHistoryFromJSON(object: any): ResourceDescriptor_History {
+export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescriptor_History {
   switch (object) {
     case "HISTORY_UNSPECIFIED":
       return ResourceDescriptor_History.HISTORY_UNSPECIFIED;
@@ -190,7 +190,7 @@ export function resourceDescriptorHistoryFromJSON(object: any): ResourceDescript
       return ResourceDescriptor_History.UNRECOGNIZED;
   }
 }
-export function resourceDescriptorHistoryToJSON(object: ResourceDescriptor_History): string {
+export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_History): string {
   switch (object) {
     case ResourceDescriptor_History.HISTORY_UNSPECIFIED:
       return "HISTORY_UNSPECIFIED";
@@ -220,7 +220,7 @@ export enum ResourceDescriptor_Style {
   DECLARATIVE_FRIENDLY = 1,
   UNRECOGNIZED = -1,
 }
-export function resourceDescriptorStyleFromJSON(object: any): ResourceDescriptor_Style {
+export function resourceDescriptor_StyleFromJSON(object: any): ResourceDescriptor_Style {
   switch (object) {
     case "STYLE_UNSPECIFIED":
       return ResourceDescriptor_Style.STYLE_UNSPECIFIED;
@@ -234,7 +234,7 @@ export function resourceDescriptorStyleFromJSON(object: any): ResourceDescriptor
       return ResourceDescriptor_Style.UNRECOGNIZED;
   }
 }
-export function resourceDescriptorStyleToJSON(object: ResourceDescriptor_Style): string {
+export function resourceDescriptor_StyleToJSON(object: ResourceDescriptor_Style): string {
   switch (object) {
     case ResourceDescriptor_Style.STYLE_UNSPECIFIED:
       return "STYLE_UNSPECIFIED";

@@ -578,7 +578,7 @@ export enum GetServiceConfigRequest_ConfigView {
   FULL = 1,
   UNRECOGNIZED = -1,
 }
-export function getServiceConfigRequestConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
+export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
     case "BASIC":
       return GetServiceConfigRequest_ConfigView.BASIC;
@@ -592,7 +592,7 @@ export function getServiceConfigRequestConfigViewFromJSON(object: any): GetServi
       return GetServiceConfigRequest_ConfigView.UNRECOGNIZED;
   }
 }
-export function getServiceConfigRequestConfigViewToJSON(object: GetServiceConfigRequest_ConfigView): string {
+export function getServiceConfigRequest_ConfigViewToJSON(object: GetServiceConfigRequest_ConfigView): string {
   switch (object) {
     case GetServiceConfigRequest_ConfigView.BASIC:
       return "BASIC";

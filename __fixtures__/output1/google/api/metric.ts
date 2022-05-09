@@ -302,7 +302,7 @@ export enum MetricDescriptor_MetricKind {
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
 }
-export function metricDescriptorMetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
+export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
   switch (object) {
     case "METRIC_KIND_UNSPECIFIED":
       return MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED;
@@ -322,7 +322,7 @@ export function metricDescriptorMetricKindFromJSON(object: any): MetricDescripto
       return MetricDescriptor_MetricKind.UNRECOGNIZED;
   }
 }
-export function metricDescriptorMetricKindToJSON(object: MetricDescriptor_MetricKind): string {
+export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_MetricKind): string {
   switch (object) {
     case MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED:
       return "METRIC_KIND_UNSPECIFIED";
@@ -365,7 +365,7 @@ export enum MetricDescriptor_ValueType {
   MONEY = 6,
   UNRECOGNIZED = -1,
 }
-export function metricDescriptorValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
+export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
   switch (object) {
     case "VALUE_TYPE_UNSPECIFIED":
       return MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED;
@@ -394,7 +394,7 @@ export function metricDescriptorValueTypeFromJSON(object: any): MetricDescriptor
       return MetricDescriptor_ValueType.UNRECOGNIZED;
   }
 }
-export function metricDescriptorValueTypeToJSON(object: MetricDescriptor_ValueType): string {
+export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueType): string {
   switch (object) {
     case MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED:
       return "VALUE_TYPE_UNSPECIFIED";

@@ -169,7 +169,7 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
-export function propertyPropertyTypeFromJSON(object: any): Property_PropertyType {
+export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case "UNSPECIFIED":
       return Property_PropertyType.UNSPECIFIED;
@@ -192,7 +192,7 @@ export function propertyPropertyTypeFromJSON(object: any): Property_PropertyType
       return Property_PropertyType.UNRECOGNIZED;
   }
 }
-export function propertyPropertyTypeToJSON(object: Property_PropertyType): string {
+export function property_PropertyTypeToJSON(object: Property_PropertyType): string {
   switch (object) {
     case Property_PropertyType.UNSPECIFIED:
       return "UNSPECIFIED";

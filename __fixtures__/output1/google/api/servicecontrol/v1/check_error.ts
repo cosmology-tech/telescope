@@ -172,7 +172,7 @@ export enum CheckError_Code {
   CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE = 305,
   UNRECOGNIZED = -1,
 }
-export function checkErrorCodeFromJSON(object: any): CheckError_Code {
+export function checkError_CodeFromJSON(object: any): CheckError_Code {
   switch (object) {
     case "ERROR_CODE_UNSPECIFIED":
       return CheckError_Code.ERROR_CODE_UNSPECIFIED;
@@ -243,7 +243,7 @@ export function checkErrorCodeFromJSON(object: any): CheckError_Code {
       return CheckError_Code.UNRECOGNIZED;
   }
 }
-export function checkErrorCodeToJSON(object: CheckError_Code): string {
+export function checkError_CodeToJSON(object: CheckError_Code): string {
   switch (object) {
     case CheckError_Code.ERROR_CODE_UNSPECIFIED:
       return "ERROR_CODE_UNSPECIFIED";

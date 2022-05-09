@@ -280,7 +280,7 @@ export enum BackendRule_PathTranslation {
   APPEND_PATH_TO_ADDRESS = 2,
   UNRECOGNIZED = -1,
 }
-export function backendRulePathTranslationFromJSON(object: any): BackendRule_PathTranslation {
+export function backendRule_PathTranslationFromJSON(object: any): BackendRule_PathTranslation {
   switch (object) {
     case "PATH_TRANSLATION_UNSPECIFIED":
       return BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED;
@@ -297,7 +297,7 @@ export function backendRulePathTranslationFromJSON(object: any): BackendRule_Pat
       return BackendRule_PathTranslation.UNRECOGNIZED;
   }
 }
-export function backendRulePathTranslationToJSON(object: BackendRule_PathTranslation): string {
+export function backendRule_PathTranslationToJSON(object: BackendRule_PathTranslation): string {
   switch (object) {
     case BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED:
       return "PATH_TRANSLATION_UNSPECIFIED";

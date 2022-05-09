@@ -220,7 +220,7 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
   CHECK = 2,
   UNRECOGNIZED = -1,
 }
-export function disableServiceRequestCheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
+export function disableServiceRequest_CheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
   switch (object) {
     case "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED":
       return DisableServiceRequest_CheckIfServiceHasUsage.CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED;
@@ -237,7 +237,7 @@ export function disableServiceRequestCheckIfServiceHasUsageFromJSON(object: any)
       return DisableServiceRequest_CheckIfServiceHasUsage.UNRECOGNIZED;
   }
 }
-export function disableServiceRequestCheckIfServiceHasUsageToJSON(object: DisableServiceRequest_CheckIfServiceHasUsage): string {
+export function disableServiceRequest_CheckIfServiceHasUsageToJSON(object: DisableServiceRequest_CheckIfServiceHasUsage): string {
   switch (object) {
     case DisableServiceRequest_CheckIfServiceHasUsage.CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED:
       return "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED";

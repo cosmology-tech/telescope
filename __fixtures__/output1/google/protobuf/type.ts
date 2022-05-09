@@ -384,7 +384,7 @@ export enum Field_Kind {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
-export function fieldKindFromJSON(object: any): Field_Kind {
+export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
     case "TYPE_UNKNOWN":
       return Field_Kind.TYPE_UNKNOWN;
@@ -449,7 +449,7 @@ export function fieldKindFromJSON(object: any): Field_Kind {
       return Field_Kind.UNRECOGNIZED;
   }
 }
-export function fieldKindToJSON(object: Field_Kind): string {
+export function field_KindToJSON(object: Field_Kind): string {
   switch (object) {
     case Field_Kind.TYPE_UNKNOWN:
       return "TYPE_UNKNOWN";
@@ -526,7 +526,7 @@ export enum Field_Cardinality {
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
-export function fieldCardinalityFromJSON(object: any): Field_Cardinality {
+export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case "CARDINALITY_UNKNOWN":
       return Field_Cardinality.CARDINALITY_UNKNOWN;
@@ -546,7 +546,7 @@ export function fieldCardinalityFromJSON(object: any): Field_Cardinality {
       return Field_Cardinality.UNRECOGNIZED;
   }
 }
-export function fieldCardinalityToJSON(object: Field_Cardinality): string {
+export function field_CardinalityToJSON(object: Field_Cardinality): string {
   switch (object) {
     case Field_Cardinality.CARDINALITY_UNKNOWN:
       return "CARDINALITY_UNKNOWN";
