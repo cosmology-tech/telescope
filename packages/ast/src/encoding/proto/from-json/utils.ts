@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
 import { callExpression, identifier } from '../../../utils';
+import { getDefaultTSTypeFromProtoType } from '..';
 
 export const fromJSON = {
 
@@ -30,7 +31,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.stringLiteral('')
+                getDefaultTSTypeFromProtoType(args.field, args.isOptional)
             )
         )
     },
@@ -60,7 +61,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.numericLiteral(0)
+                getDefaultTSTypeFromProtoType(args.field, args.isOptional)
             )
         )
     },
@@ -104,13 +105,13 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.booleanLiteral(false)
+                getDefaultTSTypeFromProtoType(args.field, args.isOptional)
             )
         )
     },
 
     // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.UZERO,
-    long(args: FromJSONMethod, defaultMethod: 'ZERO' | 'UZERO') {
+    long(args: FromJSONMethod) {
         const prop = args.field.name;
         args.context.addUtil('isSet');
         args.context.addUtil('Long');
@@ -139,21 +140,18 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.memberExpression(
-                    t.identifier('Long'),
-                    t.identifier(defaultMethod)
-                )
+                getDefaultTSTypeFromProtoType(args.field, args.isOptional)
             )
         );
     },
 
     int64(args: FromJSONMethod) {
-        return fromJSON.long(args, 'ZERO');
+        return fromJSON.long(args);
     },
 
     // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
     uint64(args: FromJSONMethod) {
-        return fromJSON.long(args, 'UZERO');
+        return fromJSON.long(args);
     },
 
     // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
@@ -218,7 +216,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.numericLiteral(0)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
             )
         );
     },
@@ -250,10 +248,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.newExpression(
-                    t.identifier('Uint8Array'),
-                    []
-                )
+                getDefaultTSTypeFromProtoType(args.field, args.isOptional)
             )
         );
     },

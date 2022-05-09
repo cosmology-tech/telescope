@@ -865,15 +865,15 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
   fromJSON(object: any): Type {
     return {
       dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : 0,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : 0,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : 0,
-      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : 0,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : undefined,
       listType: isSet(object.listType) ? Type_ListType.fromJSON(object.listType) : undefined,
       mapType: isSet(object.mapType) ? Type_MapType.fromJSON(object.mapType) : undefined,
       function: isSet(object.function) ? Type_FunctionType.fromJSON(object.function) : undefined,
-      messageType: isSet(object.messageType) ? String(object.messageType) : \\"\\",
-      typeParam: isSet(object.typeParam) ? String(object.typeParam) : \\"\\",
+      messageType: isSet(object.messageType) ? String(object.messageType) : undefined,
+      typeParam: isSet(object.typeParam) ? String(object.typeParam) : undefined,
       type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
       error: isSet(object.error) ? Empty.fromJSON(object.error) : undefined,
       abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
@@ -1227,13 +1227,13 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 
   fromJSON(object: any): Constant {
     return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : 0,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : false,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.ZERO,
-      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.UZERO,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : \\"\\",
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : new Uint8Array(),
+      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
       durationValue: isSet(object.durationValue) ? String(object.durationValue) : undefined,
       timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
@@ -1622,7 +1622,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
         return acc;
       }, {}) : {},
       protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
-      textPayload: isSet(object.textPayload) ? String(object.textPayload) : \\"\\",
+      textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
       structPayload: isSet(object.structPayload) ? Struct.fromJSON(object.structPayload) : undefined,
       operation: isSet(object.operation) ? LogEntryOperation.fromJSON(object.operation) : undefined,
       sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined

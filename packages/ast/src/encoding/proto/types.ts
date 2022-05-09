@@ -305,16 +305,6 @@ export const getBaseCreateTypeFuncName = (name) => {
     return `createBase${upperFirst(name)}`;
 };
 
-/*
-  returns "Type | undefined"
-*/
-const optionalType = (type: t.TSType) => {
-    return t.tsUnionType([
-        type,
-        t.tsUndefinedKeyword()
-    ])
-}
-
 export const getOneOfs = (type: ProtoType) => {
     const keys = Object.keys(type.oneofs ?? {});
     if (!keys.length) return [];
