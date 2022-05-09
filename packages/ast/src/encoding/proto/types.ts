@@ -211,7 +211,11 @@ export const getTagNumber = (field: ProtoField) => {
 };
 
 
-export const getDefaultTSTypeFromProtoType = (field: ProtoField) => {
+export const getDefaultTSTypeFromProtoType = (field: ProtoField, isOptional: boolean) => {
+
+    if (isOptional) {
+        return t.identifier('undefined');
+    }
 
     if (field.rule === 'repeated') {
         return t.arrayExpression([]);
@@ -396,16 +400,21 @@ export const createProtoType = (name: string, proto: ProtoType) => {
 
 
 export const createCreateProtoType = (name: string, proto: ProtoType) => {
+    const oneOfs = getOneOfs(proto);
+
     const fields = Object.keys(proto.fields).map(key => {
+        const isOneOf = oneOfs.includes(key);
+        const isOptional = getFieldOptionality(proto.fields[key], isOneOf)
         return {
             name: key,
-            ...proto.fields[key]
+            ...proto.fields[key],
+            isOptional
         };
     })
         .map(field => {
             return t.objectProperty(
                 t.identifier(field.name),
-                getDefaultTSTypeFromProtoType(field)
+                getDefaultTSTypeFromProtoType(field, field.isOptional)
             )
         })
 
