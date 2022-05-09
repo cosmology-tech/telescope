@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Gauge } from "./gauge";

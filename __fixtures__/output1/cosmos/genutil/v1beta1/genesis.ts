@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   genTxs: Uint8Array[];
 }

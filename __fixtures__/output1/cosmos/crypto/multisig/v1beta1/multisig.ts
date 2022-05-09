@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { bytesFromBase64, base64FromBytes, Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
+import { bytesFromBase64, base64FromBytes, Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface MultiSignature {
   signatures: Uint8Array[];
 }

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 export interface GenesisState {
   codes: Code[];

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Params } from "./params";
 import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, SuperfluidDelegationRecord } from "./superfluid";

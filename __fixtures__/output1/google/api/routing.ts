@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface RoutingRule {
   routingParameters: RoutingParameter[];
 }

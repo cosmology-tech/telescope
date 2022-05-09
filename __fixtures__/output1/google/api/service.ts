@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Api } from "../protobuf/api";
 import { Type, Enum } from "../protobuf/type";
 import { Documentation } from "./documentation";

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { GenesisState } from "../../client/v1/genesis";
 import { GenesisState } from "../../connection/v1/genesis";
 import { GenesisState } from "../../channel/v1/genesis";

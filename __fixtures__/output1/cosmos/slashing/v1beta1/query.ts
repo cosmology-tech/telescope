@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet } from "@osmonauts/helpers";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Params, ValidatorSigningInfo } from "./slashing";
 export interface QueryParamsRequest {}

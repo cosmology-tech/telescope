@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { Exact, DeepPartial } from "@osmonauts/helpers";
 import { GrantAuthorization } from "./authz";
 export interface GenesisState {
   authorization: GrantAuthorization[];

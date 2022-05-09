@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Minter, Params } from "./mint";
 export interface GenesisState {
   minter: Minter;

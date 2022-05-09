@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { GroupInfo, GroupMember, GroupPolicyInfo, Proposal, Vote } from "./types";
 export interface GenesisState {
   groupSeq: Long;

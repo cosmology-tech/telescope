@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Header, Data, Commit } from "./types";
 import { EvidenceList } from "./evidence";
 export interface Block {

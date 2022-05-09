@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Empty {}
 
 function createBaseEmpty(): Empty {

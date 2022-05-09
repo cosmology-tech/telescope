@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, KeysOfUnion, Builtin, isSet, Long } from "@osmonauts/helpers";
+import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 import { FeeToken } from "./feetoken";
 export interface QueryFeeTokensRequest {}
 

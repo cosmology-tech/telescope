@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { toDuration, fromDuration, isSet, Exact, DeepPartial, KeysOfUnion, Builtin } from "@osmonauts/helpers";
+import { toDuration, fromDuration, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Duration } from "../protobuf/duration";
 export interface RetryInfo {
   retryDelay: string;

@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, KeysOfUnion, Builtin, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface Minter {
   inflation: string;
   annualProvisions: string;
