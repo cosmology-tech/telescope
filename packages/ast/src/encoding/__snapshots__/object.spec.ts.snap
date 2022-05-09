@@ -67,7 +67,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptor>, I>>(object: I): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
-    message.data = object.data !== undefined && object.data !== null ? Data.fromPartial(object.data) : undefined;
+    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
   }
@@ -276,8 +276,8 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<ModeInfo_Multi>, I>>(object: I): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
-    message.single = object.single !== undefined && object.single !== null ? Single.fromPartial(object.single) : undefined;
-    message.multi = object.multi !== undefined && object.multi !== null ? Multi.fromPartial(object.multi) : undefined;
+    message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
     return message;
   }
 
@@ -787,14 +787,14 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.primitive = object.primitive ?? 0;
     message.wrapper = object.wrapper ?? 0;
     message.wellKnown = object.wellKnown ?? 0;
-    message.listType = object.listType !== undefined && object.listType !== null ? ListType.fromPartial(object.listType) : undefined;
-    message.mapType = object.mapType !== undefined && object.mapType !== null ? MapType.fromPartial(object.mapType) : undefined;
-    message.function = object.function !== undefined && object.function !== null ? FunctionType.fromPartial(object.function) : undefined;
+    message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : undefined;
+    message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : undefined;
     message.messageType = object.messageType ?? \\"\\";
     message.typeParam = object.typeParam ?? \\"\\";
     message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
-    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? AbstractType.fromPartial(object.abstractType) : undefined;
+    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
   }
 

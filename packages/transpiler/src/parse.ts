@@ -73,7 +73,7 @@ export const parseType = (
     obj.keyTypes.forEach(field => {
         const keyTypeObject = makeKeyTypeObj(context.ref, field, scope);
         const name = getParsedObjectName(context.ref, {
-            name: getKeyTypeEntryName(obj.name, field.parsedType.name)
+            name: getKeyTypeEntryName(obj.name, field.name)
         }, scope);
         context.addType(name, keyTypeObject, true);
     });

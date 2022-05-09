@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { FromPartialMethod } from './index';
 import { identifier, callExpression } from '../../../utils';
+import { getFieldsTypeName } from '..';
 
 export const fromPartial = {
 
@@ -146,7 +147,7 @@ export const fromPartial = {
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
     type(args: FromPartialMethod) {
         const prop = args.field.name;
-        const name = args.field.parsedType.name
+        const name = getFieldsTypeName(args.field);
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -546,7 +547,7 @@ export const arrayTypes = {
 
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     type(args: FromPartialMethod) {
-        const name = args.field.parsedType.name;
+        const name = getFieldsTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),
