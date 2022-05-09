@@ -20,7 +20,7 @@ export interface TxResponse {
 
 function createBaseTxResponse(): TxResponse {
   return {
-    height: Long.UZERO,
+    height: Long.ZERO,
     txhash: "",
     codespace: "",
     code: 0,
@@ -28,8 +28,8 @@ function createBaseTxResponse(): TxResponse {
     rawLog: "",
     logs: [],
     info: "",
-    gasWanted: Long.UZERO,
-    gasUsed: Long.UZERO,
+    gasWanted: Long.ZERO,
+    gasUsed: Long.ZERO,
     tx: undefined,
     timestamp: "",
     events: []

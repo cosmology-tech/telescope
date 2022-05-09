@@ -6,20 +6,20 @@ import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log
 import { HttpRequest } from "../type/http_request";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
-export interface LogEntry_LabelsMapEntry {
+export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
 }
 
-function createBaseLogEntry_LabelsMapEntry(): LogEntry_LabelsMapEntry {
+function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const LogEntry_LabelsMapEntry = {
-  encode(message: LogEntry_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const LogEntry_LabelsEntry = {
+  encode(message: LogEntry_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -31,10 +31,10 @@ export const LogEntry_LabelsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLogEntry_LabelsMapEntry();
+    const message = createBaseLogEntry_LabelsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -57,22 +57,22 @@ export const LogEntry_LabelsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): LogEntry_LabelsMapEntry {
+  fromJSON(object: any): LogEntry_LabelsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: LogEntry_LabelsMapEntry): unknown {
+  toJSON(message: LogEntry_LabelsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsMapEntry>, I>>(object: I): LogEntry_LabelsMapEntry {
-    const message = createBaseLogEntry_LabelsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsEntry>, I>>(object: I): LogEntry_LabelsEntry {
+    const message = createBaseLogEntry_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -113,7 +113,7 @@ function createBaseLogEntry(): LogEntry {
     severity: undefined,
     insertId: "",
     httpRequest: undefined,
-    labels: "",
+    labels: {},
     operation: undefined,
     trace: "",
     spanId: "",
@@ -161,7 +161,7 @@ export const LogEntry = {
     }
 
     Object.entries(message.labels).forEach(([key, value]) => {
-      LogEntry_LabelsMapEntry.encode({
+      LogEntry_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(90).fork()).ldelim();
@@ -244,7 +244,7 @@ export const LogEntry = {
           break;
 
         case 11:
-          const entry11 = LogEntry_LabelsMapEntry.decode(reader, reader.uint32());
+          const entry11 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
 
           if (entry11.value !== undefined) {
             message.labels[entry11.key] = entry11.value;
@@ -480,7 +480,7 @@ export interface LogEntrySourceLocation {
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
     file: "",
-    line: Long.UZERO,
+    line: Long.ZERO,
     function: ""
   };
 }

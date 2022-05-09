@@ -375,7 +375,7 @@ function createBaseValidator(): Validator {
     tokens: "",
     delegatorShares: "",
     description: undefined,
-    unbondingHeight: Long.UZERO,
+    unbondingHeight: Long.ZERO,
     unbondingTime: undefined,
     commission: undefined,
     minSelfDelegation: ""
@@ -1135,7 +1135,7 @@ export interface UnbondingDelegationEntry {
 
 function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
-    creationHeight: Long.UZERO,
+    creationHeight: Long.ZERO,
     completionTime: undefined,
     initialBalance: "",
     balance: ""
@@ -1232,7 +1232,7 @@ export interface RedelegationEntry {
 
 function createBaseRedelegationEntry(): RedelegationEntry {
   return {
-    creationHeight: Long.UZERO,
+    creationHeight: Long.ZERO,
     completionTime: undefined,
     initialBalance: "",
     sharesDst: ""

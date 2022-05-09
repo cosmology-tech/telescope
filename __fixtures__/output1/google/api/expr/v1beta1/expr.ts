@@ -545,7 +545,7 @@ export const Expr_CreateList = {
 };
 export interface Expr_CreateStruct {
   type: string;
-  entries: CreateStruct_Expr_Entry[];
+  entries: Expr_CreateStruct_Entry[];
 }
 
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
@@ -562,7 +562,7 @@ export const Expr_CreateStruct = {
     }
 
     for (const v of message.entries) {
-      CreateStruct_Expr_Entry.encode(v!, writer.uint32(18).fork()).ldelim();
+      Expr_CreateStruct_Entry.encode(v!, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -582,7 +582,7 @@ export const Expr_CreateStruct = {
           break;
 
         case 2:
-          message.entries.push(CreateStruct_Expr_Entry.decode(reader, reader.uint32()));
+          message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -597,7 +597,7 @@ export const Expr_CreateStruct = {
   fromJSON(object: any): Expr_CreateStruct {
     return {
       type: isSet(object.type) ? String(object.type) : "",
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => CreateStruct_Expr_Entry.fromJSON(e)) : []
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e)) : []
     };
   },
 
@@ -606,7 +606,7 @@ export const Expr_CreateStruct = {
     message.type !== undefined && (obj.type = message.type);
 
     if (message.entries) {
-      obj.entries = message.entries.map(e => e ? CreateStruct_Expr_Entry.toJSON(e) : undefined);
+      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toJSON(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -617,19 +617,19 @@ export const Expr_CreateStruct = {
   fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct>, I>>(object: I): Expr_CreateStruct {
     const message = createBaseExpr_CreateStruct();
     message.type = object.type ?? "";
-    message.entries = object.entries?.map(e => CreateStruct_Expr_Entry.fromPartial(e)) || [];
+    message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
     return message;
   }
 
 };
-export interface Entry {
+export interface Expr_CreateStruct_Entry {
   id: number;
   fieldKey?: string;
   mapKey?: Expr;
   value: Expr;
 }
 
-function createBaseEntry(): Entry {
+function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
     id: 0,
     fieldKey: "",
@@ -638,8 +638,8 @@ function createBaseEntry(): Entry {
   };
 }
 
-export const Entry = {
-  encode(message: Entry, writer = _m0.Writer.create()): _m0.Writer {
+export const Expr_CreateStruct_Entry = {
+  encode(message: Expr_CreateStruct_Entry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
@@ -659,10 +659,10 @@ export const Entry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct_Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEntry();
+    const message = createBaseExpr_CreateStruct_Entry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -693,7 +693,7 @@ export const Entry = {
     return message;
   },
 
-  fromJSON(object: any): Entry {
+  fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : "",
@@ -702,7 +702,7 @@ export const Entry = {
     };
   },
 
-  toJSON(message: Entry): unknown {
+  toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
@@ -711,8 +711,8 @@ export const Entry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Entry>, I>>(object: I): Entry {
-    const message = createBaseEntry();
+  fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct_Entry>, I>>(object: I): Expr_CreateStruct_Entry {
+    const message = createBaseExpr_CreateStruct_Entry();
     message.id = object.id ?? 0;
     message.fieldKey = object.fieldKey ?? "";
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
@@ -873,7 +873,7 @@ function createBaseLiteral(): Literal {
   return {
     nullValue: undefined,
     boolValue: false,
-    int64Value: Long.UZERO,
+    int64Value: Long.ZERO,
     uint64Value: Long.UZERO,
     doubleValue: 0,
     stringValue: "",

@@ -3314,7 +3314,7 @@ export interface CopyLogEntriesResponse {
 
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   return {
-    logEntriesCopiedCount: Long.UZERO
+    logEntriesCopiedCount: Long.ZERO
   };
 }
 

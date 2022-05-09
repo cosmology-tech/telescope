@@ -14,7 +14,7 @@ function createBasePlan(): Plan {
   return {
     name: "",
     time: undefined,
-    height: Long.UZERO,
+    height: Long.ZERO,
     info: "",
     upgradedClientState: undefined
   };

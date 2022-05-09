@@ -248,11 +248,11 @@ function createBaseParams(): Params {
     mintDenom: "",
     genesisEpochProvisions: "",
     epochIdentifier: "",
-    reductionPeriodInEpochs: Long.UZERO,
+    reductionPeriodInEpochs: Long.ZERO,
     reductionFactor: "",
     distributionProportions: undefined,
     weightedDeveloperRewardsReceivers: [],
-    mintingRewardsDistributionStartEpoch: Long.UZERO
+    mintingRewardsDistributionStartEpoch: Long.ZERO
   };
 }
 

@@ -92,7 +92,7 @@ export interface Explain_ExprStep {
 
 function createBaseExplain_ExprStep(): Explain_ExprStep {
   return {
-    id: Long.UZERO,
+    id: Long.ZERO,
     valueIndex: 0
   };
 }

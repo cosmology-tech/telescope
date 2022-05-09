@@ -14,7 +14,7 @@ export interface Distribution {
 
 function createBaseDistribution(): Distribution {
   return {
-    count: Long.UZERO,
+    count: Long.ZERO,
     mean: 0,
     sumOfSquaredDeviation: 0,
     range: undefined,
@@ -236,9 +236,9 @@ export const Distribution_Range = {
 
 };
 export interface Distribution_BucketOptions {
-  linearBuckets?: BucketOptions_Distribution_Linear;
-  exponentialBuckets?: BucketOptions_Distribution_Exponential;
-  explicitBuckets?: BucketOptions_Distribution_Explicit;
+  linearBuckets?: Distribution_BucketOptions_Linear;
+  exponentialBuckets?: Distribution_BucketOptions_Exponential;
+  explicitBuckets?: Distribution_BucketOptions_Explicit;
 }
 
 function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
@@ -252,15 +252,15 @@ function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
 export const Distribution_BucketOptions = {
   encode(message: Distribution_BucketOptions, writer = _m0.Writer.create()): _m0.Writer {
     if (message.linearBuckets !== undefined) {
-      BucketOptions_Distribution_Linear.encode(message.linearBuckets, writer.uint32(10).fork()).ldelim();
+      Distribution_BucketOptions_Linear.encode(message.linearBuckets, writer.uint32(10).fork()).ldelim();
     }
 
     if (message.exponentialBuckets !== undefined) {
-      BucketOptions_Distribution_Exponential.encode(message.exponentialBuckets, writer.uint32(18).fork()).ldelim();
+      Distribution_BucketOptions_Exponential.encode(message.exponentialBuckets, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.explicitBuckets !== undefined) {
-      BucketOptions_Distribution_Explicit.encode(message.explicitBuckets, writer.uint32(26).fork()).ldelim();
+      Distribution_BucketOptions_Explicit.encode(message.explicitBuckets, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -276,15 +276,15 @@ export const Distribution_BucketOptions = {
 
       switch (tag >>> 3) {
         case 1:
-          message.linearBuckets = BucketOptions_Distribution_Linear.decode(reader, reader.uint32());
+          message.linearBuckets = Distribution_BucketOptions_Linear.decode(reader, reader.uint32());
           break;
 
         case 2:
-          message.exponentialBuckets = BucketOptions_Distribution_Exponential.decode(reader, reader.uint32());
+          message.exponentialBuckets = Distribution_BucketOptions_Exponential.decode(reader, reader.uint32());
           break;
 
         case 3:
-          message.explicitBuckets = BucketOptions_Distribution_Explicit.decode(reader, reader.uint32());
+          message.explicitBuckets = Distribution_BucketOptions_Explicit.decode(reader, reader.uint32());
           break;
 
         default:
@@ -298,36 +298,36 @@ export const Distribution_BucketOptions = {
 
   fromJSON(object: any): Distribution_BucketOptions {
     return {
-      linearBuckets: isSet(object.linearBuckets) ? BucketOptions_Distribution_Linear.fromJSON(object.linearBuckets) : undefined,
-      exponentialBuckets: isSet(object.exponentialBuckets) ? BucketOptions_Distribution_Exponential.fromJSON(object.exponentialBuckets) : undefined,
-      explicitBuckets: isSet(object.explicitBuckets) ? BucketOptions_Distribution_Explicit.fromJSON(object.explicitBuckets) : undefined
+      linearBuckets: isSet(object.linearBuckets) ? Distribution_BucketOptions_Linear.fromJSON(object.linearBuckets) : undefined,
+      exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_BucketOptions_Exponential.fromJSON(object.exponentialBuckets) : undefined,
+      explicitBuckets: isSet(object.explicitBuckets) ? Distribution_BucketOptions_Explicit.fromJSON(object.explicitBuckets) : undefined
     };
   },
 
   toJSON(message: Distribution_BucketOptions): unknown {
     const obj: any = {};
-    message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? BucketOptions_Distribution_Linear.toJSON(message.linearBuckets) : undefined);
-    message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? BucketOptions_Distribution_Exponential.toJSON(message.exponentialBuckets) : undefined);
-    message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? BucketOptions_Distribution_Explicit.toJSON(message.explicitBuckets) : undefined);
+    message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toJSON(message.linearBuckets) : undefined);
+    message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toJSON(message.exponentialBuckets) : undefined);
+    message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toJSON(message.explicitBuckets) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions>, I>>(object: I): Distribution_BucketOptions {
     const message = createBaseDistribution_BucketOptions();
-    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? BucketOptions_Distribution_Linear.fromPartial(object.linearBuckets) : undefined;
-    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? BucketOptions_Distribution_Exponential.fromPartial(object.exponentialBuckets) : undefined;
-    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? BucketOptions_Distribution_Explicit.fromPartial(object.explicitBuckets) : undefined;
+    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets) : undefined;
+    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets) : undefined;
+    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_BucketOptions_Explicit.fromPartial(object.explicitBuckets) : undefined;
     return message;
   }
 
 };
-export interface Linear {
+export interface Distribution_BucketOptions_Linear {
   numFiniteBuckets: number;
   width: number;
   offset: number;
 }
 
-function createBaseLinear(): Linear {
+function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptions_Linear {
   return {
     numFiniteBuckets: 0,
     width: 0,
@@ -335,8 +335,8 @@ function createBaseLinear(): Linear {
   };
 }
 
-export const Linear = {
-  encode(message: Linear, writer = _m0.Writer.create()): _m0.Writer {
+export const Distribution_BucketOptions_Linear = {
+  encode(message: Distribution_BucketOptions_Linear, writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -352,10 +352,10 @@ export const Linear = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Linear {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Linear {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLinear();
+    const message = createBaseDistribution_BucketOptions_Linear();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -382,7 +382,7 @@ export const Linear = {
     return message;
   },
 
-  fromJSON(object: any): Linear {
+  fromJSON(object: any): Distribution_BucketOptions_Linear {
     return {
       numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
       width: isSet(object.width) ? Number(object.width) : 0,
@@ -390,7 +390,7 @@ export const Linear = {
     };
   },
 
-  toJSON(message: Linear): unknown {
+  toJSON(message: Distribution_BucketOptions_Linear): unknown {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
     message.width !== undefined && (obj.width = message.width);
@@ -398,8 +398,8 @@ export const Linear = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Linear>, I>>(object: I): Linear {
-    const message = createBaseLinear();
+  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions_Linear>, I>>(object: I): Distribution_BucketOptions_Linear {
+    const message = createBaseDistribution_BucketOptions_Linear();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.width = object.width ?? 0;
     message.offset = object.offset ?? 0;
@@ -407,13 +407,13 @@ export const Linear = {
   }
 
 };
-export interface Exponential {
+export interface Distribution_BucketOptions_Exponential {
   numFiniteBuckets: number;
   growthFactor: number;
   scale: number;
 }
 
-function createBaseExponential(): Exponential {
+function createBaseDistribution_BucketOptions_Exponential(): Distribution_BucketOptions_Exponential {
   return {
     numFiniteBuckets: 0,
     growthFactor: 0,
@@ -421,8 +421,8 @@ function createBaseExponential(): Exponential {
   };
 }
 
-export const Exponential = {
-  encode(message: Exponential, writer = _m0.Writer.create()): _m0.Writer {
+export const Distribution_BucketOptions_Exponential = {
+  encode(message: Distribution_BucketOptions_Exponential, writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -438,10 +438,10 @@ export const Exponential = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Exponential {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Exponential {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseExponential();
+    const message = createBaseDistribution_BucketOptions_Exponential();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -468,7 +468,7 @@ export const Exponential = {
     return message;
   },
 
-  fromJSON(object: any): Exponential {
+  fromJSON(object: any): Distribution_BucketOptions_Exponential {
     return {
       numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
       growthFactor: isSet(object.growthFactor) ? Number(object.growthFactor) : 0,
@@ -476,7 +476,7 @@ export const Exponential = {
     };
   },
 
-  toJSON(message: Exponential): unknown {
+  toJSON(message: Distribution_BucketOptions_Exponential): unknown {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
     message.growthFactor !== undefined && (obj.growthFactor = message.growthFactor);
@@ -484,8 +484,8 @@ export const Exponential = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Exponential>, I>>(object: I): Exponential {
-    const message = createBaseExponential();
+  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions_Exponential>, I>>(object: I): Distribution_BucketOptions_Exponential {
+    const message = createBaseDistribution_BucketOptions_Exponential();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.growthFactor = object.growthFactor ?? 0;
     message.scale = object.scale ?? 0;
@@ -493,18 +493,18 @@ export const Exponential = {
   }
 
 };
-export interface Explicit {
+export interface Distribution_BucketOptions_Explicit {
   bounds: number[];
 }
 
-function createBaseExplicit(): Explicit {
+function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOptions_Explicit {
   return {
     bounds: []
   };
 }
 
-export const Explicit = {
-  encode(message: Explicit, writer = _m0.Writer.create()): _m0.Writer {
+export const Distribution_BucketOptions_Explicit = {
+  encode(message: Distribution_BucketOptions_Explicit, writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(9).fork();
 
     for (const v of message.bounds) {
@@ -515,10 +515,10 @@ export const Explicit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Explicit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Explicit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseExplicit();
+    const message = createBaseDistribution_BucketOptions_Explicit();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -544,13 +544,13 @@ export const Explicit = {
     return message;
   },
 
-  fromJSON(object: any): Explicit {
+  fromJSON(object: any): Distribution_BucketOptions_Explicit {
     return {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
     };
   },
 
-  toJSON(message: Explicit): unknown {
+  toJSON(message: Distribution_BucketOptions_Explicit): unknown {
     const obj: any = {};
 
     if (message.bounds) {
@@ -562,8 +562,8 @@ export const Explicit = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Explicit>, I>>(object: I): Explicit {
-    const message = createBaseExplicit();
+  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions_Explicit>, I>>(object: I): Distribution_BucketOptions_Explicit {
+    const message = createBaseDistribution_BucketOptions_Explicit();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;
   }

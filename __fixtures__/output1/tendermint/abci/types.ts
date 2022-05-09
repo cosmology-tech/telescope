@@ -526,7 +526,7 @@ function createBaseRequestInitChain(): RequestInitChain {
     consensusParams: undefined,
     validators: [],
     appStateBytes: new Uint8Array(),
-    initialHeight: Long.UZERO
+    initialHeight: Long.ZERO
   };
 }
 
@@ -650,7 +650,7 @@ function createBaseRequestQuery(): RequestQuery {
   return {
     data: new Uint8Array(),
     path: "",
-    height: Long.UZERO,
+    height: Long.ZERO,
     prove: false
   };
 }
@@ -1013,7 +1013,7 @@ export interface RequestEndBlock {
 
 function createBaseRequestEndBlock(): RequestEndBlock {
   return {
-    height: Long.UZERO
+    height: Long.ZERO
   };
 }
 
@@ -1832,7 +1832,7 @@ function createBaseResponseInfo(): ResponseInfo {
     data: "",
     version: "",
     appVersion: Long.UZERO,
-    lastBlockHeight: Long.UZERO,
+    lastBlockHeight: Long.ZERO,
     lastBlockAppHash: new Uint8Array()
   };
 }
@@ -2126,11 +2126,11 @@ function createBaseResponseQuery(): ResponseQuery {
     code: 0,
     log: "",
     info: "",
-    index: Long.UZERO,
+    index: Long.ZERO,
     key: new Uint8Array(),
     value: new Uint8Array(),
     proofOps: undefined,
-    height: Long.UZERO,
+    height: Long.ZERO,
     codespace: ""
   };
 }
@@ -2356,8 +2356,8 @@ function createBaseResponseCheckTx(): ResponseCheckTx {
     data: new Uint8Array(),
     log: "",
     info: "",
-    gasWanted: Long.UZERO,
-    gasUsed: Long.UZERO,
+    gasWanted: Long.ZERO,
+    gasUsed: Long.ZERO,
     events: [],
     codespace: ""
   };
@@ -2513,8 +2513,8 @@ function createBaseResponseDeliverTx(): ResponseDeliverTx {
     data: new Uint8Array(),
     log: "",
     info: "",
-    gasWanted: Long.UZERO,
-    gasUsed: Long.UZERO,
+    gasWanted: Long.ZERO,
+    gasUsed: Long.ZERO,
     events: [],
     codespace: ""
   };
@@ -2759,7 +2759,7 @@ export interface ResponseCommit {
 function createBaseResponseCommit(): ResponseCommit {
   return {
     data: new Uint8Array(),
-    retainHeight: Long.UZERO
+    retainHeight: Long.ZERO
   };
 }
 
@@ -3363,8 +3363,8 @@ export interface BlockParams {
 
 function createBaseBlockParams(): BlockParams {
   return {
-    maxBytes: Long.UZERO,
-    maxGas: Long.UZERO
+    maxBytes: Long.ZERO,
+    maxGas: Long.ZERO
   };
 }
 
@@ -3682,7 +3682,7 @@ export interface TxResult {
 
 function createBaseTxResult(): TxResult {
   return {
-    height: Long.UZERO,
+    height: Long.ZERO,
     index: 0,
     tx: new Uint8Array(),
     result: undefined
@@ -3780,7 +3780,7 @@ export interface Validator {
 function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
-    power: Long.UZERO
+    power: Long.ZERO
   };
 }
 
@@ -3853,7 +3853,7 @@ export interface ValidatorUpdate {
 function createBaseValidatorUpdate(): ValidatorUpdate {
   return {
     pubKey: undefined,
-    power: Long.UZERO
+    power: Long.ZERO
   };
 }
 
@@ -4041,9 +4041,9 @@ function createBaseEvidence(): Evidence {
   return {
     type: undefined,
     validator: undefined,
-    height: Long.UZERO,
+    height: Long.ZERO,
     time: undefined,
-    totalVotingPower: Long.UZERO
+    totalVotingPower: Long.ZERO
   };
 }
 

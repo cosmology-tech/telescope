@@ -2,20 +2,20 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
-export interface MetricValue_LabelsMapEntry {
+export interface MetricValue_LabelsEntry {
   key: string;
   value: string;
 }
 
-function createBaseMetricValue_LabelsMapEntry(): MetricValue_LabelsMapEntry {
+function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const MetricValue_LabelsMapEntry = {
-  encode(message: MetricValue_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const MetricValue_LabelsEntry = {
+  encode(message: MetricValue_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -27,10 +27,10 @@ export const MetricValue_LabelsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetricValue_LabelsMapEntry();
+    const message = createBaseMetricValue_LabelsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -53,22 +53,22 @@ export const MetricValue_LabelsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): MetricValue_LabelsMapEntry {
+  fromJSON(object: any): MetricValue_LabelsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: MetricValue_LabelsMapEntry): unknown {
+  toJSON(message: MetricValue_LabelsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricValue_LabelsMapEntry>, I>>(object: I): MetricValue_LabelsMapEntry {
-    const message = createBaseMetricValue_LabelsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<MetricValue_LabelsEntry>, I>>(object: I): MetricValue_LabelsEntry {
+    const message = createBaseMetricValue_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -90,11 +90,11 @@ export interface MetricValue {
 
 function createBaseMetricValue(): MetricValue {
   return {
-    labels: "",
+    labels: {},
     startTime: undefined,
     endTime: undefined,
     boolValue: false,
-    int64Value: Long.UZERO,
+    int64Value: Long.ZERO,
     doubleValue: 0,
     stringValue: "",
     distributionValue: undefined
@@ -104,7 +104,7 @@ function createBaseMetricValue(): MetricValue {
 export const MetricValue = {
   encode(message: MetricValue, writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
-      MetricValue_LabelsMapEntry.encode({
+      MetricValue_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(10).fork()).ldelim();
@@ -145,7 +145,7 @@ export const MetricValue = {
 
       switch (tag >>> 3) {
         case 1:
-          const entry1 = MetricValue_LabelsMapEntry.decode(reader, reader.uint32());
+          const entry1 = MetricValue_LabelsEntry.decode(reader, reader.uint32());
 
           if (entry1.value !== undefined) {
             message.labels[entry1.key] = entry1.value;

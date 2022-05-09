@@ -287,15 +287,15 @@ export const CheckResponse_CheckInfo = {
 };
 export interface CheckResponse_ConsumerInfo {
   projectNumber: Long;
-  type: ConsumerInfo_CheckResponse_ConsumerType;
+  type: CheckResponse_ConsumerInfo_ConsumerType;
   consumerNumber: Long;
 }
 
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   return {
-    projectNumber: Long.UZERO,
+    projectNumber: Long.ZERO,
     type: undefined,
-    consumerNumber: Long.UZERO
+    consumerNumber: Long.ZERO
   };
 }
 
@@ -349,7 +349,7 @@ export const CheckResponse_ConsumerInfo = {
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
       projectNumber: isSet(object.projectNumber) ? Long.fromString(object.projectNumber) : Long.ZERO,
-      type: isSet(object.type) ? consumerInfo_CheckResponse_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
       consumerNumber: isSet(object.consumerNumber) ? Long.fromString(object.consumerNumber) : Long.ZERO
     };
   },
@@ -357,7 +357,7 @@ export const CheckResponse_ConsumerInfo = {
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
     message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || Long.ZERO).toString());
-    message.type !== undefined && (obj.type = consumerInfo_CheckResponse_ConsumerTypeToJSON(message.type));
+    message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
     message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || Long.ZERO).toString());
     return obj;
   },
@@ -371,7 +371,7 @@ export const CheckResponse_ConsumerInfo = {
   }
 
 };
-export enum ConsumerType {
+export enum CheckResponse_ConsumerInfo_ConsumerType {
   /*This is never used.*/
   CONSUMER_TYPE_UNSPECIFIED = 0,
 
@@ -390,44 +390,44 @@ export enum ConsumerType {
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }
-export function consumerTypeFromJSON(object: any): ConsumerType {
+export function checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object: any): CheckResponse_ConsumerInfo_ConsumerType {
   switch (object) {
     case "CONSUMER_TYPE_UNSPECIFIED":
-      return ConsumerType.CONSUMER_TYPE_UNSPECIFIED;
+      return CheckResponse_ConsumerInfo_ConsumerType.CONSUMER_TYPE_UNSPECIFIED;
 
     case "PROJECT":
-      return ConsumerType.PROJECT;
+      return CheckResponse_ConsumerInfo_ConsumerType.PROJECT;
 
     case "FOLDER":
-      return ConsumerType.FOLDER;
+      return CheckResponse_ConsumerInfo_ConsumerType.FOLDER;
 
     case "ORGANIZATION":
-      return ConsumerType.ORGANIZATION;
+      return CheckResponse_ConsumerInfo_ConsumerType.ORGANIZATION;
 
     case "SERVICE_SPECIFIC":
-      return ConsumerType.SERVICE_SPECIFIC;
+      return CheckResponse_ConsumerInfo_ConsumerType.SERVICE_SPECIFIC;
 
     case -1:
     case "UNRECOGNIZED":
     default:
-      return ConsumerType.UNRECOGNIZED;
+      return CheckResponse_ConsumerInfo_ConsumerType.UNRECOGNIZED;
   }
 }
-export function consumerTypeToJSON(object: ConsumerType): string {
+export function checkResponse_ConsumerInfo_ConsumerTypeToJSON(object: CheckResponse_ConsumerInfo_ConsumerType): string {
   switch (object) {
-    case ConsumerType.CONSUMER_TYPE_UNSPECIFIED:
+    case CheckResponse_ConsumerInfo_ConsumerType.CONSUMER_TYPE_UNSPECIFIED:
       return "CONSUMER_TYPE_UNSPECIFIED";
 
-    case ConsumerType.PROJECT:
+    case CheckResponse_ConsumerInfo_ConsumerType.PROJECT:
       return "PROJECT";
 
-    case ConsumerType.FOLDER:
+    case CheckResponse_ConsumerInfo_ConsumerType.FOLDER:
       return "FOLDER";
 
-    case ConsumerType.ORGANIZATION:
+    case CheckResponse_ConsumerInfo_ConsumerType.ORGANIZATION:
       return "ORGANIZATION";
 
-    case ConsumerType.SERVICE_SPECIFIC:
+    case CheckResponse_ConsumerInfo_ConsumerType.SERVICE_SPECIFIC:
       return "SERVICE_SPECIFIC";
 
     default:

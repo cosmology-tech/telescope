@@ -126,7 +126,7 @@ export interface Int64Value {
 
 function createBaseInt64Value(): Int64Value {
   return {
-    value: Long.UZERO
+    value: Long.ZERO
   };
 }
 

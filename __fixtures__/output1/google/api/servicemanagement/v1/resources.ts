@@ -952,20 +952,20 @@ export const Rollout = {
   }
 
 };
-export interface TrafficPercentStrategy_PercentagesMapEntry {
+export interface TrafficPercentStrategy_PercentagesEntry {
   key: string;
   value: number;
 }
 
-function createBaseTrafficPercentStrategy_PercentagesMapEntry(): TrafficPercentStrategy_PercentagesMapEntry {
+function createBaseTrafficPercentStrategy_PercentagesEntry(): TrafficPercentStrategy_PercentagesEntry {
   return {
     key: "",
     value: 0
   };
 }
 
-export const TrafficPercentStrategy_PercentagesMapEntry = {
-  encode(message: TrafficPercentStrategy_PercentagesMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const TrafficPercentStrategy_PercentagesEntry = {
+  encode(message: TrafficPercentStrategy_PercentagesEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -977,10 +977,10 @@ export const TrafficPercentStrategy_PercentagesMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TrafficPercentStrategy_PercentagesMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TrafficPercentStrategy_PercentagesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTrafficPercentStrategy_PercentagesMapEntry();
+    const message = createBaseTrafficPercentStrategy_PercentagesEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1003,22 +1003,22 @@ export const TrafficPercentStrategy_PercentagesMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): TrafficPercentStrategy_PercentagesMapEntry {
+  fromJSON(object: any): TrafficPercentStrategy_PercentagesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
-  toJSON(message: TrafficPercentStrategy_PercentagesMapEntry): unknown {
+  toJSON(message: TrafficPercentStrategy_PercentagesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TrafficPercentStrategy_PercentagesMapEntry>, I>>(object: I): TrafficPercentStrategy_PercentagesMapEntry {
-    const message = createBaseTrafficPercentStrategy_PercentagesMapEntry();
+  fromPartial<I extends Exact<DeepPartial<TrafficPercentStrategy_PercentagesEntry>, I>>(object: I): TrafficPercentStrategy_PercentagesEntry {
+    const message = createBaseTrafficPercentStrategy_PercentagesEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
     return message;
@@ -1033,14 +1033,14 @@ export interface TrafficPercentStrategy {
 
 function createBaseTrafficPercentStrategy(): TrafficPercentStrategy {
   return {
-    percentages: 0
+    percentages: {}
   };
 }
 
 export const TrafficPercentStrategy = {
   encode(message: TrafficPercentStrategy, writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.percentages).forEach(([key, value]) => {
-      TrafficPercentStrategy_PercentagesMapEntry.encode({
+      TrafficPercentStrategy_PercentagesEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(9).fork()).ldelim();
@@ -1058,7 +1058,7 @@ export const TrafficPercentStrategy = {
 
       switch (tag >>> 3) {
         case 1:
-          const entry1 = TrafficPercentStrategy_PercentagesMapEntry.decode(reader, reader.uint32());
+          const entry1 = TrafficPercentStrategy_PercentagesEntry.decode(reader, reader.uint32());
 
           if (entry1.value !== undefined) {
             message.percentages[entry1.key] = entry1.value;

@@ -23,9 +23,9 @@ function createBaseHttpRequest(): HttpRequest {
   return {
     requestMethod: "",
     requestUrl: "",
-    requestSize: Long.UZERO,
+    requestSize: Long.ZERO,
     status: 0,
-    responseSize: Long.UZERO,
+    responseSize: Long.ZERO,
     userAgent: "",
     remoteIp: "",
     serverIp: "",
@@ -34,7 +34,7 @@ function createBaseHttpRequest(): HttpRequest {
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,
-    cacheFillBytes: Long.UZERO,
+    cacheFillBytes: Long.ZERO,
     protocol: ""
   };
 }

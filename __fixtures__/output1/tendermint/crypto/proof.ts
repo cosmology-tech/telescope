@@ -9,8 +9,8 @@ export interface Proof {
 
 function createBaseProof(): Proof {
   return {
-    total: Long.UZERO,
-    index: Long.UZERO,
+    total: Long.ZERO,
+    index: Long.ZERO,
     leafHash: new Uint8Array(),
     aunts: []
   };

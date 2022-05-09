@@ -366,20 +366,20 @@ export const CheckResponse = {
   }
 
 };
-export interface EvalRequest_BindingsMapEntry {
+export interface EvalRequest_BindingsEntry {
   key: string;
   value: ExprValue;
 }
 
-function createBaseEvalRequest_BindingsMapEntry(): EvalRequest_BindingsMapEntry {
+function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
     key: "",
     value: undefined
   };
 }
 
-export const EvalRequest_BindingsMapEntry = {
-  encode(message: EvalRequest_BindingsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const EvalRequest_BindingsEntry = {
+  encode(message: EvalRequest_BindingsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -391,10 +391,10 @@ export const EvalRequest_BindingsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_BindingsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_BindingsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEvalRequest_BindingsMapEntry();
+    const message = createBaseEvalRequest_BindingsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -417,22 +417,22 @@ export const EvalRequest_BindingsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): EvalRequest_BindingsMapEntry {
+  fromJSON(object: any): EvalRequest_BindingsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: EvalRequest_BindingsMapEntry): unknown {
+  toJSON(message: EvalRequest_BindingsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalRequest_BindingsMapEntry>, I>>(object: I): EvalRequest_BindingsMapEntry {
-    const message = createBaseEvalRequest_BindingsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<EvalRequest_BindingsEntry>, I>>(object: I): EvalRequest_BindingsEntry {
+    const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
     return message;
@@ -452,7 +452,7 @@ function createBaseEvalRequest(): EvalRequest {
   return {
     parsedExpr: undefined,
     checkedExpr: undefined,
-    bindings: undefined,
+    bindings: {},
     container: ""
   };
 }
@@ -468,7 +468,7 @@ export const EvalRequest = {
     }
 
     Object.entries(message.bindings).forEach(([key, value]) => {
-      EvalRequest_BindingsMapEntry.encode({
+      EvalRequest_BindingsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(26).fork()).ldelim();
@@ -499,7 +499,7 @@ export const EvalRequest = {
           break;
 
         case 3:
-          const entry3 = EvalRequest_BindingsMapEntry.decode(reader, reader.uint32());
+          const entry3 = EvalRequest_BindingsEntry.decode(reader, reader.uint32());
 
           if (entry3.value !== undefined) {
             message.bindings[entry3.key] = entry3.value;
@@ -657,7 +657,7 @@ function createBaseIssueDetails(): IssueDetails {
   return {
     severity: undefined,
     position: undefined,
-    id: Long.UZERO
+    id: Long.ZERO
   };
 }
 

@@ -64,20 +64,20 @@ export const DeleteLogRequest = {
   }
 
 };
-export interface WriteLogEntriesRequest_LabelsMapEntry {
+export interface WriteLogEntriesRequest_LabelsEntry {
   key: string;
   value: string;
 }
 
-function createBaseWriteLogEntriesRequest_LabelsMapEntry(): WriteLogEntriesRequest_LabelsMapEntry {
+function createBaseWriteLogEntriesRequest_LabelsEntry(): WriteLogEntriesRequest_LabelsEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const WriteLogEntriesRequest_LabelsMapEntry = {
-  encode(message: WriteLogEntriesRequest_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const WriteLogEntriesRequest_LabelsEntry = {
+  encode(message: WriteLogEntriesRequest_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -89,10 +89,10 @@ export const WriteLogEntriesRequest_LabelsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest_LabelsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest_LabelsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseWriteLogEntriesRequest_LabelsMapEntry();
+    const message = createBaseWriteLogEntriesRequest_LabelsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -115,22 +115,22 @@ export const WriteLogEntriesRequest_LabelsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): WriteLogEntriesRequest_LabelsMapEntry {
+  fromJSON(object: any): WriteLogEntriesRequest_LabelsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: WriteLogEntriesRequest_LabelsMapEntry): unknown {
+  toJSON(message: WriteLogEntriesRequest_LabelsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesRequest_LabelsMapEntry>, I>>(object: I): WriteLogEntriesRequest_LabelsMapEntry {
-    const message = createBaseWriteLogEntriesRequest_LabelsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesRequest_LabelsEntry>, I>>(object: I): WriteLogEntriesRequest_LabelsEntry {
+    const message = createBaseWriteLogEntriesRequest_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -152,7 +152,7 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
     logName: "",
     resource: undefined,
-    labels: "",
+    labels: {},
     entries: [],
     partialSuccess: false,
     dryRun: false
@@ -170,7 +170,7 @@ export const WriteLogEntriesRequest = {
     }
 
     Object.entries(message.labels).forEach(([key, value]) => {
-      WriteLogEntriesRequest_LabelsMapEntry.encode({
+      WriteLogEntriesRequest_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(26).fork()).ldelim();
@@ -209,7 +209,7 @@ export const WriteLogEntriesRequest = {
           break;
 
         case 3:
-          const entry3 = WriteLogEntriesRequest_LabelsMapEntry.decode(reader, reader.uint32());
+          const entry3 = WriteLogEntriesRequest_LabelsEntry.decode(reader, reader.uint32());
 
           if (entry3.value !== undefined) {
             message.labels[entry3.key] = entry3.value;
@@ -341,20 +341,20 @@ export const WriteLogEntriesResponse = {
   }
 
 };
-export interface WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
+export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
   value: Status;
 }
 
-function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsMapEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
+function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   return {
     key: 0,
     value: undefined
   };
 }
 
-export const WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry = {
-  encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
+  encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== 0) {
       writer.uint32(8).int32(message.key);
     }
@@ -366,10 +366,10 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsMapEntry();
+    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -392,22 +392,22 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
+  fromJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return {
       key: isSet(object.key) ? Number(object.key) : 0,
       value: isSet(object.value) ? google.rpc.Status.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry): unknown {
+  toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
     message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry>, I>>(object: I): WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry {
-    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>, I>>(object: I): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
     message.value = object.value !== undefined && object.value !== null ? google.rpc.Status.fromPartial(object.value) : undefined;
     return message;
@@ -422,14 +422,14 @@ export interface WriteLogEntriesPartialErrors {
 
 function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors {
   return {
-    logEntryErrors: undefined
+    logEntryErrors: {}
   };
 }
 
 export const WriteLogEntriesPartialErrors = {
   encode(message: WriteLogEntriesPartialErrors, writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.logEntryErrors).forEach(([key, value]) => {
-      WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry.encode({
+      WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(10).fork()).ldelim();
@@ -447,7 +447,7 @@ export const WriteLogEntriesPartialErrors = {
 
       switch (tag >>> 3) {
         case 1:
-          const entry1 = WriteLogEntriesPartialErrors_LogEntryErrorsMapEntry.decode(reader, reader.uint32());
+          const entry1 = WriteLogEntriesPartialErrors_LogEntryErrorsEntry.decode(reader, reader.uint32());
 
           if (entry1.value !== undefined) {
             message.logEntryErrors[entry1.key] = entry1.value;
@@ -1206,7 +1206,7 @@ export const TailLogEntriesResponse = {
 
 };
 export interface TailLogEntriesResponse_SuppressionInfo {
-  reason: SuppressionInfo_TailLogEntriesResponse_Reason;
+  reason: TailLogEntriesResponse_SuppressionInfo_Reason;
   suppressedCount: number;
 }
 
@@ -1258,14 +1258,14 @@ export const TailLogEntriesResponse_SuppressionInfo = {
 
   fromJSON(object: any): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? suppressionInfo_TailLogEntriesResponse_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
       suppressedCount: isSet(object.suppressedCount) ? Number(object.suppressedCount) : 0
     };
   },
 
   toJSON(message: TailLogEntriesResponse_SuppressionInfo): unknown {
     const obj: any = {};
-    message.reason !== undefined && (obj.reason = suppressionInfo_TailLogEntriesResponse_ReasonToJSON(message.reason));
+    message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
     message.suppressedCount !== undefined && (obj.suppressedCount = Math.round(message.suppressedCount));
     return obj;
   },
@@ -1278,7 +1278,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   }
 
 };
-export enum Reason {
+export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   /*Unexpected default.*/
   REASON_UNSPECIFIED = 0,
 
@@ -1293,32 +1293,32 @@ export enum Reason {
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }
-export function reasonFromJSON(object: any): Reason {
+export function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason {
   switch (object) {
     case "REASON_UNSPECIFIED":
-      return Reason.REASON_UNSPECIFIED;
+      return TailLogEntriesResponse_SuppressionInfo_Reason.REASON_UNSPECIFIED;
 
     case "RATE_LIMIT":
-      return Reason.RATE_LIMIT;
+      return TailLogEntriesResponse_SuppressionInfo_Reason.RATE_LIMIT;
 
     case "NOT_CONSUMED":
-      return Reason.NOT_CONSUMED;
+      return TailLogEntriesResponse_SuppressionInfo_Reason.NOT_CONSUMED;
 
     case -1:
     case "UNRECOGNIZED":
     default:
-      return Reason.UNRECOGNIZED;
+      return TailLogEntriesResponse_SuppressionInfo_Reason.UNRECOGNIZED;
   }
 }
-export function reasonToJSON(object: Reason): string {
+export function tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(object: TailLogEntriesResponse_SuppressionInfo_Reason): string {
   switch (object) {
-    case Reason.REASON_UNSPECIFIED:
+    case TailLogEntriesResponse_SuppressionInfo_Reason.REASON_UNSPECIFIED:
       return "REASON_UNSPECIFIED";
 
-    case Reason.RATE_LIMIT:
+    case TailLogEntriesResponse_SuppressionInfo_Reason.RATE_LIMIT:
       return "RATE_LIMIT";
 
-    case Reason.NOT_CONSUMED:
+    case TailLogEntriesResponse_SuppressionInfo_Reason.NOT_CONSUMED:
       return "NOT_CONSUMED";
 
     default:

@@ -7,7 +7,7 @@ export interface CommitInfo {
 
 function createBaseCommitInfo(): CommitInfo {
   return {
-    version: Long.UZERO,
+    version: Long.ZERO,
     storeInfos: []
   };
 }
@@ -159,7 +159,7 @@ export interface CommitID {
 
 function createBaseCommitID(): CommitID {
   return {
-    version: Long.UZERO,
+    version: Long.ZERO,
     hash: new Uint8Array()
   };
 }

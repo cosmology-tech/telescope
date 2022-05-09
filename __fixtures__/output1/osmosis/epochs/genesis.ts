@@ -17,10 +17,10 @@ function createBaseEpochInfo(): EpochInfo {
     identifier: "",
     startTime: undefined,
     duration: undefined,
-    currentEpoch: Long.UZERO,
+    currentEpoch: Long.ZERO,
     currentEpochStartTime: undefined,
     epochCountingStarted: false,
-    currentEpochStartHeight: Long.UZERO
+    currentEpochStartHeight: Long.ZERO
   };
 }
 

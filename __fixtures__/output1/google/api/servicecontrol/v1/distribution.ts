@@ -14,7 +14,7 @@ export interface Distribution {
 
 function createBaseDistribution(): Distribution {
   return {
-    count: Long.UZERO,
+    count: Long.ZERO,
     mean: 0,
     minimum: 0,
     maximum: 0,

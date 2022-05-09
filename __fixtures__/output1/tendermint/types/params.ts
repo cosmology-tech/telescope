@@ -108,9 +108,9 @@ export interface BlockParams {
 
 function createBaseBlockParams(): BlockParams {
   return {
-    maxBytes: Long.UZERO,
-    maxGas: Long.UZERO,
-    timeIotaMs: Long.UZERO
+    maxBytes: Long.ZERO,
+    maxGas: Long.ZERO,
+    timeIotaMs: Long.ZERO
   };
 }
 
@@ -194,9 +194,9 @@ export interface EvidenceParams {
 
 function createBaseEvidenceParams(): EvidenceParams {
   return {
-    maxAgeNumBlocks: Long.UZERO,
+    maxAgeNumBlocks: Long.ZERO,
     maxAgeDuration: undefined,
-    maxBytes: Long.UZERO
+    maxBytes: Long.ZERO
   };
 }
 
@@ -402,8 +402,8 @@ export interface HashedParams {
 
 function createBaseHashedParams(): HashedParams {
   return {
-    blockMaxBytes: Long.UZERO,
-    blockMaxGas: Long.UZERO
+    blockMaxBytes: Long.ZERO,
+    blockMaxGas: Long.ZERO
   };
 }
 

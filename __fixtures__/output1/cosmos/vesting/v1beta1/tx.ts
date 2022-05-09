@@ -16,7 +16,7 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
     fromAddress: "",
     toAddress: "",
     amount: [],
-    endTime: Long.UZERO,
+    endTime: Long.ZERO,
     delayed: false
   };
 }
@@ -312,7 +312,7 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
   return {
     fromAddress: "",
     toAddress: "",
-    startTime: Long.UZERO,
+    startTime: Long.ZERO,
     vestingPeriods: []
   };
 }

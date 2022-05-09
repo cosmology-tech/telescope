@@ -226,8 +226,8 @@ export const SignatureDescriptor = {
 
 };
 export interface SignatureDescriptor_Data {
-  single?: Data_SignatureDescriptor_Single;
-  multi?: Data_SignatureDescriptor_Multi;
+  single?: SignatureDescriptor_Data_Single;
+  multi?: SignatureDescriptor_Data_Multi;
 }
 
 function createBaseSignatureDescriptor_Data(): SignatureDescriptor_Data {
@@ -240,11 +240,11 @@ function createBaseSignatureDescriptor_Data(): SignatureDescriptor_Data {
 export const SignatureDescriptor_Data = {
   encode(message: SignatureDescriptor_Data, writer = _m0.Writer.create()): _m0.Writer {
     if (message.single !== undefined) {
-      Data_SignatureDescriptor_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
+      SignatureDescriptor_Data_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
     }
 
     if (message.multi !== undefined) {
-      Data_SignatureDescriptor_Multi.encode(message.multi, writer.uint32(18).fork()).ldelim();
+      SignatureDescriptor_Data_Multi.encode(message.multi, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -260,11 +260,11 @@ export const SignatureDescriptor_Data = {
 
       switch (tag >>> 3) {
         case 1:
-          message.single = Data_SignatureDescriptor_Single.decode(reader, reader.uint32());
+          message.single = SignatureDescriptor_Data_Single.decode(reader, reader.uint32());
           break;
 
         case 2:
-          message.multi = Data_SignatureDescriptor_Multi.decode(reader, reader.uint32());
+          message.multi = SignatureDescriptor_Data_Multi.decode(reader, reader.uint32());
           break;
 
         default:
@@ -278,40 +278,40 @@ export const SignatureDescriptor_Data = {
 
   fromJSON(object: any): SignatureDescriptor_Data {
     return {
-      single: isSet(object.single) ? Data_SignatureDescriptor_Single.fromJSON(object.single) : undefined,
-      multi: isSet(object.multi) ? Data_SignatureDescriptor_Multi.fromJSON(object.multi) : undefined
+      single: isSet(object.single) ? SignatureDescriptor_Data_Single.fromJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromJSON(object.multi) : undefined
     };
   },
 
   toJSON(message: SignatureDescriptor_Data): unknown {
     const obj: any = {};
-    message.single !== undefined && (obj.single = message.single ? Data_SignatureDescriptor_Single.toJSON(message.single) : undefined);
-    message.multi !== undefined && (obj.multi = message.multi ? Data_SignatureDescriptor_Multi.toJSON(message.multi) : undefined);
+    message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toJSON(message.single) : undefined);
+    message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toJSON(message.multi) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptor_Data>, I>>(object: I): SignatureDescriptor_Data {
     const message = createBaseSignatureDescriptor_Data();
-    message.single = object.single !== undefined && object.single !== null ? Data_SignatureDescriptor_Single.fromPartial(object.single) : undefined;
-    message.multi = object.multi !== undefined && object.multi !== null ? Data_SignatureDescriptor_Multi.fromPartial(object.multi) : undefined;
+    message.single = object.single !== undefined && object.single !== null ? SignatureDescriptor_Data_Single.fromPartial(object.single) : undefined;
+    message.multi = object.multi !== undefined && object.multi !== null ? SignatureDescriptor_Data_Multi.fromPartial(object.multi) : undefined;
     return message;
   }
 
 };
-export interface Single {
+export interface SignatureDescriptor_Data_Single {
   mode: SignMode;
   signature: Uint8Array;
 }
 
-function createBaseSingle(): Single {
+function createBaseSignatureDescriptor_Data_Single(): SignatureDescriptor_Data_Single {
   return {
     mode: undefined,
     signature: new Uint8Array()
   };
 }
 
-export const Single = {
-  encode(message: Single, writer = _m0.Writer.create()): _m0.Writer {
+export const SignatureDescriptor_Data_Single = {
+  encode(message: SignatureDescriptor_Data_Single, writer = _m0.Writer.create()): _m0.Writer {
     if (message.mode !== 0) {
       writer.uint32(8).int32(message.mode);
     }
@@ -323,10 +323,10 @@ export const Single = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Single {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor_Data_Single {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSingle();
+    const message = createBaseSignatureDescriptor_Data_Single();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -349,42 +349,42 @@ export const Single = {
     return message;
   },
 
-  fromJSON(object: any): Single {
+  fromJSON(object: any): SignatureDescriptor_Data_Single {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
 
-  toJSON(message: Single): unknown {
+  toJSON(message: SignatureDescriptor_Data_Single): unknown {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Single>, I>>(object: I): Single {
-    const message = createBaseSingle();
+  fromPartial<I extends Exact<DeepPartial<SignatureDescriptor_Data_Single>, I>>(object: I): SignatureDescriptor_Data_Single {
+    const message = createBaseSignatureDescriptor_Data_Single();
     message.mode = object.mode ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
   }
 
 };
-export interface Multi {
+export interface SignatureDescriptor_Data_Multi {
   bitarray: CompactBitArray;
   signatures: SignatureDescriptor_Data[];
 }
 
-function createBaseMulti(): Multi {
+function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
   return {
     bitarray: undefined,
     signatures: []
   };
 }
 
-export const Multi = {
-  encode(message: Multi, writer = _m0.Writer.create()): _m0.Writer {
+export const SignatureDescriptor_Data_Multi = {
+  encode(message: SignatureDescriptor_Data_Multi, writer = _m0.Writer.create()): _m0.Writer {
     if (message.bitarray !== undefined) {
       CompactBitArray.encode(message.bitarray, writer.uint32(10).fork()).ldelim();
     }
@@ -396,10 +396,10 @@ export const Multi = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Multi {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor_Data_Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMulti();
+    const message = createBaseSignatureDescriptor_Data_Multi();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -422,14 +422,14 @@ export const Multi = {
     return message;
   },
 
-  fromJSON(object: any): Multi {
+  fromJSON(object: any): SignatureDescriptor_Data_Multi {
     return {
       bitarray: isSet(object.bitarray) ? CompactBitArray.fromJSON(object.bitarray) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromJSON(e)) : []
     };
   },
 
-  toJSON(message: Multi): unknown {
+  toJSON(message: SignatureDescriptor_Data_Multi): unknown {
     const obj: any = {};
     message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toJSON(message.bitarray) : undefined);
 
@@ -442,8 +442,8 @@ export const Multi = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Multi>, I>>(object: I): Multi {
-    const message = createBaseMulti();
+  fromPartial<I extends Exact<DeepPartial<SignatureDescriptor_Data_Multi>, I>>(object: I): SignatureDescriptor_Data_Multi {
+    const message = createBaseSignatureDescriptor_Data_Multi();
     message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
     message.signatures = object.signatures?.map(e => SignatureDescriptor_Data.fromPartial(e)) || [];
     return message;

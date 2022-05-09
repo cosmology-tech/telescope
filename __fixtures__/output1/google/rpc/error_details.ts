@@ -275,20 +275,20 @@ export const QuotaFailure_Violation = {
   }
 
 };
-export interface ErrorInfo_MetadataMapEntry {
+export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
 }
 
-function createBaseErrorInfo_MetadataMapEntry(): ErrorInfo_MetadataMapEntry {
+function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const ErrorInfo_MetadataMapEntry = {
-  encode(message: ErrorInfo_MetadataMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const ErrorInfo_MetadataEntry = {
+  encode(message: ErrorInfo_MetadataEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -300,10 +300,10 @@ export const ErrorInfo_MetadataMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseErrorInfo_MetadataMapEntry();
+    const message = createBaseErrorInfo_MetadataEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -326,22 +326,22 @@ export const ErrorInfo_MetadataMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): ErrorInfo_MetadataMapEntry {
+  fromJSON(object: any): ErrorInfo_MetadataEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: ErrorInfo_MetadataMapEntry): unknown {
+  toJSON(message: ErrorInfo_MetadataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ErrorInfo_MetadataMapEntry>, I>>(object: I): ErrorInfo_MetadataMapEntry {
-    const message = createBaseErrorInfo_MetadataMapEntry();
+  fromPartial<I extends Exact<DeepPartial<ErrorInfo_MetadataEntry>, I>>(object: I): ErrorInfo_MetadataEntry {
+    const message = createBaseErrorInfo_MetadataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -360,7 +360,7 @@ function createBaseErrorInfo(): ErrorInfo {
   return {
     reason: "",
     domain: "",
-    metadata: ""
+    metadata: {}
   };
 }
 
@@ -375,7 +375,7 @@ export const ErrorInfo = {
     }
 
     Object.entries(message.metadata).forEach(([key, value]) => {
-      ErrorInfo_MetadataMapEntry.encode({
+      ErrorInfo_MetadataEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(26).fork()).ldelim();
@@ -401,7 +401,7 @@ export const ErrorInfo = {
           break;
 
         case 3:
-          const entry3 = ErrorInfo_MetadataMapEntry.decode(reader, reader.uint32());
+          const entry3 = ErrorInfo_MetadataEntry.decode(reader, reader.uint32());
 
           if (entry3.value !== undefined) {
             message.metadata[entry3.key] = entry3.value;

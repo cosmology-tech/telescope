@@ -257,7 +257,7 @@ export interface MissedBlock {
 
 function createBaseMissedBlock(): MissedBlock {
   return {
-    index: Long.UZERO,
+    index: Long.ZERO,
     missed: false
   };
 }

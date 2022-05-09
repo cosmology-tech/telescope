@@ -7,7 +7,7 @@ export interface BitArray {
 
 function createBaseBitArray(): BitArray {
   return {
-    bits: Long.UZERO,
+    bits: Long.ZERO,
     elems: []
   };
 }

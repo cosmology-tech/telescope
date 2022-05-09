@@ -93,8 +93,8 @@ export interface EvalState_Result {
 
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: Long.UZERO,
-    value: Long.UZERO
+    expr: Long.ZERO,
+    value: Long.ZERO
   };
 }
 

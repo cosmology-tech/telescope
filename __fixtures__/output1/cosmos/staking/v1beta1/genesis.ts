@@ -186,7 +186,7 @@ export interface LastValidatorPower {
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {
     address: "",
-    power: Long.UZERO
+    power: Long.ZERO
   };
 }
 

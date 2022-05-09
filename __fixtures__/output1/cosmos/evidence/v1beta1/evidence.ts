@@ -10,9 +10,9 @@ export interface Equivocation {
 
 function createBaseEquivocation(): Equivocation {
   return {
-    height: Long.UZERO,
+    height: Long.ZERO,
     time: undefined,
-    power: Long.UZERO,
+    power: Long.ZERO,
     consensusAddress: ""
   };
 }

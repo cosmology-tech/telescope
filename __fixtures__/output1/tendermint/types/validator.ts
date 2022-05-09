@@ -11,7 +11,7 @@ function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
     proposer: undefined,
-    totalVotingPower: Long.UZERO
+    totalVotingPower: Long.ZERO
   };
 }
 
@@ -104,8 +104,8 @@ function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
     pubKey: undefined,
-    votingPower: Long.UZERO,
-    proposerPriority: Long.UZERO
+    votingPower: Long.ZERO,
+    proposerPriority: Long.ZERO
   };
 }
 
@@ -200,7 +200,7 @@ export interface SimpleValidator {
 function createBaseSimpleValidator(): SimpleValidator {
   return {
     pubKey: undefined,
-    votingPower: Long.UZERO
+    votingPower: Long.ZERO
   };
 }
 

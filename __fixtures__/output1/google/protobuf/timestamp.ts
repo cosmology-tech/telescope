@@ -7,7 +7,7 @@ export interface Timestamp {
 
 function createBaseTimestamp(): Timestamp {
   return {
-    seconds: Long.UZERO,
+    seconds: Long.ZERO,
     nanos: 0
   };
 }

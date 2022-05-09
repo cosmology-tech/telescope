@@ -199,7 +199,7 @@ export interface OsmoEquivalentMultiplierRecord {
 
 function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRecord {
   return {
-    epochNumber: Long.UZERO,
+    epochNumber: Long.ZERO,
     denom: "",
     multiplier: ""
   };

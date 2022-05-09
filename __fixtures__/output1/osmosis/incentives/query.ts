@@ -923,7 +923,7 @@ function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
     owner: "",
     lockIds: [],
-    endEpoch: Long.UZERO
+    endEpoch: Long.ZERO
   };
 }
 

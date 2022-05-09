@@ -171,7 +171,7 @@ export interface QueryAppliedPlanResponse {
 
 function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
   return {
-    height: Long.UZERO
+    height: Long.ZERO
   };
 }
 
@@ -231,7 +231,7 @@ export interface QueryUpgradedConsensusStateRequest {
 
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {
-    lastHeight: Long.UZERO
+    lastHeight: Long.ZERO
   };
 }
 

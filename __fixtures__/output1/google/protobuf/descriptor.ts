@@ -2902,7 +2902,7 @@ function createBaseUninterpretedOption(): UninterpretedOption {
     name: [],
     identifierValue: "",
     positiveIntValue: Long.UZERO,
-    negativeIntValue: Long.UZERO,
+    negativeIntValue: Long.ZERO,
     doubleValue: 0,
     stringValue: new Uint8Array(),
     aggregateValue: ""

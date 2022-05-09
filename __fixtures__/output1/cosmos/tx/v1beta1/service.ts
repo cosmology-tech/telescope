@@ -710,7 +710,7 @@ export interface GetBlockWithTxsRequest {
 
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
   return {
-    height: Long.UZERO,
+    height: Long.ZERO,
     pagination: undefined
   };
 }

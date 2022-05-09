@@ -88,8 +88,8 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
     voteA: undefined,
     voteB: undefined,
-    totalVotingPower: Long.UZERO,
-    validatorPower: Long.UZERO,
+    totalVotingPower: Long.ZERO,
+    validatorPower: Long.ZERO,
     timestamp: undefined
   };
 }
@@ -196,9 +196,9 @@ export interface LightClientAttackEvidence {
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
     conflictingBlock: undefined,
-    commonHeight: Long.UZERO,
+    commonHeight: Long.ZERO,
     byzantineValidators: [],
-    totalVotingPower: Long.UZERO,
+    totalVotingPower: Long.ZERO,
     timestamp: undefined
   };
 }

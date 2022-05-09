@@ -373,7 +373,7 @@ function createBaseSnapshotIAVLItem(): SnapshotIAVLItem {
   return {
     key: new Uint8Array(),
     value: new Uint8Array(),
-    version: Long.UZERO,
+    version: Long.ZERO,
     height: 0
   };
 }

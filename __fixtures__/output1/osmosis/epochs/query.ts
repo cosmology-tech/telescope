@@ -177,7 +177,7 @@ export interface QueryCurrentEpochResponse {
 
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   return {
-    currentEpoch: Long.UZERO
+    currentEpoch: Long.ZERO
   };
 }
 

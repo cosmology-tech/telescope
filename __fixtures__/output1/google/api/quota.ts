@@ -84,20 +84,20 @@ export const Quota = {
   }
 
 };
-export interface MetricRule_MetricCostsMapEntry {
+export interface MetricRule_MetricCostsEntry {
   key: string;
   value: Long;
 }
 
-function createBaseMetricRule_MetricCostsMapEntry(): MetricRule_MetricCostsMapEntry {
+function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
   return {
     key: "",
-    value: Long.UZERO
+    value: Long.ZERO
   };
 }
 
-export const MetricRule_MetricCostsMapEntry = {
-  encode(message: MetricRule_MetricCostsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const MetricRule_MetricCostsEntry = {
+  encode(message: MetricRule_MetricCostsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -109,10 +109,10 @@ export const MetricRule_MetricCostsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule_MetricCostsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule_MetricCostsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetricRule_MetricCostsMapEntry();
+    const message = createBaseMetricRule_MetricCostsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -135,22 +135,22 @@ export const MetricRule_MetricCostsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): MetricRule_MetricCostsMapEntry {
+  fromJSON(object: any): MetricRule_MetricCostsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
     };
   },
 
-  toJSON(message: MetricRule_MetricCostsMapEntry): unknown {
+  toJSON(message: MetricRule_MetricCostsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricRule_MetricCostsMapEntry>, I>>(object: I): MetricRule_MetricCostsMapEntry {
-    const message = createBaseMetricRule_MetricCostsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<MetricRule_MetricCostsEntry>, I>>(object: I): MetricRule_MetricCostsEntry {
+    const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
@@ -167,7 +167,7 @@ export interface MetricRule {
 function createBaseMetricRule(): MetricRule {
   return {
     selector: "",
-    metricCosts: Long.UZERO
+    metricCosts: {}
   };
 }
 
@@ -178,7 +178,7 @@ export const MetricRule = {
     }
 
     Object.entries(message.metricCosts).forEach(([key, value]) => {
-      MetricRule_MetricCostsMapEntry.encode({
+      MetricRule_MetricCostsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(16).fork()).ldelim();
@@ -200,7 +200,7 @@ export const MetricRule = {
           break;
 
         case 2:
-          const entry2 = MetricRule_MetricCostsMapEntry.decode(reader, reader.uint32());
+          const entry2 = MetricRule_MetricCostsEntry.decode(reader, reader.uint32());
 
           if (entry2.value !== undefined) {
             message.metricCosts[entry2.key] = entry2.value;
@@ -221,9 +221,9 @@ export const MetricRule = {
     return {
       selector: isSet(object.selector) ? String(object.selector) : "",
       metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
-        [key: string]: int64;
+        [key: string]: Long;
       }>((acc, [key, value]) => {
-        acc[key] = int64.fromJSON(value);
+        acc[key] = Long.fromValue((value as Long | string));
         return acc;
       }, {}) : {}
     };
@@ -236,7 +236,7 @@ export const MetricRule = {
 
     if (message.metricCosts) {
       Object.entries(message.metricCosts).forEach(([k, v]) => {
-        obj.metricCosts[k] = int64.toJSON(v);
+        obj.metricCosts[k] = v.toString();
       });
     }
 
@@ -247,10 +247,10 @@ export const MetricRule = {
     const message = createBaseMetricRule();
     message.selector = object.selector ?? "";
     message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
-      [key: string]: int64;
+      [key: string]: Long;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = int64.fromPartial(value);
+        acc[key] = Long.fromValue(value);
       }
 
       return acc;
@@ -259,20 +259,20 @@ export const MetricRule = {
   }
 
 };
-export interface QuotaLimit_ValuesMapEntry {
+export interface QuotaLimit_ValuesEntry {
   key: string;
   value: Long;
 }
 
-function createBaseQuotaLimit_ValuesMapEntry(): QuotaLimit_ValuesMapEntry {
+function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
   return {
     key: "",
-    value: Long.UZERO
+    value: Long.ZERO
   };
 }
 
-export const QuotaLimit_ValuesMapEntry = {
-  encode(message: QuotaLimit_ValuesMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const QuotaLimit_ValuesEntry = {
+  encode(message: QuotaLimit_ValuesEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -284,10 +284,10 @@ export const QuotaLimit_ValuesMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit_ValuesMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit_ValuesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuotaLimit_ValuesMapEntry();
+    const message = createBaseQuotaLimit_ValuesEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -310,22 +310,22 @@ export const QuotaLimit_ValuesMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): QuotaLimit_ValuesMapEntry {
+  fromJSON(object: any): QuotaLimit_ValuesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
     };
   },
 
-  toJSON(message: QuotaLimit_ValuesMapEntry): unknown {
+  toJSON(message: QuotaLimit_ValuesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaLimit_ValuesMapEntry>, I>>(object: I): QuotaLimit_ValuesMapEntry {
-    const message = createBaseQuotaLimit_ValuesMapEntry();
+  fromPartial<I extends Exact<DeepPartial<QuotaLimit_ValuesEntry>, I>>(object: I): QuotaLimit_ValuesEntry {
+    const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
@@ -351,13 +351,13 @@ function createBaseQuotaLimit(): QuotaLimit {
   return {
     name: "",
     description: "",
-    defaultLimit: Long.UZERO,
-    maxLimit: Long.UZERO,
-    freeTier: Long.UZERO,
+    defaultLimit: Long.ZERO,
+    maxLimit: Long.ZERO,
+    freeTier: Long.ZERO,
     duration: "",
     metric: "",
     unit: "",
-    values: Long.UZERO,
+    values: {},
     displayName: ""
   };
 }
@@ -397,7 +397,7 @@ export const QuotaLimit = {
     }
 
     Object.entries(message.values).forEach(([key, value]) => {
-      QuotaLimit_ValuesMapEntry.encode({
+      QuotaLimit_ValuesEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(80).fork()).ldelim();
@@ -452,7 +452,7 @@ export const QuotaLimit = {
           break;
 
         case 10:
-          const entry10 = QuotaLimit_ValuesMapEntry.decode(reader, reader.uint32());
+          const entry10 = QuotaLimit_ValuesEntry.decode(reader, reader.uint32());
 
           if (entry10.value !== undefined) {
             message.values[entry10.key] = entry10.value;
@@ -484,9 +484,9 @@ export const QuotaLimit = {
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
-        [key: string]: int64;
+        [key: string]: Long;
       }>((acc, [key, value]) => {
-        acc[key] = int64.fromJSON(value);
+        acc[key] = Long.fromValue((value as Long | string));
         return acc;
       }, {}) : {},
       displayName: isSet(object.displayName) ? String(object.displayName) : ""
@@ -507,7 +507,7 @@ export const QuotaLimit = {
 
     if (message.values) {
       Object.entries(message.values).forEach(([k, v]) => {
-        obj.values[k] = int64.toJSON(v);
+        obj.values[k] = v.toString();
       });
     }
 
@@ -526,10 +526,10 @@ export const QuotaLimit = {
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";
     message.values = Object.entries(object.values ?? {}).reduce<{
-      [key: string]: int64;
+      [key: string]: Long;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = int64.fromPartial(value);
+        acc[key] = Long.fromValue(value);
       }
 
       return acc;

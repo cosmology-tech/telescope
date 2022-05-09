@@ -383,7 +383,7 @@ export interface AbsoluteTxPosition {
 
 function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   return {
-    blockHeight: Long.UZERO,
+    blockHeight: Long.ZERO,
     txIndex: Long.UZERO
   };
 }

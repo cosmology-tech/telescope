@@ -4,20 +4,20 @@ import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
-export interface Operation_LabelsMapEntry {
+export interface Operation_LabelsEntry {
   key: string;
   value: string;
 }
 
-function createBaseOperation_LabelsMapEntry(): Operation_LabelsMapEntry {
+function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Operation_LabelsMapEntry = {
-  encode(message: Operation_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Operation_LabelsEntry = {
+  encode(message: Operation_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -29,10 +29,10 @@ export const Operation_LabelsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_LabelsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_LabelsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOperation_LabelsMapEntry();
+    const message = createBaseOperation_LabelsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -55,22 +55,22 @@ export const Operation_LabelsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Operation_LabelsMapEntry {
+  fromJSON(object: any): Operation_LabelsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Operation_LabelsMapEntry): unknown {
+  toJSON(message: Operation_LabelsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Operation_LabelsMapEntry>, I>>(object: I): Operation_LabelsMapEntry {
-    const message = createBaseOperation_LabelsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Operation_LabelsEntry>, I>>(object: I): Operation_LabelsEntry {
+    const message = createBaseOperation_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -99,7 +99,7 @@ function createBaseOperation(): Operation {
     consumerId: "",
     startTime: undefined,
     endTime: undefined,
-    labels: "",
+    labels: {},
     metricValueSets: [],
     logEntries: [],
     importance: undefined,
@@ -124,7 +124,7 @@ export const Operation = {
     if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
     if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(42).fork()).ldelim();
     Object.entries(message.labels).forEach(([key, value]) => {
-      Operation_LabelsMapEntry.encode({
+      Operation_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(50).fork()).ldelim();
@@ -179,7 +179,7 @@ export const Operation = {
           break;
 
         case 6:
-          const entry6 = Operation_LabelsMapEntry.decode(reader, reader.uint32());
+          const entry6 = Operation_LabelsEntry.decode(reader, reader.uint32());
 
           if (entry6.value !== undefined) {
             message.labels[entry6.key] = entry6.value;

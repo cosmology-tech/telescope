@@ -12,7 +12,7 @@ export interface GetValidatorSetByHeightRequest {
 
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
-    height: Long.UZERO,
+    height: Long.ZERO,
     pagination: undefined
   };
 }
@@ -86,7 +86,7 @@ export interface GetValidatorSetByHeightResponse {
 
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return {
-    blockHeight: Long.UZERO,
+    blockHeight: Long.ZERO,
     validators: [],
     pagination: undefined
   };
@@ -238,7 +238,7 @@ export interface GetLatestValidatorSetResponse {
 
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return {
-    blockHeight: Long.UZERO,
+    blockHeight: Long.ZERO,
     validators: [],
     pagination: undefined
   };
@@ -333,8 +333,8 @@ function createBaseValidator(): Validator {
   return {
     address: "",
     pubKey: undefined,
-    votingPower: Long.UZERO,
-    proposerPriority: Long.UZERO
+    votingPower: Long.ZERO,
+    proposerPriority: Long.ZERO
   };
 }
 
@@ -427,7 +427,7 @@ export interface GetBlockByHeightRequest {
 
 function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
   return {
-    height: Long.UZERO
+    height: Long.ZERO
   };
 }
 

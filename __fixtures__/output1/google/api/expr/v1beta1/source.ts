@@ -1,19 +1,19 @@
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
-export interface SourceInfo_PositionsMapEntry {
+export interface SourceInfo_PositionsEntry {
   key: number;
   value: number;
 }
 
-function createBaseSourceInfo_PositionsMapEntry(): SourceInfo_PositionsMapEntry {
+function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
   return {
     key: 0,
     value: 0
   };
 }
 
-export const SourceInfo_PositionsMapEntry = {
-  encode(message: SourceInfo_PositionsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const SourceInfo_PositionsEntry = {
+  encode(message: SourceInfo_PositionsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== 0) {
       writer.uint32(8).int32(message.key);
     }
@@ -25,10 +25,10 @@ export const SourceInfo_PositionsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSourceInfo_PositionsMapEntry();
+    const message = createBaseSourceInfo_PositionsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -51,22 +51,22 @@ export const SourceInfo_PositionsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): SourceInfo_PositionsMapEntry {
+  fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
       key: isSet(object.key) ? Number(object.key) : 0,
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
-  toJSON(message: SourceInfo_PositionsMapEntry): unknown {
+  toJSON(message: SourceInfo_PositionsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsMapEntry>, I>>(object: I): SourceInfo_PositionsMapEntry {
-    const message = createBaseSourceInfo_PositionsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsEntry>, I>>(object: I): SourceInfo_PositionsEntry {
+    const message = createBaseSourceInfo_PositionsEntry();
     message.key = object.key ?? 0;
     message.value = object.value ?? 0;
     return message;
@@ -85,7 +85,7 @@ function createBaseSourceInfo(): SourceInfo {
   return {
     location: "",
     lineOffsets: [],
-    positions: 0
+    positions: {}
   };
 }
 
@@ -103,7 +103,7 @@ export const SourceInfo = {
 
     writer.ldelim();
     Object.entries(message.positions).forEach(([key, value]) => {
-      SourceInfo_PositionsMapEntry.encode({
+      SourceInfo_PositionsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(32).fork()).ldelim();
@@ -136,7 +136,7 @@ export const SourceInfo = {
           }
 
         case 4:
-          const entry4 = SourceInfo_PositionsMapEntry.decode(reader, reader.uint32());
+          const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
 
           if (entry4.value !== undefined) {
             message.positions[entry4.key] = entry4.value;

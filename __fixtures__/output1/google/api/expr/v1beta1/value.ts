@@ -21,7 +21,7 @@ function createBaseValue(): Value {
   return {
     nullValue: undefined,
     boolValue: false,
-    int64Value: Long.UZERO,
+    int64Value: Long.ZERO,
     uint64Value: Long.UZERO,
     doubleValue: 0,
     stringValue: "",

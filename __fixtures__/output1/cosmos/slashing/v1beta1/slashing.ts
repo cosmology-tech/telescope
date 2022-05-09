@@ -14,11 +14,11 @@ export interface ValidatorSigningInfo {
 function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
   return {
     address: "",
-    startHeight: Long.UZERO,
-    indexOffset: Long.UZERO,
+    startHeight: Long.ZERO,
+    indexOffset: Long.ZERO,
     jailedUntil: undefined,
     tombstoned: false,
-    missedBlocksCounter: Long.UZERO
+    missedBlocksCounter: Long.ZERO
   };
 }
 
@@ -135,7 +135,7 @@ export interface Params {
 
 function createBaseParams(): Params {
   return {
-    signedBlocksWindow: Long.UZERO,
+    signedBlocksWindow: Long.ZERO,
     minSignedPerWindow: new Uint8Array(),
     downtimeJailDuration: undefined,
     slashFractionDoubleSign: new Uint8Array(),

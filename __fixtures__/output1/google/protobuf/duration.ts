@@ -7,7 +7,7 @@ export interface Duration {
 
 function createBaseDuration(): Duration {
   return {
-    seconds: Long.UZERO,
+    seconds: Long.ZERO,
     nanos: 0
   };
 }

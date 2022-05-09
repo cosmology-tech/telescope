@@ -421,20 +421,20 @@ export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueT
       return "UNKNOWN";
   }
 }
-export interface Metric_LabelsMapEntry {
+export interface Metric_LabelsEntry {
   key: string;
   value: string;
 }
 
-function createBaseMetric_LabelsMapEntry(): Metric_LabelsMapEntry {
+function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
   return {
     key: "",
     value: ""
   };
 }
 
-export const Metric_LabelsMapEntry = {
-  encode(message: Metric_LabelsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Metric_LabelsEntry = {
+  encode(message: Metric_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -446,10 +446,10 @@ export const Metric_LabelsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Metric_LabelsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metric_LabelsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetric_LabelsMapEntry();
+    const message = createBaseMetric_LabelsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -472,22 +472,22 @@ export const Metric_LabelsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Metric_LabelsMapEntry {
+  fromJSON(object: any): Metric_LabelsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
-  toJSON(message: Metric_LabelsMapEntry): unknown {
+  toJSON(message: Metric_LabelsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Metric_LabelsMapEntry>, I>>(object: I): Metric_LabelsMapEntry {
-    const message = createBaseMetric_LabelsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Metric_LabelsEntry>, I>>(object: I): Metric_LabelsEntry {
+    const message = createBaseMetric_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -504,7 +504,7 @@ export interface Metric {
 function createBaseMetric(): Metric {
   return {
     type: "",
-    labels: ""
+    labels: {}
   };
 }
 
@@ -515,7 +515,7 @@ export const Metric = {
     }
 
     Object.entries(message.labels).forEach(([key, value]) => {
-      Metric_LabelsMapEntry.encode({
+      Metric_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(18).fork()).ldelim();
@@ -537,7 +537,7 @@ export const Metric = {
           break;
 
         case 2:
-          const entry2 = Metric_LabelsMapEntry.decode(reader, reader.uint32());
+          const entry2 = Metric_LabelsEntry.decode(reader, reader.uint32());
 
           if (entry2.value !== undefined) {
             message.labels[entry2.key] = entry2.value;

@@ -1,19 +1,19 @@
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
-export interface Struct_FieldsMapEntry {
+export interface Struct_FieldsEntry {
   key: string;
   value: Value;
 }
 
-function createBaseStruct_FieldsMapEntry(): Struct_FieldsMapEntry {
+function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
     key: "",
     value: undefined
   };
 }
 
-export const Struct_FieldsMapEntry = {
-  encode(message: Struct_FieldsMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const Struct_FieldsEntry = {
+  encode(message: Struct_FieldsEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -25,10 +25,10 @@ export const Struct_FieldsMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStruct_FieldsMapEntry();
+    const message = createBaseStruct_FieldsEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -51,22 +51,22 @@ export const Struct_FieldsMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): Struct_FieldsMapEntry {
+  fromJSON(object: any): Struct_FieldsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: Struct_FieldsMapEntry): unknown {
+  toJSON(message: Struct_FieldsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Struct_FieldsMapEntry>, I>>(object: I): Struct_FieldsMapEntry {
-    const message = createBaseStruct_FieldsMapEntry();
+  fromPartial<I extends Exact<DeepPartial<Struct_FieldsEntry>, I>>(object: I): Struct_FieldsEntry {
+    const message = createBaseStruct_FieldsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
@@ -81,14 +81,14 @@ export interface Struct {
 
 function createBaseStruct(): Struct {
   return {
-    fields: undefined
+    fields: {}
   };
 }
 
 export const Struct = {
   encode(message: Struct, writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.fields).forEach(([key, value]) => {
-      Struct_FieldsMapEntry.encode({
+      Struct_FieldsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(10).fork()).ldelim();
@@ -106,7 +106,7 @@ export const Struct = {
 
       switch (tag >>> 3) {
         case 1:
-          const entry1 = Struct_FieldsMapEntry.decode(reader, reader.uint32());
+          const entry1 = Struct_FieldsEntry.decode(reader, reader.uint32());
 
           if (entry1.value !== undefined) {
             message.fields[entry1.key] = entry1.value;

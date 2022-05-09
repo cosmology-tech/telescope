@@ -1617,7 +1617,7 @@ export interface QueryHistoricalInfoRequest {
 
 function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
   return {
-    height: Long.UZERO
+    height: Long.ZERO
   };
 }
 

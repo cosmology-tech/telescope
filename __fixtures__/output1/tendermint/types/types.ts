@@ -351,7 +351,7 @@ function createBaseHeader(): Header {
   return {
     version: undefined,
     chainId: "",
-    height: Long.UZERO,
+    height: Long.ZERO,
     time: undefined,
     lastBlockId: undefined,
     lastCommitHash: new Uint8Array(),
@@ -636,7 +636,7 @@ export interface Vote {
 function createBaseVote(): Vote {
   return {
     type: undefined,
-    height: Long.UZERO,
+    height: Long.ZERO,
     round: 0,
     blockId: undefined,
     timestamp: undefined,
@@ -780,7 +780,7 @@ export interface Commit {
 
 function createBaseCommit(): Commit {
   return {
-    height: Long.UZERO,
+    height: Long.ZERO,
     round: 0,
     blockId: undefined,
     signatures: []
@@ -986,7 +986,7 @@ export interface Proposal {
 function createBaseProposal(): Proposal {
   return {
     type: undefined,
-    height: Long.UZERO,
+    height: Long.ZERO,
     round: 0,
     polRound: 0,
     blockId: undefined,
@@ -1265,9 +1265,9 @@ export interface BlockMeta {
 function createBaseBlockMeta(): BlockMeta {
   return {
     blockId: undefined,
-    blockSize: Long.UZERO,
+    blockSize: Long.ZERO,
     header: undefined,
-    numTxs: Long.UZERO
+    numTxs: Long.ZERO
   };
 }
 

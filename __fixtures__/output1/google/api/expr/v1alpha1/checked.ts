@@ -3,20 +3,20 @@ import { Empty } from "../../../protobuf/empty";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
-export interface CheckedExpr_ReferenceMapMapEntry {
+export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
   value: Reference;
 }
 
-function createBaseCheckedExpr_ReferenceMapMapEntry(): CheckedExpr_ReferenceMapMapEntry {
+function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {
-    key: Long.UZERO,
+    key: Long.ZERO,
     value: undefined
   };
 }
 
-export const CheckedExpr_ReferenceMapMapEntry = {
-  encode(message: CheckedExpr_ReferenceMapMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const CheckedExpr_ReferenceMapEntry = {
+  encode(message: CheckedExpr_ReferenceMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -28,10 +28,10 @@ export const CheckedExpr_ReferenceMapMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckedExpr_ReferenceMapMapEntry();
+    const message = createBaseCheckedExpr_ReferenceMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -54,42 +54,42 @@ export const CheckedExpr_ReferenceMapMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): CheckedExpr_ReferenceMapMapEntry {
+  fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: CheckedExpr_ReferenceMapMapEntry): unknown {
+  toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckedExpr_ReferenceMapMapEntry>, I>>(object: I): CheckedExpr_ReferenceMapMapEntry {
-    const message = createBaseCheckedExpr_ReferenceMapMapEntry();
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr_ReferenceMapEntry>, I>>(object: I): CheckedExpr_ReferenceMapEntry {
+    const message = createBaseCheckedExpr_ReferenceMapEntry();
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   }
 
 };
-export interface CheckedExpr_TypeMapMapEntry {
+export interface CheckedExpr_TypeMapEntry {
   key: Long;
   value: Type;
 }
 
-function createBaseCheckedExpr_TypeMapMapEntry(): CheckedExpr_TypeMapMapEntry {
+function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   return {
-    key: Long.UZERO,
+    key: Long.ZERO,
     value: undefined
   };
 }
 
-export const CheckedExpr_TypeMapMapEntry = {
-  encode(message: CheckedExpr_TypeMapMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+export const CheckedExpr_TypeMapEntry = {
+  encode(message: CheckedExpr_TypeMapEntry, writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -101,10 +101,10 @@ export const CheckedExpr_TypeMapMapEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckedExpr_TypeMapMapEntry();
+    const message = createBaseCheckedExpr_TypeMapEntry();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -127,22 +127,22 @@ export const CheckedExpr_TypeMapMapEntry = {
     return message;
   },
 
-  fromJSON(object: any): CheckedExpr_TypeMapMapEntry {
+  fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
 
-  toJSON(message: CheckedExpr_TypeMapMapEntry): unknown {
+  toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckedExpr_TypeMapMapEntry>, I>>(object: I): CheckedExpr_TypeMapMapEntry {
-    const message = createBaseCheckedExpr_TypeMapMapEntry();
+  fromPartial<I extends Exact<DeepPartial<CheckedExpr_TypeMapEntry>, I>>(object: I): CheckedExpr_TypeMapEntry {
+    const message = createBaseCheckedExpr_TypeMapEntry();
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
@@ -163,8 +163,8 @@ export interface CheckedExpr {
 
 function createBaseCheckedExpr(): CheckedExpr {
   return {
-    referenceMap: undefined,
-    typeMap: undefined,
+    referenceMap: {},
+    typeMap: {},
     sourceInfo: undefined,
     exprVersion: "",
     expr: undefined
@@ -174,13 +174,13 @@ function createBaseCheckedExpr(): CheckedExpr {
 export const CheckedExpr = {
   encode(message: CheckedExpr, writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
-      CheckedExpr_ReferenceMapMapEntry.encode({
+      CheckedExpr_ReferenceMapEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(18).fork()).ldelim();
     });
     Object.entries(message.typeMap).forEach(([key, value]) => {
-      CheckedExpr_TypeMapMapEntry.encode({
+      CheckedExpr_TypeMapEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(26).fork()).ldelim();
@@ -211,7 +211,7 @@ export const CheckedExpr = {
 
       switch (tag >>> 3) {
         case 2:
-          const entry2 = CheckedExpr_ReferenceMapMapEntry.decode(reader, reader.uint32());
+          const entry2 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
 
           if (entry2.value !== undefined) {
             message.referenceMap[entry2.key] = entry2.value;
@@ -220,7 +220,7 @@ export const CheckedExpr = {
           break;
 
         case 3:
-          const entry3 = CheckedExpr_TypeMapMapEntry.decode(reader, reader.uint32());
+          const entry3 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
 
           if (entry3.value !== undefined) {
             message.typeMap[entry3.key] = entry3.value;
@@ -1141,7 +1141,7 @@ export const Decl_IdentDecl = {
 
 };
 export interface Decl_FunctionDecl {
-  overloads: FunctionDecl_Decl_Overload[];
+  overloads: Decl_FunctionDecl_Overload[];
 }
 
 function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
@@ -1153,7 +1153,7 @@ function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
 export const Decl_FunctionDecl = {
   encode(message: Decl_FunctionDecl, writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overloads) {
-      FunctionDecl_Decl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
+      Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -1169,7 +1169,7 @@ export const Decl_FunctionDecl = {
 
       switch (tag >>> 3) {
         case 1:
-          message.overloads.push(FunctionDecl_Decl_Overload.decode(reader, reader.uint32()));
+          message.overloads.push(Decl_FunctionDecl_Overload.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -1183,7 +1183,7 @@ export const Decl_FunctionDecl = {
 
   fromJSON(object: any): Decl_FunctionDecl {
     return {
-      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => FunctionDecl_Decl_Overload.fromJSON(e)) : []
+      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e)) : []
     };
   },
 
@@ -1191,7 +1191,7 @@ export const Decl_FunctionDecl = {
     const obj: any = {};
 
     if (message.overloads) {
-      obj.overloads = message.overloads.map(e => e ? FunctionDecl_Decl_Overload.toJSON(e) : undefined);
+      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined);
     } else {
       obj.overloads = [];
     }
@@ -1201,12 +1201,12 @@ export const Decl_FunctionDecl = {
 
   fromPartial<I extends Exact<DeepPartial<Decl_FunctionDecl>, I>>(object: I): Decl_FunctionDecl {
     const message = createBaseDecl_FunctionDecl();
-    message.overloads = object.overloads?.map(e => FunctionDecl_Decl_Overload.fromPartial(e)) || [];
+    message.overloads = object.overloads?.map(e => Decl_FunctionDecl_Overload.fromPartial(e)) || [];
     return message;
   }
 
 };
-export interface Overload {
+export interface Decl_FunctionDecl_Overload {
   overloadId: string;
   params: Type[];
   typeParams: string[];
@@ -1215,7 +1215,7 @@ export interface Overload {
   doc: string;
 }
 
-function createBaseOverload(): Overload {
+function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
   return {
     overloadId: "",
     params: [],
@@ -1226,8 +1226,8 @@ function createBaseOverload(): Overload {
   };
 }
 
-export const Overload = {
-  encode(message: Overload, writer = _m0.Writer.create()): _m0.Writer {
+export const Decl_FunctionDecl_Overload = {
+  encode(message: Decl_FunctionDecl_Overload, writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
@@ -1255,10 +1255,10 @@ export const Overload = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Overload {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOverload();
+    const message = createBaseDecl_FunctionDecl_Overload();
 
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1296,7 +1296,7 @@ export const Overload = {
     return message;
   },
 
-  fromJSON(object: any): Overload {
+  fromJSON(object: any): Decl_FunctionDecl_Overload {
     return {
       overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
       params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromJSON(e)) : [],
@@ -1307,7 +1307,7 @@ export const Overload = {
     };
   },
 
-  toJSON(message: Overload): unknown {
+  toJSON(message: Decl_FunctionDecl_Overload): unknown {
     const obj: any = {};
     message.overloadId !== undefined && (obj.overloadId = message.overloadId);
 
@@ -1329,8 +1329,8 @@ export const Overload = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Overload>, I>>(object: I): Overload {
-    const message = createBaseOverload();
+  fromPartial<I extends Exact<DeepPartial<Decl_FunctionDecl_Overload>, I>>(object: I): Decl_FunctionDecl_Overload {
+    const message = createBaseDecl_FunctionDecl_Overload();
     message.overloadId = object.overloadId ?? "";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
     message.typeParams = object.typeParams?.map(e => e) || [];

@@ -16,7 +16,7 @@ function createBaseBaseVestingAccount(): BaseVestingAccount {
     originalVesting: [],
     delegatedFree: [],
     delegatedVesting: [],
-    endTime: Long.UZERO
+    endTime: Long.ZERO
   };
 }
 
@@ -138,7 +138,7 @@ export interface ContinuousVestingAccount {
 function createBaseContinuousVestingAccount(): ContinuousVestingAccount {
   return {
     baseVestingAccount: undefined,
-    startTime: Long.UZERO
+    startTime: Long.ZERO
   };
 }
 
@@ -270,7 +270,7 @@ export interface Period {
 
 function createBasePeriod(): Period {
   return {
-    length: Long.UZERO,
+    length: Long.ZERO,
     amount: []
   };
 }
@@ -351,7 +351,7 @@ export interface PeriodicVestingAccount {
 function createBasePeriodicVestingAccount(): PeriodicVestingAccount {
   return {
     baseVestingAccount: undefined,
-    startTime: Long.UZERO,
+    startTime: Long.ZERO,
     vestingPeriods: []
   };
 }

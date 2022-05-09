@@ -11,7 +11,7 @@ function createBaseGenesisState(): GenesisState {
   return {
     minter: undefined,
     params: undefined,
-    halvenStartedEpoch: Long.UZERO
+    halvenStartedEpoch: Long.ZERO
   };
 }
 
