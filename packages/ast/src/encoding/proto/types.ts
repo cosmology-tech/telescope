@@ -313,12 +313,18 @@ const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
     return isOneOf || field?.options?.['(gogoproto.nullable)'];
 };
 
-const getProtoNameSafe = (name: string) => {
+const getProtoNameSafe = (field: ProtoField) => {
+    let name = field.type;
+
     if (name.includes('.')) {
         const parts = name.split('.');
-        return parts[parts.length - 1];
+        name = parts[parts.length - 1];
     }
-    return name;
+    //
+    if (!field.scope || !field.scope.length) return name;
+    if (field.scope?.length <= 1) return name;
+    const [_first, ...rest] = field.scope;
+    return [...rest.reverse(), name].join('_');
 };
 
 const getProtoField = (field: ProtoField) => {
@@ -332,7 +338,7 @@ const getProtoField = (field: ProtoField) => {
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeFromProtoType(field.type);
     } else {
-        ast = t.tsTypeReference(t.identifier(getProtoNameSafe(field.type)));
+        ast = t.tsTypeReference(t.identifier(getProtoNameSafe(field)));
     }
 
     if (field.rule === 'repeated') {
@@ -368,12 +374,13 @@ export const createProtoType = (name: string, proto: ProtoType) => {
         t.tsInterfaceBody(
             Object.keys(proto.fields).map(fieldName => {
                 const isOneOf = oneOfs.includes(fieldName);
+                const field = proto.fields[fieldName];
                 return tsPropertySignature(
                     t.identifier(fieldName),
                     t.tsTypeAnnotation(
-                        getProtoField(proto.fields[fieldName])
+                        getProtoField(field)
                     ),
-                    getFieldOptionality(proto.fields[fieldName], isOneOf)
+                    getFieldOptionality(field, isOneOf)
                 )
             })
         )
