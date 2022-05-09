@@ -342,6 +342,8 @@ export const fromJSON = {
         const keyType = args.field.keyType;
         const valueType = args.field.parsedType.name;
 
+        args.context.addUtil('isObject');
+
         let fromJSON = null;
         let valueTypeType = valueType;
         switch (valueType) {
