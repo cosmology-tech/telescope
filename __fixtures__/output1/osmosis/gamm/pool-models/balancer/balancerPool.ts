@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobuf/minimal";
+import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface SmoothWeightChangeParams {
   startTime: Date;
   duration: string;

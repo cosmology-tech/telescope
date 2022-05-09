@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Duration } from "../protobuf/duration";
 import { Any } from "../protobuf/any";
 import { Status } from "../rpc/status";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface Operation {
   name: string;
   metadata: Any;

@@ -1,6 +1,6 @@
+import { Minter, Params } from "./mint";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Minter, Params } from "./mint";
 export interface GenesisState {
   minter: Minter;
   params: Params;

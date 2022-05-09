@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Proof } from "../crypto/proof";
 import { Consensus } from "../version/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { ValidatorSet } from "./validator";
+import * as _m0 from "protobuf/minimal";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export enum BlockIDFlag {
   BLOCK_ID_FLAG_UNKNOWN = 0,
   BLOCK_ID_FLAG_ABSENT = 1,

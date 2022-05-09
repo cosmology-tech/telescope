@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
-import { Action, ClaimRecord } from "./claim";
+import { Action, ClaimRecord, actionFromJSON, actionToJSON } from "./claim";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
+import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface QueryModuleAccountBalanceRequest {}
 
 function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalanceRequest {

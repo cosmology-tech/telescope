@@ -1,6 +1,6 @@
+import { DistrRecord } from "./incentives";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { DistrRecord } from "./incentives";
 export interface ReplacePoolIncentivesProposal {
   title: string;
   description: string;

@@ -1,5 +1,3 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Api } from "../protobuf/api";
 import { Type, Enum } from "../protobuf/type";
 import { Documentation } from "./documentation";
@@ -20,6 +18,8 @@ import { Monitoring } from "./monitoring";
 import { SystemParameters } from "./system_parameter";
 import { SourceInfo } from "./source_info";
 import { UInt32Value } from "../protobuf/wrappers";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Service {
   name: string;
   title: string;

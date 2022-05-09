@@ -1,7 +1,7 @@
+import { Option, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
+import { SourceContext } from "./source_context";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Option, Syntax } from "./type";
-import { SourceContext } from "./source_context";
 export interface Api {
   name: string;
   methods: Method[];

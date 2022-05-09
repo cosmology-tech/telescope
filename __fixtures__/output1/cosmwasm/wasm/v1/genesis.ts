@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "./tx";
 import { Params, CodeInfo, ContractInfo, Model } from "./types";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface GenesisState {
   params: Params;
   codes: Code[];

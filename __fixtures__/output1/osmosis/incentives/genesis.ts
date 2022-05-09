@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Params } from "./params";
 import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
+import * as _m0 from "protobuf/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   params: Params;
   gauges: Gauge[];

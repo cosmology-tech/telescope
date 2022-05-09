@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { RegistrationNodeInfo } from "./types";
 import { MasterCertificate } from "./msg";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   registration: RegistrationNodeInfo[];
   nodeExchMasterCertificate: MasterCertificate;

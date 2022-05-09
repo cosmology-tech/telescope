@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface MsgGrant {
   granter: string;
   grantee: string;

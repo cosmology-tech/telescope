@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 export interface Member {
   address: string;
   weight: string;

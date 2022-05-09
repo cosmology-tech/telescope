@@ -1,6 +1,6 @@
+import { CapabilityOwners } from "./capability";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { CapabilityOwners } from "./capability";
 export interface GenesisOwners {
   index: Long;
   indexOwners: CapabilityOwners;

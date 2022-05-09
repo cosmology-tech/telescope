@@ -1,6 +1,6 @@
+import { Height } from "../../client/v1/client";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
-import { Height } from "../../client/v1/client";
 export interface Channel {
   state: State;
   ordering: Order;

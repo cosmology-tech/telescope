@@ -1,6 +1,6 @@
+import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from "./gov";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from "./gov";
 export interface GenesisState {
   startingProposalId: Long;
   deposits: Deposit[];

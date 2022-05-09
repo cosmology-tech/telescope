@@ -1,6 +1,6 @@
+import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, Long, toDuration, fromDuration } from "@osmonauts/helpers";
-import { Duration } from "../../google/protobuf/duration";
 export interface ConsensusParams {
   block: BlockParams;
   evidence: EvidenceParams;

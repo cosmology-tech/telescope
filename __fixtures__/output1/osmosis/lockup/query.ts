@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, SyntheticLock } from "./lock";
+import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 export interface ModuleBalanceRequest {}
 
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {

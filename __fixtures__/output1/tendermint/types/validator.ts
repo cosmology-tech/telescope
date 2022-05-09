@@ -1,6 +1,6 @@
+import { PublicKey } from "../crypto/keys";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
-import { PublicKey } from "../crypto/keys";
 export interface ValidatorSet {
   validators: Validator[];
   proposer: Validator;

@@ -1,6 +1,6 @@
+import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
-import { Any } from "../../../google/protobuf/any";
 export enum AccessType {
   /*AccessTypeUnspecified placeholder for empty value*/
   ACCESS_TYPE_UNSPECIFIED = 0,

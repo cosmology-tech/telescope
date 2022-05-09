@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { DenomTrace, Params } from "./transfer";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface QueryDenomTraceRequest {
   hash: string;
 }

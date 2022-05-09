@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobuf/minimal";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface StoreCodeProposal {
   title: string;
   description: string;

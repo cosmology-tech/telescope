@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Struct } from "../../protobuf/struct";
 import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface AttributeContext {
   origin: Peer;
   source: Peer;

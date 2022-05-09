@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { BaseAccount } from "../../auth/v1beta1/auth";
 import { Coin } from "../../base/v1beta1/coin";
+import * as _m0 from "protobuf/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface BaseVestingAccount {
   baseAccount: BaseAccount;
   originalVesting: Coin[];

@@ -1,6 +1,6 @@
+import { Config } from "./config";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
-import { Config } from "./config";
 export interface QueryConfigRequest {}
 
 function createBaseQueryConfigRequest(): QueryConfigRequest {

@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 import { MonitoredResource, MonitoredResourceDescriptor } from "../../api/monitored_resource";
 import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
 import { Status } from "../../rpc/status";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface DeleteLogRequest {
   logName: string;
 }

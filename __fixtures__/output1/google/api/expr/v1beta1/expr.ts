@@ -1,7 +1,7 @@
+import { SourceInfo } from "./source";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
-import { SourceInfo } from "./source";
-import { NullValue } from "../../../protobuf/struct";
 export interface ParsedExpr {
   expr: Expr;
   sourceInfo: SourceInfo;

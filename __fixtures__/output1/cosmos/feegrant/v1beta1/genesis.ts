@@ -1,6 +1,6 @@
+import { Grant } from "./feegrant";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial } from "@osmonauts/helpers";
-import { Grant } from "./feegrant";
 export interface GenesisState {
   allowances: Grant[];
 }

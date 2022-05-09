@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Grant } from "./feegrant";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface QueryAllowanceRequest {
   granter: string;
   grantee: string;

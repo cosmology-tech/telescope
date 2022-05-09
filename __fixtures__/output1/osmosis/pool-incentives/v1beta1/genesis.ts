@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Params, DistrInfo } from "./incentives";
 import { Duration } from "../../../google/protobuf/duration";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   params: Params;
   lockableDurations: string[];

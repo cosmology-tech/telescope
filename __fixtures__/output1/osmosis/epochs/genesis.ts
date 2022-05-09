@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
+import * as _m0 from "protobuf/minimal";
+import { toTimestamp, toDuration, fromTimestamp, fromDuration, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface EpochInfo {
   identifier: string;
   startTime: Date;

@@ -1,6 +1,6 @@
+import { Params, ValidatorSigningInfo } from "./slashing";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
-import { Params, ValidatorSigningInfo } from "./slashing";
 export interface GenesisState {
   params: Params;
   signingInfos: SigningInfo[];

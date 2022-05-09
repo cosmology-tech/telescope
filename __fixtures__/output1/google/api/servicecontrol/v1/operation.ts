@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../../../protobuf/timestamp";
 import { MetricValueSet } from "./metric_value";
 import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface Operation_StringMapEntry {
   key: string;
   value: string;

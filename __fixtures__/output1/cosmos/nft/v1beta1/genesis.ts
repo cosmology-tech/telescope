@@ -1,6 +1,6 @@
+import { Class, NFT } from "./nft";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
-import { Class, NFT } from "./nft";
 export interface GenesisState {
   classes: Class[];
   entries: Entry[];

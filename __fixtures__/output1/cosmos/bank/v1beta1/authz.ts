@@ -1,6 +1,6 @@
+import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial } from "@osmonauts/helpers";
-import { Coin } from "../../base/v1beta1/coin";
 export interface SendAuthorization {
   spendLimit: Coin[];
 }

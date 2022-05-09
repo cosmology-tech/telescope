@@ -127,6 +127,9 @@ export const toAminoJsonMethod = ({
     toAminoParams.typeAnnotation = t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
 
     const fields = protoFieldsToArray(proto).map((field) => {
+
+        // if (field.parsedType.type === 'Enum') console.log(field);
+
         const aminoField = toAminoParseField({
             context,
             field,

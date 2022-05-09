@@ -1,6 +1,6 @@
+import { CommitmentProof } from "../../../../confio/proofs";
 import * as _m0 from "protobuf/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
-import { CommitmentProof } from "../../../../confio/proofs";
 export interface MerkleRoot {
   hash: Uint8Array;
 }

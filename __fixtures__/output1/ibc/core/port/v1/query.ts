@@ -1,6 +1,6 @@
+import { Order, Counterparty, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Order, Counterparty } from "../../channel/v1/channel";
 export interface QueryAppVersionRequest {
   portId: string;
   connectionId: string;

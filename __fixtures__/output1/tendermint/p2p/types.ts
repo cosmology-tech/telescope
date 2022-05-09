@@ -1,6 +1,6 @@
+import { Timestamp } from "../../google/protobuf/timestamp";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
-import { Timestamp } from "../../google/protobuf/timestamp";
 export interface ProtocolVersion {
   p2p: Long;
   block: Long;

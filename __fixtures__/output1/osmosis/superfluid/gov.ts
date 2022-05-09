@@ -1,6 +1,6 @@
+import { SuperfluidAsset } from "./superfluid";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { SuperfluidAsset } from "./superfluid";
 export interface SetSuperfluidAssetsProposal {
   title: string;
   description: string;

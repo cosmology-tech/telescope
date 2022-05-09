@@ -1,6 +1,6 @@
+import { IdentifiedChannel, PacketState } from "./channel";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { IdentifiedChannel, PacketState } from "./channel";
 export interface GenesisState {
   channels: IdentifiedChannel[];
   acknowledgements: PacketState[];

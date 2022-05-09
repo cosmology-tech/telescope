@@ -1,6 +1,6 @@
+import { Service } from "./resources";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Service } from "./resources";
 export interface EnableServiceRequest {
   name: string;
 }

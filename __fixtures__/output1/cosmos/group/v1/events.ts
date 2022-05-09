@@ -1,6 +1,6 @@
+import { ProposalExecutorResult, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { ProposalExecutorResult } from "./types";
 export interface EventCreateGroup {
   groupId: Long;
 }

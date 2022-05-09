@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import { ClaimRecord } from "./claim";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   moduleAccountBalance: Coin;
   params: Params;

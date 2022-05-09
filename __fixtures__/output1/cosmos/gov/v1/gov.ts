@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 export enum VoteOption {
   /*VOTE_OPTION_UNSPECIFIED defines a no-op vote option.*/
   VOTE_OPTION_UNSPECIFIED = 0,

@@ -1,6 +1,6 @@
+import { Any } from "../protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Any } from "../protobuf/any";
 export interface Status {
   code: number;
   message: string;

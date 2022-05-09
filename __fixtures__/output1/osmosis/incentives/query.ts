@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
+import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface ModuleToDistributeCoinsRequest {}
 
 function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequest {

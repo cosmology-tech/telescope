@@ -1,6 +1,6 @@
+import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
-import { Any } from "../../../google/protobuf/any";
 export interface Config {
   modules: ModuleConfig[];
 }

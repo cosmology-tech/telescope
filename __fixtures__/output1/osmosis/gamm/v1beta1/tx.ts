@@ -1,6 +1,6 @@
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface MsgJoinPool {
   sender: string;
   poolId: Long;

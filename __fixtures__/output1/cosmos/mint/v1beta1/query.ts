@@ -1,6 +1,6 @@
+import { Params } from "./mint";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
-import { Params } from "./mint";
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {

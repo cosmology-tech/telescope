@@ -1,6 +1,6 @@
+import { Expr } from "./expr";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Expr } from "./expr";
 export interface Decl {
   id: number;
   name: string;

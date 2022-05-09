@@ -1,10 +1,10 @@
-import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../query/v1beta1/pagination";
 import { Any } from "../../../../google/protobuf/any";
 import { BlockID } from "../../../../tendermint/types/types";
 import { Block } from "../../../../tendermint/types/block";
 import { NodeInfo } from "../../../../tendermint/p2p/types";
+import * as _m0 from "protobuf/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GetValidatorSetByHeightRequest {
   height: Long;
   pagination: PageRequest;

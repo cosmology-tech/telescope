@@ -1,6 +1,6 @@
+import { Any } from "../protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial } from "@osmonauts/helpers";
-import { Any } from "../protobuf/any";
 export interface SourceInfo {
   sourceFiles: Any[];
 }

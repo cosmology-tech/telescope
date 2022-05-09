@@ -1,6 +1,6 @@
+import { ParamChange } from "./params";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { ParamChange } from "./params";
 export interface QueryParamsRequest {
   subspace: string;
   key: string;

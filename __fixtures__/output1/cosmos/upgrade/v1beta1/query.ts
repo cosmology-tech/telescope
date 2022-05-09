@@ -1,6 +1,6 @@
+import { Plan, ModuleVersion } from "./upgrade";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
-import { Plan, ModuleVersion } from "./upgrade";
 export interface QueryCurrentPlanRequest {}
 
 function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {

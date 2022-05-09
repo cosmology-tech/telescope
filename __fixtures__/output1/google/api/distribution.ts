@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { Timestamp } from "../protobuf/timestamp";
 import { Any } from "../protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { Long, isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface Distribution {
   count: Long;
   mean: number;

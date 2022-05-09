@@ -1,10 +1,10 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 import { Tx } from "./tx";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { TxResponse, GasInfo, Result } from "../../base/abci/v1beta1/abci";
 import { BlockID } from "../../../tendermint/types/types";
 import { Block } from "../../../tendermint/types/block";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export interface GetTxsEventRequest {
   events: string[];
   pagination: PageRequest;

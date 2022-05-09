@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 import { MetricDescriptor } from "../../api/metric";
 import { Timestamp } from "../../protobuf/timestamp";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface LogMetric_StringMapEntry {
   key: string;
   value: string;

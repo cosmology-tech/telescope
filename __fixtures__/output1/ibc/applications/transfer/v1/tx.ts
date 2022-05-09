@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
+import * as _m0 from "protobuf/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface MsgTransfer {
   sourcePort: string;
   sourceChannel: string;

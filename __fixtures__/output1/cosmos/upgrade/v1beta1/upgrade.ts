@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Plan {
   name: string;
   time: Date;

@@ -1,6 +1,6 @@
+import { LabelDescriptor } from "./label";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { LabelDescriptor } from "./label";
 export interface LogDescriptor {
   name: string;
   labels: LabelDescriptor[];

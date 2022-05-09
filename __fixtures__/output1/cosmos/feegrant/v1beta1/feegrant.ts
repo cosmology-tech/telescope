@@ -1,9 +1,9 @@
-import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 import { Coin } from "../../base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobuf/minimal";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface BasicAllowance {
   spendLimit: Coin[];
   expiration: Date;

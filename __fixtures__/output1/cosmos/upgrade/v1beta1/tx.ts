@@ -1,6 +1,6 @@
+import { Plan } from "./upgrade";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
-import { Plan } from "./upgrade";
 export interface MsgSoftwareUpgrade {
   authority: string;
   plan: Plan;

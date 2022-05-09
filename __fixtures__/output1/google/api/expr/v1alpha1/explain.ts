@@ -1,6 +1,6 @@
+import { Value } from "./value";
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
-import { Value } from "./value";
 export interface Explain {
   values: Value[];
   exprSteps: ExprStep[];

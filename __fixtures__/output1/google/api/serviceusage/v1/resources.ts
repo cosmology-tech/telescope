@@ -1,5 +1,3 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Api } from "../../../protobuf/api";
 import { Documentation } from "../../documentation";
 import { Quota } from "../../quota";
@@ -8,6 +6,8 @@ import { Usage } from "../../usage";
 import { Endpoint } from "../../endpoint";
 import { MonitoredResourceDescriptor } from "../../monitored_resource";
 import { Monitoring } from "../../monitoring";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Service {
   name: string;
   parent: string;

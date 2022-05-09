@@ -1,8 +1,8 @@
-import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Params, ValidatorOutstandingRewards, ValidatorAccumulatedCommission, ValidatorSlashEvent, DelegationDelegatorReward } from "./distribution";
 import { DecCoin } from "../../base/v1beta1/coin";
+import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {

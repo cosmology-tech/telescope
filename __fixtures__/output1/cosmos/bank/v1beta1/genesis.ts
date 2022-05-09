@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import { Params, Metadata } from "./bank";
 import { Coin } from "../../base/v1beta1/coin";
+import * as _m0 from "protobuf/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   params: Params;
   balances: Balance[];

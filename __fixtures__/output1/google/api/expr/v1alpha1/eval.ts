@@ -1,7 +1,7 @@
-import * as _m0 from "protobuf/minimal";
-import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 import { Value } from "./value";
 import { Status } from "../../../rpc/status";
+import * as _m0 from "protobuf/minimal";
+import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface EvalState {
   values: ExprValue[];
   results: Result[];
