@@ -35,7 +35,13 @@ export class TelescopeBuilder {
         const hash = this.store.getProtos().map(ref => {
             const context = this.context(ref);
             parse(context);
+
             context.buildBase();
+            if (context.mutations.length) {
+                context.buildAminoInterfaces();
+                context.buildAminoConverter();
+            }
+
             const importStmts = buildAllImports(context);
 
             const prog = []
