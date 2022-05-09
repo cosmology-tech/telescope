@@ -181,45 +181,11 @@ export const getAminoImports = (mutations: ServiceMutation[]) => {
     });
 };
 
-interface BuildBaseTSClass {
-    includeEncode: boolean;
-    includeDecode: boolean;
-    includeFromPartial: boolean;
-    includeFromJSON: boolean;
-    includeToJSON: boolean;
-}
-
-export interface TelescopeParseContext {
-    proto: ProtoParseContext;
-    amino: AminoParseContext;
-    store: ProtoStore;
-    ref: ProtoRef;
-    parsedImports: Record<string, any>;
-    body: any[];
-    mutations: ServiceMutation[];
-    queries: any[];
-    types: any[];
-    options: any;
-}
-
 export const buildBaseTypeScriptClass = (
     context: TelescopeParseContext,
     name: string,
-    obj: any,
-    {
-        includeEncode,
-        includeDecode,
-        includeFromPartial,
-        includeFromJSON,
-        includeToJSON
-    }: BuildBaseTSClass = {
-            includeEncode: true,
-            includeDecode: true,
-            includeFromPartial: true,
-            includeFromJSON: true,
-            includeToJSON: true
-        }) => {
-
+    obj: any
+) => {
     context.body.push(createProtoType(name, obj));
     context.body.push(createCreateProtoType(name, obj));
     context.body.push(createObjectWithMethods(context.proto, name, obj));
@@ -258,6 +224,19 @@ export const getAminoRelativeDeps = (mutations: ServiceMutation[], filename: str
             return m;
         }, {});
 };
+
+export interface TelescopeParseContext {
+    proto: ProtoParseContext;
+    amino: AminoParseContext;
+    store: ProtoStore;
+    ref: ProtoRef;
+    parsedImports: Record<string, any>;
+    body: any[];
+    mutations: ServiceMutation[];
+    queries: any[];
+    types: any[];
+    options: any;
+}
 export class TelescopeParseContext implements TelescopeParseContext {
     constructor(ref: ProtoRef, store: ProtoStore) {
         this.proto = new ProtoParseContext();
