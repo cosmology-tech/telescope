@@ -42,10 +42,16 @@ export const toAminoParseField = ({
 
     // arrays
     if (field.rule === 'repeated') {
-        switch (field.parsedType.type) {
-            case 'Type':
-                return toAmino.typeArray(args);
+        switch (field.type) {
+            case 'string':
+                return toAmino.string(args);
+            default:
+                switch (field.parsedType.type) {
+                    case 'Type':
+                        return toAmino.typeArray(args);
+                }
         }
+
         // TODO test case
         return needsImplementation(field.name, field);
     }
@@ -53,7 +59,7 @@ export const toAminoParseField = ({
 
     // casting special types
     if (field.type === 'google.protobuf.Any') {
-        switch (field.options['(cosmos_proto.accepts_interface)']) {
+        switch (field.options?.['(cosmos_proto.accepts_interface)']) {
             case 'cosmos.crypto.PubKey':
                 return toAmino.pubkey(args);
         }
