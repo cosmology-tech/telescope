@@ -130,7 +130,7 @@ export declare const types: {
 export declare const getWireNumber: (type: any) => any;
 export declare const getPackedWireNumber: (type: any) => any;
 export declare const getTagNumber: (field: ProtoField) => number;
-export declare const getDefaultTSTypeFromProtoType: (field: ProtoField) => t.ArrayExpression | t.BooleanLiteral | t.Identifier | t.MemberExpression | t.NewExpression | t.NumericLiteral | t.ObjectExpression | t.StringLiteral;
+export declare const getDefaultTSTypeFromProtoType: (field: ProtoField, isOptional: boolean) => t.ArrayExpression | t.BooleanLiteral | t.Identifier | t.MemberExpression | t.NewExpression | t.NumericLiteral | t.ObjectExpression | t.StringLiteral;
 export declare const getEnumToJsonName: (name: any) => string;
 export declare const getEnumFromJsonName: (name: any) => string;
 export declare const getFieldsTypeName: (field: ProtoField) => string;

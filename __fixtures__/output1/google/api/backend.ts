@@ -86,8 +86,8 @@ function createBaseBackendRule(): BackendRule {
     minDeadline: 0,
     operationDeadline: 0,
     pathTranslation: undefined,
-    jwtAudience: "",
-    disableAuth: false,
+    jwtAudience: undefined,
+    disableAuth: undefined,
     protocol: ""
   };
 }

@@ -346,8 +346,8 @@ function createBaseType(): Type {
     listType: undefined,
     mapType: undefined,
     function: undefined,
-    messageType: "",
-    typeParam: "",
+    messageType: undefined,
+    typeParam: undefined,
     type: undefined,
     error: undefined,
     abstractType: undefined

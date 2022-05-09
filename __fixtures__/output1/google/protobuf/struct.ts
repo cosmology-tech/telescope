@@ -174,9 +174,9 @@ export interface Value {
 function createBaseValue(): Value {
   return {
     nullValue: undefined,
-    numberValue: 0,
-    stringValue: "",
-    boolValue: false,
+    numberValue: undefined,
+    stringValue: undefined,
+    boolValue: undefined,
     structValue: undefined,
     listValue: undefined
   };

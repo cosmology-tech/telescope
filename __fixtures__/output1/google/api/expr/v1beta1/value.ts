@@ -20,17 +20,17 @@ export interface Value {
 function createBaseValue(): Value {
   return {
     nullValue: undefined,
-    boolValue: false,
-    int64Value: Long.ZERO,
-    uint64Value: Long.UZERO,
-    doubleValue: 0,
-    stringValue: "",
-    bytesValue: new Uint8Array(),
+    boolValue: undefined,
+    int64Value: undefined,
+    uint64Value: undefined,
+    doubleValue: undefined,
+    stringValue: undefined,
+    bytesValue: undefined,
     enumValue: undefined,
     objectValue: undefined,
     mapValue: undefined,
     listValue: undefined,
-    typeValue: ""
+    typeValue: undefined
   };
 }
 

@@ -7,8 +7,8 @@ export interface PublicKey {
 
 function createBasePublicKey(): PublicKey {
   return {
-    ed25519: new Uint8Array(),
-    secp256k1: new Uint8Array()
+    ed25519: undefined,
+    secp256k1: undefined
   };
 }
 

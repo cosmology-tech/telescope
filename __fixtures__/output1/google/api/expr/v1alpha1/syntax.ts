@@ -620,7 +620,7 @@ export interface Expr_CreateStruct_Entry {
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
     id: Long.ZERO,
-    fieldKey: "",
+    fieldKey: undefined,
     mapKey: undefined,
     value: undefined
   };
@@ -862,12 +862,12 @@ export interface Constant {
 function createBaseConstant(): Constant {
   return {
     nullValue: undefined,
-    boolValue: false,
-    int64Value: Long.ZERO,
-    uint64Value: Long.UZERO,
-    doubleValue: 0,
-    stringValue: "",
-    bytesValue: new Uint8Array(),
+    boolValue: undefined,
+    int64Value: undefined,
+    uint64Value: undefined,
+    doubleValue: undefined,
+    stringValue: undefined,
+    bytesValue: undefined,
     durationValue: undefined,
     timestampValue: undefined
   };

@@ -105,7 +105,7 @@ function createBaseLogEntry(): LogEntry {
     insertId: "",
     labels: {},
     protoPayload: undefined,
-    textPayload: "",
+    textPayload: undefined,
     structPayload: undefined,
     operation: undefined,
     sourceLocation: undefined

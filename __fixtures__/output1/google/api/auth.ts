@@ -197,8 +197,8 @@ export interface JwtLocation {
 
 function createBaseJwtLocation(): JwtLocation {
   return {
-    header: "",
-    query: "",
+    header: undefined,
+    query: undefined,
     valuePrefix: ""
   };
 }

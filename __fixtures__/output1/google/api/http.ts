@@ -95,11 +95,11 @@ export interface HttpRule {
 function createBaseHttpRule(): HttpRule {
   return {
     selector: "",
-    get: "",
-    put: "",
-    post: "",
-    delete: "",
-    patch: "",
+    get: undefined,
+    put: undefined,
+    post: undefined,
+    delete: undefined,
+    patch: undefined,
     custom: undefined,
     body: "",
     responseBody: "",

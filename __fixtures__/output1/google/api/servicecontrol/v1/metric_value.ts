@@ -93,10 +93,10 @@ function createBaseMetricValue(): MetricValue {
     labels: {},
     startTime: undefined,
     endTime: undefined,
-    boolValue: false,
-    int64Value: Long.ZERO,
-    doubleValue: 0,
-    stringValue: "",
+    boolValue: undefined,
+    int64Value: undefined,
+    doubleValue: undefined,
+    stringValue: undefined,
     distributionValue: undefined
   };
 }

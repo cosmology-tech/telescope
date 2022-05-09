@@ -698,8 +698,8 @@ export interface Acknowledgement {
 
 function createBaseAcknowledgement(): Acknowledgement {
   return {
-    result: new Uint8Array(),
-    error: ""
+    result: undefined,
+    error: undefined
   };
 }
 

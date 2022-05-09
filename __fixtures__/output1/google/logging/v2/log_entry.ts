@@ -106,7 +106,7 @@ function createBaseLogEntry(): LogEntry {
     logName: "",
     resource: undefined,
     protoPayload: undefined,
-    textPayload: "",
+    textPayload: undefined,
     jsonPayload: undefined,
     timestamp: undefined,
     receiveTimestamp: undefined,
