@@ -21,8 +21,9 @@ export const getParsedObjectName = (
     obj: any,
     scope: string[],
 ) => {
+    const _scope = [...scope];
     const root = getRoot(ref);
-    const allButPackage = scope.splice(root.package.split('.').length);
+    const allButPackage = _scope.splice(root.package.split('.').length);
     // pull off "this" name
     allButPackage.pop();
     return getObjectName(obj.name, [root.package, ...allButPackage]);
@@ -69,6 +70,9 @@ export const parseType = (
     scope: string[],
     isNested: boolean = false
 ) => {
+
+    // scope already has the name of "this" field at the end of it
+
 
     obj.keyTypes.forEach(field => {
         const keyTypeObject = makeKeyTypeObj(context.ref, field, scope);

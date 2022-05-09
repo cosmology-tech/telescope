@@ -616,6 +616,124 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
 };"
 `;
 
+exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`] = `
+"export const Decl_FunctionDecl_Overload = {
+  encode(message: Decl_FunctionDecl_Overload, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.overloadId !== \\"\\") {
+      writer.uint32(10).string(message.overloadId);
+    }
+
+    for (const v of message.params) {
+      Type.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    for (const v of message.typeParams) {
+      writer.uint32(26).string(v!);
+    }
+
+    if (message.resultType !== undefined) {
+      Type.encode(message.resultType, writer.uint32(34).fork()).ldelim();
+    }
+
+    if (message.isInstanceFunction === true) {
+      writer.uint32(40).bool(message.isInstanceFunction);
+    }
+
+    if (message.doc !== \\"\\") {
+      writer.uint32(50).string(message.doc);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDecl_FunctionDecl_Overload();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.overloadId = reader.string();
+          break;
+
+        case 2:
+          message.params.push(Type.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.typeParams.push(reader.string());
+
+        case 4:
+          message.resultType = Type.decode(reader, reader.uint32());
+          break;
+
+        case 5:
+          message.isInstanceFunction = reader.bool();
+          break;
+
+        case 6:
+          message.doc = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Decl_FunctionDecl_Overload {
+    return {
+      overloadId: isSet(object.overloadId) ? String(object.overloadId) : \\"\\",
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromJSON(e)) : [],
+      typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => String(e)) : [],
+      resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
+      isInstanceFunction: isSet(object.isInstanceFunction) ? Boolean(object.isInstanceFunction) : false,
+      doc: isSet(object.doc) ? String(object.doc) : \\"\\"
+    };
+  },
+
+  toJSON(message: Decl_FunctionDecl_Overload): unknown {
+    const obj: any = {};
+    message.overloadId !== undefined && (obj.overloadId = message.overloadId);
+
+    if (message.params) {
+      obj.params = message.params.map(e => e ? Type.toJSON(e) : undefined);
+    } else {
+      obj.params = [];
+    }
+
+    if (message.typeParams) {
+      obj.typeParams = message.typeParams.map(e => e);
+    } else {
+      obj.typeParams = [];
+    }
+
+    message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
+    message.isInstanceFunction !== undefined && (obj.isInstanceFunction = message.isInstanceFunction);
+    message.doc !== undefined && (obj.doc = message.doc);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Decl_FunctionDecl_Overload>, I>>(object: I): Decl_FunctionDecl_Overload {
+    const message = createBaseDecl_FunctionDecl_Overload();
+    message.overloadId = object.overloadId ?? \\"\\";
+    message.params = object.params?.map(e => Type.fromPartial(e)) || [];
+    message.typeParams = object.typeParams?.map(e => e) || [];
+    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
+    message.isInstanceFunction = object.isInstanceFunction ?? false;
+    message.doc = object.doc ?? \\"\\";
+    return message;
+  }
+
+};"
+`;
+
 exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 "export const Type = {
   encode(message: Type, writer = _m0.Writer.create()): _m0.Writer {
@@ -869,13 +987,13 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 "export const CheckedExpr = {
   encode(message: CheckedExpr, writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
-      CheckedExpr_ReferenceMapMapEntry.encode({
+      CheckedExpr_ReferenceMapEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(18).fork()).ldelim();
     });
     Object.entries(message.typeMap).forEach(([key, value]) => {
-      CheckedExpr_TypeMapMapEntry.encode({
+      CheckedExpr_TypeMapEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(26).fork()).ldelim();
@@ -906,7 +1024,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 
       switch (tag >>> 3) {
         case 2:
-          const entry2 = CheckedExpr_ReferenceMapMapEntry.decode(reader, reader.uint32());
+          const entry2 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
 
           if (entry2.value !== undefined) {
             message.referenceMap[entry2.key] = entry2.value;
@@ -915,7 +1033,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
           break;
 
         case 3:
-          const entry3 = CheckedExpr_TypeMapMapEntry.decode(reader, reader.uint32());
+          const entry3 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
 
           if (entry3.value !== undefined) {
             message.typeMap[entry3.key] = entry3.value;
@@ -1167,7 +1285,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
 
     writer.ldelim();
     Object.entries(message.positions).forEach(([key, value]) => {
-      SourceInfo_PositionsMapEntry.encode({
+      SourceInfo_PositionsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(32).fork()).ldelim();
@@ -1200,7 +1318,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
           }
 
         case 4:
-          const entry4 = SourceInfo_PositionsMapEntry.decode(reader, reader.uint32());
+          const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
 
           if (entry4.value !== undefined) {
             message.positions[entry4.key] = entry4.value;
@@ -1270,6 +1388,99 @@ exports[`google/api/expr/v1beta1/source 1`] = `
 };"
 `;
 
+exports[`google/api/quota keyType 1`] = `
+"export const MetricRule = {
+  encode(message: MetricRule, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.selector !== \\"\\") {
+      writer.uint32(10).string(message.selector);
+    }
+
+    Object.entries(message.metricCosts).forEach(([key, value]) => {
+      MetricRule_MetricCostsEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(16).fork()).ldelim();
+    });
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMetricRule();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.selector = reader.string();
+          break;
+
+        case 2:
+          const entry2 = MetricRule_MetricCostsEntry.decode(reader, reader.uint32());
+
+          if (entry2.value !== undefined) {
+            message.metricCosts[entry2.key] = entry2.value;
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MetricRule {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : \\"\\",
+      metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toJSON(message: MetricRule): unknown {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    obj.metricCosts = {};
+
+    if (message.metricCosts) {
+      Object.entries(message.metricCosts).forEach(([k, v]) => {
+        obj.metricCosts[k] = v.toString();
+      });
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MetricRule>, I>>(object: I): MetricRule {
+    const message = createBaseMetricRule();
+    message.selector = object.selector ?? \\"\\";
+    message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
+      [key: string]: Long;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = Long.fromValue(value);
+      }
+
+      return acc;
+    }, {});
+    return message;
+  }
+
+};"
+`;
+
+exports[`google/api/quota keyType 2`] = `Array []`;
+
 exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 "export const LogEntry = {
   encode(message: LogEntry, writer = _m0.Writer.create()): _m0.Writer {
@@ -1296,7 +1507,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     }
 
     Object.entries(message.labels).forEach(([key, value]) => {
-      LogEntry_LabelsMapEntry.encode({
+      LogEntry_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(106).fork()).ldelim();
@@ -1359,7 +1570,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
           break;
 
         case 13:
-          const entry13 = LogEntry_LabelsMapEntry.decode(reader, reader.uint32());
+          const entry13 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
 
           if (entry13.value !== undefined) {
             message.labels[entry13.key] = entry13.value;

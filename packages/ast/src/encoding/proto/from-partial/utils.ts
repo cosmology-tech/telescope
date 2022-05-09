@@ -312,6 +312,7 @@ export const fromPartial = {
         const valueType = args.field.parsedType.name
 
         let fromPartial = null;
+        // valueTypeType: string for identifier
         let valueTypeType = valueType;
         switch (valueType) {
             case 'string':
@@ -321,6 +322,14 @@ export const fromPartial = {
             case 'uint32':
                 valueTypeType = 'number';
                 fromPartial = t.identifier('Number');
+                break;
+            case 'int64':
+            case 'uint64':
+                valueTypeType = 'Long';
+                fromPartial = t.memberExpression(
+                    t.identifier('Long'),
+                    t.identifier('fromValue')
+                );
                 break;
             default:
                 fromPartial = t.memberExpression(

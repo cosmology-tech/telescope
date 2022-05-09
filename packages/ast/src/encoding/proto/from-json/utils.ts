@@ -345,21 +345,61 @@ export const fromJSON = {
         args.context.addUtil('isObject');
 
         let fromJSON = null;
+        // valueTypeType: string for identifier
         let valueTypeType = valueType;
         switch (valueType) {
             case 'string':
-                fromJSON = t.identifier('String');
+                fromJSON = t.callExpression(
+                    t.identifier('String'),
+                    [
+                        t.identifier('value')
+                    ]
+                )
+
                 break;
             case 'int32':
             case 'uint32':
-                // is this right?
                 valueTypeType = 'number';
-                fromJSON = t.identifier('Number');
+                fromJSON = t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        t.identifier('value')
+                    ]
+                );
+
+                break;
+            case 'int64':
+            case 'uint64':
+                valueTypeType = 'Long';
+                fromJSON = t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('fromValue')
+                    ),
+                    [
+                        t.tsAsExpression(
+                            t.identifier('value'),
+                            t.tsUnionType(
+                                [
+                                    t.tsTypeReference(
+                                        t.identifier('Long')
+                                    ),
+                                    t.tsStringKeyword()
+                                ]
+                            )
+                        )
+                    ]
+                )
                 break;
             default:
-                fromJSON = t.memberExpression(
-                    t.identifier(valueType),
-                    t.identifier('fromJSON')
+                fromJSON = t.callExpression(
+                    t.memberExpression(
+                        t.identifier(valueType),
+                        t.identifier('fromJSON')
+                    ),
+                    [
+                        t.identifier('value')
+                    ]
                 );
         }
 
@@ -442,12 +482,7 @@ export const fromJSON = {
                                             wrapKey(t.identifier('key')),
                                             true
                                         ),
-                                        t.callExpression(
-                                            fromJSON,
-                                            [
-                                                t.identifier('value')
-                                            ]
-                                        )
+                                        fromJSON
                                     )
                                 ),
                                 t.returnStatement(

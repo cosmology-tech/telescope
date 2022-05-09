@@ -365,28 +365,38 @@ export const toJSON = {
         let toJSON = null;
         switch (valueType) {
             case 'string':
-                toJSON = a => a;
+                toJSON = t.identifier('v')
                 break;
             case 'uint32':
             case 'int32':
-                toJSON = a => t.callExpression(
+                toJSON = t.callExpression(
                     t.memberExpression(
                         t.identifier('Math'),
                         t.identifier('round')
                     ),
                     [
-                        a
+                        t.identifier('v')
                     ]
                 )
                 break;
+            case 'int64':
+            case 'uint64':
+                toJSON = t.callExpression(
+                    t.memberExpression(
+                        t.identifier('v'),
+                        t.identifier('toString')
+                    ),
+                    []
+                )
+                break;
             default:
-                toJSON = a => t.callExpression(
+                toJSON = t.callExpression(
                     t.memberExpression(
                         t.identifier(valueType),
                         t.identifier('toJSON')
                     ),
                     [
-                        a
+                        t.identifier('v')
                     ]
                 )
         }
@@ -449,7 +459,7 @@ export const toJSON = {
                                                     t.identifier('k'),
                                                     true
                                                 ),
-                                                toJSON(t.identifier('v'))
+                                                toJSON
                                             )
                                         )
                                     ])

@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { getObjectName } from '@osmonauts/proto-parser';
 import { pascal } from 'case';
 import { identifier, tsPropertySignature, functionDeclaration } from '../../utils';
 import { ProtoParseContext } from '../context';
@@ -210,13 +211,17 @@ export const getTagNumber = (field: ProtoField) => {
 };
 
 
-export const getDefaultTSTypeFromProtoType = (type, isArray) => {
+export const getDefaultTSTypeFromProtoType = (field: ProtoField) => {
 
-    if (isArray) {
+    if (field.rule === 'repeated') {
         return t.arrayExpression([]);
     }
 
-    switch (type) {
+    if (field.keyType) {
+        return t.objectExpression([])
+    }
+
+    switch (field.type) {
         case 'string':
             return t.stringLiteral('');
         case 'double':
@@ -227,14 +232,18 @@ export const getDefaultTSTypeFromProtoType = (type, isArray) => {
         case 'fixed32':
         case 'sfixed32':
             return t.numericLiteral(0);
-        case 'int64':
         case 'uint64':
+            return t.memberExpression(
+                t.identifier('Long'),
+                t.identifier('UZERO')
+            );
+        case 'int64':
         case 'sint64':
         case 'fixed64':
         case 'sfixed64':
             return t.memberExpression(
                 t.identifier('Long'),
-                t.identifier('UZERO')
+                t.identifier('ZERO')
             );
         case 'bytes':
             return t.newExpression(
@@ -281,11 +290,11 @@ export const getEnumFromJsonName = (name) => {
 export const getFieldsTypeName = (field: ProtoField) => {
     if (field?.scope.length <= 1) return field.parsedType.name;
     const [_first, ...rest] = field.scope;
-    return [...rest.reverse(), field.parsedType.name].join('_');
+    return [...rest, field.parsedType.name].join('_');
 };
 
 export const getKeyTypeEntryName = (typeName: string, prop: string) => {
-    return `${typeName}_${pascal(prop)}MapEntry`;
+    return `${typeName}_${pascal(prop)}Entry`;
 };
 
 export const getBaseCreateTypeFuncName = (name) => {
@@ -313,32 +322,30 @@ const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
     return isOneOf || field?.options?.['(gogoproto.nullable)'];
 };
 
-const getProtoNameSafe = (field: ProtoField) => {
+const getProtoFieldTypeName = (field: ProtoField) => {
     let name = field.type;
 
     if (name.includes('.')) {
         const parts = name.split('.');
         name = parts[parts.length - 1];
     }
-    //
+
     if (!field.scope || !field.scope.length) return name;
-    if (field.scope?.length <= 1) return name;
-    const [_first, ...rest] = field.scope;
-    return [...rest.reverse(), name].join('_');
+    return getObjectName(name, field.scope);
 };
 
 const getProtoField = (field: ProtoField) => {
     let ast: any = null;
     let optional = false;
 
-    if (field?.options?.['(gogoproto.nullable)']) {
+    if (field.options?.['(gogoproto.nullable)']) {
         optional = true;
     }
 
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeFromProtoType(field.type);
     } else {
-        ast = t.tsTypeReference(t.identifier(getProtoNameSafe(field)));
+        ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(field)));
     }
 
     if (field.rule === 'repeated') {
@@ -390,18 +397,15 @@ export const createProtoType = (name: string, proto: ProtoType) => {
 
 export const createCreateProtoType = (name: string, proto: ProtoType) => {
     const fields = Object.keys(proto.fields).map(key => {
-        const field: ProtoField = proto.fields[key];
         return {
             name: key,
-            keyType: field.keyType,
-            type: field.type,
-            rule: field.rule
+            ...proto.fields[key]
         };
     })
         .map(field => {
             return t.objectProperty(
                 t.identifier(field.name),
-                getDefaultTSTypeFromProtoType(field.type, field.rule === 'repeated')
+                getDefaultTSTypeFromProtoType(field)
             )
         })
 

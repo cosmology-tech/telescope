@@ -117,6 +117,13 @@ describe('google/api/expr/v1alpha1/checked', () => {
             ))
         })
     })
+    describe('Decl_FunctionDecl_Overload', () => {
+        it('MapType', () => {
+            expectCode(createObjectWithMethods(
+                'Decl_FunctionDecl_Overload', getNestedProto(res).Decl.nested.FunctionDecl.nested.Overload
+            ))
+        })
+    })
     describe('typeHash (Long)', () => {
         it('CheckedExpr', () => {
             expectCode(createObjectWithMethods(
@@ -168,5 +175,20 @@ it('ibc/core/port/v1/query', () => {
         getNestedProto(res).QueryAppVersionRequest
     ))
     expect(context.imports).toMatchSnapshot();
-    console.log(context.imports);
+    // console.log(context.imports);
+});
+
+describe('google/api/quota', () => {
+    it('keyType', () => {
+        const ref = store.findProto('google/api/quota.proto');
+        const res = traverse(store, ref);
+        const context = new ProtoParseContext();
+        expectCode(create(
+            context,
+            'MetricRule',
+            getNestedProto(res).MetricRule
+        ))
+        expect(context.imports).toMatchSnapshot();
+        // console.log(context.imports);
+    });
 });
