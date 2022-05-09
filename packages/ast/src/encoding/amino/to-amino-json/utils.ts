@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { BILLION, memberExpressionOrIdentifier, shorthandProperty } from "../../../utils";
 import { getTypeFromCurrentProtoPath, protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
+import { getOneOfs, getFieldOptionality } from '../../proto';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField) {
@@ -139,7 +140,11 @@ export const toAmino = {
         /// BEGIN
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const parentField = field;
+        const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
+            const isOneOf = oneOfs.includes(field.name);
+            const isOptional = getFieldOptionality(field, isOneOf);
+
             if (parentField.import) currentProtoPath = parentField.import;
             return toAminoParseField({
                 context,
@@ -168,7 +173,12 @@ export const toAmino = {
 
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const parentField = field;
+        const oneOfs = getOneOfs(Type);
+
         const properties = protoFieldsToArray(Type).map(field => {
+            const isOneOf = oneOfs.includes(field.name);
+            const isOptional = getFieldOptionality(field, isOneOf);
+
             if (parentField.import) currentProtoPath = parentField.import;
 
             return toAminoParseField({

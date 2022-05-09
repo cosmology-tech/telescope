@@ -3,6 +3,7 @@ import { BILLION, memberExpressionOrIdentifierAminoCasing, shorthandProperty } f
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { getTypeFromCurrentProtoPath, protoFieldsToArray } from '../utils';
 import { getEnumFromJsonName } from '../../proto';
+import { getOneOfs, getFieldOptionality } from '../../proto';
 import { getObjectName } from '@osmonauts/proto-parser';
 
 export const fromAmino = {
@@ -157,7 +158,12 @@ export const fromAmino = {
     type({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const oneOfs = getOneOfs(Type);
+
         const properties = protoFieldsToArray(Type).map(field => {
+            const isOneOf = oneOfs.includes(field.name);
+            const isOptional = getFieldOptionality(field, isOneOf);
+
             if (parentField.import) currentProtoPath = parentField.import;
             return fromAminoParseField({
                 context,
@@ -179,7 +185,11 @@ export const fromAmino = {
         const variable = 'el' + nested;
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
+        const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
+            const isOneOf = oneOfs.includes(field.name);
+            const isOptional = getFieldOptionality(field, isOneOf);
+
             if (parentField.import) currentProtoPath = parentField.import;
 
             return fromAminoParseField({
