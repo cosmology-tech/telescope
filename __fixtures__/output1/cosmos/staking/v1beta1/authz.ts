@@ -3,8 +3,8 @@ import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface StakeAuthorization {
   maxTokens: Coin;
-  allowList?: Validators;
-  denyList?: Validators;
+  allowList?: StakeAuthorization_Validators;
+  denyList?: StakeAuthorization_Validators;
   authorizationType: AuthorizationType;
 }
 

@@ -94,7 +94,7 @@ export interface CheckResponse {
   checkErrors: CheckError[];
   serviceConfigId: string;
   serviceRolloutId: string;
-  checkInfo: CheckInfo;
+  checkInfo: CheckResponse_CheckInfo;
 }
 
 function createBaseCheckResponse(): CheckResponse {
@@ -209,7 +209,7 @@ export const CheckResponse = {
 };
 export interface CheckResponse_CheckInfo {
   unusedArguments: string[];
-  consumerInfo: ConsumerInfo;
+  consumerInfo: CheckResponse_ConsumerInfo;
 }
 
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
@@ -287,7 +287,7 @@ export const CheckResponse_CheckInfo = {
 };
 export interface CheckResponse_ConsumerInfo {
   projectNumber: Long;
-  type: ConsumerType;
+  type: ConsumerInfo_CheckResponse_ConsumerType;
   consumerNumber: Long;
 }
 
@@ -527,7 +527,7 @@ export const ReportRequest = {
 
 };
 export interface ReportResponse {
-  reportErrors: ReportError[];
+  reportErrors: ReportResponse_ReportError[];
   serviceConfigId: string;
   serviceRolloutId: string;
 }

@@ -141,7 +141,7 @@ export const SignatureDescriptors = {
 };
 export interface SignatureDescriptor {
   publicKey: Any;
-  data: Data;
+  data: SignatureDescriptor_Data;
   sequence: Long;
 }
 
@@ -226,8 +226,8 @@ export const SignatureDescriptor = {
 
 };
 export interface SignatureDescriptor_Data {
-  single?: Single;
-  multi?: Multi;
+  single?: Data_SignatureDescriptor_Single;
+  multi?: Data_SignatureDescriptor_Multi;
 }
 
 function createBaseSignatureDescriptor_Data(): SignatureDescriptor_Data {
@@ -373,7 +373,7 @@ export const Single = {
 };
 export interface Multi {
   bitarray: CompactBitArray;
-  signatures: Data[];
+  signatures: SignatureDescriptor_Data[];
 }
 
 function createBaseMulti(): Multi {

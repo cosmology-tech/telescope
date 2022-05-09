@@ -1,8 +1,8 @@
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface Logging {
-  producerDestinations: LoggingDestination[];
-  consumerDestinations: LoggingDestination[];
+  producerDestinations: Logging_LoggingDestination[];
+  consumerDestinations: Logging_LoggingDestination[];
 }
 
 function createBaseLogging(): Logging {

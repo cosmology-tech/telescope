@@ -345,7 +345,7 @@ export const ListValue = {
 
 };
 export interface MapValue {
-  entries: Entry[];
+  entries: MapValue_Entry[];
 }
 
 function createBaseMapValue(): MapValue {

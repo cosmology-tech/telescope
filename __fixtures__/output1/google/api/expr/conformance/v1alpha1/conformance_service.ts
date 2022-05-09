@@ -3,7 +3,7 @@ import { Decl, CheckedExpr } from "../../v1alpha1/checked";
 import { ExprValue } from "../../v1alpha1/eval";
 import { Status } from "../../../../rpc/status";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject, Long } from "@osmonauts/helpers";
 export interface ParseRequest {
   celSource: string;
   syntaxVersion: string;
@@ -648,7 +648,7 @@ export const EvalResponse = {
 
 };
 export interface IssueDetails {
-  severity: Severity;
+  severity: IssueDetails_Severity;
   position: SourcePosition;
   id: Long;
 }

@@ -143,8 +143,8 @@ export const Type = {
 
 };
 export interface Field {
-  kind: Kind;
-  cardinality: Cardinality;
+  kind: Field_Kind;
+  cardinality: Field_Cardinality;
   number: number;
   name: string;
   typeUrl: string;

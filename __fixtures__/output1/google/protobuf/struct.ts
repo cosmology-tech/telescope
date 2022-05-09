@@ -1,5 +1,5 @@
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface Struct_ValueMapEntry {
   key: string;
   value: Value;

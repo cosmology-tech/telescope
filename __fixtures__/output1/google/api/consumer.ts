@@ -68,7 +68,7 @@ export const ProjectProperties = {
 };
 export interface Property {
   name: string;
-  type: PropertyType;
+  type: Property_PropertyType;
   description: string;
 }
 

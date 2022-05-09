@@ -2,17 +2,17 @@ import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_st
 import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, toDuration, fromDuration, isObject } from "@osmonauts/helpers";
 export interface MetricDescriptor {
   name: string;
   type: string;
   labels: LabelDescriptor[];
-  metricKind: MetricKind;
-  valueType: ValueType;
+  metricKind: MetricDescriptor_MetricKind;
+  valueType: MetricDescriptor_ValueType;
   unit: string;
   description: string;
   displayName: string;
-  metadata: MetricDescriptorMetadata;
+  metadata: MetricDescriptor_MetricDescriptorMetadata;
   launchStage: LaunchStage;
   monitoredResourceTypes: string[];
 }

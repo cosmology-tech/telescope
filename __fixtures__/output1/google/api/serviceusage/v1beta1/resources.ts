@@ -7,7 +7,7 @@ import { Endpoint } from "../../endpoint";
 import { MonitoredResourceDescriptor } from "../../monitored_resource";
 import { Monitoring } from "../../monitoring";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long, isObject } from "@osmonauts/helpers";
 export interface Service {
   name: string;
   parent: string;

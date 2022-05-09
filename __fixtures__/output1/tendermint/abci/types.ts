@@ -2891,7 +2891,7 @@ export const ResponseListSnapshots = {
 
 };
 export interface ResponseOfferSnapshot {
-  result: Result;
+  result: ResponseOfferSnapshot_Result;
 }
 
 function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
@@ -3081,7 +3081,7 @@ export const ResponseLoadSnapshotChunk = {
 
 };
 export interface ResponseApplySnapshotChunk {
-  result: Result;
+  result: ResponseOfferSnapshot_Result;
   refetchChunks: number[];
   rejectSenders: string[];
 }

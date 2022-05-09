@@ -2,7 +2,7 @@ import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface LabelDescriptor {
   key: string;
-  valueType: ValueType;
+  valueType: LabelDescriptor_ValueType;
   description: string;
 }
 

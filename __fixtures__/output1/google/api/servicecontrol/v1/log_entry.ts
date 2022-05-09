@@ -4,7 +4,7 @@ import { HttpRequest } from "./http_request";
 import { Any } from "../../../protobuf/any";
 import { Struct } from "../../../protobuf/struct";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
 export interface LogEntry_StringMapEntry {
   key: string;
   value: string;

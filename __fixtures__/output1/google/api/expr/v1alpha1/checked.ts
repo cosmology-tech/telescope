@@ -2,7 +2,7 @@ import { SourceInfo, Expr, Constant } from "./syntax";
 import { Empty } from "../../../protobuf/empty";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobuf/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
   value: Reference;
@@ -323,17 +323,17 @@ export const CheckedExpr = {
 export interface Type {
   dyn?: Empty;
   null?: NullValue;
-  primitive?: PrimitiveType;
-  wrapper?: PrimitiveType;
-  wellKnown?: WellKnownType;
-  listType?: ListType;
-  mapType?: MapType;
-  function?: FunctionType;
+  primitive?: Type_PrimitiveType;
+  wrapper?: Type_PrimitiveType;
+  wellKnown?: Type_WellKnownType;
+  listType?: Type_ListType;
+  mapType?: Type_MapType;
+  function?: Type_FunctionType;
   messageType?: string;
   typeParam?: string;
   type?: Type;
   error?: Empty;
-  abstractType?: AbstractType;
+  abstractType?: Type_AbstractType;
 }
 
 function createBaseType(): Type {
@@ -970,8 +970,8 @@ export function typeWellKnownTypeToJSON(object: Type_WellKnownType): string {
 }
 export interface Decl {
   name: string;
-  ident?: IdentDecl;
-  function?: FunctionDecl;
+  ident?: Decl_IdentDecl;
+  function?: Decl_FunctionDecl;
 }
 
 function createBaseDecl(): Decl {
@@ -1141,7 +1141,7 @@ export const Decl_IdentDecl = {
 
 };
 export interface Decl_FunctionDecl {
-  overloads: Overload[];
+  overloads: FunctionDecl_Decl_Overload[];
 }
 
 function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {

@@ -6,10 +6,10 @@ export interface Distribution {
   count: Long;
   mean: number;
   sumOfSquaredDeviation: number;
-  range: Range;
-  bucketOptions: BucketOptions;
+  range: Distribution_Range;
+  bucketOptions: Distribution_BucketOptions;
   bucketCounts: Long[];
-  exemplars: Exemplar[];
+  exemplars: Distribution_Exemplar[];
 }
 
 function createBaseDistribution(): Distribution {
@@ -236,9 +236,9 @@ export const Distribution_Range = {
 
 };
 export interface Distribution_BucketOptions {
-  linearBuckets?: Linear;
-  exponentialBuckets?: Exponential;
-  explicitBuckets?: Explicit;
+  linearBuckets?: BucketOptions_Distribution_Linear;
+  exponentialBuckets?: BucketOptions_Distribution_Exponential;
+  explicitBuckets?: BucketOptions_Distribution_Explicit;
 }
 
 function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {

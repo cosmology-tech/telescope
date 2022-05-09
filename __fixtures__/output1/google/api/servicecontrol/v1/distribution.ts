@@ -7,9 +7,9 @@ export interface Distribution {
   maximum: number;
   sumOfSquaredDeviation: number;
   bucketCounts: Long[];
-  linearBuckets?: LinearBuckets;
-  exponentialBuckets?: ExponentialBuckets;
-  explicitBuckets?: ExplicitBuckets;
+  linearBuckets?: Distribution_LinearBuckets;
+  exponentialBuckets?: Distribution_ExponentialBuckets;
+  explicitBuckets?: Distribution_ExplicitBuckets;
 }
 
 function createBaseDistribution(): Distribution {

@@ -2,7 +2,7 @@ import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf
 import { Duration } from "../../../protobuf/duration";
 import { Timestamp } from "../../../protobuf/timestamp";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long, toDuration, toTimestamp, fromDuration, fromTimestamp, bytesFromBase64, fromJsonTimestamp, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long, toDuration, toTimestamp, fromDuration, fromTimestamp, bytesFromBase64, fromJsonTimestamp, base64FromBytes, isObject } from "@osmonauts/helpers";
 export interface ParsedExpr {
   expr: Expr;
   sourceInfo: SourceInfo;
@@ -79,12 +79,12 @@ export const ParsedExpr = {
 export interface Expr {
   id: Long;
   constExpr?: Constant;
-  identExpr?: Ident;
-  selectExpr?: Select;
-  callExpr?: Call;
-  listExpr?: CreateList;
-  structExpr?: CreateStruct;
-  comprehensionExpr?: Comprehension;
+  identExpr?: Expr_Ident;
+  selectExpr?: Expr_Select;
+  callExpr?: Expr_Call;
+  listExpr?: Expr_CreateList;
+  structExpr?: Expr_CreateStruct;
+  comprehensionExpr?: Expr_Comprehension;
 }
 
 function createBaseExpr(): Expr {
@@ -533,7 +533,7 @@ export const Expr_CreateList = {
 };
 export interface Expr_CreateStruct {
   messageName: string;
-  entries: Entry[];
+  entries: CreateStruct_Expr_Entry[];
 }
 
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {

@@ -3,7 +3,7 @@ import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
 import { Status } from "../../rpc/status";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface DeleteLogRequest {
   logName: string;
 }
@@ -1123,7 +1123,7 @@ export const TailLogEntriesRequest = {
 };
 export interface TailLogEntriesResponse {
   entries: LogEntry[];
-  suppressionInfo: SuppressionInfo[];
+  suppressionInfo: TailLogEntriesResponse_SuppressionInfo[];
 }
 
 function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
@@ -1206,7 +1206,7 @@ export const TailLogEntriesResponse = {
 
 };
 export interface TailLogEntriesResponse_SuppressionInfo {
-  reason: Reason;
+  reason: SuppressionInfo_TailLogEntriesResponse_Reason;
   suppressedCount: number;
 }
 

@@ -91,12 +91,12 @@ export const ParsedExpr = {
 export interface Expr {
   id: number;
   literalExpr?: Literal;
-  identExpr?: Ident;
-  selectExpr?: Select;
-  callExpr?: Call;
-  listExpr?: CreateList;
-  structExpr?: CreateStruct;
-  comprehensionExpr?: Comprehension;
+  identExpr?: Expr_Ident;
+  selectExpr?: Expr_Select;
+  callExpr?: Expr_Call;
+  listExpr?: Expr_CreateList;
+  structExpr?: Expr_CreateStruct;
+  comprehensionExpr?: Expr_Comprehension;
 }
 
 function createBaseExpr(): Expr {
@@ -545,7 +545,7 @@ export const Expr_CreateList = {
 };
 export interface Expr_CreateStruct {
   type: string;
-  entries: Entry[];
+  entries: CreateStruct_Expr_Entry[];
 }
 
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {

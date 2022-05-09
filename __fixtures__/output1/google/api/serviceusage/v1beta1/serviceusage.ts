@@ -2668,7 +2668,7 @@ export const GenerateServiceIdentityRequest = {
 };
 export interface GetServiceIdentityResponse {
   identity: ServiceIdentity;
-  state: IdentityState;
+  state: GetServiceIdentityResponse_IdentityState;
 }
 
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {

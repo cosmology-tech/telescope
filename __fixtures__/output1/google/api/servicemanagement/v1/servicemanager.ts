@@ -484,7 +484,7 @@ export const UndeleteServiceResponse = {
 export interface GetServiceConfigRequest {
   serviceName: string;
   configId: string;
-  view: ConfigView;
+  view: GetServiceConfigRequest_ConfigView;
 }
 
 function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {

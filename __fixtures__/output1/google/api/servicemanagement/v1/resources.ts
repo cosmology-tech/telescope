@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
 export interface ManagedService {
   serviceName: string;
   producerProjectId: string;
@@ -77,7 +77,7 @@ export const ManagedService = {
 };
 export interface OperationMetadata {
   resourceNames: string[];
-  steps: Step[];
+  steps: OperationMetadata_Step[];
   progressPercentage: number;
   startTime: Date;
 }
@@ -183,7 +183,7 @@ export const OperationMetadata = {
 };
 export interface OperationMetadata_Step {
   description: string;
-  status: Status;
+  status: OperationMetadata_Status;
 }
 
 function createBaseOperationMetadata_Step(): OperationMetadata_Step {
@@ -327,7 +327,7 @@ export function operationMetadataStatusToJSON(object: OperationMetadata_Status):
 }
 export interface Diagnostic {
   location: string;
-  kind: Kind;
+  kind: Diagnostic_Kind;
   message: string;
 }
 
@@ -527,7 +527,7 @@ export const ConfigSource = {
 export interface ConfigFile {
   filePath: string;
   fileContents: Uint8Array;
-  fileType: FileType;
+  fileType: ConfigFile_FileType;
 }
 
 function createBaseConfigFile(): ConfigFile {
@@ -820,9 +820,9 @@ export interface Rollout {
   rolloutId: string;
   createTime: Date;
   createdBy: string;
-  status: RolloutStatus;
-  trafficPercentStrategy?: TrafficPercentStrategy;
-  deleteServiceStrategy?: DeleteServiceStrategy;
+  status: Rollout_RolloutStatus;
+  trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
+  deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
   serviceName: string;
 }
 

@@ -72,7 +72,7 @@ export interface BackendRule {
   deadline: number;
   minDeadline: number;
   operationDeadline: number;
-  pathTranslation: PathTranslation;
+  pathTranslation: BackendRule_PathTranslation;
   jwtAudience?: string;
   disableAuth?: boolean;
   protocol: string;

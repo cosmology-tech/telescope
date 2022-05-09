@@ -5,7 +5,7 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest } from "../type/http_request";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
 export interface LogEntry_StringMapEntry {
   key: string;
   value: string;

@@ -1,8 +1,8 @@
 import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface Monitoring {
-  producerDestinations: MonitoringDestination[];
-  consumerDestinations: MonitoringDestination[];
+  producerDestinations: Monitoring_MonitoringDestination[];
+  consumerDestinations: Monitoring_MonitoringDestination[];
 }
 
 function createBaseMonitoring(): Monitoring {

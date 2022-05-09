@@ -124,7 +124,7 @@ export const EnableServiceResponse = {
 export interface DisableServiceRequest {
   name: string;
   disableDependentServices: boolean;
-  checkIfServiceHasUsage: CheckIfServiceHasUsage;
+  checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 
 function createBaseDisableServiceRequest(): DisableServiceRequest {
@@ -630,7 +630,7 @@ export const BatchEnableServicesRequest = {
 };
 export interface BatchEnableServicesResponse {
   services: Service[];
-  failures: EnableFailure[];
+  failures: BatchEnableServicesResponse_EnableFailure[];
 }
 
 function createBaseBatchEnableServicesResponse(): BatchEnableServicesResponse {

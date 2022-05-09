@@ -1,7 +1,7 @@
 import { MetricValueSet } from "./metric_value";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface AllocateQuotaRequest {
   serviceName: string;
   allocateOperation: QuotaOperation;
@@ -169,7 +169,7 @@ export interface QuotaOperation {
     [key: string]: string;
   };
   quotaMetrics: MetricValueSet[];
-  quotaMode: QuotaMode;
+  quotaMode: QuotaOperation_QuotaMode;
 }
 
 function createBaseQuotaOperation(): QuotaOperation {
@@ -524,7 +524,7 @@ export const AllocateQuotaResponse = {
 
 };
 export interface QuotaError {
-  code: Code;
+  code: QuotaError_Code;
   subject: string;
   description: string;
   status: Status;

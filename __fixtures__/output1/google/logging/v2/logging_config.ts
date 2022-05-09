@@ -280,7 +280,7 @@ export interface LogSink {
   description: string;
   disabled: boolean;
   exclusions: LogExclusion[];
-  outputVersionFormat: VersionFormat;
+  outputVersionFormat: LogSink_VersionFormat;
   writerIdentity: string;
   includeChildren: boolean;
   bigqueryOptions?: BigQueryOptions;

@@ -1,6 +1,6 @@
 import { Duration } from "../protobuf/duration";
 import * as _m0 from "protobuf/minimal";
-import { toDuration, fromDuration, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { toDuration, fromDuration, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface RetryInfo {
   retryDelay: string;
 }
@@ -137,7 +137,7 @@ export const DebugInfo = {
 
 };
 export interface QuotaFailure {
-  violations: Violation[];
+  violations: QuotaFailure_Violation[];
 }
 
 function createBaseQuotaFailure(): QuotaFailure {
@@ -464,7 +464,7 @@ export const ErrorInfo = {
 
 };
 export interface PreconditionFailure {
-  violations: Violation[];
+  violations: QuotaFailure_Violation[];
 }
 
 function createBasePreconditionFailure(): PreconditionFailure {
@@ -616,7 +616,7 @@ export const PreconditionFailure_Violation = {
 
 };
 export interface BadRequest {
-  fieldViolations: FieldViolation[];
+  fieldViolations: BadRequest_FieldViolation[];
 }
 
 function createBaseBadRequest(): BadRequest {
@@ -927,7 +927,7 @@ export const ResourceInfo = {
 
 };
 export interface Help {
-  links: Link[];
+  links: Help_Link[];
 }
 
 function createBaseHelp(): Help {

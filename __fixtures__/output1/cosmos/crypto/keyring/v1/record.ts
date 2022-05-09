@@ -4,10 +4,10 @@ import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Record {
   name: string;
   pubKey: Any;
-  local?: Local;
-  ledger?: Ledger;
-  multi?: Multi;
-  offline?: Offline;
+  local?: Record_Local;
+  ledger?: Record_Ledger;
+  multi?: Record_Multi;
+  offline?: Record_Offline;
 }
 
 function createBaseRecord(): Record {

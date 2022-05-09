@@ -4,7 +4,7 @@ import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface EvalState {
   values: ExprValue[];
-  results: Result[];
+  results: EvalState_Result[];
 }
 
 function createBaseEvalState(): EvalState {

@@ -718,8 +718,8 @@ export const SignerInfo = {
 
 };
 export interface ModeInfo {
-  single?: Single;
-  multi?: Multi;
+  single?: ModeInfo_Single;
+  multi?: ModeInfo_Multi;
 }
 
 function createBaseModeInfo(): ModeInfo {

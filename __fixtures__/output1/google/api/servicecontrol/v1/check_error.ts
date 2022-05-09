@@ -2,7 +2,7 @@ import { Status } from "../../../rpc/status";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface CheckError {
-  code: Code;
+  code: CheckError_Code;
   subject: string;
   detail: string;
   status: Status;

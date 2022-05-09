@@ -1,7 +1,7 @@
 import * as _m0 from "protobuf/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface ModuleSchemaDescriptor {
-  schemaFile: FileEntry[];
+  schemaFile: ModuleSchemaDescriptor_FileEntry[];
   prefix: Uint8Array;
 }
 

@@ -4,10 +4,10 @@ export interface ResourceDescriptor {
   type: string;
   pattern: string[];
   nameField: string;
-  history: History;
+  history: ResourceDescriptor_History;
   plural: string;
   singular: string;
-  style: Style[];
+  style: ResourceDescriptor_Style[];
 }
 
 function createBaseResourceDescriptor(): ResourceDescriptor {

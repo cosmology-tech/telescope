@@ -3,15 +3,15 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface AttributeContext {
-  origin: Peer;
-  source: Peer;
-  destination: Peer;
-  request: Request;
-  response: Response;
-  resource: Resource;
-  api: Api;
+  origin: AttributeContext_Peer;
+  source: AttributeContext_Peer;
+  destination: AttributeContext_Peer;
+  request: AttributeContext_Request;
+  response: AttributeContext_Response;
+  resource: AttributeContext_Resource;
+  api: AttributeContext_Api;
   extensions: Any[];
 }
 
@@ -684,7 +684,7 @@ export interface Request {
   size: Long;
   protocol: string;
   reason: string;
-  auth: Auth;
+  auth: AttributeContext_Auth;
 }
 
 function createBaseRequest(): Request {

@@ -64,7 +64,7 @@ export const QueryGaugeIdsRequest = {
 
 };
 export interface QueryGaugeIdsResponse {
-  gaugeIdsWithDuration: GaugeIdWithDuration[];
+  gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
 }
 
 function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {

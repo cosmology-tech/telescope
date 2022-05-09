@@ -331,10 +331,10 @@ export interface DescriptorProto {
   extension: FieldDescriptorProto[];
   nestedType: DescriptorProto[];
   enumType: EnumDescriptorProto[];
-  extensionRange: ExtensionRange[];
+  extensionRange: DescriptorProto_ExtensionRange[];
   oneofDecl: OneofDescriptorProto[];
   options: MessageOptions;
-  reservedRange: ReservedRange[];
+  reservedRange: DescriptorProto_ReservedRange[];
   reservedName: string[];
 }
 
@@ -771,8 +771,8 @@ export const ExtensionRangeOptions = {
 export interface FieldDescriptorProto {
   name: string;
   number: number;
-  label: Label;
-  type: Type;
+  label: FieldDescriptorProto_Label;
+  type: FieldDescriptorProto_Type;
   typeName: string;
   extendee: string;
   defaultValue: string;
@@ -1223,7 +1223,7 @@ export interface EnumDescriptorProto {
   name: string;
   value: EnumValueDescriptorProto[];
   options: EnumOptions;
-  reservedRange: EnumReservedRange[];
+  reservedRange: EnumDescriptorProto_EnumReservedRange[];
   reservedName: string[];
 }
 
@@ -1729,7 +1729,7 @@ export interface FileOptions {
   javaMultipleFiles: boolean;
   javaGenerateEqualsAndHash: boolean;
   javaStringCheckUtf8: boolean;
-  optimizeFor: OptimizeMode;
+  optimizeFor: FileOptions_OptimizeMode;
   goPackage: string;
   ccGenericServices: boolean;
   javaGenericServices: boolean;
@@ -2212,9 +2212,9 @@ export const MessageOptions = {
 
 };
 export interface FieldOptions {
-  ctype: CType;
+  ctype: FieldOptions_CType;
   packed: boolean;
-  jstype: JSType;
+  jstype: FieldOptions_JSType;
   lazy: boolean;
   deprecated: boolean;
   weak: boolean;
@@ -2755,7 +2755,7 @@ export const ServiceOptions = {
 };
 export interface MethodOptions {
   deprecated: boolean;
-  idempotencyLevel: IdempotencyLevel;
+  idempotencyLevel: MethodOptions_IdempotencyLevel;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -2888,7 +2888,7 @@ export function methodOptionsIdempotencyLevelToJSON(object: MethodOptions_Idempo
   }
 }
 export interface UninterpretedOption {
-  name: NamePart[];
+  name: UninterpretedOption_NamePart[];
   identifierValue: string;
   positiveIntValue: Long;
   negativeIntValue: Long;
@@ -3105,7 +3105,7 @@ export const UninterpretedOption_NamePart = {
 
 };
 export interface SourceCodeInfo {
-  location: Location[];
+  location: SourceCodeInfo_Location[];
 }
 
 function createBaseSourceCodeInfo(): SourceCodeInfo {
@@ -3320,7 +3320,7 @@ export const SourceCodeInfo_Location = {
 
 };
 export interface GeneratedCodeInfo {
-  annotation: Annotation[];
+  annotation: GeneratedCodeInfo_Annotation[];
 }
 
 function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {

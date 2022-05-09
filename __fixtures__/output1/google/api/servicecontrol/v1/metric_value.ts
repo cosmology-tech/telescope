@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, Long, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface MetricValue_StringMapEntry {
   key: string;
   value: string;

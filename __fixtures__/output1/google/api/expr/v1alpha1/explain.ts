@@ -3,7 +3,7 @@ import * as _m0 from "protobuf/minimal";
 import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface Explain {
   values: Value[];
-  exprSteps: ExprStep[];
+  exprSteps: Explain_ExprStep[];
 }
 
 function createBaseExplain(): Explain {

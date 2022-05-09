@@ -7,7 +7,7 @@ export interface GenesisState {
   codes: Code[];
   contracts: Contract[];
   sequences: Sequence[];
-  genMsgs: GenMsgs[];
+  genMsgs: GenesisState_GenMsgs[];
 }
 
 function createBaseGenesisState(): GenesisState {

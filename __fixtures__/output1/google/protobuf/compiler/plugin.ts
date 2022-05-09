@@ -212,7 +212,7 @@ export const CodeGeneratorRequest = {
 };
 export interface CodeGeneratorResponse {
   error: string;
-  file: File[];
+  file: CodeGeneratorResponse_File[];
 }
 
 function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
