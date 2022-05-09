@@ -556,3 +556,120 @@ export const load = (protoRegistry: Registry) => {
     protoRegistry.register(typeUrl, mod);
   });
 };
+export const MessageComposer = {
+  encoded: {
+    lockTokens(value: MsgLockTokens) {
+      return {
+        type_url: "/osmosis.lockup.MsgLockTokens",
+        value: MsgLockTokens.encode(value).finish()
+      };
+    },
+
+    beginUnlockingAll(value: MsgBeginUnlockingAll) {
+      return {
+        type_url: "/osmosis.lockup.MsgBeginUnlockingAll",
+        value: MsgBeginUnlockingAll.encode(value).finish()
+      };
+    },
+
+    beginUnlocking(value: MsgBeginUnlocking) {
+      return {
+        type_url: "/osmosis.lockup.MsgBeginUnlocking",
+        value: MsgBeginUnlocking.encode(value).finish()
+      };
+    }
+
+  },
+  withTypeUrl: {
+    lockTokens(value: MsgLockTokens) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgLockTokens",
+        value
+      };
+    },
+
+    beginUnlockingAll(value: MsgBeginUnlockingAll) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
+        value
+      };
+    },
+
+    beginUnlocking(value: MsgBeginUnlocking) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
+        value
+      };
+    }
+
+  },
+  toJSON: {
+    lockTokens(value: MsgLockTokens) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgLockTokens",
+        value: MsgLockTokens.toJSON(value)
+      };
+    },
+
+    beginUnlockingAll(value: MsgBeginUnlockingAll) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
+        value: MsgBeginUnlockingAll.toJSON(value)
+      };
+    },
+
+    beginUnlocking(value: MsgBeginUnlocking) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
+        value: MsgBeginUnlocking.toJSON(value)
+      };
+    }
+
+  },
+  fromJSON: {
+    lockTokens(value: any) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgLockTokens",
+        value: MsgLockTokens.fromJSON(value)
+      };
+    },
+
+    beginUnlockingAll(value: any) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
+        value: MsgBeginUnlockingAll.fromJSON(value)
+      };
+    },
+
+    beginUnlocking(value: any) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
+        value: MsgBeginUnlocking.fromJSON(value)
+      };
+    }
+
+  },
+  fromPartial: {
+    lockTokens(value: MsgLockTokens) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgLockTokens",
+        value: MsgLockTokens.fromPartial(value)
+      };
+    },
+
+    beginUnlockingAll(value: MsgBeginUnlockingAll) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
+        value: MsgBeginUnlockingAll.fromPartial(value)
+      };
+    },
+
+    beginUnlocking(value: MsgBeginUnlocking) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
+        value: MsgBeginUnlocking.fromPartial(value)
+      };
+    }
+
+  }
+};

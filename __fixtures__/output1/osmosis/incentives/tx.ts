@@ -462,3 +462,85 @@ export const load = (protoRegistry: Registry) => {
     protoRegistry.register(typeUrl, mod);
   });
 };
+export const MessageComposer = {
+  encoded: {
+    createGauge(value: MsgCreateGauge) {
+      return {
+        type_url: "/osmosis.incentives.MsgCreateGauge",
+        value: MsgCreateGauge.encode(value).finish()
+      };
+    },
+
+    addToGauge(value: MsgAddToGauge) {
+      return {
+        type_url: "/osmosis.incentives.MsgAddToGauge",
+        value: MsgAddToGauge.encode(value).finish()
+      };
+    }
+
+  },
+  withTypeUrl: {
+    createGauge(value: MsgCreateGauge) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgCreateGauge",
+        value
+      };
+    },
+
+    addToGauge(value: MsgAddToGauge) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgAddToGauge",
+        value
+      };
+    }
+
+  },
+  toJSON: {
+    createGauge(value: MsgCreateGauge) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgCreateGauge",
+        value: MsgCreateGauge.toJSON(value)
+      };
+    },
+
+    addToGauge(value: MsgAddToGauge) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgAddToGauge",
+        value: MsgAddToGauge.toJSON(value)
+      };
+    }
+
+  },
+  fromJSON: {
+    createGauge(value: any) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgCreateGauge",
+        value: MsgCreateGauge.fromJSON(value)
+      };
+    },
+
+    addToGauge(value: any) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgAddToGauge",
+        value: MsgAddToGauge.fromJSON(value)
+      };
+    }
+
+  },
+  fromPartial: {
+    createGauge(value: MsgCreateGauge) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgCreateGauge",
+        value: MsgCreateGauge.fromPartial(value)
+      };
+    },
+
+    addToGauge(value: MsgAddToGauge) {
+      return {
+        typeUrl: "/osmosis.incentives.MsgAddToGauge",
+        value: MsgAddToGauge.fromPartial(value)
+      };
+    }
+
+  }
+};

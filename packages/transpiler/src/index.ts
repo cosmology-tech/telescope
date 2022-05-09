@@ -42,6 +42,7 @@ export class TelescopeBuilder {
                 context.buildAminoConverter();
                 context.buildRegistry();
                 context.buildRegistryLoader();
+                context.buildHelperObject();
             }
 
             const importStmts = buildAllImports(context);

@@ -1138,3 +1138,155 @@ export const load = (protoRegistry: Registry) => {
     protoRegistry.register(typeUrl, mod);
   });
 };
+export const MessageComposer = {
+  encoded: {
+    connectionOpenInit(value: MsgConnectionOpenInit) {
+      return {
+        type_url: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+        value: MsgConnectionOpenInit.encode(value).finish()
+      };
+    },
+
+    connectionOpenTry(value: MsgConnectionOpenTry) {
+      return {
+        type_url: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+        value: MsgConnectionOpenTry.encode(value).finish()
+      };
+    },
+
+    connectionOpenAck(value: MsgConnectionOpenAck) {
+      return {
+        type_url: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+        value: MsgConnectionOpenAck.encode(value).finish()
+      };
+    },
+
+    connectionOpenConfirm(value: MsgConnectionOpenConfirm) {
+      return {
+        type_url: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+        value: MsgConnectionOpenConfirm.encode(value).finish()
+      };
+    }
+
+  },
+  withTypeUrl: {
+    connectionOpenInit(value: MsgConnectionOpenInit) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+        value
+      };
+    },
+
+    connectionOpenTry(value: MsgConnectionOpenTry) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+        value
+      };
+    },
+
+    connectionOpenAck(value: MsgConnectionOpenAck) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+        value
+      };
+    },
+
+    connectionOpenConfirm(value: MsgConnectionOpenConfirm) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+        value
+      };
+    }
+
+  },
+  toJSON: {
+    connectionOpenInit(value: MsgConnectionOpenInit) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+        value: MsgConnectionOpenInit.toJSON(value)
+      };
+    },
+
+    connectionOpenTry(value: MsgConnectionOpenTry) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+        value: MsgConnectionOpenTry.toJSON(value)
+      };
+    },
+
+    connectionOpenAck(value: MsgConnectionOpenAck) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+        value: MsgConnectionOpenAck.toJSON(value)
+      };
+    },
+
+    connectionOpenConfirm(value: MsgConnectionOpenConfirm) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+        value: MsgConnectionOpenConfirm.toJSON(value)
+      };
+    }
+
+  },
+  fromJSON: {
+    connectionOpenInit(value: any) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+        value: MsgConnectionOpenInit.fromJSON(value)
+      };
+    },
+
+    connectionOpenTry(value: any) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+        value: MsgConnectionOpenTry.fromJSON(value)
+      };
+    },
+
+    connectionOpenAck(value: any) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+        value: MsgConnectionOpenAck.fromJSON(value)
+      };
+    },
+
+    connectionOpenConfirm(value: any) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+        value: MsgConnectionOpenConfirm.fromJSON(value)
+      };
+    }
+
+  },
+  fromPartial: {
+    connectionOpenInit(value: MsgConnectionOpenInit) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+        value: MsgConnectionOpenInit.fromPartial(value)
+      };
+    },
+
+    connectionOpenTry(value: MsgConnectionOpenTry) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+        value: MsgConnectionOpenTry.fromPartial(value)
+      };
+    },
+
+    connectionOpenAck(value: MsgConnectionOpenAck) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+        value: MsgConnectionOpenAck.fromPartial(value)
+      };
+    },
+
+    connectionOpenConfirm(value: MsgConnectionOpenConfirm) {
+      return {
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+        value: MsgConnectionOpenConfirm.fromPartial(value)
+      };
+    }
+
+  }
+};

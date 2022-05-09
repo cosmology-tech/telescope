@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { identifier } from '../../utils';
 import { Mutation } from '../../types';
+import { camel } from 'case';
 
 export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) => {
     return t.objectMethod('method', t.identifier(methodName), [
@@ -133,6 +134,14 @@ export const createHelperObject = ({
     name,
     mutations
 }: { name: string, mutations: Mutation[] }) => {
+
+    mutations = mutations.map(mutation => {
+        return {
+            ...mutation,
+            methodName: camel(mutation.methodName)
+        }
+    });
+
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
