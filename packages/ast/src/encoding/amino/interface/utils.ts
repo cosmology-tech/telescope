@@ -54,7 +54,7 @@ export const aminoInterface = {
             t.tsTypeAnnotation(arrayTypeNDim(t.tSNumberKeyword(), 1))
         );
     },
-    type({ context, field, currentProtoPath }: RenderAminoField) {
+    type({ context, field, currentProtoPath, isOptional }: RenderAminoField) {
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const properties = protoFieldsToArray(Type).map(field => {
@@ -62,7 +62,8 @@ export const aminoInterface = {
             return renderAminoField({
                 context,
                 field,
-                currentProtoPath
+                currentProtoPath,
+                isOptional // TODO how to handle nested optionality
             })
         });
 
@@ -76,7 +77,7 @@ export const aminoInterface = {
             )
         );
     },
-    typeArray({ context, field, currentProtoPath }: RenderAminoField) {
+    typeArray({ context, field, currentProtoPath, isOptional }: RenderAminoField) {
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const properties = protoFieldsToArray(Type).map(field => {
@@ -84,7 +85,8 @@ export const aminoInterface = {
             return renderAminoField({
                 context,
                 field,
-                currentProtoPath
+                currentProtoPath,
+                isOptional // TODO how to handle nested optionality
             })
         });
 

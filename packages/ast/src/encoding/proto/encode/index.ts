@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../types';
@@ -11,20 +12,29 @@ export interface EncodeMethod {
     typeName: string;
     context: ProtoParseContext;
     field: ProtoField;
+    isOptional: boolean;
 }
 
 export const encodeMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
 
+    const oneOfs = getOneOfs(proto);
+
     return Object.keys(proto.fields ?? {}).reduce((m, fieldName) => {
+
+        const isOneOf = oneOfs.includes(fieldName);
+
         const field = {
             name: fieldName,
             ...proto.fields[fieldName]
         };
 
+        const isOptional = getFieldOptionality(field, isOneOf);
+
         const args: EncodeMethod = {
             typeName: name,
             context,
-            field
+            field,
+            isOptional
         };
 
         if (field.rule === 'repeated') {

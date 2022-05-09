@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../types';
@@ -10,18 +11,24 @@ const needsImplementation = (name: string, field: ProtoField) => {
 export interface FromPartialMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOptional: boolean;
 }
 
 export const fromPartialMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const oneOfs = getOneOfs(proto);
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = {
             name: fieldName,
             ...proto.fields[fieldName]
         };
 
+        const isOneOf = oneOfs.includes(fieldName);
+        const isOptional = getFieldOptionality(field, isOneOf);
+
         const args: FromPartialMethod = {
             context,
-            field
+            field,
+            isOptional
         };
 
         if (field.rule === 'repeated') {

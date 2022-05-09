@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../types';
@@ -11,19 +12,25 @@ export interface DecodeMethod {
     typeName: string;
     context: ProtoParseContext;
     field: ProtoField;
+    isOptional: boolean;
 }
 
 export const decodeMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const oneOfs = getOneOfs(proto);
     return Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = {
             name: fieldName,
             ...proto.fields[fieldName]
         };
 
+        const isOneOf = oneOfs.includes(fieldName);
+        const isOptional = getFieldOptionality(field, isOneOf);
+
         const args: DecodeMethod = {
             typeName: name,
             context,
-            field
+            field,
+            isOptional
         };
 
         if (field.rule === 'repeated') {

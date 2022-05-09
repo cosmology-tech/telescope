@@ -311,14 +311,14 @@ const optionalType = (type: t.TSType) => {
     ])
 }
 
-const getOneOfs = (type: ProtoType) => {
+export const getOneOfs = (type: ProtoType) => {
     const keys = Object.keys(type.oneofs ?? {});
     if (!keys.length) return [];
     if (keys.length !== 1) throw new Error('getOneOfs() oneofs cardinality not known!');
     return type.oneofs[keys[0]].oneof;
 };
 
-const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
+export const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
     return isOneOf || field?.options?.['(gogoproto.nullable)'];
 };
 

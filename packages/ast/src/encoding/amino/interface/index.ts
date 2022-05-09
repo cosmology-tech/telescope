@@ -3,23 +3,27 @@ import { AminoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '../../proto/types';
 import { getTypeUrl, protoFieldsToArray, typeUrlToAmino } from '../utils';
 import { aminoInterface } from './utils';
+import { getFieldOptionality, getOneOfs } from '../../proto';
 
 export interface RenderAminoField {
     context: AminoParseContext;
     field: ProtoField;
     currentProtoPath: string;
+    isOptional: boolean;
 };
 
 export const renderAminoField = ({
     context,
     field,
-    currentProtoPath
+    currentProtoPath,
+    isOptional
 }: RenderAminoField) => {
 
     const args = {
         context,
         field,
-        currentProtoPath
+        currentProtoPath,
+        isOptional
     }
 
     if (field.rule === 'repeated') {
@@ -86,11 +90,16 @@ export const makeAminoTypeInterface = ({
     const typeUrl = getTypeUrl(context.ref.proto, proto);
     const aminoType = typeUrlToAmino(typeUrl, context.options.exceptions);
 
+    const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {
+        const isOneOf = oneOfs.includes(field.name);
+        const isOptional = getFieldOptionality(field, isOneOf);
+
         const aminoField = renderAminoField({
             context,
             field,
-            currentProtoPath: context.ref.filename
+            currentProtoPath: context.ref.filename,
+            isOptional
         });
         return {
             ctx: context,

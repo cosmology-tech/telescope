@@ -117,7 +117,7 @@ export const fromAmino = {
         )
     },
 
-    enum({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
+    enum({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const Enum = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
 
         const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
@@ -128,7 +128,7 @@ export const fromAmino = {
         return t.objectProperty(t.identifier(field.name), value);
     },
 
-    enumArray({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
+    enumArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const Enum = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
 
         const enumFunction = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
@@ -154,7 +154,7 @@ export const fromAmino = {
         return t.objectProperty(t.identifier(field.name), value);
     },
 
-    type({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
+    type({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
         const properties = protoFieldsToArray(Type).map(field => {
@@ -164,7 +164,8 @@ export const fromAmino = {
                 field,
                 currentProtoPath,
                 scope: [...scope],
-                nested: nested + 1
+                nested: nested + 1,
+                isOptional // TODO how to handle nested optionality?
             })
         });
         return t.objectProperty(t.identifier(field.name),
@@ -174,7 +175,7 @@ export const fromAmino = {
         );
     },
 
-    typeArray({ context, field, currentProtoPath, scope, nested }: FromAminoParseField) {
+    typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const variable = 'el' + nested;
         const parentField = field;
         const Type = getTypeFromCurrentProtoPath(field, currentProtoPath, context);
@@ -186,7 +187,8 @@ export const fromAmino = {
                 field,
                 currentProtoPath,
                 scope: [variable],
-                nested: nested + 1
+                nested: nested + 1,
+                isOptional // TODO how to handle nested optionality?
             })
         });
 

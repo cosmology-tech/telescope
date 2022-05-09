@@ -4,6 +4,7 @@ import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
 import { protoFieldsToArray } from '../utils';
 import { toAmino } from './utils';
+import { getFieldOptionality, getOneOfs } from '../../proto';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement toAmino (${field.type} rules[${field.rule}] name[${name}])`);
@@ -19,6 +20,7 @@ export interface ToAminoParseField {
     currentProtoPath: string;
     scope: string[];
     nested: number;
+    isOptional: boolean;
 };
 
 export const toAminoParseField = ({
@@ -26,7 +28,8 @@ export const toAminoParseField = ({
     field,
     currentProtoPath,
     scope: previousScope,
-    nested
+    nested,
+    isOptional
 }: ToAminoParseField) => {
 
     const scope = [field.name, ...previousScope];
@@ -36,7 +39,8 @@ export const toAminoParseField = ({
         field,
         currentProtoPath,
         scope,
-        nested
+        nested,
+        isOptional
     };
 
 
@@ -132,16 +136,19 @@ export const toAminoJsonMethod = ({
     );
     toAminoParams.typeAnnotation = t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
 
+    const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {
 
-        // if (field.parsedType.type === 'Enum') console.log(field);
+        const isOneOf = oneOfs.includes(field.name);
+        const isOptional = getFieldOptionality(field, isOneOf);
 
         const aminoField = toAminoParseField({
             context,
             field,
             currentProtoPath: context.ref.filename,
             scope: [],
-            nested: 0
+            nested: 0,
+            isOptional
         });
         return {
             ctx: context,

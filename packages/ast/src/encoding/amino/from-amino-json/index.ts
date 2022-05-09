@@ -4,6 +4,7 @@ import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '../../proto/types';
 import { protoFieldsToArray } from '../utils';
 import { fromAmino } from './utils';
+import { getFieldOptionality, getOneOfs } from '../../proto';
 
 export interface FromAminoParseField {
     context: AminoParseContext;
@@ -11,6 +12,8 @@ export interface FromAminoParseField {
     currentProtoPath: string;
     scope: string[];
     nested: number;
+    isOptional: boolean;
+
 };
 
 export const fromAminoParseField = ({
@@ -18,7 +21,8 @@ export const fromAminoParseField = ({
     field,
     currentProtoPath,
     scope: previousScope,
-    nested
+    nested,
+    isOptional
 }: FromAminoParseField) => {
 
     const scope = [field.name, ...previousScope];
@@ -28,7 +32,8 @@ export const fromAminoParseField = ({
         field,
         currentProtoPath,
         scope,
-        nested
+        nested,
+        isOptional
     };
 
     // arrays
@@ -114,13 +119,18 @@ export const fromAminoJsonMethod = ({
         t.tsLiteralType(t.stringLiteral('value'))
     ));
 
+    const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {
+        const isOneOf = oneOfs.includes(field.name);
+        const isOptional = getFieldOptionality(field, isOneOf);
+
         const aminoField = fromAminoParseField({
             context,
             field,
             currentProtoPath: context.ref.filename,
             scope: [],
-            nested: 0
+            nested: 0,
+            isOptional
         });
         return {
             ctx: context,

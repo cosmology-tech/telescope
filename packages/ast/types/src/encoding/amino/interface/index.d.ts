@@ -5,8 +5,9 @@ export interface RenderAminoField {
     context: AminoParseContext;
     field: ProtoField;
     currentProtoPath: string;
+    isOptional: boolean;
 }
-export declare const renderAminoField: ({ context, field, currentProtoPath }: RenderAminoField) => any;
+export declare const renderAminoField: ({ context, field, currentProtoPath, isOptional }: RenderAminoField) => any;
 export interface MakeAminoTypeInterface {
     context: AminoParseContext;
     proto: ProtoType;

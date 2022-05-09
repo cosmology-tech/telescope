@@ -136,5 +136,7 @@ export declare const getEnumFromJsonName: (name: any) => string;
 export declare const getFieldsTypeName: (field: ProtoField) => string;
 export declare const getKeyTypeEntryName: (typeName: string, prop: string) => string;
 export declare const getBaseCreateTypeFuncName: (name: any) => string;
+export declare const getOneOfs: (type: ProtoType) => string[];
+export declare const getFieldOptionality: (field: ProtoField, isOneOf: boolean) => boolean;
 export declare const createProtoType: (name: string, proto: ProtoType) => t.ExportNamedDeclaration;
 export declare const createCreateProtoType: (name: string, proto: ProtoType) => t.FunctionDeclaration;
