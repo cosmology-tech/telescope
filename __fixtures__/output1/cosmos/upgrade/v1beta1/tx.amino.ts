@@ -3,7 +3,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
-import { MsgSoftwareUpgrade, MsgCancelUpgrade } from "../../../../../packages/transpiler/cosmos/upgrade/v1beta1/tx";
+import { MsgSoftwareUpgrade, MsgCancelUpgrade } from "./tx";
 export interface AminoMsgSoftwareUpgrade extends AminoMsg {
   type: "cosmos-sdk/MsgSoftwareUpgrade";
   value: {

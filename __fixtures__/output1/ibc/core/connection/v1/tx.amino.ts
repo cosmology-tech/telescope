@@ -4,7 +4,7 @@ import { Height } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
 import { MerklePrefix } from "../../commitment/v1/commitment";
-import { MsgConnectionOpenInit, MsgConnectionOpenTry, MsgConnectionOpenAck, MsgConnectionOpenConfirm } from "../../../../../../packages/transpiler/ibc/core/connection/v1/tx";
+import { MsgConnectionOpenInit, MsgConnectionOpenTry, MsgConnectionOpenAck, MsgConnectionOpenConfirm } from "./tx";
 export interface AminoMsgConnectionOpenInit extends AminoMsg {
   type: "cosmos-sdk/MsgConnectionOpenInit";
   value: {

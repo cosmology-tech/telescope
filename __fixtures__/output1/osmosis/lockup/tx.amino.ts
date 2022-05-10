@@ -3,7 +3,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
-import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking } from "../../../../packages/transpiler/osmosis/lockup/tx";
+import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking } from "./tx";
 export interface AminoMsgLockTokens extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {

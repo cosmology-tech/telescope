@@ -4,7 +4,7 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
 import { Duration } from "../../google/protobuf/duration";
-import { MsgCreateGauge, MsgAddToGauge } from "../../../../packages/transpiler/osmosis/incentives/tx";
+import { lockQueryTypeFromJSON, MsgCreateGauge, MsgAddToGauge } from "./tx";
 export interface AminoMsgCreateGauge extends AminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: {

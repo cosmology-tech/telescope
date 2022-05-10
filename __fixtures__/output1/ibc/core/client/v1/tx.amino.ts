@@ -1,6 +1,6 @@
 import { Any } from "../../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgCreateClient, MsgUpdateClient, MsgUpgradeClient, MsgSubmitMisbehaviour } from "../../../../../../packages/transpiler/ibc/core/client/v1/tx";
+import { MsgCreateClient, MsgUpdateClient, MsgUpgradeClient, MsgSubmitMisbehaviour } from "./tx";
 export interface AminoMsgCreateClient extends AminoMsg {
   type: "cosmos-sdk/MsgCreateClient";
   value: {

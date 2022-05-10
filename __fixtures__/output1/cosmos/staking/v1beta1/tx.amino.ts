@@ -4,7 +4,7 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { AminoMsg, decodeBech32Pubkey, encodeBech32PubKey } from "@cosmjs/amino";
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
-import { MsgCreateValidator, MsgEditValidator, MsgDelegate, MsgBeginRedelegate, MsgUndelegate } from "../../../../../packages/transpiler/cosmos/staking/v1beta1/tx";
+import { MsgCreateValidator, MsgEditValidator, MsgDelegate, MsgBeginRedelegate, MsgUndelegate } from "./tx";
 export interface AminoMsgCreateValidator extends AminoMsg {
   type: "cosmos-sdk/MsgCreateValidator";
   value: {

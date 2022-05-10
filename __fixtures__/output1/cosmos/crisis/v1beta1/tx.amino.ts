@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgVerifyInvariant } from "../../../../../packages/transpiler/cosmos/crisis/v1beta1/tx";
+import { MsgVerifyInvariant } from "./tx";
 export interface AminoMsgVerifyInvariant extends AminoMsg {
   type: "cosmos-sdk/MsgVerifyInvariant";
   value: {

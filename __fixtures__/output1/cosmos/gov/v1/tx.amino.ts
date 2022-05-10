@@ -3,7 +3,7 @@ import { Coin } from "../../base/v1beta1/coin";
 import { VoteOption, WeightedVoteOption, voteOptionFromJSON } from "./gov";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
-import { MsgSubmitProposal, MsgExecLegacyContent, MsgVote, MsgVoteWeighted, MsgDeposit } from "../../../../../packages/transpiler/cosmos/gov/v1/tx";
+import { voteOptionFromJSON, MsgSubmitProposal, MsgExecLegacyContent, MsgVote, MsgVoteWeighted, MsgDeposit } from "./tx";
 export interface AminoMsgSubmitProposal extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: {

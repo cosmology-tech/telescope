@@ -1,6 +1,6 @@
 import { Coin } from "../../base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgSetWithdrawAddress, MsgWithdrawDelegatorReward, MsgWithdrawValidatorCommission, MsgFundCommunityPool } from "../../../../../packages/transpiler/cosmos/distribution/v1beta1/tx";
+import { MsgSetWithdrawAddress, MsgWithdrawDelegatorReward, MsgWithdrawValidatorCommission, MsgFundCommunityPool } from "./tx";
 export interface AminoMsgSetWithdrawAddress extends AminoMsg {
   type: "cosmos-sdk/MsgModifyWithdrawAddress";
   value: {

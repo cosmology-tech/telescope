@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgUnjail } from "../../../../../packages/transpiler/cosmos/slashing/v1beta1/tx";
+import { MsgUnjail } from "./tx";
 export interface AminoMsgUnjail extends AminoMsg {
   type: "cosmos-sdk/MsgUnjail";
   value: {

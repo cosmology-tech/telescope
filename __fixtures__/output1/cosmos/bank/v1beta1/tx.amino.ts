@@ -1,7 +1,7 @@
 import { Coin } from "../../base/v1beta1/coin";
 import { Input, Output } from "./bank";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgSend, MsgMultiSend } from "../../../../../packages/transpiler/cosmos/bank/v1beta1/tx";
+import { MsgSend, MsgMultiSend } from "./tx";
 export interface AminoMsgSend extends AminoMsg {
   type: "cosmos-sdk/MsgSend";
   value: {

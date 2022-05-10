@@ -2,7 +2,7 @@ import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
-import { MsgTransfer } from "../../../../../../packages/transpiler/ibc/applications/transfer/v1/tx";
+import { MsgTransfer } from "./tx";
 export interface AminoMsgTransfer extends AminoMsg {
   type: "cosmos-sdk/MsgTransfer";
   value: {

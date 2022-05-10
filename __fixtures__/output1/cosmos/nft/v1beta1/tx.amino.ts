@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgSend } from "../../../../../packages/transpiler/cosmos/nft/v1beta1/tx";
+import { MsgSend } from "./tx";
 export interface AminoMsgSend extends AminoMsg {
   type: "cosmos-sdk/MsgSend";
   value: {

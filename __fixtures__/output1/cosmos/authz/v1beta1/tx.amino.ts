@@ -3,7 +3,7 @@ import { Any } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { MsgGrant, MsgExec, MsgRevoke } from "../../../../../packages/transpiler/cosmos/authz/v1beta1/tx";
+import { MsgGrant, MsgExec, MsgRevoke } from "./tx";
 export interface AminoMsgGrant extends AminoMsg {
   type: "cosmos-sdk/MsgGrant";
   value: {

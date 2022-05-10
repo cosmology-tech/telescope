@@ -1,7 +1,7 @@
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
-import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate } from "../../../../packages/transpiler/osmosis/superfluid/tx";
+import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate } from "./tx";
 export interface AminoMsgSuperfluidDelegate extends AminoMsg {
   type: "osmosis/superfluid/superfluid-delegate";
   value: {
