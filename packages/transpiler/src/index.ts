@@ -8,6 +8,7 @@ import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
 import { join, dirname, resolve } from 'path';
 import { sync as mkdirp } from 'mkdirp';
+import { GenericParseContext, createClient } from '@osmonauts/ast';
 export interface TelescopeInput {
     protoDir: string;
     outPath: string;
@@ -39,14 +40,6 @@ export class TelescopeBuilder {
 
     build(input: TelescopeInput) {
 
-        // 0 REMEMBER!
-        // YOU MUST SWITCH FROM in DIRECTORY to out DIRECTORY!!!
-        // otherwise paths will break
-
-        // ============
-
-
-
         // 1 get package bundle
         const bundled = bundlePackages(this.store, input);
         const packaged = bundled.reduce((m, bundle) => {
@@ -55,12 +48,11 @@ export class TelescopeBuilder {
                 .concat(bundle.body);
             const ast = t.program(prog);
             const content = generate(ast).code;
-            const out = bundle.bundleFile;
+            const out = resolve(join(input.outPath, bundle.bundleFile));
             mkdirp(dirname(out));
             writeFileSync(out, content);
 
             // 2 search for all files that live in package
-            console.log(`now looking for all [${bundle.base}]`);
             const baseProtos = this.store.getProtos().filter(ref => {
                 return ref.filename.split('/')[0] === bundle.base
             });
@@ -90,7 +82,6 @@ export class TelescopeBuilder {
             const serviceContexts = packageContexts.filter(context => context.mutations.length > 0);
 
             // 5 write out one amino helper for all contexts w/mutations
-
             const aminoHelpers = serviceContexts.map(c => {
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
                 const filename = resolve(join(input.outPath, localname));
@@ -125,11 +116,14 @@ export class TelescopeBuilder {
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
 
-                return filename;
+                return {
+                    localname,
+                    filename
+                };
+
             });
 
             // 6 write out one registry helper for all contexts w/mutations
-
             const registries = serviceContexts.map(c => {
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.registry.ts')
@@ -164,11 +158,44 @@ export class TelescopeBuilder {
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
 
-                return filename;
+                return {
+                    localname,
+                    filename
+                };
 
             })
 
             // 7 write out one client for each base package, referencing the last two steps
+
+
+
+            const clientFile = join('telescope', `${bundle.base}`, 'client.ts');
+            const ctx = new GenericParseContext();
+
+            const clientBody = createClient({
+                context: ctx,
+                name: 'getSigningOsmosisClient',
+                registries: [
+                    'osmosis.gamm.v1beta1',
+                    'osmosis.superfluid.v1beta1',
+                    'osmosis.lockup'
+                ],
+                aminos: [
+                    'osmosis.gamm.v1beta1',
+                    'osmosis.superfluid.v1beta1',
+                    'osmosis.lockup'
+                ]
+            });
+
+            const cProg = []
+                .concat(clientBody);
+
+            const cAst = t.program(cProg);
+            const cContent = generate(cAst).code;
+
+            const clientOutFile = join(input.outPath, clientFile);
+            mkdirp(dirname(clientOutFile));
+            writeFileSync(clientOutFile, cContent);
 
             return m;
         }, {});

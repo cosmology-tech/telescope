@@ -23,7 +23,7 @@ it('bundlePackages', () => {
     const bundled = bundlePackages(store, input);
     const packaged = bundled.reduce((m, bundle) => {
         m[bundle.base] = {
-            bundle: '.' + bundle.bundleFile.split('__fixtures__')[1],
+            bundle: bundle.bundleFile,
             base: bundle.base,
             code: generate(t.program([
                 ...bundle.importPaths,
@@ -39,7 +39,7 @@ it('bundle packages root file names', () => {
     const bundled = bundlePackages(store, input);
     const packaged = bundled.reduce((m, bundle) => {
         m[bundle.base] = {
-            bundle: '.' + bundle.bundleFile.split('__fixtures__')[1],
+            bundle: bundle.bundleFile,
         };
         return m;
     }, {});

@@ -3,34 +3,34 @@
 exports[`bundle packages root file names 1`] = `
 Object {
   "cosmos": Object {
-    "bundle": "./chain1/telescope/cosmos/bundle.ts",
+    "bundle": "telescope/cosmos/bundle.ts",
   },
   "cosmos_proto": Object {
-    "bundle": "./chain1/telescope/cosmos_proto/bundle.ts",
+    "bundle": "telescope/cosmos_proto/bundle.ts",
   },
   "cosmwasm": Object {
-    "bundle": "./chain1/telescope/cosmwasm/bundle.ts",
+    "bundle": "telescope/cosmwasm/bundle.ts",
   },
   "gogoproto": Object {
-    "bundle": "./chain1/telescope/gogoproto/bundle.ts",
+    "bundle": "telescope/gogoproto/bundle.ts",
   },
   "google": Object {
-    "bundle": "./chain1/telescope/google/bundle.ts",
+    "bundle": "telescope/google/bundle.ts",
   },
   "ibc": Object {
-    "bundle": "./chain1/telescope/ibc/bundle.ts",
+    "bundle": "telescope/ibc/bundle.ts",
   },
   "ics23": Object {
-    "bundle": "./chain1/telescope/ics23/bundle.ts",
+    "bundle": "telescope/ics23/bundle.ts",
   },
   "osmosis": Object {
-    "bundle": "./chain1/telescope/osmosis/bundle.ts",
+    "bundle": "telescope/osmosis/bundle.ts",
   },
   "secret": Object {
-    "bundle": "./chain1/telescope/secret/bundle.ts",
+    "bundle": "telescope/secret/bundle.ts",
   },
   "tendermint": Object {
-    "bundle": "./chain1/telescope/tendermint/bundle.ts",
+    "bundle": "telescope/tendermint/bundle.ts",
   },
 }
 `;
@@ -39,99 +39,99 @@ exports[`bundlePackages 1`] = `
 Object {
   "cosmos": Object {
     "base": "cosmos",
-    "bundle": "./chain1/telescope/cosmos/bundle.ts",
-    "code": "import * as _2 from \\"../../../../packages/transpiler/cosmos/app/v1alpha1/config\\";
-import * as _3 from \\"../../../../packages/transpiler/cosmos/app/v1alpha1/module\\";
-import * as _4 from \\"../../../../packages/transpiler/cosmos/app/v1alpha1/query\\";
-import * as _5 from \\"../../../../packages/transpiler/cosmos/auth/v1beta1/auth\\";
-import * as _6 from \\"../../../../packages/transpiler/cosmos/auth/v1beta1/genesis\\";
-import * as _7 from \\"../../../../packages/transpiler/cosmos/auth/v1beta1/query\\";
-import * as _8 from \\"../../../../packages/transpiler/cosmos/authz/v1beta1/authz\\";
-import * as _9 from \\"../../../../packages/transpiler/cosmos/authz/v1beta1/event\\";
-import * as _10 from \\"../../../../packages/transpiler/cosmos/authz/v1beta1/genesis\\";
-import * as _11 from \\"../../../../packages/transpiler/cosmos/authz/v1beta1/query\\";
-import * as _12 from \\"../../../../packages/transpiler/cosmos/authz/v1beta1/tx\\";
-import * as _13 from \\"../../../../packages/transpiler/cosmos/bank/v1beta1/authz\\";
-import * as _14 from \\"../../../../packages/transpiler/cosmos/bank/v1beta1/bank\\";
-import * as _15 from \\"../../../../packages/transpiler/cosmos/bank/v1beta1/genesis\\";
-import * as _16 from \\"../../../../packages/transpiler/cosmos/bank/v1beta1/query\\";
-import * as _17 from \\"../../../../packages/transpiler/cosmos/bank/v1beta1/tx\\";
-import * as _18 from \\"../../../../packages/transpiler/cosmos/base/abci/v1beta1/abci\\";
-import * as _19 from \\"../../../../packages/transpiler/cosmos/base/kv/v1beta1/kv\\";
-import * as _20 from \\"../../../../packages/transpiler/cosmos/base/query/v1beta1/pagination\\";
-import * as _21 from \\"../../../../packages/transpiler/cosmos/base/reflection/v1beta1/reflection\\";
-import * as _22 from \\"../../../../packages/transpiler/cosmos/base/reflection/v2alpha1/reflection\\";
-import * as _23 from \\"../../../../packages/transpiler/cosmos/base/snapshots/v1beta1/snapshot\\";
-import * as _24 from \\"../../../../packages/transpiler/cosmos/base/store/v1beta1/commit_info\\";
-import * as _25 from \\"../../../../packages/transpiler/cosmos/base/store/v1beta1/listening\\";
-import * as _26 from \\"../../../../packages/transpiler/cosmos/base/tendermint/v1beta1/query\\";
-import * as _27 from \\"../../../../packages/transpiler/cosmos/base/v1beta1/coin\\";
-import * as _28 from \\"../../../../packages/transpiler/cosmos/capability/v1beta1/capability\\";
-import * as _29 from \\"../../../../packages/transpiler/cosmos/capability/v1beta1/genesis\\";
-import * as _30 from \\"../../../../packages/transpiler/cosmos/crisis/v1beta1/genesis\\";
-import * as _31 from \\"../../../../packages/transpiler/cosmos/crisis/v1beta1/tx\\";
-import * as _32 from \\"../../../../packages/transpiler/cosmos/crypto/ed25519/keys\\";
-import * as _33 from \\"../../../../packages/transpiler/cosmos/crypto/hd/v1/hd\\";
-import * as _34 from \\"../../../../packages/transpiler/cosmos/crypto/keyring/v1/record\\";
-import * as _35 from \\"../../../../packages/transpiler/cosmos/crypto/multisig/keys\\";
-import * as _36 from \\"../../../../packages/transpiler/cosmos/crypto/secp256k1/keys\\";
-import * as _37 from \\"../../../../packages/transpiler/cosmos/crypto/secp256r1/keys\\";
-import * as _38 from \\"../../../../packages/transpiler/cosmos/distribution/v1beta1/distribution\\";
-import * as _39 from \\"../../../../packages/transpiler/cosmos/distribution/v1beta1/genesis\\";
-import * as _40 from \\"../../../../packages/transpiler/cosmos/distribution/v1beta1/query\\";
-import * as _41 from \\"../../../../packages/transpiler/cosmos/distribution/v1beta1/tx\\";
-import * as _42 from \\"../../../../packages/transpiler/cosmos/evidence/v1beta1/evidence\\";
-import * as _43 from \\"../../../../packages/transpiler/cosmos/evidence/v1beta1/genesis\\";
-import * as _44 from \\"../../../../packages/transpiler/cosmos/evidence/v1beta1/query\\";
-import * as _45 from \\"../../../../packages/transpiler/cosmos/evidence/v1beta1/tx\\";
-import * as _46 from \\"../../../../packages/transpiler/cosmos/feegrant/v1beta1/feegrant\\";
-import * as _47 from \\"../../../../packages/transpiler/cosmos/feegrant/v1beta1/genesis\\";
-import * as _48 from \\"../../../../packages/transpiler/cosmos/feegrant/v1beta1/query\\";
-import * as _49 from \\"../../../../packages/transpiler/cosmos/feegrant/v1beta1/tx\\";
-import * as _50 from \\"../../../../packages/transpiler/cosmos/genutil/v1beta1/genesis\\";
-import * as _51 from \\"../../../../packages/transpiler/cosmos/gov/v1/genesis\\";
-import * as _52 from \\"../../../../packages/transpiler/cosmos/gov/v1/gov\\";
-import * as _53 from \\"../../../../packages/transpiler/cosmos/gov/v1/query\\";
-import * as _54 from \\"../../../../packages/transpiler/cosmos/gov/v1/tx\\";
-import * as _55 from \\"../../../../packages/transpiler/cosmos/gov/v1beta1/genesis\\";
-import * as _56 from \\"../../../../packages/transpiler/cosmos/gov/v1beta1/gov\\";
-import * as _57 from \\"../../../../packages/transpiler/cosmos/gov/v1beta1/query\\";
-import * as _58 from \\"../../../../packages/transpiler/cosmos/gov/v1beta1/tx\\";
-import * as _59 from \\"../../../../packages/transpiler/cosmos/group/v1/events\\";
-import * as _60 from \\"../../../../packages/transpiler/cosmos/group/v1/genesis\\";
-import * as _61 from \\"../../../../packages/transpiler/cosmos/group/v1/query\\";
-import * as _62 from \\"../../../../packages/transpiler/cosmos/group/v1/tx\\";
-import * as _63 from \\"../../../../packages/transpiler/cosmos/group/v1/types\\";
-import * as _64 from \\"../../../../packages/transpiler/cosmos/mint/v1beta1/genesis\\";
-import * as _65 from \\"../../../../packages/transpiler/cosmos/mint/v1beta1/mint\\";
-import * as _66 from \\"../../../../packages/transpiler/cosmos/mint/v1beta1/query\\";
-import * as _67 from \\"../../../../packages/transpiler/cosmos/msg/v1/msg\\";
-import * as _68 from \\"../../../../packages/transpiler/cosmos/nft/v1beta1/event\\";
-import * as _69 from \\"../../../../packages/transpiler/cosmos/nft/v1beta1/genesis\\";
-import * as _70 from \\"../../../../packages/transpiler/cosmos/nft/v1beta1/nft\\";
-import * as _71 from \\"../../../../packages/transpiler/cosmos/nft/v1beta1/query\\";
-import * as _72 from \\"../../../../packages/transpiler/cosmos/nft/v1beta1/tx\\";
-import * as _73 from \\"../../../../packages/transpiler/cosmos/orm/v1/orm\\";
-import * as _74 from \\"../../../../packages/transpiler/cosmos/orm/v1alpha1/schema\\";
-import * as _75 from \\"../../../../packages/transpiler/cosmos/params/v1beta1/params\\";
-import * as _76 from \\"../../../../packages/transpiler/cosmos/params/v1beta1/query\\";
-import * as _77 from \\"../../../../packages/transpiler/cosmos/slashing/v1beta1/genesis\\";
-import * as _78 from \\"../../../../packages/transpiler/cosmos/slashing/v1beta1/query\\";
-import * as _79 from \\"../../../../packages/transpiler/cosmos/slashing/v1beta1/slashing\\";
-import * as _80 from \\"../../../../packages/transpiler/cosmos/slashing/v1beta1/tx\\";
-import * as _81 from \\"../../../../packages/transpiler/cosmos/staking/v1beta1/authz\\";
-import * as _82 from \\"../../../../packages/transpiler/cosmos/staking/v1beta1/genesis\\";
-import * as _83 from \\"../../../../packages/transpiler/cosmos/staking/v1beta1/query\\";
-import * as _84 from \\"../../../../packages/transpiler/cosmos/staking/v1beta1/staking\\";
-import * as _85 from \\"../../../../packages/transpiler/cosmos/staking/v1beta1/tx\\";
-import * as _86 from \\"../../../../packages/transpiler/cosmos/tx/signing/v1beta1/signing\\";
-import * as _87 from \\"../../../../packages/transpiler/cosmos/tx/v1beta1/service\\";
-import * as _88 from \\"../../../../packages/transpiler/cosmos/tx/v1beta1/tx\\";
-import * as _89 from \\"../../../../packages/transpiler/cosmos/upgrade/v1beta1/query\\";
-import * as _90 from \\"../../../../packages/transpiler/cosmos/upgrade/v1beta1/tx\\";
-import * as _91 from \\"../../../../packages/transpiler/cosmos/upgrade/v1beta1/upgrade\\";
-import * as _92 from \\"../../../../packages/transpiler/cosmos/vesting/v1beta1/tx\\";
-import * as _93 from \\"../../../../packages/transpiler/cosmos/vesting/v1beta1/vesting\\";
+    "bundle": "telescope/cosmos/bundle.ts",
+    "code": "import * as _2 from \\"../../cosmos/app/v1alpha1/config\\";
+import * as _3 from \\"../../cosmos/app/v1alpha1/module\\";
+import * as _4 from \\"../../cosmos/app/v1alpha1/query\\";
+import * as _5 from \\"../../cosmos/auth/v1beta1/auth\\";
+import * as _6 from \\"../../cosmos/auth/v1beta1/genesis\\";
+import * as _7 from \\"../../cosmos/auth/v1beta1/query\\";
+import * as _8 from \\"../../cosmos/authz/v1beta1/authz\\";
+import * as _9 from \\"../../cosmos/authz/v1beta1/event\\";
+import * as _10 from \\"../../cosmos/authz/v1beta1/genesis\\";
+import * as _11 from \\"../../cosmos/authz/v1beta1/query\\";
+import * as _12 from \\"../../cosmos/authz/v1beta1/tx\\";
+import * as _13 from \\"../../cosmos/bank/v1beta1/authz\\";
+import * as _14 from \\"../../cosmos/bank/v1beta1/bank\\";
+import * as _15 from \\"../../cosmos/bank/v1beta1/genesis\\";
+import * as _16 from \\"../../cosmos/bank/v1beta1/query\\";
+import * as _17 from \\"../../cosmos/bank/v1beta1/tx\\";
+import * as _18 from \\"../../cosmos/base/abci/v1beta1/abci\\";
+import * as _19 from \\"../../cosmos/base/kv/v1beta1/kv\\";
+import * as _20 from \\"../../cosmos/base/query/v1beta1/pagination\\";
+import * as _21 from \\"../../cosmos/base/reflection/v1beta1/reflection\\";
+import * as _22 from \\"../../cosmos/base/reflection/v2alpha1/reflection\\";
+import * as _23 from \\"../../cosmos/base/snapshots/v1beta1/snapshot\\";
+import * as _24 from \\"../../cosmos/base/store/v1beta1/commit_info\\";
+import * as _25 from \\"../../cosmos/base/store/v1beta1/listening\\";
+import * as _26 from \\"../../cosmos/base/tendermint/v1beta1/query\\";
+import * as _27 from \\"../../cosmos/base/v1beta1/coin\\";
+import * as _28 from \\"../../cosmos/capability/v1beta1/capability\\";
+import * as _29 from \\"../../cosmos/capability/v1beta1/genesis\\";
+import * as _30 from \\"../../cosmos/crisis/v1beta1/genesis\\";
+import * as _31 from \\"../../cosmos/crisis/v1beta1/tx\\";
+import * as _32 from \\"../../cosmos/crypto/ed25519/keys\\";
+import * as _33 from \\"../../cosmos/crypto/hd/v1/hd\\";
+import * as _34 from \\"../../cosmos/crypto/keyring/v1/record\\";
+import * as _35 from \\"../../cosmos/crypto/multisig/keys\\";
+import * as _36 from \\"../../cosmos/crypto/secp256k1/keys\\";
+import * as _37 from \\"../../cosmos/crypto/secp256r1/keys\\";
+import * as _38 from \\"../../cosmos/distribution/v1beta1/distribution\\";
+import * as _39 from \\"../../cosmos/distribution/v1beta1/genesis\\";
+import * as _40 from \\"../../cosmos/distribution/v1beta1/query\\";
+import * as _41 from \\"../../cosmos/distribution/v1beta1/tx\\";
+import * as _42 from \\"../../cosmos/evidence/v1beta1/evidence\\";
+import * as _43 from \\"../../cosmos/evidence/v1beta1/genesis\\";
+import * as _44 from \\"../../cosmos/evidence/v1beta1/query\\";
+import * as _45 from \\"../../cosmos/evidence/v1beta1/tx\\";
+import * as _46 from \\"../../cosmos/feegrant/v1beta1/feegrant\\";
+import * as _47 from \\"../../cosmos/feegrant/v1beta1/genesis\\";
+import * as _48 from \\"../../cosmos/feegrant/v1beta1/query\\";
+import * as _49 from \\"../../cosmos/feegrant/v1beta1/tx\\";
+import * as _50 from \\"../../cosmos/genutil/v1beta1/genesis\\";
+import * as _51 from \\"../../cosmos/gov/v1/genesis\\";
+import * as _52 from \\"../../cosmos/gov/v1/gov\\";
+import * as _53 from \\"../../cosmos/gov/v1/query\\";
+import * as _54 from \\"../../cosmos/gov/v1/tx\\";
+import * as _55 from \\"../../cosmos/gov/v1beta1/genesis\\";
+import * as _56 from \\"../../cosmos/gov/v1beta1/gov\\";
+import * as _57 from \\"../../cosmos/gov/v1beta1/query\\";
+import * as _58 from \\"../../cosmos/gov/v1beta1/tx\\";
+import * as _59 from \\"../../cosmos/group/v1/events\\";
+import * as _60 from \\"../../cosmos/group/v1/genesis\\";
+import * as _61 from \\"../../cosmos/group/v1/query\\";
+import * as _62 from \\"../../cosmos/group/v1/tx\\";
+import * as _63 from \\"../../cosmos/group/v1/types\\";
+import * as _64 from \\"../../cosmos/mint/v1beta1/genesis\\";
+import * as _65 from \\"../../cosmos/mint/v1beta1/mint\\";
+import * as _66 from \\"../../cosmos/mint/v1beta1/query\\";
+import * as _67 from \\"../../cosmos/msg/v1/msg\\";
+import * as _68 from \\"../../cosmos/nft/v1beta1/event\\";
+import * as _69 from \\"../../cosmos/nft/v1beta1/genesis\\";
+import * as _70 from \\"../../cosmos/nft/v1beta1/nft\\";
+import * as _71 from \\"../../cosmos/nft/v1beta1/query\\";
+import * as _72 from \\"../../cosmos/nft/v1beta1/tx\\";
+import * as _73 from \\"../../cosmos/orm/v1/orm\\";
+import * as _74 from \\"../../cosmos/orm/v1alpha1/schema\\";
+import * as _75 from \\"../../cosmos/params/v1beta1/params\\";
+import * as _76 from \\"../../cosmos/params/v1beta1/query\\";
+import * as _77 from \\"../../cosmos/slashing/v1beta1/genesis\\";
+import * as _78 from \\"../../cosmos/slashing/v1beta1/query\\";
+import * as _79 from \\"../../cosmos/slashing/v1beta1/slashing\\";
+import * as _80 from \\"../../cosmos/slashing/v1beta1/tx\\";
+import * as _81 from \\"../../cosmos/staking/v1beta1/authz\\";
+import * as _82 from \\"../../cosmos/staking/v1beta1/genesis\\";
+import * as _83 from \\"../../cosmos/staking/v1beta1/query\\";
+import * as _84 from \\"../../cosmos/staking/v1beta1/staking\\";
+import * as _85 from \\"../../cosmos/staking/v1beta1/tx\\";
+import * as _86 from \\"../../cosmos/tx/signing/v1beta1/signing\\";
+import * as _87 from \\"../../cosmos/tx/v1beta1/service\\";
+import * as _88 from \\"../../cosmos/tx/v1beta1/tx\\";
+import * as _89 from \\"../../cosmos/upgrade/v1beta1/query\\";
+import * as _90 from \\"../../cosmos/upgrade/v1beta1/tx\\";
+import * as _91 from \\"../../cosmos/upgrade/v1beta1/upgrade\\";
+import * as _92 from \\"../../cosmos/vesting/v1beta1/tx\\";
+import * as _93 from \\"../../cosmos/vesting/v1beta1/vesting\\";
 export namespace cosmos {
   export namespace app {
     export const v1alpha1 = { ..._2,
@@ -337,20 +337,20 @@ export namespace cosmos {
   },
   "cosmos_proto": Object {
     "base": "cosmos_proto",
-    "bundle": "./chain1/telescope/cosmos_proto/bundle.ts",
-    "code": "import * as _1 from \\"../../../../packages/transpiler/cosmos_proto/cosmos\\";
+    "bundle": "telescope/cosmos_proto/bundle.ts",
+    "code": "import * as _1 from \\"../../cosmos_proto/cosmos\\";
 export const cosmos_proto = { ..._1
 };",
   },
   "cosmwasm": Object {
     "base": "cosmwasm",
-    "bundle": "./chain1/telescope/cosmwasm/bundle.ts",
-    "code": "import * as _94 from \\"../../../../packages/transpiler/cosmwasm/wasm/v1/genesis\\";
-import * as _95 from \\"../../../../packages/transpiler/cosmwasm/wasm/v1/ibc\\";
-import * as _96 from \\"../../../../packages/transpiler/cosmwasm/wasm/v1/proposal\\";
-import * as _97 from \\"../../../../packages/transpiler/cosmwasm/wasm/v1/query\\";
-import * as _98 from \\"../../../../packages/transpiler/cosmwasm/wasm/v1/tx\\";
-import * as _99 from \\"../../../../packages/transpiler/cosmwasm/wasm/v1/types\\";
+    "bundle": "telescope/cosmwasm/bundle.ts",
+    "code": "import * as _94 from \\"../../cosmwasm/wasm/v1/genesis\\";
+import * as _95 from \\"../../cosmwasm/wasm/v1/ibc\\";
+import * as _96 from \\"../../cosmwasm/wasm/v1/proposal\\";
+import * as _97 from \\"../../cosmwasm/wasm/v1/query\\";
+import * as _98 from \\"../../cosmwasm/wasm/v1/tx\\";
+import * as _99 from \\"../../cosmwasm/wasm/v1/types\\";
 export namespace cosmwasm {
   export namespace wasm {
     export const v1 = { ..._94,
@@ -365,66 +365,66 @@ export namespace cosmwasm {
   },
   "gogoproto": Object {
     "base": "gogoproto",
-    "bundle": "./chain1/telescope/gogoproto/bundle.ts",
-    "code": "import * as _100 from \\"../../../../packages/transpiler/gogoproto/gogo\\";
+    "bundle": "telescope/gogoproto/bundle.ts",
+    "code": "import * as _100 from \\"../../gogoproto/gogo\\";
 export const gogoproto = { ..._100
 };",
   },
   "google": Object {
     "base": "google",
-    "bundle": "./chain1/telescope/google/bundle.ts",
-    "code": "import * as _101 from \\"../../../../packages/transpiler/google/api/annotations\\";
-import * as _102 from \\"../../../../packages/transpiler/google/api/auth\\";
-import * as _103 from \\"../../../../packages/transpiler/google/api/backend\\";
-import * as _104 from \\"../../../../packages/transpiler/google/api/billing\\";
-import * as _105 from \\"../../../../packages/transpiler/google/api/client\\";
-import * as _106 from \\"../../../../packages/transpiler/google/api/config_change\\";
-import * as _107 from \\"../../../../packages/transpiler/google/api/consumer\\";
-import * as _108 from \\"../../../../packages/transpiler/google/api/context\\";
-import * as _109 from \\"../../../../packages/transpiler/google/api/control\\";
-import * as _110 from \\"../../../../packages/transpiler/google/api/distribution\\";
-import * as _111 from \\"../../../../packages/transpiler/google/api/documentation\\";
-import * as _112 from \\"../../../../packages/transpiler/google/api/endpoint\\";
-import * as _113 from \\"../../../../packages/transpiler/google/api/error_reason\\";
-import * as _114 from \\"../../../../packages/transpiler/google/api/field_behavior\\";
-import * as _115 from \\"../../../../packages/transpiler/google/api/http\\";
-import * as _116 from \\"../../../../packages/transpiler/google/api/httpbody\\";
-import * as _117 from \\"../../../../packages/transpiler/google/api/label\\";
-import * as _118 from \\"../../../../packages/transpiler/google/api/launch_stage\\";
-import * as _119 from \\"../../../../packages/transpiler/google/api/log\\";
-import * as _120 from \\"../../../../packages/transpiler/google/api/logging\\";
-import * as _121 from \\"../../../../packages/transpiler/google/api/metric\\";
-import * as _122 from \\"../../../../packages/transpiler/google/api/monitored_resource\\";
-import * as _123 from \\"../../../../packages/transpiler/google/api/monitoring\\";
-import * as _124 from \\"../../../../packages/transpiler/google/api/quota\\";
-import * as _125 from \\"../../../../packages/transpiler/google/api/resource\\";
-import * as _126 from \\"../../../../packages/transpiler/google/api/routing\\";
-import * as _127 from \\"../../../../packages/transpiler/google/api/service\\";
-import * as _128 from \\"../../../../packages/transpiler/google/api/source_info\\";
-import * as _129 from \\"../../../../packages/transpiler/google/api/system_parameter\\";
-import * as _130 from \\"../../../../packages/transpiler/google/api/usage\\";
-import * as _131 from \\"../../../../packages/transpiler/google/api/visibility\\";
-import * as _132 from \\"../../../../packages/transpiler/google/logging/type/http_request\\";
-import * as _133 from \\"../../../../packages/transpiler/google/logging/type/log_severity\\";
-import * as _134 from \\"../../../../packages/transpiler/google/logging/v2/log_entry\\";
-import * as _135 from \\"../../../../packages/transpiler/google/logging/v2/logging_config\\";
-import * as _136 from \\"../../../../packages/transpiler/google/logging/v2/logging_metrics\\";
-import * as _137 from \\"../../../../packages/transpiler/google/logging/v2/logging\\";
-import * as _138 from \\"../../../../packages/transpiler/google/longrunning/operations\\";
-import * as _139 from \\"../../../../packages/transpiler/google/protobuf/any\\";
-import * as _140 from \\"../../../../packages/transpiler/google/protobuf/api\\";
-import * as _141 from \\"../../../../packages/transpiler/google/protobuf/descriptor\\";
-import * as _142 from \\"../../../../packages/transpiler/google/protobuf/duration\\";
-import * as _143 from \\"../../../../packages/transpiler/google/protobuf/empty\\";
-import * as _144 from \\"../../../../packages/transpiler/google/protobuf/field_mask\\";
-import * as _145 from \\"../../../../packages/transpiler/google/protobuf/source_context\\";
-import * as _146 from \\"../../../../packages/transpiler/google/protobuf/struct\\";
-import * as _147 from \\"../../../../packages/transpiler/google/protobuf/timestamp\\";
-import * as _148 from \\"../../../../packages/transpiler/google/protobuf/type\\";
-import * as _149 from \\"../../../../packages/transpiler/google/protobuf/wrappers\\";
-import * as _150 from \\"../../../../packages/transpiler/google/rpc/code\\";
-import * as _151 from \\"../../../../packages/transpiler/google/rpc/error_details\\";
-import * as _152 from \\"../../../../packages/transpiler/google/rpc/status\\";
+    "bundle": "telescope/google/bundle.ts",
+    "code": "import * as _101 from \\"../../google/api/annotations\\";
+import * as _102 from \\"../../google/api/auth\\";
+import * as _103 from \\"../../google/api/backend\\";
+import * as _104 from \\"../../google/api/billing\\";
+import * as _105 from \\"../../google/api/client\\";
+import * as _106 from \\"../../google/api/config_change\\";
+import * as _107 from \\"../../google/api/consumer\\";
+import * as _108 from \\"../../google/api/context\\";
+import * as _109 from \\"../../google/api/control\\";
+import * as _110 from \\"../../google/api/distribution\\";
+import * as _111 from \\"../../google/api/documentation\\";
+import * as _112 from \\"../../google/api/endpoint\\";
+import * as _113 from \\"../../google/api/error_reason\\";
+import * as _114 from \\"../../google/api/field_behavior\\";
+import * as _115 from \\"../../google/api/http\\";
+import * as _116 from \\"../../google/api/httpbody\\";
+import * as _117 from \\"../../google/api/label\\";
+import * as _118 from \\"../../google/api/launch_stage\\";
+import * as _119 from \\"../../google/api/log\\";
+import * as _120 from \\"../../google/api/logging\\";
+import * as _121 from \\"../../google/api/metric\\";
+import * as _122 from \\"../../google/api/monitored_resource\\";
+import * as _123 from \\"../../google/api/monitoring\\";
+import * as _124 from \\"../../google/api/quota\\";
+import * as _125 from \\"../../google/api/resource\\";
+import * as _126 from \\"../../google/api/routing\\";
+import * as _127 from \\"../../google/api/service\\";
+import * as _128 from \\"../../google/api/source_info\\";
+import * as _129 from \\"../../google/api/system_parameter\\";
+import * as _130 from \\"../../google/api/usage\\";
+import * as _131 from \\"../../google/api/visibility\\";
+import * as _132 from \\"../../google/logging/type/http_request\\";
+import * as _133 from \\"../../google/logging/type/log_severity\\";
+import * as _134 from \\"../../google/logging/v2/log_entry\\";
+import * as _135 from \\"../../google/logging/v2/logging_config\\";
+import * as _136 from \\"../../google/logging/v2/logging_metrics\\";
+import * as _137 from \\"../../google/logging/v2/logging\\";
+import * as _138 from \\"../../google/longrunning/operations\\";
+import * as _139 from \\"../../google/protobuf/any\\";
+import * as _140 from \\"../../google/protobuf/api\\";
+import * as _141 from \\"../../google/protobuf/descriptor\\";
+import * as _142 from \\"../../google/protobuf/duration\\";
+import * as _143 from \\"../../google/protobuf/empty\\";
+import * as _144 from \\"../../google/protobuf/field_mask\\";
+import * as _145 from \\"../../google/protobuf/source_context\\";
+import * as _146 from \\"../../google/protobuf/struct\\";
+import * as _147 from \\"../../google/protobuf/timestamp\\";
+import * as _148 from \\"../../google/protobuf/type\\";
+import * as _149 from \\"../../google/protobuf/wrappers\\";
+import * as _150 from \\"../../google/rpc/code\\";
+import * as _151 from \\"../../google/rpc/error_details\\";
+import * as _152 from \\"../../google/rpc/status\\";
 export namespace google {
   export const api = { ..._101,
     ..._102,
@@ -490,31 +490,31 @@ export namespace google {
   },
   "ibc": Object {
     "base": "ibc",
-    "bundle": "./chain1/telescope/ibc/bundle.ts",
-    "code": "import * as _153 from \\"../../../../packages/transpiler/ibc/applications/transfer/v1/genesis\\";
-import * as _154 from \\"../../../../packages/transpiler/ibc/applications/transfer/v1/query\\";
-import * as _155 from \\"../../../../packages/transpiler/ibc/applications/transfer/v1/transfer\\";
-import * as _156 from \\"../../../../packages/transpiler/ibc/applications/transfer/v1/tx\\";
-import * as _157 from \\"../../../../packages/transpiler/ibc/applications/transfer/v2/packet\\";
-import * as _158 from \\"../../../../packages/transpiler/ibc/core/channel/v1/channel\\";
-import * as _159 from \\"../../../../packages/transpiler/ibc/core/channel/v1/genesis\\";
-import * as _160 from \\"../../../../packages/transpiler/ibc/core/channel/v1/query\\";
-import * as _161 from \\"../../../../packages/transpiler/ibc/core/channel/v1/tx\\";
-import * as _162 from \\"../../../../packages/transpiler/ibc/core/client/v1/client\\";
-import * as _163 from \\"../../../../packages/transpiler/ibc/core/client/v1/genesis\\";
-import * as _164 from \\"../../../../packages/transpiler/ibc/core/client/v1/query\\";
-import * as _165 from \\"../../../../packages/transpiler/ibc/core/client/v1/tx\\";
-import * as _166 from \\"../../../../packages/transpiler/ibc/core/commitment/v1/commitment\\";
-import * as _167 from \\"../../../../packages/transpiler/ibc/core/connection/v1/connection\\";
-import * as _168 from \\"../../../../packages/transpiler/ibc/core/connection/v1/genesis\\";
-import * as _169 from \\"../../../../packages/transpiler/ibc/core/connection/v1/query\\";
-import * as _170 from \\"../../../../packages/transpiler/ibc/core/connection/v1/tx\\";
-import * as _171 from \\"../../../../packages/transpiler/ibc/core/port/v1/query\\";
-import * as _172 from \\"../../../../packages/transpiler/ibc/core/types/v1/genesis\\";
-import * as _173 from \\"../../../../packages/transpiler/ibc/lightclients/localhost/v1/localhost\\";
-import * as _174 from \\"../../../../packages/transpiler/ibc/lightclients/solomachine/v1/solomachine\\";
-import * as _175 from \\"../../../../packages/transpiler/ibc/lightclients/solomachine/v2/solomachine\\";
-import * as _176 from \\"../../../../packages/transpiler/ibc/lightclients/tendermint/v1/tendermint\\";
+    "bundle": "telescope/ibc/bundle.ts",
+    "code": "import * as _153 from \\"../../ibc/applications/transfer/v1/genesis\\";
+import * as _154 from \\"../../ibc/applications/transfer/v1/query\\";
+import * as _155 from \\"../../ibc/applications/transfer/v1/transfer\\";
+import * as _156 from \\"../../ibc/applications/transfer/v1/tx\\";
+import * as _157 from \\"../../ibc/applications/transfer/v2/packet\\";
+import * as _158 from \\"../../ibc/core/channel/v1/channel\\";
+import * as _159 from \\"../../ibc/core/channel/v1/genesis\\";
+import * as _160 from \\"../../ibc/core/channel/v1/query\\";
+import * as _161 from \\"../../ibc/core/channel/v1/tx\\";
+import * as _162 from \\"../../ibc/core/client/v1/client\\";
+import * as _163 from \\"../../ibc/core/client/v1/genesis\\";
+import * as _164 from \\"../../ibc/core/client/v1/query\\";
+import * as _165 from \\"../../ibc/core/client/v1/tx\\";
+import * as _166 from \\"../../ibc/core/commitment/v1/commitment\\";
+import * as _167 from \\"../../ibc/core/connection/v1/connection\\";
+import * as _168 from \\"../../ibc/core/connection/v1/genesis\\";
+import * as _169 from \\"../../ibc/core/connection/v1/query\\";
+import * as _170 from \\"../../ibc/core/connection/v1/tx\\";
+import * as _171 from \\"../../ibc/core/port/v1/query\\";
+import * as _172 from \\"../../ibc/core/types/v1/genesis\\";
+import * as _173 from \\"../../ibc/lightclients/localhost/v1/localhost\\";
+import * as _174 from \\"../../ibc/lightclients/solomachine/v1/solomachine\\";
+import * as _175 from \\"../../ibc/lightclients/solomachine/v2/solomachine\\";
+import * as _176 from \\"../../ibc/lightclients/tendermint/v1/tendermint\\";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
@@ -582,51 +582,51 @@ export namespace ibc {
   },
   "ics23": Object {
     "base": "ics23",
-    "bundle": "./chain1/telescope/ics23/bundle.ts",
-    "code": "import * as _0 from \\"../../../../packages/transpiler/confio/proofs\\";
+    "bundle": "telescope/ics23/bundle.ts",
+    "code": "import * as _0 from \\"../../confio/proofs\\";
 export const ics23 = { ..._0
 };",
   },
   "osmosis": Object {
     "base": "osmosis",
-    "bundle": "./chain1/telescope/osmosis/bundle.ts",
-    "code": "import * as _177 from \\"../../../../packages/transpiler/osmosis/claim/v1beta1/claim\\";
-import * as _178 from \\"../../../../packages/transpiler/osmosis/claim/v1beta1/genesis\\";
-import * as _179 from \\"../../../../packages/transpiler/osmosis/claim/v1beta1/params\\";
-import * as _180 from \\"../../../../packages/transpiler/osmosis/claim/v1beta1/query\\";
-import * as _181 from \\"../../../../packages/transpiler/osmosis/epochs/genesis\\";
-import * as _182 from \\"../../../../packages/transpiler/osmosis/epochs/query\\";
-import * as _183 from \\"../../../../packages/transpiler/osmosis/gamm/pool-models/balancer/balancerPool\\";
-import * as _184 from \\"../../../../packages/transpiler/osmosis/gamm/pool-models/balancer/tx\\";
-import * as _185 from \\"../../../../packages/transpiler/osmosis/gamm/v1beta1/genesis\\";
-import * as _186 from \\"../../../../packages/transpiler/osmosis/gamm/v1beta1/query\\";
-import * as _187 from \\"../../../../packages/transpiler/osmosis/gamm/v1beta1/tx\\";
-import * as _188 from \\"../../../../packages/transpiler/osmosis/incentives/gauge\\";
-import * as _189 from \\"../../../../packages/transpiler/osmosis/incentives/genesis\\";
-import * as _190 from \\"../../../../packages/transpiler/osmosis/incentives/params\\";
-import * as _191 from \\"../../../../packages/transpiler/osmosis/incentives/query\\";
-import * as _192 from \\"../../../../packages/transpiler/osmosis/incentives/tx\\";
-import * as _193 from \\"../../../../packages/transpiler/osmosis/lockup/genesis\\";
-import * as _194 from \\"../../../../packages/transpiler/osmosis/lockup/lock\\";
-import * as _195 from \\"../../../../packages/transpiler/osmosis/lockup/query\\";
-import * as _196 from \\"../../../../packages/transpiler/osmosis/lockup/tx\\";
-import * as _197 from \\"../../../../packages/transpiler/osmosis/mint/v1beta1/genesis\\";
-import * as _198 from \\"../../../../packages/transpiler/osmosis/mint/v1beta1/mint\\";
-import * as _199 from \\"../../../../packages/transpiler/osmosis/mint/v1beta1/query\\";
-import * as _200 from \\"../../../../packages/transpiler/osmosis/pool-incentives/v1beta1/genesis\\";
-import * as _201 from \\"../../../../packages/transpiler/osmosis/pool-incentives/v1beta1/gov\\";
-import * as _202 from \\"../../../../packages/transpiler/osmosis/pool-incentives/v1beta1/incentives\\";
-import * as _203 from \\"../../../../packages/transpiler/osmosis/pool-incentives/v1beta1/query\\";
-import * as _204 from \\"../../../../packages/transpiler/osmosis/store/v1beta1/tree\\";
-import * as _205 from \\"../../../../packages/transpiler/osmosis/superfluid/genesis\\";
-import * as _206 from \\"../../../../packages/transpiler/osmosis/superfluid/params\\";
-import * as _207 from \\"../../../../packages/transpiler/osmosis/superfluid/query\\";
-import * as _208 from \\"../../../../packages/transpiler/osmosis/superfluid/superfluid\\";
-import * as _209 from \\"../../../../packages/transpiler/osmosis/superfluid/tx\\";
-import * as _210 from \\"../../../../packages/transpiler/osmosis/txfees/v1beta1/feetoken\\";
-import * as _211 from \\"../../../../packages/transpiler/osmosis/txfees/v1beta1/genesis\\";
-import * as _212 from \\"../../../../packages/transpiler/osmosis/txfees/v1beta1/gov\\";
-import * as _213 from \\"../../../../packages/transpiler/osmosis/txfees/v1beta1/query\\";
+    "bundle": "telescope/osmosis/bundle.ts",
+    "code": "import * as _177 from \\"../../osmosis/claim/v1beta1/claim\\";
+import * as _178 from \\"../../osmosis/claim/v1beta1/genesis\\";
+import * as _179 from \\"../../osmosis/claim/v1beta1/params\\";
+import * as _180 from \\"../../osmosis/claim/v1beta1/query\\";
+import * as _181 from \\"../../osmosis/epochs/genesis\\";
+import * as _182 from \\"../../osmosis/epochs/query\\";
+import * as _183 from \\"../../osmosis/gamm/pool-models/balancer/balancerPool\\";
+import * as _184 from \\"../../osmosis/gamm/pool-models/balancer/tx\\";
+import * as _185 from \\"../../osmosis/gamm/v1beta1/genesis\\";
+import * as _186 from \\"../../osmosis/gamm/v1beta1/query\\";
+import * as _187 from \\"../../osmosis/gamm/v1beta1/tx\\";
+import * as _188 from \\"../../osmosis/incentives/gauge\\";
+import * as _189 from \\"../../osmosis/incentives/genesis\\";
+import * as _190 from \\"../../osmosis/incentives/params\\";
+import * as _191 from \\"../../osmosis/incentives/query\\";
+import * as _192 from \\"../../osmosis/incentives/tx\\";
+import * as _193 from \\"../../osmosis/lockup/genesis\\";
+import * as _194 from \\"../../osmosis/lockup/lock\\";
+import * as _195 from \\"../../osmosis/lockup/query\\";
+import * as _196 from \\"../../osmosis/lockup/tx\\";
+import * as _197 from \\"../../osmosis/mint/v1beta1/genesis\\";
+import * as _198 from \\"../../osmosis/mint/v1beta1/mint\\";
+import * as _199 from \\"../../osmosis/mint/v1beta1/query\\";
+import * as _200 from \\"../../osmosis/pool-incentives/v1beta1/genesis\\";
+import * as _201 from \\"../../osmosis/pool-incentives/v1beta1/gov\\";
+import * as _202 from \\"../../osmosis/pool-incentives/v1beta1/incentives\\";
+import * as _203 from \\"../../osmosis/pool-incentives/v1beta1/query\\";
+import * as _204 from \\"../../osmosis/store/v1beta1/tree\\";
+import * as _205 from \\"../../osmosis/superfluid/genesis\\";
+import * as _206 from \\"../../osmosis/superfluid/params\\";
+import * as _207 from \\"../../osmosis/superfluid/query\\";
+import * as _208 from \\"../../osmosis/superfluid/superfluid\\";
+import * as _209 from \\"../../osmosis/superfluid/tx\\";
+import * as _210 from \\"../../osmosis/txfees/v1beta1/feetoken\\";
+import * as _211 from \\"../../osmosis/txfees/v1beta1/genesis\\";
+import * as _212 from \\"../../osmosis/txfees/v1beta1/gov\\";
+import * as _213 from \\"../../osmosis/txfees/v1beta1/query\\";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._177,
@@ -693,16 +693,16 @@ export namespace osmosis {
   },
   "secret": Object {
     "base": "secret",
-    "bundle": "./chain1/telescope/secret/bundle.ts",
-    "code": "import * as _214 from \\"../../../../packages/transpiler/secret/compute/v1beta1/genesis\\";
-import * as _215 from \\"../../../../packages/transpiler/secret/compute/v1beta1/msg\\";
-import * as _216 from \\"../../../../packages/transpiler/secret/compute/v1beta1/query\\";
-import * as _217 from \\"../../../../packages/transpiler/secret/compute/v1beta1/types\\";
-import * as _218 from \\"../../../../packages/transpiler/secret/registration/v1beta1/genesis\\";
-import * as _219 from \\"../../../../packages/transpiler/secret/registration/v1beta1/msg\\";
-import * as _220 from \\"../../../../packages/transpiler/secret/registration/v1beta1/query\\";
-import * as _221 from \\"../../../../packages/transpiler/secret/registration/v1beta1/types\\";
-import * as _222 from \\"../../../../packages/transpiler/secret/registration/v1beta1/remote_attestation/types\\";
+    "bundle": "telescope/secret/bundle.ts",
+    "code": "import * as _214 from \\"../../secret/compute/v1beta1/genesis\\";
+import * as _215 from \\"../../secret/compute/v1beta1/msg\\";
+import * as _216 from \\"../../secret/compute/v1beta1/query\\";
+import * as _217 from \\"../../secret/compute/v1beta1/types\\";
+import * as _218 from \\"../../secret/registration/v1beta1/genesis\\";
+import * as _219 from \\"../../secret/registration/v1beta1/msg\\";
+import * as _220 from \\"../../secret/registration/v1beta1/query\\";
+import * as _221 from \\"../../secret/registration/v1beta1/types\\";
+import * as _222 from \\"../../secret/registration/v1beta1/remote_attestation/types\\";
 export namespace secret {
   export namespace compute {
     export const v1beta1 = { ..._214,
@@ -726,18 +726,18 @@ export namespace secret {
   },
   "tendermint": Object {
     "base": "tendermint",
-    "bundle": "./chain1/telescope/tendermint/bundle.ts",
-    "code": "import * as _223 from \\"../../../../packages/transpiler/tendermint/abci/types\\";
-import * as _224 from \\"../../../../packages/transpiler/tendermint/crypto/keys\\";
-import * as _225 from \\"../../../../packages/transpiler/tendermint/crypto/proof\\";
-import * as _226 from \\"../../../../packages/transpiler/tendermint/libs/bits/types\\";
-import * as _227 from \\"../../../../packages/transpiler/tendermint/p2p/types\\";
-import * as _228 from \\"../../../../packages/transpiler/tendermint/types/block\\";
-import * as _229 from \\"../../../../packages/transpiler/tendermint/types/evidence\\";
-import * as _230 from \\"../../../../packages/transpiler/tendermint/types/params\\";
-import * as _231 from \\"../../../../packages/transpiler/tendermint/types/types\\";
-import * as _232 from \\"../../../../packages/transpiler/tendermint/types/validator\\";
-import * as _233 from \\"../../../../packages/transpiler/tendermint/version/types\\";
+    "bundle": "telescope/tendermint/bundle.ts",
+    "code": "import * as _223 from \\"../../tendermint/abci/types\\";
+import * as _224 from \\"../../tendermint/crypto/keys\\";
+import * as _225 from \\"../../tendermint/crypto/proof\\";
+import * as _226 from \\"../../tendermint/libs/bits/types\\";
+import * as _227 from \\"../../tendermint/p2p/types\\";
+import * as _228 from \\"../../tendermint/types/block\\";
+import * as _229 from \\"../../tendermint/types/evidence\\";
+import * as _230 from \\"../../tendermint/types/params\\";
+import * as _231 from \\"../../tendermint/types/types\\";
+import * as _232 from \\"../../tendermint/types/validator\\";
+import * as _233 from \\"../../tendermint/version/types\\";
 export namespace tendermint {
   export const abci = { ..._223
   };
