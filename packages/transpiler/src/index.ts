@@ -92,7 +92,8 @@ export class TelescopeBuilder {
             // 5 write out one amino helper for all contexts w/mutations
 
             const aminoHelpers = serviceContexts.map(c => {
-                const filename = resolve(join(input.outPath, c.ref.filename)).replace(/\.proto$/, '.amino.ts'); ''
+                const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
+                const filename = resolve(join(input.outPath, localname));
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
@@ -108,7 +109,7 @@ export class TelescopeBuilder {
 
                 const serviceImports = getServiceDependencies(
                     ctx.mutations,
-                    filename
+                    localname
                 );
 
                 // build file
@@ -130,7 +131,8 @@ export class TelescopeBuilder {
 
             const registries = serviceContexts.map(c => {
 
-                const filename = resolve(join(input.outPath, c.ref.filename)).replace(/\.proto$/, '.registry.ts'); ''
+                const localname = c.ref.filename.replace(/\.proto$/, '.registry.ts')
+                const filename = resolve(join(input.outPath, localname));
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
@@ -147,10 +149,9 @@ export class TelescopeBuilder {
                 // SEE ABOVE - DONT RENAME THESE DIRECTLY
                 // ctx.ref.filename = filename;
 
-
                 const serviceImports = getServiceDependencies(
                     ctx.mutations,
-                    filename
+                    localname
                 );
 
                 const imports = buildAllImports(ctx, serviceImports);
@@ -160,9 +161,6 @@ export class TelescopeBuilder {
                 ])).code;
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
-                // console.log(filename);
-
-                console.log(c.ref.filename);
 
                 return filename;
 

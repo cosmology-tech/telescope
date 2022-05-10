@@ -81,7 +81,13 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
                 type: 'fromJSONEnum',
                 name,
                 import: lookup.import
-            })
+            });
+        } else {
+            this.imports.push({
+                type: 'fromJSONEnum',
+                name,
+                import: this.ref.filename
+            });
         }
         return name;
     }
@@ -95,7 +101,13 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
                 type: 'toJSONEnum',
                 name,
                 import: lookup.import
-            })
+            });
+        } else {
+            this.imports.push({
+                type: 'toJSONEnum',
+                name,
+                import: this.ref.filename
+            });
         }
         return name;
     }
