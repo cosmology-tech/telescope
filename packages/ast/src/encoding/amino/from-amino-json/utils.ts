@@ -20,6 +20,8 @@ export const fromAmino = {
     },
 
     long(args: FromAminoParseField) {
+        args.context.addUtil('Long');
+
         return t.objectProperty(t.identifier(args.field.name),
             t.callExpression(
                 t.memberExpression(
@@ -33,6 +35,8 @@ export const fromAmino = {
     },
 
     duration(args: FromAminoParseField) {
+        args.context.addUtil('Long');
+
         const value = t.objectExpression(
             [
                 t.objectProperty(t.identifier('seconds'), t.callExpression(
@@ -74,6 +78,8 @@ export const fromAmino = {
     },
 
     height(args: FromAminoParseField) {
+        args.context.addUtil('Long');
+
         return t.objectProperty(
             t.identifier(args.field.name),
             t.conditionalExpression(

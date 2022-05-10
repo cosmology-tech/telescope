@@ -31,6 +31,18 @@ const getProtoImports = (context: TelescopeParseContext): ImportObj[] => {
         });
 };
 
+const getAminoImports = (context: TelescopeParseContext): ImportObj[] => {
+    return context.amino.imports
+        .map(usage => {
+            const importPath = getRelativePath(context.ref.filename, usage.import);
+            return {
+                type: 'import',
+                name: usage.name,
+                path: importPath
+            }
+        });
+};
+
 const getParsedImports = (context: TelescopeParseContext, parsedImports: ImportHash): ImportObj[] => {
     const imports = [];
     Object.entries(parsedImports ?? {})
@@ -118,6 +130,7 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
 export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
 
     const protoImports: ImportObj[] = getProtoImports(context);
+    const aminoImports: ImportObj[] = getAminoImports(context);
     const parsedImports: ImportObj[] = getParsedImports(context, context.amino.ref.traversed.parsedImports);
     const additionalImports: ImportObj[] = importHashToArray(allImports);
     const utilities: ImportObj[] = convertUtilsToImports(context);
@@ -126,6 +139,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
         .concat(parsedImports)
         .concat(utilities)
         .concat(protoImports)
+        .concat(aminoImports)
         .concat(additionalImports);
 
 
@@ -135,7 +149,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
 }
 
 
-export const getAminoImports = (mutations: ServiceMutation[]) => {
+export const getAminoImportsFromMutations = (mutations: ServiceMutation[]) => {
     return mutations.map(mutation => {
         return {
             import: mutation.messageImport,
@@ -145,7 +159,7 @@ export const getAminoImports = (mutations: ServiceMutation[]) => {
 };
 
 export const getAminoRelativeDeps = (mutations: ServiceMutation[], filename: string) => {
-    return getAminoImports(mutations)
+    return getAminoImportsFromMutations(mutations)
         .map(imp => {
             const f = filename;
             const f2 = imp.import;

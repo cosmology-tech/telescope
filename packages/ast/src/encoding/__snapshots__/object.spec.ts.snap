@@ -1270,6 +1270,133 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 };"
 `;
 
+exports[`google/api/expr/v1alpha1/value Entry 1`] = `
+"export const Entry = {
+  encode(message: Entry, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== undefined) {
+      Value.encode(message.key, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.value !== undefined) {
+      Value.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = Value.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.value = Value.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Entry {
+    return {
+      key: isSet(object.key) ? Value.fromJSON(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
+    };
+  },
+
+  toJSON(message: Entry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Entry>, I>>(object: I): Entry {
+    const message = createBaseEntry();
+    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
+    return message;
+  }
+
+};"
+`;
+
+exports[`google/api/expr/v1alpha1/value Entry 2`] = `Array []`;
+
+exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
+"export const MapValue = {
+  encode(message: MapValue, writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.entries) {
+      MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MapValue {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMapValue();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.entries.push(MapValue_Entry.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: MapValue): unknown {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MapValue>, I>>(object: I): MapValue {
+    const message = createBaseMapValue();
+    message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
+exports[`google/api/expr/v1alpha1/value MapValue 2`] = `Array []`;
+
 exports[`google/api/expr/v1beta1/source 1`] = `
 "export const SourceInfo = {
   encode(message: SourceInfo, writer = _m0.Writer.create()): _m0.Writer {

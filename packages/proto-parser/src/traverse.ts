@@ -48,6 +48,17 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
             return m;
         }
 
+        // local scope first
+        found = lookup(store, ref, field.type);
+        if (found) {
+            m[key] = {
+                scope: found.scope,
+                parsedType: instanceType(found),
+                ...serialize(),
+            };
+            return m;
+        }
+
         found = importLookup(store, ref, field.type);
         if (found) {
             imports[found.import] = imports[found.import] || [];
@@ -75,16 +86,6 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
                 ...serialize(),
                 importedName: found.importedName,
                 import: found.import,
-            };
-            return m;
-        }
-
-        found = lookup(store, ref, field.type);
-        if (found) {
-            m[key] = {
-                scope: found.scope,
-                parsedType: instanceType(found),
-                ...serialize(),
             };
             return m;
         }

@@ -20,7 +20,6 @@ const createObjectWithMethods = (name: string, proto: any) => {
     return create(new ProtoParseContext(), name, proto);
 }
 
-
 describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const res = traverse(store, ref);
@@ -71,6 +70,30 @@ describe('google/api/expr/v1alpha1/syntax', () => {
         ))
     })
 });
+
+describe('google/api/expr/v1alpha1/value', () => {
+    const ref = store.findProto('google/api/expr/v1alpha1/value.proto');
+    const res = traverse(store, ref);
+    it('MapValue', () => {
+        const context = new ProtoParseContext();
+        expectCode(create(
+            context,
+            'MapValue',
+            getNestedProto(res).MapValue
+        ))
+        expect(context.imports).toMatchSnapshot();
+    })
+    it('Entry', () => {
+        const context = new ProtoParseContext();
+        expectCode(create(
+            context,
+            'Entry',
+            getNestedProto(res).MapValue.nested.Entry
+        ))
+        expect(context.imports).toMatchSnapshot();
+    })
+});
+
 
 describe('cosmos/tx/signing/v1beta1/signing', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
