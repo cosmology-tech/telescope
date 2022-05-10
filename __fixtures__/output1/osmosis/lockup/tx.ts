@@ -2,8 +2,8 @@ import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long, toDuration, fromDuration, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import * as _m0 from "protobuf/minimal";
-import { toDuration, fromDuration, isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgLockTokens {
   owner: string;
   duration: string;

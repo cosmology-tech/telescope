@@ -2,8 +2,9 @@ import { Counterparty, Version } from "./connection";
 import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import * as _m0 from "protobuf/minimal";
+import { MerklePrefix } from "../../commitment/v1/commitment";
 export interface MsgConnectionOpenInit {
   clientId: string;
   counterparty: Counterparty;

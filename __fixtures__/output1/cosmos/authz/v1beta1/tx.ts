@@ -1,8 +1,9 @@
 import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 export interface MsgGrant {
   granter: string;
   grantee: string;

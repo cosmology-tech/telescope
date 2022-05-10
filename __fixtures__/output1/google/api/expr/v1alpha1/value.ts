@@ -1,4 +1,4 @@
-import { NullValue, ListValue, Value, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobuf/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";

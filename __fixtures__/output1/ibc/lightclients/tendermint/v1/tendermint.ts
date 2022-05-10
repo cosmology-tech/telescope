@@ -3,7 +3,7 @@ import { Height } from "../../../core/client/v1/client";
 import { ProofSpec } from "../../../../confio/proofs";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { MerkleRoot } from "../../../core/commitment/v1/commitment";
-import { Header, SignedHeader } from "../../../../tendermint/types/types";
+import { SignedHeader } from "../../../../tendermint/types/types";
 import { ValidatorSet } from "../../../../tendermint/types/validator";
 import * as _m0 from "protobuf/minimal";
 import { toDuration, fromDuration, isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";

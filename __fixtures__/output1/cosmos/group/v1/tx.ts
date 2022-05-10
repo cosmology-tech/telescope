@@ -1,8 +1,9 @@
 import { Member, VoteOption, voteOptionFromJSON, voteOptionToJSON } from "./types";
 import { Any } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 export interface MsgCreateGroup {
   admin: string;
   members: Member[];

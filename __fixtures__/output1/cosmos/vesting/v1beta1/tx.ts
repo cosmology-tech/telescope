@@ -1,8 +1,8 @@
 import { Coin } from "../../base/v1beta1/coin";
 import { Period } from "./vesting";
 import { AminoMsg } from "@cosmjs/amino";
-import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import * as _m0 from "protobuf/minimal";
 export interface MsgCreateVestingAccount {
   fromAddress: string;
   toAddress: string;

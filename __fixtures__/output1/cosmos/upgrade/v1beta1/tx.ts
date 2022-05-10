@@ -1,7 +1,9 @@
 import { Plan } from "./upgrade";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any } from "../../../google/protobuf/any";
 export interface MsgSoftwareUpgrade {
   authority: string;
   plan: Plan;

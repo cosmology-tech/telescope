@@ -2,8 +2,8 @@ import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../base/v1beta1/coin";
 import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "./gov";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 import * as _m0 from "protobuf/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgSubmitProposal {
   messages: Any[];
   initialDeposit: Coin[];

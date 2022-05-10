@@ -1,7 +1,7 @@
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import * as _m0 from "protobuf/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import * as _m0 from "protobuf/minimal";
 export interface MsgSuperfluidDelegate {
   sender: string;
   lockId: Long;

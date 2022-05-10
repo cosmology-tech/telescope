@@ -2,8 +2,9 @@ import { QueryCondition } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 import * as _m0 from "protobuf/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Duration } from "../../google/protobuf/duration";
 export interface MsgCreateGauge {
   isPerpetual: boolean;
   owner: string;
