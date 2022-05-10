@@ -120,10 +120,10 @@ export class TelescopeParseContext implements TelescopeParseContext {
     }
 
     buildRegistry() {
-        this.body.push(createTypeRegistry(getMutations(this.mutations)));
+        this.body.push(createTypeRegistry(this.amino, getMutations(this.mutations)));
     }
     buildRegistryLoader() {
-        this.body.push(createRegistryLoader());
+        this.body.push(createRegistryLoader(this.amino));
     }
     buildAminoInterfaces() {
         const protos = getAminoProtos(this.mutations, this.store);

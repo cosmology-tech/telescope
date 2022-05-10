@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { AminoParseContext } from '../encoding';
 import { identifier } from '../utils';
 
 export interface ServiceMethod {
@@ -14,35 +15,42 @@ export const createTypeRegistryObject = (mutation: ServiceMethod) => {
   );
 };
 
-export const createTypeRegistry = (mutations: ServiceMethod[]) => t.exportNamedDeclaration(
-  t.variableDeclaration('const', [
-    t.variableDeclarator(identifier(
-      'registry',
-      t.tsTypeAnnotation(
-        t.tsTypeReference(t.identifier('ReadonlyArray'), t.tsTypeParameterInstantiation(
-          [
-            t.tsTupleType([
-              t.tsStringKeyword(),
-              t.tsTypeReference(
-                t.identifier('GeneratedType')
-              )]
-            )
-          ]
-        ))
-      )
-    ), t.arrayExpression(
-      [
-        ...mutations.map(mutation => t.arrayExpression(
-          [
-            t.stringLiteral(mutation.typeUrl),
-            t.identifier(mutation.TypeName)
-          ]
-        ))
-      ]
-    ))
-  ]));
+export const createTypeRegistry = (context: AminoParseContext, mutations: ServiceMethod[]) => {
+  context.addUtil('GeneratedType');
 
-export const createRegistryLoader = () => {
+  return t.exportNamedDeclaration(
+    t.variableDeclaration('const', [
+      t.variableDeclarator(identifier(
+        'registry',
+        t.tsTypeAnnotation(
+          t.tsTypeReference(t.identifier('ReadonlyArray'), t.tsTypeParameterInstantiation(
+            [
+              t.tsTupleType([
+                t.tsStringKeyword(),
+                t.tsTypeReference(
+                  t.identifier('GeneratedType')
+                )]
+              )
+            ]
+          ))
+        )
+      ), t.arrayExpression(
+        [
+          ...mutations.map(mutation => t.arrayExpression(
+            [
+              t.stringLiteral(mutation.typeUrl),
+              t.identifier(mutation.TypeName)
+            ]
+          ))
+        ]
+      ))
+    ]));
+
+};
+
+export const createRegistryLoader = (context: AminoParseContext) => {
+  context.addUtil('Registry');
+
   return t.exportNamedDeclaration(t.variableDeclaration(
     'const',
     [

@@ -21,6 +21,11 @@ export const mutations: ServiceMethod[] = [
   }
 ];
 
+
+const context = {
+  addUtil: () => { }
+}
+
 const expectCode = (ast) => {
   expect(
     generate(ast).code
@@ -33,9 +38,9 @@ const printCode = (ast) => {
 }
 
 it('createTypeRegistry', async () => {
-  expectCode(createTypeRegistry(mutations));
+  expectCode(createTypeRegistry(context, mutations));
 });
 
 it('createRegistryLoader', async () => {
-  expectCode(createRegistryLoader());
+  expectCode(createRegistryLoader(context));
 });

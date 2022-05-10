@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import generate from '@babel/generator';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getServiceDependencies } from './imports';
-import { TelescopeParseContext } from './build';
+import { getMutations, TelescopeParseContext } from './build';
 import { parse } from './parse';
 import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
@@ -146,7 +146,14 @@ export class TelescopeBuilder {
 
                 // SEE ABOVE - DONT RENAME THESE DIRECTLY
                 // ctx.ref.filename = filename;
-                const imports = buildAllImports(ctx);
+
+
+                const serviceImports = getServiceDependencies(
+                    ctx.mutations,
+                    filename
+                );
+
+                const imports = buildAllImports(ctx, serviceImports);
                 const content = generate(t.program([
                     ...imports,
                     ...ctx.body
