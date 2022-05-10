@@ -212,7 +212,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     const message = createBaseAuxSignerData();
     message.address = object.address ?? \\"\\";
     message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
+    message.mode = object.mode ?? undefined;
     message.sig = object.sig ?? new Uint8Array();
     return message;
   }
@@ -901,15 +901,15 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
   fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
     const message = createBaseType();
     message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
-    message.null = object.null ?? 0;
-    message.primitive = object.primitive ?? 0;
-    message.wrapper = object.wrapper ?? 0;
-    message.wellKnown = object.wellKnown ?? 0;
+    message.null = object.null ?? undefined;
+    message.primitive = object.primitive ?? undefined;
+    message.wrapper = object.wrapper ?? undefined;
+    message.wellKnown = object.wellKnown ?? undefined;
     message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : undefined;
     message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : undefined;
     message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : undefined;
-    message.messageType = object.messageType ?? \\"\\";
-    message.typeParam = object.typeParam ?? \\"\\";
+    message.messageType = object.messageType ?? undefined;
+    message.typeParam = object.typeParam ?? undefined;
     message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
@@ -1255,13 +1255,13 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 
   fromPartial<I extends Exact<DeepPartial<Constant>, I>>(object: I): Constant {
     const message = createBaseConstant();
-    message.nullValue = object.nullValue ?? 0;
-    message.boolValue = object.boolValue ?? false;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : Long.ZERO;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : Long.UZERO;
-    message.doubleValue = object.doubleValue ?? 0;
-    message.stringValue = object.stringValue ?? \\"\\";
-    message.bytesValue = object.bytesValue ?? new Uint8Array();
+    message.nullValue = object.nullValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    message.bytesValue = object.bytesValue ?? undefined;
     message.durationValue = object.durationValue ?? undefined;
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
@@ -1657,7 +1657,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     const message = createBaseLogEntry();
     message.name = object.name ?? \\"\\";
     message.timestamp = object.timestamp ?? undefined;
-    message.severity = object.severity ?? 0;
+    message.severity = object.severity ?? undefined;
     message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.trace = object.trace ?? \\"\\";
     message.insertId = object.insertId ?? \\"\\";
@@ -1671,7 +1671,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       return acc;
     }, {});
     message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
-    message.textPayload = object.textPayload ?? \\"\\";
+    message.textPayload = object.textPayload ?? undefined;
     message.structPayload = object.structPayload !== undefined && object.structPayload !== null ? Struct.fromPartial(object.structPayload) : undefined;
     message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
@@ -1769,7 +1769,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? \\"\\";
     message.connectionId = object.connectionId ?? \\"\\";
-    message.ordering = object.ordering ?? 0;
+    message.ordering = object.ordering ?? undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.proposedVersion = object.proposedVersion ?? \\"\\";
     return message;

@@ -1,51 +1,90 @@
 import * as t from '@babel/types';
 import { FromPartialMethod } from './index';
 import { identifier, callExpression } from '../../../utils';
-import { getFieldsTypeName } from '..';
+import { getDefaultTSTypeFromProtoType, getFieldsTypeName } from '..';
+
+// message.sender = expr
+const setField = (prop: string, expr: t.Expression): t.Statement => {
+    return t.expressionStatement(
+        t.assignmentExpression(
+            '=',
+            t.memberExpression(
+                t.identifier('message'),
+                t.identifier(prop)
+            ),
+            expr
+        )
+    );
+};
+
+// message.sender = object.sender ?? value;
+const setNullishCoalescing = (prop: string, value: t.Expression): t.Statement => {
+    return setField(prop, t.logicalExpression(
+        '??',
+        t.memberExpression(
+            t.identifier('object'),
+            t.identifier(prop)
+        ),
+        value
+    ));
+};
+
+const setNotUndefinedAndNotNull = (
+    prop: string,
+    value: t.Expression,
+    defaultValue: t.Expression,
+): t.Statement => {
+    return t.expressionStatement(
+        t.assignmentExpression(
+            '=',
+            t.memberExpression(
+                t.identifier('message'),
+                t.identifier(prop)
+            ),
+            t.conditionalExpression(
+                t.logicalExpression(
+                    '&&',
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        ),
+                        t.identifier('undefined')
+                    ),
+                    t.binaryExpression(
+                        '!==',
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(prop)
+                        ),
+                        t.nullLiteral()
+                    )
+                ),
+                value,
+                defaultValue
+            )
+        )
+    );
+};
 
 export const fromPartial = {
 
     // message.sender = object.sender ?? "";
     string(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.stringLiteral('')
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
     },
 
     // message.disableMacros = object.disableMacros ?? false;
     bool(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.booleanLiteral(false)
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
     },
 
@@ -53,22 +92,9 @@ export const fromPartial = {
 
     number(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.numericLiteral(0)
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
     },
 
@@ -87,156 +113,70 @@ export const fromPartial = {
 
 
     // message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
-    long(args: FromPartialMethod, defaultMethod: 'ZERO' | 'UZERO') {
+    long(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
+        return setNotUndefinedAndNotNull(
+            prop,
+            t.callExpression(
                 t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
+                    t.identifier('Long'),
+                    t.identifier('fromValue')
                 ),
-                t.conditionalExpression(
-                    t.logicalExpression(
-                        '&&',
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.identifier('undefined')
-                        ),
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.nullLiteral()
-                        )
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('Long'),
-                            t.identifier('fromValue')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    ),
+                [
                     t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier(defaultMethod)
+                        t.identifier('object'),
+                        t.identifier(prop)
                     )
-                )
-            )
+                ]
+            ),
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
     },
 
     int64(args: FromPartialMethod) {
-        return fromPartial.long(args, 'ZERO');
+        return fromPartial.long(args);
     },
     uint64(args: FromPartialMethod) {
-        return fromPartial.long(args, 'UZERO');
+        return fromPartial.long(args);
     },
 
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
     type(args: FromPartialMethod) {
         const prop = args.field.name;
         const name = getFieldsTypeName(args.field);
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
+        return setNotUndefinedAndNotNull(
+            prop,
+            t.callExpression(
                 t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
+                    t.identifier(name),
+                    t.identifier('fromPartial')
                 ),
-                t.conditionalExpression(
-                    t.logicalExpression(
-                        '&&',
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.identifier('undefined')
-                        ),
-                        t.binaryExpression(
-                            '!==',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            ),
-                            t.nullLiteral()
-                        )
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier(name),
-                            t.identifier('fromPartial')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    ),
-                    t.identifier('undefined')
-                )
-            )
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(prop)
+                    )
+                ]
+            ),
+            t.identifier('undefined')
         );
     },
 
     // message.mode = object.mode ?? 0;
     enum(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.numericLiteral(0)
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
     },
 
     // message.queryData = object.queryData ?? new Uint8Array()
     bytes(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.newExpression(
-                        t.identifier('Uint8Array'),
-                        []
-                    )
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
     },
 
@@ -244,22 +184,9 @@ export const fromPartial = {
 
     duration(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('undefined')
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            t.identifier('undefined')
         );
     },
 
@@ -267,22 +194,9 @@ export const fromPartial = {
 
     timestamp(args: FromPartialMethod) {
         const prop = args.field.name;
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.logicalExpression(
-                    '??',
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    ),
-                    t.identifier('undefined')
-                )
-            )
+        return setNullishCoalescing(
+            prop,
+            t.identifier('undefined')
         );
     },
 
