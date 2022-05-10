@@ -192,13 +192,13 @@ export const MetricDescriptor = {
     message.name = object.name ?? "";
     message.type = object.type ?? "";
     message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];
-    message.metricKind = object.metricKind ?? 0;
-    message.valueType = object.valueType ?? 0;
+    message.metricKind = object.metricKind ?? undefined;
+    message.valueType = object.valueType ?? undefined;
     message.unit = object.unit ?? "";
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata) : undefined;
-    message.launchStage = object.launchStage ?? 0;
+    message.launchStage = object.launchStage ?? undefined;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
   }
@@ -277,7 +277,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
 
   fromPartial<I extends Exact<DeepPartial<MetricDescriptor_MetricDescriptorMetadata>, I>>(object: I): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
-    message.launchStage = object.launchStage ?? 0;
+    message.launchStage = object.launchStage ?? undefined;
     message.samplePeriod = object.samplePeriod ?? undefined;
     message.ingestDelay = object.ingestDelay ?? undefined;
     return message;

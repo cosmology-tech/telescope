@@ -100,7 +100,7 @@ export const SuperfluidAsset = {
   fromPartial<I extends Exact<DeepPartial<SuperfluidAsset>, I>>(object: I): SuperfluidAsset {
     const message = createBaseSuperfluidAsset();
     message.denom = object.denom ?? "";
-    message.assetType = object.assetType ?? 0;
+    message.assetType = object.assetType ?? undefined;
     return message;
   }
 

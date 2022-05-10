@@ -112,7 +112,7 @@ export const ConnectionEnd = {
     const message = createBaseConnectionEnd();
     message.clientId = object.clientId ?? "";
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
@@ -243,7 +243,7 @@ export const IdentifiedConnection = {
     message.id = object.id ?? "";
     message.clientId = object.clientId ?? "";
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;

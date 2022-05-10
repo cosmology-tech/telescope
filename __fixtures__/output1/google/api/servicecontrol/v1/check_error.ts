@@ -92,7 +92,7 @@ export const CheckError = {
 
   fromPartial<I extends Exact<DeepPartial<CheckError>, I>>(object: I): CheckError {
     const message = createBaseCheckError();
-    message.code = object.code ?? 0;
+    message.code = object.code ?? undefined;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;

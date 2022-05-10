@@ -152,7 +152,7 @@ export const Api = {
     message.version = object.version ?? "";
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
-    message.syntax = object.syntax ?? 0;
+    message.syntax = object.syntax ?? undefined;
     return message;
   }
 
@@ -296,7 +296,7 @@ export const Method = {
     message.responseTypeUrl = object.responseTypeUrl ?? "";
     message.responseStreaming = object.responseStreaming ?? false;
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.syntax = object.syntax ?? 0;
+    message.syntax = object.syntax ?? undefined;
     return message;
   }
 

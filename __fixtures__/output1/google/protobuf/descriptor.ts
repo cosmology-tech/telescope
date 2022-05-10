@@ -933,8 +933,8 @@ export const FieldDescriptorProto = {
     const message = createBaseFieldDescriptorProto();
     message.name = object.name ?? "";
     message.number = object.number ?? 0;
-    message.label = object.label ?? 0;
-    message.type = object.type ?? 0;
+    message.label = object.label ?? undefined;
+    message.type = object.type ?? undefined;
     message.typeName = object.typeName ?? "";
     message.extendee = object.extendee ?? "";
     message.defaultValue = object.defaultValue ?? "";
@@ -2029,7 +2029,7 @@ export const FileOptions = {
     message.javaMultipleFiles = object.javaMultipleFiles ?? false;
     message.javaGenerateEqualsAndHash = object.javaGenerateEqualsAndHash ?? false;
     message.javaStringCheckUtf8 = object.javaStringCheckUtf8 ?? false;
-    message.optimizeFor = object.optimizeFor ?? 0;
+    message.optimizeFor = object.optimizeFor ?? undefined;
     message.goPackage = object.goPackage ?? "";
     message.ccGenericServices = object.ccGenericServices ?? false;
     message.javaGenericServices = object.javaGenericServices ?? false;
@@ -2344,9 +2344,9 @@ export const FieldOptions = {
 
   fromPartial<I extends Exact<DeepPartial<FieldOptions>, I>>(object: I): FieldOptions {
     const message = createBaseFieldOptions();
-    message.ctype = object.ctype ?? 0;
+    message.ctype = object.ctype ?? undefined;
     message.packed = object.packed ?? false;
-    message.jstype = object.jstype ?? 0;
+    message.jstype = object.jstype ?? undefined;
     message.lazy = object.lazy ?? false;
     message.deprecated = object.deprecated ?? false;
     message.weak = object.weak ?? false;
@@ -2839,7 +2839,7 @@ export const MethodOptions = {
   fromPartial<I extends Exact<DeepPartial<MethodOptions>, I>>(object: I): MethodOptions {
     const message = createBaseMethodOptions();
     message.deprecated = object.deprecated ?? false;
-    message.idempotencyLevel = object.idempotencyLevel ?? 0;
+    message.idempotencyLevel = object.idempotencyLevel ?? undefined;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   }

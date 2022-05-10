@@ -277,10 +277,10 @@ export const Value = {
 
   fromPartial<I extends Exact<DeepPartial<Value>, I>>(object: I): Value {
     const message = createBaseValue();
-    message.nullValue = object.nullValue ?? 0;
-    message.numberValue = object.numberValue ?? 0;
-    message.stringValue = object.stringValue ?? "";
-    message.boolValue = object.boolValue ?? false;
+    message.nullValue = object.nullValue ?? undefined;
+    message.numberValue = object.numberValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
     message.structValue = object.structValue !== undefined && object.structValue !== null ? Struct.fromPartial(object.structValue) : undefined;
     message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
     return message;

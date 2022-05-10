@@ -60,15 +60,15 @@ export const PublicKey = {
 
   toJSON(message: PublicKey): unknown {
     const obj: any = {};
-    message.ed25519 !== undefined && (obj.ed25519 = base64FromBytes(message.ed25519 !== undefined ? message.ed25519 : undefined));
-    message.secp256k1 !== undefined && (obj.secp256k1 = base64FromBytes(message.secp256k1 !== undefined ? message.secp256k1 : undefined));
+    message.ed25519 !== undefined && (obj.ed25519 = message.ed25519 !== undefined ? base64FromBytes(message.ed25519) : undefined);
+    message.secp256k1 !== undefined && (obj.secp256k1 = message.secp256k1 !== undefined ? base64FromBytes(message.secp256k1) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<PublicKey>, I>>(object: I): PublicKey {
     const message = createBasePublicKey();
-    message.ed25519 = object.ed25519 ?? new Uint8Array();
-    message.secp256k1 = object.secp256k1 ?? new Uint8Array();
+    message.ed25519 = object.ed25519 ?? undefined;
+    message.secp256k1 = object.secp256k1 ?? undefined;
     return message;
   }
 

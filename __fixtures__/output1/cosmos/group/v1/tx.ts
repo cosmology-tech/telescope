@@ -1460,7 +1460,7 @@ export const MsgSubmitProposal = {
     message.proposers = object.proposers?.map(e => e) || [];
     message.metadata = object.metadata ?? "";
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
-    message.exec = object.exec ?? 0;
+    message.exec = object.exec ?? undefined;
     return message;
   }
 
@@ -1747,9 +1747,9 @@ export const MsgVote = {
     const message = createBaseMsgVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? 0;
+    message.option = object.option ?? undefined;
     message.metadata = object.metadata ?? "";
-    message.exec = object.exec ?? 0;
+    message.exec = object.exec ?? undefined;
     return message;
   }
 

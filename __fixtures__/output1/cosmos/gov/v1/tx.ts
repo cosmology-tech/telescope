@@ -384,7 +384,7 @@ export const MsgVote = {
     const message = createBaseMsgVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? 0;
+    message.option = object.option ?? undefined;
     message.metadata = object.metadata ?? "";
     return message;
   }

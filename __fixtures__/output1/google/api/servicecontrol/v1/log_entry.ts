@@ -287,7 +287,7 @@ export const LogEntry = {
     const message = createBaseLogEntry();
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
-    message.severity = object.severity ?? 0;
+    message.severity = object.severity ?? undefined;
     message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.trace = object.trace ?? "";
     message.insertId = object.insertId ?? "";
@@ -301,7 +301,7 @@ export const LogEntry = {
       return acc;
     }, {});
     message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
-    message.textPayload = object.textPayload ?? "";
+    message.textPayload = object.textPayload ?? undefined;
     message.structPayload = object.structPayload !== undefined && object.structPayload !== null ? Struct.fromPartial(object.structPayload) : undefined;
     message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;

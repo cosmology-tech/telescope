@@ -562,7 +562,7 @@ export const GetServiceConfigRequest = {
     const message = createBaseGetServiceConfigRequest();
     message.serviceName = object.serviceName ?? "";
     message.configId = object.configId ?? "";
-    message.view = object.view ?? 0;
+    message.view = object.view ?? undefined;
     return message;
   }
 

@@ -160,7 +160,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     const message = createBaseModuleSchemaDescriptor_FileEntry();
     message.id = object.id ?? 0;
     message.protoFileName = object.protoFileName ?? "";
-    message.storageType = object.storageType ?? 0;
+    message.storageType = object.storageType ?? undefined;
     return message;
   }
 

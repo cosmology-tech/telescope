@@ -365,7 +365,7 @@ export const SignatureDescriptor_Data_Single = {
 
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptor_Data_Single>, I>>(object: I): SignatureDescriptor_Data_Single {
     const message = createBaseSignatureDescriptor_Data_Single();
-    message.mode = object.mode ?? 0;
+    message.mode = object.mode ?? undefined;
     message.signature = object.signature ?? new Uint8Array();
     return message;
   }

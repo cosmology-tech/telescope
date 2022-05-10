@@ -202,7 +202,7 @@ export const DisableServiceRequest = {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     message.disableDependentServices = object.disableDependentServices ?? false;
-    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? 0;
+    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? undefined;
     return message;
   }
 

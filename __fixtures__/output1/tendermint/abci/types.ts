@@ -942,7 +942,7 @@ export const RequestCheckTx = {
   fromPartial<I extends Exact<DeepPartial<RequestCheckTx>, I>>(object: I): RequestCheckTx {
     const message = createBaseRequestCheckTx();
     message.tx = object.tx ?? new Uint8Array();
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     return message;
   }
 
@@ -2945,7 +2945,7 @@ export const ResponseOfferSnapshot = {
 
   fromPartial<I extends Exact<DeepPartial<ResponseOfferSnapshot>, I>>(object: I): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
-    message.result = object.result ?? 0;
+    message.result = object.result ?? undefined;
     return message;
   }
 
@@ -3180,7 +3180,7 @@ export const ResponseApplySnapshotChunk = {
 
   fromPartial<I extends Exact<DeepPartial<ResponseApplySnapshotChunk>, I>>(object: I): ResponseApplySnapshotChunk {
     const message = createBaseResponseApplySnapshotChunk();
-    message.result = object.result ?? 0;
+    message.result = object.result ?? undefined;
     message.refetchChunks = object.refetchChunks?.map(e => e) || [];
     message.rejectSenders = object.rejectSenders?.map(e => e) || [];
     return message;
@@ -4130,7 +4130,7 @@ export const Evidence = {
 
   fromPartial<I extends Exact<DeepPartial<Evidence>, I>>(object: I): Evidence {
     const message = createBaseEvidence();
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.time = object.time ?? undefined;

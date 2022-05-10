@@ -241,10 +241,10 @@ export const MetricValue = {
     }, {});
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
-    message.boolValue = object.boolValue ?? false;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : Long.ZERO;
-    message.doubleValue = object.doubleValue ?? 0;
-    message.stringValue = object.stringValue ?? "";
+    message.boolValue = object.boolValue ?? undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
     message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
     return message;
   }

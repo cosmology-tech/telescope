@@ -249,7 +249,7 @@ export const OperationMetadata_Step = {
   fromPartial<I extends Exact<DeepPartial<OperationMetadata_Step>, I>>(object: I): OperationMetadata_Step {
     const message = createBaseOperationMetadata_Step();
     message.description = object.description ?? "";
-    message.status = object.status ?? 0;
+    message.status = object.status ?? undefined;
     return message;
   }
 
@@ -405,7 +405,7 @@ export const Diagnostic = {
   fromPartial<I extends Exact<DeepPartial<Diagnostic>, I>>(object: I): Diagnostic {
     const message = createBaseDiagnostic();
     message.location = object.location ?? "";
-    message.kind = object.kind ?? 0;
+    message.kind = object.kind ?? undefined;
     message.message = object.message ?? "";
     return message;
   }
@@ -605,7 +605,7 @@ export const ConfigFile = {
     const message = createBaseConfigFile();
     message.filePath = object.filePath ?? "";
     message.fileContents = object.fileContents ?? new Uint8Array();
-    message.fileType = object.fileType ?? 0;
+    message.fileType = object.fileType ?? undefined;
     return message;
   }
 
@@ -944,7 +944,7 @@ export const Rollout = {
     message.rolloutId = object.rolloutId ?? "";
     message.createTime = object.createTime ?? undefined;
     message.createdBy = object.createdBy ?? "";
-    message.status = object.status ?? 0;
+    message.status = object.status ?? undefined;
     message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : undefined;
     message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
     message.serviceName = object.serviceName ?? "";

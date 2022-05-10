@@ -268,8 +268,8 @@ export const JwtLocation = {
 
   fromPartial<I extends Exact<DeepPartial<JwtLocation>, I>>(object: I): JwtLocation {
     const message = createBaseJwtLocation();
-    message.header = object.header ?? "";
-    message.query = object.query ?? "";
+    message.header = object.header ?? undefined;
+    message.query = object.query ?? undefined;
     message.valuePrefix = object.valuePrefix ?? "";
     return message;
   }

@@ -235,7 +235,7 @@ export const QueryCondition = {
 
   fromPartial<I extends Exact<DeepPartial<QueryCondition>, I>>(object: I): QueryCondition {
     const message = createBaseQueryCondition();
-    message.lockQueryType = object.lockQueryType ?? 0;
+    message.lockQueryType = object.lockQueryType ?? undefined;
     message.denom = object.denom ?? "";
     message.duration = object.duration ?? undefined;
     message.timestamp = object.timestamp ?? undefined;

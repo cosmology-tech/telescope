@@ -489,7 +489,7 @@ export const EventExec = {
   fromPartial<I extends Exact<DeepPartial<EventExec>, I>>(object: I): EventExec {
     const message = createBaseEventExec();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
-    message.result = object.result ?? 0;
+    message.result = object.result ?? undefined;
     return message;
   }
 

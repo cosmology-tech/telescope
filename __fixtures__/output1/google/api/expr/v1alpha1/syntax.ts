@@ -702,7 +702,7 @@ export const Expr_CreateStruct_Entry = {
   fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct_Entry>, I>>(object: I): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
-    message.fieldKey = object.fieldKey ?? "";
+    message.fieldKey = object.fieldKey ?? undefined;
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
@@ -984,7 +984,7 @@ export const Constant = {
     message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : undefined));
+    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
     message.durationValue !== undefined && (obj.durationValue = message.durationValue);
     message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;
@@ -992,13 +992,13 @@ export const Constant = {
 
   fromPartial<I extends Exact<DeepPartial<Constant>, I>>(object: I): Constant {
     const message = createBaseConstant();
-    message.nullValue = object.nullValue ?? 0;
-    message.boolValue = object.boolValue ?? false;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : Long.ZERO;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : Long.UZERO;
-    message.doubleValue = object.doubleValue ?? 0;
-    message.stringValue = object.stringValue ?? "";
-    message.bytesValue = object.bytesValue ?? new Uint8Array();
+    message.nullValue = object.nullValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    message.bytesValue = object.bytesValue ?? undefined;
     message.durationValue = object.durationValue ?? undefined;
     message.timestampValue = object.timestampValue ?? undefined;
     return message;

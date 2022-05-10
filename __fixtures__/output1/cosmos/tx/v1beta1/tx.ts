@@ -845,7 +845,7 @@ export const ModeInfo_Single = {
 
   fromPartial<I extends Exact<DeepPartial<ModeInfo_Single>, I>>(object: I): ModeInfo_Single {
     const message = createBaseModeInfo_Single();
-    message.mode = object.mode ?? 0;
+    message.mode = object.mode ?? undefined;
     return message;
   }
 
@@ -1206,7 +1206,7 @@ export const AuxSignerData = {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";
     message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? 0;
+    message.mode = object.mode ?? undefined;
     message.sig = object.sig ?? new Uint8Array();
     return message;
   }

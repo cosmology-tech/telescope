@@ -316,7 +316,7 @@ export const QuotaOperation = {
       return acc;
     }, {});
     message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
-    message.quotaMode = object.quotaMode ?? 0;
+    message.quotaMode = object.quotaMode ?? undefined;
     return message;
   }
 
@@ -614,7 +614,7 @@ export const QuotaError = {
 
   fromPartial<I extends Exact<DeepPartial<QuotaError>, I>>(object: I): QuotaError {
     const message = createBaseQuotaError();
-    message.code = object.code ?? 0;
+    message.code = object.code ?? undefined;
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;

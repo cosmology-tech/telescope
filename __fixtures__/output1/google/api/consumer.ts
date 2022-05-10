@@ -146,7 +146,7 @@ export const Property = {
   fromPartial<I extends Exact<DeepPartial<Property>, I>>(object: I): Property {
     const message = createBaseProperty();
     message.name = object.name ?? "";
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     message.description = object.description ?? "";
     return message;
   }

@@ -1272,7 +1272,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
 
   fromPartial<I extends Exact<DeepPartial<TailLogEntriesResponse_SuppressionInfo>, I>>(object: I): TailLogEntriesResponse_SuppressionInfo {
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
-    message.reason = object.reason ?? 0;
+    message.reason = object.reason ?? undefined;
     message.suppressedCount = object.suppressedCount ?? 0;
     return message;
   }

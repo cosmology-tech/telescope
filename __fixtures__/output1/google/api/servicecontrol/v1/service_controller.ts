@@ -365,7 +365,7 @@ export const CheckResponse_ConsumerInfo = {
   fromPartial<I extends Exact<DeepPartial<CheckResponse_ConsumerInfo>, I>>(object: I): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
     message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
     return message;
   }

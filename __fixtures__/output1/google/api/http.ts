@@ -249,11 +249,11 @@ export const HttpRule = {
   fromPartial<I extends Exact<DeepPartial<HttpRule>, I>>(object: I): HttpRule {
     const message = createBaseHttpRule();
     message.selector = object.selector ?? "";
-    message.get = object.get ?? "";
-    message.put = object.put ?? "";
-    message.post = object.post ?? "";
-    message.delete = object.delete ?? "";
-    message.patch = object.patch ?? "";
+    message.get = object.get ?? undefined;
+    message.put = object.put ?? undefined;
+    message.post = object.post ?? undefined;
+    message.delete = object.delete ?? undefined;
+    message.patch = object.patch ?? undefined;
     message.custom = object.custom !== undefined && object.custom !== null ? CustomHttpPattern.fromPartial(object.custom) : undefined;
     message.body = object.body ?? "";
     message.responseBody = object.responseBody ?? "";

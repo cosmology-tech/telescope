@@ -520,15 +520,15 @@ export const Type = {
   fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
     const message = createBaseType();
     message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
-    message.null = object.null ?? 0;
-    message.primitive = object.primitive ?? 0;
-    message.wrapper = object.wrapper ?? 0;
-    message.wellKnown = object.wellKnown ?? 0;
+    message.null = object.null ?? undefined;
+    message.primitive = object.primitive ?? undefined;
+    message.wrapper = object.wrapper ?? undefined;
+    message.wellKnown = object.wellKnown ?? undefined;
     message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : undefined;
     message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : undefined;
     message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : undefined;
-    message.messageType = object.messageType ?? "";
-    message.typeParam = object.typeParam ?? "";
+    message.messageType = object.messageType ?? undefined;
+    message.typeParam = object.typeParam ?? undefined;
     message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;

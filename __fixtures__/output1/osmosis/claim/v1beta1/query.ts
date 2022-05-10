@@ -405,7 +405,7 @@ export const QueryClaimableForActionRequest = {
   fromPartial<I extends Exact<DeepPartial<QueryClaimableForActionRequest>, I>>(object: I): QueryClaimableForActionRequest {
     const message = createBaseQueryClaimableForActionRequest();
     message.address = object.address ?? "";
-    message.action = object.action ?? 0;
+    message.action = object.action ?? undefined;
     return message;
   }
 

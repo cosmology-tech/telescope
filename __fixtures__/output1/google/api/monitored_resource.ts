@@ -129,7 +129,7 @@ export const MonitoredResourceDescriptor = {
     message.displayName = object.displayName ?? "";
     message.description = object.description ?? "";
     message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];
-    message.launchStage = object.launchStage ?? 0;
+    message.launchStage = object.launchStage ?? undefined;
     return message;
   }
 

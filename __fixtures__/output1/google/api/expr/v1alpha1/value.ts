@@ -178,7 +178,7 @@ export const Value = {
     message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : undefined));
+    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
     message.enumValue !== undefined && (obj.enumValue = message.enumValue ? EnumValue.toJSON(message.enumValue) : undefined);
     message.objectValue !== undefined && (obj.objectValue = message.objectValue ? Any.toJSON(message.objectValue) : undefined);
     message.mapValue !== undefined && (obj.mapValue = message.mapValue ? MapValue.toJSON(message.mapValue) : undefined);
@@ -189,18 +189,18 @@ export const Value = {
 
   fromPartial<I extends Exact<DeepPartial<Value>, I>>(object: I): Value {
     const message = createBaseValue();
-    message.nullValue = object.nullValue ?? 0;
-    message.boolValue = object.boolValue ?? false;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : Long.ZERO;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : Long.UZERO;
-    message.doubleValue = object.doubleValue ?? 0;
-    message.stringValue = object.stringValue ?? "";
-    message.bytesValue = object.bytesValue ?? new Uint8Array();
+    message.nullValue = object.nullValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    message.bytesValue = object.bytesValue ?? undefined;
     message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : undefined;
     message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : undefined;
     message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : undefined;
     message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
-    message.typeValue = object.typeValue ?? "";
+    message.typeValue = object.typeValue ?? undefined;
     return message;
   }
 

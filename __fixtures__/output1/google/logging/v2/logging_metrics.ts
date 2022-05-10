@@ -271,7 +271,7 @@ export const LogMetric = {
     }, {});
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
-    message.version = object.version ?? 0;
+    message.version = object.version ?? undefined;
     return message;
   }
 

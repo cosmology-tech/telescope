@@ -982,11 +982,11 @@ export const Proposal = {
     message.submitTime = object.submitTime ?? undefined;
     message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? Long.fromValue(object.groupVersion) : Long.UZERO;
     message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO;
-    message.status = object.status ?? 0;
-    message.result = object.result ?? 0;
+    message.status = object.status ?? undefined;
+    message.result = object.result ?? undefined;
     message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
     message.votingPeriodEnd = object.votingPeriodEnd ?? undefined;
-    message.executorResult = object.executorResult ?? 0;
+    message.executorResult = object.executorResult ?? undefined;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
   }
@@ -1359,7 +1359,7 @@ export const Vote = {
     const message = createBaseVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? 0;
+    message.option = object.option ?? undefined;
     message.metadata = object.metadata ?? "";
     message.submitTime = object.submitTime ?? undefined;
     return message;

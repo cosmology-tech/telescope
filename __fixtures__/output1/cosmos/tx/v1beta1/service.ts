@@ -91,7 +91,7 @@ export const GetTxsEventRequest = {
     const message = createBaseGetTxsEventRequest();
     message.events = object.events?.map(e => e) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
-    message.orderBy = object.orderBy ?? 0;
+    message.orderBy = object.orderBy ?? undefined;
     return message;
   }
 
@@ -304,7 +304,7 @@ export const BroadcastTxRequest = {
   fromPartial<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(object: I): BroadcastTxRequest {
     const message = createBaseBroadcastTxRequest();
     message.txBytes = object.txBytes ?? new Uint8Array();
-    message.mode = object.mode ?? 0;
+    message.mode = object.mode ?? undefined;
     return message;
   }
 

@@ -552,10 +552,10 @@ export const LeafOp = {
 
   fromPartial<I extends Exact<DeepPartial<LeafOp>, I>>(object: I): LeafOp {
     const message = createBaseLeafOp();
-    message.hash = object.hash ?? 0;
-    message.prehashKey = object.prehashKey ?? 0;
-    message.prehashValue = object.prehashValue ?? 0;
-    message.length = object.length ?? 0;
+    message.hash = object.hash ?? undefined;
+    message.prehashKey = object.prehashKey ?? undefined;
+    message.prehashValue = object.prehashValue ?? undefined;
+    message.length = object.length ?? undefined;
     message.prefix = object.prefix ?? new Uint8Array();
     return message;
   }
@@ -640,7 +640,7 @@ export const InnerOp = {
 
   fromPartial<I extends Exact<DeepPartial<InnerOp>, I>>(object: I): InnerOp {
     const message = createBaseInnerOp();
-    message.hash = object.hash ?? 0;
+    message.hash = object.hash ?? undefined;
     message.prefix = object.prefix ?? new Uint8Array();
     message.suffix = object.suffix ?? new Uint8Array();
     return message;
@@ -883,7 +883,7 @@ export const InnerSpec = {
     message.minPrefixLength = object.minPrefixLength ?? 0;
     message.maxPrefixLength = object.maxPrefixLength ?? 0;
     message.emptyChild = object.emptyChild ?? new Uint8Array();
-    message.hash = object.hash ?? 0;
+    message.hash = object.hash ?? undefined;
     return message;
   }
 

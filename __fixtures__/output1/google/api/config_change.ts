@@ -112,7 +112,7 @@ export const ConfigChange = {
     message.element = object.element ?? "";
     message.oldValue = object.oldValue ?? "";
     message.newValue = object.newValue ?? "";
-    message.changeType = object.changeType ?? 0;
+    message.changeType = object.changeType ?? undefined;
     message.advices = object.advices?.map(e => Advice.fromPartial(e)) || [];
     return message;
   }

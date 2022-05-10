@@ -288,7 +288,7 @@ export const Operation = {
     }, {});
     message.metricValueSets = object.metricValueSets?.map(e => MetricValueSet.fromPartial(e)) || [];
     message.logEntries = object.logEntries?.map(e => LogEntry.fromPartial(e)) || [];
-    message.importance = object.importance ?? 0;
+    message.importance = object.importance ?? undefined;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   }

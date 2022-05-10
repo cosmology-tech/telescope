@@ -759,7 +759,7 @@ export const Vote = {
 
   fromPartial<I extends Exact<DeepPartial<Vote>, I>>(object: I): Vote {
     const message = createBaseVote();
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
@@ -965,7 +965,7 @@ export const CommitSig = {
 
   fromPartial<I extends Exact<DeepPartial<CommitSig>, I>>(object: I): CommitSig {
     const message = createBaseCommitSig();
-    message.blockIdFlag = object.blockIdFlag ?? 0;
+    message.blockIdFlag = object.blockIdFlag ?? undefined;
     message.validatorAddress = object.validatorAddress ?? new Uint8Array();
     message.timestamp = object.timestamp ?? undefined;
     message.signature = object.signature ?? new Uint8Array();
@@ -1098,7 +1098,7 @@ export const Proposal = {
 
   fromPartial<I extends Exact<DeepPartial<Proposal>, I>>(object: I): Proposal {
     const message = createBaseProposal();
-    message.type = object.type ?? 0;
+    message.type = object.type ?? undefined;
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;

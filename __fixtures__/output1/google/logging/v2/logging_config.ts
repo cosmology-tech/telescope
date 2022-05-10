@@ -159,7 +159,7 @@ export const LogBucket = {
     message.updateTime = object.updateTime ?? undefined;
     message.retentionDays = object.retentionDays ?? 0;
     message.locked = object.locked ?? false;
-    message.lifecycleState = object.lifecycleState ?? 0;
+    message.lifecycleState = object.lifecycleState ?? undefined;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     return message;
@@ -466,7 +466,7 @@ export const LogSink = {
     message.description = object.description ?? "";
     message.disabled = object.disabled ?? false;
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
-    message.outputVersionFormat = object.outputVersionFormat ?? 0;
+    message.outputVersionFormat = object.outputVersionFormat ?? undefined;
     message.writerIdentity = object.writerIdentity ?? "";
     message.includeChildren = object.includeChildren ?? false;
     message.bigqueryOptions = object.bigqueryOptions !== undefined && object.bigqueryOptions !== null ? BigQueryOptions.fromPartial(object.bigqueryOptions) : undefined;
@@ -3299,7 +3299,7 @@ export const CopyLogEntriesMetadata = {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     message.cancellationRequested = object.cancellationRequested ?? false;
     message.request = object.request !== undefined && object.request !== null ? CopyLogEntriesRequest.fromPartial(object.request) : undefined;
     message.progress = object.progress ?? 0;

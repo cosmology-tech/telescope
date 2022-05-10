@@ -532,7 +532,7 @@ export const ListConsumerQuotaMetricsRequest = {
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
-    message.view = object.view ?? 0;
+    message.view = object.view ?? undefined;
     return message;
   }
 
@@ -684,7 +684,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromPartial<I extends Exact<DeepPartial<GetConsumerQuotaMetricRequest>, I>>(object: I): GetConsumerQuotaMetricRequest {
     const message = createBaseGetConsumerQuotaMetricRequest();
     message.name = object.name ?? "";
-    message.view = object.view ?? 0;
+    message.view = object.view ?? undefined;
     return message;
   }
 
@@ -757,7 +757,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromPartial<I extends Exact<DeepPartial<GetConsumerQuotaLimitRequest>, I>>(object: I): GetConsumerQuotaLimitRequest {
     const message = createBaseGetConsumerQuotaLimitRequest();
     message.name = object.name ?? "";
-    message.view = object.view ?? 0;
+    message.view = object.view ?? undefined;
     return message;
   }
 
@@ -2734,7 +2734,7 @@ export const GetServiceIdentityResponse = {
   fromPartial<I extends Exact<DeepPartial<GetServiceIdentityResponse>, I>>(object: I): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
     message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     return message;
   }
 

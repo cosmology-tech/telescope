@@ -726,7 +726,7 @@ export const IssueDetails = {
 
   fromPartial<I extends Exact<DeepPartial<IssueDetails>, I>>(object: I): IssueDetails {
     const message = createBaseIssueDetails();
-    message.severity = object.severity ?? 0;
+    message.severity = object.severity ?? undefined;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     return message;

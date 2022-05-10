@@ -132,7 +132,7 @@ export const WeightedVoteOption = {
 
   fromPartial<I extends Exact<DeepPartial<WeightedVoteOption>, I>>(object: I): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
-    message.option = object.option ?? 0;
+    message.option = object.option ?? undefined;
     message.weight = object.weight ?? "";
     return message;
   }
@@ -451,7 +451,7 @@ export const Proposal = {
     const message = createBaseProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
-    message.status = object.status ?? 0;
+    message.status = object.status ?? undefined;
     message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
     message.submitTime = object.submitTime ?? undefined;
     message.depositEndTime = object.depositEndTime ?? undefined;
@@ -735,7 +735,7 @@ export const Vote = {
     const message = createBaseVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? 0;
+    message.option = object.option ?? undefined;
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
   }

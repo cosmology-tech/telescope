@@ -108,7 +108,7 @@ export const AccessTypeParam = {
 
   fromPartial<I extends Exact<DeepPartial<AccessTypeParam>, I>>(object: I): AccessTypeParam {
     const message = createBaseAccessTypeParam();
-    message.value = object.value ?? 0;
+    message.value = object.value ?? undefined;
     return message;
   }
 
@@ -180,7 +180,7 @@ export const AccessConfig = {
 
   fromPartial<I extends Exact<DeepPartial<AccessConfig>, I>>(object: I): AccessConfig {
     const message = createBaseAccessConfig();
-    message.permission = object.permission ?? 0;
+    message.permission = object.permission ?? undefined;
     message.address = object.address ?? "";
     return message;
   }
@@ -266,7 +266,7 @@ export const Params = {
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
-    message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
+    message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? undefined;
     message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? Long.fromValue(object.maxWasmCodeSize) : Long.UZERO;
     return message;
   }
@@ -639,7 +639,7 @@ export const ContractCodeHistoryEntry = {
 
   fromPartial<I extends Exact<DeepPartial<ContractCodeHistoryEntry>, I>>(object: I): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
-    message.operation = object.operation ?? 0;
+    message.operation = object.operation ?? undefined;
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();

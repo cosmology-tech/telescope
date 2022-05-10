@@ -224,7 +224,7 @@ export const AssetTypeResponse = {
 
   fromPartial<I extends Exact<DeepPartial<AssetTypeResponse>, I>>(object: I): AssetTypeResponse {
     const message = createBaseAssetTypeResponse();
-    message.assetType = object.assetType ?? 0;
+    message.assetType = object.assetType ?? undefined;
     return message;
   }
 

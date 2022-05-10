@@ -109,8 +109,8 @@ export const Channel = {
 
   fromPartial<I extends Exact<DeepPartial<Channel>, I>>(object: I): Channel {
     const message = createBaseChannel();
-    message.state = object.state ?? 0;
-    message.ordering = object.ordering ?? 0;
+    message.state = object.state ?? undefined;
+    message.ordering = object.ordering ?? undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
@@ -250,8 +250,8 @@ export const IdentifiedChannel = {
 
   fromPartial<I extends Exact<DeepPartial<IdentifiedChannel>, I>>(object: I): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
-    message.state = object.state ?? 0;
-    message.ordering = object.ordering ?? 0;
+    message.state = object.state ?? undefined;
+    message.ordering = object.ordering ?? undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
@@ -751,15 +751,15 @@ export const Acknowledgement = {
 
   toJSON(message: Acknowledgement): unknown {
     const obj: any = {};
-    message.result !== undefined && (obj.result = base64FromBytes(message.result !== undefined ? message.result : undefined));
+    message.result !== undefined && (obj.result = message.result !== undefined ? base64FromBytes(message.result) : undefined);
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Acknowledgement>, I>>(object: I): Acknowledgement {
     const message = createBaseAcknowledgement();
-    message.result = object.result ?? new Uint8Array();
-    message.error = object.error ?? "";
+    message.result = object.result ?? undefined;
+    message.error = object.error ?? undefined;
     return message;
   }
 

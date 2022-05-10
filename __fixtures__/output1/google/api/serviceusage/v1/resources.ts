@@ -102,7 +102,7 @@ export const Service = {
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
     message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : undefined;
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     return message;
   }
 

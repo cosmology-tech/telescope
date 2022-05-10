@@ -80,7 +80,7 @@ export const LabelDescriptor = {
   fromPartial<I extends Exact<DeepPartial<LabelDescriptor>, I>>(object: I): LabelDescriptor {
     const message = createBaseLabelDescriptor();
     message.key = object.key ?? "";
-    message.valueType = object.valueType ?? 0;
+    message.valueType = object.valueType ?? undefined;
     message.description = object.description ?? "";
     return message;
   }

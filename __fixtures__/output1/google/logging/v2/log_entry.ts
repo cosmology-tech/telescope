@@ -346,11 +346,11 @@ export const LogEntry = {
     message.logName = object.logName ?? "";
     message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
     message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
-    message.textPayload = object.textPayload ?? "";
+    message.textPayload = object.textPayload ?? undefined;
     message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.receiveTimestamp = object.receiveTimestamp ?? undefined;
-    message.severity = object.severity ?? 0;
+    message.severity = object.severity ?? undefined;
     message.insertId = object.insertId ?? "";
     message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.labels = Object.entries(object.labels ?? {}).reduce<{

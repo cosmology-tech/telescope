@@ -491,7 +491,7 @@ export const SignatureAndData = {
   fromPartial<I extends Exact<DeepPartial<SignatureAndData>, I>>(object: I): SignatureAndData {
     const message = createBaseSignatureAndData();
     message.signature = object.signature ?? new Uint8Array();
-    message.dataType = object.dataType ?? 0;
+    message.dataType = object.dataType ?? undefined;
     message.data = object.data ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
@@ -677,7 +677,7 @@ export const SignBytes = {
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     message.diversifier = object.diversifier ?? "";
-    message.dataType = object.dataType ?? 0;
+    message.dataType = object.dataType ?? undefined;
     message.data = object.data ?? new Uint8Array();
     return message;
   }

@@ -151,7 +151,7 @@ export const ResourceDescriptor = {
     message.type = object.type ?? "";
     message.pattern = object.pattern?.map(e => e) || [];
     message.nameField = object.nameField ?? "";
-    message.history = object.history ?? 0;
+    message.history = object.history ?? undefined;
     message.plural = object.plural ?? "";
     message.singular = object.singular ?? "";
     message.style = object.style?.map(e => e) || [];

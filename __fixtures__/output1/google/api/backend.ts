@@ -222,9 +222,9 @@ export const BackendRule = {
     message.deadline = object.deadline ?? 0;
     message.minDeadline = object.minDeadline ?? 0;
     message.operationDeadline = object.operationDeadline ?? 0;
-    message.pathTranslation = object.pathTranslation ?? 0;
-    message.jwtAudience = object.jwtAudience ?? "";
-    message.disableAuth = object.disableAuth ?? false;
+    message.pathTranslation = object.pathTranslation ?? undefined;
+    message.jwtAudience = object.jwtAudience ?? undefined;
+    message.disableAuth = object.disableAuth ?? undefined;
     message.protocol = object.protocol ?? "";
     return message;
   }

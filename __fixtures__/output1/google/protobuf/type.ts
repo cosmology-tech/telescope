@@ -137,7 +137,7 @@ export const Type = {
     message.oneofs = object.oneofs?.map(e => e) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
-    message.syntax = object.syntax ?? 0;
+    message.syntax = object.syntax ?? undefined;
     return message;
   }
 
@@ -311,8 +311,8 @@ export const Field = {
 
   fromPartial<I extends Exact<DeepPartial<Field>, I>>(object: I): Field {
     const message = createBaseField();
-    message.kind = object.kind ?? 0;
-    message.cardinality = object.cardinality ?? 0;
+    message.kind = object.kind ?? undefined;
+    message.cardinality = object.cardinality ?? undefined;
     message.number = object.number ?? 0;
     message.name = object.name ?? "";
     message.typeUrl = object.typeUrl ?? "";
@@ -682,7 +682,7 @@ export const Enum = {
     message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
-    message.syntax = object.syntax ?? 0;
+    message.syntax = object.syntax ?? undefined;
     return message;
   }
 
