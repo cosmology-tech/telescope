@@ -1,4 +1,3 @@
-import { AminoMsg } from "@cosmjs/amino";
 import * as _m0 from "protobuf/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface MsgUnjail {
@@ -104,82 +103,4 @@ export const MsgUnjailResponse = {
     return message;
   }
 
-};
-export interface AminoMsgUnjail extends AminoMsg {
-  type: "cosmos-sdk/MsgUnjail";
-  value: {
-    validator_addr: string;
-  };
-}
-export const AminoConverter = {
-  "/cosmos.slashing.v1beta1.MsgUnjail": {
-    aminoType: "cosmos-sdk/MsgUnjail",
-    toAmino: ({
-      validatorAddr
-    }: MsgUnjail): AminoMsgUnjail["value"] => {
-      return {
-        validator_addr: validatorAddr
-      };
-    },
-    fromAmino: ({
-      validator_addr
-    }: AminoMsgUnjail["value"]): MsgUnjail => {
-      return {
-        validatorAddr: validator_addr
-      };
-    }
-  }
-};
-export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.slashing.v1beta1.MsgUnjail", MsgUnjail]];
-export const load = (protoRegistry: Registry) => {
-  registry.forEach(([typeUrl, mod]) => {
-    protoRegistry.register(typeUrl, mod);
-  });
-};
-export const MessageComposer = {
-  encoded: {
-    unjail(value: MsgUnjail) {
-      return {
-        type_url: "/cosmos.slashing.v1beta1.MsgUnjail",
-        value: MsgUnjail.encode(value).finish()
-      };
-    }
-
-  },
-  withTypeUrl: {
-    unjail(value: MsgUnjail) {
-      return {
-        typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
-        value
-      };
-    }
-
-  },
-  toJSON: {
-    unjail(value: MsgUnjail) {
-      return {
-        typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
-        value: MsgUnjail.toJSON(value)
-      };
-    }
-
-  },
-  fromJSON: {
-    unjail(value: any) {
-      return {
-        typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
-        value: MsgUnjail.fromJSON(value)
-      };
-    }
-
-  },
-  fromPartial: {
-    unjail(value: MsgUnjail) {
-      return {
-        typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
-        value: MsgUnjail.fromPartial(value)
-      };
-    }
-
-  }
 };
