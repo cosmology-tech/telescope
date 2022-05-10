@@ -127,6 +127,9 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
     return list;
 };
 
+// TODO potentially allow passing in of a custom ref/filepath
+// defaults to context ref, but allows for another path.
+
 export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
 
     const protoImports: ImportObj[] = getProtoImports(context);
@@ -158,7 +161,10 @@ export const getAminoImportsFromMutations = (mutations: ServiceMutation[]) => {
     });
 };
 
-export const getAminoRelativeDeps = (mutations: ServiceMutation[], filename: string) => {
+export const getServiceDependencies = (
+    mutations: ServiceMutation[],
+    filename: string
+) => {
     return getAminoImportsFromMutations(mutations)
         .map(imp => {
             const f = filename;

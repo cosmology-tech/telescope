@@ -1,3 +1,17 @@
+import generate from '@babel/generator';
+
+export const expectCode = (ast) => {
+    expect(
+        generate(ast).code
+    ).toMatchSnapshot();
+}
+export const printCode = (ast) => {
+    console.log(
+        generate(ast).code
+    );
+}
+
+
 export const strip = (obj) => {
     var copy;
     // Handle the 3 simple types, and null or undefined

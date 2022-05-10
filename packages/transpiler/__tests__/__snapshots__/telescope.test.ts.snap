@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bundle package registries and root file names bundle deps by creating a context 1`] = `
+Object {
+  "../tx": Array [
+    "MsgJoinPool",
+    "MsgExitPool",
+    "MsgSwapExactAmountIn",
+    "MsgSwapExactAmountOut",
+    "MsgJoinSwapExternAmountIn",
+    "MsgJoinSwapShareAmountOut",
+    "MsgExitSwapExternAmountOut",
+    "MsgExitSwapShareAmountIn",
+  ],
+}
+`;
+
+exports[`bundle package registries and root file names bundle deps by creating a context 2`] = `
+"import { Coin } from \\"../../../../cosmos/base/v1beta1/coin\\";
+import { AminoMsg } from \\"@cosmjs/amino\\";
+import { Long, isSet, Exact, DeepPartial } from \\"@osmonauts/helpers\\";
+import * as _m0 from \\"protobuf/minimal\\";
+import { MsgJoinPool, MsgExitPool, MsgSwapExactAmountIn, MsgSwapExactAmountOut, MsgJoinSwapExternAmountIn, MsgJoinSwapShareAmountOut, MsgExitSwapExternAmountOut, MsgExitSwapShareAmountIn } from \\"../tx\\";"
+`;

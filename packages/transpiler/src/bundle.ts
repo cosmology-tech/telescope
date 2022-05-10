@@ -35,12 +35,21 @@ export const bundlePackages = (store: ProtoStore, input: TelescopeInput) => {
     return Object.keys(allPackages).map(base => {
         const pkgs = allPackages[base];
         const bundleVariables = {};
-        const bundleFile = join(input.protoDir, base, 'pkg.bundle.ts');
+
+        // 0 REMEMBER!
+        // YOU MUST SWITCH FROM in DIRECTORY to out DIRECTORY!!!
+        // otherwise paths will break
+
+        const bundleFile = join(input.protoDir, 'telescope', base, 'bundle.ts');
+        const indexFile = join(input.protoDir, base, 'index.ts');
+        const clientFile = join(input.protoDir, 'telescope', base, 'client.ts');
         const importPaths = [];
         parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
         const body = recursiveModuleBundle(bundleVariables);
         return {
             bundleFile,
+            indexFile,
+            clientFile,
             importPaths,
             base,
             body

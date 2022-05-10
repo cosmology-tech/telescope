@@ -1,4 +1,4 @@
-import { buildAllImports, getAminoRelativeDeps } from '../src/imports';
+import { buildAllImports, getServiceDependencies } from '../src/imports';
 import { dirname, join } from 'path';
 import { ProtoStore, parseProto } from '@osmonauts/proto-parser'
 import { TelescopeBuilder } from '../src';
@@ -139,7 +139,7 @@ it('basic imports', () => {
 });
 
 it('from package c deps', () => {
-    const imports1 = getAminoRelativeDeps(
+    const imports1 = getServiceDependencies(
         res.context.mutations,
         res.context.ref.filename
     );
@@ -152,13 +152,13 @@ it('from package c deps', () => {
 });
 
 it('bundle deps', () => {
-    const imports2 = getAminoRelativeDeps(
+    const imports2 = getServiceDependencies(
         res.context.mutations,
         join(dirname(res.context.ref.filename), 'bundle.ts')
     );
     expect(imports2).toMatchSnapshot();
 
     const evenMoreImports = buildAllImports(res.context, imports2);
-    // console.log(generate(t.program(evenMoreImports)).code)
+    console.log(generate(t.program(evenMoreImports)).code)
     expectCode(t.program(evenMoreImports))
 });

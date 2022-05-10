@@ -22,6 +22,8 @@ import {
     ImportUsage
 } from '@osmonauts/ast';
 import { ServiceMutation, ServiceQuery } from './types';
+import { bundlePackages } from './bundle';
+import { TelescopeInput } from '.';
 
 export const getMutations = (mutations: ServiceMutation[]) => {
     return mutations.map((mutation: ServiceMutation) => {
@@ -103,7 +105,6 @@ export class TelescopeParseContext implements TelescopeParseContext {
     addQuery(query: ServiceQuery) {
         this.queries.push(query);
     }
-
     // build main Class with methods
     buildBase() {
         this.types.forEach(typeReg => {
