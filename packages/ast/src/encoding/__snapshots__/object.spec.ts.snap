@@ -1247,7 +1247,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = base64FromBytes(message.bytesValue !== undefined ? message.bytesValue : undefined));
+    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
     message.durationValue !== undefined && (obj.durationValue = message.durationValue);
     message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;

@@ -6,5 +6,5 @@ export interface FromPartialMethod {
     field: ProtoField;
     isOptional: boolean;
 }
-export declare const fromPartialMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ExpressionStatement[];
+export declare const fromPartialMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => t.Statement[];
 export declare const fromPartialMethod: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ObjectMethod;

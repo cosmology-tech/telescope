@@ -159,26 +159,54 @@ export const toJSON = {
     bytes(args: ToJSONMethod) {
         args.context.addUtil('base64FromBytes');
 
-        return notUndefinedSetValue(args.field.name, t.callExpression(
-            t.identifier('base64FromBytes'),
-            [
-                t.conditionalExpression(
-                    t.binaryExpression(
-                        '!==',
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(args.field.name)
-                        ),
-                        t.identifier('undefined')
-                    ),
+        let expr;
+        if (args.isOptional) {
+            // message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
+
+            expr = t.conditionalExpression(
+                t.binaryExpression(
+                    '!==',
                     t.memberExpression(
                         t.identifier('message'),
                         t.identifier(args.field.name)
                     ),
-                    getDefaultTSTypeFromProtoType(args.field, args.isOptional)
-                )
-            ]
-        ));
+                    t.identifier('undefined')
+                ),
+                t.callExpression(
+                    t.identifier('base64FromBytes'),
+                    [
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(args.field.name)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            );
+        } else {
+            // message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
+            expr = t.callExpression(
+                t.identifier('base64FromBytes'),
+                [
+                    t.conditionalExpression(
+                        t.binaryExpression(
+                            '!==',
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(args.field.name)
+                            ),
+                            t.identifier('undefined')
+                        ),
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(args.field.name)
+                        ),
+                        getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+                    )
+                ]
+            )
+        }
+        return notUndefinedSetValue(args.field.name, expr);
     },
 
     // message.period !== undefined && (obj.period = message.period);

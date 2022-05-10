@@ -1,17 +1,17 @@
 import * as t from '@babel/types';
 import { EncodeMethod } from './index';
 export declare const types: {
-    string(num: number, prop: string): t.IfStatement;
-    double(num: number, prop: string): t.IfStatement;
-    float(num: number, prop: string): t.IfStatement;
-    int32(num: number, prop: string): t.IfStatement;
-    uint32(num: number, prop: string): t.IfStatement;
-    int64(num: number, prop: string): t.IfStatement;
-    uint64(num: number, prop: string): t.IfStatement;
-    bool(num: number, prop: string): t.IfStatement;
+    string(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    double(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    float(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    int32(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    uint32(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    int64(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    uint64(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    bool(num: number, prop: string, isOptional: boolean): t.IfStatement;
     type(num: number, prop: string, name: string): t.IfStatement;
-    enum(num: number, prop: string): t.IfStatement;
-    bytes(num: number, prop: string): t.IfStatement;
+    enum(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    bytes(num: number, prop: string, isOptional: boolean): t.IfStatement;
     timestamp(num: number, prop: string): t.IfStatement;
     duration(num: number, prop: string): t.IfStatement;
     forkDelimArray(num: number, prop: string, expr: t.Statement): (t.ExpressionStatement | t.ForOfStatement)[];

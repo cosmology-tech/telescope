@@ -8,7 +8,7 @@ export declare const fromJSON: {
     int32(args: FromJSONMethod): t.ObjectProperty;
     uint32(args: FromJSONMethod): t.ObjectProperty;
     bool(args: FromJSONMethod): t.ObjectProperty;
-    long(args: FromJSONMethod, defaultMethod: 'ZERO' | 'UZERO'): t.ObjectProperty;
+    long(args: FromJSONMethod): t.ObjectProperty;
     int64(args: FromJSONMethod): t.ObjectProperty;
     uint64(args: FromJSONMethod): t.ObjectProperty;
     type(args: FromJSONMethod): t.ObjectProperty;

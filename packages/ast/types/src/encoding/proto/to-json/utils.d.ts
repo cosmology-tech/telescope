@@ -9,7 +9,7 @@ export declare const toJSON: {
     number(args: ToJSONMethod): t.ExpressionStatement;
     int32(args: ToJSONMethod): t.ExpressionStatement;
     uint32(args: ToJSONMethod): t.ExpressionStatement;
-    long(args: ToJSONMethod, defaultMethod: 'UZERO' | 'ZERO'): t.ExpressionStatement;
+    long(args: ToJSONMethod): t.ExpressionStatement;
     int64(args: ToJSONMethod): t.ExpressionStatement;
     uint64(args: ToJSONMethod): t.ExpressionStatement;
     type(args: ToJSONMethod): t.ExpressionStatement;
@@ -29,9 +29,9 @@ export declare const arrayTypes: {
     number(): t.CallExpression;
     uint32(): t.CallExpression;
     int32(): t.CallExpression;
-    long(defaultMethod: 'ZERO' | 'UZERO'): t.CallExpression;
-    uint64(): t.CallExpression;
-    int64(): t.CallExpression;
+    long(args: ToJSONMethod): t.CallExpression;
+    uint64(args: ToJSONMethod): t.CallExpression;
+    int64(args: ToJSONMethod): t.CallExpression;
     bytes(args: ToJSONMethod): t.CallExpression;
     enum(args: ToJSONMethod): t.CallExpression;
     type(args: ToJSONMethod): t.ConditionalExpression;
