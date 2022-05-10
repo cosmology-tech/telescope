@@ -50,12 +50,11 @@ export class TelescopeBuilder {
         // 1 get package bundle
         const bundled = bundlePackages(this.store, input);
         const packaged = bundled.reduce((m, bundle) => {
-            const content = generate(t.program([
-                ...bundle.importPaths,
-                ...bundle.body
-            ])).code
-
-
+            const prog = []
+                .concat(bundle.importPaths)
+                .concat(bundle.body);
+            const ast = t.program(prog);
+            const content = generate(ast).code;
             const out = bundle.bundleFile;
             mkdirp(dirname(out));
             writeFileSync(out, content);
@@ -77,7 +76,8 @@ export class TelescopeBuilder {
                 const prog = []
                     .concat(importStmts)
                     .concat(context.body);
-                const gen = generate(t.program(prog));
+                const ast = t.program(prog);
+                const gen = generate(ast);
                 const filename = ref.filename.replace(/\.proto/, '.ts');
                 const out = join(input.outPath, filename);
                 mkdirp(dirname(out));
@@ -117,10 +117,11 @@ export class TelescopeBuilder {
                 // OR ELSE LATER the other build will use this name!
                 // ctx.ref.filename = filename;
                 const imports = buildAllImports(ctx, serviceImports);
-                const content = generate(t.program([
-                    ...imports,
-                    ...ctx.body
-                ])).code;
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body);
+                const ast = t.program(prog);
+                const content = generate(ast).code;
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
 
@@ -155,10 +156,11 @@ export class TelescopeBuilder {
                 );
 
                 const imports = buildAllImports(ctx, serviceImports);
-                const content = generate(t.program([
-                    ...imports,
-                    ...ctx.body
-                ])).code;
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body);
+                const ast = t.program(prog);
+                const content = generate(ast).code;
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
 
