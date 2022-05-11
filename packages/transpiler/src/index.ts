@@ -10,7 +10,7 @@ import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
 import { extname, join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { GenericParseContext, createClient } from '@osmonauts/ast';
+import { GenericParseContext, createClient, AminoParseContext } from '@osmonauts/ast';
 import { camel, pascal } from 'case';
 import { converter } from 'protobufjs';
 export interface TelescopeInput {
@@ -58,7 +58,7 @@ export class TelescopeBuilder {
 
             // 2 search for all files that live in package
             const baseProtos = this.store.getProtos().filter(ref => {
-                return ref.filename.split('/')[0] === bundle.base
+                return ref.proto.package.split('.')[0] === bundle.base
             });
 
             // 3 write out all TS files for package
@@ -100,6 +100,18 @@ export class TelescopeBuilder {
                     c.ref,
                     c.store
                 );
+
+                // BEGIN PLUGIN CODE HERE
+                // const amino = new AminoParseContext(
+                //     c.ref, c.store
+                // );
+                // if (bundle.base === 'osmosis') {
+                //     amino.options = {
+                //         aminoCasingFn: camel
+                //     }
+                // }
+                // ctx.amino = amino;
+                // END PLUGIN CODE HERE
 
                 // get mutations, services
                 parse(ctx);
