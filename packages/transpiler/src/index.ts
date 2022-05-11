@@ -72,12 +72,18 @@ export class TelescopeBuilder {
                 const prog = []
                     .concat(importStmts)
                     .concat(context.body);
-                const ast = t.program(prog);
-                const gen = generate(ast);
+
                 const filename = ref.filename.replace(/\.proto/, '.ts');
                 const out = join(input.outPath, filename);
                 mkdirp(dirname(out));
-                writeFileSync(out, gen.code);
+                if (context.body.length > 0) {
+                    const ast = t.program(prog);
+                    const gen = generate(ast);
+                    writeFileSync(out, gen.code);
+                } else {
+                    writeFileSync(out, `export {}`);
+                }
+
 
                 return context;
             });
