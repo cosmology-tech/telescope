@@ -52,7 +52,7 @@ describe('bundle package registries and root file names', () => {
                 }
             )
         }));
-        // console.log(JSON.stringify(result, null, 2));
+        console.log(JSON.stringify(result, null, 2));
 
     })
 
@@ -63,13 +63,13 @@ describe('bundle package registries and root file names', () => {
             join(dirname(context.ref.filename), 'bundle.ts')
         );
         expect(imports2).toMatchSnapshot();
-        console.log(imports2);
+        // console.log(imports2);
 
         const evenMoreImports = buildAllImports(context, imports2);
-        console.log(generate(t.program(evenMoreImports)).code)
+        // console.log(generate(t.program(evenMoreImports)).code)
         expectCode(t.program(evenMoreImports))
     });
-    it.only('bundle deps by creating a context', () => {
+    it('bundle deps by creating a context', () => {
 
         const context = telescope.contexts.find(context => context.ref.filename === 'osmosis/gamm/v1beta1/tx.proto');
 
@@ -99,7 +99,7 @@ describe('bundle package registries and root file names', () => {
         expect(ctx.amino.imports.length).toBe(18);
         expect(ctx.proto.imports.length).toBe(0);
 
-        console.log(ctx.amino.imports);
+        // console.log(ctx.amino.imports);
 
 
         const serviceImports = getServiceDependencies(
@@ -107,7 +107,7 @@ describe('bundle package registries and root file names', () => {
             join(dirname(context.ref.filename), 'telescope/amino-converter.ts')
         );
         expect(serviceImports).toMatchSnapshot();
-        console.log(serviceImports);
+        // console.log(serviceImports);
 
         // MAKE A FAKE REF
 
@@ -119,13 +119,13 @@ describe('bundle package registries and root file names', () => {
         // context.ref.filename = 'osmosis/gamm/v1beta1/amino-converter.proto';
         context.ref = ref;
         const evenMoreImports = buildAllImports(context, serviceImports);
-        console.log(generate(t.program(evenMoreImports)).code)
+        // console.log(generate(t.program(evenMoreImports)).code)
         expectCode(t.program(evenMoreImports))
 
         // make AST
         const ast = t.program([...evenMoreImports, ...ctx.body])
 
-        console.log(generate(ast).code);
+        // console.log(generate(ast).code);
 
     });
 })

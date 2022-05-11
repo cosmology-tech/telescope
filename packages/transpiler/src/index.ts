@@ -3,12 +3,16 @@ import generate from '@babel/generator';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getServiceDependencies } from './imports';
 import { getMutations, TelescopeParseContext } from './build';
+import { importNamespace, importStmt } from '@osmonauts/ast';
+
 import { parse } from './parse';
 import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
-import { join, dirname, resolve } from 'path';
+import { extname, join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import { GenericParseContext, createClient } from '@osmonauts/ast';
+import { camel, pascal } from 'case';
+import { converter } from 'protobufjs';
 export interface TelescopeInput {
     protoDir: string;
     outPath: string;
@@ -42,7 +46,7 @@ export class TelescopeBuilder {
 
         // 1 get package bundle
         const bundled = bundlePackages(this.store, input);
-        const packaged = bundled.reduce((m, bundle) => {
+        bundled.forEach(bundle => {
             const prog = []
                 .concat(bundle.importPaths)
                 .concat(bundle.body);
@@ -82,7 +86,7 @@ export class TelescopeBuilder {
             const serviceContexts = packageContexts.filter(context => context.mutations.length > 0);
 
             // 5 write out one amino helper for all contexts w/mutations
-            const aminoHelpers = serviceContexts.map(c => {
+            const aminoConverters = serviceContexts.map(c => {
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
                 const filename = resolve(join(input.outPath, localname));
                 // FRESH new context
@@ -165,40 +169,93 @@ export class TelescopeBuilder {
 
             })
 
+
+            const variableSlug = (str) => {
+                str = String(str).toString();
+                str = str.replace(/\//g, '_');
+                str = str.replace('.', '_');
+                str = str.replace(extname(str), '');
+                str = str.replace(/^\s+|\s+$/g, ""); // trim
+                str = str.toLowerCase();
+                str = str
+                    .replace(/[^a-z0-9_ -]/g, "") // remove invalid chars
+                    .replace(/\s+/g, "-") // collapse whitespace and replace by -
+                    .replace(/-+/g, "-") // collapse dashes
+                    .replace(/^-+/, "") // trim - from start of text
+                    .replace(/-+$/, "");
+
+                return camel(str);
+            }
+
             // 7 write out one client for each base package, referencing the last two steps
+            let counter = 0;
+
+            if (registries.length) {
+                const registryImports = [];
+                const converterImports = [];
+                const clientFile = join('telescope', `${bundle.base}`, 'client.ts');
+                const ctx = new GenericParseContext();
+
+                const registryVariables = [];
+                const converterVariables = [];
+
+                registries.forEach(registry => {
+                    let rel = relative(dirname(clientFile), registry.localname);
+                    if (!rel.startsWith('.')) rel = `./${rel}`;
+                    // const variable = `_${counter++}`;
+                    const variable = variableSlug(registry.localname);
+                    registryVariables.push(variable);
+                    registryImports.push(importNamespace(variable, rel));
+                });
+
+                aminoConverters.forEach(converter => {
+                    let rel = relative(dirname(clientFile), converter.localname);
+                    if (!rel.startsWith('.')) rel = `./${rel}`;
+                    // const variable = `_${counter++}`;
+                    const variable = variableSlug(converter.localname);
+                    converterVariables.push(variable);
+                    converterImports.push(importNamespace(variable, rel));
+                });
 
 
+                // export const buildClients = (obj) => {
+                //     return Object.keys(obj).map(pkg => {
+                //         const name = 'getSigning' + pascal(pkg + 'Client');
+                //         const { registries, aminos } = obj[pkg];
+                //         return ast.createClient({
+                //             name,
+                //             registries,
+                //             aminos
+                //         })
+                //     })
+                // }
 
-            const clientFile = join('telescope', `${bundle.base}`, 'client.ts');
-            const ctx = new GenericParseContext();
+                const name = 'getSigning' + pascal(bundle.base + 'Client');
+                const clientBody = createClient({
+                    context: ctx,
+                    name,
+                    registries: registryVariables,
+                    aminos: converterVariables
+                });
 
-            const clientBody = createClient({
-                context: ctx,
-                name: 'getSigningOsmosisClient',
-                registries: [
-                    'osmosis.gamm.v1beta1',
-                    'osmosis.superfluid.v1beta1',
-                    'osmosis.lockup'
-                ],
-                aminos: [
-                    'osmosis.gamm.v1beta1',
-                    'osmosis.superfluid.v1beta1',
-                    'osmosis.lockup'
+                const cProg = [
+                    importStmt(['OfflineSigner', 'GeneratedType', 'Registry'], '@cosmjs/proto-signing'),
+                    importStmt(['defaultRegistryTypes', 'AminoTypes', 'SigningStargateClient'], '@cosmjs/stargate'),
                 ]
-            });
+                    .concat(registryImports)
+                    .concat(converterImports)
+                    .concat(clientBody);
 
-            const cProg = []
-                .concat(clientBody);
+                const cAst = t.program(cProg);
+                const cContent = generate(cAst).code;
 
-            const cAst = t.program(cProg);
-            const cContent = generate(cAst).code;
+                const clientOutFile = join(input.outPath, clientFile);
+                mkdirp(dirname(clientOutFile));
+                writeFileSync(clientOutFile, cContent);
+            }
 
-            const clientOutFile = join(input.outPath, clientFile);
-            mkdirp(dirname(clientOutFile));
-            writeFileSync(clientOutFile, cContent);
 
-            return m;
-        }, {});
+        });
 
     }
 

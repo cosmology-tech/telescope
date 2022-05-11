@@ -46,7 +46,9 @@ export const bundlePackages = (store: ProtoStore, input: TelescopeInput) => {
             body
         };
     });
-}
+};
+
+// TODO review bundle registry methods 
 export const bundleRegistries = (telescope: TelescopeBuilder) => {
     const withMutations = telescope.contexts.filter(
         ctx => ctx.mutations.length
