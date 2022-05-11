@@ -2,17 +2,16 @@ import * as t from '@babel/types';
 import generate from '@babel/generator';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getServiceDependencies } from './imports';
-import { getMutations, TelescopeParseContext } from './build';
+import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
 import { variableSlug } from './utils';
 import { parse } from './parse';
 import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
-import { extname, join, dirname, resolve, relative } from 'path';
+import { join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import { GenericParseContext, createClient, AminoParseContext } from '@osmonauts/ast';
 import { camel, pascal } from 'case';
-import { converter } from 'protobufjs';
 export interface TelescopeInput {
     protoDir: string;
     outPath: string;
@@ -236,92 +235,13 @@ export class TelescopeBuilder {
                 mkdirp(dirname(clientOutFile));
                 writeFileSync(clientOutFile, cContent);
             }
-
-
         });
-
-    }
-
-    buildAll() {
-        const hash = this.store.getProtos().map(ref => {
-            const context = this.context(ref);
-            parse(context);
-
-            context.buildBase();
-
-            // TODO don't loop through all protos...
-            // loop through packgaes and put these into separate files
-            if (context.mutations.length) {
-                context.buildAminoInterfaces();
-                context.buildAminoConverter();
-                context.buildRegistry();
-                context.buildRegistryLoader();
-                context.buildHelperObject();
-            }
-
-            const importStmts = buildAllImports(context);
-
-            const prog = []
-                .concat(importStmts)
-                .concat(context.body);
-
-            const gen = generate(t.program(prog));
-
-            const filename = ref.filename.replace(/\.proto/, '.ts');
-            return {
-                filename,
-                content: gen.code
-            };
-        });
-        return hash;
-    }
-
-    buildProto(path) {
-        const ref = this.store.findProto(path);
-        const context = this.context(ref);
-        parse(context);
-        context.buildBase();
-
-        // generate(context, 'amino')
-        // generate(context, 'proto')
-
-        // maybe we can do something like this to separate out the context..
-        // parse(context1, {
-        //     amino: true
-        // });
-
-        // parse(context2, {
-
-
-        //     registry: true
-        // });
-
-        // messages = c.toObjectWithPartialMethods(this.mutations);
-        // registry = c.createTypeRegistry(this.mutations);
-        // json = c.toObjectWithJsonMethods(this.mutations);
-        // toJSON = c.toObjectWithToJSONMethods(this.mutations);
-        // fromJSON = c.toObjectWithFromJSONMethods(this.mutations);
-        // encoded = c.toObjectWithEncodedMethods(this.mutations);
-
-        // this.outFiles = [];
-
-        const importStmts = buildAllImports(context);
-
-        const prog = []
-            .concat(importStmts)
-            .concat(context.body);
-
-        const gen = generate(t.program(prog));
-        return {
-            gen,
-            context
-        }
     }
 }
 
 export default (input: TelescopeInput) => {
     const builder = new TelescopeBuilder(input);
-    // const res = builder.buildProto('osmosis/gamm/v1beta1/tx.proto');
-    // console.log(res);
+    // TODO remove need for arguments
+    builder.build(input);
 };
 
