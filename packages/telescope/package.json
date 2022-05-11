@@ -1,5 +1,5 @@
 {
-  "name": "@osmonauts/transpiler",
+  "name": "@osmonauts/telescope",
   "version": "0.3.1",
   "description": "A TypeScript Transpiler for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",

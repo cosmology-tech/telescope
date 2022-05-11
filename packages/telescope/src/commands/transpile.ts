@@ -7,9 +7,9 @@ export default async (argv) => {
     {
       _: true,
       type: 'path',
-      name: 'tsProtoPath',
-      message: 'which directory contains the the output ts-proto TS files?',
-      default: './out/proto'
+      name: 'protoDir',
+      message: 'where is the proto directory?',
+      default: './proto'
     },
     {
       _: true,
@@ -20,6 +20,6 @@ export default async (argv) => {
     }
   ];
 
-  const { tsProtoPath, outPath } = await prompt(questions, argv);
-  telescope({ protoPath: tsProtoPath, outPath })
+  const { protoDir, outPath } = await prompt(questions, argv);
+  telescope({ protoDir, outPath })
 };
