@@ -1,10 +1,10 @@
-import { QueryCondition } from "../lockup/lock";
+import { QueryCondition, lockQueryTypeFromJSON } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
 import { Duration } from "../../google/protobuf/duration";
-import { lockQueryTypeFromJSON, MsgCreateGauge, MsgAddToGauge } from "./tx";
+import { MsgCreateGauge, MsgAddToGauge } from "./tx";
 export interface AminoMsgCreateGauge extends AminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: {
