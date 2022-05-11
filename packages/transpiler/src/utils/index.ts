@@ -1,4 +1,5 @@
 import { ProtoStore, ProtoRoot, ProtoRef, getObjectName } from '@osmonauts/proto-parser';
+import { camel } from 'case';
 import { relative, dirname, extname } from 'path';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
@@ -44,4 +45,22 @@ export const getRelativePath = (f1: string, f2: string) => {
     let importPath = rel.replace(extname(rel), '');
     if (!/\//.test(importPath)) importPath = `./${importPath}`;
     return importPath;
+}
+
+
+export const variableSlug = (str) => {
+    str = String(str).toString();
+    str = str.replace(/\//g, '_');
+    str = str.replace('.', '_');
+    str = str.replace(extname(str), '');
+    str = str.replace(/^\s+|\s+$/g, ""); // trim
+    str = str.toLowerCase();
+    str = str
+        .replace(/[^a-z0-9_ -]/g, "") // remove invalid chars
+        .replace(/\s+/g, "-") // collapse whitespace and replace by -
+        .replace(/-+/g, "-") // collapse dashes
+        .replace(/^-+/, "") // trim - from start of text
+        .replace(/-+$/, "");
+
+    return camel(str);
 }

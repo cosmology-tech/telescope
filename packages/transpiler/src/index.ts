@@ -4,7 +4,7 @@ import { ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getServiceDependencies } from './imports';
 import { getMutations, TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
-
+import { variableSlug } from './utils';
 import { parse } from './parse';
 import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
@@ -169,27 +169,7 @@ export class TelescopeBuilder {
 
             })
 
-
-            const variableSlug = (str) => {
-                str = String(str).toString();
-                str = str.replace(/\//g, '_');
-                str = str.replace('.', '_');
-                str = str.replace(extname(str), '');
-                str = str.replace(/^\s+|\s+$/g, ""); // trim
-                str = str.toLowerCase();
-                str = str
-                    .replace(/[^a-z0-9_ -]/g, "") // remove invalid chars
-                    .replace(/\s+/g, "-") // collapse whitespace and replace by -
-                    .replace(/-+/g, "-") // collapse dashes
-                    .replace(/^-+/, "") // trim - from start of text
-                    .replace(/-+$/, "");
-
-                return camel(str);
-            }
-
             // 7 write out one client for each base package, referencing the last two steps
-            let counter = 0;
-
             if (registries.length) {
                 const registryImports = [];
                 const converterImports = [];
@@ -202,7 +182,6 @@ export class TelescopeBuilder {
                 registries.forEach(registry => {
                     let rel = relative(dirname(clientFile), registry.localname);
                     if (!rel.startsWith('.')) rel = `./${rel}`;
-                    // const variable = `_${counter++}`;
                     const variable = variableSlug(registry.localname);
                     registryVariables.push(variable);
                     registryImports.push(importNamespace(variable, rel));
@@ -211,24 +190,10 @@ export class TelescopeBuilder {
                 aminoConverters.forEach(converter => {
                     let rel = relative(dirname(clientFile), converter.localname);
                     if (!rel.startsWith('.')) rel = `./${rel}`;
-                    // const variable = `_${counter++}`;
                     const variable = variableSlug(converter.localname);
                     converterVariables.push(variable);
                     converterImports.push(importNamespace(variable, rel));
                 });
-
-
-                // export const buildClients = (obj) => {
-                //     return Object.keys(obj).map(pkg => {
-                //         const name = 'getSigning' + pascal(pkg + 'Client');
-                //         const { registries, aminos } = obj[pkg];
-                //         return ast.createClient({
-                //             name,
-                //             registries,
-                //             aminos
-                //         })
-                //     })
-                // }
 
                 const name = 'getSigning' + pascal(bundle.base + 'Client');
                 const clientBody = createClient({
