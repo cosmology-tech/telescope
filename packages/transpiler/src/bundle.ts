@@ -35,7 +35,7 @@ export const bundlePackages = (store: ProtoStore, input: TelescopeInput) => {
     return Object.keys(allPackages).map(base => {
         const pkgs = allPackages[base];
         const bundleVariables = {};
-        const bundleFile = join('telescope', base, 'bundle.ts');
+        const bundleFile = join(base, 'bundle.ts');
         const importPaths = [];
         parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
         const body = recursiveModuleBundle(bundleVariables);

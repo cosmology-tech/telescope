@@ -43,7 +43,7 @@ export const UTILS = {
 export const getRelativePath = (f1: string, f2: string) => {
     const rel = relative(dirname(f1), f2);
     let importPath = rel.replace(extname(rel), '');
-    if (!/\//.test(importPath)) importPath = `./${importPath}`;
+    if (!/^\./.test(importPath)) importPath = `./${importPath}`;
     return importPath;
 }
 

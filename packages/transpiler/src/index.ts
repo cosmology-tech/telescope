@@ -4,7 +4,7 @@ import { ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getServiceDependencies } from './imports';
 import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
-import { variableSlug } from './utils';
+import { getRelativePath, variableSlug } from './utils';
 import { parse } from './parse';
 import { bundlePackages } from './bundle';
 import { writeFileSync } from 'fs';
@@ -43,7 +43,9 @@ export class TelescopeBuilder {
 
     build(input: TelescopeInput) {
 
-        // 1 get package bundle
+        const allFiles = [];
+
+        // 1 get bundle of all packages
         const bundled = bundlePackages(this.store, input);
         bundled.forEach(bundle => {
             const prog = []
@@ -187,10 +189,15 @@ export class TelescopeBuilder {
             })
 
             // 7 write out one client for each base package, referencing the last two steps
+            const filesToInclude = [
+                bundle.bundleFile
+            ];
+
             if (registries.length) {
                 const registryImports = [];
                 const converterImports = [];
-                const clientFile = join('telescope', `${bundle.base}`, 'client.ts');
+                const clientFile = join(`${bundle.base}`, 'client.ts');
+                filesToInclude.push(clientFile);
                 const ctx = new GenericParseContext();
 
                 const registryVariables = [];
@@ -235,7 +242,28 @@ export class TelescopeBuilder {
                 mkdirp(dirname(clientOutFile));
                 writeFileSync(clientOutFile, cContent);
             }
+
+            // 8 write an index file for each base
+            // console.log(filesToInclude)
+
+
+            filesToInclude.forEach(file => allFiles.push(file));
         });
+
+        // finally, write one index file with all files, exported
+        const indexFile = 'index.ts';
+        const indexOutFile = join(input.outPath, indexFile);
+        const stmts = allFiles.map(
+            file => t.exportAllDeclaration(
+                t.stringLiteral(getRelativePath(indexFile, file))
+            )
+        );
+        const finalAst = t.program(stmts);
+        const indexContent = generate(finalAst).code;
+        mkdirp(dirname(indexOutFile));
+        writeFileSync(indexOutFile, indexContent);
+
+
     }
 }
 

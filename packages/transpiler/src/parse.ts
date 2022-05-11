@@ -67,12 +67,10 @@ const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
 export const parseType = (
     context: TelescopeParseContext,
     obj: any,
+    // scope already has the name of "this" field at the end of it
     scope: string[],
     isNested: boolean = false
 ) => {
-
-    // scope already has the name of "this" field at the end of it
-
 
     obj.keyTypes.forEach(field => {
         const keyTypeObject = makeKeyTypeObj(context.ref, field, scope);
