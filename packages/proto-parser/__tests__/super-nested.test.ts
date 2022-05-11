@@ -330,7 +330,7 @@ describe('cosmology/example/c', () => {
     expect(result.lookupType).toEqual('local');
     expect(result.lookupPath).toEqual('cosmology/example/c.proto');
     expect(result.name).toEqual('MsgTypePackageC');
-    expect(result.import).toEqual(null);
+    expect(result.import).toEqual('cosmology/example/c.proto');
     expect(result.importType).toEqual('local');
     expect(result.importedName).toEqual('MsgTypePackageC');
   });
@@ -370,7 +370,7 @@ describe('cosmology/example/c', () => {
     expect(field.import).toEqual('cosmology/example/b.proto')
     expect(result).toEqual({
       name: 'EnumPackageA',
-      import: null,
+      import: 'cosmology/example/a.proto',
       importType: 'local',
       importedName: 'EnumPackageA',
       package: 'cosmology.finance',
@@ -414,7 +414,7 @@ describe('cosmology/example/c', () => {
       lookupFrom: 'cosmology/example/a.proto',
       lookupScope: [],
       name: 'EnumPackageA',
-      import: null,
+      import: 'cosmology/example/a.proto',
       importType: 'local',
       importedName: 'EnumPackageA',
       package: 'cosmology.finance',
@@ -427,7 +427,7 @@ describe('cosmology/example/c', () => {
       lookupFrom: 'cosmology/example/a.proto',
       lookupScope: [],
       name: 'EnumDuplicateName',
-      import: null,
+      import: 'cosmology/example/a.proto',
       importType: 'local',
       importedName: 'EnumDuplicateName',
       package: 'cosmology.finance',
@@ -447,7 +447,7 @@ describe('cosmology/example/c', () => {
           lookupFrom: 'cosmology/example/b.proto',
           lookupScope: [],
           name: 'EnumDuplicateName',
-          import: null,
+          import: 'cosmology/example/b.proto',
           importType: 'local',
           importedName: 'EnumDuplicateName',
           package: 'cosmology.finance',
@@ -464,7 +464,7 @@ describe('cosmology/example/c', () => {
           // lookupFrom: 'cosmology/example/b.proto',
           lookupScope: [],
           name: 'EnumDuplicateName',
-          import: null,
+          import: 'cosmology/example/b.proto',
           importType: 'local',
           importedName: 'EnumDuplicateName',
           package: 'cosmology.finance',
@@ -479,7 +479,7 @@ describe('cosmology/example/c', () => {
 
     const MsgTypePackageC = store.get(ref, 'MsgTypePackageC');
     expect(MsgTypePackageC.name).toEqual('MsgTypePackageC');
-    expect(MsgTypePackageC.import).toEqual(null);
+    expect(MsgTypePackageC.import).toEqual('cosmology/example/c.proto');
     expect(MsgTypePackageC.importType).toEqual('local');
     expect(MsgTypePackageC.importedName).toEqual('MsgTypePackageC');
     expect(MsgTypePackageC.package).toEqual('cosmology.finance');
@@ -489,7 +489,7 @@ describe('cosmology/example/c', () => {
 
     const MsgTypePackageB = store.get(awesomeRef, 'MsgTypePackageB');
     expect(MsgTypePackageB.name).toEqual('MsgTypePackageB');
-    expect(MsgTypePackageB.import).toEqual(null);
+    expect(MsgTypePackageB.import).toEqual('cosmology/example/c.proto');
     expect(MsgTypePackageB.importType).toEqual('local');
     expect(MsgTypePackageB.importedName).toEqual('MsgTypePackageB');
     expect(MsgTypePackageB.package).toEqual('cosmology.finance');
@@ -499,7 +499,7 @@ describe('cosmology/example/c', () => {
     // console.log(MsgTypePackageB.obj)
     const EnumTypePackageB = store.get(awesomeRef, 'EnumTypePackageB');
     expect(EnumTypePackageB.name).toEqual('EnumTypePackageB');
-    expect(EnumTypePackageB.import).toEqual(null);
+    expect(EnumTypePackageB.import).toEqual('cosmology/example/c.proto');
     expect(EnumTypePackageB.importType).toEqual('local');
     expect(EnumTypePackageB.importedName).toEqual('EnumTypePackageB');
     expect(EnumTypePackageB.package).toEqual('cosmology.finance');

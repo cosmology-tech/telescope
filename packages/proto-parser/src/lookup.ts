@@ -161,7 +161,7 @@ export const lookupLocal = (
     if (refObject) {
         return {
             name,
-            import: null,
+            import: ref.filename,
             importType: 'local',
             importedName: name,
             package: root.package,
