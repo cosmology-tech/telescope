@@ -8,10 +8,10 @@ import { lockQueryTypeFromJSON, MsgCreateGauge, MsgAddToGauge } from "./tx";
 export interface AminoMsgCreateGauge extends AminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: {
-    is_perpetual: boolean;
+    isPerpetual: boolean;
     owner: string;
-    distribute_to: {
-      lock_query_type: number;
+    distributeTo: {
+      lockQueryType: number;
       denom: string;
       duration: {
         seconds: string;
@@ -26,18 +26,18 @@ export interface AminoMsgCreateGauge extends AminoMsg {
       denom: string;
       amount: string;
     }[];
-    start_time: {
+    startTime: {
       seconds: string;
       nanos: number;
     };
-    num_epochs_paid_over: string;
+    numEpochsPaidOver: string;
   };
 }
 export interface AminoMsgAddToGauge extends AminoMsg {
   type: "osmosis/incentives/add-to-gauge";
   value: {
     owner: string;
-    gauge_id: string;
+    gaugeId: string;
     rewards: {
       denom: string;
       amount: string;
@@ -56,10 +56,10 @@ export const AminoConverter = {
       numEpochsPaidOver
     }: MsgCreateGauge): AminoMsgCreateGauge["value"] => {
       return {
-        is_perpetual: isPerpetual,
+        isPerpetual,
         owner,
-        distribute_to: {
-          lock_query_type: distributeTo.lockQueryType,
+        distributeTo: {
+          lockQueryType: distributeTo.lockQueryType,
           denom: distributeTo.denom,
           duration: {
             seconds: distributeTo.duration.seconds.toString(),
@@ -74,34 +74,34 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        start_time: {
+        startTime: {
           seconds: startTime.seconds.toString(),
           nanos: startTime.nanos
         },
-        num_epochs_paid_over: numEpochsPaidOver.toString()
+        numEpochsPaidOver: numEpochsPaidOver.toString()
       };
     },
     fromAmino: ({
-      is_perpetual,
+      isPerpetual,
       owner,
-      distribute_to,
+      distributeTo,
       coins,
-      start_time,
-      num_epochs_paid_over
+      startTime,
+      numEpochsPaidOver
     }: AminoMsgCreateGauge["value"]): MsgCreateGauge => {
       return {
-        isPerpetual: is_perpetual,
+        isPerpetual,
         owner,
         distributeTo: {
-          lockQueryType: lockQueryTypeFromJSON(distribute_to.lock_query_type),
-          denom: distribute_to.denom,
+          lockQueryType: lockQueryTypeFromJSON(distributeTo.lockQueryType),
+          denom: distributeTo.denom,
           duration: {
-            seconds: Long.fromString(distribute_to.duration.seconds),
-            nanos: distribute_to.duration.nanos
+            seconds: Long.fromString(distributeTo.duration.seconds),
+            nanos: distributeTo.duration.nanos
           },
           timestamp: {
-            seconds: Long.fromString(distribute_to.timestamp.seconds),
-            nanos: distribute_to.timestamp.nanos
+            seconds: Long.fromString(distributeTo.timestamp.seconds),
+            nanos: distributeTo.timestamp.nanos
           }
         },
         coins: coins.map(el0 => ({
@@ -109,10 +109,10 @@ export const AminoConverter = {
           amount: el0.amount
         })),
         startTime: {
-          seconds: Long.fromString(start_time.seconds),
-          nanos: start_time.nanos
+          seconds: Long.fromString(startTime.seconds),
+          nanos: startTime.nanos
         },
-        numEpochsPaidOver: Long.fromString(num_epochs_paid_over)
+        numEpochsPaidOver: Long.fromString(numEpochsPaidOver)
       };
     }
   },
@@ -125,7 +125,7 @@ export const AminoConverter = {
     }: MsgAddToGauge): AminoMsgAddToGauge["value"] => {
       return {
         owner,
-        gauge_id: gaugeId.toString(),
+        gaugeId: gaugeId.toString(),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -134,12 +134,12 @@ export const AminoConverter = {
     },
     fromAmino: ({
       owner,
-      gauge_id,
+      gaugeId,
       rewards
     }: AminoMsgAddToGauge["value"]): MsgAddToGauge => {
       return {
         owner,
-        gaugeId: Long.fromString(gauge_id),
+        gaugeId: Long.fromString(gaugeId),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

@@ -102,15 +102,15 @@ export class TelescopeBuilder {
                 );
 
                 // BEGIN PLUGIN CODE HERE
-                // const amino = new AminoParseContext(
-                //     c.ref, c.store
-                // );
-                // if (bundle.base === 'osmosis') {
-                //     amino.options = {
-                //         aminoCasingFn: camel
-                //     }
-                // }
-                // ctx.amino = amino;
+                const amino = new AminoParseContext(
+                    c.ref, c.store
+                );
+                if (bundle.base === 'osmosis') {
+                    amino.options = {
+                        aminoCasingFn: camel
+                    }
+                }
+                ctx.amino = amino;
                 // END PLUGIN CODE HERE
 
                 // get mutations, services
