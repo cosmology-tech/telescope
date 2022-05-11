@@ -1,7 +1,7 @@
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-import * as cosmwasmWasmV1TxRegistry from "../../cosmwasm/wasm/v1/tx.registry";
-import * as cosmwasmWasmV1TxAmino from "../../cosmwasm/wasm/v1/tx.amino";
+import * as cosmwasmWasmV1TxRegistry from "./wasm/v1/tx.registry";
+import * as cosmwasmWasmV1TxAmino from "./wasm/v1/tx.amino";
 export const getSigningCosmwasmClient = async ({
   rpcEndpoint,
   signer,

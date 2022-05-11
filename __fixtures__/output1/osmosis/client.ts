@@ -1,13 +1,13 @@
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-import * as osmosisGammV1beta1TxRegistry from "../../osmosis/gamm/v1beta1/tx.registry";
-import * as osmosisIncentivesTxRegistry from "../../osmosis/incentives/tx.registry";
-import * as osmosisLockupTxRegistry from "../../osmosis/lockup/tx.registry";
-import * as osmosisSuperfluidTxRegistry from "../../osmosis/superfluid/tx.registry";
-import * as osmosisGammV1beta1TxAmino from "../../osmosis/gamm/v1beta1/tx.amino";
-import * as osmosisIncentivesTxAmino from "../../osmosis/incentives/tx.amino";
-import * as osmosisLockupTxAmino from "../../osmosis/lockup/tx.amino";
-import * as osmosisSuperfluidTxAmino from "../../osmosis/superfluid/tx.amino";
+import * as osmosisGammV1beta1TxRegistry from "./gamm/v1beta1/tx.registry";
+import * as osmosisIncentivesTxRegistry from "./incentives/tx.registry";
+import * as osmosisLockupTxRegistry from "./lockup/tx.registry";
+import * as osmosisSuperfluidTxRegistry from "./superfluid/tx.registry";
+import * as osmosisGammV1beta1TxAmino from "./gamm/v1beta1/tx.amino";
+import * as osmosisIncentivesTxAmino from "./incentives/tx.amino";
+import * as osmosisLockupTxAmino from "./lockup/tx.amino";
+import * as osmosisSuperfluidTxAmino from "./superfluid/tx.amino";
 export const getSigningOsmosisClient = async ({
   rpcEndpoint,
   signer,
