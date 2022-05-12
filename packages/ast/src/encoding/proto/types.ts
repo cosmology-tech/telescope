@@ -316,19 +316,26 @@ export const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
     return isOneOf || field?.options?.['(gogoproto.nullable)'];
 };
 
-const getProtoFieldTypeName = (field: ProtoField) => {
-    let name = field.type;
+const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
+    let name = context.getTypeName(field)
 
     if (name.includes('.')) {
         const parts = name.split('.');
         name = parts[parts.length - 1];
     }
 
-    if (!field.scope || !field.scope.length) return name;
-    return getObjectName(name, field.scope);
+    return name;
+
+    // if (!field.scope || !field.scope.length) return name;
+
+    // do we need to implment something that does BOTH scope + proto style? (e.g. some.package.Field => Field)
+    // const impName = getObjectName(name, field.scope);
+    // const lookName = context.getTypeName(field);
+    // console.log({ impName, lookName });
+    // return getObjectName(context.getTypeName(field), field.scope);
 };
 
-const getProtoField = (field: ProtoField) => {
+const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     let ast: any = null;
     let optional = false;
 
@@ -339,7 +346,7 @@ const getProtoField = (field: ProtoField) => {
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeFromProtoType(field.type);
     } else {
-        ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(field)));
+        ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
     }
 
     if (field.rule === 'repeated') {
@@ -365,7 +372,11 @@ const getProtoField = (field: ProtoField) => {
     return ast;
 };
 
-export const createProtoType = (name: string, proto: ProtoType) => {
+export const createProtoType = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
     const oneOfs = getOneOfs(proto);
 
     return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
@@ -379,7 +390,7 @@ export const createProtoType = (name: string, proto: ProtoType) => {
                 return tsPropertySignature(
                     t.identifier(fieldName),
                     t.tsTypeAnnotation(
-                        getProtoField(field)
+                        getProtoField(context, field)
                     ),
                     getFieldOptionality(field, isOneOf)
                 )
