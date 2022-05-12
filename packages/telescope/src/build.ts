@@ -47,7 +47,7 @@ export const buildBaseTypeScriptClass = (
     name: string,
     obj: any
 ) => {
-    context.body.push(createProtoType(name, obj));
+    context.body.push(createProtoType(context.proto, name, obj));
     context.body.push(createCreateProtoType(name, obj));
     context.body.push(createObjectWithMethods(context.proto, name, obj));
 };
@@ -75,7 +75,9 @@ export interface TelescopeParseContext {
 }
 export class TelescopeParseContext implements TelescopeParseContext {
     constructor(ref: ProtoRef, store: ProtoStore) {
-        this.proto = new ProtoParseContext();
+        this.proto = new ProtoParseContext(
+            ref, store
+        );
         this.amino = new AminoParseContext(
             ref, store
         );

@@ -1,0 +1,38 @@
+import { ProtoRoot, ProtoRef } from '@osmonauts/proto-parser';
+export declare const getRoot: (ref: ProtoRef) => ProtoRoot;
+export declare const UTILS: {
+    AminoHeight: string;
+    AminoMsg: string;
+    AminoTypes: string;
+    decodeBech32Pubkey: string;
+    defaultRegistryTypes: string;
+    encodeBech32PubKey: string;
+    fromBase64: string;
+    fromBech32: string;
+    fromDuration: string;
+    fromHex: string;
+    fromJsonTimestamp: string;
+    fromTimestamp: string;
+    GeneratedType: string;
+    isSet: string;
+    isObject: string;
+    Long: string;
+    OfflineSigner: string;
+    omitDefault: string;
+    Registry: string;
+    SigningStargateClient: string;
+    toBase64: string;
+    toDuration: string;
+    toTimestamp: string;
+    bytesFromBase64: string;
+    base64FromBytes: string;
+    _m0: {
+        type: string;
+        path: string;
+        name: string;
+    };
+    Exact: string;
+    DeepPartial: string;
+};
+export declare const getRelativePath: (f1: string, f2: string) => string;
+export declare const variableSlug: (str: any) => string;
