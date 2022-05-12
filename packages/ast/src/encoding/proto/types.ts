@@ -225,6 +225,10 @@ export const getDefaultTSTypeFromProtoType = (field: ProtoField, isOptional: boo
         return t.objectExpression([])
     }
 
+    if (field.parsedType?.type === 'Enum') {
+        return t.numericLiteral(0);
+    }
+
     switch (field.type) {
         case 'string':
             return t.stringLiteral('');
