@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { getEnumFromJsonName, getEnumToJsonName } from './types';
-import { identifier, tsEnumMember, functionDeclaration } from '../../utils';
+import { identifier, tsEnumMember, functionDeclaration, commentBlock } from '../../utils';
 
 import { ProtoEnum } from './types';
 
@@ -20,6 +20,23 @@ const getEnumValues = (proto: ProtoEnum) => {
     return enums;
 }
 
+const processEnumComment = (e: ProtoEnum) => {
+    const comment = e.comment;
+
+    if (!/[\n]+/.test(comment)) {
+        return `* ${e.name} - ${comment} `;
+    }
+    let lines = comment.split('\n');
+    lines = ['*', ...lines, ' '];
+    const comments = lines.map((line, i) => {
+        if (i == 0) return line;
+        if (i == 1) return ` * ${e.name} - ${line}`;
+        if (i == (lines.length - 1)) return line;
+        return ` * ${line}`
+    });
+    return comments.join('\n');
+};
+
 export const createProtoEnum = (name: string, proto: ProtoEnum) => {
     const enums = getEnumValues(proto);
     const values = enums.map(e => {
@@ -28,11 +45,11 @@ export const createProtoEnum = (name: string, proto: ProtoEnum) => {
             t.numericLiteral(e.value),
             e.comment ? [{
                 type: 'CommentBlock',
-                value: `* ${e.name} - ${e.comment} `
+                value: processEnumComment(e)
             }] : []
         );
     })
-    return t.exportNamedDeclaration(
+    const declaration = t.exportNamedDeclaration(
         t.tsEnumDeclaration(
             t.identifier(name),
             [
@@ -45,7 +62,15 @@ export const createProtoEnum = (name: string, proto: ProtoEnum) => {
                 ),
             ]
         )
-    )
+    );
+
+    if (proto.comment) {
+        declaration.leadingComments = [
+            commentBlock(proto.comment)
+        ];
+    }
+
+    return declaration;
 };
 
 export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {

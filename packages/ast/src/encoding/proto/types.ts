@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { getObjectName } from '@osmonauts/proto-parser';
 import { pascal } from 'case';
-import { identifier, tsPropertySignature, functionDeclaration } from '../../utils';
+import { identifier, tsPropertySignature, functionDeclaration, commentBlock } from '../../utils';
 import { ProtoParseContext } from '../context';
 
 export interface ProtoAny {
@@ -370,29 +370,6 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     }
 
     return ast;
-};
-
-const commentBlock = (comment: string): t.CommentBlock => {
-
-    if (!/[\n]+/.test(comment)) {
-        return {
-            type: 'CommentBlock',
-            value: `* ${comment} `
-        };
-    }
-
-    let lines = comment.split('\n');
-    lines = ['*', ...lines, ' '];
-    const comments = lines.map((line, i) => {
-        if (i == 0) return line;
-        if (i == (lines.length - 1)) return line;
-        return ` * ${line}`
-    });
-
-    return {
-        type: 'CommentBlock',
-        value: comments.join('\n')
-    };
 };
 
 export const createProtoType = (

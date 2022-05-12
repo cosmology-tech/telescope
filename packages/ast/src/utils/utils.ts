@@ -4,6 +4,29 @@ const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
 export { BILLION };
 
+export const commentBlock = (comment: string): t.CommentBlock => {
+
+    if (!/[\n]+/.test(comment)) {
+        return {
+            type: 'CommentBlock',
+            value: `* ${comment} `
+        };
+    }
+
+    let lines = comment.split('\n');
+    lines = ['*', ...lines, ' '];
+    const comments = lines.map((line, i) => {
+        if (i == 0) return line;
+        if (i == (lines.length - 1)) return line;
+        return ` * ${line}`
+    });
+
+    return {
+        type: 'CommentBlock',
+        value: comments.join('\n')
+    };
+};
+
 export const recursiveNamespace = (names, moduleBlockBody) => {
     if (!names || !names.length) return moduleBlockBody;
     const name = names.pop();
