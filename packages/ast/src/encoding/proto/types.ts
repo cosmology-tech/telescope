@@ -326,8 +326,6 @@ export const getObjectNameOld = (name: string, scope: string[] = []) => {
     return [...scopes, name].join('_')
 };
 
-
-
 const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
     let name = context.getTypeName(field)
     return renderNameSafely(name);

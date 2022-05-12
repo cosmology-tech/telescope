@@ -1,7 +1,7 @@
 import { traverse } from '@babel/core';
 import { ProtoStore } from './store';
 import { ProtoRef, ProtoRoot } from './types';
-import { getNestedProto } from './utils';
+import { getNested, getNestedProto } from './utils';
 
 export interface Lookup {
     obj: any;
@@ -130,6 +130,18 @@ export const lookup = (
     const root = getRoot(ref);
     const nested = getNestedProto(root);
     return recursiveLookup(nested, name, [root.package], allowNested);
+};
+
+export const lookupNested = (
+    ref: ProtoRef,
+    traversal: string[],
+    name: string,
+    allowNested = true
+) => {
+    const root = getRoot(ref);
+    const nested = getNested(root, traversal);
+    const scoped = [...traversal].splice(root.package.split('.').length);
+    return recursiveLookup(nested, name, [root.package, ...scoped], allowNested);
 };
 
 export const lookupAny = (

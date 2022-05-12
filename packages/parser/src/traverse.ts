@@ -1,5 +1,5 @@
 import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
-import { importLookup, protoImportLookup, lookup, lookupAny } from './lookup';
+import { importLookup, protoImportLookup, lookup, lookupAny, lookupNested } from './lookup';
 import { ProtoStore } from './store';
 import { ProtoRoot, ProtoRef } from './types';
 import { instanceType, NATIVE_TYPES } from './utils';
@@ -21,6 +21,7 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
             ref.proto.root,
             imports,
             exports,
+            [],
             false
         ),
         parsedImports: null,
@@ -49,7 +50,7 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     return obj;
 };
 
-const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
+const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, traversal: string[]) => {
     return Object.keys(obj.fields).reduce((m, key) => {
 
         const field = obj.fields[key];
@@ -75,7 +76,18 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
             return m;
         }
 
-        // local scope first
+        // nested scope first
+        found = lookupNested(ref, traversal, field.type);
+        if (found) {
+            m[key] = {
+                scope: found.scope,
+                parsedType: instanceType(found),
+                ...serialize(),
+            };
+            return m;
+        }
+
+        // local scope second
         found = lookup(store, ref, field.type);
         if (found) {
             m[key] = {
@@ -121,11 +133,19 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
     }, {});
 };
 
-const traverseType = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, exports: object, isNested: boolean) => {
+const traverseType = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    obj: any,
+    imports: object,
+    exports: object,
+    traversal: string[],
+    isNested: boolean
+) => {
     let nested = null;
     if (obj.nested) {
         nested = Object.keys(obj.nested).reduce((m, key) => {
-            m[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, true);
+            m[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, [...traversal, key], true);
             return m;
         }, {});
     }
@@ -146,7 +166,7 @@ const traverseType = (store: ProtoStore, ref: ProtoRef, obj: any, imports: objec
             };
             return m;
         }, {}) : undefined,
-        fields: traverseFields(store, ref, obj, imports),
+        fields: traverseFields(store, ref, obj, imports, traversal),
         nested,
         keyTypes: [],
         comment: obj.comment
@@ -186,8 +206,7 @@ const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obje
     }
 };
 
-const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, name: string) => {
-
+const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, name: string, traversal: string[]) => {
     const service = obj.methods[name];
     const { requestType } = service;
     let refObject = lookupAny(store, ref, requestType);
@@ -200,7 +219,7 @@ const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, impor
         type: 'ServiceMethod',
         name,
         requestType,
-        fields: traverseFields(store, ref, refObject.obj, imports)
+        fields: traverseFields(store, ref, refObject.obj, imports, traversal)
     };
 };
 
@@ -210,10 +229,10 @@ const getServiceType = (obj) => {
     return 'Unknown';
 }
 
-const traverseService = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
+const traverseService = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, traversal: string[]) => {
     const methods = Object.keys(obj.methods).reduce((m, key) => {
         m[key] = traverseServiceMethod(
-            store, ref, obj, imports, key
+            store, ref, obj, imports, key, traversal
         );
         return m;
     }, {})
@@ -227,15 +246,23 @@ const traverseService = (store: ProtoStore, ref: ProtoRef, obj: any, imports: ob
     }
 };
 
-export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, exports: object, isNested: boolean) => {
+export const recursiveTraversal = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    obj: any,
+    imports: object,
+    exports: object,
+    traversal: string[],
+    isNested: boolean
+) => {
     if (obj instanceof Type) {
-        return traverseType(store, ref, obj, imports, exports, isNested);
+        return traverseType(store, ref, obj, imports, exports, traversal, isNested);
     }
     if (obj instanceof Enum) {
         return traverseEnum(store, ref, obj, imports);
     }
     if (obj instanceof Service) {
-        return traverseService(store, ref, obj, imports);
+        return traverseService(store, ref, obj, imports, traversal);
     }
     if (obj instanceof Field) {
         return traverseField(store, ref, obj, imports);
@@ -243,7 +270,7 @@ export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, i
     if (obj instanceof Root) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, isNested);
+                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, [...traversal, key], isNested);
                 return m;
             }, {
                 type: 'Root',
@@ -256,7 +283,7 @@ export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, i
     if (obj instanceof Namespace) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, isNested);
+                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, [...traversal, key], isNested);
                 return m;
             }, {
                 type: 'Namespace',
