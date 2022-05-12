@@ -1909,11 +1909,13 @@ exports[`ibc/core/port/v1/query 2`] = `
 Array [
   Object {
     "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
     "name": "Counterparty",
     "type": "typeImport",
   },
   Object {
     "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
     "name": "Counterparty",
     "type": "typeImport",
   },
@@ -1924,6 +1926,7 @@ Array [
   },
   Object {
     "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
     "name": "Counterparty",
     "type": "typeImport",
   },
@@ -1934,7 +1937,178 @@ Array [
   },
   Object {
     "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
     "name": "Counterparty",
+    "type": "typeImport",
+  },
+]
+`;
+
+exports[`ibc/core/types/v1/genesis name collisions 1`] = `
+"export const GenesisState = {
+  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+    if (message.clientGenesis !== undefined) {
+      GenesisState1.encode(message.clientGenesis, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.connectionGenesis !== undefined) {
+      GenesisState2.encode(message.connectionGenesis, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.channelGenesis !== undefined) {
+      GenesisState3.encode(message.channelGenesis, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGenesisState();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.clientGenesis = GenesisState1.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.connectionGenesis = GenesisState2.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.channelGenesis = GenesisState3.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): GenesisState {
+    return {
+      clientGenesis: isSet(object.clientGenesis) ? GenesisState1.fromJSON(object.clientGenesis) : undefined,
+      connectionGenesis: isSet(object.connectionGenesis) ? GenesisState2.fromJSON(object.connectionGenesis) : undefined,
+      channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined
+    };
+  },
+
+  toJSON(message: GenesisState): unknown {
+    const obj: any = {};
+    message.clientGenesis !== undefined && (obj.clientGenesis = message.clientGenesis ? GenesisState1.toJSON(message.clientGenesis) : undefined);
+    message.connectionGenesis !== undefined && (obj.connectionGenesis = message.connectionGenesis ? GenesisState2.toJSON(message.connectionGenesis) : undefined);
+    message.channelGenesis !== undefined && (obj.channelGenesis = message.channelGenesis ? GenesisState3.toJSON(message.channelGenesis) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+    const message = createBaseGenesisState();
+    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState.fromPartial(object.clientGenesis) : undefined;
+    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState.fromPartial(object.connectionGenesis) : undefined;
+    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState.fromPartial(object.channelGenesis) : undefined;
+    return message;
+  }
+
+};"
+`;
+
+exports[`ibc/core/types/v1/genesis name collisions 2`] = `
+Array [
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
     "type": "typeImport",
   },
 ]
