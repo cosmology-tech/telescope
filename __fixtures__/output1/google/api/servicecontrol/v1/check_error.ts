@@ -33,7 +33,7 @@ export interface CheckError {
 
 function createBaseCheckError(): CheckError {
   return {
-    code: undefined,
+    code: 0,
     subject: "",
     detail: "",
     status: undefined
@@ -115,7 +115,7 @@ export const CheckError = {
 
   fromPartial<I extends Exact<DeepPartial<CheckError>, I>>(object: I): CheckError {
     const message = createBaseCheckError();
-    message.code = object.code ?? undefined;
+    message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
@@ -123,16 +123,22 @@ export const CheckError = {
   }
 
 };
+
+/** Error codes for Check responses. */
 export enum CheckError_Code {
   /** ERROR_CODE_UNSPECIFIED - This is never used in `CheckResponse`. */
   ERROR_CODE_UNSPECIFIED = 0,
 
-  /** NOT_FOUND - The consumer's project id, network container, or resource container was
-  not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND]. */
+  /**
+   * NOT_FOUND - The consumer's project id, network container, or resource container was
+   * not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
+   */
   NOT_FOUND = 5,
 
-  /** PERMISSION_DENIED - The consumer doesn't have access to the specified resource.
-  Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED]. */
+  /**
+   * PERMISSION_DENIED - The consumer doesn't have access to the specified resource.
+   * Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+   */
   PERMISSION_DENIED = 7,
 
   /** RESOURCE_EXHAUSTED - Quota check failed. Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]. */
@@ -150,24 +156,34 @@ export enum CheckError_Code {
   /** PROJECT_INVALID - The consumer's project number or id does not represent a valid project. */
   PROJECT_INVALID = 114,
 
-  /** CONSUMER_INVALID - The input consumer info does not represent a valid consumer folder or
-  organization. */
+  /**
+   * CONSUMER_INVALID - The input consumer info does not represent a valid consumer folder or
+   * organization.
+   */
   CONSUMER_INVALID = 125,
 
-  /** IP_ADDRESS_BLOCKED - The IP address of the consumer is invalid for the specific consumer
-  project. */
+  /**
+   * IP_ADDRESS_BLOCKED - The IP address of the consumer is invalid for the specific consumer
+   * project.
+   */
   IP_ADDRESS_BLOCKED = 109,
 
-  /** REFERER_BLOCKED - The referer address of the consumer request is invalid for the specific
-  consumer project. */
+  /**
+   * REFERER_BLOCKED - The referer address of the consumer request is invalid for the specific
+   * consumer project.
+   */
   REFERER_BLOCKED = 110,
 
-  /** CLIENT_APP_BLOCKED - The client application of the consumer request is invalid for the
-  specific consumer project. */
+  /**
+   * CLIENT_APP_BLOCKED - The client application of the consumer request is invalid for the
+   * specific consumer project.
+   */
   CLIENT_APP_BLOCKED = 111,
 
-  /** API_TARGET_BLOCKED - The API targeted by this request is invalid for the specified consumer
-  project. */
+  /**
+   * API_TARGET_BLOCKED - The API targeted by this request is invalid for the specified consumer
+   * project.
+   */
   API_TARGET_BLOCKED = 122,
 
   /** API_KEY_INVALID - The consumer's API key is invalid. */

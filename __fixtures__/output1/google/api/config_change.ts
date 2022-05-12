@@ -50,7 +50,7 @@ function createBaseConfigChange(): ConfigChange {
     element: "",
     oldValue: "",
     newValue: "",
-    changeType: undefined,
+    changeType: 0,
     advices: []
   };
 }
@@ -149,7 +149,7 @@ export const ConfigChange = {
     message.element = object.element ?? "";
     message.oldValue = object.oldValue ?? "";
     message.newValue = object.newValue ?? "";
-    message.changeType = object.changeType ?? undefined;
+    message.changeType = object.changeType ?? 0;
     message.advices = object.advices?.map(e => Advice.fromPartial(e)) || [];
     return message;
   }
@@ -224,20 +224,31 @@ export const Advice = {
   }
 
 };
+
+/**
+ * Classifies set of possible modifications to an object in the service
+ * configuration.
+ */
 export enum ChangeType {
   /** CHANGE_TYPE_UNSPECIFIED - No value was provided. */
   CHANGE_TYPE_UNSPECIFIED = 0,
 
-  /** ADDED - The changed object exists in the 'new' service configuration, but not
-  in the 'old' service configuration. */
+  /**
+   * ADDED - The changed object exists in the 'new' service configuration, but not
+   * in the 'old' service configuration.
+   */
   ADDED = 1,
 
-  /** REMOVED - The changed object exists in the 'old' service configuration, but not
-  in the 'new' service configuration. */
+  /**
+   * REMOVED - The changed object exists in the 'old' service configuration, but not
+   * in the 'new' service configuration.
+   */
   REMOVED = 2,
 
-  /** MODIFIED - The changed object exists in both service configurations, but its value
-  is different. */
+  /**
+   * MODIFIED - The changed object exists in both service configurations, but its value
+   * is different.
+   */
   MODIFIED = 3,
   UNRECOGNIZED = -1,
 }

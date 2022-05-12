@@ -455,7 +455,7 @@ export interface EventExec {
 function createBaseEventExec(): EventExec {
   return {
     proposalId: Long.UZERO,
-    result: undefined
+    result: 0
   };
 }
 
@@ -515,7 +515,7 @@ export const EventExec = {
   fromPartial<I extends Exact<DeepPartial<EventExec>, I>>(object: I): EventExec {
     const message = createBaseEventExec();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
-    message.result = object.result ?? undefined;
+    message.result = object.result ?? 0;
     return message;
   }
 

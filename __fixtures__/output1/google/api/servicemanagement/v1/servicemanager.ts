@@ -559,7 +559,7 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
   return {
     serviceName: "",
     configId: "",
-    view: undefined
+    view: 0
   };
 }
 
@@ -630,7 +630,7 @@ export const GetServiceConfigRequest = {
     const message = createBaseGetServiceConfigRequest();
     message.serviceName = object.serviceName ?? "";
     message.configId = object.configId ?? "";
-    message.view = object.view ?? undefined;
+    message.view = object.view ?? 0;
     return message;
   }
 
@@ -639,10 +639,12 @@ export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
   BASIC = 0,
 
-  /** FULL - Server response includes all fields including SourceInfo.
-  SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
-  and are only available for configs created using the
-  SubmitConfigSource method. */
+  /**
+   * FULL - Server response includes all fields including SourceInfo.
+   * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
+   * and are only available for configs created using the
+   * SubmitConfigSource method.
+   */
   FULL = 1,
   UNRECOGNIZED = -1,
 }

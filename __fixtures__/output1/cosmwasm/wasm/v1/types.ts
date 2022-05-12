@@ -1,6 +1,8 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** AccessType permission types */
 export enum AccessType {
   /** ACCESS_TYPE_UNSPECIFIED - AccessTypeUnspecified placeholder for empty value */
   ACCESS_TYPE_UNSPECIFIED = 0,
@@ -65,7 +67,7 @@ export interface AccessTypeParam {
 
 function createBaseAccessTypeParam(): AccessTypeParam {
   return {
-    value: undefined
+    value: 0
   };
 }
 
@@ -114,7 +116,7 @@ export const AccessTypeParam = {
 
   fromPartial<I extends Exact<DeepPartial<AccessTypeParam>, I>>(object: I): AccessTypeParam {
     const message = createBaseAccessTypeParam();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? 0;
     return message;
   }
 
@@ -128,7 +130,7 @@ export interface AccessConfig {
 
 function createBaseAccessConfig(): AccessConfig {
   return {
-    permission: undefined,
+    permission: 0,
     address: ""
   };
 }
@@ -188,7 +190,7 @@ export const AccessConfig = {
 
   fromPartial<I extends Exact<DeepPartial<AccessConfig>, I>>(object: I): AccessConfig {
     const message = createBaseAccessConfig();
-    message.permission = object.permission ?? undefined;
+    message.permission = object.permission ?? 0;
     message.address = object.address ?? "";
     return message;
   }
@@ -205,7 +207,7 @@ export interface Params {
 function createBaseParams(): Params {
   return {
     codeUploadAccess: undefined,
-    instantiateDefaultPermission: undefined,
+    instantiateDefaultPermission: 0,
     maxWasmCodeSize: Long.UZERO
   };
 }
@@ -276,7 +278,7 @@ export const Params = {
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
-    message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? undefined;
+    message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
     message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? Long.fromValue(object.maxWasmCodeSize) : Long.UZERO;
     return message;
   }
@@ -533,6 +535,8 @@ export const ContractInfo = {
   }
 
 };
+
+/** ContractCodeHistoryOperationType actions that caused a code change */
 export enum ContractCodeHistoryOperationType {
   /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
@@ -604,7 +608,7 @@ export interface ContractCodeHistoryEntry {
 
 function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
-    operation: undefined,
+    operation: 0,
     codeId: Long.UZERO,
     updated: undefined,
     msg: new Uint8Array()
@@ -686,7 +690,7 @@ export const ContractCodeHistoryEntry = {
 
   fromPartial<I extends Exact<DeepPartial<ContractCodeHistoryEntry>, I>>(object: I): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
-    message.operation = object.operation ?? undefined;
+    message.operation = object.operation ?? 0;
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();

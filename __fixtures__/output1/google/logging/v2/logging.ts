@@ -1527,7 +1527,7 @@ export interface TailLogEntriesResponse_SuppressionInfo {
 
 function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesResponse_SuppressionInfo {
   return {
-    reason: undefined,
+    reason: 0,
     suppressedCount: 0
   };
 }
@@ -1587,24 +1587,30 @@ export const TailLogEntriesResponse_SuppressionInfo = {
 
   fromPartial<I extends Exact<DeepPartial<TailLogEntriesResponse_SuppressionInfo>, I>>(object: I): TailLogEntriesResponse_SuppressionInfo {
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
-    message.reason = object.reason ?? undefined;
+    message.reason = object.reason ?? 0;
     message.suppressedCount = object.suppressedCount ?? 0;
     return message;
   }
 
 };
+
+/** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   /** REASON_UNSPECIFIED - Unexpected default. */
   REASON_UNSPECIFIED = 0,
 
-  /** RATE_LIMIT - Indicates suppression occurred due to relevant entries being
-  received in excess of rate limits. For quotas and limits, see
-  [Logging API quotas and
-  limits](https://cloud.google.com/logging/quotas#api-limits). */
+  /**
+   * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
+   * received in excess of rate limits. For quotas and limits, see
+   * [Logging API quotas and
+   * limits](https://cloud.google.com/logging/quotas#api-limits).
+   */
   RATE_LIMIT = 1,
 
-  /** NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
-  responses quickly enough. */
+  /**
+   * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
+   * responses quickly enough.
+   */
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }

@@ -727,7 +727,7 @@ export interface IssueDetails {
 
 function createBaseIssueDetails(): IssueDetails {
   return {
-    severity: undefined,
+    severity: 0,
     position: undefined,
     id: Long.ZERO
   };
@@ -798,19 +798,23 @@ export const IssueDetails = {
 
   fromPartial<I extends Exact<DeepPartial<IssueDetails>, I>>(object: I): IssueDetails {
     const message = createBaseIssueDetails();
-    message.severity = object.severity ?? undefined;
+    message.severity = object.severity ?? 0;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     return message;
   }
 
 };
+
+/** Severities of issues. */
 export enum IssueDetails_Severity {
   /** SEVERITY_UNSPECIFIED - An unspecified severity. */
   SEVERITY_UNSPECIFIED = 0,
 
-  /** DEPRECATION - Deprecation issue for statements and method that may no longer be
-  supported or maintained. */
+  /**
+   * DEPRECATION - Deprecation issue for statements and method that may no longer be
+   * supported or maintained.
+   */
   DEPRECATION = 1,
 
   /** WARNING - Warnings such as: unused variables. */

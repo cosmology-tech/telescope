@@ -941,6 +941,8 @@ export const Type_AbstractType = {
   }
 
 };
+
+/** CEL primitive types. */
 export enum Type_PrimitiveType {
   /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
   PRIMITIVE_TYPE_UNSPECIFIED = 0,
@@ -948,19 +950,25 @@ export enum Type_PrimitiveType {
   /** BOOL - Boolean type. */
   BOOL = 1,
 
-  /** INT64 - Int64 type.
-  
-  Proto-based integer values are widened to int64. */
+  /**
+   * INT64 - Int64 type.
+   * 
+   * Proto-based integer values are widened to int64.
+   */
   INT64 = 2,
 
-  /** UINT64 - Uint64 type.
-  
-  Proto-based unsigned integer values are widened to uint64. */
+  /**
+   * UINT64 - Uint64 type.
+   * 
+   * Proto-based unsigned integer values are widened to uint64.
+   */
   UINT64 = 3,
 
-  /** DOUBLE - Double type.
-  
-  Proto-based float values are widened to double values. */
+  /**
+   * DOUBLE - Double type.
+   * 
+   * Proto-based float values are widened to double values.
+   */
   DOUBLE = 4,
 
   /** STRING - String type. */
@@ -1033,15 +1041,19 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
       return "UNKNOWN";
   }
 }
+
+/** Well-known protobuf types treated with first-class support in CEL. */
 export enum Type_WellKnownType {
   /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
   WELL_KNOWN_TYPE_UNSPECIFIED = 0,
 
-  /** ANY - Well-known protobuf.Any type.
-  
-  Any types are a polymorphic message type. During type-checking they are
-  treated like `DYN` types, but at runtime they are resolved to a specific
-  message type specified at evaluation time. */
+  /**
+   * ANY - Well-known protobuf.Any type.
+   * 
+   * Any types are a polymorphic message type. During type-checking they are
+   * treated like `DYN` types, but at runtime they are resolved to a specific
+   * message type specified at evaluation time.
+   */
   ANY = 1,
 
   /** TIMESTAMP - Well-known protobuf.Timestamp type, internally referenced as `timestamp`. */

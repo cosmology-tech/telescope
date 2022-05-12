@@ -31,7 +31,7 @@ function createBaseType(): Type {
     oneofs: [],
     options: [],
     sourceContext: undefined,
-    syntax: undefined
+    syntax: 0
   };
 }
 
@@ -151,7 +151,7 @@ export const Type = {
     message.oneofs = object.oneofs?.map(e => e) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
-    message.syntax = object.syntax ?? undefined;
+    message.syntax = object.syntax ?? 0;
     return message;
   }
 
@@ -198,8 +198,8 @@ export interface Field {
 
 function createBaseField(): Field {
   return {
-    kind: undefined,
-    cardinality: undefined,
+    kind: 0,
+    cardinality: 0,
     number: 0,
     name: "",
     typeUrl: "",
@@ -352,8 +352,8 @@ export const Field = {
 
   fromPartial<I extends Exact<DeepPartial<Field>, I>>(object: I): Field {
     const message = createBaseField();
-    message.kind = object.kind ?? undefined;
-    message.cardinality = object.cardinality ?? undefined;
+    message.kind = object.kind ?? 0;
+    message.cardinality = object.cardinality ?? 0;
     message.number = object.number ?? 0;
     message.name = object.name ?? "";
     message.typeUrl = object.typeUrl ?? "";
@@ -366,6 +366,8 @@ export const Field = {
   }
 
 };
+
+/** Basic field types. */
 export enum Field_Kind {
   /** TYPE_UNKNOWN - Field type unknown. */
   TYPE_UNKNOWN = 0,
@@ -572,6 +574,8 @@ export function field_KindToJSON(object: Field_Kind): string {
       return "UNKNOWN";
   }
 }
+
+/** Whether a field is optional, required, or repeated. */
 export enum Field_Cardinality {
   /** CARDINALITY_UNKNOWN - For fields with unknown cardinality. */
   CARDINALITY_UNKNOWN = 0,
@@ -653,7 +657,7 @@ function createBaseEnum(): Enum {
     enumvalue: [],
     options: [],
     sourceContext: undefined,
-    syntax: undefined
+    syntax: 0
   };
 }
 
@@ -757,7 +761,7 @@ export const Enum = {
     message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
-    message.syntax = object.syntax ?? undefined;
+    message.syntax = object.syntax ?? 0;
     return message;
   }
 
@@ -952,6 +956,8 @@ export const Option = {
   }
 
 };
+
+/** The syntax in which a protocol buffer element is defined. */
 export enum Syntax {
   /** SYNTAX_PROTO2 - Syntax `proto2`. */
   SYNTAX_PROTO2 = 0,

@@ -36,7 +36,7 @@ function createBaseConnectionEnd(): ConnectionEnd {
   return {
     clientId: "",
     versions: [],
-    state: undefined,
+    state: 0,
     counterparty: undefined,
     delayPeriod: Long.UZERO
   };
@@ -135,7 +135,7 @@ export const ConnectionEnd = {
     const message = createBaseConnectionEnd();
     message.clientId = object.clientId ?? "";
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
@@ -175,7 +175,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
     id: "",
     clientId: "",
     versions: [],
-    state: undefined,
+    state: 0,
     counterparty: undefined,
     delayPeriod: Long.UZERO
   };
@@ -285,13 +285,18 @@ export const IdentifiedConnection = {
     message.id = object.id ?? "";
     message.clientId = object.clientId ?? "";
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
   }
 
 };
+
+/**
+ * State defines if a connection is in one of the following states:
+ * INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ */
 export enum State {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
   STATE_UNINITIALIZED_UNSPECIFIED = 0,
@@ -299,8 +304,10 @@ export enum State {
   /** STATE_INIT - A connection end has just started the opening handshake. */
   STATE_INIT = 1,
 
-  /** STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-  chain. */
+  /**
+   * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
+   * chain.
+   */
   STATE_TRYOPEN = 2,
 
   /** STATE_OPEN - A connection end has completed the handshake. */

@@ -250,7 +250,7 @@ function createBaseQuotaOperation(): QuotaOperation {
     consumerId: "",
     labels: {},
     quotaMetrics: [],
-    quotaMode: undefined
+    quotaMode: 0
   };
 }
 
@@ -387,103 +387,115 @@ export const QuotaOperation = {
       return acc;
     }, {});
     message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
-    message.quotaMode = object.quotaMode ?? undefined;
+    message.quotaMode = object.quotaMode ?? 0;
     return message;
   }
 
 };
-export enum QuotaMode {
+
+/** Supported quota modes. */
+export enum QuotaOperation_QuotaMode {
   /** UNSPECIFIED - Guard against implicit default. Must not be used. */
   UNSPECIFIED = 0,
 
-  /** NORMAL - For AllocateQuota request, allocates quota for the amount specified in
-  the service configuration or specified using the quota metrics. If the
-  amount is higher than the available quota, allocation error will be
-  returned and no quota will be allocated.
-  If multiple quotas are part of the request, and one fails, none of the
-  quotas are allocated or released. */
+  /**
+   * NORMAL - For AllocateQuota request, allocates quota for the amount specified in
+   * the service configuration or specified using the quota metrics. If the
+   * amount is higher than the available quota, allocation error will be
+   * returned and no quota will be allocated.
+   * If multiple quotas are part of the request, and one fails, none of the
+   * quotas are allocated or released.
+   */
   NORMAL = 1,
 
-  /** BEST_EFFORT - The operation allocates quota for the amount specified in the service
-  configuration or specified using the quota metrics. If the amount is
-  higher than the available quota, request does not fail but all available
-  quota will be allocated.
-  For rate quota, BEST_EFFORT will continue to deduct from other groups
-  even if one does not have enough quota. For allocation, it will find the
-  minimum available amount across all groups and deduct that amount from
-  all the affected groups. */
+  /**
+   * BEST_EFFORT - The operation allocates quota for the amount specified in the service
+   * configuration or specified using the quota metrics. If the amount is
+   * higher than the available quota, request does not fail but all available
+   * quota will be allocated.
+   * For rate quota, BEST_EFFORT will continue to deduct from other groups
+   * even if one does not have enough quota. For allocation, it will find the
+   * minimum available amount across all groups and deduct that amount from
+   * all the affected groups.
+   */
   BEST_EFFORT = 2,
 
-  /** CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
-  available and does not change the available quota. No lock is placed on
-  the available quota either. */
+  /**
+   * CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
+   * available and does not change the available quota. No lock is placed on
+   * the available quota either.
+   */
   CHECK_ONLY = 3,
 
-  /** QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
-  effective quota limit(s) in the response, and no quota check will be
-  performed. Not supported for other requests, and even for
-  AllocateQuotaRequest, this is currently supported only for allowlisted
-  services. */
+  /**
+   * QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
+   * effective quota limit(s) in the response, and no quota check will be
+   * performed. Not supported for other requests, and even for
+   * AllocateQuotaRequest, this is currently supported only for allowlisted
+   * services.
+   */
   QUERY_ONLY = 4,
 
-  /** ADJUST_ONLY - The operation allocates quota for the amount specified in the service
-  configuration or specified using the quota metrics. If the requested
-  amount is higher than the available quota, request does not fail and
-  remaining quota would become negative (going over the limit).
-  Not supported for Rate Quota. */
+  /**
+   * ADJUST_ONLY - The operation allocates quota for the amount specified in the service
+   * configuration or specified using the quota metrics. If the requested
+   * amount is higher than the available quota, request does not fail and
+   * remaining quota would become negative (going over the limit).
+   * Not supported for Rate Quota.
+   */
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
 }
-export function quotaModeFromJSON(object: any): QuotaMode {
+export function quotaOperation_QuotaModeFromJSON(object: any): QuotaOperation_QuotaMode {
   switch (object) {
     case 0:
     case "UNSPECIFIED":
-      return QuotaMode.UNSPECIFIED;
+      return QuotaOperation_QuotaMode.UNSPECIFIED;
 
     case 1:
     case "NORMAL":
-      return QuotaMode.NORMAL;
+      return QuotaOperation_QuotaMode.NORMAL;
 
     case 2:
     case "BEST_EFFORT":
-      return QuotaMode.BEST_EFFORT;
+      return QuotaOperation_QuotaMode.BEST_EFFORT;
 
     case 3:
     case "CHECK_ONLY":
-      return QuotaMode.CHECK_ONLY;
+      return QuotaOperation_QuotaMode.CHECK_ONLY;
 
     case 4:
     case "QUERY_ONLY":
-      return QuotaMode.QUERY_ONLY;
+      return QuotaOperation_QuotaMode.QUERY_ONLY;
 
     case 5:
     case "ADJUST_ONLY":
-      return QuotaMode.ADJUST_ONLY;
+      return QuotaOperation_QuotaMode.ADJUST_ONLY;
 
     case -1:
     case "UNRECOGNIZED":
     default:
-      return QuotaMode.UNRECOGNIZED;
+      return QuotaOperation_QuotaMode.UNRECOGNIZED;
   }
 }
-export function quotaModeToJSON(object: QuotaMode): string {
+export function quotaOperation_QuotaModeToJSON(object: QuotaOperation_QuotaMode): string {
   switch (object) {
-    case QuotaMode.UNSPECIFIED:
+    case QuotaOperation_QuotaMode.UNSPECIFIED:
       return "UNSPECIFIED";
 
-    case QuotaMode.NORMAL:
+    case QuotaOperation_QuotaMode.NORMAL:
       return "NORMAL";
 
-    case QuotaMode.BEST_EFFORT:
+    case QuotaOperation_QuotaMode.BEST_EFFORT:
       return "BEST_EFFORT";
 
-    case QuotaMode.CHECK_ONLY:
+    case QuotaOperation_QuotaMode.CHECK_ONLY:
       return "CHECK_ONLY";
 
-    case QuotaMode.QUERY_ONLY:
+    case QuotaOperation_QuotaMode.QUERY_ONLY:
       return "QUERY_ONLY";
 
-    case QuotaMode.ADJUST_ONLY:
+    case QuotaOperation_QuotaMode.ADJUST_ONLY:
       return "ADJUST_ONLY";
 
     default:
@@ -648,7 +660,7 @@ export interface QuotaError {
 
 function createBaseQuotaError(): QuotaError {
   return {
-    code: undefined,
+    code: 0,
     subject: "",
     description: "",
     status: undefined
@@ -730,7 +742,7 @@ export const QuotaError = {
 
   fromPartial<I extends Exact<DeepPartial<QuotaError>, I>>(object: I): QuotaError {
     const message = createBaseQuotaError();
-    message.code = object.code ?? undefined;
+    message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
@@ -738,16 +750,28 @@ export const QuotaError = {
   }
 
 };
+
+/**
+ * Error codes related to project config validations are deprecated since the
+ * quota controller methods do not perform these validations. Instead services
+ * have to call the Check method, without quota_properties field, to perform
+ * these validations before calling the quota controller methods. These
+ * methods check only for project deletion to be wipe out compliant.
+ */
 export enum QuotaError_Code {
   /** UNSPECIFIED - This is never used. */
   UNSPECIFIED = 0,
 
-  /** RESOURCE_EXHAUSTED - Quota allocation failed.
-  Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]. */
+  /**
+   * RESOURCE_EXHAUSTED - Quota allocation failed.
+   * Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+   */
   RESOURCE_EXHAUSTED = 8,
 
-  /** BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
-  billing. */
+  /**
+   * BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
+   * billing.
+   */
   BILLING_NOT_ACTIVE = 107,
 
   /** PROJECT_DELETED - Consumer's project has been marked as deleted (soft deletion). */

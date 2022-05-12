@@ -71,7 +71,7 @@ function createBaseApi(): Api {
     version: "",
     sourceContext: undefined,
     mixins: [],
-    syntax: undefined
+    syntax: 0
   };
 }
 
@@ -203,7 +203,7 @@ export const Api = {
     message.version = object.version ?? "";
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
-    message.syntax = object.syntax ?? undefined;
+    message.syntax = object.syntax ?? 0;
     return message;
   }
 
@@ -241,7 +241,7 @@ function createBaseMethod(): Method {
     responseTypeUrl: "",
     responseStreaming: false,
     options: [],
-    syntax: undefined
+    syntax: 0
   };
 }
 
@@ -362,7 +362,7 @@ export const Method = {
     message.responseTypeUrl = object.responseTypeUrl ?? "";
     message.responseStreaming = object.responseStreaming ?? false;
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.syntax = object.syntax ?? undefined;
+    message.syntax = object.syntax ?? 0;
     return message;
   }
 

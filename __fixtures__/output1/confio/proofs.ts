@@ -68,6 +68,13 @@ export function hashOpToJSON(object: HashOp): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * LengthOp defines how to process the key and value of the LeafOp
+ * to include length information. After encoding the length with the given
+ * algorithm, the length will be prepended to the key and value bytes.
+ * (Each one with it's own encoded length)
+ */
 export enum LengthOp {
   /** NO_PREFIX - NO_PREFIX don't include any length info */
   NO_PREFIX = 0,
@@ -527,10 +534,10 @@ export interface LeafOp {
 
 function createBaseLeafOp(): LeafOp {
   return {
-    hash: undefined,
-    prehashKey: undefined,
-    prehashValue: undefined,
-    length: undefined,
+    hash: 0,
+    prehashKey: 0,
+    prehashValue: 0,
+    length: 0,
     prefix: new Uint8Array()
   };
 }
@@ -620,10 +627,10 @@ export const LeafOp = {
 
   fromPartial<I extends Exact<DeepPartial<LeafOp>, I>>(object: I): LeafOp {
     const message = createBaseLeafOp();
-    message.hash = object.hash ?? undefined;
-    message.prehashKey = object.prehashKey ?? undefined;
-    message.prehashValue = object.prehashValue ?? undefined;
-    message.length = object.length ?? undefined;
+    message.hash = object.hash ?? 0;
+    message.prehashKey = object.prehashKey ?? 0;
+    message.prehashValue = object.prehashValue ?? 0;
+    message.length = object.length ?? 0;
     message.prefix = object.prefix ?? new Uint8Array();
     return message;
   }
@@ -655,7 +662,7 @@ export interface InnerOp {
 
 function createBaseInnerOp(): InnerOp {
   return {
-    hash: undefined,
+    hash: 0,
     prefix: new Uint8Array(),
     suffix: new Uint8Array()
   };
@@ -726,7 +733,7 @@ export const InnerOp = {
 
   fromPartial<I extends Exact<DeepPartial<InnerOp>, I>>(object: I): InnerOp {
     const message = createBaseInnerOp();
-    message.hash = object.hash ?? undefined;
+    message.hash = object.hash ?? 0;
     message.prefix = object.prefix ?? new Uint8Array();
     message.suffix = object.suffix ?? new Uint8Array();
     return message;
@@ -889,7 +896,7 @@ function createBaseInnerSpec(): InnerSpec {
     minPrefixLength: 0,
     maxPrefixLength: 0,
     emptyChild: new Uint8Array(),
-    hash: undefined
+    hash: 0
   };
 }
 
@@ -1012,7 +1019,7 @@ export const InnerSpec = {
     message.minPrefixLength = object.minPrefixLength ?? 0;
     message.maxPrefixLength = object.maxPrefixLength ?? 0;
     message.emptyChild = object.emptyChild ?? new Uint8Array();
-    message.hash = object.hash ?? undefined;
+    message.hash = object.hash ?? 0;
     return message;
   }
 

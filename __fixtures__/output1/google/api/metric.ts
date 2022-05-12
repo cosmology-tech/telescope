@@ -185,13 +185,13 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     name: "",
     type: "",
     labels: [],
-    metricKind: undefined,
-    valueType: undefined,
+    metricKind: 0,
+    valueType: 0,
     unit: "",
     description: "",
     displayName: "",
     metadata: undefined,
-    launchStage: undefined,
+    launchStage: 0,
     monitoredResourceTypes: []
   };
 }
@@ -356,13 +356,13 @@ export const MetricDescriptor = {
     message.name = object.name ?? "";
     message.type = object.type ?? "";
     message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];
-    message.metricKind = object.metricKind ?? undefined;
-    message.valueType = object.valueType ?? undefined;
+    message.metricKind = object.metricKind ?? 0;
+    message.valueType = object.valueType ?? 0;
     message.unit = object.unit ?? "";
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata) : undefined;
-    message.launchStage = object.launchStage ?? undefined;
+    message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
   }
@@ -392,7 +392,7 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
 
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
-    launchStage: undefined,
+    launchStage: 0,
     samplePeriod: undefined,
     ingestDelay: undefined
   };
@@ -457,13 +457,19 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
 
   fromPartial<I extends Exact<DeepPartial<MetricDescriptor_MetricDescriptorMetadata>, I>>(object: I): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
-    message.launchStage = object.launchStage ?? undefined;
+    message.launchStage = object.launchStage ?? 0;
     message.samplePeriod = object.samplePeriod ?? undefined;
     message.ingestDelay = object.ingestDelay ?? undefined;
     return message;
   }
 
 };
+
+/**
+ * The kind of measurement. It describes how the data is reported.
+ * For information on setting the start time and end time based on
+ * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
+ */
 export enum MetricDescriptor_MetricKind {
   /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
   METRIC_KIND_UNSPECIFIED = 0,
@@ -474,11 +480,13 @@ export enum MetricDescriptor_MetricKind {
   /** DELTA - The change in a value during a time interval. */
   DELTA = 2,
 
-  /** CUMULATIVE - A value accumulated over a time interval.  Cumulative
-  measurements in a time series should have the same start time
-  and increasing end times, until an event resets the cumulative
-  value to zero and sets a new start time for the following
-  points. */
+  /**
+   * CUMULATIVE - A value accumulated over a time interval.  Cumulative
+   * measurements in a time series should have the same start time
+   * and increasing end times, until an event resets the cumulative
+   * value to zero and sets a new start time for the following
+   * points.
+   */
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
 }
@@ -524,12 +532,16 @@ export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_Metri
       return "UNKNOWN";
   }
 }
+
+/** The value type of a metric. */
 export enum MetricDescriptor_ValueType {
   /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
   VALUE_TYPE_UNSPECIFIED = 0,
 
-  /** BOOL - The value is a boolean.
-  This value type can be used only if the metric kind is `GAUGE`. */
+  /**
+   * BOOL - The value is a boolean.
+   * This value type can be used only if the metric kind is `GAUGE`.
+   */
   BOOL = 1,
 
   /** INT64 - The value is a signed 64-bit integer. */
@@ -538,8 +550,10 @@ export enum MetricDescriptor_ValueType {
   /** DOUBLE - The value is a double precision floating point number. */
   DOUBLE = 3,
 
-  /** STRING - The value is a text string.
-  This value type can be used only if the metric kind is `GAUGE`. */
+  /**
+   * STRING - The value is a text string.
+   * This value type can be used only if the metric kind is `GAUGE`.
+   */
   STRING = 4,
 
   /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */

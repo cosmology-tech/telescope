@@ -113,7 +113,7 @@ export interface Property {
 function createBaseProperty(): Property {
   return {
     name: "",
-    type: undefined,
+    type: 0,
     description: ""
   };
 }
@@ -184,12 +184,14 @@ export const Property = {
   fromPartial<I extends Exact<DeepPartial<Property>, I>>(object: I): Property {
     const message = createBaseProperty();
     message.name = object.name ?? "";
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? 0;
     message.description = object.description ?? "";
     return message;
   }
 
 };
+
+/** Supported data type of the property values */
 export enum Property_PropertyType {
   /** UNSPECIFIED - The type is unspecified, and will result in an error. */
   UNSPECIFIED = 0,

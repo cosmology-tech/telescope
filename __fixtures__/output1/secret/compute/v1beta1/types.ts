@@ -55,7 +55,7 @@ export interface AccessTypeParam {
 
 function createBaseAccessTypeParam(): AccessTypeParam {
   return {
-    value: undefined
+    value: 0
   };
 }
 
@@ -104,7 +104,7 @@ export const AccessTypeParam = {
 
   fromPartial<I extends Exact<DeepPartial<AccessTypeParam>, I>>(object: I): AccessTypeParam {
     const message = createBaseAccessTypeParam();
-    message.value = object.value ?? undefined;
+    message.value = object.value ?? 0;
     return message;
   }
 

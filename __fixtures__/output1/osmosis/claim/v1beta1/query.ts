@@ -355,7 +355,7 @@ export interface QueryClaimableForActionRequest {
 function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequest {
   return {
     address: "",
-    action: undefined
+    action: 0
   };
 }
 
@@ -415,7 +415,7 @@ export const QueryClaimableForActionRequest = {
   fromPartial<I extends Exact<DeepPartial<QueryClaimableForActionRequest>, I>>(object: I): QueryClaimableForActionRequest {
     const message = createBaseQueryClaimableForActionRequest();
     message.address = object.address ?? "";
-    message.action = object.action ?? undefined;
+    message.action = object.action ?? 0;
     return message;
   }
 

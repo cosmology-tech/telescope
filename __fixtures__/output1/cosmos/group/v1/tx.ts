@@ -1400,15 +1400,21 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   }
 
 };
+
+/** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {
-  /** EXEC_UNSPECIFIED - An empty value means that there should be a separate
-  MsgExec request for the proposal to execute. */
+  /**
+   * EXEC_UNSPECIFIED - An empty value means that there should be a separate
+   * MsgExec request for the proposal to execute.
+   */
   EXEC_UNSPECIFIED = 0,
 
-  /** EXEC_TRY - Try to execute the proposal immediately.
-  If the proposal is not allowed per the DecisionPolicy,
-  the proposal will still be open and could
-  be executed at a later point. */
+  /**
+   * EXEC_TRY - Try to execute the proposal immediately.
+   * If the proposal is not allowed per the DecisionPolicy,
+   * the proposal will still be open and could
+   * be executed at a later point.
+   */
   EXEC_TRY = 1,
   UNRECOGNIZED = -1,
 }
@@ -1472,7 +1478,7 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
     proposers: [],
     metadata: "",
     messages: [],
-    exec: undefined
+    exec: 0
   };
 }
 
@@ -1577,7 +1583,7 @@ export const MsgSubmitProposal = {
     message.proposers = object.proposers?.map(e => e) || [];
     message.metadata = object.metadata ?? "";
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
-    message.exec = object.exec ?? undefined;
+    message.exec = object.exec ?? 0;
     return message;
   }
 
@@ -1795,9 +1801,9 @@ function createBaseMsgVote(): MsgVote {
   return {
     proposalId: Long.UZERO,
     voter: "",
-    option: undefined,
+    option: 0,
     metadata: "",
-    exec: undefined
+    exec: 0
   };
 }
 
@@ -1888,9 +1894,9 @@ export const MsgVote = {
     const message = createBaseMsgVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? undefined;
+    message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
-    message.exec = object.exec ?? undefined;
+    message.exec = object.exec ?? 0;
     return message;
   }
 

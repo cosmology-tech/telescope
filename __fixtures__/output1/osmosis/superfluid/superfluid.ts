@@ -44,7 +44,7 @@ export interface SuperfluidAsset {
 function createBaseSuperfluidAsset(): SuperfluidAsset {
   return {
     denom: "",
-    assetType: undefined
+    assetType: 0
   };
 }
 
@@ -104,7 +104,7 @@ export const SuperfluidAsset = {
   fromPartial<I extends Exact<DeepPartial<SuperfluidAsset>, I>>(object: I): SuperfluidAsset {
     const message = createBaseSuperfluidAsset();
     message.denom = object.denom ?? "";
-    message.assetType = object.assetType ?? undefined;
+    message.assetType = object.assetType ?? 0;
     return message;
   }
 

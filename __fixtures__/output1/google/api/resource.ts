@@ -145,7 +145,7 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
     type: "",
     pattern: [],
     nameField: "",
-    history: undefined,
+    history: 0,
     plural: "",
     singular: "",
     style: []
@@ -284,7 +284,7 @@ export const ResourceDescriptor = {
     message.type = object.type ?? "";
     message.pattern = object.pattern?.map(e => e) || [];
     message.nameField = object.nameField ?? "";
-    message.history = object.history ?? undefined;
+    message.history = object.history ?? 0;
     message.plural = object.plural ?? "";
     message.singular = object.singular ?? "";
     message.style = object.style?.map(e => e) || [];
@@ -292,17 +292,26 @@ export const ResourceDescriptor = {
   }
 
 };
+
+/**
+ * A description of the historical or future-looking state of the
+ * resource pattern.
+ */
 export enum ResourceDescriptor_History {
   /** HISTORY_UNSPECIFIED - The "unset" value. */
   HISTORY_UNSPECIFIED = 0,
 
-  /** ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
-  additional patterns were added later. */
+  /**
+   * ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
+   * additional patterns were added later.
+   */
   ORIGINALLY_SINGLE_PATTERN = 1,
 
-  /** FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
-  later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
-  that from being necessary once there are multiple patterns.) */
+  /**
+   * FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
+   * later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
+   * that from being necessary once there are multiple patterns.)
+   */
   FUTURE_MULTI_PATTERN = 2,
   UNRECOGNIZED = -1,
 }
@@ -341,18 +350,22 @@ export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_Hist
       return "UNKNOWN";
   }
 }
+
+/** A flag representing a specific style that a resource claims to conform to. */
 export enum ResourceDescriptor_Style {
   /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
   STYLE_UNSPECIFIED = 0,
 
-  /** DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
-  
-  Declarative-friendly resources must be more strictly consistent, and
-  setting this to true communicates to tools that this resource should
-  adhere to declarative-friendly expectations.
-  
-  Note: This is used by the API linter (linter.aip.dev) to enable
-  additional checks. */
+  /**
+   * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
+   * 
+   * Declarative-friendly resources must be more strictly consistent, and
+   * setting this to true communicates to tools that this resource should
+   * adhere to declarative-friendly expectations.
+   * 
+   * Note: This is used by the API linter (linter.aip.dev) to enable
+   * additional checks.
+   */
   DECLARATIVE_FRIENDLY = 1,
   UNRECOGNIZED = -1,
 }

@@ -16,7 +16,7 @@ export interface LabelDescriptor {
 function createBaseLabelDescriptor(): LabelDescriptor {
   return {
     key: "",
-    valueType: undefined,
+    valueType: 0,
     description: ""
   };
 }
@@ -87,12 +87,14 @@ export const LabelDescriptor = {
   fromPartial<I extends Exact<DeepPartial<LabelDescriptor>, I>>(object: I): LabelDescriptor {
     const message = createBaseLabelDescriptor();
     message.key = object.key ?? "";
-    message.valueType = object.valueType ?? undefined;
+    message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
   }
 
 };
+
+/** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
   /** STRING - A variable-length string. This is the default. */
   STRING = 0,

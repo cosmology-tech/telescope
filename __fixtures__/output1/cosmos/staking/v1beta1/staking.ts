@@ -436,7 +436,7 @@ function createBaseValidator(): Validator {
     operatorAddress: "",
     consensusPubkey: undefined,
     jailed: false,
-    status: undefined,
+    status: 0,
     tokens: "",
     delegatorShares: "",
     description: undefined,
@@ -593,7 +593,7 @@ export const Validator = {
     message.operatorAddress = object.operatorAddress ?? "";
     message.consensusPubkey = object.consensusPubkey !== undefined && object.consensusPubkey !== null ? Any.fromPartial(object.consensusPubkey) : undefined;
     message.jailed = object.jailed ?? false;
-    message.status = object.status ?? undefined;
+    message.status = object.status ?? 0;
     message.tokens = object.tokens ?? "";
     message.delegatorShares = object.delegatorShares ?? "";
     message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
@@ -605,6 +605,8 @@ export const Validator = {
   }
 
 };
+
+/** BondStatus is the status of a validator. */
 export enum BondStatus {
   /** BOND_STATUS_UNSPECIFIED - UNSPECIFIED defines an invalid validator status. */
   BOND_STATUS_UNSPECIFIED = 0,

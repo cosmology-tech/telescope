@@ -160,7 +160,7 @@ function createBaseLogEntry(): LogEntry {
   return {
     name: "",
     timestamp: undefined,
-    severity: undefined,
+    severity: 0,
     httpRequest: undefined,
     trace: "",
     insertId: "",
@@ -348,7 +348,7 @@ export const LogEntry = {
     const message = createBaseLogEntry();
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
-    message.severity = object.severity ?? undefined;
+    message.severity = object.severity ?? 0;
     message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.trace = object.trace ?? "";
     message.insertId = object.insertId ?? "";

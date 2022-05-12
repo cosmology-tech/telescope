@@ -322,7 +322,7 @@ function createBaseMsgVote(): MsgVote {
   return {
     proposalId: Long.UZERO,
     voter: "",
-    option: undefined,
+    option: 0,
     metadata: ""
   };
 }
@@ -404,7 +404,7 @@ export const MsgVote = {
     const message = createBaseMsgVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? undefined;
+    message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
     return message;
   }

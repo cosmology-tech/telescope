@@ -882,8 +882,8 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
   return {
     name: "",
     number: 0,
-    label: undefined,
-    type: undefined,
+    label: 0,
+    type: 0,
     typeName: "",
     extendee: "",
     defaultValue: "",
@@ -1030,8 +1030,8 @@ export const FieldDescriptorProto = {
     const message = createBaseFieldDescriptorProto();
     message.name = object.name ?? "";
     message.number = object.number ?? 0;
-    message.label = object.label ?? undefined;
-    message.type = object.type ?? undefined;
+    message.label = object.label ?? 0;
+    message.type = object.type ?? 0;
     message.typeName = object.typeName ?? "";
     message.extendee = object.extendee ?? "";
     message.defaultValue = object.defaultValue ?? "";
@@ -1043,28 +1043,36 @@ export const FieldDescriptorProto = {
 
 };
 export enum FieldDescriptorProto_Type {
-  /** TYPE_DOUBLE - 0 is reserved for errors.
-  Order is weird for historical reasons. */
+  /**
+   * TYPE_DOUBLE - 0 is reserved for errors.
+   * Order is weird for historical reasons.
+   */
   TYPE_DOUBLE = 1,
   TYPE_FLOAT = 2,
 
-  /** TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
-  negative values are likely. */
+  /**
+   * TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
+   * negative values are likely.
+   */
   TYPE_INT64 = 3,
   TYPE_UINT64 = 4,
 
-  /** TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
-  negative values are likely. */
+  /**
+   * TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
+   * negative values are likely.
+   */
   TYPE_INT32 = 5,
   TYPE_FIXED64 = 6,
   TYPE_FIXED32 = 7,
   TYPE_BOOL = 8,
   TYPE_STRING = 9,
 
-  /** TYPE_GROUP - Tag-delimited aggregate.
-  Group type is deprecated and not supported in proto3. However, Proto3
-  implementations should still be able to parse the group wire format and
-  treat group fields as unknown fields. */
+  /**
+   * TYPE_GROUP - Tag-delimited aggregate.
+   * Group type is deprecated and not supported in proto3. However, Proto3
+   * implementations should still be able to parse the group wire format and
+   * treat group fields as unknown fields.
+   */
   TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
 
@@ -2024,7 +2032,7 @@ function createBaseFileOptions(): FileOptions {
     javaMultipleFiles: false,
     javaGenerateEqualsAndHash: false,
     javaStringCheckUtf8: false,
-    optimizeFor: undefined,
+    optimizeFor: 0,
     goPackage: "",
     ccGenericServices: false,
     javaGenericServices: false,
@@ -2299,7 +2307,7 @@ export const FileOptions = {
     message.javaMultipleFiles = object.javaMultipleFiles ?? false;
     message.javaGenerateEqualsAndHash = object.javaGenerateEqualsAndHash ?? false;
     message.javaStringCheckUtf8 = object.javaStringCheckUtf8 ?? false;
-    message.optimizeFor = object.optimizeFor ?? undefined;
+    message.optimizeFor = object.optimizeFor ?? 0;
     message.goPackage = object.goPackage ?? "";
     message.ccGenericServices = object.ccGenericServices ?? false;
     message.javaGenericServices = object.javaGenericServices ?? false;
@@ -2319,9 +2327,13 @@ export const FileOptions = {
   }
 
 };
+
+/** Generated classes can be optimized for speed or code size. */
 export enum FileOptions_OptimizeMode {
-  /** SPEED - Generate complete code for parsing, serialization,
-  etc. */
+  /**
+   * SPEED - Generate complete code for parsing, serialization,
+   * etc.
+   */
   SPEED = 1,
 
   /** CODE_SIZE - Use ReflectionOps to implement these methods. */
@@ -2625,9 +2637,9 @@ export interface FieldOptions {
 
 function createBaseFieldOptions(): FieldOptions {
   return {
-    ctype: undefined,
+    ctype: 0,
     packed: false,
-    jstype: undefined,
+    jstype: 0,
     lazy: false,
     deprecated: false,
     weak: false,
@@ -2746,9 +2758,9 @@ export const FieldOptions = {
 
   fromPartial<I extends Exact<DeepPartial<FieldOptions>, I>>(object: I): FieldOptions {
     const message = createBaseFieldOptions();
-    message.ctype = object.ctype ?? undefined;
+    message.ctype = object.ctype ?? 0;
     message.packed = object.packed ?? false;
-    message.jstype = object.jstype ?? undefined;
+    message.jstype = object.jstype ?? 0;
     message.lazy = object.lazy ?? false;
     message.deprecated = object.deprecated ?? false;
     message.weak = object.weak ?? false;
@@ -3208,7 +3220,7 @@ export interface MethodOptions {
 function createBaseMethodOptions(): MethodOptions {
   return {
     deprecated: false,
-    idempotencyLevel: undefined,
+    idempotencyLevel: 0,
     uninterpretedOption: []
   };
 }
@@ -3285,12 +3297,18 @@ export const MethodOptions = {
   fromPartial<I extends Exact<DeepPartial<MethodOptions>, I>>(object: I): MethodOptions {
     const message = createBaseMethodOptions();
     message.deprecated = object.deprecated ?? false;
-    message.idempotencyLevel = object.idempotencyLevel ?? undefined;
+    message.idempotencyLevel = object.idempotencyLevel ?? 0;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   }
 
 };
+
+/**
+ * Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
+ * or neither? HTTP based RPC implementation may choose GET verb for safe
+ * methods, and PUT verb for idempotent methods instead of the default POST.
+ */
 export enum MethodOptions_IdempotencyLevel {
   IDEMPOTENCY_UNKNOWN = 0,
 

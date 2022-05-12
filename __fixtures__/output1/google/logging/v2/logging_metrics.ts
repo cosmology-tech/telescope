@@ -226,7 +226,7 @@ function createBaseLogMetric(): LogMetric {
     labelExtractors: {},
     createTime: undefined,
     updateTime: undefined,
-    version: undefined
+    version: 0
   };
 }
 
@@ -396,12 +396,14 @@ export const LogMetric = {
     }, {});
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
-    message.version = object.version ?? undefined;
+    message.version = object.version ?? 0;
     return message;
   }
 
 };
-export enum ApiVersion {
+
+/** Logging API version. */
+export enum LogMetric_ApiVersion {
   /** V2 - Logging API v2. */
   V2 = 0,
 
@@ -409,28 +411,28 @@ export enum ApiVersion {
   V1 = 1,
   UNRECOGNIZED = -1,
 }
-export function apiVersionFromJSON(object: any): ApiVersion {
+export function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion {
   switch (object) {
     case 0:
     case "V2":
-      return ApiVersion.V2;
+      return LogMetric_ApiVersion.V2;
 
     case 1:
     case "V1":
-      return ApiVersion.V1;
+      return LogMetric_ApiVersion.V1;
 
     case -1:
     case "UNRECOGNIZED":
     default:
-      return ApiVersion.UNRECOGNIZED;
+      return LogMetric_ApiVersion.UNRECOGNIZED;
   }
 }
-export function apiVersionToJSON(object: ApiVersion): string {
+export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string {
   switch (object) {
-    case ApiVersion.V2:
+    case LogMetric_ApiVersion.V2:
       return "V2";
 
-    case ApiVersion.V1:
+    case LogMetric_ApiVersion.V1:
       return "V1";
 
     default:

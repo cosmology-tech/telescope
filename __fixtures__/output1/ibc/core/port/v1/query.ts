@@ -24,7 +24,7 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
   return {
     portId: "",
     connectionId: "",
-    ordering: undefined,
+    ordering: 0,
     counterparty: undefined,
     proposedVersion: ""
   };
@@ -117,7 +117,7 @@ export const QueryAppVersionRequest = {
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
-    message.ordering = object.ordering ?? undefined;
+    message.ordering = object.ordering ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.proposedVersion = object.proposedVersion ?? "";
     return message;

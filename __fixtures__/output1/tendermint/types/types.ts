@@ -4,6 +4,8 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { ValidatorSet } from "./validator";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+
+/** BlockIdFlag indicates which BlcokID the signature is for */
 export enum BlockIDFlag {
   BLOCK_ID_FLAG_UNKNOWN = 0,
   BLOCK_ID_FLAG_ABSENT = 1,
@@ -53,6 +55,8 @@ export function blockIDFlagToJSON(object: BlockIDFlag): string {
       return "UNKNOWN";
   }
 }
+
+/** SignedMsgType is a type of signed message in the consensus. */
 export enum SignedMsgType {
   SIGNED_MSG_TYPE_UNKNOWN = 0,
 
@@ -681,7 +685,7 @@ export interface Vote {
 
 function createBaseVote(): Vote {
   return {
-    type: undefined,
+    type: 0,
     height: Long.ZERO,
     round: 0,
     blockId: undefined,
@@ -805,7 +809,7 @@ export const Vote = {
 
   fromPartial<I extends Exact<DeepPartial<Vote>, I>>(object: I): Vote {
     const message = createBaseVote();
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? 0;
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
@@ -935,7 +939,7 @@ export interface CommitSig {
 
 function createBaseCommitSig(): CommitSig {
   return {
-    blockIdFlag: undefined,
+    blockIdFlag: 0,
     validatorAddress: new Uint8Array(),
     timestamp: undefined,
     signature: new Uint8Array()
@@ -1015,7 +1019,7 @@ export const CommitSig = {
 
   fromPartial<I extends Exact<DeepPartial<CommitSig>, I>>(object: I): CommitSig {
     const message = createBaseCommitSig();
-    message.blockIdFlag = object.blockIdFlag ?? undefined;
+    message.blockIdFlag = object.blockIdFlag ?? 0;
     message.validatorAddress = object.validatorAddress ?? new Uint8Array();
     message.timestamp = object.timestamp ?? undefined;
     message.signature = object.signature ?? new Uint8Array();
@@ -1035,7 +1039,7 @@ export interface Proposal {
 
 function createBaseProposal(): Proposal {
   return {
-    type: undefined,
+    type: 0,
     height: Long.ZERO,
     round: 0,
     polRound: 0,
@@ -1148,7 +1152,7 @@ export const Proposal = {
 
   fromPartial<I extends Exact<DeepPartial<Proposal>, I>>(object: I): Proposal {
     const message = createBaseProposal();
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? 0;
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;

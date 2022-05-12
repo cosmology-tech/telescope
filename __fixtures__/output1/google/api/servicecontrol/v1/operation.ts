@@ -180,7 +180,7 @@ function createBaseOperation(): Operation {
     labels: {},
     metricValueSets: [],
     logEntries: [],
-    importance: undefined,
+    importance: 0,
     extensions: []
   };
 }
@@ -366,45 +366,51 @@ export const Operation = {
     }, {});
     message.metricValueSets = object.metricValueSets?.map(e => MetricValueSet.fromPartial(e)) || [];
     message.logEntries = object.logEntries?.map(e => LogEntry.fromPartial(e)) || [];
-    message.importance = object.importance ?? undefined;
+    message.importance = object.importance ?? 0;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   }
 
 };
-export enum Importance {
-  /** LOW - Allows data caching, batching, and aggregation. It provides
-  higher performance with higher data loss risk. */
+
+/** Defines the importance of the data contained in the operation. */
+export enum Operation_Importance {
+  /**
+   * LOW - Allows data caching, batching, and aggregation. It provides
+   * higher performance with higher data loss risk.
+   */
   LOW = 0,
 
-  /** HIGH - Disables data aggregation to minimize data loss. It is for operations
-  that contains significant monetary value or audit trail. This feature
-  only applies to the client libraries. */
+  /**
+   * HIGH - Disables data aggregation to minimize data loss. It is for operations
+   * that contains significant monetary value or audit trail. This feature
+   * only applies to the client libraries.
+   */
   HIGH = 1,
   UNRECOGNIZED = -1,
 }
-export function importanceFromJSON(object: any): Importance {
+export function operation_ImportanceFromJSON(object: any): Operation_Importance {
   switch (object) {
     case 0:
     case "LOW":
-      return Importance.LOW;
+      return Operation_Importance.LOW;
 
     case 1:
     case "HIGH":
-      return Importance.HIGH;
+      return Operation_Importance.HIGH;
 
     case -1:
     case "UNRECOGNIZED":
     default:
-      return Importance.UNRECOGNIZED;
+      return Operation_Importance.UNRECOGNIZED;
   }
 }
-export function importanceToJSON(object: Importance): string {
+export function operation_ImportanceToJSON(object: Operation_Importance): string {
   switch (object) {
-    case Importance.LOW:
+    case Operation_Importance.LOW:
       return "LOW";
 
-    case Importance.HIGH:
+    case Operation_Importance.HIGH:
       return "HIGH";
 
     default:

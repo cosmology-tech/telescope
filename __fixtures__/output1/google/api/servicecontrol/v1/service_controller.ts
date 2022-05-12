@@ -365,7 +365,7 @@ export interface CheckResponse_ConsumerInfo {
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   return {
     projectNumber: Long.ZERO,
-    type: undefined,
+    type: 0,
     consumerNumber: Long.ZERO
   };
 }
@@ -436,12 +436,17 @@ export const CheckResponse_ConsumerInfo = {
   fromPartial<I extends Exact<DeepPartial<CheckResponse_ConsumerInfo>, I>>(object: I): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
     message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
-    message.type = object.type ?? undefined;
+    message.type = object.type ?? 0;
     message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
     return message;
   }
 
 };
+
+/**
+ * The type of the consumer as defined in
+ * [Google Resource Manager](https://cloud.google.com/resource-manager/).
+ */
 export enum CheckResponse_ConsumerInfo_ConsumerType {
   /** CONSUMER_TYPE_UNSPECIFIED - This is never used. */
   CONSUMER_TYPE_UNSPECIFIED = 0,
@@ -455,9 +460,11 @@ export enum CheckResponse_ConsumerInfo_ConsumerType {
   /** ORGANIZATION - The consumer is a Google Cloud Organization. */
   ORGANIZATION = 3,
 
-  /** SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
-  producer to offer their users the ability to manage service control
-  functionalities at a finer level of granularity than the PROJECT. */
+  /**
+   * SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
+   * producer to offer their users the ability to manage service control
+   * functionalities at a finer level of granularity than the PROJECT.
+   */
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }

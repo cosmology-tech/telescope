@@ -448,7 +448,7 @@ export interface SignatureAndData {
 function createBaseSignatureAndData(): SignatureAndData {
   return {
     signature: new Uint8Array(),
-    dataType: undefined,
+    dataType: 0,
     data: new Uint8Array(),
     timestamp: Long.UZERO
   };
@@ -530,7 +530,7 @@ export const SignatureAndData = {
   fromPartial<I extends Exact<DeepPartial<SignatureAndData>, I>>(object: I): SignatureAndData {
     const message = createBaseSignatureAndData();
     message.signature = object.signature ?? new Uint8Array();
-    message.dataType = object.dataType ?? undefined;
+    message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
@@ -634,7 +634,7 @@ function createBaseSignBytes(): SignBytes {
     sequence: Long.UZERO,
     timestamp: Long.UZERO,
     diversifier: "",
-    dataType: undefined,
+    dataType: 0,
     data: new Uint8Array()
   };
 }
@@ -727,12 +727,17 @@ export const SignBytes = {
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     message.diversifier = object.diversifier ?? "";
-    message.dataType = object.dataType ?? undefined;
+    message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
     return message;
   }
 
 };
+
+/**
+ * DataType defines the type of solo machine proof being created. This is done
+ * to preserve uniqueness of different data sign byte encodings.
+ */
 export enum DataType {
   /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
   DATA_TYPE_UNINITIALIZED_UNSPECIFIED = 0,

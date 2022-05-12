@@ -2,30 +2,51 @@ import { CompactBitArray } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/**
+ * SignMode represents a signing mode with its own security guarantees.
+ * 
+ * This enum should be considered a registry of all known sign modes
+ * in the Cosmos ecosystem. Apps are not expected to support all known
+ * sign modes. Apps that would like to support custom  sign modes are
+ * encouraged to open a small PR against this file to add a new case
+ * to this SignMode enum describing their sign mode so that different
+ * apps have a consistent version of this enum.
+ */
 export enum SignMode {
-  /** SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-  rejected. */
+  /**
+   * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
+   * rejected.
+   */
   SIGN_MODE_UNSPECIFIED = 0,
 
-  /** SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-  verified with raw bytes from Tx. */
+  /**
+   * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
+   * verified with raw bytes from Tx.
+   */
   SIGN_MODE_DIRECT = 1,
 
-  /** SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
-  human-readable textual representation on top of the binary representation
-  from SIGN_MODE_DIRECT. It is currently not supported. */
+  /**
+   * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
+   * human-readable textual representation on top of the binary representation
+   * from SIGN_MODE_DIRECT. It is currently not supported.
+   */
   SIGN_MODE_TEXTUAL = 2,
 
-  /** SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
-  SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
-  require signers signing over other signers' `signer_info`. It also allows
-  for adding Tips in transactions.
-  
-  Since: cosmos-sdk 0.46 */
+  /**
+   * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
+   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+   * require signers signing over other signers' `signer_info`. It also allows
+   * for adding Tips in transactions.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
   SIGN_MODE_DIRECT_AUX = 3,
 
-  /** SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-  Amino JSON and will be removed in the future. */
+  /**
+   * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
+   * Amino JSON and will be removed in the future.
+   */
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
 }
@@ -337,7 +358,7 @@ export interface SignatureDescriptor_Data_Single {
 
 function createBaseSignatureDescriptor_Data_Single(): SignatureDescriptor_Data_Single {
   return {
-    mode: undefined,
+    mode: 0,
     signature: new Uint8Array()
   };
 }
@@ -397,7 +418,7 @@ export const SignatureDescriptor_Data_Single = {
 
   fromPartial<I extends Exact<DeepPartial<SignatureDescriptor_Data_Single>, I>>(object: I): SignatureDescriptor_Data_Single {
     const message = createBaseSignatureDescriptor_Data_Single();
-    message.mode = object.mode ?? undefined;
+    message.mode = object.mode ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
   }

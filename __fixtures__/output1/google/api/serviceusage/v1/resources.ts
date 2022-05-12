@@ -44,7 +44,7 @@ function createBaseService(): Service {
     name: "",
     parent: "",
     config: undefined,
-    state: undefined
+    state: 0
   };
 }
 
@@ -126,19 +126,25 @@ export const Service = {
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
     message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : undefined;
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     return message;
   }
 
 };
+
+/** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
-  /** STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-  is unspecified or not meaningful. Currently, all consumers other than
-  projects (such as folders and organizations) are always in this state. */
+  /**
+   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
+   */
   STATE_UNSPECIFIED = 0,
 
-  /** DISABLED - The service cannot be used by this consumer. It has either been explicitly
-  disabled, or has never been enabled. */
+  /**
+   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
+   * disabled, or has never been enabled.
+   */
   DISABLED = 1,
 
   /** ENABLED - The service has been explicitly enabled for use by this consumer. */

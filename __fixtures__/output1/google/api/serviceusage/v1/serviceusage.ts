@@ -174,7 +174,7 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
   return {
     name: "",
     disableDependentServices: false,
-    checkIfServiceHasUsage: undefined
+    checkIfServiceHasUsage: 0
   };
 }
 
@@ -245,11 +245,16 @@ export const DisableServiceRequest = {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     message.disableDependentServices = object.disableDependentServices ?? false;
-    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? undefined;
+    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? 0;
     return message;
   }
 
 };
+
+/**
+ * Enum to determine if service usage should be checked when disabling a
+ * service.
+ */
 export enum DisableServiceRequest_CheckIfServiceHasUsage {
   /** CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED - When unset, the default behavior is used, which is SKIP. */
   CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED = 0,
@@ -257,9 +262,11 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
   /** SKIP - If set, skip checking service usage when disabling a service. */
   SKIP = 1,
 
-  /** CHECK - If set, service usage is checked when disabling the service. If a
-  service, or its dependents, has usage in the last 30 days, the request
-  returns a FAILED_PRECONDITION error. */
+  /**
+   * CHECK - If set, service usage is checked when disabling the service. If a
+   * service, or its dependents, has usage in the last 30 days, the request
+   * returns a FAILED_PRECONDITION error.
+   */
   CHECK = 2,
   UNRECOGNIZED = -1,
 }

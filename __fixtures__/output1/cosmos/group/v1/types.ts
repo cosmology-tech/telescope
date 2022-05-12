@@ -423,6 +423,8 @@ export const DecisionPolicyWindows = {
   }
 
 };
+
+/** VoteOption enumerates the valid vote options for a given proposal. */
 export enum VoteOption {
   /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
   VOTE_OPTION_UNSPECIFIED = 0,
@@ -937,11 +939,11 @@ function createBaseProposal(): Proposal {
     submitTime: undefined,
     groupVersion: Long.UZERO,
     groupPolicyVersion: Long.UZERO,
-    status: undefined,
-    result: undefined,
+    status: 0,
+    result: 0,
     finalTallyResult: undefined,
     votingPeriodEnd: undefined,
-    executorResult: undefined,
+    executorResult: 0,
     messages: []
   };
 }
@@ -1126,16 +1128,18 @@ export const Proposal = {
     message.submitTime = object.submitTime ?? undefined;
     message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? Long.fromValue(object.groupVersion) : Long.UZERO;
     message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO;
-    message.status = object.status ?? undefined;
-    message.result = object.result ?? undefined;
+    message.status = object.status ?? 0;
+    message.result = object.result ?? 0;
     message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
     message.votingPeriodEnd = object.votingPeriodEnd ?? undefined;
-    message.executorResult = object.executorResult ?? undefined;
+    message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
   }
 
 };
+
+/** ProposalStatus defines proposal statuses. */
 export enum ProposalStatus {
   /** PROPOSAL_STATUS_UNSPECIFIED - An empty value is invalid and not allowed. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
@@ -1149,8 +1153,10 @@ export enum ProposalStatus {
   /** PROPOSAL_STATUS_ABORTED - Final status of a proposal when the group was modified before the final tally. */
   PROPOSAL_STATUS_ABORTED = 3,
 
-  /** PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
-  is Withdrawn. */
+  /**
+   * PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
+   * is Withdrawn.
+   */
   PROPOSAL_STATUS_WITHDRAWN = 4,
   UNRECOGNIZED = -1,
 }
@@ -1203,6 +1209,8 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
       return "UNKNOWN";
   }
 }
+
+/** ProposalResult defines types of proposal results. */
 export enum ProposalResult {
   /** PROPOSAL_RESULT_UNSPECIFIED - An empty value is invalid and not allowed */
   PROPOSAL_RESULT_UNSPECIFIED = 0,
@@ -1259,6 +1267,8 @@ export function proposalResultToJSON(object: ProposalResult): string {
       return "UNKNOWN";
   }
 }
+
+/** ProposalExecutorResult defines types of proposal executor results. */
 export enum ProposalExecutorResult {
   /** PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED - An empty value is not allowed. */
   PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED = 0,
@@ -1446,7 +1456,7 @@ function createBaseVote(): Vote {
   return {
     proposalId: Long.UZERO,
     voter: "",
-    option: undefined,
+    option: 0,
     metadata: "",
     submitTime: undefined
   };
@@ -1536,7 +1546,7 @@ export const Vote = {
     const message = createBaseVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? undefined;
+    message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
     message.submitTime = object.submitTime ?? undefined;
     return message;

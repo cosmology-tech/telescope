@@ -32,7 +32,7 @@ function createBaseStakeAuthorization(): StakeAuthorization {
     maxTokens: undefined,
     allowList: undefined,
     denyList: undefined,
-    authorizationType: undefined
+    authorizationType: 0
   };
 }
 
@@ -114,7 +114,7 @@ export const StakeAuthorization = {
     message.maxTokens = object.maxTokens !== undefined && object.maxTokens !== null ? Coin.fromPartial(object.maxTokens) : undefined;
     message.allowList = object.allowList !== undefined && object.allowList !== null ? StakeAuthorization_Validators.fromPartial(object.allowList) : undefined;
     message.denyList = object.denyList !== undefined && object.denyList !== null ? StakeAuthorization_Validators.fromPartial(object.denyList) : undefined;
-    message.authorizationType = object.authorizationType ?? undefined;
+    message.authorizationType = object.authorizationType ?? 0;
     return message;
   }
 
@@ -187,6 +187,12 @@ export const StakeAuthorization_Validators = {
   }
 
 };
+
+/**
+ * AuthorizationType defines the type of staking module authorization type
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export enum AuthorizationType {
   /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
   AUTHORIZATION_TYPE_UNSPECIFIED = 0,

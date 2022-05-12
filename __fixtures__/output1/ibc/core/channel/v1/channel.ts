@@ -29,8 +29,8 @@ export interface Channel {
 
 function createBaseChannel(): Channel {
   return {
-    state: undefined,
-    ordering: undefined,
+    state: 0,
+    ordering: 0,
     counterparty: undefined,
     connectionHops: [],
     version: ""
@@ -128,8 +128,8 @@ export const Channel = {
 
   fromPartial<I extends Exact<DeepPartial<Channel>, I>>(object: I): Channel {
     const message = createBaseChannel();
-    message.state = object.state ?? undefined;
-    message.ordering = object.ordering ?? undefined;
+    message.state = object.state ?? 0;
+    message.ordering = object.ordering ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
@@ -170,8 +170,8 @@ export interface IdentifiedChannel {
 
 function createBaseIdentifiedChannel(): IdentifiedChannel {
   return {
-    state: undefined,
-    ordering: undefined,
+    state: 0,
+    ordering: 0,
     counterparty: undefined,
     connectionHops: [],
     version: "",
@@ -291,8 +291,8 @@ export const IdentifiedChannel = {
 
   fromPartial<I extends Exact<DeepPartial<IdentifiedChannel>, I>>(object: I): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
-    message.state = object.state ?? undefined;
-    message.ordering = object.ordering ?? undefined;
+    message.state = object.state ?? 0;
+    message.ordering = object.ordering ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
@@ -302,6 +302,11 @@ export const IdentifiedChannel = {
   }
 
 };
+
+/**
+ * State defines if a channel is in one of the following states:
+ * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ */
 export enum State {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
   STATE_UNINITIALIZED_UNSPECIFIED = 0,
@@ -312,12 +317,16 @@ export enum State {
   /** STATE_TRYOPEN - A channel has acknowledged the handshake step on the counterparty chain. */
   STATE_TRYOPEN = 2,
 
-  /** STATE_OPEN - A channel has completed the handshake. Open channels are
-  ready to send and receive packets. */
+  /**
+   * STATE_OPEN - A channel has completed the handshake. Open channels are
+   * ready to send and receive packets.
+   */
   STATE_OPEN = 3,
 
-  /** STATE_CLOSED - A channel has been closed and can no longer be used to send or receive
-  packets. */
+  /**
+   * STATE_CLOSED - A channel has been closed and can no longer be used to send or receive
+   * packets.
+   */
   STATE_CLOSED = 4,
   UNRECOGNIZED = -1,
 }
@@ -370,12 +379,16 @@ export function stateToJSON(object: State): string {
       return "UNKNOWN";
   }
 }
+
+/** Order defines if a channel is ORDERED or UNORDERED */
 export enum Order {
   /** ORDER_NONE_UNSPECIFIED - zero-value for channel ordering */
   ORDER_NONE_UNSPECIFIED = 0,
 
-  /** ORDER_UNORDERED - packets can be delivered in any order, which may differ from the order in
-  which they were sent. */
+  /**
+   * ORDER_UNORDERED - packets can be delivered in any order, which may differ from the order in
+   * which they were sent.
+   */
   ORDER_UNORDERED = 1,
 
   /** ORDER_ORDERED - packets are delivered exactly in the order which they were sent */

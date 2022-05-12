@@ -566,7 +566,7 @@ function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRe
     parent: "",
     pageSize: 0,
     pageToken: "",
-    view: undefined
+    view: 0
   };
 }
 
@@ -648,7 +648,7 @@ export const ListConsumerQuotaMetricsRequest = {
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
-    message.view = object.view ?? undefined;
+    message.view = object.view ?? 0;
     return message;
   }
 
@@ -758,7 +758,7 @@ export interface GetConsumerQuotaMetricRequest {
 function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricRequest {
   return {
     name: "",
-    view: undefined
+    view: 0
   };
 }
 
@@ -818,7 +818,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromPartial<I extends Exact<DeepPartial<GetConsumerQuotaMetricRequest>, I>>(object: I): GetConsumerQuotaMetricRequest {
     const message = createBaseGetConsumerQuotaMetricRequest();
     message.name = object.name ?? "";
-    message.view = object.view ?? undefined;
+    message.view = object.view ?? 0;
     return message;
   }
 
@@ -841,7 +841,7 @@ export interface GetConsumerQuotaLimitRequest {
 function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest {
   return {
     name: "",
-    view: undefined
+    view: 0
   };
 }
 
@@ -901,7 +901,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromPartial<I extends Exact<DeepPartial<GetConsumerQuotaLimitRequest>, I>>(object: I): GetConsumerQuotaLimitRequest {
     const message = createBaseGetConsumerQuotaLimitRequest();
     message.name = object.name ?? "";
-    message.view = object.view ?? undefined;
+    message.view = object.view ?? 0;
     return message;
   }
 
@@ -3151,7 +3151,7 @@ export interface GetServiceIdentityResponse {
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
   return {
     identity: undefined,
-    state: undefined
+    state: 0
   };
 }
 
@@ -3211,14 +3211,18 @@ export const GetServiceIdentityResponse = {
   fromPartial<I extends Exact<DeepPartial<GetServiceIdentityResponse>, I>>(object: I): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
     message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     return message;
   }
 
 };
+
+/** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {
-  /** IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
-  omitted. */
+  /**
+   * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
+   * omitted.
+   */
   IDENTITY_STATE_UNSPECIFIED = 0,
 
   /** ACTIVE - Service identity has been created and can be used. */

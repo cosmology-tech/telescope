@@ -176,7 +176,7 @@ export interface AssetTypeResponse {
 
 function createBaseAssetTypeResponse(): AssetTypeResponse {
   return {
-    assetType: undefined
+    assetType: 0
   };
 }
 
@@ -225,7 +225,7 @@ export const AssetTypeResponse = {
 
   fromPartial<I extends Exact<DeepPartial<AssetTypeResponse>, I>>(object: I): AssetTypeResponse {
     const message = createBaseAssetTypeResponse();
-    message.assetType = object.assetType ?? undefined;
+    message.assetType = object.assetType ?? 0;
     return message;
   }
 

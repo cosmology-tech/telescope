@@ -23,7 +23,7 @@ function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return {
     events: [],
     pagination: undefined,
-    orderBy: undefined
+    orderBy: 0
   };
 }
 
@@ -100,11 +100,13 @@ export const GetTxsEventRequest = {
     const message = createBaseGetTxsEventRequest();
     message.events = object.events?.map(e => e) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
-    message.orderBy = object.orderBy ?? undefined;
+    message.orderBy = object.orderBy ?? 0;
     return message;
   }
 
 };
+
+/** OrderBy defines the sorting order */
 export enum OrderBy {
   /** ORDER_BY_UNSPECIFIED - ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case. */
   ORDER_BY_UNSPECIFIED = 0,
@@ -272,7 +274,7 @@ export interface BroadcastTxRequest {
 function createBaseBroadcastTxRequest(): BroadcastTxRequest {
   return {
     txBytes: new Uint8Array(),
-    mode: undefined
+    mode: 0
   };
 }
 
@@ -332,25 +334,33 @@ export const BroadcastTxRequest = {
   fromPartial<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(object: I): BroadcastTxRequest {
     const message = createBaseBroadcastTxRequest();
     message.txBytes = object.txBytes ?? new Uint8Array();
-    message.mode = object.mode ?? undefined;
+    message.mode = object.mode ?? 0;
     return message;
   }
 
 };
+
+/** BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method. */
 export enum BroadcastMode {
   /** BROADCAST_MODE_UNSPECIFIED - zero-value for mode ordering */
   BROADCAST_MODE_UNSPECIFIED = 0,
 
-  /** BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
-  the tx to be committed in a block. */
+  /**
+   * BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
+   * the tx to be committed in a block.
+   */
   BROADCAST_MODE_BLOCK = 1,
 
-  /** BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
-  a CheckTx execution response only. */
+  /**
+   * BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
+   * a CheckTx execution response only.
+   */
   BROADCAST_MODE_SYNC = 2,
 
-  /** BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
-  immediately. */
+  /**
+   * BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
+   * immediately.
+   */
   BROADCAST_MODE_ASYNC = 3,
   UNRECOGNIZED = -1,
 }

@@ -254,7 +254,7 @@ function createBaseLogEntry(): LogEntry {
     jsonPayload: undefined,
     timestamp: undefined,
     receiveTimestamp: undefined,
-    severity: undefined,
+    severity: 0,
     insertId: "",
     httpRequest: undefined,
     labels: {},
@@ -494,7 +494,7 @@ export const LogEntry = {
     message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.receiveTimestamp = object.receiveTimestamp ?? undefined;
-    message.severity = object.severity ?? undefined;
+    message.severity = object.severity ?? 0;
     message.insertId = object.insertId ?? "";
     message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.labels = Object.entries(object.labels ?? {}).reduce<{

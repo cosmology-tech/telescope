@@ -4,6 +4,8 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
   /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
   VOTE_OPTION_UNSPECIFIED = 0,
@@ -83,7 +85,7 @@ export interface WeightedVoteOption {
 
 function createBaseWeightedVoteOption(): WeightedVoteOption {
   return {
-    option: undefined,
+    option: 0,
     weight: ""
   };
 }
@@ -143,7 +145,7 @@ export const WeightedVoteOption = {
 
   fromPartial<I extends Exact<DeepPartial<WeightedVoteOption>, I>>(object: I): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
-    message.option = object.option ?? undefined;
+    message.option = object.option ?? 0;
     message.weight = object.weight ?? "";
     return message;
   }
@@ -348,7 +350,7 @@ function createBaseProposal(): Proposal {
   return {
     proposalId: Long.UZERO,
     content: undefined,
-    status: undefined,
+    status: 0,
     finalTallyResult: undefined,
     submitTime: undefined,
     depositEndTime: undefined,
@@ -480,7 +482,7 @@ export const Proposal = {
     const message = createBaseProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
-    message.status = object.status ?? undefined;
+    message.status = object.status ?? 0;
     message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
     message.submitTime = object.submitTime ?? undefined;
     message.depositEndTime = object.depositEndTime ?? undefined;
@@ -491,28 +493,40 @@ export const Proposal = {
   }
 
 };
+
+/** ProposalStatus enumerates the valid statuses of a proposal. */
 export enum ProposalStatus {
   /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
 
-  /** PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
-  period. */
+  /**
+   * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
+   * period.
+   */
   PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
 
-  /** PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
-  period. */
+  /**
+   * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
+   * period.
+   */
   PROPOSAL_STATUS_VOTING_PERIOD = 2,
 
-  /** PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
-  passed. */
+  /**
+   * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
+   * passed.
+   */
   PROPOSAL_STATUS_PASSED = 3,
 
-  /** PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
-  been rejected. */
+  /**
+   * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
+   * been rejected.
+   */
   PROPOSAL_STATUS_REJECTED = 4,
 
-  /** PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
-  failed. */
+  /**
+   * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
+   * failed.
+   */
   PROPOSAL_STATUS_FAILED = 5,
   UNRECOGNIZED = -1,
 }
@@ -697,7 +711,7 @@ function createBaseVote(): Vote {
   return {
     proposalId: Long.UZERO,
     voter: "",
-    option: undefined,
+    option: 0,
     options: []
   };
 }
@@ -785,7 +799,7 @@ export const Vote = {
     const message = createBaseVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
-    message.option = object.option ?? undefined;
+    message.option = object.option ?? 0;
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
   }

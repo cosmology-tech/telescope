@@ -82,7 +82,7 @@ function createBaseLogBucket(): LogBucket {
     updateTime: undefined,
     retentionDays: 0,
     locked: false,
-    lifecycleState: undefined,
+    lifecycleState: 0,
     restrictedFields: [],
     cmekSettings: undefined
   };
@@ -220,7 +220,7 @@ export const LogBucket = {
     message.updateTime = object.updateTime ?? undefined;
     message.retentionDays = object.retentionDays ?? 0;
     message.locked = object.locked ?? false;
-    message.lifecycleState = object.lifecycleState ?? undefined;
+    message.lifecycleState = object.lifecycleState ?? 0;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     return message;
@@ -504,7 +504,7 @@ function createBaseLogSink(): LogSink {
     description: "",
     disabled: false,
     exclusions: [],
-    outputVersionFormat: undefined,
+    outputVersionFormat: 0,
     writerIdentity: "",
     includeChildren: false,
     bigqueryOptions: undefined,
@@ -674,7 +674,7 @@ export const LogSink = {
     message.description = object.description ?? "";
     message.disabled = object.disabled ?? false;
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
-    message.outputVersionFormat = object.outputVersionFormat ?? undefined;
+    message.outputVersionFormat = object.outputVersionFormat ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     message.includeChildren = object.includeChildren ?? false;
     message.bigqueryOptions = object.bigqueryOptions !== undefined && object.bigqueryOptions !== null ? BigQueryOptions.fromPartial(object.bigqueryOptions) : undefined;
@@ -684,6 +684,8 @@ export const LogSink = {
   }
 
 };
+
+/** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
   /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
   VERSION_FORMAT_UNSPECIFIED = 0,
@@ -4244,7 +4246,7 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   return {
     startTime: undefined,
     endTime: undefined,
-    state: undefined,
+    state: 0,
     cancellationRequested: false,
     request: undefined,
     progress: 0,
@@ -4354,7 +4356,7 @@ export const CopyLogEntriesMetadata = {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
-    message.state = object.state ?? undefined;
+    message.state = object.state ?? 0;
     message.cancellationRequested = object.cancellationRequested ?? false;
     message.request = object.request !== undefined && object.request !== null ? CopyLogEntriesRequest.fromPartial(object.request) : undefined;
     message.progress = object.progress ?? 0;
@@ -4426,16 +4428,22 @@ export const CopyLogEntriesResponse = {
   }
 
 };
+
+/** LogBucket lifecycle states. */
 export enum LifecycleState {
-  /** LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
-  values. */
+  /**
+   * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
+   * values.
+   */
   LIFECYCLE_STATE_UNSPECIFIED = 0,
 
   /** ACTIVE - The normal and active state. */
   ACTIVE = 1,
 
-  /** DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
-  (e.g. buckets), this can be reversed by an un-delete operation. */
+  /**
+   * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
+   * (e.g. buckets), this can be reversed by an un-delete operation.
+   */
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
 }
@@ -4474,6 +4482,14 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * List of different operation states.
+ * High level state of the operation. This is used to report the job's
+ * current state to the user. Once a long running operation is created,
+ * the current state of the operation can be queried even before the
+ * operation is finished and the final result is available.
+ */
 export enum OperationState {
   /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,

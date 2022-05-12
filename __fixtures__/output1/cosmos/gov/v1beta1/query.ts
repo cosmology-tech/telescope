@@ -145,7 +145,7 @@ export interface QueryProposalsRequest {
 
 function createBaseQueryProposalsRequest(): QueryProposalsRequest {
   return {
-    proposalStatus: undefined,
+    proposalStatus: 0,
     voter: "",
     depositor: "",
     pagination: undefined
@@ -227,7 +227,7 @@ export const QueryProposalsRequest = {
 
   fromPartial<I extends Exact<DeepPartial<QueryProposalsRequest>, I>>(object: I): QueryProposalsRequest {
     const message = createBaseQueryProposalsRequest();
-    message.proposalStatus = object.proposalStatus ?? undefined;
+    message.proposalStatus = object.proposalStatus ?? 0;
     message.voter = object.voter ?? "";
     message.depositor = object.depositor ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
