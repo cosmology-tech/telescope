@@ -177,6 +177,7 @@ export const FileDescriptorProto = {
 
         case 3:
           message.dependency.push(reader.string());
+          break;
 
         case 10:
           if ((tag & 7) === 2) {
@@ -189,6 +190,8 @@ export const FileDescriptorProto = {
             message.publicDependency.push(reader.int32());
           }
 
+          break;
+
         case 11:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
@@ -199,6 +202,8 @@ export const FileDescriptorProto = {
           } else {
             message.weakDependency.push(reader.int32());
           }
+
+          break;
 
         case 4:
           message.messageType.push(DescriptorProto.decode(reader, reader.uint32()));
@@ -445,6 +450,7 @@ export const DescriptorProto = {
 
         case 10:
           message.reservedName.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -1289,6 +1295,7 @@ export const EnumDescriptorProto = {
 
         case 5:
           message.reservedName.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -3240,6 +3247,8 @@ export const SourceCodeInfo_Location = {
             message.path.push(reader.int32());
           }
 
+          break;
+
         case 2:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
@@ -3251,6 +3260,8 @@ export const SourceCodeInfo_Location = {
             message.span.push(reader.int32());
           }
 
+          break;
+
         case 3:
           message.leadingComments = reader.string();
           break;
@@ -3261,6 +3272,7 @@ export const SourceCodeInfo_Location = {
 
         case 6:
           message.leadingDetachedComments.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -3445,6 +3457,8 @@ export const GeneratedCodeInfo_Annotation = {
           } else {
             message.path.push(reader.int32());
           }
+
+          break;
 
         case 2:
           message.sourceFile = reader.string();

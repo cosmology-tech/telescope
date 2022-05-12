@@ -143,6 +143,7 @@ export const RemoveSuperfluidAssetsProposal = {
 
         case 3:
           message.superfluidAssetDenoms.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

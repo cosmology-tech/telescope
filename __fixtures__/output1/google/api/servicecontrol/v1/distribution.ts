@@ -111,6 +111,8 @@ export const Distribution = {
             message.bucketCounts.push((reader.int64() as Long));
           }
 
+          break;
+
         case 7:
           message.linearBuckets = Distribution_LinearBuckets.decode(reader, reader.uint32());
           break;
@@ -394,6 +396,8 @@ export const Distribution_ExplicitBuckets = {
           } else {
             message.bounds.push(reader.double());
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);

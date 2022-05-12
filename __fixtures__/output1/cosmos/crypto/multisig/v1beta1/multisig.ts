@@ -30,6 +30,7 @@ export const MultiSignature = {
       switch (tag >>> 3) {
         case 1:
           message.signatures.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

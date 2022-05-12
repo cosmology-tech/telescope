@@ -135,6 +135,8 @@ export const ScalarDescriptor = {
             message.fieldType.push((reader.int32() as any));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;

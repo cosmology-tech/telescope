@@ -54,6 +54,7 @@ export const Tx = {
 
         case 3:
           message.signatures.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -145,6 +146,7 @@ export const TxRaw = {
 
         case 3:
           message.signatures.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

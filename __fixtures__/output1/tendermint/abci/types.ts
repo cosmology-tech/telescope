@@ -3139,8 +3139,11 @@ export const ResponseApplySnapshotChunk = {
             message.refetchChunks.push(reader.uint32());
           }
 
+          break;
+
         case 3:
           message.rejectSenders.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

@@ -396,6 +396,7 @@ export const QueryContractsByCodeResponse = {
       switch (tag >>> 3) {
         case 1:
           message.contracts.push(reader.string());
+          break;
 
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -1322,6 +1323,8 @@ export const QueryPinnedCodesResponse = {
           } else {
             message.codeIds.push((reader.uint64() as Long));
           }
+
+          break;
 
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());

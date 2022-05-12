@@ -400,6 +400,7 @@ export const BatchEnableServicesRequest = {
 
         case 2:
           message.serviceIds.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -834,6 +835,8 @@ export const CreateAdminOverrideRequest = {
             message.forceOnly.push((reader.int32() as any));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -959,6 +962,8 @@ export const UpdateAdminOverrideRequest = {
             message.forceOnly.push((reader.int32() as any));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1066,6 +1071,8 @@ export const DeleteAdminOverrideRequest = {
           } else {
             message.forceOnly.push((reader.int32() as any));
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -1410,6 +1417,8 @@ export const ImportAdminOverridesRequest = {
             message.forceOnly.push((reader.int32() as any));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1635,6 +1644,8 @@ export const CreateConsumerOverrideRequest = {
             message.forceOnly.push((reader.int32() as any));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1760,6 +1771,8 @@ export const UpdateConsumerOverrideRequest = {
             message.forceOnly.push((reader.int32() as any));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1867,6 +1880,8 @@ export const DeleteConsumerOverrideRequest = {
           } else {
             message.forceOnly.push((reader.int32() as any));
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -2210,6 +2225,8 @@ export const ImportConsumerOverridesRequest = {
           } else {
             message.forceOnly.push((reader.int32() as any));
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);

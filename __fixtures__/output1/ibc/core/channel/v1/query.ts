@@ -1603,6 +1603,8 @@ export const QueryPacketAcknowledgementsRequest = {
             message.packetCommitmentSequences.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1800,6 +1802,8 @@ export const QueryUnreceivedPacketsRequest = {
             message.packetCommitmentSequences.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1888,6 +1892,8 @@ export const QueryUnreceivedPacketsResponse = {
           } else {
             message.sequences.push((reader.uint64() as Long));
           }
+
+          break;
 
         case 2:
           message.height = Height.decode(reader, reader.uint32());
@@ -1992,6 +1998,8 @@ export const QueryUnreceivedAcksRequest = {
             message.packetAckSequences.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -2080,6 +2088,8 @@ export const QueryUnreceivedAcksResponse = {
           } else {
             message.sequences.push((reader.uint64() as Long));
           }
+
+          break;
 
         case 2:
           message.height = Height.decode(reader, reader.uint32());

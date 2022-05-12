@@ -90,6 +90,7 @@ export const QuoteReport = {
 
         case 7:
           message.advisoryIds.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

@@ -103,6 +103,7 @@ export const LogBucket = {
 
         case 15:
           message.restrictedFields.push(reader.string());
+          break;
 
         case 19:
           message.cmekSettings = CmekSettings.decode(reader, reader.uint32());

@@ -377,6 +377,7 @@ export const OperationMetadata = {
       switch (tag >>> 3) {
         case 2:
           message.resourceNames.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

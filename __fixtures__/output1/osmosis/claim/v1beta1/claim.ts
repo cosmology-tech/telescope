@@ -108,6 +108,8 @@ export const ClaimRecord = {
             message.actionCompleted.push(reader.bool());
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;

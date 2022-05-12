@@ -121,6 +121,7 @@ export const ClientState = {
 
         case 9:
           message.upgradePath.push(reader.string());
+          break;
 
         case 10:
           message.allowUpdateAfterExpiry = reader.bool();

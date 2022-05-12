@@ -243,6 +243,7 @@ export const CheckResponse_CheckInfo = {
       switch (tag >>> 3) {
         case 1:
           message.unusedArguments.push(reader.string());
+          break;
 
         case 2:
           message.consumerInfo = CheckResponse_ConsumerInfo.decode(reader, reader.uint32());

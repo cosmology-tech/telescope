@@ -67,6 +67,7 @@ export const Channel = {
 
         case 4:
           message.connectionHops.push(reader.string());
+          break;
 
         case 5:
           message.version = reader.string();
@@ -196,6 +197,7 @@ export const IdentifiedChannel = {
 
         case 4:
           message.connectionHops.push(reader.string());
+          break;
 
         case 5:
           message.version = reader.string();

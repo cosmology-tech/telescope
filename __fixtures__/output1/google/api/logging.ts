@@ -124,6 +124,7 @@ export const Logging_LoggingDestination = {
 
         case 1:
           message.logs.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

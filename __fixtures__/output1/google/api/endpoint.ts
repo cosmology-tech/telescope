@@ -52,6 +52,7 @@ export const Endpoint = {
 
         case 2:
           message.aliases.push(reader.string());
+          break;
 
         case 101:
           message.target = reader.string();

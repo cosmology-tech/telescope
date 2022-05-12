@@ -860,6 +860,8 @@ export const PinCodesProposal = {
             message.codeIds.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -961,6 +963,8 @@ export const UnpinCodesProposal = {
           } else {
             message.codeIds.push((reader.uint64() as Long));
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);

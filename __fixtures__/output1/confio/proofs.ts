@@ -819,6 +819,8 @@ export const InnerSpec = {
             message.childOrder.push(reader.int32());
           }
 
+          break;
+
         case 2:
           message.childSize = reader.int32();
           break;
@@ -1255,6 +1257,8 @@ export const CompressedExistenceProof = {
           } else {
             message.path.push(reader.int32());
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);

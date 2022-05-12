@@ -133,6 +133,7 @@ export const MetricDescriptor = {
 
         case 13:
           message.monitoredResourceTypes.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

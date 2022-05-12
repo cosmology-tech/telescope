@@ -404,6 +404,7 @@ export const QueryClientConnectionsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.connectionPaths.push(reader.string());
+          break;
 
         case 2:
           message.proof = reader.bytes();

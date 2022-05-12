@@ -972,6 +972,8 @@ export const RewardsEstRequest = {
             message.lockIds.push((reader.uint64() as Long));
           }
 
+          break;
+
         case 3:
           message.endEpoch = (reader.int64() as Long);
           break;

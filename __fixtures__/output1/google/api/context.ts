@@ -124,15 +124,19 @@ export const ContextRule = {
 
         case 2:
           message.requested.push(reader.string());
+          break;
 
         case 3:
           message.provided.push(reader.string());
+          break;
 
         case 4:
           message.allowedRequestExtensions.push(reader.string());
+          break;
 
         case 5:
           message.allowedResponseExtensions.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

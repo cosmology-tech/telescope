@@ -533,6 +533,7 @@ export const AttributeContext_Auth = {
 
         case 2:
           message.audiences.push(reader.string());
+          break;
 
         case 3:
           message.presenter = reader.string();
@@ -544,6 +545,7 @@ export const AttributeContext_Auth = {
 
         case 5:
           message.accessLevels.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

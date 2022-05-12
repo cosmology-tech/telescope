@@ -590,6 +590,7 @@ export const BatchEnableServicesRequest = {
 
         case 2:
           message.serviceIds.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -825,6 +826,7 @@ export const BatchGetServicesRequest = {
 
         case 2:
           message.names.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

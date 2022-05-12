@@ -150,6 +150,7 @@ export const ModuleAccount = {
 
         case 3:
           message.permissions.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

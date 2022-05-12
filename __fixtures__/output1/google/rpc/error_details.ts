@@ -94,6 +94,7 @@ export const DebugInfo = {
       switch (tag >>> 3) {
         case 1:
           message.stackEntries.push(reader.string());
+          break;
 
         case 2:
           message.detail = reader.string();

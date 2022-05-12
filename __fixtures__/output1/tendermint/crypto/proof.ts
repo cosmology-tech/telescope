@@ -60,6 +60,7 @@ export const Proof = {
 
         case 4:
           message.aunts.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

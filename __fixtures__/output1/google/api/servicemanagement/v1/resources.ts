@@ -120,6 +120,7 @@ export const OperationMetadata = {
       switch (tag >>> 3) {
         case 1:
           message.resourceNames.push(reader.string());
+          break;
 
         case 2:
           message.steps.push(OperationMetadata_Step.decode(reader, reader.uint32()));

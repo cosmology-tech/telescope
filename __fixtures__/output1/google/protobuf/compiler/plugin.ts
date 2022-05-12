@@ -148,6 +148,7 @@ export const CodeGeneratorRequest = {
       switch (tag >>> 3) {
         case 1:
           message.fileToGenerate.push(reader.string());
+          break;
 
         case 2:
           message.parameter = reader.string();

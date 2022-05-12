@@ -118,6 +118,7 @@ export const MsgExecResponse = {
       switch (tag >>> 3) {
         case 1:
           message.results.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

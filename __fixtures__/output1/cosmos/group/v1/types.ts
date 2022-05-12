@@ -879,6 +879,7 @@ export const Proposal = {
 
         case 4:
           message.proposers.push(reader.string());
+          break;
 
         case 5:
           message.submitTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));

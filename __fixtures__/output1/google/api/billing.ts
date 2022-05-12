@@ -106,6 +106,7 @@ export const Billing_BillingDestination = {
 
         case 2:
           message.metrics.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

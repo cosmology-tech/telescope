@@ -70,6 +70,7 @@ export const Type = {
 
         case 3:
           message.oneofs.push(reader.string());
+          break;
 
         case 4:
           message.options.push(Option.decode(reader, reader.uint32()));

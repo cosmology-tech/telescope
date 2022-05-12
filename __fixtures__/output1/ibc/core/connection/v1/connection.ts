@@ -419,6 +419,7 @@ export const ClientPaths = {
       switch (tag >>> 3) {
         case 1:
           message.paths.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -494,6 +495,7 @@ export const ConnectionPaths = {
 
         case 2:
           message.paths.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -572,6 +574,7 @@ export const Version = {
 
         case 2:
           message.features.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

@@ -1274,6 +1274,7 @@ export const Decl_FunctionDecl_Overload = {
 
         case 3:
           message.typeParams.push(reader.string());
+          break;
 
         case 4:
           message.resultType = Type.decode(reader, reader.uint32());
@@ -1387,6 +1388,7 @@ export const Reference = {
 
         case 3:
           message.overloadId.push(reader.string());
+          break;
 
         case 4:
           message.value = Constant.decode(reader, reader.uint32());

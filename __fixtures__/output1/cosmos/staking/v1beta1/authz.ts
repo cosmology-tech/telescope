@@ -130,6 +130,7 @@ export const StakeAuthorization_Validators = {
       switch (tag >>> 3) {
         case 1:
           message.address.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

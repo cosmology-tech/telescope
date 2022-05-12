@@ -258,6 +258,7 @@ export const GrantQueueItem = {
       switch (tag >>> 3) {
         case 1:
           message.msgTypeUrls.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

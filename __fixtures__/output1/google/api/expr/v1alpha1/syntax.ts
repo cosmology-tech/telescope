@@ -1233,6 +1233,8 @@ export const SourceInfo = {
             message.lineOffsets.push(reader.int32());
           }
 
+          break;
+
         case 4:
           const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
 

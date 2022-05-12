@@ -1399,6 +1399,7 @@ export const MsgSubmitProposal = {
 
         case 2:
           message.proposers.push(reader.string());
+          break;
 
         case 3:
           message.metadata = reader.string();

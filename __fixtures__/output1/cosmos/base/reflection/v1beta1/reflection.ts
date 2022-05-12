@@ -74,6 +74,7 @@ export const ListAllInterfacesResponse = {
       switch (tag >>> 3) {
         case 1:
           message.interfaceNames.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -199,6 +200,7 @@ export const ListImplementationsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.implementationMessageNames.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

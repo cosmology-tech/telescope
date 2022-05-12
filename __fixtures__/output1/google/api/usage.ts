@@ -42,6 +42,7 @@ export const Usage = {
       switch (tag >>> 3) {
         case 1:
           message.requirements.push(reader.string());
+          break;
 
         case 6:
           message.rules.push(UsageRule.decode(reader, reader.uint32()));

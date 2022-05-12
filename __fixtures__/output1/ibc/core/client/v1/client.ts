@@ -528,6 +528,7 @@ export const Params = {
       switch (tag >>> 3) {
         case 1:
           message.allowedClients.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

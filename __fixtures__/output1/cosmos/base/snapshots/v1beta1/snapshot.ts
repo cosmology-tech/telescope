@@ -142,6 +142,7 @@ export const Metadata = {
       switch (tag >>> 3) {
         case 1:
           message.chunkHashes.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -697,6 +698,7 @@ export const SnapshotSchema = {
       switch (tag >>> 3) {
         case 1:
           message.keys.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

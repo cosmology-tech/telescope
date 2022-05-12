@@ -30,6 +30,7 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.genTxs.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

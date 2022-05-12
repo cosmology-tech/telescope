@@ -238,6 +238,7 @@ export const AllowedMsgAllowance = {
 
         case 2:
           message.allowedMessages.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

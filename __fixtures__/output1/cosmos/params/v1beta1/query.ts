@@ -284,6 +284,7 @@ export const Subspace = {
 
         case 2:
           message.keys.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

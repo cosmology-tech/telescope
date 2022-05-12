@@ -557,6 +557,7 @@ export const ListLogEntriesRequest = {
       switch (tag >>> 3) {
         case 8:
           message.resourceNames.push(reader.string());
+          break;
 
         case 2:
           message.filter = reader.string();
@@ -911,6 +912,7 @@ export const ListLogsRequest = {
 
         case 8:
           message.resourceNames.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
@@ -991,6 +993,7 @@ export const ListLogsResponse = {
       switch (tag >>> 3) {
         case 3:
           message.logNames.push(reader.string());
+          break;
 
         case 2:
           message.nextPageToken = reader.string();
@@ -1072,6 +1075,7 @@ export const TailLogEntriesRequest = {
       switch (tag >>> 3) {
         case 1:
           message.resourceNames.push(reader.string());
+          break;
 
         case 2:
           message.filter = reader.string();

@@ -151,6 +151,7 @@ export const MerklePath = {
       switch (tag >>> 3) {
         case 1:
           message.keyPath.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

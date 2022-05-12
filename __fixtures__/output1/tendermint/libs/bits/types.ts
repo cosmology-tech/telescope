@@ -52,6 +52,8 @@ export const BitArray = {
             message.elems.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;

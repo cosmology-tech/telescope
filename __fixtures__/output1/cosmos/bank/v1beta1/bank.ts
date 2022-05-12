@@ -427,6 +427,7 @@ export const DenomUnit = {
 
         case 3:
           message.aliases.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

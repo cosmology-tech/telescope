@@ -73,6 +73,7 @@ export const ResourceDescriptor = {
 
         case 2:
           message.pattern.push(reader.string());
+          break;
 
         case 3:
           message.nameField = reader.string();
@@ -100,6 +101,8 @@ export const ResourceDescriptor = {
           } else {
             message.style.push((reader.int32() as any));
           }
+
+          break;
 
         default:
           reader.skipType(tag & 7);

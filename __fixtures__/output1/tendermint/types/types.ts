@@ -587,6 +587,7 @@ export const Data = {
       switch (tag >>> 3) {
         case 1:
           message.txs.push(reader.bytes());
+          break;
 
         default:
           reader.skipType(tag & 7);

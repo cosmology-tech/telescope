@@ -622,6 +622,7 @@ export const ValAddresses = {
       switch (tag >>> 3) {
         case 1:
           message.addresses.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);

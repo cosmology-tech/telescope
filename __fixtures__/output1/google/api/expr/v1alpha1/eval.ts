@@ -353,6 +353,8 @@ export const UnknownSet = {
             message.exprs.push((reader.int64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;

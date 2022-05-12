@@ -47,6 +47,7 @@ export const GetTxsEventRequest = {
       switch (tag >>> 3) {
         case 1:
           message.events.push(reader.string());
+          break;
 
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());

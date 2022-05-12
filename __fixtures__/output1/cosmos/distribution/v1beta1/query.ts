@@ -898,6 +898,7 @@ export const QueryDelegatorValidatorsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.validators.push(reader.string());
+          break;
 
         default:
           reader.skipType(tag & 7);
