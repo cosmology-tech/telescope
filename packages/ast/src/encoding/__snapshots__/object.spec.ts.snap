@@ -2,7 +2,7 @@
 
 exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
 "export const SignatureDescriptor = {
-  encode(message: SignatureDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SignatureDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
     }
@@ -77,7 +77,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
 
 exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
 "export const SignatureDescriptors = {
-  encode(message: SignatureDescriptors, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SignatureDescriptors, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signatures) {
       SignatureDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -136,7 +136,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
 
 exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
 "export const AuxSignerData = {
-  encode(message: AuxSignerData, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuxSignerData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== \\"\\") {
       writer.uint32(10).string(message.address);
     }
@@ -222,7 +222,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
 
 exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
 "export const ModeInfo_Multi = {
-  encode(message: ModeInfo_Multi, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModeInfo_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.single !== undefined) {
       ModeInfo_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
     }
@@ -286,7 +286,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
 
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
 "export const PinCodesProposal = {
-  encode(message: PinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== \\"\\") {
       writer.uint32(10).string(message.title);
     }
@@ -333,6 +333,8 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
             message.codeIds.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -377,7 +379,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
 exports[`cosmwasm/wasm/v1/proposal 2`] = `
 "export const UnpinCodesProposal = {
-  encode(message: UnpinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnpinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== \\"\\") {
       writer.uint32(10).string(message.title);
     }
@@ -424,6 +426,8 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
             message.codeIds.push((reader.uint64() as Long));
           }
 
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -468,7 +472,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
 
 exports[`cosmwasm/wasm/v1/query 1`] = `
 "export const QueryRawContractStateRequest = {
-  encode(message: QueryRawContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryRawContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== \\"\\") {
       writer.uint32(10).string(message.address);
     }
@@ -532,7 +536,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
 exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1`] = `
 "export const ParseRequest = {
-  encode(message: ParseRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.celSource !== \\"\\") {
       writer.uint32(10).string(message.celSource);
     }
@@ -618,7 +622,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
 
 exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`] = `
 "export const Decl_FunctionDecl_Overload = {
-  encode(message: Decl_FunctionDecl_Overload, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== \\"\\") {
       writer.uint32(10).string(message.overloadId);
     }
@@ -665,6 +669,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
 
         case 3:
           message.typeParams.push(reader.string());
+          break;
 
         case 4:
           message.resultType = Type.decode(reader, reader.uint32());
@@ -736,7 +741,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
 
 exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 "export const Type = {
-  encode(message: Type, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
@@ -921,7 +926,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 
 exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
 "export const Type_MapType = {
-  encode(message: Type_MapType, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
@@ -985,7 +990,7 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
 
 exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 "export const CheckedExpr = {
-  encode(message: CheckedExpr, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode({
         key: (key as any),
@@ -1137,7 +1142,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
 
 exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 "export const Constant = {
-  encode(message: Constant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
@@ -1272,7 +1277,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
 
 exports[`google/api/expr/v1alpha1/value Entry 1`] = `
 "export const Entry = {
-  encode(message: Entry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
     }
@@ -1338,7 +1343,7 @@ exports[`google/api/expr/v1alpha1/value Entry 2`] = `Array []`;
 
 exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
 "export const MapValue = {
-  encode(message: MapValue, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MapValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1399,7 +1404,7 @@ exports[`google/api/expr/v1alpha1/value MapValue 2`] = `Array []`;
 
 exports[`google/api/expr/v1beta1/source 1`] = `
 "export const SourceInfo = {
-  encode(message: SourceInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== \\"\\") {
       writer.uint32(18).string(message.location);
     }
@@ -1443,6 +1448,8 @@ exports[`google/api/expr/v1beta1/source 1`] = `
           } else {
             message.lineOffsets.push(reader.int32());
           }
+
+          break;
 
         case 4:
           const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
@@ -1517,7 +1524,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
 
 exports[`google/api/quota keyType 1`] = `
 "export const MetricRule = {
-  encode(message: MetricRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== \\"\\") {
       writer.uint32(10).string(message.selector);
     }
@@ -1610,7 +1617,7 @@ exports[`google/api/quota keyType 2`] = `Array []`;
 
 exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 "export const LogEntry = {
-  encode(message: LogEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== \\"\\") {
       writer.uint32(82).string(message.name);
     }
@@ -1810,7 +1817,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 
 exports[`ibc/core/port/v1/query 1`] = `
 "export const QueryAppVersionRequest = {
-  encode(message: QueryAppVersionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAppVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== \\"\\") {
       writer.uint32(10).string(message.portId);
     }
@@ -1946,7 +1953,7 @@ Array [
 
 exports[`ibc/core/types/v1/genesis name collisions 1`] = `
 "export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientGenesis !== undefined) {
       GenesisState1.encode(message.clientGenesis, writer.uint32(10).fork()).ldelim();
     }
@@ -2116,7 +2123,7 @@ Array [
 
 exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
 "export const MsgJoinPool = {
-  encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== \\"\\") {
       writer.uint32(10).string(message.sender);
     }
@@ -2208,7 +2215,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
 
 exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
 "export const MsgSwapExactAmountIn = {
-  encode(message: MsgSwapExactAmountIn, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSwapExactAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== \\"\\") {
       writer.uint32(10).string(message.sender);
     }
@@ -2300,7 +2307,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
 
 exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
 "export const MsgSwapExactAmountOut = {
-  encode(message: MsgSwapExactAmountOut, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSwapExactAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== \\"\\") {
       writer.uint32(10).string(message.sender);
     }

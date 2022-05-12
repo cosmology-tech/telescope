@@ -27,6 +27,9 @@ export declare class AminoParseContext extends GenericParseContext implements Pa
     lookupEnumToJson(field: ProtoField, currentProtoPath: string): string;
 }
 export declare class ProtoParseContext extends GenericParseContext implements ParseContext {
+    store: ProtoStore;
+    ref: ProtoRef;
+    constructor(ref: ProtoRef, store: ProtoStore);
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
     getTypeName(field: ProtoField): string;

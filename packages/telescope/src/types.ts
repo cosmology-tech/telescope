@@ -13,7 +13,6 @@ export interface ServiceMutation extends ServiceInfo {
 export interface ServiceQuery extends ServiceInfo {
 }
 
-
 export interface ImportObj {
     type: 'import' | 'default' | 'namespace';
     name: string;

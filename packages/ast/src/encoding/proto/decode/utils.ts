@@ -525,7 +525,8 @@ export const switchTagDelimArray = (num: number, prop: string, expr: t.Expressio
 
                 ]),
                 blockStmt
-            )
+            ),
+            t.breakStatement()
         ]
     )
 };
@@ -547,7 +548,8 @@ export const switchArray = (num: number, prop: string, expr: t.Expression) => {
                         expr
                     ]
                 )
-            )
+            ),
+            t.breakStatement()
         ]
     );
 };
