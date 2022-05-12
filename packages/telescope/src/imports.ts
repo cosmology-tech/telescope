@@ -26,6 +26,7 @@ const getProtoImports = (context: TelescopeParseContext): ImportObj[] => {
             return {
                 type: 'import',
                 name: usage.name,
+                importAs: usage.importedAs,
                 path: importPath
             }
         });
@@ -38,6 +39,7 @@ const getAminoImports = (context: TelescopeParseContext): ImportObj[] => {
             return {
                 type: 'import',
                 name: usage.name,
+                importAs: usage.importedAs,
                 path: importPath
             }
         });
@@ -48,16 +50,34 @@ const getParsedImports = (context: TelescopeParseContext, parsedImports: ImportH
     Object.entries(parsedImports ?? {})
         .forEach(([path, names]) => {
             const importPath = getRelativePath(context.ref.filename, path);
+            const aliases = context.ref?.traversed?.importNames?.[path];
             names.forEach(name => {
+                let importAs = name;
+                if (aliases && aliases[name]) {
+                    importAs = aliases[name]
+                }
                 imports.push({
                     type: 'import',
                     name,
+                    importAs,
                     path: importPath
                 })
             });
         });
     return imports;
 };
+
+const importAs = (name: string, importAs: string, importPath: string) => {
+    return t.importDeclaration(
+        [
+            t.importSpecifier(
+                t.identifier(importAs),
+                t.identifier(name)
+            )
+        ],
+        t.stringLiteral(importPath)
+    )
+}
 
 const getImportStatments = (list: ImportObj[]) => {
     const imports = list.reduce((m, obj) => {
@@ -83,10 +103,15 @@ const getImportStatments = (list: ImportObj[]) => {
                     )
                 )
             }
-            const namedImports = imports.filter(a => a.type === 'import');
+            const namedImports = imports.filter(a => a.type === 'import' && (!a.importAs || (a.name === a.importAs)));
             if (namedImports.length) {
                 m.push(importStmt(namedImports.map(i => i.name), namedImports[0].path));
             }
+            const aliasNamedImports = imports.filter(a => a.type === 'import' && (a.importAs && (a.name !== a.importAs)));
+            aliasNamedImports.forEach(imp => {
+                m.push(importAs(imp.name, imp.importAs, imp.path));
+            });
+
             const namespaced = imports.filter(a => a.type === 'namespace');
             if (namespaced.length) {
                 if (namespaced.length > 1) throw new Error('more than one namespaced name NOT allowed.')
@@ -138,6 +163,11 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
     const additionalImports: ImportObj[] = importHashToArray(allImports);
     const utilities: ImportObj[] = convertUtilsToImports(context);
 
+    if (context.ref.filename === 'ibc/core/types/v1/genesis.proto') {
+        console.log(protoImports)
+        // console.log(context.ref.traversed.importNames)
+    }
+
     const list = []
         .concat(parsedImports)
         .concat(utilities)
@@ -145,6 +175,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
         .concat(aminoImports)
         .concat(additionalImports);
 
+    // console.log(list);
 
     const importStmts = getImportStatments(list);
 

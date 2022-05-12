@@ -18,7 +18,7 @@ export interface ImportObj {
     type: 'import' | 'default' | 'namespace';
     name: string;
     path: string;
-
+    importAs?: string;
 }
 export interface ImportHash {
     [key: string]: string[];
