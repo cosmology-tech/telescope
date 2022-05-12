@@ -1,7 +1,10 @@
 import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
+  /** Params params = 1 [(gogoproto.nullable) = false]; */
   codes: Code[];
   contracts: Contract[];
   sequences: Sequence[];
@@ -103,6 +106,8 @@ export const GenesisState = {
   }
 
 };
+
+/** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
   codeId: Long;
   codeInfo: CodeInfo;
@@ -189,6 +194,8 @@ export const Code = {
   }
 
 };
+
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
   contractAddress: Uint8Array;
   contractInfo: ContractInfo;
@@ -294,6 +301,8 @@ export const Contract = {
   }
 
 };
+
+/** Sequence id and value of a counter */
 export interface Sequence {
   idKey: Uint8Array;
   value: Long;

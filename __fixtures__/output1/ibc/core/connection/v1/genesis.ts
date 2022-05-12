@@ -1,9 +1,13 @@
 import { IdentifiedConnection, ConnectionPaths, Params } from "./connection";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisState {
   connections: IdentifiedConnection[];
   clientConnectionPaths: ConnectionPaths[];
+
+  /** the sequence for the next generated connection identifier */
   nextConnectionSequence: Long;
   params: Params;
 }

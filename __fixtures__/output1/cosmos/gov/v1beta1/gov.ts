@@ -70,6 +70,12 @@ export function voteOptionToJSON(object: VoteOption): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
@@ -143,6 +149,11 @@ export const WeightedVoteOption = {
   }
 
 };
+
+/**
+ * TextProposal defines a standard text proposal whose changes need to be
+ * manually updated in case of approval.
+ */
 export interface TextProposal {
   title: string;
   description: string;
@@ -216,6 +227,11 @@ export const TextProposal = {
   }
 
 };
+
+/**
+ * Deposit defines an amount deposited by an account address to an active
+ * proposal.
+ */
 export interface Deposit {
   proposalId: Long;
   depositor: string;
@@ -308,10 +324,18 @@ export const Deposit = {
   }
 
 };
+
+/** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: Long;
   content: Any;
   status: ProposalStatus;
+
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
   finalTallyResult: TallyResult;
   submitTime: Date;
   depositEndTime: Date;
@@ -548,6 +572,8 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
       return "UNKNOWN";
   }
 }
+
+/** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
   yes: string;
   abstain: string;
@@ -647,10 +673,23 @@ export const TallyResult = {
   }
 
 };
+
+/**
+ * Vote defines a vote on a governance proposal.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
+ */
 export interface Vote {
   proposalId: Long;
   voter: string;
+
+  /**
+   * Deprecated: Prefer to use `options` instead. This field is set in queries
+   * if and only if `len(options) == 1` and that option has weight 1. In all
+   * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
+   */
   option: VoteOption;
+
+  /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
 
@@ -752,8 +791,16 @@ export const Vote = {
   }
 
 };
+
+/** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParams {
+  /** Minimum deposit for a proposal to enter voting period. */
   minDeposit: Coin[];
+
+  /**
+   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
+   * months.
+   */
   maxDepositPeriod: string;
 }
 
@@ -828,7 +875,10 @@ export const DepositParams = {
   }
 
 };
+
+/** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
+  /** Length of the voting period. */
   votingPeriod: string;
 }
 
@@ -885,9 +935,22 @@ export const VotingParams = {
   }
 
 };
+
+/** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
+  /**
+   * Minimum percentage of total stake needed to vote for a result to be
+   * considered valid.
+   */
   quorum: Uint8Array;
+
+  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
   threshold: Uint8Array;
+
+  /**
+   * Minimum value of Veto votes to Total votes ratio for proposal to be
+   * vetoed. Default value: 1/3.
+   */
   vetoThreshold: Uint8Array;
 }
 

@@ -3,6 +3,11 @@ import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/**
+ * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
+ * initialize a connection with Chain B.
+ */
 export interface MsgConnectionOpenInit {
   clientId: string;
   counterparty: Counterparty;
@@ -115,6 +120,11 @@ export const MsgConnectionOpenInit = {
   }
 
 };
+
+/**
+ * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
+ * type.
+ */
 export interface MsgConnectionOpenInitResponse {}
 
 function createBaseMsgConnectionOpenInitResponse(): MsgConnectionOpenInitResponse {
@@ -159,16 +169,35 @@ export const MsgConnectionOpenInitResponse = {
   }
 
 };
+
+/**
+ * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
+ * connection on Chain B.
+ */
 export interface MsgConnectionOpenTry {
   clientId: string;
+
+  /**
+   * in the case of crossing hello's, when both chains call OpenInit, we need
+   * the connection identifier of the previous connection in state INIT
+   */
   previousConnectionId: string;
   clientState: Any;
   counterparty: Counterparty;
   delayPeriod: Long;
   counterpartyVersions: Version[];
   proofHeight: Height;
+
+  /**
+   * proof of the initialization the connection on Chain A: `UNITIALIZED ->
+   * INIT`
+   */
   proofInit: Uint8Array;
+
+  /** proof of client state included in message */
   proofClient: Uint8Array;
+
+  /** proof of client consensus state */
   proofConsensus: Uint8Array;
   consensusHeight: Height;
   signer: string;
@@ -368,6 +397,8 @@ export const MsgConnectionOpenTry = {
   }
 
 };
+
+/** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponse {}
 
 function createBaseMsgConnectionOpenTryResponse(): MsgConnectionOpenTryResponse {
@@ -412,14 +443,28 @@ export const MsgConnectionOpenTryResponse = {
   }
 
 };
+
+/**
+ * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
+ * acknowledge the change of connection state to TRYOPEN on Chain B.
+ */
 export interface MsgConnectionOpenAck {
   connectionId: string;
   counterpartyConnectionId: string;
   version: Version;
   clientState: Any;
   proofHeight: Height;
+
+  /**
+   * proof of the initialization the connection on Chain B: `UNITIALIZED ->
+   * TRYOPEN`
+   */
   proofTry: Uint8Array;
+
+  /** proof of client state included in message */
   proofClient: Uint8Array;
+
+  /** proof of client consensus state */
   proofConsensus: Uint8Array;
   consensusHeight: Height;
   signer: string;
@@ -589,6 +634,8 @@ export const MsgConnectionOpenAck = {
   }
 
 };
+
+/** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponse {}
 
 function createBaseMsgConnectionOpenAckResponse(): MsgConnectionOpenAckResponse {
@@ -633,8 +680,15 @@ export const MsgConnectionOpenAckResponse = {
   }
 
 };
+
+/**
+ * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
+ * acknowledge the change of connection state to OPEN on Chain A.
+ */
 export interface MsgConnectionOpenConfirm {
   connectionId: string;
+
+  /** proof for the change of the connection state on Chain A: `INIT -> OPEN` */
   proofAck: Uint8Array;
   proofHeight: Height;
   signer: string;
@@ -732,6 +786,11 @@ export const MsgConnectionOpenConfirm = {
   }
 
 };
+
+/**
+ * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
+ * response type.
+ */
 export interface MsgConnectionOpenConfirmResponse {}
 
 function createBaseMsgConnectionOpenConfirmResponse(): MsgConnectionOpenConfirmResponse {

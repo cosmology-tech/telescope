@@ -1,5 +1,11 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * App includes the protocol and software version for the application.
+ * This information is included in ResponseInfo. The App.Protocol can be
+ * updated in ResponseEndBlock.
+ */
 export interface App {
   protocol: Long;
   software: string;
@@ -73,6 +79,12 @@ export const App = {
   }
 
 };
+
+/**
+ * Consensus captures the consensus rules for processing a block in the blockchain,
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
+ */
 export interface Consensus {
   block: Long;
   app: Long;

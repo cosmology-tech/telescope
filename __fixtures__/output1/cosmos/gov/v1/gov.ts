@@ -70,6 +70,8 @@ export function voteOptionToJSON(object: VoteOption): string {
       return "UNKNOWN";
   }
 }
+
+/** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
@@ -143,6 +145,11 @@ export const WeightedVoteOption = {
   }
 
 };
+
+/**
+ * Deposit defines an amount deposited by an account address to an active
+ * proposal.
+ */
 export interface Deposit {
   proposalId: Long;
   depositor: string;
@@ -235,16 +242,26 @@ export const Deposit = {
   }
 
 };
+
+/** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   id: Long;
   messages: Any[];
   status: ProposalStatus;
+
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
   finalTallyResult: TallyResult;
   submitTime: Date;
   depositEndTime: Date;
   totalDeposit: Coin[];
   votingStartTime: Date;
   votingEndTime: Date;
+
+  /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
 
@@ -495,6 +512,8 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
       return "UNKNOWN";
   }
 }
+
+/** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
   yesCount: string;
   abstainCount: string;
@@ -594,10 +613,17 @@ export const TallyResult = {
   }
 
 };
+
+/**
+ * Vote defines a vote on a governance proposal.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
+ */
 export interface Vote {
   proposalId: Long;
   voter: string;
   options: WeightedVoteOption[];
+
+  /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
 }
 
@@ -699,8 +725,16 @@ export const Vote = {
   }
 
 };
+
+/** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParams {
+  /** Minimum deposit for a proposal to enter voting period. */
   minDeposit: Coin[];
+
+  /**
+   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
+   * months.
+   */
   maxDepositPeriod: string;
 }
 
@@ -775,7 +809,10 @@ export const DepositParams = {
   }
 
 };
+
+/** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
+  /** Length of the voting period. */
   votingPeriod: string;
 }
 
@@ -832,9 +869,22 @@ export const VotingParams = {
   }
 
 };
+
+/** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
+  /**
+   * Minimum percentage of total stake needed to vote for a result to be
+   * considered valid.
+   */
   quorum: string;
+
+  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
   threshold: string;
+
+  /**
+   * Minimum value of Veto votes to Total votes ratio for proposal to be
+   * vetoed. Default value: 1/3.
+   */
   vetoThreshold: string;
 }
 

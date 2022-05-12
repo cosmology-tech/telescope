@@ -50,6 +50,7 @@ export const QueryParamsRequest = {
 
 };
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 

@@ -1,9 +1,19 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
+ * of fees from the account of Granter.
+ */
 export interface MsgGrantAllowance {
+  /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
+
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance: Any;
 }
 
@@ -87,6 +97,8 @@ export const MsgGrantAllowance = {
   }
 
 };
+
+/** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {}
 
 function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
@@ -131,8 +143,13 @@ export const MsgGrantAllowanceResponse = {
   }
 
 };
+
+/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowance {
+  /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
 
@@ -204,6 +221,8 @@ export const MsgRevokeAllowance = {
   }
 
 };
+
+/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
 
 function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {

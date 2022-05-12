@@ -2,6 +2,8 @@ import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "./tx";
 import { Params, CodeInfo, ContractInfo, Model } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
   params: Params;
   codes: Code[];
@@ -135,6 +137,11 @@ export const GenesisState = {
   }
 
 };
+
+/**
+ * GenMsgs define the messages that can be executed during genesis phase in
+ * order. The intention is to have more human readable data that is auditable.
+ */
 export interface GenesisState_GenMsgs {
   storeCode?: MsgStoreCode;
   instantiateContract?: MsgInstantiateContract;
@@ -221,10 +228,14 @@ export const GenesisState_GenMsgs = {
   }
 
 };
+
+/** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
   codeId: Long;
   codeInfo: CodeInfo;
   codeBytes: Uint8Array;
+
+  /** Pinned to wasmvm cache */
   pinned: boolean;
 }
 
@@ -320,6 +331,8 @@ export const Code = {
   }
 
 };
+
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
   contractAddress: string;
   contractInfo: ContractInfo;
@@ -412,6 +425,8 @@ export const Contract = {
   }
 
 };
+
+/** Sequence key and value of an id generation counter */
 export interface Sequence {
   idKey: Uint8Array;
   value: Long;

@@ -133,6 +133,8 @@ export const EpochInfo = {
   }
 
 };
+
+/** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
   epochs: EpochInfo[];
 }

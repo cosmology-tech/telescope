@@ -2,6 +2,11 @@ import { BaseAccount } from "../../auth/v1beta1/auth";
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * BaseVestingAccount implements the VestingAccount interface. It contains all
+ * the necessary fields needed for any vesting account implementation.
+ */
 export interface BaseVestingAccount {
   baseAccount: BaseAccount;
   originalVesting: Coin[];
@@ -130,6 +135,11 @@ export const BaseVestingAccount = {
   }
 
 };
+
+/**
+ * ContinuousVestingAccount implements the VestingAccount interface. It
+ * continuously vests by unlocking coins linearly with respect to time.
+ */
 export interface ContinuousVestingAccount {
   baseVestingAccount: BaseVestingAccount;
   startTime: Long;
@@ -203,6 +213,12 @@ export const ContinuousVestingAccount = {
   }
 
 };
+
+/**
+ * DelayedVestingAccount implements the VestingAccount interface. It vests all
+ * coins after a specific time, but non prior. In other words, it keeps them
+ * locked until a specified time.
+ */
 export interface DelayedVestingAccount {
   baseVestingAccount: BaseVestingAccount;
 }
@@ -263,6 +279,8 @@ export const DelayedVestingAccount = {
   }
 
 };
+
+/** Period defines a length of time and amount of coins that will vest. */
 export interface Period {
   length: Long;
   amount: Coin[];
@@ -342,6 +360,11 @@ export const Period = {
   }
 
 };
+
+/**
+ * PeriodicVestingAccount implements the VestingAccount interface. It
+ * periodically vests by unlocking coins during each specified period.
+ */
 export interface PeriodicVestingAccount {
   baseVestingAccount: BaseVestingAccount;
   startTime: Long;
@@ -434,6 +457,14 @@ export const PeriodicVestingAccount = {
   }
 
 };
+
+/**
+ * PermanentLockedAccount implements the VestingAccount interface. It does
+ * not ever release coins, locking them indefinitely. Coins in this account can
+ * still be used for delegating and for governance votes even while locked.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface PermanentLockedAccount {
   baseVestingAccount: BaseVestingAccount;
 }

@@ -1,6 +1,8 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
   basedenom: string;
   feetokens: FeeToken[];

@@ -2,7 +2,13 @@ import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1
 import { DenomTrace, Params } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
+ * method
+ */
 export interface QueryDenomTraceRequest {
+  /** hash (in hex format) of the denomination trace information. */
   hash: string;
 }
 
@@ -62,7 +68,13 @@ export const QueryDenomTraceRequest = {
   }
 
 };
+
+/**
+ * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
+ * method.
+ */
 export interface QueryDenomTraceResponse {
+  /** denom_trace returns the requested denomination trace information. */
   denomTrace: DenomTrace;
 }
 
@@ -122,7 +134,13 @@ export const QueryDenomTraceResponse = {
   }
 
 };
+
+/**
+ * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
+ * method
+ */
 export interface QueryDenomTracesRequest {
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -182,8 +200,16 @@ export const QueryDenomTracesRequest = {
   }
 
 };
+
+/**
+ * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
+ * method.
+ */
 export interface QueryDenomTracesResponse {
+  /** denom_traces returns all denominations trace information. */
   denomTraces: DenomTrace[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -261,6 +287,8 @@ export const QueryDenomTracesResponse = {
   }
 
 };
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -305,7 +333,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 

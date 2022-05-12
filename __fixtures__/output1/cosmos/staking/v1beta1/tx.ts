@@ -4,6 +4,8 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+
+/** MsgCreateValidator defines a SDK message for creating a new validator. */
 export interface MsgCreateValidator {
   description: Description;
   commission: CommissionRates;
@@ -142,6 +144,8 @@ export const MsgCreateValidator = {
   }
 
 };
+
+/** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponse {}
 
 function createBaseMsgCreateValidatorResponse(): MsgCreateValidatorResponse {
@@ -186,9 +190,18 @@ export const MsgCreateValidatorResponse = {
   }
 
 };
+
+/** MsgEditValidator defines a SDK message for editing an existing validator. */
 export interface MsgEditValidator {
   description: Description;
   validatorAddress: string;
+
+  /**
+   * We pass a reference to the new commission rate and min self delegation as
+   * it's not mandatory to update. If not updated, the deserialized rate will be
+   * zero with no way to distinguish if an update was intended.
+   * REF: #2373
+   */
   commissionRate: string;
   minSelfDelegation: string;
 }
@@ -285,6 +298,8 @@ export const MsgEditValidator = {
   }
 
 };
+
+/** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
 export interface MsgEditValidatorResponse {}
 
 function createBaseMsgEditValidatorResponse(): MsgEditValidatorResponse {
@@ -329,6 +344,11 @@ export const MsgEditValidatorResponse = {
   }
 
 };
+
+/**
+ * MsgDelegate defines a SDK message for performing a delegation of coins
+ * from a delegator to a validator.
+ */
 export interface MsgDelegate {
   delegatorAddress: string;
   validatorAddress: string;
@@ -415,6 +435,8 @@ export const MsgDelegate = {
   }
 
 };
+
+/** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponse {}
 
 function createBaseMsgDelegateResponse(): MsgDelegateResponse {
@@ -459,6 +481,11 @@ export const MsgDelegateResponse = {
   }
 
 };
+
+/**
+ * MsgBeginRedelegate defines a SDK message for performing a redelegation
+ * of coins from a delegator and source validator to a destination validator.
+ */
 export interface MsgBeginRedelegate {
   delegatorAddress: string;
   validatorSrcAddress: string;
@@ -558,6 +585,8 @@ export const MsgBeginRedelegate = {
   }
 
 };
+
+/** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponse {
   completionTime: Date;
 }
@@ -615,6 +644,11 @@ export const MsgBeginRedelegateResponse = {
   }
 
 };
+
+/**
+ * MsgUndelegate defines a SDK message for performing an undelegation from a
+ * delegate and a validator.
+ */
 export interface MsgUndelegate {
   delegatorAddress: string;
   validatorAddress: string;
@@ -701,6 +735,8 @@ export const MsgUndelegate = {
   }
 
 };
+
+/** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponse {
   completionTime: Date;
 }

@@ -1,6 +1,8 @@
 import { Params } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -45,7 +47,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 
@@ -105,6 +110,11 @@ export const QueryParamsResponse = {
   }
 
 };
+
+/**
+ * QueryEpochProvisionsRequest is the request type for the
+ * Query/EpochProvisions RPC method.
+ */
 export interface QueryEpochProvisionsRequest {}
 
 function createBaseQueryEpochProvisionsRequest(): QueryEpochProvisionsRequest {
@@ -149,7 +159,13 @@ export const QueryEpochProvisionsRequest = {
   }
 
 };
+
+/**
+ * QueryEpochProvisionsResponse is the response type for the
+ * Query/EpochProvisions RPC method.
+ */
 export interface QueryEpochProvisionsResponse {
+  /** epoch_provisions is the current minting per epoch provisions value. */
   epochProvisions: Uint8Array;
 }
 

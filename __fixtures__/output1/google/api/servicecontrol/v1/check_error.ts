@@ -1,10 +1,33 @@
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * Defines the errors to be returned in
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ */
 export interface CheckError {
+  /** The error code. */
   code: CheckError_Code;
+
+  /**
+   * Subject to whom this error applies. See the specific code enum for more
+   * details on this field. For example:
+   * 
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
+   */
   subject: string;
+
+  /** Free-form text providing details on the error cause of the error. */
   detail: string;
+
+  /**
+   * Contains public information about the check error. If available,
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
+   */
   status: Status;
 }
 

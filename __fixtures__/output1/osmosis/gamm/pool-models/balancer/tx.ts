@@ -1,6 +1,8 @@
 import { PoolParams, PoolAsset } from "./balancerPool";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
   sender: string;
   poolParams: PoolParams;

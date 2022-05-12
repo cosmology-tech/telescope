@@ -3,10 +3,31 @@ import { Service } from "../../service";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** Request message for `ListServices` method. */
 export interface ListServicesRequest {
+  /** Include services produced by the specified project. */
   producerProjectId: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
   pageSize: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
   pageToken: string;
+
+  /**
+   * Include services consumed by the specified consumer.
+   * 
+   * The Google Service Management implementation accepts the following
+   * forms:
+   * - project:<project_id>
+   */
   consumerId: string;
 }
 
@@ -102,8 +123,13 @@ export const ListServicesRequest = {
   }
 
 };
+
+/** Response message for `ListServices` method. */
 export interface ListServicesResponse {
+  /** The returned services will only have the name field set. */
   services: ManagedService[];
+
+  /** Token that can be passed to `ListServices` to resume a paginated query. */
   nextPageToken: string;
 }
 
@@ -181,7 +207,13 @@ export const ListServicesResponse = {
   }
 
 };
+
+/** Request message for `GetService` method. */
 export interface GetServiceRequest {
+  /**
+   * Required. The name of the service.  See the `ServiceManager` overview for naming
+   * requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
 }
 
@@ -241,7 +273,10 @@ export const GetServiceRequest = {
   }
 
 };
+
+/** Request message for CreateService method. */
 export interface CreateServiceRequest {
+  /** Required. Initial values for the service resource. */
   service: ManagedService;
 }
 
@@ -301,7 +336,13 @@ export const CreateServiceRequest = {
   }
 
 };
+
+/** Request message for DeleteService method. */
 export interface DeleteServiceRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
 }
 
@@ -361,7 +402,13 @@ export const DeleteServiceRequest = {
   }
 
 };
+
+/** Request message for UndeleteService method. */
 export interface UndeleteServiceRequest {
+  /**
+   * Required. The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements. For example: `example.googleapis.com`.
+   */
   serviceName: string;
 }
 
@@ -421,7 +468,10 @@ export const UndeleteServiceRequest = {
   }
 
 };
+
+/** Response message for UndeleteService method. */
 export interface UndeleteServiceResponse {
+  /** Revived service resource. */
   service: ManagedService;
 }
 
@@ -481,9 +531,27 @@ export const UndeleteServiceResponse = {
   }
 
 };
+
+/** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /**
+   * Required. The id of the service configuration resource.
+   * 
+   * This field must be specified for the server to return all fields, including
+   * `SourceInfo`.
+   */
   configId: string;
+
+  /**
+   * Specifies which parts of the Service Config should be returned in the
+   * response.
+   */
   view: GetServiceConfigRequest_ConfigView;
 }
 
@@ -606,9 +674,22 @@ export function getServiceConfigRequest_ConfigViewToJSON(object: GetServiceConfi
       return "UNKNOWN";
   }
 }
+
+/** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /** The token of the page to retrieve. */
   pageToken: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
   pageSize: number;
 }
 
@@ -692,8 +773,13 @@ export const ListServiceConfigsRequest = {
   }
 
 };
+
+/** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponse {
+  /** The list of service configuration resources. */
   serviceConfigs: Service[];
+
+  /** The token of the next page of results. */
   nextPageToken: string;
 }
 
@@ -771,8 +857,16 @@ export const ListServiceConfigsResponse = {
   }
 
 };
+
+/** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /** Required. The service configuration resource. */
   serviceConfig: Service;
 }
 
@@ -844,9 +938,23 @@ export const CreateServiceConfigRequest = {
   }
 
 };
+
+/** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /** Required. The source configuration for the service. */
   configSource: ConfigSource;
+
+  /**
+   * Optional. If set, this will result in the generation of a
+   * `google.api.Service` configuration based on the `ConfigSource` provided,
+   * but the generated config and the sources will NOT be persisted.
+   */
   validateOnly: boolean;
 }
 
@@ -930,7 +1038,10 @@ export const SubmitConfigSourceRequest = {
   }
 
 };
+
+/** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponse {
+  /** The generated service configuration. */
   serviceConfig: Service;
 }
 
@@ -990,8 +1101,16 @@ export const SubmitConfigSourceResponse = {
   }
 
 };
+
+/** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /** Required. The rollout resource. The `service_name` field is output only. */
   rollout: Rollout;
 }
 
@@ -1063,10 +1182,34 @@ export const CreateServiceRolloutRequest = {
   }
 
 };
+
+/** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /** The token of the page to retrieve. */
   pageToken: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
   pageSize: number;
+
+  /**
+   * Required. Use `filter` to return subset of rollouts.
+   * The following filters are supported:
+   * -- To limit the results to only those in
+   * [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   * use filter='status=SUCCESS'
+   * -- To limit the results to those in
+   * [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   * or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+   */
   filter: string;
 }
 
@@ -1162,8 +1305,13 @@ export const ListServiceRolloutsRequest = {
   }
 
 };
+
+/** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponse {
+  /** The list of rollout resources. */
   rollouts: Rollout[];
+
+  /** The token of the next page of results. */
   nextPageToken: string;
 }
 
@@ -1241,8 +1389,16 @@ export const ListServiceRolloutsResponse = {
   }
 
 };
+
+/** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
   serviceName: string;
+
+  /** Required. The id of the rollout resource. */
   rolloutId: string;
 }
 
@@ -1314,8 +1470,25 @@ export const GetServiceRolloutRequest = {
   }
 
 };
+
+/** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequest {
+  /**
+   * Required. Service configuration for which we want to generate the report.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
   newConfig: Any;
+
+  /**
+   * Optional. Service configuration against which the comparison will be done.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
   oldConfig: Any;
 }
 
@@ -1387,10 +1560,26 @@ export const GenerateConfigReportRequest = {
   }
 
 };
+
+/** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponse {
+  /** Name of the service this report belongs to. */
   serviceName: string;
+
+  /** ID of the service configuration this report belongs to. */
   id: string;
+
+  /**
+   * list of ChangeReport, each corresponding to comparison between two
+   * service configurations.
+   */
   changeReports: ChangeReport[];
+
+  /**
+   * Errors / Linter warnings associated with the service definition this
+   * report
+   * belongs to.
+   */
   diagnostics: Diagnostic[];
 }
 

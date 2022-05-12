@@ -1,10 +1,29 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface StakeAuthorization {
+  /**
+   * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
+   * empty, there is no spend limit and any amount of coins can be delegated.
+   */
   maxTokens: Coin;
+
+  /**
+   * allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's
+   * account.
+   */
   allowList?: StakeAuthorization_Validators;
+
+  /** deny_list specifies list of validator addresses to whom grantee can not delegate tokens. */
   denyList?: StakeAuthorization_Validators;
+
+  /** authorization_type defines one of AuthorizationType. */
   authorizationType: AuthorizationType;
 }
 
@@ -100,6 +119,8 @@ export const StakeAuthorization = {
   }
 
 };
+
+/** Validators defines list of validator addresses. */
 export interface StakeAuthorization_Validators {
   address: string[];
 }

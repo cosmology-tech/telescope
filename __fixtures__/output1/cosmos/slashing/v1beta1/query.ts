@@ -2,6 +2,8 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Params, ValidatorSigningInfo } from "./slashing";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -46,6 +48,8 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
   params: Params;
 }
@@ -106,7 +110,13 @@ export const QueryParamsResponse = {
   }
 
 };
+
+/**
+ * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
+ * method
+ */
 export interface QuerySigningInfoRequest {
+  /** cons_address is the address to query signing info of */
   consAddress: string;
 }
 
@@ -166,7 +176,13 @@ export const QuerySigningInfoRequest = {
   }
 
 };
+
+/**
+ * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
+ * method
+ */
 export interface QuerySigningInfoResponse {
+  /** val_signing_info is the signing info of requested val cons address */
   valSigningInfo: ValidatorSigningInfo;
 }
 
@@ -226,6 +242,11 @@ export const QuerySigningInfoResponse = {
   }
 
 };
+
+/**
+ * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
+ * method
+ */
 export interface QuerySigningInfosRequest {
   pagination: PageRequest;
 }
@@ -286,7 +307,13 @@ export const QuerySigningInfosRequest = {
   }
 
 };
+
+/**
+ * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
+ * method
+ */
 export interface QuerySigningInfosResponse {
+  /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
   pagination: PageResponse;
 }

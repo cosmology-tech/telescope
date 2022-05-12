@@ -1,12 +1,23 @@
 import { IdentifiedClientState, ClientConsensusStates, Params } from "./client";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
+  /** client states with their corresponding identifiers */
   clients: IdentifiedClientState[];
+
+  /** consensus states from each client */
   clientsConsensus: ClientConsensusStates[];
+
+  /** metadata from each client */
   clientsMetadata: IdentifiedGenesisMetadata[];
   params: Params;
+
+  /** create localhost on initialization */
   createLocalhost: boolean;
+
+  /** the sequence for the next generated client identifier */
   nextClientSequence: Long;
 }
 
@@ -142,8 +153,16 @@ export const GenesisState = {
   }
 
 };
+
+/**
+ * GenesisMetadata defines the genesis type for metadata that clients may return
+ * with ExportMetadata
+ */
 export interface GenesisMetadata {
+  /** store key of metadata without clientID-prefix */
   key: Uint8Array;
+
+  /** metadata value */
   value: Uint8Array;
 }
 
@@ -215,6 +234,11 @@ export const GenesisMetadata = {
   }
 
 };
+
+/**
+ * IdentifiedGenesisMetadata has the client metadata with the corresponding
+ * client id.
+ */
 export interface IdentifiedGenesisMetadata {
   clientId: string;
   clientMetadata: GenesisMetadata[];

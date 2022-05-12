@@ -2,7 +2,10 @@ import { ContractInfo } from "./types";
 import { StringEvent } from "../../../cosmos/base/abci/v1beta1/abci";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** QueryContractInfoRequest is the request type for the Query/ContractInfo RPC method */
 export interface QueryContractInfoRequest {
+  /** address is the address of the contract to query */
   address: Uint8Array;
 }
 
@@ -62,7 +65,10 @@ export const QueryContractInfoRequest = {
   }
 
 };
+
+/** QueryContractInfoResponse is the response type for the Query/ContractInfo RPC method */
 export interface QueryContractInfoResponse {
+  /** address is the address of the contract */
   address: Uint8Array;
   ContractInfo: ContractInfo;
 }
@@ -136,6 +142,7 @@ export const QueryContractInfoResponse = {
 
 };
 export interface QueryContractHistoryRequest {
+  /** address is the address of the contract to query */
   address: Uint8Array;
 }
 
@@ -196,6 +203,7 @@ export const QueryContractHistoryRequest = {
 
 };
 export interface QueryContractsByCodeRequest {
+  /** grpc-gateway_out does not support Go style CodID */
   codeId: Long;
 }
 
@@ -255,6 +263,8 @@ export const QueryContractsByCodeRequest = {
   }
 
 };
+
+/** ContractInfoWithAddress adds the address (key) to the ContractInfo representation */
 export interface ContractInfoWithAddress {
   address: Uint8Array;
   ContractInfo: ContractInfo;
@@ -395,6 +405,7 @@ export const QueryContractsByCodeResponse = {
 
 };
 export interface QuerySmartContractStateRequest {
+  /** address is the address of the contract */
   address: Uint8Array;
   queryData: Uint8Array;
 }
@@ -528,6 +539,7 @@ export const QueryContractAddressByLabelRequest = {
 
 };
 export interface QueryContractKeyRequest {
+  /** address is the address of the contract */
   address: Uint8Array;
 }
 
@@ -588,6 +600,7 @@ export const QueryContractKeyRequest = {
 
 };
 export interface QueryContractHashRequest {
+  /** address is the address of the contract */
   address: Uint8Array;
 }
 
@@ -708,6 +721,7 @@ export const QuerySmartContractStateResponse = {
 
 };
 export interface QueryCodeRequest {
+  /** grpc-gateway_out does not support Go style CodID */
   codeId: Long;
 }
 
@@ -768,6 +782,7 @@ export const QueryCodeRequest = {
 
 };
 export interface CodeInfoResponse {
+  /** id for legacy support */
   codeId: Long;
   creator: Uint8Array;
   dataHash: Uint8Array;
@@ -1019,6 +1034,7 @@ export const QueryCodesResponse = {
 
 };
 export interface QueryContractAddressByLabelResponse {
+  /** address is the address of the contract */
   address: Uint8Array;
 }
 
@@ -1079,6 +1095,7 @@ export const QueryContractAddressByLabelResponse = {
 
 };
 export interface QueryContractKeyResponse {
+  /** address is the address of the contract */
   key: Uint8Array;
 }
 
@@ -1198,6 +1215,8 @@ export const QueryContractHashResponse = {
   }
 
 };
+
+/** DecryptedAnswer is a struct that represents a decrypted tx-query */
 export interface DecryptedAnswer {
   type: string;
   input: string;

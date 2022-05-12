@@ -437,6 +437,8 @@ export const RequestInfo = {
   }
 
 };
+
+/** nondeterministic */
 export interface RequestSetOption {
   key: string;
   value: string;
@@ -1113,6 +1115,8 @@ export const RequestCommit = {
   }
 
 };
+
+/** lists available snapshots */
 export interface RequestListSnapshots {}
 
 function createBaseRequestListSnapshots(): RequestListSnapshots {
@@ -1157,8 +1161,13 @@ export const RequestListSnapshots = {
   }
 
 };
+
+/** offers a snapshot to the application */
 export interface RequestOfferSnapshot {
+  /** snapshot offered by peers */
   snapshot: Snapshot;
+
+  /** light client-verified app hash for snapshot height */
   appHash: Uint8Array;
 }
 
@@ -1230,6 +1239,8 @@ export const RequestOfferSnapshot = {
   }
 
 };
+
+/** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunk {
   height: Long;
   format: number;
@@ -1316,6 +1327,8 @@ export const RequestLoadSnapshotChunk = {
   }
 
 };
+
+/** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunk {
   index: number;
   chunk: Uint8Array;
@@ -1657,6 +1670,8 @@ export const Response = {
   }
 
 };
+
+/** nondeterministic */
 export interface ResponseException {
   error: string;
 }
@@ -1933,8 +1948,12 @@ export const ResponseInfo = {
   }
 
 };
+
+/** nondeterministic */
 export interface ResponseSetOption {
   code: number;
+
+  /** bytes data = 2; */
   log: string;
   info: string;
 }
@@ -2113,7 +2132,11 @@ export const ResponseInitChain = {
 };
 export interface ResponseQuery {
   code: number;
+
+  /** bytes data = 2; // use "value" instead. */
   log: string;
+
+  /** nondeterministic */
   info: string;
   index: Long;
   key: Uint8Array;
@@ -2344,7 +2367,11 @@ export const ResponseBeginBlock = {
 export interface ResponseCheckTx {
   code: number;
   data: Uint8Array;
+
+  /** nondeterministic */
   log: string;
+
+  /** nondeterministic */
   info: string;
   gasWanted: Long;
   gasUsed: Long;
@@ -2501,7 +2528,11 @@ export const ResponseCheckTx = {
 export interface ResponseDeliverTx {
   code: number;
   data: Uint8Array;
+
+  /** nondeterministic */
   log: string;
+
+  /** nondeterministic */
   info: string;
   gasWanted: Long;
   gasUsed: Long;
@@ -2754,6 +2785,7 @@ export const ResponseEndBlock = {
 
 };
 export interface ResponseCommit {
+  /** reserve 1 */
   data: Uint8Array;
   retainHeight: Long;
 }
@@ -3090,7 +3122,11 @@ export const ResponseLoadSnapshotChunk = {
 };
 export interface ResponseApplySnapshotChunk {
   result: ResponseOfferSnapshot_Result;
+
+  /** Chunks to refetch and reapply */
   refetchChunks: number[];
+
+  /** Chunk senders to reject and ban */
   rejectSenders: string[];
 }
 
@@ -3274,6 +3310,11 @@ export function responseApplySnapshotChunk_ResultToJSON(object: ResponseApplySna
       return "UNKNOWN";
   }
 }
+
+/**
+ * ConsensusParams contains all consensus-relevant parameters
+ * that can be adjusted by the abci app
+ */
 export interface ConsensusParams {
   block: BlockParams;
   evidence: EvidenceParams;
@@ -3373,8 +3414,13 @@ export const ConsensusParams = {
   }
 
 };
+
+/** BlockParams contains limits on the block size. */
 export interface BlockParams {
+  /** Note: must be greater than 0 */
   maxBytes: Long;
+
+  /** Note: must be greater or equal to -1 */
   maxGas: Long;
 }
 
@@ -3525,6 +3571,12 @@ export const LastCommitInfo = {
   }
 
 };
+
+/**
+ * Event allows application developers to attach additional information to
+ * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
+ * Later, transactions may be queried using these events.
+ */
 export interface Event {
   type: string;
   attributes: EventAttribute[];
@@ -3604,9 +3656,13 @@ export const Event = {
   }
 
 };
+
+/** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttribute {
   key: Uint8Array;
   value: Uint8Array;
+
+  /** nondeterministic */
   index: boolean;
 }
 
@@ -3690,6 +3746,12 @@ export const EventAttribute = {
   }
 
 };
+
+/**
+ * TxResult contains results of executing the transaction.
+ * 
+ * One usage is indexing transaction results.
+ */
 export interface TxResult {
   height: Long;
   index: number;
@@ -3789,8 +3851,16 @@ export const TxResult = {
   }
 
 };
+
+/** Validator */
 export interface Validator {
+  /**
+   * The first 20 bytes of SHA256(public key)
+   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
+   */
   address: Uint8Array;
+
+  /** The voting power */
   power: Long;
 }
 
@@ -3862,6 +3932,8 @@ export const Validator = {
   }
 
 };
+
+/** ValidatorUpdate */
 export interface ValidatorUpdate {
   pubKey: PublicKey;
   power: Long;
@@ -3935,6 +4007,8 @@ export const ValidatorUpdate = {
   }
 
 };
+
+/** VoteInfo */
 export interface VoteInfo {
   validator: Validator;
   signedLastBlock: boolean;
@@ -4051,9 +4125,21 @@ export function evidenceTypeToJSON(object: EvidenceType): string {
 }
 export interface Evidence {
   type: EvidenceType;
+
+  /** The offending validator */
   validator: Validator;
+
+  /** The height when the offense occurred */
   height: Long;
+
+  /** The corresponding time where the offense occurred */
   time: Date;
+
+  /**
+   * Total voting power of the validator set in case the ABCI application does
+   * not store historical validators.
+   * https://github.com/tendermint/tendermint/issues/4581
+   */
   totalVotingPower: Long;
 }
 
@@ -4160,10 +4246,19 @@ export const Evidence = {
 
 };
 export interface Snapshot {
+  /** The height at which the snapshot was taken */
   height: Long;
+
+  /** The application-specific snapshot format */
   format: number;
+
+  /** Number of chunks in the snapshot */
   chunks: number;
+
+  /** Arbitrary snapshot hash, equal only if identical */
   hash: Uint8Array;
+
+  /** Arbitrary application metadata */
   metadata: Uint8Array;
 }
 

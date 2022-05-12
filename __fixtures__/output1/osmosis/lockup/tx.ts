@@ -282,6 +282,8 @@ export const MsgBeginUnlockingAllResponse = {
 export interface MsgBeginUnlocking {
   owner: string;
   ID: Long;
+
+  /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
 

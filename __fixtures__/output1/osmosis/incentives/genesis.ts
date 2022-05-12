@@ -3,7 +3,10 @@ import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GenesisState defines the incentives module's genesis state. */
 export interface GenesisState {
+  /** params defines all the parameters of the module */
   params: Params;
   gauges: Gauge[];
   lockableDurations: string[];

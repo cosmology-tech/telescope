@@ -2,6 +2,11 @@ import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/**
+ * MsgGrant is a request type for Grant method. It declares authorization to the grantee
+ * on behalf of the granter with the provided expiration time.
+ */
 export interface MsgGrant {
   granter: string;
   grantee: string;
@@ -88,6 +93,8 @@ export const MsgGrant = {
   }
 
 };
+
+/** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {
   results: Uint8Array[];
 }
@@ -154,8 +161,20 @@ export const MsgExecResponse = {
   }
 
 };
+
+/**
+ * MsgExec attempts to execute the provided messages using
+ * authorizations granted to the grantee. Each message should have only
+ * one signer corresponding to the granter of the authorization.
+ */
 export interface MsgExec {
   grantee: string;
+
+  /**
+   * Authorization Msg requests to execute. Each msg must implement Authorization interface
+   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
+   * triple and validate it.
+   */
   msgs: Any[];
 }
 
@@ -233,6 +252,8 @@ export const MsgExec = {
   }
 
 };
+
+/** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponse {}
 
 function createBaseMsgGrantResponse(): MsgGrantResponse {
@@ -277,6 +298,11 @@ export const MsgGrantResponse = {
   }
 
 };
+
+/**
+ * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
+ * granter's account with that has been granted to the grantee.
+ */
 export interface MsgRevoke {
   granter: string;
   grantee: string;
@@ -363,6 +389,8 @@ export const MsgRevoke = {
   }
 
 };
+
+/** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponse {}
 
 function createBaseMsgRevokeResponse(): MsgRevokeResponse {

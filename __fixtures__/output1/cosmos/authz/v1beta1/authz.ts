@@ -2,7 +2,13 @@ import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+
+/**
+ * GenericAuthorization gives the grantee unrestricted permissions to execute
+ * the provided method on behalf of the granter's account.
+ */
 export interface GenericAuthorization {
+  /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
 
@@ -62,8 +68,19 @@ export const GenericAuthorization = {
   }
 
 };
+
+/**
+ * Grant gives permissions to execute
+ * the provide method with expiration time.
+ */
 export interface Grant {
   authorization: Any;
+
+  /**
+   * time when the grant will expire and will be pruned. If null, then the grant
+   * doesn't have a time expiration (other conditions  in `authorization`
+   * may apply to invalidate the grant)
+   */
   expiration?: Date;
 }
 
@@ -132,6 +149,11 @@ export const Grant = {
   }
 
 };
+
+/**
+ * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
+ * It is used in genesis.proto and query.proto
+ */
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
@@ -228,7 +250,10 @@ export const GrantAuthorization = {
   }
 
 };
+
+/** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItem {
+  /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msgTypeUrls: string[];
 }
 

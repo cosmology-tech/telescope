@@ -106,6 +106,8 @@ export function signedMsgTypeToJSON(object: SignedMsgType): string {
       return "UNKNOWN";
   }
 }
+
+/** PartsetHeader */
 export interface PartSetHeader {
   total: number;
   hash: Uint8Array;
@@ -265,6 +267,8 @@ export const Part = {
   }
 
 };
+
+/** BlockID */
 export interface BlockID {
   hash: Uint8Array;
   partSetHeader: PartSetHeader;
@@ -338,20 +342,39 @@ export const BlockID = {
   }
 
 };
+
+/** Header defines the structure of a Tendermint block header. */
 export interface Header {
+  /** basic block info */
   version: Consensus;
   chainId: string;
   height: Long;
   time: Date;
+
+  /** prev block info */
   lastBlockId: BlockID;
+
+  /** hashes of block data */
   lastCommitHash: Uint8Array;
   dataHash: Uint8Array;
+
+  /** hashes from the app output from the prev block */
   validatorsHash: Uint8Array;
+
+  /** validators for the next block */
   nextValidatorsHash: Uint8Array;
+
+  /** consensus params for current block */
   consensusHash: Uint8Array;
+
+  /** state after txs from the previous block */
   appHash: Uint8Array;
   lastResultsHash: Uint8Array;
+
+  /** consensus info */
   evidenceHash: Uint8Array;
+
+  /** original proposer of the block */
   proposerAddress: Uint8Array;
 }
 
@@ -565,7 +588,14 @@ export const Header = {
   }
 
 };
+
+/** Data contains the set of transactions included in the block */
 export interface Data {
+  /**
+   * Txs that will be applied by state @ block.Height+1.
+   * NOTE: not all txs here are valid.  We're just agreeing on the order first.
+   * This means that block.AppHash does not include these txs.
+   */
   txs: Uint8Array[];
 }
 
@@ -631,10 +661,17 @@ export const Data = {
   }
 
 };
+
+/**
+ * Vote represents a prevote, precommit, or commit vote from validators for
+ * consensus.
+ */
 export interface Vote {
   type: SignedMsgType;
   height: Long;
   round: number;
+
+  /** zero if vote is nil. */
   blockId: BlockID;
   timestamp: Date;
   validatorAddress: Uint8Array;
@@ -780,6 +817,8 @@ export const Vote = {
   }
 
 };
+
+/** Commit contains the evidence that a block was committed by a set of validators. */
 export interface Commit {
   height: Long;
   round: number;
@@ -885,6 +924,8 @@ export const Commit = {
   }
 
 };
+
+/** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSig {
   blockIdFlag: BlockIDFlag;
   validatorAddress: Uint8Array;
@@ -1363,6 +1404,8 @@ export const BlockMeta = {
   }
 
 };
+
+/** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 export interface TxProof {
   rootHash: Uint8Array;
   data: Uint8Array;

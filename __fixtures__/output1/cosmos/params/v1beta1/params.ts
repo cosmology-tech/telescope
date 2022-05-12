@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
   title: string;
   description: string;
@@ -92,6 +94,11 @@ export const ParameterChangeProposal = {
   }
 
 };
+
+/**
+ * ParamChange defines an individual parameter change, for use in
+ * ParameterChangeProposal.
+ */
 export interface ParamChange {
   subspace: string;
   key: string;

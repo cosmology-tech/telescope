@@ -1,8 +1,13 @@
 import { ParamChange } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
+  /** subspace defines the module to query the parameter for. */
   subspace: string;
+
+  /** key defines the key of the parameter in the subspace. */
   key: string;
 }
 
@@ -74,7 +79,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** param defines the queried parameter. */
   param: ParamChange;
 }
 
@@ -134,6 +142,11 @@ export const QueryParamsResponse = {
   }
 
 };
+
+/**
+ * QuerySubspacesRequest defines a request type for querying for all registered
+ * subspaces and all keys for a subspace.
+ */
 export interface QuerySubspacesRequest {}
 
 function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
@@ -178,6 +191,11 @@ export const QuerySubspacesRequest = {
   }
 
 };
+
+/**
+ * QuerySubspacesResponse defines the response types for querying for all
+ * registered subspaces and all keys for a subspace.
+ */
 export interface QuerySubspacesResponse {
   subspaces: Subspace[];
 }
@@ -244,6 +262,11 @@ export const QuerySubspacesResponse = {
   }
 
 };
+
+/**
+ * Subspace defines a parameter subspace name and all the keys that exist for
+ * the subspace.
+ */
 export interface Subspace {
   subspace: string;
   keys: string[];

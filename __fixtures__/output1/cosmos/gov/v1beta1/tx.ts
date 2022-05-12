@@ -3,6 +3,11 @@ import { Coin } from "../../base/v1beta1/coin";
 import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "./gov";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/**
+ * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
+ * proposal Content.
+ */
 export interface MsgSubmitProposal {
   content: Any;
   initialDeposit: Coin[];
@@ -95,6 +100,8 @@ export const MsgSubmitProposal = {
   }
 
 };
+
+/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
 }
@@ -155,6 +162,8 @@ export const MsgSubmitProposalResponse = {
   }
 
 };
+
+/** MsgVote defines a message to cast a vote. */
 export interface MsgVote {
   proposalId: Long;
   voter: string;
@@ -241,6 +250,8 @@ export const MsgVote = {
   }
 
 };
+
+/** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
 
 function createBaseMsgVoteResponse(): MsgVoteResponse {
@@ -285,6 +296,12 @@ export const MsgVoteResponse = {
   }
 
 };
+
+/**
+ * MsgVoteWeighted defines a message to cast a vote.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface MsgVoteWeighted {
   proposalId: Long;
   voter: string;
@@ -377,6 +394,12 @@ export const MsgVoteWeighted = {
   }
 
 };
+
+/**
+ * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface MsgVoteWeightedResponse {}
 
 function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
@@ -421,6 +444,8 @@ export const MsgVoteWeightedResponse = {
   }
 
 };
+
+/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDeposit {
   proposalId: Long;
   depositor: string;
@@ -513,6 +538,8 @@ export const MsgDeposit = {
   }
 
 };
+
+/** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
 
 function createBaseMsgDepositResponse(): MsgDepositResponse {

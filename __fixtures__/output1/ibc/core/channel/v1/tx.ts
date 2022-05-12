@@ -2,6 +2,11 @@ import { Channel, Packet } from "./channel";
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+
+/**
+ * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
+ * is called by a relayer on Chain A.
+ */
 export interface MsgChannelOpenInit {
   portId: string;
   channel: Channel;
@@ -88,6 +93,8 @@ export const MsgChannelOpenInit = {
   }
 
 };
+
+/** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponse {}
 
 function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
@@ -132,8 +139,18 @@ export const MsgChannelOpenInitResponse = {
   }
 
 };
+
+/**
+ * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
+ * on Chain B.
+ */
 export interface MsgChannelOpenTry {
   portId: string;
+
+  /**
+   * in the case of crossing hello's, when both chains call OpenInit, we need
+   * the channel identifier of the previous channel in state INIT
+   */
   previousChannelId: string;
   channel: Channel;
   counterpartyVersion: string;
@@ -270,6 +287,8 @@ export const MsgChannelOpenTry = {
   }
 
 };
+
+/** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponse {}
 
 function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
@@ -314,6 +333,11 @@ export const MsgChannelOpenTryResponse = {
   }
 
 };
+
+/**
+ * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
+ * the change of channel state to TRYOPEN on Chain B.
+ */
 export interface MsgChannelOpenAck {
   portId: string;
   channelId: string;
@@ -452,6 +476,8 @@ export const MsgChannelOpenAck = {
   }
 
 };
+
+/** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponse {}
 
 function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
@@ -496,6 +522,11 @@ export const MsgChannelOpenAckResponse = {
   }
 
 };
+
+/**
+ * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
+ * acknowledge the change of channel state to OPEN on Chain A.
+ */
 export interface MsgChannelOpenConfirm {
   portId: string;
   channelId: string;
@@ -608,6 +639,11 @@ export const MsgChannelOpenConfirm = {
   }
 
 };
+
+/**
+ * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
+ * type.
+ */
 export interface MsgChannelOpenConfirmResponse {}
 
 function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmResponse {
@@ -652,6 +688,11 @@ export const MsgChannelOpenConfirmResponse = {
   }
 
 };
+
+/**
+ * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
+ * to close a channel with Chain B.
+ */
 export interface MsgChannelCloseInit {
   portId: string;
   channelId: string;
@@ -738,6 +779,8 @@ export const MsgChannelCloseInit = {
   }
 
 };
+
+/** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponse {}
 
 function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
@@ -782,6 +825,11 @@ export const MsgChannelCloseInitResponse = {
   }
 
 };
+
+/**
+ * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
+ * to acknowledge the change of channel state to CLOSED on Chain A.
+ */
 export interface MsgChannelCloseConfirm {
   portId: string;
   channelId: string;
@@ -894,6 +942,11 @@ export const MsgChannelCloseConfirm = {
   }
 
 };
+
+/**
+ * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
+ * type.
+ */
 export interface MsgChannelCloseConfirmResponse {}
 
 function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmResponse {
@@ -938,6 +991,8 @@ export const MsgChannelCloseConfirmResponse = {
   }
 
 };
+
+/** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacket {
   packet: Packet;
   proofCommitment: Uint8Array;
@@ -1037,6 +1092,8 @@ export const MsgRecvPacket = {
   }
 
 };
+
+/** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponse {}
 
 function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
@@ -1081,6 +1138,8 @@ export const MsgRecvPacketResponse = {
   }
 
 };
+
+/** MsgTimeout receives timed-out packet */
 export interface MsgTimeout {
   packet: Packet;
   proofUnreceived: Uint8Array;
@@ -1193,6 +1252,8 @@ export const MsgTimeout = {
   }
 
 };
+
+/** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponse {}
 
 function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
@@ -1237,6 +1298,8 @@ export const MsgTimeoutResponse = {
   }
 
 };
+
+/** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnClose {
   packet: Packet;
   proofUnreceived: Uint8Array;
@@ -1362,6 +1425,8 @@ export const MsgTimeoutOnClose = {
   }
 
 };
+
+/** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponse {}
 
 function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
@@ -1406,6 +1471,8 @@ export const MsgTimeoutOnCloseResponse = {
   }
 
 };
+
+/** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgement {
   packet: Packet;
   acknowledgement: Uint8Array;
@@ -1518,6 +1585,8 @@ export const MsgAcknowledgement = {
   }
 
 };
+
+/** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponse {}
 
 function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {

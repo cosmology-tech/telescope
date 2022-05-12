@@ -4,7 +4,13 @@ import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+
+/**
+ * QueryConnectionRequest is the request type for the Query/Connection RPC
+ * method
+ */
 export interface QueryConnectionRequest {
+  /** connection unique identifier */
   connectionId: string;
 }
 
@@ -64,9 +70,20 @@ export const QueryConnectionRequest = {
   }
 
 };
+
+/**
+ * QueryConnectionResponse is the response type for the Query/Connection RPC
+ * method. Besides the connection end, it includes a proof and the height from
+ * which the proof was retrieved.
+ */
 export interface QueryConnectionResponse {
+  /** connection associated with the request identifier */
   connection: ConnectionEnd;
+
+  /** merkle proof of existence */
   proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
 
@@ -150,6 +167,11 @@ export const QueryConnectionResponse = {
   }
 
 };
+
+/**
+ * QueryConnectionsRequest is the request type for the Query/Connections RPC
+ * method
+ */
 export interface QueryConnectionsRequest {
   pagination: PageRequest;
 }
@@ -210,9 +232,19 @@ export const QueryConnectionsRequest = {
   }
 
 };
+
+/**
+ * QueryConnectionsResponse is the response type for the Query/Connections RPC
+ * method.
+ */
 export interface QueryConnectionsResponse {
+  /** list of stored connections of the chain. */
   connections: IdentifiedConnection[];
+
+  /** pagination response */
   pagination: PageResponse;
+
+  /** query block height */
   height: Height;
 }
 
@@ -302,7 +334,13 @@ export const QueryConnectionsResponse = {
   }
 
 };
+
+/**
+ * QueryClientConnectionsRequest is the request type for the
+ * Query/ClientConnections RPC method
+ */
 export interface QueryClientConnectionsRequest {
+  /** client identifier associated with a connection */
   clientId: string;
 }
 
@@ -362,9 +400,19 @@ export const QueryClientConnectionsRequest = {
   }
 
 };
+
+/**
+ * QueryClientConnectionsResponse is the response type for the
+ * Query/ClientConnections RPC method
+ */
 export interface QueryClientConnectionsResponse {
+  /** slice of all the connection paths associated with a client. */
   connectionPaths: string[];
+
+  /** merkle proof of existence */
   proof: Uint8Array;
+
+  /** height at which the proof was generated */
   proofHeight: Height;
 }
 
@@ -454,7 +502,13 @@ export const QueryClientConnectionsResponse = {
   }
 
 };
+
+/**
+ * QueryConnectionClientStateRequest is the request type for the
+ * Query/ConnectionClientState RPC method
+ */
 export interface QueryConnectionClientStateRequest {
+  /** connection identifier */
   connectionId: string;
 }
 
@@ -514,9 +568,19 @@ export const QueryConnectionClientStateRequest = {
   }
 
 };
+
+/**
+ * QueryConnectionClientStateResponse is the response type for the
+ * Query/ConnectionClientState RPC method
+ */
 export interface QueryConnectionClientStateResponse {
+  /** client state associated with the channel */
   identifiedClientState: IdentifiedClientState;
+
+  /** merkle proof of existence */
   proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
 
@@ -600,7 +664,13 @@ export const QueryConnectionClientStateResponse = {
   }
 
 };
+
+/**
+ * QueryConnectionConsensusStateRequest is the request type for the
+ * Query/ConnectionConsensusState RPC method
+ */
 export interface QueryConnectionConsensusStateRequest {
+  /** connection identifier */
   connectionId: string;
   revisionNumber: Long;
   revisionHeight: Long;
@@ -686,10 +756,22 @@ export const QueryConnectionConsensusStateRequest = {
   }
 
 };
+
+/**
+ * QueryConnectionConsensusStateResponse is the response type for the
+ * Query/ConnectionConsensusState RPC method
+ */
 export interface QueryConnectionConsensusStateResponse {
+  /** consensus state associated with the channel */
   consensusState: Any;
+
+  /** client ID associated with the consensus state */
   clientId: string;
+
+  /** merkle proof of existence */
   proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
 

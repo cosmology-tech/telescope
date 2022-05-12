@@ -1,8 +1,15 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** A description of a label. */
 export interface LabelDescriptor {
+  /** The label key. */
   key: string;
+
+  /** The type of data that can be assigned to the label. */
   valueType: LabelDescriptor_ValueType;
+
+  /** A human-readable description for the label. */
   description: string;
 }
 

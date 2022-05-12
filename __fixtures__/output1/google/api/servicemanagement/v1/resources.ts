@@ -2,8 +2,19 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
+
+/**
+ * The full representation of a Service that is managed by
+ * Google Service Management.
+ */
 export interface ManagedService {
+  /**
+   * The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements.
+   */
   serviceName: string;
+
+  /** ID of the project that produces and owns this service. */
   producerProjectId: string;
 }
 
@@ -75,10 +86,22 @@ export const ManagedService = {
   }
 
 };
+
+/** The metadata associated with a long running operation resource. */
 export interface OperationMetadata {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
   resourceNames: string[];
+
+  /** Detailed status information for each step. The order is undetermined. */
   steps: OperationMetadata_Step[];
+
+  /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
+
+  /** The start time of the operation. */
   startTime: Date;
 }
 
@@ -182,8 +205,13 @@ export const OperationMetadata = {
   }
 
 };
+
+/** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
+  /** The short description of the step. */
   description: string;
+
+  /** The status code. */
   status: OperationMetadata_Status;
 }
 
@@ -332,9 +360,16 @@ export function operationMetadata_StatusToJSON(object: OperationMetadata_Status)
       return "UNKNOWN";
   }
 }
+
+/** Represents a diagnostic message (error or warning) */
 export interface Diagnostic {
+  /** File name and line number of the error or warning. */
   location: string;
+
+  /** The kind of diagnostic information provided. */
   kind: Diagnostic_Kind;
+
+  /** Message describing the error or warning. */
   message: string;
 }
 
@@ -454,8 +489,23 @@ export function diagnostic_KindToJSON(object: Diagnostic_Kind): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * Represents a source file which is used to generate the service configuration
+ * defined by `google.api.Service`.
+ */
 export interface ConfigSource {
+  /**
+   * A unique ID for a specific instance of this message, typically assigned
+   * by the client for tracking purpose. If empty, the server may choose to
+   * generate one instead.
+   */
   id: string;
+
+  /**
+   * Set of source configuration files that are used to generate a service
+   * configuration (`google.api.Service`).
+   */
   files: ConfigFile[];
 }
 
@@ -533,9 +583,16 @@ export const ConfigSource = {
   }
 
 };
+
+/** Generic specification of a source configuration file */
 export interface ConfigFile {
+  /** The file name of the configuration file (full or relative path). */
   filePath: string;
+
+  /** The bytes that constitute the file. */
   fileContents: Uint8Array;
+
+  /** The type of configuration file this represents. */
   fileType: ConfigFile_FileType;
 }
 
@@ -705,7 +762,13 @@ export function configFile_FileTypeToJSON(object: ConfigFile_FileType): string {
       return "UNKNOWN";
   }
 }
+
+/** Represents a service configuration with its name and id. */
 export interface ConfigRef {
+  /**
+   * Resource name of a service config. It must have the following
+   * format: "services/{service name}/configs/{config id}".
+   */
   name: string;
 }
 
@@ -765,7 +828,21 @@ export const ConfigRef = {
   }
 
 };
+
+/**
+ * Change report associated with a particular service configuration.
+ * 
+ * It contains a list of ConfigChanges based on the comparison between
+ * two service configurations.
+ */
 export interface ChangeReport {
+  /**
+   * List of changes between two service configurations.
+   * The changes will be alphabetically sorted based on the identifier
+   * of each change.
+   * A ConfigChange identifier is a dot separated path to the configuration.
+   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
+   */
   configChanges: ConfigChange[];
 }
 
@@ -831,13 +908,51 @@ export const ChangeReport = {
   }
 
 };
+
+/**
+ * A rollout resource that defines how service configuration versions are pushed
+ * to control plane systems. Typically, you create a new version of the
+ * service config, and then create a Rollout to push the service config.
+ */
 export interface Rollout {
+  /**
+   * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
+   * and only lower case letters, digits, '.', '_' and '-' are allowed.
+   * 
+   * If not specified by client, the server will generate one. The generated id
+   * will have the form of <date><revision number>, where "date" is the create
+   * date in ISO 8601 format.  "revision number" is a monotonically increasing
+   * positive number that is reset every day for each service.
+   * An example of the generated rollout_id is '2016-02-16r1'
+   */
   rolloutId: string;
+
+  /** Creation time of the rollout. Readonly. */
   createTime: Date;
+
+  /** The user who created the Rollout. Readonly. */
   createdBy: string;
+
+  /**
+   * The status of this rollout. Readonly. In case of a failed rollout,
+   * the system will automatically rollback to the current Rollout
+   * version. Readonly.
+   */
   status: Rollout_RolloutStatus;
+
+  /**
+   * Google Service Control selects service configurations based on
+   * traffic percentage.
+   */
   trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
+
+  /**
+   * The strategy associated with a rollout to delete a `ManagedService`.
+   * Readonly.
+   */
   deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
+
+  /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
 
@@ -1040,7 +1155,45 @@ export const TrafficPercentStrategy_PercentagesEntry = {
   }
 
 };
+
+/**
+ * Strategy that specifies how clients of Google Service Controller want to
+ * send traffic to use different config versions. This is generally
+ * used by API proxy to split traffic based on your configured percentage for
+ * each config version.
+ * 
+ * One example of how to gradually rollout a new service configuration using
+ * this
+ * strategy:
+ * Day 1
+ * 
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160206"
+ * traffic_percent_strategy {
+ * percentages: {
+ * "example.googleapis.com/20160201": 70.00
+ * "example.googleapis.com/20160206": 30.00
+ * }
+ * }
+ * }
+ * 
+ * Day 2
+ * 
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160207"
+ * traffic_percent_strategy: {
+ * percentages: {
+ * "example.googleapis.com/20160206": 100.00
+ * }
+ * }
+ * }
+ */
 export interface TrafficPercentStrategy {
+  /**
+   * Maps service configuration IDs to their corresponding traffic percentage.
+   * Key is the service configuration ID, Value is the traffic percentage
+   * which must be greater than 0.0 and the sum must equal to 100.0.
+   */
   percentages: {
     [key: string]: number;
   };
@@ -1129,6 +1282,11 @@ export const TrafficPercentStrategy = {
   }
 
 };
+
+/**
+ * Strategy used to delete a service. This strategy is a placeholder only
+ * used by the system generated rollout to delete a service.
+ */
 export interface Rollout_DeleteServiceStrategy {}
 
 function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrategy {

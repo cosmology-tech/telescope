@@ -61,6 +61,7 @@ export const QueryEncryptedSeedRequest = {
 
 };
 export interface QueryEncryptedSeedResponse {
+  /** [(gogoproto.nullable) = false]; */
   encryptedSeed: Uint8Array;
 }
 

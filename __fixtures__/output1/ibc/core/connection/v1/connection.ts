@@ -1,11 +1,34 @@
 import { MerklePrefix } from "../../commitment/v1/commitment";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * ConnectionEnd defines a stateful object on a chain connected to another
+ * separate one.
+ * NOTE: there must only be 2 defined ConnectionEnds to establish
+ * a connection between two chains.
+ */
 export interface ConnectionEnd {
+  /** client associated with this connection. */
   clientId: string;
+
+  /**
+   * IBC version which can be utilised to determine encodings or protocols for
+   * channels or packets utilising this connection.
+   */
   versions: Version[];
+
+  /** current state of the connection end. */
   state: State;
+
+  /** counterparty chain associated with this connection. */
   counterparty: Counterparty;
+
+  /**
+   * delay period that must pass before a consensus state can be used for
+   * packet-verification NOTE: delay period logic is only implemented by some
+   * clients.
+   */
   delayPeriod: Long;
 }
 
@@ -119,12 +142,31 @@ export const ConnectionEnd = {
   }
 
 };
+
+/**
+ * IdentifiedConnection defines a connection with additional connection
+ * identifier field.
+ */
 export interface IdentifiedConnection {
+  /** connection identifier. */
   id: string;
+
+  /** client associated with this connection. */
   clientId: string;
+
+  /**
+   * IBC version which can be utilised to determine encodings or protocols for
+   * channels or packets utilising this connection
+   */
   versions: Version[];
+
+  /** current state of the connection end. */
   state: State;
+
+  /** counterparty chain associated with this connection. */
   counterparty: Counterparty;
+
+  /** delay period associated with this connection. */
   delayPeriod: Long;
 }
 
@@ -307,9 +349,22 @@ export function stateToJSON(object: State): string {
       return "UNKNOWN";
   }
 }
+
+/** Counterparty defines the counterparty chain associated with a connection end. */
 export interface Counterparty {
+  /**
+   * identifies the client on the counterparty chain associated with a given
+   * connection.
+   */
   clientId: string;
+
+  /**
+   * identifies the connection end on the counterparty chain associated with a
+   * given connection.
+   */
   connectionId: string;
+
+  /** commitment merkle prefix of the counterparty chain. */
   prefix: MerklePrefix;
 }
 
@@ -393,7 +448,10 @@ export const Counterparty = {
   }
 
 };
+
+/** ClientPaths define all the connection paths for a client state. */
 export interface ClientPaths {
+  /** list of connection paths */
   paths: string[];
 }
 
@@ -459,8 +517,13 @@ export const ClientPaths = {
   }
 
 };
+
+/** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPaths {
+  /** client state unique identifier */
   clientId: string;
+
+  /** list of connection paths */
   paths: string[];
 }
 
@@ -538,8 +601,16 @@ export const ConnectionPaths = {
   }
 
 };
+
+/**
+ * Version defines the versioning scheme used to negotiate the IBC verison in
+ * the connection handshake.
+ */
 export interface Version {
+  /** unique version identifier */
   identifier: string;
+
+  /** list of features compatible with the specified identifier */
   features: string[];
 }
 
@@ -617,7 +688,14 @@ export const Version = {
   }
 
 };
+
+/** Params defines the set of Connection parameters. */
 export interface Params {
+  /**
+   * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
+   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
+   * conditions. A safe choice is 3-5x the expected time per block.
+   */
   maxExpectedTimePerBlock: Long;
 }
 

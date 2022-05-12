@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+
+/** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
 
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
@@ -44,7 +46,10 @@ export const ListAllInterfacesRequest = {
   }
 
 };
+
+/** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
+  /** interface_names is an array of all the registered interfaces. */
   interfaceNames: string[];
 }
 
@@ -110,7 +115,13 @@ export const ListAllInterfacesResponse = {
   }
 
 };
+
+/**
+ * ListImplementationsRequest is the request type of the ListImplementations
+ * RPC.
+ */
 export interface ListImplementationsRequest {
+  /** interface_name defines the interface to query the implementations for. */
   interfaceName: string;
 }
 
@@ -170,6 +181,11 @@ export const ListImplementationsRequest = {
   }
 
 };
+
+/**
+ * ListImplementationsResponse is the response type of the ListImplementations
+ * RPC.
+ */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
 }

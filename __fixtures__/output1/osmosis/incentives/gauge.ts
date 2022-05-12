@@ -5,13 +5,37 @@ import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Gauge {
+  /** unique ID of a Gauge */
   id: Long;
+
+  /**
+   * flag to show if it's perpetual or multi-epoch
+   * distribution incentives by third party
+   */
   isPerpetual: boolean;
+
+  /**
+   * Rewards are distributed to lockups that are are returned by at least one of
+   * these queries
+   */
   distributeTo: QueryCondition;
+
+  /**
+   * total amount of Coins that has been in the gauge.
+   * can distribute multiple coins
+   */
   coins: Coin[];
+
+  /** distribution start time */
   startTime: Date;
+
+  /** number of epochs distribution will be done */
   numEpochsPaidOver: Long;
+
+  /** number of epochs distributed already */
   filledEpochs: Long;
+
+  /** already distributed coins */
   distributedCoins: Coin[];
 }
 

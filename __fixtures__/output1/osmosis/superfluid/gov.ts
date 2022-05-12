@@ -1,6 +1,11 @@
 import { SuperfluidAsset } from "./superfluid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
+ * assets
+ */
 export interface SetSuperfluidAssetsProposal {
   title: string;
   description: string;
@@ -93,6 +98,11 @@ export const SetSuperfluidAssetsProposal = {
   }
 
 };
+
+/**
+ * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
+ * assets by denom
+ */
 export interface RemoveSuperfluidAssetsProposal {
   title: string;
   description: string;

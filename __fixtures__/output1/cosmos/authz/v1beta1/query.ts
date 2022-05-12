@@ -2,10 +2,16 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantAuthorization } from "./authz";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequest {
   granter: string;
   grantee: string;
+
+  /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
   msgTypeUrl: string;
+
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -101,8 +107,13 @@ export const QueryGrantsRequest = {
   }
 
 };
+
+/** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponse {
+  /** authorizations is a list of grants granted for grantee by granter. */
   grants: Grant[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -180,8 +191,12 @@ export const QueryGrantsResponse = {
   }
 
 };
+
+/** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequest {
   granter: string;
+
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -253,8 +268,13 @@ export const QueryGranterGrantsRequest = {
   }
 
 };
+
+/** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponse {
+  /** grants is a list of grants granted by the granter. */
   grants: GrantAuthorization[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -332,8 +352,12 @@ export const QueryGranterGrantsResponse = {
   }
 
 };
+
+/** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequest {
   grantee: string;
+
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -405,8 +429,13 @@ export const QueryGranteeGrantsRequest = {
   }
 
 };
+
+/** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponse {
+  /** grants is a list of grants granted to the grantee. */
   grants: GrantAuthorization[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 

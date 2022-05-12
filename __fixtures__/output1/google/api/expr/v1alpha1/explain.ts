@@ -1,8 +1,27 @@
 import { Value } from "./value";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
+
+/**
+ * Values of intermediate expressions produced when evaluating expression.
+ * Deprecated, use `EvalState` instead.
+ */
 export interface Explain {
+  /**
+   * All of the observed values.
+   * 
+   * The field value_index is an index in the values list.
+   * Separating values from steps is needed to remove redundant values.
+   */
   values: Value[];
+
+  /**
+   * List of steps.
+   * 
+   * Repeated evaluations of the same expression generate new ExprStep
+   * instances. The order of such ExprStep instances matches the order of
+   * elements returned by Comprehension.iter_range.
+   */
   exprSteps: Explain_ExprStep[];
 }
 
@@ -85,8 +104,13 @@ export const Explain = {
   }
 
 };
+
+/** ID and value index of one step. */
 export interface Explain_ExprStep {
+  /** ID of corresponding Expr node. */
   id: Long;
+
+  /** Index of the value in the values list. */
   valueIndex: number;
 }
 

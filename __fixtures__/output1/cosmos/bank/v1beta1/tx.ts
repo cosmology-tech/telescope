@@ -2,6 +2,8 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Input, Output } from "./bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
   fromAddress: string;
   toAddress: string;
@@ -94,6 +96,8 @@ export const MsgSend = {
   }
 
 };
+
+/** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
 
 function createBaseMsgSendResponse(): MsgSendResponse {
@@ -138,6 +142,8 @@ export const MsgSendResponse = {
   }
 
 };
+
+/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSend {
   inputs: Input[];
   outputs: Output[];
@@ -222,6 +228,8 @@ export const MsgMultiSend = {
   }
 
 };
+
+/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponse {}
 
 function createBaseMsgMultiSendResponse(): MsgMultiSendResponse {

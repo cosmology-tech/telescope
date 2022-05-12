@@ -3,8 +3,14 @@ import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgStoreCode {
   sender: Uint8Array;
+
+  /** WASMByteCode can be raw or gzip compressed */
   wasmByteCode: Uint8Array;
+
+  /** Source is a valid absolute HTTPS URI to the contract's source code, optional */
   source: string;
+
+  /** Builder is a valid docker image name with tag, optional */
   builder: string;
 }
 
@@ -102,6 +108,11 @@ export const MsgStoreCode = {
 };
 export interface MsgInstantiateContract {
   sender: Uint8Array;
+
+  /**
+   * Admin is an optional address that can execute migrations
+   * bytes admin = 2 [(gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.AccAddress"];
+   */
   callbackCodeHash: string;
   codeId: Long;
   label: string;

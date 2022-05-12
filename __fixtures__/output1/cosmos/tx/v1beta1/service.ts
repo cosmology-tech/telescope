@@ -5,8 +5,16 @@ import { BlockID } from "../../../tendermint/types/types";
 import { Block } from "../../../tendermint/types/block";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+
+/**
+ * GetTxsEventRequest is the request type for the Service.TxsByEvents
+ * RPC method.
+ */
 export interface GetTxsEventRequest {
+  /** events is the list of transaction event type. */
   events: string[];
+
+  /** pagination defines a pagination for the request. */
   pagination: PageRequest;
   orderBy: OrderBy;
 }
@@ -143,9 +151,19 @@ export function orderByToJSON(object: OrderBy): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * GetTxsEventResponse is the response type for the Service.TxsByEvents
+ * RPC method.
+ */
 export interface GetTxsEventResponse {
+  /** txs is the list of queried transactions. */
   txs: Tx[];
+
+  /** tx_responses is the list of queried TxResponses. */
   txResponses: TxResponse[];
+
+  /** pagination defines a pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -240,7 +258,13 @@ export const GetTxsEventResponse = {
   }
 
 };
+
+/**
+ * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
+ * RPC method.
+ */
 export interface BroadcastTxRequest {
+  /** tx_bytes is the raw transaction. */
   txBytes: Uint8Array;
   mode: BroadcastMode;
 }
@@ -372,7 +396,13 @@ export function broadcastModeToJSON(object: BroadcastMode): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * BroadcastTxResponse is the response type for the
+ * Service.BroadcastTx method.
+ */
 export interface BroadcastTxResponse {
+  /** tx_response is the queried TxResponses. */
   txResponse: TxResponse;
 }
 
@@ -432,8 +462,23 @@ export const BroadcastTxResponse = {
   }
 
 };
+
+/**
+ * SimulateRequest is the request type for the Service.Simulate
+ * RPC method.
+ */
 export interface SimulateRequest {
+  /**
+   * tx is the transaction to simulate.
+   * Deprecated. Send raw tx bytes instead.
+   */
   tx: Tx;
+
+  /**
+   * tx_bytes is the raw transaction.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
   txBytes: Uint8Array;
 }
 
@@ -505,8 +550,16 @@ export const SimulateRequest = {
   }
 
 };
+
+/**
+ * SimulateResponse is the response type for the
+ * Service.SimulateRPC method.
+ */
 export interface SimulateResponse {
+  /** gas_info is the information about gas used in the simulation. */
   gasInfo: GasInfo;
+
+  /** result is the result of the simulation. */
   result: Result;
 }
 
@@ -578,7 +631,13 @@ export const SimulateResponse = {
   }
 
 };
+
+/**
+ * GetTxRequest is the request type for the Service.GetTx
+ * RPC method.
+ */
 export interface GetTxRequest {
+  /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
 }
 
@@ -638,8 +697,13 @@ export const GetTxRequest = {
   }
 
 };
+
+/** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
+  /** tx is the queried transaction. */
   tx: Tx;
+
+  /** tx_response is the queried TxResponses. */
   txResponse: TxResponse;
 }
 
@@ -711,8 +775,18 @@ export const GetTxResponse = {
   }
 
 };
+
+/**
+ * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.45.2
+ */
 export interface GetBlockWithTxsRequest {
+  /** height is the height of the block to query. */
   height: Long;
+
+  /** pagination defines a pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -784,10 +858,19 @@ export const GetBlockWithTxsRequest = {
   }
 
 };
+
+/**
+ * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
+ * 
+ * Since: cosmos-sdk 0.45.2
+ */
 export interface GetBlockWithTxsResponse {
+  /** txs are the transactions in the block. */
   txs: Tx[];
   blockId: BlockID;
   block: Block;
+
+  /** pagination defines a pagination for the response. */
   pagination: PageResponse;
 }
 

@@ -1,7 +1,10 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** Source information used to create a Service Config */
 export interface SourceInfo {
+  /** All files used during config generation. */
   sourceFiles: Any[];
 }
 

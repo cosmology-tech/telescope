@@ -4,11 +4,23 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface MsgCreateGauge {
+  /**
+   * flag to show if it's perpetual or multi-epoch
+   * distribution incentives by third party
+   */
   isPerpetual: boolean;
   owner: string;
+
+  /** distribute condition of a lock which meet one of these conditions */
   distributeTo: QueryCondition;
+
+  /** can distribute multiple coins */
   coins: Coin[];
+
+  /** distribution start time */
   startTime: Date;
+
+  /** number of epochs distribution will be done */
   numEpochsPaidOver: Long;
 }
 

@@ -1,6 +1,9 @@
 import * as _m0 from "protobufjs/minimal";
 import { bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
+  /** gen_txs defines the genesis transactions. */
   genTxs: Uint8Array[];
 }
 

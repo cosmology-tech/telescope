@@ -1,5 +1,10 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * Capability defines an implementation of an object capability. The index
+ * provided to a Capability must be globally unique.
+ */
 export interface Capability {
   index: Long;
 }
@@ -60,6 +65,11 @@ export const Capability = {
   }
 
 };
+
+/**
+ * Owner defines a single capability owner. An owner is defined by the name of
+ * capability and the module name.
+ */
 export interface Owner {
   module: string;
   name: string;
@@ -133,6 +143,11 @@ export const Owner = {
   }
 
 };
+
+/**
+ * CapabilityOwners defines a set of owners of a single Capability. The set of
+ * owners must be unique.
+ */
 export interface CapabilityOwners {
   owners: Owner[];
 }

@@ -1,6 +1,11 @@
 import { Plan, ModuleVersion } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/**
+ * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
+ * method.
+ */
 export interface QueryCurrentPlanRequest {}
 
 function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {
@@ -45,7 +50,13 @@ export const QueryCurrentPlanRequest = {
   }
 
 };
+
+/**
+ * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC
+ * method.
+ */
 export interface QueryCurrentPlanResponse {
+  /** plan is the current upgrade plan. */
   plan: Plan;
 }
 
@@ -105,7 +116,13 @@ export const QueryCurrentPlanResponse = {
   }
 
 };
+
+/**
+ * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
+ * method.
+ */
 export interface QueryAppliedPlanRequest {
+  /** name is the name of the applied plan to query for. */
   name: string;
 }
 
@@ -165,7 +182,13 @@ export const QueryAppliedPlanRequest = {
   }
 
 };
+
+/**
+ * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC
+ * method.
+ */
 export interface QueryAppliedPlanResponse {
+  /** height is the block height at which the plan was applied. */
   height: Long;
 }
 
@@ -225,7 +248,16 @@ export const QueryAppliedPlanResponse = {
   }
 
 };
+
+/**
+ * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
+ * RPC method.
+ */
 export interface QueryUpgradedConsensusStateRequest {
+  /**
+   * last height of the current chain must be sent in request
+   * as this is the height under which next consensus state is stored
+   */
   lastHeight: Long;
 }
 
@@ -285,7 +317,13 @@ export const QueryUpgradedConsensusStateRequest = {
   }
 
 };
+
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
+ * RPC method.
+ */
 export interface QueryUpgradedConsensusStateResponse {
+  /** Since: cosmos-sdk 0.43 */
   upgradedConsensusState: Uint8Array;
 }
 
@@ -345,7 +383,19 @@ export const QueryUpgradedConsensusStateResponse = {
   }
 
 };
+
+/**
+ * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface QueryModuleVersionsRequest {
+  /**
+   * module_name is a field to query a specific module
+   * consensus version from state. Leaving this empty will
+   * fetch the full list of module versions from state
+   */
   moduleName: string;
 }
 
@@ -405,7 +455,15 @@ export const QueryModuleVersionsRequest = {
   }
 
 };
+
+/**
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface QueryModuleVersionsResponse {
+  /** module_versions is a list of module names with their consensus versions. */
   moduleVersions: ModuleVersion[];
 }
 
@@ -471,6 +529,12 @@ export const QueryModuleVersionsResponse = {
   }
 
 };
+
+/**
+ * QueryAuthorityRequest is the request type for Query/Authority
+ * 
+ * Since: cosmos-sdk 0.46
+ */
 export interface QueryAuthorityRequest {}
 
 function createBaseQueryAuthorityRequest(): QueryAuthorityRequest {
@@ -515,6 +579,12 @@ export const QueryAuthorityRequest = {
   }
 
 };
+
+/**
+ * QueryAuthorityResponse is the response type for Query/Authority
+ * 
+ * Since: cosmos-sdk 0.46
+ */
 export interface QueryAuthorityResponse {
   address: string;
 }

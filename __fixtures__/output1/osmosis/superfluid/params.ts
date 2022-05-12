@@ -1,6 +1,12 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** Params holds parameters for the superfluid module */
 export interface Params {
+  /**
+   * the risk_factor is to be cut on OSMO equivalent value of lp tokens for
+   * superfluid staking, default: 5%
+   */
   minimumRiskFactor: string;
 }
 

@@ -1,6 +1,15 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * `SourceContext` represents information about the source of a
+ * protobuf element, like the file in which it is defined.
+ */
 export interface SourceContext {
+  /**
+   * The path-qualified name of the .proto file that contained the associated
+   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
+   */
   fileName: string;
 }
 

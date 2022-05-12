@@ -3,7 +3,14 @@ import { Any } from "../../../google/protobuf/any";
 import { Params } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/**
+ * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface QueryAccountsRequest {
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -63,8 +70,17 @@ export const QueryAccountsRequest = {
   }
 
 };
+
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface QueryAccountsResponse {
+  /** accounts are the existing accounts */
   accounts: Any[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -142,7 +158,10 @@ export const QueryAccountsResponse = {
   }
 
 };
+
+/** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
+  /** address defines the address to query for. */
   address: string;
 }
 
@@ -202,6 +221,8 @@ export const QueryAccountRequest = {
   }
 
 };
+
+/** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequest {}
 
 function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
@@ -246,7 +267,10 @@ export const QueryModuleAccountsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 
@@ -306,7 +330,10 @@ export const QueryParamsResponse = {
   }
 
 };
+
+/** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
+  /** account defines the account of the corresponding address. */
   account: Any;
 }
 
@@ -366,6 +393,8 @@ export const QueryAccountResponse = {
   }
 
 };
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -410,6 +439,8 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
   accounts: Any[];
 }
@@ -476,6 +507,8 @@ export const QueryModuleAccountsResponse = {
   }
 
 };
+
+/** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequest {}
 
 function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
@@ -520,6 +553,8 @@ export const Bech32PrefixRequest = {
   }
 
 };
+
+/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
   bech32Prefix: string;
 }
@@ -580,6 +615,8 @@ export const Bech32PrefixResponse = {
   }
 
 };
+
+/** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequest {
   addressBytes: Uint8Array;
 }
@@ -640,6 +677,8 @@ export const AddressBytesToStringRequest = {
   }
 
 };
+
+/** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
   addressString: string;
 }
@@ -700,6 +739,8 @@ export const AddressBytesToStringResponse = {
   }
 
 };
+
+/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequest {
   addressString: string;
 }
@@ -760,6 +801,8 @@ export const AddressStringToBytesRequest = {
   }
 
 };
+
+/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponse {
   addressBytes: Uint8Array;
 }

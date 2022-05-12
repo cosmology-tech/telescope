@@ -1,12 +1,25 @@
 import { Any } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** Record is used for representing a key in the keyring. */
 export interface Record {
+  /** name represents a name of Record */
   name: string;
+
+  /** pub_key represents a public key in any format */
   pubKey: Any;
+
+  /** local stores the public information about a locally stored key */
   local?: Record_Local;
+
+  /** ledger stores the public information about a Ledger key */
   ledger?: Record_Ledger;
+
+  /** Multi does not store any information. */
   multi?: Record_Multi;
+
+  /** Offline does not store any information. */
   offline?: Record_Offline;
 }
 
@@ -126,6 +139,11 @@ export const Record = {
   }
 
 };
+
+/**
+ * Item is a keyring item stored in a keyring backend.
+ * Local item
+ */
 export interface Record_Local {
   privKey: Any;
   privKeyType: string;
@@ -199,6 +217,8 @@ export const Record_Local = {
   }
 
 };
+
+/** Ledger item */
 export interface Record_Ledger {}
 
 function createBaseRecord_Ledger(): Record_Ledger {
@@ -243,6 +263,8 @@ export const Record_Ledger = {
   }
 
 };
+
+/** Multi item */
 export interface Record_Multi {}
 
 function createBaseRecord_Multi(): Record_Multi {
@@ -287,6 +309,8 @@ export const Record_Multi = {
   }
 
 };
+
+/** Offline item */
 export interface Record_Offline {}
 
 function createBaseRecord_Offline(): Record_Offline {

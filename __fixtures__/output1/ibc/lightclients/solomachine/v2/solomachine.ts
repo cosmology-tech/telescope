@@ -3,10 +3,23 @@ import { ConnectionEnd } from "../../../core/connection/v1/connection";
 import { Channel } from "../../../core/channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/**
+ * ClientState defines a solo machine client that tracks the current consensus
+ * state and if the client is frozen.
+ */
 export interface ClientState {
+  /** latest sequence of the client state */
   sequence: Long;
+
+  /** frozen sequence of the solo machine */
   isFrozen: boolean;
   consensusState: ConsensusState;
+
+  /**
+   * when set to true, will allow governance to update a solo machine client.
+   * The client will be unfrozen if it is frozen.
+   */
   allowUpdateAfterProposal: boolean;
 }
 
@@ -102,8 +115,21 @@ export const ClientState = {
   }
 
 };
+
+/**
+ * ConsensusState defines a solo machine consensus state. The sequence of a
+ * consensus state is contained in the "height" key used in storing the
+ * consensus state.
+ */
 export interface ConsensusState {
+  /** public key of the solo machine */
   publicKey: Any;
+
+  /**
+   * diversifier allows the same public key to be re-used across different solo
+   * machine clients (potentially on different chains) without being considered
+   * misbehaviour.
+   */
   diversifier: string;
   timestamp: Long;
 }
@@ -188,7 +214,10 @@ export const ConsensusState = {
   }
 
 };
+
+/** Header defines a solo machine consensus header */
 export interface Header {
+  /** sequence to update solo machine public key at */
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
@@ -300,6 +329,11 @@ export const Header = {
   }
 
 };
+
+/**
+ * Misbehaviour defines misbehaviour for a solo machine which consists
+ * of a sequence and two signatures over different messages at that sequence.
+ */
 export interface Misbehaviour {
   clientId: string;
   sequence: Long;
@@ -399,6 +433,11 @@ export const Misbehaviour = {
   }
 
 };
+
+/**
+ * SignatureAndData contains a signature and the data signed over to create that
+ * signature.
+ */
 export interface SignatureAndData {
   signature: Uint8Array;
   dataType: DataType;
@@ -498,6 +537,11 @@ export const SignatureAndData = {
   }
 
 };
+
+/**
+ * TimestampedSignatureData contains the signature data and the timestamp of the
+ * signature.
+ */
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: Long;
@@ -571,11 +615,17 @@ export const TimestampedSignatureData = {
   }
 
 };
+
+/** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytes {
   sequence: Long;
   timestamp: Long;
   diversifier: string;
+
+  /** type of the data used */
   dataType: DataType;
+
+  /** marshaled data */
   data: Uint8Array;
 }
 
@@ -799,8 +849,13 @@ export function dataTypeToJSON(object: DataType): string {
       return "UNKNOWN";
   }
 }
+
+/** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
+  /** header public key */
   newPubKey: Any;
+
+  /** header diversifier */
   newDiversifier: string;
 }
 
@@ -872,6 +927,8 @@ export const HeaderData = {
   }
 
 };
+
+/** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateData {
   path: Uint8Array;
   clientState: Any;
@@ -945,6 +1002,11 @@ export const ClientStateData = {
   }
 
 };
+
+/**
+ * ConsensusStateData returns the SignBytes data for consensus state
+ * verification.
+ */
 export interface ConsensusStateData {
   path: Uint8Array;
   consensusState: Any;
@@ -1018,6 +1080,11 @@ export const ConsensusStateData = {
   }
 
 };
+
+/**
+ * ConnectionStateData returns the SignBytes data for connection state
+ * verification.
+ */
 export interface ConnectionStateData {
   path: Uint8Array;
   connection: ConnectionEnd;
@@ -1091,6 +1158,11 @@ export const ConnectionStateData = {
   }
 
 };
+
+/**
+ * ChannelStateData returns the SignBytes data for channel state
+ * verification.
+ */
 export interface ChannelStateData {
   path: Uint8Array;
   channel: Channel;
@@ -1164,6 +1236,11 @@ export const ChannelStateData = {
   }
 
 };
+
+/**
+ * PacketCommitmentData returns the SignBytes data for packet commitment
+ * verification.
+ */
 export interface PacketCommitmentData {
   path: Uint8Array;
   commitment: Uint8Array;
@@ -1237,6 +1314,11 @@ export const PacketCommitmentData = {
   }
 
 };
+
+/**
+ * PacketAcknowledgementData returns the SignBytes data for acknowledgement
+ * verification.
+ */
 export interface PacketAcknowledgementData {
   path: Uint8Array;
   acknowledgement: Uint8Array;
@@ -1310,6 +1392,11 @@ export const PacketAcknowledgementData = {
   }
 
 };
+
+/**
+ * PacketReceiptAbsenceData returns the SignBytes data for
+ * packet receipt absence verification.
+ */
 export interface PacketReceiptAbsenceData {
   path: Uint8Array;
 }
@@ -1370,6 +1457,11 @@ export const PacketReceiptAbsenceData = {
   }
 
 };
+
+/**
+ * NextSequenceRecvData returns the SignBytes data for verification of the next
+ * sequence to be received.
+ */
 export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;

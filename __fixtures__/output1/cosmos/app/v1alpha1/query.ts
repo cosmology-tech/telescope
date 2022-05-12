@@ -1,6 +1,8 @@
 import { Config } from "./config";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+
+/** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
 
 function createBaseQueryConfigRequest(): QueryConfigRequest {
@@ -45,7 +47,10 @@ export const QueryConfigRequest = {
   }
 
 };
+
+/** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
+  /** config is the current app config. */
   config: Config;
 }
 

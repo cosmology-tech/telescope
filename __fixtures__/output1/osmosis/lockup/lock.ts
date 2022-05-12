@@ -3,6 +3,12 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { toDuration, toTimestamp, Long, fromDuration, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * PeriodLock is a single unit of lock by period. It's a record of locked coin
+ * at a specific time. It stores owner, duration, unlock time and the amount of
+ * coins locked.
+ */
 export interface PeriodLock {
   ID: Long;
   owner: string;
@@ -153,9 +159,16 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
   }
 }
 export interface QueryCondition {
+  /** type of lock query, ByLockDuration | ByLockTime */
   lockQueryType: LockQueryType;
+
+  /** What token denomination are we looking for lockups of */
   denom: string;
+
+  /** valid when query condition is ByDuration */
   duration: string;
+
+  /** valid when query condition is ByTime */
   timestamp: Date;
 }
 
@@ -245,9 +258,32 @@ export const QueryCondition = {
   }
 
 };
+
+/**
+ * SyntheticLock is a single unit of synthetic lockup
+ * TODO: Change this to have
+ * * underlying_lock_id
+ * * synthetic_coin
+ * * end_time
+ * * duration
+ * * owner
+ * We then index synthetic locks by the denom, just like we do with normal
+ * locks. Ideally we even get an interface, so we can re-use that same logic.
+ * I currently have no idea how reward distribution is supposed to be working...
+ * EVENTUALLY
+ * we make a "constrained_coin" field, which is what the current "coins" field
+ * is. Constrained coin field can be a #post-v7 feature, since we aren't
+ * allowing partial unlocks of synthetic lockups.
+ */
 export interface SyntheticLock {
+  /** underlying native lockup id for this synthetic lockup */
   underlyingLockId: Long;
   synthDenom: string;
+
+  /**
+   * used for unbonding synthetic lockups, for active synthetic lockups, this
+   * value is set to uninitialized value
+   */
   endTime: Date;
   duration: string;
 }

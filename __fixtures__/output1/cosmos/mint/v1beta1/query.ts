@@ -1,6 +1,8 @@
 import { Params } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -45,7 +47,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 
@@ -105,6 +110,8 @@ export const QueryParamsResponse = {
   }
 
 };
+
+/** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequest {}
 
 function createBaseQueryInflationRequest(): QueryInflationRequest {
@@ -149,7 +156,13 @@ export const QueryInflationRequest = {
   }
 
 };
+
+/**
+ * QueryInflationResponse is the response type for the Query/Inflation RPC
+ * method.
+ */
 export interface QueryInflationResponse {
+  /** inflation is the current minting inflation value. */
   inflation: Uint8Array;
 }
 
@@ -209,6 +222,11 @@ export const QueryInflationResponse = {
   }
 
 };
+
+/**
+ * QueryAnnualProvisionsRequest is the request type for the
+ * Query/AnnualProvisions RPC method.
+ */
 export interface QueryAnnualProvisionsRequest {}
 
 function createBaseQueryAnnualProvisionsRequest(): QueryAnnualProvisionsRequest {
@@ -253,7 +271,13 @@ export const QueryAnnualProvisionsRequest = {
   }
 
 };
+
+/**
+ * QueryAnnualProvisionsResponse is the response type for the
+ * Query/AnnualProvisions RPC method.
+ */
 export interface QueryAnnualProvisionsResponse {
+  /** annual_provisions is the current minting annual provisions value. */
   annualProvisions: Uint8Array;
 }
 

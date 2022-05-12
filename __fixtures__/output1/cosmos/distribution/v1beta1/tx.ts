@@ -1,6 +1,11 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * MsgSetWithdrawAddress sets the withdraw address for
+ * a delegator (or validator self-delegation).
+ */
 export interface MsgSetWithdrawAddress {
   delegatorAddress: string;
   withdrawAddress: string;
@@ -74,6 +79,8 @@ export const MsgSetWithdrawAddress = {
   }
 
 };
+
+/** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
 export interface MsgSetWithdrawAddressResponse {}
 
 function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressResponse {
@@ -118,6 +125,11 @@ export const MsgSetWithdrawAddressResponse = {
   }
 
 };
+
+/**
+ * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
+ * from a single validator.
+ */
 export interface MsgWithdrawDelegatorReward {
   delegatorAddress: string;
   validatorAddress: string;
@@ -191,6 +203,8 @@ export const MsgWithdrawDelegatorReward = {
   }
 
 };
+
+/** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 export interface MsgWithdrawDelegatorRewardResponse {
   amount: Coin[];
 }
@@ -257,6 +271,11 @@ export const MsgWithdrawDelegatorRewardResponse = {
   }
 
 };
+
+/**
+ * MsgWithdrawValidatorCommission withdraws the full commission to the validator
+ * address.
+ */
 export interface MsgWithdrawValidatorCommission {
   validatorAddress: string;
 }
@@ -317,6 +336,8 @@ export const MsgWithdrawValidatorCommission = {
   }
 
 };
+
+/** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 export interface MsgWithdrawValidatorCommissionResponse {
   amount: Coin[];
 }
@@ -383,6 +404,11 @@ export const MsgWithdrawValidatorCommissionResponse = {
   }
 
 };
+
+/**
+ * MsgFundCommunityPool allows an account to directly
+ * fund the community pool.
+ */
 export interface MsgFundCommunityPool {
   amount: Coin[];
   depositor: string;
@@ -462,6 +488,8 @@ export const MsgFundCommunityPool = {
   }
 
 };
+
+/** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
 export interface MsgFundCommunityPoolResponse {}
 
 function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse {

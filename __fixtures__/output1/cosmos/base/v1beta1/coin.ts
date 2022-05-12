@@ -1,5 +1,12 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * Coin defines a token with a denomination and an amount.
+ * 
+ * NOTE: The amount field is an Int which implements the custom method
+ * signatures required by gogoproto.
+ */
 export interface Coin {
   denom: string;
   amount: string;
@@ -73,6 +80,13 @@ export const Coin = {
   }
 
 };
+
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.
+ * 
+ * NOTE: The amount field is an Dec which implements the custom method
+ * signatures required by gogoproto.
+ */
 export interface DecCoin {
   denom: string;
   amount: string;
@@ -146,6 +160,8 @@ export const DecCoin = {
   }
 
 };
+
+/** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProto {
   int: string;
 }
@@ -206,6 +222,8 @@ export const IntProto = {
   }
 
 };
+
+/** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProto {
   dec: string;
 }

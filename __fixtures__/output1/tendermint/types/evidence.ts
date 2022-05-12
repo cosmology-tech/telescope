@@ -76,6 +76,8 @@ export const Evidence = {
   }
 
 };
+
+/** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidence {
   voteA: Vote;
   voteB: Vote;
@@ -185,6 +187,8 @@ export const DuplicateVoteEvidence = {
   }
 
 };
+
+/** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
   conflictingBlock: LightBlock;
   commonHeight: Long;

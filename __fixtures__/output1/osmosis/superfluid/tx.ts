@@ -365,6 +365,12 @@ export const MsgSuperfluidUnbondLockResponse = {
   }
 
 };
+
+/**
+ * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
+ * and then does a superfluid lock from the newly created lockup, to the
+ * specified validator addr.
+ */
 export interface MsgLockAndSuperfluidDelegate {
   sender: string;
   coins: Coin[];

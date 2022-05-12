@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
   validatorAddr: string;
 }
@@ -60,6 +62,8 @@ export const MsgUnjail = {
   }
 
 };
+
+/** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
 
 function createBaseMsgUnjailResponse(): MsgUnjailResponse {

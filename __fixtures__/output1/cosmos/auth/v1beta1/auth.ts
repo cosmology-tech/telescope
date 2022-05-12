@@ -1,6 +1,12 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * BaseAccount defines a base account type. It contains all the necessary fields
+ * for basic account functionality. Any custom account type should extend this
+ * type for additional functionality (e.g. vesting).
+ */
 export interface BaseAccount {
   address: string;
   pubKey: Any;
@@ -100,6 +106,8 @@ export const BaseAccount = {
   }
 
 };
+
+/** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
   baseAccount: BaseAccount;
   name: string;
@@ -192,6 +200,8 @@ export const ModuleAccount = {
   }
 
 };
+
+/** Params defines the parameters for the auth module. */
 export interface Params {
   maxMemoCharacters: Long;
   txSigLimit: Long;

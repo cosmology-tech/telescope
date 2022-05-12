@@ -4,6 +4,8 @@ import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** =============================== Pool */
 export interface QueryPoolRequest {
   poolId: Long;
 }
@@ -124,7 +126,10 @@ export const QueryPoolResponse = {
   }
 
 };
+
+/** =============================== Pools */
 export interface QueryPoolsRequest {
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -186,6 +191,8 @@ export const QueryPoolsRequest = {
 };
 export interface QueryPoolsResponse {
   pools: Any[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -263,6 +270,8 @@ export const QueryPoolsResponse = {
   }
 
 };
+
+/** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
 
 function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
@@ -367,6 +376,8 @@ export const QueryNumPoolsResponse = {
   }
 
 };
+
+/** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
   poolId: Long;
 }
@@ -487,6 +498,8 @@ export const QueryPoolParamsResponse = {
   }
 
 };
+
+/** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
   poolId: Long;
 }
@@ -613,6 +626,8 @@ export const QueryTotalPoolLiquidityResponse = {
   }
 
 };
+
+/** =============================== TotalShares */
 export interface QueryTotalSharesRequest {
   poolId: Long;
 }
@@ -733,6 +748,8 @@ export const QueryTotalSharesResponse = {
   }
 
 };
+
+/** =============================== SpotPrice */
 export interface QuerySpotPriceRequest {
   poolId: Long;
   tokenInDenom: string;
@@ -820,6 +837,7 @@ export const QuerySpotPriceRequest = {
 
 };
 export interface QuerySpotPriceResponse {
+  /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
 }
 
@@ -879,6 +897,8 @@ export const QuerySpotPriceResponse = {
   }
 
 };
+
+/** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequest {
   sender: string;
   poolId: Long;
@@ -1044,6 +1064,8 @@ export const QuerySwapExactAmountInResponse = {
   }
 
 };
+
+/** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequest {
   sender: string;
   poolId: Long;

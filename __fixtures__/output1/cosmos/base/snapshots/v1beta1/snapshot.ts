@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
   height: Long;
   format: number;
@@ -112,7 +114,10 @@ export const Snapshot = {
   }
 
 };
+
+/** Metadata contains SDK-specific snapshot metadata. */
 export interface Metadata {
+  /** SHA-256 chunk hashes */
   chunkHashes: Uint8Array[];
 }
 
@@ -178,6 +183,8 @@ export const Metadata = {
   }
 
 };
+
+/** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
 export interface SnapshotItem {
   store?: SnapshotStoreItem;
   iavl?: SnapshotIAVLItem;
@@ -303,6 +310,8 @@ export const SnapshotItem = {
   }
 
 };
+
+/** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItem {
   name: string;
 }
@@ -363,10 +372,16 @@ export const SnapshotStoreItem = {
   }
 
 };
+
+/** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItem {
   key: Uint8Array;
   value: Uint8Array;
+
+  /** version is block height */
   version: Long;
+
+  /** height is depth of the tree. */
   height: number;
 }
 
@@ -462,6 +477,8 @@ export const SnapshotIAVLItem = {
   }
 
 };
+
+/** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMeta {
   name: string;
   format: number;
@@ -535,6 +552,8 @@ export const SnapshotExtensionMeta = {
   }
 
 };
+
+/** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayload {
   payload: Uint8Array;
 }
@@ -595,6 +614,8 @@ export const SnapshotExtensionPayload = {
   }
 
 };
+
+/** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItem {
   key: Uint8Array;
   value: Uint8Array;
@@ -668,6 +689,8 @@ export const SnapshotKVItem = {
   }
 
 };
+
+/** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchema {
   keys: Uint8Array[];
 }

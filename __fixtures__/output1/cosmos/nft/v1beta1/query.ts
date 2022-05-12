@@ -2,6 +2,8 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { NFT, Class } from "./nft";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
   classId: string;
   owner: string;
@@ -75,6 +77,8 @@ export const QueryBalanceRequest = {
   }
 
 };
+
+/** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponse {
   amount: Long;
 }
@@ -135,6 +139,8 @@ export const QueryBalanceResponse = {
   }
 
 };
+
+/** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequest {
   classId: string;
   id: string;
@@ -208,6 +214,8 @@ export const QueryOwnerRequest = {
   }
 
 };
+
+/** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponse {
   owner: string;
 }
@@ -268,6 +276,8 @@ export const QueryOwnerResponse = {
   }
 
 };
+
+/** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequest {
   classId: string;
 }
@@ -328,6 +338,8 @@ export const QuerySupplyRequest = {
   }
 
 };
+
+/** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponse {
   amount: Long;
 }
@@ -388,6 +400,8 @@ export const QuerySupplyResponse = {
   }
 
 };
+
+/** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequest {
   classId: string;
   owner: string;
@@ -474,6 +488,8 @@ export const QueryNFTsRequest = {
   }
 
 };
+
+/** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponse {
   nfts: NFT[];
   pagination: PageResponse;
@@ -553,6 +569,8 @@ export const QueryNFTsResponse = {
   }
 
 };
+
+/** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
   classId: string;
   id: string;
@@ -626,6 +644,8 @@ export const QueryNFTRequest = {
   }
 
 };
+
+/** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponse {
   nft: NFT;
 }
@@ -686,6 +706,8 @@ export const QueryNFTResponse = {
   }
 
 };
+
+/** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
   classId: string;
 }
@@ -746,6 +768,8 @@ export const QueryClassRequest = {
   }
 
 };
+
+/** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponse {
   class: Class;
 }
@@ -806,7 +830,10 @@ export const QueryClassResponse = {
   }
 
 };
+
+/** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequest {
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -866,6 +893,8 @@ export const QueryClassesRequest = {
   }
 
 };
+
+/** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponse {
   classes: Class[];
   pagination: PageResponse;

@@ -2,6 +2,12 @@ import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface Params {
+  /**
+   * minted_denom is the denomination of the coin expected to be minted by the
+   * minting module. Pool-incentives module doesn’t actually mint the coin
+   * itself, but rather manages the distribution of coins that matches the
+   * defined minted_denom.
+   */
   mintedDenom: string;
 }
 

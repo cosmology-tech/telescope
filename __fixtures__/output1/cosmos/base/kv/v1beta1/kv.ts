@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+
+/** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
   pairs: Pair[];
 }
@@ -66,6 +68,8 @@ export const Pairs = {
   }
 
 };
+
+/** Pair defines a key/value bytes tuple. */
 export interface Pair {
   key: Uint8Array;
   value: Uint8Array;

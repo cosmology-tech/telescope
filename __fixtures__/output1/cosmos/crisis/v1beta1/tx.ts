@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
   sender: string;
   invariantModuleName: string;
@@ -86,6 +88,8 @@ export const MsgVerifyInvariant = {
   }
 
 };
+
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
 
 function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {

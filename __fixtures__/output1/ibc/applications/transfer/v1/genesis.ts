@@ -1,6 +1,8 @@
 import { DenomTrace, Params } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisState {
   portId: string;
   denomTraces: DenomTrace[];

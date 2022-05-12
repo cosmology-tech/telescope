@@ -1,7 +1,14 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptor {
   schemaFile: ModuleSchemaDescriptor_FileEntry[];
+
+  /**
+   * prefix is an optional prefix that precedes all keys in this module's
+   * store.
+   */
   prefix: Uint8Array;
 }
 
@@ -79,9 +86,27 @@ export const ModuleSchemaDescriptor = {
   }
 
 };
+
+/** FileEntry describes an ORM file used in a module. */
 export interface ModuleSchemaDescriptor_FileEntry {
+  /**
+   * id is a prefix that will be varint encoded and prepended to all the
+   * table keys specified in the file's tables.
+   */
   id: number;
+
+  /**
+   * proto_file_name is the name of a file .proto in that contains
+   * table definitions. The .proto file must be in a package that the
+   * module has referenced using cosmos.app.v1.ModuleDescriptor.use_package.
+   */
   protoFileName: string;
+
+  /**
+   * storage_type optionally indicates the type of storage this file's
+   * tables should used. If it is left unspecified, the default KV-storage
+   * of the app will be used.
+   */
   storageType: StorageType;
 }
 

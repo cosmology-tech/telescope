@@ -1,6 +1,11 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * ===================== MsgJoinPool
+ * This is really MsgJoinPoolNoSwap
+ */
 export interface MsgJoinPool {
   sender: string;
   poolId: Long;
@@ -150,6 +155,8 @@ export const MsgJoinPoolResponse = {
   }
 
 };
+
+/** ===================== MsgExitPool */
 export interface MsgExitPool {
   sender: string;
   poolId: Long;
@@ -299,6 +306,8 @@ export const MsgExitPoolResponse = {
   }
 
 };
+
+/** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRoute {
   poolId: Long;
   tokenOutDenom: string;
@@ -537,6 +546,8 @@ export const MsgSwapExactAmountInResponse = {
   }
 
 };
+
+/** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRoute {
   poolId: Long;
   tokenInDenom: string;
@@ -775,10 +786,20 @@ export const MsgSwapExactAmountOutResponse = {
   }
 
 };
+
+/**
+ * ===================== MsgJoinSwapExternAmountIn
+ * TODO: Rename to MsgJoinSwapExactAmountIn
+ */
 export interface MsgJoinSwapExternAmountIn {
   sender: string;
   poolId: Long;
   tokenIn: Coin;
+
+  /**
+   * reserved 3;
+   * reserved "token_in";
+   */
   shareOutMinAmount: string;
 }
 
@@ -934,6 +955,8 @@ export const MsgJoinSwapExternAmountInResponse = {
   }
 
 };
+
+/** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOut {
   sender: string;
   poolId: Long;
@@ -1106,6 +1129,8 @@ export const MsgJoinSwapShareAmountOutResponse = {
   }
 
 };
+
+/** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountIn {
   sender: string;
   poolId: Long;
@@ -1278,6 +1303,8 @@ export const MsgExitSwapShareAmountInResponse = {
   }
 
 };
+
+/** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOut {
   sender: string;
   poolId: Long;

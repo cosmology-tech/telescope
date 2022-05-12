@@ -3,6 +3,8 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
 
 function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalanceRequest {
@@ -47,7 +49,10 @@ export const QueryModuleAccountBalanceRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponse {
+  /** params defines the parameters of the module. */
   moduleAccountBalance: Coin[];
 }
 
@@ -113,6 +118,8 @@ export const QueryModuleAccountBalanceResponse = {
   }
 
 };
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -157,7 +164,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 

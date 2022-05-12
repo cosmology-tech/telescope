@@ -2,6 +2,11 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Period } from "./vesting";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * MsgCreateVestingAccount defines a message that enables creating a vesting
+ * account.
+ */
 export interface MsgCreateVestingAccount {
   fromAddress: string;
   toAddress: string;
@@ -120,6 +125,8 @@ export const MsgCreateVestingAccount = {
   }
 
 };
+
+/** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
 export interface MsgCreateVestingAccountResponse {}
 
 function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountResponse {
@@ -164,6 +171,11 @@ export const MsgCreateVestingAccountResponse = {
   }
 
 };
+
+/**
+ * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
+ * locked account.
+ */
 export interface MsgCreatePermanentLockedAccount {
   fromAddress: string;
   toAddress: string;
@@ -256,6 +268,8 @@ export const MsgCreatePermanentLockedAccount = {
   }
 
 };
+
+/** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
 export interface MsgCreatePermanentLockedAccountResponse {}
 
 function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanentLockedAccountResponse {
@@ -300,6 +314,11 @@ export const MsgCreatePermanentLockedAccountResponse = {
   }
 
 };
+
+/**
+ * MsgCreateVestingAccount defines a message that enables creating a vesting
+ * account.
+ */
 export interface MsgCreatePeriodicVestingAccount {
   fromAddress: string;
   toAddress: string;
@@ -405,6 +424,11 @@ export const MsgCreatePeriodicVestingAccount = {
   }
 
 };
+
+/**
+ * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
+ * response type.
+ */
 export interface MsgCreatePeriodicVestingAccountResponse {}
 
 function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicVestingAccountResponse {

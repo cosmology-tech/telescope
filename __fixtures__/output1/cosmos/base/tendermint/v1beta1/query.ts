@@ -5,8 +5,12 @@ import { Block } from "../../../../tendermint/types/block";
 import { NodeInfo } from "../../../../tendermint/p2p/types";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
   height: Long;
+
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -78,9 +82,13 @@ export const GetValidatorSetByHeightRequest = {
   }
 
 };
+
+/** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
   blockHeight: Long;
   validators: Validator[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -170,7 +178,10 @@ export const GetValidatorSetByHeightResponse = {
   }
 
 };
+
+/** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequest {
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -230,9 +241,13 @@ export const GetLatestValidatorSetRequest = {
   }
 
 };
+
+/** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
   blockHeight: Long;
   validators: Validator[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -322,6 +337,8 @@ export const GetLatestValidatorSetResponse = {
   }
 
 };
+
+/** Validator is the type for the validator-set. */
 export interface Validator {
   address: string;
   pubKey: Any;
@@ -421,6 +438,8 @@ export const Validator = {
   }
 
 };
+
+/** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequest {
   height: Long;
 }
@@ -481,6 +500,8 @@ export const GetBlockByHeightRequest = {
   }
 
 };
+
+/** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
   blockId: BlockID;
   block: Block;
@@ -554,6 +575,8 @@ export const GetBlockByHeightResponse = {
   }
 
 };
+
+/** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockRequest {}
 
 function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
@@ -598,6 +621,8 @@ export const GetLatestBlockRequest = {
   }
 
 };
+
+/** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
   blockId: BlockID;
   block: Block;
@@ -671,6 +696,8 @@ export const GetLatestBlockResponse = {
   }
 
 };
+
+/** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequest {}
 
 function createBaseGetSyncingRequest(): GetSyncingRequest {
@@ -715,6 +742,8 @@ export const GetSyncingRequest = {
   }
 
 };
+
+/** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 export interface GetSyncingResponse {
   syncing: boolean;
 }
@@ -775,6 +804,8 @@ export const GetSyncingResponse = {
   }
 
 };
+
+/** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoRequest {}
 
 function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
@@ -819,6 +850,8 @@ export const GetNodeInfoRequest = {
   }
 
 };
+
+/** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
   nodeInfo: NodeInfo;
   applicationVersion: VersionInfo;
@@ -892,6 +925,8 @@ export const GetNodeInfoResponse = {
   }
 
 };
+
+/** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
   name: string;
   appName: string;
@@ -900,6 +935,8 @@ export interface VersionInfo {
   buildTags: string;
   goVersion: string;
   buildDeps: Module[];
+
+  /** Since: cosmos-sdk 0.43 */
   cosmosSdkVersion: string;
 }
 
@@ -1049,9 +1086,16 @@ export const VersionInfo = {
   }
 
 };
+
+/** Module is the type for VersionInfo */
 export interface Module {
+  /** module path */
   path: string;
+
+  /** module version */
   version: string;
+
+  /** checksum */
   sum: string;
 }
 

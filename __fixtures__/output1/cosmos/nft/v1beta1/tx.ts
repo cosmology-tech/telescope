@@ -1,9 +1,18 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
+  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
   classId: string;
+
+  /** id defines the unique identification of nft */
   id: string;
+
+  /** sender is the address of the owner of nft */
   sender: string;
+
+  /** receiver is the receiver address of nft */
   receiver: string;
 }
 
@@ -99,6 +108,8 @@ export const MsgSend = {
   }
 
 };
+
+/** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
 
 function createBaseMsgSendResponse(): MsgSendResponse {

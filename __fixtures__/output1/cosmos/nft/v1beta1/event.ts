@@ -1,5 +1,7 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** EventSend is emitted on Msg/Send */
 export interface EventSend {
   classId: string;
   id: string;
@@ -99,6 +101,8 @@ export const EventSend = {
   }
 
 };
+
+/** EventMint is emitted on Mint */
 export interface EventMint {
   classId: string;
   id: string;
@@ -185,6 +189,8 @@ export const EventMint = {
   }
 
 };
+
+/** EventBurn is emitted on Burn */
 export interface EventBurn {
   classId: string;
   id: string;

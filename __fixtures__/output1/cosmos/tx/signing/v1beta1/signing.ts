@@ -78,7 +78,10 @@ export function signModeToJSON(object: SignMode): string {
       return "UNKNOWN";
   }
 }
+
+/** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptors {
+  /** signatures are the signature descriptors */
   signatures: SignatureDescriptor[];
 }
 
@@ -144,9 +147,23 @@ export const SignatureDescriptors = {
   }
 
 };
+
+/**
+ * SignatureDescriptor is a convenience type which represents the full data for
+ * a signature including the public key of the signer, signing modes and the
+ * signature itself. It is primarily used for coordinating signatures between
+ * clients.
+ */
 export interface SignatureDescriptor {
+  /** public_key is the public key of the signer */
   publicKey: Any;
   data: SignatureDescriptor_Data;
+
+  /**
+   * sequence is the sequence of the account, which describes the
+   * number of committed transactions signed by a given address. It is used to prevent
+   * replay attacks.
+   */
   sequence: Long;
 }
 
@@ -230,8 +247,13 @@ export const SignatureDescriptor = {
   }
 
 };
+
+/** Data represents signature data */
 export interface SignatureDescriptor_Data {
+  /** single represents a single signer */
   single?: SignatureDescriptor_Data_Single;
+
+  /** multi represents a multisig signer */
   multi?: SignatureDescriptor_Data_Multi;
 }
 
@@ -303,8 +325,13 @@ export const SignatureDescriptor_Data = {
   }
 
 };
+
+/** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_Single {
+  /** mode is the signing mode of the single signer */
   mode: SignMode;
+
+  /** signature is the raw signature bytes */
   signature: Uint8Array;
 }
 
@@ -376,8 +403,13 @@ export const SignatureDescriptor_Data_Single = {
   }
 
 };
+
+/** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
+  /** bitarray specifies which keys within the multisig are signing */
   bitarray: CompactBitArray;
+
+  /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
 }
 

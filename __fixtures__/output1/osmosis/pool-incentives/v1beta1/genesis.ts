@@ -2,7 +2,10 @@ import { Params, DistrInfo } from "./incentives";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
+  /** params defines all the paramaters of the module. */
   params: Params;
   lockableDurations: string[];
   distrInfo?: DistrInfo;

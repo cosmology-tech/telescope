@@ -3,6 +3,8 @@ import { Params, ValidatorOutstandingRewards, ValidatorAccumulatedCommission, Va
 import { DecCoin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -47,7 +49,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
   params: Params;
 }
 
@@ -107,7 +112,13 @@ export const QueryParamsResponse = {
   }
 
 };
+
+/**
+ * QueryValidatorOutstandingRewardsRequest is the request type for the
+ * Query/ValidatorOutstandingRewards RPC method.
+ */
 export interface QueryValidatorOutstandingRewardsRequest {
+  /** validator_address defines the validator address to query for. */
   validatorAddress: string;
 }
 
@@ -167,6 +178,11 @@ export const QueryValidatorOutstandingRewardsRequest = {
   }
 
 };
+
+/**
+ * QueryValidatorOutstandingRewardsResponse is the response type for the
+ * Query/ValidatorOutstandingRewards RPC method.
+ */
 export interface QueryValidatorOutstandingRewardsResponse {
   rewards: ValidatorOutstandingRewards;
 }
@@ -227,7 +243,13 @@ export const QueryValidatorOutstandingRewardsResponse = {
   }
 
 };
+
+/**
+ * QueryValidatorCommissionRequest is the request type for the
+ * Query/ValidatorCommission RPC method
+ */
 export interface QueryValidatorCommissionRequest {
+  /** validator_address defines the validator address to query for. */
   validatorAddress: string;
 }
 
@@ -287,7 +309,13 @@ export const QueryValidatorCommissionRequest = {
   }
 
 };
+
+/**
+ * QueryValidatorCommissionResponse is the response type for the
+ * Query/ValidatorCommission RPC method
+ */
 export interface QueryValidatorCommissionResponse {
+  /** commission defines the commision the validator received. */
   commission: ValidatorAccumulatedCommission;
 }
 
@@ -347,10 +375,22 @@ export const QueryValidatorCommissionResponse = {
   }
 
 };
+
+/**
+ * QueryValidatorSlashesRequest is the request type for the
+ * Query/ValidatorSlashes RPC method
+ */
 export interface QueryValidatorSlashesRequest {
+  /** validator_address defines the validator address to query for. */
   validatorAddress: string;
+
+  /** starting_height defines the optional starting height to query the slashes. */
   startingHeight: Long;
+
+  /** starting_height defines the optional ending height to query the slashes. */
   endingHeight: Long;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -446,8 +486,16 @@ export const QueryValidatorSlashesRequest = {
   }
 
 };
+
+/**
+ * QueryValidatorSlashesResponse is the response type for the
+ * Query/ValidatorSlashes RPC method.
+ */
 export interface QueryValidatorSlashesResponse {
+  /** slashes defines the slashes the validator received. */
   slashes: ValidatorSlashEvent[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -525,8 +573,16 @@ export const QueryValidatorSlashesResponse = {
   }
 
 };
+
+/**
+ * QueryDelegationRewardsRequest is the request type for the
+ * Query/DelegationRewards RPC method.
+ */
 export interface QueryDelegationRewardsRequest {
+  /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
+
+  /** validator_address defines the validator address to query for. */
   validatorAddress: string;
 }
 
@@ -598,7 +654,13 @@ export const QueryDelegationRewardsRequest = {
   }
 
 };
+
+/**
+ * QueryDelegationRewardsResponse is the response type for the
+ * Query/DelegationRewards RPC method.
+ */
 export interface QueryDelegationRewardsResponse {
+  /** rewards defines the rewards accrued by a delegation. */
   rewards: DecCoin[];
 }
 
@@ -664,7 +726,13 @@ export const QueryDelegationRewardsResponse = {
   }
 
 };
+
+/**
+ * QueryDelegationTotalRewardsRequest is the request type for the
+ * Query/DelegationTotalRewards RPC method.
+ */
 export interface QueryDelegationTotalRewardsRequest {
+  /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
 }
 
@@ -724,8 +792,16 @@ export const QueryDelegationTotalRewardsRequest = {
   }
 
 };
+
+/**
+ * QueryDelegationTotalRewardsResponse is the response type for the
+ * Query/DelegationTotalRewards RPC method.
+ */
 export interface QueryDelegationTotalRewardsResponse {
+  /** rewards defines all the rewards accrued by a delegator. */
   rewards: DelegationDelegatorReward[];
+
+  /** total defines the sum of all the rewards. */
   total: DecCoin[];
 }
 
@@ -808,7 +884,13 @@ export const QueryDelegationTotalRewardsResponse = {
   }
 
 };
+
+/**
+ * QueryDelegatorValidatorsRequest is the request type for the
+ * Query/DelegatorValidators RPC method.
+ */
 export interface QueryDelegatorValidatorsRequest {
+  /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
 }
 
@@ -868,7 +950,13 @@ export const QueryDelegatorValidatorsRequest = {
   }
 
 };
+
+/**
+ * QueryDelegatorValidatorsResponse is the response type for the
+ * Query/DelegatorValidators RPC method.
+ */
 export interface QueryDelegatorValidatorsResponse {
+  /** validators defines the validators a delegator is delegating for. */
   validators: string[];
 }
 
@@ -934,7 +1022,13 @@ export const QueryDelegatorValidatorsResponse = {
   }
 
 };
+
+/**
+ * QueryDelegatorWithdrawAddressRequest is the request type for the
+ * Query/DelegatorWithdrawAddress RPC method.
+ */
 export interface QueryDelegatorWithdrawAddressRequest {
+  /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
 }
 
@@ -994,7 +1088,13 @@ export const QueryDelegatorWithdrawAddressRequest = {
   }
 
 };
+
+/**
+ * QueryDelegatorWithdrawAddressResponse is the response type for the
+ * Query/DelegatorWithdrawAddress RPC method.
+ */
 export interface QueryDelegatorWithdrawAddressResponse {
+  /** withdraw_address defines the delegator address to query for. */
   withdrawAddress: string;
 }
 
@@ -1054,6 +1154,11 @@ export const QueryDelegatorWithdrawAddressResponse = {
   }
 
 };
+
+/**
+ * QueryCommunityPoolRequest is the request type for the Query/CommunityPool RPC
+ * method.
+ */
 export interface QueryCommunityPoolRequest {}
 
 function createBaseQueryCommunityPoolRequest(): QueryCommunityPoolRequest {
@@ -1098,7 +1203,13 @@ export const QueryCommunityPoolRequest = {
   }
 
 };
+
+/**
+ * QueryCommunityPoolResponse is the response type for the Query/CommunityPool
+ * RPC method.
+ */
 export interface QueryCommunityPoolResponse {
+  /** pool defines community pool's coins. */
   pool: DecCoin[];
 }
 

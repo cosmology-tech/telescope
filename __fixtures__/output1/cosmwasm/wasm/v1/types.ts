@@ -57,6 +57,8 @@ export function accessTypeToJSON(object: AccessType): string {
       return "UNKNOWN";
   }
 }
+
+/** AccessTypeParam */
 export interface AccessTypeParam {
   value: AccessType;
 }
@@ -117,6 +119,8 @@ export const AccessTypeParam = {
   }
 
 };
+
+/** AccessConfig access control type. */
 export interface AccessConfig {
   permission: AccessType;
   address: string;
@@ -190,6 +194,8 @@ export const AccessConfig = {
   }
 
 };
+
+/** Params defines the set of wasm parameters. */
 export interface Params {
   codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
@@ -276,9 +282,16 @@ export const Params = {
   }
 
 };
+
+/** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfo {
+  /** CodeHash is the unique identifier created by wasmvm */
   codeHash: Uint8Array;
+
+  /** Creator address who initially stored the code */
   creator: string;
+
+  /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig: AccessConfig;
 }
 
@@ -362,13 +375,33 @@ export const CodeInfo = {
   }
 
 };
+
+/** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
+  /** CodeID is the reference to the stored Wasm code */
   codeId: Long;
+
+  /** Creator address who initially instantiated the contract */
   creator: string;
+
+  /** Admin is an optional address that can execute migrations */
   admin: string;
+
+  /** Label is optional metadata to be stored with a contract instance. */
   label: string;
+
+  /**
+   * Created Tx position when the contract was instantiated.
+   * This data should kept internal and not be exposed via query results. Just
+   * use for sorting
+   */
   created: AbsoluteTxPosition;
   ibcPortId: string;
+
+  /**
+   * Extension is an extension point to store custom metadata within the
+   * persistence model.
+   */
   extension: Any;
 }
 
@@ -556,9 +589,15 @@ export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHisto
       return "UNKNOWN";
   }
 }
+
+/** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
   operation: ContractCodeHistoryOperationType;
+
+  /** CodeID is the reference to the stored WASM code */
   codeId: Long;
+
+  /** Updated Tx position when the operation was executed. */
   updated: AbsoluteTxPosition;
   msg: Uint8Array;
 }
@@ -655,8 +694,19 @@ export const ContractCodeHistoryEntry = {
   }
 
 };
+
+/**
+ * AbsoluteTxPosition is a unique transaction position that allows for global
+ * ordering of transactions.
+ */
 export interface AbsoluteTxPosition {
+  /** BlockHeight is the block the contract was created at */
   blockHeight: Long;
+
+  /**
+   * TxIndex is a monotonic counter within the block (actual transaction index,
+   * or gas consumed)
+   */
   txIndex: Long;
 }
 
@@ -728,8 +778,13 @@ export const AbsoluteTxPosition = {
   }
 
 };
+
+/** Model is a struct that holds a KV pair */
 export interface Model {
+  /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
+
+  /** base64-encode raw value */
   value: Uint8Array;
 }
 

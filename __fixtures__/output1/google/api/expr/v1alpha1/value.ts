@@ -2,18 +2,48 @@ import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * Represents a CEL value.
+ * 
+ * This is similar to `google.protobuf.Value`, but can represent CEL's full
+ * range of values.
+ */
 export interface Value {
+  /** Null value. */
   nullValue?: NullValue;
+
+  /** Boolean value. */
   boolValue?: boolean;
+
+  /** Signed integer value. */
   int64Value?: Long;
+
+  /** Unsigned integer value. */
   uint64Value?: Long;
+
+  /** Floating point value. */
   doubleValue?: number;
+
+  /** UTF-8 string value. */
   stringValue?: string;
+
+  /** Byte string value. */
   bytesValue?: Uint8Array;
+
+  /** An enum value. */
   enumValue?: EnumValue;
+
+  /** The proto message backing an object value. */
   objectValue?: Any;
+
+  /** Map value. */
   mapValue?: MapValue;
+
+  /** List value. */
   listValue?: ListValue;
+
+  /** Type value. */
   typeValue?: string;
 }
 
@@ -205,8 +235,13 @@ export const Value = {
   }
 
 };
+
+/** An enum value. */
 export interface EnumValue {
+  /** The fully qualified name of the enum type. */
   type: string;
+
+  /** The value of the enum. */
   value: number;
 }
 
@@ -278,7 +313,15 @@ export const EnumValue = {
   }
 
 };
+
+/**
+ * A list.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
 export interface ListValue {
+  /** The ordered values in the list. */
   values: Value[];
 }
 
@@ -344,7 +387,20 @@ export const ListValue = {
   }
 
 };
+
+/**
+ * A map.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
 export interface MapValue {
+  /**
+   * The set of map entries.
+   * 
+   * CEL has fewer restrictions on keys, so a protobuf map represenation
+   * cannot be used.
+   */
   entries: MapValue_Entry[];
 }
 
@@ -410,8 +466,18 @@ export const MapValue = {
   }
 
 };
+
+/** An entry in the map. */
 export interface MapValue_Entry {
+  /**
+   * The key.
+   * 
+   * Must be unique with in the map.
+   * Currently only boolean, int, uint, and string values can be keys.
+   */
   key: Value;
+
+  /** The value. */
   value: Value;
 }
 

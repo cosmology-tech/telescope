@@ -2,8 +2,13 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Validator, DelegationResponse, UnbondingDelegation, RedelegationResponse, HistoricalInfo, Pool, Params } from "./staking";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** QueryValidatorsRequest is request type for Query/Validators RPC method. */
 export interface QueryValidatorsRequest {
+  /** status enables to query for validators matching a given status. */
   status: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -75,8 +80,13 @@ export const QueryValidatorsRequest = {
   }
 
 };
+
+/** QueryValidatorsResponse is response type for the Query/Validators RPC method */
 export interface QueryValidatorsResponse {
+  /** validators contains all the queried validators. */
   validators: Validator[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -154,7 +164,10 @@ export const QueryValidatorsResponse = {
   }
 
 };
+
+/** QueryValidatorRequest is response type for the Query/Validator RPC method */
 export interface QueryValidatorRequest {
+  /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
 
@@ -214,7 +227,10 @@ export const QueryValidatorRequest = {
   }
 
 };
+
+/** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponse {
+  /** validator defines the the validator info. */
   validator: Validator;
 }
 
@@ -274,8 +290,16 @@ export const QueryValidatorResponse = {
   }
 
 };
+
+/**
+ * QueryValidatorDelegationsRequest is request type for the
+ * Query/ValidatorDelegations RPC method
+ */
 export interface QueryValidatorDelegationsRequest {
+  /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -347,8 +371,15 @@ export const QueryValidatorDelegationsRequest = {
   }
 
 };
+
+/**
+ * QueryValidatorDelegationsResponse is response type for the
+ * Query/ValidatorDelegations RPC method
+ */
 export interface QueryValidatorDelegationsResponse {
   delegationResponses: DelegationResponse[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -426,8 +457,16 @@ export const QueryValidatorDelegationsResponse = {
   }
 
 };
+
+/**
+ * QueryValidatorUnbondingDelegationsRequest is required type for the
+ * Query/ValidatorUnbondingDelegations RPC method
+ */
 export interface QueryValidatorUnbondingDelegationsRequest {
+  /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -499,8 +538,15 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   }
 
 };
+
+/**
+ * QueryValidatorUnbondingDelegationsResponse is response type for the
+ * Query/ValidatorUnbondingDelegations RPC method.
+ */
 export interface QueryValidatorUnbondingDelegationsResponse {
   unbondingResponses: UnbondingDelegation[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -578,8 +624,13 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   }
 
 };
+
+/** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
 export interface QueryDelegationRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
 
@@ -651,7 +702,10 @@ export const QueryDelegationRequest = {
   }
 
 };
+
+/** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
 export interface QueryDelegationResponse {
+  /** delegation_responses defines the delegation info of a delegation. */
   delegationResponse: DelegationResponse;
 }
 
@@ -711,8 +765,16 @@ export const QueryDelegationResponse = {
   }
 
 };
+
+/**
+ * QueryUnbondingDelegationRequest is request type for the
+ * Query/UnbondingDelegation RPC method.
+ */
 export interface QueryUnbondingDelegationRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
 
@@ -784,7 +846,13 @@ export const QueryUnbondingDelegationRequest = {
   }
 
 };
+
+/**
+ * QueryDelegationResponse is response type for the Query/UnbondingDelegation
+ * RPC method.
+ */
 export interface QueryUnbondingDelegationResponse {
+  /** unbond defines the unbonding information of a delegation. */
   unbond: UnbondingDelegation;
 }
 
@@ -844,8 +912,16 @@ export const QueryUnbondingDelegationResponse = {
   }
 
 };
+
+/**
+ * QueryDelegatorDelegationsRequest is request type for the
+ * Query/DelegatorDelegations RPC method.
+ */
 export interface QueryDelegatorDelegationsRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -917,8 +993,16 @@ export const QueryDelegatorDelegationsRequest = {
   }
 
 };
+
+/**
+ * QueryDelegatorDelegationsResponse is response type for the
+ * Query/DelegatorDelegations RPC method.
+ */
 export interface QueryDelegatorDelegationsResponse {
+  /** delegation_responses defines all the delegations' info of a delegator. */
   delegationResponses: DelegationResponse[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -996,8 +1080,16 @@ export const QueryDelegatorDelegationsResponse = {
   }
 
 };
+
+/**
+ * QueryDelegatorUnbondingDelegationsRequest is request type for the
+ * Query/DelegatorUnbondingDelegations RPC method.
+ */
 export interface QueryDelegatorUnbondingDelegationsRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -1069,8 +1161,15 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   }
 
 };
+
+/**
+ * QueryUnbondingDelegatorDelegationsResponse is response type for the
+ * Query/UnbondingDelegatorDelegations RPC method.
+ */
 export interface QueryDelegatorUnbondingDelegationsResponse {
   unbondingResponses: UnbondingDelegation[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -1148,10 +1247,22 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   }
 
 };
+
+/**
+ * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
+ * method.
+ */
 export interface QueryRedelegationsRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** src_validator_addr defines the validator address to redelegate from. */
   srcValidatorAddr: string;
+
+  /** dst_validator_addr defines the validator address to redelegate to. */
   dstValidatorAddr: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -1247,8 +1358,15 @@ export const QueryRedelegationsRequest = {
   }
 
 };
+
+/**
+ * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
+ * method.
+ */
 export interface QueryRedelegationsResponse {
   redelegationResponses: RedelegationResponse[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -1326,8 +1444,16 @@ export const QueryRedelegationsResponse = {
   }
 
 };
+
+/**
+ * QueryDelegatorValidatorsRequest is request type for the
+ * Query/DelegatorValidators RPC method.
+ */
 export interface QueryDelegatorValidatorsRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -1399,8 +1525,16 @@ export const QueryDelegatorValidatorsRequest = {
   }
 
 };
+
+/**
+ * QueryDelegatorValidatorsResponse is response type for the
+ * Query/DelegatorValidators RPC method.
+ */
 export interface QueryDelegatorValidatorsResponse {
+  /** validators defines the the validators' info of a delegator. */
   validators: Validator[];
+
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -1478,8 +1612,16 @@ export const QueryDelegatorValidatorsResponse = {
   }
 
 };
+
+/**
+ * QueryDelegatorValidatorRequest is request type for the
+ * Query/DelegatorValidator RPC method.
+ */
 export interface QueryDelegatorValidatorRequest {
+  /** delegator_addr defines the delegator address to query for. */
   delegatorAddr: string;
+
+  /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
 
@@ -1551,7 +1693,13 @@ export const QueryDelegatorValidatorRequest = {
   }
 
 };
+
+/**
+ * QueryDelegatorValidatorResponse response type for the
+ * Query/DelegatorValidator RPC method.
+ */
 export interface QueryDelegatorValidatorResponse {
+  /** validator defines the the validator info. */
   validator: Validator;
 }
 
@@ -1611,7 +1759,13 @@ export const QueryDelegatorValidatorResponse = {
   }
 
 };
+
+/**
+ * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
+ * method.
+ */
 export interface QueryHistoricalInfoRequest {
+  /** height defines at which height to query the historical info. */
   height: Long;
 }
 
@@ -1671,7 +1825,13 @@ export const QueryHistoricalInfoRequest = {
   }
 
 };
+
+/**
+ * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
+ * method.
+ */
 export interface QueryHistoricalInfoResponse {
+  /** hist defines the historical info at the given height. */
   hist: HistoricalInfo;
 }
 
@@ -1731,6 +1891,8 @@ export const QueryHistoricalInfoResponse = {
   }
 
 };
+
+/** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequest {}
 
 function createBaseQueryPoolRequest(): QueryPoolRequest {
@@ -1775,7 +1937,10 @@ export const QueryPoolRequest = {
   }
 
 };
+
+/** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponse {
+  /** pool defines the pool info. */
   pool: Pool;
 }
 
@@ -1835,6 +2000,8 @@ export const QueryPoolResponse = {
   }
 
 };
+
+/** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -1879,7 +2046,10 @@ export const QueryParamsRequest = {
   }
 
 };
+
+/** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  /** params holds all the parameters of this module. */
   params: Params;
 }
 

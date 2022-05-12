@@ -2,9 +2,19 @@ import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCode {
+  /** Sender is the that actor that signed the messages */
   sender: string;
+
+  /** WASMByteCode can be raw or gzip compressed */
   wasmByteCode: Uint8Array;
+
+  /**
+   * InstantiatePermission access control to apply on contract creation,
+   * optional
+   */
   instantiatePermission: AccessConfig;
 }
 
@@ -88,7 +98,10 @@ export const MsgStoreCode = {
   }
 
 };
+
+/** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponse {
+  /** CodeID is the reference to the stored WASM code */
   codeId: Long;
 }
 
@@ -148,12 +161,28 @@ export const MsgStoreCodeResponse = {
   }
 
 };
+
+/**
+ * MsgInstantiateContract create a new smart contract instance for the given
+ * code id.
+ */
 export interface MsgInstantiateContract {
+  /** Sender is the that actor that signed the messages */
   sender: string;
+
+  /** Admin is an optional address that can execute migrations */
   admin: string;
+
+  /** CodeID is the reference to the stored WASM code */
   codeId: Long;
+
+  /** Label is optional metadata to be stored with a contract instance. */
   label: string;
+
+  /** Msg json encoded message to be passed to the contract on instantiation */
   msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
 
@@ -279,8 +308,13 @@ export const MsgInstantiateContract = {
   }
 
 };
+
+/** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponse {
+  /** Address is the bech32 address of the new contract instance. */
   address: string;
+
+  /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
 }
 
@@ -352,10 +386,19 @@ export const MsgInstantiateContractResponse = {
   }
 
 };
+
+/** MsgExecuteContract submits the given message data to a smart contract */
 export interface MsgExecuteContract {
+  /** Sender is the that actor that signed the messages */
   sender: string;
+
+  /** Contract is the address of the smart contract */
   contract: string;
+
+  /** Msg json encoded message to be passed to the contract */
   msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on execution */
   funds: Coin[];
 }
 
@@ -457,7 +500,10 @@ export const MsgExecuteContract = {
   }
 
 };
+
+/** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponse {
+  /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
 }
 
@@ -517,10 +563,19 @@ export const MsgExecuteContractResponse = {
   }
 
 };
+
+/** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContract {
+  /** Sender is the that actor that signed the messages */
   sender: string;
+
+  /** Contract is the address of the smart contract */
   contract: string;
+
+  /** CodeID references the new WASM code */
   codeId: Long;
+
+  /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
 
@@ -616,7 +671,13 @@ export const MsgMigrateContract = {
   }
 
 };
+
+/** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponse {
+  /**
+   * Data contains same raw bytes returned as data from the wasm contract.
+   * (May be empty)
+   */
   data: Uint8Array;
 }
 
@@ -676,9 +737,16 @@ export const MsgMigrateContractResponse = {
   }
 
 };
+
+/** MsgUpdateAdmin sets a new admin for a smart contract */
 export interface MsgUpdateAdmin {
+  /** Sender is the that actor that signed the messages */
   sender: string;
+
+  /** NewAdmin address to be set */
   newAdmin: string;
+
+  /** Contract is the address of the smart contract */
   contract: string;
 }
 
@@ -762,6 +830,8 @@ export const MsgUpdateAdmin = {
   }
 
 };
+
+/** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponse {}
 
 function createBaseMsgUpdateAdminResponse(): MsgUpdateAdminResponse {
@@ -806,8 +876,13 @@ export const MsgUpdateAdminResponse = {
   }
 
 };
+
+/** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdmin {
+  /** Sender is the that actor that signed the messages */
   sender: string;
+
+  /** Contract is the address of the smart contract */
   contract: string;
 }
 
@@ -879,6 +954,8 @@ export const MsgClearAdmin = {
   }
 
 };
+
+/** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponse {}
 
 function createBaseMsgClearAdminResponse(): MsgClearAdminResponse {

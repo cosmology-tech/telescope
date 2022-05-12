@@ -1,6 +1,12 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * LegacyAminoPubKey specifies a public key type
+ * which nests multiple public keys and a threshold,
+ * it uses legacy amino address rules.
+ */
 export interface LegacyAminoPubKey {
   threshold: number;
   publicKeys: Any[];

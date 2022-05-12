@@ -345,6 +345,7 @@ export const GaugeByIDResponse = {
 
 };
 export interface GaugesRequest {
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -406,6 +407,8 @@ export const GaugesRequest = {
 };
 export interface GaugesResponse {
   data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -484,6 +487,7 @@ export const GaugesResponse = {
 
 };
 export interface ActiveGaugesRequest {
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -545,6 +549,8 @@ export const ActiveGaugesRequest = {
 };
 export interface ActiveGaugesResponse {
   data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -624,6 +630,8 @@ export const ActiveGaugesResponse = {
 };
 export interface ActiveGaugesPerDenomRequest {
   denom: string;
+
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -697,6 +705,8 @@ export const ActiveGaugesPerDenomRequest = {
 };
 export interface ActiveGaugesPerDenomResponse {
   data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -775,6 +785,7 @@ export const ActiveGaugesPerDenomResponse = {
 
 };
 export interface UpcomingGaugesRequest {
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
 
@@ -836,6 +847,8 @@ export const UpcomingGaugesRequest = {
 };
 export interface UpcomingGaugesResponse {
   data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 

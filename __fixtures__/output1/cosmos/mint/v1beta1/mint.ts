@@ -1,7 +1,12 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** Minter represents the minting state. */
 export interface Minter {
+  /** current annual inflation rate */
   inflation: string;
+
+  /** current annual expected provisions */
   annualProvisions: string;
 }
 
@@ -73,12 +78,25 @@ export const Minter = {
   }
 
 };
+
+/** Params holds parameters for the mint module. */
 export interface Params {
+  /** type of coin to mint */
   mintDenom: string;
+
+  /** maximum annual change in inflation rate */
   inflationRateChange: string;
+
+  /** maximum inflation rate */
   inflationMax: string;
+
+  /** minimum inflation rate */
   inflationMin: string;
+
+  /** goal of percent bonded atoms */
   goalBonded: string;
+
+  /** expected blocks per year */
   blocksPerYear: Long;
 }
 

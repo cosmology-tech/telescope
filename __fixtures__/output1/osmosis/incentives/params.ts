@@ -1,6 +1,9 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** Params holds parameters for the incentives module */
 export interface Params {
+  /** distribution epoch identifier */
   distrEpochIdentifier: string;
 }
 

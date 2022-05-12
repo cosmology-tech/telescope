@@ -1,8 +1,16 @@
 import { Height } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/**
+ * ClientState defines a loopback (localhost) client. It requires (read-only)
+ * access to keys outside the client prefix.
+ */
 export interface ClientState {
+  /** self chain ID */
   chainId: string;
+
+  /** self latest block height */
   height: Height;
 }
 

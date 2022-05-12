@@ -2,12 +2,25 @@ import { SourceContext } from "./source_context";
 import { Any } from "./any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+
+/** A protocol buffer message type. */
 export interface Type {
+  /** The fully qualified message name. */
   name: string;
+
+  /** The list of fields. */
   fields: Field[];
+
+  /** The list of types appearing in `oneof` definitions in this type. */
   oneofs: string[];
+
+  /** The protocol buffer options. */
   options: Option[];
+
+  /** The source context. */
   sourceContext: SourceContext;
+
+  /** The source syntax. */
   syntax: Syntax;
 }
 
@@ -143,16 +156,43 @@ export const Type = {
   }
 
 };
+
+/** A single field of a message type. */
 export interface Field {
+  /** The field type. */
   kind: Field_Kind;
+
+  /** The field cardinality. */
   cardinality: Field_Cardinality;
+
+  /** The field number. */
   number: number;
+
+  /** The field name. */
   name: string;
+
+  /**
+   * The field type URL, without the scheme, for message or enumeration
+   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+   */
   typeUrl: string;
+
+  /**
+   * The index of the field type in `Type.oneofs`, for message or enumeration
+   * types. The first type has index 1; zero means the type is not in the list.
+   */
   oneofIndex: number;
+
+  /** Whether to use alternative packed wire representation. */
   packed: boolean;
+
+  /** The protocol buffer options. */
   options: Option[];
+
+  /** The field JSON name. */
   jsonName: string;
+
+  /** The string value of the default value of this field. Proto2 syntax only. */
   defaultValue: string;
 }
 
@@ -588,11 +628,22 @@ export function field_CardinalityToJSON(object: Field_Cardinality): string {
       return "UNKNOWN";
   }
 }
+
+/** Enum type definition. */
 export interface Enum {
+  /** Enum type name. */
   name: string;
+
+  /** Enum value definitions. */
   enumvalue: EnumValue[];
+
+  /** Protocol buffer options. */
   options: Option[];
+
+  /** The source context. */
   sourceContext: SourceContext;
+
+  /** The source syntax. */
   syntax: Syntax;
 }
 
@@ -711,9 +762,16 @@ export const Enum = {
   }
 
 };
+
+/** Enum value definition. */
 export interface EnumValue {
+  /** Enum value name. */
   name: string;
+
+  /** Enum value number. */
   number: number;
+
+  /** Protocol buffer options. */
   options: Option[];
 }
 
@@ -803,8 +861,26 @@ export const EnumValue = {
   }
 
 };
+
+/**
+ * A protocol buffer option, which can be attached to a message, field,
+ * enumeration, etc.
+ */
 export interface Option {
+  /**
+   * The option's name. For protobuf built-in options (options defined in
+   * descriptor.proto), this is the short name. For example, `"map_entry"`.
+   * For custom options, it should be the fully-qualified name. For example,
+   * `"google.api.http"`.
+   */
   name: string;
+
+  /**
+   * The option's value packed in an Any message. If the value is a primitive,
+   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
+   * should be used. If the value is an enum, it should be stored as an int32
+   * value using the google.protobuf.Int32Value type.
+   */
   value: Any;
 }
 
