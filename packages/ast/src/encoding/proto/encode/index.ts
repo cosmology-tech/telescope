@@ -141,7 +141,14 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
             ), false),
 
             t.assignmentPattern(
-                t.identifier('writer'),
+                identifier('writer', t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.tsQualifiedName(
+                            t.identifier('_m0'),
+                            t.identifier('Writer')
+                        )
+                    )
+                )),
                 t.callExpression(
                     t.memberExpression(
                         t.memberExpression(
@@ -150,9 +157,7 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                         ),
                         t.identifier('create')
                     ),
-                    [
-
-                    ]
+                    []
                 )
             )
         ],
