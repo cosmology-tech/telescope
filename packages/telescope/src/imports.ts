@@ -163,19 +163,12 @@ export const buildAllImports = (context: TelescopeParseContext, allImports?: Imp
     const additionalImports: ImportObj[] = importHashToArray(allImports);
     const utilities: ImportObj[] = convertUtilsToImports(context);
 
-    if (context.ref.filename === 'ibc/core/types/v1/genesis.proto') {
-        console.log(protoImports)
-        // console.log(context.ref.traversed.importNames)
-    }
-
     const list = []
         .concat(parsedImports)
         .concat(utilities)
         .concat(protoImports)
         .concat(aminoImports)
         .concat(additionalImports);
-
-    // console.log(list);
 
     const importStmts = getImportStatments(list);
 

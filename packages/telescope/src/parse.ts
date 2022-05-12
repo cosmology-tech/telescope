@@ -32,7 +32,7 @@ export const getParsedObjectName = (
 // TODO potentially move this back to ast or proto bc the ast lib references MapEntries...
 const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
     const root = getRoot(ref);
-    const scoped = scope.splice(root.package.split('.').length);
+    const scoped = [...scope].splice(root.package.split('.').length);
     const adhocObj: ProtoType = {
         type: 'Type',
         comment: undefined,
@@ -73,17 +73,17 @@ export const parseType = (
 ) => {
 
     obj.keyTypes.forEach(field => {
-        const keyTypeObject = makeKeyTypeObj(context.ref, field, scope);
+        const keyTypeObject = makeKeyTypeObj(context.ref, field, [...scope]);
         const name = getParsedObjectName(context.ref, {
             name: getKeyTypeEntryName(obj.name, field.name)
-        }, scope);
+        }, [...scope]);
         context.addType(name, keyTypeObject, true);
     });
 
     // parse nested names
     let name = obj.name;
     if (isNested) {
-        name = getParsedObjectName(context.ref, obj, scope);
+        name = getParsedObjectName(context.ref, obj, [...scope]);
     }
 
     context.addType(name, obj, isNested);

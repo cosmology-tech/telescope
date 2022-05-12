@@ -22,26 +22,10 @@ Object {
   ],
   "package": "google.api.expr.v1alpha1",
   "parsedExports": Object {
-    "CheckedExpr": Array [
-      Object {
-        "name": "CheckedExpr",
-      },
-    ],
-    "Decl": Array [
-      Object {
-        "name": "Decl",
-      },
-    ],
-    "Reference": Array [
-      Object {
-        "name": "Reference",
-      },
-    ],
-    "Type": Array [
-      Object {
-        "name": "Type",
-      },
-    ],
+    "CheckedExpr": true,
+    "Decl": true,
+    "Reference": true,
+    "Type": true,
   },
   "parsedImports": Object {
     "google/api/expr/v1alpha1/syntax.proto": Array [
@@ -67,6 +51,7 @@ Object {
                   "v1alpha1": Object {
                     "nested": Object {
                       "CheckedExpr": Object {
+                        "comment": "A CEL expression which has been successfully type checked.",
                         "fields": Object {
                           "expr": Object {
                             "comment": "The checked expression. Semantically equivalent to the parsed \`expr\`, but
@@ -221,6 +206,10 @@ space.",
                         "type": "Type",
                       },
                       "Decl": Object {
+                        "comment": "Represents a declaration of a named value or function.
+
+A declaration is part of the contract between the expression, the agent
+evaluating that expression, and the caller requesting evaluation.",
                         "fields": Object {
                           "function": Object {
                             "comment": "Function declaration.",
@@ -271,6 +260,11 @@ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                         "name": "Decl",
                         "nested": Object {
                           "FunctionDecl": Object {
+                            "comment": "Function declaration specifies one or more overloads which indicate the
+function's parameter types and return type.
+
+Functions have no observable side-effects (there may be side-effects like
+logging which are not observable from CEL).",
                             "fields": Object {
                               "overloads": Object {
                                 "comment": "Required. List of function overloads, must contain at least one overload.",
@@ -292,6 +286,16 @@ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                             "name": "FunctionDecl",
                             "nested": Object {
                               "Overload": Object {
+                                "comment": "An overload indicates a function's parameter types and return type, and
+may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+values.
+
+Functions overloads are declared in either a function or method
+call-style. For methods, the \`params[0]\` is the expected type of the
+target receiver.
+
+Overloads must have non-overlapping argument types after erasure of all
+parameterized type variables (similar as type erasure in Java).",
                                 "fields": Object {
                                   "doc": Object {
                                     "comment": "Documentation string for the overload.",
@@ -398,6 +402,12 @@ the type params of \`K, V\`.",
                             "type": "Type",
                           },
                           "IdentDecl": Object {
+                            "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
+
+An identifier without a value is a declaration that must be provided at
+evaluation time. An identifier with a value should resolve to a constant,
+but may be used in conjunction with other identifiers bound at evaluation
+time.",
                             "fields": Object {
                               "doc": Object {
                                 "comment": "Documentation string for the identifier.",
@@ -461,6 +471,7 @@ must be supplied at evaluation time.",
                         "type": "Type",
                       },
                       "Reference": Object {
+                        "comment": "Describes a resolved reference to a declaration.",
                         "fields": Object {
                           "name": Object {
                             "comment": "The fully qualified name of the declaration.",
@@ -519,6 +530,7 @@ constant if known at compile time.",
                         "type": "Type",
                       },
                       "Type": Object {
+                        "comment": "Represents a CEL type.",
                         "fields": Object {
                           "abstractType": Object {
                             "comment": "Abstract, application defined type.",
@@ -709,6 +721,7 @@ named \`E\`.",
                         "name": "Type",
                         "nested": Object {
                           "AbstractType": Object {
+                            "comment": "Application defined abstract type.",
                             "fields": Object {
                               "name": Object {
                                 "comment": "The fully qualified name of this abstract type.",
@@ -743,6 +756,7 @@ named \`E\`.",
                             "type": "Type",
                           },
                           "FunctionType": Object {
+                            "comment": "Function type with result and arg types.",
                             "fields": Object {
                               "argTypes": Object {
                                 "comment": "Argument types of the function.",
@@ -778,6 +792,7 @@ named \`E\`.",
                             "type": "Type",
                           },
                           "ListType": Object {
+                            "comment": "List type with typed elements, e.g. \`list<example.proto.MyMessage>\`.",
                             "fields": Object {
                               "elemType": Object {
                                 "comment": "The element type.",
@@ -800,6 +815,7 @@ named \`E\`.",
                             "type": "Type",
                           },
                           "MapType": Object {
+                            "comment": "Map type with parameterized key and value types, e.g. \`map<string, int>\`.",
                             "fields": Object {
                               "keyType": Object {
                                 "comment": "The type of the key.",

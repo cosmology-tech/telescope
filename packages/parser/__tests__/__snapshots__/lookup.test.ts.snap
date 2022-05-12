@@ -2,6 +2,7 @@
 
 exports[`double import bug GenesisState 1`] = `
 Object {
+  "comment": "GenesisState defines the ibc module's genesis state.",
   "fields": Object {
     "channelGenesis": Object {
       "comment": "ICS004 - Channel genesis state",
@@ -81,11 +82,7 @@ Array [
 
 exports[`double import bug imports/exports 1`] = `
 Object {
-  "GenesisState": Array [
-    Object {
-      "name": "GenesisState",
-    },
-  ],
+  "GenesisState": true,
 }
 `;
 

@@ -18,26 +18,10 @@ Object {
   ],
   "package": "cosmos.authz.v1beta1",
   "parsedExports": Object {
-    "GenericAuthorization": Array [
-      Object {
-        "name": "GenericAuthorization",
-      },
-    ],
-    "Grant": Array [
-      Object {
-        "name": "Grant",
-      },
-    ],
-    "GrantAuthorization": Array [
-      Object {
-        "name": "GrantAuthorization",
-      },
-    ],
-    "GrantQueueItem": Array [
-      Object {
-        "name": "GrantQueueItem",
-      },
-    ],
+    "GenericAuthorization": true,
+    "Grant": true,
+    "GrantAuthorization": true,
+    "GrantQueueItem": true,
   },
   "parsedImports": Object {
     "google/protobuf/any.proto": Array [
@@ -56,6 +40,8 @@ Object {
               "v1beta1": Object {
                 "nested": Object {
                   "GenericAuthorization": Object {
+                    "comment": "GenericAuthorization gives the grantee unrestricted permissions to execute
+the provided method on behalf of the granter's account.",
                     "fields": Object {
                       "msg": Object {
                         "comment": "Msg, identified by it's type URL, to grant unrestricted permissions to execute",
@@ -79,6 +65,8 @@ Object {
                     "type": "Type",
                   },
                   "Grant": Object {
+                    "comment": "Grant gives permissions to execute
+the provide method with expiration time.",
                     "fields": Object {
                       "authorization": Object {
                         "comment": null,
@@ -128,6 +116,8 @@ may apply to invalidate the grant)",
                     "type": "Type",
                   },
                   "GrantAuthorization": Object {
+                    "comment": "GrantAuthorization extends a grant with both the addresses of the grantee and granter.
+It is used in genesis.proto and query.proto",
                     "fields": Object {
                       "authorization": Object {
                         "comment": null,
@@ -202,6 +192,7 @@ may apply to invalidate the grant)",
                     "type": "Type",
                   },
                   "GrantQueueItem": Object {
+                    "comment": "GrantQueueItem contains the list of TypeURL of a sdk.Msg.",
                     "fields": Object {
                       "msgTypeUrls": Object {
                         "comment": "msg_type_urls contains the list of TypeURL of a sdk.Msg.",
@@ -254,16 +245,8 @@ Object {
   ],
   "package": "cosmos.tx.signing.v1beta1",
   "parsedExports": Object {
-    "SignatureDescriptor": Array [
-      Object {
-        "name": "SignatureDescriptor",
-      },
-    ],
-    "SignatureDescriptors": Array [
-      Object {
-        "name": "SignatureDescriptors",
-      },
-    ],
+    "SignatureDescriptor": true,
+    "SignatureDescriptors": true,
   },
   "parsedImports": Object {
     "cosmos/crypto/multisig/v1beta1/multisig.proto": Array [
@@ -320,6 +303,10 @@ rejected.",
                         },
                       },
                       "SignatureDescriptor": Object {
+                        "comment": "SignatureDescriptor is a convenience type which represents the full data for
+a signature including the public key of the signer, signing modes and the
+signature itself. It is primarily used for coordinating signatures between
+clients.",
                         "fields": Object {
                           "data": Object {
                             "comment": null,
@@ -367,6 +354,7 @@ replay attacks.",
                         "name": "SignatureDescriptor",
                         "nested": Object {
                           "Data": Object {
+                            "comment": "Data represents signature data",
                             "fields": Object {
                               "multi": Object {
                                 "comment": "multi represents a multisig signer",
@@ -401,6 +389,7 @@ replay attacks.",
                             "name": "Data",
                             "nested": Object {
                               "Multi": Object {
+                                "comment": "Multi is the signature data for a multisig public key",
                                 "fields": Object {
                                   "bitarray": Object {
                                     "comment": "bitarray specifies which keys within the multisig are signing",
@@ -440,6 +429,7 @@ replay attacks.",
                                 "type": "Type",
                               },
                               "Single": Object {
+                                "comment": "Single is the signature data for a single signer",
                                 "fields": Object {
                                   "mode": Object {
                                     "comment": "mode is the signing mode of the single signer",
@@ -490,6 +480,7 @@ replay attacks.",
                         "type": "Type",
                       },
                       "SignatureDescriptors": Object {
+                        "comment": "SignatureDescriptors wraps multiple SignatureDescriptor's.",
                         "fields": Object {
                           "signatures": Object {
                             "comment": "signatures are the signature descriptors",
@@ -556,61 +547,17 @@ Object {
   ],
   "package": "cosmos.tx.v1beta1",
   "parsedExports": Object {
-    "AuthInfo": Array [
-      Object {
-        "name": "AuthInfo",
-      },
-    ],
-    "AuxSignerData": Array [
-      Object {
-        "name": "AuxSignerData",
-      },
-    ],
-    "Fee": Array [
-      Object {
-        "name": "Fee",
-      },
-    ],
-    "ModeInfo": Array [
-      Object {
-        "name": "ModeInfo",
-      },
-    ],
-    "SignDoc": Array [
-      Object {
-        "name": "SignDoc",
-      },
-    ],
-    "SignDocDirectAux": Array [
-      Object {
-        "name": "SignDocDirectAux",
-      },
-    ],
-    "SignerInfo": Array [
-      Object {
-        "name": "SignerInfo",
-      },
-    ],
-    "Tip": Array [
-      Object {
-        "name": "Tip",
-      },
-    ],
-    "Tx": Array [
-      Object {
-        "name": "Tx",
-      },
-    ],
-    "TxBody": Array [
-      Object {
-        "name": "TxBody",
-      },
-    ],
-    "TxRaw": Array [
-      Object {
-        "name": "TxRaw",
-      },
-    ],
+    "AuthInfo": true,
+    "AuxSignerData": true,
+    "Fee": true,
+    "ModeInfo": true,
+    "SignDoc": true,
+    "SignDocDirectAux": true,
+    "SignerInfo": true,
+    "Tip": true,
+    "Tx": true,
+    "TxBody": true,
+    "TxRaw": true,
   },
   "parsedImports": Object {
     "cosmos/base/v1beta1/coin.proto": Array [
@@ -635,6 +582,8 @@ Object {
               "v1beta1": Object {
                 "nested": Object {
                   "AuthInfo": Object {
+                    "comment": "AuthInfo describes the fee and signer modes that are used to sign a
+transaction.",
                     "fields": Object {
                       "fee": Object {
                         "comment": "Fee is the fee and gas limit for the transaction. The first signer is the
@@ -690,6 +639,12 @@ Since: cosmos-sdk 0.46",
                     "type": "Type",
                   },
                   "AuxSignerData": Object {
+                    "comment": "AuxSignerData is the intermediary format that an auxiliary signer (e.g. a
+tipper) builds and sends to the fee payer (who will build and broadcast the
+actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
+by the node if sent directly as-is.
+
+Since: cosmos-sdk 0.46",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the bech32-encoded address of the auxiliary signer. If using
@@ -756,6 +711,9 @@ LEGACY_AMINO_JSON.",
                     "type": "Type",
                   },
                   "Fee": Object {
+                    "comment": "Fee includes the amount of coins paid in fees and the maximum
+gas to be used by the transaction. The ratio yields an effective \\"gasprice\\",
+which must be above some miminum to be accepted into the mempool.",
                     "fields": Object {
                       "amount": Object {
                         "comment": "amount is the amount of coins to be paid as a fee",
@@ -830,6 +788,7 @@ setting this field does *not* change the ordering of required signers for the tr
                     "type": "Type",
                   },
                   "ModeInfo": Object {
+                    "comment": "ModeInfo describes the signing mode of a single or nested multisig signer.",
                     "fields": Object {
                       "multi": Object {
                         "comment": "multi represents a nested multisig signer",
@@ -862,6 +821,7 @@ setting this field does *not* change the ordering of required signers for the tr
                     "name": "ModeInfo",
                     "nested": Object {
                       "Multi": Object {
+                        "comment": "Multi is the mode info for a multisig public key",
                         "fields": Object {
                           "bitarray": Object {
                             "comment": "bitarray specifies which keys within the multisig are signing",
@@ -901,6 +861,9 @@ which could include nested multisig public keys",
                         "type": "Type",
                       },
                       "Single": Object {
+                        "comment": "Single is the mode info for a single signer. It is structured as a message
+to allow for additional fields such as locale for SIGN_MODE_TEXTUAL in the
+future",
                         "fields": Object {
                           "mode": Object {
                             "comment": "mode is the signing mode of the single signer",
@@ -938,6 +901,7 @@ which could include nested multisig public keys",
                     "type": "Type",
                   },
                   "SignDoc": Object {
+                    "comment": "SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT.",
                     "fields": Object {
                       "accountNumber": Object {
                         "comment": "account_number is the account number of the account in state",
@@ -996,6 +960,10 @@ attacker",
                     "type": "Type",
                   },
                   "SignDocDirectAux": Object {
+                    "comment": "SignDocDirectAux is the type used for generating sign bytes for
+SIGN_MODE_DIRECT_AUX.
+
+Since: cosmos-sdk 0.46",
                     "fields": Object {
                       "accountNumber": Object {
                         "comment": "account_number is the account number of the account in state.",
@@ -1081,6 +1049,8 @@ empty if the signer is not the tipper for this transaction.",
                     "type": "Type",
                   },
                   "SignerInfo": Object {
+                    "comment": "SignerInfo describes the public key and signing mode of a single top-level
+signer.",
                     "fields": Object {
                       "modeInfo": Object {
                         "comment": "mode_info describes the signing mode of the signer and is a nested
@@ -1134,6 +1104,9 @@ prevent replay attacks.",
                     "type": "Type",
                   },
                   "Tip": Object {
+                    "comment": "Tip is the tip used for meta-transactions.
+
+Since: cosmos-sdk 0.46",
                     "fields": Object {
                       "amount": Object {
                         "comment": "amount is the amount of the tip",
@@ -1178,6 +1151,7 @@ prevent replay attacks.",
                     "type": "Type",
                   },
                   "Tx": Object {
+                    "comment": "Tx is the standard type used for broadcasting transactions.",
                     "fields": Object {
                       "authInfo": Object {
                         "comment": "auth_info is the authorization related content of the transaction,
@@ -1227,6 +1201,7 @@ public key and signing mode by position.",
                     "type": "Type",
                   },
                   "TxBody": Object {
+                    "comment": "TxBody is the body of a transaction that all signers sign over.",
                     "fields": Object {
                       "extensionOptions": Object {
                         "comment": "extension_options are arbitrary options that can be added by chains
@@ -1320,6 +1295,11 @@ be processed by the chain",
                     "type": "Type",
                   },
                   "TxRaw": Object {
+                    "comment": "TxRaw is a variant of Tx that pins the signer's exact binary representation
+of body and auth_info. This is used for signing, broadcasting and
+verification. The binary \`serialize(tx: TxRaw)\` is stored in Tendermint and
+the hash \`sha256(serialize(tx: TxRaw))\` becomes the \\"txhash\\", commonly used
+as the transaction ID.",
                     "fields": Object {
                       "authInfoBytes": Object {
                         "comment": "auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
@@ -1399,51 +1379,15 @@ Object {
   ],
   "package": "cosmwasm.wasm.v1",
   "parsedExports": Object {
-    "ClearAdminProposal": Array [
-      Object {
-        "name": "ClearAdminProposal",
-      },
-    ],
-    "ExecuteContractProposal": Array [
-      Object {
-        "name": "ExecuteContractProposal",
-      },
-    ],
-    "InstantiateContractProposal": Array [
-      Object {
-        "name": "InstantiateContractProposal",
-      },
-    ],
-    "MigrateContractProposal": Array [
-      Object {
-        "name": "MigrateContractProposal",
-      },
-    ],
-    "PinCodesProposal": Array [
-      Object {
-        "name": "PinCodesProposal",
-      },
-    ],
-    "StoreCodeProposal": Array [
-      Object {
-        "name": "StoreCodeProposal",
-      },
-    ],
-    "SudoContractProposal": Array [
-      Object {
-        "name": "SudoContractProposal",
-      },
-    ],
-    "UnpinCodesProposal": Array [
-      Object {
-        "name": "UnpinCodesProposal",
-      },
-    ],
-    "UpdateAdminProposal": Array [
-      Object {
-        "name": "UpdateAdminProposal",
-      },
-    ],
+    "ClearAdminProposal": true,
+    "ExecuteContractProposal": true,
+    "InstantiateContractProposal": true,
+    "MigrateContractProposal": true,
+    "PinCodesProposal": true,
+    "StoreCodeProposal": true,
+    "SudoContractProposal": true,
+    "UnpinCodesProposal": true,
+    "UpdateAdminProposal": true,
   },
   "parsedImports": Object {
     "cosmos/base/v1beta1/coin.proto": Array [
@@ -1462,6 +1406,8 @@ Object {
               "v1": Object {
                 "nested": Object {
                   "ClearAdminProposal": Object {
+                    "comment": "ClearAdminProposal gov proposal content type to clear the admin of a
+contract.",
                     "fields": Object {
                       "contract": Object {
                         "comment": "Contract is the address of the smart contract",
@@ -1505,6 +1451,8 @@ Object {
                     "type": "Type",
                   },
                   "ExecuteContractProposal": Object {
+                    "comment": "ExecuteContractProposal gov proposal content type to call execute on a
+contract.",
                     "fields": Object {
                       "contract": Object {
                         "comment": "Contract is the address of the smart contract",
@@ -1593,6 +1541,8 @@ Object {
                     "type": "Type",
                   },
                   "InstantiateContractProposal": Object {
+                    "comment": "InstantiateContractProposal gov proposal content type to instantiate a
+contract.",
                     "fields": Object {
                       "admin": Object {
                         "comment": "Admin is an optional address that can execute migrations",
@@ -1706,6 +1656,7 @@ Object {
                     "type": "Type",
                   },
                   "MigrateContractProposal": Object {
+                    "comment": "MigrateContractProposal gov proposal content type to migrate a contract.",
                     "fields": Object {
                       "codeId": Object {
                         "comment": "CodeID references the new WASM codesudo",
@@ -1777,6 +1728,8 @@ Object {
                     "type": "Type",
                   },
                   "PinCodesProposal": Object {
+                    "comment": "PinCodesProposal gov proposal content type to pin a set of code ids in the
+wasmvm cache.",
                     "fields": Object {
                       "codeIds": Object {
                         "comment": "CodeIDs references the new WASM codes",
@@ -1831,6 +1784,7 @@ Object {
                     "type": "Type",
                   },
                   "StoreCodeProposal": Object {
+                    "comment": "StoreCodeProposal gov proposal content type to submit WASM code to the system",
                     "fields": Object {
                       "description": Object {
                         "comment": "Description is a human readable text",
@@ -1905,6 +1859,7 @@ Object {
                     "type": "Type",
                   },
                   "SudoContractProposal": Object {
+                    "comment": "SudoContractProposal gov proposal content type to call sudo on a contract.",
                     "fields": Object {
                       "contract": Object {
                         "comment": "Contract is the address of the smart contract",
@@ -1962,6 +1917,8 @@ Object {
                     "type": "Type",
                   },
                   "UnpinCodesProposal": Object {
+                    "comment": "UnpinCodesProposal gov proposal content type to unpin a set of code ids in
+the wasmvm cache.",
                     "fields": Object {
                       "codeIds": Object {
                         "comment": "CodeIDs references the WASM codes",
@@ -2016,6 +1973,7 @@ Object {
                     "type": "Type",
                   },
                   "UpdateAdminProposal": Object {
+                    "comment": "UpdateAdminProposal gov proposal content type to set an admin for a contract.",
                     "fields": Object {
                       "contract": Object {
                         "comment": "Contract is the address of the smart contract",
@@ -2108,101 +2066,25 @@ Object {
   ],
   "package": "cosmwasm.wasm.v1",
   "parsedExports": Object {
-    "CodeInfoResponse": Array [
-      Object {
-        "name": "CodeInfoResponse",
-      },
-    ],
-    "QueryAllContractStateRequest": Array [
-      Object {
-        "name": "QueryAllContractStateRequest",
-      },
-    ],
-    "QueryAllContractStateResponse": Array [
-      Object {
-        "name": "QueryAllContractStateResponse",
-      },
-    ],
-    "QueryCodeRequest": Array [
-      Object {
-        "name": "QueryCodeRequest",
-      },
-    ],
-    "QueryCodeResponse": Array [
-      Object {
-        "name": "QueryCodeResponse",
-      },
-    ],
-    "QueryCodesRequest": Array [
-      Object {
-        "name": "QueryCodesRequest",
-      },
-    ],
-    "QueryCodesResponse": Array [
-      Object {
-        "name": "QueryCodesResponse",
-      },
-    ],
-    "QueryContractHistoryRequest": Array [
-      Object {
-        "name": "QueryContractHistoryRequest",
-      },
-    ],
-    "QueryContractHistoryResponse": Array [
-      Object {
-        "name": "QueryContractHistoryResponse",
-      },
-    ],
-    "QueryContractInfoRequest": Array [
-      Object {
-        "name": "QueryContractInfoRequest",
-      },
-    ],
-    "QueryContractInfoResponse": Array [
-      Object {
-        "name": "QueryContractInfoResponse",
-      },
-    ],
-    "QueryContractsByCodeRequest": Array [
-      Object {
-        "name": "QueryContractsByCodeRequest",
-      },
-    ],
-    "QueryContractsByCodeResponse": Array [
-      Object {
-        "name": "QueryContractsByCodeResponse",
-      },
-    ],
-    "QueryPinnedCodesRequest": Array [
-      Object {
-        "name": "QueryPinnedCodesRequest",
-      },
-    ],
-    "QueryPinnedCodesResponse": Array [
-      Object {
-        "name": "QueryPinnedCodesResponse",
-      },
-    ],
-    "QueryRawContractStateRequest": Array [
-      Object {
-        "name": "QueryRawContractStateRequest",
-      },
-    ],
-    "QueryRawContractStateResponse": Array [
-      Object {
-        "name": "QueryRawContractStateResponse",
-      },
-    ],
-    "QuerySmartContractStateRequest": Array [
-      Object {
-        "name": "QuerySmartContractStateRequest",
-      },
-    ],
-    "QuerySmartContractStateResponse": Array [
-      Object {
-        "name": "QuerySmartContractStateResponse",
-      },
-    ],
+    "CodeInfoResponse": true,
+    "QueryAllContractStateRequest": true,
+    "QueryAllContractStateResponse": true,
+    "QueryCodeRequest": true,
+    "QueryCodeResponse": true,
+    "QueryCodesRequest": true,
+    "QueryCodesResponse": true,
+    "QueryContractHistoryRequest": true,
+    "QueryContractHistoryResponse": true,
+    "QueryContractInfoRequest": true,
+    "QueryContractInfoResponse": true,
+    "QueryContractsByCodeRequest": true,
+    "QueryContractsByCodeResponse": true,
+    "QueryPinnedCodesRequest": true,
+    "QueryPinnedCodesResponse": true,
+    "QueryRawContractStateRequest": true,
+    "QueryRawContractStateResponse": true,
+    "QuerySmartContractStateRequest": true,
+    "QuerySmartContractStateResponse": true,
   },
   "parsedImports": Object {
     "cosmos/base/query/v1beta1/pagination.proto": Array [
@@ -2224,6 +2106,7 @@ Object {
               "v1": Object {
                 "nested": Object {
                   "CodeInfoResponse": Object {
+                    "comment": "CodeInfoResponse contains code meta data from CodeInfo",
                     "fields": Object {
                       "codeId": Object {
                         "comment": null,
@@ -2662,6 +2545,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Service",
                   },
                   "QueryAllContractStateRequest": Object {
+                    "comment": "QueryAllContractStateRequest is the request type for the
+Query/AllContractState RPC method",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the address of the contract",
@@ -2698,6 +2583,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryAllContractStateResponse": Object {
+                    "comment": "QueryAllContractStateResponse is the response type for the
+Query/AllContractState RPC method",
                     "fields": Object {
                       "models": Object {
                         "comment": null,
@@ -2744,6 +2631,7 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryCodeRequest": Object {
+                    "comment": "QueryCodeRequest is the request type for the Query/Code RPC method",
                     "fields": Object {
                       "codeId": Object {
                         "comment": "grpc-gateway_out does not support Go style CodID",
@@ -2765,6 +2653,7 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryCodeResponse": Object {
+                    "comment": "QueryCodeResponse is the response type for the Query/Code RPC method",
                     "fields": Object {
                       "codeInfo": Object {
                         "comment": null,
@@ -2807,6 +2696,7 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryCodesRequest": Object {
+                    "comment": "QueryCodesRequest is the request type for the Query/Codes RPC method",
                     "fields": Object {
                       "pagination": Object {
                         "comment": "pagination defines an optional pagination for the request.",
@@ -2832,6 +2722,7 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryCodesResponse": Object {
+                    "comment": "QueryCodesResponse is the response type for the Query/Codes RPC method",
                     "fields": Object {
                       "codeInfos": Object {
                         "comment": null,
@@ -2873,6 +2764,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryContractHistoryRequest": Object {
+                    "comment": "QueryContractHistoryRequest is the request type for the Query/ContractHistory
+RPC method",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the address of the contract to query",
@@ -2909,6 +2802,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryContractHistoryResponse": Object {
+                    "comment": "QueryContractHistoryResponse is the response type for the
+Query/ContractHistory RPC method",
                     "fields": Object {
                       "entries": Object {
                         "comment": null,
@@ -2955,6 +2850,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryContractInfoRequest": Object {
+                    "comment": "QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
+method",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the address of the contract to query",
@@ -2976,6 +2873,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryContractInfoResponse": Object {
+                    "comment": "QueryContractInfoResponse is the response type for the Query/ContractInfo RPC
+method",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the address of the contract",
@@ -3021,6 +2920,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryContractsByCodeRequest": Object {
+                    "comment": "QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
+RPC method",
                     "fields": Object {
                       "codeId": Object {
                         "comment": "grpc-gateway_out does not support Go style CodID
@@ -3058,6 +2959,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryContractsByCodeResponse": Object {
+                    "comment": "QueryContractsByCodeResponse is the response type for the
+Query/ContractsByCode RPC method",
                     "fields": Object {
                       "contracts": Object {
                         "comment": "contracts are a set of contract addresses",
@@ -3095,6 +2998,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryPinnedCodesRequest": Object {
+                    "comment": "QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
+RPC method",
                     "fields": Object {
                       "pagination": Object {
                         "comment": "pagination defines an optional pagination for the request.",
@@ -3120,6 +3025,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryPinnedCodesResponse": Object {
+                    "comment": "QueryPinnedCodesResponse is the response type for the
+Query/PinnedCodes RPC method",
                     "fields": Object {
                       "codeIds": Object {
                         "comment": null,
@@ -3161,6 +3068,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryRawContractStateRequest": Object {
+                    "comment": "QueryRawContractStateRequest is the request type for the
+Query/RawContractState RPC method",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the address of the contract",
@@ -3193,6 +3102,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QueryRawContractStateResponse": Object {
+                    "comment": "QueryRawContractStateResponse is the response type for the
+Query/RawContractState RPC method",
                     "fields": Object {
                       "data": Object {
                         "comment": "Data contains the raw store data",
@@ -3214,6 +3125,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QuerySmartContractStateRequest": Object {
+                    "comment": "QuerySmartContractStateRequest is the request type for the
+Query/SmartContractState RPC method",
                     "fields": Object {
                       "address": Object {
                         "comment": "address is the address of the contract",
@@ -3249,6 +3162,8 @@ pagination defines an optional pagination for the request.",
                     "type": "Type",
                   },
                   "QuerySmartContractStateResponse": Object {
+                    "comment": "QuerySmartContractStateResponse is the response type for the
+Query/SmartContractState RPC method",
                     "fields": Object {
                       "data": Object {
                         "comment": "Data contains the json data returned from the smart contract",
@@ -3309,26 +3224,10 @@ Object {
   ],
   "package": "google.api.expr.v1alpha1",
   "parsedExports": Object {
-    "CheckedExpr": Array [
-      Object {
-        "name": "CheckedExpr",
-      },
-    ],
-    "Decl": Array [
-      Object {
-        "name": "Decl",
-      },
-    ],
-    "Reference": Array [
-      Object {
-        "name": "Reference",
-      },
-    ],
-    "Type": Array [
-      Object {
-        "name": "Type",
-      },
-    ],
+    "CheckedExpr": true,
+    "Decl": true,
+    "Reference": true,
+    "Type": true,
   },
   "parsedImports": Object {
     "google/api/expr/v1alpha1/syntax.proto": Array [
@@ -3354,6 +3253,7 @@ Object {
                   "v1alpha1": Object {
                     "nested": Object {
                       "CheckedExpr": Object {
+                        "comment": "A CEL expression which has been successfully type checked.",
                         "fields": Object {
                           "expr": Object {
                             "comment": "The checked expression. Semantically equivalent to the parsed \`expr\`, but
@@ -3508,6 +3408,10 @@ space.",
                         "type": "Type",
                       },
                       "Decl": Object {
+                        "comment": "Represents a declaration of a named value or function.
+
+A declaration is part of the contract between the expression, the agent
+evaluating that expression, and the caller requesting evaluation.",
                         "fields": Object {
                           "function": Object {
                             "comment": "Function declaration.",
@@ -3558,6 +3462,11 @@ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                         "name": "Decl",
                         "nested": Object {
                           "FunctionDecl": Object {
+                            "comment": "Function declaration specifies one or more overloads which indicate the
+function's parameter types and return type.
+
+Functions have no observable side-effects (there may be side-effects like
+logging which are not observable from CEL).",
                             "fields": Object {
                               "overloads": Object {
                                 "comment": "Required. List of function overloads, must contain at least one overload.",
@@ -3579,6 +3488,16 @@ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                             "name": "FunctionDecl",
                             "nested": Object {
                               "Overload": Object {
+                                "comment": "An overload indicates a function's parameter types and return type, and
+may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+values.
+
+Functions overloads are declared in either a function or method
+call-style. For methods, the \`params[0]\` is the expected type of the
+target receiver.
+
+Overloads must have non-overlapping argument types after erasure of all
+parameterized type variables (similar as type erasure in Java).",
                                 "fields": Object {
                                   "doc": Object {
                                     "comment": "Documentation string for the overload.",
@@ -3685,6 +3604,12 @@ the type params of \`K, V\`.",
                             "type": "Type",
                           },
                           "IdentDecl": Object {
+                            "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
+
+An identifier without a value is a declaration that must be provided at
+evaluation time. An identifier with a value should resolve to a constant,
+but may be used in conjunction with other identifiers bound at evaluation
+time.",
                             "fields": Object {
                               "doc": Object {
                                 "comment": "Documentation string for the identifier.",
@@ -3748,6 +3673,7 @@ must be supplied at evaluation time.",
                         "type": "Type",
                       },
                       "Reference": Object {
+                        "comment": "Describes a resolved reference to a declaration.",
                         "fields": Object {
                           "name": Object {
                             "comment": "The fully qualified name of the declaration.",
@@ -3806,6 +3732,7 @@ constant if known at compile time.",
                         "type": "Type",
                       },
                       "Type": Object {
+                        "comment": "Represents a CEL type.",
                         "fields": Object {
                           "abstractType": Object {
                             "comment": "Abstract, application defined type.",
@@ -3996,6 +3923,7 @@ named \`E\`.",
                         "name": "Type",
                         "nested": Object {
                           "AbstractType": Object {
+                            "comment": "Application defined abstract type.",
                             "fields": Object {
                               "name": Object {
                                 "comment": "The fully qualified name of this abstract type.",
@@ -4030,6 +3958,7 @@ named \`E\`.",
                             "type": "Type",
                           },
                           "FunctionType": Object {
+                            "comment": "Function type with result and arg types.",
                             "fields": Object {
                               "argTypes": Object {
                                 "comment": "Argument types of the function.",
@@ -4065,6 +3994,7 @@ named \`E\`.",
                             "type": "Type",
                           },
                           "ListType": Object {
+                            "comment": "List type with typed elements, e.g. \`list<example.proto.MyMessage>\`.",
                             "fields": Object {
                               "elemType": Object {
                                 "comment": "The element type.",
@@ -4087,6 +4017,7 @@ named \`E\`.",
                             "type": "Type",
                           },
                           "MapType": Object {
+                            "comment": "Map type with parameterized key and value types, e.g. \`map<string, int>\`.",
                             "fields": Object {
                               "keyType": Object {
                                 "comment": "The type of the key.",
@@ -4228,11 +4159,7 @@ Object {
   ],
   "package": "osmosis.claim.v1beta1",
   "parsedExports": Object {
-    "Params": Array [
-      Object {
-        "name": "Params",
-      },
-    ],
+    "Params": true,
   },
   "parsedImports": Object {
     "google/protobuf/duration.proto": Array [
@@ -4251,6 +4178,7 @@ Object {
               "v1beta1": Object {
                 "nested": Object {
                   "Params": Object {
+                    "comment": "Params defines the claim module's parameters.",
                     "fields": Object {
                       "airdropStartTime": Object {
                         "comment": null,
@@ -4361,96 +4289,24 @@ Object {
   ],
   "package": "osmosis.gamm.v1beta1",
   "parsedExports": Object {
-    "MsgExitPool": Array [
-      Object {
-        "name": "MsgExitPool",
-      },
-    ],
-    "MsgExitPoolResponse": Array [
-      Object {
-        "name": "MsgExitPoolResponse",
-      },
-    ],
-    "MsgExitSwapExternAmountOut": Array [
-      Object {
-        "name": "MsgExitSwapExternAmountOut",
-      },
-    ],
-    "MsgExitSwapExternAmountOutResponse": Array [
-      Object {
-        "name": "MsgExitSwapExternAmountOutResponse",
-      },
-    ],
-    "MsgExitSwapShareAmountIn": Array [
-      Object {
-        "name": "MsgExitSwapShareAmountIn",
-      },
-    ],
-    "MsgExitSwapShareAmountInResponse": Array [
-      Object {
-        "name": "MsgExitSwapShareAmountInResponse",
-      },
-    ],
-    "MsgJoinPool": Array [
-      Object {
-        "name": "MsgJoinPool",
-      },
-    ],
-    "MsgJoinPoolResponse": Array [
-      Object {
-        "name": "MsgJoinPoolResponse",
-      },
-    ],
-    "MsgJoinSwapExternAmountIn": Array [
-      Object {
-        "name": "MsgJoinSwapExternAmountIn",
-      },
-    ],
-    "MsgJoinSwapExternAmountInResponse": Array [
-      Object {
-        "name": "MsgJoinSwapExternAmountInResponse",
-      },
-    ],
-    "MsgJoinSwapShareAmountOut": Array [
-      Object {
-        "name": "MsgJoinSwapShareAmountOut",
-      },
-    ],
-    "MsgJoinSwapShareAmountOutResponse": Array [
-      Object {
-        "name": "MsgJoinSwapShareAmountOutResponse",
-      },
-    ],
-    "MsgSwapExactAmountIn": Array [
-      Object {
-        "name": "MsgSwapExactAmountIn",
-      },
-    ],
-    "MsgSwapExactAmountInResponse": Array [
-      Object {
-        "name": "MsgSwapExactAmountInResponse",
-      },
-    ],
-    "MsgSwapExactAmountOut": Array [
-      Object {
-        "name": "MsgSwapExactAmountOut",
-      },
-    ],
-    "MsgSwapExactAmountOutResponse": Array [
-      Object {
-        "name": "MsgSwapExactAmountOutResponse",
-      },
-    ],
-    "SwapAmountInRoute": Array [
-      Object {
-        "name": "SwapAmountInRoute",
-      },
-    ],
-    "SwapAmountOutRoute": Array [
-      Object {
-        "name": "SwapAmountOutRoute",
-      },
-    ],
+    "MsgExitPool": true,
+    "MsgExitPoolResponse": true,
+    "MsgExitSwapExternAmountOut": true,
+    "MsgExitSwapExternAmountOutResponse": true,
+    "MsgExitSwapShareAmountIn": true,
+    "MsgExitSwapShareAmountInResponse": true,
+    "MsgJoinPool": true,
+    "MsgJoinPoolResponse": true,
+    "MsgJoinSwapExternAmountIn": true,
+    "MsgJoinSwapExternAmountInResponse": true,
+    "MsgJoinSwapShareAmountOut": true,
+    "MsgJoinSwapShareAmountOutResponse": true,
+    "MsgSwapExactAmountIn": true,
+    "MsgSwapExactAmountInResponse": true,
+    "MsgSwapExactAmountOut": true,
+    "MsgSwapExactAmountOutResponse": true,
+    "SwapAmountInRoute": true,
+    "SwapAmountOutRoute": true,
   },
   "parsedImports": Object {
     "cosmos/base/v1beta1/coin.proto": Array [
@@ -5105,6 +4961,7 @@ reserved \\"token_in\\";",
                     "type": "Service",
                   },
                   "MsgExitPool": Object {
+                    "comment": "===================== MsgExitPool",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5179,6 +5036,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgExitPoolResponse": Object {
+                    "comment": null,
                     "fields": Object {},
                     "keyTypes": Array [],
                     "name": "MsgExitPoolResponse",
@@ -5188,6 +5046,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgExitSwapExternAmountOut": Object {
+                    "comment": "===================== MsgExitSwapExternAmountOut",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5261,6 +5120,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgExitSwapExternAmountOutResponse": Object {
+                    "comment": null,
                     "fields": Object {
                       "shareInAmount": Object {
                         "comment": null,
@@ -5287,6 +5147,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgExitSwapShareAmountIn": Object {
+                    "comment": "===================== MsgExitSwapShareAmountIn",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5371,6 +5232,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgExitSwapShareAmountInResponse": Object {
+                    "comment": null,
                     "fields": Object {
                       "tokenOutAmount": Object {
                         "comment": null,
@@ -5397,6 +5259,8 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgJoinPool": Object {
+                    "comment": "===================== MsgJoinPool
+This is really MsgJoinPoolNoSwap",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5471,6 +5335,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgJoinPoolResponse": Object {
+                    "comment": null,
                     "fields": Object {},
                     "keyTypes": Array [],
                     "name": "MsgJoinPoolResponse",
@@ -5480,6 +5345,8 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgJoinSwapExternAmountIn": Object {
+                    "comment": "===================== MsgJoinSwapExternAmountIn
+TODO: Rename to MsgJoinSwapExactAmountIn",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5554,6 +5421,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgJoinSwapExternAmountInResponse": Object {
+                    "comment": null,
                     "fields": Object {
                       "shareOutAmount": Object {
                         "comment": null,
@@ -5580,6 +5448,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgJoinSwapShareAmountOut": Object {
+                    "comment": "===================== MsgJoinSwapShareAmountOut",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5664,6 +5533,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgJoinSwapShareAmountOutResponse": Object {
+                    "comment": null,
                     "fields": Object {
                       "tokenInAmount": Object {
                         "comment": null,
@@ -5690,6 +5560,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountIn": Object {
+                    "comment": null,
                     "fields": Object {
                       "routes": Object {
                         "comment": null,
@@ -5765,6 +5636,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountInResponse": Object {
+                    "comment": null,
                     "fields": Object {
                       "tokenOutAmount": Object {
                         "comment": null,
@@ -5791,6 +5663,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountOut": Object {
+                    "comment": null,
                     "fields": Object {
                       "routes": Object {
                         "comment": null,
@@ -5866,6 +5739,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountOutResponse": Object {
+                    "comment": null,
                     "fields": Object {
                       "tokenInAmount": Object {
                         "comment": null,
@@ -5892,6 +5766,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "SwapAmountInRoute": Object {
+                    "comment": "===================== MsgSwapExactAmountIn",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,
@@ -5930,6 +5805,7 @@ reserved \\"token_in\\";",
                     "type": "Type",
                   },
                   "SwapAmountOutRoute": Object {
+                    "comment": "===================== MsgSwapExactAmountOut",
                     "fields": Object {
                       "poolId": Object {
                         "comment": null,

@@ -6,21 +6,9 @@ Object {
   "imports": undefined,
   "package": "cosmology.finance",
   "parsedExports": Object {
-    "ExistenceProof": Array [
-      Object {
-        "name": "ExistenceProof",
-      },
-    ],
-    "LeafOp": Array [
-      Object {
-        "name": "LeafOp",
-      },
-    ],
-    "NonExistenceProof": Array [
-      Object {
-        "name": "NonExistenceProof",
-      },
-    ],
+    "ExistenceProof": true,
+    "LeafOp": true,
+    "NonExistenceProof": true,
   },
   "parsedImports": Object {},
   "root": Object {
@@ -30,6 +18,7 @@ Object {
           "finance": Object {
             "nested": Object {
               "ExistenceProof": Object {
+                "comment": null,
                 "fields": Object {
                   "key": Object {
                     "comment": null,
@@ -95,6 +84,7 @@ Object {
                 },
               },
               "LeafOp": Object {
+                "comment": null,
                 "fields": Object {
                   "hash": Object {
                     "comment": null,
@@ -152,6 +142,7 @@ Object {
                 "type": "Type",
               },
               "NonExistenceProof": Object {
+                "comment": null,
                 "fields": Object {
                   "key": Object {
                     "comment": null,

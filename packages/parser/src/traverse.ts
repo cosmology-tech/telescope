@@ -132,10 +132,7 @@ const traverseType = (store: ProtoStore, ref: ProtoRef, obj: any, imports: objec
 
     if (!isNested) {
         exports[obj.name] = exports[obj.name] || [];
-        exports[obj.name].push({
-            name: obj.name
-        })
-
+        exports[obj.name] = true;
     }
 
     const traversed = {
@@ -151,7 +148,8 @@ const traverseType = (store: ProtoStore, ref: ProtoRef, obj: any, imports: objec
         }, {}) : undefined,
         fields: traverseFields(store, ref, obj, imports),
         nested,
-        keyTypes: []
+        keyTypes: [],
+        comment: obj.comment
     };
 
     // parse keyType

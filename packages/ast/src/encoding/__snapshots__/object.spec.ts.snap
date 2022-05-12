@@ -212,7 +212,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     const message = createBaseAuxSignerData();
     message.address = object.address ?? \\"\\";
     message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
-    message.mode = object.mode ?? undefined;
+    message.mode = object.mode ?? 0;
     message.sig = object.sig ?? new Uint8Array();
     return message;
   }
@@ -1791,7 +1791,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     const message = createBaseLogEntry();
     message.name = object.name ?? \\"\\";
     message.timestamp = object.timestamp ?? undefined;
-    message.severity = object.severity ?? undefined;
+    message.severity = object.severity ?? 0;
     message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
     message.trace = object.trace ?? \\"\\";
     message.insertId = object.insertId ?? \\"\\";
@@ -1903,7 +1903,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? \\"\\";
     message.connectionId = object.connectionId ?? \\"\\";
-    message.ordering = object.ordering ?? undefined;
+    message.ordering = object.ordering ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.proposedVersion = object.proposedVersion ?? \\"\\";
     return message;

@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { getObjectName } from '@osmonauts/proto-parser';
 import { pascal } from 'case';
-import { identifier, tsPropertySignature, functionDeclaration, commentBlock } from '../../utils';
+import { identifier, tsPropertySignature, functionDeclaration, commentBlock, renderNameSafely } from '../../utils';
 import { ProtoParseContext } from '../context';
 
 export interface ProtoAny {
@@ -297,8 +297,8 @@ export const getEnumFromJsonName = (name) => {
 
 export const getFieldsTypeName = (field: ProtoField) => {
     if (field?.scope.length <= 1) return field.parsedType.name;
-    const [_first, ...rest] = field.scope;
-    return [...rest, field.parsedType.name].join('_');
+    const [_pkg, ...scopes] = field.scope;
+    return [...scopes, field.parsedType.name].join('_');
 };
 
 export const getKeyTypeEntryName = (typeName: string, prop: string) => {
@@ -320,23 +320,17 @@ export const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
     return isOneOf || field?.options?.['(gogoproto.nullable)'];
 };
 
+export const getObjectNameOld = (name: string, scope: string[] = []) => {
+    if (!scope.length || scope.length === 1) return name;
+    const [_pkg, ...scopes] = scope;
+    return [...scopes, name].join('_')
+};
+
+
+
 const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
     let name = context.getTypeName(field)
-
-    if (name.includes('.')) {
-        const parts = name.split('.');
-        name = parts[parts.length - 1];
-    }
-
-    return name;
-
-    // if (!field.scope || !field.scope.length) return name;
-
-    // do we need to implment something that does BOTH scope + proto style? (e.g. some.package.Field => Field)
-    // const impName = getObjectName(name, field.scope);
-    // const lookName = context.getTypeName(field);
-    // console.log({ impName, lookName });
-    // return getObjectName(context.getTypeName(field), field.scope);
+    return renderNameSafely(name);
 };
 
 const getProtoField = (context: ProtoParseContext, field: ProtoField) => {

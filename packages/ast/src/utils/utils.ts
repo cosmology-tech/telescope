@@ -27,6 +27,14 @@ export const commentBlock = (comment: string): t.CommentBlock => {
     };
 };
 
+export const renderNameSafely = (name) => {
+    return name.split('_').map(str => {
+        const parts = str.split('.');
+        str = parts[parts.length - 1];
+        return str;
+    }).join('_');
+};
+
 export const recursiveNamespace = (names, moduleBlockBody) => {
     if (!names || !names.length) return moduleBlockBody;
     const name = names.pop();
