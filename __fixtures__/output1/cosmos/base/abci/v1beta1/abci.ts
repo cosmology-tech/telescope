@@ -1,6 +1,6 @@
 import { Any } from "../../../../google/protobuf/any";
 import { Event } from "../../../../tendermint/abci/types";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface TxResponse {
   height: Long;

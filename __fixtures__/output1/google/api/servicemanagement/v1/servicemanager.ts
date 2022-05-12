@@ -1,7 +1,7 @@
 import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "./resources";
 import { Service } from "../../service";
 import { Any } from "../../../protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface ListServicesRequest {
   producerProjectId: string;

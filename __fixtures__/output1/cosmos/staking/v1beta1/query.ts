@@ -1,6 +1,6 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Validator, DelegationResponse, UnbondingDelegation, RedelegationResponse, HistoricalInfo, Pool, Params } from "./staking";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface QueryValidatorsRequest {
   status: string;

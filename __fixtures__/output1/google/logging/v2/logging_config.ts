@@ -1,6 +1,6 @@
 import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface LogBucket {
   name: string;

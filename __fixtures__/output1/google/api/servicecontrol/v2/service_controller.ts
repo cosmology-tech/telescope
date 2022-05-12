@@ -1,6 +1,6 @@
 import { AttributeContext } from "../../../rpc/context/attribute_context";
 import { Status } from "../../../rpc/status";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface CheckRequest {
   serviceName: string;

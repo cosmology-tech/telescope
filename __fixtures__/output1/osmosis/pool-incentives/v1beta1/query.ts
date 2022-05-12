@@ -1,7 +1,7 @@
 import { Duration } from "../../../google/protobuf/duration";
 import { DistrInfo, Params } from "./incentives";
 import { Gauge } from "../../incentives/gauge";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface QueryGaugeIdsRequest {
   poolId: Long;

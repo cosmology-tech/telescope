@@ -1,7 +1,7 @@
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Duration } from "../../../protobuf/duration";
 import { Timestamp } from "../../../protobuf/timestamp";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, toDuration, toTimestamp, fromDuration, fromTimestamp, bytesFromBase64, fromJsonTimestamp, base64FromBytes, isObject } from "@osmonauts/helpers";
 export interface ParsedExpr {
   expr: Expr;

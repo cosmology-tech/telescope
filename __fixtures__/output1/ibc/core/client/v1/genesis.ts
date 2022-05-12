@@ -1,5 +1,5 @@
 import { IdentifiedClientState, ClientConsensusStates, Params } from "./client";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface GenesisState {
   clients: IdentifiedClientState[];

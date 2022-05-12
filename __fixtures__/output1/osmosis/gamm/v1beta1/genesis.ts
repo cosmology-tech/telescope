@@ -1,6 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface Params {
   poolCreationFee: Coin[];

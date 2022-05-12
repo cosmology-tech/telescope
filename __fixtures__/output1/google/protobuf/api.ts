@@ -1,6 +1,6 @@
 import { Option, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext } from "./source_context";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Api {
   name: string;

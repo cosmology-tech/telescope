@@ -1,7 +1,7 @@
 import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { toDuration, toTimestamp, Long, fromDuration, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface PeriodLock {
   ID: Long;

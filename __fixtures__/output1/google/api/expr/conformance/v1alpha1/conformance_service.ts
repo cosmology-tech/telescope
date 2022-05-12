@@ -2,7 +2,7 @@ import { ParsedExpr, SourcePosition } from "../../v1alpha1/syntax";
 import { Decl, CheckedExpr } from "../../v1alpha1/checked";
 import { ExprValue } from "../../v1alpha1/eval";
 import { Status } from "../../../../rpc/status";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, isObject, Long } from "@osmonauts/helpers";
 export interface ParseRequest {
   celSource: string;

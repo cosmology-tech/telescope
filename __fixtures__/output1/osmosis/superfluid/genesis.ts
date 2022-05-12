@@ -1,6 +1,6 @@
 import { Params } from "./params";
 import { SuperfluidAsset, OsmoEquivalentMultiplierRecord, SuperfluidIntermediaryAccount, LockIdIntermediaryAccountConnection } from "./superfluid";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   params: Params;

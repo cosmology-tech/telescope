@@ -1,6 +1,6 @@
 import { MetricValueSet } from "./metric_value";
 import { Status } from "../../../rpc/status";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface AllocateQuotaRequest {
   serviceName: string;

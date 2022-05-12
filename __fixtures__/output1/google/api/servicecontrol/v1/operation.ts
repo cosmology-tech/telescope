@@ -2,7 +2,7 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { MetricValueSet } from "./metric_value";
 import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
 export interface Operation_LabelsEntry {
   key: string;

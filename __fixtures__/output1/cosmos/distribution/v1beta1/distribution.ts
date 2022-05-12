@@ -1,5 +1,5 @@
 import { DecCoin, Coin } from "../../base/v1beta1/coin";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface Params {
   communityTax: string;

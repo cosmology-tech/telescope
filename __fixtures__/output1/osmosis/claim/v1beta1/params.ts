@@ -1,6 +1,6 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Params {
   airdropStartTime: Date;

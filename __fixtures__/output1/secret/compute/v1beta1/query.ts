@@ -1,6 +1,6 @@
 import { ContractInfo } from "./types";
 import { StringEvent } from "../../../cosmos/base/abci/v1beta1/abci";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface QueryContractInfoRequest {
   address: Uint8Array;

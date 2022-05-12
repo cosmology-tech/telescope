@@ -1,5 +1,5 @@
 import { Value } from "./value";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface Explain {
   values: Value[];

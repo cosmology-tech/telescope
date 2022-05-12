@@ -1,6 +1,6 @@
 import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "./tx";
 import { Params, CodeInfo, ContractInfo, Model } from "./types";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface GenesisState {
   params: Params;

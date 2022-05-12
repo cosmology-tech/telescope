@@ -2,7 +2,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { SwapAmountInRoute, SwapAmountOutRoute } from "./tx";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface QueryPoolRequest {
   poolId: Long;

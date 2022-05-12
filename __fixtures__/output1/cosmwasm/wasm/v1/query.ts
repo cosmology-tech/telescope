@@ -1,6 +1,6 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { ContractInfo, ContractCodeHistoryEntry, Model } from "./types";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface QueryContractInfoRequest {
   address: string;

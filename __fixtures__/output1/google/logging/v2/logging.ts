@@ -2,7 +2,7 @@ import { MonitoredResource, MonitoredResourceDescriptor } from "../../api/monito
 import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
 import { Status } from "../../rpc/status";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, isObject, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface DeleteLogRequest {
   logName: string;

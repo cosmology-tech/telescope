@@ -1,6 +1,6 @@
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any } from "../../../protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Value {
   nullValue?: NullValue;

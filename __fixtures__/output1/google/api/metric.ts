@@ -1,7 +1,7 @@
 import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toDuration, fromDuration, isObject } from "@osmonauts/helpers";
 export interface MetricDescriptor {
   name: string;

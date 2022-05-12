@@ -1,6 +1,6 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { NFT, Class } from "./nft";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface QueryBalanceRequest {
   classId: string;

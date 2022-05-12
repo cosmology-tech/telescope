@@ -1,5 +1,5 @@
 import { FileDescriptorProto } from "../descriptor";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Version {
   major: number;

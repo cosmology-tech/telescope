@@ -1,6 +1,6 @@
 import { ProposalStatus, Proposal, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface QueryProposalRequest {
   proposalId: Long;

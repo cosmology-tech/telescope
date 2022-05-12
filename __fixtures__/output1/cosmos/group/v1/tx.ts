@@ -1,6 +1,6 @@
 import { Member, VoteOption, voteOptionFromJSON, voteOptionToJSON } from "./types";
 import { Any } from "../../../google/protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgCreateGroup {
   admin: string;

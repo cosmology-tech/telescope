@@ -1,5 +1,5 @@
 import { PeriodLock, SyntheticLock } from "./lock";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   lastLockId: Long;

@@ -1,7 +1,7 @@
 import { LabelDescriptor } from "./label";
 import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct } from "../protobuf/struct";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface MonitoredResourceDescriptor {
   name: string;

@@ -1,6 +1,6 @@
 import { Channel, Packet } from "./channel";
 import { Height } from "../../client/v1/client";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export interface MsgChannelOpenInit {
   portId: string;

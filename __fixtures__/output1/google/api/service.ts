@@ -18,7 +18,7 @@ import { Monitoring } from "./monitoring";
 import { SystemParameters } from "./system_parameter";
 import { SourceInfo } from "./source_info";
 import { UInt32Value } from "../protobuf/wrappers";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Service {
   name: string;

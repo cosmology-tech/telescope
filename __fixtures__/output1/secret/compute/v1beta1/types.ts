@@ -1,4 +1,4 @@
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export enum AccessType {
   UNDEFINED = 0,

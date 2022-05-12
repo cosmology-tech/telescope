@@ -1,6 +1,6 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface ValidatorSigningInfo {
   address: string;

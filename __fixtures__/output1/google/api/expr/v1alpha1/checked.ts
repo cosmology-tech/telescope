@@ -1,7 +1,7 @@
 import { SourceInfo, Expr, Constant } from "./syntax";
 import { Empty } from "../../../protobuf/empty";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 export interface CheckedExpr_ReferenceMapEntry {
   key: Long;

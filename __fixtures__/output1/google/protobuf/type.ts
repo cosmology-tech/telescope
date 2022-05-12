@@ -1,6 +1,6 @@
 import { SourceContext } from "./source_context";
 import { Any } from "./any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface Type {
   name: string;

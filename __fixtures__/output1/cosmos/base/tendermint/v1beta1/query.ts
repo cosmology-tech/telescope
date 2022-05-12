@@ -3,7 +3,7 @@ import { Any } from "../../../../google/protobuf/any";
 import { BlockID } from "../../../../tendermint/types/types";
 import { Block } from "../../../../tendermint/types/block";
 import { NodeInfo } from "../../../../tendermint/p2p/types";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface GetValidatorSetByHeightRequest {
   height: Long;

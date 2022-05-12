@@ -2,7 +2,7 @@ import { Any } from "../../../google/protobuf/any";
 import { SignMode, signModeFromJSON, signModeToJSON } from "../signing/v1beta1/signing";
 import { CompactBitArray } from "../../crypto/multisig/v1beta1/multisig";
 import { Coin } from "../../base/v1beta1/coin";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface Tx {
   body: TxBody;

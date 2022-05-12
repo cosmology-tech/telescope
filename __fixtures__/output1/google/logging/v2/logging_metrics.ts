@@ -1,6 +1,6 @@
 import { MetricDescriptor } from "../../api/metric";
 import { Timestamp } from "../../protobuf/timestamp";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface LogMetric_LabelExtractorsEntry {
   key: string;

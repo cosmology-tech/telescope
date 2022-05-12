@@ -5,7 +5,7 @@ import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { MerkleRoot } from "../../../core/commitment/v1/commitment";
 import { SignedHeader } from "../../../../tendermint/types/types";
 import { ValidatorSet } from "../../../../tendermint/types/validator";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { toDuration, fromDuration, isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export interface ClientState {
   chainId: string;

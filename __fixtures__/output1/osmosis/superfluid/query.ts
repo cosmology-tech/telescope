@@ -3,7 +3,7 @@ import { Params } from "./params";
 import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, SuperfluidDelegationRecord, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "./superfluid";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock } from "../lockup/lock";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryParamsRequest {}
 

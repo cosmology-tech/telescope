@@ -3,7 +3,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
 import { Duration } from "../../../google/protobuf/duration";
 import { Coin } from "../../base/v1beta1/coin";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, Long, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface HistoricalInfo {
   header: Header;

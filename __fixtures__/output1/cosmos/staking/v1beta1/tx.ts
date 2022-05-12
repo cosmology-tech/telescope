@@ -2,7 +2,7 @@ import { Description, CommissionRates } from "./staking";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface MsgCreateValidator {
   description: Description;

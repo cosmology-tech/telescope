@@ -1,5 +1,5 @@
 import { Duration } from "../../protobuf/duration";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { toDuration, Long, fromDuration, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface HttpRequest {
   requestMethod: string;

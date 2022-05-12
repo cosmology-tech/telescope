@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
 import { Params } from "./auth";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface QueryAccountsRequest {
   pagination: PageRequest;

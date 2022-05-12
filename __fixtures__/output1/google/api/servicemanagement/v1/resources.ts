@@ -1,6 +1,6 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
 export interface ManagedService {
   serviceName: string;

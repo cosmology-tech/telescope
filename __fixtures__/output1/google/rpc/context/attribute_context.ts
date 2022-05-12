@@ -2,7 +2,7 @@ import { Struct } from "../../protobuf/struct";
 import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
 export interface AttributeContext {
   origin: AttributeContext_Peer;

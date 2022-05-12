@@ -4,7 +4,7 @@ import { Struct } from "../../protobuf/struct";
 import { Timestamp } from "../../protobuf/timestamp";
 import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest } from "../type/http_request";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
 export interface LogEntry_LabelsEntry {
   key: string;

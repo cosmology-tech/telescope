@@ -1,5 +1,5 @@
 import { Plan, ModuleVersion } from "./upgrade";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface QueryCurrentPlanRequest {}
 

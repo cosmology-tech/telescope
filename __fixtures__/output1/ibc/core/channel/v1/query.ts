@@ -2,7 +2,7 @@ import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1
 import { Channel, IdentifiedChannel, PacketState } from "./channel";
 import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export interface QueryChannelRequest {
   portId: string;

@@ -1,7 +1,7 @@
 import { Operation } from "./operation";
 import { CheckError } from "./check_error";
 import { Status } from "../../../rpc/status";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface CheckRequest {
   serviceName: string;

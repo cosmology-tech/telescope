@@ -1,7 +1,7 @@
 import { Vote, LightBlock } from "./types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Validator } from "./validator";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;

@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Params, ValidatorOutstandingRewards, ValidatorAccumulatedCommission, ValidatorSlashEvent, DelegationDelegatorReward } from "./distribution";
 import { DecCoin } from "../../base/v1beta1/coin";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryParamsRequest {}
 

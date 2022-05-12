@@ -1,5 +1,5 @@
 import { Height } from "../../../core/client/v1/client";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface ClientState {
   chainId: string;

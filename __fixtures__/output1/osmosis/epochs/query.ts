@@ -1,5 +1,5 @@
 import { EpochInfo } from "./genesis";
-import * as _m0 from "protobuf/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryEpochsInfoRequest {}
 
