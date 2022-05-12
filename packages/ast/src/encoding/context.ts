@@ -102,6 +102,18 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
 
 }
 export class ProtoParseContext extends GenericParseContext implements ParseContext {
+    store: ProtoStore;
+    ref: ProtoRef;
+
+    constructor(
+        ref: ProtoRef,
+        store: ProtoStore,
+    ) {
+        super();
+        this.ref = ref;
+        this.store = store;
+    }
+
     getToEnum(field: ProtoField) {
         const name = getEnumToJsonName(getFieldsTypeName(field));
         if (field.import) {
@@ -128,15 +140,25 @@ export class ProtoParseContext extends GenericParseContext implements ParseConte
 
 
     getTypeName(field: ProtoField) {
-        const name = getFieldsTypeName(field);
+        let name = getFieldsTypeName(field);
+        let importedAs = name;
+        const names = this.ref.traversed?.importNames;
+        if (names
+            && names.hasOwnProperty(field.import)
+            && names[field.import].hasOwnProperty(name)
+        ) {
+
+            importedAs = names[field.import][name];
+        }
         if (field.import) {
             this.imports.push({
                 type: 'typeImport',
                 name,
+                importedAs,
                 import: field.import
             })
         }
-        return name;
+        return importedAs;
     }
 }
 

@@ -6,19 +6,46 @@ import { instanceType, NATIVE_TYPES } from './utils';
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     const imports = {};
+    const exports = {};
 
-    const obj: ProtoRoot & { parsedImports: Record<string, string[]> } = {
+    const obj: ProtoRoot & {
+        parsedImports: Record<string, string[]>;
+        parsedExports: Record<string, any>;
+        importNames: Record<string, any>;
+    } = {
         imports: ref.proto.imports,
         package: ref.proto.package,
         root: recursiveTraversal(
             store,
             ref,
             ref.proto.root,
-            imports
+            imports,
+            exports,
+            false
         ),
         parsedImports: null,
+        parsedExports: null,
+        importNames: null,
     };
+
     obj.parsedImports = imports;
+    obj.parsedExports = exports;
+    let counter = 1;
+    obj.importNames = Object.entries(imports).reduce((m, [path, names]) => {
+        m[path] = m[path] || {};
+        names.forEach(importName => {
+            const hasConflict = Object.entries(imports).some(([otherPath, otherNames]) => {
+                if (path === otherPath) return false;
+                if (otherNames.includes(importName)) return true;
+            });
+            if (hasConflict || exports.hasOwnProperty(importName)) {
+                m[path][importName] = importName + counter++;
+            } else {
+                m[path][importName] = importName;
+            }
+        })
+        return m;
+    }, {});
     return obj;
 };
 
@@ -94,13 +121,21 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
     }, {});
 };
 
-const traverseType = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
+const traverseType = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, exports: object, isNested: boolean) => {
     let nested = null;
     if (obj.nested) {
         nested = Object.keys(obj.nested).reduce((m, key) => {
-            m[key] = recursiveTraversal(store, ref, obj.nested[key], imports);
+            m[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, true);
             return m;
         }, {});
+    }
+
+    if (!isNested) {
+        exports[obj.name] = exports[obj.name] || [];
+        exports[obj.name].push({
+            name: obj.name
+        })
+
     }
 
     const traversed = {
@@ -194,9 +229,9 @@ const traverseService = (store: ProtoStore, ref: ProtoRef, obj: any, imports: ob
     }
 };
 
-export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
+export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, exports: object, isNested: boolean) => {
     if (obj instanceof Type) {
-        return traverseType(store, ref, obj, imports);
+        return traverseType(store, ref, obj, imports, exports, isNested);
     }
     if (obj instanceof Enum) {
         return traverseEnum(store, ref, obj, imports);
@@ -210,7 +245,7 @@ export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, i
     if (obj instanceof Root) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports);
+                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, isNested);
                 return m;
             }, {
                 type: 'Root',
@@ -223,7 +258,7 @@ export const recursiveTraversal = (store: ProtoStore, ref: ProtoRef, obj: any, i
     if (obj instanceof Namespace) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports);
+                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, isNested);
                 return m;
             }, {
                 type: 'Namespace',
