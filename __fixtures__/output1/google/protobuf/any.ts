@@ -13,7 +13,7 @@ function createBaseAny(): Any {
 }
 
 export const Any = {
-  encode(message: Any, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Any, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.typeUrl !== "") {
       writer.uint32(10).string(message.typeUrl);
     }

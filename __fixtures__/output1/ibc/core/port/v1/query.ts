@@ -20,7 +20,7 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
 }
 
 export const QueryAppVersionRequest = {
-  encode(message: QueryAppVersionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAppVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -126,7 +126,7 @@ function createBaseQueryAppVersionResponse(): QueryAppVersionResponse {
 }
 
 export const QueryAppVersionResponse = {
-  encode(message: QueryAppVersionResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAppVersionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }

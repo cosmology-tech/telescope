@@ -17,7 +17,7 @@ function createBaseMsgCreateGroup(): MsgCreateGroup {
 }
 
 export const MsgCreateGroup = {
-  encode(message: MsgCreateGroup, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -105,7 +105,7 @@ function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
 }
 
 export const MsgCreateGroupResponse = {
-  encode(message: MsgCreateGroupResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -169,7 +169,7 @@ function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
 }
 
 export const MsgUpdateGroupMembers = {
-  encode(message: MsgUpdateGroupMembers, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupMembers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -253,7 +253,7 @@ function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersRespons
 }
 
 export const MsgUpdateGroupMembersResponse = {
-  encode(message: MsgUpdateGroupMembersResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -305,7 +305,7 @@ function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
 }
 
 export const MsgUpdateGroupAdmin = {
-  encode(message: MsgUpdateGroupAdmin, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -383,7 +383,7 @@ function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
 }
 
 export const MsgUpdateGroupAdminResponse = {
-  encode(message: MsgUpdateGroupAdminResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -435,7 +435,7 @@ function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
 }
 
 export const MsgUpdateGroupMetadata = {
-  encode(message: MsgUpdateGroupMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -513,7 +513,7 @@ function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataRespo
 }
 
 export const MsgUpdateGroupMetadataResponse = {
-  encode(message: MsgUpdateGroupMetadataResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -567,7 +567,7 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
 }
 
 export const MsgCreateGroupPolicy = {
-  encode(message: MsgCreateGroupPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -660,7 +660,7 @@ function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse 
 }
 
 export const MsgCreateGroupPolicyResponse = {
-  encode(message: MsgCreateGroupPolicyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGroupPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -724,7 +724,7 @@ function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
 }
 
 export const MsgUpdateGroupPolicyAdmin = {
-  encode(message: MsgUpdateGroupPolicyAdmin, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupPolicyAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -816,7 +816,7 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
 }
 
 export const MsgCreateGroupWithPolicy = {
-  encode(message: MsgCreateGroupWithPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGroupWithPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -939,7 +939,7 @@ function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyR
 }
 
 export const MsgCreateGroupWithPolicyResponse = {
-  encode(message: MsgCreateGroupWithPolicyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGroupWithPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -1006,7 +1006,7 @@ function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdmi
 }
 
 export const MsgUpdateGroupPolicyAdminResponse = {
-  encode(message: MsgUpdateGroupPolicyAdminResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupPolicyAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1058,7 +1058,7 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDec
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicy = {
-  encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -1136,7 +1136,7 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupP
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
-  encode(message: MsgUpdateGroupPolicyDecisionPolicyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1188,7 +1188,7 @@ function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata 
 }
 
 export const MsgUpdateGroupPolicyMetadata = {
-  encode(message: MsgUpdateGroupPolicyMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -1266,7 +1266,7 @@ function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyM
 }
 
 export const MsgUpdateGroupPolicyMetadataResponse = {
-  encode(message: MsgUpdateGroupPolicyMetadataResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateGroupPolicyMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1360,7 +1360,7 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
-  encode(message: MsgSubmitProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -1475,7 +1475,7 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
-  encode(message: MsgSubmitProposalResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -1537,7 +1537,7 @@ function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
 }
 
 export const MsgWithdrawProposal = {
-  encode(message: MsgWithdrawProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -1604,7 +1604,7 @@ function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
 }
 
 export const MsgWithdrawProposalResponse = {
-  encode(message: MsgWithdrawProposalResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1660,7 +1660,7 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
-  encode(message: MsgVote, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -1760,7 +1760,7 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
-  encode(message: MsgVoteResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1810,7 +1810,7 @@ function createBaseMsgExec(): MsgExec {
 }
 
 export const MsgExec = {
-  encode(message: MsgExec, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -1877,7 +1877,7 @@ function createBaseMsgExecResponse(): MsgExecResponse {
 }
 
 export const MsgExecResponse = {
-  encode(message: MsgExecResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1927,7 +1927,7 @@ function createBaseMsgLeaveGroup(): MsgLeaveGroup {
 }
 
 export const MsgLeaveGroup = {
-  encode(message: MsgLeaveGroup, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -1994,7 +1994,7 @@ function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
 }
 
 export const MsgLeaveGroupResponse = {
-  encode(message: MsgLeaveGroupResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLeaveGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

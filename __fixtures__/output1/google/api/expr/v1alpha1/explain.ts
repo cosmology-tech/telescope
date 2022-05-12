@@ -14,7 +14,7 @@ function createBaseExplain(): Explain {
 }
 
 export const Explain = {
-  encode(message: Explain, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Explain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -98,7 +98,7 @@ function createBaseExplain_ExprStep(): Explain_ExprStep {
 }
 
 export const Explain_ExprStep = {
-  encode(message: Explain_ExprStep, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Explain_ExprStep, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
     }

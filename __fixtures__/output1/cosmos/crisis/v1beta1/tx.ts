@@ -15,7 +15,7 @@ function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
 }
 
 export const MsgVerifyInvariant = {
-  encode(message: MsgVerifyInvariant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVerifyInvariant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -93,7 +93,7 @@ function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
 }
 
 export const MsgVerifyInvariantResponse = {
-  encode(message: MsgVerifyInvariantResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVerifyInvariantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

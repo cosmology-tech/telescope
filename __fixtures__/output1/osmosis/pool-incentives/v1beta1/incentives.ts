@@ -12,7 +12,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(message: Params, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintedDenom !== "") {
       writer.uint32(10).string(message.mintedDenom);
     }
@@ -72,7 +72,7 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 }
 
 export const LockableDurationsInfo = {
-  encode(message: LockableDurationsInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -140,7 +140,7 @@ function createBaseDistrInfo(): DistrInfo {
 }
 
 export const DistrInfo = {
-  encode(message: DistrInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DistrInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.totalWeight !== "") {
       writer.uint32(10).string(message.totalWeight);
     }
@@ -219,7 +219,7 @@ function createBaseDistrRecord(): DistrRecord {
 }
 
 export const DistrRecord = {
-  encode(message: DistrRecord, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DistrRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gaugeId.isZero()) {
       writer.uint32(8).uint64(message.gaugeId);
     }

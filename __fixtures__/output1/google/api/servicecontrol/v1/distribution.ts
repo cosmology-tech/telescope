@@ -27,7 +27,7 @@ function createBaseDistribution(): Distribution {
 }
 
 export const Distribution = {
-  encode(message: Distribution, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
     }
@@ -196,7 +196,7 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
 }
 
 export const Distribution_LinearBuckets = {
-  encode(message: Distribution_LinearBuckets, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_LinearBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -282,7 +282,7 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
 }
 
 export const Distribution_ExponentialBuckets = {
-  encode(message: Distribution_ExponentialBuckets, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_ExponentialBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -364,7 +364,7 @@ function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets 
 }
 
 export const Distribution_ExplicitBuckets = {
-  encode(message: Distribution_ExplicitBuckets, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(9).fork();
 
     for (const v of message.bounds) {

@@ -78,7 +78,7 @@ function createBaseWeightedVoteOption(): WeightedVoteOption {
 }
 
 export const WeightedVoteOption = {
-  encode(message: WeightedVoteOption, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WeightedVoteOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
     }
@@ -151,7 +151,7 @@ function createBaseTextProposal(): TextProposal {
 }
 
 export const TextProposal = {
-  encode(message: TextProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TextProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -226,7 +226,7 @@ function createBaseDeposit(): Deposit {
 }
 
 export const Deposit = {
-  encode(message: Deposit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Deposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -330,7 +330,7 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
-  encode(message: Proposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -554,7 +554,7 @@ function createBaseTallyResult(): TallyResult {
 }
 
 export const TallyResult = {
-  encode(message: TallyResult, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.yes !== "") {
       writer.uint32(10).string(message.yes);
     }
@@ -653,7 +653,7 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
-  encode(message: Vote, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -754,7 +754,7 @@ function createBaseDepositParams(): DepositParams {
 }
 
 export const DepositParams = {
-  encode(message: DepositParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DepositParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -828,7 +828,7 @@ function createBaseVotingParams(): VotingParams {
 }
 
 export const VotingParams = {
-  encode(message: VotingParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
     return writer;
   },
@@ -889,7 +889,7 @@ function createBaseTallyParams(): TallyParams {
 }
 
 export const TallyParams = {
-  encode(message: TallyParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TallyParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quorum.length !== 0) {
       writer.uint32(10).bytes(message.quorum);
     }

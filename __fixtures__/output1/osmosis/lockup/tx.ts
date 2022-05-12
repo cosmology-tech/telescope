@@ -18,7 +18,7 @@ function createBaseMsgLockTokens(): MsgLockTokens {
 }
 
 export const MsgLockTokens = {
-  encode(message: MsgLockTokens, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockTokens, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -104,7 +104,7 @@ function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
 }
 
 export const MsgLockTokensResponse = {
-  encode(message: MsgLockTokensResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
     }
@@ -164,7 +164,7 @@ function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
 }
 
 export const MsgBeginUnlockingAll = {
-  encode(message: MsgBeginUnlockingAll, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlockingAll, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -224,7 +224,7 @@ function createBaseMsgBeginUnlockingAllResponse(): MsgBeginUnlockingAllResponse 
 }
 
 export const MsgBeginUnlockingAllResponse = {
-  encode(message: MsgBeginUnlockingAllResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlockingAllResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unlocks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -294,7 +294,7 @@ function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
 }
 
 export const MsgBeginUnlocking = {
-  encode(message: MsgBeginUnlocking, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlocking, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -382,7 +382,7 @@ function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
 }
 
 export const MsgBeginUnlockingResponse = {
-  encode(message: MsgBeginUnlockingResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlockingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }

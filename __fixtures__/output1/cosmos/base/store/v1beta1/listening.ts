@@ -17,7 +17,7 @@ function createBaseStoreKVPair(): StoreKVPair {
 }
 
 export const StoreKVPair = {
-  encode(message: StoreKVPair, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StoreKVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.storeKey !== "") {
       writer.uint32(10).string(message.storeKey);
     }

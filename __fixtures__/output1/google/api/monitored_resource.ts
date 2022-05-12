@@ -24,7 +24,7 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 }
 
 export const MonitoredResourceDescriptor = {
-  encode(message: MonitoredResourceDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(42).string(message.name);
     }
@@ -147,7 +147,7 @@ function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntr
 }
 
 export const MonitoredResource_LabelsEntry = {
-  encode(message: MonitoredResource_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResource_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -222,7 +222,7 @@ function createBaseMonitoredResource(): MonitoredResource {
 }
 
 export const MonitoredResource = {
-  encode(message: MonitoredResource, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -322,7 +322,7 @@ function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourc
 }
 
 export const MonitoredResourceMetadata_UserLabelsEntry = {
-  encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -397,7 +397,7 @@ function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
 }
 
 export const MonitoredResourceMetadata = {
-  encode(message: MonitoredResourceMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.systemLabels !== undefined) {
       Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();
     }

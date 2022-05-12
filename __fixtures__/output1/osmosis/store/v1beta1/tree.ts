@@ -11,7 +11,7 @@ function createBaseNode(): Node {
 }
 
 export const Node = {
-  encode(message: Node, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Node, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.children) {
       Child.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -79,7 +79,7 @@ function createBaseChild(): Child {
 }
 
 export const Child = {
-  encode(message: Child, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Child, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index.length !== 0) {
       writer.uint32(10).bytes(message.index);
     }
@@ -150,7 +150,7 @@ function createBaseLeaf(): Leaf {
 }
 
 export const Leaf = {
-  encode(message: Leaf, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Leaf, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.leaf !== undefined) {
       Child.encode(message.leaf, writer.uint32(10).fork()).ldelim();
     }

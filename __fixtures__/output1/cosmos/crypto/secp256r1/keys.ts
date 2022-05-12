@@ -11,7 +11,7 @@ function createBasePubKey(): PubKey {
 }
 
 export const PubKey = {
-  encode(message: PubKey, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PubKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -71,7 +71,7 @@ function createBasePrivKey(): PrivKey {
 }
 
 export const PrivKey = {
-  encode(message: PrivKey, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PrivKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.secret.length !== 0) {
       writer.uint32(10).bytes(message.secret);
     }

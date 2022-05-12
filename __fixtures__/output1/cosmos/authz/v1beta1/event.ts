@@ -15,7 +15,7 @@ function createBaseEventGrant(): EventGrant {
 }
 
 export const EventGrant = {
-  encode(message: EventGrant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
     }
@@ -101,7 +101,7 @@ function createBaseEventRevoke(): EventRevoke {
 }
 
 export const EventRevoke = {
-  encode(message: EventRevoke, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
     }

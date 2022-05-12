@@ -14,7 +14,7 @@ function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
 }
 
 export const QueryGaugeIdsRequest = {
-  encode(message: QueryGaugeIdsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGaugeIdsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -74,7 +74,7 @@ function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
 }
 
 export const QueryGaugeIdsResponse = {
-  encode(message: QueryGaugeIdsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGaugeIdsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.gaugeIdsWithDuration) {
       QueryGaugeIdsResponse_GaugeIdWithDuration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -142,7 +142,7 @@ function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsRes
 }
 
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
-  encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gaugeId.isZero()) {
       writer.uint32(8).uint64(message.gaugeId);
     }
@@ -206,7 +206,7 @@ function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
 }
 
 export const QueryDistrInfoRequest = {
-  encode(message: QueryDistrInfoRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDistrInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -254,7 +254,7 @@ function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
 }
 
 export const QueryDistrInfoResponse = {
-  encode(message: QueryDistrInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDistrInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.distrInfo !== undefined) {
       DistrInfo.encode(message.distrInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -310,7 +310,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -358,7 +358,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -414,7 +414,7 @@ function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsReques
 }
 
 export const QueryLockableDurationsRequest = {
-  encode(message: QueryLockableDurationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -462,7 +462,7 @@ function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsRespo
 }
 
 export const QueryLockableDurationsResponse = {
-  encode(message: QueryLockableDurationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLockableDurationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -524,7 +524,7 @@ function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsReques
 }
 
 export const QueryIncentivizedPoolsRequest = {
-  encode(message: QueryIncentivizedPoolsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentivizedPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -576,7 +576,7 @@ function createBaseIncentivizedPool(): IncentivizedPool {
 }
 
 export const IncentivizedPool = {
-  encode(message: IncentivizedPool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IncentivizedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -656,7 +656,7 @@ function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsRespo
 }
 
 export const QueryIncentivizedPoolsResponse = {
-  encode(message: QueryIncentivizedPoolsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryIncentivizedPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.incentivizedPools) {
       IncentivizedPool.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -718,7 +718,7 @@ function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentive
 }
 
 export const QueryExternalIncentiveGaugesRequest = {
-  encode(message: QueryExternalIncentiveGaugesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryExternalIncentiveGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -766,7 +766,7 @@ function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiv
 }
 
 export const QueryExternalIncentiveGaugesResponse = {
-  encode(message: QueryExternalIncentiveGaugesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryExternalIncentiveGaugesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
     }

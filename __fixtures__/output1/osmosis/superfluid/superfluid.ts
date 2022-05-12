@@ -45,7 +45,7 @@ function createBaseSuperfluidAsset(): SuperfluidAsset {
 }
 
 export const SuperfluidAsset = {
-  encode(message: SuperfluidAsset, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -120,7 +120,7 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
 }
 
 export const SuperfluidIntermediaryAccount = {
-  encode(message: SuperfluidIntermediaryAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidIntermediaryAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -206,7 +206,7 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 }
 
 export const OsmoEquivalentMultiplierRecord = {
-  encode(message: OsmoEquivalentMultiplierRecord, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OsmoEquivalentMultiplierRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.epochNumber.isZero()) {
       writer.uint32(8).int64(message.epochNumber);
     }
@@ -292,7 +292,7 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
 }
 
 export const SuperfluidDelegationRecord = {
-  encode(message: SuperfluidDelegationRecord, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -376,7 +376,7 @@ function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAcco
 }
 
 export const LockIdIntermediaryAccountConnection = {
-  encode(message: LockIdIntermediaryAccountConnection, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockIdIntermediaryAccountConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }

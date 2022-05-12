@@ -7,7 +7,7 @@ function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
 }
 
 export const ListAllInterfacesRequest = {
-  encode(message: ListAllInterfacesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -55,7 +55,7 @@ function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
 }
 
 export const ListAllInterfacesResponse = {
-  encode(message: ListAllInterfacesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListAllInterfacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.interfaceNames) {
       writer.uint32(10).string(v!);
     }
@@ -120,7 +120,7 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
 }
 
 export const ListImplementationsRequest = {
-  encode(message: ListImplementationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListImplementationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.interfaceName !== "") {
       writer.uint32(10).string(message.interfaceName);
     }
@@ -180,7 +180,7 @@ function createBaseListImplementationsResponse(): ListImplementationsResponse {
 }
 
 export const ListImplementationsResponse = {
-  encode(message: ListImplementationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListImplementationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.implementationMessageNames) {
       writer.uint32(10).string(v!);
     }

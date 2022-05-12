@@ -17,7 +17,7 @@ function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
 }
 
 export const MsgChannelOpenInit = {
-  encode(message: MsgChannelOpenInit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -95,7 +95,7 @@ function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
 }
 
 export const MsgChannelOpenInitResponse = {
-  encode(message: MsgChannelOpenInitResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -155,7 +155,7 @@ function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
 }
 
 export const MsgChannelOpenTry = {
-  encode(message: MsgChannelOpenTry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -277,7 +277,7 @@ function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
 }
 
 export const MsgChannelOpenTryResponse = {
-  encode(message: MsgChannelOpenTryResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -337,7 +337,7 @@ function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
 }
 
 export const MsgChannelOpenAck = {
-  encode(message: MsgChannelOpenAck, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -459,7 +459,7 @@ function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
 }
 
 export const MsgChannelOpenAckResponse = {
-  encode(message: MsgChannelOpenAckResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -515,7 +515,7 @@ function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
 }
 
 export const MsgChannelOpenConfirm = {
-  encode(message: MsgChannelOpenConfirm, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -615,7 +615,7 @@ function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmRespons
 }
 
 export const MsgChannelOpenConfirmResponse = {
-  encode(message: MsgChannelOpenConfirmResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -667,7 +667,7 @@ function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
 }
 
 export const MsgChannelCloseInit = {
-  encode(message: MsgChannelCloseInit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelCloseInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -745,7 +745,7 @@ function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
 }
 
 export const MsgChannelCloseInitResponse = {
-  encode(message: MsgChannelCloseInitResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelCloseInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -801,7 +801,7 @@ function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
 }
 
 export const MsgChannelCloseConfirm = {
-  encode(message: MsgChannelCloseConfirm, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelCloseConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -901,7 +901,7 @@ function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmRespo
 }
 
 export const MsgChannelCloseConfirmResponse = {
-  encode(message: MsgChannelCloseConfirmResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgChannelCloseConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -955,7 +955,7 @@ function createBaseMsgRecvPacket(): MsgRecvPacket {
 }
 
 export const MsgRecvPacket = {
-  encode(message: MsgRecvPacket, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRecvPacket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
@@ -1044,7 +1044,7 @@ function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
 }
 
 export const MsgRecvPacketResponse = {
-  encode(message: MsgRecvPacketResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRecvPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1100,7 +1100,7 @@ function createBaseMsgTimeout(): MsgTimeout {
 }
 
 export const MsgTimeout = {
-  encode(message: MsgTimeout, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgTimeout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
@@ -1200,7 +1200,7 @@ function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
 }
 
 export const MsgTimeoutResponse = {
-  encode(message: MsgTimeoutResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgTimeoutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1258,7 +1258,7 @@ function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
 }
 
 export const MsgTimeoutOnClose = {
-  encode(message: MsgTimeoutOnClose, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgTimeoutOnClose, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
@@ -1369,7 +1369,7 @@ function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
 }
 
 export const MsgTimeoutOnCloseResponse = {
-  encode(message: MsgTimeoutOnCloseResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgTimeoutOnCloseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1425,7 +1425,7 @@ function createBaseMsgAcknowledgement(): MsgAcknowledgement {
 }
 
 export const MsgAcknowledgement = {
-  encode(message: MsgAcknowledgement, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgAcknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
@@ -1525,7 +1525,7 @@ function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {
 }
 
 export const MsgAcknowledgementResponse = {
-  encode(message: MsgAcknowledgementResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

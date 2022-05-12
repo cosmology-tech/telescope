@@ -13,7 +13,7 @@ function createBaseAuthentication(): Authentication {
 }
 
 export const Authentication = {
-  encode(message: Authentication, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Authentication, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       AuthenticationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
@@ -101,7 +101,7 @@ function createBaseAuthenticationRule(): AuthenticationRule {
 }
 
 export const AuthenticationRule = {
-  encode(message: AuthenticationRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthenticationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -204,7 +204,7 @@ function createBaseJwtLocation(): JwtLocation {
 }
 
 export const JwtLocation = {
-  encode(message: JwtLocation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: JwtLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
     }
@@ -296,7 +296,7 @@ function createBaseAuthProvider(): AuthProvider {
 }
 
 export const AuthProvider = {
-  encode(message: AuthProvider, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -417,7 +417,7 @@ function createBaseOAuthRequirements(): OAuthRequirements {
 }
 
 export const OAuthRequirements = {
-  encode(message: OAuthRequirements, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OAuthRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.canonicalScopes !== "") {
       writer.uint32(10).string(message.canonicalScopes);
     }
@@ -479,7 +479,7 @@ function createBaseAuthRequirement(): AuthRequirement {
 }
 
 export const AuthRequirement = {
-  encode(message: AuthRequirement, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthRequirement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.providerId !== "") {
       writer.uint32(10).string(message.providerId);
     }

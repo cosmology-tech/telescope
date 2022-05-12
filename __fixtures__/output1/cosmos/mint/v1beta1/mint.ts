@@ -13,7 +13,7 @@ function createBaseMinter(): Minter {
 }
 
 export const Minter = {
-  encode(message: Minter, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflation !== "") {
       writer.uint32(10).string(message.inflation);
     }
@@ -94,7 +94,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(message: Params, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }

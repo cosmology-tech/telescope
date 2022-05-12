@@ -15,7 +15,7 @@ function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEn
 }
 
 export const LogMetric_LabelExtractorsEntry = {
-  encode(message: LogMetric_LabelExtractorsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogMetric_LabelExtractorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -106,7 +106,7 @@ function createBaseLogMetric(): LogMetric {
 }
 
 export const LogMetric = {
-  encode(message: LogMetric, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -325,7 +325,7 @@ function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
 }
 
 export const ListLogMetricsRequest = {
-  encode(message: ListLogMetricsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogMetricsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -409,7 +409,7 @@ function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
 }
 
 export const ListLogMetricsResponse = {
-  encode(message: ListLogMetricsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogMetricsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -486,7 +486,7 @@ function createBaseGetLogMetricRequest(): GetLogMetricRequest {
 }
 
 export const GetLogMetricRequest = {
-  encode(message: GetLogMetricRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
@@ -548,7 +548,7 @@ function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
 }
 
 export const CreateLogMetricRequest = {
-  encode(message: CreateLogMetricRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -621,7 +621,7 @@ function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
 }
 
 export const UpdateLogMetricRequest = {
-  encode(message: UpdateLogMetricRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
@@ -692,7 +692,7 @@ function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
 }
 
 export const DeleteLogMetricRequest = {
-  encode(message: DeleteLogMetricRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }

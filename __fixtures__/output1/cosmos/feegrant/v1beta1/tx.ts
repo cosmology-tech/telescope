@@ -16,7 +16,7 @@ function createBaseMsgGrantAllowance(): MsgGrantAllowance {
 }
 
 export const MsgGrantAllowance = {
-  encode(message: MsgGrantAllowance, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgGrantAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -94,7 +94,7 @@ function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
 }
 
 export const MsgGrantAllowanceResponse = {
-  encode(message: MsgGrantAllowanceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgGrantAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -144,7 +144,7 @@ function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
 }
 
 export const MsgRevokeAllowance = {
-  encode(message: MsgRevokeAllowance, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRevokeAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -211,7 +211,7 @@ function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {
 }
 
 export const MsgRevokeAllowanceResponse = {
-  encode(message: MsgRevokeAllowanceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRevokeAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

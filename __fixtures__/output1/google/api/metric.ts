@@ -34,7 +34,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
 }
 
 export const MetricDescriptor = {
-  encode(message: MetricDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -219,7 +219,7 @@ function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor
 }
 
 export const MetricDescriptor_MetricDescriptorMetadata = {
-  encode(message: MetricDescriptor_MetricDescriptorMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricDescriptor_MetricDescriptorMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.launchStage !== 0) {
       writer.uint32(8).int32(message.launchStage);
     }
@@ -434,7 +434,7 @@ function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
 }
 
 export const Metric_LabelsEntry = {
-  encode(message: Metric_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Metric_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -509,7 +509,7 @@ function createBaseMetric(): Metric {
 }
 
 export const Metric = {
-  encode(message: Metric, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Metric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(26).string(message.type);
     }

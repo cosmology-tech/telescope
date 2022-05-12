@@ -23,7 +23,7 @@ function createBaseType(): Type {
 }
 
 export const Type = {
-  encode(message: Type, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -171,7 +171,7 @@ function createBaseField(): Field {
 }
 
 export const Field = {
-  encode(message: Field, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
@@ -583,7 +583,7 @@ function createBaseEnum(): Enum {
 }
 
 export const Enum = {
-  encode(message: Enum, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Enum, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -702,7 +702,7 @@ function createBaseEnumValue(): EnumValue {
 }
 
 export const EnumValue = {
-  encode(message: EnumValue, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -792,7 +792,7 @@ function createBaseOption(): Option {
 }
 
 export const Option = {
-  encode(message: Option, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Option, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

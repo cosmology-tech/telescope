@@ -10,7 +10,7 @@ function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalance
 }
 
 export const QueryModuleAccountBalanceRequest = {
-  encode(message: QueryModuleAccountBalanceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryModuleAccountBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -58,7 +58,7 @@ function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanc
 }
 
 export const QueryModuleAccountBalanceResponse = {
-  encode(message: QueryModuleAccountBalanceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryModuleAccountBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.moduleAccountBalance) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -120,7 +120,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -168,7 +168,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -228,7 +228,7 @@ function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
 }
 
 export const QueryClaimRecordRequest = {
-  encode(message: QueryClaimRecordRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimRecordRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -288,7 +288,7 @@ function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
 }
 
 export const QueryClaimRecordResponse = {
-  encode(message: QueryClaimRecordResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimRecordResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.claimRecord !== undefined) {
       ClaimRecord.encode(message.claimRecord, writer.uint32(10).fork()).ldelim();
     }
@@ -350,7 +350,7 @@ function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequ
 }
 
 export const QueryClaimableForActionRequest = {
-  encode(message: QueryClaimableForActionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimableForActionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -421,7 +421,7 @@ function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionRes
 }
 
 export const QueryClaimableForActionResponse = {
-  encode(message: QueryClaimableForActionResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimableForActionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -487,7 +487,7 @@ function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
 }
 
 export const QueryTotalClaimableRequest = {
-  encode(message: QueryTotalClaimableRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalClaimableRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -547,7 +547,7 @@ function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
 }
 
 export const QueryTotalClaimableResponse = {
-  encode(message: QueryTotalClaimableResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalClaimableResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }

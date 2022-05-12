@@ -79,7 +79,7 @@ function createBaseService(): Service {
 }
 
 export const Service = {
-  encode(message: Service, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

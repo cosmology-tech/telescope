@@ -8,7 +8,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -56,7 +56,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -112,7 +112,7 @@ function createBaseQueryInflationRequest(): QueryInflationRequest {
 }
 
 export const QueryInflationRequest = {
-  encode(message: QueryInflationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryInflationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -160,7 +160,7 @@ function createBaseQueryInflationResponse(): QueryInflationResponse {
 }
 
 export const QueryInflationResponse = {
-  encode(message: QueryInflationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryInflationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflation.length !== 0) {
       writer.uint32(10).bytes(message.inflation);
     }
@@ -216,7 +216,7 @@ function createBaseQueryAnnualProvisionsRequest(): QueryAnnualProvisionsRequest 
 }
 
 export const QueryAnnualProvisionsRequest = {
-  encode(message: QueryAnnualProvisionsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAnnualProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -264,7 +264,7 @@ function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsRespons
 }
 
 export const QueryAnnualProvisionsResponse = {
-  encode(message: QueryAnnualProvisionsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAnnualProvisionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.annualProvisions.length !== 0) {
       writer.uint32(10).bytes(message.annualProvisions);
     }

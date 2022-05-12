@@ -15,7 +15,7 @@ function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
 }
 
 export const MetricValue_LabelsEntry = {
-  encode(message: MetricValue_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricValue_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -102,7 +102,7 @@ function createBaseMetricValue(): MetricValue {
 }
 
 export const MetricValue = {
-  encode(message: MetricValue, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode({
         key: (key as any),
@@ -263,7 +263,7 @@ function createBaseMetricValueSet(): MetricValueSet {
 }
 
 export const MetricValueSet = {
-  encode(message: MetricValueSet, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricValueSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }

@@ -21,7 +21,7 @@ function createBaseParseRequest(): ParseRequest {
 }
 
 export const ParseRequest = {
-  encode(message: ParseRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
     }
@@ -116,7 +116,7 @@ function createBaseParseResponse(): ParseResponse {
 }
 
 export const ParseResponse = {
-  encode(message: ParseResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -199,7 +199,7 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
-  encode(message: CheckRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -300,7 +300,7 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
-  encode(message: CheckResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.checkedExpr !== undefined) {
       CheckedExpr.encode(message.checkedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -379,7 +379,7 @@ function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
 }
 
 export const EvalRequest_BindingsEntry = {
-  encode(message: EvalRequest_BindingsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalRequest_BindingsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -458,7 +458,7 @@ function createBaseEvalRequest(): EvalRequest {
 }
 
 export const EvalRequest = {
-  encode(message: EvalRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -581,7 +581,7 @@ function createBaseEvalResponse(): EvalResponse {
 }
 
 export const EvalResponse = {
-  encode(message: EvalResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== undefined) {
       ExprValue.encode(message.result, writer.uint32(10).fork()).ldelim();
     }
@@ -662,7 +662,7 @@ function createBaseIssueDetails(): IssueDetails {
 }
 
 export const IssueDetails = {
-  encode(message: IssueDetails, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IssueDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);
     }

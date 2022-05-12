@@ -17,7 +17,7 @@ function createBaseMsgStoreCode(): MsgStoreCode {
 }
 
 export const MsgStoreCode = {
-  encode(message: MsgStoreCode, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgStoreCode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -99,7 +99,7 @@ function createBaseMsgStoreCodeResponse(): MsgStoreCodeResponse {
 }
 
 export const MsgStoreCodeResponse = {
-  encode(message: MsgStoreCodeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgStoreCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -169,7 +169,7 @@ function createBaseMsgInstantiateContract(): MsgInstantiateContract {
 }
 
 export const MsgInstantiateContract = {
-  encode(message: MsgInstantiateContract, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgInstantiateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -292,7 +292,7 @@ function createBaseMsgInstantiateContractResponse(): MsgInstantiateContractRespo
 }
 
 export const MsgInstantiateContractResponse = {
-  encode(message: MsgInstantiateContractResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgInstantiateContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -369,7 +369,7 @@ function createBaseMsgExecuteContract(): MsgExecuteContract {
 }
 
 export const MsgExecuteContract = {
-  encode(message: MsgExecuteContract, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExecuteContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -468,7 +468,7 @@ function createBaseMsgExecuteContractResponse(): MsgExecuteContractResponse {
 }
 
 export const MsgExecuteContractResponse = {
-  encode(message: MsgExecuteContractResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExecuteContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -534,7 +534,7 @@ function createBaseMsgMigrateContract(): MsgMigrateContract {
 }
 
 export const MsgMigrateContract = {
-  encode(message: MsgMigrateContract, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgMigrateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -627,7 +627,7 @@ function createBaseMsgMigrateContractResponse(): MsgMigrateContractResponse {
 }
 
 export const MsgMigrateContractResponse = {
-  encode(message: MsgMigrateContractResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgMigrateContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -691,7 +691,7 @@ function createBaseMsgUpdateAdmin(): MsgUpdateAdmin {
 }
 
 export const MsgUpdateAdmin = {
-  encode(message: MsgUpdateAdmin, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -769,7 +769,7 @@ function createBaseMsgUpdateAdminResponse(): MsgUpdateAdminResponse {
 }
 
 export const MsgUpdateAdminResponse = {
-  encode(message: MsgUpdateAdminResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -819,7 +819,7 @@ function createBaseMsgClearAdmin(): MsgClearAdmin {
 }
 
 export const MsgClearAdmin = {
-  encode(message: MsgClearAdmin, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgClearAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -886,7 +886,7 @@ function createBaseMsgClearAdminResponse(): MsgClearAdminResponse {
 }
 
 export const MsgClearAdminResponse = {
-  encode(message: MsgClearAdminResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgClearAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

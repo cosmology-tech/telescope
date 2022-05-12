@@ -20,7 +20,7 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 
 export const ListServicesRequest = {
-  encode(message: ListServicesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.producerProjectId !== "") {
       writer.uint32(10).string(message.producerProjectId);
     }
@@ -115,7 +115,7 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 
 export const ListServicesResponse = {
-  encode(message: ListServicesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       ManagedService.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -192,7 +192,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 
 export const GetServiceRequest = {
-  encode(message: GetServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -252,7 +252,7 @@ function createBaseCreateServiceRequest(): CreateServiceRequest {
 }
 
 export const CreateServiceRequest = {
-  encode(message: CreateServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
     }
@@ -312,7 +312,7 @@ function createBaseDeleteServiceRequest(): DeleteServiceRequest {
 }
 
 export const DeleteServiceRequest = {
-  encode(message: DeleteServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -372,7 +372,7 @@ function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
 }
 
 export const UndeleteServiceRequest = {
-  encode(message: UndeleteServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UndeleteServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -432,7 +432,7 @@ function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
 }
 
 export const UndeleteServiceResponse = {
-  encode(message: UndeleteServiceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UndeleteServiceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
     }
@@ -496,7 +496,7 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
 }
 
 export const GetServiceConfigRequest = {
-  encode(message: GetServiceConfigRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetServiceConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -619,7 +619,7 @@ function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
 }
 
 export const ListServiceConfigsRequest = {
-  encode(message: ListServiceConfigsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServiceConfigsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -703,7 +703,7 @@ function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
 }
 
 export const ListServiceConfigsResponse = {
-  encode(message: ListServiceConfigsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServiceConfigsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.serviceConfigs) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -782,7 +782,7 @@ function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
 }
 
 export const CreateServiceConfigRequest = {
-  encode(message: CreateServiceConfigRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateServiceConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -857,7 +857,7 @@ function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
 }
 
 export const SubmitConfigSourceRequest = {
-  encode(message: SubmitConfigSourceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SubmitConfigSourceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -939,7 +939,7 @@ function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
 }
 
 export const SubmitConfigSourceResponse = {
-  encode(message: SubmitConfigSourceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SubmitConfigSourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceConfig !== undefined) {
       Service.encode(message.serviceConfig, writer.uint32(10).fork()).ldelim();
     }
@@ -1001,7 +1001,7 @@ function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
 }
 
 export const CreateServiceRolloutRequest = {
-  encode(message: CreateServiceRolloutRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateServiceRolloutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -1078,7 +1078,7 @@ function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
 }
 
 export const ListServiceRolloutsRequest = {
-  encode(message: ListServiceRolloutsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServiceRolloutsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -1173,7 +1173,7 @@ function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
 }
 
 export const ListServiceRolloutsResponse = {
-  encode(message: ListServiceRolloutsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServiceRolloutsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rollouts) {
       Rollout.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1252,7 +1252,7 @@ function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
 }
 
 export const GetServiceRolloutRequest = {
-  encode(message: GetServiceRolloutRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetServiceRolloutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -1325,7 +1325,7 @@ function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
 }
 
 export const GenerateConfigReportRequest = {
-  encode(message: GenerateConfigReportRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenerateConfigReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.newConfig !== undefined) {
       Any.encode(message.newConfig, writer.uint32(10).fork()).ldelim();
     }
@@ -1402,7 +1402,7 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
 }
 
 export const GenerateConfigReportResponse = {
-  encode(message: GenerateConfigReportResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenerateConfigReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }

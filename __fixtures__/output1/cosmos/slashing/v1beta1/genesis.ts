@@ -16,7 +16,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -111,7 +111,7 @@ function createBaseSigningInfo(): SigningInfo {
 }
 
 export const SigningInfo = {
-  encode(message: SigningInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -184,7 +184,7 @@ function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
 }
 
 export const ValidatorMissedBlocks = {
-  encode(message: ValidatorMissedBlocks, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorMissedBlocks, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -263,7 +263,7 @@ function createBaseMissedBlock(): MissedBlock {
 }
 
 export const MissedBlock = {
-  encode(message: MissedBlock, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MissedBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).int64(message.index);
     }

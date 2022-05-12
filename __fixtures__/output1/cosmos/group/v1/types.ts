@@ -20,7 +20,7 @@ function createBaseMember(): Member {
 }
 
 export const Member = {
-  encode(message: Member, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Member, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -110,7 +110,7 @@ function createBaseMembers(): Members {
 }
 
 export const Members = {
-  encode(message: Members, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Members, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.members) {
       Member.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -178,7 +178,7 @@ function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
 }
 
 export const ThresholdDecisionPolicy = {
-  encode(message: ThresholdDecisionPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ThresholdDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.threshold !== "") {
       writer.uint32(10).string(message.threshold);
     }
@@ -251,7 +251,7 @@ function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
 }
 
 export const PercentageDecisionPolicy = {
-  encode(message: PercentageDecisionPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PercentageDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.percentage !== "") {
       writer.uint32(10).string(message.percentage);
     }
@@ -324,7 +324,7 @@ function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
 }
 
 export const DecisionPolicyWindows = {
-  encode(message: DecisionPolicyWindows, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DecisionPolicyWindows, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
     if (message.minExecutionPeriod !== undefined) Duration.encode(toDuration(message.minExecutionPeriod), writer.uint32(18).fork()).ldelim();
     return writer;
@@ -460,7 +460,7 @@ function createBaseGroupInfo(): GroupInfo {
 }
 
 export const GroupInfo = {
-  encode(message: GroupInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GroupInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -574,7 +574,7 @@ function createBaseGroupMember(): GroupMember {
 }
 
 export const GroupMember = {
-  encode(message: GroupMember, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GroupMember, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -657,7 +657,7 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
 }
 
 export const GroupPolicyInfo = {
-  encode(message: GroupPolicyInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GroupPolicyInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -804,7 +804,7 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
-  encode(message: Proposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -1175,7 +1175,7 @@ function createBaseTallyResult(): TallyResult {
 }
 
 export const TallyResult = {
-  encode(message: TallyResult, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.yesCount !== "") {
       writer.uint32(10).string(message.yesCount);
     }
@@ -1276,7 +1276,7 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
-  encode(message: Vote, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }

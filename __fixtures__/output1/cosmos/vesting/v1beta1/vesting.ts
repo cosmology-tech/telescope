@@ -21,7 +21,7 @@ function createBaseBaseVestingAccount(): BaseVestingAccount {
 }
 
 export const BaseVestingAccount = {
-  encode(message: BaseVestingAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BaseVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
     }
@@ -143,7 +143,7 @@ function createBaseContinuousVestingAccount(): ContinuousVestingAccount {
 }
 
 export const ContinuousVestingAccount = {
-  encode(message: ContinuousVestingAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContinuousVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
@@ -214,7 +214,7 @@ function createBaseDelayedVestingAccount(): DelayedVestingAccount {
 }
 
 export const DelayedVestingAccount = {
-  encode(message: DelayedVestingAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DelayedVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
@@ -276,7 +276,7 @@ function createBasePeriod(): Period {
 }
 
 export const Period = {
-  encode(message: Period, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Period, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.length.isZero()) {
       writer.uint32(8).int64(message.length);
     }
@@ -357,7 +357,7 @@ function createBasePeriodicVestingAccount(): PeriodicVestingAccount {
 }
 
 export const PeriodicVestingAccount = {
-  encode(message: PeriodicVestingAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeriodicVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
@@ -445,7 +445,7 @@ function createBasePermanentLockedAccount(): PermanentLockedAccount {
 }
 
 export const PermanentLockedAccount = {
-  encode(message: PermanentLockedAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PermanentLockedAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }

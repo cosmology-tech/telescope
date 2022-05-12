@@ -25,7 +25,7 @@ function createBaseService(): Service {
 }
 
 export const Service = {
-  encode(message: Service, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -182,7 +182,7 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 
 export const ServiceConfig = {
-  encode(message: ServiceConfig, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -358,7 +358,7 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
-  encode(message: OperationMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
     }

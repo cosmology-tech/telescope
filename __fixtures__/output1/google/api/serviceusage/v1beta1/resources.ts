@@ -25,7 +25,7 @@ function createBaseService(): Service {
 }
 
 export const Service = {
-  encode(message: Service, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -182,7 +182,7 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 
 export const ServiceConfig = {
-  encode(message: ServiceConfig, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -358,7 +358,7 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
-  encode(message: OperationMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
     }
@@ -433,7 +433,7 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
 }
 
 export const ConsumerQuotaMetric = {
-  encode(message: ConsumerQuotaMetric, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsumerQuotaMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -569,7 +569,7 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
 }
 
 export const ConsumerQuotaLimit = {
-  encode(message: ConsumerQuotaLimit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsumerQuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -741,7 +741,7 @@ function createBaseQuotaBucket_DimensionsEntry(): QuotaBucket_DimensionsEntry {
 }
 
 export const QuotaBucket_DimensionsEntry = {
-  encode(message: QuotaBucket_DimensionsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaBucket_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -824,7 +824,7 @@ function createBaseQuotaBucket(): QuotaBucket {
 }
 
 export const QuotaBucket = {
-  encode(message: QuotaBucket, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.effectiveLimit.isZero()) {
       writer.uint32(8).int64(message.effectiveLimit);
     }
@@ -968,7 +968,7 @@ function createBaseQuotaOverride_DimensionsEntry(): QuotaOverride_DimensionsEntr
 }
 
 export const QuotaOverride_DimensionsEntry = {
-  encode(message: QuotaOverride_DimensionsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOverride_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1051,7 +1051,7 @@ function createBaseQuotaOverride(): QuotaOverride {
 }
 
 export const QuotaOverride = {
-  encode(message: QuotaOverride, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOverride, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1194,7 +1194,7 @@ function createBaseOverrideInlineSource(): OverrideInlineSource {
 }
 
 export const OverrideInlineSource = {
-  encode(message: OverrideInlineSource, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OverrideInlineSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1307,7 +1307,7 @@ function createBaseAdminQuotaPolicy_DimensionsEntry(): AdminQuotaPolicy_Dimensio
 }
 
 export const AdminQuotaPolicy_DimensionsEntry = {
-  encode(message: AdminQuotaPolicy_DimensionsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AdminQuotaPolicy_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1390,7 +1390,7 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
 }
 
 export const AdminQuotaPolicy = {
-  encode(message: AdminQuotaPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AdminQuotaPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1535,7 +1535,7 @@ function createBaseServiceIdentity(): ServiceIdentity {
 }
 
 export const ServiceIdentity = {
-  encode(message: ServiceIdentity, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceIdentity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
     }

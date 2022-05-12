@@ -29,7 +29,7 @@ function createBaseGauge(): Gauge {
 }
 
 export const Gauge = {
-  encode(message: Gauge, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Gauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -176,7 +176,7 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 }
 
 export const LockableDurationsInfo = {
-  encode(message: LockableDurationsInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }

@@ -16,7 +16,7 @@ function createBaseMsgCreateClient(): MsgCreateClient {
 }
 
 export const MsgCreateClient = {
-  encode(message: MsgCreateClient, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
     }
@@ -94,7 +94,7 @@ function createBaseMsgCreateClientResponse(): MsgCreateClientResponse {
 }
 
 export const MsgCreateClientResponse = {
-  encode(message: MsgCreateClientResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -146,7 +146,7 @@ function createBaseMsgUpdateClient(): MsgUpdateClient {
 }
 
 export const MsgUpdateClient = {
-  encode(message: MsgUpdateClient, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -224,7 +224,7 @@ function createBaseMsgUpdateClientResponse(): MsgUpdateClientResponse {
 }
 
 export const MsgUpdateClientResponse = {
-  encode(message: MsgUpdateClientResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -282,7 +282,7 @@ function createBaseMsgUpgradeClient(): MsgUpgradeClient {
 }
 
 export const MsgUpgradeClient = {
-  encode(message: MsgUpgradeClient, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpgradeClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -393,7 +393,7 @@ function createBaseMsgUpgradeClientResponse(): MsgUpgradeClientResponse {
 }
 
 export const MsgUpgradeClientResponse = {
-  encode(message: MsgUpgradeClientResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpgradeClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -445,7 +445,7 @@ function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
 }
 
 export const MsgSubmitMisbehaviour = {
-  encode(message: MsgSubmitMisbehaviour, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSubmitMisbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -523,7 +523,7 @@ function createBaseMsgSubmitMisbehaviourResponse(): MsgSubmitMisbehaviourRespons
 }
 
 export const MsgSubmitMisbehaviourResponse = {
-  encode(message: MsgSubmitMisbehaviourResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSubmitMisbehaviourResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

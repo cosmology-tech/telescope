@@ -12,7 +12,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -60,7 +60,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -120,7 +120,7 @@ function createBaseAssetTypeRequest(): AssetTypeRequest {
 }
 
 export const AssetTypeRequest = {
-  encode(message: AssetTypeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AssetTypeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -180,7 +180,7 @@ function createBaseAssetTypeResponse(): AssetTypeResponse {
 }
 
 export const AssetTypeResponse = {
-  encode(message: AssetTypeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AssetTypeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.assetType !== 0) {
       writer.uint32(8).int32(message.assetType);
     }
@@ -236,7 +236,7 @@ function createBaseAllAssetsRequest(): AllAssetsRequest {
 }
 
 export const AllAssetsRequest = {
-  encode(message: AllAssetsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllAssetsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -284,7 +284,7 @@ function createBaseAllAssetsResponse(): AllAssetsResponse {
 }
 
 export const AllAssetsResponse = {
-  encode(message: AllAssetsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllAssetsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.assets) {
       SuperfluidAsset.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -350,7 +350,7 @@ function createBaseAssetMultiplierRequest(): AssetMultiplierRequest {
 }
 
 export const AssetMultiplierRequest = {
-  encode(message: AssetMultiplierRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AssetMultiplierRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -410,7 +410,7 @@ function createBaseAssetMultiplierResponse(): AssetMultiplierResponse {
 }
 
 export const AssetMultiplierResponse = {
-  encode(message: AssetMultiplierResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AssetMultiplierResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.osmoEquivalentMultiplier !== undefined) {
       OsmoEquivalentMultiplierRecord.encode(message.osmoEquivalentMultiplier, writer.uint32(10).fork()).ldelim();
     }
@@ -476,7 +476,7 @@ function createBaseSuperfluidIntermediaryAccountInfo(): SuperfluidIntermediaryAc
 }
 
 export const SuperfluidIntermediaryAccountInfo = {
-  encode(message: SuperfluidIntermediaryAccountInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidIntermediaryAccountInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -569,7 +569,7 @@ function createBaseAllIntermediaryAccountsRequest(): AllIntermediaryAccountsRequ
 }
 
 export const AllIntermediaryAccountsRequest = {
-  encode(message: AllIntermediaryAccountsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllIntermediaryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -631,7 +631,7 @@ function createBaseAllIntermediaryAccountsResponse(): AllIntermediaryAccountsRes
 }
 
 export const AllIntermediaryAccountsResponse = {
-  encode(message: AllIntermediaryAccountsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllIntermediaryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       SuperfluidIntermediaryAccountInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -708,7 +708,7 @@ function createBaseConnectedIntermediaryAccountRequest(): ConnectedIntermediaryA
 }
 
 export const ConnectedIntermediaryAccountRequest = {
-  encode(message: ConnectedIntermediaryAccountRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConnectedIntermediaryAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
@@ -768,7 +768,7 @@ function createBaseConnectedIntermediaryAccountResponse(): ConnectedIntermediary
 }
 
 export const ConnectedIntermediaryAccountResponse = {
-  encode(message: ConnectedIntermediaryAccountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConnectedIntermediaryAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       SuperfluidIntermediaryAccountInfo.encode(message.account, writer.uint32(10).fork()).ldelim();
     }
@@ -824,7 +824,7 @@ function createBaseTotalSuperfluidDelegationsRequest(): TotalSuperfluidDelegatio
 }
 
 export const TotalSuperfluidDelegationsRequest = {
-  encode(message: TotalSuperfluidDelegationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TotalSuperfluidDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -872,7 +872,7 @@ function createBaseTotalSuperfluidDelegationsResponse(): TotalSuperfluidDelegati
 }
 
 export const TotalSuperfluidDelegationsResponse = {
-  encode(message: TotalSuperfluidDelegationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TotalSuperfluidDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.totalDelegations !== "") {
       writer.uint32(10).string(message.totalDelegations);
     }
@@ -936,7 +936,7 @@ function createBaseSuperfluidDelegationAmountRequest(): SuperfluidDelegationAmou
 }
 
 export const SuperfluidDelegationAmountRequest = {
-  encode(message: SuperfluidDelegationAmountRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationAmountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1018,7 +1018,7 @@ function createBaseSuperfluidDelegationAmountResponse(): SuperfluidDelegationAmo
 }
 
 export const SuperfluidDelegationAmountResponse = {
-  encode(message: SuperfluidDelegationAmountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationAmountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1084,7 +1084,7 @@ function createBaseSuperfluidDelegationsByDelegatorRequest(): SuperfluidDelegati
 }
 
 export const SuperfluidDelegationsByDelegatorRequest = {
-  encode(message: SuperfluidDelegationsByDelegatorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationsByDelegatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1146,7 +1146,7 @@ function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegat
 }
 
 export const SuperfluidDelegationsByDelegatorResponse = {
-  encode(message: SuperfluidDelegationsByDelegatorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationsByDelegatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.superfluidDelegationRecords) {
       SuperfluidDelegationRecord.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1230,7 +1230,7 @@ function createBaseSuperfluidUndelegationsByDelegatorRequest(): SuperfluidUndele
 }
 
 export const SuperfluidUndelegationsByDelegatorRequest = {
-  encode(message: SuperfluidUndelegationsByDelegatorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidUndelegationsByDelegatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1305,7 +1305,7 @@ function createBaseSuperfluidUndelegationsByDelegatorResponse(): SuperfluidUndel
 }
 
 export const SuperfluidUndelegationsByDelegatorResponse = {
-  encode(message: SuperfluidUndelegationsByDelegatorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidUndelegationsByDelegatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.superfluidDelegationRecords) {
       SuperfluidDelegationRecord.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1405,7 +1405,7 @@ function createBaseSuperfluidDelegationsByValidatorDenomRequest(): SuperfluidDel
 }
 
 export const SuperfluidDelegationsByValidatorDenomRequest = {
-  encode(message: SuperfluidDelegationsByValidatorDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationsByValidatorDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -1476,7 +1476,7 @@ function createBaseSuperfluidDelegationsByValidatorDenomResponse(): SuperfluidDe
 }
 
 export const SuperfluidDelegationsByValidatorDenomResponse = {
-  encode(message: SuperfluidDelegationsByValidatorDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationsByValidatorDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.superfluidDelegationRecords) {
       SuperfluidDelegationRecord.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1544,7 +1544,7 @@ function createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest(): E
 }
 
 export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
-  encode(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -1615,7 +1615,7 @@ function createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse(): 
 }
 
 export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
-  encode(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.totalDelegatedCoins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }

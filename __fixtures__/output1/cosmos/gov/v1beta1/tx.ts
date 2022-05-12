@@ -18,7 +18,7 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
-  encode(message: MsgSubmitProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(10).fork()).ldelim();
     }
@@ -106,7 +106,7 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
-  encode(message: MsgSubmitProposalResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -170,7 +170,7 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
-  encode(message: MsgVote, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -248,7 +248,7 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
-  encode(message: MsgVoteResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -300,7 +300,7 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
 }
 
 export const MsgVoteWeighted = {
-  encode(message: MsgVoteWeighted, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVoteWeighted, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -384,7 +384,7 @@ function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
 }
 
 export const MsgVoteWeightedResponse = {
-  encode(message: MsgVoteWeightedResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -436,7 +436,7 @@ function createBaseMsgDeposit(): MsgDeposit {
 }
 
 export const MsgDeposit = {
-  encode(message: MsgDeposit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -520,7 +520,7 @@ function createBaseMsgDepositResponse(): MsgDepositResponse {
 }
 
 export const MsgDepositResponse = {
-  encode(message: MsgDepositResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

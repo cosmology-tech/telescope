@@ -61,7 +61,7 @@ function createBaseClaimRecord(): ClaimRecord {
 }
 
 export const ClaimRecord = {
-  encode(message: ClaimRecord, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ClaimRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }

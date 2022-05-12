@@ -7,7 +7,7 @@ function createBaseEmpty(): Empty {
 }
 
 export const Empty = {
-  encode(message: Empty, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Empty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

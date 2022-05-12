@@ -16,7 +16,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lastLockId.isZero()) {
       writer.uint32(8).uint64(message.lastLockId);
     }

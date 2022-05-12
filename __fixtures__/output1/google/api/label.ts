@@ -15,7 +15,7 @@ function createBaseLabelDescriptor(): LabelDescriptor {
 }
 
 export const LabelDescriptor = {
-  encode(message: LabelDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LabelDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }

@@ -13,7 +13,7 @@ function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
 }
 
 export const QueryContractInfoRequest = {
-  encode(message: QueryContractInfoRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -75,7 +75,7 @@ function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
 }
 
 export const QueryContractInfoResponse = {
-  encode(message: QueryContractInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -148,7 +148,7 @@ function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
 }
 
 export const QueryContractHistoryRequest = {
-  encode(message: QueryContractHistoryRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractHistoryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -221,7 +221,7 @@ function createBaseQueryContractHistoryResponse(): QueryContractHistoryResponse 
 }
 
 export const QueryContractHistoryResponse = {
-  encode(message: QueryContractHistoryResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractHistoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       ContractCodeHistoryEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -300,7 +300,7 @@ function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
 }
 
 export const QueryContractsByCodeRequest = {
-  encode(message: QueryContractsByCodeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractsByCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -373,7 +373,7 @@ function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse 
 }
 
 export const QueryContractsByCodeResponse = {
-  encode(message: QueryContractsByCodeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractsByCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.contracts) {
       writer.uint32(10).string(v!);
     }
@@ -451,7 +451,7 @@ function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest 
 }
 
 export const QueryAllContractStateRequest = {
-  encode(message: QueryAllContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -524,7 +524,7 @@ function createBaseQueryAllContractStateResponse(): QueryAllContractStateRespons
 }
 
 export const QueryAllContractStateResponse = {
-  encode(message: QueryAllContractStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.models) {
       Model.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -603,7 +603,7 @@ function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest 
 }
 
 export const QueryRawContractStateRequest = {
-  encode(message: QueryRawContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryRawContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -674,7 +674,7 @@ function createBaseQueryRawContractStateResponse(): QueryRawContractStateRespons
 }
 
 export const QueryRawContractStateResponse = {
-  encode(message: QueryRawContractStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryRawContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -736,7 +736,7 @@ function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequ
 }
 
 export const QuerySmartContractStateRequest = {
-  encode(message: QuerySmartContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySmartContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -807,7 +807,7 @@ function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateRes
 }
 
 export const QuerySmartContractStateResponse = {
-  encode(message: QuerySmartContractStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySmartContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -867,7 +867,7 @@ function createBaseQueryCodeRequest(): QueryCodeRequest {
 }
 
 export const QueryCodeRequest = {
-  encode(message: QueryCodeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -931,7 +931,7 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
 }
 
 export const CodeInfoResponse = {
-  encode(message: CodeInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -1015,7 +1015,7 @@ function createBaseQueryCodeResponse(): QueryCodeResponse {
 }
 
 export const QueryCodeResponse = {
-  encode(message: QueryCodeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeInfo !== undefined) {
       CodeInfoResponse.encode(message.codeInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -1086,7 +1086,7 @@ function createBaseQueryCodesRequest(): QueryCodesRequest {
 }
 
 export const QueryCodesRequest = {
-  encode(message: QueryCodesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -1148,7 +1148,7 @@ function createBaseQueryCodesResponse(): QueryCodesResponse {
 }
 
 export const QueryCodesResponse = {
-  encode(message: QueryCodesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.codeInfos) {
       CodeInfoResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1225,7 +1225,7 @@ function createBaseQueryPinnedCodesRequest(): QueryPinnedCodesRequest {
 }
 
 export const QueryPinnedCodesRequest = {
-  encode(message: QueryPinnedCodesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPinnedCodesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
@@ -1287,7 +1287,7 @@ function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
 }
 
 export const QueryPinnedCodesResponse = {
-  encode(message: QueryPinnedCodesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPinnedCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(8).fork();
 
     for (const v of message.codeIds) {

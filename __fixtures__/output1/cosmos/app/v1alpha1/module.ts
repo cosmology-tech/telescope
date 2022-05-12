@@ -15,7 +15,7 @@ function createBaseModuleDescriptor(): ModuleDescriptor {
 }
 
 export const ModuleDescriptor = {
-  encode(message: ModuleDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.goImport !== "") {
       writer.uint32(10).string(message.goImport);
     }
@@ -110,7 +110,7 @@ function createBasePackageReference(): PackageReference {
 }
 
 export const PackageReference = {
-  encode(message: PackageReference, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PackageReference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -181,7 +181,7 @@ function createBaseMigrateFromInfo(): MigrateFromInfo {
 }
 
 export const MigrateFromInfo = {
-  encode(message: MigrateFromInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MigrateFromInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
     }

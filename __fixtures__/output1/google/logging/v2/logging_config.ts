@@ -29,7 +29,7 @@ function createBaseLogBucket(): LogBucket {
 }
 
 export const LogBucket = {
-  encode(message: LogBucket, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -185,7 +185,7 @@ function createBaseLogView(): LogView {
 }
 
 export const LogView = {
-  encode(message: LogView, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogView, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -306,7 +306,7 @@ function createBaseLogSink(): LogSink {
 }
 
 export const LogSink = {
-  encode(message: LogSink, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogSink, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -532,7 +532,7 @@ function createBaseBigQueryOptions(): BigQueryOptions {
 }
 
 export const BigQueryOptions = {
-  encode(message: BigQueryOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BigQueryOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.usePartitionedTables === true) {
       writer.uint32(8).bool(message.usePartitionedTables);
     }
@@ -607,7 +607,7 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
 }
 
 export const ListBucketsRequest = {
-  encode(message: ListBucketsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListBucketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -691,7 +691,7 @@ function createBaseListBucketsResponse(): ListBucketsResponse {
 }
 
 export const ListBucketsResponse = {
-  encode(message: ListBucketsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListBucketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -772,7 +772,7 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
 }
 
 export const CreateBucketRequest = {
-  encode(message: CreateBucketRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -858,7 +858,7 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
 }
 
 export const UpdateBucketRequest = {
-  encode(message: UpdateBucketRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -940,7 +940,7 @@ function createBaseGetBucketRequest(): GetBucketRequest {
 }
 
 export const GetBucketRequest = {
-  encode(message: GetBucketRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1000,7 +1000,7 @@ function createBaseDeleteBucketRequest(): DeleteBucketRequest {
 }
 
 export const DeleteBucketRequest = {
-  encode(message: DeleteBucketRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1060,7 +1060,7 @@ function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
 }
 
 export const UndeleteBucketRequest = {
-  encode(message: UndeleteBucketRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UndeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1124,7 +1124,7 @@ function createBaseListViewsRequest(): ListViewsRequest {
 }
 
 export const ListViewsRequest = {
-  encode(message: ListViewsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListViewsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1208,7 +1208,7 @@ function createBaseListViewsResponse(): ListViewsResponse {
 }
 
 export const ListViewsResponse = {
-  encode(message: ListViewsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListViewsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1289,7 +1289,7 @@ function createBaseCreateViewRequest(): CreateViewRequest {
 }
 
 export const CreateViewRequest = {
-  encode(message: CreateViewRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1375,7 +1375,7 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
 }
 
 export const UpdateViewRequest = {
-  encode(message: UpdateViewRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1457,7 +1457,7 @@ function createBaseGetViewRequest(): GetViewRequest {
 }
 
 export const GetViewRequest = {
-  encode(message: GetViewRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1517,7 +1517,7 @@ function createBaseDeleteViewRequest(): DeleteViewRequest {
 }
 
 export const DeleteViewRequest = {
-  encode(message: DeleteViewRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1581,7 +1581,7 @@ function createBaseListSinksRequest(): ListSinksRequest {
 }
 
 export const ListSinksRequest = {
-  encode(message: ListSinksRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListSinksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1665,7 +1665,7 @@ function createBaseListSinksResponse(): ListSinksResponse {
 }
 
 export const ListSinksResponse = {
-  encode(message: ListSinksResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListSinksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1742,7 +1742,7 @@ function createBaseGetSinkRequest(): GetSinkRequest {
 }
 
 export const GetSinkRequest = {
-  encode(message: GetSinkRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
@@ -1806,7 +1806,7 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
 }
 
 export const CreateSinkRequest = {
-  encode(message: CreateSinkRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1894,7 +1894,7 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
 }
 
 export const UpdateSinkRequest = {
-  encode(message: UpdateSinkRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
@@ -1987,7 +1987,7 @@ function createBaseDeleteSinkRequest(): DeleteSinkRequest {
 }
 
 export const DeleteSinkRequest = {
-  encode(message: DeleteSinkRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
@@ -2057,7 +2057,7 @@ function createBaseLogExclusion(): LogExclusion {
 }
 
 export const LogExclusion = {
-  encode(message: LogExclusion, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogExclusion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2170,7 +2170,7 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
 }
 
 export const ListExclusionsRequest = {
-  encode(message: ListExclusionsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListExclusionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -2254,7 +2254,7 @@ function createBaseListExclusionsResponse(): ListExclusionsResponse {
 }
 
 export const ListExclusionsResponse = {
-  encode(message: ListExclusionsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListExclusionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2331,7 +2331,7 @@ function createBaseGetExclusionRequest(): GetExclusionRequest {
 }
 
 export const GetExclusionRequest = {
-  encode(message: GetExclusionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2393,7 +2393,7 @@ function createBaseCreateExclusionRequest(): CreateExclusionRequest {
 }
 
 export const CreateExclusionRequest = {
-  encode(message: CreateExclusionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -2468,7 +2468,7 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
 }
 
 export const UpdateExclusionRequest = {
-  encode(message: UpdateExclusionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2550,7 +2550,7 @@ function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
 }
 
 export const DeleteExclusionRequest = {
-  encode(message: DeleteExclusionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2610,7 +2610,7 @@ function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
 }
 
 export const GetCmekSettingsRequest = {
-  encode(message: GetCmekSettingsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2674,7 +2674,7 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
 }
 
 export const UpdateCmekSettingsRequest = {
-  encode(message: UpdateCmekSettingsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2760,7 +2760,7 @@ function createBaseCmekSettings(): CmekSettings {
 }
 
 export const CmekSettings = {
-  encode(message: CmekSettings, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CmekSettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2842,7 +2842,7 @@ function createBaseGetSettingsRequest(): GetSettingsRequest {
 }
 
 export const GetSettingsRequest = {
-  encode(message: GetSettingsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2906,7 +2906,7 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
 }
 
 export const UpdateSettingsRequest = {
-  encode(message: UpdateSettingsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2996,7 +2996,7 @@ function createBaseSettings(): Settings {
 }
 
 export const Settings = {
-  encode(message: Settings, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Settings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3104,7 +3104,7 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
 }
 
 export const CopyLogEntriesRequest = {
-  encode(message: CopyLogEntriesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CopyLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3198,7 +3198,7 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
 }
 
 export const CopyLogEntriesMetadata = {
-  encode(message: CopyLogEntriesMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CopyLogEntriesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
     if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(18).fork()).ldelim();
 
@@ -3319,7 +3319,7 @@ function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
 }
 
 export const CopyLogEntriesResponse = {
-  encode(message: CopyLogEntriesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CopyLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.logEntriesCopiedCount.isZero()) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }

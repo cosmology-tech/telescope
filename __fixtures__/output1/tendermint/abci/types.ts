@@ -44,7 +44,7 @@ function createBaseRequest(): Request {
 }
 
 export const Request = {
-  encode(message: Request, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Request, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.echo !== undefined) {
       RequestEcho.encode(message.echo, writer.uint32(10).fork()).ldelim();
     }
@@ -258,7 +258,7 @@ function createBaseRequestEcho(): RequestEcho {
 }
 
 export const RequestEcho = {
-  encode(message: RequestEcho, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestEcho, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.message !== "") {
       writer.uint32(10).string(message.message);
     }
@@ -314,7 +314,7 @@ function createBaseRequestFlush(): RequestFlush {
 }
 
 export const RequestFlush = {
-  encode(message: RequestFlush, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -366,7 +366,7 @@ function createBaseRequestInfo(): RequestInfo {
 }
 
 export const RequestInfo = {
-  encode(message: RequestInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
@@ -450,7 +450,7 @@ function createBaseRequestSetOption(): RequestSetOption {
 }
 
 export const RequestSetOption = {
-  encode(message: RequestSetOption, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestSetOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -531,7 +531,7 @@ function createBaseRequestInitChain(): RequestInitChain {
 }
 
 export const RequestInitChain = {
-  encode(message: RequestInitChain, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestInitChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.time !== undefined) Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
 
     if (message.chainId !== "") {
@@ -656,7 +656,7 @@ function createBaseRequestQuery(): RequestQuery {
 }
 
 export const RequestQuery = {
-  encode(message: RequestQuery, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestQuery, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -755,7 +755,7 @@ function createBaseRequestBeginBlock(): RequestBeginBlock {
 }
 
 export const RequestBeginBlock = {
-  encode(message: RequestBeginBlock, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestBeginBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
     }
@@ -887,7 +887,7 @@ function createBaseRequestCheckTx(): RequestCheckTx {
 }
 
 export const RequestCheckTx = {
-  encode(message: RequestCheckTx, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestCheckTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
     }
@@ -958,7 +958,7 @@ function createBaseRequestDeliverTx(): RequestDeliverTx {
 }
 
 export const RequestDeliverTx = {
-  encode(message: RequestDeliverTx, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestDeliverTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
     }
@@ -1018,7 +1018,7 @@ function createBaseRequestEndBlock(): RequestEndBlock {
 }
 
 export const RequestEndBlock = {
-  encode(message: RequestEndBlock, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestEndBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
@@ -1074,7 +1074,7 @@ function createBaseRequestCommit(): RequestCommit {
 }
 
 export const RequestCommit = {
-  encode(message: RequestCommit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1118,7 +1118,7 @@ function createBaseRequestListSnapshots(): RequestListSnapshots {
 }
 
 export const RequestListSnapshots = {
-  encode(message: RequestListSnapshots, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestListSnapshots, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1168,7 +1168,7 @@ function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
 }
 
 export const RequestOfferSnapshot = {
-  encode(message: RequestOfferSnapshot, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestOfferSnapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.snapshot !== undefined) {
       Snapshot.encode(message.snapshot, writer.uint32(10).fork()).ldelim();
     }
@@ -1243,7 +1243,7 @@ function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
 }
 
 export const RequestLoadSnapshotChunk = {
-  encode(message: RequestLoadSnapshotChunk, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestLoadSnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).uint64(message.height);
     }
@@ -1329,7 +1329,7 @@ function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
 }
 
 export const RequestApplySnapshotChunk = {
-  encode(message: RequestApplySnapshotChunk, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestApplySnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
@@ -1441,7 +1441,7 @@ function createBaseResponse(): Response {
 }
 
 export const Response = {
-  encode(message: Response, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.exception !== undefined) {
       ResponseException.encode(message.exception, writer.uint32(10).fork()).ldelim();
     }
@@ -1666,7 +1666,7 @@ function createBaseResponseException(): ResponseException {
 }
 
 export const ResponseException = {
-  encode(message: ResponseException, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseException, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.error !== "") {
       writer.uint32(10).string(message.error);
     }
@@ -1726,7 +1726,7 @@ function createBaseResponseEcho(): ResponseEcho {
 }
 
 export const ResponseEcho = {
-  encode(message: ResponseEcho, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseEcho, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.message !== "") {
       writer.uint32(10).string(message.message);
     }
@@ -1782,7 +1782,7 @@ function createBaseResponseFlush(): ResponseFlush {
 }
 
 export const ResponseFlush = {
-  encode(message: ResponseFlush, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1838,7 +1838,7 @@ function createBaseResponseInfo(): ResponseInfo {
 }
 
 export const ResponseInfo = {
-  encode(message: ResponseInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data !== "") {
       writer.uint32(10).string(message.data);
     }
@@ -1946,7 +1946,7 @@ function createBaseResponseSetOption(): ResponseSetOption {
 }
 
 export const ResponseSetOption = {
-  encode(message: ResponseSetOption, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseSetOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
     }
@@ -2032,7 +2032,7 @@ function createBaseResponseInitChain(): ResponseInitChain {
 }
 
 export const ResponseInitChain = {
-  encode(message: ResponseInitChain, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseInitChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusParams !== undefined) {
       ConsensusParams.encode(message.consensusParams, writer.uint32(10).fork()).ldelim();
     }
@@ -2136,7 +2136,7 @@ function createBaseResponseQuery(): ResponseQuery {
 }
 
 export const ResponseQuery = {
-  encode(message: ResponseQuery, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseQuery, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
     }
@@ -2284,7 +2284,7 @@ function createBaseResponseBeginBlock(): ResponseBeginBlock {
 }
 
 export const ResponseBeginBlock = {
-  encode(message: ResponseBeginBlock, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseBeginBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2364,7 +2364,7 @@ function createBaseResponseCheckTx(): ResponseCheckTx {
 }
 
 export const ResponseCheckTx = {
-  encode(message: ResponseCheckTx, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseCheckTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
     }
@@ -2521,7 +2521,7 @@ function createBaseResponseDeliverTx(): ResponseDeliverTx {
 }
 
 export const ResponseDeliverTx = {
-  encode(message: ResponseDeliverTx, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseDeliverTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
     }
@@ -2668,7 +2668,7 @@ function createBaseResponseEndBlock(): ResponseEndBlock {
 }
 
 export const ResponseEndBlock = {
-  encode(message: ResponseEndBlock, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseEndBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validatorUpdates) {
       ValidatorUpdate.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2764,7 +2764,7 @@ function createBaseResponseCommit(): ResponseCommit {
 }
 
 export const ResponseCommit = {
-  encode(message: ResponseCommit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
     }
@@ -2835,7 +2835,7 @@ function createBaseResponseListSnapshots(): ResponseListSnapshots {
 }
 
 export const ResponseListSnapshots = {
-  encode(message: ResponseListSnapshots, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseListSnapshots, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.snapshots) {
       Snapshot.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2901,7 +2901,7 @@ function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
 }
 
 export const ResponseOfferSnapshot = {
-  encode(message: ResponseOfferSnapshot, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseOfferSnapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
     }
@@ -3031,7 +3031,7 @@ function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
 }
 
 export const ResponseLoadSnapshotChunk = {
-  encode(message: ResponseLoadSnapshotChunk, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseLoadSnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chunk.length !== 0) {
       writer.uint32(10).bytes(message.chunk);
     }
@@ -3095,7 +3095,7 @@ function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
 }
 
 export const ResponseApplySnapshotChunk = {
-  encode(message: ResponseApplySnapshotChunk, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResponseApplySnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
     }
@@ -3274,7 +3274,7 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams = {
-  encode(message: ConsensusParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsensusParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
     }
@@ -3369,7 +3369,7 @@ function createBaseBlockParams(): BlockParams {
 }
 
 export const BlockParams = {
-  encode(message: BlockParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.maxBytes.isZero()) {
       writer.uint32(8).int64(message.maxBytes);
     }
@@ -3442,7 +3442,7 @@ function createBaseLastCommitInfo(): LastCommitInfo {
 }
 
 export const LastCommitInfo = {
-  encode(message: LastCommitInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LastCommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.round !== 0) {
       writer.uint32(8).int32(message.round);
     }
@@ -3521,7 +3521,7 @@ function createBaseEvent(): Event {
 }
 
 export const Event = {
-  encode(message: Event, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Event, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -3602,7 +3602,7 @@ function createBaseEventAttribute(): EventAttribute {
 }
 
 export const EventAttribute = {
-  encode(message: EventAttribute, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventAttribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -3690,7 +3690,7 @@ function createBaseTxResult(): TxResult {
 }
 
 export const TxResult = {
-  encode(message: TxResult, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TxResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
@@ -3785,7 +3785,7 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
-  encode(message: Validator, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -3858,7 +3858,7 @@ function createBaseValidatorUpdate(): ValidatorUpdate {
 }
 
 export const ValidatorUpdate = {
-  encode(message: ValidatorUpdate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorUpdate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
@@ -3931,7 +3931,7 @@ function createBaseVoteInfo(): VoteInfo {
 }
 
 export const VoteInfo = {
-  encode(message: VoteInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: VoteInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
     }
@@ -4048,7 +4048,7 @@ function createBaseEvidence(): Evidence {
 }
 
 export const Evidence = {
-  encode(message: Evidence, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Evidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
@@ -4158,7 +4158,7 @@ function createBaseSnapshot(): Snapshot {
 }
 
 export const Snapshot = {
-  encode(message: Snapshot, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Snapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).uint64(message.height);
     }

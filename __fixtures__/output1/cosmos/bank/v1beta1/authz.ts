@@ -12,7 +12,7 @@ function createBaseSendAuthorization(): SendAuthorization {
 }
 
 export const SendAuthorization = {
-  encode(message: SendAuthorization, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SendAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }

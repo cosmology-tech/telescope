@@ -15,7 +15,7 @@ function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
 }
 
 export const QueryAllowanceRequest = {
-  encode(message: QueryAllowanceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllowanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -86,7 +86,7 @@ function createBaseQueryAllowanceResponse(): QueryAllowanceResponse {
 }
 
 export const QueryAllowanceResponse = {
-  encode(message: QueryAllowanceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowance !== undefined) {
       Grant.encode(message.allowance, writer.uint32(10).fork()).ldelim();
     }
@@ -148,7 +148,7 @@ function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
 }
 
 export const QueryAllowancesRequest = {
-  encode(message: QueryAllowancesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllowancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
     }
@@ -221,7 +221,7 @@ function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
 }
 
 export const QueryAllowancesResponse = {
-  encode(message: QueryAllowancesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllowancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -300,7 +300,7 @@ function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRe
 }
 
 export const QueryAllowancesByGranterRequest = {
-  encode(message: QueryAllowancesByGranterRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllowancesByGranterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -373,7 +373,7 @@ function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterR
 }
 
 export const QueryAllowancesByGranterResponse = {
-  encode(message: QueryAllowancesByGranterResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllowancesByGranterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
     }

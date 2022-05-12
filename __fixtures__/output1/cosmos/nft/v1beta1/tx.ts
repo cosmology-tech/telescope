@@ -17,7 +17,7 @@ function createBaseMsgSend(): MsgSend {
 }
 
 export const MsgSend = {
-  encode(message: MsgSend, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -106,7 +106,7 @@ function createBaseMsgSendResponse(): MsgSendResponse {
 }
 
 export const MsgSendResponse = {
-  encode(message: MsgSendResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

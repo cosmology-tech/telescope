@@ -18,7 +18,7 @@ function createBaseMsgJoinPool(): MsgJoinPool {
 }
 
 export const MsgJoinPool = {
-  encode(message: MsgJoinPool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -113,7 +113,7 @@ function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
 }
 
 export const MsgJoinPoolResponse = {
-  encode(message: MsgJoinPoolResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -167,7 +167,7 @@ function createBaseMsgExitPool(): MsgExitPool {
 }
 
 export const MsgExitPool = {
-  encode(message: MsgExitPool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExitPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -262,7 +262,7 @@ function createBaseMsgExitPoolResponse(): MsgExitPoolResponse {
 }
 
 export const MsgExitPoolResponse = {
-  encode(message: MsgExitPoolResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExitPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -312,7 +312,7 @@ function createBaseSwapAmountInRoute(): SwapAmountInRoute {
 }
 
 export const SwapAmountInRoute = {
-  encode(message: SwapAmountInRoute, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SwapAmountInRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -389,7 +389,7 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
 }
 
 export const MsgSwapExactAmountIn = {
-  encode(message: MsgSwapExactAmountIn, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSwapExactAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -488,7 +488,7 @@ function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse 
 }
 
 export const MsgSwapExactAmountInResponse = {
-  encode(message: MsgSwapExactAmountInResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSwapExactAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
     }
@@ -550,7 +550,7 @@ function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
 }
 
 export const SwapAmountOutRoute = {
-  encode(message: SwapAmountOutRoute, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SwapAmountOutRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -627,7 +627,7 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
 }
 
 export const MsgSwapExactAmountOut = {
-  encode(message: MsgSwapExactAmountOut, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSwapExactAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -726,7 +726,7 @@ function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutRespons
 }
 
 export const MsgSwapExactAmountOutResponse = {
-  encode(message: MsgSwapExactAmountOutResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSwapExactAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
     }
@@ -792,7 +792,7 @@ function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
 }
 
 export const MsgJoinSwapExternAmountIn = {
-  encode(message: MsgJoinSwapExternAmountIn, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinSwapExternAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -885,7 +885,7 @@ function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountI
 }
 
 export const MsgJoinSwapExternAmountInResponse = {
-  encode(message: MsgJoinSwapExternAmountInResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinSwapExternAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.shareOutAmount !== "") {
       writer.uint32(10).string(message.shareOutAmount);
     }
@@ -953,7 +953,7 @@ function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
 }
 
 export const MsgJoinSwapShareAmountOut = {
-  encode(message: MsgJoinSwapShareAmountOut, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinSwapShareAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -1057,7 +1057,7 @@ function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOu
 }
 
 export const MsgJoinSwapShareAmountOutResponse = {
-  encode(message: MsgJoinSwapShareAmountOutResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgJoinSwapShareAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
     }
@@ -1125,7 +1125,7 @@ function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
 }
 
 export const MsgExitSwapShareAmountIn = {
-  encode(message: MsgExitSwapShareAmountIn, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExitSwapShareAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -1229,7 +1229,7 @@ function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInR
 }
 
 export const MsgExitSwapShareAmountInResponse = {
-  encode(message: MsgExitSwapShareAmountInResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExitSwapShareAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
     }
@@ -1295,7 +1295,7 @@ function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
 }
 
 export const MsgExitSwapExternAmountOut = {
-  encode(message: MsgExitSwapExternAmountOut, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExitSwapExternAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -1388,7 +1388,7 @@ function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmount
 }
 
 export const MsgExitSwapExternAmountOutResponse = {
-  encode(message: MsgExitSwapExternAmountOutResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExitSwapExternAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.shareInAmount !== "") {
       writer.uint32(10).string(message.shareInAmount);
     }

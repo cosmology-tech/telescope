@@ -17,7 +17,7 @@ function createBaseBasicAllowance(): BasicAllowance {
 }
 
 export const BasicAllowance = {
-  encode(message: BasicAllowance, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BasicAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -99,7 +99,7 @@ function createBasePeriodicAllowance(): PeriodicAllowance {
 }
 
 export const PeriodicAllowance = {
-  encode(message: PeriodicAllowance, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeriodicAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.basic !== undefined) {
       BasicAllowance.encode(message.basic, writer.uint32(10).fork()).ldelim();
     }
@@ -211,7 +211,7 @@ function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
 }
 
 export const AllowedMsgAllowance = {
-  encode(message: AllowedMsgAllowance, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllowedMsgAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowance !== undefined) {
       Any.encode(message.allowance, writer.uint32(10).fork()).ldelim();
     }
@@ -291,7 +291,7 @@ function createBaseGrant(): Grant {
 }
 
 export const Grant = {
-  encode(message: Grant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }

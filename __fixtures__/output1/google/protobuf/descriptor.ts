@@ -11,7 +11,7 @@ function createBaseFileDescriptorSet(): FileDescriptorSet {
 }
 
 export const FileDescriptorSet = {
-  encode(message: FileDescriptorSet, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FileDescriptorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.file) {
       FileDescriptorProto.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -99,7 +99,7 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
 }
 
 export const FileDescriptorProto = {
-  encode(message: FileDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FileDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -354,7 +354,7 @@ function createBaseDescriptorProto(): DescriptorProto {
 }
 
 export const DescriptorProto = {
-  encode(message: DescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -558,7 +558,7 @@ function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRa
 }
 
 export const DescriptorProto_ExtensionRange = {
-  encode(message: DescriptorProto_ExtensionRange, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DescriptorProto_ExtensionRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
     }
@@ -642,7 +642,7 @@ function createBaseDescriptorProto_ReservedRange(): DescriptorProto_ReservedRang
 }
 
 export const DescriptorProto_ReservedRange = {
-  encode(message: DescriptorProto_ReservedRange, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DescriptorProto_ReservedRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
     }
@@ -713,7 +713,7 @@ function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
 }
 
 export const ExtensionRangeOptions = {
-  encode(message: ExtensionRangeOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ExtensionRangeOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
     }
@@ -797,7 +797,7 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
 }
 
 export const FieldDescriptorProto = {
-  encode(message: FieldDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FieldDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1159,7 +1159,7 @@ function createBaseOneofDescriptorProto(): OneofDescriptorProto {
 }
 
 export const OneofDescriptorProto = {
-  encode(message: OneofDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OneofDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1238,7 +1238,7 @@ function createBaseEnumDescriptorProto(): EnumDescriptorProto {
 }
 
 export const EnumDescriptorProto = {
-  encode(message: EnumDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1360,7 +1360,7 @@ function createBaseEnumDescriptorProto_EnumReservedRange(): EnumDescriptorProto_
 }
 
 export const EnumDescriptorProto_EnumReservedRange = {
-  encode(message: EnumDescriptorProto_EnumReservedRange, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumDescriptorProto_EnumReservedRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
     }
@@ -1435,7 +1435,7 @@ function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
 }
 
 export const EnumValueDescriptorProto = {
-  encode(message: EnumValueDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumValueDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1521,7 +1521,7 @@ function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
 }
 
 export const ServiceDescriptorProto = {
-  encode(message: ServiceDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1619,7 +1619,7 @@ function createBaseMethodDescriptorProto(): MethodDescriptorProto {
 }
 
 export const MethodDescriptorProto = {
-  encode(message: MethodDescriptorProto, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MethodDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1774,7 +1774,7 @@ function createBaseFileOptions(): FileOptions {
 }
 
 export const FileOptions = {
-  encode(message: FileOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FileOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.javaPackage !== "") {
       writer.uint32(10).string(message.javaPackage);
     }
@@ -2112,7 +2112,7 @@ function createBaseMessageOptions(): MessageOptions {
 }
 
 export const MessageOptions = {
-  encode(message: MessageOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MessageOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageSetWireFormat === true) {
       writer.uint32(8).bool(message.messageSetWireFormat);
     }
@@ -2234,7 +2234,7 @@ function createBaseFieldOptions(): FieldOptions {
 }
 
 export const FieldOptions = {
-  encode(message: FieldOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FieldOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ctype !== 0) {
       writer.uint32(8).int32(message.ctype);
     }
@@ -2448,7 +2448,7 @@ function createBaseOneofOptions(): OneofOptions {
 }
 
 export const OneofOptions = {
-  encode(message: OneofOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OneofOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
     }
@@ -2518,7 +2518,7 @@ function createBaseEnumOptions(): EnumOptions {
 }
 
 export const EnumOptions = {
-  encode(message: EnumOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowAlias === true) {
       writer.uint32(16).bool(message.allowAlias);
     }
@@ -2608,7 +2608,7 @@ function createBaseEnumValueOptions(): EnumValueOptions {
 }
 
 export const EnumValueOptions = {
-  encode(message: EnumValueOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumValueOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(8).bool(message.deprecated);
     }
@@ -2687,7 +2687,7 @@ function createBaseServiceOptions(): ServiceOptions {
 }
 
 export const ServiceOptions = {
-  encode(message: ServiceOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
     }
@@ -2768,7 +2768,7 @@ function createBaseMethodOptions(): MethodOptions {
 }
 
 export const MethodOptions = {
-  encode(message: MethodOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MethodOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
     }
@@ -2910,7 +2910,7 @@ function createBaseUninterpretedOption(): UninterpretedOption {
 }
 
 export const UninterpretedOption = {
-  encode(message: UninterpretedOption, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UninterpretedOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.name) {
       UninterpretedOption_NamePart.encode(v!, writer.uint32(18).fork()).ldelim();
     }
@@ -3044,7 +3044,7 @@ function createBaseUninterpretedOption_NamePart(): UninterpretedOption_NamePart 
 }
 
 export const UninterpretedOption_NamePart = {
-  encode(message: UninterpretedOption_NamePart, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UninterpretedOption_NamePart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.namePart !== "") {
       writer.uint32(10).string(message.namePart);
     }
@@ -3115,7 +3115,7 @@ function createBaseSourceCodeInfo(): SourceCodeInfo {
 }
 
 export const SourceCodeInfo = {
-  encode(message: SourceCodeInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceCodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.location) {
       SourceCodeInfo_Location.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -3189,7 +3189,7 @@ function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
 }
 
 export const SourceCodeInfo_Location = {
-  encode(message: SourceCodeInfo_Location, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceCodeInfo_Location, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(8).fork();
 
     for (const v of message.path) {
@@ -3330,7 +3330,7 @@ function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {
 }
 
 export const GeneratedCodeInfo = {
-  encode(message: GeneratedCodeInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GeneratedCodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.annotation) {
       GeneratedCodeInfo_Annotation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -3402,7 +3402,7 @@ function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation 
 }
 
 export const GeneratedCodeInfo_Annotation = {
-  encode(message: GeneratedCodeInfo_Annotation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GeneratedCodeInfo_Annotation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(8).fork();
 
     for (const v of message.path) {

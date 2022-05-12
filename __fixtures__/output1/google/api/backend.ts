@@ -11,7 +11,7 @@ function createBaseBackend(): Backend {
 }
 
 export const Backend = {
-  encode(message: Backend, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Backend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       BackendRule.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -93,7 +93,7 @@ function createBaseBackendRule(): BackendRule {
 }
 
 export const BackendRule = {
-  encode(message: BackendRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BackendRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }

@@ -8,7 +8,7 @@ function createBaseQueryConfigRequest(): QueryConfigRequest {
 }
 
 export const QueryConfigRequest = {
-  encode(message: QueryConfigRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -56,7 +56,7 @@ function createBaseQueryConfigResponse(): QueryConfigResponse {
 }
 
 export const QueryConfigResponse = {
-  encode(message: QueryConfigResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.config !== undefined) {
       Config.encode(message.config, writer.uint32(10).fork()).ldelim();
     }

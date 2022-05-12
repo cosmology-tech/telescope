@@ -22,7 +22,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.clients) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -155,7 +155,7 @@ function createBaseGenesisMetadata(): GenesisMetadata {
 }
 
 export const GenesisMetadata = {
-  encode(message: GenesisMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -228,7 +228,7 @@ function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
 }
 
 export const IdentifiedGenesisMetadata = {
-  encode(message: IdentifiedGenesisMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdentifiedGenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }

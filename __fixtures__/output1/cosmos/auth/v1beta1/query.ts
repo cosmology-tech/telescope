@@ -14,7 +14,7 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
 }
 
 export const QueryAccountsRequest = {
-  encode(message: QueryAccountsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -76,7 +76,7 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
 }
 
 export const QueryAccountsResponse = {
-  encode(message: QueryAccountsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -153,7 +153,7 @@ function createBaseQueryAccountRequest(): QueryAccountRequest {
 }
 
 export const QueryAccountRequest = {
-  encode(message: QueryAccountRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -209,7 +209,7 @@ function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
 }
 
 export const QueryModuleAccountsRequest = {
-  encode(message: QueryModuleAccountsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryModuleAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -257,7 +257,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -317,7 +317,7 @@ function createBaseQueryAccountResponse(): QueryAccountResponse {
 }
 
 export const QueryAccountResponse = {
-  encode(message: QueryAccountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
     }
@@ -373,7 +373,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -421,7 +421,7 @@ function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
 }
 
 export const QueryModuleAccountsResponse = {
-  encode(message: QueryModuleAccountsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryModuleAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -483,7 +483,7 @@ function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
 }
 
 export const Bech32PrefixRequest = {
-  encode(message: Bech32PrefixRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Bech32PrefixRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -531,7 +531,7 @@ function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
 }
 
 export const Bech32PrefixResponse = {
-  encode(message: Bech32PrefixResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Bech32PrefixResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bech32Prefix !== "") {
       writer.uint32(10).string(message.bech32Prefix);
     }
@@ -591,7 +591,7 @@ function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
 }
 
 export const AddressBytesToStringRequest = {
-  encode(message: AddressBytesToStringRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AddressBytesToStringRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
     }
@@ -651,7 +651,7 @@ function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse 
 }
 
 export const AddressBytesToStringResponse = {
-  encode(message: AddressBytesToStringResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AddressBytesToStringResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
     }
@@ -711,7 +711,7 @@ function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
 }
 
 export const AddressStringToBytesRequest = {
-  encode(message: AddressStringToBytesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AddressStringToBytesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
     }
@@ -771,7 +771,7 @@ function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse 
 }
 
 export const AddressStringToBytesResponse = {
-  encode(message: AddressStringToBytesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AddressStringToBytesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
     }

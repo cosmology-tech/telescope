@@ -13,7 +13,7 @@ function createBaseDuration(): Duration {
 }
 
 export const Duration = {
-  encode(message: Duration, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.seconds.isZero()) {
       writer.uint32(8).int64(message.seconds);
     }

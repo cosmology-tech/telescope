@@ -23,7 +23,7 @@ function createBaseQuoteReport(): QuoteReport {
 }
 
 export const QuoteReport = {
-  encode(message: QuoteReport, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuoteReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -158,7 +158,7 @@ function createBaseQuoteReportBody(): QuoteReportBody {
 }
 
 export const QuoteReportBody = {
-  encode(message: QuoteReportBody, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuoteReportBody, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mrEnclave !== "") {
       writer.uint32(10).string(message.mrEnclave);
     }
@@ -244,7 +244,7 @@ function createBaseQuoteReportData(): QuoteReportData {
 }
 
 export const QuoteReportData = {
-  encode(message: QuoteReportData, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuoteReportData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.version.isZero()) {
       writer.uint32(8).uint64(message.version);
     }
@@ -330,7 +330,7 @@ function createBaseEndorsedAttestationReport(): EndorsedAttestationReport {
 }
 
 export const EndorsedAttestationReport = {
-  encode(message: EndorsedAttestationReport, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EndorsedAttestationReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.report.length !== 0) {
       writer.uint32(10).bytes(message.report);
     }
@@ -414,7 +414,7 @@ function createBaseSGXEC256Signature(): SGXEC256Signature {
 }
 
 export const SGXEC256Signature = {
-  encode(message: SGXEC256Signature, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SGXEC256Signature, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gx !== "") {
       writer.uint32(10).string(message.gx);
     }
@@ -501,7 +501,7 @@ function createBasePlatformInfoBlob(): PlatformInfoBlob {
 }
 
 export const PlatformInfoBlob = {
-  encode(message: PlatformInfoBlob, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PlatformInfoBlob, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sgxEpidGroupFlags !== 0) {
       writer.uint32(8).uint32(message.sgxEpidGroupFlags);
     }

@@ -27,7 +27,7 @@ function createBaseMsgCreateValidator(): MsgCreateValidator {
 }
 
 export const MsgCreateValidator = {
-  encode(message: MsgCreateValidator, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(10).fork()).ldelim();
     }
@@ -149,7 +149,7 @@ function createBaseMsgCreateValidatorResponse(): MsgCreateValidatorResponse {
 }
 
 export const MsgCreateValidatorResponse = {
-  encode(message: MsgCreateValidatorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -203,7 +203,7 @@ function createBaseMsgEditValidator(): MsgEditValidator {
 }
 
 export const MsgEditValidator = {
-  encode(message: MsgEditValidator, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgEditValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(10).fork()).ldelim();
     }
@@ -292,7 +292,7 @@ function createBaseMsgEditValidatorResponse(): MsgEditValidatorResponse {
 }
 
 export const MsgEditValidatorResponse = {
-  encode(message: MsgEditValidatorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgEditValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -344,7 +344,7 @@ function createBaseMsgDelegate(): MsgDelegate {
 }
 
 export const MsgDelegate = {
-  encode(message: MsgDelegate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -422,7 +422,7 @@ function createBaseMsgDelegateResponse(): MsgDelegateResponse {
 }
 
 export const MsgDelegateResponse = {
-  encode(message: MsgDelegateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -476,7 +476,7 @@ function createBaseMsgBeginRedelegate(): MsgBeginRedelegate {
 }
 
 export const MsgBeginRedelegate = {
-  encode(message: MsgBeginRedelegate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginRedelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -569,7 +569,7 @@ function createBaseMsgBeginRedelegateResponse(): MsgBeginRedelegateResponse {
 }
 
 export const MsgBeginRedelegateResponse = {
-  encode(message: MsgBeginRedelegateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginRedelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.completionTime !== undefined) Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
     return writer;
   },
@@ -630,7 +630,7 @@ function createBaseMsgUndelegate(): MsgUndelegate {
 }
 
 export const MsgUndelegate = {
-  encode(message: MsgUndelegate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUndelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -712,7 +712,7 @@ function createBaseMsgUndelegateResponse(): MsgUndelegateResponse {
 }
 
 export const MsgUndelegateResponse = {
-  encode(message: MsgUndelegateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.completionTime !== undefined) Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
     return writer;
   },

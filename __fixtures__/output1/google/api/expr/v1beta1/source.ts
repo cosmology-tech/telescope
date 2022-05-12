@@ -13,7 +13,7 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 }
 
 export const SourceInfo_PositionsEntry = {
-  encode(message: SourceInfo_PositionsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceInfo_PositionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== 0) {
       writer.uint32(8).int32(message.key);
     }
@@ -90,7 +90,7 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
-  encode(message: SourceInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(18).string(message.location);
     }
@@ -221,7 +221,7 @@ function createBaseSourcePosition(): SourcePosition {
 }
 
 export const SourcePosition = {
-  encode(message: SourcePosition, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourcePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }

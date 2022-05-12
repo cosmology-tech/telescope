@@ -16,7 +16,7 @@ function createBaseProtocolVersion(): ProtocolVersion {
 }
 
 export const ProtocolVersion = {
-  encode(message: ProtocolVersion, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ProtocolVersion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.p2p.isZero()) {
       writer.uint32(8).uint64(message.p2p);
     }
@@ -112,7 +112,7 @@ function createBaseNodeInfo(): NodeInfo {
 }
 
 export const NodeInfo = {
-  encode(message: NodeInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: NodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.protocolVersion !== undefined) {
       ProtocolVersion.encode(message.protocolVersion, writer.uint32(10).fork()).ldelim();
     }
@@ -251,7 +251,7 @@ function createBaseNodeInfoOther(): NodeInfoOther {
 }
 
 export const NodeInfoOther = {
-  encode(message: NodeInfoOther, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: NodeInfoOther, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txIndex !== "") {
       writer.uint32(10).string(message.txIndex);
     }
@@ -326,7 +326,7 @@ function createBasePeerInfo(): PeerInfo {
 }
 
 export const PeerInfo = {
-  encode(message: PeerInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -417,7 +417,7 @@ function createBasePeerAddressInfo(): PeerAddressInfo {
 }
 
 export const PeerAddressInfo = {
-  encode(message: PeerAddressInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeerAddressInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }

@@ -14,7 +14,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
     }
@@ -85,7 +85,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.param !== undefined) {
       ParamChange.encode(message.param, writer.uint32(10).fork()).ldelim();
     }
@@ -141,7 +141,7 @@ function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
 }
 
 export const QuerySubspacesRequest = {
-  encode(message: QuerySubspacesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySubspacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -189,7 +189,7 @@ function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
 }
 
 export const QuerySubspacesResponse = {
-  encode(message: QuerySubspacesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySubspacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.subspaces) {
       Subspace.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -257,7 +257,7 @@ function createBaseSubspace(): Subspace {
 }
 
 export const Subspace = {
-  encode(message: Subspace, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Subspace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
     }

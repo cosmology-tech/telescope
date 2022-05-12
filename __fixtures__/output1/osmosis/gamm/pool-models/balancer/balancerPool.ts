@@ -16,7 +16,7 @@ function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
 }
 
 export const SmoothWeightChangeParams = {
-  encode(message: SmoothWeightChangeParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SmoothWeightChangeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
     if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     return writer;
@@ -85,7 +85,7 @@ function createBasePoolParams(): PoolParams {
 }
 
 export const PoolParams = {
-  encode(message: PoolParams, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
       writer.uint32(10).string(message.swapFee);
     }
@@ -169,7 +169,7 @@ function createBasePoolAsset(): PoolAsset {
 }
 
 export const PoolAsset = {
-  encode(message: PoolAsset, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(10).fork()).ldelim();
     }
@@ -250,7 +250,7 @@ function createBasePool(): Pool {
 }
 
 export const Pool = {
-  encode(message: Pool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }

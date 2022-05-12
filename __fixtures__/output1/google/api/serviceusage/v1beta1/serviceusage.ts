@@ -13,7 +13,7 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 }
 
 export const EnableServiceRequest = {
-  encode(message: EnableServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnableServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -73,7 +73,7 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 }
 
 export const DisableServiceRequest = {
-  encode(message: DisableServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DisableServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -133,7 +133,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 
 export const GetServiceRequest = {
-  encode(message: GetServiceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -199,7 +199,7 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 
 export const ListServicesRequest = {
-  encode(message: ListServicesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -294,7 +294,7 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 
 export const ListServicesResponse = {
-  encode(message: ListServicesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -373,7 +373,7 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 }
 
 export const BatchEnableServicesRequest = {
-  encode(message: BatchEnableServicesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BatchEnableServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -455,7 +455,7 @@ function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRe
 }
 
 export const ListConsumerQuotaMetricsRequest = {
-  encode(message: ListConsumerQuotaMetricsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListConsumerQuotaMetricsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -550,7 +550,7 @@ function createBaseListConsumerQuotaMetricsResponse(): ListConsumerQuotaMetricsR
 }
 
 export const ListConsumerQuotaMetricsResponse = {
-  encode(message: ListConsumerQuotaMetricsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListConsumerQuotaMetricsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.metrics) {
       ConsumerQuotaMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -629,7 +629,7 @@ function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricReques
 }
 
 export const GetConsumerQuotaMetricRequest = {
-  encode(message: GetConsumerQuotaMetricRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetConsumerQuotaMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -702,7 +702,7 @@ function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest 
 }
 
 export const GetConsumerQuotaLimitRequest = {
-  encode(message: GetConsumerQuotaLimitRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetConsumerQuotaLimitRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -779,7 +779,7 @@ function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
 }
 
 export const CreateAdminOverrideRequest = {
-  encode(message: CreateAdminOverrideRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateAdminOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -896,7 +896,7 @@ function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
 }
 
 export const UpdateAdminOverrideRequest = {
-  encode(message: UpdateAdminOverrideRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateAdminOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1020,7 +1020,7 @@ function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
 }
 
 export const DeleteAdminOverrideRequest = {
-  encode(message: DeleteAdminOverrideRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteAdminOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1122,7 +1122,7 @@ function createBaseListAdminOverridesRequest(): ListAdminOverridesRequest {
 }
 
 export const ListAdminOverridesRequest = {
-  encode(message: ListAdminOverridesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListAdminOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1206,7 +1206,7 @@ function createBaseListAdminOverridesResponse(): ListAdminOverridesResponse {
 }
 
 export const ListAdminOverridesResponse = {
-  encode(message: ListAdminOverridesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListAdminOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1283,7 +1283,7 @@ function createBaseBatchCreateAdminOverridesResponse(): BatchCreateAdminOverride
 }
 
 export const BatchCreateAdminOverridesResponse = {
-  encode(message: BatchCreateAdminOverridesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BatchCreateAdminOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1355,7 +1355,7 @@ function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
 }
 
 export const ImportAdminOverridesRequest = {
-  encode(message: ImportAdminOverridesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportAdminOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1464,7 +1464,7 @@ function createBaseImportAdminOverridesResponse(): ImportAdminOverridesResponse 
 }
 
 export const ImportAdminOverridesResponse = {
-  encode(message: ImportAdminOverridesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportAdminOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1526,7 +1526,7 @@ function createBaseImportAdminOverridesMetadata(): ImportAdminOverridesMetadata 
 }
 
 export const ImportAdminOverridesMetadata = {
-  encode(message: ImportAdminOverridesMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportAdminOverridesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1580,7 +1580,7 @@ function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideReques
 }
 
 export const CreateConsumerOverrideRequest = {
-  encode(message: CreateConsumerOverrideRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateConsumerOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -1697,7 +1697,7 @@ function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideReques
 }
 
 export const UpdateConsumerOverrideRequest = {
-  encode(message: UpdateConsumerOverrideRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateConsumerOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1821,7 +1821,7 @@ function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideReques
 }
 
 export const DeleteConsumerOverrideRequest = {
-  encode(message: DeleteConsumerOverrideRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteConsumerOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1923,7 +1923,7 @@ function createBaseListConsumerOverridesRequest(): ListConsumerOverridesRequest 
 }
 
 export const ListConsumerOverridesRequest = {
-  encode(message: ListConsumerOverridesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListConsumerOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -2007,7 +2007,7 @@ function createBaseListConsumerOverridesResponse(): ListConsumerOverridesRespons
 }
 
 export const ListConsumerOverridesResponse = {
-  encode(message: ListConsumerOverridesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListConsumerOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2084,7 +2084,7 @@ function createBaseBatchCreateConsumerOverridesResponse(): BatchCreateConsumerOv
 }
 
 export const BatchCreateConsumerOverridesResponse = {
-  encode(message: BatchCreateConsumerOverridesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BatchCreateConsumerOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2156,7 +2156,7 @@ function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequ
 }
 
 export const ImportConsumerOverridesRequest = {
-  encode(message: ImportConsumerOverridesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportConsumerOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -2265,7 +2265,7 @@ function createBaseImportConsumerOverridesResponse(): ImportConsumerOverridesRes
 }
 
 export const ImportConsumerOverridesResponse = {
-  encode(message: ImportConsumerOverridesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportConsumerOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2327,7 +2327,7 @@ function createBaseImportConsumerOverridesMetadata(): ImportConsumerOverridesMet
 }
 
 export const ImportConsumerOverridesMetadata = {
-  encode(message: ImportConsumerOverridesMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportConsumerOverridesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2375,7 +2375,7 @@ function createBaseImportAdminQuotaPoliciesResponse(): ImportAdminQuotaPoliciesR
 }
 
 export const ImportAdminQuotaPoliciesResponse = {
-  encode(message: ImportAdminQuotaPoliciesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportAdminQuotaPoliciesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.policies) {
       AdminQuotaPolicy.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2437,7 +2437,7 @@ function createBaseImportAdminQuotaPoliciesMetadata(): ImportAdminQuotaPoliciesM
 }
 
 export const ImportAdminQuotaPoliciesMetadata = {
-  encode(message: ImportAdminQuotaPoliciesMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ImportAdminQuotaPoliciesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2481,7 +2481,7 @@ function createBaseCreateAdminQuotaPolicyMetadata(): CreateAdminQuotaPolicyMetad
 }
 
 export const CreateAdminQuotaPolicyMetadata = {
-  encode(message: CreateAdminQuotaPolicyMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateAdminQuotaPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2525,7 +2525,7 @@ function createBaseUpdateAdminQuotaPolicyMetadata(): UpdateAdminQuotaPolicyMetad
 }
 
 export const UpdateAdminQuotaPolicyMetadata = {
-  encode(message: UpdateAdminQuotaPolicyMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateAdminQuotaPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2569,7 +2569,7 @@ function createBaseDeleteAdminQuotaPolicyMetadata(): DeleteAdminQuotaPolicyMetad
 }
 
 export const DeleteAdminQuotaPolicyMetadata = {
-  encode(message: DeleteAdminQuotaPolicyMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteAdminQuotaPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2617,7 +2617,7 @@ function createBaseGenerateServiceIdentityRequest(): GenerateServiceIdentityRequ
 }
 
 export const GenerateServiceIdentityRequest = {
-  encode(message: GenerateServiceIdentityRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenerateServiceIdentityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -2679,7 +2679,7 @@ function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
 }
 
 export const GetServiceIdentityResponse = {
-  encode(message: GetServiceIdentityResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetServiceIdentityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identity !== undefined) {
       ServiceIdentity.encode(message.identity, writer.uint32(10).fork()).ldelim();
     }
@@ -2781,7 +2781,7 @@ function createBaseGetServiceIdentityMetadata(): GetServiceIdentityMetadata {
 }
 
 export const GetServiceIdentityMetadata = {
-  encode(message: GetServiceIdentityMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetServiceIdentityMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

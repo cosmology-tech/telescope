@@ -17,7 +17,7 @@ function createBaseMsgGrant(): MsgGrant {
 }
 
 export const MsgGrant = {
-  encode(message: MsgGrant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -99,7 +99,7 @@ function createBaseMsgExecResponse(): MsgExecResponse {
 }
 
 export const MsgExecResponse = {
-  encode(message: MsgExecResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.results) {
       writer.uint32(10).bytes(v!);
     }
@@ -166,7 +166,7 @@ function createBaseMsgExec(): MsgExec {
 }
 
 export const MsgExec = {
-  encode(message: MsgExec, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
     }
@@ -239,7 +239,7 @@ function createBaseMsgGrantResponse(): MsgGrantResponse {
 }
 
 export const MsgGrantResponse = {
-  encode(message: MsgGrantResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgGrantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -291,7 +291,7 @@ function createBaseMsgRevoke(): MsgRevoke {
 }
 
 export const MsgRevoke = {
-  encode(message: MsgRevoke, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -369,7 +369,7 @@ function createBaseMsgRevokeResponse(): MsgRevokeResponse {
 }
 
 export const MsgRevokeResponse = {
-  encode(message: MsgRevokeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRevokeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

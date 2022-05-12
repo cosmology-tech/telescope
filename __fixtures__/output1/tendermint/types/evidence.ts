@@ -16,7 +16,7 @@ function createBaseEvidence(): Evidence {
 }
 
 export const Evidence = {
-  encode(message: Evidence, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Evidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.duplicateVoteEvidence !== undefined) {
       DuplicateVoteEvidence.encode(message.duplicateVoteEvidence, writer.uint32(10).fork()).ldelim();
     }
@@ -95,7 +95,7 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
 }
 
 export const DuplicateVoteEvidence = {
-  encode(message: DuplicateVoteEvidence, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DuplicateVoteEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.voteA !== undefined) {
       Vote.encode(message.voteA, writer.uint32(10).fork()).ldelim();
     }
@@ -204,7 +204,7 @@ function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
 }
 
 export const LightClientAttackEvidence = {
-  encode(message: LightClientAttackEvidence, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LightClientAttackEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.conflictingBlock !== undefined) {
       LightBlock.encode(message.conflictingBlock, writer.uint32(10).fork()).ldelim();
     }
@@ -311,7 +311,7 @@ function createBaseEvidenceList(): EvidenceList {
 }
 
 export const EvidenceList = {
-  encode(message: EvidenceList, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvidenceList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.evidence) {
       Evidence.encode(v!, writer.uint32(10).fork()).ldelim();
     }

@@ -21,7 +21,7 @@ function createBasePlan(): Plan {
 }
 
 export const Plan = {
-  encode(message: Plan, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Plan, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -127,7 +127,7 @@ function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
 }
 
 export const SoftwareUpgradeProposal = {
-  encode(message: SoftwareUpgradeProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SoftwareUpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -211,7 +211,7 @@ function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposa
 }
 
 export const CancelSoftwareUpgradeProposal = {
-  encode(message: CancelSoftwareUpgradeProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CancelSoftwareUpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -284,7 +284,7 @@ function createBaseModuleVersion(): ModuleVersion {
 }
 
 export const ModuleVersion = {
-  encode(message: ModuleVersion, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleVersion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

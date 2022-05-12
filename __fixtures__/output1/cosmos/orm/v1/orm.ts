@@ -15,7 +15,7 @@ function createBaseTableDescriptor(): TableDescriptor {
 }
 
 export const TableDescriptor = {
-  encode(message: TableDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TableDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.primaryKey !== undefined) {
       PrimaryKeyDescriptor.encode(message.primaryKey, writer.uint32(10).fork()).ldelim();
     }
@@ -105,7 +105,7 @@ function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
 }
 
 export const PrimaryKeyDescriptor = {
-  encode(message: PrimaryKeyDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PrimaryKeyDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
@@ -180,7 +180,7 @@ function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
 }
 
 export const SecondaryIndexDescriptor = {
-  encode(message: SecondaryIndexDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SecondaryIndexDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
@@ -262,7 +262,7 @@ function createBaseSingletonDescriptor(): SingletonDescriptor {
 }
 
 export const SingletonDescriptor = {
-  encode(message: SingletonDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SingletonDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
     }

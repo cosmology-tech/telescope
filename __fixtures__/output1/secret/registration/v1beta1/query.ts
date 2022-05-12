@@ -11,7 +11,7 @@ function createBaseQueryEncryptedSeedRequest(): QueryEncryptedSeedRequest {
 }
 
 export const QueryEncryptedSeedRequest = {
-  encode(message: QueryEncryptedSeedRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryEncryptedSeedRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey.length !== 0) {
       writer.uint32(10).bytes(message.pubKey);
     }
@@ -71,7 +71,7 @@ function createBaseQueryEncryptedSeedResponse(): QueryEncryptedSeedResponse {
 }
 
 export const QueryEncryptedSeedResponse = {
-  encode(message: QueryEncryptedSeedResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryEncryptedSeedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.encryptedSeed.length !== 0) {
       writer.uint32(10).bytes(message.encryptedSeed);
     }

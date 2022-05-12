@@ -8,7 +8,7 @@ function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
 }
 
 export const QueryFeeTokensRequest = {
-  encode(message: QueryFeeTokensRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryFeeTokensRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -56,7 +56,7 @@ function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
 }
 
 export const QueryFeeTokensResponse = {
-  encode(message: QueryFeeTokensResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryFeeTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.feeTokens) {
       FeeToken.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -122,7 +122,7 @@ function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
 }
 
 export const QueryDenomPoolIdRequest = {
-  encode(message: QueryDenomPoolIdRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDenomPoolIdRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -182,7 +182,7 @@ function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
 }
 
 export const QueryDenomPoolIdResponse = {
-  encode(message: QueryDenomPoolIdResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDenomPoolIdResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolID.isZero()) {
       writer.uint32(8).uint64(message.poolID);
     }
@@ -238,7 +238,7 @@ function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
 }
 
 export const QueryBaseDenomRequest = {
-  encode(message: QueryBaseDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBaseDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -286,7 +286,7 @@ function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
 }
 
 export const QueryBaseDenomResponse = {
-  encode(message: QueryBaseDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBaseDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseDenom !== "") {
       writer.uint32(10).string(message.baseDenom);
     }

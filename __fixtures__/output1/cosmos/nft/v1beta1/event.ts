@@ -17,7 +17,7 @@ function createBaseEventSend(): EventSend {
 }
 
 export const EventSend = {
-  encode(message: EventSend, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -114,7 +114,7 @@ function createBaseEventMint(): EventMint {
 }
 
 export const EventMint = {
-  encode(message: EventMint, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -200,7 +200,7 @@ function createBaseEventBurn(): EventBurn {
 }
 
 export const EventBurn = {
-  encode(message: EventBurn, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventBurn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }

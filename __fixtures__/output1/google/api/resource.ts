@@ -23,7 +23,7 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
 }
 
 export const ResourceDescriptor = {
-  encode(message: ResourceDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -259,7 +259,7 @@ function createBaseResourceReference(): ResourceReference {
 }
 
 export const ResourceReference = {
-  encode(message: ResourceReference, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResourceReference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }

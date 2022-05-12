@@ -18,7 +18,7 @@ function createBaseMsgStoreCode(): MsgStoreCode {
 }
 
 export const MsgStoreCode = {
-  encode(message: MsgStoreCode, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgStoreCode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender.length !== 0) {
       writer.uint32(10).bytes(message.sender);
     }
@@ -123,7 +123,7 @@ function createBaseMsgInstantiateContract(): MsgInstantiateContract {
 }
 
 export const MsgInstantiateContract = {
-  encode(message: MsgInstantiateContract, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgInstantiateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender.length !== 0) {
       writer.uint32(10).bytes(message.sender);
     }
@@ -265,7 +265,7 @@ function createBaseMsgExecuteContract(): MsgExecuteContract {
 }
 
 export const MsgExecuteContract = {
-  encode(message: MsgExecuteContract, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExecuteContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender.length !== 0) {
       writer.uint32(10).bytes(message.sender);
     }

@@ -13,7 +13,7 @@ function createBaseGenericAuthorization(): GenericAuthorization {
 }
 
 export const GenericAuthorization = {
-  encode(message: GenericAuthorization, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenericAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msg !== "") {
       writer.uint32(10).string(message.msg);
     }
@@ -75,7 +75,7 @@ function createBaseGrant(): Grant {
 }
 
 export const Grant = {
-  encode(message: Grant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authorization !== undefined) {
       Any.encode(message.authorization, writer.uint32(10).fork()).ldelim();
     }
@@ -149,7 +149,7 @@ function createBaseGrantAuthorization(): GrantAuthorization {
 }
 
 export const GrantAuthorization = {
-  encode(message: GrantAuthorization, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GrantAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -239,7 +239,7 @@ function createBaseGrantQueueItem(): GrantQueueItem {
 }
 
 export const GrantQueueItem = {
-  encode(message: GrantQueueItem, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GrantQueueItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.msgTypeUrls) {
       writer.uint32(10).string(v!);
     }

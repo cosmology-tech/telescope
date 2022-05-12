@@ -17,7 +17,7 @@ function createBaseMsgIBCSend(): MsgIBCSend {
 }
 
 export const MsgIBCSend = {
-  encode(message: MsgIBCSend, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgIBCSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== "") {
       writer.uint32(18).string(message.channel);
     }
@@ -110,7 +110,7 @@ function createBaseMsgIBCCloseChannel(): MsgIBCCloseChannel {
 }
 
 export const MsgIBCCloseChannel = {
-  encode(message: MsgIBCCloseChannel, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgIBCCloseChannel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== "") {
       writer.uint32(18).string(message.channel);
     }

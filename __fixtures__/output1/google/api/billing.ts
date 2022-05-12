@@ -11,7 +11,7 @@ function createBaseBilling(): Billing {
 }
 
 export const Billing = {
-  encode(message: Billing, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Billing, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.consumerDestinations) {
       Billing_BillingDestination.encode(v!, writer.uint32(66).fork()).ldelim();
     }
@@ -79,7 +79,7 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
 }
 
 export const Billing_BillingDestination = {
-  encode(message: Billing_BillingDestination, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Billing_BillingDestination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
     }

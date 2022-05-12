@@ -37,7 +37,7 @@ function createBaseTxResponse(): TxResponse {
 }
 
 export const TxResponse = {
-  encode(message: TxResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
@@ -245,7 +245,7 @@ function createBaseABCIMessageLog(): ABCIMessageLog {
 }
 
 export const ABCIMessageLog = {
-  encode(message: ABCIMessageLog, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ABCIMessageLog, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgIndex !== 0) {
       writer.uint32(8).uint32(message.msgIndex);
     }
@@ -335,7 +335,7 @@ function createBaseStringEvent(): StringEvent {
 }
 
 export const StringEvent = {
-  encode(message: StringEvent, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StringEvent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -414,7 +414,7 @@ function createBaseAttribute(): Attribute {
 }
 
 export const Attribute = {
-  encode(message: Attribute, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Attribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -487,7 +487,7 @@ function createBaseGasInfo(): GasInfo {
 }
 
 export const GasInfo = {
-  encode(message: GasInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GasInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gasWanted.isZero()) {
       writer.uint32(8).uint64(message.gasWanted);
     }
@@ -564,7 +564,7 @@ function createBaseResult(): Result {
 }
 
 export const Result = {
-  encode(message: Result, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -670,7 +670,7 @@ function createBaseSimulationResponse(): SimulationResponse {
 }
 
 export const SimulationResponse = {
-  encode(message: SimulationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SimulationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -743,7 +743,7 @@ function createBaseMsgData(): MsgData {
 }
 
 export const MsgData = {
-  encode(message: MsgData, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgType !== "") {
       writer.uint32(10).string(message.msgType);
     }
@@ -816,7 +816,7 @@ function createBaseTxMsgData(): TxMsgData {
 }
 
 export const TxMsgData = {
-  encode(message: TxMsgData, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TxMsgData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       MsgData.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -908,7 +908,7 @@ function createBaseSearchTxsResult(): SearchTxsResult {
 }
 
 export const SearchTxsResult = {
-  encode(message: SearchTxsResult, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SearchTxsResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.totalCount.isZero()) {
       writer.uint32(8).uint64(message.totalCount);
     }

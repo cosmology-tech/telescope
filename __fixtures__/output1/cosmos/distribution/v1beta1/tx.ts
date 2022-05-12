@@ -14,7 +14,7 @@ function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
 }
 
 export const MsgSetWithdrawAddress = {
-  encode(message: MsgSetWithdrawAddress, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetWithdrawAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -81,7 +81,7 @@ function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressRespons
 }
 
 export const MsgSetWithdrawAddressResponse = {
-  encode(message: MsgSetWithdrawAddressResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -131,7 +131,7 @@ function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
 }
 
 export const MsgWithdrawDelegatorReward = {
-  encode(message: MsgWithdrawDelegatorReward, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawDelegatorReward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -202,7 +202,7 @@ function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRew
 }
 
 export const MsgWithdrawDelegatorRewardResponse = {
-  encode(message: MsgWithdrawDelegatorRewardResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawDelegatorRewardResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -268,7 +268,7 @@ function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommiss
 }
 
 export const MsgWithdrawValidatorCommission = {
-  encode(message: MsgWithdrawValidatorCommission, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawValidatorCommission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -328,7 +328,7 @@ function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidato
 }
 
 export const MsgWithdrawValidatorCommissionResponse = {
-  encode(message: MsgWithdrawValidatorCommissionResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawValidatorCommissionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -396,7 +396,7 @@ function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
 }
 
 export const MsgFundCommunityPool = {
-  encode(message: MsgFundCommunityPool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgFundCommunityPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -469,7 +469,7 @@ function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse 
 }
 
 export const MsgFundCommunityPoolResponse = {
-  encode(message: MsgFundCommunityPoolResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgFundCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

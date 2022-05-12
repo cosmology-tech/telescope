@@ -16,7 +16,7 @@ function createBaseParsedExpr(): ParsedExpr {
 }
 
 export const ParsedExpr = {
-  encode(message: ParsedExpr, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParsedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(18).fork()).ldelim();
     }
@@ -101,7 +101,7 @@ function createBaseExpr(): Expr {
 }
 
 export const Expr = {
-  encode(message: Expr, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(16).int64(message.id);
     }
@@ -238,7 +238,7 @@ function createBaseExpr_Ident(): Expr_Ident {
 }
 
 export const Expr_Ident = {
-  encode(message: Expr_Ident, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_Ident, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -302,7 +302,7 @@ function createBaseExpr_Select(): Expr_Select {
 }
 
 export const Expr_Select = {
-  encode(message: Expr_Select, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_Select, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
     }
@@ -388,7 +388,7 @@ function createBaseExpr_Call(): Expr_Call {
 }
 
 export const Expr_Call = {
-  encode(message: Expr_Call, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_Call, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
     }
@@ -476,7 +476,7 @@ function createBaseExpr_CreateList(): Expr_CreateList {
 }
 
 export const Expr_CreateList = {
-  encode(message: Expr_CreateList, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_CreateList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.elements) {
       Expr.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -544,7 +544,7 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
 }
 
 export const Expr_CreateStruct = {
-  encode(message: Expr_CreateStruct, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_CreateStruct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
     }
@@ -627,7 +627,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 }
 
 export const Expr_CreateStruct_Entry = {
-  encode(message: Expr_CreateStruct_Entry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_CreateStruct_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
     }
@@ -732,7 +732,7 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 }
 
 export const Expr_Comprehension = {
-  encode(message: Expr_Comprehension, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Expr_Comprehension, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.iterVar !== "") {
       writer.uint32(10).string(message.iterVar);
     }
@@ -874,7 +874,7 @@ function createBaseConstant(): Constant {
 }
 
 export const Constant = {
-  encode(message: Constant, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
@@ -1018,7 +1018,7 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 }
 
 export const SourceInfo_PositionsEntry = {
-  encode(message: SourceInfo_PositionsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceInfo_PositionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -1091,7 +1091,7 @@ function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
 }
 
 export const SourceInfo_MacroCallsEntry = {
-  encode(message: SourceInfo_MacroCallsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceInfo_MacroCallsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -1174,7 +1174,7 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
-  encode(message: SourceInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syntaxVersion !== "") {
       writer.uint32(10).string(message.syntaxVersion);
     }
@@ -1354,7 +1354,7 @@ function createBaseSourcePosition(): SourcePosition {
 }
 
 export const SourcePosition = {
-  encode(message: SourcePosition, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SourcePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }

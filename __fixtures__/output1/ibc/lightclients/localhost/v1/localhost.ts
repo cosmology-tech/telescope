@@ -14,7 +14,7 @@ function createBaseClientState(): ClientState {
 }
 
 export const ClientState = {
-  encode(message: ClientState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }

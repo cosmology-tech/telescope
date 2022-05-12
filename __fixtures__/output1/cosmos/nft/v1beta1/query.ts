@@ -15,7 +15,7 @@ function createBaseQueryBalanceRequest(): QueryBalanceRequest {
 }
 
 export const QueryBalanceRequest = {
-  encode(message: QueryBalanceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -86,7 +86,7 @@ function createBaseQueryBalanceResponse(): QueryBalanceResponse {
 }
 
 export const QueryBalanceResponse = {
-  encode(message: QueryBalanceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.amount.isZero()) {
       writer.uint32(8).uint64(message.amount);
     }
@@ -148,7 +148,7 @@ function createBaseQueryOwnerRequest(): QueryOwnerRequest {
 }
 
 export const QueryOwnerRequest = {
-  encode(message: QueryOwnerRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryOwnerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -219,7 +219,7 @@ function createBaseQueryOwnerResponse(): QueryOwnerResponse {
 }
 
 export const QueryOwnerResponse = {
-  encode(message: QueryOwnerResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryOwnerResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -279,7 +279,7 @@ function createBaseQuerySupplyRequest(): QuerySupplyRequest {
 }
 
 export const QuerySupplyRequest = {
-  encode(message: QuerySupplyRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -339,7 +339,7 @@ function createBaseQuerySupplyResponse(): QuerySupplyResponse {
 }
 
 export const QuerySupplyResponse = {
-  encode(message: QuerySupplyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.amount.isZero()) {
       writer.uint32(8).uint64(message.amount);
     }
@@ -403,7 +403,7 @@ function createBaseQueryNFTsRequest(): QueryNFTsRequest {
 }
 
 export const QueryNFTsRequest = {
-  encode(message: QueryNFTsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNFTsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -487,7 +487,7 @@ function createBaseQueryNFTsResponse(): QueryNFTsResponse {
 }
 
 export const QueryNFTsResponse = {
-  encode(message: QueryNFTsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNFTsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.nfts) {
       NFT.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -566,7 +566,7 @@ function createBaseQueryNFTRequest(): QueryNFTRequest {
 }
 
 export const QueryNFTRequest = {
-  encode(message: QueryNFTRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNFTRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -637,7 +637,7 @@ function createBaseQueryNFTResponse(): QueryNFTResponse {
 }
 
 export const QueryNFTResponse = {
-  encode(message: QueryNFTResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNFTResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nft !== undefined) {
       NFT.encode(message.nft, writer.uint32(10).fork()).ldelim();
     }
@@ -697,7 +697,7 @@ function createBaseQueryClassRequest(): QueryClassRequest {
 }
 
 export const QueryClassRequest = {
-  encode(message: QueryClassRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClassRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -757,7 +757,7 @@ function createBaseQueryClassResponse(): QueryClassResponse {
 }
 
 export const QueryClassResponse = {
-  encode(message: QueryClassResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClassResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.class !== undefined) {
       Class.encode(message.class, writer.uint32(10).fork()).ldelim();
     }
@@ -817,7 +817,7 @@ function createBaseQueryClassesRequest(): QueryClassesRequest {
 }
 
 export const QueryClassesRequest = {
-  encode(message: QueryClassesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClassesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -879,7 +879,7 @@ function createBaseQueryClassesResponse(): QueryClassesResponse {
 }
 
 export const QueryClassesResponse = {
-  encode(message: QueryClassesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClassesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
     }

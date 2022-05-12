@@ -13,7 +13,7 @@ function createBaseLogging(): Logging {
 }
 
 export const Logging = {
-  encode(message: Logging, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Logging, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.producerDestinations) {
       Logging_LoggingDestination.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -97,7 +97,7 @@ function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
 }
 
 export const Logging_LoggingDestination = {
-  encode(message: Logging_LoggingDestination, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Logging_LoggingDestination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.monitoredResource !== "") {
       writer.uint32(26).string(message.monitoredResource);
     }

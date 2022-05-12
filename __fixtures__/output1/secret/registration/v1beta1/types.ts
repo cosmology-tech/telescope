@@ -13,7 +13,7 @@ function createBaseSeedConfig(): SeedConfig {
 }
 
 export const SeedConfig = {
-  encode(message: SeedConfig, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SeedConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.masterCert !== "") {
       writer.uint32(10).string(message.masterCert);
     }
@@ -86,7 +86,7 @@ function createBaseRegistrationNodeInfo(): RegistrationNodeInfo {
 }
 
 export const RegistrationNodeInfo = {
-  encode(message: RegistrationNodeInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RegistrationNodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.certificate.length !== 0) {
       writer.uint32(10).bytes(message.certificate);
     }

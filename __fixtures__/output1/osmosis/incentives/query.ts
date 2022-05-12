@@ -11,7 +11,7 @@ function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequ
 }
 
 export const ModuleToDistributeCoinsRequest = {
-  encode(message: ModuleToDistributeCoinsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleToDistributeCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -59,7 +59,7 @@ function createBaseModuleToDistributeCoinsResponse(): ModuleToDistributeCoinsRes
 }
 
 export const ModuleToDistributeCoinsResponse = {
-  encode(message: ModuleToDistributeCoinsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleToDistributeCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -121,7 +121,7 @@ function createBaseModuleDistributedCoinsRequest(): ModuleDistributedCoinsReques
 }
 
 export const ModuleDistributedCoinsRequest = {
-  encode(message: ModuleDistributedCoinsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleDistributedCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -169,7 +169,7 @@ function createBaseModuleDistributedCoinsResponse(): ModuleDistributedCoinsRespo
 }
 
 export const ModuleDistributedCoinsResponse = {
-  encode(message: ModuleDistributedCoinsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleDistributedCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -235,7 +235,7 @@ function createBaseGaugeByIDRequest(): GaugeByIDRequest {
 }
 
 export const GaugeByIDRequest = {
-  encode(message: GaugeByIDRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GaugeByIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -295,7 +295,7 @@ function createBaseGaugeByIDResponse(): GaugeByIDResponse {
 }
 
 export const GaugeByIDResponse = {
-  encode(message: GaugeByIDResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GaugeByIDResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gauge !== undefined) {
       Gauge.encode(message.gauge, writer.uint32(10).fork()).ldelim();
     }
@@ -355,7 +355,7 @@ function createBaseGaugesRequest(): GaugesRequest {
 }
 
 export const GaugesRequest = {
-  encode(message: GaugesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -417,7 +417,7 @@ function createBaseGaugesResponse(): GaugesResponse {
 }
 
 export const GaugesResponse = {
-  encode(message: GaugesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GaugesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -494,7 +494,7 @@ function createBaseActiveGaugesRequest(): ActiveGaugesRequest {
 }
 
 export const ActiveGaugesRequest = {
-  encode(message: ActiveGaugesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ActiveGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -556,7 +556,7 @@ function createBaseActiveGaugesResponse(): ActiveGaugesResponse {
 }
 
 export const ActiveGaugesResponse = {
-  encode(message: ActiveGaugesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ActiveGaugesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -635,7 +635,7 @@ function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
 }
 
 export const ActiveGaugesPerDenomRequest = {
-  encode(message: ActiveGaugesPerDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ActiveGaugesPerDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -708,7 +708,7 @@ function createBaseActiveGaugesPerDenomResponse(): ActiveGaugesPerDenomResponse 
 }
 
 export const ActiveGaugesPerDenomResponse = {
-  encode(message: ActiveGaugesPerDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ActiveGaugesPerDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -785,7 +785,7 @@ function createBaseUpcomingGaugesRequest(): UpcomingGaugesRequest {
 }
 
 export const UpcomingGaugesRequest = {
-  encode(message: UpcomingGaugesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpcomingGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -847,7 +847,7 @@ function createBaseUpcomingGaugesResponse(): UpcomingGaugesResponse {
 }
 
 export const UpcomingGaugesResponse = {
-  encode(message: UpcomingGaugesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpcomingGaugesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -928,7 +928,7 @@ function createBaseRewardsEstRequest(): RewardsEstRequest {
 }
 
 export const RewardsEstRequest = {
-  encode(message: RewardsEstRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RewardsEstRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -1027,7 +1027,7 @@ function createBaseRewardsEstResponse(): RewardsEstResponse {
 }
 
 export const RewardsEstResponse = {
-  encode(message: RewardsEstResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RewardsEstResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1089,7 +1089,7 @@ function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsReques
 }
 
 export const QueryLockableDurationsRequest = {
-  encode(message: QueryLockableDurationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1137,7 +1137,7 @@ function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsRespo
 }
 
 export const QueryLockableDurationsResponse = {
-  encode(message: QueryLockableDurationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLockableDurationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }

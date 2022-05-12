@@ -24,7 +24,7 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
 }
 
 export const MsgCreateGauge = {
-  encode(message: MsgCreateGauge, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.isPerpetual === true) {
       writer.uint32(8).bool(message.isPerpetual);
     }
@@ -139,7 +139,7 @@ function createBaseMsgCreateGaugeResponse(): MsgCreateGaugeResponse {
 }
 
 export const MsgCreateGaugeResponse = {
-  encode(message: MsgCreateGaugeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -191,7 +191,7 @@ function createBaseMsgAddToGauge(): MsgAddToGauge {
 }
 
 export const MsgAddToGauge = {
-  encode(message: MsgAddToGauge, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgAddToGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -275,7 +275,7 @@ function createBaseMsgAddToGaugeResponse(): MsgAddToGaugeResponse {
 }
 
 export const MsgAddToGaugeResponse = {
-  encode(message: MsgAddToGaugeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgAddToGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

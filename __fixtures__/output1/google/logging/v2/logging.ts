@@ -15,7 +15,7 @@ function createBaseDeleteLogRequest(): DeleteLogRequest {
 }
 
 export const DeleteLogRequest = {
-  encode(message: DeleteLogRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteLogRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
     }
@@ -77,7 +77,7 @@ function createBaseWriteLogEntriesRequest_LabelsEntry(): WriteLogEntriesRequest_
 }
 
 export const WriteLogEntriesRequest_LabelsEntry = {
-  encode(message: WriteLogEntriesRequest_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WriteLogEntriesRequest_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -160,7 +160,7 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
 }
 
 export const WriteLogEntriesRequest = {
-  encode(message: WriteLogEntriesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WriteLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
     }
@@ -304,7 +304,7 @@ function createBaseWriteLogEntriesResponse(): WriteLogEntriesResponse {
 }
 
 export const WriteLogEntriesResponse = {
-  encode(message: WriteLogEntriesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WriteLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -354,7 +354,7 @@ function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogE
 }
 
 export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
-  encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== 0) {
       writer.uint32(8).int32(message.key);
     }
@@ -427,7 +427,7 @@ function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors 
 }
 
 export const WriteLogEntriesPartialErrors = {
-  encode(message: WriteLogEntriesPartialErrors, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WriteLogEntriesPartialErrors, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.logEntryErrors).forEach(([key, value]) => {
       WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode({
         key: (key as any),
@@ -522,7 +522,7 @@ function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
 }
 
 export const ListLogEntriesRequest = {
-  encode(message: ListLogEntriesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
     }
@@ -633,7 +633,7 @@ function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
 }
 
 export const ListLogEntriesResponse = {
-  encode(message: ListLogEntriesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -712,7 +712,7 @@ function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResou
 }
 
 export const ListMonitoredResourceDescriptorsRequest = {
-  encode(message: ListMonitoredResourceDescriptorsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListMonitoredResourceDescriptorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pageSize !== 0) {
       writer.uint32(8).int32(message.pageSize);
     }
@@ -785,7 +785,7 @@ function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredReso
 }
 
 export const ListMonitoredResourceDescriptorsResponse = {
-  encode(message: ListMonitoredResourceDescriptorsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListMonitoredResourceDescriptorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -868,7 +868,7 @@ function createBaseListLogsRequest(): ListLogsRequest {
 }
 
 export const ListLogsRequest = {
-  encode(message: ListLogsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -968,7 +968,7 @@ function createBaseListLogsResponse(): ListLogsResponse {
 }
 
 export const ListLogsResponse = {
-  encode(message: ListLogsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
     }
@@ -1048,7 +1048,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
 }
 
 export const TailLogEntriesRequest = {
-  encode(message: TailLogEntriesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TailLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
     }
@@ -1134,7 +1134,7 @@ function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
 }
 
 export const TailLogEntriesResponse = {
-  encode(message: TailLogEntriesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TailLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1218,7 +1218,7 @@ function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesRespo
 }
 
 export const TailLogEntriesResponse_SuppressionInfo = {
-  encode(message: TailLogEntriesResponse_SuppressionInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TailLogEntriesResponse_SuppressionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== 0) {
       writer.uint32(8).int32(message.reason);
     }

@@ -15,7 +15,7 @@ function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
 }
 
 export const QueryValidatorsRequest = {
-  encode(message: QueryValidatorsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
     }
@@ -88,7 +88,7 @@ function createBaseQueryValidatorsResponse(): QueryValidatorsResponse {
 }
 
 export const QueryValidatorsResponse = {
-  encode(message: QueryValidatorsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -165,7 +165,7 @@ function createBaseQueryValidatorRequest(): QueryValidatorRequest {
 }
 
 export const QueryValidatorRequest = {
-  encode(message: QueryValidatorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
     }
@@ -225,7 +225,7 @@ function createBaseQueryValidatorResponse(): QueryValidatorResponse {
 }
 
 export const QueryValidatorResponse = {
-  encode(message: QueryValidatorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
     }
@@ -287,7 +287,7 @@ function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegations
 }
 
 export const QueryValidatorDelegationsRequest = {
-  encode(message: QueryValidatorDelegationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
     }
@@ -360,7 +360,7 @@ function createBaseQueryValidatorDelegationsResponse(): QueryValidatorDelegation
 }
 
 export const QueryValidatorDelegationsResponse = {
-  encode(message: QueryValidatorDelegationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.delegationResponses) {
       DelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -439,7 +439,7 @@ function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUn
 }
 
 export const QueryValidatorUnbondingDelegationsRequest = {
-  encode(message: QueryValidatorUnbondingDelegationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorUnbondingDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
     }
@@ -512,7 +512,7 @@ function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorU
 }
 
 export const QueryValidatorUnbondingDelegationsResponse = {
-  encode(message: QueryValidatorUnbondingDelegationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorUnbondingDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unbondingResponses) {
       UnbondingDelegation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -591,7 +591,7 @@ function createBaseQueryDelegationRequest(): QueryDelegationRequest {
 }
 
 export const QueryDelegationRequest = {
-  encode(message: QueryDelegationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -662,7 +662,7 @@ function createBaseQueryDelegationResponse(): QueryDelegationResponse {
 }
 
 export const QueryDelegationResponse = {
-  encode(message: QueryDelegationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegationResponse !== undefined) {
       DelegationResponse.encode(message.delegationResponse, writer.uint32(10).fork()).ldelim();
     }
@@ -724,7 +724,7 @@ function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRe
 }
 
 export const QueryUnbondingDelegationRequest = {
-  encode(message: QueryUnbondingDelegationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUnbondingDelegationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -795,7 +795,7 @@ function createBaseQueryUnbondingDelegationResponse(): QueryUnbondingDelegationR
 }
 
 export const QueryUnbondingDelegationResponse = {
-  encode(message: QueryUnbondingDelegationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUnbondingDelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.unbond !== undefined) {
       UnbondingDelegation.encode(message.unbond, writer.uint32(10).fork()).ldelim();
     }
@@ -857,7 +857,7 @@ function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegations
 }
 
 export const QueryDelegatorDelegationsRequest = {
-  encode(message: QueryDelegatorDelegationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -930,7 +930,7 @@ function createBaseQueryDelegatorDelegationsResponse(): QueryDelegatorDelegation
 }
 
 export const QueryDelegatorDelegationsResponse = {
-  encode(message: QueryDelegatorDelegationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.delegationResponses) {
       DelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1009,7 +1009,7 @@ function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUn
 }
 
 export const QueryDelegatorUnbondingDelegationsRequest = {
-  encode(message: QueryDelegatorUnbondingDelegationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorUnbondingDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -1082,7 +1082,7 @@ function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorU
 }
 
 export const QueryDelegatorUnbondingDelegationsResponse = {
-  encode(message: QueryDelegatorUnbondingDelegationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorUnbondingDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unbondingResponses) {
       UnbondingDelegation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1165,7 +1165,7 @@ function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
 }
 
 export const QueryRedelegationsRequest = {
-  encode(message: QueryRedelegationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryRedelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -1260,7 +1260,7 @@ function createBaseQueryRedelegationsResponse(): QueryRedelegationsResponse {
 }
 
 export const QueryRedelegationsResponse = {
-  encode(message: QueryRedelegationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryRedelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.redelegationResponses) {
       RedelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1339,7 +1339,7 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 }
 
 export const QueryDelegatorValidatorsRequest = {
-  encode(message: QueryDelegatorValidatorsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -1412,7 +1412,7 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 
 export const QueryDelegatorValidatorsResponse = {
-  encode(message: QueryDelegatorValidatorsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1491,7 +1491,7 @@ function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequ
 }
 
 export const QueryDelegatorValidatorRequest = {
-  encode(message: QueryDelegatorValidatorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorValidatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
     }
@@ -1562,7 +1562,7 @@ function createBaseQueryDelegatorValidatorResponse(): QueryDelegatorValidatorRes
 }
 
 export const QueryDelegatorValidatorResponse = {
-  encode(message: QueryDelegatorValidatorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
     }
@@ -1622,7 +1622,7 @@ function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
 }
 
 export const QueryHistoricalInfoRequest = {
-  encode(message: QueryHistoricalInfoRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryHistoricalInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
@@ -1682,7 +1682,7 @@ function createBaseQueryHistoricalInfoResponse(): QueryHistoricalInfoResponse {
 }
 
 export const QueryHistoricalInfoResponse = {
-  encode(message: QueryHistoricalInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryHistoricalInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hist !== undefined) {
       HistoricalInfo.encode(message.hist, writer.uint32(10).fork()).ldelim();
     }
@@ -1738,7 +1738,7 @@ function createBaseQueryPoolRequest(): QueryPoolRequest {
 }
 
 export const QueryPoolRequest = {
-  encode(message: QueryPoolRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1786,7 +1786,7 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
 }
 
 export const QueryPoolResponse = {
-  encode(message: QueryPoolResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pool !== undefined) {
       Pool.encode(message.pool, writer.uint32(10).fork()).ldelim();
     }
@@ -1842,7 +1842,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1890,7 +1890,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }

@@ -21,7 +21,7 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
 }
 
 export const MsgCreateVestingAccount = {
-  encode(message: MsgCreateVestingAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
     }
@@ -127,7 +127,7 @@ function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountRes
 }
 
 export const MsgCreateVestingAccountResponse = {
-  encode(message: MsgCreateVestingAccountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -179,7 +179,7 @@ function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAc
 }
 
 export const MsgCreatePermanentLockedAccount = {
-  encode(message: MsgCreatePermanentLockedAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreatePermanentLockedAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
     }
@@ -263,7 +263,7 @@ function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanent
 }
 
 export const MsgCreatePermanentLockedAccountResponse = {
-  encode(message: MsgCreatePermanentLockedAccountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreatePermanentLockedAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -317,7 +317,7 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
 }
 
 export const MsgCreatePeriodicVestingAccount = {
-  encode(message: MsgCreatePeriodicVestingAccount, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreatePeriodicVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
     }
@@ -412,7 +412,7 @@ function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicV
 }
 
 export const MsgCreatePeriodicVestingAccountResponse = {
-  encode(message: MsgCreatePeriodicVestingAccountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreatePeriodicVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

@@ -16,7 +16,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.codes) {
       Code.encode(v!, writer.uint32(18).fork()).ldelim();
     }
@@ -118,7 +118,7 @@ function createBaseCode(): Code {
 }
 
 export const Code = {
-  encode(message: Code, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -206,7 +206,7 @@ function createBaseContract(): Contract {
 }
 
 export const Contract = {
-  encode(message: Contract, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Contract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress.length !== 0) {
       writer.uint32(10).bytes(message.contractAddress);
     }
@@ -307,7 +307,7 @@ function createBaseSequence(): Sequence {
 }
 
 export const Sequence = {
-  encode(message: Sequence, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Sequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }

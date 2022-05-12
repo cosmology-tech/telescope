@@ -12,7 +12,7 @@ function createBaseRetryInfo(): RetryInfo {
 }
 
 export const RetryInfo = {
-  encode(message: RetryInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) Duration.encode(toDuration(message.retryDelay), writer.uint32(10).fork()).ldelim();
     return writer;
   },
@@ -71,7 +71,7 @@ function createBaseDebugInfo(): DebugInfo {
 }
 
 export const DebugInfo = {
-  encode(message: DebugInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DebugInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
@@ -147,7 +147,7 @@ function createBaseQuotaFailure(): QuotaFailure {
 }
 
 export const QuotaFailure = {
-  encode(message: QuotaFailure, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -215,7 +215,7 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 }
 
 export const QuotaFailure_Violation = {
-  encode(message: QuotaFailure_Violation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
     }
@@ -288,7 +288,7 @@ function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
 }
 
 export const ErrorInfo_MetadataEntry = {
-  encode(message: ErrorInfo_MetadataEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ErrorInfo_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -365,7 +365,7 @@ function createBaseErrorInfo(): ErrorInfo {
 }
 
 export const ErrorInfo = {
-  encode(message: ErrorInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ErrorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
     }
@@ -474,7 +474,7 @@ function createBasePreconditionFailure(): PreconditionFailure {
 }
 
 export const PreconditionFailure = {
-  encode(message: PreconditionFailure, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -544,7 +544,7 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 }
 
 export const PreconditionFailure_Violation = {
-  encode(message: PreconditionFailure_Violation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PreconditionFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -626,7 +626,7 @@ function createBaseBadRequest(): BadRequest {
 }
 
 export const BadRequest = {
-  encode(message: BadRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BadRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fieldViolations) {
       BadRequest_FieldViolation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -694,7 +694,7 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 }
 
 export const BadRequest_FieldViolation = {
-  encode(message: BadRequest_FieldViolation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BadRequest_FieldViolation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
     }
@@ -767,7 +767,7 @@ function createBaseRequestInfo(): RequestInfo {
 }
 
 export const RequestInfo = {
-  encode(message: RequestInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -844,7 +844,7 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 
 export const ResourceInfo = {
-  encode(message: ResourceInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
     }
@@ -937,7 +937,7 @@ function createBaseHelp(): Help {
 }
 
 export const Help = {
-  encode(message: Help, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Help, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       Help_Link.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1005,7 +1005,7 @@ function createBaseHelp_Link(): Help_Link {
 }
 
 export const Help_Link = {
-  encode(message: Help_Link, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Help_Link, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -1078,7 +1078,7 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 }
 
 export const LocalizedMessage = {
-  encode(message: LocalizedMessage, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LocalizedMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.locale !== "") {
       writer.uint32(10).string(message.locale);
     }

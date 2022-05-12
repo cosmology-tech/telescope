@@ -14,7 +14,7 @@ function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
 }
 
 export const MsgSoftwareUpgrade = {
-  encode(message: MsgSoftwareUpgrade, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSoftwareUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -81,7 +81,7 @@ function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
 }
 
 export const MsgSoftwareUpgradeResponse = {
-  encode(message: MsgSoftwareUpgradeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -129,7 +129,7 @@ function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
 }
 
 export const MsgCancelUpgrade = {
-  encode(message: MsgCancelUpgrade, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCancelUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -185,7 +185,7 @@ function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
 }
 
 export const MsgCancelUpgradeResponse = {
-  encode(message: MsgCancelUpgradeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

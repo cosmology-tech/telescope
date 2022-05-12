@@ -11,7 +11,7 @@ function createBaseMsgUnjail(): MsgUnjail {
 }
 
 export const MsgUnjail = {
-  encode(message: MsgUnjail, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUnjail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
     }
@@ -67,7 +67,7 @@ function createBaseMsgUnjailResponse(): MsgUnjailResponse {
 }
 
 export const MsgUnjailResponse = {
-  encode(message: MsgUnjailResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

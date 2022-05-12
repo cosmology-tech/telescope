@@ -29,7 +29,7 @@ function createBaseAttributeContext(): AttributeContext {
 }
 
 export const AttributeContext = {
-  encode(message: AttributeContext, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AttributeContext, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.origin !== undefined) {
       AttributeContext_Peer.encode(message.origin, writer.uint32(58).fork()).ldelim();
     }
@@ -174,7 +174,7 @@ function createBasePeer_LabelsEntry(): Peer_LabelsEntry {
 }
 
 export const Peer_LabelsEntry = {
-  encode(message: Peer_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Peer_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -255,7 +255,7 @@ function createBasePeer(): Peer {
 }
 
 export const Peer = {
-  encode(message: Peer, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Peer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ip !== "") {
       writer.uint32(10).string(message.ip);
     }
@@ -393,7 +393,7 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
 }
 
 export const AttributeContext_Api = {
-  encode(message: AttributeContext_Api, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AttributeContext_Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
     }
@@ -494,7 +494,7 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
 }
 
 export const AttributeContext_Auth = {
-  encode(message: AttributeContext_Auth, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AttributeContext_Auth, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
     }
@@ -610,7 +610,7 @@ function createBaseRequest_HeadersEntry(): Request_HeadersEntry {
 }
 
 export const Request_HeadersEntry = {
-  encode(message: Request_HeadersEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Request_HeadersEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -705,7 +705,7 @@ function createBaseRequest(): Request {
 }
 
 export const Request = {
-  encode(message: Request, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Request, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -914,7 +914,7 @@ function createBaseResponse_HeadersEntry(): Response_HeadersEntry {
 }
 
 export const Response_HeadersEntry = {
-  encode(message: Response_HeadersEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Response_HeadersEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -995,7 +995,7 @@ function createBaseResponse(): Response {
 }
 
 export const Response = {
-  encode(message: Response, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.code.isZero()) {
       writer.uint32(8).int64(message.code);
     }
@@ -1122,7 +1122,7 @@ function createBaseResource_LabelsEntry(): Resource_LabelsEntry {
 }
 
 export const Resource_LabelsEntry = {
-  encode(message: Resource_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Resource_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1195,7 +1195,7 @@ function createBaseResource_AnnotationsEntry(): Resource_AnnotationsEntry {
 }
 
 export const Resource_AnnotationsEntry = {
-  encode(message: Resource_AnnotationsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Resource_AnnotationsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1292,7 +1292,7 @@ function createBaseResource(): Resource {
 }
 
 export const Resource = {
-  encode(message: Resource, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
     }

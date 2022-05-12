@@ -19,7 +19,7 @@ function createBaseQueryGrantsRequest(): QueryGrantsRequest {
 }
 
 export const QueryGrantsRequest = {
-  encode(message: QueryGrantsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGrantsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -114,7 +114,7 @@ function createBaseQueryGrantsResponse(): QueryGrantsResponse {
 }
 
 export const QueryGrantsResponse = {
-  encode(message: QueryGrantsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGrantsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -193,7 +193,7 @@ function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
 }
 
 export const QueryGranterGrantsRequest = {
-  encode(message: QueryGranterGrantsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGranterGrantsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
@@ -266,7 +266,7 @@ function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
 }
 
 export const QueryGranterGrantsResponse = {
-  encode(message: QueryGranterGrantsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGranterGrantsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -345,7 +345,7 @@ function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
 }
 
 export const QueryGranteeGrantsRequest = {
-  encode(message: QueryGranteeGrantsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGranteeGrantsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
     }
@@ -418,7 +418,7 @@ function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
 }
 
 export const QueryGranteeGrantsResponse = {
-  encode(message: QueryGranteeGrantsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryGranteeGrantsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
     }

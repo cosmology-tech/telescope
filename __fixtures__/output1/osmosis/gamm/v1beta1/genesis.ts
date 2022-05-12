@@ -13,7 +13,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(message: Params, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.poolCreationFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -83,7 +83,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }

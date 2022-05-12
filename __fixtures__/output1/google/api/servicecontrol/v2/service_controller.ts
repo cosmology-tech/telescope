@@ -21,7 +21,7 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
-  encode(message: CheckRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -139,7 +139,7 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 
 export const ResourceInfo = {
-  encode(message: ResourceInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -245,7 +245,7 @@ function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
 }
 
 export const CheckResponse_HeadersEntry = {
-  encode(message: CheckResponse_HeadersEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckResponse_HeadersEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -320,7 +320,7 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
-  encode(message: CheckResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== undefined) {
       Status.encode(message.status, writer.uint32(10).fork()).ldelim();
     }
@@ -422,7 +422,7 @@ function createBaseReportRequest(): ReportRequest {
 }
 
 export const ReportRequest = {
-  encode(message: ReportRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -506,7 +506,7 @@ function createBaseReportResponse(): ReportResponse {
 }
 
 export const ReportResponse = {
-  encode(message: ReportResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

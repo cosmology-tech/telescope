@@ -11,7 +11,7 @@ function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
 }
 
 export const ModuleBalanceRequest = {
-  encode(message: ModuleBalanceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -59,7 +59,7 @@ function createBaseModuleBalanceResponse(): ModuleBalanceResponse {
 }
 
 export const ModuleBalanceResponse = {
-  encode(message: ModuleBalanceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -121,7 +121,7 @@ function createBaseModuleLockedAmountRequest(): ModuleLockedAmountRequest {
 }
 
 export const ModuleLockedAmountRequest = {
-  encode(message: ModuleLockedAmountRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleLockedAmountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -169,7 +169,7 @@ function createBaseModuleLockedAmountResponse(): ModuleLockedAmountResponse {
 }
 
 export const ModuleLockedAmountResponse = {
-  encode(message: ModuleLockedAmountResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleLockedAmountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -235,7 +235,7 @@ function createBaseAccountUnlockableCoinsRequest(): AccountUnlockableCoinsReques
 }
 
 export const AccountUnlockableCoinsRequest = {
-  encode(message: AccountUnlockableCoinsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountUnlockableCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -295,7 +295,7 @@ function createBaseAccountUnlockableCoinsResponse(): AccountUnlockableCoinsRespo
 }
 
 export const AccountUnlockableCoinsResponse = {
-  encode(message: AccountUnlockableCoinsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountUnlockableCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -361,7 +361,7 @@ function createBaseAccountUnlockingCoinsRequest(): AccountUnlockingCoinsRequest 
 }
 
 export const AccountUnlockingCoinsRequest = {
-  encode(message: AccountUnlockingCoinsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountUnlockingCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -421,7 +421,7 @@ function createBaseAccountUnlockingCoinsResponse(): AccountUnlockingCoinsRespons
 }
 
 export const AccountUnlockingCoinsResponse = {
-  encode(message: AccountUnlockingCoinsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountUnlockingCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -487,7 +487,7 @@ function createBaseAccountLockedCoinsRequest(): AccountLockedCoinsRequest {
 }
 
 export const AccountLockedCoinsRequest = {
-  encode(message: AccountLockedCoinsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -547,7 +547,7 @@ function createBaseAccountLockedCoinsResponse(): AccountLockedCoinsResponse {
 }
 
 export const AccountLockedCoinsResponse = {
-  encode(message: AccountLockedCoinsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -615,7 +615,7 @@ function createBaseAccountLockedPastTimeRequest(): AccountLockedPastTimeRequest 
 }
 
 export const AccountLockedPastTimeRequest = {
-  encode(message: AccountLockedPastTimeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedPastTimeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -683,7 +683,7 @@ function createBaseAccountLockedPastTimeResponse(): AccountLockedPastTimeRespons
 }
 
 export const AccountLockedPastTimeResponse = {
-  encode(message: AccountLockedPastTimeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedPastTimeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -751,7 +751,7 @@ function createBaseAccountLockedPastTimeNotUnlockingOnlyRequest(): AccountLocked
 }
 
 export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
-  encode(message: AccountLockedPastTimeNotUnlockingOnlyRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedPastTimeNotUnlockingOnlyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -819,7 +819,7 @@ function createBaseAccountLockedPastTimeNotUnlockingOnlyResponse(): AccountLocke
 }
 
 export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
-  encode(message: AccountLockedPastTimeNotUnlockingOnlyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedPastTimeNotUnlockingOnlyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -887,7 +887,7 @@ function createBaseAccountUnlockedBeforeTimeRequest(): AccountUnlockedBeforeTime
 }
 
 export const AccountUnlockedBeforeTimeRequest = {
-  encode(message: AccountUnlockedBeforeTimeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountUnlockedBeforeTimeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -955,7 +955,7 @@ function createBaseAccountUnlockedBeforeTimeResponse(): AccountUnlockedBeforeTim
 }
 
 export const AccountUnlockedBeforeTimeResponse = {
-  encode(message: AccountUnlockedBeforeTimeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountUnlockedBeforeTimeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1025,7 +1025,7 @@ function createBaseAccountLockedPastTimeDenomRequest(): AccountLockedPastTimeDen
 }
 
 export const AccountLockedPastTimeDenomRequest = {
-  encode(message: AccountLockedPastTimeDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedPastTimeDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -1105,7 +1105,7 @@ function createBaseAccountLockedPastTimeDenomResponse(): AccountLockedPastTimeDe
 }
 
 export const AccountLockedPastTimeDenomResponse = {
-  encode(message: AccountLockedPastTimeDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedPastTimeDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1173,7 +1173,7 @@ function createBaseLockedDenomRequest(): LockedDenomRequest {
 }
 
 export const LockedDenomRequest = {
-  encode(message: LockedDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockedDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -1241,7 +1241,7 @@ function createBaseLockedDenomResponse(): LockedDenomResponse {
 }
 
 export const LockedDenomResponse = {
-  encode(message: LockedDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockedDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.amount !== "") {
       writer.uint32(10).string(message.amount);
     }
@@ -1301,7 +1301,7 @@ function createBaseLockedRequest(): LockedRequest {
 }
 
 export const LockedRequest = {
-  encode(message: LockedRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockedRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
@@ -1361,7 +1361,7 @@ function createBaseLockedResponse(): LockedResponse {
 }
 
 export const LockedResponse = {
-  encode(message: LockedResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.lock !== undefined) {
       PeriodLock.encode(message.lock, writer.uint32(10).fork()).ldelim();
     }
@@ -1421,7 +1421,7 @@ function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockup
 }
 
 export const SyntheticLockupsByLockupIDRequest = {
-  encode(message: SyntheticLockupsByLockupIDRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SyntheticLockupsByLockupIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
     }
@@ -1481,7 +1481,7 @@ function createBaseSyntheticLockupsByLockupIDResponse(): SyntheticLockupsByLocku
 }
 
 export const SyntheticLockupsByLockupIDResponse = {
-  encode(message: SyntheticLockupsByLockupIDResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SyntheticLockupsByLockupIDResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.syntheticLocks) {
       SyntheticLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1549,7 +1549,7 @@ function createBaseAccountLockedLongerDurationRequest(): AccountLockedLongerDura
 }
 
 export const AccountLockedLongerDurationRequest = {
-  encode(message: AccountLockedLongerDurationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedLongerDurationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -1617,7 +1617,7 @@ function createBaseAccountLockedLongerDurationResponse(): AccountLockedLongerDur
 }
 
 export const AccountLockedLongerDurationResponse = {
-  encode(message: AccountLockedLongerDurationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedLongerDurationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1685,7 +1685,7 @@ function createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest(): Account
 }
 
 export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
-  encode(message: AccountLockedLongerDurationNotUnlockingOnlyRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedLongerDurationNotUnlockingOnlyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -1753,7 +1753,7 @@ function createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse(): Accoun
 }
 
 export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
-  encode(message: AccountLockedLongerDurationNotUnlockingOnlyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedLongerDurationNotUnlockingOnlyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1823,7 +1823,7 @@ function createBaseAccountLockedLongerDurationDenomRequest(): AccountLockedLonge
 }
 
 export const AccountLockedLongerDurationDenomRequest = {
-  encode(message: AccountLockedLongerDurationDenomRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedLongerDurationDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -1903,7 +1903,7 @@ function createBaseAccountLockedLongerDurationDenomResponse(): AccountLockedLong
 }
 
 export const AccountLockedLongerDurationDenomResponse = {
-  encode(message: AccountLockedLongerDurationDenomResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountLockedLongerDurationDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }

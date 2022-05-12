@@ -22,7 +22,7 @@ function createBaseOperation(): Operation {
 }
 
 export const Operation = {
-  encode(message: Operation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -126,7 +126,7 @@ function createBaseGetOperationRequest(): GetOperationRequest {
 }
 
 export const GetOperationRequest = {
-  encode(message: GetOperationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -192,7 +192,7 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
 }
 
 export const ListOperationsRequest = {
-  encode(message: ListOperationsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListOperationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(34).string(message.name);
     }
@@ -287,7 +287,7 @@ function createBaseListOperationsResponse(): ListOperationsResponse {
 }
 
 export const ListOperationsResponse = {
-  encode(message: ListOperationsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListOperationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -364,7 +364,7 @@ function createBaseCancelOperationRequest(): CancelOperationRequest {
 }
 
 export const CancelOperationRequest = {
-  encode(message: CancelOperationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CancelOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -424,7 +424,7 @@ function createBaseDeleteOperationRequest(): DeleteOperationRequest {
 }
 
 export const DeleteOperationRequest = {
-  encode(message: DeleteOperationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -486,7 +486,7 @@ function createBaseWaitOperationRequest(): WaitOperationRequest {
 }
 
 export const WaitOperationRequest = {
-  encode(message: WaitOperationRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WaitOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -556,7 +556,7 @@ function createBaseOperationInfo(): OperationInfo {
 }
 
 export const OperationInfo = {
-  encode(message: OperationInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.responseType !== "") {
       writer.uint32(10).string(message.responseType);
     }

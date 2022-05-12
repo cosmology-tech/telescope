@@ -19,7 +19,7 @@ function createBasePageRequest(): PageRequest {
 }
 
 export const PageRequest = {
-  encode(message: PageRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PageRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -125,7 +125,7 @@ function createBasePageResponse(): PageResponse {
 }
 
 export const PageResponse = {
-  encode(message: PageResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PageResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
     }

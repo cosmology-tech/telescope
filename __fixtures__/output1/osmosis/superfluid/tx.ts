@@ -16,7 +16,7 @@ function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
 }
 
 export const MsgSuperfluidDelegate = {
-  encode(message: MsgSuperfluidDelegate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -94,7 +94,7 @@ function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateRespons
 }
 
 export const MsgSuperfluidDelegateResponse = {
-  encode(message: MsgSuperfluidDelegateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -144,7 +144,7 @@ function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
 }
 
 export const MsgSuperfluidUndelegate = {
-  encode(message: MsgSuperfluidUndelegate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidUndelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -211,7 +211,7 @@ function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateRes
 }
 
 export const MsgSuperfluidUndelegateResponse = {
-  encode(message: MsgSuperfluidUndelegateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -261,7 +261,7 @@ function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
 }
 
 export const MsgSuperfluidUnbondLock = {
-  encode(message: MsgSuperfluidUnbondLock, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidUnbondLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -328,7 +328,7 @@ function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockRes
 }
 
 export const MsgSuperfluidUnbondLockResponse = {
-  encode(message: MsgSuperfluidUnbondLockResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidUnbondLockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -380,7 +380,7 @@ function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate 
 }
 
 export const MsgLockAndSuperfluidDelegate = {
-  encode(message: MsgLockAndSuperfluidDelegate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockAndSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -468,7 +468,7 @@ function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidD
 }
 
 export const MsgLockAndSuperfluidDelegateResponse = {
-  encode(message: MsgLockAndSuperfluidDelegateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockAndSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
     }

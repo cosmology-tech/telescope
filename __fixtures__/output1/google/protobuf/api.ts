@@ -25,7 +25,7 @@ function createBaseApi(): Api {
 }
 
 export const Api = {
-  encode(message: Api, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -180,7 +180,7 @@ function createBaseMethod(): Method {
 }
 
 export const Method = {
-  encode(message: Method, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Method, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -314,7 +314,7 @@ function createBaseMixin(): Mixin {
 }
 
 export const Mixin = {
-  encode(message: Mixin, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Mixin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

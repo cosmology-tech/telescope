@@ -18,7 +18,7 @@ function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequ
 }
 
 export const GetValidatorSetByHeightRequest = {
-  encode(message: GetValidatorSetByHeightRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetValidatorSetByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
@@ -93,7 +93,7 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
 }
 
 export const GetValidatorSetByHeightResponse = {
-  encode(message: GetValidatorSetByHeightResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetValidatorSetByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
     }
@@ -181,7 +181,7 @@ function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest 
 }
 
 export const GetLatestValidatorSetRequest = {
-  encode(message: GetLatestValidatorSetRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestValidatorSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -245,7 +245,7 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
 }
 
 export const GetLatestValidatorSetResponse = {
-  encode(message: GetLatestValidatorSetResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
     }
@@ -339,7 +339,7 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
-  encode(message: Validator, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -432,7 +432,7 @@ function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
 }
 
 export const GetBlockByHeightRequest = {
-  encode(message: GetBlockByHeightRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetBlockByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
@@ -494,7 +494,7 @@ function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
 }
 
 export const GetBlockByHeightResponse = {
-  encode(message: GetBlockByHeightResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetBlockByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -561,7 +561,7 @@ function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
 }
 
 export const GetLatestBlockRequest = {
-  encode(message: GetLatestBlockRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -611,7 +611,7 @@ function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
 }
 
 export const GetLatestBlockResponse = {
-  encode(message: GetLatestBlockResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -678,7 +678,7 @@ function createBaseGetSyncingRequest(): GetSyncingRequest {
 }
 
 export const GetSyncingRequest = {
-  encode(message: GetSyncingRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -726,7 +726,7 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
 }
 
 export const GetSyncingResponse = {
-  encode(message: GetSyncingResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSyncingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syncing === true) {
       writer.uint32(8).bool(message.syncing);
     }
@@ -782,7 +782,7 @@ function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
 }
 
 export const GetNodeInfoRequest = {
-  encode(message: GetNodeInfoRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -832,7 +832,7 @@ function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
 }
 
 export const GetNodeInfoResponse = {
-  encode(message: GetNodeInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetNodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nodeInfo !== undefined) {
       NodeInfo.encode(message.nodeInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -917,7 +917,7 @@ function createBaseVersionInfo(): VersionInfo {
 }
 
 export const VersionInfo = {
-  encode(message: VersionInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: VersionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1064,7 +1064,7 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
-  encode(message: Module, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }

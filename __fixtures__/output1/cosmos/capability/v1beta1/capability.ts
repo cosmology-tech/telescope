@@ -11,7 +11,7 @@ function createBaseCapability(): Capability {
 }
 
 export const Capability = {
-  encode(message: Capability, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Capability, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).uint64(message.index);
     }
@@ -73,7 +73,7 @@ function createBaseOwner(): Owner {
 }
 
 export const Owner = {
-  encode(message: Owner, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Owner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
     }
@@ -144,7 +144,7 @@ function createBaseCapabilityOwners(): CapabilityOwners {
 }
 
 export const CapabilityOwners = {
-  encode(message: CapabilityOwners, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CapabilityOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
     }

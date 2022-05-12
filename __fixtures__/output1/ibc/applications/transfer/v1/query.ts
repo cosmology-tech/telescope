@@ -13,7 +13,7 @@ function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
 }
 
 export const QueryDenomTraceRequest = {
-  encode(message: QueryDenomTraceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDenomTraceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
     }
@@ -73,7 +73,7 @@ function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
 }
 
 export const QueryDenomTraceResponse = {
-  encode(message: QueryDenomTraceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDenomTraceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denomTrace !== undefined) {
       DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
     }
@@ -133,7 +133,7 @@ function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
 }
 
 export const QueryDenomTracesRequest = {
-  encode(message: QueryDenomTracesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDenomTracesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -195,7 +195,7 @@ function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
 }
 
 export const QueryDenomTracesResponse = {
-  encode(message: QueryDenomTracesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDenomTracesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.denomTraces) {
       DenomTrace.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -268,7 +268,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -316,7 +316,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }

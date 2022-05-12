@@ -11,7 +11,7 @@ function createBaseSystemParameters(): SystemParameters {
 }
 
 export const SystemParameters = {
-  encode(message: SystemParameters, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SystemParameters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       SystemParameterRule.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -79,7 +79,7 @@ function createBaseSystemParameterRule(): SystemParameterRule {
 }
 
 export const SystemParameterRule = {
-  encode(message: SystemParameterRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SystemParameterRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -160,7 +160,7 @@ function createBaseSystemParameter(): SystemParameter {
 }
 
 export const SystemParameter = {
-  encode(message: SystemParameter, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SystemParameter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

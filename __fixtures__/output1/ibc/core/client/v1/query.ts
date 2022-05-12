@@ -14,7 +14,7 @@ function createBaseQueryClientStateRequest(): QueryClientStateRequest {
 }
 
 export const QueryClientStateRequest = {
-  encode(message: QueryClientStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -78,7 +78,7 @@ function createBaseQueryClientStateResponse(): QueryClientStateResponse {
 }
 
 export const QueryClientStateResponse = {
-  encode(message: QueryClientStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
     }
@@ -160,7 +160,7 @@ function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
 }
 
 export const QueryClientStatesRequest = {
-  encode(message: QueryClientStatesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -222,7 +222,7 @@ function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
 }
 
 export const QueryClientStatesResponse = {
-  encode(message: QueryClientStatesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.clientStates) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -305,7 +305,7 @@ function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
 }
 
 export const QueryConsensusStateRequest = {
-  encode(message: QueryConsensusStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -402,7 +402,7 @@ function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
 }
 
 export const QueryConsensusStateResponse = {
-  encode(message: QueryConsensusStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
     }
@@ -486,7 +486,7 @@ function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
 }
 
 export const QueryConsensusStatesRequest = {
-  encode(message: QueryConsensusStatesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConsensusStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -559,7 +559,7 @@ function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse 
 }
 
 export const QueryConsensusStatesResponse = {
-  encode(message: QueryConsensusStatesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConsensusStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.consensusStates) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -636,7 +636,7 @@ function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
 }
 
 export const QueryClientStatusRequest = {
-  encode(message: QueryClientStatusRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -696,7 +696,7 @@ function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
 }
 
 export const QueryClientStatusResponse = {
-  encode(message: QueryClientStatusResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientStatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
     }
@@ -752,7 +752,7 @@ function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
 }
 
 export const QueryClientParamsRequest = {
-  encode(message: QueryClientParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -800,7 +800,7 @@ function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
 }
 
 export const QueryClientParamsResponse = {
-  encode(message: QueryClientParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClientParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -856,7 +856,7 @@ function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRe
 }
 
 export const QueryUpgradedClientStateRequest = {
-  encode(message: QueryUpgradedClientStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUpgradedClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -904,7 +904,7 @@ function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateR
 }
 
 export const QueryUpgradedClientStateResponse = {
-  encode(message: QueryUpgradedClientStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUpgradedClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedClientState !== undefined) {
       Any.encode(message.upgradedClientState, writer.uint32(10).fork()).ldelim();
     }
@@ -960,7 +960,7 @@ function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusS
 }
 
 export const QueryUpgradedConsensusStateRequest = {
-  encode(message: QueryUpgradedConsensusStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1008,7 +1008,7 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
 }
 
 export const QueryUpgradedConsensusStateResponse = {
-  encode(message: QueryUpgradedConsensusStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUpgradedConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedConsensusState !== undefined) {
       Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
     }

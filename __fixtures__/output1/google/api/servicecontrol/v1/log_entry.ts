@@ -18,7 +18,7 @@ function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
 }
 
 export const LogEntry_LabelsEntry = {
-  encode(message: LogEntry_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntry_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -113,7 +113,7 @@ function createBaseLogEntry(): LogEntry {
 }
 
 export const LogEntry = {
-  encode(message: LogEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
     }
@@ -326,7 +326,7 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 }
 
 export const LogEntryOperation = {
-  encode(message: LogEntryOperation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntryOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -423,7 +423,7 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 }
 
 export const LogEntrySourceLocation = {
-  encode(message: LogEntrySourceLocation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogEntrySourceLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
     }

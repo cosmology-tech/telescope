@@ -35,7 +35,7 @@ function createBaseValue(): Value {
 }
 
 export const Value = {
-  encode(message: Value, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
@@ -218,7 +218,7 @@ function createBaseEnumValue(): EnumValue {
 }
 
 export const EnumValue = {
-  encode(message: EnumValue, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -289,7 +289,7 @@ function createBaseListValue(): ListValue {
 }
 
 export const ListValue = {
-  encode(message: ListValue, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -355,7 +355,7 @@ function createBaseMapValue(): MapValue {
 }
 
 export const MapValue = {
-  encode(message: MapValue, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MapValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -423,7 +423,7 @@ function createBaseMapValue_Entry(): MapValue_Entry {
 }
 
 export const MapValue_Entry = {
-  encode(message: MapValue_Entry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MapValue_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
     }

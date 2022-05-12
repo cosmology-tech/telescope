@@ -26,7 +26,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(message: GenesisState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -203,7 +203,7 @@ function createBasePacketSequence(): PacketSequence {
 }
 
 export const PacketSequence = {
-  encode(message: PacketSequence, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PacketSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }

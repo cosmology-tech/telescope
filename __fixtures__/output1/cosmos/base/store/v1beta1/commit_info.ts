@@ -13,7 +13,7 @@ function createBaseCommitInfo(): CommitInfo {
 }
 
 export const CommitInfo = {
-  encode(message: CommitInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.version.isZero()) {
       writer.uint32(8).int64(message.version);
     }
@@ -92,7 +92,7 @@ function createBaseStoreInfo(): StoreInfo {
 }
 
 export const StoreInfo = {
-  encode(message: StoreInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StoreInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -165,7 +165,7 @@ function createBaseCommitID(): CommitID {
 }
 
 export const CommitID = {
-  encode(message: CommitID, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommitID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.version.isZero()) {
       writer.uint32(8).int64(message.version);
     }

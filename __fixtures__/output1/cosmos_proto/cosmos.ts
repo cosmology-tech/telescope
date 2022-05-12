@@ -13,7 +13,7 @@ function createBaseInterfaceDescriptor(): InterfaceDescriptor {
 }
 
 export const InterfaceDescriptor = {
-  encode(message: InterfaceDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InterfaceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -88,7 +88,7 @@ function createBaseScalarDescriptor(): ScalarDescriptor {
 }
 
 export const ScalarDescriptor = {
-  encode(message: ScalarDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ScalarDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

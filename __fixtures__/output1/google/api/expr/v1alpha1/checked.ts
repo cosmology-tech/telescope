@@ -16,7 +16,7 @@ function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntr
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
-  encode(message: CheckedExpr_ReferenceMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr_ReferenceMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -89,7 +89,7 @@ function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
 }
 
 export const CheckedExpr_TypeMapEntry = {
-  encode(message: CheckedExpr_TypeMapEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr_TypeMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).int64(message.key);
     }
@@ -172,7 +172,7 @@ function createBaseCheckedExpr(): CheckedExpr {
 }
 
 export const CheckedExpr = {
-  encode(message: CheckedExpr, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode({
         key: (key as any),
@@ -355,7 +355,7 @@ function createBaseType(): Type {
 }
 
 export const Type = {
-  encode(message: Type, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
@@ -547,7 +547,7 @@ function createBaseType_ListType(): Type_ListType {
 }
 
 export const Type_ListType = {
-  encode(message: Type_ListType, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_ListType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.elemType !== undefined) {
       Type.encode(message.elemType, writer.uint32(10).fork()).ldelim();
     }
@@ -609,7 +609,7 @@ function createBaseType_MapType(): Type_MapType {
 }
 
 export const Type_MapType = {
-  encode(message: Type_MapType, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
@@ -682,7 +682,7 @@ function createBaseType_FunctionType(): Type_FunctionType {
 }
 
 export const Type_FunctionType = {
-  encode(message: Type_FunctionType, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_FunctionType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(10).fork()).ldelim();
     }
@@ -761,7 +761,7 @@ function createBaseType_AbstractType(): Type_AbstractType {
 }
 
 export const Type_AbstractType = {
-  encode(message: Type_AbstractType, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_AbstractType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -983,7 +983,7 @@ function createBaseDecl(): Decl {
 }
 
 export const Decl = {
-  encode(message: Decl, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1069,7 +1069,7 @@ function createBaseDecl_IdentDecl(): Decl_IdentDecl {
 }
 
 export const Decl_IdentDecl = {
-  encode(message: Decl_IdentDecl, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(10).fork()).ldelim();
     }
@@ -1151,7 +1151,7 @@ function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
 }
 
 export const Decl_FunctionDecl = {
-  encode(message: Decl_FunctionDecl, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overloads) {
       Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1227,7 +1227,7 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
 }
 
 export const Decl_FunctionDecl_Overload = {
-  encode(message: Decl_FunctionDecl_Overload, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
@@ -1356,7 +1356,7 @@ function createBaseReference(): Reference {
 }
 
 export const Reference = {
-  encode(message: Reference, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Reference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

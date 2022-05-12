@@ -13,7 +13,7 @@ function createBaseQuota(): Quota {
 }
 
 export const Quota = {
-  encode(message: Quota, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Quota, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.limits) {
       QuotaLimit.encode(v!, writer.uint32(26).fork()).ldelim();
     }
@@ -97,7 +97,7 @@ function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
 }
 
 export const MetricRule_MetricCostsEntry = {
-  encode(message: MetricRule_MetricCostsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule_MetricCostsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -172,7 +172,7 @@ function createBaseMetricRule(): MetricRule {
 }
 
 export const MetricRule = {
-  encode(message: MetricRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -272,7 +272,7 @@ function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
 }
 
 export const QuotaLimit_ValuesEntry = {
-  encode(message: QuotaLimit_ValuesEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaLimit_ValuesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -363,7 +363,7 @@ function createBaseQuotaLimit(): QuotaLimit {
 }
 
 export const QuotaLimit = {
-  encode(message: QuotaLimit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(50).string(message.name);
     }

@@ -15,7 +15,7 @@ function createBaseManagedService(): ManagedService {
 }
 
 export const ManagedService = {
-  encode(message: ManagedService, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(18).string(message.serviceName);
     }
@@ -92,7 +92,7 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
-  encode(message: OperationMetadata, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
     }
@@ -194,7 +194,7 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
 }
 
 export const OperationMetadata_Step = {
-  encode(message: OperationMetadata_Step, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
@@ -340,7 +340,7 @@ function createBaseDiagnostic(): Diagnostic {
 }
 
 export const Diagnostic = {
-  encode(message: Diagnostic, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }
@@ -458,7 +458,7 @@ function createBaseConfigSource(): ConfigSource {
 }
 
 export const ConfigSource = {
-  encode(message: ConfigSource, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(42).string(message.id);
     }
@@ -539,7 +539,7 @@ function createBaseConfigFile(): ConfigFile {
 }
 
 export const ConfigFile = {
-  encode(message: ConfigFile, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filePath !== "") {
       writer.uint32(10).string(message.filePath);
     }
@@ -701,7 +701,7 @@ function createBaseConfigRef(): ConfigRef {
 }
 
 export const ConfigRef = {
-  encode(message: ConfigRef, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigRef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -761,7 +761,7 @@ function createBaseChangeReport(): ChangeReport {
 }
 
 export const ChangeReport = {
-  encode(message: ChangeReport, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ChangeReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.configChanges) {
       ConfigChange.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -839,7 +839,7 @@ function createBaseRollout(): Rollout {
 }
 
 export const Rollout = {
-  encode(message: Rollout, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Rollout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rolloutId !== "") {
       writer.uint32(10).string(message.rolloutId);
     }
@@ -965,7 +965,7 @@ function createBaseTrafficPercentStrategy_PercentagesEntry(): TrafficPercentStra
 }
 
 export const TrafficPercentStrategy_PercentagesEntry = {
-  encode(message: TrafficPercentStrategy_PercentagesEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TrafficPercentStrategy_PercentagesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1038,7 +1038,7 @@ function createBaseTrafficPercentStrategy(): TrafficPercentStrategy {
 }
 
 export const TrafficPercentStrategy = {
-  encode(message: TrafficPercentStrategy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TrafficPercentStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.percentages).forEach(([key, value]) => {
       TrafficPercentStrategy_PercentagesEntry.encode({
         key: (key as any),
@@ -1121,7 +1121,7 @@ function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrateg
 }
 
 export const Rollout_DeleteServiceStrategy = {
-  encode(message: Rollout_DeleteServiceStrategy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

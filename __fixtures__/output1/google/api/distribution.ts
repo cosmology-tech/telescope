@@ -25,7 +25,7 @@ function createBaseDistribution(): Distribution {
 }
 
 export const Distribution = {
-  encode(message: Distribution, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
     }
@@ -175,7 +175,7 @@ function createBaseDistribution_Range(): Distribution_Range {
 }
 
 export const Distribution_Range = {
-  encode(message: Distribution_Range, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_Range, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.min !== 0) {
       writer.uint32(9).double(message.min);
     }
@@ -250,7 +250,7 @@ function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
 }
 
 export const Distribution_BucketOptions = {
-  encode(message: Distribution_BucketOptions, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.linearBuckets !== undefined) {
       Distribution_BucketOptions_Linear.encode(message.linearBuckets, writer.uint32(10).fork()).ldelim();
     }
@@ -336,7 +336,7 @@ function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptio
 }
 
 export const Distribution_BucketOptions_Linear = {
-  encode(message: Distribution_BucketOptions_Linear, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions_Linear, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -422,7 +422,7 @@ function createBaseDistribution_BucketOptions_Exponential(): Distribution_Bucket
 }
 
 export const Distribution_BucketOptions_Exponential = {
-  encode(message: Distribution_BucketOptions_Exponential, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions_Exponential, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -504,7 +504,7 @@ function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOpt
 }
 
 export const Distribution_BucketOptions_Explicit = {
-  encode(message: Distribution_BucketOptions_Explicit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions_Explicit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(9).fork();
 
     for (const v of message.bounds) {
@@ -584,7 +584,7 @@ function createBaseDistribution_Exemplar(): Distribution_Exemplar {
 }
 
 export const Distribution_Exemplar = {
-  encode(message: Distribution_Exemplar, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_Exemplar, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }

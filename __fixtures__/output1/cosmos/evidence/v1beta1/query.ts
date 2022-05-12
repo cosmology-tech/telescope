@@ -13,7 +13,7 @@ function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
 }
 
 export const QueryEvidenceRequest = {
-  encode(message: QueryEvidenceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.evidenceHash.length !== 0) {
       writer.uint32(10).bytes(message.evidenceHash);
     }
@@ -73,7 +73,7 @@ function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
 }
 
 export const QueryEvidenceResponse = {
-  encode(message: QueryEvidenceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.evidence !== undefined) {
       Any.encode(message.evidence, writer.uint32(10).fork()).ldelim();
     }
@@ -133,7 +133,7 @@ function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
 }
 
 export const QueryAllEvidenceRequest = {
-  encode(message: QueryAllEvidenceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -195,7 +195,7 @@ function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
 }
 
 export const QueryAllEvidenceResponse = {
-  encode(message: QueryAllEvidenceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAllEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.evidence) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }

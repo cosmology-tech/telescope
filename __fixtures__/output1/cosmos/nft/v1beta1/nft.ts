@@ -24,7 +24,7 @@ function createBaseClass(): Class {
 }
 
 export const Class = {
-  encode(message: Class, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -158,7 +158,7 @@ function createBaseNFT(): NFT {
 }
 
 export const NFT = {
-  encode(message: NFT, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }

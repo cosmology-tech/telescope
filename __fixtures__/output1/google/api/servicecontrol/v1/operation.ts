@@ -17,7 +17,7 @@ function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
 }
 
 export const Operation_LabelsEntry = {
-  encode(message: Operation_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Operation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -108,7 +108,7 @@ function createBaseOperation(): Operation {
 }
 
 export const Operation = {
-  encode(message: Operation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }

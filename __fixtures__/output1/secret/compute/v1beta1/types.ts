@@ -56,7 +56,7 @@ function createBaseAccessTypeParam(): AccessTypeParam {
 }
 
 export const AccessTypeParam = {
-  encode(message: AccessTypeParam, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccessTypeParam, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
@@ -122,7 +122,7 @@ function createBaseCodeInfo(): CodeInfo {
 }
 
 export const CodeInfo = {
-  encode(message: CodeInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
     }
@@ -217,7 +217,7 @@ function createBaseContractCustomInfo(): ContractCustomInfo {
 }
 
 export const ContractCustomInfo = {
-  encode(message: ContractCustomInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractCustomInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enclaveKey.length !== 0) {
       writer.uint32(10).bytes(message.enclaveKey);
     }
@@ -294,7 +294,7 @@ function createBaseContractInfo(): ContractInfo {
 }
 
 export const ContractInfo = {
-  encode(message: ContractInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -389,7 +389,7 @@ function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
 }
 
 export const AbsoluteTxPosition = {
-  encode(message: AbsoluteTxPosition, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
     }
@@ -462,7 +462,7 @@ function createBaseModel(): Model {
 }
 
 export const Model = {
-  encode(message: Model, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Model, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.Key.length !== 0) {
       writer.uint32(10).bytes(message.Key);
     }

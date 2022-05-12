@@ -22,7 +22,7 @@ function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
 }
 
 export const MsgConnectionOpenInit = {
-  encode(message: MsgConnectionOpenInit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -122,7 +122,7 @@ function createBaseMsgConnectionOpenInitResponse(): MsgConnectionOpenInitRespons
 }
 
 export const MsgConnectionOpenInitResponse = {
-  encode(message: MsgConnectionOpenInitResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -192,7 +192,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
 }
 
 export const MsgConnectionOpenTry = {
-  encode(message: MsgConnectionOpenTry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -375,7 +375,7 @@ function createBaseMsgConnectionOpenTryResponse(): MsgConnectionOpenTryResponse 
 }
 
 export const MsgConnectionOpenTryResponse = {
-  encode(message: MsgConnectionOpenTryResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -441,7 +441,7 @@ function createBaseMsgConnectionOpenAck(): MsgConnectionOpenAck {
 }
 
 export const MsgConnectionOpenAck = {
-  encode(message: MsgConnectionOpenAck, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
@@ -596,7 +596,7 @@ function createBaseMsgConnectionOpenAckResponse(): MsgConnectionOpenAckResponse 
 }
 
 export const MsgConnectionOpenAckResponse = {
-  encode(message: MsgConnectionOpenAckResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -650,7 +650,7 @@ function createBaseMsgConnectionOpenConfirm(): MsgConnectionOpenConfirm {
 }
 
 export const MsgConnectionOpenConfirm = {
-  encode(message: MsgConnectionOpenConfirm, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
@@ -739,7 +739,7 @@ function createBaseMsgConnectionOpenConfirmResponse(): MsgConnectionOpenConfirmR
 }
 
 export const MsgConnectionOpenConfirmResponse = {
-  encode(message: MsgConnectionOpenConfirmResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 

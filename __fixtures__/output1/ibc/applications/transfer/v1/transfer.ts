@@ -13,7 +13,7 @@ function createBaseDenomTrace(): DenomTrace {
 }
 
 export const DenomTrace = {
-  encode(message: DenomTrace, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DenomTrace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
@@ -86,7 +86,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(message: Params, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sendEnabled === true) {
       writer.uint32(8).bool(message.sendEnabled);
     }

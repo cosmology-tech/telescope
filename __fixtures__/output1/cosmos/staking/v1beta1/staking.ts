@@ -18,7 +18,7 @@ function createBaseHistoricalInfo(): HistoricalInfo {
 }
 
 export const HistoricalInfo = {
-  encode(message: HistoricalInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: HistoricalInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
     }
@@ -99,7 +99,7 @@ function createBaseCommissionRates(): CommissionRates {
 }
 
 export const CommissionRates = {
-  encode(message: CommissionRates, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommissionRates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rate !== "") {
       writer.uint32(10).string(message.rate);
     }
@@ -183,7 +183,7 @@ function createBaseCommission(): Commission {
 }
 
 export const Commission = {
-  encode(message: Commission, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Commission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commissionRates !== undefined) {
       CommissionRates.encode(message.commissionRates, writer.uint32(10).fork()).ldelim();
     }
@@ -259,7 +259,7 @@ function createBaseDescription(): Description {
 }
 
 export const Description = {
-  encode(message: Description, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Description, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.moniker !== "") {
       writer.uint32(10).string(message.moniker);
     }
@@ -383,7 +383,7 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
-  encode(message: Validator, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operatorAddress !== "") {
       writer.uint32(10).string(message.operatorAddress);
     }
@@ -603,7 +603,7 @@ function createBaseValAddresses(): ValAddresses {
 }
 
 export const ValAddresses = {
-  encode(message: ValAddresses, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValAddresses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.addresses) {
       writer.uint32(10).string(v!);
     }
@@ -670,7 +670,7 @@ function createBaseDVPair(): DVPair {
 }
 
 export const DVPair = {
-  encode(message: DVPair, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -741,7 +741,7 @@ function createBaseDVPairs(): DVPairs {
 }
 
 export const DVPairs = {
-  encode(message: DVPairs, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DVPairs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pairs) {
       DVPair.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -811,7 +811,7 @@ function createBaseDVVTriplet(): DVVTriplet {
 }
 
 export const DVVTriplet = {
-  encode(message: DVVTriplet, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DVVTriplet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -893,7 +893,7 @@ function createBaseDVVTriplets(): DVVTriplets {
 }
 
 export const DVVTriplets = {
-  encode(message: DVVTriplets, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DVVTriplets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.triplets) {
       DVVTriplet.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -963,7 +963,7 @@ function createBaseDelegation(): Delegation {
 }
 
 export const Delegation = {
-  encode(message: Delegation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Delegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1049,7 +1049,7 @@ function createBaseUnbondingDelegation(): UnbondingDelegation {
 }
 
 export const UnbondingDelegation = {
-  encode(message: UnbondingDelegation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnbondingDelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1143,7 +1143,7 @@ function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
 }
 
 export const UnbondingDelegationEntry = {
-  encode(message: UnbondingDelegationEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnbondingDelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.creationHeight.isZero()) {
       writer.uint32(8).int64(message.creationHeight);
     }
@@ -1240,7 +1240,7 @@ function createBaseRedelegationEntry(): RedelegationEntry {
 }
 
 export const RedelegationEntry = {
-  encode(message: RedelegationEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RedelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.creationHeight.isZero()) {
       writer.uint32(8).int64(message.creationHeight);
     }
@@ -1337,7 +1337,7 @@ function createBaseRedelegation(): Redelegation {
 }
 
 export const Redelegation = {
-  encode(message: Redelegation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Redelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1446,7 +1446,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(message: Params, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.unbondingTime !== undefined) Duration.encode(toDuration(message.unbondingTime), writer.uint32(10).fork()).ldelim();
 
     if (message.maxValidators !== 0) {
@@ -1561,7 +1561,7 @@ function createBaseDelegationResponse(): DelegationResponse {
 }
 
 export const DelegationResponse = {
-  encode(message: DelegationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegation !== undefined) {
       Delegation.encode(message.delegation, writer.uint32(10).fork()).ldelim();
     }
@@ -1634,7 +1634,7 @@ function createBaseRedelegationEntryResponse(): RedelegationEntryResponse {
 }
 
 export const RedelegationEntryResponse = {
-  encode(message: RedelegationEntryResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RedelegationEntryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.redelegationEntry !== undefined) {
       RedelegationEntry.encode(message.redelegationEntry, writer.uint32(10).fork()).ldelim();
     }
@@ -1707,7 +1707,7 @@ function createBaseRedelegationResponse(): RedelegationResponse {
 }
 
 export const RedelegationResponse = {
-  encode(message: RedelegationResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RedelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.redelegation !== undefined) {
       Redelegation.encode(message.redelegation, writer.uint32(10).fork()).ldelim();
     }
@@ -1786,7 +1786,7 @@ function createBasePool(): Pool {
 }
 
 export const Pool = {
-  encode(message: Pool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.notBondedTokens !== "") {
       writer.uint32(10).string(message.notBondedTokens);
     }

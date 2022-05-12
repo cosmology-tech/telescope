@@ -9,7 +9,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -57,7 +57,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -117,7 +117,7 @@ function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
 }
 
 export const QuerySigningInfoRequest = {
-  encode(message: QuerySigningInfoRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySigningInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consAddress !== "") {
       writer.uint32(10).string(message.consAddress);
     }
@@ -177,7 +177,7 @@ function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
 }
 
 export const QuerySigningInfoResponse = {
-  encode(message: QuerySigningInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySigningInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.valSigningInfo !== undefined) {
       ValidatorSigningInfo.encode(message.valSigningInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -237,7 +237,7 @@ function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
 }
 
 export const QuerySigningInfosRequest = {
-  encode(message: QuerySigningInfosRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySigningInfosRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -299,7 +299,7 @@ function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
 }
 
 export const QuerySigningInfosResponse = {
-  encode(message: QuerySigningInfosResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySigningInfosResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.info) {
       ValidatorSigningInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }

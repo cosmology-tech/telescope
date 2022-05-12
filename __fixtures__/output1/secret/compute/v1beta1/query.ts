@@ -13,7 +13,7 @@ function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
 }
 
 export const QueryContractInfoRequest = {
-  encode(message: QueryContractInfoRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -75,7 +75,7 @@ function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
 }
 
 export const QueryContractInfoResponse = {
-  encode(message: QueryContractInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -146,7 +146,7 @@ function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
 }
 
 export const QueryContractHistoryRequest = {
-  encode(message: QueryContractHistoryRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractHistoryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -206,7 +206,7 @@ function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
 }
 
 export const QueryContractsByCodeRequest = {
-  encode(message: QueryContractsByCodeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractsByCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -268,7 +268,7 @@ function createBaseContractInfoWithAddress(): ContractInfoWithAddress {
 }
 
 export const ContractInfoWithAddress = {
-  encode(message: ContractInfoWithAddress, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractInfoWithAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -339,7 +339,7 @@ function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse 
 }
 
 export const QueryContractsByCodeResponse = {
-  encode(message: QueryContractsByCodeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractsByCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.contractInfos) {
       ContractInfoWithAddress.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -407,7 +407,7 @@ function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequ
 }
 
 export const QuerySmartContractStateRequest = {
-  encode(message: QuerySmartContractStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySmartContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -478,7 +478,7 @@ function createBaseQueryContractAddressByLabelRequest(): QueryContractAddressByL
 }
 
 export const QueryContractAddressByLabelRequest = {
-  encode(message: QueryContractAddressByLabelRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractAddressByLabelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.label !== "") {
       writer.uint32(10).string(message.label);
     }
@@ -538,7 +538,7 @@ function createBaseQueryContractKeyRequest(): QueryContractKeyRequest {
 }
 
 export const QueryContractKeyRequest = {
-  encode(message: QueryContractKeyRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractKeyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -598,7 +598,7 @@ function createBaseQueryContractHashRequest(): QueryContractHashRequest {
 }
 
 export const QueryContractHashRequest = {
-  encode(message: QueryContractHashRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractHashRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -658,7 +658,7 @@ function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateRes
 }
 
 export const QuerySmartContractStateResponse = {
-  encode(message: QuerySmartContractStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySmartContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -718,7 +718,7 @@ function createBaseQueryCodeRequest(): QueryCodeRequest {
 }
 
 export const QueryCodeRequest = {
-  encode(message: QueryCodeRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -786,7 +786,7 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
 }
 
 export const CodeInfoResponse = {
-  encode(message: CodeInfoResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
     }
@@ -892,7 +892,7 @@ function createBaseQueryCodeResponse(): QueryCodeResponse {
 }
 
 export const QueryCodeResponse = {
-  encode(message: QueryCodeResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeInfo !== undefined) {
       CodeInfoResponse.encode(message.codeInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -963,7 +963,7 @@ function createBaseQueryCodesResponse(): QueryCodesResponse {
 }
 
 export const QueryCodesResponse = {
-  encode(message: QueryCodesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.codeInfos) {
       CodeInfoResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1029,7 +1029,7 @@ function createBaseQueryContractAddressByLabelResponse(): QueryContractAddressBy
 }
 
 export const QueryContractAddressByLabelResponse = {
-  encode(message: QueryContractAddressByLabelResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractAddressByLabelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -1089,7 +1089,7 @@ function createBaseQueryContractKeyResponse(): QueryContractKeyResponse {
 }
 
 export const QueryContractKeyResponse = {
-  encode(message: QueryContractKeyResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractKeyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -1149,7 +1149,7 @@ function createBaseQueryContractHashResponse(): QueryContractHashResponse {
 }
 
 export const QueryContractHashResponse = {
-  encode(message: QueryContractHashResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryContractHashResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
     }
@@ -1221,7 +1221,7 @@ function createBaseDecryptedAnswer(): DecryptedAnswer {
 }
 
 export const DecryptedAnswer = {
-  encode(message: DecryptedAnswer, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DecryptedAnswer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }

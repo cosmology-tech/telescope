@@ -15,7 +15,7 @@ function createBaseParameterChangeProposal(): ParameterChangeProposal {
 }
 
 export const ParameterChangeProposal = {
-  encode(message: ParameterChangeProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParameterChangeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -107,7 +107,7 @@ function createBaseParamChange(): ParamChange {
 }
 
 export const ParamChange = {
-  encode(message: ParamChange, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParamChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
     }

@@ -17,7 +17,7 @@ function createBaseQueryChannelRequest(): QueryChannelRequest {
 }
 
 export const QueryChannelRequest = {
-  encode(message: QueryChannelRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -92,7 +92,7 @@ function createBaseQueryChannelResponse(): QueryChannelResponse {
 }
 
 export const QueryChannelResponse = {
-  encode(message: QueryChannelResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(10).fork()).ldelim();
     }
@@ -174,7 +174,7 @@ function createBaseQueryChannelsRequest(): QueryChannelsRequest {
 }
 
 export const QueryChannelsRequest = {
-  encode(message: QueryChannelsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -238,7 +238,7 @@ function createBaseQueryChannelsResponse(): QueryChannelsResponse {
 }
 
 export const QueryChannelsResponse = {
-  encode(message: QueryChannelsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -328,7 +328,7 @@ function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequ
 }
 
 export const QueryConnectionChannelsRequest = {
-  encode(message: QueryConnectionChannelsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConnectionChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connection !== "") {
       writer.uint32(10).string(message.connection);
     }
@@ -403,7 +403,7 @@ function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsRes
 }
 
 export const QueryConnectionChannelsResponse = {
-  encode(message: QueryConnectionChannelsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryConnectionChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -493,7 +493,7 @@ function createBaseQueryChannelClientStateRequest(): QueryChannelClientStateRequ
 }
 
 export const QueryChannelClientStateRequest = {
-  encode(message: QueryChannelClientStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -568,7 +568,7 @@ function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateRes
 }
 
 export const QueryChannelClientStateResponse = {
-  encode(message: QueryChannelClientStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
     }
@@ -656,7 +656,7 @@ function createBaseQueryChannelConsensusStateRequest(): QueryChannelConsensusSta
 }
 
 export const QueryChannelConsensusStateRequest = {
-  encode(message: QueryChannelConsensusStateRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -755,7 +755,7 @@ function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusSt
 }
 
 export const QueryChannelConsensusStateResponse = {
-  encode(message: QueryChannelConsensusStateResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryChannelConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
     }
@@ -852,7 +852,7 @@ function createBaseQueryPacketCommitmentRequest(): QueryPacketCommitmentRequest 
 }
 
 export const QueryPacketCommitmentRequest = {
-  encode(message: QueryPacketCommitmentRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketCommitmentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -938,7 +938,7 @@ function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentRespons
 }
 
 export const QueryPacketCommitmentResponse = {
-  encode(message: QueryPacketCommitmentResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketCommitmentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commitment.length !== 0) {
       writer.uint32(10).bytes(message.commitment);
     }
@@ -1024,7 +1024,7 @@ function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsReques
 }
 
 export const QueryPacketCommitmentsRequest = {
-  encode(message: QueryPacketCommitmentsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketCommitmentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -1110,7 +1110,7 @@ function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsRespo
 }
 
 export const QueryPacketCommitmentsResponse = {
-  encode(message: QueryPacketCommitmentsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketCommitmentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.commitments) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1202,7 +1202,7 @@ function createBaseQueryPacketReceiptRequest(): QueryPacketReceiptRequest {
 }
 
 export const QueryPacketReceiptRequest = {
-  encode(message: QueryPacketReceiptRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketReceiptRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -1288,7 +1288,7 @@ function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
 }
 
 export const QueryPacketReceiptResponse = {
-  encode(message: QueryPacketReceiptResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketReceiptResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.received === true) {
       writer.uint32(16).bool(message.received);
     }
@@ -1374,7 +1374,7 @@ function createBaseQueryPacketAcknowledgementRequest(): QueryPacketAcknowledgeme
 }
 
 export const QueryPacketAcknowledgementRequest = {
-  encode(message: QueryPacketAcknowledgementRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketAcknowledgementRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -1460,7 +1460,7 @@ function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementResponse = {
-  encode(message: QueryPacketAcknowledgementResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.acknowledgement.length !== 0) {
       writer.uint32(10).bytes(message.acknowledgement);
     }
@@ -1548,7 +1548,7 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementsRequest = {
-  encode(message: QueryPacketAcknowledgementsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketAcknowledgementsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -1661,7 +1661,7 @@ function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledge
 }
 
 export const QueryPacketAcknowledgementsResponse = {
-  encode(message: QueryPacketAcknowledgementsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPacketAcknowledgementsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.acknowledgements) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1753,7 +1753,7 @@ function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsReques
 }
 
 export const QueryUnreceivedPacketsRequest = {
-  encode(message: QueryUnreceivedPacketsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUnreceivedPacketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -1853,7 +1853,7 @@ function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsRespo
 }
 
 export const QueryUnreceivedPacketsResponse = {
-  encode(message: QueryUnreceivedPacketsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUnreceivedPacketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(8).fork();
 
     for (const v of message.sequences) {
@@ -1945,7 +1945,7 @@ function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
 }
 
 export const QueryUnreceivedAcksRequest = {
-  encode(message: QueryUnreceivedAcksRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUnreceivedAcksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -2045,7 +2045,7 @@ function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
 }
 
 export const QueryUnreceivedAcksResponse = {
-  encode(message: QueryUnreceivedAcksResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUnreceivedAcksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(8).fork();
 
     for (const v of message.sequences) {
@@ -2135,7 +2135,7 @@ function createBaseQueryNextSequenceReceiveRequest(): QueryNextSequenceReceiveRe
 }
 
 export const QueryNextSequenceReceiveRequest = {
-  encode(message: QueryNextSequenceReceiveRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNextSequenceReceiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -2210,7 +2210,7 @@ function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveR
 }
 
 export const QueryNextSequenceReceiveResponse = {
-  encode(message: QueryNextSequenceReceiveResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNextSequenceReceiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.nextSequenceReceive.isZero()) {
       writer.uint32(8).uint64(message.nextSequenceReceive);
     }

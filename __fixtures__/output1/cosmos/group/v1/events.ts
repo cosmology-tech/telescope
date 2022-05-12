@@ -12,7 +12,7 @@ function createBaseEventCreateGroup(): EventCreateGroup {
 }
 
 export const EventCreateGroup = {
-  encode(message: EventCreateGroup, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -72,7 +72,7 @@ function createBaseEventUpdateGroup(): EventUpdateGroup {
 }
 
 export const EventUpdateGroup = {
-  encode(message: EventUpdateGroup, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventUpdateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -132,7 +132,7 @@ function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
 }
 
 export const EventCreateGroupPolicy = {
-  encode(message: EventCreateGroupPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventCreateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -192,7 +192,7 @@ function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
 }
 
 export const EventUpdateGroupPolicy = {
-  encode(message: EventUpdateGroupPolicy, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventUpdateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -252,7 +252,7 @@ function createBaseEventSubmitProposal(): EventSubmitProposal {
 }
 
 export const EventSubmitProposal = {
-  encode(message: EventSubmitProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -312,7 +312,7 @@ function createBaseEventWithdrawProposal(): EventWithdrawProposal {
 }
 
 export const EventWithdrawProposal = {
-  encode(message: EventWithdrawProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -372,7 +372,7 @@ function createBaseEventVote(): EventVote {
 }
 
 export const EventVote = {
-  encode(message: EventVote, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -434,7 +434,7 @@ function createBaseEventExec(): EventExec {
 }
 
 export const EventExec = {
-  encode(message: EventExec, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -507,7 +507,7 @@ function createBaseEventLeaveGroup(): EventLeaveGroup {
 }
 
 export const EventLeaveGroup = {
-  encode(message: EventLeaveGroup, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EventLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }

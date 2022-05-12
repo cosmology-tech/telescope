@@ -18,7 +18,7 @@ function createBaseStakeAuthorization(): StakeAuthorization {
 }
 
 export const StakeAuthorization = {
-  encode(message: StakeAuthorization, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StakeAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxTokens !== undefined) {
       Coin.encode(message.maxTokens, writer.uint32(10).fork()).ldelim();
     }
@@ -111,7 +111,7 @@ function createBaseStakeAuthorization_Validators(): StakeAuthorization_Validator
 }
 
 export const StakeAuthorization_Validators = {
-  encode(message: StakeAuthorization_Validators, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StakeAuthorization_Validators, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.address) {
       writer.uint32(10).string(v!);
     }

@@ -21,7 +21,7 @@ function createBaseDocumentation(): Documentation {
 }
 
 export const Documentation = {
-  encode(message: Documentation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Documentation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.summary !== "") {
       writer.uint32(10).string(message.summary);
     }
@@ -151,7 +151,7 @@ function createBaseDocumentationRule(): DocumentationRule {
 }
 
 export const DocumentationRule = {
-  encode(message: DocumentationRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DocumentationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -237,7 +237,7 @@ function createBasePage(): Page {
 }
 
 export const Page = {
-  encode(message: Page, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Page, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

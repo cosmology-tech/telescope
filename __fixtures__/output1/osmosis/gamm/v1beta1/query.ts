@@ -15,7 +15,7 @@ function createBaseQueryPoolRequest(): QueryPoolRequest {
 }
 
 export const QueryPoolRequest = {
-  encode(message: QueryPoolRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -75,7 +75,7 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
 }
 
 export const QueryPoolResponse = {
-  encode(message: QueryPoolResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pool !== undefined) {
       Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
     }
@@ -135,7 +135,7 @@ function createBaseQueryPoolsRequest(): QueryPoolsRequest {
 }
 
 export const QueryPoolsRequest = {
-  encode(message: QueryPoolsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
@@ -197,7 +197,7 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
 }
 
 export const QueryPoolsResponse = {
-  encode(message: QueryPoolsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -270,7 +270,7 @@ function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
 }
 
 export const QueryNumPoolsRequest = {
-  encode(message: QueryNumPoolsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNumPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -318,7 +318,7 @@ function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
 }
 
 export const QueryNumPoolsResponse = {
-  encode(message: QueryNumPoolsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNumPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.numPools.isZero()) {
       writer.uint32(8).uint64(message.numPools);
     }
@@ -378,7 +378,7 @@ function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
 }
 
 export const QueryPoolParamsRequest = {
-  encode(message: QueryPoolParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -438,7 +438,7 @@ function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
 }
 
 export const QueryPoolParamsResponse = {
-  encode(message: QueryPoolParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Any.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -498,7 +498,7 @@ function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequ
 }
 
 export const QueryTotalPoolLiquidityRequest = {
-  encode(message: QueryTotalPoolLiquidityRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalPoolLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -558,7 +558,7 @@ function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityRes
 }
 
 export const QueryTotalPoolLiquidityResponse = {
-  encode(message: QueryTotalPoolLiquidityResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalPoolLiquidityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -624,7 +624,7 @@ function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
 }
 
 export const QueryTotalSharesRequest = {
-  encode(message: QueryTotalSharesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -684,7 +684,7 @@ function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
 }
 
 export const QueryTotalSharesResponse = {
-  encode(message: QueryTotalSharesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.totalShares !== undefined) {
       Coin.encode(message.totalShares, writer.uint32(10).fork()).ldelim();
     }
@@ -748,7 +748,7 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 }
 
 export const QuerySpotPriceRequest = {
-  encode(message: QuerySpotPriceRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
     }
@@ -830,7 +830,7 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
 }
 
 export const QuerySpotPriceResponse = {
-  encode(message: QuerySpotPriceResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);
     }
@@ -896,7 +896,7 @@ function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInReques
 }
 
 export const QuerySwapExactAmountInRequest = {
-  encode(message: QuerySwapExactAmountInRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountInRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -995,7 +995,7 @@ function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInRespo
 }
 
 export const QuerySwapExactAmountInResponse = {
-  encode(message: QuerySwapExactAmountInResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
     }
@@ -1061,7 +1061,7 @@ function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequ
 }
 
 export const QuerySwapExactAmountOutRequest = {
-  encode(message: QuerySwapExactAmountOutRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountOutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -1160,7 +1160,7 @@ function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutRes
 }
 
 export const QuerySwapExactAmountOutResponse = {
-  encode(message: QuerySwapExactAmountOutResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
     }
@@ -1216,7 +1216,7 @@ function createBaseQueryTotalLiquidityRequest(): QueryTotalLiquidityRequest {
 }
 
 export const QueryTotalLiquidityRequest = {
-  encode(message: QueryTotalLiquidityRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1264,7 +1264,7 @@ function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
 }
 
 export const QueryTotalLiquidityResponse = {
-  encode(message: QueryTotalLiquidityResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalLiquidityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }

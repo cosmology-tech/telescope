@@ -16,7 +16,7 @@ function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
 }
 
 export const SetSuperfluidAssetsProposal = {
-  encode(message: SetSuperfluidAssetsProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SetSuperfluidAssetsProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -108,7 +108,7 @@ function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsPropo
 }
 
 export const RemoveSuperfluidAssetsProposal = {
-  encode(message: RemoveSuperfluidAssetsProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RemoveSuperfluidAssetsProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }

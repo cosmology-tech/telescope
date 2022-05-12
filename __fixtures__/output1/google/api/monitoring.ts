@@ -13,7 +13,7 @@ function createBaseMonitoring(): Monitoring {
 }
 
 export const Monitoring = {
-  encode(message: Monitoring, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Monitoring, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.producerDestinations) {
       Monitoring_MonitoringDestination.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -97,7 +97,7 @@ function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDest
 }
 
 export const Monitoring_MonitoringDestination = {
-  encode(message: Monitoring_MonitoringDestination, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Monitoring_MonitoringDestination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
     }

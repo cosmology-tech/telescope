@@ -17,7 +17,7 @@ function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
 }
 
 export const AllocateQuotaRequest = {
-  encode(message: AllocateQuotaRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllocateQuotaRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -101,7 +101,7 @@ function createBaseQuotaOperation_LabelsEntry(): QuotaOperation_LabelsEntry {
 }
 
 export const QuotaOperation_LabelsEntry = {
-  encode(message: QuotaOperation_LabelsEntry, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOperation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -184,7 +184,7 @@ function createBaseQuotaOperation(): QuotaOperation {
 }
 
 export const QuotaOperation = {
-  encode(message: QuotaOperation, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }
@@ -430,7 +430,7 @@ function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
 }
 
 export const AllocateQuotaResponse = {
-  encode(message: AllocateQuotaResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllocateQuotaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }
@@ -540,7 +540,7 @@ function createBaseQuotaError(): QuotaError {
 }
 
 export const QuotaError = {
-  encode(message: QuotaError, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }

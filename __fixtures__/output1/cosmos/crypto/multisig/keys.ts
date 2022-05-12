@@ -14,7 +14,7 @@ function createBaseLegacyAminoPubKey(): LegacyAminoPubKey {
 }
 
 export const LegacyAminoPubKey = {
-  encode(message: LegacyAminoPubKey, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LegacyAminoPubKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.threshold !== 0) {
       writer.uint32(8).uint32(message.threshold);
     }

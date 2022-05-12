@@ -20,7 +20,7 @@ function createBaseChannel(): Channel {
 }
 
 export const Channel = {
-  encode(message: Channel, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Channel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
     }
@@ -141,7 +141,7 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
 }
 
 export const IdentifiedChannel = {
-  encode(message: IdentifiedChannel, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdentifiedChannel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
     }
@@ -381,7 +381,7 @@ function createBaseCounterparty(): Counterparty {
 }
 
 export const Counterparty = {
-  encode(message: Counterparty, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Counterparty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -466,7 +466,7 @@ function createBasePacket(): Packet {
 }
 
 export const Packet = {
-  encode(message: Packet, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Packet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.sequence.isZero()) {
       writer.uint32(8).uint64(message.sequence);
     }
@@ -609,7 +609,7 @@ function createBasePacketState(): PacketState {
 }
 
 export const PacketState = {
-  encode(message: PacketState, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PacketState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -704,7 +704,7 @@ function createBaseAcknowledgement(): Acknowledgement {
 }
 
 export const Acknowledgement = {
-  encode(message: Acknowledgement, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Acknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== undefined) {
       writer.uint32(170).bytes(message.result);
     }

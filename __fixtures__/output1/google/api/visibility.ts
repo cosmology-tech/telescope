@@ -11,7 +11,7 @@ function createBaseVisibility(): Visibility {
 }
 
 export const Visibility = {
-  encode(message: Visibility, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Visibility, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       VisibilityRule.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -79,7 +79,7 @@ function createBaseVisibilityRule(): VisibilityRule {
 }
 
 export const VisibilityRule = {
-  encode(message: VisibilityRule, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: VisibilityRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }

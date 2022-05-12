@@ -10,7 +10,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -58,7 +58,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -118,7 +118,7 @@ function createBaseQueryValidatorOutstandingRewardsRequest(): QueryValidatorOuts
 }
 
 export const QueryValidatorOutstandingRewardsRequest = {
-  encode(message: QueryValidatorOutstandingRewardsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorOutstandingRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -178,7 +178,7 @@ function createBaseQueryValidatorOutstandingRewardsResponse(): QueryValidatorOut
 }
 
 export const QueryValidatorOutstandingRewardsResponse = {
-  encode(message: QueryValidatorOutstandingRewardsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorOutstandingRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rewards !== undefined) {
       ValidatorOutstandingRewards.encode(message.rewards, writer.uint32(10).fork()).ldelim();
     }
@@ -238,7 +238,7 @@ function createBaseQueryValidatorCommissionRequest(): QueryValidatorCommissionRe
 }
 
 export const QueryValidatorCommissionRequest = {
-  encode(message: QueryValidatorCommissionRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorCommissionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -298,7 +298,7 @@ function createBaseQueryValidatorCommissionResponse(): QueryValidatorCommissionR
 }
 
 export const QueryValidatorCommissionResponse = {
-  encode(message: QueryValidatorCommissionResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorCommissionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commission !== undefined) {
       ValidatorAccumulatedCommission.encode(message.commission, writer.uint32(10).fork()).ldelim();
     }
@@ -364,7 +364,7 @@ function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest 
 }
 
 export const QueryValidatorSlashesRequest = {
-  encode(message: QueryValidatorSlashesRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorSlashesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -459,7 +459,7 @@ function createBaseQueryValidatorSlashesResponse(): QueryValidatorSlashesRespons
 }
 
 export const QueryValidatorSlashesResponse = {
-  encode(message: QueryValidatorSlashesResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryValidatorSlashesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.slashes) {
       ValidatorSlashEvent.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -538,7 +538,7 @@ function createBaseQueryDelegationRewardsRequest(): QueryDelegationRewardsReques
 }
 
 export const QueryDelegationRewardsRequest = {
-  encode(message: QueryDelegationRewardsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegationRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -609,7 +609,7 @@ function createBaseQueryDelegationRewardsResponse(): QueryDelegationRewardsRespo
 }
 
 export const QueryDelegationRewardsResponse = {
-  encode(message: QueryDelegationRewardsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegationRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -675,7 +675,7 @@ function createBaseQueryDelegationTotalRewardsRequest(): QueryDelegationTotalRew
 }
 
 export const QueryDelegationTotalRewardsRequest = {
-  encode(message: QueryDelegationTotalRewardsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegationTotalRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -737,7 +737,7 @@ function createBaseQueryDelegationTotalRewardsResponse(): QueryDelegationTotalRe
 }
 
 export const QueryDelegationTotalRewardsResponse = {
-  encode(message: QueryDelegationTotalRewardsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegationTotalRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DelegationDelegatorReward.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -819,7 +819,7 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 }
 
 export const QueryDelegatorValidatorsRequest = {
-  encode(message: QueryDelegatorValidatorsRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -879,7 +879,7 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 
 export const QueryDelegatorValidatorsResponse = {
-  encode(message: QueryDelegatorValidatorsResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       writer.uint32(10).string(v!);
     }
@@ -944,7 +944,7 @@ function createBaseQueryDelegatorWithdrawAddressRequest(): QueryDelegatorWithdra
 }
 
 export const QueryDelegatorWithdrawAddressRequest = {
-  encode(message: QueryDelegatorWithdrawAddressRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorWithdrawAddressRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -1004,7 +1004,7 @@ function createBaseQueryDelegatorWithdrawAddressResponse(): QueryDelegatorWithdr
 }
 
 export const QueryDelegatorWithdrawAddressResponse = {
-  encode(message: QueryDelegatorWithdrawAddressResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDelegatorWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.withdrawAddress !== "") {
       writer.uint32(10).string(message.withdrawAddress);
     }
@@ -1060,7 +1060,7 @@ function createBaseQueryCommunityPoolRequest(): QueryCommunityPoolRequest {
 }
 
 export const QueryCommunityPoolRequest = {
-  encode(message: QueryCommunityPoolRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCommunityPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1108,7 +1108,7 @@ function createBaseQueryCommunityPoolResponse(): QueryCommunityPoolResponse {
 }
 
 export const QueryCommunityPoolResponse = {
-  encode(message: QueryCommunityPoolResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pool) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }

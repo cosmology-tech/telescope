@@ -16,7 +16,7 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
 }
 
 export const ReplacePoolIncentivesProposal = {
-  encode(message: ReplacePoolIncentivesProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ReplacePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -108,7 +108,7 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
 }
 
 export const UpdatePoolIncentivesProposal = {
-  encode(message: UpdatePoolIncentivesProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdatePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }

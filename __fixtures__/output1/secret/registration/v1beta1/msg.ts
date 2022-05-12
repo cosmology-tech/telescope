@@ -13,7 +13,7 @@ function createBaseRaAuthenticate(): RaAuthenticate {
 }
 
 export const RaAuthenticate = {
-  encode(message: RaAuthenticate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RaAuthenticate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender.length !== 0) {
       writer.uint32(10).bytes(message.sender);
     }
@@ -84,7 +84,7 @@ function createBaseMasterCertificate(): MasterCertificate {
 }
 
 export const MasterCertificate = {
-  encode(message: MasterCertificate, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MasterCertificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bytes.length !== 0) {
       writer.uint32(10).bytes(message.bytes);
     }
@@ -144,7 +144,7 @@ function createBaseKey(): Key {
 }
 
 export const Key = {
-  encode(message: Key, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Key, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }

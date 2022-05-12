@@ -21,7 +21,7 @@ function createBaseAppDescriptor(): AppDescriptor {
 }
 
 export const AppDescriptor = {
-  encode(message: AppDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AppDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authn !== undefined) {
       AuthnDescriptor.encode(message.authn, writer.uint32(10).fork()).ldelim();
     }
@@ -138,7 +138,7 @@ function createBaseTxDescriptor(): TxDescriptor {
 }
 
 export const TxDescriptor = {
-  encode(message: TxDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TxDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
@@ -215,7 +215,7 @@ function createBaseAuthnDescriptor(): AuthnDescriptor {
 }
 
 export const AuthnDescriptor = {
-  encode(message: AuthnDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthnDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signModes) {
       SigningModeDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -285,7 +285,7 @@ function createBaseSigningModeDescriptor(): SigningModeDescriptor {
 }
 
 export const SigningModeDescriptor = {
-  encode(message: SigningModeDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SigningModeDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -367,7 +367,7 @@ function createBaseChainDescriptor(): ChainDescriptor {
 }
 
 export const ChainDescriptor = {
-  encode(message: ChainDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ChainDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -427,7 +427,7 @@ function createBaseCodecDescriptor(): CodecDescriptor {
 }
 
 export const CodecDescriptor = {
-  encode(message: CodecDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CodecDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.interfaces) {
       InterfaceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -497,7 +497,7 @@ function createBaseInterfaceDescriptor(): InterfaceDescriptor {
 }
 
 export const InterfaceDescriptor = {
-  encode(message: InterfaceDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InterfaceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
@@ -592,7 +592,7 @@ function createBaseInterfaceImplementerDescriptor(): InterfaceImplementerDescrip
 }
 
 export const InterfaceImplementerDescriptor = {
-  encode(message: InterfaceImplementerDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InterfaceImplementerDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
@@ -665,7 +665,7 @@ function createBaseInterfaceAcceptingMessageDescriptor(): InterfaceAcceptingMess
 }
 
 export const InterfaceAcceptingMessageDescriptor = {
-  encode(message: InterfaceAcceptingMessageDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InterfaceAcceptingMessageDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
@@ -741,7 +741,7 @@ function createBaseConfigurationDescriptor(): ConfigurationDescriptor {
 }
 
 export const ConfigurationDescriptor = {
-  encode(message: ConfigurationDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigurationDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bech32AccountAddressPrefix !== "") {
       writer.uint32(10).string(message.bech32AccountAddressPrefix);
     }
@@ -801,7 +801,7 @@ function createBaseMsgDescriptor(): MsgDescriptor {
 }
 
 export const MsgDescriptor = {
-  encode(message: MsgDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(10).string(message.msgTypeUrl);
     }
@@ -857,7 +857,7 @@ function createBaseGetAuthnDescriptorRequest(): GetAuthnDescriptorRequest {
 }
 
 export const GetAuthnDescriptorRequest = {
-  encode(message: GetAuthnDescriptorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetAuthnDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -905,7 +905,7 @@ function createBaseGetAuthnDescriptorResponse(): GetAuthnDescriptorResponse {
 }
 
 export const GetAuthnDescriptorResponse = {
-  encode(message: GetAuthnDescriptorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetAuthnDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authn !== undefined) {
       AuthnDescriptor.encode(message.authn, writer.uint32(10).fork()).ldelim();
     }
@@ -961,7 +961,7 @@ function createBaseGetChainDescriptorRequest(): GetChainDescriptorRequest {
 }
 
 export const GetChainDescriptorRequest = {
-  encode(message: GetChainDescriptorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetChainDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1009,7 +1009,7 @@ function createBaseGetChainDescriptorResponse(): GetChainDescriptorResponse {
 }
 
 export const GetChainDescriptorResponse = {
-  encode(message: GetChainDescriptorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetChainDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chain !== undefined) {
       ChainDescriptor.encode(message.chain, writer.uint32(10).fork()).ldelim();
     }
@@ -1065,7 +1065,7 @@ function createBaseGetCodecDescriptorRequest(): GetCodecDescriptorRequest {
 }
 
 export const GetCodecDescriptorRequest = {
-  encode(message: GetCodecDescriptorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetCodecDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1113,7 +1113,7 @@ function createBaseGetCodecDescriptorResponse(): GetCodecDescriptorResponse {
 }
 
 export const GetCodecDescriptorResponse = {
-  encode(message: GetCodecDescriptorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetCodecDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codec !== undefined) {
       CodecDescriptor.encode(message.codec, writer.uint32(10).fork()).ldelim();
     }
@@ -1169,7 +1169,7 @@ function createBaseGetConfigurationDescriptorRequest(): GetConfigurationDescript
 }
 
 export const GetConfigurationDescriptorRequest = {
-  encode(message: GetConfigurationDescriptorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetConfigurationDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1217,7 +1217,7 @@ function createBaseGetConfigurationDescriptorResponse(): GetConfigurationDescrip
 }
 
 export const GetConfigurationDescriptorResponse = {
-  encode(message: GetConfigurationDescriptorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetConfigurationDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.config !== undefined) {
       ConfigurationDescriptor.encode(message.config, writer.uint32(10).fork()).ldelim();
     }
@@ -1273,7 +1273,7 @@ function createBaseGetQueryServicesDescriptorRequest(): GetQueryServicesDescript
 }
 
 export const GetQueryServicesDescriptorRequest = {
-  encode(message: GetQueryServicesDescriptorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetQueryServicesDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1321,7 +1321,7 @@ function createBaseGetQueryServicesDescriptorResponse(): GetQueryServicesDescrip
 }
 
 export const GetQueryServicesDescriptorResponse = {
-  encode(message: GetQueryServicesDescriptorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetQueryServicesDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.queries !== undefined) {
       QueryServicesDescriptor.encode(message.queries, writer.uint32(10).fork()).ldelim();
     }
@@ -1377,7 +1377,7 @@ function createBaseGetTxDescriptorRequest(): GetTxDescriptorRequest {
 }
 
 export const GetTxDescriptorRequest = {
-  encode(message: GetTxDescriptorRequest, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetTxDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1425,7 +1425,7 @@ function createBaseGetTxDescriptorResponse(): GetTxDescriptorResponse {
 }
 
 export const GetTxDescriptorResponse = {
-  encode(message: GetTxDescriptorResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetTxDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       TxDescriptor.encode(message.tx, writer.uint32(10).fork()).ldelim();
     }
@@ -1485,7 +1485,7 @@ function createBaseQueryServicesDescriptor(): QueryServicesDescriptor {
 }
 
 export const QueryServicesDescriptor = {
-  encode(message: QueryServicesDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryServicesDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.queryServices) {
       QueryServiceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1555,7 +1555,7 @@ function createBaseQueryServiceDescriptor(): QueryServiceDescriptor {
 }
 
 export const QueryServiceDescriptor = {
-  encode(message: QueryServiceDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryServiceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
@@ -1645,7 +1645,7 @@ function createBaseQueryMethodDescriptor(): QueryMethodDescriptor {
 }
 
 export const QueryMethodDescriptor = {
-  encode(message: QueryMethodDescriptor, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryMethodDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

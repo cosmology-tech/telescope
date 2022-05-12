@@ -18,7 +18,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(message: Params, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.communityTax !== "") {
       writer.uint32(10).string(message.communityTax);
     }
@@ -113,7 +113,7 @@ function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
 }
 
 export const ValidatorHistoricalRewards = {
-  encode(message: ValidatorHistoricalRewards, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorHistoricalRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.cumulativeRewardRatio) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -192,7 +192,7 @@ function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
 }
 
 export const ValidatorCurrentRewards = {
-  encode(message: ValidatorCurrentRewards, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorCurrentRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -269,7 +269,7 @@ function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommiss
 }
 
 export const ValidatorAccumulatedCommission = {
-  encode(message: ValidatorAccumulatedCommission, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorAccumulatedCommission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.commission) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -335,7 +335,7 @@ function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
 }
 
 export const ValidatorOutstandingRewards = {
-  encode(message: ValidatorOutstandingRewards, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorOutstandingRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -403,7 +403,7 @@ function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
 }
 
 export const ValidatorSlashEvent = {
-  encode(message: ValidatorSlashEvent, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorSlashEvent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.validatorPeriod.isZero()) {
       writer.uint32(8).uint64(message.validatorPeriod);
     }
@@ -474,7 +474,7 @@ function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
 }
 
 export const ValidatorSlashEvents = {
-  encode(message: ValidatorSlashEvents, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorSlashEvents, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validatorSlashEvents) {
       ValidatorSlashEvent.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -540,7 +540,7 @@ function createBaseFeePool(): FeePool {
 }
 
 export const FeePool = {
-  encode(message: FeePool, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FeePool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.communityPool) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -612,7 +612,7 @@ function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
 }
 
 export const CommunityPoolSpendProposal = {
-  encode(message: CommunityPoolSpendProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommunityPoolSpendProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -715,7 +715,7 @@ function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
 }
 
 export const DelegatorStartingInfo = {
-  encode(message: DelegatorStartingInfo, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DelegatorStartingInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.previousPeriod.isZero()) {
       writer.uint32(8).uint64(message.previousPeriod);
     }
@@ -799,7 +799,7 @@ function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
 }
 
 export const DelegationDelegatorReward = {
-  encode(message: DelegationDelegatorReward, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DelegationDelegatorReward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -884,7 +884,7 @@ function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendPr
 }
 
 export const CommunityPoolSpendProposalWithDeposit = {
-  encode(message: CommunityPoolSpendProposalWithDeposit, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommunityPoolSpendProposalWithDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }

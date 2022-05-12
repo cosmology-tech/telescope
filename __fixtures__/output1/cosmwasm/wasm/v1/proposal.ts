@@ -21,7 +21,7 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
 }
 
 export const StoreCodeProposal = {
-  encode(message: StoreCodeProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StoreCodeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -139,7 +139,7 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
 }
 
 export const InstantiateContractProposal = {
-  encode(message: InstantiateContractProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InstantiateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -290,7 +290,7 @@ function createBaseMigrateContractProposal(): MigrateContractProposal {
 }
 
 export const MigrateContractProposal = {
-  encode(message: MigrateContractProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MigrateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -400,7 +400,7 @@ function createBaseSudoContractProposal(): SudoContractProposal {
 }
 
 export const SudoContractProposal = {
-  encode(message: SudoContractProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SudoContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -503,7 +503,7 @@ function createBaseExecuteContractProposal(): ExecuteContractProposal {
 }
 
 export const ExecuteContractProposal = {
-  encode(message: ExecuteContractProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ExecuteContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -630,7 +630,7 @@ function createBaseUpdateAdminProposal(): UpdateAdminProposal {
 }
 
 export const UpdateAdminProposal = {
-  encode(message: UpdateAdminProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -727,7 +727,7 @@ function createBaseClearAdminProposal(): ClearAdminProposal {
 }
 
 export const ClearAdminProposal = {
-  encode(message: ClearAdminProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ClearAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -813,7 +813,7 @@ function createBasePinCodesProposal(): PinCodesProposal {
 }
 
 export const PinCodesProposal = {
-  encode(message: PinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -915,7 +915,7 @@ function createBaseUnpinCodesProposal(): UnpinCodesProposal {
 }
 
 export const UnpinCodesProposal = {
-  encode(message: UnpinCodesProposal, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnpinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }

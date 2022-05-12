@@ -17,7 +17,7 @@ function createBaseMsgSend(): MsgSend {
 }
 
 export const MsgSend = {
-  encode(message: MsgSend, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
     }
@@ -101,7 +101,7 @@ function createBaseMsgSendResponse(): MsgSendResponse {
 }
 
 export const MsgSendResponse = {
-  encode(message: MsgSendResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -151,7 +151,7 @@ function createBaseMsgMultiSend(): MsgMultiSend {
 }
 
 export const MsgMultiSend = {
-  encode(message: MsgMultiSend, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgMultiSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.inputs) {
       Input.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -229,7 +229,7 @@ function createBaseMsgMultiSendResponse(): MsgMultiSendResponse {
 }
 
 export const MsgMultiSendResponse = {
-  encode(message: MsgMultiSendResponse, writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgMultiSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
