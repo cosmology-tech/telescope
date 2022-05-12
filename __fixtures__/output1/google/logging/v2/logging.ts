@@ -1283,28 +1283,31 @@ export const TailLogEntriesResponse_SuppressionInfo = {
 
 };
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
-  /*Unexpected default.*/
+  /** REASON_UNSPECIFIED - Unexpected default. */
   REASON_UNSPECIFIED = 0,
 
-  /*Indicates suppression occurred due to relevant entries being
+  /** RATE_LIMIT - Indicates suppression occurred due to relevant entries being
   received in excess of rate limits. For quotas and limits, see
   [Logging API quotas and
-  limits](https://cloud.google.com/logging/quotas#api-limits).*/
+  limits](https://cloud.google.com/logging/quotas#api-limits). */
   RATE_LIMIT = 1,
 
-  /*Indicates suppression occurred due to the client not consuming
-  responses quickly enough.*/
+  /** NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
+  responses quickly enough. */
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }
 export function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason {
   switch (object) {
+    case 0:
     case "REASON_UNSPECIFIED":
       return TailLogEntriesResponse_SuppressionInfo_Reason.REASON_UNSPECIFIED;
 
+    case 1:
     case "RATE_LIMIT":
       return TailLogEntriesResponse_SuppressionInfo_Reason.RATE_LIMIT;
 
+    case 2:
     case "NOT_CONSUMED":
       return TailLogEntriesResponse_SuppressionInfo_Reason.NOT_CONSUMED;
 

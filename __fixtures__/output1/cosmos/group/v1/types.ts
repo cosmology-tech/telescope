@@ -379,36 +379,41 @@ export const DecisionPolicyWindows = {
 
 };
 export enum VoteOption {
-  /*VOTE_OPTION_UNSPECIFIED defines a no-op vote option.*/
+  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
   VOTE_OPTION_UNSPECIFIED = 0,
 
-  /*VOTE_OPTION_YES defines a yes vote option.*/
+  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
   VOTE_OPTION_YES = 1,
 
-  /*VOTE_OPTION_ABSTAIN defines an abstain vote option.*/
+  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
   VOTE_OPTION_ABSTAIN = 2,
 
-  /*VOTE_OPTION_NO defines a no vote option.*/
+  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
   VOTE_OPTION_NO = 3,
 
-  /*VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.*/
+  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
+    case 0:
     case "VOTE_OPTION_UNSPECIFIED":
       return VoteOption.VOTE_OPTION_UNSPECIFIED;
 
+    case 1:
     case "VOTE_OPTION_YES":
       return VoteOption.VOTE_OPTION_YES;
 
+    case 2:
     case "VOTE_OPTION_ABSTAIN":
       return VoteOption.VOTE_OPTION_ABSTAIN;
 
+    case 3:
     case "VOTE_OPTION_NO":
       return VoteOption.VOTE_OPTION_NO;
 
+    case 4:
     case "VOTE_OPTION_NO_WITH_VETO":
       return VoteOption.VOTE_OPTION_NO_WITH_VETO;
 
@@ -994,37 +999,42 @@ export const Proposal = {
 
 };
 export enum ProposalStatus {
-  /*An empty value is invalid and not allowed.*/
+  /** PROPOSAL_STATUS_UNSPECIFIED - An empty value is invalid and not allowed. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
 
-  /*Initial status of a proposal when persisted.*/
+  /** PROPOSAL_STATUS_SUBMITTED - Initial status of a proposal when persisted. */
   PROPOSAL_STATUS_SUBMITTED = 1,
 
-  /*Final status of a proposal when the final tally was executed.*/
+  /** PROPOSAL_STATUS_CLOSED - Final status of a proposal when the final tally was executed. */
   PROPOSAL_STATUS_CLOSED = 2,
 
-  /*Final status of a proposal when the group was modified before the final tally.*/
+  /** PROPOSAL_STATUS_ABORTED - Final status of a proposal when the group was modified before the final tally. */
   PROPOSAL_STATUS_ABORTED = 3,
 
-  /*A proposal can be deleted before the voting start time by the owner. When this happens the final status
-  is Withdrawn.*/
+  /** PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
+  is Withdrawn. */
   PROPOSAL_STATUS_WITHDRAWN = 4,
   UNRECOGNIZED = -1,
 }
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
+    case 0:
     case "PROPOSAL_STATUS_UNSPECIFIED":
       return ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED;
 
+    case 1:
     case "PROPOSAL_STATUS_SUBMITTED":
       return ProposalStatus.PROPOSAL_STATUS_SUBMITTED;
 
+    case 2:
     case "PROPOSAL_STATUS_CLOSED":
       return ProposalStatus.PROPOSAL_STATUS_CLOSED;
 
+    case 3:
     case "PROPOSAL_STATUS_ABORTED":
       return ProposalStatus.PROPOSAL_STATUS_ABORTED;
 
+    case 4:
     case "PROPOSAL_STATUS_WITHDRAWN":
       return ProposalStatus.PROPOSAL_STATUS_WITHDRAWN;
 
@@ -1056,30 +1066,34 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
   }
 }
 export enum ProposalResult {
-  /*An empty value is invalid and not allowed*/
+  /** PROPOSAL_RESULT_UNSPECIFIED - An empty value is invalid and not allowed */
   PROPOSAL_RESULT_UNSPECIFIED = 0,
 
-  /*Until a final tally has happened the status is unfinalized*/
+  /** PROPOSAL_RESULT_UNFINALIZED - Until a final tally has happened the status is unfinalized */
   PROPOSAL_RESULT_UNFINALIZED = 1,
 
-  /*Final result of the tally*/
+  /** PROPOSAL_RESULT_ACCEPTED - Final result of the tally */
   PROPOSAL_RESULT_ACCEPTED = 2,
 
-  /*Final result of the tally*/
+  /** PROPOSAL_RESULT_REJECTED - Final result of the tally */
   PROPOSAL_RESULT_REJECTED = 3,
   UNRECOGNIZED = -1,
 }
 export function proposalResultFromJSON(object: any): ProposalResult {
   switch (object) {
+    case 0:
     case "PROPOSAL_RESULT_UNSPECIFIED":
       return ProposalResult.PROPOSAL_RESULT_UNSPECIFIED;
 
+    case 1:
     case "PROPOSAL_RESULT_UNFINALIZED":
       return ProposalResult.PROPOSAL_RESULT_UNFINALIZED;
 
+    case 2:
     case "PROPOSAL_RESULT_ACCEPTED":
       return ProposalResult.PROPOSAL_RESULT_ACCEPTED;
 
+    case 3:
     case "PROPOSAL_RESULT_REJECTED":
       return ProposalResult.PROPOSAL_RESULT_REJECTED;
 
@@ -1108,30 +1122,34 @@ export function proposalResultToJSON(object: ProposalResult): string {
   }
 }
 export enum ProposalExecutorResult {
-  /*An empty value is not allowed.*/
+  /** PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED - An empty value is not allowed. */
   PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED = 0,
 
-  /*We have not yet run the executor.*/
+  /** PROPOSAL_EXECUTOR_RESULT_NOT_RUN - We have not yet run the executor. */
   PROPOSAL_EXECUTOR_RESULT_NOT_RUN = 1,
 
-  /*The executor was successful and proposed action updated state.*/
+  /** PROPOSAL_EXECUTOR_RESULT_SUCCESS - The executor was successful and proposed action updated state. */
   PROPOSAL_EXECUTOR_RESULT_SUCCESS = 2,
 
-  /*The executor returned an error and proposed action didn't update state.*/
+  /** PROPOSAL_EXECUTOR_RESULT_FAILURE - The executor returned an error and proposed action didn't update state. */
   PROPOSAL_EXECUTOR_RESULT_FAILURE = 3,
   UNRECOGNIZED = -1,
 }
 export function proposalExecutorResultFromJSON(object: any): ProposalExecutorResult {
   switch (object) {
+    case 0:
     case "PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED":
       return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED;
 
+    case 1:
     case "PROPOSAL_EXECUTOR_RESULT_NOT_RUN":
       return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_NOT_RUN;
 
+    case 2:
     case "PROPOSAL_EXECUTOR_RESULT_SUCCESS":
       return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_SUCCESS;
 
+    case 3:
     case "PROPOSAL_EXECUTOR_RESULT_FAILURE":
       return ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_FAILURE;
 

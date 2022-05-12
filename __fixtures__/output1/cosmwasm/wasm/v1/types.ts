@@ -2,30 +2,34 @@ import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export enum AccessType {
-  /*AccessTypeUnspecified placeholder for empty value*/
+  /** ACCESS_TYPE_UNSPECIFIED - AccessTypeUnspecified placeholder for empty value */
   ACCESS_TYPE_UNSPECIFIED = 0,
 
-  /*AccessTypeNobody forbidden*/
+  /** ACCESS_TYPE_NOBODY - AccessTypeNobody forbidden */
   ACCESS_TYPE_NOBODY = 1,
 
-  /*AccessTypeOnlyAddress restricted to an address*/
+  /** ACCESS_TYPE_ONLY_ADDRESS - AccessTypeOnlyAddress restricted to an address */
   ACCESS_TYPE_ONLY_ADDRESS = 2,
 
-  /*AccessTypeEverybody unrestricted*/
+  /** ACCESS_TYPE_EVERYBODY - AccessTypeEverybody unrestricted */
   ACCESS_TYPE_EVERYBODY = 3,
   UNRECOGNIZED = -1,
 }
 export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
+    case 0:
     case "ACCESS_TYPE_UNSPECIFIED":
       return AccessType.ACCESS_TYPE_UNSPECIFIED;
 
+    case 1:
     case "ACCESS_TYPE_NOBODY":
       return AccessType.ACCESS_TYPE_NOBODY;
 
+    case 2:
     case "ACCESS_TYPE_ONLY_ADDRESS":
       return AccessType.ACCESS_TYPE_ONLY_ADDRESS;
 
+    case 3:
     case "ACCESS_TYPE_EVERYBODY":
       return AccessType.ACCESS_TYPE_EVERYBODY;
 
@@ -497,30 +501,34 @@ export const ContractInfo = {
 
 };
 export enum ContractCodeHistoryOperationType {
-  /*ContractCodeHistoryOperationTypeUnspecified placeholder for empty value*/
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
 
-  /*ContractCodeHistoryOperationTypeInit on chain contract instantiation*/
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT - ContractCodeHistoryOperationTypeInit on chain contract instantiation */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT = 1,
 
-  /*ContractCodeHistoryOperationTypeMigrate code migration*/
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE - ContractCodeHistoryOperationTypeMigrate code migration */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE = 2,
 
-  /*ContractCodeHistoryOperationTypeGenesis based on genesis data*/
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS - ContractCodeHistoryOperationTypeGenesis based on genesis data */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
   UNRECOGNIZED = -1,
 }
 export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
   switch (object) {
+    case 0:
     case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED":
       return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED;
 
+    case 1:
     case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT":
       return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT;
 
+    case 2:
     case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE":
       return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE;
 
+    case 3:
     case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS":
       return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS;
 

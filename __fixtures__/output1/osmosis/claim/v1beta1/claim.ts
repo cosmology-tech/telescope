@@ -10,15 +10,19 @@ export enum Action {
 }
 export function actionFromJSON(object: any): Action {
   switch (object) {
+    case 0:
     case "ActionAddLiquidity":
       return Action.ActionAddLiquidity;
 
+    case 1:
     case "ActionSwap":
       return Action.ActionSwap;
 
+    case 2:
     case "ActionVote":
       return Action.ActionVote;
 
+    case 3:
     case "ActionDelegateStake":
       return Action.ActionDelegateStake;
 

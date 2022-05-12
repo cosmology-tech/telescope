@@ -568,21 +568,23 @@ export const GetServiceConfigRequest = {
 
 };
 export enum GetServiceConfigRequest_ConfigView {
-  /*Server response includes all fields except SourceInfo.*/
+  /** BASIC - Server response includes all fields except SourceInfo. */
   BASIC = 0,
 
-  /*Server response includes all fields including SourceInfo.
+  /** FULL - Server response includes all fields including SourceInfo.
   SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
   and are only available for configs created using the
-  SubmitConfigSource method.*/
+  SubmitConfigSource method. */
   FULL = 1,
   UNRECOGNIZED = -1,
 }
 export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
+    case 0:
     case "BASIC":
       return GetServiceConfigRequest_ConfigView.BASIC;
 
+    case 1:
     case "FULL":
       return GetServiceConfigRequest_ConfigView.FULL;
 

@@ -153,36 +153,41 @@ export const Property = {
 
 };
 export enum Property_PropertyType {
-  /*The type is unspecified, and will result in an error.*/
+  /** UNSPECIFIED - The type is unspecified, and will result in an error. */
   UNSPECIFIED = 0,
 
-  /*The type is `int64`.*/
+  /** INT64 - The type is `int64`. */
   INT64 = 1,
 
-  /*The type is `bool`.*/
+  /** BOOL - The type is `bool`. */
   BOOL = 2,
 
-  /*The type is `string`.*/
+  /** STRING - The type is `string`. */
   STRING = 3,
 
-  /*The type is 'double'.*/
+  /** DOUBLE - The type is 'double'. */
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
+    case 0:
     case "UNSPECIFIED":
       return Property_PropertyType.UNSPECIFIED;
 
+    case 1:
     case "INT64":
       return Property_PropertyType.INT64;
 
+    case 2:
     case "BOOL":
       return Property_PropertyType.BOOL;
 
+    case 3:
     case "STRING":
       return Property_PropertyType.STRING;
 
+    case 4:
     case "DOUBLE":
       return Property_PropertyType.DOUBLE;
 

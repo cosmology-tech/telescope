@@ -9,15 +9,19 @@ export enum AccessType {
 }
 export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
+    case 0:
     case "UNDEFINED":
       return AccessType.UNDEFINED;
 
+    case 1:
     case "NOBODY":
       return AccessType.NOBODY;
 
+    case 2:
     case "ONLY_ADDRESS":
       return AccessType.ONLY_ADDRESS;
 
+    case 3:
     case "EVERYBODY":
       return AccessType.EVERYBODY;
 

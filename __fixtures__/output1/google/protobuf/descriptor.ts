@@ -952,98 +952,116 @@ export const FieldDescriptorProto = {
 
 };
 export enum FieldDescriptorProto_Type {
-  /*0 is reserved for errors.
-  Order is weird for historical reasons.*/
+  /** TYPE_DOUBLE - 0 is reserved for errors.
+  Order is weird for historical reasons. */
   TYPE_DOUBLE = 1,
   TYPE_FLOAT = 2,
 
-  /*Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
-  negative values are likely.*/
+  /** TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
+  negative values are likely. */
   TYPE_INT64 = 3,
   TYPE_UINT64 = 4,
 
-  /*Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
-  negative values are likely.*/
+  /** TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
+  negative values are likely. */
   TYPE_INT32 = 5,
   TYPE_FIXED64 = 6,
   TYPE_FIXED32 = 7,
   TYPE_BOOL = 8,
   TYPE_STRING = 9,
 
-  /*Tag-delimited aggregate.
+  /** TYPE_GROUP - Tag-delimited aggregate.
   Group type is deprecated and not supported in proto3. However, Proto3
   implementations should still be able to parse the group wire format and
-  treat group fields as unknown fields.*/
+  treat group fields as unknown fields. */
   TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
 
-  /*New in version 2.*/
+  /** TYPE_BYTES - New in version 2. */
   TYPE_BYTES = 12,
   TYPE_UINT32 = 13,
   TYPE_ENUM = 14,
   TYPE_SFIXED32 = 15,
   TYPE_SFIXED64 = 16,
 
-  /*Uses ZigZag encoding.*/
+  /** TYPE_SINT32 - Uses ZigZag encoding. */
   TYPE_SINT32 = 17,
 
-  /*Uses ZigZag encoding.*/
+  /** TYPE_SINT64 - Uses ZigZag encoding. */
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
 export function fieldDescriptorProto_TypeFromJSON(object: any): FieldDescriptorProto_Type {
   switch (object) {
+    case 1:
     case "TYPE_DOUBLE":
       return FieldDescriptorProto_Type.TYPE_DOUBLE;
 
+    case 2:
     case "TYPE_FLOAT":
       return FieldDescriptorProto_Type.TYPE_FLOAT;
 
+    case 3:
     case "TYPE_INT64":
       return FieldDescriptorProto_Type.TYPE_INT64;
 
+    case 4:
     case "TYPE_UINT64":
       return FieldDescriptorProto_Type.TYPE_UINT64;
 
+    case 5:
     case "TYPE_INT32":
       return FieldDescriptorProto_Type.TYPE_INT32;
 
+    case 6:
     case "TYPE_FIXED64":
       return FieldDescriptorProto_Type.TYPE_FIXED64;
 
+    case 7:
     case "TYPE_FIXED32":
       return FieldDescriptorProto_Type.TYPE_FIXED32;
 
+    case 8:
     case "TYPE_BOOL":
       return FieldDescriptorProto_Type.TYPE_BOOL;
 
+    case 9:
     case "TYPE_STRING":
       return FieldDescriptorProto_Type.TYPE_STRING;
 
+    case 10:
     case "TYPE_GROUP":
       return FieldDescriptorProto_Type.TYPE_GROUP;
 
+    case 11:
     case "TYPE_MESSAGE":
       return FieldDescriptorProto_Type.TYPE_MESSAGE;
 
+    case 12:
     case "TYPE_BYTES":
       return FieldDescriptorProto_Type.TYPE_BYTES;
 
+    case 13:
     case "TYPE_UINT32":
       return FieldDescriptorProto_Type.TYPE_UINT32;
 
+    case 14:
     case "TYPE_ENUM":
       return FieldDescriptorProto_Type.TYPE_ENUM;
 
+    case 15:
     case "TYPE_SFIXED32":
       return FieldDescriptorProto_Type.TYPE_SFIXED32;
 
+    case 16:
     case "TYPE_SFIXED64":
       return FieldDescriptorProto_Type.TYPE_SFIXED64;
 
+    case 17:
     case "TYPE_SINT32":
       return FieldDescriptorProto_Type.TYPE_SINT32;
 
+    case 18:
     case "TYPE_SINT64":
       return FieldDescriptorProto_Type.TYPE_SINT64;
 
@@ -1114,7 +1132,7 @@ export function fieldDescriptorProto_TypeToJSON(object: FieldDescriptorProto_Typ
   }
 }
 export enum FieldDescriptorProto_Label {
-  /*0 is reserved for errors*/
+  /** LABEL_OPTIONAL - 0 is reserved for errors */
   LABEL_OPTIONAL = 1,
   LABEL_REQUIRED = 2,
   LABEL_REPEATED = 3,
@@ -1122,12 +1140,15 @@ export enum FieldDescriptorProto_Label {
 }
 export function fieldDescriptorProto_LabelFromJSON(object: any): FieldDescriptorProto_Label {
   switch (object) {
+    case 1:
     case "LABEL_OPTIONAL":
       return FieldDescriptorProto_Label.LABEL_OPTIONAL;
 
+    case 2:
     case "LABEL_REQUIRED":
       return FieldDescriptorProto_Label.LABEL_REQUIRED;
 
+    case 3:
     case "LABEL_REPEATED":
       return FieldDescriptorProto_Label.LABEL_REPEATED;
 
@@ -2057,25 +2078,28 @@ export const FileOptions = {
 
 };
 export enum FileOptions_OptimizeMode {
-  /*Generate complete code for parsing, serialization,
-  etc.*/
+  /** SPEED - Generate complete code for parsing, serialization,
+  etc. */
   SPEED = 1,
 
-  /*Use ReflectionOps to implement these methods.*/
+  /** CODE_SIZE - Use ReflectionOps to implement these methods. */
   CODE_SIZE = 2,
 
-  /*Generate code using MessageLite and the lite runtime.*/
+  /** LITE_RUNTIME - Generate code using MessageLite and the lite runtime. */
   LITE_RUNTIME = 3,
   UNRECOGNIZED = -1,
 }
 export function fileOptions_OptimizeModeFromJSON(object: any): FileOptions_OptimizeMode {
   switch (object) {
+    case 1:
     case "SPEED":
       return FileOptions_OptimizeMode.SPEED;
 
+    case 2:
     case "CODE_SIZE":
       return FileOptions_OptimizeMode.CODE_SIZE;
 
+    case 3:
     case "LITE_RUNTIME":
       return FileOptions_OptimizeMode.LITE_RUNTIME;
 
@@ -2363,7 +2387,7 @@ export const FieldOptions = {
 
 };
 export enum FieldOptions_CType {
-  /*Default mode.*/
+  /** STRING - Default mode. */
   STRING = 0,
   CORD = 1,
   STRING_PIECE = 2,
@@ -2371,12 +2395,15 @@ export enum FieldOptions_CType {
 }
 export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
   switch (object) {
+    case 0:
     case "STRING":
       return FieldOptions_CType.STRING;
 
+    case 1:
     case "CORD":
       return FieldOptions_CType.CORD;
 
+    case 2:
     case "STRING_PIECE":
       return FieldOptions_CType.STRING_PIECE;
 
@@ -2402,24 +2429,27 @@ export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
   }
 }
 export enum FieldOptions_JSType {
-  /*Use the default type.*/
+  /** JS_NORMAL - Use the default type. */
   JS_NORMAL = 0,
 
-  /*Use JavaScript strings.*/
+  /** JS_STRING - Use JavaScript strings. */
   JS_STRING = 1,
 
-  /*Use JavaScript numbers.*/
+  /** JS_NUMBER - Use JavaScript numbers. */
   JS_NUMBER = 2,
   UNRECOGNIZED = -1,
 }
 export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
   switch (object) {
+    case 0:
     case "JS_NORMAL":
       return FieldOptions_JSType.JS_NORMAL;
 
+    case 1:
     case "JS_STRING":
       return FieldOptions_JSType.JS_STRING;
 
+    case 2:
     case "JS_NUMBER":
       return FieldOptions_JSType.JS_NUMBER;
 
@@ -2855,21 +2885,24 @@ export const MethodOptions = {
 export enum MethodOptions_IdempotencyLevel {
   IDEMPOTENCY_UNKNOWN = 0,
 
-  /*implies idempotent*/
+  /** NO_SIDE_EFFECTS - implies idempotent */
   NO_SIDE_EFFECTS = 1,
 
-  /*idempotent, but may have side effects*/
+  /** IDEMPOTENT - idempotent, but may have side effects */
   IDEMPOTENT = 2,
   UNRECOGNIZED = -1,
 }
 export function methodOptions_IdempotencyLevelFromJSON(object: any): MethodOptions_IdempotencyLevel {
   switch (object) {
+    case 0:
     case "IDEMPOTENCY_UNKNOWN":
       return MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN;
 
+    case 1:
     case "NO_SIDE_EFFECTS":
       return MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS;
 
+    case 2:
     case "IDEMPOTENT":
       return MethodOptions_IdempotencyLevel.IDEMPOTENT;
 

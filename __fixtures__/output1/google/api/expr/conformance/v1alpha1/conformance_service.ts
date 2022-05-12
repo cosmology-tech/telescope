@@ -734,31 +734,35 @@ export const IssueDetails = {
 
 };
 export enum IssueDetails_Severity {
-  /*An unspecified severity.*/
+  /** SEVERITY_UNSPECIFIED - An unspecified severity. */
   SEVERITY_UNSPECIFIED = 0,
 
-  /*Deprecation issue for statements and method that may no longer be
-  supported or maintained.*/
+  /** DEPRECATION - Deprecation issue for statements and method that may no longer be
+  supported or maintained. */
   DEPRECATION = 1,
 
-  /*Warnings such as: unused variables.*/
+  /** WARNING - Warnings such as: unused variables. */
   WARNING = 2,
 
-  /*Errors such as: unmatched curly braces or variable redefinition.*/
+  /** ERROR - Errors such as: unmatched curly braces or variable redefinition. */
   ERROR = 3,
   UNRECOGNIZED = -1,
 }
 export function issueDetails_SeverityFromJSON(object: any): IssueDetails_Severity {
   switch (object) {
+    case 0:
     case "SEVERITY_UNSPECIFIED":
       return IssueDetails_Severity.SEVERITY_UNSPECIFIED;
 
+    case 1:
     case "DEPRECATION":
       return IssueDetails_Severity.DEPRECATION;
 
+    case 2:
     case "WARNING":
       return IssueDetails_Severity.WARNING;
 
+    case 3:
     case "ERROR":
       return IssueDetails_Severity.ERROR;
 

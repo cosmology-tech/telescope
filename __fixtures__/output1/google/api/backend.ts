@@ -233,7 +233,7 @@ export const BackendRule = {
 export enum BackendRule_PathTranslation {
   PATH_TRANSLATION_UNSPECIFIED = 0,
 
-  /*Use the backend address as-is, with no modification to the path. If the
+  /** CONSTANT_ADDRESS - Use the backend address as-is, with no modification to the path. If the
   URL pattern contains variables, the variable names and values will be
   appended to the query string. If a query string parameter and a URL
   pattern variable have the same name, this may result in duplicate keys in
@@ -255,10 +255,10 @@ export enum BackendRule_PathTranslation {
   
   Request path: /api/company/widgetworks/user/johndoe?timezone=EST
   Translated:
-  https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe*/
+  https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe */
   CONSTANT_ADDRESS = 1,
 
-  /*The request path will be appended to the backend address.
+  /** APPEND_PATH_TO_ADDRESS - The request path will be appended to the backend address.
   
   # Examples
   
@@ -276,18 +276,21 @@ export enum BackendRule_PathTranslation {
   
   Request path: /api/company/widgetworks/user/johndoe?timezone=EST
   Translated:
-  https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST*/
+  https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST */
   APPEND_PATH_TO_ADDRESS = 2,
   UNRECOGNIZED = -1,
 }
 export function backendRule_PathTranslationFromJSON(object: any): BackendRule_PathTranslation {
   switch (object) {
+    case 0:
     case "PATH_TRANSLATION_UNSPECIFIED":
       return BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED;
 
+    case 1:
     case "CONSTANT_ADDRESS":
       return BackendRule_PathTranslation.CONSTANT_ADDRESS;
 
+    case 2:
     case "APPEND_PATH_TO_ADDRESS":
       return BackendRule_PathTranslation.APPEND_PATH_TO_ADDRESS;
 

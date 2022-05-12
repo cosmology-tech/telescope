@@ -1304,22 +1304,24 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
 
 };
 export enum Exec {
-  /*An empty value means that there should be a separate
-  MsgExec request for the proposal to execute.*/
+  /** EXEC_UNSPECIFIED - An empty value means that there should be a separate
+  MsgExec request for the proposal to execute. */
   EXEC_UNSPECIFIED = 0,
 
-  /*Try to execute the proposal immediately.
+  /** EXEC_TRY - Try to execute the proposal immediately.
   If the proposal is not allowed per the DecisionPolicy,
   the proposal will still be open and could
-  be executed at a later point.*/
+  be executed at a later point. */
   EXEC_TRY = 1,
   UNRECOGNIZED = -1,
 }
 export function execFromJSON(object: any): Exec {
   switch (object) {
+    case 0:
     case "EXEC_UNSPECIFIED":
       return Exec.EXEC_UNSPECIFIED;
 
+    case 1:
     case "EXEC_TRY":
       return Exec.EXEC_TRY;
 

@@ -288,12 +288,13 @@ export const Value = {
 
 };
 export enum NullValue {
-  /*Null value.*/
+  /** NULL_VALUE - Null value. */
   NULL_VALUE = 0,
   UNRECOGNIZED = -1,
 }
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
+    case 0:
     case "NULL_VALUE":
       return NullValue.NULL_VALUE;
 

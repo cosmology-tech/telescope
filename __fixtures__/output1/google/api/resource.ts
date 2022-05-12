@@ -163,27 +163,30 @@ export const ResourceDescriptor = {
 
 };
 export enum ResourceDescriptor_History {
-  /*The "unset" value.*/
+  /** HISTORY_UNSPECIFIED - The "unset" value. */
   HISTORY_UNSPECIFIED = 0,
 
-  /*The resource originally had one pattern and launched as such, and
-  additional patterns were added later.*/
+  /** ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
+  additional patterns were added later. */
   ORIGINALLY_SINGLE_PATTERN = 1,
 
-  /*The resource has one pattern, but the API owner expects to add more
+  /** FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
   later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
-  that from being necessary once there are multiple patterns.)*/
+  that from being necessary once there are multiple patterns.) */
   FUTURE_MULTI_PATTERN = 2,
   UNRECOGNIZED = -1,
 }
 export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescriptor_History {
   switch (object) {
+    case 0:
     case "HISTORY_UNSPECIFIED":
       return ResourceDescriptor_History.HISTORY_UNSPECIFIED;
 
+    case 1:
     case "ORIGINALLY_SINGLE_PATTERN":
       return ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN;
 
+    case 2:
     case "FUTURE_MULTI_PATTERN":
       return ResourceDescriptor_History.FUTURE_MULTI_PATTERN;
 
@@ -209,25 +212,27 @@ export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_Hist
   }
 }
 export enum ResourceDescriptor_Style {
-  /*The unspecified value. Do not use.*/
+  /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
   STYLE_UNSPECIFIED = 0,
 
-  /*This resource is intended to be "declarative-friendly".
+  /** DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
   
   Declarative-friendly resources must be more strictly consistent, and
   setting this to true communicates to tools that this resource should
   adhere to declarative-friendly expectations.
   
   Note: This is used by the API linter (linter.aip.dev) to enable
-  additional checks.*/
+  additional checks. */
   DECLARATIVE_FRIENDLY = 1,
   UNRECOGNIZED = -1,
 }
 export function resourceDescriptor_StyleFromJSON(object: any): ResourceDescriptor_Style {
   switch (object) {
+    case 0:
     case "STYLE_UNSPECIFIED":
       return ResourceDescriptor_Style.STYLE_UNSPECIFIED;
 
+    case 1:
     case "DECLARATIVE_FRIENDLY":
       return ResourceDescriptor_Style.DECLARATIVE_FRIENDLY;
 

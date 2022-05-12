@@ -98,24 +98,27 @@ export const GetTxsEventRequest = {
 
 };
 export enum OrderBy {
-  /*ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.*/
+  /** ORDER_BY_UNSPECIFIED - ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case. */
   ORDER_BY_UNSPECIFIED = 0,
 
-  /*ORDER_BY_ASC defines ascending order*/
+  /** ORDER_BY_ASC - ORDER_BY_ASC defines ascending order */
   ORDER_BY_ASC = 1,
 
-  /*ORDER_BY_DESC defines descending order*/
+  /** ORDER_BY_DESC - ORDER_BY_DESC defines descending order */
   ORDER_BY_DESC = 2,
   UNRECOGNIZED = -1,
 }
 export function orderByFromJSON(object: any): OrderBy {
   switch (object) {
+    case 0:
     case "ORDER_BY_UNSPECIFIED":
       return OrderBy.ORDER_BY_UNSPECIFIED;
 
+    case 1:
     case "ORDER_BY_ASC":
       return OrderBy.ORDER_BY_ASC;
 
+    case 2:
     case "ORDER_BY_DESC":
       return OrderBy.ORDER_BY_DESC;
 
@@ -311,33 +314,37 @@ export const BroadcastTxRequest = {
 
 };
 export enum BroadcastMode {
-  /*zero-value for mode ordering*/
+  /** BROADCAST_MODE_UNSPECIFIED - zero-value for mode ordering */
   BROADCAST_MODE_UNSPECIFIED = 0,
 
-  /*BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
-  the tx to be committed in a block.*/
+  /** BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
+  the tx to be committed in a block. */
   BROADCAST_MODE_BLOCK = 1,
 
-  /*BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
-  a CheckTx execution response only.*/
+  /** BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
+  a CheckTx execution response only. */
   BROADCAST_MODE_SYNC = 2,
 
-  /*BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
-  immediately.*/
+  /** BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
+  immediately. */
   BROADCAST_MODE_ASYNC = 3,
   UNRECOGNIZED = -1,
 }
 export function broadcastModeFromJSON(object: any): BroadcastMode {
   switch (object) {
+    case 0:
     case "BROADCAST_MODE_UNSPECIFIED":
       return BroadcastMode.BROADCAST_MODE_UNSPECIFIED;
 
+    case 1:
     case "BROADCAST_MODE_BLOCK":
       return BroadcastMode.BROADCAST_MODE_BLOCK;
 
+    case 2:
     case "BROADCAST_MODE_SYNC":
       return BroadcastMode.BROADCAST_MODE_SYNC;
 
+    case 3:
     case "BROADCAST_MODE_ASYNC":
       return BroadcastMode.BROADCAST_MODE_ASYNC;
 

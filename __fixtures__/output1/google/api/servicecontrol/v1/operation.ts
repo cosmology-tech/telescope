@@ -295,21 +295,23 @@ export const Operation = {
 
 };
 export enum Importance {
-  /*Allows data caching, batching, and aggregation. It provides
-  higher performance with higher data loss risk.*/
+  /** LOW - Allows data caching, batching, and aggregation. It provides
+  higher performance with higher data loss risk. */
   LOW = 0,
 
-  /*Disables data aggregation to minimize data loss. It is for operations
+  /** HIGH - Disables data aggregation to minimize data loss. It is for operations
   that contains significant monetary value or audit trail. This feature
-  only applies to the client libraries.*/
+  only applies to the client libraries. */
   HIGH = 1,
   UNRECOGNIZED = -1,
 }
 export function importanceFromJSON(object: any): Importance {
   switch (object) {
+    case 0:
     case "LOW":
       return Importance.LOW;
 
+    case 1:
     case "HIGH":
       return Importance.HIGH;
 

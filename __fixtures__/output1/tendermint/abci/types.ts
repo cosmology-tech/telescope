@@ -850,9 +850,11 @@ export enum CheckTxType {
 }
 export function checkTxTypeFromJSON(object: any): CheckTxType {
   switch (object) {
+    case 0:
     case "NEW":
       return CheckTxType.NEW;
 
+    case 1:
     case "RECHECK":
       return CheckTxType.RECHECK;
 
@@ -2951,42 +2953,48 @@ export const ResponseOfferSnapshot = {
 
 };
 export enum ResponseOfferSnapshot_Result {
-  /*Unknown result, abort all snapshot restoration*/
+  /** UNKNOWN - Unknown result, abort all snapshot restoration */
   UNKNOWN = 0,
 
-  /*Snapshot accepted, apply chunks*/
+  /** ACCEPT - Snapshot accepted, apply chunks */
   ACCEPT = 1,
 
-  /*Abort all snapshot restoration*/
+  /** ABORT - Abort all snapshot restoration */
   ABORT = 2,
 
-  /*Reject this specific snapshot, try others*/
+  /** REJECT - Reject this specific snapshot, try others */
   REJECT = 3,
 
-  /*Reject all snapshots of this format, try others*/
+  /** REJECT_FORMAT - Reject all snapshots of this format, try others */
   REJECT_FORMAT = 4,
 
-  /*Reject all snapshots from the sender(s), try others*/
+  /** REJECT_SENDER - Reject all snapshots from the sender(s), try others */
   REJECT_SENDER = 5,
   UNRECOGNIZED = -1,
 }
 export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
   switch (object) {
+    case 0:
     case "UNKNOWN":
       return ResponseOfferSnapshot_Result.UNKNOWN;
 
+    case 1:
     case "ACCEPT":
       return ResponseOfferSnapshot_Result.ACCEPT;
 
+    case 2:
     case "ABORT":
       return ResponseOfferSnapshot_Result.ABORT;
 
+    case 3:
     case "REJECT":
       return ResponseOfferSnapshot_Result.REJECT;
 
+    case 4:
     case "REJECT_FORMAT":
       return ResponseOfferSnapshot_Result.REJECT_FORMAT;
 
+    case 5:
     case "REJECT_SENDER":
       return ResponseOfferSnapshot_Result.REJECT_SENDER;
 
@@ -3191,42 +3199,48 @@ export const ResponseApplySnapshotChunk = {
 
 };
 export enum ResponseApplySnapshotChunk_Result {
-  /*Unknown result, abort all snapshot restoration*/
+  /** UNKNOWN - Unknown result, abort all snapshot restoration */
   UNKNOWN = 0,
 
-  /*Chunk successfully accepted*/
+  /** ACCEPT - Chunk successfully accepted */
   ACCEPT = 1,
 
-  /*Abort all snapshot restoration*/
+  /** ABORT - Abort all snapshot restoration */
   ABORT = 2,
 
-  /*Retry chunk (combine with refetch and reject)*/
+  /** RETRY - Retry chunk (combine with refetch and reject) */
   RETRY = 3,
 
-  /*Retry snapshot (combine with refetch and reject)*/
+  /** RETRY_SNAPSHOT - Retry snapshot (combine with refetch and reject) */
   RETRY_SNAPSHOT = 4,
 
-  /*Reject this snapshot, try others*/
+  /** REJECT_SNAPSHOT - Reject this snapshot, try others */
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
 }
 export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
   switch (object) {
+    case 0:
     case "UNKNOWN":
       return ResponseApplySnapshotChunk_Result.UNKNOWN;
 
+    case 1:
     case "ACCEPT":
       return ResponseApplySnapshotChunk_Result.ACCEPT;
 
+    case 2:
     case "ABORT":
       return ResponseApplySnapshotChunk_Result.ABORT;
 
+    case 3:
     case "RETRY":
       return ResponseApplySnapshotChunk_Result.RETRY;
 
+    case 4:
     case "RETRY_SNAPSHOT":
       return ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT;
 
+    case 5:
     case "REJECT_SNAPSHOT":
       return ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT;
 
@@ -4002,12 +4016,15 @@ export enum EvidenceType {
 }
 export function evidenceTypeFromJSON(object: any): EvidenceType {
   switch (object) {
+    case 0:
     case "UNKNOWN":
       return EvidenceType.UNKNOWN;
 
+    case 1:
     case "DUPLICATE_VOTE":
       return EvidenceType.DUPLICATE_VOTE;
 
+    case 2:
     case "LIGHT_CLIENT_ATTACK":
       return EvidenceType.LIGHT_CLIENT_ATTACK;
 

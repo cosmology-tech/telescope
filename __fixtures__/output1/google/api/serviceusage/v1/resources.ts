@@ -108,27 +108,30 @@ export const Service = {
 
 };
 export enum State {
-  /*The default value, which indicates that the enabled state of the service
+  /** STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
   is unspecified or not meaningful. Currently, all consumers other than
-  projects (such as folders and organizations) are always in this state.*/
+  projects (such as folders and organizations) are always in this state. */
   STATE_UNSPECIFIED = 0,
 
-  /*The service cannot be used by this consumer. It has either been explicitly
-  disabled, or has never been enabled.*/
+  /** DISABLED - The service cannot be used by this consumer. It has either been explicitly
+  disabled, or has never been enabled. */
   DISABLED = 1,
 
-  /*The service has been explicitly enabled for use by this consumer.*/
+  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
 export function stateFromJSON(object: any): State {
   switch (object) {
+    case 0:
     case "STATE_UNSPECIFIED":
       return State.STATE_UNSPECIFIED;
 
+    case 1:
     case "DISABLED":
       return State.DISABLED;
 
+    case 2:
     case "ENABLED":
       return State.ENABLED;
 

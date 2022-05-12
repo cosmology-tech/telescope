@@ -2757,19 +2757,21 @@ export const GetServiceIdentityResponse = {
 
 };
 export enum GetServiceIdentityResponse_IdentityState {
-  /*Default service identity state. This value is used if the state is
-  omitted.*/
+  /** IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
+  omitted. */
   IDENTITY_STATE_UNSPECIFIED = 0,
 
-  /*Service identity has been created and can be used.*/
+  /** ACTIVE - Service identity has been created and can be used. */
   ACTIVE = 1,
   UNRECOGNIZED = -1,
 }
 export function getServiceIdentityResponse_IdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState {
   switch (object) {
+    case 0:
     case "IDENTITY_STATE_UNSPECIFIED":
       return GetServiceIdentityResponse_IdentityState.IDENTITY_STATE_UNSPECIFIED;
 
+    case 1:
     case "ACTIVE":
       return GetServiceIdentityResponse_IdentityState.ACTIVE;
 

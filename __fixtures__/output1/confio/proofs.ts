@@ -1,34 +1,40 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
 export enum HashOp {
-  /*NO_HASH is the default if no data passed. Note this is an illegal argument some places.*/
+  /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
   NO_HASH = 0,
   SHA256 = 1,
   SHA512 = 2,
   KECCAK = 3,
   RIPEMD160 = 4,
 
-  /*ripemd160(sha256(x))*/
+  /** BITCOIN - ripemd160(sha256(x)) */
   BITCOIN = 5,
   UNRECOGNIZED = -1,
 }
 export function hashOpFromJSON(object: any): HashOp {
   switch (object) {
+    case 0:
     case "NO_HASH":
       return HashOp.NO_HASH;
 
+    case 1:
     case "SHA256":
       return HashOp.SHA256;
 
+    case 2:
     case "SHA512":
       return HashOp.SHA512;
 
+    case 3:
     case "KECCAK":
       return HashOp.KECCAK;
 
+    case 4:
     case "RIPEMD160":
       return HashOp.RIPEMD160;
 
+    case 5:
     case "BITCOIN":
       return HashOp.BITCOIN;
 
@@ -63,60 +69,69 @@ export function hashOpToJSON(object: HashOp): string {
   }
 }
 export enum LengthOp {
-  /*NO_PREFIX don't include any length info*/
+  /** NO_PREFIX - NO_PREFIX don't include any length info */
   NO_PREFIX = 0,
 
-  /*VAR_PROTO uses protobuf (and go-amino) varint encoding of the length*/
+  /** VAR_PROTO - VAR_PROTO uses protobuf (and go-amino) varint encoding of the length */
   VAR_PROTO = 1,
 
-  /*VAR_RLP uses rlp int encoding of the length*/
+  /** VAR_RLP - VAR_RLP uses rlp int encoding of the length */
   VAR_RLP = 2,
 
-  /*FIXED32_BIG uses big-endian encoding of the length as a 32 bit integer*/
+  /** FIXED32_BIG - FIXED32_BIG uses big-endian encoding of the length as a 32 bit integer */
   FIXED32_BIG = 3,
 
-  /*FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit integer*/
+  /** FIXED32_LITTLE - FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit integer */
   FIXED32_LITTLE = 4,
 
-  /*FIXED64_BIG uses big-endian encoding of the length as a 64 bit integer*/
+  /** FIXED64_BIG - FIXED64_BIG uses big-endian encoding of the length as a 64 bit integer */
   FIXED64_BIG = 5,
 
-  /*FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit integer*/
+  /** FIXED64_LITTLE - FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit integer */
   FIXED64_LITTLE = 6,
 
-  /*REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32 bytes (sha256 output)*/
+  /** REQUIRE_32_BYTES - REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32 bytes (sha256 output) */
   REQUIRE_32_BYTES = 7,
 
-  /*REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output)*/
+  /** REQUIRE_64_BYTES - REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output) */
   REQUIRE_64_BYTES = 8,
   UNRECOGNIZED = -1,
 }
 export function lengthOpFromJSON(object: any): LengthOp {
   switch (object) {
+    case 0:
     case "NO_PREFIX":
       return LengthOp.NO_PREFIX;
 
+    case 1:
     case "VAR_PROTO":
       return LengthOp.VAR_PROTO;
 
+    case 2:
     case "VAR_RLP":
       return LengthOp.VAR_RLP;
 
+    case 3:
     case "FIXED32_BIG":
       return LengthOp.FIXED32_BIG;
 
+    case 4:
     case "FIXED32_LITTLE":
       return LengthOp.FIXED32_LITTLE;
 
+    case 5:
     case "FIXED64_BIG":
       return LengthOp.FIXED64_BIG;
 
+    case 6:
     case "FIXED64_LITTLE":
       return LengthOp.FIXED64_LITTLE;
 
+    case 7:
     case "REQUIRE_32_BYTES":
       return LengthOp.REQUIRE_32_BYTES;
 
+    case 8:
     case "REQUIRE_64_BYTES":
       return LengthOp.REQUIRE_64_BYTES;
 

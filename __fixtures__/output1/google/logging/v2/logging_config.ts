@@ -478,24 +478,27 @@ export const LogSink = {
 
 };
 export enum LogSink_VersionFormat {
-  /*An unspecified format version that will default to V2.*/
+  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
   VERSION_FORMAT_UNSPECIFIED = 0,
 
-  /*`LogEntry` version 2 format.*/
+  /** V2 - `LogEntry` version 2 format. */
   V2 = 1,
 
-  /*`LogEntry` version 1 format.*/
+  /** V1 - `LogEntry` version 1 format. */
   V1 = 2,
   UNRECOGNIZED = -1,
 }
 export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
   switch (object) {
+    case 0:
     case "VERSION_FORMAT_UNSPECIFIED":
       return LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED;
 
+    case 1:
     case "V2":
       return LogSink_VersionFormat.V2;
 
+    case 2:
     case "V1":
       return LogSink_VersionFormat.V1;
 
@@ -3370,26 +3373,29 @@ export const CopyLogEntriesResponse = {
 
 };
 export enum LifecycleState {
-  /*Unspecified state. This is only used/useful for distinguishing unset
-  values.*/
+  /** LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
+  values. */
   LIFECYCLE_STATE_UNSPECIFIED = 0,
 
-  /*The normal and active state.*/
+  /** ACTIVE - The normal and active state. */
   ACTIVE = 1,
 
-  /*The resource has been marked for deletion by the user. For some resources
-  (e.g. buckets), this can be reversed by an un-delete operation.*/
+  /** DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
+  (e.g. buckets), this can be reversed by an un-delete operation. */
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
 }
 export function lifecycleStateFromJSON(object: any): LifecycleState {
   switch (object) {
+    case 0:
     case "LIFECYCLE_STATE_UNSPECIFIED":
       return LifecycleState.LIFECYCLE_STATE_UNSPECIFIED;
 
+    case 1:
     case "ACTIVE":
       return LifecycleState.ACTIVE;
 
+    case 2:
     case "DELETE_REQUESTED":
       return LifecycleState.DELETE_REQUESTED;
 
@@ -3415,48 +3421,55 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
   }
 }
 export enum OperationState {
-  /*Should not be used.*/
+  /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,
 
-  /*The operation is scheduled.*/
+  /** OPERATION_STATE_SCHEDULED - The operation is scheduled. */
   OPERATION_STATE_SCHEDULED = 1,
 
-  /*Waiting for necessary permissions.*/
+  /** OPERATION_STATE_WAITING_FOR_PERMISSIONS - Waiting for necessary permissions. */
   OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2,
 
-  /*The operation is running.*/
+  /** OPERATION_STATE_RUNNING - The operation is running. */
   OPERATION_STATE_RUNNING = 3,
 
-  /*The operation was completed successfully.*/
+  /** OPERATION_STATE_SUCCEEDED - The operation was completed successfully. */
   OPERATION_STATE_SUCCEEDED = 4,
 
-  /*The operation failed.*/
+  /** OPERATION_STATE_FAILED - The operation failed. */
   OPERATION_STATE_FAILED = 5,
 
-  /*The operation was cancelled by the user.*/
+  /** OPERATION_STATE_CANCELLED - The operation was cancelled by the user. */
   OPERATION_STATE_CANCELLED = 6,
   UNRECOGNIZED = -1,
 }
 export function operationStateFromJSON(object: any): OperationState {
   switch (object) {
+    case 0:
     case "OPERATION_STATE_UNSPECIFIED":
       return OperationState.OPERATION_STATE_UNSPECIFIED;
 
+    case 1:
     case "OPERATION_STATE_SCHEDULED":
       return OperationState.OPERATION_STATE_SCHEDULED;
 
+    case 2:
     case "OPERATION_STATE_WAITING_FOR_PERMISSIONS":
       return OperationState.OPERATION_STATE_WAITING_FOR_PERMISSIONS;
 
+    case 3:
     case "OPERATION_STATE_RUNNING":
       return OperationState.OPERATION_STATE_RUNNING;
 
+    case 4:
     case "OPERATION_STATE_SUCCEEDED":
       return OperationState.OPERATION_STATE_SUCCEEDED;
 
+    case 5:
     case "OPERATION_STATE_FAILED":
       return OperationState.OPERATION_STATE_FAILED;
 
+    case 6:
     case "OPERATION_STATE_CANCELLED":
       return OperationState.OPERATION_STATE_CANCELLED;
 

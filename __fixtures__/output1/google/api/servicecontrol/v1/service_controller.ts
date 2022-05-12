@@ -373,38 +373,43 @@ export const CheckResponse_ConsumerInfo = {
 
 };
 export enum CheckResponse_ConsumerInfo_ConsumerType {
-  /*This is never used.*/
+  /** CONSUMER_TYPE_UNSPECIFIED - This is never used. */
   CONSUMER_TYPE_UNSPECIFIED = 0,
 
-  /*The consumer is a Google Cloud Project.*/
+  /** PROJECT - The consumer is a Google Cloud Project. */
   PROJECT = 1,
 
-  /*The consumer is a Google Cloud Folder.*/
+  /** FOLDER - The consumer is a Google Cloud Folder. */
   FOLDER = 2,
 
-  /*The consumer is a Google Cloud Organization.*/
+  /** ORGANIZATION - The consumer is a Google Cloud Organization. */
   ORGANIZATION = 3,
 
-  /*Service-specific resource container which is defined by the service
+  /** SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
   producer to offer their users the ability to manage service control
-  functionalities at a finer level of granularity than the PROJECT.*/
+  functionalities at a finer level of granularity than the PROJECT. */
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }
 export function checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object: any): CheckResponse_ConsumerInfo_ConsumerType {
   switch (object) {
+    case 0:
     case "CONSUMER_TYPE_UNSPECIFIED":
       return CheckResponse_ConsumerInfo_ConsumerType.CONSUMER_TYPE_UNSPECIFIED;
 
+    case 1:
     case "PROJECT":
       return CheckResponse_ConsumerInfo_ConsumerType.PROJECT;
 
+    case 2:
     case "FOLDER":
       return CheckResponse_ConsumerInfo_ConsumerType.FOLDER;
 
+    case 3:
     case "ORGANIZATION":
       return CheckResponse_ConsumerInfo_ConsumerType.ORGANIZATION;
 
+    case 4:
     case "SERVICE_SPECIFIC":
       return CheckResponse_ConsumerInfo_ConsumerType.SERVICE_SPECIFIC;
 

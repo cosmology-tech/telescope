@@ -185,12 +185,15 @@ export enum ScalarType {
 }
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
+    case 0:
     case "SCALAR_TYPE_UNSPECIFIED":
       return ScalarType.SCALAR_TYPE_UNSPECIFIED;
 
+    case 1:
     case "SCALAR_TYPE_STRING":
       return ScalarType.SCALAR_TYPE_STRING;
 
+    case 2:
     case "SCALAR_TYPE_BYTES":
       return ScalarType.SCALAR_TYPE_BYTES;
 

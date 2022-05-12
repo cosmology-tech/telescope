@@ -1,8 +1,8 @@
 export enum ErrorReason {
-  /*Do not use this default value.*/
+  /** ERROR_REASON_UNSPECIFIED - Do not use this default value. */
   ERROR_REASON_UNSPECIFIED = 0,
 
-  /*The request is calling a disabled service for a consumer.
+  /** SERVICE_DISABLED - The request is calling a disabled service for a consumer.
   
   Example of an ErrorInfo when the consumer "projects/123" contacting
   "pubsub.googleapis.com" service which is disabled:
@@ -16,10 +16,10 @@ export enum ErrorReason {
   }
   
   This response indicates the "pubsub.googleapis.com" has been disabled in
-  "projects/123".*/
+  "projects/123". */
   SERVICE_DISABLED = 1,
 
-  /*The request whose associated billing account is disabled.
+  /** BILLING_DISABLED - The request whose associated billing account is disabled.
   
   Example of an ErrorInfo when the consumer "projects/123" fails to contact
   "pubsub.googleapis.com" service because the associated billing account is
@@ -33,10 +33,10 @@ export enum ErrorReason {
   }
   }
   
-  This response indicates the billing account associated has been disabled.*/
+  This response indicates the billing account associated has been disabled. */
   BILLING_DISABLED = 2,
 
-  /*The request is denied because the provided [API
+  /** API_KEY_INVALID - The request is denied because the provided [API
   key](https://cloud.google.com/docs/authentication/api-keys) is invalid. It
   may be in a bad format, cannot be found, or has been expired).
   
@@ -48,10 +48,10 @@ export enum ErrorReason {
   "metadata": {
   "service": "storage.googleapis.com",
   }
-  }*/
+  } */
   API_KEY_INVALID = 3,
 
-  /*The request is denied because it violates [API key API
+  /** API_KEY_SERVICE_BLOCKED - The request is denied because it violates [API key API
   restrictions](https://cloud.google.com/docs/authentication/api-keys#adding_api_restrictions).
   
   Example of an ErrorInfo when the consumer "projects/123" fails to call the
@@ -64,10 +64,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   API_KEY_SERVICE_BLOCKED = 4,
 
-  /*The request is denied because it violates [API key HTTP
+  /** API_KEY_HTTP_REFERRER_BLOCKED - The request is denied because it violates [API key HTTP
   restrictions](https://cloud.google.com/docs/authentication/api-keys#adding_http_restrictions).
   
   Example of an ErrorInfo when the consumer "projects/123" fails to call
@@ -80,10 +80,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com",
   }
-  }*/
+  } */
   API_KEY_HTTP_REFERRER_BLOCKED = 7,
 
-  /*The request is denied because it violates [API key IP address
+  /** API_KEY_IP_ADDRESS_BLOCKED - The request is denied because it violates [API key IP address
   restrictions](https://cloud.google.com/docs/authentication/api-keys#adding_application_restrictions).
   
   Example of an ErrorInfo when the consumer "projects/123" fails to call
@@ -96,10 +96,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com",
   }
-  }*/
+  } */
   API_KEY_IP_ADDRESS_BLOCKED = 8,
 
-  /*The request is denied because it violates [API key Android application
+  /** API_KEY_ANDROID_APP_BLOCKED - The request is denied because it violates [API key Android application
   restrictions](https://cloud.google.com/docs/authentication/api-keys#adding_application_restrictions).
   
   Example of an ErrorInfo when the consumer "projects/123" fails to call
@@ -112,10 +112,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   API_KEY_ANDROID_APP_BLOCKED = 9,
 
-  /*The request is denied because it violates [API key iOS application
+  /** API_KEY_IOS_APP_BLOCKED - The request is denied because it violates [API key iOS application
   restrictions](https://cloud.google.com/docs/authentication/api-keys#adding_application_restrictions).
   
   Example of an ErrorInfo when the consumer "projects/123" fails to call
@@ -128,10 +128,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   API_KEY_IOS_APP_BLOCKED = 13,
 
-  /*The request is denied because there is not enough rate quota for the
+  /** RATE_LIMIT_EXCEEDED - The request is denied because there is not enough rate quota for the
   consumer.
   
   Example of an ErrorInfo when the consumer "projects/123" fails to contact
@@ -163,10 +163,10 @@ export enum ErrorReason {
   "quota_metric": "dataflow.googleapis.com/default_requests",
   "quota_limit": "DefaultRequestsPerMinutePerOrganization"
   }
-  }*/
+  } */
   RATE_LIMIT_EXCEEDED = 5,
 
-  /*The request is denied because there is not enough resource quota for the
+  /** RESOURCE_QUOTA_EXCEEDED - The request is denied because there is not enough resource quota for the
   consumer.
   
   Example of an ErrorInfo when the consumer "projects/123" fails to contact
@@ -197,10 +197,10 @@ export enum ErrorReason {
   "quota_metric": "dataflow.googleapis.com/job_count",
   "quota_limit": "jobs-per-organization"
   }
-  }*/
+  } */
   RESOURCE_QUOTA_EXCEEDED = 6,
 
-  /*The request whose associated billing account address is in a tax restricted
+  /** LOCATION_TAX_POLICY_VIOLATED - The request whose associated billing account address is in a tax restricted
   location, violates the local tax restrictions when creating resources in
   the restricted region.
   
@@ -218,10 +218,10 @@ export enum ErrorReason {
   }
   
   This response indicates creating the Cloud Storage Bucket in
-  "locations/asia-northeast3" violates the location tax restriction.*/
+  "locations/asia-northeast3" violates the location tax restriction. */
   LOCATION_TAX_POLICY_VIOLATED = 10,
 
-  /*The request is denied because the caller does not have required permission
+  /** USER_PROJECT_DENIED - The request is denied because the caller does not have required permission
   on the user project "projects/123" or the user project is invalid. For more
   information, check the [userProject System
   Parameters](https://cloud.google.com/apis/docs/system-parameters).
@@ -235,10 +235,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   USER_PROJECT_DENIED = 11,
 
-  /*The request is denied because the consumer "projects/123" is suspended due
+  /** CONSUMER_SUSPENDED - The request is denied because the consumer "projects/123" is suspended due
   to Terms of Service(Tos) violations. Check [Project suspension
   guidelines](https://cloud.google.com/resource-manager/docs/project-suspension-guidelines)
   for more information.
@@ -252,10 +252,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   CONSUMER_SUSPENDED = 12,
 
-  /*The request is denied because the associated consumer is invalid. It may be
+  /** CONSUMER_INVALID - The request is denied because the associated consumer is invalid. It may be
   in a bad format, cannot be found, or have been deleted.
   
   Example of an ErrorInfo when calling Cloud Storage service with the
@@ -267,10 +267,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   CONSUMER_INVALID = 14,
 
-  /*The request is denied because it violates [VPC Service
+  /** SECURITY_POLICY_VIOLATED - The request is denied because it violates [VPC Service
   Controls](https://cloud.google.com/vpc-service-controls/docs/overview).
   The 'uid' field is a random generated identifier that customer can use it
   to search the audit log for a request rejected by VPC Service Controls. For
@@ -288,10 +288,10 @@ export enum ErrorReason {
   "consumer": "projects/123",
   "service": "storage.googleapis.com"
   }
-  }*/
+  } */
   SECURITY_POLICY_VIOLATED = 15,
 
-  /*The request is denied because the provided access token has expired.
+  /** ACCESS_TOKEN_EXPIRED - The request is denied because the provided access token has expired.
   
   Example of an ErrorInfo when the request is calling Cloud Storage service
   with an expired access token:
@@ -302,10 +302,10 @@ export enum ErrorReason {
   "service": "storage.googleapis.com",
   "method": "google.storage.v1.Storage.GetObject"
   }
-  }*/
+  } */
   ACCESS_TOKEN_EXPIRED = 16,
 
-  /*The request is denied because the provided access token doesn't have at
+  /** ACCESS_TOKEN_SCOPE_INSUFFICIENT - The request is denied because the provided access token doesn't have at
   least one of the acceptable scopes required for the API. Please check
   [OAuth 2.0 Scopes for Google
   APIs](https://developers.google.com/identity/protocols/oauth2/scopes) for
@@ -321,10 +321,10 @@ export enum ErrorReason {
   "service": "storage.googleapis.com",
   "method": "google.storage.v1.Storage.GetObject"
   }
-  }*/
+  } */
   ACCESS_TOKEN_SCOPE_INSUFFICIENT = 17,
 
-  /*The request is denied because the account associated with the provided
+  /** ACCOUNT_STATE_INVALID - The request is denied because the account associated with the provided
   access token is in an invalid state, such as disabled or deleted.
   For more information, see https://cloud.google.com/docs/authentication.
   
@@ -343,10 +343,10 @@ export enum ErrorReason {
   "method": "google.storage.v1.Storage.GetObject",
   "email": "user@123.iam.gserviceaccount.com"
   }
-  }*/
+  } */
   ACCOUNT_STATE_INVALID = 18,
 
-  /*The request is denied because the type of the provided access token is not
+  /** ACCESS_TOKEN_TYPE_UNSUPPORTED - The request is denied because the type of the provided access token is not
   supported by the API being called.
   
   Example of an ErrorInfo when the request is to the Cloud Storage API with
@@ -358,69 +358,89 @@ export enum ErrorReason {
   "service": "storage.googleapis.com",
   "method": "google.storage.v1.Storage.GetObject"
   }
-  }*/
+  } */
   ACCESS_TOKEN_TYPE_UNSUPPORTED = 19,
   UNRECOGNIZED = -1,
 }
 export function errorReasonFromJSON(object: any): ErrorReason {
   switch (object) {
+    case 0:
     case "ERROR_REASON_UNSPECIFIED":
       return ErrorReason.ERROR_REASON_UNSPECIFIED;
 
+    case 1:
     case "SERVICE_DISABLED":
       return ErrorReason.SERVICE_DISABLED;
 
+    case 2:
     case "BILLING_DISABLED":
       return ErrorReason.BILLING_DISABLED;
 
+    case 3:
     case "API_KEY_INVALID":
       return ErrorReason.API_KEY_INVALID;
 
+    case 4:
     case "API_KEY_SERVICE_BLOCKED":
       return ErrorReason.API_KEY_SERVICE_BLOCKED;
 
+    case 7:
     case "API_KEY_HTTP_REFERRER_BLOCKED":
       return ErrorReason.API_KEY_HTTP_REFERRER_BLOCKED;
 
+    case 8:
     case "API_KEY_IP_ADDRESS_BLOCKED":
       return ErrorReason.API_KEY_IP_ADDRESS_BLOCKED;
 
+    case 9:
     case "API_KEY_ANDROID_APP_BLOCKED":
       return ErrorReason.API_KEY_ANDROID_APP_BLOCKED;
 
+    case 13:
     case "API_KEY_IOS_APP_BLOCKED":
       return ErrorReason.API_KEY_IOS_APP_BLOCKED;
 
+    case 5:
     case "RATE_LIMIT_EXCEEDED":
       return ErrorReason.RATE_LIMIT_EXCEEDED;
 
+    case 6:
     case "RESOURCE_QUOTA_EXCEEDED":
       return ErrorReason.RESOURCE_QUOTA_EXCEEDED;
 
+    case 10:
     case "LOCATION_TAX_POLICY_VIOLATED":
       return ErrorReason.LOCATION_TAX_POLICY_VIOLATED;
 
+    case 11:
     case "USER_PROJECT_DENIED":
       return ErrorReason.USER_PROJECT_DENIED;
 
+    case 12:
     case "CONSUMER_SUSPENDED":
       return ErrorReason.CONSUMER_SUSPENDED;
 
+    case 14:
     case "CONSUMER_INVALID":
       return ErrorReason.CONSUMER_INVALID;
 
+    case 15:
     case "SECURITY_POLICY_VIOLATED":
       return ErrorReason.SECURITY_POLICY_VIOLATED;
 
+    case 16:
     case "ACCESS_TOKEN_EXPIRED":
       return ErrorReason.ACCESS_TOKEN_EXPIRED;
 
+    case 17:
     case "ACCESS_TOKEN_SCOPE_INSUFFICIENT":
       return ErrorReason.ACCESS_TOKEN_SCOPE_INSUFFICIENT;
 
+    case 18:
     case "ACCOUNT_STATE_INVALID":
       return ErrorReason.ACCOUNT_STATE_INVALID;
 
+    case 19:
     case "ACCESS_TOKEN_TYPE_UNSUPPORTED":
       return ErrorReason.ACCESS_TOKEN_TYPE_UNSUPPORTED;
 

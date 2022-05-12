@@ -828,54 +828,61 @@ export const Type_AbstractType = {
 
 };
 export enum Type_PrimitiveType {
-  /*Unspecified type.*/
+  /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
   PRIMITIVE_TYPE_UNSPECIFIED = 0,
 
-  /*Boolean type.*/
+  /** BOOL - Boolean type. */
   BOOL = 1,
 
-  /*Int64 type.
+  /** INT64 - Int64 type.
   
-  Proto-based integer values are widened to int64.*/
+  Proto-based integer values are widened to int64. */
   INT64 = 2,
 
-  /*Uint64 type.
+  /** UINT64 - Uint64 type.
   
-  Proto-based unsigned integer values are widened to uint64.*/
+  Proto-based unsigned integer values are widened to uint64. */
   UINT64 = 3,
 
-  /*Double type.
+  /** DOUBLE - Double type.
   
-  Proto-based float values are widened to double values.*/
+  Proto-based float values are widened to double values. */
   DOUBLE = 4,
 
-  /*String type.*/
+  /** STRING - String type. */
   STRING = 5,
 
-  /*Bytes type.*/
+  /** BYTES - Bytes type. */
   BYTES = 6,
   UNRECOGNIZED = -1,
 }
 export function type_PrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
   switch (object) {
+    case 0:
     case "PRIMITIVE_TYPE_UNSPECIFIED":
       return Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED;
 
+    case 1:
     case "BOOL":
       return Type_PrimitiveType.BOOL;
 
+    case 2:
     case "INT64":
       return Type_PrimitiveType.INT64;
 
+    case 3:
     case "UINT64":
       return Type_PrimitiveType.UINT64;
 
+    case 4:
     case "DOUBLE":
       return Type_PrimitiveType.DOUBLE;
 
+    case 5:
     case "STRING":
       return Type_PrimitiveType.STRING;
 
+    case 6:
     case "BYTES":
       return Type_PrimitiveType.BYTES;
 
@@ -913,34 +920,38 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
   }
 }
 export enum Type_WellKnownType {
-  /*Unspecified type.*/
+  /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
   WELL_KNOWN_TYPE_UNSPECIFIED = 0,
 
-  /*Well-known protobuf.Any type.
+  /** ANY - Well-known protobuf.Any type.
   
   Any types are a polymorphic message type. During type-checking they are
   treated like `DYN` types, but at runtime they are resolved to a specific
-  message type specified at evaluation time.*/
+  message type specified at evaluation time. */
   ANY = 1,
 
-  /*Well-known protobuf.Timestamp type, internally referenced as `timestamp`.*/
+  /** TIMESTAMP - Well-known protobuf.Timestamp type, internally referenced as `timestamp`. */
   TIMESTAMP = 2,
 
-  /*Well-known protobuf.Duration type, internally referenced as `duration`.*/
+  /** DURATION - Well-known protobuf.Duration type, internally referenced as `duration`. */
   DURATION = 3,
   UNRECOGNIZED = -1,
 }
 export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
   switch (object) {
+    case 0:
     case "WELL_KNOWN_TYPE_UNSPECIFIED":
       return Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED;
 
+    case 1:
     case "ANY":
       return Type_WellKnownType.ANY;
 
+    case 2:
     case "TIMESTAMP":
       return Type_WellKnownType.TIMESTAMP;
 
+    case 3:
     case "DURATION":
       return Type_WellKnownType.DURATION;
 

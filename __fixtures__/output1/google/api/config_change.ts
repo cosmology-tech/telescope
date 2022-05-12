@@ -179,33 +179,37 @@ export const Advice = {
 
 };
 export enum ChangeType {
-  /*No value was provided.*/
+  /** CHANGE_TYPE_UNSPECIFIED - No value was provided. */
   CHANGE_TYPE_UNSPECIFIED = 0,
 
-  /*The changed object exists in the 'new' service configuration, but not
-  in the 'old' service configuration.*/
+  /** ADDED - The changed object exists in the 'new' service configuration, but not
+  in the 'old' service configuration. */
   ADDED = 1,
 
-  /*The changed object exists in the 'old' service configuration, but not
-  in the 'new' service configuration.*/
+  /** REMOVED - The changed object exists in the 'old' service configuration, but not
+  in the 'new' service configuration. */
   REMOVED = 2,
 
-  /*The changed object exists in both service configurations, but its value
-  is different.*/
+  /** MODIFIED - The changed object exists in both service configurations, but its value
+  is different. */
   MODIFIED = 3,
   UNRECOGNIZED = -1,
 }
 export function changeTypeFromJSON(object: any): ChangeType {
   switch (object) {
+    case 0:
     case "CHANGE_TYPE_UNSPECIFIED":
       return ChangeType.CHANGE_TYPE_UNSPECIFIED;
 
+    case 1:
     case "ADDED":
       return ChangeType.ADDED;
 
+    case 2:
     case "REMOVED":
       return ChangeType.REMOVED;
 
+    case 3:
     case "MODIFIED":
       return ChangeType.MODIFIED;
 

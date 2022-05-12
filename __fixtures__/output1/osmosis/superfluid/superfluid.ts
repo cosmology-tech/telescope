@@ -8,9 +8,11 @@ export enum SuperfluidAssetType {
 }
 export function superfluidAssetTypeFromJSON(object: any): SuperfluidAssetType {
   switch (object) {
+    case 0:
     case "SuperfluidAssetTypeNative":
       return SuperfluidAssetType.SuperfluidAssetTypeNative;
 
+    case 1:
     case "SuperfluidAssetTypeLPShare":
       return SuperfluidAssetType.SuperfluidAssetTypeLPShare;
 

@@ -327,120 +327,139 @@ export const Field = {
 
 };
 export enum Field_Kind {
-  /*Field type unknown.*/
+  /** TYPE_UNKNOWN - Field type unknown. */
   TYPE_UNKNOWN = 0,
 
-  /*Field type double.*/
+  /** TYPE_DOUBLE - Field type double. */
   TYPE_DOUBLE = 1,
 
-  /*Field type float.*/
+  /** TYPE_FLOAT - Field type float. */
   TYPE_FLOAT = 2,
 
-  /*Field type int64.*/
+  /** TYPE_INT64 - Field type int64. */
   TYPE_INT64 = 3,
 
-  /*Field type uint64.*/
+  /** TYPE_UINT64 - Field type uint64. */
   TYPE_UINT64 = 4,
 
-  /*Field type int32.*/
+  /** TYPE_INT32 - Field type int32. */
   TYPE_INT32 = 5,
 
-  /*Field type fixed64.*/
+  /** TYPE_FIXED64 - Field type fixed64. */
   TYPE_FIXED64 = 6,
 
-  /*Field type fixed32.*/
+  /** TYPE_FIXED32 - Field type fixed32. */
   TYPE_FIXED32 = 7,
 
-  /*Field type bool.*/
+  /** TYPE_BOOL - Field type bool. */
   TYPE_BOOL = 8,
 
-  /*Field type string.*/
+  /** TYPE_STRING - Field type string. */
   TYPE_STRING = 9,
 
-  /*Field type group. Proto2 syntax only, and deprecated.*/
+  /** TYPE_GROUP - Field type group. Proto2 syntax only, and deprecated. */
   TYPE_GROUP = 10,
 
-  /*Field type message.*/
+  /** TYPE_MESSAGE - Field type message. */
   TYPE_MESSAGE = 11,
 
-  /*Field type bytes.*/
+  /** TYPE_BYTES - Field type bytes. */
   TYPE_BYTES = 12,
 
-  /*Field type uint32.*/
+  /** TYPE_UINT32 - Field type uint32. */
   TYPE_UINT32 = 13,
 
-  /*Field type enum.*/
+  /** TYPE_ENUM - Field type enum. */
   TYPE_ENUM = 14,
 
-  /*Field type sfixed32.*/
+  /** TYPE_SFIXED32 - Field type sfixed32. */
   TYPE_SFIXED32 = 15,
 
-  /*Field type sfixed64.*/
+  /** TYPE_SFIXED64 - Field type sfixed64. */
   TYPE_SFIXED64 = 16,
 
-  /*Field type sint32.*/
+  /** TYPE_SINT32 - Field type sint32. */
   TYPE_SINT32 = 17,
 
-  /*Field type sint64.*/
+  /** TYPE_SINT64 - Field type sint64. */
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
 export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
+    case 0:
     case "TYPE_UNKNOWN":
       return Field_Kind.TYPE_UNKNOWN;
 
+    case 1:
     case "TYPE_DOUBLE":
       return Field_Kind.TYPE_DOUBLE;
 
+    case 2:
     case "TYPE_FLOAT":
       return Field_Kind.TYPE_FLOAT;
 
+    case 3:
     case "TYPE_INT64":
       return Field_Kind.TYPE_INT64;
 
+    case 4:
     case "TYPE_UINT64":
       return Field_Kind.TYPE_UINT64;
 
+    case 5:
     case "TYPE_INT32":
       return Field_Kind.TYPE_INT32;
 
+    case 6:
     case "TYPE_FIXED64":
       return Field_Kind.TYPE_FIXED64;
 
+    case 7:
     case "TYPE_FIXED32":
       return Field_Kind.TYPE_FIXED32;
 
+    case 8:
     case "TYPE_BOOL":
       return Field_Kind.TYPE_BOOL;
 
+    case 9:
     case "TYPE_STRING":
       return Field_Kind.TYPE_STRING;
 
+    case 10:
     case "TYPE_GROUP":
       return Field_Kind.TYPE_GROUP;
 
+    case 11:
     case "TYPE_MESSAGE":
       return Field_Kind.TYPE_MESSAGE;
 
+    case 12:
     case "TYPE_BYTES":
       return Field_Kind.TYPE_BYTES;
 
+    case 13:
     case "TYPE_UINT32":
       return Field_Kind.TYPE_UINT32;
 
+    case 14:
     case "TYPE_ENUM":
       return Field_Kind.TYPE_ENUM;
 
+    case 15:
     case "TYPE_SFIXED32":
       return Field_Kind.TYPE_SFIXED32;
 
+    case 16:
     case "TYPE_SFIXED64":
       return Field_Kind.TYPE_SFIXED64;
 
+    case 17:
     case "TYPE_SINT32":
       return Field_Kind.TYPE_SINT32;
 
+    case 18:
     case "TYPE_SINT64":
       return Field_Kind.TYPE_SINT64;
 
@@ -514,30 +533,34 @@ export function field_KindToJSON(object: Field_Kind): string {
   }
 }
 export enum Field_Cardinality {
-  /*For fields with unknown cardinality.*/
+  /** CARDINALITY_UNKNOWN - For fields with unknown cardinality. */
   CARDINALITY_UNKNOWN = 0,
 
-  /*For optional fields.*/
+  /** CARDINALITY_OPTIONAL - For optional fields. */
   CARDINALITY_OPTIONAL = 1,
 
-  /*For required fields. Proto2 syntax only.*/
+  /** CARDINALITY_REQUIRED - For required fields. Proto2 syntax only. */
   CARDINALITY_REQUIRED = 2,
 
-  /*For repeated fields.*/
+  /** CARDINALITY_REPEATED - For repeated fields. */
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
+    case 0:
     case "CARDINALITY_UNKNOWN":
       return Field_Cardinality.CARDINALITY_UNKNOWN;
 
+    case 1:
     case "CARDINALITY_OPTIONAL":
       return Field_Cardinality.CARDINALITY_OPTIONAL;
 
+    case 2:
     case "CARDINALITY_REQUIRED":
       return Field_Cardinality.CARDINALITY_REQUIRED;
 
+    case 3:
     case "CARDINALITY_REPEATED":
       return Field_Cardinality.CARDINALITY_REPEATED;
 
@@ -854,18 +877,20 @@ export const Option = {
 
 };
 export enum Syntax {
-  /*Syntax `proto2`.*/
+  /** SYNTAX_PROTO2 - Syntax `proto2`. */
   SYNTAX_PROTO2 = 0,
 
-  /*Syntax `proto3`.*/
+  /** SYNTAX_PROTO3 - Syntax `proto3`. */
   SYNTAX_PROTO3 = 1,
   UNRECOGNIZED = -1,
 }
 export function syntaxFromJSON(object: any): Syntax {
   switch (object) {
+    case 0:
     case "SYNTAX_PROTO2":
       return Syntax.SYNTAX_PROTO2;
 
+    case 1:
     case "SYNTAX_PROTO3":
       return Syntax.SYNTAX_PROTO3;
 

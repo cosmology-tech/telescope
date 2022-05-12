@@ -277,18 +277,20 @@ export const LogMetric = {
 
 };
 export enum ApiVersion {
-  /*Logging API v2.*/
+  /** V2 - Logging API v2. */
   V2 = 0,
 
-  /*Logging API v1.*/
+  /** V1 - Logging API v1. */
   V1 = 1,
   UNRECOGNIZED = -1,
 }
 export function apiVersionFromJSON(object: any): ApiVersion {
   switch (object) {
+    case 0:
     case "V2":
       return ApiVersion.V2;
 
+    case 1:
     case "V1":
       return ApiVersion.V1;
 

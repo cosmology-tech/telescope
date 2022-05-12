@@ -208,26 +208,29 @@ export const DisableServiceRequest = {
 
 };
 export enum DisableServiceRequest_CheckIfServiceHasUsage {
-  /*When unset, the default behavior is used, which is SKIP.*/
+  /** CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED - When unset, the default behavior is used, which is SKIP. */
   CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED = 0,
 
-  /*If set, skip checking service usage when disabling a service.*/
+  /** SKIP - If set, skip checking service usage when disabling a service. */
   SKIP = 1,
 
-  /*If set, service usage is checked when disabling the service. If a
+  /** CHECK - If set, service usage is checked when disabling the service. If a
   service, or its dependents, has usage in the last 30 days, the request
-  returns a FAILED_PRECONDITION error.*/
+  returns a FAILED_PRECONDITION error. */
   CHECK = 2,
   UNRECOGNIZED = -1,
 }
 export function disableServiceRequest_CheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
   switch (object) {
+    case 0:
     case "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED":
       return DisableServiceRequest_CheckIfServiceHasUsage.CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED;
 
+    case 1:
     case "SKIP":
       return DisableServiceRequest_CheckIfServiceHasUsage.SKIP;
 
+    case 2:
     case "CHECK":
       return DisableServiceRequest_CheckIfServiceHasUsage.CHECK;
 

@@ -87,24 +87,27 @@ export const LabelDescriptor = {
 
 };
 export enum LabelDescriptor_ValueType {
-  /*A variable-length string. This is the default.*/
+  /** STRING - A variable-length string. This is the default. */
   STRING = 0,
 
-  /*Boolean; true or false.*/
+  /** BOOL - Boolean; true or false. */
   BOOL = 1,
 
-  /*A 64-bit signed integer.*/
+  /** INT64 - A 64-bit signed integer. */
   INT64 = 2,
   UNRECOGNIZED = -1,
 }
 export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
   switch (object) {
+    case 0:
     case "STRING":
       return LabelDescriptor_ValueType.STRING;
 
+    case 1:
     case "BOOL":
       return LabelDescriptor_ValueType.BOOL;
 
+    case 2:
     case "INT64":
       return LabelDescriptor_ValueType.INT64;
 

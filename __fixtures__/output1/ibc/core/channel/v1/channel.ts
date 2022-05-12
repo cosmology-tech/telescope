@@ -264,38 +264,43 @@ export const IdentifiedChannel = {
 
 };
 export enum State {
-  /*Default State*/
+  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
   STATE_UNINITIALIZED_UNSPECIFIED = 0,
 
-  /*A channel has just started the opening handshake.*/
+  /** STATE_INIT - A channel has just started the opening handshake. */
   STATE_INIT = 1,
 
-  /*A channel has acknowledged the handshake step on the counterparty chain.*/
+  /** STATE_TRYOPEN - A channel has acknowledged the handshake step on the counterparty chain. */
   STATE_TRYOPEN = 2,
 
-  /*A channel has completed the handshake. Open channels are
-  ready to send and receive packets.*/
+  /** STATE_OPEN - A channel has completed the handshake. Open channels are
+  ready to send and receive packets. */
   STATE_OPEN = 3,
 
-  /*A channel has been closed and can no longer be used to send or receive
-  packets.*/
+  /** STATE_CLOSED - A channel has been closed and can no longer be used to send or receive
+  packets. */
   STATE_CLOSED = 4,
   UNRECOGNIZED = -1,
 }
 export function stateFromJSON(object: any): State {
   switch (object) {
+    case 0:
     case "STATE_UNINITIALIZED_UNSPECIFIED":
       return State.STATE_UNINITIALIZED_UNSPECIFIED;
 
+    case 1:
     case "STATE_INIT":
       return State.STATE_INIT;
 
+    case 2:
     case "STATE_TRYOPEN":
       return State.STATE_TRYOPEN;
 
+    case 3:
     case "STATE_OPEN":
       return State.STATE_OPEN;
 
+    case 4:
     case "STATE_CLOSED":
       return State.STATE_CLOSED;
 
@@ -327,25 +332,28 @@ export function stateToJSON(object: State): string {
   }
 }
 export enum Order {
-  /*zero-value for channel ordering*/
+  /** ORDER_NONE_UNSPECIFIED - zero-value for channel ordering */
   ORDER_NONE_UNSPECIFIED = 0,
 
-  /*packets can be delivered in any order, which may differ from the order in
-  which they were sent.*/
+  /** ORDER_UNORDERED - packets can be delivered in any order, which may differ from the order in
+  which they were sent. */
   ORDER_UNORDERED = 1,
 
-  /*packets are delivered exactly in the order which they were sent*/
+  /** ORDER_ORDERED - packets are delivered exactly in the order which they were sent */
   ORDER_ORDERED = 2,
   UNRECOGNIZED = -1,
 }
 export function orderFromJSON(object: any): Order {
   switch (object) {
+    case 0:
     case "ORDER_NONE_UNSPECIFIED":
       return Order.ORDER_NONE_UNSPECIFIED;
 
+    case 1:
     case "ORDER_UNORDERED":
       return Order.ORDER_UNORDERED;
 
+    case 2:
     case "ORDER_ORDERED":
       return Order.ORDER_ORDERED;
 

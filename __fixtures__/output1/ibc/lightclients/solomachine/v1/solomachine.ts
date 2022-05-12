@@ -684,66 +684,76 @@ export const SignBytes = {
 
 };
 export enum DataType {
-  /*Default State*/
+  /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
   DATA_TYPE_UNINITIALIZED_UNSPECIFIED = 0,
 
-  /*Data type for client state verification*/
+  /** DATA_TYPE_CLIENT_STATE - Data type for client state verification */
   DATA_TYPE_CLIENT_STATE = 1,
 
-  /*Data type for consensus state verification*/
+  /** DATA_TYPE_CONSENSUS_STATE - Data type for consensus state verification */
   DATA_TYPE_CONSENSUS_STATE = 2,
 
-  /*Data type for connection state verification*/
+  /** DATA_TYPE_CONNECTION_STATE - Data type for connection state verification */
   DATA_TYPE_CONNECTION_STATE = 3,
 
-  /*Data type for channel state verification*/
+  /** DATA_TYPE_CHANNEL_STATE - Data type for channel state verification */
   DATA_TYPE_CHANNEL_STATE = 4,
 
-  /*Data type for packet commitment verification*/
+  /** DATA_TYPE_PACKET_COMMITMENT - Data type for packet commitment verification */
   DATA_TYPE_PACKET_COMMITMENT = 5,
 
-  /*Data type for packet acknowledgement verification*/
+  /** DATA_TYPE_PACKET_ACKNOWLEDGEMENT - Data type for packet acknowledgement verification */
   DATA_TYPE_PACKET_ACKNOWLEDGEMENT = 6,
 
-  /*Data type for packet receipt absence verification*/
+  /** DATA_TYPE_PACKET_RECEIPT_ABSENCE - Data type for packet receipt absence verification */
   DATA_TYPE_PACKET_RECEIPT_ABSENCE = 7,
 
-  /*Data type for next sequence recv verification*/
+  /** DATA_TYPE_NEXT_SEQUENCE_RECV - Data type for next sequence recv verification */
   DATA_TYPE_NEXT_SEQUENCE_RECV = 8,
 
-  /*Data type for header verification*/
+  /** DATA_TYPE_HEADER - Data type for header verification */
   DATA_TYPE_HEADER = 9,
   UNRECOGNIZED = -1,
 }
 export function dataTypeFromJSON(object: any): DataType {
   switch (object) {
+    case 0:
     case "DATA_TYPE_UNINITIALIZED_UNSPECIFIED":
       return DataType.DATA_TYPE_UNINITIALIZED_UNSPECIFIED;
 
+    case 1:
     case "DATA_TYPE_CLIENT_STATE":
       return DataType.DATA_TYPE_CLIENT_STATE;
 
+    case 2:
     case "DATA_TYPE_CONSENSUS_STATE":
       return DataType.DATA_TYPE_CONSENSUS_STATE;
 
+    case 3:
     case "DATA_TYPE_CONNECTION_STATE":
       return DataType.DATA_TYPE_CONNECTION_STATE;
 
+    case 4:
     case "DATA_TYPE_CHANNEL_STATE":
       return DataType.DATA_TYPE_CHANNEL_STATE;
 
+    case 5:
     case "DATA_TYPE_PACKET_COMMITMENT":
       return DataType.DATA_TYPE_PACKET_COMMITMENT;
 
+    case 6:
     case "DATA_TYPE_PACKET_ACKNOWLEDGEMENT":
       return DataType.DATA_TYPE_PACKET_ACKNOWLEDGEMENT;
 
+    case 7:
     case "DATA_TYPE_PACKET_RECEIPT_ABSENCE":
       return DataType.DATA_TYPE_PACKET_RECEIPT_ABSENCE;
 
+    case 8:
     case "DATA_TYPE_NEXT_SEQUENCE_RECV":
       return DataType.DATA_TYPE_NEXT_SEQUENCE_RECV;
 
+    case 9:
     case "DATA_TYPE_HEADER":
       return DataType.DATA_TYPE_HEADER;
 

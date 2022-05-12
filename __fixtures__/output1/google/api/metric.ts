@@ -286,34 +286,38 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
 
 };
 export enum MetricDescriptor_MetricKind {
-  /*Do not use this default value.*/
+  /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
   METRIC_KIND_UNSPECIFIED = 0,
 
-  /*An instantaneous measurement of a value.*/
+  /** GAUGE - An instantaneous measurement of a value. */
   GAUGE = 1,
 
-  /*The change in a value during a time interval.*/
+  /** DELTA - The change in a value during a time interval. */
   DELTA = 2,
 
-  /*A value accumulated over a time interval.  Cumulative
+  /** CUMULATIVE - A value accumulated over a time interval.  Cumulative
   measurements in a time series should have the same start time
   and increasing end times, until an event resets the cumulative
   value to zero and sets a new start time for the following
-  points.*/
+  points. */
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
 }
 export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
   switch (object) {
+    case 0:
     case "METRIC_KIND_UNSPECIFIED":
       return MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED;
 
+    case 1:
     case "GAUGE":
       return MetricDescriptor_MetricKind.GAUGE;
 
+    case 2:
     case "DELTA":
       return MetricDescriptor_MetricKind.DELTA;
 
+    case 3:
     case "CUMULATIVE":
       return MetricDescriptor_MetricKind.CUMULATIVE;
 
@@ -342,50 +346,57 @@ export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_Metri
   }
 }
 export enum MetricDescriptor_ValueType {
-  /*Do not use this default value.*/
+  /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
   VALUE_TYPE_UNSPECIFIED = 0,
 
-  /*The value is a boolean.
-  This value type can be used only if the metric kind is `GAUGE`.*/
+  /** BOOL - The value is a boolean.
+  This value type can be used only if the metric kind is `GAUGE`. */
   BOOL = 1,
 
-  /*The value is a signed 64-bit integer.*/
+  /** INT64 - The value is a signed 64-bit integer. */
   INT64 = 2,
 
-  /*The value is a double precision floating point number.*/
+  /** DOUBLE - The value is a double precision floating point number. */
   DOUBLE = 3,
 
-  /*The value is a text string.
-  This value type can be used only if the metric kind is `GAUGE`.*/
+  /** STRING - The value is a text string.
+  This value type can be used only if the metric kind is `GAUGE`. */
   STRING = 4,
 
-  /*The value is a [`Distribution`][google.api.Distribution].*/
+  /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
   DISTRIBUTION = 5,
 
-  /*The value is money.*/
+  /** MONEY - The value is money. */
   MONEY = 6,
   UNRECOGNIZED = -1,
 }
 export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
   switch (object) {
+    case 0:
     case "VALUE_TYPE_UNSPECIFIED":
       return MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED;
 
+    case 1:
     case "BOOL":
       return MetricDescriptor_ValueType.BOOL;
 
+    case 2:
     case "INT64":
       return MetricDescriptor_ValueType.INT64;
 
+    case 3:
     case "DOUBLE":
       return MetricDescriptor_ValueType.DOUBLE;
 
+    case 4:
     case "STRING":
       return MetricDescriptor_ValueType.STRING;
 
+    case 5:
     case "DISTRIBUTION":
       return MetricDescriptor_ValueType.DISTRIBUTION;
 
+    case 6:
     case "MONEY":
       return MetricDescriptor_ValueType.MONEY;
 

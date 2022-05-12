@@ -541,30 +541,34 @@ export const Validator = {
 
 };
 export enum BondStatus {
-  /*UNSPECIFIED defines an invalid validator status.*/
+  /** BOND_STATUS_UNSPECIFIED - UNSPECIFIED defines an invalid validator status. */
   BOND_STATUS_UNSPECIFIED = 0,
 
-  /*UNBONDED defines a validator that is not bonded.*/
+  /** BOND_STATUS_UNBONDED - UNBONDED defines a validator that is not bonded. */
   BOND_STATUS_UNBONDED = 1,
 
-  /*UNBONDING defines a validator that is unbonding.*/
+  /** BOND_STATUS_UNBONDING - UNBONDING defines a validator that is unbonding. */
   BOND_STATUS_UNBONDING = 2,
 
-  /*BONDED defines a validator that is bonded.*/
+  /** BOND_STATUS_BONDED - BONDED defines a validator that is bonded. */
   BOND_STATUS_BONDED = 3,
   UNRECOGNIZED = -1,
 }
 export function bondStatusFromJSON(object: any): BondStatus {
   switch (object) {
+    case 0:
     case "BOND_STATUS_UNSPECIFIED":
       return BondStatus.BOND_STATUS_UNSPECIFIED;
 
+    case 1:
     case "BOND_STATUS_UNBONDED":
       return BondStatus.BOND_STATUS_UNBONDED;
 
+    case 2:
     case "BOND_STATUS_UNBONDING":
       return BondStatus.BOND_STATUS_UNBONDING;
 
+    case 3:
     case "BOND_STATUS_BONDED":
       return BondStatus.BOND_STATUS_BONDED;
 

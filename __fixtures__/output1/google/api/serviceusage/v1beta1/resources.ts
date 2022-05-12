@@ -108,27 +108,30 @@ export const Service = {
 
 };
 export enum State {
-  /*The default value, which indicates that the enabled state of the service
+  /** STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
   is unspecified or not meaningful. Currently, all consumers other than
-  projects (such as folders and organizations) are always in this state.*/
+  projects (such as folders and organizations) are always in this state. */
   STATE_UNSPECIFIED = 0,
 
-  /*The service cannot be used by this consumer. It has either been explicitly
-  disabled, or has never been enabled.*/
+  /** DISABLED - The service cannot be used by this consumer. It has either been explicitly
+  disabled, or has never been enabled. */
   DISABLED = 1,
 
-  /*The service has been explicitly enabled for use by this consumer.*/
+  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
 export function stateFromJSON(object: any): State {
   switch (object) {
+    case 0:
     case "STATE_UNSPECIFIED":
       return State.STATE_UNSPECIFIED;
 
+    case 1:
     case "DISABLED":
       return State.DISABLED;
 
+    case 2:
     case "ENABLED":
       return State.ENABLED;
 
@@ -681,30 +684,33 @@ export const ConsumerQuotaLimit = {
 
 };
 export enum QuotaView {
-  /*No quota view specified. Requests that do not specify a quota view will
-  typically default to the BASIC view.*/
+  /** QUOTA_VIEW_UNSPECIFIED - No quota view specified. Requests that do not specify a quota view will
+  typically default to the BASIC view. */
   QUOTA_VIEW_UNSPECIFIED = 0,
 
-  /*Only buckets with overrides are shown in the response.*/
+  /** BASIC - Only buckets with overrides are shown in the response. */
   BASIC = 1,
 
-  /*Include per-location buckets even if they do not have overrides.
+  /** FULL - Include per-location buckets even if they do not have overrides.
   When the view is FULL, and a limit has regional or zonal quota, the limit
   will include buckets for all regions or zones that could support
   overrides, even if none are currently present. In some cases this will
   cause the response to become very large; callers that do not need this
-  extra information should use the BASIC view instead.*/
+  extra information should use the BASIC view instead. */
   FULL = 2,
   UNRECOGNIZED = -1,
 }
 export function quotaViewFromJSON(object: any): QuotaView {
   switch (object) {
+    case 0:
     case "QUOTA_VIEW_UNSPECIFIED":
       return QuotaView.QUOTA_VIEW_UNSPECIFIED;
 
+    case 1:
     case "BASIC":
       return QuotaView.BASIC;
 
+    case 2:
     case "FULL":
       return QuotaView.FULL;
 
@@ -1251,26 +1257,29 @@ export const OverrideInlineSource = {
 
 };
 export enum QuotaSafetyCheck {
-  /*Unspecified quota safety check.*/
+  /** QUOTA_SAFETY_CHECK_UNSPECIFIED - Unspecified quota safety check. */
   QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
 
-  /*Validates that a quota mutation would not cause the consumer's effective
-  limit to be lower than the consumer's quota usage.*/
+  /** LIMIT_DECREASE_BELOW_USAGE - Validates that a quota mutation would not cause the consumer's effective
+  limit to be lower than the consumer's quota usage. */
   LIMIT_DECREASE_BELOW_USAGE = 1,
 
-  /*Validates that a quota mutation would not cause the consumer's effective
-  limit to decrease by more than 10 percent.*/
+  /** LIMIT_DECREASE_PERCENTAGE_TOO_HIGH - Validates that a quota mutation would not cause the consumer's effective
+  limit to decrease by more than 10 percent. */
   LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
   UNRECOGNIZED = -1,
 }
 export function quotaSafetyCheckFromJSON(object: any): QuotaSafetyCheck {
   switch (object) {
+    case 0:
     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
       return QuotaSafetyCheck.QUOTA_SAFETY_CHECK_UNSPECIFIED;
 
+    case 1:
     case "LIMIT_DECREASE_BELOW_USAGE":
       return QuotaSafetyCheck.LIMIT_DECREASE_BELOW_USAGE;
 
+    case 2:
     case "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH":
       return QuotaSafetyCheck.LIMIT_DECREASE_PERCENTAGE_TOO_HIGH;
 

@@ -101,139 +101,160 @@ export const CheckError = {
 
 };
 export enum CheckError_Code {
-  /*This is never used in `CheckResponse`.*/
+  /** ERROR_CODE_UNSPECIFIED - This is never used in `CheckResponse`. */
   ERROR_CODE_UNSPECIFIED = 0,
 
-  /*The consumer's project id, network container, or resource container was
-  not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].*/
+  /** NOT_FOUND - The consumer's project id, network container, or resource container was
+  not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND]. */
   NOT_FOUND = 5,
 
-  /*The consumer doesn't have access to the specified resource.
-  Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].*/
+  /** PERMISSION_DENIED - The consumer doesn't have access to the specified resource.
+  Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED]. */
   PERMISSION_DENIED = 7,
 
-  /*Quota check failed. Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].*/
+  /** RESOURCE_EXHAUSTED - Quota check failed. Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]. */
   RESOURCE_EXHAUSTED = 8,
 
-  /*The consumer hasn't activated the service.*/
+  /** SERVICE_NOT_ACTIVATED - The consumer hasn't activated the service. */
   SERVICE_NOT_ACTIVATED = 104,
 
-  /*The consumer cannot access the service because billing is disabled.*/
+  /** BILLING_DISABLED - The consumer cannot access the service because billing is disabled. */
   BILLING_DISABLED = 107,
 
-  /*The consumer's project has been marked as deleted (soft deletion).*/
+  /** PROJECT_DELETED - The consumer's project has been marked as deleted (soft deletion). */
   PROJECT_DELETED = 108,
 
-  /*The consumer's project number or id does not represent a valid project.*/
+  /** PROJECT_INVALID - The consumer's project number or id does not represent a valid project. */
   PROJECT_INVALID = 114,
 
-  /*The input consumer info does not represent a valid consumer folder or
-  organization.*/
+  /** CONSUMER_INVALID - The input consumer info does not represent a valid consumer folder or
+  organization. */
   CONSUMER_INVALID = 125,
 
-  /*The IP address of the consumer is invalid for the specific consumer
-  project.*/
+  /** IP_ADDRESS_BLOCKED - The IP address of the consumer is invalid for the specific consumer
+  project. */
   IP_ADDRESS_BLOCKED = 109,
 
-  /*The referer address of the consumer request is invalid for the specific
-  consumer project.*/
+  /** REFERER_BLOCKED - The referer address of the consumer request is invalid for the specific
+  consumer project. */
   REFERER_BLOCKED = 110,
 
-  /*The client application of the consumer request is invalid for the
-  specific consumer project.*/
+  /** CLIENT_APP_BLOCKED - The client application of the consumer request is invalid for the
+  specific consumer project. */
   CLIENT_APP_BLOCKED = 111,
 
-  /*The API targeted by this request is invalid for the specified consumer
-  project.*/
+  /** API_TARGET_BLOCKED - The API targeted by this request is invalid for the specified consumer
+  project. */
   API_TARGET_BLOCKED = 122,
 
-  /*The consumer's API key is invalid.*/
+  /** API_KEY_INVALID - The consumer's API key is invalid. */
   API_KEY_INVALID = 105,
 
-  /*The consumer's API Key has expired.*/
+  /** API_KEY_EXPIRED - The consumer's API Key has expired. */
   API_KEY_EXPIRED = 112,
 
-  /*The consumer's API Key was not found in config record.*/
+  /** API_KEY_NOT_FOUND - The consumer's API Key was not found in config record. */
   API_KEY_NOT_FOUND = 113,
 
-  /*The credential in the request can not be verified.*/
+  /** INVALID_CREDENTIAL - The credential in the request can not be verified. */
   INVALID_CREDENTIAL = 123,
 
-  /*The backend server for looking up project id/number is unavailable.*/
+  /** NAMESPACE_LOOKUP_UNAVAILABLE - The backend server for looking up project id/number is unavailable. */
   NAMESPACE_LOOKUP_UNAVAILABLE = 300,
 
-  /*The backend server for checking service status is unavailable.*/
+  /** SERVICE_STATUS_UNAVAILABLE - The backend server for checking service status is unavailable. */
   SERVICE_STATUS_UNAVAILABLE = 301,
 
-  /*The backend server for checking billing status is unavailable.*/
+  /** BILLING_STATUS_UNAVAILABLE - The backend server for checking billing status is unavailable. */
   BILLING_STATUS_UNAVAILABLE = 302,
 
-  /*Cloud Resource Manager backend server is unavailable.*/
+  /** CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE - Cloud Resource Manager backend server is unavailable. */
   CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE = 305,
   UNRECOGNIZED = -1,
 }
 export function checkError_CodeFromJSON(object: any): CheckError_Code {
   switch (object) {
+    case 0:
     case "ERROR_CODE_UNSPECIFIED":
       return CheckError_Code.ERROR_CODE_UNSPECIFIED;
 
+    case 5:
     case "NOT_FOUND":
       return CheckError_Code.NOT_FOUND;
 
+    case 7:
     case "PERMISSION_DENIED":
       return CheckError_Code.PERMISSION_DENIED;
 
+    case 8:
     case "RESOURCE_EXHAUSTED":
       return CheckError_Code.RESOURCE_EXHAUSTED;
 
+    case 104:
     case "SERVICE_NOT_ACTIVATED":
       return CheckError_Code.SERVICE_NOT_ACTIVATED;
 
+    case 107:
     case "BILLING_DISABLED":
       return CheckError_Code.BILLING_DISABLED;
 
+    case 108:
     case "PROJECT_DELETED":
       return CheckError_Code.PROJECT_DELETED;
 
+    case 114:
     case "PROJECT_INVALID":
       return CheckError_Code.PROJECT_INVALID;
 
+    case 125:
     case "CONSUMER_INVALID":
       return CheckError_Code.CONSUMER_INVALID;
 
+    case 109:
     case "IP_ADDRESS_BLOCKED":
       return CheckError_Code.IP_ADDRESS_BLOCKED;
 
+    case 110:
     case "REFERER_BLOCKED":
       return CheckError_Code.REFERER_BLOCKED;
 
+    case 111:
     case "CLIENT_APP_BLOCKED":
       return CheckError_Code.CLIENT_APP_BLOCKED;
 
+    case 122:
     case "API_TARGET_BLOCKED":
       return CheckError_Code.API_TARGET_BLOCKED;
 
+    case 105:
     case "API_KEY_INVALID":
       return CheckError_Code.API_KEY_INVALID;
 
+    case 112:
     case "API_KEY_EXPIRED":
       return CheckError_Code.API_KEY_EXPIRED;
 
+    case 113:
     case "API_KEY_NOT_FOUND":
       return CheckError_Code.API_KEY_NOT_FOUND;
 
+    case 123:
     case "INVALID_CREDENTIAL":
       return CheckError_Code.INVALID_CREDENTIAL;
 
+    case 300:
     case "NAMESPACE_LOOKUP_UNAVAILABLE":
       return CheckError_Code.NAMESPACE_LOOKUP_UNAVAILABLE;
 
+    case 301:
     case "SERVICE_STATUS_UNAVAILABLE":
       return CheckError_Code.SERVICE_STATUS_UNAVAILABLE;
 
+    case 302:
     case "BILLING_STATUS_UNAVAILABLE":
       return CheckError_Code.BILLING_STATUS_UNAVAILABLE;
 
+    case 305:
     case "CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE":
       return CheckError_Code.CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE;
 

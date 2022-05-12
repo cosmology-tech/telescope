@@ -167,30 +167,34 @@ export const StakeAuthorization_Validators = {
 
 };
 export enum AuthorizationType {
-  /*AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type*/
+  /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
   AUTHORIZATION_TYPE_UNSPECIFIED = 0,
 
-  /*AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate*/
+  /** AUTHORIZATION_TYPE_DELEGATE - AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate */
   AUTHORIZATION_TYPE_DELEGATE = 1,
 
-  /*AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate*/
+  /** AUTHORIZATION_TYPE_UNDELEGATE - AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate */
   AUTHORIZATION_TYPE_UNDELEGATE = 2,
 
-  /*AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate*/
+  /** AUTHORIZATION_TYPE_REDELEGATE - AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate */
   AUTHORIZATION_TYPE_REDELEGATE = 3,
   UNRECOGNIZED = -1,
 }
 export function authorizationTypeFromJSON(object: any): AuthorizationType {
   switch (object) {
+    case 0:
     case "AUTHORIZATION_TYPE_UNSPECIFIED":
       return AuthorizationType.AUTHORIZATION_TYPE_UNSPECIFIED;
 
+    case 1:
     case "AUTHORIZATION_TYPE_DELEGATE":
       return AuthorizationType.AUTHORIZATION_TYPE_DELEGATE;
 
+    case 2:
     case "AUTHORIZATION_TYPE_UNDELEGATE":
       return AuthorizationType.AUTHORIZATION_TYPE_UNDELEGATE;
 
+    case 3:
     case "AUTHORIZATION_TYPE_REDELEGATE":
       return AuthorizationType.AUTHORIZATION_TYPE_REDELEGATE;
 

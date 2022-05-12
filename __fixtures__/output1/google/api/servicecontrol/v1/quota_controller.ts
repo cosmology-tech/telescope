@@ -322,64 +322,70 @@ export const QuotaOperation = {
 
 };
 export enum QuotaMode {
-  /*Guard against implicit default. Must not be used.*/
+  /** UNSPECIFIED - Guard against implicit default. Must not be used. */
   UNSPECIFIED = 0,
 
-  /*For AllocateQuota request, allocates quota for the amount specified in
+  /** NORMAL - For AllocateQuota request, allocates quota for the amount specified in
   the service configuration or specified using the quota metrics. If the
   amount is higher than the available quota, allocation error will be
   returned and no quota will be allocated.
   If multiple quotas are part of the request, and one fails, none of the
-  quotas are allocated or released.*/
+  quotas are allocated or released. */
   NORMAL = 1,
 
-  /*The operation allocates quota for the amount specified in the service
+  /** BEST_EFFORT - The operation allocates quota for the amount specified in the service
   configuration or specified using the quota metrics. If the amount is
   higher than the available quota, request does not fail but all available
   quota will be allocated.
   For rate quota, BEST_EFFORT will continue to deduct from other groups
   even if one does not have enough quota. For allocation, it will find the
   minimum available amount across all groups and deduct that amount from
-  all the affected groups.*/
+  all the affected groups. */
   BEST_EFFORT = 2,
 
-  /*For AllocateQuota request, only checks if there is enough quota
+  /** CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
   available and does not change the available quota. No lock is placed on
-  the available quota either.*/
+  the available quota either. */
   CHECK_ONLY = 3,
 
-  /*Unimplemented. When used in AllocateQuotaRequest, this returns the
+  /** QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
   effective quota limit(s) in the response, and no quota check will be
   performed. Not supported for other requests, and even for
   AllocateQuotaRequest, this is currently supported only for allowlisted
-  services.*/
+  services. */
   QUERY_ONLY = 4,
 
-  /*The operation allocates quota for the amount specified in the service
+  /** ADJUST_ONLY - The operation allocates quota for the amount specified in the service
   configuration or specified using the quota metrics. If the requested
   amount is higher than the available quota, request does not fail and
   remaining quota would become negative (going over the limit).
-  Not supported for Rate Quota.*/
+  Not supported for Rate Quota. */
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
 }
 export function quotaModeFromJSON(object: any): QuotaMode {
   switch (object) {
+    case 0:
     case "UNSPECIFIED":
       return QuotaMode.UNSPECIFIED;
 
+    case 1:
     case "NORMAL":
       return QuotaMode.NORMAL;
 
+    case 2:
     case "BEST_EFFORT":
       return QuotaMode.BEST_EFFORT;
 
+    case 3:
     case "CHECK_ONLY":
       return QuotaMode.CHECK_ONLY;
 
+    case 4:
     case "QUERY_ONLY":
       return QuotaMode.QUERY_ONLY;
 
+    case 5:
     case "ADJUST_ONLY":
       return QuotaMode.ADJUST_ONLY;
 
@@ -623,44 +629,50 @@ export const QuotaError = {
 
 };
 export enum QuotaError_Code {
-  /*This is never used.*/
+  /** UNSPECIFIED - This is never used. */
   UNSPECIFIED = 0,
 
-  /*Quota allocation failed.
-  Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].*/
+  /** RESOURCE_EXHAUSTED - Quota allocation failed.
+  Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]. */
   RESOURCE_EXHAUSTED = 8,
 
-  /*Consumer cannot access the service because the service requires active
-  billing.*/
+  /** BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
+  billing. */
   BILLING_NOT_ACTIVE = 107,
 
-  /*Consumer's project has been marked as deleted (soft deletion).*/
+  /** PROJECT_DELETED - Consumer's project has been marked as deleted (soft deletion). */
   PROJECT_DELETED = 108,
 
-  /*Specified API key is invalid.*/
+  /** API_KEY_INVALID - Specified API key is invalid. */
   API_KEY_INVALID = 105,
 
-  /*Specified API Key has expired.*/
+  /** API_KEY_EXPIRED - Specified API Key has expired. */
   API_KEY_EXPIRED = 112,
   UNRECOGNIZED = -1,
 }
 export function quotaError_CodeFromJSON(object: any): QuotaError_Code {
   switch (object) {
+    case 0:
     case "UNSPECIFIED":
       return QuotaError_Code.UNSPECIFIED;
 
+    case 8:
     case "RESOURCE_EXHAUSTED":
       return QuotaError_Code.RESOURCE_EXHAUSTED;
 
+    case 107:
     case "BILLING_NOT_ACTIVE":
       return QuotaError_Code.BILLING_NOT_ACTIVE;
 
+    case 108:
     case "PROJECT_DELETED":
       return QuotaError_Code.PROJECT_DELETED;
 
+    case 105:
     case "API_KEY_INVALID":
       return QuotaError_Code.API_KEY_INVALID;
 
+    case 112:
     case "API_KEY_EXPIRED":
       return QuotaError_Code.API_KEY_EXPIRED;
 

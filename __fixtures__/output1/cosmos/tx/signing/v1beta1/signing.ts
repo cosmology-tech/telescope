@@ -3,46 +3,51 @@ import { Any } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export enum SignMode {
-  /*SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-  rejected.*/
+  /** SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
+  rejected. */
   SIGN_MODE_UNSPECIFIED = 0,
 
-  /*SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-  verified with raw bytes from Tx.*/
+  /** SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
+  verified with raw bytes from Tx. */
   SIGN_MODE_DIRECT = 1,
 
-  /*SIGN_MODE_TEXTUAL is a future signing mode that will verify some
+  /** SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
   human-readable textual representation on top of the binary representation
-  from SIGN_MODE_DIRECT. It is currently not supported.*/
+  from SIGN_MODE_DIRECT. It is currently not supported. */
   SIGN_MODE_TEXTUAL = 2,
 
-  /*SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
+  /** SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
   SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
   require signers signing over other signers' `signer_info`. It also allows
   for adding Tips in transactions.
   
-  Since: cosmos-sdk 0.46*/
+  Since: cosmos-sdk 0.46 */
   SIGN_MODE_DIRECT_AUX = 3,
 
-  /*SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-  Amino JSON and will be removed in the future.*/
+  /** SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
+  Amino JSON and will be removed in the future. */
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
 }
 export function signModeFromJSON(object: any): SignMode {
   switch (object) {
+    case 0:
     case "SIGN_MODE_UNSPECIFIED":
       return SignMode.SIGN_MODE_UNSPECIFIED;
 
+    case 1:
     case "SIGN_MODE_DIRECT":
       return SignMode.SIGN_MODE_DIRECT;
 
+    case 2:
     case "SIGN_MODE_TEXTUAL":
       return SignMode.SIGN_MODE_TEXTUAL;
 
+    case 3:
     case "SIGN_MODE_DIRECT_AUX":
       return SignMode.SIGN_MODE_DIRECT_AUX;
 
+    case 127:
     case "SIGN_MODE_LEGACY_AMINO_JSON":
       return SignMode.SIGN_MODE_LEGACY_AMINO_JSON;
 

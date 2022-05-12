@@ -251,31 +251,35 @@ export const IdentifiedConnection = {
 
 };
 export enum State {
-  /*Default State*/
+  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
   STATE_UNINITIALIZED_UNSPECIFIED = 0,
 
-  /*A connection end has just started the opening handshake.*/
+  /** STATE_INIT - A connection end has just started the opening handshake. */
   STATE_INIT = 1,
 
-  /*A connection end has acknowledged the handshake step on the counterparty
-  chain.*/
+  /** STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
+  chain. */
   STATE_TRYOPEN = 2,
 
-  /*A connection end has completed the handshake.*/
+  /** STATE_OPEN - A connection end has completed the handshake. */
   STATE_OPEN = 3,
   UNRECOGNIZED = -1,
 }
 export function stateFromJSON(object: any): State {
   switch (object) {
+    case 0:
     case "STATE_UNINITIALIZED_UNSPECIFIED":
       return State.STATE_UNINITIALIZED_UNSPECIFIED;
 
+    case 1:
     case "STATE_INIT":
       return State.STATE_INIT;
 
+    case 2:
     case "STATE_TRYOPEN":
       return State.STATE_TRYOPEN;
 
+    case 3:
     case "STATE_OPEN":
       return State.STATE_OPEN;
 

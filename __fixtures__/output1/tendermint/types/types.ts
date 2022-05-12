@@ -13,15 +13,19 @@ export enum BlockIDFlag {
 }
 export function blockIDFlagFromJSON(object: any): BlockIDFlag {
   switch (object) {
+    case 0:
     case "BLOCK_ID_FLAG_UNKNOWN":
       return BlockIDFlag.BLOCK_ID_FLAG_UNKNOWN;
 
+    case 1:
     case "BLOCK_ID_FLAG_ABSENT":
       return BlockIDFlag.BLOCK_ID_FLAG_ABSENT;
 
+    case 2:
     case "BLOCK_ID_FLAG_COMMIT":
       return BlockIDFlag.BLOCK_ID_FLAG_COMMIT;
 
+    case 3:
     case "BLOCK_ID_FLAG_NIL":
       return BlockIDFlag.BLOCK_ID_FLAG_NIL;
 
@@ -52,25 +56,29 @@ export function blockIDFlagToJSON(object: BlockIDFlag): string {
 export enum SignedMsgType {
   SIGNED_MSG_TYPE_UNKNOWN = 0,
 
-  /*Votes*/
+  /** SIGNED_MSG_TYPE_PREVOTE - Votes */
   SIGNED_MSG_TYPE_PREVOTE = 1,
   SIGNED_MSG_TYPE_PRECOMMIT = 2,
 
-  /*Proposals*/
+  /** SIGNED_MSG_TYPE_PROPOSAL - Proposals */
   SIGNED_MSG_TYPE_PROPOSAL = 32,
   UNRECOGNIZED = -1,
 }
 export function signedMsgTypeFromJSON(object: any): SignedMsgType {
   switch (object) {
+    case 0:
     case "SIGNED_MSG_TYPE_UNKNOWN":
       return SignedMsgType.SIGNED_MSG_TYPE_UNKNOWN;
 
+    case 1:
     case "SIGNED_MSG_TYPE_PREVOTE":
       return SignedMsgType.SIGNED_MSG_TYPE_PREVOTE;
 
+    case 2:
     case "SIGNED_MSG_TYPE_PRECOMMIT":
       return SignedMsgType.SIGNED_MSG_TYPE_PRECOMMIT;
 
+    case 32:
     case "SIGNED_MSG_TYPE_PROPOSAL":
       return SignedMsgType.SIGNED_MSG_TYPE_PROPOSAL;
 
