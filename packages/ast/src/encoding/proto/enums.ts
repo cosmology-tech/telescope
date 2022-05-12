@@ -28,7 +28,7 @@ export const createProtoEnum = (name: string, proto: ProtoEnum) => {
             t.numericLiteral(e.value),
             e.comment ? [{
                 type: 'CommentBlock',
-                value: e.comment
+                value: `* ${e.name} - ${e.comment} `
             }] : []
         );
     })
@@ -51,15 +51,16 @@ export const createProtoEnum = (name: string, proto: ProtoEnum) => {
 export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
 
     const enums = getEnumValues(proto);
-    const switches = enums.map(e => {
-        return t.switchCase(t.numericLiteral(e.value), []),
-            t.switchCase(t.stringLiteral(e.name), [
-                t.returnStatement(t.memberExpression(
-                    t.identifier(name),
-                    t.identifier(e.name)
-                ))
-            ]);
-    });
+    const switches = enums.reduce((m, e) => {
+        m.push(t.switchCase(t.numericLiteral(e.value), []));
+        m.push(t.switchCase(t.stringLiteral(e.name), [
+            t.returnStatement(t.memberExpression(
+                t.identifier(name),
+                t.identifier(e.name)
+            ))
+        ]));
+        return m;
+    }, []);
 
     return t.exportNamedDeclaration(
         functionDeclaration(
@@ -108,7 +109,7 @@ export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
                     t.stringLiteral(e.name)
                 )
             ]
-        )
+        );
     });
 
     return t.exportNamedDeclaration(
