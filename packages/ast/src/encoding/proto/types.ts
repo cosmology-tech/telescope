@@ -372,6 +372,29 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     return ast;
 };
 
+const commentBlock = (comment: string): t.CommentBlock => {
+
+    if (!/[\n]+/.test(comment)) {
+        return {
+            type: 'CommentBlock',
+            value: `* ${comment} `
+        };
+    }
+
+    let lines = comment.split('\n');
+    lines = ['*', ...lines, ' '];
+    const comments = lines.map((line, i) => {
+        if (i == 0) return line;
+        if (i == (lines.length - 1)) return line;
+        return ` * ${line}`
+    });
+
+    return {
+        type: 'CommentBlock',
+        value: comments.join('\n')
+    };
+};
+
 export const createProtoType = (
     context: ProtoParseContext,
     name: string,
@@ -379,24 +402,39 @@ export const createProtoType = (
 ) => {
     const oneOfs = getOneOfs(proto);
 
-    return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
+    const declaration = t.exportNamedDeclaration(t.tsInterfaceDeclaration(
         t.identifier(name),
         null,
         [],
         t.tsInterfaceBody(
-            Object.keys(proto.fields).map(fieldName => {
+            Object.keys(proto.fields).reduce((m, fieldName) => {
                 const isOneOf = oneOfs.includes(fieldName);
                 const field = proto.fields[fieldName];
-                return tsPropertySignature(
+                const propSig = tsPropertySignature(
                     t.identifier(fieldName),
                     t.tsTypeAnnotation(
                         getProtoField(context, field)
                     ),
                     getFieldOptionality(field, isOneOf)
-                )
-            })
+                );
+                if (field.comment) {
+                    propSig.leadingComments = [
+                        commentBlock(field.comment)
+                    ]
+                }
+                m.push(propSig)
+                return m;
+            }, [])
         )
-    ))
+    ));
+
+    if (proto.comment) {
+        declaration.leadingComments = [
+            commentBlock(proto.comment)
+        ];
+    }
+
+    return declaration;
 };
 
 
