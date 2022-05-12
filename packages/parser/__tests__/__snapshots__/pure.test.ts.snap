@@ -2,8 +2,26 @@
 
 exports[`pure proto 1`] = `
 Object {
+  "importNames": Object {},
   "imports": undefined,
   "package": "cosmology.finance",
+  "parsedExports": Object {
+    "ExistenceProof": Array [
+      Object {
+        "name": "ExistenceProof",
+      },
+    ],
+    "LeafOp": Array [
+      Object {
+        "name": "LeafOp",
+      },
+    ],
+    "NonExistenceProof": Array [
+      Object {
+        "name": "NonExistenceProof",
+      },
+    ],
+  },
   "parsedImports": Object {},
   "root": Object {
     "nested": Object {

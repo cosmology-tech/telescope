@@ -2,6 +2,14 @@
 
 exports[`cosmos/authz/v1beta1/authz 1`] = `
 Object {
+  "importNames": Object {
+    "google/protobuf/any.proto": Object {
+      "Any": "Any",
+    },
+    "google/protobuf/timestamp.proto": Object {
+      "Timestamp": "Timestamp",
+    },
+  },
   "imports": Array [
     "cosmos_proto/cosmos.proto",
     "google/protobuf/timestamp.proto",
@@ -9,6 +17,28 @@ Object {
     "google/protobuf/any.proto",
   ],
   "package": "cosmos.authz.v1beta1",
+  "parsedExports": Object {
+    "GenericAuthorization": Array [
+      Object {
+        "name": "GenericAuthorization",
+      },
+    ],
+    "Grant": Array [
+      Object {
+        "name": "Grant",
+      },
+    ],
+    "GrantAuthorization": Array [
+      Object {
+        "name": "GrantAuthorization",
+      },
+    ],
+    "GrantQueueItem": Array [
+      Object {
+        "name": "GrantQueueItem",
+      },
+    ],
+  },
   "parsedImports": Object {
     "google/protobuf/any.proto": Array [
       "Any",
@@ -210,11 +240,31 @@ may apply to invalidate the grant)",
 
 exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 Object {
+  "importNames": Object {
+    "cosmos/crypto/multisig/v1beta1/multisig.proto": Object {
+      "CompactBitArray": "CompactBitArray",
+    },
+    "google/protobuf/any.proto": Object {
+      "Any": "Any",
+    },
+  },
   "imports": Array [
     "cosmos/crypto/multisig/v1beta1/multisig.proto",
     "google/protobuf/any.proto",
   ],
   "package": "cosmos.tx.signing.v1beta1",
+  "parsedExports": Object {
+    "SignatureDescriptor": Array [
+      Object {
+        "name": "SignatureDescriptor",
+      },
+    ],
+    "SignatureDescriptors": Array [
+      Object {
+        "name": "SignatureDescriptors",
+      },
+    ],
+  },
   "parsedImports": Object {
     "cosmos/crypto/multisig/v1beta1/multisig.proto": Array [
       "CompactBitArray",
@@ -482,6 +532,20 @@ replay attacks.",
 
 exports[`cosmos/tx/v1beta1/tx 1`] = `
 Object {
+  "importNames": Object {
+    "cosmos/base/v1beta1/coin.proto": Object {
+      "Coin": "Coin",
+    },
+    "cosmos/crypto/multisig/v1beta1/multisig.proto": Object {
+      "CompactBitArray": "CompactBitArray",
+    },
+    "cosmos/tx/signing/v1beta1/signing.proto": Object {
+      "SignMode": "SignMode",
+    },
+    "google/protobuf/any.proto": Object {
+      "Any": "Any",
+    },
+  },
   "imports": Array [
     "gogoproto/gogo.proto",
     "cosmos/crypto/multisig/v1beta1/multisig.proto",
@@ -491,6 +555,63 @@ Object {
     "cosmos_proto/cosmos.proto",
   ],
   "package": "cosmos.tx.v1beta1",
+  "parsedExports": Object {
+    "AuthInfo": Array [
+      Object {
+        "name": "AuthInfo",
+      },
+    ],
+    "AuxSignerData": Array [
+      Object {
+        "name": "AuxSignerData",
+      },
+    ],
+    "Fee": Array [
+      Object {
+        "name": "Fee",
+      },
+    ],
+    "ModeInfo": Array [
+      Object {
+        "name": "ModeInfo",
+      },
+    ],
+    "SignDoc": Array [
+      Object {
+        "name": "SignDoc",
+      },
+    ],
+    "SignDocDirectAux": Array [
+      Object {
+        "name": "SignDocDirectAux",
+      },
+    ],
+    "SignerInfo": Array [
+      Object {
+        "name": "SignerInfo",
+      },
+    ],
+    "Tip": Array [
+      Object {
+        "name": "Tip",
+      },
+    ],
+    "Tx": Array [
+      Object {
+        "name": "Tx",
+      },
+    ],
+    "TxBody": Array [
+      Object {
+        "name": "TxBody",
+      },
+    ],
+    "TxRaw": Array [
+      Object {
+        "name": "TxRaw",
+      },
+    ],
+  },
   "parsedImports": Object {
     "cosmos/base/v1beta1/coin.proto": Array [
       "Coin",
@@ -1263,12 +1384,67 @@ public key and signing mode by position.",
 
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
 Object {
+  "importNames": Object {
+    "cosmos/base/v1beta1/coin.proto": Object {
+      "Coin": "Coin",
+    },
+    "cosmwasm/wasm/v1/types.proto": Object {
+      "AccessConfig": "AccessConfig",
+    },
+  },
   "imports": Array [
     "gogoproto/gogo.proto",
     "cosmos/base/v1beta1/coin.proto",
     "cosmwasm/wasm/v1/types.proto",
   ],
   "package": "cosmwasm.wasm.v1",
+  "parsedExports": Object {
+    "ClearAdminProposal": Array [
+      Object {
+        "name": "ClearAdminProposal",
+      },
+    ],
+    "ExecuteContractProposal": Array [
+      Object {
+        "name": "ExecuteContractProposal",
+      },
+    ],
+    "InstantiateContractProposal": Array [
+      Object {
+        "name": "InstantiateContractProposal",
+      },
+    ],
+    "MigrateContractProposal": Array [
+      Object {
+        "name": "MigrateContractProposal",
+      },
+    ],
+    "PinCodesProposal": Array [
+      Object {
+        "name": "PinCodesProposal",
+      },
+    ],
+    "StoreCodeProposal": Array [
+      Object {
+        "name": "StoreCodeProposal",
+      },
+    ],
+    "SudoContractProposal": Array [
+      Object {
+        "name": "SudoContractProposal",
+      },
+    ],
+    "UnpinCodesProposal": Array [
+      Object {
+        "name": "UnpinCodesProposal",
+      },
+    ],
+    "UpdateAdminProposal": Array [
+      Object {
+        "name": "UpdateAdminProposal",
+      },
+    ],
+  },
   "parsedImports": Object {
     "cosmos/base/v1beta1/coin.proto": Array [
       "Coin",
@@ -1913,6 +2089,17 @@ Object {
 
 exports[`cosmwasm/wasm/v1/query 1`] = `
 Object {
+  "importNames": Object {
+    "cosmos/base/query/v1beta1/pagination.proto": Object {
+      "PageRequest": "PageRequest",
+      "PageResponse": "PageResponse",
+    },
+    "cosmwasm/wasm/v1/types.proto": Object {
+      "ContractCodeHistoryEntry": "ContractCodeHistoryEntry",
+      "ContractInfo": "ContractInfo",
+      "Model": "Model",
+    },
+  },
   "imports": Array [
     "gogoproto/gogo.proto",
     "cosmwasm/wasm/v1/types.proto",
@@ -1920,6 +2107,103 @@ Object {
     "cosmos/base/query/v1beta1/pagination.proto",
   ],
   "package": "cosmwasm.wasm.v1",
+  "parsedExports": Object {
+    "CodeInfoResponse": Array [
+      Object {
+        "name": "CodeInfoResponse",
+      },
+    ],
+    "QueryAllContractStateRequest": Array [
+      Object {
+        "name": "QueryAllContractStateRequest",
+      },
+    ],
+    "QueryAllContractStateResponse": Array [
+      Object {
+        "name": "QueryAllContractStateResponse",
+      },
+    ],
+    "QueryCodeRequest": Array [
+      Object {
+        "name": "QueryCodeRequest",
+      },
+    ],
+    "QueryCodeResponse": Array [
+      Object {
+        "name": "QueryCodeResponse",
+      },
+    ],
+    "QueryCodesRequest": Array [
+      Object {
+        "name": "QueryCodesRequest",
+      },
+    ],
+    "QueryCodesResponse": Array [
+      Object {
+        "name": "QueryCodesResponse",
+      },
+    ],
+    "QueryContractHistoryRequest": Array [
+      Object {
+        "name": "QueryContractHistoryRequest",
+      },
+    ],
+    "QueryContractHistoryResponse": Array [
+      Object {
+        "name": "QueryContractHistoryResponse",
+      },
+    ],
+    "QueryContractInfoRequest": Array [
+      Object {
+        "name": "QueryContractInfoRequest",
+      },
+    ],
+    "QueryContractInfoResponse": Array [
+      Object {
+        "name": "QueryContractInfoResponse",
+      },
+    ],
+    "QueryContractsByCodeRequest": Array [
+      Object {
+        "name": "QueryContractsByCodeRequest",
+      },
+    ],
+    "QueryContractsByCodeResponse": Array [
+      Object {
+        "name": "QueryContractsByCodeResponse",
+      },
+    ],
+    "QueryPinnedCodesRequest": Array [
+      Object {
+        "name": "QueryPinnedCodesRequest",
+      },
+    ],
+    "QueryPinnedCodesResponse": Array [
+      Object {
+        "name": "QueryPinnedCodesResponse",
+      },
+    ],
+    "QueryRawContractStateRequest": Array [
+      Object {
+        "name": "QueryRawContractStateRequest",
+      },
+    ],
+    "QueryRawContractStateResponse": Array [
+      Object {
+        "name": "QueryRawContractStateResponse",
+      },
+    ],
+    "QuerySmartContractStateRequest": Array [
+      Object {
+        "name": "QuerySmartContractStateRequest",
+      },
+    ],
+    "QuerySmartContractStateResponse": Array [
+      Object {
+        "name": "QuerySmartContractStateResponse",
+      },
+    ],
+  },
   "parsedImports": Object {
     "cosmos/base/query/v1beta1/pagination.proto": Array [
       "PageRequest",
@@ -3005,12 +3289,47 @@ pagination defines an optional pagination for the request.",
 
 exports[`google/api/expr/v1alpha1/checked 1`] = `
 Object {
+  "importNames": Object {
+    "google/api/expr/v1alpha1/syntax.proto": Object {
+      "Constant": "Constant",
+      "Expr": "Expr",
+      "SourceInfo": "SourceInfo",
+    },
+    "google/protobuf/empty.proto": Object {
+      "Empty": "Empty",
+    },
+    "google/protobuf/struct.proto": Object {
+      "NullValue": "NullValue",
+    },
+  },
   "imports": Array [
     "google/api/expr/v1alpha1/syntax.proto",
     "google/protobuf/empty.proto",
     "google/protobuf/struct.proto",
   ],
   "package": "google.api.expr.v1alpha1",
+  "parsedExports": Object {
+    "CheckedExpr": Array [
+      Object {
+        "name": "CheckedExpr",
+      },
+    ],
+    "Decl": Array [
+      Object {
+        "name": "Decl",
+      },
+    ],
+    "Reference": Array [
+      Object {
+        "name": "Reference",
+      },
+    ],
+    "Type": Array [
+      Object {
+        "name": "Type",
+      },
+    ],
+  },
   "parsedImports": Object {
     "google/api/expr/v1alpha1/syntax.proto": Array [
       "SourceInfo",
@@ -3894,12 +4213,27 @@ message type specified at evaluation time.",
 
 exports[`osmosis/claim/v1beta1/params 1`] = `
 Object {
+  "importNames": Object {
+    "google/protobuf/duration.proto": Object {
+      "Duration": "Duration",
+    },
+    "google/protobuf/timestamp.proto": Object {
+      "Timestamp": "Timestamp",
+    },
+  },
   "imports": Array [
     "gogoproto/gogo.proto",
     "google/protobuf/duration.proto",
     "google/protobuf/timestamp.proto",
   ],
   "package": "osmosis.claim.v1beta1",
+  "parsedExports": Object {
+    "Params": Array [
+      Object {
+        "name": "Params",
+      },
+    ],
+  },
   "parsedImports": Object {
     "google/protobuf/duration.proto": Array [
       "Duration",
@@ -4016,11 +4350,108 @@ Object {
 
 exports[`osmosis/gamm/v1beta1/tx 1`] = `
 Object {
+  "importNames": Object {
+    "cosmos/base/v1beta1/coin.proto": Object {
+      "Coin": "Coin",
+    },
+  },
   "imports": Array [
     "gogoproto/gogo.proto",
     "cosmos/base/v1beta1/coin.proto",
   ],
   "package": "osmosis.gamm.v1beta1",
+  "parsedExports": Object {
+    "MsgExitPool": Array [
+      Object {
+        "name": "MsgExitPool",
+      },
+    ],
+    "MsgExitPoolResponse": Array [
+      Object {
+        "name": "MsgExitPoolResponse",
+      },
+    ],
+    "MsgExitSwapExternAmountOut": Array [
+      Object {
+        "name": "MsgExitSwapExternAmountOut",
+      },
+    ],
+    "MsgExitSwapExternAmountOutResponse": Array [
+      Object {
+        "name": "MsgExitSwapExternAmountOutResponse",
+      },
+    ],
+    "MsgExitSwapShareAmountIn": Array [
+      Object {
+        "name": "MsgExitSwapShareAmountIn",
+      },
+    ],
+    "MsgExitSwapShareAmountInResponse": Array [
+      Object {
+        "name": "MsgExitSwapShareAmountInResponse",
+      },
+    ],
+    "MsgJoinPool": Array [
+      Object {
+        "name": "MsgJoinPool",
+      },
+    ],
+    "MsgJoinPoolResponse": Array [
+      Object {
+        "name": "MsgJoinPoolResponse",
+      },
+    ],
+    "MsgJoinSwapExternAmountIn": Array [
+      Object {
+        "name": "MsgJoinSwapExternAmountIn",
+      },
+    ],
+    "MsgJoinSwapExternAmountInResponse": Array [
+      Object {
+        "name": "MsgJoinSwapExternAmountInResponse",
+      },
+    ],
+    "MsgJoinSwapShareAmountOut": Array [
+      Object {
+        "name": "MsgJoinSwapShareAmountOut",
+      },
+    ],
+    "MsgJoinSwapShareAmountOutResponse": Array [
+      Object {
+        "name": "MsgJoinSwapShareAmountOutResponse",
+      },
+    ],
+    "MsgSwapExactAmountIn": Array [
+      Object {
+        "name": "MsgSwapExactAmountIn",
+      },
+    ],
+    "MsgSwapExactAmountInResponse": Array [
+      Object {
+        "name": "MsgSwapExactAmountInResponse",
+      },
+    ],
+    "MsgSwapExactAmountOut": Array [
+      Object {
+        "name": "MsgSwapExactAmountOut",
+      },
+    ],
+    "MsgSwapExactAmountOutResponse": Array [
+      Object {
+        "name": "MsgSwapExactAmountOutResponse",
+      },
+    ],
+    "SwapAmountInRoute": Array [
+      Object {
+        "name": "SwapAmountInRoute",
+      },
+    ],
+    "SwapAmountOutRoute": Array [
+      Object {
+        "name": "SwapAmountOutRoute",
+      },
+    ],
+  },
   "parsedImports": Object {
     "cosmos/base/v1beta1/coin.proto": Array [
       "Coin",

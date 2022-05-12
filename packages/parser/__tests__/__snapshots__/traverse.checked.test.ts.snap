@@ -2,12 +2,47 @@
 
 exports[`google/api/expr/v1alpha1/checked 1`] = `
 Object {
+  "importNames": Object {
+    "google/api/expr/v1alpha1/syntax.proto": Object {
+      "Constant": "Constant",
+      "Expr": "Expr",
+      "SourceInfo": "SourceInfo",
+    },
+    "google/protobuf/empty.proto": Object {
+      "Empty": "Empty",
+    },
+    "google/protobuf/struct.proto": Object {
+      "NullValue": "NullValue",
+    },
+  },
   "imports": Array [
     "google/api/expr/v1alpha1/syntax.proto",
     "google/protobuf/empty.proto",
     "google/protobuf/struct.proto",
   ],
   "package": "google.api.expr.v1alpha1",
+  "parsedExports": Object {
+    "CheckedExpr": Array [
+      Object {
+        "name": "CheckedExpr",
+      },
+    ],
+    "Decl": Array [
+      Object {
+        "name": "Decl",
+      },
+    ],
+    "Reference": Array [
+      Object {
+        "name": "Reference",
+      },
+    ],
+    "Type": Array [
+      Object {
+        "name": "Type",
+      },
+    ],
+  },
   "parsedImports": Object {
     "google/api/expr/v1alpha1/syntax.proto": Array [
       "SourceInfo",
