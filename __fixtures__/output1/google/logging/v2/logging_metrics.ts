@@ -2,79 +2,48 @@ import { MetricDescriptor } from "../../api/metric";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
+
+/** Logging API version. */
+export enum LogMetric_ApiVersion {
+  /** V2 - Logging API v2. */
+  V2 = 0,
+
+  /** V1 - Logging API v1. */
+  V1 = 1,
+  UNRECOGNIZED = -1,
+}
+export function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion {
+  switch (object) {
+    case 0:
+    case "V2":
+      return LogMetric_ApiVersion.V2;
+
+    case 1:
+    case "V1":
+      return LogMetric_ApiVersion.V1;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LogMetric_ApiVersion.UNRECOGNIZED;
+  }
+}
+export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string {
+  switch (object) {
+    case LogMetric_ApiVersion.V2:
+      return "V2";
+
+    case LogMetric_ApiVersion.V1:
+      return "V1";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
 }
-
-function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const LogMetric_LabelExtractorsEntry = {
-  encode(message: LogMetric_LabelExtractorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLogMetric_LabelExtractorsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): LogMetric_LabelExtractorsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<LogMetric_LabelExtractorsEntry>, I>>(object: I): LogMetric_LabelExtractorsEntry {
-    const message = createBaseLogMetric_LabelExtractorsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  }
-
-};
 
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
@@ -215,6 +184,168 @@ export interface LogMetric {
   version: LogMetric_ApiVersion;
 }
 
+/** The parameters to ListLogMetrics. */
+export interface ListLogMetricsRequest {
+  /**
+   * Required. The name of the project containing the metrics:
+   * 
+   * "projects/[PROJECT_ID]"
+   */
+  parent: string;
+
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  pageToken: string;
+
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  pageSize: number;
+}
+
+/** Result returned from ListLogMetrics. */
+export interface ListLogMetricsResponse {
+  /** A list of logs-based metrics. */
+  metrics: LogMetric[];
+
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call this
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  nextPageToken: string;
+}
+
+/** The parameters to GetLogMetric. */
+export interface GetLogMetricRequest {
+  /**
+   * Required. The resource name of the desired metric:
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   */
+  metricName: string;
+}
+
+/** The parameters to CreateLogMetric. */
+export interface CreateLogMetricRequest {
+  /**
+   * Required. The resource name of the project in which to create the metric:
+   * 
+   * "projects/[PROJECT_ID]"
+   * 
+   * The new metric must be provided in the request.
+   */
+  parent: string;
+
+  /**
+   * Required. The new logs-based metric, which must not have an identifier that
+   * already exists.
+   */
+  metric: LogMetric;
+}
+
+/** The parameters to UpdateLogMetric. */
+export interface UpdateLogMetricRequest {
+  /**
+   * Required. The resource name of the metric to update:
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * 
+   * The updated metric must be provided in the request and it's
+   * `name` field must be the same as `[METRIC_ID]` If the metric
+   * does not exist in `[PROJECT_ID]`, then a new metric is created.
+   */
+  metricName: string;
+
+  /** Required. The updated metric. */
+  metric: LogMetric;
+}
+
+/** The parameters to DeleteLogMetric. */
+export interface DeleteLogMetricRequest {
+  /**
+   * Required. The resource name of the metric to delete:
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   */
+  metricName: string;
+}
+
+function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const LogMetric_LabelExtractorsEntry = {
+  encode(message: LogMetric_LabelExtractorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): LogMetric_LabelExtractorsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<LogMetric_LabelExtractorsEntry>, I>>(object: I): LogMetric_LabelExtractorsEntry {
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseLogMetric(): LogMetric {
   return {
     name: "",
@@ -262,8 +393,14 @@ export const LogMetric = {
         value
       }, writer.uint32(58).fork()).ldelim();
     });
-    if (message.createTime !== undefined) Timestamp.encode(toTimestamp(message.createTime), writer.uint32(74).fork()).ldelim();
-    if (message.updateTime !== undefined) Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(82).fork()).ldelim();
+
+    if (message.createTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.createTime), writer.uint32(74).fork()).ldelim();
+    }
+
+    if (message.updateTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(82).fork()).ldelim();
+    }
 
     if (message.version !== 0) {
       writer.uint32(32).int32(message.version);
@@ -402,69 +539,6 @@ export const LogMetric = {
 
 };
 
-/** Logging API version. */
-export enum LogMetric_ApiVersion {
-  /** V2 - Logging API v2. */
-  V2 = 0,
-
-  /** V1 - Logging API v1. */
-  V1 = 1,
-  UNRECOGNIZED = -1,
-}
-export function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion {
-  switch (object) {
-    case 0:
-    case "V2":
-      return LogMetric_ApiVersion.V2;
-
-    case 1:
-    case "V1":
-      return LogMetric_ApiVersion.V1;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return LogMetric_ApiVersion.UNRECOGNIZED;
-  }
-}
-export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string {
-  switch (object) {
-    case LogMetric_ApiVersion.V2:
-      return "V2";
-
-    case LogMetric_ApiVersion.V1:
-      return "V1";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** The parameters to ListLogMetrics. */
-export interface ListLogMetricsRequest {
-  /**
-   * Required. The name of the project containing the metrics:
-   * 
-   * "projects/[PROJECT_ID]"
-   */
-  parent: string;
-
-  /**
-   * Optional. If present, then retrieve the next batch of results from the
-   * preceding call to this method. `pageToken` must be the value of
-   * `nextPageToken` from the previous response. The values of other method
-   * parameters should be identical to those in the previous call.
-   */
-  pageToken: string;
-
-  /**
-   * Optional. The maximum number of results to return from this request.
-   * Non-positive values are ignored. The presence of `nextPageToken` in the
-   * response indicates that more results might be available.
-   */
-  pageSize: number;
-}
-
 function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
   return {
     parent: "",
@@ -546,19 +620,6 @@ export const ListLogMetricsRequest = {
 
 };
 
-/** Result returned from ListLogMetrics. */
-export interface ListLogMetricsResponse {
-  /** A list of logs-based metrics. */
-  metrics: LogMetric[];
-
-  /**
-   * If there might be more results than appear in this response, then
-   * `nextPageToken` is included. To get the next set of results, call this
-   * method again using the value of `nextPageToken` as `pageToken`.
-   */
-  nextPageToken: string;
-}
-
 function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
   return {
     metrics: [],
@@ -634,16 +695,6 @@ export const ListLogMetricsResponse = {
 
 };
 
-/** The parameters to GetLogMetric. */
-export interface GetLogMetricRequest {
-  /**
-   * Required. The resource name of the desired metric:
-   * 
-   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   */
-  metricName: string;
-}
-
 function createBaseGetLogMetricRequest(): GetLogMetricRequest {
   return {
     metricName: ""
@@ -700,24 +751,6 @@ export const GetLogMetricRequest = {
   }
 
 };
-
-/** The parameters to CreateLogMetric. */
-export interface CreateLogMetricRequest {
-  /**
-   * Required. The resource name of the project in which to create the metric:
-   * 
-   * "projects/[PROJECT_ID]"
-   * 
-   * The new metric must be provided in the request.
-   */
-  parent: string;
-
-  /**
-   * Required. The new logs-based metric, which must not have an identifier that
-   * already exists.
-   */
-  metric: LogMetric;
-}
 
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
@@ -788,23 +821,6 @@ export const CreateLogMetricRequest = {
 
 };
 
-/** The parameters to UpdateLogMetric. */
-export interface UpdateLogMetricRequest {
-  /**
-   * Required. The resource name of the metric to update:
-   * 
-   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   * 
-   * The updated metric must be provided in the request and it's
-   * `name` field must be the same as `[METRIC_ID]` If the metric
-   * does not exist in `[PROJECT_ID]`, then a new metric is created.
-   */
-  metricName: string;
-
-  /** Required. The updated metric. */
-  metric: LogMetric;
-}
-
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
@@ -873,16 +889,6 @@ export const UpdateLogMetricRequest = {
   }
 
 };
-
-/** The parameters to DeleteLogMetric. */
-export interface DeleteLogMetricRequest {
-  /**
-   * Required. The resource name of the metric to delete:
-   * 
-   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   */
-  metricName: string;
-}
 
 function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
   return {

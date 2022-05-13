@@ -4,79 +4,55 @@ import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
+
+/** Defines the importance of the data contained in the operation. */
+export enum Operation_Importance {
+  /**
+   * LOW - Allows data caching, batching, and aggregation. It provides
+   * higher performance with higher data loss risk.
+   */
+  LOW = 0,
+
+  /**
+   * HIGH - Disables data aggregation to minimize data loss. It is for operations
+   * that contains significant monetary value or audit trail. This feature
+   * only applies to the client libraries.
+   */
+  HIGH = 1,
+  UNRECOGNIZED = -1,
+}
+export function operation_ImportanceFromJSON(object: any): Operation_Importance {
+  switch (object) {
+    case 0:
+    case "LOW":
+      return Operation_Importance.LOW;
+
+    case 1:
+    case "HIGH":
+      return Operation_Importance.HIGH;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Operation_Importance.UNRECOGNIZED;
+  }
+}
+export function operation_ImportanceToJSON(object: Operation_Importance): string {
+  switch (object) {
+    case Operation_Importance.LOW:
+      return "LOW";
+
+    case Operation_Importance.HIGH:
+      return "HIGH";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface Operation_LabelsEntry {
   key: string;
   value: string;
 }
-
-function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const Operation_LabelsEntry = {
-  encode(message: Operation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOperation_LabelsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): Operation_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: Operation_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Operation_LabelsEntry>, I>>(object: I): Operation_LabelsEntry {
-    const message = createBaseOperation_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  }
-
-};
 
 /** Represents information regarding an operation. */
 export interface Operation {
@@ -170,6 +146,75 @@ export interface Operation {
   extensions: Any[];
 }
 
+function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const Operation_LabelsEntry = {
+  encode(message: Operation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOperation_LabelsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Operation_LabelsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: Operation_LabelsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Operation_LabelsEntry>, I>>(object: I): Operation_LabelsEntry {
+    const message = createBaseOperation_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseOperation(): Operation {
   return {
     operationId: "",
@@ -199,8 +244,14 @@ export const Operation = {
       writer.uint32(26).string(message.consumerId);
     }
 
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
-    if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(42).fork()).ldelim();
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
+    }
+
+    if (message.endTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.endTime), writer.uint32(42).fork()).ldelim();
+    }
+
     Object.entries(message.labels).forEach(([key, value]) => {
       Operation_LabelsEntry.encode({
         key: (key as any),
@@ -372,48 +423,3 @@ export const Operation = {
   }
 
 };
-
-/** Defines the importance of the data contained in the operation. */
-export enum Operation_Importance {
-  /**
-   * LOW - Allows data caching, batching, and aggregation. It provides
-   * higher performance with higher data loss risk.
-   */
-  LOW = 0,
-
-  /**
-   * HIGH - Disables data aggregation to minimize data loss. It is for operations
-   * that contains significant monetary value or audit trail. This feature
-   * only applies to the client libraries.
-   */
-  HIGH = 1,
-  UNRECOGNIZED = -1,
-}
-export function operation_ImportanceFromJSON(object: any): Operation_Importance {
-  switch (object) {
-    case 0:
-    case "LOW":
-      return Operation_Importance.LOW;
-
-    case 1:
-    case "HIGH":
-      return Operation_Importance.HIGH;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Operation_Importance.UNRECOGNIZED;
-  }
-}
-export function operation_ImportanceToJSON(object: Operation_Importance): string {
-  switch (object) {
-    case Operation_Importance.LOW:
-      return "LOW";
-
-    case Operation_Importance.HIGH:
-      return "HIGH";
-
-    default:
-      return "UNKNOWN";
-  }
-}

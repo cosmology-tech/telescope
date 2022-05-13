@@ -10,75 +10,6 @@ export interface LogEntry_LabelsEntry {
   value: string;
 }
 
-function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const LogEntry_LabelsEntry = {
-  encode(message: LogEntry_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLogEntry_LabelsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): LogEntry_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: LogEntry_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsEntry>, I>>(object: I): LogEntry_LabelsEntry {
-    const message = createBaseLogEntry_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  }
-
-};
-
 /** An individual log entry. */
 export interface LogEntry {
   /**
@@ -156,6 +87,128 @@ export interface LogEntry {
   sourceLocation: LogEntrySourceLocation;
 }
 
+/**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
+export interface LogEntryOperation {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the
+   * same identifier are assumed to be part of the same operation.
+   */
+  id: string;
+
+  /**
+   * Optional. An arbitrary producer identifier. The combination of
+   * `id` and `producer` must be globally unique.  Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer: string;
+
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first: boolean;
+
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last: boolean;
+}
+
+/**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocation {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file: string;
+
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line: Long;
+
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function: string;
+}
+
+function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const LogEntry_LabelsEntry = {
+  encode(message: LogEntry_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLogEntry_LabelsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): LogEntry_LabelsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: LogEntry_LabelsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsEntry>, I>>(object: I): LogEntry_LabelsEntry {
+    const message = createBaseLogEntry_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseLogEntry(): LogEntry {
   return {
     name: "",
@@ -179,7 +232,9 @@ export const LogEntry = {
       writer.uint32(82).string(message.name);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(90).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(90).fork()).ldelim();
+    }
 
     if (message.severity !== 0) {
       writer.uint32(96).int32(message.severity);
@@ -371,31 +426,6 @@ export const LogEntry = {
 
 };
 
-/**
- * Additional information about a potentially long-running operation with which
- * a log entry is associated.
- */
-export interface LogEntryOperation {
-  /**
-   * Optional. An arbitrary operation identifier. Log entries with the
-   * same identifier are assumed to be part of the same operation.
-   */
-  id: string;
-
-  /**
-   * Optional. An arbitrary producer identifier. The combination of
-   * `id` and `producer` must be globally unique.  Examples for `producer`:
-   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
-   */
-  producer: string;
-
-  /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
-
-  /** Optional. Set this to True if this is the last log entry in the operation. */
-  last: boolean;
-}
-
 function createBaseLogEntryOperation(): LogEntryOperation {
   return {
     id: "",
@@ -488,34 +518,6 @@ export const LogEntryOperation = {
   }
 
 };
-
-/**
- * Additional information about the source code location that produced the log
- * entry.
- */
-export interface LogEntrySourceLocation {
-  /**
-   * Optional. Source file name. Depending on the runtime environment, this
-   * might be a simple name or a fully-qualified name.
-   */
-  file: string;
-
-  /**
-   * Optional. Line within the source file. 1-based; 0 indicates no line number
-   * available.
-   */
-  line: Long;
-
-  /**
-   * Optional. Human-readable name of the function or method being invoked, with
-   * optional context such as the class or package name. This information may be
-   * used in contexts such as the logs viewer, where a file and line number are
-   * less meaningful. The format can vary by language. For example:
-   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
-   * (Python).
-   */
-  function: string;
-}
 
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {

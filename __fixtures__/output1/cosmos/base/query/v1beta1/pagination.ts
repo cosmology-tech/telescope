@@ -47,6 +47,30 @@ export interface PageRequest {
   reverse: boolean;
 }
 
+/**
+ * PageResponse is to be embedded in gRPC response messages where the
+ * corresponding request message has used PageRequest.
+ * 
+ * message SomeResponse {
+ * repeated Bar results = 1;
+ * PageResponse page = 2;
+ * }
+ */
+export interface PageResponse {
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   */
+  nextKey: Uint8Array;
+
+  /**
+   * total is total number of results available if PageRequest.count_total
+   * was set, its value is undefined otherwise
+   */
+  total: Long;
+}
+
 function createBasePageRequest(): PageRequest {
   return {
     key: new Uint8Array(),
@@ -151,30 +175,6 @@ export const PageRequest = {
   }
 
 };
-
-/**
- * PageResponse is to be embedded in gRPC response messages where the
- * corresponding request message has used PageRequest.
- * 
- * message SomeResponse {
- * repeated Bar results = 1;
- * PageResponse page = 2;
- * }
- */
-export interface PageResponse {
-  /**
-   * next_key is the key to be passed to PageRequest.key to
-   * query the next page most efficiently. It will be empty if
-   * there are no more results.
-   */
-  nextKey: Uint8Array;
-
-  /**
-   * total is total number of results available if PageRequest.count_total
-   * was set, its value is undefined otherwise
-   */
-  total: Long;
-}
 
 function createBasePageResponse(): PageResponse {
   return {

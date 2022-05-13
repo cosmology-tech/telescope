@@ -47,6 +47,99 @@ export interface Operation {
   response?: Any;
 }
 
+/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
+export interface GetOperationRequest {
+  /** The name of the operation resource. */
+  name: string;
+}
+
+/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsRequest {
+  /** The name of the operation's parent resource. */
+  name: string;
+
+  /** The standard list filter. */
+  filter: string;
+
+  /** The standard list page size. */
+  pageSize: number;
+
+  /** The standard list page token. */
+  pageToken: string;
+}
+
+/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsResponse {
+  /** A list of operations that matches the specified filter in the request. */
+  operations: Operation[];
+
+  /** The standard List next-page token. */
+  nextPageToken: string;
+}
+
+/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
+export interface CancelOperationRequest {
+  /** The name of the operation resource to be cancelled. */
+  name: string;
+}
+
+/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
+export interface DeleteOperationRequest {
+  /** The name of the operation resource to be deleted. */
+  name: string;
+}
+
+/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
+export interface WaitOperationRequest {
+  /** The name of the operation resource to wait on. */
+  name: string;
+
+  /**
+   * The maximum duration to wait before timing out. If left blank, the wait
+   * will be at most the time permitted by the underlying HTTP/RPC protocol.
+   * If RPC context deadline is also specified, the shorter one will be used.
+   */
+  timeout: string;
+}
+
+/**
+ * A message representing the message types used by a long-running operation.
+ * 
+ * Example:
+ * 
+ * rpc LongRunningRecognize(LongRunningRecognizeRequest)
+ * returns (google.longrunning.Operation) {
+ * option (google.longrunning.operation_info) = {
+ * response_type: "LongRunningRecognizeResponse"
+ * metadata_type: "LongRunningRecognizeMetadata"
+ * };
+ * }
+ */
+export interface OperationInfo {
+  /**
+   * Required. The message name of the primary return type for this
+   * long-running operation.
+   * This type will be used to deserialize the LRO's response.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  responseType: string;
+
+  /**
+   * Required. The message name of the metadata type for this long-running
+   * operation.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  metadataType: string;
+}
+
 function createBaseOperation(): Operation {
   return {
     name: "",
@@ -152,12 +245,6 @@ export const Operation = {
 
 };
 
-/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
-export interface GetOperationRequest {
-  /** The name of the operation resource. */
-  name: string;
-}
-
 function createBaseGetOperationRequest(): GetOperationRequest {
   return {
     name: ""
@@ -214,21 +301,6 @@ export const GetOperationRequest = {
   }
 
 };
-
-/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
-export interface ListOperationsRequest {
-  /** The name of the operation's parent resource. */
-  name: string;
-
-  /** The standard list filter. */
-  filter: string;
-
-  /** The standard list page size. */
-  pageSize: number;
-
-  /** The standard list page token. */
-  pageToken: string;
-}
 
 function createBaseListOperationsRequest(): ListOperationsRequest {
   return {
@@ -323,15 +395,6 @@ export const ListOperationsRequest = {
 
 };
 
-/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
-export interface ListOperationsResponse {
-  /** A list of operations that matches the specified filter in the request. */
-  operations: Operation[];
-
-  /** The standard List next-page token. */
-  nextPageToken: string;
-}
-
 function createBaseListOperationsResponse(): ListOperationsResponse {
   return {
     operations: [],
@@ -407,12 +470,6 @@ export const ListOperationsResponse = {
 
 };
 
-/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
-export interface CancelOperationRequest {
-  /** The name of the operation resource to be cancelled. */
-  name: string;
-}
-
 function createBaseCancelOperationRequest(): CancelOperationRequest {
   return {
     name: ""
@@ -469,12 +526,6 @@ export const CancelOperationRequest = {
   }
 
 };
-
-/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
-export interface DeleteOperationRequest {
-  /** The name of the operation resource to be deleted. */
-  name: string;
-}
 
 function createBaseDeleteOperationRequest(): DeleteOperationRequest {
   return {
@@ -533,19 +584,6 @@ export const DeleteOperationRequest = {
 
 };
 
-/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
-export interface WaitOperationRequest {
-  /** The name of the operation resource to wait on. */
-  name: string;
-
-  /**
-   * The maximum duration to wait before timing out. If left blank, the wait
-   * will be at most the time permitted by the underlying HTTP/RPC protocol.
-   * If RPC context deadline is also specified, the shorter one will be used.
-   */
-  timeout: string;
-}
-
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
     name: "",
@@ -559,7 +597,10 @@ export const WaitOperationRequest = {
       writer.uint32(10).string(message.name);
     }
 
-    if (message.timeout !== undefined) Duration.encode(toDuration(message.timeout), writer.uint32(18).fork()).ldelim();
+    if (message.timeout !== undefined) {
+      Duration.encode(toDuration(message.timeout), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -611,44 +652,6 @@ export const WaitOperationRequest = {
   }
 
 };
-
-/**
- * A message representing the message types used by a long-running operation.
- * 
- * Example:
- * 
- * rpc LongRunningRecognize(LongRunningRecognizeRequest)
- * returns (google.longrunning.Operation) {
- * option (google.longrunning.operation_info) = {
- * response_type: "LongRunningRecognizeResponse"
- * metadata_type: "LongRunningRecognizeMetadata"
- * };
- * }
- */
-export interface OperationInfo {
-  /**
-   * Required. The message name of the primary return type for this
-   * long-running operation.
-   * This type will be used to deserialize the LRO's response.
-   * 
-   * If the response is in a different package from the rpc, a fully-qualified
-   * message name must be used (e.g. `google.protobuf.Struct`).
-   * 
-   * Note: Altering this value constitutes a breaking change.
-   */
-  responseType: string;
-
-  /**
-   * Required. The message name of the metadata type for this long-running
-   * operation.
-   * 
-   * If the response is in a different package from the rpc, a fully-qualified
-   * message name must be used (e.g. `google.protobuf.Struct`).
-   * 
-   * Note: Altering this value constitutes a breaking change.
-   */
-  metadataType: string;
-}
 
 function createBaseOperationInfo(): OperationInfo {
   return {

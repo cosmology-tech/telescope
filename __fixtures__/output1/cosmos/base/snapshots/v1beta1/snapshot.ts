@@ -10,6 +10,61 @@ export interface Snapshot {
   metadata: Metadata;
 }
 
+/** Metadata contains SDK-specific snapshot metadata. */
+export interface Metadata {
+  /** SHA-256 chunk hashes */
+  chunkHashes: Uint8Array[];
+}
+
+/** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
+export interface SnapshotItem {
+  store?: SnapshotStoreItem;
+  iavl?: SnapshotIAVLItem;
+  extension?: SnapshotExtensionMeta;
+  extensionPayload?: SnapshotExtensionPayload;
+  kv?: SnapshotKVItem;
+  schema?: SnapshotSchema;
+}
+
+/** SnapshotStoreItem contains metadata about a snapshotted store. */
+export interface SnapshotStoreItem {
+  name: string;
+}
+
+/** SnapshotIAVLItem is an exported IAVL node. */
+export interface SnapshotIAVLItem {
+  key: Uint8Array;
+  value: Uint8Array;
+
+  /** version is block height */
+  version: Long;
+
+  /** height is depth of the tree. */
+  height: number;
+}
+
+/** SnapshotExtensionMeta contains metadata about an external snapshotter. */
+export interface SnapshotExtensionMeta {
+  name: string;
+  format: number;
+}
+
+/** SnapshotExtensionPayload contains payloads of an external snapshotter. */
+export interface SnapshotExtensionPayload {
+  payload: Uint8Array;
+}
+
+/** SnapshotKVItem is an exported Key/Value Pair */
+export interface SnapshotKVItem {
+  key: Uint8Array;
+  value: Uint8Array;
+}
+
+/** SnapshotSchema is an exported schema of smt store */
+export interface SnapshotSchema {
+  keys: Uint8Array[];
+}
+
 function createBaseSnapshot(): Snapshot {
   return {
     height: Long.UZERO,
@@ -115,12 +170,6 @@ export const Snapshot = {
 
 };
 
-/** Metadata contains SDK-specific snapshot metadata. */
-export interface Metadata {
-  /** SHA-256 chunk hashes */
-  chunkHashes: Uint8Array[];
-}
-
 function createBaseMetadata(): Metadata {
   return {
     chunkHashes: []
@@ -183,16 +232,6 @@ export const Metadata = {
   }
 
 };
-
-/** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
-export interface SnapshotItem {
-  store?: SnapshotStoreItem;
-  iavl?: SnapshotIAVLItem;
-  extension?: SnapshotExtensionMeta;
-  extensionPayload?: SnapshotExtensionPayload;
-  kv?: SnapshotKVItem;
-  schema?: SnapshotSchema;
-}
 
 function createBaseSnapshotItem(): SnapshotItem {
   return {
@@ -311,11 +350,6 @@ export const SnapshotItem = {
 
 };
 
-/** SnapshotStoreItem contains metadata about a snapshotted store. */
-export interface SnapshotStoreItem {
-  name: string;
-}
-
 function createBaseSnapshotStoreItem(): SnapshotStoreItem {
   return {
     name: ""
@@ -372,18 +406,6 @@ export const SnapshotStoreItem = {
   }
 
 };
-
-/** SnapshotIAVLItem is an exported IAVL node. */
-export interface SnapshotIAVLItem {
-  key: Uint8Array;
-  value: Uint8Array;
-
-  /** version is block height */
-  version: Long;
-
-  /** height is depth of the tree. */
-  height: number;
-}
 
 function createBaseSnapshotIAVLItem(): SnapshotIAVLItem {
   return {
@@ -478,12 +500,6 @@ export const SnapshotIAVLItem = {
 
 };
 
-/** SnapshotExtensionMeta contains metadata about an external snapshotter. */
-export interface SnapshotExtensionMeta {
-  name: string;
-  format: number;
-}
-
 function createBaseSnapshotExtensionMeta(): SnapshotExtensionMeta {
   return {
     name: "",
@@ -553,11 +569,6 @@ export const SnapshotExtensionMeta = {
 
 };
 
-/** SnapshotExtensionPayload contains payloads of an external snapshotter. */
-export interface SnapshotExtensionPayload {
-  payload: Uint8Array;
-}
-
 function createBaseSnapshotExtensionPayload(): SnapshotExtensionPayload {
   return {
     payload: new Uint8Array()
@@ -614,12 +625,6 @@ export const SnapshotExtensionPayload = {
   }
 
 };
-
-/** SnapshotKVItem is an exported Key/Value Pair */
-export interface SnapshotKVItem {
-  key: Uint8Array;
-  value: Uint8Array;
-}
 
 function createBaseSnapshotKVItem(): SnapshotKVItem {
   return {
@@ -689,11 +694,6 @@ export const SnapshotKVItem = {
   }
 
 };
-
-/** SnapshotSchema is an exported schema of smt store */
-export interface SnapshotSchema {
-  keys: Uint8Array[];
-}
 
 function createBaseSnapshotSchema(): SnapshotSchema {
   return {

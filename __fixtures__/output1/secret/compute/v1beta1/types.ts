@@ -53,6 +53,51 @@ export interface AccessTypeParam {
   value: AccessType;
 }
 
+/** CodeInfo is data for the uploaded contract WASM code */
+export interface CodeInfo {
+  codeHash: Uint8Array;
+  creator: Uint8Array;
+  source: string;
+  builder: string;
+}
+export interface ContractCustomInfo {
+  enclaveKey: Uint8Array;
+  label: string;
+}
+
+/** ContractInfo stores a WASM contract instance */
+export interface ContractInfo {
+  codeId: Long;
+  creator: Uint8Array;
+
+  /** bytes admin = 3 [(gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.AccAddress"]; */
+  label: string;
+
+  /**
+   * never show this in query results, just use for sorting
+   * (Note: when using json tag "-" amino refused to serialize it...)
+   */
+  created: AbsoluteTxPosition;
+}
+
+/** AbsoluteTxPosition can be used to sort contracts */
+export interface AbsoluteTxPosition {
+  /** BlockHeight is the block the contract was created at */
+  blockHeight: Long;
+
+  /** TxIndex is a monotonic counter within the block (actual transaction index, or gas consumed) */
+  txIndex: Long;
+}
+
+/** Model is a struct that holds a KV pair */
+export interface Model {
+  /** hex-encode key to read it better (this is often ascii) */
+  Key: Uint8Array;
+
+  /** base64-encode raw value */
+  Value: Uint8Array;
+}
+
 function createBaseAccessTypeParam(): AccessTypeParam {
   return {
     value: 0
@@ -109,14 +154,6 @@ export const AccessTypeParam = {
   }
 
 };
-
-/** CodeInfo is data for the uploaded contract WASM code */
-export interface CodeInfo {
-  codeHash: Uint8Array;
-  creator: Uint8Array;
-  source: string;
-  builder: string;
-}
 
 function createBaseCodeInfo(): CodeInfo {
   return {
@@ -210,10 +247,6 @@ export const CodeInfo = {
   }
 
 };
-export interface ContractCustomInfo {
-  enclaveKey: Uint8Array;
-  label: string;
-}
 
 function createBaseContractCustomInfo(): ContractCustomInfo {
   return {
@@ -283,21 +316,6 @@ export const ContractCustomInfo = {
   }
 
 };
-
-/** ContractInfo stores a WASM contract instance */
-export interface ContractInfo {
-  codeId: Long;
-  creator: Uint8Array;
-
-  /** bytes admin = 3 [(gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.AccAddress"]; */
-  label: string;
-
-  /**
-   * never show this in query results, just use for sorting
-   * (Note: when using json tag "-" amino refused to serialize it...)
-   */
-  created: AbsoluteTxPosition;
-}
 
 function createBaseContractInfo(): ContractInfo {
   return {
@@ -392,15 +410,6 @@ export const ContractInfo = {
 
 };
 
-/** AbsoluteTxPosition can be used to sort contracts */
-export interface AbsoluteTxPosition {
-  /** BlockHeight is the block the contract was created at */
-  blockHeight: Long;
-
-  /** TxIndex is a monotonic counter within the block (actual transaction index, or gas consumed) */
-  txIndex: Long;
-}
-
 function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   return {
     blockHeight: Long.ZERO,
@@ -469,15 +478,6 @@ export const AbsoluteTxPosition = {
   }
 
 };
-
-/** Model is a struct that holds a KV pair */
-export interface Model {
-  /** hex-encode key to read it better (this is often ascii) */
-  Key: Uint8Array;
-
-  /** base64-encode raw value */
-  Value: Uint8Array;
-}
 
 function createBaseModel(): Model {
   return {

@@ -3,6 +3,70 @@ import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
+ * State defines if a connection is in one of the following states:
+ * INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ */
+export enum State {
+  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
+  STATE_UNINITIALIZED_UNSPECIFIED = 0,
+
+  /** STATE_INIT - A connection end has just started the opening handshake. */
+  STATE_INIT = 1,
+
+  /**
+   * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
+   * chain.
+   */
+  STATE_TRYOPEN = 2,
+
+  /** STATE_OPEN - A connection end has completed the handshake. */
+  STATE_OPEN = 3,
+  UNRECOGNIZED = -1,
+}
+export function stateFromJSON(object: any): State {
+  switch (object) {
+    case 0:
+    case "STATE_UNINITIALIZED_UNSPECIFIED":
+      return State.STATE_UNINITIALIZED_UNSPECIFIED;
+
+    case 1:
+    case "STATE_INIT":
+      return State.STATE_INIT;
+
+    case 2:
+    case "STATE_TRYOPEN":
+      return State.STATE_TRYOPEN;
+
+    case 3:
+    case "STATE_OPEN":
+      return State.STATE_OPEN;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return State.UNRECOGNIZED;
+  }
+}
+export function stateToJSON(object: State): string {
+  switch (object) {
+    case State.STATE_UNINITIALIZED_UNSPECIFIED:
+      return "STATE_UNINITIALIZED_UNSPECIFIED";
+
+    case State.STATE_INIT:
+      return "STATE_INIT";
+
+    case State.STATE_TRYOPEN:
+      return "STATE_TRYOPEN";
+
+    case State.STATE_OPEN:
+      return "STATE_OPEN";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/**
  * ConnectionEnd defines a stateful object on a chain connected to another
  * separate one.
  * NOTE: there must only be 2 defined ConnectionEnds to establish
@@ -30,6 +94,88 @@ export interface ConnectionEnd {
    * clients.
    */
   delayPeriod: Long;
+}
+
+/**
+ * IdentifiedConnection defines a connection with additional connection
+ * identifier field.
+ */
+export interface IdentifiedConnection {
+  /** connection identifier. */
+  id: string;
+
+  /** client associated with this connection. */
+  clientId: string;
+
+  /**
+   * IBC version which can be utilised to determine encodings or protocols for
+   * channels or packets utilising this connection
+   */
+  versions: Version[];
+
+  /** current state of the connection end. */
+  state: State;
+
+  /** counterparty chain associated with this connection. */
+  counterparty: Counterparty;
+
+  /** delay period associated with this connection. */
+  delayPeriod: Long;
+}
+
+/** Counterparty defines the counterparty chain associated with a connection end. */
+export interface Counterparty {
+  /**
+   * identifies the client on the counterparty chain associated with a given
+   * connection.
+   */
+  clientId: string;
+
+  /**
+   * identifies the connection end on the counterparty chain associated with a
+   * given connection.
+   */
+  connectionId: string;
+
+  /** commitment merkle prefix of the counterparty chain. */
+  prefix: MerklePrefix;
+}
+
+/** ClientPaths define all the connection paths for a client state. */
+export interface ClientPaths {
+  /** list of connection paths */
+  paths: string[];
+}
+
+/** ConnectionPaths define all the connection paths for a given client state. */
+export interface ConnectionPaths {
+  /** client state unique identifier */
+  clientId: string;
+
+  /** list of connection paths */
+  paths: string[];
+}
+
+/**
+ * Version defines the versioning scheme used to negotiate the IBC verison in
+ * the connection handshake.
+ */
+export interface Version {
+  /** unique version identifier */
+  identifier: string;
+
+  /** list of features compatible with the specified identifier */
+  features: string[];
+}
+
+/** Params defines the set of Connection parameters. */
+export interface Params {
+  /**
+   * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
+   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
+   * conditions. A safe choice is 3-5x the expected time per block.
+   */
+  maxExpectedTimePerBlock: Long;
 }
 
 function createBaseConnectionEnd(): ConnectionEnd {
@@ -142,33 +288,6 @@ export const ConnectionEnd = {
   }
 
 };
-
-/**
- * IdentifiedConnection defines a connection with additional connection
- * identifier field.
- */
-export interface IdentifiedConnection {
-  /** connection identifier. */
-  id: string;
-
-  /** client associated with this connection. */
-  clientId: string;
-
-  /**
-   * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection
-   */
-  versions: Version[];
-
-  /** current state of the connection end. */
-  state: State;
-
-  /** counterparty chain associated with this connection. */
-  counterparty: Counterparty;
-
-  /** delay period associated with this connection. */
-  delayPeriod: Long;
-}
 
 function createBaseIdentifiedConnection(): IdentifiedConnection {
   return {
@@ -293,88 +412,6 @@ export const IdentifiedConnection = {
 
 };
 
-/**
- * State defines if a connection is in one of the following states:
- * INIT, TRYOPEN, OPEN or UNINITIALIZED.
- */
-export enum State {
-  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
-  STATE_UNINITIALIZED_UNSPECIFIED = 0,
-
-  /** STATE_INIT - A connection end has just started the opening handshake. */
-  STATE_INIT = 1,
-
-  /**
-   * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-   * chain.
-   */
-  STATE_TRYOPEN = 2,
-
-  /** STATE_OPEN - A connection end has completed the handshake. */
-  STATE_OPEN = 3,
-  UNRECOGNIZED = -1,
-}
-export function stateFromJSON(object: any): State {
-  switch (object) {
-    case 0:
-    case "STATE_UNINITIALIZED_UNSPECIFIED":
-      return State.STATE_UNINITIALIZED_UNSPECIFIED;
-
-    case 1:
-    case "STATE_INIT":
-      return State.STATE_INIT;
-
-    case 2:
-    case "STATE_TRYOPEN":
-      return State.STATE_TRYOPEN;
-
-    case 3:
-    case "STATE_OPEN":
-      return State.STATE_OPEN;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return State.UNRECOGNIZED;
-  }
-}
-export function stateToJSON(object: State): string {
-  switch (object) {
-    case State.STATE_UNINITIALIZED_UNSPECIFIED:
-      return "STATE_UNINITIALIZED_UNSPECIFIED";
-
-    case State.STATE_INIT:
-      return "STATE_INIT";
-
-    case State.STATE_TRYOPEN:
-      return "STATE_TRYOPEN";
-
-    case State.STATE_OPEN:
-      return "STATE_OPEN";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** Counterparty defines the counterparty chain associated with a connection end. */
-export interface Counterparty {
-  /**
-   * identifies the client on the counterparty chain associated with a given
-   * connection.
-   */
-  clientId: string;
-
-  /**
-   * identifies the connection end on the counterparty chain associated with a
-   * given connection.
-   */
-  connectionId: string;
-
-  /** commitment merkle prefix of the counterparty chain. */
-  prefix: MerklePrefix;
-}
-
 function createBaseCounterparty(): Counterparty {
   return {
     clientId: "",
@@ -456,12 +493,6 @@ export const Counterparty = {
 
 };
 
-/** ClientPaths define all the connection paths for a client state. */
-export interface ClientPaths {
-  /** list of connection paths */
-  paths: string[];
-}
-
 function createBaseClientPaths(): ClientPaths {
   return {
     paths: []
@@ -524,15 +555,6 @@ export const ClientPaths = {
   }
 
 };
-
-/** ConnectionPaths define all the connection paths for a given client state. */
-export interface ConnectionPaths {
-  /** client state unique identifier */
-  clientId: string;
-
-  /** list of connection paths */
-  paths: string[];
-}
 
 function createBaseConnectionPaths(): ConnectionPaths {
   return {
@@ -609,18 +631,6 @@ export const ConnectionPaths = {
 
 };
 
-/**
- * Version defines the versioning scheme used to negotiate the IBC verison in
- * the connection handshake.
- */
-export interface Version {
-  /** unique version identifier */
-  identifier: string;
-
-  /** list of features compatible with the specified identifier */
-  features: string[];
-}
-
 function createBaseVersion(): Version {
   return {
     identifier: "",
@@ -695,16 +705,6 @@ export const Version = {
   }
 
 };
-
-/** Params defines the set of Connection parameters. */
-export interface Params {
-  /**
-   * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
-   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
-   * conditions. A safe choice is 3-5x the expected time per block.
-   */
-  maxExpectedTimePerBlock: Long;
-}
 
 function createBaseParams(): Params {
   return {

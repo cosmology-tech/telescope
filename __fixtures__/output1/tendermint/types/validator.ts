@@ -6,6 +6,16 @@ export interface ValidatorSet {
   proposer: Validator;
   totalVotingPower: Long;
 }
+export interface Validator {
+  address: Uint8Array;
+  pubKey: PublicKey;
+  votingPower: Long;
+  proposerPriority: Long;
+}
+export interface SimpleValidator {
+  pubKey: PublicKey;
+  votingPower: Long;
+}
 
 function createBaseValidatorSet(): ValidatorSet {
   return {
@@ -93,12 +103,6 @@ export const ValidatorSet = {
   }
 
 };
-export interface Validator {
-  address: Uint8Array;
-  pubKey: PublicKey;
-  votingPower: Long;
-  proposerPriority: Long;
-}
 
 function createBaseValidator(): Validator {
   return {
@@ -192,10 +196,6 @@ export const Validator = {
   }
 
 };
-export interface SimpleValidator {
-  pubKey: PublicKey;
-  votingPower: Long;
-}
 
 function createBaseSimpleValidator(): SimpleValidator {
   return {

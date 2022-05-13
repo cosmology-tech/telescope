@@ -13,6 +13,166 @@ export interface QueryClientStateRequest {
   clientId: string;
 }
 
+/**
+ * QueryClientStateResponse is the response type for the Query/ClientState RPC
+ * method. Besides the client state, it includes a proof and the height from
+ * which the proof was retrieved.
+ */
+export interface QueryClientStateResponse {
+  /** client state associated with the request identifier */
+  clientState: Any;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proofHeight: Height;
+}
+
+/**
+ * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
+ * method
+ */
+export interface QueryClientStatesRequest {
+  /** pagination request */
+  pagination: PageRequest;
+}
+
+/**
+ * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
+ * method.
+ */
+export interface QueryClientStatesResponse {
+  /** list of stored ClientStates of the chain. */
+  clientStates: IdentifiedClientState[];
+
+  /** pagination response */
+  pagination: PageResponse;
+}
+
+/**
+ * QueryConsensusStateRequest is the request type for the Query/ConsensusState
+ * RPC method. Besides the consensus state, it includes a proof and the height
+ * from which the proof was retrieved.
+ */
+export interface QueryConsensusStateRequest {
+  /** client identifier */
+  clientId: string;
+
+  /** consensus state revision number */
+  revisionNumber: Long;
+
+  /** consensus state revision height */
+  revisionHeight: Long;
+
+  /**
+   * latest_height overrrides the height field and queries the latest stored
+   * ConsensusState
+   */
+  latestHeight: boolean;
+}
+
+/**
+ * QueryConsensusStateResponse is the response type for the Query/ConsensusState
+ * RPC method
+ */
+export interface QueryConsensusStateResponse {
+  /** consensus state associated with the client identifier at the given height */
+  consensusState: Any;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proofHeight: Height;
+}
+
+/**
+ * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
+ * RPC method.
+ */
+export interface QueryConsensusStatesRequest {
+  /** client identifier */
+  clientId: string;
+
+  /** pagination request */
+  pagination: PageRequest;
+}
+
+/**
+ * QueryConsensusStatesResponse is the response type for the
+ * Query/ConsensusStates RPC method
+ */
+export interface QueryConsensusStatesResponse {
+  /** consensus states associated with the identifier */
+  consensusStates: ConsensusStateWithHeight[];
+
+  /** pagination response */
+  pagination: PageResponse;
+}
+
+/**
+ * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
+ * method
+ */
+export interface QueryClientStatusRequest {
+  /** client unique identifier */
+  clientId: string;
+}
+
+/**
+ * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
+ * method. It returns the current status of the IBC client.
+ */
+export interface QueryClientStatusResponse {
+  status: string;
+}
+
+/**
+ * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
+ * method.
+ */
+export interface QueryClientParamsRequest {}
+
+/**
+ * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
+ * method.
+ */
+export interface QueryClientParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+
+/**
+ * QueryUpgradedClientStateRequest is the request type for the
+ * Query/UpgradedClientState RPC method
+ */
+export interface QueryUpgradedClientStateRequest {}
+
+/**
+ * QueryUpgradedClientStateResponse is the response type for the
+ * Query/UpgradedClientState RPC method.
+ */
+export interface QueryUpgradedClientStateResponse {
+  /** client state associated with the request identifier */
+  upgradedClientState: Any;
+}
+
+/**
+ * QueryUpgradedConsensusStateRequest is the request type for the
+ * Query/UpgradedConsensusState RPC method
+ */
+export interface QueryUpgradedConsensusStateRequest {}
+
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the
+ * Query/UpgradedConsensusState RPC method.
+ */
+export interface QueryUpgradedConsensusStateResponse {
+  /** Consensus state associated with the request identifier */
+  upgradedConsensusState: Any;
+}
+
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {
   return {
     clientId: ""
@@ -69,22 +229,6 @@ export const QueryClientStateRequest = {
   }
 
 };
-
-/**
- * QueryClientStateResponse is the response type for the Query/ClientState RPC
- * method. Besides the client state, it includes a proof and the height from
- * which the proof was retrieved.
- */
-export interface QueryClientStateResponse {
-  /** client state associated with the request identifier */
-  clientState: Any;
-
-  /** merkle proof of existence */
-  proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
-  proofHeight: Height;
-}
 
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
   return {
@@ -167,15 +311,6 @@ export const QueryClientStateResponse = {
 
 };
 
-/**
- * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
- * method
- */
-export interface QueryClientStatesRequest {
-  /** pagination request */
-  pagination: PageRequest;
-}
-
 function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
   return {
     pagination: undefined
@@ -232,18 +367,6 @@ export const QueryClientStatesRequest = {
   }
 
 };
-
-/**
- * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
- * method.
- */
-export interface QueryClientStatesResponse {
-  /** list of stored ClientStates of the chain. */
-  clientStates: IdentifiedClientState[];
-
-  /** pagination response */
-  pagination: PageResponse;
-}
 
 function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
   return {
@@ -319,28 +442,6 @@ export const QueryClientStatesResponse = {
   }
 
 };
-
-/**
- * QueryConsensusStateRequest is the request type for the Query/ConsensusState
- * RPC method. Besides the consensus state, it includes a proof and the height
- * from which the proof was retrieved.
- */
-export interface QueryConsensusStateRequest {
-  /** client identifier */
-  clientId: string;
-
-  /** consensus state revision number */
-  revisionNumber: Long;
-
-  /** consensus state revision height */
-  revisionHeight: Long;
-
-  /**
-   * latest_height overrrides the height field and queries the latest stored
-   * ConsensusState
-   */
-  latestHeight: boolean;
-}
 
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
   return {
@@ -435,21 +536,6 @@ export const QueryConsensusStateRequest = {
 
 };
 
-/**
- * QueryConsensusStateResponse is the response type for the Query/ConsensusState
- * RPC method
- */
-export interface QueryConsensusStateResponse {
-  /** consensus state associated with the client identifier at the given height */
-  consensusState: Any;
-
-  /** merkle proof of existence */
-  proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
-  proofHeight: Height;
-}
-
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
   return {
     consensusState: undefined,
@@ -531,18 +617,6 @@ export const QueryConsensusStateResponse = {
 
 };
 
-/**
- * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
- * RPC method.
- */
-export interface QueryConsensusStatesRequest {
-  /** client identifier */
-  clientId: string;
-
-  /** pagination request */
-  pagination: PageRequest;
-}
-
 function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
   return {
     clientId: "",
@@ -611,18 +685,6 @@ export const QueryConsensusStatesRequest = {
   }
 
 };
-
-/**
- * QueryConsensusStatesResponse is the response type for the
- * Query/ConsensusStates RPC method
- */
-export interface QueryConsensusStatesResponse {
-  /** consensus states associated with the identifier */
-  consensusStates: ConsensusStateWithHeight[];
-
-  /** pagination response */
-  pagination: PageResponse;
-}
 
 function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse {
   return {
@@ -699,15 +761,6 @@ export const QueryConsensusStatesResponse = {
 
 };
 
-/**
- * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
- * method
- */
-export interface QueryClientStatusRequest {
-  /** client unique identifier */
-  clientId: string;
-}
-
 function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
   return {
     clientId: ""
@@ -764,14 +817,6 @@ export const QueryClientStatusRequest = {
   }
 
 };
-
-/**
- * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
- * method. It returns the current status of the IBC client.
- */
-export interface QueryClientStatusResponse {
-  status: string;
-}
 
 function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
   return {
@@ -830,18 +875,12 @@ export const QueryClientStatusResponse = {
 
 };
 
-/**
- * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
- * method.
- */
-export interface QueryClientParamsRequest {}
-
 function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
   return {};
 }
 
 export const QueryClientParamsRequest = {
-  encode(message: QueryClientParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryClientParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -863,30 +902,21 @@ export const QueryClientParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryClientParamsRequest {
+  fromJSON(_: any): QueryClientParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryClientParamsRequest): unknown {
+  toJSON(_: QueryClientParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClientParamsRequest>, I>>(object: I): QueryClientParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryClientParamsRequest>, I>>(_: I): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
     return message;
   }
 
 };
-
-/**
- * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
- * method.
- */
-export interface QueryClientParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
   return {
@@ -945,18 +975,12 @@ export const QueryClientParamsResponse = {
 
 };
 
-/**
- * QueryUpgradedClientStateRequest is the request type for the
- * Query/UpgradedClientState RPC method
- */
-export interface QueryUpgradedClientStateRequest {}
-
 function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRequest {
   return {};
 }
 
 export const QueryUpgradedClientStateRequest = {
-  encode(message: QueryUpgradedClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryUpgradedClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -978,30 +1002,21 @@ export const QueryUpgradedClientStateRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryUpgradedClientStateRequest {
+  fromJSON(_: any): QueryUpgradedClientStateRequest {
     return {};
   },
 
-  toJSON(message: QueryUpgradedClientStateRequest): unknown {
+  toJSON(_: QueryUpgradedClientStateRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryUpgradedClientStateRequest>, I>>(object: I): QueryUpgradedClientStateRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryUpgradedClientStateRequest>, I>>(_: I): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
     return message;
   }
 
 };
-
-/**
- * QueryUpgradedClientStateResponse is the response type for the
- * Query/UpgradedClientState RPC method.
- */
-export interface QueryUpgradedClientStateResponse {
-  /** client state associated with the request identifier */
-  upgradedClientState: Any;
-}
 
 function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateResponse {
   return {
@@ -1060,18 +1075,12 @@ export const QueryUpgradedClientStateResponse = {
 
 };
 
-/**
- * QueryUpgradedConsensusStateRequest is the request type for the
- * Query/UpgradedConsensusState RPC method
- */
-export interface QueryUpgradedConsensusStateRequest {}
-
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {};
 }
 
 export const QueryUpgradedConsensusStateRequest = {
-  encode(message: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1093,30 +1102,21 @@ export const QueryUpgradedConsensusStateRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryUpgradedConsensusStateRequest {
+  fromJSON(_: any): QueryUpgradedConsensusStateRequest {
     return {};
   },
 
-  toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
+  toJSON(_: QueryUpgradedConsensusStateRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>>(object: I): QueryUpgradedConsensusStateRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>>(_: I): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     return message;
   }
 
 };
-
-/**
- * QueryUpgradedConsensusStateResponse is the response type for the
- * Query/UpgradedConsensusState RPC method.
- */
-export interface QueryUpgradedConsensusStateResponse {
-  /** Consensus state associated with the request identifier */
-  upgradedConsensusState: Any;
-}
 
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
   return {

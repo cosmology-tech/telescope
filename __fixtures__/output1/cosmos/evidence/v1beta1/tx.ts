@@ -11,6 +11,12 @@ export interface MsgSubmitEvidence {
   evidence: Any;
 }
 
+/** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+export interface MsgSubmitEvidenceResponse {
+  /** hash defines the hash of the evidence. */
+  hash: Uint8Array;
+}
+
 function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
   return {
     submitter: "",
@@ -79,12 +85,6 @@ export const MsgSubmitEvidence = {
   }
 
 };
-
-/** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
-export interface MsgSubmitEvidenceResponse {
-  /** hash defines the hash of the evidence. */
-  hash: Uint8Array;
-}
 
 function createBaseMsgSubmitEvidenceResponse(): MsgSubmitEvidenceResponse {
   return {

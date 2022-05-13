@@ -56,6 +56,76 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface MonitoredResource_LabelsEntry {
+  key: string;
+  value: string;
+}
+
+/**
+ * An object representing a resource that can be used for monitoring, logging,
+ * billing, or other purposes. Examples include virtual machine instances,
+ * databases, and storage devices such as disks. The `type` field identifies a
+ * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object that describes the resource's
+ * schema. Information in the `labels` field identifies the actual resource and
+ * its attributes according to the schema. For example, a particular Compute
+ * Engine VM instance could be represented by the following object, because the
+ * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
+ * `"instance_id"` and `"zone"`:
+ * 
+ * { "type": "gce_instance",
+ * "labels": { "instance_id": "12345678901234",
+ * "zone": "us-central1-a" }}
+ */
+export interface MonitoredResource {
+  /**
+   * Required. The monitored resource type. This field must match
+   * the `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For
+   * example, the type of a Compute Engine VM instance is `gce_instance`.
+   */
+  type: string;
+
+  /**
+   * Required. Values for all of the labels listed in the associated monitored
+   * resource descriptor. For example, Compute Engine VM instances use the
+   * labels `"project_id"`, `"instance_id"`, and `"zone"`.
+   */
+  labels: {
+    [key: string]: string;
+  };
+}
+export interface MonitoredResourceMetadata_UserLabelsEntry {
+  key: string;
+  value: string;
+}
+
+/**
+ * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
+ * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
+ * uniquely identify a monitored resource instance. There is some other useful
+ * auxiliary metadata. Monitoring and Logging use an ingestion
+ * pipeline to extract metadata for cloud resources of all types, and store
+ * the metadata in this message.
+ */
+export interface MonitoredResourceMetadata {
+  /**
+   * Output only. Values for predefined system metadata labels.
+   * System labels are a kind of metadata extracted by Google, including
+   * "machine_image", "vpc", "subnet_id",
+   * "security_group", "name", etc.
+   * System label values can be only strings, Boolean values, or a list of
+   * strings. For example:
+   * 
+   * { "name": "my-test-instance",
+   * "security_group": ["a", "b", "c"],
+   * "spot_instance": false }
+   */
+  systemLabels: Struct;
+
+  /** Output only. A map of user-defined metadata labels. */
+  userLabels: {
+    [key: string]: string;
+  };
+}
 
 function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
   return {
@@ -179,10 +249,6 @@ export const MonitoredResourceDescriptor = {
   }
 
 };
-export interface MonitoredResource_LabelsEntry {
-  key: string;
-  value: string;
-}
 
 function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntry {
   return {
@@ -252,39 +318,6 @@ export const MonitoredResource_LabelsEntry = {
   }
 
 };
-
-/**
- * An object representing a resource that can be used for monitoring, logging,
- * billing, or other purposes. Examples include virtual machine instances,
- * databases, and storage devices such as disks. The `type` field identifies a
- * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object that describes the resource's
- * schema. Information in the `labels` field identifies the actual resource and
- * its attributes according to the schema. For example, a particular Compute
- * Engine VM instance could be represented by the following object, because the
- * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
- * `"instance_id"` and `"zone"`:
- * 
- * { "type": "gce_instance",
- * "labels": { "instance_id": "12345678901234",
- * "zone": "us-central1-a" }}
- */
-export interface MonitoredResource {
-  /**
-   * Required. The monitored resource type. This field must match
-   * the `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For
-   * example, the type of a Compute Engine VM instance is `gce_instance`.
-   */
-  type: string;
-
-  /**
-   * Required. Values for all of the labels listed in the associated monitored
-   * resource descriptor. For example, Compute Engine VM instances use the
-   * labels `"project_id"`, `"instance_id"`, and `"zone"`.
-   */
-  labels: {
-    [key: string]: string;
-  };
-}
 
 function createBaseMonitoredResource(): MonitoredResource {
   return {
@@ -381,10 +414,6 @@ export const MonitoredResource = {
   }
 
 };
-export interface MonitoredResourceMetadata_UserLabelsEntry {
-  key: string;
-  value: string;
-}
 
 function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourceMetadata_UserLabelsEntry {
   return {
@@ -454,35 +483,6 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   }
 
 };
-
-/**
- * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
- * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
- * uniquely identify a monitored resource instance. There is some other useful
- * auxiliary metadata. Monitoring and Logging use an ingestion
- * pipeline to extract metadata for cloud resources of all types, and store
- * the metadata in this message.
- */
-export interface MonitoredResourceMetadata {
-  /**
-   * Output only. Values for predefined system metadata labels.
-   * System labels are a kind of metadata extracted by Google, including
-   * "machine_image", "vpc", "subnet_id",
-   * "security_group", "name", etc.
-   * System label values can be only strings, Boolean values, or a list of
-   * strings. For example:
-   * 
-   * { "name": "my-test-instance",
-   * "security_group": ["a", "b", "c"],
-   * "spot_instance": false }
-   */
-  systemLabels: Struct;
-
-  /** Output only. A map of user-defined metadata labels. */
-  userLabels: {
-    [key: string]: string;
-  };
-}
 
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   return {

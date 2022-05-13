@@ -21,6 +21,153 @@ export interface StoreCodeProposal {
   instantiatePermission: AccessConfig;
 }
 
+/**
+ * InstantiateContractProposal gov proposal content type to instantiate a
+ * contract.
+ */
+export interface InstantiateContractProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  runAs: string;
+
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+
+  /** CodeID is the reference to the stored WASM code */
+  codeId: Long;
+
+  /** Label is optional metadata to be stored with a constract instance. */
+  label: string;
+
+  /** Msg json encoded message to be passed to the contract on instantiation */
+  msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds: Coin[];
+}
+
+/** MigrateContractProposal gov proposal content type to migrate a contract. */
+export interface MigrateContractProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** CodeID references the new WASM codesudo */
+  codeId: Long;
+
+  /** Msg json encoded message to be passed to the contract on migration */
+  msg: Uint8Array;
+}
+
+/** SudoContractProposal gov proposal content type to call sudo on a contract. */
+export interface SudoContractProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** Msg json encoded message to be passed to the contract as sudo */
+  msg: Uint8Array;
+}
+
+/**
+ * ExecuteContractProposal gov proposal content type to call execute on a
+ * contract.
+ */
+export interface ExecuteContractProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  runAs: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** Msg json encoded message to be passed to the contract as execute */
+  msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds: Coin[];
+}
+
+/** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
+export interface UpdateAdminProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** NewAdmin address to be set */
+  newAdmin: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
+/**
+ * ClearAdminProposal gov proposal content type to clear the admin of a
+ * contract.
+ */
+export interface ClearAdminProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
+/**
+ * PinCodesProposal gov proposal content type to pin a set of code ids in the
+ * wasmvm cache.
+ */
+export interface PinCodesProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** CodeIDs references the new WASM codes */
+  codeIds: Long[];
+}
+
+/**
+ * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
+ * the wasmvm cache.
+ */
+export interface UnpinCodesProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** CodeIDs references the WASM codes */
+  codeIds: Long[];
+}
+
 function createBaseStoreCodeProposal(): StoreCodeProposal {
   return {
     title: "",
@@ -125,36 +272,6 @@ export const StoreCodeProposal = {
   }
 
 };
-
-/**
- * InstantiateContractProposal gov proposal content type to instantiate a
- * contract.
- */
-export interface InstantiateContractProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** RunAs is the address that is passed to the contract's environment as sender */
-  runAs: string;
-
-  /** Admin is an optional address that can execute migrations */
-  admin: string;
-
-  /** CodeID is the reference to the stored WASM code */
-  codeId: Long;
-
-  /** Label is optional metadata to be stored with a constract instance. */
-  label: string;
-
-  /** Msg json encoded message to be passed to the contract on instantiation */
-  msg: Uint8Array;
-
-  /** Funds coins that are transferred to the contract on instantiation */
-  funds: Coin[];
-}
 
 function createBaseInstantiateContractProposal(): InstantiateContractProposal {
   return {
@@ -303,24 +420,6 @@ export const InstantiateContractProposal = {
 
 };
 
-/** MigrateContractProposal gov proposal content type to migrate a contract. */
-export interface MigrateContractProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** Contract is the address of the smart contract */
-  contract: string;
-
-  /** CodeID references the new WASM codesudo */
-  codeId: Long;
-
-  /** Msg json encoded message to be passed to the contract on migration */
-  msg: Uint8Array;
-}
-
 function createBaseMigrateContractProposal(): MigrateContractProposal {
   return {
     title: "",
@@ -426,21 +525,6 @@ export const MigrateContractProposal = {
 
 };
 
-/** SudoContractProposal gov proposal content type to call sudo on a contract. */
-export interface SudoContractProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** Contract is the address of the smart contract */
-  contract: string;
-
-  /** Msg json encoded message to be passed to the contract as sudo */
-  msg: Uint8Array;
-}
-
 function createBaseSudoContractProposal(): SudoContractProposal {
   return {
     title: "",
@@ -533,30 +617,6 @@ export const SudoContractProposal = {
   }
 
 };
-
-/**
- * ExecuteContractProposal gov proposal content type to call execute on a
- * contract.
- */
-export interface ExecuteContractProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** RunAs is the address that is passed to the contract's environment as sender */
-  runAs: string;
-
-  /** Contract is the address of the smart contract */
-  contract: string;
-
-  /** Msg json encoded message to be passed to the contract as execute */
-  msg: Uint8Array;
-
-  /** Funds coins that are transferred to the contract on instantiation */
-  funds: Coin[];
-}
 
 function createBaseExecuteContractProposal(): ExecuteContractProposal {
   return {
@@ -681,21 +741,6 @@ export const ExecuteContractProposal = {
 
 };
 
-/** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
-export interface UpdateAdminProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** NewAdmin address to be set */
-  newAdmin: string;
-
-  /** Contract is the address of the smart contract */
-  contract: string;
-}
-
 function createBaseUpdateAdminProposal(): UpdateAdminProposal {
   return {
     title: "",
@@ -789,21 +834,6 @@ export const UpdateAdminProposal = {
 
 };
 
-/**
- * ClearAdminProposal gov proposal content type to clear the admin of a
- * contract.
- */
-export interface ClearAdminProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** Contract is the address of the smart contract */
-  contract: string;
-}
-
 function createBaseClearAdminProposal(): ClearAdminProposal {
   return {
     title: "",
@@ -884,21 +914,6 @@ export const ClearAdminProposal = {
   }
 
 };
-
-/**
- * PinCodesProposal gov proposal content type to pin a set of code ids in the
- * wasmvm cache.
- */
-export interface PinCodesProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** CodeIDs references the new WASM codes */
-  codeIds: Long[];
-}
 
 function createBasePinCodesProposal(): PinCodesProposal {
   return {
@@ -998,21 +1013,6 @@ export const PinCodesProposal = {
   }
 
 };
-
-/**
- * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
- * the wasmvm cache.
- */
-export interface UnpinCodesProposal {
-  /** Title is a short summary */
-  title: string;
-
-  /** Description is a human readable text */
-  description: string;
-
-  /** CodeIDs references the WASM codes */
-  codeIds: Long[];
-}
 
 function createBaseUnpinCodesProposal(): UnpinCodesProposal {
   return {

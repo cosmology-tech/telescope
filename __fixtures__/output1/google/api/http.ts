@@ -25,81 +25,6 @@ export interface Http {
   fullyDecodeReservedExpansion: boolean;
 }
 
-function createBaseHttp(): Http {
-  return {
-    rules: [],
-    fullyDecodeReservedExpansion: false
-  };
-}
-
-export const Http = {
-  encode(message: Http, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.rules) {
-      HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-
-    if (message.fullyDecodeReservedExpansion === true) {
-      writer.uint32(16).bool(message.fullyDecodeReservedExpansion);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Http {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseHttp();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.rules.push(HttpRule.decode(reader, reader.uint32()));
-          break;
-
-        case 2:
-          message.fullyDecodeReservedExpansion = reader.bool();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): Http {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
-      fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion) ? Boolean(object.fullyDecodeReservedExpansion) : false
-    };
-  },
-
-  toJSON(message: Http): unknown {
-    const obj: any = {};
-
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? HttpRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-
-    message.fullyDecodeReservedExpansion !== undefined && (obj.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Http>, I>>(object: I): Http {
-    const message = createBaseHttp();
-    message.rules = object.rules?.map(e => HttpRule.fromPartial(e)) || [];
-    message.fullyDecodeReservedExpansion = object.fullyDecodeReservedExpansion ?? false;
-    return message;
-  }
-
-};
-
 /**
  * # gRPC Transcoding
  * 
@@ -433,6 +358,90 @@ export interface HttpRule {
   additionalBindings: HttpRule[];
 }
 
+/** A custom pattern is used for defining custom HTTP verb. */
+export interface CustomHttpPattern {
+  /** The name of this custom HTTP verb. */
+  kind: string;
+
+  /** The path matched by this custom verb. */
+  path: string;
+}
+
+function createBaseHttp(): Http {
+  return {
+    rules: [],
+    fullyDecodeReservedExpansion: false
+  };
+}
+
+export const Http = {
+  encode(message: Http, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.rules) {
+      HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.fullyDecodeReservedExpansion === true) {
+      writer.uint32(16).bool(message.fullyDecodeReservedExpansion);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Http {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHttp();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.rules.push(HttpRule.decode(reader, reader.uint32()));
+          break;
+
+        case 2:
+          message.fullyDecodeReservedExpansion = reader.bool();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Http {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
+      fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion) ? Boolean(object.fullyDecodeReservedExpansion) : false
+    };
+  },
+
+  toJSON(message: Http): unknown {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? HttpRule.toJSON(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    message.fullyDecodeReservedExpansion !== undefined && (obj.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Http>, I>>(object: I): Http {
+    const message = createBaseHttp();
+    message.rules = object.rules?.map(e => HttpRule.fromPartial(e)) || [];
+    message.fullyDecodeReservedExpansion = object.fullyDecodeReservedExpansion ?? false;
+    return message;
+  }
+
+};
+
 function createBaseHttpRule(): HttpRule {
   return {
     selector: "",
@@ -603,15 +612,6 @@ export const HttpRule = {
   }
 
 };
-
-/** A custom pattern is used for defining custom HTTP verb. */
-export interface CustomHttpPattern {
-  /** The name of this custom HTTP verb. */
-  kind: string;
-
-  /** The path matched by this custom verb. */
-  path: string;
-}
 
 function createBaseCustomHttpPattern(): CustomHttpPattern {
   return {

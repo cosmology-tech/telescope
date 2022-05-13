@@ -3,6 +3,13 @@ import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@os
 export interface Node {
   children: Child[];
 }
+export interface Child {
+  index: Uint8Array;
+  accumulation: string;
+}
+export interface Leaf {
+  leaf: Child;
+}
 
 function createBaseNode(): Node {
   return {
@@ -66,10 +73,6 @@ export const Node = {
   }
 
 };
-export interface Child {
-  index: Uint8Array;
-  accumulation: string;
-}
 
 function createBaseChild(): Child {
   return {
@@ -139,9 +142,6 @@ export const Child = {
   }
 
 };
-export interface Leaf {
-  leaf: Child;
-}
 
 function createBaseLeaf(): Leaf {
   return {

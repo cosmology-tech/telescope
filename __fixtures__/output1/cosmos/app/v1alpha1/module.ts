@@ -32,6 +32,63 @@ export interface ModuleDescriptor {
   canMigrateFrom: MigrateFromInfo[];
 }
 
+/** PackageReference is a reference to a protobuf package used by a module. */
+export interface PackageReference {
+  /** name is the fully-qualified name of the package. */
+  name: string;
+
+  /**
+   * revision is the optional revision of the package that is being used.
+   * Protobuf packages used in Cosmos should generally have a major version
+   * as the last part of the package name, ex. foo.bar.baz.v1.
+   * The revision of a package can be thought of as the minor version of a
+   * package which has additional backwards compatible definitions that weren't
+   * present in a previous version.
+   * 
+   * A package should indicate its revision with a source code comment
+   * above the package declaration in one of its fields containing the
+   * test "Revision N" where N is an integer revision. All packages start
+   * at revision 0 the first time they are released in a module.
+   * 
+   * When a new version of a module is released and items are added to existing
+   * .proto files, these definitions should contain comments of the form
+   * "Since Revision N" where N is an integer revision.
+   * 
+   * When the module runtime starts up, it will check the pinned proto
+   * image and panic if there are runtime protobuf definitions that are not
+   * in the pinned descriptor which do not have
+   * a "Since Revision N" comment or have a "Since Revision N" comment where
+   * N is <= to the revision specified here. This indicates that the protobuf
+   * files have been updated, but the pinned file descriptor hasn't.
+   * 
+   * If there are items in the pinned file descriptor with a revision
+   * greater than the value indicated here, this will also cause a panic
+   * as it may mean that the pinned descriptor for a legacy module has been
+   * improperly updated or that there is some other versioning discrepancy.
+   * Runtime protobuf definitions will also be checked for compatibility
+   * with pinned file descriptors to make sure there are no incompatible changes.
+   * 
+   * This behavior ensures that:
+   * * pinned proto images are up-to-date
+   * * protobuf files are carefully annotated with revision comments which
+   * are important good client UX
+   * * protobuf files are changed in backwards and forwards compatible ways
+   */
+  revision: number;
+}
+
+/**
+ * MigrateFromInfo is information on a module version that a newer module
+ * can migrate from.
+ */
+export interface MigrateFromInfo {
+  /**
+   * module is the fully-qualified protobuf name of the module config object
+   * for the previous module version, ex: "cosmos.group.module.v1.Module".
+   */
+  module: string;
+}
+
 function createBaseModuleDescriptor(): ModuleDescriptor {
   return {
     goImport: "",
@@ -124,51 +181,6 @@ export const ModuleDescriptor = {
 
 };
 
-/** PackageReference is a reference to a protobuf package used by a module. */
-export interface PackageReference {
-  /** name is the fully-qualified name of the package. */
-  name: string;
-
-  /**
-   * revision is the optional revision of the package that is being used.
-   * Protobuf packages used in Cosmos should generally have a major version
-   * as the last part of the package name, ex. foo.bar.baz.v1.
-   * The revision of a package can be thought of as the minor version of a
-   * package which has additional backwards compatible definitions that weren't
-   * present in a previous version.
-   * 
-   * A package should indicate its revision with a source code comment
-   * above the package declaration in one of its fields containing the
-   * test "Revision N" where N is an integer revision. All packages start
-   * at revision 0 the first time they are released in a module.
-   * 
-   * When a new version of a module is released and items are added to existing
-   * .proto files, these definitions should contain comments of the form
-   * "Since Revision N" where N is an integer revision.
-   * 
-   * When the module runtime starts up, it will check the pinned proto
-   * image and panic if there are runtime protobuf definitions that are not
-   * in the pinned descriptor which do not have
-   * a "Since Revision N" comment or have a "Since Revision N" comment where
-   * N is <= to the revision specified here. This indicates that the protobuf
-   * files have been updated, but the pinned file descriptor hasn't.
-   * 
-   * If there are items in the pinned file descriptor with a revision
-   * greater than the value indicated here, this will also cause a panic
-   * as it may mean that the pinned descriptor for a legacy module has been
-   * improperly updated or that there is some other versioning discrepancy.
-   * Runtime protobuf definitions will also be checked for compatibility
-   * with pinned file descriptors to make sure there are no incompatible changes.
-   * 
-   * This behavior ensures that:
-   * * pinned proto images are up-to-date
-   * * protobuf files are carefully annotated with revision comments which
-   * are important good client UX
-   * * protobuf files are changed in backwards and forwards compatible ways
-   */
-  revision: number;
-}
-
 function createBasePackageReference(): PackageReference {
   return {
     name: "",
@@ -237,18 +249,6 @@ export const PackageReference = {
   }
 
 };
-
-/**
- * MigrateFromInfo is information on a module version that a newer module
- * can migrate from.
- */
-export interface MigrateFromInfo {
-  /**
-   * module is the fully-qualified protobuf name of the module config object
-   * for the previous module version, ex: "cosmos.group.module.v1.Module".
-   */
-  module: string;
-}
 
 function createBaseMigrateFromInfo(): MigrateFromInfo {
   return {

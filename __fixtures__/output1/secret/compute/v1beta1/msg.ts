@@ -13,6 +13,28 @@ export interface MsgStoreCode {
   /** Builder is a valid docker image name with tag, optional */
   builder: string;
 }
+export interface MsgInstantiateContract {
+  sender: Uint8Array;
+
+  /**
+   * Admin is an optional address that can execute migrations
+   * bytes admin = 2 [(gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.AccAddress"];
+   */
+  callbackCodeHash: string;
+  codeId: Long;
+  label: string;
+  initMsg: Uint8Array;
+  initFunds: Coin[];
+  callbackSig: Uint8Array;
+}
+export interface MsgExecuteContract {
+  sender: Uint8Array;
+  contract: Uint8Array;
+  msg: Uint8Array;
+  callbackCodeHash: string;
+  sentFunds: Coin[];
+  callbackSig: Uint8Array;
+}
 
 function createBaseMsgStoreCode(): MsgStoreCode {
   return {
@@ -106,20 +128,6 @@ export const MsgStoreCode = {
   }
 
 };
-export interface MsgInstantiateContract {
-  sender: Uint8Array;
-
-  /**
-   * Admin is an optional address that can execute migrations
-   * bytes admin = 2 [(gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.AccAddress"];
-   */
-  callbackCodeHash: string;
-  codeId: Long;
-  label: string;
-  initMsg: Uint8Array;
-  initFunds: Coin[];
-  callbackSig: Uint8Array;
-}
 
 function createBaseMsgInstantiateContract(): MsgInstantiateContract {
   return {
@@ -255,14 +263,6 @@ export const MsgInstantiateContract = {
   }
 
 };
-export interface MsgExecuteContract {
-  sender: Uint8Array;
-  contract: Uint8Array;
-  msg: Uint8Array;
-  callbackCodeHash: string;
-  sentFunds: Coin[];
-  callbackSig: Uint8Array;
-}
 
 function createBaseMsgExecuteContract(): MsgExecuteContract {
   return {

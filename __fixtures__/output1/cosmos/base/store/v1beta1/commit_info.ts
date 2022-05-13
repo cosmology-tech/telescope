@@ -10,6 +10,24 @@ export interface CommitInfo {
   storeInfos: StoreInfo[];
 }
 
+/**
+ * StoreInfo defines store-specific commit information. It contains a reference
+ * between a store name and the commit ID.
+ */
+export interface StoreInfo {
+  name: string;
+  commitId: CommitID;
+}
+
+/**
+ * CommitID defines the committment information when a specific store is
+ * committed.
+ */
+export interface CommitID {
+  version: Long;
+  hash: Uint8Array;
+}
+
 function createBaseCommitInfo(): CommitInfo {
   return {
     version: Long.ZERO,
@@ -85,15 +103,6 @@ export const CommitInfo = {
 
 };
 
-/**
- * StoreInfo defines store-specific commit information. It contains a reference
- * between a store name and the commit ID.
- */
-export interface StoreInfo {
-  name: string;
-  commitId: CommitID;
-}
-
 function createBaseStoreInfo(): StoreInfo {
   return {
     name: "",
@@ -162,15 +171,6 @@ export const StoreInfo = {
   }
 
 };
-
-/**
- * CommitID defines the committment information when a specific store is
- * committed.
- */
-export interface CommitID {
-  version: Long;
-  hash: Uint8Array;
-}
 
 function createBaseCommitID(): CommitID {
   return {

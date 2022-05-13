@@ -60,9 +60,157 @@ export function accessTypeToJSON(object: AccessType): string {
   }
 }
 
+/** ContractCodeHistoryOperationType actions that caused a code change */
+export enum ContractCodeHistoryOperationType {
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
+
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT - ContractCodeHistoryOperationTypeInit on chain contract instantiation */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT = 1,
+
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE - ContractCodeHistoryOperationTypeMigrate code migration */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE = 2,
+
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS - ContractCodeHistoryOperationTypeGenesis based on genesis data */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
+  UNRECOGNIZED = -1,
+}
+export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
+  switch (object) {
+    case 0:
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED;
+
+    case 1:
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT;
+
+    case 2:
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE;
+
+    case 3:
+    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS":
+      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ContractCodeHistoryOperationType.UNRECOGNIZED;
+  }
+}
+export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHistoryOperationType): string {
+  switch (object) {
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED";
+
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT";
+
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE";
+
+    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS:
+      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** AccessTypeParam */
 export interface AccessTypeParam {
   value: AccessType;
+}
+
+/** AccessConfig access control type. */
+export interface AccessConfig {
+  permission: AccessType;
+  address: string;
+}
+
+/** Params defines the set of wasm parameters. */
+export interface Params {
+  codeUploadAccess: AccessConfig;
+  instantiateDefaultPermission: AccessType;
+  maxWasmCodeSize: Long;
+}
+
+/** CodeInfo is data for the uploaded contract WASM code */
+export interface CodeInfo {
+  /** CodeHash is the unique identifier created by wasmvm */
+  codeHash: Uint8Array;
+
+  /** Creator address who initially stored the code */
+  creator: string;
+
+  /** InstantiateConfig access control to apply on contract creation, optional */
+  instantiateConfig: AccessConfig;
+}
+
+/** ContractInfo stores a WASM contract instance */
+export interface ContractInfo {
+  /** CodeID is the reference to the stored Wasm code */
+  codeId: Long;
+
+  /** Creator address who initially instantiated the contract */
+  creator: string;
+
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+
+  /** Label is optional metadata to be stored with a contract instance. */
+  label: string;
+
+  /**
+   * Created Tx position when the contract was instantiated.
+   * This data should kept internal and not be exposed via query results. Just
+   * use for sorting
+   */
+  created: AbsoluteTxPosition;
+  ibcPortId: string;
+
+  /**
+   * Extension is an extension point to store custom metadata within the
+   * persistence model.
+   */
+  extension: Any;
+}
+
+/** ContractCodeHistoryEntry metadata to a contract. */
+export interface ContractCodeHistoryEntry {
+  operation: ContractCodeHistoryOperationType;
+
+  /** CodeID is the reference to the stored WASM code */
+  codeId: Long;
+
+  /** Updated Tx position when the operation was executed. */
+  updated: AbsoluteTxPosition;
+  msg: Uint8Array;
+}
+
+/**
+ * AbsoluteTxPosition is a unique transaction position that allows for global
+ * ordering of transactions.
+ */
+export interface AbsoluteTxPosition {
+  /** BlockHeight is the block the contract was created at */
+  blockHeight: Long;
+
+  /**
+   * TxIndex is a monotonic counter within the block (actual transaction index,
+   * or gas consumed)
+   */
+  txIndex: Long;
+}
+
+/** Model is a struct that holds a KV pair */
+export interface Model {
+  /** hex-encode key to read it better (this is often ascii) */
+  key: Uint8Array;
+
+  /** base64-encode raw value */
+  value: Uint8Array;
 }
 
 function createBaseAccessTypeParam(): AccessTypeParam {
@@ -121,12 +269,6 @@ export const AccessTypeParam = {
   }
 
 };
-
-/** AccessConfig access control type. */
-export interface AccessConfig {
-  permission: AccessType;
-  address: string;
-}
 
 function createBaseAccessConfig(): AccessConfig {
   return {
@@ -196,13 +338,6 @@ export const AccessConfig = {
   }
 
 };
-
-/** Params defines the set of wasm parameters. */
-export interface Params {
-  codeUploadAccess: AccessConfig;
-  instantiateDefaultPermission: AccessType;
-  maxWasmCodeSize: Long;
-}
 
 function createBaseParams(): Params {
   return {
@@ -285,18 +420,6 @@ export const Params = {
 
 };
 
-/** CodeInfo is data for the uploaded contract WASM code */
-export interface CodeInfo {
-  /** CodeHash is the unique identifier created by wasmvm */
-  codeHash: Uint8Array;
-
-  /** Creator address who initially stored the code */
-  creator: string;
-
-  /** InstantiateConfig access control to apply on contract creation, optional */
-  instantiateConfig: AccessConfig;
-}
-
 function createBaseCodeInfo(): CodeInfo {
   return {
     codeHash: new Uint8Array(),
@@ -377,35 +500,6 @@ export const CodeInfo = {
   }
 
 };
-
-/** ContractInfo stores a WASM contract instance */
-export interface ContractInfo {
-  /** CodeID is the reference to the stored Wasm code */
-  codeId: Long;
-
-  /** Creator address who initially instantiated the contract */
-  creator: string;
-
-  /** Admin is an optional address that can execute migrations */
-  admin: string;
-
-  /** Label is optional metadata to be stored with a contract instance. */
-  label: string;
-
-  /**
-   * Created Tx position when the contract was instantiated.
-   * This data should kept internal and not be exposed via query results. Just
-   * use for sorting
-   */
-  created: AbsoluteTxPosition;
-  ibcPortId: string;
-
-  /**
-   * Extension is an extension point to store custom metadata within the
-   * persistence model.
-   */
-  extension: Any;
-}
 
 function createBaseContractInfo(): ContractInfo {
   return {
@@ -536,76 +630,6 @@ export const ContractInfo = {
 
 };
 
-/** ContractCodeHistoryOperationType actions that caused a code change */
-export enum ContractCodeHistoryOperationType {
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT - ContractCodeHistoryOperationTypeInit on chain contract instantiation */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT = 1,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE - ContractCodeHistoryOperationTypeMigrate code migration */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE = 2,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS - ContractCodeHistoryOperationTypeGenesis based on genesis data */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
-  UNRECOGNIZED = -1,
-}
-export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
-  switch (object) {
-    case 0:
-    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED":
-      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED;
-
-    case 1:
-    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT":
-      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT;
-
-    case 2:
-    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE":
-      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE;
-
-    case 3:
-    case "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS":
-      return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ContractCodeHistoryOperationType.UNRECOGNIZED;
-  }
-}
-export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHistoryOperationType): string {
-  switch (object) {
-    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED:
-      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED";
-
-    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT:
-      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT";
-
-    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE:
-      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE";
-
-    case ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS:
-      return "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** ContractCodeHistoryEntry metadata to a contract. */
-export interface ContractCodeHistoryEntry {
-  operation: ContractCodeHistoryOperationType;
-
-  /** CodeID is the reference to the stored WASM code */
-  codeId: Long;
-
-  /** Updated Tx position when the operation was executed. */
-  updated: AbsoluteTxPosition;
-  msg: Uint8Array;
-}
-
 function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
@@ -699,21 +723,6 @@ export const ContractCodeHistoryEntry = {
 
 };
 
-/**
- * AbsoluteTxPosition is a unique transaction position that allows for global
- * ordering of transactions.
- */
-export interface AbsoluteTxPosition {
-  /** BlockHeight is the block the contract was created at */
-  blockHeight: Long;
-
-  /**
-   * TxIndex is a monotonic counter within the block (actual transaction index,
-   * or gas consumed)
-   */
-  txIndex: Long;
-}
-
 function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   return {
     blockHeight: Long.UZERO,
@@ -782,15 +791,6 @@ export const AbsoluteTxPosition = {
   }
 
 };
-
-/** Model is a struct that holds a KV pair */
-export interface Model {
-  /** hex-encode key to read it better (this is often ascii) */
-  key: Uint8Array;
-
-  /** base64-encode raw value */
-  value: Uint8Array;
-}
 
 function createBaseModel(): Model {
   return {

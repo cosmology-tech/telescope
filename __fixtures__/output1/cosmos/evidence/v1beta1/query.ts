@@ -9,6 +9,33 @@ export interface QueryEvidenceRequest {
   evidenceHash: Uint8Array;
 }
 
+/** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
+export interface QueryEvidenceResponse {
+  /** evidence returns the requested evidence. */
+  evidence: Any;
+}
+
+/**
+ * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
+ * method.
+ */
+export interface QueryAllEvidenceRequest {
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest;
+}
+
+/**
+ * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
+ * method.
+ */
+export interface QueryAllEvidenceResponse {
+  /** evidence returns all evidences. */
+  evidence: Any[];
+
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse;
+}
+
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
   return {
     evidenceHash: new Uint8Array()
@@ -65,12 +92,6 @@ export const QueryEvidenceRequest = {
   }
 
 };
-
-/** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
-export interface QueryEvidenceResponse {
-  /** evidence returns the requested evidence. */
-  evidence: Any;
-}
 
 function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
   return {
@@ -129,15 +150,6 @@ export const QueryEvidenceResponse = {
 
 };
 
-/**
- * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
- * method.
- */
-export interface QueryAllEvidenceRequest {
-  /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
-}
-
 function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
   return {
     pagination: undefined
@@ -194,18 +206,6 @@ export const QueryAllEvidenceRequest = {
   }
 
 };
-
-/**
- * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
- * method.
- */
-export interface QueryAllEvidenceResponse {
-  /** evidence returns all evidences. */
-  evidence: Any[];
-
-  /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
-}
 
 function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
   return {

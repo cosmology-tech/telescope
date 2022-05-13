@@ -28,7 +28,9 @@ export const Equivocation = {
       writer.uint32(8).int64(message.height);
     }
 
-    if (message.time !== undefined) Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
+    if (message.time !== undefined) {
+      Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
+    }
 
     if (!message.power.isZero()) {
       writer.uint32(24).int64(message.power);

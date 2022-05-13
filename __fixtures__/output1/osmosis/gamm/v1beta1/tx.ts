@@ -12,6 +12,100 @@ export interface MsgJoinPool {
   shareOutAmount: string;
   tokenInMaxs: Coin[];
 }
+export interface MsgJoinPoolResponse {}
+
+/** ===================== MsgExitPool */
+export interface MsgExitPool {
+  sender: string;
+  poolId: Long;
+  shareInAmount: string;
+  tokenOutMins: Coin[];
+}
+export interface MsgExitPoolResponse {}
+
+/** ===================== MsgSwapExactAmountIn */
+export interface SwapAmountInRoute {
+  poolId: Long;
+  tokenOutDenom: string;
+}
+export interface MsgSwapExactAmountIn {
+  sender: string;
+  routes: SwapAmountInRoute[];
+  tokenIn: Coin;
+  tokenOutMinAmount: string;
+}
+export interface MsgSwapExactAmountInResponse {
+  tokenOutAmount: string;
+}
+
+/** ===================== MsgSwapExactAmountOut */
+export interface SwapAmountOutRoute {
+  poolId: Long;
+  tokenInDenom: string;
+}
+export interface MsgSwapExactAmountOut {
+  sender: string;
+  routes: SwapAmountOutRoute[];
+  tokenInMaxAmount: string;
+  tokenOut: Coin;
+}
+export interface MsgSwapExactAmountOutResponse {
+  tokenInAmount: string;
+}
+
+/**
+ * ===================== MsgJoinSwapExternAmountIn
+ * TODO: Rename to MsgJoinSwapExactAmountIn
+ */
+export interface MsgJoinSwapExternAmountIn {
+  sender: string;
+  poolId: Long;
+  tokenIn: Coin;
+
+  /**
+   * reserved 3;
+   * reserved "token_in";
+   */
+  shareOutMinAmount: string;
+}
+export interface MsgJoinSwapExternAmountInResponse {
+  shareOutAmount: string;
+}
+
+/** ===================== MsgJoinSwapShareAmountOut */
+export interface MsgJoinSwapShareAmountOut {
+  sender: string;
+  poolId: Long;
+  tokenInDenom: string;
+  shareOutAmount: string;
+  tokenInMaxAmount: string;
+}
+export interface MsgJoinSwapShareAmountOutResponse {
+  tokenInAmount: string;
+}
+
+/** ===================== MsgExitSwapShareAmountIn */
+export interface MsgExitSwapShareAmountIn {
+  sender: string;
+  poolId: Long;
+  tokenOutDenom: string;
+  shareInAmount: string;
+  tokenOutMinAmount: string;
+}
+export interface MsgExitSwapShareAmountInResponse {
+  tokenOutAmount: string;
+}
+
+/** ===================== MsgExitSwapExternAmountOut */
+export interface MsgExitSwapExternAmountOut {
+  sender: string;
+  poolId: Long;
+  tokenOut: Coin;
+  shareInMaxAmount: string;
+}
+export interface MsgExitSwapExternAmountOutResponse {
+  shareInAmount: string;
+}
 
 function createBaseMsgJoinPool(): MsgJoinPool {
   return {
@@ -111,14 +205,13 @@ export const MsgJoinPool = {
   }
 
 };
-export interface MsgJoinPoolResponse {}
 
 function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
   return {};
 }
 
 export const MsgJoinPoolResponse = {
-  encode(message: MsgJoinPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgJoinPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -140,29 +233,21 @@ export const MsgJoinPoolResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgJoinPoolResponse {
+  fromJSON(_: any): MsgJoinPoolResponse {
     return {};
   },
 
-  toJSON(message: MsgJoinPoolResponse): unknown {
+  toJSON(_: MsgJoinPoolResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinPoolResponse>, I>>(object: I): MsgJoinPoolResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgJoinPoolResponse>, I>>(_: I): MsgJoinPoolResponse {
     const message = createBaseMsgJoinPoolResponse();
     return message;
   }
 
 };
-
-/** ===================== MsgExitPool */
-export interface MsgExitPool {
-  sender: string;
-  poolId: Long;
-  shareInAmount: string;
-  tokenOutMins: Coin[];
-}
 
 function createBaseMsgExitPool(): MsgExitPool {
   return {
@@ -262,14 +347,13 @@ export const MsgExitPool = {
   }
 
 };
-export interface MsgExitPoolResponse {}
 
 function createBaseMsgExitPoolResponse(): MsgExitPoolResponse {
   return {};
 }
 
 export const MsgExitPoolResponse = {
-  encode(message: MsgExitPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgExitPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -291,27 +375,21 @@ export const MsgExitPoolResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgExitPoolResponse {
+  fromJSON(_: any): MsgExitPoolResponse {
     return {};
   },
 
-  toJSON(message: MsgExitPoolResponse): unknown {
+  toJSON(_: MsgExitPoolResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitPoolResponse>, I>>(object: I): MsgExitPoolResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgExitPoolResponse>, I>>(_: I): MsgExitPoolResponse {
     const message = createBaseMsgExitPoolResponse();
     return message;
   }
 
 };
-
-/** ===================== MsgSwapExactAmountIn */
-export interface SwapAmountInRoute {
-  poolId: Long;
-  tokenOutDenom: string;
-}
 
 function createBaseSwapAmountInRoute(): SwapAmountInRoute {
   return {
@@ -381,12 +459,6 @@ export const SwapAmountInRoute = {
   }
 
 };
-export interface MsgSwapExactAmountIn {
-  sender: string;
-  routes: SwapAmountInRoute[];
-  tokenIn: Coin;
-  tokenOutMinAmount: string;
-}
 
 function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
   return {
@@ -486,9 +558,6 @@ export const MsgSwapExactAmountIn = {
   }
 
 };
-export interface MsgSwapExactAmountInResponse {
-  tokenOutAmount: string;
-}
 
 function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse {
   return {
@@ -546,12 +615,6 @@ export const MsgSwapExactAmountInResponse = {
   }
 
 };
-
-/** ===================== MsgSwapExactAmountOut */
-export interface SwapAmountOutRoute {
-  poolId: Long;
-  tokenInDenom: string;
-}
 
 function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
   return {
@@ -621,12 +684,6 @@ export const SwapAmountOutRoute = {
   }
 
 };
-export interface MsgSwapExactAmountOut {
-  sender: string;
-  routes: SwapAmountOutRoute[];
-  tokenInMaxAmount: string;
-  tokenOut: Coin;
-}
 
 function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
   return {
@@ -726,9 +783,6 @@ export const MsgSwapExactAmountOut = {
   }
 
 };
-export interface MsgSwapExactAmountOutResponse {
-  tokenInAmount: string;
-}
 
 function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutResponse {
   return {
@@ -786,22 +840,6 @@ export const MsgSwapExactAmountOutResponse = {
   }
 
 };
-
-/**
- * ===================== MsgJoinSwapExternAmountIn
- * TODO: Rename to MsgJoinSwapExactAmountIn
- */
-export interface MsgJoinSwapExternAmountIn {
-  sender: string;
-  poolId: Long;
-  tokenIn: Coin;
-
-  /**
-   * reserved 3;
-   * reserved "token_in";
-   */
-  shareOutMinAmount: string;
-}
 
 function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
   return {
@@ -895,9 +933,6 @@ export const MsgJoinSwapExternAmountIn = {
   }
 
 };
-export interface MsgJoinSwapExternAmountInResponse {
-  shareOutAmount: string;
-}
 
 function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountInResponse {
   return {
@@ -955,15 +990,6 @@ export const MsgJoinSwapExternAmountInResponse = {
   }
 
 };
-
-/** ===================== MsgJoinSwapShareAmountOut */
-export interface MsgJoinSwapShareAmountOut {
-  sender: string;
-  poolId: Long;
-  tokenInDenom: string;
-  shareOutAmount: string;
-  tokenInMaxAmount: string;
-}
 
 function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
   return {
@@ -1069,9 +1095,6 @@ export const MsgJoinSwapShareAmountOut = {
   }
 
 };
-export interface MsgJoinSwapShareAmountOutResponse {
-  tokenInAmount: string;
-}
 
 function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOutResponse {
   return {
@@ -1129,15 +1152,6 @@ export const MsgJoinSwapShareAmountOutResponse = {
   }
 
 };
-
-/** ===================== MsgExitSwapShareAmountIn */
-export interface MsgExitSwapShareAmountIn {
-  sender: string;
-  poolId: Long;
-  tokenOutDenom: string;
-  shareInAmount: string;
-  tokenOutMinAmount: string;
-}
 
 function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
   return {
@@ -1243,9 +1257,6 @@ export const MsgExitSwapShareAmountIn = {
   }
 
 };
-export interface MsgExitSwapShareAmountInResponse {
-  tokenOutAmount: string;
-}
 
 function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInResponse {
   return {
@@ -1303,14 +1314,6 @@ export const MsgExitSwapShareAmountInResponse = {
   }
 
 };
-
-/** ===================== MsgExitSwapExternAmountOut */
-export interface MsgExitSwapExternAmountOut {
-  sender: string;
-  poolId: Long;
-  tokenOut: Coin;
-  shareInMaxAmount: string;
-}
 
 function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
   return {
@@ -1404,9 +1407,6 @@ export const MsgExitSwapExternAmountOut = {
   }
 
 };
-export interface MsgExitSwapExternAmountOutResponse {
-  shareInAmount: string;
-}
 
 function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmountOutResponse {
   return {

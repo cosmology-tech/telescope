@@ -6,6 +6,62 @@ export interface Minter {
   /** current epoch provisions */
   epochProvisions: string;
 }
+export interface WeightedAddress {
+  address: string;
+  weight: string;
+}
+export interface DistributionProportions {
+  /**
+   * staking defines the proportion of the minted minted_denom that is to be
+   * allocated as staking rewards.
+   */
+  staking: string;
+
+  /**
+   * pool_incentives defines the proportion of the minted minted_denom that is
+   * to be allocated as pool incentives.
+   */
+  poolIncentives: string;
+
+  /**
+   * developer_rewards defines the proportion of the minted minted_denom that is
+   * to be allocated to developer rewards address.
+   */
+  developerRewards: string;
+
+  /**
+   * community_pool defines the proportion of the minted minted_denom that is
+   * to be allocated to the community pool.
+   */
+  communityPool: string;
+}
+
+/** Params holds parameters for the mint module. */
+export interface Params {
+  /** type of coin to mint */
+  mintDenom: string;
+
+  /** epoch provisions from the first epoch */
+  genesisEpochProvisions: string;
+
+  /** mint epoch identifier */
+  epochIdentifier: string;
+
+  /** number of epochs take to reduce rewards */
+  reductionPeriodInEpochs: Long;
+
+  /** reduction multiplier to execute on each period */
+  reductionFactor: string;
+
+  /** distribution_proportions defines the proportion of the minted denom */
+  distributionProportions: DistributionProportions;
+
+  /** address to receive developer rewards */
+  weightedDeveloperRewardsReceivers: WeightedAddress[];
+
+  /** start epoch to distribute minting rewards */
+  mintingRewardsDistributionStartEpoch: Long;
+}
 
 function createBaseMinter(): Minter {
   return {
@@ -63,10 +119,6 @@ export const Minter = {
   }
 
 };
-export interface WeightedAddress {
-  address: string;
-  weight: string;
-}
 
 function createBaseWeightedAddress(): WeightedAddress {
   return {
@@ -136,31 +188,6 @@ export const WeightedAddress = {
   }
 
 };
-export interface DistributionProportions {
-  /**
-   * staking defines the proportion of the minted minted_denom that is to be
-   * allocated as staking rewards.
-   */
-  staking: string;
-
-  /**
-   * pool_incentives defines the proportion of the minted minted_denom that is
-   * to be allocated as pool incentives.
-   */
-  poolIncentives: string;
-
-  /**
-   * developer_rewards defines the proportion of the minted minted_denom that is
-   * to be allocated to developer rewards address.
-   */
-  developerRewards: string;
-
-  /**
-   * community_pool defines the proportion of the minted minted_denom that is
-   * to be allocated to the community pool.
-   */
-  communityPool: string;
-}
 
 function createBaseDistributionProportions(): DistributionProportions {
   return {
@@ -254,33 +281,6 @@ export const DistributionProportions = {
   }
 
 };
-
-/** Params holds parameters for the mint module. */
-export interface Params {
-  /** type of coin to mint */
-  mintDenom: string;
-
-  /** epoch provisions from the first epoch */
-  genesisEpochProvisions: string;
-
-  /** mint epoch identifier */
-  epochIdentifier: string;
-
-  /** number of epochs take to reduce rewards */
-  reductionPeriodInEpochs: Long;
-
-  /** reduction multiplier to execute on each period */
-  reductionFactor: string;
-
-  /** distribution_proportions defines the proportion of the minted denom */
-  distributionProportions: DistributionProportions;
-
-  /** address to receive developer rewards */
-  weightedDeveloperRewardsReceivers: WeightedAddress[];
-
-  /** start epoch to distribute minting rewards */
-  mintingRewardsDistributionStartEpoch: Long;
-}
 
 function createBaseParams(): Params {
   return {

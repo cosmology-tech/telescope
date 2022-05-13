@@ -77,6 +77,24 @@ export interface Monitoring {
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
 
+/**
+ * Configuration of a specific monitoring destination (the producer project
+ * or the consumer project).
+ */
+export interface Monitoring_MonitoringDestination {
+  /**
+   * The monitored resource type. The type must be defined in
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitoredResource: string;
+
+  /**
+   * Types of the metrics to report to this monitoring destination.
+   * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
+   */
+  metrics: string[];
+}
+
 function createBaseMonitoring(): Monitoring {
   return {
     producerDestinations: [],
@@ -156,24 +174,6 @@ export const Monitoring = {
   }
 
 };
-
-/**
- * Configuration of a specific monitoring destination (the producer project
- * or the consumer project).
- */
-export interface Monitoring_MonitoringDestination {
-  /**
-   * The monitored resource type. The type must be defined in
-   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
-   */
-  monitoredResource: string;
-
-  /**
-   * Types of the metrics to report to this monitoring destination.
-   * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
-   */
-  metrics: string[];
-}
 
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
   return {

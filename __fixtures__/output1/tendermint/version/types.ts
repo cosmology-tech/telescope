@@ -11,6 +11,16 @@ export interface App {
   software: string;
 }
 
+/**
+ * Consensus captures the consensus rules for processing a block in the blockchain,
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
+ */
+export interface Consensus {
+  block: Long;
+  app: Long;
+}
+
 function createBaseApp(): App {
   return {
     protocol: Long.UZERO,
@@ -79,16 +89,6 @@ export const App = {
   }
 
 };
-
-/**
- * Consensus captures the consensus rules for processing a block in the blockchain,
- * including all blockchain data structures and the rules of the application's
- * state transition machine.
- */
-export interface Consensus {
-  block: Long;
-  app: Long;
-}
 
 function createBaseConsensus(): Consensus {
   return {

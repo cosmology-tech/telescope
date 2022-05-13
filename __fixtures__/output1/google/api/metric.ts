@@ -5,6 +5,168 @@ import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toDuration, fromDuration, isObject } from "@osmonauts/helpers";
 
 /**
+ * The kind of measurement. It describes how the data is reported.
+ * For information on setting the start time and end time based on
+ * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
+ */
+export enum MetricDescriptor_MetricKind {
+  /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
+  METRIC_KIND_UNSPECIFIED = 0,
+
+  /** GAUGE - An instantaneous measurement of a value. */
+  GAUGE = 1,
+
+  /** DELTA - The change in a value during a time interval. */
+  DELTA = 2,
+
+  /**
+   * CUMULATIVE - A value accumulated over a time interval.  Cumulative
+   * measurements in a time series should have the same start time
+   * and increasing end times, until an event resets the cumulative
+   * value to zero and sets a new start time for the following
+   * points.
+   */
+  CUMULATIVE = 3,
+  UNRECOGNIZED = -1,
+}
+export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
+  switch (object) {
+    case 0:
+    case "METRIC_KIND_UNSPECIFIED":
+      return MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED;
+
+    case 1:
+    case "GAUGE":
+      return MetricDescriptor_MetricKind.GAUGE;
+
+    case 2:
+    case "DELTA":
+      return MetricDescriptor_MetricKind.DELTA;
+
+    case 3:
+    case "CUMULATIVE":
+      return MetricDescriptor_MetricKind.CUMULATIVE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MetricDescriptor_MetricKind.UNRECOGNIZED;
+  }
+}
+export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_MetricKind): string {
+  switch (object) {
+    case MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED:
+      return "METRIC_KIND_UNSPECIFIED";
+
+    case MetricDescriptor_MetricKind.GAUGE:
+      return "GAUGE";
+
+    case MetricDescriptor_MetricKind.DELTA:
+      return "DELTA";
+
+    case MetricDescriptor_MetricKind.CUMULATIVE:
+      return "CUMULATIVE";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/** The value type of a metric. */
+export enum MetricDescriptor_ValueType {
+  /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
+  VALUE_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * BOOL - The value is a boolean.
+   * This value type can be used only if the metric kind is `GAUGE`.
+   */
+  BOOL = 1,
+
+  /** INT64 - The value is a signed 64-bit integer. */
+  INT64 = 2,
+
+  /** DOUBLE - The value is a double precision floating point number. */
+  DOUBLE = 3,
+
+  /**
+   * STRING - The value is a text string.
+   * This value type can be used only if the metric kind is `GAUGE`.
+   */
+  STRING = 4,
+
+  /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
+  DISTRIBUTION = 5,
+
+  /** MONEY - The value is money. */
+  MONEY = 6,
+  UNRECOGNIZED = -1,
+}
+export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
+  switch (object) {
+    case 0:
+    case "VALUE_TYPE_UNSPECIFIED":
+      return MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED;
+
+    case 1:
+    case "BOOL":
+      return MetricDescriptor_ValueType.BOOL;
+
+    case 2:
+    case "INT64":
+      return MetricDescriptor_ValueType.INT64;
+
+    case 3:
+    case "DOUBLE":
+      return MetricDescriptor_ValueType.DOUBLE;
+
+    case 4:
+    case "STRING":
+      return MetricDescriptor_ValueType.STRING;
+
+    case 5:
+    case "DISTRIBUTION":
+      return MetricDescriptor_ValueType.DISTRIBUTION;
+
+    case 6:
+    case "MONEY":
+      return MetricDescriptor_ValueType.MONEY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MetricDescriptor_ValueType.UNRECOGNIZED;
+  }
+}
+export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueType): string {
+  switch (object) {
+    case MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED:
+      return "VALUE_TYPE_UNSPECIFIED";
+
+    case MetricDescriptor_ValueType.BOOL:
+      return "BOOL";
+
+    case MetricDescriptor_ValueType.INT64:
+      return "INT64";
+
+    case MetricDescriptor_ValueType.DOUBLE:
+      return "DOUBLE";
+
+    case MetricDescriptor_ValueType.STRING:
+      return "STRING";
+
+    case MetricDescriptor_ValueType.DISTRIBUTION:
+      return "DISTRIBUTION";
+
+    case MetricDescriptor_ValueType.MONEY:
+      return "MONEY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
  * existing data unusable.
@@ -178,6 +340,51 @@ export interface MetricDescriptor {
    * resource types listed here.
    */
   monitoredResourceTypes: string[];
+}
+
+/** Additional annotations that can be used to guide the usage of a metric. */
+export interface MetricDescriptor_MetricDescriptorMetadata {
+  /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
+  launchStage: LaunchStage;
+
+  /**
+   * The sampling period of metric data points. For metrics which are written
+   * periodically, consecutive data points are stored at this time interval,
+   * excluding data loss due to errors. Metrics with a higher granularity have
+   * a smaller sampling period.
+   */
+  samplePeriod: string;
+
+  /**
+   * The delay of data points caused by ingestion. Data points older than this
+   * age are guaranteed to be ingested and available to be read, excluding
+   * data loss due to errors.
+   */
+  ingestDelay: string;
+}
+export interface Metric_LabelsEntry {
+  key: string;
+  value: string;
+}
+
+/**
+ * A specific metric, identified by specifying values for all of the
+ * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
+ */
+export interface Metric {
+  /**
+   * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
+   * For example, `custom.googleapis.com/invoice/paid/amount`.
+   */
+  type: string;
+
+  /**
+   * The set of label values that uniquely identify this metric. All
+   * labels listed in the `MetricDescriptor` must be assigned values.
+   */
+  labels: {
+    [key: string]: string;
+  };
 }
 
 function createBaseMetricDescriptor(): MetricDescriptor {
@@ -369,27 +576,6 @@ export const MetricDescriptor = {
 
 };
 
-/** Additional annotations that can be used to guide the usage of a metric. */
-export interface MetricDescriptor_MetricDescriptorMetadata {
-  /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
-  launchStage: LaunchStage;
-
-  /**
-   * The sampling period of metric data points. For metrics which are written
-   * periodically, consecutive data points are stored at this time interval,
-   * excluding data loss due to errors. Metrics with a higher granularity have
-   * a smaller sampling period.
-   */
-  samplePeriod: string;
-
-  /**
-   * The delay of data points caused by ingestion. Data points older than this
-   * age are guaranteed to be ingested and available to be read, excluding
-   * data loss due to errors.
-   */
-  ingestDelay: string;
-}
-
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
     launchStage: 0,
@@ -404,8 +590,14 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
       writer.uint32(8).int32(message.launchStage);
     }
 
-    if (message.samplePeriod !== undefined) Duration.encode(toDuration(message.samplePeriod), writer.uint32(18).fork()).ldelim();
-    if (message.ingestDelay !== undefined) Duration.encode(toDuration(message.ingestDelay), writer.uint32(26).fork()).ldelim();
+    if (message.samplePeriod !== undefined) {
+      Duration.encode(toDuration(message.samplePeriod), writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.ingestDelay !== undefined) {
+      Duration.encode(toDuration(message.ingestDelay), writer.uint32(26).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -464,172 +656,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   }
 
 };
-
-/**
- * The kind of measurement. It describes how the data is reported.
- * For information on setting the start time and end time based on
- * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
- */
-export enum MetricDescriptor_MetricKind {
-  /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
-  METRIC_KIND_UNSPECIFIED = 0,
-
-  /** GAUGE - An instantaneous measurement of a value. */
-  GAUGE = 1,
-
-  /** DELTA - The change in a value during a time interval. */
-  DELTA = 2,
-
-  /**
-   * CUMULATIVE - A value accumulated over a time interval.  Cumulative
-   * measurements in a time series should have the same start time
-   * and increasing end times, until an event resets the cumulative
-   * value to zero and sets a new start time for the following
-   * points.
-   */
-  CUMULATIVE = 3,
-  UNRECOGNIZED = -1,
-}
-export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
-  switch (object) {
-    case 0:
-    case "METRIC_KIND_UNSPECIFIED":
-      return MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED;
-
-    case 1:
-    case "GAUGE":
-      return MetricDescriptor_MetricKind.GAUGE;
-
-    case 2:
-    case "DELTA":
-      return MetricDescriptor_MetricKind.DELTA;
-
-    case 3:
-    case "CUMULATIVE":
-      return MetricDescriptor_MetricKind.CUMULATIVE;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return MetricDescriptor_MetricKind.UNRECOGNIZED;
-  }
-}
-export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_MetricKind): string {
-  switch (object) {
-    case MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED:
-      return "METRIC_KIND_UNSPECIFIED";
-
-    case MetricDescriptor_MetricKind.GAUGE:
-      return "GAUGE";
-
-    case MetricDescriptor_MetricKind.DELTA:
-      return "DELTA";
-
-    case MetricDescriptor_MetricKind.CUMULATIVE:
-      return "CUMULATIVE";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** The value type of a metric. */
-export enum MetricDescriptor_ValueType {
-  /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
-  VALUE_TYPE_UNSPECIFIED = 0,
-
-  /**
-   * BOOL - The value is a boolean.
-   * This value type can be used only if the metric kind is `GAUGE`.
-   */
-  BOOL = 1,
-
-  /** INT64 - The value is a signed 64-bit integer. */
-  INT64 = 2,
-
-  /** DOUBLE - The value is a double precision floating point number. */
-  DOUBLE = 3,
-
-  /**
-   * STRING - The value is a text string.
-   * This value type can be used only if the metric kind is `GAUGE`.
-   */
-  STRING = 4,
-
-  /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
-  DISTRIBUTION = 5,
-
-  /** MONEY - The value is money. */
-  MONEY = 6,
-  UNRECOGNIZED = -1,
-}
-export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
-  switch (object) {
-    case 0:
-    case "VALUE_TYPE_UNSPECIFIED":
-      return MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED;
-
-    case 1:
-    case "BOOL":
-      return MetricDescriptor_ValueType.BOOL;
-
-    case 2:
-    case "INT64":
-      return MetricDescriptor_ValueType.INT64;
-
-    case 3:
-    case "DOUBLE":
-      return MetricDescriptor_ValueType.DOUBLE;
-
-    case 4:
-    case "STRING":
-      return MetricDescriptor_ValueType.STRING;
-
-    case 5:
-    case "DISTRIBUTION":
-      return MetricDescriptor_ValueType.DISTRIBUTION;
-
-    case 6:
-    case "MONEY":
-      return MetricDescriptor_ValueType.MONEY;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return MetricDescriptor_ValueType.UNRECOGNIZED;
-  }
-}
-export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueType): string {
-  switch (object) {
-    case MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED:
-      return "VALUE_TYPE_UNSPECIFIED";
-
-    case MetricDescriptor_ValueType.BOOL:
-      return "BOOL";
-
-    case MetricDescriptor_ValueType.INT64:
-      return "INT64";
-
-    case MetricDescriptor_ValueType.DOUBLE:
-      return "DOUBLE";
-
-    case MetricDescriptor_ValueType.STRING:
-      return "STRING";
-
-    case MetricDescriptor_ValueType.DISTRIBUTION:
-      return "DISTRIBUTION";
-
-    case MetricDescriptor_ValueType.MONEY:
-      return "MONEY";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-export interface Metric_LabelsEntry {
-  key: string;
-  value: string;
-}
 
 function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
   return {
@@ -699,26 +725,6 @@ export const Metric_LabelsEntry = {
   }
 
 };
-
-/**
- * A specific metric, identified by specifying values for all of the
- * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
- */
-export interface Metric {
-  /**
-   * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
-   * For example, `custom.googleapis.com/invoice/paid/amount`.
-   */
-  type: string;
-
-  /**
-   * The set of label values that uniquely identify this metric. All
-   * labels listed in the `MetricDescriptor` must be assigned values.
-   */
-  labels: {
-    [key: string]: string;
-  };
-}
 
 function createBaseMetric(): Metric {
   return {

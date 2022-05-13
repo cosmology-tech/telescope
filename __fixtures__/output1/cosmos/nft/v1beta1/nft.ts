@@ -26,6 +26,24 @@ export interface Class {
   data: Any;
 }
 
+/** NFT defines the NFT. */
+export interface NFT {
+  /** class_id associated with the NFT, similar to the contract address of ERC721 */
+  classId: string;
+
+  /** id is a unique identifier of the NFT */
+  id: string;
+
+  /** uri for the NFT metadata stored off chain */
+  uri: string;
+
+  /** uri_hash is a hash of the document pointed by uri */
+  uriHash: string;
+
+  /** data is an app specific data of the NFT. Optional */
+  data: Any;
+}
+
 function createBaseClass(): Class {
   return {
     id: "",
@@ -154,24 +172,6 @@ export const Class = {
   }
 
 };
-
-/** NFT defines the NFT. */
-export interface NFT {
-  /** class_id associated with the NFT, similar to the contract address of ERC721 */
-  classId: string;
-
-  /** id is a unique identifier of the NFT */
-  id: string;
-
-  /** uri for the NFT metadata stored off chain */
-  uri: string;
-
-  /** uri_hash is a hash of the document pointed by uri */
-  uriHash: string;
-
-  /** data is an app specific data of the NFT. Optional */
-  data: Any;
-}
 
 function createBaseNFT(): NFT {
   return {

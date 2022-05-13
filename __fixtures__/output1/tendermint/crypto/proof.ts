@@ -6,6 +6,34 @@ export interface Proof {
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
+export interface ValueOp {
+  /** Encoded in ProofOp.Key. */
+  key: Uint8Array;
+
+  /** To encode in ProofOp.Data */
+  proof: Proof;
+}
+export interface DominoOp {
+  key: string;
+  input: string;
+  output: string;
+}
+
+/**
+ * ProofOp defines an operation used for calculating Merkle root
+ * The data could be arbitrary format, providing nessecary data
+ * for example neighbouring node hash
+ */
+export interface ProofOp {
+  type: string;
+  key: Uint8Array;
+  data: Uint8Array;
+}
+
+/** ProofOps is Merkle proof defined by the list of ProofOps */
+export interface ProofOps {
+  ops: ProofOp[];
+}
 
 function createBaseProof(): Proof {
   return {
@@ -105,13 +133,6 @@ export const Proof = {
   }
 
 };
-export interface ValueOp {
-  /** Encoded in ProofOp.Key. */
-  key: Uint8Array;
-
-  /** To encode in ProofOp.Data */
-  proof: Proof;
-}
 
 function createBaseValueOp(): ValueOp {
   return {
@@ -181,11 +202,6 @@ export const ValueOp = {
   }
 
 };
-export interface DominoOp {
-  key: string;
-  input: string;
-  output: string;
-}
 
 function createBaseDominoOp(): DominoOp {
   return {
@@ -268,17 +284,6 @@ export const DominoOp = {
 
 };
 
-/**
- * ProofOp defines an operation used for calculating Merkle root
- * The data could be arbitrary format, providing nessecary data
- * for example neighbouring node hash
- */
-export interface ProofOp {
-  type: string;
-  key: Uint8Array;
-  data: Uint8Array;
-}
-
 function createBaseProofOp(): ProofOp {
   return {
     type: "",
@@ -359,11 +364,6 @@ export const ProofOp = {
   }
 
 };
-
-/** ProofOps is Merkle proof defined by the list of ProofOps */
-export interface ProofOps {
-  ops: ProofOp[];
-}
 
 function createBaseProofOps(): ProofOps {
   return {

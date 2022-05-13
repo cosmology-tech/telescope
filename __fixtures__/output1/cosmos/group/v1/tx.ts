@@ -3,6 +3,52 @@ import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
+/** Exec defines modes of execution of a proposal on creation or on new vote. */
+export enum Exec {
+  /**
+   * EXEC_UNSPECIFIED - An empty value means that there should be a separate
+   * MsgExec request for the proposal to execute.
+   */
+  EXEC_UNSPECIFIED = 0,
+
+  /**
+   * EXEC_TRY - Try to execute the proposal immediately.
+   * If the proposal is not allowed per the DecisionPolicy,
+   * the proposal will still be open and could
+   * be executed at a later point.
+   */
+  EXEC_TRY = 1,
+  UNRECOGNIZED = -1,
+}
+export function execFromJSON(object: any): Exec {
+  switch (object) {
+    case 0:
+    case "EXEC_UNSPECIFIED":
+      return Exec.EXEC_UNSPECIFIED;
+
+    case 1:
+    case "EXEC_TRY":
+      return Exec.EXEC_TRY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Exec.UNRECOGNIZED;
+  }
+}
+export function execToJSON(object: Exec): string {
+  switch (object) {
+    case Exec.EXEC_UNSPECIFIED:
+      return "EXEC_UNSPECIFIED";
+
+    case Exec.EXEC_TRY:
+      return "EXEC_TRY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** MsgCreateGroup is the Msg/CreateGroup request type. */
 export interface MsgCreateGroup {
   /** admin is the account address of the group admin. */
@@ -14,6 +60,247 @@ export interface MsgCreateGroup {
   /** metadata is any arbitrary metadata to attached to the group. */
   metadata: string;
 }
+
+/** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
+export interface MsgCreateGroupResponse {
+  /** group_id is the unique ID of the newly created group. */
+  groupId: Long;
+}
+
+/** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
+export interface MsgUpdateGroupMembers {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+
+  /**
+   * member_updates is the list of members to update,
+   * set weight to 0 to remove a member.
+   */
+  memberUpdates: Member[];
+}
+
+/** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
+export interface MsgUpdateGroupMembersResponse {}
+
+/** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
+export interface MsgUpdateGroupAdmin {
+  /** admin is the current account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+
+  /** new_admin is the group new admin account address. */
+  newAdmin: string;
+}
+
+/** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
+export interface MsgUpdateGroupAdminResponse {}
+
+/** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
+export interface MsgUpdateGroupMetadata {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+
+  /** metadata is the updated group's metadata. */
+  metadata: string;
+}
+
+/** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
+export interface MsgUpdateGroupMetadataResponse {}
+
+/** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
+export interface MsgCreateGroupPolicy {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+
+  /** metadata is any arbitrary metadata attached to the group policy. */
+  metadata: string;
+
+  /** decision_policy specifies the group policy's decision policy. */
+  decisionPolicy: Any;
+}
+
+/** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
+export interface MsgCreateGroupPolicyResponse {
+  /** address is the account address of the newly created group policy. */
+  address: string;
+}
+
+/** MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type. */
+export interface MsgUpdateGroupPolicyAdmin {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** address is the account address of the group policy. */
+  address: string;
+
+  /** new_admin is the new group policy admin. */
+  newAdmin: string;
+}
+
+/** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
+export interface MsgCreateGroupWithPolicy {
+  /** admin is the account address of the group and group policy admin. */
+  admin: string;
+
+  /** members defines the group members. */
+  members: Member[];
+
+  /** group_metadata is any arbitrary metadata attached to the group. */
+  groupMetadata: string;
+
+  /** group_policy_metadata is any arbitrary metadata attached to the group policy. */
+  groupPolicyMetadata: string;
+
+  /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
+  groupPolicyAsAdmin: boolean;
+
+  /** decision_policy specifies the group policy's decision policy. */
+  decisionPolicy: Any;
+}
+
+/** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
+export interface MsgCreateGroupWithPolicyResponse {
+  /** group_id is the unique ID of the newly created group with policy. */
+  groupId: Long;
+
+  /** group_policy_address is the account address of the newly created group policy. */
+  groupPolicyAddress: string;
+}
+
+/** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
+export interface MsgUpdateGroupPolicyAdminResponse {}
+
+/** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
+export interface MsgUpdateGroupPolicyDecisionPolicy {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** address is the account address of group policy. */
+  address: string;
+
+  /** decision_policy is the updated group policy's decision policy. */
+  decisionPolicy: Any;
+}
+
+/** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
+export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
+
+/** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
+export interface MsgUpdateGroupPolicyMetadata {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** address is the account address of group policy. */
+  address: string;
+
+  /** metadata is the updated group policy metadata. */
+  metadata: string;
+}
+
+/** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
+export interface MsgUpdateGroupPolicyMetadataResponse {}
+
+/** MsgSubmitProposal is the Msg/SubmitProposal request type. */
+export interface MsgSubmitProposal {
+  /** address is the account address of group policy. */
+  address: string;
+
+  /**
+   * proposers are the account addresses of the proposers.
+   * Proposers signatures will be counted as yes votes.
+   */
+  proposers: string[];
+
+  /** metadata is any arbitrary metadata to attached to the proposal. */
+  metadata: string;
+
+  /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
+  messages: Any[];
+
+  /**
+   * exec defines the mode of execution of the proposal,
+   * whether it should be executed immediately on creation or not.
+   * If so, proposers signatures are considered as Yes votes.
+   */
+  exec: Exec;
+}
+
+/** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
+export interface MsgSubmitProposalResponse {
+  /** proposal is the unique ID of the proposal. */
+  proposalId: Long;
+}
+
+/** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
+export interface MsgWithdrawProposal {
+  /** proposal is the unique ID of the proposal. */
+  proposalId: Long;
+
+  /** address is the admin of the group policy or one of the proposer of the proposal. */
+  address: string;
+}
+
+/** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
+export interface MsgWithdrawProposalResponse {}
+
+/** MsgVote is the Msg/Vote request type. */
+export interface MsgVote {
+  /** proposal is the unique ID of the proposal. */
+  proposalId: Long;
+
+  /** voter is the voter account address. */
+  voter: string;
+
+  /** option is the voter's choice on the proposal. */
+  option: VoteOption;
+
+  /** metadata is any arbitrary metadata to attached to the vote. */
+  metadata: string;
+
+  /**
+   * exec defines whether the proposal should be executed
+   * immediately after voting or not.
+   */
+  exec: Exec;
+}
+
+/** MsgVoteResponse is the Msg/Vote response type. */
+export interface MsgVoteResponse {}
+
+/** MsgExec is the Msg/Exec request type. */
+export interface MsgExec {
+  /** proposal is the unique ID of the proposal. */
+  proposalId: Long;
+
+  /** signer is the account address used to execute the proposal. */
+  signer: string;
+}
+
+/** MsgExecResponse is the Msg/Exec request type. */
+export interface MsgExecResponse {}
+
+/** MsgLeaveGroup is the Msg/LeaveGroup request type. */
+export interface MsgLeaveGroup {
+  /** address is the account address of the group member. */
+  address: string;
+
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+}
+
+/** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
+export interface MsgLeaveGroupResponse {}
 
 function createBaseMsgCreateGroup(): MsgCreateGroup {
   return {
@@ -102,12 +389,6 @@ export const MsgCreateGroup = {
 
 };
 
-/** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
-export interface MsgCreateGroupResponse {
-  /** group_id is the unique ID of the newly created group. */
-  groupId: Long;
-}
-
 function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
   return {
     groupId: Long.UZERO
@@ -164,21 +445,6 @@ export const MsgCreateGroupResponse = {
   }
 
 };
-
-/** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
-export interface MsgUpdateGroupMembers {
-  /** admin is the account address of the group admin. */
-  admin: string;
-
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-
-  /**
-   * member_updates is the list of members to update,
-   * set weight to 0 to remove a member.
-   */
-  memberUpdates: Member[];
-}
 
 function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
   return {
@@ -267,15 +533,12 @@ export const MsgUpdateGroupMembers = {
 
 };
 
-/** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
-export interface MsgUpdateGroupMembersResponse {}
-
 function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersResponse {
   return {};
 }
 
 export const MsgUpdateGroupMembersResponse = {
-  encode(message: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -297,33 +560,21 @@ export const MsgUpdateGroupMembersResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateGroupMembersResponse {
+  fromJSON(_: any): MsgUpdateGroupMembersResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateGroupMembersResponse): unknown {
+  toJSON(_: MsgUpdateGroupMembersResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembersResponse>, I>>(object: I): MsgUpdateGroupMembersResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembersResponse>, I>>(_: I): MsgUpdateGroupMembersResponse {
     const message = createBaseMsgUpdateGroupMembersResponse();
     return message;
   }
 
 };
-
-/** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
-export interface MsgUpdateGroupAdmin {
-  /** admin is the current account address of the group admin. */
-  admin: string;
-
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-
-  /** new_admin is the group new admin account address. */
-  newAdmin: string;
-}
 
 function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
   return {
@@ -406,15 +657,12 @@ export const MsgUpdateGroupAdmin = {
 
 };
 
-/** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
-export interface MsgUpdateGroupAdminResponse {}
-
 function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
   return {};
 }
 
 export const MsgUpdateGroupAdminResponse = {
-  encode(message: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -436,33 +684,21 @@ export const MsgUpdateGroupAdminResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateGroupAdminResponse {
+  fromJSON(_: any): MsgUpdateGroupAdminResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateGroupAdminResponse): unknown {
+  toJSON(_: MsgUpdateGroupAdminResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdminResponse>, I>>(object: I): MsgUpdateGroupAdminResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdminResponse>, I>>(_: I): MsgUpdateGroupAdminResponse {
     const message = createBaseMsgUpdateGroupAdminResponse();
     return message;
   }
 
 };
-
-/** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
-export interface MsgUpdateGroupMetadata {
-  /** admin is the account address of the group admin. */
-  admin: string;
-
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-
-  /** metadata is the updated group's metadata. */
-  metadata: string;
-}
 
 function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
   return {
@@ -545,15 +781,12 @@ export const MsgUpdateGroupMetadata = {
 
 };
 
-/** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
-export interface MsgUpdateGroupMetadataResponse {}
-
 function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataResponse {
   return {};
 }
 
 export const MsgUpdateGroupMetadataResponse = {
-  encode(message: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -575,36 +808,21 @@ export const MsgUpdateGroupMetadataResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateGroupMetadataResponse {
+  fromJSON(_: any): MsgUpdateGroupMetadataResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateGroupMetadataResponse): unknown {
+  toJSON(_: MsgUpdateGroupMetadataResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadataResponse>, I>>(object: I): MsgUpdateGroupMetadataResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadataResponse>, I>>(_: I): MsgUpdateGroupMetadataResponse {
     const message = createBaseMsgUpdateGroupMetadataResponse();
     return message;
   }
 
 };
-
-/** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
-export interface MsgCreateGroupPolicy {
-  /** admin is the account address of the group admin. */
-  admin: string;
-
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-
-  /** metadata is any arbitrary metadata attached to the group policy. */
-  metadata: string;
-
-  /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: Any;
-}
 
 function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
   return {
@@ -699,12 +917,6 @@ export const MsgCreateGroupPolicy = {
 
 };
 
-/** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
-export interface MsgCreateGroupPolicyResponse {
-  /** address is the account address of the newly created group policy. */
-  address: string;
-}
-
 function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse {
   return {
     address: ""
@@ -761,18 +973,6 @@ export const MsgCreateGroupPolicyResponse = {
   }
 
 };
-
-/** MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type. */
-export interface MsgUpdateGroupPolicyAdmin {
-  /** admin is the account address of the group admin. */
-  admin: string;
-
-  /** address is the account address of the group policy. */
-  address: string;
-
-  /** new_admin is the new group policy admin. */
-  newAdmin: string;
-}
 
 function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
   return {
@@ -854,27 +1054,6 @@ export const MsgUpdateGroupPolicyAdmin = {
   }
 
 };
-
-/** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
-export interface MsgCreateGroupWithPolicy {
-  /** admin is the account address of the group and group policy admin. */
-  admin: string;
-
-  /** members defines the group members. */
-  members: Member[];
-
-  /** group_metadata is any arbitrary metadata attached to the group. */
-  groupMetadata: string;
-
-  /** group_policy_metadata is any arbitrary metadata attached to the group policy. */
-  groupPolicyMetadata: string;
-
-  /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
-  groupPolicyAsAdmin: boolean;
-
-  /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: Any;
-}
 
 function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
   return {
@@ -999,15 +1178,6 @@ export const MsgCreateGroupWithPolicy = {
 
 };
 
-/** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
-export interface MsgCreateGroupWithPolicyResponse {
-  /** group_id is the unique ID of the newly created group with policy. */
-  groupId: Long;
-
-  /** group_policy_address is the account address of the newly created group policy. */
-  groupPolicyAddress: string;
-}
-
 function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyResponse {
   return {
     groupId: Long.UZERO,
@@ -1077,15 +1247,12 @@ export const MsgCreateGroupWithPolicyResponse = {
 
 };
 
-/** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
-export interface MsgUpdateGroupPolicyAdminResponse {}
-
 function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdminResponse {
   return {};
 }
 
 export const MsgUpdateGroupPolicyAdminResponse = {
-  encode(message: MsgUpdateGroupPolicyAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateGroupPolicyAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1107,33 +1274,21 @@ export const MsgUpdateGroupPolicyAdminResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateGroupPolicyAdminResponse {
+  fromJSON(_: any): MsgUpdateGroupPolicyAdminResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateGroupPolicyAdminResponse): unknown {
+  toJSON(_: MsgUpdateGroupPolicyAdminResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyAdminResponse>, I>>(object: I): MsgUpdateGroupPolicyAdminResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyAdminResponse>, I>>(_: I): MsgUpdateGroupPolicyAdminResponse {
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
     return message;
   }
 
 };
-
-/** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
-export interface MsgUpdateGroupPolicyDecisionPolicy {
-  /** admin is the account address of the group admin. */
-  admin: string;
-
-  /** address is the account address of group policy. */
-  address: string;
-
-  /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy: Any;
-}
 
 function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDecisionPolicy {
   return {
@@ -1216,15 +1371,12 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
 
 };
 
-/** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
-export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
-
 function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupPolicyDecisionPolicyResponse {
   return {};
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
-  encode(message: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1246,33 +1398,21 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  fromJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateGroupPolicyDecisionPolicyResponse): unknown {
+  toJSON(_: MsgUpdateGroupPolicyDecisionPolicyResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>, I>>(object: I): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>, I>>(_: I): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
     return message;
   }
 
 };
-
-/** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
-export interface MsgUpdateGroupPolicyMetadata {
-  /** admin is the account address of the group admin. */
-  admin: string;
-
-  /** address is the account address of group policy. */
-  address: string;
-
-  /** metadata is the updated group policy metadata. */
-  metadata: string;
-}
 
 function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata {
   return {
@@ -1355,15 +1495,12 @@ export const MsgUpdateGroupPolicyMetadata = {
 
 };
 
-/** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
-export interface MsgUpdateGroupPolicyMetadataResponse {}
-
 function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyMetadataResponse {
   return {};
 }
 
 export const MsgUpdateGroupPolicyMetadataResponse = {
-  encode(message: MsgUpdateGroupPolicyMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateGroupPolicyMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1385,92 +1522,21 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateGroupPolicyMetadataResponse {
+  fromJSON(_: any): MsgUpdateGroupPolicyMetadataResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateGroupPolicyMetadataResponse): unknown {
+  toJSON(_: MsgUpdateGroupPolicyMetadataResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyMetadataResponse>, I>>(object: I): MsgUpdateGroupPolicyMetadataResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyMetadataResponse>, I>>(_: I): MsgUpdateGroupPolicyMetadataResponse {
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
     return message;
   }
 
 };
-
-/** Exec defines modes of execution of a proposal on creation or on new vote. */
-export enum Exec {
-  /**
-   * EXEC_UNSPECIFIED - An empty value means that there should be a separate
-   * MsgExec request for the proposal to execute.
-   */
-  EXEC_UNSPECIFIED = 0,
-
-  /**
-   * EXEC_TRY - Try to execute the proposal immediately.
-   * If the proposal is not allowed per the DecisionPolicy,
-   * the proposal will still be open and could
-   * be executed at a later point.
-   */
-  EXEC_TRY = 1,
-  UNRECOGNIZED = -1,
-}
-export function execFromJSON(object: any): Exec {
-  switch (object) {
-    case 0:
-    case "EXEC_UNSPECIFIED":
-      return Exec.EXEC_UNSPECIFIED;
-
-    case 1:
-    case "EXEC_TRY":
-      return Exec.EXEC_TRY;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Exec.UNRECOGNIZED;
-  }
-}
-export function execToJSON(object: Exec): string {
-  switch (object) {
-    case Exec.EXEC_UNSPECIFIED:
-      return "EXEC_UNSPECIFIED";
-
-    case Exec.EXEC_TRY:
-      return "EXEC_TRY";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** MsgSubmitProposal is the Msg/SubmitProposal request type. */
-export interface MsgSubmitProposal {
-  /** address is the account address of group policy. */
-  address: string;
-
-  /**
-   * proposers are the account addresses of the proposers.
-   * Proposers signatures will be counted as yes votes.
-   */
-  proposers: string[];
-
-  /** metadata is any arbitrary metadata to attached to the proposal. */
-  metadata: string;
-
-  /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
-  messages: Any[];
-
-  /**
-   * exec defines the mode of execution of the proposal,
-   * whether it should be executed immediately on creation or not.
-   * If so, proposers signatures are considered as Yes votes.
-   */
-  exec: Exec;
-}
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
@@ -1589,12 +1655,6 @@ export const MsgSubmitProposal = {
 
 };
 
-/** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
-export interface MsgSubmitProposalResponse {
-  /** proposal is the unique ID of the proposal. */
-  proposalId: Long;
-}
-
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
   return {
     proposalId: Long.UZERO
@@ -1651,15 +1711,6 @@ export const MsgSubmitProposalResponse = {
   }
 
 };
-
-/** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
-export interface MsgWithdrawProposal {
-  /** proposal is the unique ID of the proposal. */
-  proposalId: Long;
-
-  /** address is the admin of the group policy or one of the proposer of the proposal. */
-  address: string;
-}
 
 function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
   return {
@@ -1730,15 +1781,12 @@ export const MsgWithdrawProposal = {
 
 };
 
-/** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
-export interface MsgWithdrawProposalResponse {}
-
 function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
   return {};
 }
 
 export const MsgWithdrawProposalResponse = {
-  encode(message: MsgWithdrawProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgWithdrawProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1760,42 +1808,21 @@ export const MsgWithdrawProposalResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgWithdrawProposalResponse {
+  fromJSON(_: any): MsgWithdrawProposalResponse {
     return {};
   },
 
-  toJSON(message: MsgWithdrawProposalResponse): unknown {
+  toJSON(_: MsgWithdrawProposalResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawProposalResponse>, I>>(object: I): MsgWithdrawProposalResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgWithdrawProposalResponse>, I>>(_: I): MsgWithdrawProposalResponse {
     const message = createBaseMsgWithdrawProposalResponse();
     return message;
   }
 
 };
-
-/** MsgVote is the Msg/Vote request type. */
-export interface MsgVote {
-  /** proposal is the unique ID of the proposal. */
-  proposalId: Long;
-
-  /** voter is the voter account address. */
-  voter: string;
-
-  /** option is the voter's choice on the proposal. */
-  option: VoteOption;
-
-  /** metadata is any arbitrary metadata to attached to the vote. */
-  metadata: string;
-
-  /**
-   * exec defines whether the proposal should be executed
-   * immediately after voting or not.
-   */
-  exec: Exec;
-}
 
 function createBaseMsgVote(): MsgVote {
   return {
@@ -1902,15 +1929,12 @@ export const MsgVote = {
 
 };
 
-/** MsgVoteResponse is the Msg/Vote response type. */
-export interface MsgVoteResponse {}
-
 function createBaseMsgVoteResponse(): MsgVoteResponse {
   return {};
 }
 
 export const MsgVoteResponse = {
-  encode(message: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1932,30 +1956,21 @@ export const MsgVoteResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgVoteResponse {
+  fromJSON(_: any): MsgVoteResponse {
     return {};
   },
 
-  toJSON(message: MsgVoteResponse): unknown {
+  toJSON(_: MsgVoteResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(object: I): MsgVoteResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(_: I): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
   }
 
 };
-
-/** MsgExec is the Msg/Exec request type. */
-export interface MsgExec {
-  /** proposal is the unique ID of the proposal. */
-  proposalId: Long;
-
-  /** signer is the account address used to execute the proposal. */
-  signer: string;
-}
 
 function createBaseMsgExec(): MsgExec {
   return {
@@ -2026,15 +2041,12 @@ export const MsgExec = {
 
 };
 
-/** MsgExecResponse is the Msg/Exec request type. */
-export interface MsgExecResponse {}
-
 function createBaseMsgExecResponse(): MsgExecResponse {
   return {};
 }
 
 export const MsgExecResponse = {
-  encode(message: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2056,30 +2068,21 @@ export const MsgExecResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgExecResponse {
+  fromJSON(_: any): MsgExecResponse {
     return {};
   },
 
-  toJSON(message: MsgExecResponse): unknown {
+  toJSON(_: MsgExecResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExecResponse>, I>>(object: I): MsgExecResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgExecResponse>, I>>(_: I): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     return message;
   }
 
 };
-
-/** MsgLeaveGroup is the Msg/LeaveGroup request type. */
-export interface MsgLeaveGroup {
-  /** address is the account address of the group member. */
-  address: string;
-
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-}
 
 function createBaseMsgLeaveGroup(): MsgLeaveGroup {
   return {
@@ -2150,15 +2153,12 @@ export const MsgLeaveGroup = {
 
 };
 
-/** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
-export interface MsgLeaveGroupResponse {}
-
 function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
   return {};
 }
 
 export const MsgLeaveGroupResponse = {
-  encode(message: MsgLeaveGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgLeaveGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2180,16 +2180,16 @@ export const MsgLeaveGroupResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgLeaveGroupResponse {
+  fromJSON(_: any): MsgLeaveGroupResponse {
     return {};
   },
 
-  toJSON(message: MsgLeaveGroupResponse): unknown {
+  toJSON(_: MsgLeaveGroupResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLeaveGroupResponse>, I>>(object: I): MsgLeaveGroupResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgLeaveGroupResponse>, I>>(_: I): MsgLeaveGroupResponse {
     const message = createBaseMsgLeaveGroupResponse();
     return message;
   }

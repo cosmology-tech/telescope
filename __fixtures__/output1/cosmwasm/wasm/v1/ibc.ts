@@ -25,6 +25,11 @@ export interface MsgIBCSend {
   data: Uint8Array;
 }
 
+/** MsgIBCCloseChannel port and channel need to be owned by the contract */
+export interface MsgIBCCloseChannel {
+  channel: string;
+}
+
 function createBaseMsgIBCSend(): MsgIBCSend {
   return {
     channel: "",
@@ -117,11 +122,6 @@ export const MsgIBCSend = {
   }
 
 };
-
-/** MsgIBCCloseChannel port and channel need to be owned by the contract */
-export interface MsgIBCCloseChannel {
-  channel: string;
-}
 
 function createBaseMsgIBCCloseChannel(): MsgIBCCloseChannel {
   return {

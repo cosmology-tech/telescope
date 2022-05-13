@@ -12,6 +12,11 @@ export interface EpochInfo {
   currentEpochStartHeight: Long;
 }
 
+/** GenesisState defines the epochs module's genesis state. */
+export interface GenesisState {
+  epochs: EpochInfo[];
+}
+
 function createBaseEpochInfo(): EpochInfo {
   return {
     identifier: "",
@@ -30,14 +35,21 @@ export const EpochInfo = {
       writer.uint32(10).string(message.identifier);
     }
 
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(18).fork()).ldelim();
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+    }
 
     if (!message.currentEpoch.isZero()) {
       writer.uint32(32).int64(message.currentEpoch);
     }
 
-    if (message.currentEpochStartTime !== undefined) Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
+    if (message.currentEpochStartTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
+    }
 
     if (message.epochCountingStarted === true) {
       writer.uint32(48).bool(message.epochCountingStarted);
@@ -133,11 +145,6 @@ export const EpochInfo = {
   }
 
 };
-
-/** GenesisState defines the epochs module's genesis state. */
-export interface GenesisState {
-  epochs: EpochInfo[];
-}
 
 function createBaseGenesisState(): GenesisState {
   return {

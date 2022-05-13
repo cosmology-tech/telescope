@@ -15,6 +15,39 @@ export interface MsgCreateVestingAccount {
   delayed: boolean;
 }
 
+/** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
+export interface MsgCreateVestingAccountResponse {}
+
+/**
+ * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
+ * locked account.
+ */
+export interface MsgCreatePermanentLockedAccount {
+  fromAddress: string;
+  toAddress: string;
+  amount: Coin[];
+}
+
+/** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
+export interface MsgCreatePermanentLockedAccountResponse {}
+
+/**
+ * MsgCreateVestingAccount defines a message that enables creating a vesting
+ * account.
+ */
+export interface MsgCreatePeriodicVestingAccount {
+  fromAddress: string;
+  toAddress: string;
+  startTime: Long;
+  vestingPeriods: Period[];
+}
+
+/**
+ * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
+ * response type.
+ */
+export interface MsgCreatePeriodicVestingAccountResponse {}
+
 function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
   return {
     fromAddress: "",
@@ -126,15 +159,12 @@ export const MsgCreateVestingAccount = {
 
 };
 
-/** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
-export interface MsgCreateVestingAccountResponse {}
-
 function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountResponse {
   return {};
 }
 
 export const MsgCreateVestingAccountResponse = {
-  encode(message: MsgCreateVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -156,31 +186,21 @@ export const MsgCreateVestingAccountResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCreateVestingAccountResponse {
+  fromJSON(_: any): MsgCreateVestingAccountResponse {
     return {};
   },
 
-  toJSON(message: MsgCreateVestingAccountResponse): unknown {
+  toJSON(_: MsgCreateVestingAccountResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateVestingAccountResponse>, I>>(object: I): MsgCreateVestingAccountResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateVestingAccountResponse>, I>>(_: I): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
   }
 
 };
-
-/**
- * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
- * locked account.
- */
-export interface MsgCreatePermanentLockedAccount {
-  fromAddress: string;
-  toAddress: string;
-  amount: Coin[];
-}
 
 function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAccount {
   return {
@@ -269,15 +289,12 @@ export const MsgCreatePermanentLockedAccount = {
 
 };
 
-/** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
-export interface MsgCreatePermanentLockedAccountResponse {}
-
 function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanentLockedAccountResponse {
   return {};
 }
 
 export const MsgCreatePermanentLockedAccountResponse = {
-  encode(message: MsgCreatePermanentLockedAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreatePermanentLockedAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -299,32 +316,21 @@ export const MsgCreatePermanentLockedAccountResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCreatePermanentLockedAccountResponse {
+  fromJSON(_: any): MsgCreatePermanentLockedAccountResponse {
     return {};
   },
 
-  toJSON(message: MsgCreatePermanentLockedAccountResponse): unknown {
+  toJSON(_: MsgCreatePermanentLockedAccountResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePermanentLockedAccountResponse>, I>>(object: I): MsgCreatePermanentLockedAccountResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreatePermanentLockedAccountResponse>, I>>(_: I): MsgCreatePermanentLockedAccountResponse {
     const message = createBaseMsgCreatePermanentLockedAccountResponse();
     return message;
   }
 
 };
-
-/**
- * MsgCreateVestingAccount defines a message that enables creating a vesting
- * account.
- */
-export interface MsgCreatePeriodicVestingAccount {
-  fromAddress: string;
-  toAddress: string;
-  startTime: Long;
-  vestingPeriods: Period[];
-}
 
 function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAccount {
   return {
@@ -425,18 +431,12 @@ export const MsgCreatePeriodicVestingAccount = {
 
 };
 
-/**
- * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
- * response type.
- */
-export interface MsgCreatePeriodicVestingAccountResponse {}
-
 function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicVestingAccountResponse {
   return {};
 }
 
 export const MsgCreatePeriodicVestingAccountResponse = {
-  encode(message: MsgCreatePeriodicVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreatePeriodicVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -458,16 +458,16 @@ export const MsgCreatePeriodicVestingAccountResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCreatePeriodicVestingAccountResponse {
+  fromJSON(_: any): MsgCreatePeriodicVestingAccountResponse {
     return {};
   },
 
-  toJSON(message: MsgCreatePeriodicVestingAccountResponse): unknown {
+  toJSON(_: MsgCreatePeriodicVestingAccountResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePeriodicVestingAccountResponse>, I>>(object: I): MsgCreatePeriodicVestingAccountResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreatePeriodicVestingAccountResponse>, I>>(_: I): MsgCreatePeriodicVestingAccountResponse {
     const message = createBaseMsgCreatePeriodicVestingAccountResponse();
     return message;
   }

@@ -5,6 +5,67 @@ import { Status } from "../../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, isObject, Long } from "@osmonauts/helpers";
 
+/** Severities of issues. */
+export enum IssueDetails_Severity {
+  /** SEVERITY_UNSPECIFIED - An unspecified severity. */
+  SEVERITY_UNSPECIFIED = 0,
+
+  /**
+   * DEPRECATION - Deprecation issue for statements and method that may no longer be
+   * supported or maintained.
+   */
+  DEPRECATION = 1,
+
+  /** WARNING - Warnings such as: unused variables. */
+  WARNING = 2,
+
+  /** ERROR - Errors such as: unmatched curly braces or variable redefinition. */
+  ERROR = 3,
+  UNRECOGNIZED = -1,
+}
+export function issueDetails_SeverityFromJSON(object: any): IssueDetails_Severity {
+  switch (object) {
+    case 0:
+    case "SEVERITY_UNSPECIFIED":
+      return IssueDetails_Severity.SEVERITY_UNSPECIFIED;
+
+    case 1:
+    case "DEPRECATION":
+      return IssueDetails_Severity.DEPRECATION;
+
+    case 2:
+    case "WARNING":
+      return IssueDetails_Severity.WARNING;
+
+    case 3:
+    case "ERROR":
+      return IssueDetails_Severity.ERROR;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return IssueDetails_Severity.UNRECOGNIZED;
+  }
+}
+export function issueDetails_SeverityToJSON(object: IssueDetails_Severity): string {
+  switch (object) {
+    case IssueDetails_Severity.SEVERITY_UNSPECIFIED:
+      return "SEVERITY_UNSPECIFIED";
+
+    case IssueDetails_Severity.DEPRECATION:
+      return "DEPRECATION";
+
+    case IssueDetails_Severity.WARNING:
+      return "WARNING";
+
+    case IssueDetails_Severity.ERROR:
+      return "ERROR";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** Request message for the Parse method. */
 export interface ParseRequest {
   /** Required. Source text in CEL syntax. */
@@ -18,6 +79,104 @@ export interface ParseRequest {
 
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disableMacros: boolean;
+}
+
+/** Response message for the Parse method. */
+export interface ParseResponse {
+  /** The parsed representation, or unset if parsing failed. */
+  parsedExpr: ParsedExpr;
+
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: Status[];
+}
+
+/** Request message for the Check method. */
+export interface CheckRequest {
+  /** Required. The parsed representation of the CEL program. */
+  parsedExpr: ParsedExpr;
+
+  /**
+   * Declarations of types for external variables and functions.
+   * Required if program uses external variables or functions
+   * not in the default environment.
+   */
+  typeEnv: Decl[];
+
+  /**
+   * The protocol buffer context.  See "Name Resolution" in the
+   * Language Definition.
+   */
+  container: string;
+
+  /**
+   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
+   * add declarations for the standard definitions to the type environment.  See
+   * "Standard Definitions" in the Language Definition.
+   */
+  noStdEnv: boolean;
+}
+
+/** Response message for the Check method. */
+export interface CheckResponse {
+  /** The annotated representation, or unset if checking failed. */
+  checkedExpr: CheckedExpr;
+
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: Status[];
+}
+export interface EvalRequest_BindingsEntry {
+  key: string;
+  value: ExprValue;
+}
+
+/** Request message for the Eval method. */
+export interface EvalRequest {
+  /** Evaluate based on the parsed representation. */
+  parsedExpr?: ParsedExpr;
+
+  /** Evaluate based on the checked representation. */
+  checkedExpr?: CheckedExpr;
+
+  /**
+   * Bindings for the external variables.  The types SHOULD be compatible
+   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   */
+  bindings: {
+    [key: string]: ExprValue;
+  };
+
+  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
+  container: string;
+}
+
+/** Response message for the Eval method. */
+export interface EvalResponse {
+  /** The execution result, or unset if execution couldn't start. */
+  result: ExprValue;
+
+  /**
+   * Any number of issues with [StatusDetails][] as the details.
+   * Note that CEL execution errors are reified into [ExprValue][].
+   * Nevertheless, we'll allow out-of-band issues to be raised,
+   * which also makes the replies more regular.
+   */
+  issues: Status[];
+}
+
+/**
+ * Warnings or errors in service execution are represented by
+ * [google.rpc.Status][google.rpc.Status] messages, with the following message
+ * in the details field.
+ */
+export interface IssueDetails {
+  /** The severity of the issue. */
+  severity: IssueDetails_Severity;
+
+  /** Position in the source, if known. */
+  position: SourcePosition;
+
+  /** Expression ID from [Expr][], 0 if unknown. */
+  id: Long;
 }
 
 function createBaseParseRequest(): ParseRequest {
@@ -113,15 +272,6 @@ export const ParseRequest = {
 
 };
 
-/** Response message for the Parse method. */
-export interface ParseResponse {
-  /** The parsed representation, or unset if parsing failed. */
-  parsedExpr: ParsedExpr;
-
-  /** Any number of issues with [StatusDetails][] as the details. */
-  issues: Status[];
-}
-
 function createBaseParseResponse(): ParseResponse {
   return {
     parsedExpr: undefined,
@@ -196,32 +346,6 @@ export const ParseResponse = {
   }
 
 };
-
-/** Request message for the Check method. */
-export interface CheckRequest {
-  /** Required. The parsed representation of the CEL program. */
-  parsedExpr: ParsedExpr;
-
-  /**
-   * Declarations of types for external variables and functions.
-   * Required if program uses external variables or functions
-   * not in the default environment.
-   */
-  typeEnv: Decl[];
-
-  /**
-   * The protocol buffer context.  See "Name Resolution" in the
-   * Language Definition.
-   */
-  container: string;
-
-  /**
-   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
-   * add declarations for the standard definitions to the type environment.  See
-   * "Standard Definitions" in the Language Definition.
-   */
-  noStdEnv: boolean;
-}
 
 function createBaseCheckRequest(): CheckRequest {
   return {
@@ -322,15 +446,6 @@ export const CheckRequest = {
 
 };
 
-/** Response message for the Check method. */
-export interface CheckResponse {
-  /** The annotated representation, or unset if checking failed. */
-  checkedExpr: CheckedExpr;
-
-  /** Any number of issues with [StatusDetails][] as the details. */
-  issues: Status[];
-}
-
 function createBaseCheckResponse(): CheckResponse {
   return {
     checkedExpr: undefined,
@@ -405,10 +520,6 @@ export const CheckResponse = {
   }
 
 };
-export interface EvalRequest_BindingsEntry {
-  key: string;
-  value: ExprValue;
-}
 
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
@@ -478,26 +589,6 @@ export const EvalRequest_BindingsEntry = {
   }
 
 };
-
-/** Request message for the Eval method. */
-export interface EvalRequest {
-  /** Evaluate based on the parsed representation. */
-  parsedExpr?: ParsedExpr;
-
-  /** Evaluate based on the checked representation. */
-  checkedExpr?: CheckedExpr;
-
-  /**
-   * Bindings for the external variables.  The types SHOULD be compatible
-   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
-   */
-  bindings: {
-    [key: string]: ExprValue;
-  };
-
-  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
-  container: string;
-}
 
 function createBaseEvalRequest(): EvalRequest {
   return {
@@ -620,20 +711,6 @@ export const EvalRequest = {
 
 };
 
-/** Response message for the Eval method. */
-export interface EvalResponse {
-  /** The execution result, or unset if execution couldn't start. */
-  result: ExprValue;
-
-  /**
-   * Any number of issues with [StatusDetails][] as the details.
-   * Note that CEL execution errors are reified into [ExprValue][].
-   * Nevertheless, we'll allow out-of-band issues to be raised,
-   * which also makes the replies more regular.
-   */
-  issues: Status[];
-}
-
 function createBaseEvalResponse(): EvalResponse {
   return {
     result: undefined,
@@ -708,22 +785,6 @@ export const EvalResponse = {
   }
 
 };
-
-/**
- * Warnings or errors in service execution are represented by
- * [google.rpc.Status][google.rpc.Status] messages, with the following message
- * in the details field.
- */
-export interface IssueDetails {
-  /** The severity of the issue. */
-  severity: IssueDetails_Severity;
-
-  /** Position in the source, if known. */
-  position: SourcePosition;
-
-  /** Expression ID from [Expr][], 0 if unknown. */
-  id: Long;
-}
 
 function createBaseIssueDetails(): IssueDetails {
   return {
@@ -805,64 +866,3 @@ export const IssueDetails = {
   }
 
 };
-
-/** Severities of issues. */
-export enum IssueDetails_Severity {
-  /** SEVERITY_UNSPECIFIED - An unspecified severity. */
-  SEVERITY_UNSPECIFIED = 0,
-
-  /**
-   * DEPRECATION - Deprecation issue for statements and method that may no longer be
-   * supported or maintained.
-   */
-  DEPRECATION = 1,
-
-  /** WARNING - Warnings such as: unused variables. */
-  WARNING = 2,
-
-  /** ERROR - Errors such as: unmatched curly braces or variable redefinition. */
-  ERROR = 3,
-  UNRECOGNIZED = -1,
-}
-export function issueDetails_SeverityFromJSON(object: any): IssueDetails_Severity {
-  switch (object) {
-    case 0:
-    case "SEVERITY_UNSPECIFIED":
-      return IssueDetails_Severity.SEVERITY_UNSPECIFIED;
-
-    case 1:
-    case "DEPRECATION":
-      return IssueDetails_Severity.DEPRECATION;
-
-    case 2:
-    case "WARNING":
-      return IssueDetails_Severity.WARNING;
-
-    case 3:
-    case "ERROR":
-      return IssueDetails_Severity.ERROR;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return IssueDetails_Severity.UNRECOGNIZED;
-  }
-}
-export function issueDetails_SeverityToJSON(object: IssueDetails_Severity): string {
-  switch (object) {
-    case IssueDetails_Severity.SEVERITY_UNSPECIFIED:
-      return "SEVERITY_UNSPECIFIED";
-
-    case IssueDetails_Severity.DEPRECATION:
-      return "DEPRECATION";
-
-    case IssueDetails_Severity.WARNING:
-      return "WARNING";
-
-    case IssueDetails_Severity.ERROR:
-      return "ERROR";
-
-    default:
-      return "UNKNOWN";
-  }
-}

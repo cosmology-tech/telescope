@@ -6,6 +6,9 @@ export interface MsgUnjail {
   validatorAddr: string;
 }
 
+/** MsgUnjailResponse defines the Msg/Unjail response type */
+export interface MsgUnjailResponse {}
+
 function createBaseMsgUnjail(): MsgUnjail {
   return {
     validatorAddr: ""
@@ -63,15 +66,12 @@ export const MsgUnjail = {
 
 };
 
-/** MsgUnjailResponse defines the Msg/Unjail response type */
-export interface MsgUnjailResponse {}
-
 function createBaseMsgUnjailResponse(): MsgUnjailResponse {
   return {};
 }
 
 export const MsgUnjailResponse = {
-  encode(message: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -93,16 +93,16 @@ export const MsgUnjailResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUnjailResponse {
+  fromJSON(_: any): MsgUnjailResponse {
     return {};
   },
 
-  toJSON(message: MsgUnjailResponse): unknown {
+  toJSON(_: MsgUnjailResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnjailResponse>, I>>(object: I): MsgUnjailResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUnjailResponse>, I>>(_: I): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
   }

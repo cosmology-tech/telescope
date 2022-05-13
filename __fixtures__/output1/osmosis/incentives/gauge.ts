@@ -38,6 +38,9 @@ export interface Gauge {
   /** already distributed coins */
   distributedCoins: Coin[];
 }
+export interface LockableDurationsInfo {
+  lockableDurations: string[];
+}
 
 function createBaseGauge(): Gauge {
   return {
@@ -70,7 +73,9 @@ export const Gauge = {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
+    }
 
     if (!message.numEpochsPaidOver.isZero()) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
@@ -189,9 +194,6 @@ export const Gauge = {
   }
 
 };
-export interface LockableDurationsInfo {
-  lockableDurations: string[];
-}
 
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {
   return {

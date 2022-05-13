@@ -11,75 +11,6 @@ export interface LogEntry_LabelsEntry {
   value: string;
 }
 
-function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const LogEntry_LabelsEntry = {
-  encode(message: LogEntry_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLogEntry_LabelsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): LogEntry_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: LogEntry_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsEntry>, I>>(object: I): LogEntry_LabelsEntry {
-    const message = createBaseLogEntry_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  }
-
-};
-
 /** An individual entry in a log. */
 export interface LogEntry {
   /**
@@ -245,6 +176,152 @@ export interface LogEntry {
   split: LogSplit;
 }
 
+/**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
+export interface LogEntryOperation {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the same
+   * identifier are assumed to be part of the same operation.
+   */
+  id: string;
+
+  /**
+   * Optional. An arbitrary producer identifier. The combination of `id` and
+   * `producer` must be globally unique. Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer: string;
+
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first: boolean;
+
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last: boolean;
+}
+
+/**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocation {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file: string;
+
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line: Long;
+
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function: string;
+}
+
+/**
+ * Additional information used to correlate multiple log entries. Used when a
+ * single LogEntry would exceed the Google Cloud Logging size limit and is
+ * split across multiple log entries.
+ */
+export interface LogSplit {
+  /**
+   * A globally unique identifier for all log entries in a sequence of split log
+   * entries. All log entries with the same |LogSplit.uid| are assumed to be
+   * part of the same sequence of split log entries.
+   */
+  uid: string;
+
+  /**
+   * The index of this LogEntry in the sequence of split log entries. Log
+   * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
+   * entries.
+   */
+  index: number;
+
+  /** The total number of log entries that the original LogEntry was split into. */
+  totalSplits: number;
+}
+
+function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const LogEntry_LabelsEntry = {
+  encode(message: LogEntry_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLogEntry_LabelsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): LogEntry_LabelsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: LogEntry_LabelsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsEntry>, I>>(object: I): LogEntry_LabelsEntry {
+    const message = createBaseLogEntry_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseLogEntry(): LogEntry {
   return {
     logName: "",
@@ -289,8 +366,13 @@ export const LogEntry = {
       Struct.encode(message.jsonPayload, writer.uint32(50).fork()).ldelim();
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(74).fork()).ldelim();
-    if (message.receiveTimestamp !== undefined) Timestamp.encode(toTimestamp(message.receiveTimestamp), writer.uint32(194).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(74).fork()).ldelim();
+    }
+
+    if (message.receiveTimestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.receiveTimestamp), writer.uint32(194).fork()).ldelim();
+    }
 
     if (message.severity !== 0) {
       writer.uint32(80).int32(message.severity);
@@ -517,31 +599,6 @@ export const LogEntry = {
 
 };
 
-/**
- * Additional information about a potentially long-running operation with which
- * a log entry is associated.
- */
-export interface LogEntryOperation {
-  /**
-   * Optional. An arbitrary operation identifier. Log entries with the same
-   * identifier are assumed to be part of the same operation.
-   */
-  id: string;
-
-  /**
-   * Optional. An arbitrary producer identifier. The combination of `id` and
-   * `producer` must be globally unique. Examples for `producer`:
-   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
-   */
-  producer: string;
-
-  /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
-
-  /** Optional. Set this to True if this is the last log entry in the operation. */
-  last: boolean;
-}
-
 function createBaseLogEntryOperation(): LogEntryOperation {
   return {
     id: "",
@@ -635,34 +692,6 @@ export const LogEntryOperation = {
 
 };
 
-/**
- * Additional information about the source code location that produced the log
- * entry.
- */
-export interface LogEntrySourceLocation {
-  /**
-   * Optional. Source file name. Depending on the runtime environment, this
-   * might be a simple name or a fully-qualified name.
-   */
-  file: string;
-
-  /**
-   * Optional. Line within the source file. 1-based; 0 indicates no line number
-   * available.
-   */
-  line: Long;
-
-  /**
-   * Optional. Human-readable name of the function or method being invoked, with
-   * optional context such as the class or package name. This information may be
-   * used in contexts such as the logs viewer, where a file and line number are
-   * less meaningful. The format can vary by language. For example:
-   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
-   * (Python).
-   */
-  function: string;
-}
-
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
     file: "",
@@ -743,30 +772,6 @@ export const LogEntrySourceLocation = {
   }
 
 };
-
-/**
- * Additional information used to correlate multiple log entries. Used when a
- * single LogEntry would exceed the Google Cloud Logging size limit and is
- * split across multiple log entries.
- */
-export interface LogSplit {
-  /**
-   * A globally unique identifier for all log entries in a sequence of split log
-   * entries. All log entries with the same |LogSplit.uid| are assumed to be
-   * part of the same sequence of split log entries.
-   */
-  uid: string;
-
-  /**
-   * The index of this LogEntry in the sequence of split log entries. Log
-   * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
-   * entries.
-   */
-  index: number;
-
-  /** The total number of log entries that the original LogEntry was split into. */
-  totalSplits: number;
-}
 
 function createBaseLogSplit(): LogSplit {
   return {

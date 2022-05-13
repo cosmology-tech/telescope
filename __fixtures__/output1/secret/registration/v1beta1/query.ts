@@ -3,6 +3,10 @@ import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@os
 export interface QueryEncryptedSeedRequest {
   pubKey: Uint8Array;
 }
+export interface QueryEncryptedSeedResponse {
+  /** [(gogoproto.nullable) = false]; */
+  encryptedSeed: Uint8Array;
+}
 
 function createBaseQueryEncryptedSeedRequest(): QueryEncryptedSeedRequest {
   return {
@@ -60,10 +64,6 @@ export const QueryEncryptedSeedRequest = {
   }
 
 };
-export interface QueryEncryptedSeedResponse {
-  /** [(gogoproto.nullable) = false]; */
-  encryptedSeed: Uint8Array;
-}
 
 function createBaseQueryEncryptedSeedResponse(): QueryEncryptedSeedResponse {
   return {

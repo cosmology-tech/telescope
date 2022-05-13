@@ -17,6 +17,78 @@ export interface MsgCreateClient {
   signer: string;
 }
 
+/** MsgCreateClientResponse defines the Msg/CreateClient response type. */
+export interface MsgCreateClientResponse {}
+
+/**
+ * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
+ * the given header.
+ */
+export interface MsgUpdateClient {
+  /** client unique identifier */
+  clientId: string;
+
+  /** header to update the light client */
+  header: Any;
+
+  /** signer address */
+  signer: string;
+}
+
+/** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
+export interface MsgUpdateClientResponse {}
+
+/**
+ * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
+ * state
+ */
+export interface MsgUpgradeClient {
+  /** client unique identifier */
+  clientId: string;
+
+  /** upgraded client state */
+  clientState: Any;
+
+  /**
+   * upgraded consensus state, only contains enough information to serve as a
+   * basis of trust in update logic
+   */
+  consensusState: Any;
+
+  /** proof that old chain committed to new client */
+  proofUpgradeClient: Uint8Array;
+
+  /** proof that old chain committed to new consensus state */
+  proofUpgradeConsensusState: Uint8Array;
+
+  /** signer address */
+  signer: string;
+}
+
+/** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
+export interface MsgUpgradeClientResponse {}
+
+/**
+ * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
+ * light client misbehaviour.
+ */
+export interface MsgSubmitMisbehaviour {
+  /** client unique identifier */
+  clientId: string;
+
+  /** misbehaviour used for freezing the light client */
+  misbehaviour: Any;
+
+  /** signer address */
+  signer: string;
+}
+
+/**
+ * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
+ * type.
+ */
+export interface MsgSubmitMisbehaviourResponse {}
+
 function createBaseMsgCreateClient(): MsgCreateClient {
   return {
     clientState: undefined,
@@ -98,15 +170,12 @@ export const MsgCreateClient = {
 
 };
 
-/** MsgCreateClientResponse defines the Msg/CreateClient response type. */
-export interface MsgCreateClientResponse {}
-
 function createBaseMsgCreateClientResponse(): MsgCreateClientResponse {
   return {};
 }
 
 export const MsgCreateClientResponse = {
-  encode(message: MsgCreateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -128,36 +197,21 @@ export const MsgCreateClientResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCreateClientResponse {
+  fromJSON(_: any): MsgCreateClientResponse {
     return {};
   },
 
-  toJSON(message: MsgCreateClientResponse): unknown {
+  toJSON(_: MsgCreateClientResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateClientResponse>, I>>(object: I): MsgCreateClientResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateClientResponse>, I>>(_: I): MsgCreateClientResponse {
     const message = createBaseMsgCreateClientResponse();
     return message;
   }
 
 };
-
-/**
- * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
- * the given header.
- */
-export interface MsgUpdateClient {
-  /** client unique identifier */
-  clientId: string;
-
-  /** header to update the light client */
-  header: Any;
-
-  /** signer address */
-  signer: string;
-}
 
 function createBaseMsgUpdateClient(): MsgUpdateClient {
   return {
@@ -240,15 +294,12 @@ export const MsgUpdateClient = {
 
 };
 
-/** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
-export interface MsgUpdateClientResponse {}
-
 function createBaseMsgUpdateClientResponse(): MsgUpdateClientResponse {
   return {};
 }
 
 export const MsgUpdateClientResponse = {
-  encode(message: MsgUpdateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -270,48 +321,21 @@ export const MsgUpdateClientResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateClientResponse {
+  fromJSON(_: any): MsgUpdateClientResponse {
     return {};
   },
 
-  toJSON(message: MsgUpdateClientResponse): unknown {
+  toJSON(_: MsgUpdateClientResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClientResponse>, I>>(object: I): MsgUpdateClientResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateClientResponse>, I>>(_: I): MsgUpdateClientResponse {
     const message = createBaseMsgUpdateClientResponse();
     return message;
   }
 
 };
-
-/**
- * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
- * state
- */
-export interface MsgUpgradeClient {
-  /** client unique identifier */
-  clientId: string;
-
-  /** upgraded client state */
-  clientState: Any;
-
-  /**
-   * upgraded consensus state, only contains enough information to serve as a
-   * basis of trust in update logic
-   */
-  consensusState: Any;
-
-  /** proof that old chain committed to new client */
-  proofUpgradeClient: Uint8Array;
-
-  /** proof that old chain committed to new consensus state */
-  proofUpgradeConsensusState: Uint8Array;
-
-  /** signer address */
-  signer: string;
-}
 
 function createBaseMsgUpgradeClient(): MsgUpgradeClient {
   return {
@@ -430,15 +454,12 @@ export const MsgUpgradeClient = {
 
 };
 
-/** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
-export interface MsgUpgradeClientResponse {}
-
 function createBaseMsgUpgradeClientResponse(): MsgUpgradeClientResponse {
   return {};
 }
 
 export const MsgUpgradeClientResponse = {
-  encode(message: MsgUpgradeClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpgradeClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -460,36 +481,21 @@ export const MsgUpgradeClientResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpgradeClientResponse {
+  fromJSON(_: any): MsgUpgradeClientResponse {
     return {};
   },
 
-  toJSON(message: MsgUpgradeClientResponse): unknown {
+  toJSON(_: MsgUpgradeClientResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpgradeClientResponse>, I>>(object: I): MsgUpgradeClientResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpgradeClientResponse>, I>>(_: I): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
   }
 
 };
-
-/**
- * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
- * light client misbehaviour.
- */
-export interface MsgSubmitMisbehaviour {
-  /** client unique identifier */
-  clientId: string;
-
-  /** misbehaviour used for freezing the light client */
-  misbehaviour: Any;
-
-  /** signer address */
-  signer: string;
-}
 
 function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
   return {
@@ -572,18 +578,12 @@ export const MsgSubmitMisbehaviour = {
 
 };
 
-/**
- * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
- * type.
- */
-export interface MsgSubmitMisbehaviourResponse {}
-
 function createBaseMsgSubmitMisbehaviourResponse(): MsgSubmitMisbehaviourResponse {
   return {};
 }
 
 export const MsgSubmitMisbehaviourResponse = {
-  encode(message: MsgSubmitMisbehaviourResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSubmitMisbehaviourResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -605,16 +605,16 @@ export const MsgSubmitMisbehaviourResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSubmitMisbehaviourResponse {
+  fromJSON(_: any): MsgSubmitMisbehaviourResponse {
     return {};
   },
 
-  toJSON(message: MsgSubmitMisbehaviourResponse): unknown {
+  toJSON(_: MsgSubmitMisbehaviourResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSubmitMisbehaviourResponse>, I>>(object: I): MsgSubmitMisbehaviourResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSubmitMisbehaviourResponse>, I>>(_: I): MsgSubmitMisbehaviourResponse {
     const message = createBaseMsgSubmitMisbehaviourResponse();
     return message;
   }

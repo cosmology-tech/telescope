@@ -104,6 +104,64 @@ export interface Documentation {
   overview: string;
 }
 
+/** A documentation rule provides information about individual API elements. */
+export interface DocumentationRule {
+  /**
+   * The selector is a comma-separated list of patterns. Each pattern is a
+   * qualified name of the element which may end in "*", indicating a wildcard.
+   * Wildcards are only allowed at the end and for a whole component of the
+   * qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A
+   * wildcard will match one or more components. To specify a default for all
+   * applicable elements, the whole pattern "*" is used.
+   */
+  selector: string;
+
+  /** Description of the selected API(s). */
+  description: string;
+
+  /**
+   * Deprecation description of the selected element(s). It can be provided if
+   * an element is marked as `deprecated`.
+   */
+  deprecationDescription: string;
+}
+
+/**
+ * Represents a documentation page. A page can contain subpages to represent
+ * nested documentation set structure.
+ */
+export interface Page {
+  /**
+   * The name of the page. It will be used as an identity of the page to
+   * generate URI of the page, text of the link to this page in navigation,
+   * etc. The full page name (start from the root page name to this page
+   * concatenated with `.`) can be used as reference to the page in your
+   * documentation. For example:
+   * <pre><code>pages:
+   * - name: Tutorial
+   * content: &#40;== include tutorial.md ==&#41;
+   * subpages:
+   * - name: Java
+   * content: &#40;== include tutorial_java.md ==&#41;
+   * </code></pre>
+   * You can reference `Java` page using Markdown reference link syntax:
+   * `[Java][Tutorial.Java]`.
+   */
+  name: string;
+
+  /**
+   * The Markdown content of the page. You can use <code>&#40;== include {path}
+   * ==&#41;</code> to include content from a Markdown file.
+   */
+  content: string;
+
+  /**
+   * Subpages of this page. The order of subpages specified here will be
+   * honored in the generated docset.
+   */
+  subpages: Page[];
+}
+
 function createBaseDocumentation(): Documentation {
   return {
     summary: "",
@@ -232,28 +290,6 @@ export const Documentation = {
 
 };
 
-/** A documentation rule provides information about individual API elements. */
-export interface DocumentationRule {
-  /**
-   * The selector is a comma-separated list of patterns. Each pattern is a
-   * qualified name of the element which may end in "*", indicating a wildcard.
-   * Wildcards are only allowed at the end and for a whole component of the
-   * qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A
-   * wildcard will match one or more components. To specify a default for all
-   * applicable elements, the whole pattern "*" is used.
-   */
-  selector: string;
-
-  /** Description of the selected API(s). */
-  description: string;
-
-  /**
-   * Deprecation description of the selected element(s). It can be provided if
-   * an element is marked as `deprecated`.
-   */
-  deprecationDescription: string;
-}
-
 function createBaseDocumentationRule(): DocumentationRule {
   return {
     selector: "",
@@ -334,42 +370,6 @@ export const DocumentationRule = {
   }
 
 };
-
-/**
- * Represents a documentation page. A page can contain subpages to represent
- * nested documentation set structure.
- */
-export interface Page {
-  /**
-   * The name of the page. It will be used as an identity of the page to
-   * generate URI of the page, text of the link to this page in navigation,
-   * etc. The full page name (start from the root page name to this page
-   * concatenated with `.`) can be used as reference to the page in your
-   * documentation. For example:
-   * <pre><code>pages:
-   * - name: Tutorial
-   * content: &#40;== include tutorial.md ==&#41;
-   * subpages:
-   * - name: Java
-   * content: &#40;== include tutorial_java.md ==&#41;
-   * </code></pre>
-   * You can reference `Java` page using Markdown reference link syntax:
-   * `[Java][Tutorial.Java]`.
-   */
-  name: string;
-
-  /**
-   * The Markdown content of the page. You can use <code>&#40;== include {path}
-   * ==&#41;</code> to include content from a Markdown file.
-   */
-  content: string;
-
-  /**
-   * Subpages of this page. The order of subpages specified here will be
-   * honored in the generated docset.
-   */
-  subpages: Page[];
-}
 
 function createBasePage(): Page {
   return {

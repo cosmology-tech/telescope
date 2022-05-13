@@ -5,12 +5,33 @@ import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@os
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+
+/**
+ * QueryEpochProvisionsRequest is the request type for the
+ * Query/EpochProvisions RPC method.
+ */
+export interface QueryEpochProvisionsRequest {}
+
+/**
+ * QueryEpochProvisionsResponse is the response type for the
+ * Query/EpochProvisions RPC method.
+ */
+export interface QueryEpochProvisionsResponse {
+  /** epoch_provisions is the current minting per epoch provisions value. */
+  epochProvisions: Uint8Array;
+}
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -32,27 +53,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
-export interface QueryParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -111,18 +126,12 @@ export const QueryParamsResponse = {
 
 };
 
-/**
- * QueryEpochProvisionsRequest is the request type for the
- * Query/EpochProvisions RPC method.
- */
-export interface QueryEpochProvisionsRequest {}
-
 function createBaseQueryEpochProvisionsRequest(): QueryEpochProvisionsRequest {
   return {};
 }
 
 export const QueryEpochProvisionsRequest = {
-  encode(message: QueryEpochProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryEpochProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -144,30 +153,21 @@ export const QueryEpochProvisionsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryEpochProvisionsRequest {
+  fromJSON(_: any): QueryEpochProvisionsRequest {
     return {};
   },
 
-  toJSON(message: QueryEpochProvisionsRequest): unknown {
+  toJSON(_: QueryEpochProvisionsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryEpochProvisionsRequest>, I>>(object: I): QueryEpochProvisionsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryEpochProvisionsRequest>, I>>(_: I): QueryEpochProvisionsRequest {
     const message = createBaseQueryEpochProvisionsRequest();
     return message;
   }
 
 };
-
-/**
- * QueryEpochProvisionsResponse is the response type for the
- * Query/EpochProvisions RPC method.
- */
-export interface QueryEpochProvisionsResponse {
-  /** epoch_provisions is the current minting per epoch provisions value. */
-  epochProvisions: Uint8Array;
-}
 
 function createBaseQueryEpochProvisionsResponse(): QueryEpochProvisionsResponse {
   return {

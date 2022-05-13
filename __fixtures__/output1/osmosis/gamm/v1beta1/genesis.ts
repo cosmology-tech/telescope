@@ -8,6 +8,13 @@ export interface Params {
   poolCreationFee: Coin[];
 }
 
+/** GenesisState defines the gamm module's genesis state. */
+export interface GenesisState {
+  pools: Any[];
+  nextPoolNumber: Long;
+  params: Params;
+}
+
 function createBaseParams(): Params {
   return {
     poolCreationFee: []
@@ -70,13 +77,6 @@ export const Params = {
   }
 
 };
-
-/** GenesisState defines the gamm module's genesis state. */
-export interface GenesisState {
-  pools: Any[];
-  nextPoolNumber: Long;
-  params: Params;
-}
 
 function createBaseGenesisState(): GenesisState {
   return {

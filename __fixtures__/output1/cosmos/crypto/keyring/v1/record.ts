@@ -23,6 +23,24 @@ export interface Record {
   offline?: Record_Offline;
 }
 
+/**
+ * Item is a keyring item stored in a keyring backend.
+ * Local item
+ */
+export interface Record_Local {
+  privKey: Any;
+  privKeyType: string;
+}
+
+/** Ledger item */
+export interface Record_Ledger {}
+
+/** Multi item */
+export interface Record_Multi {}
+
+/** Offline item */
+export interface Record_Offline {}
+
 function createBaseRecord(): Record {
   return {
     name: "",
@@ -140,15 +158,6 @@ export const Record = {
 
 };
 
-/**
- * Item is a keyring item stored in a keyring backend.
- * Local item
- */
-export interface Record_Local {
-  privKey: Any;
-  privKeyType: string;
-}
-
 function createBaseRecord_Local(): Record_Local {
   return {
     privKey: undefined,
@@ -218,15 +227,12 @@ export const Record_Local = {
 
 };
 
-/** Ledger item */
-export interface Record_Ledger {}
-
 function createBaseRecord_Ledger(): Record_Ledger {
   return {};
 }
 
 export const Record_Ledger = {
-  encode(message: Record_Ledger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Record_Ledger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -248,31 +254,28 @@ export const Record_Ledger = {
     return message;
   },
 
-  fromJSON(object: any): Record_Ledger {
+  fromJSON(_: any): Record_Ledger {
     return {};
   },
 
-  toJSON(message: Record_Ledger): unknown {
+  toJSON(_: Record_Ledger): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Record_Ledger>, I>>(object: I): Record_Ledger {
+  fromPartial<I extends Exact<DeepPartial<Record_Ledger>, I>>(_: I): Record_Ledger {
     const message = createBaseRecord_Ledger();
     return message;
   }
 
 };
 
-/** Multi item */
-export interface Record_Multi {}
-
 function createBaseRecord_Multi(): Record_Multi {
   return {};
 }
 
 export const Record_Multi = {
-  encode(message: Record_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Record_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -294,31 +297,28 @@ export const Record_Multi = {
     return message;
   },
 
-  fromJSON(object: any): Record_Multi {
+  fromJSON(_: any): Record_Multi {
     return {};
   },
 
-  toJSON(message: Record_Multi): unknown {
+  toJSON(_: Record_Multi): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Record_Multi>, I>>(object: I): Record_Multi {
+  fromPartial<I extends Exact<DeepPartial<Record_Multi>, I>>(_: I): Record_Multi {
     const message = createBaseRecord_Multi();
     return message;
   }
 
 };
 
-/** Offline item */
-export interface Record_Offline {}
-
 function createBaseRecord_Offline(): Record_Offline {
   return {};
 }
 
 export const Record_Offline = {
-  encode(message: Record_Offline, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Record_Offline, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -340,16 +340,16 @@ export const Record_Offline = {
     return message;
   },
 
-  fromJSON(object: any): Record_Offline {
+  fromJSON(_: any): Record_Offline {
     return {};
   },
 
-  toJSON(message: Record_Offline): unknown {
+  toJSON(_: Record_Offline): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Record_Offline>, I>>(object: I): Record_Offline {
+  fromPartial<I extends Exact<DeepPartial<Record_Offline>, I>>(_: I): Record_Offline {
     const message = createBaseRecord_Offline();
     return message;
   }

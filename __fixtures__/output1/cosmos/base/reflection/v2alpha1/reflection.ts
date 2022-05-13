@@ -25,6 +25,208 @@ export interface AppDescriptor {
   tx: TxDescriptor;
 }
 
+/** TxDescriptor describes the accepted transaction type */
+export interface TxDescriptor {
+  /**
+   * fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
+   * it is not meant to support polymorphism of transaction types, it is supposed to be used by
+   * reflection clients to understand if they can handle a specific transaction type in an application.
+   */
+  fullname: string;
+
+  /** msgs lists the accepted application messages (sdk.Msg) */
+  msgs: MsgDescriptor[];
+}
+
+/**
+ * AuthnDescriptor provides information on how to sign transactions without relying
+ * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
+ */
+export interface AuthnDescriptor {
+  /** sign_modes defines the supported signature algorithm */
+  signModes: SigningModeDescriptor[];
+}
+
+/**
+ * SigningModeDescriptor provides information on a signing flow of the application
+ * NOTE(fdymylja): here we could go as far as providing an entire flow on how
+ * to sign a message given a SigningModeDescriptor, but it's better to think about
+ * this another time
+ */
+export interface SigningModeDescriptor {
+  /** name defines the unique name of the signing mode */
+  name: string;
+
+  /** number is the unique int32 identifier for the sign_mode enum */
+  number: number;
+
+  /**
+   * authn_info_provider_method_fullname defines the fullname of the method to call to get
+   * the metadata required to authenticate using the provided sign_modes
+   */
+  authnInfoProviderMethodFullname: string;
+}
+
+/** ChainDescriptor describes chain information of the application */
+export interface ChainDescriptor {
+  /** id is the chain id */
+  id: string;
+}
+
+/** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
+export interface CodecDescriptor {
+  /** interfaces is a list of the registerted interfaces descriptors */
+  interfaces: InterfaceDescriptor[];
+}
+
+/** InterfaceDescriptor describes the implementation of an interface */
+export interface InterfaceDescriptor {
+  /** fullname is the name of the interface */
+  fullname: string;
+
+  /**
+   * interface_accepting_messages contains information regarding the proto messages which contain the interface as
+   * google.protobuf.Any field
+   */
+  interfaceAcceptingMessages: InterfaceAcceptingMessageDescriptor[];
+
+  /** interface_implementers is a list of the descriptors of the interface implementers */
+  interfaceImplementers: InterfaceImplementerDescriptor[];
+}
+
+/** InterfaceImplementerDescriptor describes an interface implementer */
+export interface InterfaceImplementerDescriptor {
+  /** fullname is the protobuf queryable name of the interface implementer */
+  fullname: string;
+
+  /**
+   * type_url defines the type URL used when marshalling the type as any
+   * this is required so we can provide type safe google.protobuf.Any marshalling and
+   * unmarshalling, making sure that we don't accept just 'any' type
+   * in our interface fields
+   */
+  typeUrl: string;
+}
+
+/**
+ * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
+ * an interface represented as a google.protobuf.Any
+ */
+export interface InterfaceAcceptingMessageDescriptor {
+  /** fullname is the protobuf fullname of the type containing the interface */
+  fullname: string;
+
+  /**
+   * field_descriptor_names is a list of the protobuf name (not fullname) of the field
+   * which contains the interface as google.protobuf.Any (the interface is the same, but
+   * it can be in multiple fields of the same proto message)
+   */
+  fieldDescriptorNames: string[];
+}
+
+/** ConfigurationDescriptor contains metadata information on the sdk.Config */
+export interface ConfigurationDescriptor {
+  /** bech32_account_address_prefix is the account address prefix */
+  bech32AccountAddressPrefix: string;
+}
+
+/** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
+export interface MsgDescriptor {
+  /** msg_type_url contains the TypeURL of a sdk.Msg. */
+  msgTypeUrl: string;
+}
+
+/** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
+export interface GetAuthnDescriptorRequest {}
+
+/** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
+export interface GetAuthnDescriptorResponse {
+  /** authn describes how to authenticate to the application when sending transactions */
+  authn: AuthnDescriptor;
+}
+
+/** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
+export interface GetChainDescriptorRequest {}
+
+/** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
+export interface GetChainDescriptorResponse {
+  /** chain describes application chain information */
+  chain: ChainDescriptor;
+}
+
+/** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
+export interface GetCodecDescriptorRequest {}
+
+/** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
+export interface GetCodecDescriptorResponse {
+  /** codec describes the application codec such as registered interfaces and implementations */
+  codec: CodecDescriptor;
+}
+
+/** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
+export interface GetConfigurationDescriptorRequest {}
+
+/** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
+export interface GetConfigurationDescriptorResponse {
+  /** config describes the application's sdk.Config */
+  config: ConfigurationDescriptor;
+}
+
+/** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
+export interface GetQueryServicesDescriptorRequest {}
+
+/** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
+export interface GetQueryServicesDescriptorResponse {
+  /** queries provides information on the available queryable services */
+  queries: QueryServicesDescriptor;
+}
+
+/** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
+export interface GetTxDescriptorRequest {}
+
+/** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
+export interface GetTxDescriptorResponse {
+  /**
+   * tx provides information on msgs that can be forwarded to the application
+   * alongside the accepted transaction protobuf type
+   */
+  tx: TxDescriptor;
+}
+
+/** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
+export interface QueryServicesDescriptor {
+  /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
+  queryServices: QueryServiceDescriptor[];
+}
+
+/** QueryServiceDescriptor describes a cosmos-sdk queryable service */
+export interface QueryServiceDescriptor {
+  /** fullname is the protobuf fullname of the service descriptor */
+  fullname: string;
+
+  /** is_module describes if this service is actually exposed by an application's module */
+  isModule: boolean;
+
+  /** methods provides a list of query service methods */
+  methods: QueryMethodDescriptor[];
+}
+
+/**
+ * QueryMethodDescriptor describes a queryable method of a query service
+ * no other info is provided beside method name and tendermint queryable path
+ * because it would be redundant with the grpc reflection service
+ */
+export interface QueryMethodDescriptor {
+  /** name is the protobuf name (not fullname) of the method */
+  name: string;
+
+  /**
+   * full_query_path is the path that can be used to query
+   * this method via tendermint abci.Query
+   */
+  fullQueryPath: string;
+}
+
 function createBaseAppDescriptor(): AppDescriptor {
   return {
     authn: undefined,
@@ -142,19 +344,6 @@ export const AppDescriptor = {
 
 };
 
-/** TxDescriptor describes the accepted transaction type */
-export interface TxDescriptor {
-  /**
-   * fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
-   * it is not meant to support polymorphism of transaction types, it is supposed to be used by
-   * reflection clients to understand if they can handle a specific transaction type in an application.
-   */
-  fullname: string;
-
-  /** msgs lists the accepted application messages (sdk.Msg) */
-  msgs: MsgDescriptor[];
-}
-
 function createBaseTxDescriptor(): TxDescriptor {
   return {
     fullname: "",
@@ -230,15 +419,6 @@ export const TxDescriptor = {
 
 };
 
-/**
- * AuthnDescriptor provides information on how to sign transactions without relying
- * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
- */
-export interface AuthnDescriptor {
-  /** sign_modes defines the supported signature algorithm */
-  signModes: SigningModeDescriptor[];
-}
-
 function createBaseAuthnDescriptor(): AuthnDescriptor {
   return {
     signModes: []
@@ -301,26 +481,6 @@ export const AuthnDescriptor = {
   }
 
 };
-
-/**
- * SigningModeDescriptor provides information on a signing flow of the application
- * NOTE(fdymylja): here we could go as far as providing an entire flow on how
- * to sign a message given a SigningModeDescriptor, but it's better to think about
- * this another time
- */
-export interface SigningModeDescriptor {
-  /** name defines the unique name of the signing mode */
-  name: string;
-
-  /** number is the unique int32 identifier for the sign_mode enum */
-  number: number;
-
-  /**
-   * authn_info_provider_method_fullname defines the fullname of the method to call to get
-   * the metadata required to authenticate using the provided sign_modes
-   */
-  authnInfoProviderMethodFullname: string;
-}
 
 function createBaseSigningModeDescriptor(): SigningModeDescriptor {
   return {
@@ -403,12 +563,6 @@ export const SigningModeDescriptor = {
 
 };
 
-/** ChainDescriptor describes chain information of the application */
-export interface ChainDescriptor {
-  /** id is the chain id */
-  id: string;
-}
-
 function createBaseChainDescriptor(): ChainDescriptor {
   return {
     id: ""
@@ -465,12 +619,6 @@ export const ChainDescriptor = {
   }
 
 };
-
-/** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
-export interface CodecDescriptor {
-  /** interfaces is a list of the registerted interfaces descriptors */
-  interfaces: InterfaceDescriptor[];
-}
 
 function createBaseCodecDescriptor(): CodecDescriptor {
   return {
@@ -534,21 +682,6 @@ export const CodecDescriptor = {
   }
 
 };
-
-/** InterfaceDescriptor describes the implementation of an interface */
-export interface InterfaceDescriptor {
-  /** fullname is the name of the interface */
-  fullname: string;
-
-  /**
-   * interface_accepting_messages contains information regarding the proto messages which contain the interface as
-   * google.protobuf.Any field
-   */
-  interfaceAcceptingMessages: InterfaceAcceptingMessageDescriptor[];
-
-  /** interface_implementers is a list of the descriptors of the interface implementers */
-  interfaceImplementers: InterfaceImplementerDescriptor[];
-}
 
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
   return {
@@ -642,20 +775,6 @@ export const InterfaceDescriptor = {
 
 };
 
-/** InterfaceImplementerDescriptor describes an interface implementer */
-export interface InterfaceImplementerDescriptor {
-  /** fullname is the protobuf queryable name of the interface implementer */
-  fullname: string;
-
-  /**
-   * type_url defines the type URL used when marshalling the type as any
-   * this is required so we can provide type safe google.protobuf.Any marshalling and
-   * unmarshalling, making sure that we don't accept just 'any' type
-   * in our interface fields
-   */
-  typeUrl: string;
-}
-
 function createBaseInterfaceImplementerDescriptor(): InterfaceImplementerDescriptor {
   return {
     fullname: "",
@@ -724,22 +843,6 @@ export const InterfaceImplementerDescriptor = {
   }
 
 };
-
-/**
- * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
- * an interface represented as a google.protobuf.Any
- */
-export interface InterfaceAcceptingMessageDescriptor {
-  /** fullname is the protobuf fullname of the type containing the interface */
-  fullname: string;
-
-  /**
-   * field_descriptor_names is a list of the protobuf name (not fullname) of the field
-   * which contains the interface as google.protobuf.Any (the interface is the same, but
-   * it can be in multiple fields of the same proto message)
-   */
-  fieldDescriptorNames: string[];
-}
 
 function createBaseInterfaceAcceptingMessageDescriptor(): InterfaceAcceptingMessageDescriptor {
   return {
@@ -816,12 +919,6 @@ export const InterfaceAcceptingMessageDescriptor = {
 
 };
 
-/** ConfigurationDescriptor contains metadata information on the sdk.Config */
-export interface ConfigurationDescriptor {
-  /** bech32_account_address_prefix is the account address prefix */
-  bech32AccountAddressPrefix: string;
-}
-
 function createBaseConfigurationDescriptor(): ConfigurationDescriptor {
   return {
     bech32AccountAddressPrefix: ""
@@ -878,12 +975,6 @@ export const ConfigurationDescriptor = {
   }
 
 };
-
-/** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
-export interface MsgDescriptor {
-  /** msg_type_url contains the TypeURL of a sdk.Msg. */
-  msgTypeUrl: string;
-}
 
 function createBaseMsgDescriptor(): MsgDescriptor {
   return {
@@ -942,15 +1033,12 @@ export const MsgDescriptor = {
 
 };
 
-/** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
-export interface GetAuthnDescriptorRequest {}
-
 function createBaseGetAuthnDescriptorRequest(): GetAuthnDescriptorRequest {
   return {};
 }
 
 export const GetAuthnDescriptorRequest = {
-  encode(message: GetAuthnDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetAuthnDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -972,27 +1060,21 @@ export const GetAuthnDescriptorRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetAuthnDescriptorRequest {
+  fromJSON(_: any): GetAuthnDescriptorRequest {
     return {};
   },
 
-  toJSON(message: GetAuthnDescriptorRequest): unknown {
+  toJSON(_: GetAuthnDescriptorRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetAuthnDescriptorRequest>, I>>(object: I): GetAuthnDescriptorRequest {
+  fromPartial<I extends Exact<DeepPartial<GetAuthnDescriptorRequest>, I>>(_: I): GetAuthnDescriptorRequest {
     const message = createBaseGetAuthnDescriptorRequest();
     return message;
   }
 
 };
-
-/** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
-export interface GetAuthnDescriptorResponse {
-  /** authn describes how to authenticate to the application when sending transactions */
-  authn: AuthnDescriptor;
-}
 
 function createBaseGetAuthnDescriptorResponse(): GetAuthnDescriptorResponse {
   return {
@@ -1051,15 +1133,12 @@ export const GetAuthnDescriptorResponse = {
 
 };
 
-/** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
-export interface GetChainDescriptorRequest {}
-
 function createBaseGetChainDescriptorRequest(): GetChainDescriptorRequest {
   return {};
 }
 
 export const GetChainDescriptorRequest = {
-  encode(message: GetChainDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetChainDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1081,27 +1160,21 @@ export const GetChainDescriptorRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetChainDescriptorRequest {
+  fromJSON(_: any): GetChainDescriptorRequest {
     return {};
   },
 
-  toJSON(message: GetChainDescriptorRequest): unknown {
+  toJSON(_: GetChainDescriptorRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetChainDescriptorRequest>, I>>(object: I): GetChainDescriptorRequest {
+  fromPartial<I extends Exact<DeepPartial<GetChainDescriptorRequest>, I>>(_: I): GetChainDescriptorRequest {
     const message = createBaseGetChainDescriptorRequest();
     return message;
   }
 
 };
-
-/** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
-export interface GetChainDescriptorResponse {
-  /** chain describes application chain information */
-  chain: ChainDescriptor;
-}
 
 function createBaseGetChainDescriptorResponse(): GetChainDescriptorResponse {
   return {
@@ -1160,15 +1233,12 @@ export const GetChainDescriptorResponse = {
 
 };
 
-/** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
-export interface GetCodecDescriptorRequest {}
-
 function createBaseGetCodecDescriptorRequest(): GetCodecDescriptorRequest {
   return {};
 }
 
 export const GetCodecDescriptorRequest = {
-  encode(message: GetCodecDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetCodecDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1190,27 +1260,21 @@ export const GetCodecDescriptorRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetCodecDescriptorRequest {
+  fromJSON(_: any): GetCodecDescriptorRequest {
     return {};
   },
 
-  toJSON(message: GetCodecDescriptorRequest): unknown {
+  toJSON(_: GetCodecDescriptorRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetCodecDescriptorRequest>, I>>(object: I): GetCodecDescriptorRequest {
+  fromPartial<I extends Exact<DeepPartial<GetCodecDescriptorRequest>, I>>(_: I): GetCodecDescriptorRequest {
     const message = createBaseGetCodecDescriptorRequest();
     return message;
   }
 
 };
-
-/** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
-export interface GetCodecDescriptorResponse {
-  /** codec describes the application codec such as registered interfaces and implementations */
-  codec: CodecDescriptor;
-}
 
 function createBaseGetCodecDescriptorResponse(): GetCodecDescriptorResponse {
   return {
@@ -1269,15 +1333,12 @@ export const GetCodecDescriptorResponse = {
 
 };
 
-/** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
-export interface GetConfigurationDescriptorRequest {}
-
 function createBaseGetConfigurationDescriptorRequest(): GetConfigurationDescriptorRequest {
   return {};
 }
 
 export const GetConfigurationDescriptorRequest = {
-  encode(message: GetConfigurationDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetConfigurationDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1299,27 +1360,21 @@ export const GetConfigurationDescriptorRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetConfigurationDescriptorRequest {
+  fromJSON(_: any): GetConfigurationDescriptorRequest {
     return {};
   },
 
-  toJSON(message: GetConfigurationDescriptorRequest): unknown {
+  toJSON(_: GetConfigurationDescriptorRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetConfigurationDescriptorRequest>, I>>(object: I): GetConfigurationDescriptorRequest {
+  fromPartial<I extends Exact<DeepPartial<GetConfigurationDescriptorRequest>, I>>(_: I): GetConfigurationDescriptorRequest {
     const message = createBaseGetConfigurationDescriptorRequest();
     return message;
   }
 
 };
-
-/** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
-export interface GetConfigurationDescriptorResponse {
-  /** config describes the application's sdk.Config */
-  config: ConfigurationDescriptor;
-}
 
 function createBaseGetConfigurationDescriptorResponse(): GetConfigurationDescriptorResponse {
   return {
@@ -1378,15 +1433,12 @@ export const GetConfigurationDescriptorResponse = {
 
 };
 
-/** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
-export interface GetQueryServicesDescriptorRequest {}
-
 function createBaseGetQueryServicesDescriptorRequest(): GetQueryServicesDescriptorRequest {
   return {};
 }
 
 export const GetQueryServicesDescriptorRequest = {
-  encode(message: GetQueryServicesDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetQueryServicesDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1408,27 +1460,21 @@ export const GetQueryServicesDescriptorRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetQueryServicesDescriptorRequest {
+  fromJSON(_: any): GetQueryServicesDescriptorRequest {
     return {};
   },
 
-  toJSON(message: GetQueryServicesDescriptorRequest): unknown {
+  toJSON(_: GetQueryServicesDescriptorRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetQueryServicesDescriptorRequest>, I>>(object: I): GetQueryServicesDescriptorRequest {
+  fromPartial<I extends Exact<DeepPartial<GetQueryServicesDescriptorRequest>, I>>(_: I): GetQueryServicesDescriptorRequest {
     const message = createBaseGetQueryServicesDescriptorRequest();
     return message;
   }
 
 };
-
-/** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
-export interface GetQueryServicesDescriptorResponse {
-  /** queries provides information on the available queryable services */
-  queries: QueryServicesDescriptor;
-}
 
 function createBaseGetQueryServicesDescriptorResponse(): GetQueryServicesDescriptorResponse {
   return {
@@ -1487,15 +1533,12 @@ export const GetQueryServicesDescriptorResponse = {
 
 };
 
-/** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
-export interface GetTxDescriptorRequest {}
-
 function createBaseGetTxDescriptorRequest(): GetTxDescriptorRequest {
   return {};
 }
 
 export const GetTxDescriptorRequest = {
-  encode(message: GetTxDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetTxDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1517,30 +1560,21 @@ export const GetTxDescriptorRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetTxDescriptorRequest {
+  fromJSON(_: any): GetTxDescriptorRequest {
     return {};
   },
 
-  toJSON(message: GetTxDescriptorRequest): unknown {
+  toJSON(_: GetTxDescriptorRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetTxDescriptorRequest>, I>>(object: I): GetTxDescriptorRequest {
+  fromPartial<I extends Exact<DeepPartial<GetTxDescriptorRequest>, I>>(_: I): GetTxDescriptorRequest {
     const message = createBaseGetTxDescriptorRequest();
     return message;
   }
 
 };
-
-/** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
-export interface GetTxDescriptorResponse {
-  /**
-   * tx provides information on msgs that can be forwarded to the application
-   * alongside the accepted transaction protobuf type
-   */
-  tx: TxDescriptor;
-}
 
 function createBaseGetTxDescriptorResponse(): GetTxDescriptorResponse {
   return {
@@ -1598,12 +1632,6 @@ export const GetTxDescriptorResponse = {
   }
 
 };
-
-/** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
-export interface QueryServicesDescriptor {
-  /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
-  queryServices: QueryServiceDescriptor[];
-}
 
 function createBaseQueryServicesDescriptor(): QueryServicesDescriptor {
   return {
@@ -1667,18 +1695,6 @@ export const QueryServicesDescriptor = {
   }
 
 };
-
-/** QueryServiceDescriptor describes a cosmos-sdk queryable service */
-export interface QueryServiceDescriptor {
-  /** fullname is the protobuf fullname of the service descriptor */
-  fullname: string;
-
-  /** is_module describes if this service is actually exposed by an application's module */
-  isModule: boolean;
-
-  /** methods provides a list of query service methods */
-  methods: QueryMethodDescriptor[];
-}
 
 function createBaseQueryServiceDescriptor(): QueryServiceDescriptor {
   return {
@@ -1766,22 +1782,6 @@ export const QueryServiceDescriptor = {
   }
 
 };
-
-/**
- * QueryMethodDescriptor describes a queryable method of a query service
- * no other info is provided beside method name and tendermint queryable path
- * because it would be redundant with the grpc reflection service
- */
-export interface QueryMethodDescriptor {
-  /** name is the protobuf name (not fullname) of the method */
-  name: string;
-
-  /**
-   * full_query_path is the path that can be used to query
-   * this method via tendermint abci.Query
-   */
-  fullQueryPath: string;
-}
 
 function createBaseQueryMethodDescriptor(): QueryMethodDescriptor {
   return {

@@ -9,6 +9,36 @@ export interface QuoteReport {
   isvEnclaveQuoteBody: string;
   advisoryIds: string[];
 }
+export interface QuoteReportBody {
+  mrEnclave: string;
+  mrSigner: string;
+  reportData: string;
+}
+export interface QuoteReportData {
+  version: Long;
+  signType: Long;
+  reportBody: QuoteReportBody;
+}
+export interface EndorsedAttestationReport {
+  report: Uint8Array;
+  signature: Uint8Array;
+  signingCert: Uint8Array;
+}
+export interface SGXEC256Signature {
+  gx: string;
+  gy: string;
+}
+export interface PlatformInfoBlob {
+  sgxEpidGroupFlags: number;
+  sgxTcbEvaluationFlags: number;
+  pseEvaluationFlags: number;
+  latestEquivalentTcbPsvn: string;
+  latestPseIsvsvn: string;
+  latestPsdaSvn: string;
+  xeid: number;
+  gid: number;
+  sgxEc256SignatureT: SGXEC256Signature;
+}
 
 function createBaseQuoteReport(): QuoteReport {
   return {
@@ -144,11 +174,6 @@ export const QuoteReport = {
   }
 
 };
-export interface QuoteReportBody {
-  mrEnclave: string;
-  mrSigner: string;
-  reportData: string;
-}
 
 function createBaseQuoteReportBody(): QuoteReportBody {
   return {
@@ -230,11 +255,6 @@ export const QuoteReportBody = {
   }
 
 };
-export interface QuoteReportData {
-  version: Long;
-  signType: Long;
-  reportBody: QuoteReportBody;
-}
 
 function createBaseQuoteReportData(): QuoteReportData {
   return {
@@ -316,11 +336,6 @@ export const QuoteReportData = {
   }
 
 };
-export interface EndorsedAttestationReport {
-  report: Uint8Array;
-  signature: Uint8Array;
-  signingCert: Uint8Array;
-}
 
 function createBaseEndorsedAttestationReport(): EndorsedAttestationReport {
   return {
@@ -402,10 +417,6 @@ export const EndorsedAttestationReport = {
   }
 
 };
-export interface SGXEC256Signature {
-  gx: string;
-  gy: string;
-}
 
 function createBaseSGXEC256Signature(): SGXEC256Signature {
   return {
@@ -475,17 +486,6 @@ export const SGXEC256Signature = {
   }
 
 };
-export interface PlatformInfoBlob {
-  sgxEpidGroupFlags: number;
-  sgxTcbEvaluationFlags: number;
-  pseEvaluationFlags: number;
-  latestEquivalentTcbPsvn: string;
-  latestPseIsvsvn: string;
-  latestPsdaSvn: string;
-  xeid: number;
-  gid: number;
-  sgxEc256SignatureT: SGXEC256Signature;
-}
 
 function createBasePlatformInfoBlob(): PlatformInfoBlob {
   return {

@@ -19,7 +19,7 @@ function createBaseEmpty(): Empty {
 }
 
 export const Empty = {
-  encode(message: Empty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Empty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -41,16 +41,16 @@ export const Empty = {
     return message;
   },
 
-  fromJSON(object: any): Empty {
+  fromJSON(_: any): Empty {
     return {};
   },
 
-  toJSON(message: Empty): unknown {
+  toJSON(_: Empty): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Empty>, I>>(object: I): Empty {
+  fromPartial<I extends Exact<DeepPartial<Empty>, I>>(_: I): Empty {
     const message = createBaseEmpty();
     return message;
   }

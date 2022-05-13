@@ -11,6 +11,48 @@ export interface MsgSetWithdrawAddress {
   withdrawAddress: string;
 }
 
+/** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
+export interface MsgSetWithdrawAddressResponse {}
+
+/**
+ * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
+ * from a single validator.
+ */
+export interface MsgWithdrawDelegatorReward {
+  delegatorAddress: string;
+  validatorAddress: string;
+}
+
+/** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
+export interface MsgWithdrawDelegatorRewardResponse {
+  amount: Coin[];
+}
+
+/**
+ * MsgWithdrawValidatorCommission withdraws the full commission to the validator
+ * address.
+ */
+export interface MsgWithdrawValidatorCommission {
+  validatorAddress: string;
+}
+
+/** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
+export interface MsgWithdrawValidatorCommissionResponse {
+  amount: Coin[];
+}
+
+/**
+ * MsgFundCommunityPool allows an account to directly
+ * fund the community pool.
+ */
+export interface MsgFundCommunityPool {
+  amount: Coin[];
+  depositor: string;
+}
+
+/** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
+export interface MsgFundCommunityPoolResponse {}
+
 function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
   return {
     delegatorAddress: "",
@@ -80,15 +122,12 @@ export const MsgSetWithdrawAddress = {
 
 };
 
-/** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
-export interface MsgSetWithdrawAddressResponse {}
-
 function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressResponse {
   return {};
 }
 
 export const MsgSetWithdrawAddressResponse = {
-  encode(message: MsgSetWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -110,30 +149,21 @@ export const MsgSetWithdrawAddressResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSetWithdrawAddressResponse {
+  fromJSON(_: any): MsgSetWithdrawAddressResponse {
     return {};
   },
 
-  toJSON(message: MsgSetWithdrawAddressResponse): unknown {
+  toJSON(_: MsgSetWithdrawAddressResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSetWithdrawAddressResponse>, I>>(object: I): MsgSetWithdrawAddressResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSetWithdrawAddressResponse>, I>>(_: I): MsgSetWithdrawAddressResponse {
     const message = createBaseMsgSetWithdrawAddressResponse();
     return message;
   }
 
 };
-
-/**
- * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
- * from a single validator.
- */
-export interface MsgWithdrawDelegatorReward {
-  delegatorAddress: string;
-  validatorAddress: string;
-}
 
 function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
   return {
@@ -204,11 +234,6 @@ export const MsgWithdrawDelegatorReward = {
 
 };
 
-/** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
-export interface MsgWithdrawDelegatorRewardResponse {
-  amount: Coin[];
-}
-
 function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRewardResponse {
   return {
     amount: []
@@ -272,14 +297,6 @@ export const MsgWithdrawDelegatorRewardResponse = {
 
 };
 
-/**
- * MsgWithdrawValidatorCommission withdraws the full commission to the validator
- * address.
- */
-export interface MsgWithdrawValidatorCommission {
-  validatorAddress: string;
-}
-
 function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommission {
   return {
     validatorAddress: ""
@@ -336,11 +353,6 @@ export const MsgWithdrawValidatorCommission = {
   }
 
 };
-
-/** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
-export interface MsgWithdrawValidatorCommissionResponse {
-  amount: Coin[];
-}
 
 function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidatorCommissionResponse {
   return {
@@ -404,15 +416,6 @@ export const MsgWithdrawValidatorCommissionResponse = {
   }
 
 };
-
-/**
- * MsgFundCommunityPool allows an account to directly
- * fund the community pool.
- */
-export interface MsgFundCommunityPool {
-  amount: Coin[];
-  depositor: string;
-}
 
 function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
   return {
@@ -489,15 +492,12 @@ export const MsgFundCommunityPool = {
 
 };
 
-/** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
-export interface MsgFundCommunityPoolResponse {}
-
 function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse {
   return {};
 }
 
 export const MsgFundCommunityPoolResponse = {
-  encode(message: MsgFundCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgFundCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -519,16 +519,16 @@ export const MsgFundCommunityPoolResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgFundCommunityPoolResponse {
+  fromJSON(_: any): MsgFundCommunityPoolResponse {
     return {};
   },
 
-  toJSON(message: MsgFundCommunityPoolResponse): unknown {
+  toJSON(_: MsgFundCommunityPoolResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgFundCommunityPoolResponse>, I>>(object: I): MsgFundCommunityPoolResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgFundCommunityPoolResponse>, I>>(_: I): MsgFundCommunityPoolResponse {
     const message = createBaseMsgFundCommunityPoolResponse();
     return message;
   }

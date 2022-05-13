@@ -6,12 +6,53 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method */
+export interface QueryParamsResponse {
+  params: Params;
+}
+
+/**
+ * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
+ * method
+ */
+export interface QuerySigningInfoRequest {
+  /** cons_address is the address to query signing info of */
+  consAddress: string;
+}
+
+/**
+ * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
+ * method
+ */
+export interface QuerySigningInfoResponse {
+  /** val_signing_info is the signing info of requested val cons address */
+  valSigningInfo: ValidatorSigningInfo;
+}
+
+/**
+ * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
+ * method
+ */
+export interface QuerySigningInfosRequest {
+  pagination: PageRequest;
+}
+
+/**
+ * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
+ * method
+ */
+export interface QuerySigningInfosResponse {
+  /** info is the signing info of all validators */
+  info: ValidatorSigningInfo[];
+  pagination: PageResponse;
+}
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -33,26 +74,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method */
-export interface QueryParamsResponse {
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -111,15 +147,6 @@ export const QueryParamsResponse = {
 
 };
 
-/**
- * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
- * method
- */
-export interface QuerySigningInfoRequest {
-  /** cons_address is the address to query signing info of */
-  consAddress: string;
-}
-
 function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
   return {
     consAddress: ""
@@ -176,15 +203,6 @@ export const QuerySigningInfoRequest = {
   }
 
 };
-
-/**
- * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
- * method
- */
-export interface QuerySigningInfoResponse {
-  /** val_signing_info is the signing info of requested val cons address */
-  valSigningInfo: ValidatorSigningInfo;
-}
 
 function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
   return {
@@ -243,14 +261,6 @@ export const QuerySigningInfoResponse = {
 
 };
 
-/**
- * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
- * method
- */
-export interface QuerySigningInfosRequest {
-  pagination: PageRequest;
-}
-
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   return {
     pagination: undefined
@@ -307,16 +317,6 @@ export const QuerySigningInfosRequest = {
   }
 
 };
-
-/**
- * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
- * method
- */
-export interface QuerySigningInfosResponse {
-  /** info is the signing info of all validators */
-  info: ValidatorSigningInfo[];
-  pagination: PageResponse;
-}
 
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   return {

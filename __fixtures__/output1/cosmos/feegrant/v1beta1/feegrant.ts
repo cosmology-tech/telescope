@@ -21,6 +21,58 @@ export interface BasicAllowance {
   expiration: Date;
 }
 
+/**
+ * PeriodicAllowance extends Allowance to allow for both a maximum cap,
+ * as well as a limit per time period.
+ */
+export interface PeriodicAllowance {
+  /** basic specifies a struct of `BasicAllowance` */
+  basic: BasicAllowance;
+
+  /**
+   * period specifies the time duration in which period_spend_limit coins can
+   * be spent before that allowance is reset
+   */
+  period: string;
+
+  /**
+   * period_spend_limit specifies the maximum number of coins that can be spent
+   * in the period
+   */
+  periodSpendLimit: Coin[];
+
+  /** period_can_spend is the number of coins left to be spent before the period_reset time */
+  periodCanSpend: Coin[];
+
+  /**
+   * period_reset is the time at which this period resets and a new one begins,
+   * it is calculated from the start time of the first transaction after the
+   * last period ended
+   */
+  periodReset: Date;
+}
+
+/** AllowedMsgAllowance creates allowance only for specified message types. */
+export interface AllowedMsgAllowance {
+  /** allowance can be any of basic and periodic fee allowance. */
+  allowance: Any;
+
+  /** allowed_messages are the messages for which the grantee has the access. */
+  allowedMessages: string[];
+}
+
+/** Grant is stored in the KVStore to record a grant with full context */
+export interface Grant {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
+  allowance: Any;
+}
+
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     spendLimit: [],
@@ -34,7 +86,10 @@ export const BasicAllowance = {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.expiration !== undefined) Timestamp.encode(toTimestamp(message.expiration), writer.uint32(18).fork()).ldelim();
+    if (message.expiration !== undefined) {
+      Timestamp.encode(toTimestamp(message.expiration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -93,37 +148,6 @@ export const BasicAllowance = {
 
 };
 
-/**
- * PeriodicAllowance extends Allowance to allow for both a maximum cap,
- * as well as a limit per time period.
- */
-export interface PeriodicAllowance {
-  /** basic specifies a struct of `BasicAllowance` */
-  basic: BasicAllowance;
-
-  /**
-   * period specifies the time duration in which period_spend_limit coins can
-   * be spent before that allowance is reset
-   */
-  period: string;
-
-  /**
-   * period_spend_limit specifies the maximum number of coins that can be spent
-   * in the period
-   */
-  periodSpendLimit: Coin[];
-
-  /** period_can_spend is the number of coins left to be spent before the period_reset time */
-  periodCanSpend: Coin[];
-
-  /**
-   * period_reset is the time at which this period resets and a new one begins,
-   * it is calculated from the start time of the first transaction after the
-   * last period ended
-   */
-  periodReset: Date;
-}
-
 function createBasePeriodicAllowance(): PeriodicAllowance {
   return {
     basic: undefined,
@@ -140,7 +164,9 @@ export const PeriodicAllowance = {
       BasicAllowance.encode(message.basic, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.period !== undefined) Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
+    if (message.period !== undefined) {
+      Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
+    }
 
     for (const v of message.periodSpendLimit) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -150,7 +176,10 @@ export const PeriodicAllowance = {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.periodReset !== undefined) Timestamp.encode(toTimestamp(message.periodReset), writer.uint32(42).fork()).ldelim();
+    if (message.periodReset !== undefined) {
+      Timestamp.encode(toTimestamp(message.periodReset), writer.uint32(42).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -235,15 +264,6 @@ export const PeriodicAllowance = {
 
 };
 
-/** AllowedMsgAllowance creates allowance only for specified message types. */
-export interface AllowedMsgAllowance {
-  /** allowance can be any of basic and periodic fee allowance. */
-  allowance: Any;
-
-  /** allowed_messages are the messages for which the grantee has the access. */
-  allowedMessages: string[];
-}
-
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
     allowance: undefined,
@@ -318,18 +338,6 @@ export const AllowedMsgAllowance = {
   }
 
 };
-
-/** Grant is stored in the KVStore to record a grant with full context */
-export interface Grant {
-  /** granter is the address of the user granting an allowance of their funds. */
-  granter: string;
-
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
-  grantee: string;
-
-  /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: Any;
-}
 
 function createBaseGrant(): Grant {
   return {

@@ -21,6 +21,18 @@ export interface GenesisState {
   denomMetadata: Metadata[];
 }
 
+/**
+ * Balance defines an account address and balance pair used in the bank module's
+ * genesis state.
+ */
+export interface Balance {
+  /** address is the address of the balance holder. */
+  address: string;
+
+  /** coins defines the different coins this balance holds. */
+  coins: Coin[];
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     params: undefined,
@@ -129,18 +141,6 @@ export const GenesisState = {
   }
 
 };
-
-/**
- * Balance defines an account address and balance pair used in the bank module's
- * genesis state.
- */
-export interface Balance {
-  /** address is the address of the balance holder. */
-  address: string;
-
-  /** coins defines the different coins this balance holds. */
-  coins: Coin[];
-}
 
 function createBaseBalance(): Balance {
   return {

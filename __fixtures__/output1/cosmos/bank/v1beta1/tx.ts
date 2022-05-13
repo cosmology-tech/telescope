@@ -10,6 +10,18 @@ export interface MsgSend {
   amount: Coin[];
 }
 
+/** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponse {}
+
+/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
+export interface MsgMultiSend {
+  inputs: Input[];
+  outputs: Output[];
+}
+
+/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
+export interface MsgMultiSendResponse {}
+
 function createBaseMsgSend(): MsgSend {
   return {
     fromAddress: "",
@@ -97,15 +109,12 @@ export const MsgSend = {
 
 };
 
-/** MsgSendResponse defines the Msg/Send response type. */
-export interface MsgSendResponse {}
-
 function createBaseMsgSendResponse(): MsgSendResponse {
   return {};
 }
 
 export const MsgSendResponse = {
-  encode(message: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -127,27 +136,21 @@ export const MsgSendResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSendResponse {
+  fromJSON(_: any): MsgSendResponse {
     return {};
   },
 
-  toJSON(message: MsgSendResponse): unknown {
+  toJSON(_: MsgSendResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSendResponse>, I>>(object: I): MsgSendResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSendResponse>, I>>(_: I): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
   }
 
 };
-
-/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
-export interface MsgMultiSend {
-  inputs: Input[];
-  outputs: Output[];
-}
 
 function createBaseMsgMultiSend(): MsgMultiSend {
   return {
@@ -229,15 +232,12 @@ export const MsgMultiSend = {
 
 };
 
-/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
-export interface MsgMultiSendResponse {}
-
 function createBaseMsgMultiSendResponse(): MsgMultiSendResponse {
   return {};
 }
 
 export const MsgMultiSendResponse = {
-  encode(message: MsgMultiSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgMultiSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -259,16 +259,16 @@ export const MsgMultiSendResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgMultiSendResponse {
+  fromJSON(_: any): MsgMultiSendResponse {
     return {};
   },
 
-  toJSON(message: MsgMultiSendResponse): unknown {
+  toJSON(_: MsgMultiSendResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgMultiSendResponse>, I>>(object: I): MsgMultiSendResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgMultiSendResponse>, I>>(_: I): MsgMultiSendResponse {
     const message = createBaseMsgMultiSendResponse();
     return message;
   }

@@ -12,6 +12,11 @@ export interface PubKey {
   key: Uint8Array;
 }
 
+/** PrivKey defines a secp256k1 private key. */
+export interface PrivKey {
+  key: Uint8Array;
+}
+
 function createBasePubKey(): PubKey {
   return {
     key: new Uint8Array()
@@ -68,11 +73,6 @@ export const PubKey = {
   }
 
 };
-
-/** PrivKey defines a secp256k1 private key. */
-export interface PrivKey {
-  key: Uint8Array;
-}
 
 function createBasePrivKey(): PrivKey {
   return {

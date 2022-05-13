@@ -10,6 +10,27 @@ export interface GenesisState {
   sequences: Sequence[];
 }
 
+/** Code struct encompasses CodeInfo and CodeBytes */
+export interface Code {
+  codeId: Long;
+  codeInfo: CodeInfo;
+  codeBytes: Uint8Array;
+}
+
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
+export interface Contract {
+  contractAddress: Uint8Array;
+  contractInfo: ContractInfo;
+  contractState: Model[];
+  contractCustomInfo: ContractCustomInfo;
+}
+
+/** Sequence id and value of a counter */
+export interface Sequence {
+  idKey: Uint8Array;
+  value: Long;
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     codes: [],
@@ -107,13 +128,6 @@ export const GenesisState = {
 
 };
 
-/** Code struct encompasses CodeInfo and CodeBytes */
-export interface Code {
-  codeId: Long;
-  codeInfo: CodeInfo;
-  codeBytes: Uint8Array;
-}
-
 function createBaseCode(): Code {
   return {
     codeId: Long.UZERO,
@@ -194,14 +208,6 @@ export const Code = {
   }
 
 };
-
-/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
-export interface Contract {
-  contractAddress: Uint8Array;
-  contractInfo: ContractInfo;
-  contractState: Model[];
-  contractCustomInfo: ContractCustomInfo;
-}
 
 function createBaseContract(): Contract {
   return {
@@ -301,12 +307,6 @@ export const Contract = {
   }
 
 };
-
-/** Sequence id and value of a counter */
-export interface Sequence {
-  idKey: Uint8Array;
-  value: Long;
-}
 
 function createBaseSequence(): Sequence {
   return {

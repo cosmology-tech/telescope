@@ -2,13 +2,26 @@ import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryFeeTokensRequest {}
+export interface QueryFeeTokensResponse {
+  feeTokens: FeeToken[];
+}
+export interface QueryDenomPoolIdRequest {
+  denom: string;
+}
+export interface QueryDenomPoolIdResponse {
+  poolID: Long;
+}
+export interface QueryBaseDenomRequest {}
+export interface QueryBaseDenomResponse {
+  baseDenom: string;
+}
 
 function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
   return {};
 }
 
 export const QueryFeeTokensRequest = {
-  encode(message: QueryFeeTokensRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryFeeTokensRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -30,24 +43,21 @@ export const QueryFeeTokensRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryFeeTokensRequest {
+  fromJSON(_: any): QueryFeeTokensRequest {
     return {};
   },
 
-  toJSON(message: QueryFeeTokensRequest): unknown {
+  toJSON(_: QueryFeeTokensRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryFeeTokensRequest>, I>>(object: I): QueryFeeTokensRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryFeeTokensRequest>, I>>(_: I): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
   }
 
 };
-export interface QueryFeeTokensResponse {
-  feeTokens: FeeToken[];
-}
 
 function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
   return {
@@ -111,9 +121,6 @@ export const QueryFeeTokensResponse = {
   }
 
 };
-export interface QueryDenomPoolIdRequest {
-  denom: string;
-}
 
 function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
   return {
@@ -171,9 +178,6 @@ export const QueryDenomPoolIdRequest = {
   }
 
 };
-export interface QueryDenomPoolIdResponse {
-  poolID: Long;
-}
 
 function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
   return {
@@ -231,14 +235,13 @@ export const QueryDenomPoolIdResponse = {
   }
 
 };
-export interface QueryBaseDenomRequest {}
 
 function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
   return {};
 }
 
 export const QueryBaseDenomRequest = {
-  encode(message: QueryBaseDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryBaseDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -260,24 +263,21 @@ export const QueryBaseDenomRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryBaseDenomRequest {
+  fromJSON(_: any): QueryBaseDenomRequest {
     return {};
   },
 
-  toJSON(message: QueryBaseDenomRequest): unknown {
+  toJSON(_: QueryBaseDenomRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBaseDenomRequest>, I>>(object: I): QueryBaseDenomRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryBaseDenomRequest>, I>>(_: I): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
   }
 
 };
-export interface QueryBaseDenomResponse {
-  baseDenom: string;
-}
 
 function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
   return {

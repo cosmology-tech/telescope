@@ -11,6 +11,86 @@ export interface DoubleValue {
   value: number;
 }
 
+/**
+ * Wrapper message for `float`.
+ * 
+ * The JSON representation for `FloatValue` is JSON number.
+ */
+export interface FloatValue {
+  /** The float value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `int64`.
+ * 
+ * The JSON representation for `Int64Value` is JSON string.
+ */
+export interface Int64Value {
+  /** The int64 value. */
+  value: Long;
+}
+
+/**
+ * Wrapper message for `uint64`.
+ * 
+ * The JSON representation for `UInt64Value` is JSON string.
+ */
+export interface UInt64Value {
+  /** The uint64 value. */
+  value: Long;
+}
+
+/**
+ * Wrapper message for `int32`.
+ * 
+ * The JSON representation for `Int32Value` is JSON number.
+ */
+export interface Int32Value {
+  /** The int32 value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `uint32`.
+ * 
+ * The JSON representation for `UInt32Value` is JSON number.
+ */
+export interface UInt32Value {
+  /** The uint32 value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `bool`.
+ * 
+ * The JSON representation for `BoolValue` is JSON `true` and `false`.
+ */
+export interface BoolValue {
+  /** The bool value. */
+  value: boolean;
+}
+
+/**
+ * Wrapper message for `string`.
+ * 
+ * The JSON representation for `StringValue` is JSON string.
+ */
+export interface StringValue {
+  /** The string value. */
+  value: string;
+}
+
+/**
+ * Wrapper message for `bytes`.
+ * 
+ * The JSON representation for `BytesValue` is JSON string.
+ */
+export interface BytesValue {
+  /** The bytes value. */
+  value: Uint8Array;
+}
+
 function createBaseDoubleValue(): DoubleValue {
   return {
     value: 0
@@ -67,16 +147,6 @@ export const DoubleValue = {
   }
 
 };
-
-/**
- * Wrapper message for `float`.
- * 
- * The JSON representation for `FloatValue` is JSON number.
- */
-export interface FloatValue {
-  /** The float value. */
-  value: number;
-}
 
 function createBaseFloatValue(): FloatValue {
   return {
@@ -135,16 +205,6 @@ export const FloatValue = {
 
 };
 
-/**
- * Wrapper message for `int64`.
- * 
- * The JSON representation for `Int64Value` is JSON string.
- */
-export interface Int64Value {
-  /** The int64 value. */
-  value: Long;
-}
-
 function createBaseInt64Value(): Int64Value {
   return {
     value: Long.ZERO
@@ -201,16 +261,6 @@ export const Int64Value = {
   }
 
 };
-
-/**
- * Wrapper message for `uint64`.
- * 
- * The JSON representation for `UInt64Value` is JSON string.
- */
-export interface UInt64Value {
-  /** The uint64 value. */
-  value: Long;
-}
 
 function createBaseUInt64Value(): UInt64Value {
   return {
@@ -269,16 +319,6 @@ export const UInt64Value = {
 
 };
 
-/**
- * Wrapper message for `int32`.
- * 
- * The JSON representation for `Int32Value` is JSON number.
- */
-export interface Int32Value {
-  /** The int32 value. */
-  value: number;
-}
-
 function createBaseInt32Value(): Int32Value {
   return {
     value: 0
@@ -335,16 +375,6 @@ export const Int32Value = {
   }
 
 };
-
-/**
- * Wrapper message for `uint32`.
- * 
- * The JSON representation for `UInt32Value` is JSON number.
- */
-export interface UInt32Value {
-  /** The uint32 value. */
-  value: number;
-}
 
 function createBaseUInt32Value(): UInt32Value {
   return {
@@ -403,16 +433,6 @@ export const UInt32Value = {
 
 };
 
-/**
- * Wrapper message for `bool`.
- * 
- * The JSON representation for `BoolValue` is JSON `true` and `false`.
- */
-export interface BoolValue {
-  /** The bool value. */
-  value: boolean;
-}
-
 function createBaseBoolValue(): BoolValue {
   return {
     value: false
@@ -470,16 +490,6 @@ export const BoolValue = {
 
 };
 
-/**
- * Wrapper message for `string`.
- * 
- * The JSON representation for `StringValue` is JSON string.
- */
-export interface StringValue {
-  /** The string value. */
-  value: string;
-}
-
 function createBaseStringValue(): StringValue {
   return {
     value: ""
@@ -536,16 +546,6 @@ export const StringValue = {
   }
 
 };
-
-/**
- * Wrapper message for `bytes`.
- * 
- * The JSON representation for `BytesValue` is JSON string.
- */
-export interface BytesValue {
-  /** The bytes value. */
-  value: Uint8Array;
-}
 
 function createBaseBytesValue(): BytesValue {
   return {

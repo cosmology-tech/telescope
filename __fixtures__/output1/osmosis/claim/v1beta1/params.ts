@@ -24,9 +24,17 @@ function createBaseParams(): Params {
 
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.airdropStartTime !== undefined) Timestamp.encode(toTimestamp(message.airdropStartTime), writer.uint32(10).fork()).ldelim();
-    if (message.durationUntilDecay !== undefined) Duration.encode(toDuration(message.durationUntilDecay), writer.uint32(18).fork()).ldelim();
-    if (message.durationOfDecay !== undefined) Duration.encode(toDuration(message.durationOfDecay), writer.uint32(26).fork()).ldelim();
+    if (message.airdropStartTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.airdropStartTime), writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.durationUntilDecay !== undefined) {
+      Duration.encode(toDuration(message.durationUntilDecay), writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.durationOfDecay !== undefined) {
+      Duration.encode(toDuration(message.durationOfDecay), writer.uint32(26).fork()).ldelim();
+    }
 
     if (message.claimDenom !== "") {
       writer.uint32(34).string(message.claimDenom);

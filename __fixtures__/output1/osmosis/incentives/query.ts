@@ -5,13 +5,80 @@ import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface ModuleToDistributeCoinsRequest {}
+export interface ModuleToDistributeCoinsResponse {
+  coins: Coin[];
+}
+export interface ModuleDistributedCoinsRequest {}
+export interface ModuleDistributedCoinsResponse {
+  coins: Coin[];
+}
+export interface GaugeByIDRequest {
+  id: Long;
+}
+export interface GaugeByIDResponse {
+  gauge: Gauge;
+}
+export interface GaugesRequest {
+  /** pagination defines an pagination for the request. */
+  pagination: PageRequest;
+}
+export interface GaugesResponse {
+  data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
+  pagination: PageResponse;
+}
+export interface ActiveGaugesRequest {
+  /** pagination defines an pagination for the request. */
+  pagination: PageRequest;
+}
+export interface ActiveGaugesResponse {
+  data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
+  pagination: PageResponse;
+}
+export interface ActiveGaugesPerDenomRequest {
+  denom: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination: PageRequest;
+}
+export interface ActiveGaugesPerDenomResponse {
+  data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
+  pagination: PageResponse;
+}
+export interface UpcomingGaugesRequest {
+  /** pagination defines an pagination for the request. */
+  pagination: PageRequest;
+}
+export interface UpcomingGaugesResponse {
+  data: Gauge[];
+
+  /** pagination defines an pagination for the response. */
+  pagination: PageResponse;
+}
+export interface RewardsEstRequest {
+  owner: string;
+  lockIds: Long[];
+  endEpoch: Long;
+}
+export interface RewardsEstResponse {
+  coins: Coin[];
+}
+export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsResponse {
+  lockableDurations: string[];
+}
 
 function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequest {
   return {};
 }
 
 export const ModuleToDistributeCoinsRequest = {
-  encode(message: ModuleToDistributeCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ModuleToDistributeCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -33,24 +100,21 @@ export const ModuleToDistributeCoinsRequest = {
     return message;
   },
 
-  fromJSON(object: any): ModuleToDistributeCoinsRequest {
+  fromJSON(_: any): ModuleToDistributeCoinsRequest {
     return {};
   },
 
-  toJSON(message: ModuleToDistributeCoinsRequest): unknown {
+  toJSON(_: ModuleToDistributeCoinsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleToDistributeCoinsRequest>, I>>(object: I): ModuleToDistributeCoinsRequest {
+  fromPartial<I extends Exact<DeepPartial<ModuleToDistributeCoinsRequest>, I>>(_: I): ModuleToDistributeCoinsRequest {
     const message = createBaseModuleToDistributeCoinsRequest();
     return message;
   }
 
 };
-export interface ModuleToDistributeCoinsResponse {
-  coins: Coin[];
-}
 
 function createBaseModuleToDistributeCoinsResponse(): ModuleToDistributeCoinsResponse {
   return {
@@ -114,14 +178,13 @@ export const ModuleToDistributeCoinsResponse = {
   }
 
 };
-export interface ModuleDistributedCoinsRequest {}
 
 function createBaseModuleDistributedCoinsRequest(): ModuleDistributedCoinsRequest {
   return {};
 }
 
 export const ModuleDistributedCoinsRequest = {
-  encode(message: ModuleDistributedCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ModuleDistributedCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -143,24 +206,21 @@ export const ModuleDistributedCoinsRequest = {
     return message;
   },
 
-  fromJSON(object: any): ModuleDistributedCoinsRequest {
+  fromJSON(_: any): ModuleDistributedCoinsRequest {
     return {};
   },
 
-  toJSON(message: ModuleDistributedCoinsRequest): unknown {
+  toJSON(_: ModuleDistributedCoinsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleDistributedCoinsRequest>, I>>(object: I): ModuleDistributedCoinsRequest {
+  fromPartial<I extends Exact<DeepPartial<ModuleDistributedCoinsRequest>, I>>(_: I): ModuleDistributedCoinsRequest {
     const message = createBaseModuleDistributedCoinsRequest();
     return message;
   }
 
 };
-export interface ModuleDistributedCoinsResponse {
-  coins: Coin[];
-}
 
 function createBaseModuleDistributedCoinsResponse(): ModuleDistributedCoinsResponse {
   return {
@@ -224,9 +284,6 @@ export const ModuleDistributedCoinsResponse = {
   }
 
 };
-export interface GaugeByIDRequest {
-  id: Long;
-}
 
 function createBaseGaugeByIDRequest(): GaugeByIDRequest {
   return {
@@ -284,9 +341,6 @@ export const GaugeByIDRequest = {
   }
 
 };
-export interface GaugeByIDResponse {
-  gauge: Gauge;
-}
 
 function createBaseGaugeByIDResponse(): GaugeByIDResponse {
   return {
@@ -344,10 +398,6 @@ export const GaugeByIDResponse = {
   }
 
 };
-export interface GaugesRequest {
-  /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
-}
 
 function createBaseGaugesRequest(): GaugesRequest {
   return {
@@ -405,12 +455,6 @@ export const GaugesRequest = {
   }
 
 };
-export interface GaugesResponse {
-  data: Gauge[];
-
-  /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
-}
 
 function createBaseGaugesResponse(): GaugesResponse {
   return {
@@ -486,10 +530,6 @@ export const GaugesResponse = {
   }
 
 };
-export interface ActiveGaugesRequest {
-  /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
-}
 
 function createBaseActiveGaugesRequest(): ActiveGaugesRequest {
   return {
@@ -547,12 +587,6 @@ export const ActiveGaugesRequest = {
   }
 
 };
-export interface ActiveGaugesResponse {
-  data: Gauge[];
-
-  /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
-}
 
 function createBaseActiveGaugesResponse(): ActiveGaugesResponse {
   return {
@@ -628,12 +662,6 @@ export const ActiveGaugesResponse = {
   }
 
 };
-export interface ActiveGaugesPerDenomRequest {
-  denom: string;
-
-  /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
-}
 
 function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
   return {
@@ -703,12 +731,6 @@ export const ActiveGaugesPerDenomRequest = {
   }
 
 };
-export interface ActiveGaugesPerDenomResponse {
-  data: Gauge[];
-
-  /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
-}
 
 function createBaseActiveGaugesPerDenomResponse(): ActiveGaugesPerDenomResponse {
   return {
@@ -784,10 +806,6 @@ export const ActiveGaugesPerDenomResponse = {
   }
 
 };
-export interface UpcomingGaugesRequest {
-  /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
-}
 
 function createBaseUpcomingGaugesRequest(): UpcomingGaugesRequest {
   return {
@@ -845,12 +863,6 @@ export const UpcomingGaugesRequest = {
   }
 
 };
-export interface UpcomingGaugesResponse {
-  data: Gauge[];
-
-  /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
-}
 
 function createBaseUpcomingGaugesResponse(): UpcomingGaugesResponse {
   return {
@@ -926,11 +938,6 @@ export const UpcomingGaugesResponse = {
   }
 
 };
-export interface RewardsEstRequest {
-  owner: string;
-  lockIds: Long[];
-  endEpoch: Long;
-}
 
 function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
@@ -1031,9 +1038,6 @@ export const RewardsEstRequest = {
   }
 
 };
-export interface RewardsEstResponse {
-  coins: Coin[];
-}
 
 function createBaseRewardsEstResponse(): RewardsEstResponse {
   return {
@@ -1097,14 +1101,13 @@ export const RewardsEstResponse = {
   }
 
 };
-export interface QueryLockableDurationsRequest {}
 
 function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsRequest {
   return {};
 }
 
 export const QueryLockableDurationsRequest = {
-  encode(message: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1126,24 +1129,21 @@ export const QueryLockableDurationsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryLockableDurationsRequest {
+  fromJSON(_: any): QueryLockableDurationsRequest {
     return {};
   },
 
-  toJSON(message: QueryLockableDurationsRequest): unknown {
+  toJSON(_: QueryLockableDurationsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsRequest>, I>>(object: I): QueryLockableDurationsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsRequest>, I>>(_: I): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
   }
 
 };
-export interface QueryLockableDurationsResponse {
-  lockableDurations: string[];
-}
 
 function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsResponse {
   return {

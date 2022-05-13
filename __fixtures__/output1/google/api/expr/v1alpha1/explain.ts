@@ -25,6 +25,15 @@ export interface Explain {
   exprSteps: Explain_ExprStep[];
 }
 
+/** ID and value index of one step. */
+export interface Explain_ExprStep {
+  /** ID of corresponding Expr node. */
+  id: Long;
+
+  /** Index of the value in the values list. */
+  valueIndex: number;
+}
+
 function createBaseExplain(): Explain {
   return {
     values: [],
@@ -104,15 +113,6 @@ export const Explain = {
   }
 
 };
-
-/** ID and value index of one step. */
-export interface Explain_ExprStep {
-  /** ID of corresponding Expr node. */
-  id: Long;
-
-  /** Index of the value in the values list. */
-  valueIndex: number;
-}
 
 function createBaseExplain_ExprStep(): Explain_ExprStep {
   return {

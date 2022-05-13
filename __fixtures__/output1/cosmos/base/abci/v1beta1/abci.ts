@@ -62,6 +62,127 @@ export interface TxResponse {
   events: Event[];
 }
 
+/** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
+export interface ABCIMessageLog {
+  msgIndex: number;
+  log: string;
+
+  /**
+   * Events contains a slice of Event objects that were emitted during some
+   * execution.
+   */
+  events: StringEvent[];
+}
+
+/**
+ * StringEvent defines en Event object wrapper where all the attributes
+ * contain key/value pairs that are strings instead of raw bytes.
+ */
+export interface StringEvent {
+  type: string;
+  attributes: Attribute[];
+}
+
+/**
+ * Attribute defines an attribute wrapper where the key and value are
+ * strings instead of raw bytes.
+ */
+export interface Attribute {
+  key: string;
+  value: string;
+}
+
+/** GasInfo defines tx execution gas context. */
+export interface GasInfo {
+  /** GasWanted is the maximum units of work we allow this tx to perform. */
+  gasWanted: Long;
+
+  /** GasUsed is the amount of gas actually consumed. */
+  gasUsed: Long;
+}
+
+/** Result is the union of ResponseFormat and ResponseCheckTx. */
+export interface Result {
+  /**
+   * Data is any data returned from message or handler execution. It MUST be
+   * length prefixed in order to separate data from multiple message executions.
+   * Deprecated. This field is still populated, but prefer msg_response instead
+   * because it also contains the Msg response typeURL.
+   */
+  data: Uint8Array;
+
+  /** Log contains the log information from message or handler execution. */
+  log: string;
+
+  /**
+   * Events contains a slice of Event objects that were emitted during message
+   * or handler execution.
+   */
+  events: Event[];
+
+  /**
+   * msg_responses contains the Msg handler responses type packed in Anys.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  msgResponses: Any[];
+}
+
+/**
+ * SimulationResponse defines the response generated when a transaction is
+ * successfully simulated.
+ */
+export interface SimulationResponse {
+  gasInfo: GasInfo;
+  result: Result;
+}
+
+/**
+ * MsgData defines the data returned in a Result object during message
+ * execution.
+ */
+export interface MsgData {
+  msgType: string;
+  data: Uint8Array;
+}
+
+/**
+ * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
+ * for each message.
+ */
+export interface TxMsgData {
+  /** data field is deprecated and not populated. */
+  data: MsgData[];
+
+  /**
+   * msg_responses contains the Msg handler responses packed into Anys.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  msgResponses: Any[];
+}
+
+/** SearchTxsResult defines a structure for querying txs pageable */
+export interface SearchTxsResult {
+  /** Count of all txs */
+  totalCount: Long;
+
+  /** Count of txs in current page */
+  count: Long;
+
+  /** Index of current page, start from 1 */
+  pageNumber: Long;
+
+  /** Count of total pages */
+  pageTotal: Long;
+
+  /** Max count txs per page */
+  limit: Long;
+
+  /** List of txs in current page */
+  txs: TxResponse[];
+}
+
 function createBaseTxResponse(): TxResponse {
   return {
     height: Long.ZERO,
@@ -275,18 +396,6 @@ export const TxResponse = {
 
 };
 
-/** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
-export interface ABCIMessageLog {
-  msgIndex: number;
-  log: string;
-
-  /**
-   * Events contains a slice of Event objects that were emitted during some
-   * execution.
-   */
-  events: StringEvent[];
-}
-
 function createBaseABCIMessageLog(): ABCIMessageLog {
   return {
     msgIndex: 0,
@@ -374,15 +483,6 @@ export const ABCIMessageLog = {
 
 };
 
-/**
- * StringEvent defines en Event object wrapper where all the attributes
- * contain key/value pairs that are strings instead of raw bytes.
- */
-export interface StringEvent {
-  type: string;
-  attributes: Attribute[];
-}
-
 function createBaseStringEvent(): StringEvent {
   return {
     type: "",
@@ -458,15 +558,6 @@ export const StringEvent = {
 
 };
 
-/**
- * Attribute defines an attribute wrapper where the key and value are
- * strings instead of raw bytes.
- */
-export interface Attribute {
-  key: string;
-  value: string;
-}
-
 function createBaseAttribute(): Attribute {
   return {
     key: "",
@@ -536,15 +627,6 @@ export const Attribute = {
 
 };
 
-/** GasInfo defines tx execution gas context. */
-export interface GasInfo {
-  /** GasWanted is the maximum units of work we allow this tx to perform. */
-  gasWanted: Long;
-
-  /** GasUsed is the amount of gas actually consumed. */
-  gasUsed: Long;
-}
-
 function createBaseGasInfo(): GasInfo {
   return {
     gasWanted: Long.UZERO,
@@ -613,33 +695,6 @@ export const GasInfo = {
   }
 
 };
-
-/** Result is the union of ResponseFormat and ResponseCheckTx. */
-export interface Result {
-  /**
-   * Data is any data returned from message or handler execution. It MUST be
-   * length prefixed in order to separate data from multiple message executions.
-   * Deprecated. This field is still populated, but prefer msg_response instead
-   * because it also contains the Msg response typeURL.
-   */
-  data: Uint8Array;
-
-  /** Log contains the log information from message or handler execution. */
-  log: string;
-
-  /**
-   * Events contains a slice of Event objects that were emitted during message
-   * or handler execution.
-   */
-  events: Event[];
-
-  /**
-   * msg_responses contains the Msg handler responses type packed in Anys.
-   * 
-   * Since: cosmos-sdk 0.46
-   */
-  msgResponses: Any[];
-}
 
 function createBaseResult(): Result {
   return {
@@ -745,15 +800,6 @@ export const Result = {
 
 };
 
-/**
- * SimulationResponse defines the response generated when a transaction is
- * successfully simulated.
- */
-export interface SimulationResponse {
-  gasInfo: GasInfo;
-  result: Result;
-}
-
 function createBaseSimulationResponse(): SimulationResponse {
   return {
     gasInfo: undefined,
@@ -823,15 +869,6 @@ export const SimulationResponse = {
 
 };
 
-/**
- * MsgData defines the data returned in a Result object during message
- * execution.
- */
-export interface MsgData {
-  msgType: string;
-  data: Uint8Array;
-}
-
 function createBaseMsgData(): MsgData {
   return {
     msgType: "",
@@ -900,22 +937,6 @@ export const MsgData = {
   }
 
 };
-
-/**
- * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
- * for each message.
- */
-export interface TxMsgData {
-  /** data field is deprecated and not populated. */
-  data: MsgData[];
-
-  /**
-   * msg_responses contains the Msg handler responses packed into Anys.
-   * 
-   * Since: cosmos-sdk 0.46
-   */
-  msgResponses: Any[];
-}
 
 function createBaseTxMsgData(): TxMsgData {
   return {
@@ -996,27 +1017,6 @@ export const TxMsgData = {
   }
 
 };
-
-/** SearchTxsResult defines a structure for querying txs pageable */
-export interface SearchTxsResult {
-  /** Count of all txs */
-  totalCount: Long;
-
-  /** Count of txs in current page */
-  count: Long;
-
-  /** Index of current page, start from 1 */
-  pageNumber: Long;
-
-  /** Count of total pages */
-  pageTotal: Long;
-
-  /** Max count txs per page */
-  limit: Long;
-
-  /** List of txs in current page */
-  txs: TxResponse[];
-}
 
 function createBaseSearchTxsResult(): SearchTxsResult {
   return {

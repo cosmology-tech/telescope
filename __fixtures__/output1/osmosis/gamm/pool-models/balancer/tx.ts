@@ -9,6 +9,9 @@ export interface MsgCreateBalancerPool {
   poolAssets: PoolAsset[];
   futurePoolGovernor: string;
 }
+export interface MsgCreateBalancerPoolResponse {
+  poolId: Long;
+}
 
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
   return {
@@ -108,9 +111,6 @@ export const MsgCreateBalancerPool = {
   }
 
 };
-export interface MsgCreateBalancerPoolResponse {
-  poolId: Long;
-}
 
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
   return {

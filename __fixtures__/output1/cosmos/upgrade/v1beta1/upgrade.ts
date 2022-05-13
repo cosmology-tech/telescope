@@ -43,6 +43,42 @@ export interface Plan {
   upgradedClientState: Any;
 }
 
+/**
+ * SoftwareUpgradeProposal is a gov Content type for initiating a software
+ * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgSoftwareUpgrade.
+ */
+export interface SoftwareUpgradeProposal {
+  title: string;
+  description: string;
+  plan: Plan;
+}
+
+/**
+ * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
+ * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgCancelUpgrade.
+ */
+export interface CancelSoftwareUpgradeProposal {
+  title: string;
+  description: string;
+}
+
+/**
+ * ModuleVersion specifies a module and its consensus version.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface ModuleVersion {
+  /** name of the app module */
+  name: string;
+
+  /** consensus version of the app module */
+  version: Long;
+}
+
 function createBasePlan(): Plan {
   return {
     name: "",
@@ -59,7 +95,9 @@ export const Plan = {
       writer.uint32(10).string(message.name);
     }
 
-    if (message.time !== undefined) Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
+    if (message.time !== undefined) {
+      Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
+    }
 
     if (!message.height.isZero()) {
       writer.uint32(24).int64(message.height);
@@ -146,18 +184,6 @@ export const Plan = {
 
 };
 
-/**
- * SoftwareUpgradeProposal is a gov Content type for initiating a software
- * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgSoftwareUpgrade.
- */
-export interface SoftwareUpgradeProposal {
-  title: string;
-  description: string;
-  plan: Plan;
-}
-
 function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
   return {
     title: "",
@@ -239,17 +265,6 @@ export const SoftwareUpgradeProposal = {
 
 };
 
-/**
- * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
- * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgCancelUpgrade.
- */
-export interface CancelSoftwareUpgradeProposal {
-  title: string;
-  description: string;
-}
-
 function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposal {
   return {
     title: "",
@@ -318,19 +333,6 @@ export const CancelSoftwareUpgradeProposal = {
   }
 
 };
-
-/**
- * ModuleVersion specifies a module and its consensus version.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface ModuleVersion {
-  /** name of the app module */
-  name: string;
-
-  /** consensus version of the app module */
-  version: Long;
-}
 
 function createBaseModuleVersion(): ModuleVersion {
   return {

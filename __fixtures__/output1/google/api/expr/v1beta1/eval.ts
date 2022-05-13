@@ -21,6 +21,95 @@ export interface EvalState {
   results: EvalState_Result[];
 }
 
+/** A single evaluation result. */
+export interface EvalState_Result {
+  /** The expression this result is for. */
+  expr: IdRef;
+
+  /** The index in `values` of the resulting value. */
+  value: number;
+}
+
+/** The value of an evaluated expression. */
+export interface ExprValue {
+  /** A concrete value. */
+  value?: Value;
+
+  /**
+   * The set of errors in the critical path of evalution.
+   * 
+   * Only errors in the critical path are included. For example,
+   * `(<error1> || true) && <error2>` will only result in `<error2>`,
+   * while `<error1> || <error2>` will result in both `<error1>` and
+   * `<error2>`.
+   * 
+   * Errors cause by the presence of other errors are not included in the
+   * set. For example `<error1>.foo`, `foo(<error1>)`, and `<error1> + 1` will
+   * only result in `<error1>`.
+   * 
+   * Multiple errors *might* be included when evaluation could result
+   * in different errors. For example `<error1> + <error2>` and
+   * `foo(<error1>, <error2>)` may result in `<error1>`, `<error2>` or both.
+   * The exact subset of errors included for this case is unspecified and
+   * depends on the implementation details of the evaluator.
+   */
+  error?: ErrorSet;
+
+  /**
+   * The set of unknowns in the critical path of evaluation.
+   * 
+   * Unknown behaves identically to Error with regards to propagation.
+   * Specifically, only unknowns in the critical path are included, unknowns
+   * caused by the presence of other unknowns are not included, and multiple
+   * unknowns *might* be included included when evaluation could result in
+   * different unknowns. For example:
+   * 
+   * (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
+   * <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
+   * <unknown[1]>.foo -> <unknown[1]>
+   * foo(<unknown[1]>) -> <unknown[1]>
+   * <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
+   * 
+   * Unknown takes precidence over Error in cases where a `Value` can short
+   * circuit the result:
+   * 
+   * <error> || <unknown> -> <unknown>
+   * <error> && <unknown> -> <unknown>
+   * 
+   * Errors take precidence in all other cases:
+   * 
+   * <unknown> + <error> -> <error>
+   * foo(<unknown>, <error>) -> <error>
+   */
+  unknown?: UnknownSet;
+}
+
+/**
+ * A set of errors.
+ * 
+ * The errors included depend on the context. See `ExprValue.error`.
+ */
+export interface ErrorSet {
+  /** The errors in the set. */
+  errors: Status[];
+}
+
+/**
+ * A set of expressions for which the value is unknown.
+ * 
+ * The unknowns included depend on the context. See `ExprValue.unknown`.
+ */
+export interface UnknownSet {
+  /** The ids of the expressions with unknown values. */
+  exprs: IdRef[];
+}
+
+/** A reference to an expression id. */
+export interface IdRef {
+  /** The expression id. */
+  id: number;
+}
+
 function createBaseEvalState(): EvalState {
   return {
     values: [],
@@ -101,15 +190,6 @@ export const EvalState = {
 
 };
 
-/** A single evaluation result. */
-export interface EvalState_Result {
-  /** The expression this result is for. */
-  expr: IdRef;
-
-  /** The index in `values` of the resulting value. */
-  value: number;
-}
-
 function createBaseEvalState_Result(): EvalState_Result {
   return {
     expr: undefined,
@@ -178,60 +258,6 @@ export const EvalState_Result = {
   }
 
 };
-
-/** The value of an evaluated expression. */
-export interface ExprValue {
-  /** A concrete value. */
-  value?: Value;
-
-  /**
-   * The set of errors in the critical path of evalution.
-   * 
-   * Only errors in the critical path are included. For example,
-   * `(<error1> || true) && <error2>` will only result in `<error2>`,
-   * while `<error1> || <error2>` will result in both `<error1>` and
-   * `<error2>`.
-   * 
-   * Errors cause by the presence of other errors are not included in the
-   * set. For example `<error1>.foo`, `foo(<error1>)`, and `<error1> + 1` will
-   * only result in `<error1>`.
-   * 
-   * Multiple errors *might* be included when evaluation could result
-   * in different errors. For example `<error1> + <error2>` and
-   * `foo(<error1>, <error2>)` may result in `<error1>`, `<error2>` or both.
-   * The exact subset of errors included for this case is unspecified and
-   * depends on the implementation details of the evaluator.
-   */
-  error?: ErrorSet;
-
-  /**
-   * The set of unknowns in the critical path of evaluation.
-   * 
-   * Unknown behaves identically to Error with regards to propagation.
-   * Specifically, only unknowns in the critical path are included, unknowns
-   * caused by the presence of other unknowns are not included, and multiple
-   * unknowns *might* be included included when evaluation could result in
-   * different unknowns. For example:
-   * 
-   * (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
-   * <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
-   * <unknown[1]>.foo -> <unknown[1]>
-   * foo(<unknown[1]>) -> <unknown[1]>
-   * <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
-   * 
-   * Unknown takes precidence over Error in cases where a `Value` can short
-   * circuit the result:
-   * 
-   * <error> || <unknown> -> <unknown>
-   * <error> && <unknown> -> <unknown>
-   * 
-   * Errors take precidence in all other cases:
-   * 
-   * <unknown> + <error> -> <error>
-   * foo(<unknown>, <error>) -> <error>
-   */
-  unknown?: UnknownSet;
-}
 
 function createBaseExprValue(): ExprValue {
   return {
@@ -314,16 +340,6 @@ export const ExprValue = {
 
 };
 
-/**
- * A set of errors.
- * 
- * The errors included depend on the context. See `ExprValue.error`.
- */
-export interface ErrorSet {
-  /** The errors in the set. */
-  errors: Status[];
-}
-
 function createBaseErrorSet(): ErrorSet {
   return {
     errors: []
@@ -387,16 +403,6 @@ export const ErrorSet = {
 
 };
 
-/**
- * A set of expressions for which the value is unknown.
- * 
- * The unknowns included depend on the context. See `ExprValue.unknown`.
- */
-export interface UnknownSet {
-  /** The ids of the expressions with unknown values. */
-  exprs: IdRef[];
-}
-
 function createBaseUnknownSet(): UnknownSet {
   return {
     exprs: []
@@ -459,12 +465,6 @@ export const UnknownSet = {
   }
 
 };
-
-/** A reference to an expression id. */
-export interface IdRef {
-  /** The expression id. */
-  id: number;
-}
 
 function createBaseIdRef(): IdRef {
   return {

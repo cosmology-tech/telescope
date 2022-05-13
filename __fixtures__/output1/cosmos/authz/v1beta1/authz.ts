@@ -12,6 +12,38 @@ export interface GenericAuthorization {
   msg: string;
 }
 
+/**
+ * Grant gives permissions to execute
+ * the provide method with expiration time.
+ */
+export interface Grant {
+  authorization: Any;
+
+  /**
+   * time when the grant will expire and will be pruned. If null, then the grant
+   * doesn't have a time expiration (other conditions  in `authorization`
+   * may apply to invalidate the grant)
+   */
+  expiration?: Date;
+}
+
+/**
+ * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
+ * It is used in genesis.proto and query.proto
+ */
+export interface GrantAuthorization {
+  granter: string;
+  grantee: string;
+  authorization: Any;
+  expiration: Date;
+}
+
+/** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
+export interface GrantQueueItem {
+  /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
+  msgTypeUrls: string[];
+}
+
 function createBaseGenericAuthorization(): GenericAuthorization {
   return {
     msg: ""
@@ -69,21 +101,6 @@ export const GenericAuthorization = {
 
 };
 
-/**
- * Grant gives permissions to execute
- * the provide method with expiration time.
- */
-export interface Grant {
-  authorization: Any;
-
-  /**
-   * time when the grant will expire and will be pruned. If null, then the grant
-   * doesn't have a time expiration (other conditions  in `authorization`
-   * may apply to invalidate the grant)
-   */
-  expiration?: Date;
-}
-
 function createBaseGrant(): Grant {
   return {
     authorization: undefined,
@@ -97,7 +114,10 @@ export const Grant = {
       Any.encode(message.authorization, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.expiration !== undefined) Timestamp.encode(toTimestamp(message.expiration), writer.uint32(18).fork()).ldelim();
+    if (message.expiration !== undefined) {
+      Timestamp.encode(toTimestamp(message.expiration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -150,17 +170,6 @@ export const Grant = {
 
 };
 
-/**
- * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
- * It is used in genesis.proto and query.proto
- */
-export interface GrantAuthorization {
-  granter: string;
-  grantee: string;
-  authorization: Any;
-  expiration: Date;
-}
-
 function createBaseGrantAuthorization(): GrantAuthorization {
   return {
     granter: "",
@@ -184,7 +193,10 @@ export const GrantAuthorization = {
       Any.encode(message.authorization, writer.uint32(26).fork()).ldelim();
     }
 
-    if (message.expiration !== undefined) Timestamp.encode(toTimestamp(message.expiration), writer.uint32(34).fork()).ldelim();
+    if (message.expiration !== undefined) {
+      Timestamp.encode(toTimestamp(message.expiration), writer.uint32(34).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -250,12 +262,6 @@ export const GrantAuthorization = {
   }
 
 };
-
-/** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
-export interface GrantQueueItem {
-  /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
-  msgTypeUrls: string[];
-}
 
 function createBaseGrantQueueItem(): GrantQueueItem {
   return {

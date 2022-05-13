@@ -4,6 +4,10 @@ export interface SeedConfig {
   masterCert: string;
   encryptedKey: string;
 }
+export interface RegistrationNodeInfo {
+  certificate: Uint8Array;
+  encryptedSeed: Uint8Array;
+}
 
 function createBaseSeedConfig(): SeedConfig {
   return {
@@ -73,10 +77,6 @@ export const SeedConfig = {
   }
 
 };
-export interface RegistrationNodeInfo {
-  certificate: Uint8Array;
-  encryptedSeed: Uint8Array;
-}
 
 function createBaseRegistrationNodeInfo(): RegistrationNodeInfo {
   return {

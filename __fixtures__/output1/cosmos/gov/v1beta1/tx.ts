@@ -14,6 +14,49 @@ export interface MsgSubmitProposal {
   proposer: string;
 }
 
+/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
+export interface MsgSubmitProposalResponse {
+  proposalId: Long;
+}
+
+/** MsgVote defines a message to cast a vote. */
+export interface MsgVote {
+  proposalId: Long;
+  voter: string;
+  option: VoteOption;
+}
+
+/** MsgVoteResponse defines the Msg/Vote response type. */
+export interface MsgVoteResponse {}
+
+/**
+ * MsgVoteWeighted defines a message to cast a vote.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface MsgVoteWeighted {
+  proposalId: Long;
+  voter: string;
+  options: WeightedVoteOption[];
+}
+
+/**
+ * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface MsgVoteWeightedResponse {}
+
+/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
+export interface MsgDeposit {
+  proposalId: Long;
+  depositor: string;
+  amount: Coin[];
+}
+
+/** MsgDepositResponse defines the Msg/Deposit response type. */
+export interface MsgDepositResponse {}
+
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
     content: undefined,
@@ -101,11 +144,6 @@ export const MsgSubmitProposal = {
 
 };
 
-/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
-export interface MsgSubmitProposalResponse {
-  proposalId: Long;
-}
-
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
   return {
     proposalId: Long.UZERO
@@ -162,13 +200,6 @@ export const MsgSubmitProposalResponse = {
   }
 
 };
-
-/** MsgVote defines a message to cast a vote. */
-export interface MsgVote {
-  proposalId: Long;
-  voter: string;
-  option: VoteOption;
-}
 
 function createBaseMsgVote(): MsgVote {
   return {
@@ -251,15 +282,12 @@ export const MsgVote = {
 
 };
 
-/** MsgVoteResponse defines the Msg/Vote response type. */
-export interface MsgVoteResponse {}
-
 function createBaseMsgVoteResponse(): MsgVoteResponse {
   return {};
 }
 
 export const MsgVoteResponse = {
-  encode(message: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -281,32 +309,21 @@ export const MsgVoteResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgVoteResponse {
+  fromJSON(_: any): MsgVoteResponse {
     return {};
   },
 
-  toJSON(message: MsgVoteResponse): unknown {
+  toJSON(_: MsgVoteResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(object: I): MsgVoteResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(_: I): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
   }
 
 };
-
-/**
- * MsgVoteWeighted defines a message to cast a vote.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface MsgVoteWeighted {
-  proposalId: Long;
-  voter: string;
-  options: WeightedVoteOption[];
-}
 
 function createBaseMsgVoteWeighted(): MsgVoteWeighted {
   return {
@@ -395,19 +412,12 @@ export const MsgVoteWeighted = {
 
 };
 
-/**
- * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface MsgVoteWeightedResponse {}
-
 function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
   return {};
 }
 
 export const MsgVoteWeightedResponse = {
-  encode(message: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -429,28 +439,21 @@ export const MsgVoteWeightedResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgVoteWeightedResponse {
+  fromJSON(_: any): MsgVoteWeightedResponse {
     return {};
   },
 
-  toJSON(message: MsgVoteWeightedResponse): unknown {
+  toJSON(_: MsgVoteWeightedResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteWeightedResponse>, I>>(object: I): MsgVoteWeightedResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgVoteWeightedResponse>, I>>(_: I): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
   }
 
 };
-
-/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
-export interface MsgDeposit {
-  proposalId: Long;
-  depositor: string;
-  amount: Coin[];
-}
 
 function createBaseMsgDeposit(): MsgDeposit {
   return {
@@ -539,15 +542,12 @@ export const MsgDeposit = {
 
 };
 
-/** MsgDepositResponse defines the Msg/Deposit response type. */
-export interface MsgDepositResponse {}
-
 function createBaseMsgDepositResponse(): MsgDepositResponse {
   return {};
 }
 
 export const MsgDepositResponse = {
-  encode(message: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -569,16 +569,16 @@ export const MsgDepositResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgDepositResponse {
+  fromJSON(_: any): MsgDepositResponse {
     return {};
   },
 
-  toJSON(message: MsgDepositResponse): unknown {
+  toJSON(_: MsgDepositResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(object: I): MsgDepositResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(_: I): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
   }

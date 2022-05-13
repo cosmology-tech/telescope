@@ -9,6 +9,61 @@ import { Monitoring } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
+/** Whether or not a service has been enabled for use by a consumer. */
+export enum State {
+  /**
+   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
+   */
+  STATE_UNSPECIFIED = 0,
+
+  /**
+   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
+   * disabled, or has never been enabled.
+   */
+  DISABLED = 1,
+
+  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
+  ENABLED = 2,
+  UNRECOGNIZED = -1,
+}
+export function stateFromJSON(object: any): State {
+  switch (object) {
+    case 0:
+    case "STATE_UNSPECIFIED":
+      return State.STATE_UNSPECIFIED;
+
+    case 1:
+    case "DISABLED":
+      return State.DISABLED;
+
+    case 2:
+    case "ENABLED":
+      return State.ENABLED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return State.UNRECOGNIZED;
+  }
+}
+export function stateToJSON(object: State): string {
+  switch (object) {
+    case State.STATE_UNSPECIFIED:
+      return "STATE_UNSPECIFIED";
+
+    case State.DISABLED:
+      return "DISABLED";
+
+    case State.ENABLED:
+      return "ENABLED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** A service that is available for use by the consumer. */
 export interface Service {
   /**
@@ -37,6 +92,68 @@ export interface Service {
 
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
+}
+
+/** The configuration of the service. */
+export interface ServiceConfig {
+  /**
+   * The DNS address at which this service is available.
+   * 
+   * An example DNS address would be:
+   * `calendar.googleapis.com`.
+   */
+  name: string;
+
+  /** The product title for this service. */
+  title: string;
+
+  /**
+   * A list of API interfaces exported by this service. Contains only the names,
+   * versions, and method names of the interfaces.
+   */
+  apis: Api[];
+
+  /**
+   * Additional API documentation. Contains only the summary and the
+   * documentation URL.
+   */
+  documentation: Documentation;
+
+  /** Quota configuration. */
+  quota: Quota;
+
+  /** Auth configuration. Contains only the OAuth rules. */
+  authentication: Authentication;
+
+  /** Configuration controlling usage of this service. */
+  usage: Usage;
+
+  /**
+   * Configuration for network endpoints. Contains only the names and aliases
+   * of the endpoints.
+   */
+  endpoints: Endpoint[];
+
+  /**
+   * Defines the monitored resources used by this service. This is required
+   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   */
+  monitoredResources: MonitoredResourceDescriptor[];
+
+  /**
+   * Monitoring configuration.
+   * This should not include the 'producer_destinations' field.
+   */
+  monitoring: Monitoring;
+}
+
+/** The operation metadata returned for the batchend services operation. */
+export interface OperationMetadata {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resourceNames: string[];
 }
 
 function createBaseService(): Service {
@@ -131,114 +248,6 @@ export const Service = {
   }
 
 };
-
-/** Whether or not a service has been enabled for use by a consumer. */
-export enum State {
-  /**
-   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   * is unspecified or not meaningful. Currently, all consumers other than
-   * projects (such as folders and organizations) are always in this state.
-   */
-  STATE_UNSPECIFIED = 0,
-
-  /**
-   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   * disabled, or has never been enabled.
-   */
-  DISABLED = 1,
-
-  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
-  ENABLED = 2,
-  UNRECOGNIZED = -1,
-}
-export function stateFromJSON(object: any): State {
-  switch (object) {
-    case 0:
-    case "STATE_UNSPECIFIED":
-      return State.STATE_UNSPECIFIED;
-
-    case 1:
-    case "DISABLED":
-      return State.DISABLED;
-
-    case 2:
-    case "ENABLED":
-      return State.ENABLED;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return State.UNRECOGNIZED;
-  }
-}
-export function stateToJSON(object: State): string {
-  switch (object) {
-    case State.STATE_UNSPECIFIED:
-      return "STATE_UNSPECIFIED";
-
-    case State.DISABLED:
-      return "DISABLED";
-
-    case State.ENABLED:
-      return "ENABLED";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** The configuration of the service. */
-export interface ServiceConfig {
-  /**
-   * The DNS address at which this service is available.
-   * 
-   * An example DNS address would be:
-   * `calendar.googleapis.com`.
-   */
-  name: string;
-
-  /** The product title for this service. */
-  title: string;
-
-  /**
-   * A list of API interfaces exported by this service. Contains only the names,
-   * versions, and method names of the interfaces.
-   */
-  apis: Api[];
-
-  /**
-   * Additional API documentation. Contains only the summary and the
-   * documentation URL.
-   */
-  documentation: Documentation;
-
-  /** Quota configuration. */
-  quota: Quota;
-
-  /** Auth configuration. Contains only the OAuth rules. */
-  authentication: Authentication;
-
-  /** Configuration controlling usage of this service. */
-  usage: Usage;
-
-  /**
-   * Configuration for network endpoints. Contains only the names and aliases
-   * of the endpoints.
-   */
-  endpoints: Endpoint[];
-
-  /**
-   * Defines the monitored resources used by this service. This is required
-   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
-   */
-  monitoredResources: MonitoredResourceDescriptor[];
-
-  /**
-   * Monitoring configuration.
-   * This should not include the 'producer_destinations' field.
-   */
-  monitoring: Monitoring;
-}
 
 function createBaseServiceConfig(): ServiceConfig {
   return {
@@ -421,15 +430,6 @@ export const ServiceConfig = {
   }
 
 };
-
-/** The operation metadata returned for the batchend services operation. */
-export interface OperationMetadata {
-  /**
-   * The full name of the resources that this operation is directly
-   * associated with.
-   */
-  resourceNames: string[];
-}
 
 function createBaseOperationMetadata(): OperationMetadata {
   return {

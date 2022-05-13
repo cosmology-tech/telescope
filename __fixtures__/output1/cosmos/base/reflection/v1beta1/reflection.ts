@@ -4,12 +4,35 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
 
+/** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
+export interface ListAllInterfacesResponse {
+  /** interface_names is an array of all the registered interfaces. */
+  interfaceNames: string[];
+}
+
+/**
+ * ListImplementationsRequest is the request type of the ListImplementations
+ * RPC.
+ */
+export interface ListImplementationsRequest {
+  /** interface_name defines the interface to query the implementations for. */
+  interfaceName: string;
+}
+
+/**
+ * ListImplementationsResponse is the response type of the ListImplementations
+ * RPC.
+ */
+export interface ListImplementationsResponse {
+  implementationMessageNames: string[];
+}
+
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
   return {};
 }
 
 export const ListAllInterfacesRequest = {
-  encode(message: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -31,27 +54,21 @@ export const ListAllInterfacesRequest = {
     return message;
   },
 
-  fromJSON(object: any): ListAllInterfacesRequest {
+  fromJSON(_: any): ListAllInterfacesRequest {
     return {};
   },
 
-  toJSON(message: ListAllInterfacesRequest): unknown {
+  toJSON(_: ListAllInterfacesRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListAllInterfacesRequest>, I>>(object: I): ListAllInterfacesRequest {
+  fromPartial<I extends Exact<DeepPartial<ListAllInterfacesRequest>, I>>(_: I): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
   }
 
 };
-
-/** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
-export interface ListAllInterfacesResponse {
-  /** interface_names is an array of all the registered interfaces. */
-  interfaceNames: string[];
-}
 
 function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
   return {
@@ -116,15 +133,6 @@ export const ListAllInterfacesResponse = {
 
 };
 
-/**
- * ListImplementationsRequest is the request type of the ListImplementations
- * RPC.
- */
-export interface ListImplementationsRequest {
-  /** interface_name defines the interface to query the implementations for. */
-  interfaceName: string;
-}
-
 function createBaseListImplementationsRequest(): ListImplementationsRequest {
   return {
     interfaceName: ""
@@ -181,14 +189,6 @@ export const ListImplementationsRequest = {
   }
 
 };
-
-/**
- * ListImplementationsResponse is the response type of the ListImplementations
- * RPC.
- */
-export interface ListImplementationsResponse {
-  implementationMessageNames: string[];
-}
 
 function createBaseListImplementationsResponse(): ListImplementationsResponse {
   return {

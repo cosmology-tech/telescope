@@ -36,6 +36,15 @@ export interface ValidatorSigningInfo {
   missedBlocksCounter: Long;
 }
 
+/** Params represents the parameters used for by the slashing module. */
+export interface Params {
+  signedBlocksWindow: Long;
+  minSignedPerWindow: Uint8Array;
+  downtimeJailDuration: string;
+  slashFractionDoubleSign: Uint8Array;
+  slashFractionDowntime: Uint8Array;
+}
+
 function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
   return {
     address: "",
@@ -61,7 +70,9 @@ export const ValidatorSigningInfo = {
       writer.uint32(24).int64(message.indexOffset);
     }
 
-    if (message.jailedUntil !== undefined) Timestamp.encode(toTimestamp(message.jailedUntil), writer.uint32(34).fork()).ldelim();
+    if (message.jailedUntil !== undefined) {
+      Timestamp.encode(toTimestamp(message.jailedUntil), writer.uint32(34).fork()).ldelim();
+    }
 
     if (message.tombstoned === true) {
       writer.uint32(40).bool(message.tombstoned);
@@ -151,15 +162,6 @@ export const ValidatorSigningInfo = {
 
 };
 
-/** Params represents the parameters used for by the slashing module. */
-export interface Params {
-  signedBlocksWindow: Long;
-  minSignedPerWindow: Uint8Array;
-  downtimeJailDuration: string;
-  slashFractionDoubleSign: Uint8Array;
-  slashFractionDowntime: Uint8Array;
-}
-
 function createBaseParams(): Params {
   return {
     signedBlocksWindow: Long.ZERO,
@@ -180,7 +182,9 @@ export const Params = {
       writer.uint32(18).bytes(message.minSignedPerWindow);
     }
 
-    if (message.downtimeJailDuration !== undefined) Duration.encode(toDuration(message.downtimeJailDuration), writer.uint32(26).fork()).ldelim();
+    if (message.downtimeJailDuration !== undefined) {
+      Duration.encode(toDuration(message.downtimeJailDuration), writer.uint32(26).fork()).ldelim();
+    }
 
     if (message.slashFractionDoubleSign.length !== 0) {
       writer.uint32(34).bytes(message.slashFractionDoubleSign);

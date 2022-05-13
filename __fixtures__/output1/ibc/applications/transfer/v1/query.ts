@@ -12,6 +12,45 @@ export interface QueryDenomTraceRequest {
   hash: string;
 }
 
+/**
+ * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
+ * method.
+ */
+export interface QueryDenomTraceResponse {
+  /** denom_trace returns the requested denomination trace information. */
+  denomTrace: DenomTrace;
+}
+
+/**
+ * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
+ * method
+ */
+export interface QueryDenomTracesRequest {
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest;
+}
+
+/**
+ * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
+ * method.
+ */
+export interface QueryDenomTracesResponse {
+  /** denom_traces returns all denominations trace information. */
+  denomTraces: DenomTrace[];
+
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse;
+}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequest {}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+
 function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
   return {
     hash: ""
@@ -68,15 +107,6 @@ export const QueryDenomTraceRequest = {
   }
 
 };
-
-/**
- * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
- * method.
- */
-export interface QueryDenomTraceResponse {
-  /** denom_trace returns the requested denomination trace information. */
-  denomTrace: DenomTrace;
-}
 
 function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
   return {
@@ -135,15 +165,6 @@ export const QueryDenomTraceResponse = {
 
 };
 
-/**
- * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
- * method
- */
-export interface QueryDenomTracesRequest {
-  /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
-}
-
 function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
   return {
     pagination: undefined
@@ -200,18 +221,6 @@ export const QueryDenomTracesRequest = {
   }
 
 };
-
-/**
- * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
- * method.
- */
-export interface QueryDenomTracesResponse {
-  /** denom_traces returns all denominations trace information. */
-  denomTraces: DenomTrace[];
-
-  /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
-}
 
 function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
   return {
@@ -288,15 +297,12 @@ export const QueryDenomTracesResponse = {
 
 };
 
-/** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequest {}
-
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -318,27 +324,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
-export interface QueryParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {

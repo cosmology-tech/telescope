@@ -2,13 +2,22 @@ import { EpochInfo } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryEpochsInfoRequest {}
+export interface QueryEpochsInfoResponse {
+  epochs: EpochInfo[];
+}
+export interface QueryCurrentEpochRequest {
+  identifier: string;
+}
+export interface QueryCurrentEpochResponse {
+  currentEpoch: Long;
+}
 
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
   return {};
 }
 
 export const QueryEpochsInfoRequest = {
-  encode(message: QueryEpochsInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryEpochsInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -30,24 +39,21 @@ export const QueryEpochsInfoRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryEpochsInfoRequest {
+  fromJSON(_: any): QueryEpochsInfoRequest {
     return {};
   },
 
-  toJSON(message: QueryEpochsInfoRequest): unknown {
+  toJSON(_: QueryEpochsInfoRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryEpochsInfoRequest>, I>>(object: I): QueryEpochsInfoRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryEpochsInfoRequest>, I>>(_: I): QueryEpochsInfoRequest {
     const message = createBaseQueryEpochsInfoRequest();
     return message;
   }
 
 };
-export interface QueryEpochsInfoResponse {
-  epochs: EpochInfo[];
-}
 
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
   return {
@@ -111,9 +117,6 @@ export const QueryEpochsInfoResponse = {
   }
 
 };
-export interface QueryCurrentEpochRequest {
-  identifier: string;
-}
 
 function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
   return {
@@ -171,9 +174,6 @@ export const QueryCurrentEpochRequest = {
   }
 
 };
-export interface QueryCurrentEpochResponse {
-  currentEpoch: Long;
-}
 
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   return {

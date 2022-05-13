@@ -20,6 +20,15 @@ export interface QueryAppVersionRequest {
   proposedVersion: string;
 }
 
+/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
+export interface QueryAppVersionResponse {
+  /** port id associated with the request identifiers */
+  portId: string;
+
+  /** supported app version */
+  version: string;
+}
+
 function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
   return {
     portId: "",
@@ -124,15 +133,6 @@ export const QueryAppVersionRequest = {
   }
 
 };
-
-/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
-export interface QueryAppVersionResponse {
-  /** port id associated with the request identifiers */
-  portId: string;
-
-  /** supported app version */
-  version: string;
-}
 
 function createBaseQueryAppVersionResponse(): QueryAppVersionResponse {
   return {

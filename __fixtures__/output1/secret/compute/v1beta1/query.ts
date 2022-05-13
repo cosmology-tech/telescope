@@ -9,6 +9,90 @@ export interface QueryContractInfoRequest {
   address: Uint8Array;
 }
 
+/** QueryContractInfoResponse is the response type for the Query/ContractInfo RPC method */
+export interface QueryContractInfoResponse {
+  /** address is the address of the contract */
+  address: Uint8Array;
+  ContractInfo: ContractInfo;
+}
+export interface QueryContractHistoryRequest {
+  /** address is the address of the contract to query */
+  address: Uint8Array;
+}
+export interface QueryContractsByCodeRequest {
+  /** grpc-gateway_out does not support Go style CodID */
+  codeId: Long;
+}
+
+/** ContractInfoWithAddress adds the address (key) to the ContractInfo representation */
+export interface ContractInfoWithAddress {
+  address: Uint8Array;
+  ContractInfo: ContractInfo;
+}
+export interface QueryContractsByCodeResponse {
+  contractInfos: ContractInfoWithAddress[];
+}
+export interface QuerySmartContractStateRequest {
+  /** address is the address of the contract */
+  address: Uint8Array;
+  queryData: Uint8Array;
+}
+export interface QueryContractAddressByLabelRequest {
+  label: string;
+}
+export interface QueryContractKeyRequest {
+  /** address is the address of the contract */
+  address: Uint8Array;
+}
+export interface QueryContractHashRequest {
+  /** address is the address of the contract */
+  address: Uint8Array;
+}
+export interface QuerySmartContractStateResponse {
+  data: Uint8Array;
+}
+export interface QueryCodeRequest {
+  /** grpc-gateway_out does not support Go style CodID */
+  codeId: Long;
+}
+export interface CodeInfoResponse {
+  /** id for legacy support */
+  codeId: Long;
+  creator: Uint8Array;
+  dataHash: Uint8Array;
+  source: string;
+  builder: string;
+}
+export interface QueryCodeResponse {
+  codeInfo: CodeInfoResponse;
+  data: Uint8Array;
+}
+export interface QueryCodesResponse {
+  codeInfos: CodeInfoResponse[];
+}
+export interface QueryContractAddressByLabelResponse {
+  /** address is the address of the contract */
+  address: Uint8Array;
+}
+export interface QueryContractKeyResponse {
+  /** address is the address of the contract */
+  key: Uint8Array;
+}
+export interface QueryContractHashResponse {
+  codeHash: Uint8Array;
+}
+
+/** DecryptedAnswer is a struct that represents a decrypted tx-query */
+export interface DecryptedAnswer {
+  type: string;
+  input: string;
+  outputData: string;
+  outputDataAsString: string;
+  outputLogs: StringEvent[];
+  outputError: Uint8Array;
+  plaintextError: string;
+}
+
 function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
   return {
     address: new Uint8Array()
@@ -65,13 +149,6 @@ export const QueryContractInfoRequest = {
   }
 
 };
-
-/** QueryContractInfoResponse is the response type for the Query/ContractInfo RPC method */
-export interface QueryContractInfoResponse {
-  /** address is the address of the contract */
-  address: Uint8Array;
-  ContractInfo: ContractInfo;
-}
 
 function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
   return {
@@ -141,10 +218,6 @@ export const QueryContractInfoResponse = {
   }
 
 };
-export interface QueryContractHistoryRequest {
-  /** address is the address of the contract to query */
-  address: Uint8Array;
-}
 
 function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
   return {
@@ -202,10 +275,6 @@ export const QueryContractHistoryRequest = {
   }
 
 };
-export interface QueryContractsByCodeRequest {
-  /** grpc-gateway_out does not support Go style CodID */
-  codeId: Long;
-}
 
 function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
   return {
@@ -263,12 +332,6 @@ export const QueryContractsByCodeRequest = {
   }
 
 };
-
-/** ContractInfoWithAddress adds the address (key) to the ContractInfo representation */
-export interface ContractInfoWithAddress {
-  address: Uint8Array;
-  ContractInfo: ContractInfo;
-}
 
 function createBaseContractInfoWithAddress(): ContractInfoWithAddress {
   return {
@@ -338,9 +401,6 @@ export const ContractInfoWithAddress = {
   }
 
 };
-export interface QueryContractsByCodeResponse {
-  contractInfos: ContractInfoWithAddress[];
-}
 
 function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse {
   return {
@@ -404,11 +464,6 @@ export const QueryContractsByCodeResponse = {
   }
 
 };
-export interface QuerySmartContractStateRequest {
-  /** address is the address of the contract */
-  address: Uint8Array;
-  queryData: Uint8Array;
-}
 
 function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequest {
   return {
@@ -478,9 +533,6 @@ export const QuerySmartContractStateRequest = {
   }
 
 };
-export interface QueryContractAddressByLabelRequest {
-  label: string;
-}
 
 function createBaseQueryContractAddressByLabelRequest(): QueryContractAddressByLabelRequest {
   return {
@@ -538,10 +590,6 @@ export const QueryContractAddressByLabelRequest = {
   }
 
 };
-export interface QueryContractKeyRequest {
-  /** address is the address of the contract */
-  address: Uint8Array;
-}
 
 function createBaseQueryContractKeyRequest(): QueryContractKeyRequest {
   return {
@@ -599,10 +647,6 @@ export const QueryContractKeyRequest = {
   }
 
 };
-export interface QueryContractHashRequest {
-  /** address is the address of the contract */
-  address: Uint8Array;
-}
 
 function createBaseQueryContractHashRequest(): QueryContractHashRequest {
   return {
@@ -660,9 +704,6 @@ export const QueryContractHashRequest = {
   }
 
 };
-export interface QuerySmartContractStateResponse {
-  data: Uint8Array;
-}
 
 function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateResponse {
   return {
@@ -720,10 +761,6 @@ export const QuerySmartContractStateResponse = {
   }
 
 };
-export interface QueryCodeRequest {
-  /** grpc-gateway_out does not support Go style CodID */
-  codeId: Long;
-}
 
 function createBaseQueryCodeRequest(): QueryCodeRequest {
   return {
@@ -781,14 +818,6 @@ export const QueryCodeRequest = {
   }
 
 };
-export interface CodeInfoResponse {
-  /** id for legacy support */
-  codeId: Long;
-  creator: Uint8Array;
-  dataHash: Uint8Array;
-  source: string;
-  builder: string;
-}
 
 function createBaseCodeInfoResponse(): CodeInfoResponse {
   return {
@@ -894,10 +923,6 @@ export const CodeInfoResponse = {
   }
 
 };
-export interface QueryCodeResponse {
-  codeInfo: CodeInfoResponse;
-  data: Uint8Array;
-}
 
 function createBaseQueryCodeResponse(): QueryCodeResponse {
   return {
@@ -967,9 +992,6 @@ export const QueryCodeResponse = {
   }
 
 };
-export interface QueryCodesResponse {
-  codeInfos: CodeInfoResponse[];
-}
 
 function createBaseQueryCodesResponse(): QueryCodesResponse {
   return {
@@ -1033,10 +1055,6 @@ export const QueryCodesResponse = {
   }
 
 };
-export interface QueryContractAddressByLabelResponse {
-  /** address is the address of the contract */
-  address: Uint8Array;
-}
 
 function createBaseQueryContractAddressByLabelResponse(): QueryContractAddressByLabelResponse {
   return {
@@ -1094,10 +1112,6 @@ export const QueryContractAddressByLabelResponse = {
   }
 
 };
-export interface QueryContractKeyResponse {
-  /** address is the address of the contract */
-  key: Uint8Array;
-}
 
 function createBaseQueryContractKeyResponse(): QueryContractKeyResponse {
   return {
@@ -1155,9 +1169,6 @@ export const QueryContractKeyResponse = {
   }
 
 };
-export interface QueryContractHashResponse {
-  codeHash: Uint8Array;
-}
 
 function createBaseQueryContractHashResponse(): QueryContractHashResponse {
   return {
@@ -1215,17 +1226,6 @@ export const QueryContractHashResponse = {
   }
 
 };
-
-/** DecryptedAnswer is a struct that represents a decrypted tx-query */
-export interface DecryptedAnswer {
-  type: string;
-  input: string;
-  outputData: string;
-  outputDataAsString: string;
-  outputLogs: StringEvent[];
-  outputError: Uint8Array;
-  plaintextError: string;
-}
 
 function createBaseDecryptedAnswer(): DecryptedAnswer {
   return {

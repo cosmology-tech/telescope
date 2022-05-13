@@ -9,6 +9,20 @@ export interface EventSend {
   receiver: string;
 }
 
+/** EventMint is emitted on Mint */
+export interface EventMint {
+  classId: string;
+  id: string;
+  owner: string;
+}
+
+/** EventBurn is emitted on Burn */
+export interface EventBurn {
+  classId: string;
+  id: string;
+  owner: string;
+}
+
 function createBaseEventSend(): EventSend {
   return {
     classId: "",
@@ -102,13 +116,6 @@ export const EventSend = {
 
 };
 
-/** EventMint is emitted on Mint */
-export interface EventMint {
-  classId: string;
-  id: string;
-  owner: string;
-}
-
 function createBaseEventMint(): EventMint {
   return {
     classId: "",
@@ -189,13 +196,6 @@ export const EventMint = {
   }
 
 };
-
-/** EventBurn is emitted on Burn */
-export interface EventBurn {
-  classId: string;
-  id: string;
-  owner: string;
-}
 
 function createBaseEventBurn(): EventBurn {
   return {

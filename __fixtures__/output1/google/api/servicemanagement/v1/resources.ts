@@ -3,287 +3,6 @@ import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
 
-/**
- * The full representation of a Service that is managed by
- * Google Service Management.
- */
-export interface ManagedService {
-  /**
-   * The name of the service. See the [overview](/service-management/overview)
-   * for naming requirements.
-   */
-  serviceName: string;
-
-  /** ID of the project that produces and owns this service. */
-  producerProjectId: string;
-}
-
-function createBaseManagedService(): ManagedService {
-  return {
-    serviceName: "",
-    producerProjectId: ""
-  };
-}
-
-export const ManagedService = {
-  encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.serviceName !== "") {
-      writer.uint32(18).string(message.serviceName);
-    }
-
-    if (message.producerProjectId !== "") {
-      writer.uint32(26).string(message.producerProjectId);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseManagedService();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 2:
-          message.serviceName = reader.string();
-          break;
-
-        case 3:
-          message.producerProjectId = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): ManagedService {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : ""
-    };
-  },
-
-  toJSON(message: ManagedService): unknown {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<ManagedService>, I>>(object: I): ManagedService {
-    const message = createBaseManagedService();
-    message.serviceName = object.serviceName ?? "";
-    message.producerProjectId = object.producerProjectId ?? "";
-    return message;
-  }
-
-};
-
-/** The metadata associated with a long running operation resource. */
-export interface OperationMetadata {
-  /**
-   * The full name of the resources that this operation is directly
-   * associated with.
-   */
-  resourceNames: string[];
-
-  /** Detailed status information for each step. The order is undetermined. */
-  steps: OperationMetadata_Step[];
-
-  /** Percentage of completion of this operation, ranging from 0 to 100. */
-  progressPercentage: number;
-
-  /** The start time of the operation. */
-  startTime: Date;
-}
-
-function createBaseOperationMetadata(): OperationMetadata {
-  return {
-    resourceNames: [],
-    steps: [],
-    progressPercentage: 0,
-    startTime: undefined
-  };
-}
-
-export const OperationMetadata = {
-  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.resourceNames) {
-      writer.uint32(10).string(v!);
-    }
-
-    for (const v of message.steps) {
-      OperationMetadata_Step.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-
-    if (message.progressPercentage !== 0) {
-      writer.uint32(24).int32(message.progressPercentage);
-    }
-
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOperationMetadata();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.resourceNames.push(reader.string());
-          break;
-
-        case 2:
-          message.steps.push(OperationMetadata_Step.decode(reader, reader.uint32()));
-          break;
-
-        case 3:
-          message.progressPercentage = reader.int32();
-          break;
-
-        case 4:
-          message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
-      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e)) : [],
-      progressPercentage: isSet(object.progressPercentage) ? Number(object.progressPercentage) : 0,
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
-    };
-  },
-
-  toJSON(message: OperationMetadata): unknown {
-    const obj: any = {};
-
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-
-    if (message.steps) {
-      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toJSON(e) : undefined);
-    } else {
-      obj.steps = [];
-    }
-
-    message.progressPercentage !== undefined && (obj.progressPercentage = Math.round(message.progressPercentage));
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<OperationMetadata>, I>>(object: I): OperationMetadata {
-    const message = createBaseOperationMetadata();
-    message.resourceNames = object.resourceNames?.map(e => e) || [];
-    message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
-    message.progressPercentage = object.progressPercentage ?? 0;
-    message.startTime = object.startTime ?? undefined;
-    return message;
-  }
-
-};
-
-/** Represents the status of one operation step. */
-export interface OperationMetadata_Step {
-  /** The short description of the step. */
-  description: string;
-
-  /** The status code. */
-  status: OperationMetadata_Status;
-}
-
-function createBaseOperationMetadata_Step(): OperationMetadata_Step {
-  return {
-    description: "",
-    status: 0
-  };
-}
-
-export const OperationMetadata_Step = {
-  encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-
-    if (message.status !== 0) {
-      writer.uint32(32).int32(message.status);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata_Step {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOperationMetadata_Step();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 2:
-          message.description = reader.string();
-          break;
-
-        case 4:
-          message.status = (reader.int32() as any);
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): OperationMetadata_Step {
-    return {
-      description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
-    };
-  },
-
-  toJSON(message: OperationMetadata_Step): unknown {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<OperationMetadata_Step>, I>>(object: I): OperationMetadata_Step {
-    const message = createBaseOperationMetadata_Step();
-    message.description = object.description ?? "";
-    message.status = object.status ?? 0;
-    return message;
-  }
-
-};
-
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
   /** STATUS_UNSPECIFIED - Unspecifed code. */
@@ -365,99 +84,6 @@ export function operationMetadata_StatusToJSON(object: OperationMetadata_Status)
   }
 }
 
-/** Represents a diagnostic message (error or warning) */
-export interface Diagnostic {
-  /** File name and line number of the error or warning. */
-  location: string;
-
-  /** The kind of diagnostic information provided. */
-  kind: Diagnostic_Kind;
-
-  /** Message describing the error or warning. */
-  message: string;
-}
-
-function createBaseDiagnostic(): Diagnostic {
-  return {
-    location: "",
-    kind: 0,
-    message: ""
-  };
-}
-
-export const Diagnostic = {
-  encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.location !== "") {
-      writer.uint32(10).string(message.location);
-    }
-
-    if (message.kind !== 0) {
-      writer.uint32(16).int32(message.kind);
-    }
-
-    if (message.message !== "") {
-      writer.uint32(26).string(message.message);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Diagnostic {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDiagnostic();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.location = reader.string();
-          break;
-
-        case 2:
-          message.kind = (reader.int32() as any);
-          break;
-
-        case 3:
-          message.message = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): Diagnostic {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
-      message: isSet(object.message) ? String(object.message) : ""
-    };
-  },
-
-  toJSON(message: Diagnostic): unknown {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Diagnostic>, I>>(object: I): Diagnostic {
-    const message = createBaseDiagnostic();
-    message.location = object.location ?? "";
-    message.kind = object.kind ?? 0;
-    message.message = object.message ?? "";
-    return message;
-  }
-
-};
-
 /** The kind of diagnostic information possible. */
 export enum Diagnostic_Kind {
   /** WARNING - Warnings and errors */
@@ -495,193 +121,6 @@ export function diagnostic_KindToJSON(object: Diagnostic_Kind): string {
       return "UNKNOWN";
   }
 }
-
-/**
- * Represents a source file which is used to generate the service configuration
- * defined by `google.api.Service`.
- */
-export interface ConfigSource {
-  /**
-   * A unique ID for a specific instance of this message, typically assigned
-   * by the client for tracking purpose. If empty, the server may choose to
-   * generate one instead.
-   */
-  id: string;
-
-  /**
-   * Set of source configuration files that are used to generate a service
-   * configuration (`google.api.Service`).
-   */
-  files: ConfigFile[];
-}
-
-function createBaseConfigSource(): ConfigSource {
-  return {
-    id: "",
-    files: []
-  };
-}
-
-export const ConfigSource = {
-  encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "") {
-      writer.uint32(42).string(message.id);
-    }
-
-    for (const v of message.files) {
-      ConfigFile.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigSource {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseConfigSource();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 5:
-          message.id = reader.string();
-          break;
-
-        case 2:
-          message.files.push(ConfigFile.decode(reader, reader.uint32()));
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): ConfigSource {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromJSON(e)) : []
-    };
-  },
-
-  toJSON(message: ConfigSource): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-
-    if (message.files) {
-      obj.files = message.files.map(e => e ? ConfigFile.toJSON(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<ConfigSource>, I>>(object: I): ConfigSource {
-    const message = createBaseConfigSource();
-    message.id = object.id ?? "";
-    message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
-    return message;
-  }
-
-};
-
-/** Generic specification of a source configuration file */
-export interface ConfigFile {
-  /** The file name of the configuration file (full or relative path). */
-  filePath: string;
-
-  /** The bytes that constitute the file. */
-  fileContents: Uint8Array;
-
-  /** The type of configuration file this represents. */
-  fileType: ConfigFile_FileType;
-}
-
-function createBaseConfigFile(): ConfigFile {
-  return {
-    filePath: "",
-    fileContents: new Uint8Array(),
-    fileType: 0
-  };
-}
-
-export const ConfigFile = {
-  encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.filePath !== "") {
-      writer.uint32(10).string(message.filePath);
-    }
-
-    if (message.fileContents.length !== 0) {
-      writer.uint32(26).bytes(message.fileContents);
-    }
-
-    if (message.fileType !== 0) {
-      writer.uint32(32).int32(message.fileType);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigFile {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseConfigFile();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.filePath = reader.string();
-          break;
-
-        case 3:
-          message.fileContents = reader.bytes();
-          break;
-
-        case 4:
-          message.fileType = (reader.int32() as any);
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): ConfigFile {
-    return {
-      filePath: isSet(object.filePath) ? String(object.filePath) : "",
-      fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
-      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : 0
-    };
-  },
-
-  toJSON(message: ConfigFile): unknown {
-    const obj: any = {};
-    message.filePath !== undefined && (obj.filePath = message.filePath);
-    message.fileContents !== undefined && (obj.fileContents = base64FromBytes(message.fileContents !== undefined ? message.fileContents : new Uint8Array()));
-    message.fileType !== undefined && (obj.fileType = configFile_FileTypeToJSON(message.fileType));
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<ConfigFile>, I>>(object: I): ConfigFile {
-    const message = createBaseConfigFile();
-    message.filePath = object.filePath ?? "";
-    message.fileContents = object.fileContents ?? new Uint8Array();
-    message.fileType = object.fileType ?? 0;
-    return message;
-  }
-
-};
 export enum ConfigFile_FileType {
   /** FILE_TYPE_UNSPECIFIED - Unknown file type. */
   FILE_TYPE_UNSPECIFIED = 0,
@@ -773,6 +212,185 @@ export function configFile_FileTypeToJSON(object: ConfigFile_FileType): string {
   }
 }
 
+/** Status of a Rollout. */
+export enum Rollout_RolloutStatus {
+  /** ROLLOUT_STATUS_UNSPECIFIED - No status specified. */
+  ROLLOUT_STATUS_UNSPECIFIED = 0,
+
+  /** IN_PROGRESS - The Rollout is in progress. */
+  IN_PROGRESS = 1,
+
+  /** SUCCESS - The Rollout has completed successfully. */
+  SUCCESS = 2,
+
+  /**
+   * CANCELLED - The Rollout has been cancelled. This can happen if you have overlapping
+   * Rollout pushes, and the previous ones will be cancelled.
+   */
+  CANCELLED = 3,
+
+  /** FAILED - The Rollout has failed and the rollback attempt has failed too. */
+  FAILED = 4,
+
+  /** PENDING - The Rollout has not started yet and is pending for execution. */
+  PENDING = 5,
+
+  /**
+   * FAILED_ROLLED_BACK - The Rollout has failed and rolled back to the previous successful
+   * Rollout.
+   */
+  FAILED_ROLLED_BACK = 6,
+  UNRECOGNIZED = -1,
+}
+export function rollout_RolloutStatusFromJSON(object: any): Rollout_RolloutStatus {
+  switch (object) {
+    case 0:
+    case "ROLLOUT_STATUS_UNSPECIFIED":
+      return Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED;
+
+    case 1:
+    case "IN_PROGRESS":
+      return Rollout_RolloutStatus.IN_PROGRESS;
+
+    case 2:
+    case "SUCCESS":
+      return Rollout_RolloutStatus.SUCCESS;
+
+    case 3:
+    case "CANCELLED":
+      return Rollout_RolloutStatus.CANCELLED;
+
+    case 4:
+    case "FAILED":
+      return Rollout_RolloutStatus.FAILED;
+
+    case 5:
+    case "PENDING":
+      return Rollout_RolloutStatus.PENDING;
+
+    case 6:
+    case "FAILED_ROLLED_BACK":
+      return Rollout_RolloutStatus.FAILED_ROLLED_BACK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Rollout_RolloutStatus.UNRECOGNIZED;
+  }
+}
+export function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): string {
+  switch (object) {
+    case Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED:
+      return "ROLLOUT_STATUS_UNSPECIFIED";
+
+    case Rollout_RolloutStatus.IN_PROGRESS:
+      return "IN_PROGRESS";
+
+    case Rollout_RolloutStatus.SUCCESS:
+      return "SUCCESS";
+
+    case Rollout_RolloutStatus.CANCELLED:
+      return "CANCELLED";
+
+    case Rollout_RolloutStatus.FAILED:
+      return "FAILED";
+
+    case Rollout_RolloutStatus.PENDING:
+      return "PENDING";
+
+    case Rollout_RolloutStatus.FAILED_ROLLED_BACK:
+      return "FAILED_ROLLED_BACK";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/**
+ * The full representation of a Service that is managed by
+ * Google Service Management.
+ */
+export interface ManagedService {
+  /**
+   * The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements.
+   */
+  serviceName: string;
+
+  /** ID of the project that produces and owns this service. */
+  producerProjectId: string;
+}
+
+/** The metadata associated with a long running operation resource. */
+export interface OperationMetadata {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resourceNames: string[];
+
+  /** Detailed status information for each step. The order is undetermined. */
+  steps: OperationMetadata_Step[];
+
+  /** Percentage of completion of this operation, ranging from 0 to 100. */
+  progressPercentage: number;
+
+  /** The start time of the operation. */
+  startTime: Date;
+}
+
+/** Represents the status of one operation step. */
+export interface OperationMetadata_Step {
+  /** The short description of the step. */
+  description: string;
+
+  /** The status code. */
+  status: OperationMetadata_Status;
+}
+
+/** Represents a diagnostic message (error or warning) */
+export interface Diagnostic {
+  /** File name and line number of the error or warning. */
+  location: string;
+
+  /** The kind of diagnostic information provided. */
+  kind: Diagnostic_Kind;
+
+  /** Message describing the error or warning. */
+  message: string;
+}
+
+/**
+ * Represents a source file which is used to generate the service configuration
+ * defined by `google.api.Service`.
+ */
+export interface ConfigSource {
+  /**
+   * A unique ID for a specific instance of this message, typically assigned
+   * by the client for tracking purpose. If empty, the server may choose to
+   * generate one instead.
+   */
+  id: string;
+
+  /**
+   * Set of source configuration files that are used to generate a service
+   * configuration (`google.api.Service`).
+   */
+  files: ConfigFile[];
+}
+
+/** Generic specification of a source configuration file */
+export interface ConfigFile {
+  /** The file name of the configuration file (full or relative path). */
+  filePath: string;
+
+  /** The bytes that constitute the file. */
+  fileContents: Uint8Array;
+
+  /** The type of configuration file this represents. */
+  fileType: ConfigFile_FileType;
+}
+
 /** Represents a service configuration with its name and id. */
 export interface ConfigRef {
   /**
@@ -781,6 +399,602 @@ export interface ConfigRef {
    */
   name: string;
 }
+
+/**
+ * Change report associated with a particular service configuration.
+ * 
+ * It contains a list of ConfigChanges based on the comparison between
+ * two service configurations.
+ */
+export interface ChangeReport {
+  /**
+   * List of changes between two service configurations.
+   * The changes will be alphabetically sorted based on the identifier
+   * of each change.
+   * A ConfigChange identifier is a dot separated path to the configuration.
+   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
+   */
+  configChanges: ConfigChange[];
+}
+
+/**
+ * A rollout resource that defines how service configuration versions are pushed
+ * to control plane systems. Typically, you create a new version of the
+ * service config, and then create a Rollout to push the service config.
+ */
+export interface Rollout {
+  /**
+   * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
+   * and only lower case letters, digits, '.', '_' and '-' are allowed.
+   * 
+   * If not specified by client, the server will generate one. The generated id
+   * will have the form of <date><revision number>, where "date" is the create
+   * date in ISO 8601 format.  "revision number" is a monotonically increasing
+   * positive number that is reset every day for each service.
+   * An example of the generated rollout_id is '2016-02-16r1'
+   */
+  rolloutId: string;
+
+  /** Creation time of the rollout. Readonly. */
+  createTime: Date;
+
+  /** The user who created the Rollout. Readonly. */
+  createdBy: string;
+
+  /**
+   * The status of this rollout. Readonly. In case of a failed rollout,
+   * the system will automatically rollback to the current Rollout
+   * version. Readonly.
+   */
+  status: Rollout_RolloutStatus;
+
+  /**
+   * Google Service Control selects service configurations based on
+   * traffic percentage.
+   */
+  trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
+
+  /**
+   * The strategy associated with a rollout to delete a `ManagedService`.
+   * Readonly.
+   */
+  deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
+
+  /** The name of the service associated with this Rollout. */
+  serviceName: string;
+}
+export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
+  key: string;
+  value: number;
+}
+
+/**
+ * Strategy that specifies how clients of Google Service Controller want to
+ * send traffic to use different config versions. This is generally
+ * used by API proxy to split traffic based on your configured percentage for
+ * each config version.
+ * 
+ * One example of how to gradually rollout a new service configuration using
+ * this
+ * strategy:
+ * Day 1
+ * 
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160206"
+ * traffic_percent_strategy {
+ * percentages: {
+ * "example.googleapis.com/20160201": 70.00
+ * "example.googleapis.com/20160206": 30.00
+ * }
+ * }
+ * }
+ * 
+ * Day 2
+ * 
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160207"
+ * traffic_percent_strategy: {
+ * percentages: {
+ * "example.googleapis.com/20160206": 100.00
+ * }
+ * }
+ * }
+ */
+export interface Rollout_TrafficPercentStrategy {
+  /**
+   * Maps service configuration IDs to their corresponding traffic percentage.
+   * Key is the service configuration ID, Value is the traffic percentage
+   * which must be greater than 0.0 and the sum must equal to 100.0.
+   */
+  percentages: {
+    [key: string]: number;
+  };
+}
+
+/**
+ * Strategy used to delete a service. This strategy is a placeholder only
+ * used by the system generated rollout to delete a service.
+ */
+export interface Rollout_DeleteServiceStrategy {}
+
+function createBaseManagedService(): ManagedService {
+  return {
+    serviceName: "",
+    producerProjectId: ""
+  };
+}
+
+export const ManagedService = {
+  encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.serviceName !== "") {
+      writer.uint32(18).string(message.serviceName);
+    }
+
+    if (message.producerProjectId !== "") {
+      writer.uint32(26).string(message.producerProjectId);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseManagedService();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 2:
+          message.serviceName = reader.string();
+          break;
+
+        case 3:
+          message.producerProjectId = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ManagedService {
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : ""
+    };
+  },
+
+  toJSON(message: ManagedService): unknown {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
+    message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ManagedService>, I>>(object: I): ManagedService {
+    const message = createBaseManagedService();
+    message.serviceName = object.serviceName ?? "";
+    message.producerProjectId = object.producerProjectId ?? "";
+    return message;
+  }
+
+};
+
+function createBaseOperationMetadata(): OperationMetadata {
+  return {
+    resourceNames: [],
+    steps: [],
+    progressPercentage: 0,
+    startTime: undefined
+  };
+}
+
+export const OperationMetadata = {
+  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.resourceNames) {
+      writer.uint32(10).string(v!);
+    }
+
+    for (const v of message.steps) {
+      OperationMetadata_Step.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.progressPercentage !== 0) {
+      writer.uint32(24).int32(message.progressPercentage);
+    }
+
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOperationMetadata();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.resourceNames.push(reader.string());
+          break;
+
+        case 2:
+          message.steps.push(OperationMetadata_Step.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.progressPercentage = reader.int32();
+          break;
+
+        case 4:
+          message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
+      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e)) : [],
+      progressPercentage: isSet(object.progressPercentage) ? Number(object.progressPercentage) : 0,
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
+    };
+  },
+
+  toJSON(message: OperationMetadata): unknown {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resourceNames = message.resourceNames.map(e => e);
+    } else {
+      obj.resourceNames = [];
+    }
+
+    if (message.steps) {
+      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toJSON(e) : undefined);
+    } else {
+      obj.steps = [];
+    }
+
+    message.progressPercentage !== undefined && (obj.progressPercentage = Math.round(message.progressPercentage));
+    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<OperationMetadata>, I>>(object: I): OperationMetadata {
+    const message = createBaseOperationMetadata();
+    message.resourceNames = object.resourceNames?.map(e => e) || [];
+    message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
+    message.progressPercentage = object.progressPercentage ?? 0;
+    message.startTime = object.startTime ?? undefined;
+    return message;
+  }
+
+};
+
+function createBaseOperationMetadata_Step(): OperationMetadata_Step {
+  return {
+    description: "",
+    status: 0
+  };
+}
+
+export const OperationMetadata_Step = {
+  encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.description !== "") {
+      writer.uint32(18).string(message.description);
+    }
+
+    if (message.status !== 0) {
+      writer.uint32(32).int32(message.status);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata_Step {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOperationMetadata_Step();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 2:
+          message.description = reader.string();
+          break;
+
+        case 4:
+          message.status = (reader.int32() as any);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): OperationMetadata_Step {
+    return {
+      description: isSet(object.description) ? String(object.description) : "",
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+    };
+  },
+
+  toJSON(message: OperationMetadata_Step): unknown {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description);
+    message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<OperationMetadata_Step>, I>>(object: I): OperationMetadata_Step {
+    const message = createBaseOperationMetadata_Step();
+    message.description = object.description ?? "";
+    message.status = object.status ?? 0;
+    return message;
+  }
+
+};
+
+function createBaseDiagnostic(): Diagnostic {
+  return {
+    location: "",
+    kind: 0,
+    message: ""
+  };
+}
+
+export const Diagnostic = {
+  encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.location !== "") {
+      writer.uint32(10).string(message.location);
+    }
+
+    if (message.kind !== 0) {
+      writer.uint32(16).int32(message.kind);
+    }
+
+    if (message.message !== "") {
+      writer.uint32(26).string(message.message);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Diagnostic {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDiagnostic();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.location = reader.string();
+          break;
+
+        case 2:
+          message.kind = (reader.int32() as any);
+          break;
+
+        case 3:
+          message.message = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Diagnostic {
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      message: isSet(object.message) ? String(object.message) : ""
+    };
+  },
+
+  toJSON(message: Diagnostic): unknown {
+    const obj: any = {};
+    message.location !== undefined && (obj.location = message.location);
+    message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
+    message.message !== undefined && (obj.message = message.message);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Diagnostic>, I>>(object: I): Diagnostic {
+    const message = createBaseDiagnostic();
+    message.location = object.location ?? "";
+    message.kind = object.kind ?? 0;
+    message.message = object.message ?? "";
+    return message;
+  }
+
+};
+
+function createBaseConfigSource(): ConfigSource {
+  return {
+    id: "",
+    files: []
+  };
+}
+
+export const ConfigSource = {
+  encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== "") {
+      writer.uint32(42).string(message.id);
+    }
+
+    for (const v of message.files) {
+      ConfigFile.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigSource {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseConfigSource();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 5:
+          message.id = reader.string();
+          break;
+
+        case 2:
+          message.files.push(ConfigFile.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ConfigSource {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: ConfigSource): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.files) {
+      obj.files = message.files.map(e => e ? ConfigFile.toJSON(e) : undefined);
+    } else {
+      obj.files = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ConfigSource>, I>>(object: I): ConfigSource {
+    const message = createBaseConfigSource();
+    message.id = object.id ?? "";
+    message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
+    return message;
+  }
+
+};
+
+function createBaseConfigFile(): ConfigFile {
+  return {
+    filePath: "",
+    fileContents: new Uint8Array(),
+    fileType: 0
+  };
+}
+
+export const ConfigFile = {
+  encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.filePath !== "") {
+      writer.uint32(10).string(message.filePath);
+    }
+
+    if (message.fileContents.length !== 0) {
+      writer.uint32(26).bytes(message.fileContents);
+    }
+
+    if (message.fileType !== 0) {
+      writer.uint32(32).int32(message.fileType);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigFile {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseConfigFile();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.filePath = reader.string();
+          break;
+
+        case 3:
+          message.fileContents = reader.bytes();
+          break;
+
+        case 4:
+          message.fileType = (reader.int32() as any);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ConfigFile {
+    return {
+      filePath: isSet(object.filePath) ? String(object.filePath) : "",
+      fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
+      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : 0
+    };
+  },
+
+  toJSON(message: ConfigFile): unknown {
+    const obj: any = {};
+    message.filePath !== undefined && (obj.filePath = message.filePath);
+    message.fileContents !== undefined && (obj.fileContents = base64FromBytes(message.fileContents !== undefined ? message.fileContents : new Uint8Array()));
+    message.fileType !== undefined && (obj.fileType = configFile_FileTypeToJSON(message.fileType));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ConfigFile>, I>>(object: I): ConfigFile {
+    const message = createBaseConfigFile();
+    message.filePath = object.filePath ?? "";
+    message.fileContents = object.fileContents ?? new Uint8Array();
+    message.fileType = object.fileType ?? 0;
+    return message;
+  }
+
+};
 
 function createBaseConfigRef(): ConfigRef {
   return {
@@ -838,23 +1052,6 @@ export const ConfigRef = {
   }
 
 };
-
-/**
- * Change report associated with a particular service configuration.
- * 
- * It contains a list of ConfigChanges based on the comparison between
- * two service configurations.
- */
-export interface ChangeReport {
-  /**
-   * List of changes between two service configurations.
-   * The changes will be alphabetically sorted based on the identifier
-   * of each change.
-   * A ConfigChange identifier is a dot separated path to the configuration.
-   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
-   */
-  configChanges: ConfigChange[];
-}
 
 function createBaseChangeReport(): ChangeReport {
   return {
@@ -919,53 +1116,6 @@ export const ChangeReport = {
 
 };
 
-/**
- * A rollout resource that defines how service configuration versions are pushed
- * to control plane systems. Typically, you create a new version of the
- * service config, and then create a Rollout to push the service config.
- */
-export interface Rollout {
-  /**
-   * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
-   * and only lower case letters, digits, '.', '_' and '-' are allowed.
-   * 
-   * If not specified by client, the server will generate one. The generated id
-   * will have the form of <date><revision number>, where "date" is the create
-   * date in ISO 8601 format.  "revision number" is a monotonically increasing
-   * positive number that is reset every day for each service.
-   * An example of the generated rollout_id is '2016-02-16r1'
-   */
-  rolloutId: string;
-
-  /** Creation time of the rollout. Readonly. */
-  createTime: Date;
-
-  /** The user who created the Rollout. Readonly. */
-  createdBy: string;
-
-  /**
-   * The status of this rollout. Readonly. In case of a failed rollout,
-   * the system will automatically rollback to the current Rollout
-   * version. Readonly.
-   */
-  status: Rollout_RolloutStatus;
-
-  /**
-   * Google Service Control selects service configurations based on
-   * traffic percentage.
-   */
-  trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
-
-  /**
-   * The strategy associated with a rollout to delete a `ManagedService`.
-   * Readonly.
-   */
-  deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
-
-  /** The name of the service associated with this Rollout. */
-  serviceName: string;
-}
-
 function createBaseRollout(): Rollout {
   return {
     rolloutId: "",
@@ -984,7 +1134,9 @@ export const Rollout = {
       writer.uint32(10).string(message.rolloutId);
     }
 
-    if (message.createTime !== undefined) Timestamp.encode(toTimestamp(message.createTime), writer.uint32(18).fork()).ldelim();
+    if (message.createTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.createTime), writer.uint32(18).fork()).ldelim();
+    }
 
     if (message.createdBy !== "") {
       writer.uint32(26).string(message.createdBy);
@@ -1092,10 +1244,6 @@ export const Rollout = {
   }
 
 };
-export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
-  key: string;
-  value: number;
-}
 
 function createBaseRollout_TrafficPercentStrategy_PercentagesEntry(): Rollout_TrafficPercentStrategy_PercentagesEntry {
   return {
@@ -1165,49 +1313,6 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   }
 
 };
-
-/**
- * Strategy that specifies how clients of Google Service Controller want to
- * send traffic to use different config versions. This is generally
- * used by API proxy to split traffic based on your configured percentage for
- * each config version.
- * 
- * One example of how to gradually rollout a new service configuration using
- * this
- * strategy:
- * Day 1
- * 
- * Rollout {
- * id: "example.googleapis.com/rollout_20160206"
- * traffic_percent_strategy {
- * percentages: {
- * "example.googleapis.com/20160201": 70.00
- * "example.googleapis.com/20160206": 30.00
- * }
- * }
- * }
- * 
- * Day 2
- * 
- * Rollout {
- * id: "example.googleapis.com/rollout_20160207"
- * traffic_percent_strategy: {
- * percentages: {
- * "example.googleapis.com/20160206": 100.00
- * }
- * }
- * }
- */
-export interface Rollout_TrafficPercentStrategy {
-  /**
-   * Maps service configuration IDs to their corresponding traffic percentage.
-   * Key is the service configuration ID, Value is the traffic percentage
-   * which must be greater than 0.0 and the sum must equal to 100.0.
-   */
-  percentages: {
-    [key: string]: number;
-  };
-}
 
 function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrategy {
   return {
@@ -1293,18 +1398,12 @@ export const Rollout_TrafficPercentStrategy = {
 
 };
 
-/**
- * Strategy used to delete a service. This strategy is a placeholder only
- * used by the system generated rollout to delete a service.
- */
-export interface Rollout_DeleteServiceStrategy {}
-
 function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrategy {
   return {};
 }
 
 export const Rollout_DeleteServiceStrategy = {
-  encode(message: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1326,112 +1425,18 @@ export const Rollout_DeleteServiceStrategy = {
     return message;
   },
 
-  fromJSON(object: any): Rollout_DeleteServiceStrategy {
+  fromJSON(_: any): Rollout_DeleteServiceStrategy {
     return {};
   },
 
-  toJSON(message: Rollout_DeleteServiceStrategy): unknown {
+  toJSON(_: Rollout_DeleteServiceStrategy): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Rollout_DeleteServiceStrategy>, I>>(object: I): Rollout_DeleteServiceStrategy {
+  fromPartial<I extends Exact<DeepPartial<Rollout_DeleteServiceStrategy>, I>>(_: I): Rollout_DeleteServiceStrategy {
     const message = createBaseRollout_DeleteServiceStrategy();
     return message;
   }
 
 };
-
-/** Status of a Rollout. */
-export enum Rollout_RolloutStatus {
-  /** ROLLOUT_STATUS_UNSPECIFIED - No status specified. */
-  ROLLOUT_STATUS_UNSPECIFIED = 0,
-
-  /** IN_PROGRESS - The Rollout is in progress. */
-  IN_PROGRESS = 1,
-
-  /** SUCCESS - The Rollout has completed successfully. */
-  SUCCESS = 2,
-
-  /**
-   * CANCELLED - The Rollout has been cancelled. This can happen if you have overlapping
-   * Rollout pushes, and the previous ones will be cancelled.
-   */
-  CANCELLED = 3,
-
-  /** FAILED - The Rollout has failed and the rollback attempt has failed too. */
-  FAILED = 4,
-
-  /** PENDING - The Rollout has not started yet and is pending for execution. */
-  PENDING = 5,
-
-  /**
-   * FAILED_ROLLED_BACK - The Rollout has failed and rolled back to the previous successful
-   * Rollout.
-   */
-  FAILED_ROLLED_BACK = 6,
-  UNRECOGNIZED = -1,
-}
-export function rollout_RolloutStatusFromJSON(object: any): Rollout_RolloutStatus {
-  switch (object) {
-    case 0:
-    case "ROLLOUT_STATUS_UNSPECIFIED":
-      return Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED;
-
-    case 1:
-    case "IN_PROGRESS":
-      return Rollout_RolloutStatus.IN_PROGRESS;
-
-    case 2:
-    case "SUCCESS":
-      return Rollout_RolloutStatus.SUCCESS;
-
-    case 3:
-    case "CANCELLED":
-      return Rollout_RolloutStatus.CANCELLED;
-
-    case 4:
-    case "FAILED":
-      return Rollout_RolloutStatus.FAILED;
-
-    case 5:
-    case "PENDING":
-      return Rollout_RolloutStatus.PENDING;
-
-    case 6:
-    case "FAILED_ROLLED_BACK":
-      return Rollout_RolloutStatus.FAILED_ROLLED_BACK;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Rollout_RolloutStatus.UNRECOGNIZED;
-  }
-}
-export function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): string {
-  switch (object) {
-    case Rollout_RolloutStatus.ROLLOUT_STATUS_UNSPECIFIED:
-      return "ROLLOUT_STATUS_UNSPECIFIED";
-
-    case Rollout_RolloutStatus.IN_PROGRESS:
-      return "IN_PROGRESS";
-
-    case Rollout_RolloutStatus.SUCCESS:
-      return "SUCCESS";
-
-    case Rollout_RolloutStatus.CANCELLED:
-      return "CANCELLED";
-
-    case Rollout_RolloutStatus.FAILED:
-      return "FAILED";
-
-    case Rollout_RolloutStatus.PENDING:
-      return "PENDING";
-
-    case Rollout_RolloutStatus.FAILED_ROLLED_BACK:
-      return "FAILED_ROLLED_BACK";
-
-    default:
-      return "UNKNOWN";
-  }
-}

@@ -116,6 +116,125 @@ export interface PartSetHeader {
   total: number;
   hash: Uint8Array;
 }
+export interface Part {
+  index: number;
+  bytes: Uint8Array;
+  proof: Proof;
+}
+
+/** BlockID */
+export interface BlockID {
+  hash: Uint8Array;
+  partSetHeader: PartSetHeader;
+}
+
+/** Header defines the structure of a Tendermint block header. */
+export interface Header {
+  /** basic block info */
+  version: Consensus;
+  chainId: string;
+  height: Long;
+  time: Date;
+
+  /** prev block info */
+  lastBlockId: BlockID;
+
+  /** hashes of block data */
+  lastCommitHash: Uint8Array;
+  dataHash: Uint8Array;
+
+  /** hashes from the app output from the prev block */
+  validatorsHash: Uint8Array;
+
+  /** validators for the next block */
+  nextValidatorsHash: Uint8Array;
+
+  /** consensus params for current block */
+  consensusHash: Uint8Array;
+
+  /** state after txs from the previous block */
+  appHash: Uint8Array;
+  lastResultsHash: Uint8Array;
+
+  /** consensus info */
+  evidenceHash: Uint8Array;
+
+  /** original proposer of the block */
+  proposerAddress: Uint8Array;
+}
+
+/** Data contains the set of transactions included in the block */
+export interface Data {
+  /**
+   * Txs that will be applied by state @ block.Height+1.
+   * NOTE: not all txs here are valid.  We're just agreeing on the order first.
+   * This means that block.AppHash does not include these txs.
+   */
+  txs: Uint8Array[];
+}
+
+/**
+ * Vote represents a prevote, precommit, or commit vote from validators for
+ * consensus.
+ */
+export interface Vote {
+  type: SignedMsgType;
+  height: Long;
+  round: number;
+
+  /** zero if vote is nil. */
+  blockId: BlockID;
+  timestamp: Date;
+  validatorAddress: Uint8Array;
+  validatorIndex: number;
+  signature: Uint8Array;
+}
+
+/** Commit contains the evidence that a block was committed by a set of validators. */
+export interface Commit {
+  height: Long;
+  round: number;
+  blockId: BlockID;
+  signatures: CommitSig[];
+}
+
+/** CommitSig is a part of the Vote included in a Commit. */
+export interface CommitSig {
+  blockIdFlag: BlockIDFlag;
+  validatorAddress: Uint8Array;
+  timestamp: Date;
+  signature: Uint8Array;
+}
+export interface Proposal {
+  type: SignedMsgType;
+  height: Long;
+  round: number;
+  polRound: number;
+  blockId: BlockID;
+  timestamp: Date;
+  signature: Uint8Array;
+}
+export interface SignedHeader {
+  header: Header;
+  commit: Commit;
+}
+export interface LightBlock {
+  signedHeader: SignedHeader;
+  validatorSet: ValidatorSet;
+}
+export interface BlockMeta {
+  blockId: BlockID;
+  blockSize: Long;
+  header: Header;
+  numTxs: Long;
+}
+
+/** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
+export interface TxProof {
+  rootHash: Uint8Array;
+  data: Uint8Array;
+  proof: Proof;
+}
 
 function createBasePartSetHeader(): PartSetHeader {
   return {
@@ -185,11 +304,6 @@ export const PartSetHeader = {
   }
 
 };
-export interface Part {
-  index: number;
-  bytes: Uint8Array;
-  proof: Proof;
-}
 
 function createBasePart(): Part {
   return {
@@ -272,12 +386,6 @@ export const Part = {
 
 };
 
-/** BlockID */
-export interface BlockID {
-  hash: Uint8Array;
-  partSetHeader: PartSetHeader;
-}
-
 function createBaseBlockID(): BlockID {
   return {
     hash: new Uint8Array(),
@@ -347,41 +455,6 @@ export const BlockID = {
 
 };
 
-/** Header defines the structure of a Tendermint block header. */
-export interface Header {
-  /** basic block info */
-  version: Consensus;
-  chainId: string;
-  height: Long;
-  time: Date;
-
-  /** prev block info */
-  lastBlockId: BlockID;
-
-  /** hashes of block data */
-  lastCommitHash: Uint8Array;
-  dataHash: Uint8Array;
-
-  /** hashes from the app output from the prev block */
-  validatorsHash: Uint8Array;
-
-  /** validators for the next block */
-  nextValidatorsHash: Uint8Array;
-
-  /** consensus params for current block */
-  consensusHash: Uint8Array;
-
-  /** state after txs from the previous block */
-  appHash: Uint8Array;
-  lastResultsHash: Uint8Array;
-
-  /** consensus info */
-  evidenceHash: Uint8Array;
-
-  /** original proposer of the block */
-  proposerAddress: Uint8Array;
-}
-
 function createBaseHeader(): Header {
   return {
     version: undefined,
@@ -415,7 +488,9 @@ export const Header = {
       writer.uint32(24).int64(message.height);
     }
 
-    if (message.time !== undefined) Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
+    if (message.time !== undefined) {
+      Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
+    }
 
     if (message.lastBlockId !== undefined) {
       BlockID.encode(message.lastBlockId, writer.uint32(42).fork()).ldelim();
@@ -593,16 +668,6 @@ export const Header = {
 
 };
 
-/** Data contains the set of transactions included in the block */
-export interface Data {
-  /**
-   * Txs that will be applied by state @ block.Height+1.
-   * NOTE: not all txs here are valid.  We're just agreeing on the order first.
-   * This means that block.AppHash does not include these txs.
-   */
-  txs: Uint8Array[];
-}
-
 function createBaseData(): Data {
   return {
     txs: []
@@ -666,23 +731,6 @@ export const Data = {
 
 };
 
-/**
- * Vote represents a prevote, precommit, or commit vote from validators for
- * consensus.
- */
-export interface Vote {
-  type: SignedMsgType;
-  height: Long;
-  round: number;
-
-  /** zero if vote is nil. */
-  blockId: BlockID;
-  timestamp: Date;
-  validatorAddress: Uint8Array;
-  validatorIndex: number;
-  signature: Uint8Array;
-}
-
 function createBaseVote(): Vote {
   return {
     type: 0,
@@ -714,7 +762,9 @@ export const Vote = {
       BlockID.encode(message.blockId, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
+    }
 
     if (message.validatorAddress.length !== 0) {
       writer.uint32(50).bytes(message.validatorAddress);
@@ -822,14 +872,6 @@ export const Vote = {
 
 };
 
-/** Commit contains the evidence that a block was committed by a set of validators. */
-export interface Commit {
-  height: Long;
-  round: number;
-  blockId: BlockID;
-  signatures: CommitSig[];
-}
-
 function createBaseCommit(): Commit {
   return {
     height: Long.ZERO,
@@ -929,14 +971,6 @@ export const Commit = {
 
 };
 
-/** CommitSig is a part of the Vote included in a Commit. */
-export interface CommitSig {
-  blockIdFlag: BlockIDFlag;
-  validatorAddress: Uint8Array;
-  timestamp: Date;
-  signature: Uint8Array;
-}
-
 function createBaseCommitSig(): CommitSig {
   return {
     blockIdFlag: 0,
@@ -956,7 +990,9 @@ export const CommitSig = {
       writer.uint32(18).bytes(message.validatorAddress);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(26).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(26).fork()).ldelim();
+    }
 
     if (message.signature.length !== 0) {
       writer.uint32(34).bytes(message.signature);
@@ -1027,15 +1063,6 @@ export const CommitSig = {
   }
 
 };
-export interface Proposal {
-  type: SignedMsgType;
-  height: Long;
-  round: number;
-  polRound: number;
-  blockId: BlockID;
-  timestamp: Date;
-  signature: Uint8Array;
-}
 
 function createBaseProposal(): Proposal {
   return {
@@ -1071,7 +1098,9 @@ export const Proposal = {
       BlockID.encode(message.blockId, writer.uint32(42).fork()).ldelim();
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(50).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(50).fork()).ldelim();
+    }
 
     if (message.signature.length !== 0) {
       writer.uint32(58).bytes(message.signature);
@@ -1163,10 +1192,6 @@ export const Proposal = {
   }
 
 };
-export interface SignedHeader {
-  header: Header;
-  commit: Commit;
-}
 
 function createBaseSignedHeader(): SignedHeader {
   return {
@@ -1236,10 +1261,6 @@ export const SignedHeader = {
   }
 
 };
-export interface LightBlock {
-  signedHeader: SignedHeader;
-  validatorSet: ValidatorSet;
-}
 
 function createBaseLightBlock(): LightBlock {
   return {
@@ -1309,12 +1330,6 @@ export const LightBlock = {
   }
 
 };
-export interface BlockMeta {
-  blockId: BlockID;
-  blockSize: Long;
-  header: Header;
-  numTxs: Long;
-}
 
 function createBaseBlockMeta(): BlockMeta {
   return {
@@ -1408,13 +1423,6 @@ export const BlockMeta = {
   }
 
 };
-
-/** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
-export interface TxProof {
-  rootHash: Uint8Array;
-  data: Uint8Array;
-  proof: Proof;
-}
 
 function createBaseTxProof(): TxProof {
   return {

@@ -10,6 +10,119 @@ export interface Params {
   withdrawAddrEnabled: boolean;
 }
 
+/**
+ * ValidatorHistoricalRewards represents historical rewards for a validator.
+ * Height is implicit within the store key.
+ * Cumulative reward ratio is the sum from the zeroeth period
+ * until this period of rewards / tokens, per the spec.
+ * The reference count indicates the number of objects
+ * which might need to reference this historical entry at any point.
+ * ReferenceCount =
+ * number of outstanding delegations which ended the associated period (and
+ * might need to read that record)
+ * + number of slashes which ended the associated period (and might need to
+ * read that record)
+ * + one per validator for the zeroeth period, set on initialization
+ */
+export interface ValidatorHistoricalRewards {
+  cumulativeRewardRatio: DecCoin[];
+  referenceCount: number;
+}
+
+/**
+ * ValidatorCurrentRewards represents current rewards and current
+ * period for a validator kept as a running counter and incremented
+ * each block as long as the validator's tokens remain constant.
+ */
+export interface ValidatorCurrentRewards {
+  rewards: DecCoin[];
+  period: Long;
+}
+
+/**
+ * ValidatorAccumulatedCommission represents accumulated commission
+ * for a validator kept as a running counter, can be withdrawn at any time.
+ */
+export interface ValidatorAccumulatedCommission {
+  commission: DecCoin[];
+}
+
+/**
+ * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards
+ * for a validator inexpensive to track, allows simple sanity checks.
+ */
+export interface ValidatorOutstandingRewards {
+  rewards: DecCoin[];
+}
+
+/**
+ * ValidatorSlashEvent represents a validator slash event.
+ * Height is implicit within the store key.
+ * This is needed to calculate appropriate amount of staking tokens
+ * for delegations which are withdrawn after a slash has occurred.
+ */
+export interface ValidatorSlashEvent {
+  validatorPeriod: Long;
+  fraction: string;
+}
+
+/** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
+export interface ValidatorSlashEvents {
+  validatorSlashEvents: ValidatorSlashEvent[];
+}
+
+/** FeePool is the global fee pool for distribution. */
+export interface FeePool {
+  communityPool: DecCoin[];
+}
+
+/**
+ * CommunityPoolSpendProposal details a proposal for use of community funds,
+ * together with how many coins are proposed to be spent, and to which
+ * recipient account.
+ */
+export interface CommunityPoolSpendProposal {
+  title: string;
+  description: string;
+  recipient: string;
+  amount: Coin[];
+}
+
+/**
+ * DelegatorStartingInfo represents the starting info for a delegator reward
+ * period. It tracks the previous validator period, the delegation's amount of
+ * staking token, and the creation height (to check later on if any slashes have
+ * occurred). NOTE: Even though validators are slashed to whole staking tokens,
+ * the delegators within the validator may be left with less than a full token,
+ * thus sdk.Dec is used.
+ */
+export interface DelegatorStartingInfo {
+  previousPeriod: Long;
+  stake: string;
+  height: Long;
+}
+
+/**
+ * DelegationDelegatorReward represents the properties
+ * of a delegator's delegation reward.
+ */
+export interface DelegationDelegatorReward {
+  validatorAddress: string;
+  reward: DecCoin[];
+}
+
+/**
+ * CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
+ * with a deposit
+ */
+export interface CommunityPoolSpendProposalWithDeposit {
+  title: string;
+  description: string;
+  recipient: string;
+  amount: string;
+  deposit: string;
+}
+
 function createBaseParams(): Params {
   return {
     communityTax: "",
@@ -103,25 +216,6 @@ export const Params = {
 
 };
 
-/**
- * ValidatorHistoricalRewards represents historical rewards for a validator.
- * Height is implicit within the store key.
- * Cumulative reward ratio is the sum from the zeroeth period
- * until this period of rewards / tokens, per the spec.
- * The reference count indicates the number of objects
- * which might need to reference this historical entry at any point.
- * ReferenceCount =
- * number of outstanding delegations which ended the associated period (and
- * might need to read that record)
- * + number of slashes which ended the associated period (and might need to
- * read that record)
- * + one per validator for the zeroeth period, set on initialization
- */
-export interface ValidatorHistoricalRewards {
-  cumulativeRewardRatio: DecCoin[];
-  referenceCount: number;
-}
-
 function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
   return {
     cumulativeRewardRatio: [],
@@ -196,16 +290,6 @@ export const ValidatorHistoricalRewards = {
   }
 
 };
-
-/**
- * ValidatorCurrentRewards represents current rewards and current
- * period for a validator kept as a running counter and incremented
- * each block as long as the validator's tokens remain constant.
- */
-export interface ValidatorCurrentRewards {
-  rewards: DecCoin[];
-  period: Long;
-}
 
 function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
   return {
@@ -282,14 +366,6 @@ export const ValidatorCurrentRewards = {
 
 };
 
-/**
- * ValidatorAccumulatedCommission represents accumulated commission
- * for a validator kept as a running counter, can be withdrawn at any time.
- */
-export interface ValidatorAccumulatedCommission {
-  commission: DecCoin[];
-}
-
 function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommission {
   return {
     commission: []
@@ -353,14 +429,6 @@ export const ValidatorAccumulatedCommission = {
 
 };
 
-/**
- * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards
- * for a validator inexpensive to track, allows simple sanity checks.
- */
-export interface ValidatorOutstandingRewards {
-  rewards: DecCoin[];
-}
-
 function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
   return {
     rewards: []
@@ -423,17 +491,6 @@ export const ValidatorOutstandingRewards = {
   }
 
 };
-
-/**
- * ValidatorSlashEvent represents a validator slash event.
- * Height is implicit within the store key.
- * This is needed to calculate appropriate amount of staking tokens
- * for delegations which are withdrawn after a slash has occurred.
- */
-export interface ValidatorSlashEvent {
-  validatorPeriod: Long;
-  fraction: string;
-}
 
 function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
   return {
@@ -504,11 +561,6 @@ export const ValidatorSlashEvent = {
 
 };
 
-/** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
-export interface ValidatorSlashEvents {
-  validatorSlashEvents: ValidatorSlashEvent[];
-}
-
 function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
   return {
     validatorSlashEvents: []
@@ -572,11 +624,6 @@ export const ValidatorSlashEvents = {
 
 };
 
-/** FeePool is the global fee pool for distribution. */
-export interface FeePool {
-  communityPool: DecCoin[];
-}
-
 function createBaseFeePool(): FeePool {
   return {
     communityPool: []
@@ -639,18 +686,6 @@ export const FeePool = {
   }
 
 };
-
-/**
- * CommunityPoolSpendProposal details a proposal for use of community funds,
- * together with how many coins are proposed to be spent, and to which
- * recipient account.
- */
-export interface CommunityPoolSpendProposal {
-  title: string;
-  description: string;
-  recipient: string;
-  amount: Coin[];
-}
 
 function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
   return {
@@ -751,20 +786,6 @@ export const CommunityPoolSpendProposal = {
 
 };
 
-/**
- * DelegatorStartingInfo represents the starting info for a delegator reward
- * period. It tracks the previous validator period, the delegation's amount of
- * staking token, and the creation height (to check later on if any slashes have
- * occurred). NOTE: Even though validators are slashed to whole staking tokens,
- * the delegators within the validator may be left with less than a full token,
- * thus sdk.Dec is used.
- */
-export interface DelegatorStartingInfo {
-  previousPeriod: Long;
-  stake: string;
-  height: Long;
-}
-
 function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
   return {
     previousPeriod: Long.UZERO,
@@ -846,15 +867,6 @@ export const DelegatorStartingInfo = {
 
 };
 
-/**
- * DelegationDelegatorReward represents the properties
- * of a delegator's delegation reward.
- */
-export interface DelegationDelegatorReward {
-  validatorAddress: string;
-  reward: DecCoin[];
-}
-
 function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
   return {
     validatorAddress: "",
@@ -929,18 +941,6 @@ export const DelegationDelegatorReward = {
   }
 
 };
-
-/**
- * CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
- * with a deposit
- */
-export interface CommunityPoolSpendProposalWithDeposit {
-  title: string;
-  description: string;
-  recipient: string;
-  amount: string;
-  deposit: string;
-}
 
 function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendProposalWithDeposit {
   return {

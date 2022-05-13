@@ -20,6 +20,36 @@ export interface GenesisState {
   missedBlocks: ValidatorMissedBlocks[];
 }
 
+/** SigningInfo stores validator signing info of corresponding address. */
+export interface SigningInfo {
+  /** address is the validator address. */
+  address: string;
+
+  /** validator_signing_info represents the signing info of this validator. */
+  validatorSigningInfo: ValidatorSigningInfo;
+}
+
+/**
+ * ValidatorMissedBlocks contains array of missed blocks of corresponding
+ * address.
+ */
+export interface ValidatorMissedBlocks {
+  /** address is the validator address. */
+  address: string;
+
+  /** missed_blocks is an array of missed blocks by the validator. */
+  missedBlocks: MissedBlock[];
+}
+
+/** MissedBlock contains height and missed status as boolean. */
+export interface MissedBlock {
+  /** index is the height at which the block was missed. */
+  index: Long;
+
+  /** missed is the missed status. */
+  missed: boolean;
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     params: undefined,
@@ -112,15 +142,6 @@ export const GenesisState = {
 
 };
 
-/** SigningInfo stores validator signing info of corresponding address. */
-export interface SigningInfo {
-  /** address is the validator address. */
-  address: string;
-
-  /** validator_signing_info represents the signing info of this validator. */
-  validatorSigningInfo: ValidatorSigningInfo;
-}
-
 function createBaseSigningInfo(): SigningInfo {
   return {
     address: "",
@@ -189,18 +210,6 @@ export const SigningInfo = {
   }
 
 };
-
-/**
- * ValidatorMissedBlocks contains array of missed blocks of corresponding
- * address.
- */
-export interface ValidatorMissedBlocks {
-  /** address is the validator address. */
-  address: string;
-
-  /** missed_blocks is an array of missed blocks by the validator. */
-  missedBlocks: MissedBlock[];
-}
 
 function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
   return {
@@ -276,15 +285,6 @@ export const ValidatorMissedBlocks = {
   }
 
 };
-
-/** MissedBlock contains height and missed status as boolean. */
-export interface MissedBlock {
-  /** index is the height at which the block was missed. */
-  index: Long;
-
-  /** missed is the missed status. */
-  missed: boolean;
-}
 
 function createBaseMissedBlock(): MissedBlock {
   return {

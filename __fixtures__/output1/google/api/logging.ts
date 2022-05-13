@@ -50,6 +50,26 @@ export interface Logging {
   consumerDestinations: Logging_LoggingDestination[];
 }
 
+/**
+ * Configuration of a specific logging destination (the producer project
+ * or the consumer project).
+ */
+export interface Logging_LoggingDestination {
+  /**
+   * The monitored resource type. The type must be defined in the
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitoredResource: string;
+
+  /**
+   * Names of the logs to be sent to this destination. Each name must
+   * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
+   * not a domain scoped name, it will be automatically prefixed with
+   * the service name followed by "/".
+   */
+  logs: string[];
+}
+
 function createBaseLogging(): Logging {
   return {
     producerDestinations: [],
@@ -129,26 +149,6 @@ export const Logging = {
   }
 
 };
-
-/**
- * Configuration of a specific logging destination (the producer project
- * or the consumer project).
- */
-export interface Logging_LoggingDestination {
-  /**
-   * The monitored resource type. The type must be defined in the
-   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
-   */
-  monitoredResource: string;
-
-  /**
-   * Names of the logs to be sent to this destination. Each name must
-   * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-   * not a domain scoped name, it will be automatically prefixed with
-   * the service name followed by "/".
-   */
-  logs: string[];
-}
 
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
   return {

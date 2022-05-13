@@ -1,6 +1,54 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
+/** Value types that can be used as label values. */
+export enum LabelDescriptor_ValueType {
+  /** STRING - A variable-length string. This is the default. */
+  STRING = 0,
+
+  /** BOOL - Boolean; true or false. */
+  BOOL = 1,
+
+  /** INT64 - A 64-bit signed integer. */
+  INT64 = 2,
+  UNRECOGNIZED = -1,
+}
+export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
+  switch (object) {
+    case 0:
+    case "STRING":
+      return LabelDescriptor_ValueType.STRING;
+
+    case 1:
+    case "BOOL":
+      return LabelDescriptor_ValueType.BOOL;
+
+    case 2:
+    case "INT64":
+      return LabelDescriptor_ValueType.INT64;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LabelDescriptor_ValueType.UNRECOGNIZED;
+  }
+}
+export function labelDescriptor_ValueTypeToJSON(object: LabelDescriptor_ValueType): string {
+  switch (object) {
+    case LabelDescriptor_ValueType.STRING:
+      return "STRING";
+
+    case LabelDescriptor_ValueType.BOOL:
+      return "BOOL";
+
+    case LabelDescriptor_ValueType.INT64:
+      return "INT64";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** A description of a label. */
 export interface LabelDescriptor {
   /** The label key. */
@@ -93,51 +141,3 @@ export const LabelDescriptor = {
   }
 
 };
-
-/** Value types that can be used as label values. */
-export enum LabelDescriptor_ValueType {
-  /** STRING - A variable-length string. This is the default. */
-  STRING = 0,
-
-  /** BOOL - Boolean; true or false. */
-  BOOL = 1,
-
-  /** INT64 - A 64-bit signed integer. */
-  INT64 = 2,
-  UNRECOGNIZED = -1,
-}
-export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
-  switch (object) {
-    case 0:
-    case "STRING":
-      return LabelDescriptor_ValueType.STRING;
-
-    case 1:
-    case "BOOL":
-      return LabelDescriptor_ValueType.BOOL;
-
-    case 2:
-    case "INT64":
-      return LabelDescriptor_ValueType.INT64;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return LabelDescriptor_ValueType.UNRECOGNIZED;
-  }
-}
-export function labelDescriptor_ValueTypeToJSON(object: LabelDescriptor_ValueType): string {
-  switch (object) {
-    case LabelDescriptor_ValueType.STRING:
-      return "STRING";
-
-    case LabelDescriptor_ValueType.BOOL:
-      return "BOOL";
-
-    case LabelDescriptor_ValueType.INT64:
-      return "INT64";
-
-    default:
-      return "UNKNOWN";
-  }
-}

@@ -29,6 +29,59 @@ export interface SmoothWeightChangeParams {
   duration: string;
 }
 
+/**
+ * PoolParams defined the parameters that will be managed by the pool
+ * governance in the future. This params are not managed by the chain
+ * governance. Instead they will be managed by the token holders of the pool.
+ * The pool's token holders are specified in future_pool_governor.
+ */
+export interface PoolParams {
+  swapFee: string;
+  exitFee: string;
+  smoothWeightChangeParams?: SmoothWeightChangeParams;
+}
+
+/**
+ * Pool asset is an internal struct that combines the amount of the
+ * token in the pool, and its balancer weight.
+ * This is an awkward packaging of data,
+ * and should be revisited in a future state migration.
+ */
+export interface PoolAsset {
+  /**
+   * Coins we are talking about,
+   * the denomination must be unique amongst all PoolAssets for this pool.
+   */
+  token: Coin;
+
+  /** Weight that is not normalized. This weight must be less than 2^50 */
+  weight: string;
+}
+export interface Pool {
+  address: string;
+  id: Long;
+  poolParams: PoolParams;
+
+  /**
+   * This string specifies who will govern the pool in the future.
+   * Valid forms of this are:
+   * {token name},{duration}
+   * {duration}
+   * where {token name} if specified is the token which determines the
+   * governor, and if not specified is the LP token for this pool.duration is
+   * a time specified as 0w,1w,2w, etc. which specifies how long the token
+   * would need to be locked up to count in governance. 0w means no lockup.
+   * TODO: Further improve these docs
+   */
+  futurePoolGovernor: string;
+
+  /** sum of all LP tokens sent out */
+  totalShares: Coin;
+
+  /** sum of all non-normalized pool weights */
+  totalWeight: string;
+}
+
 function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
   return {
     startTime: undefined,
@@ -38,8 +91,14 @@ function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
 
 export const SmoothWeightChangeParams = {
   encode(message: SmoothWeightChangeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -91,18 +150,6 @@ export const SmoothWeightChangeParams = {
   }
 
 };
-
-/**
- * PoolParams defined the parameters that will be managed by the pool
- * governance in the future. This params are not managed by the chain
- * governance. Instead they will be managed by the token holders of the pool.
- * The pool's token holders are specified in future_pool_governor.
- */
-export interface PoolParams {
-  swapFee: string;
-  exitFee: string;
-  smoothWeightChangeParams?: SmoothWeightChangeParams;
-}
 
 function createBasePoolParams(): PoolParams {
   return {
@@ -185,23 +232,6 @@ export const PoolParams = {
 
 };
 
-/**
- * Pool asset is an internal struct that combines the amount of the
- * token in the pool, and its balancer weight.
- * This is an awkward packaging of data,
- * and should be revisited in a future state migration.
- */
-export interface PoolAsset {
-  /**
-   * Coins we are talking about,
-   * the denomination must be unique amongst all PoolAssets for this pool.
-   */
-  token: Coin;
-
-  /** Weight that is not normalized. This weight must be less than 2^50 */
-  weight: string;
-}
-
 function createBasePoolAsset(): PoolAsset {
   return {
     token: undefined,
@@ -270,30 +300,6 @@ export const PoolAsset = {
   }
 
 };
-export interface Pool {
-  address: string;
-  id: Long;
-  poolParams: PoolParams;
-
-  /**
-   * This string specifies who will govern the pool in the future.
-   * Valid forms of this are:
-   * {token name},{duration}
-   * {duration}
-   * where {token name} if specified is the token which determines the
-   * governor, and if not specified is the LP token for this pool.duration is
-   * a time specified as 0w,1w,2w, etc. which specifies how long the token
-   * would need to be locked up to count in governance. 0w means no lockup.
-   * TODO: Further improve these docs
-   */
-  futurePoolGovernor: string;
-
-  /** sum of all LP tokens sent out */
-  totalShares: Coin;
-
-  /** sum of all non-normalized pool weights */
-  totalWeight: string;
-}
 
 function createBasePool(): Pool {
   return {

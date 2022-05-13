@@ -10,6 +10,17 @@ export interface Params {
    */
   mintedDenom: string;
 }
+export interface LockableDurationsInfo {
+  lockableDurations: string[];
+}
+export interface DistrInfo {
+  totalWeight: string;
+  records: DistrRecord[];
+}
+export interface DistrRecord {
+  gaugeId: Long;
+  weight: string;
+}
 
 function createBaseParams(): Params {
   return {
@@ -67,9 +78,6 @@ export const Params = {
   }
 
 };
-export interface LockableDurationsInfo {
-  lockableDurations: string[];
-}
 
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {
   return {
@@ -133,10 +141,6 @@ export const LockableDurationsInfo = {
   }
 
 };
-export interface DistrInfo {
-  totalWeight: string;
-  records: DistrRecord[];
-}
 
 function createBaseDistrInfo(): DistrInfo {
   return {
@@ -212,10 +216,6 @@ export const DistrInfo = {
   }
 
 };
-export interface DistrRecord {
-  gaugeId: Long;
-  weight: string;
-}
 
 function createBaseDistrRecord(): DistrRecord {
   return {

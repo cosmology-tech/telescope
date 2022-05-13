@@ -6,6 +6,12 @@ export interface Pairs {
   pairs: Pair[];
 }
 
+/** Pair defines a key/value bytes tuple. */
+export interface Pair {
+  key: Uint8Array;
+  value: Uint8Array;
+}
+
 function createBasePairs(): Pairs {
   return {
     pairs: []
@@ -68,12 +74,6 @@ export const Pairs = {
   }
 
 };
-
-/** Pair defines a key/value bytes tuple. */
-export interface Pair {
-  key: Uint8Array;
-  value: Uint8Array;
-}
 
 function createBasePair(): Pair {
   return {

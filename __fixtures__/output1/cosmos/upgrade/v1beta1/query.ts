@@ -8,12 +8,102 @@ import { Exact, DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } fro
  */
 export interface QueryCurrentPlanRequest {}
 
+/**
+ * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC
+ * method.
+ */
+export interface QueryCurrentPlanResponse {
+  /** plan is the current upgrade plan. */
+  plan: Plan;
+}
+
+/**
+ * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
+ * method.
+ */
+export interface QueryAppliedPlanRequest {
+  /** name is the name of the applied plan to query for. */
+  name: string;
+}
+
+/**
+ * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC
+ * method.
+ */
+export interface QueryAppliedPlanResponse {
+  /** height is the block height at which the plan was applied. */
+  height: Long;
+}
+
+/**
+ * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
+ * RPC method.
+ */
+export interface QueryUpgradedConsensusStateRequest {
+  /**
+   * last height of the current chain must be sent in request
+   * as this is the height under which next consensus state is stored
+   */
+  lastHeight: Long;
+}
+
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
+ * RPC method.
+ */
+export interface QueryUpgradedConsensusStateResponse {
+  /** Since: cosmos-sdk 0.43 */
+  upgradedConsensusState: Uint8Array;
+}
+
+/**
+ * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryModuleVersionsRequest {
+  /**
+   * module_name is a field to query a specific module
+   * consensus version from state. Leaving this empty will
+   * fetch the full list of module versions from state
+   */
+  moduleName: string;
+}
+
+/**
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryModuleVersionsResponse {
+  /** module_versions is a list of module names with their consensus versions. */
+  moduleVersions: ModuleVersion[];
+}
+
+/**
+ * QueryAuthorityRequest is the request type for Query/Authority
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryAuthorityRequest {}
+
+/**
+ * QueryAuthorityResponse is the response type for Query/Authority
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryAuthorityResponse {
+  address: string;
+}
+
 function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {
   return {};
 }
 
 export const QueryCurrentPlanRequest = {
-  encode(message: QueryCurrentPlanRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryCurrentPlanRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -35,30 +125,21 @@ export const QueryCurrentPlanRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryCurrentPlanRequest {
+  fromJSON(_: any): QueryCurrentPlanRequest {
     return {};
   },
 
-  toJSON(message: QueryCurrentPlanRequest): unknown {
+  toJSON(_: QueryCurrentPlanRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryCurrentPlanRequest>, I>>(object: I): QueryCurrentPlanRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryCurrentPlanRequest>, I>>(_: I): QueryCurrentPlanRequest {
     const message = createBaseQueryCurrentPlanRequest();
     return message;
   }
 
 };
-
-/**
- * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC
- * method.
- */
-export interface QueryCurrentPlanResponse {
-  /** plan is the current upgrade plan. */
-  plan: Plan;
-}
 
 function createBaseQueryCurrentPlanResponse(): QueryCurrentPlanResponse {
   return {
@@ -117,15 +198,6 @@ export const QueryCurrentPlanResponse = {
 
 };
 
-/**
- * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
- * method.
- */
-export interface QueryAppliedPlanRequest {
-  /** name is the name of the applied plan to query for. */
-  name: string;
-}
-
 function createBaseQueryAppliedPlanRequest(): QueryAppliedPlanRequest {
   return {
     name: ""
@@ -182,15 +254,6 @@ export const QueryAppliedPlanRequest = {
   }
 
 };
-
-/**
- * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC
- * method.
- */
-export interface QueryAppliedPlanResponse {
-  /** height is the block height at which the plan was applied. */
-  height: Long;
-}
 
 function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
   return {
@@ -249,18 +312,6 @@ export const QueryAppliedPlanResponse = {
 
 };
 
-/**
- * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
- * RPC method.
- */
-export interface QueryUpgradedConsensusStateRequest {
-  /**
-   * last height of the current chain must be sent in request
-   * as this is the height under which next consensus state is stored
-   */
-  lastHeight: Long;
-}
-
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {
     lastHeight: Long.ZERO
@@ -317,15 +368,6 @@ export const QueryUpgradedConsensusStateRequest = {
   }
 
 };
-
-/**
- * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
- * RPC method.
- */
-export interface QueryUpgradedConsensusStateResponse {
-  /** Since: cosmos-sdk 0.43 */
-  upgradedConsensusState: Uint8Array;
-}
 
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
   return {
@@ -384,21 +426,6 @@ export const QueryUpgradedConsensusStateResponse = {
 
 };
 
-/**
- * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
- * RPC method.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface QueryModuleVersionsRequest {
-  /**
-   * module_name is a field to query a specific module
-   * consensus version from state. Leaving this empty will
-   * fetch the full list of module versions from state
-   */
-  moduleName: string;
-}
-
 function createBaseQueryModuleVersionsRequest(): QueryModuleVersionsRequest {
   return {
     moduleName: ""
@@ -455,17 +482,6 @@ export const QueryModuleVersionsRequest = {
   }
 
 };
-
-/**
- * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
- * RPC method.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface QueryModuleVersionsResponse {
-  /** module_versions is a list of module names with their consensus versions. */
-  moduleVersions: ModuleVersion[];
-}
 
 function createBaseQueryModuleVersionsResponse(): QueryModuleVersionsResponse {
   return {
@@ -530,19 +546,12 @@ export const QueryModuleVersionsResponse = {
 
 };
 
-/**
- * QueryAuthorityRequest is the request type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
-export interface QueryAuthorityRequest {}
-
 function createBaseQueryAuthorityRequest(): QueryAuthorityRequest {
   return {};
 }
 
 export const QueryAuthorityRequest = {
-  encode(message: QueryAuthorityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryAuthorityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -564,30 +573,21 @@ export const QueryAuthorityRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryAuthorityRequest {
+  fromJSON(_: any): QueryAuthorityRequest {
     return {};
   },
 
-  toJSON(message: QueryAuthorityRequest): unknown {
+  toJSON(_: QueryAuthorityRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAuthorityRequest>, I>>(object: I): QueryAuthorityRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryAuthorityRequest>, I>>(_: I): QueryAuthorityRequest {
     const message = createBaseQueryAuthorityRequest();
     return message;
   }
 
 };
-
-/**
- * QueryAuthorityResponse is the response type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
-export interface QueryAuthorityResponse {
-  address: string;
-}
 
 function createBaseQueryAuthorityResponse(): QueryAuthorityResponse {
   return {

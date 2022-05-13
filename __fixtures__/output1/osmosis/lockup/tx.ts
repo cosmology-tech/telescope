@@ -8,6 +8,25 @@ export interface MsgLockTokens {
   duration: string;
   coins: Coin[];
 }
+export interface MsgLockTokensResponse {
+  ID: Long;
+}
+export interface MsgBeginUnlockingAll {
+  owner: string;
+}
+export interface MsgBeginUnlockingAllResponse {
+  unlocks: PeriodLock[];
+}
+export interface MsgBeginUnlocking {
+  owner: string;
+  ID: Long;
+
+  /** Amount of unlocking coins. Unlock all if not set. */
+  coins: Coin[];
+}
+export interface MsgBeginUnlockingResponse {
+  success: boolean;
+}
 
 function createBaseMsgLockTokens(): MsgLockTokens {
   return {
@@ -23,7 +42,9 @@ export const MsgLockTokens = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
 
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -93,9 +114,6 @@ export const MsgLockTokens = {
   }
 
 };
-export interface MsgLockTokensResponse {
-  ID: Long;
-}
 
 function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
   return {
@@ -153,9 +171,6 @@ export const MsgLockTokensResponse = {
   }
 
 };
-export interface MsgBeginUnlockingAll {
-  owner: string;
-}
 
 function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
   return {
@@ -213,9 +228,6 @@ export const MsgBeginUnlockingAll = {
   }
 
 };
-export interface MsgBeginUnlockingAllResponse {
-  unlocks: PeriodLock[];
-}
 
 function createBaseMsgBeginUnlockingAllResponse(): MsgBeginUnlockingAllResponse {
   return {
@@ -279,13 +291,6 @@ export const MsgBeginUnlockingAllResponse = {
   }
 
 };
-export interface MsgBeginUnlocking {
-  owner: string;
-  ID: Long;
-
-  /** Amount of unlocking coins. Unlock all if not set. */
-  coins: Coin[];
-}
 
 function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
   return {
@@ -373,9 +378,6 @@ export const MsgBeginUnlocking = {
   }
 
 };
-export interface MsgBeginUnlockingResponse {
-  success: boolean;
-}
 
 function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
   return {

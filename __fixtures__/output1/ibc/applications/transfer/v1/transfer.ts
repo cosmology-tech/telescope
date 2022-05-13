@@ -16,6 +16,26 @@ export interface DenomTrace {
   baseDenom: string;
 }
 
+/**
+ * Params defines the set of IBC transfer parameters.
+ * NOTE: To prevent a single token from being transferred, set the
+ * TransfersEnabled parameter to true and then set the bank module's SendEnabled
+ * parameter for the denomination to false.
+ */
+export interface Params {
+  /**
+   * send_enabled enables or disables all cross-chain token transfers from this
+   * chain.
+   */
+  sendEnabled: boolean;
+
+  /**
+   * receive_enabled enables or disables all cross-chain token transfers to this
+   * chain.
+   */
+  receiveEnabled: boolean;
+}
+
 function createBaseDenomTrace(): DenomTrace {
   return {
     path: "",
@@ -84,26 +104,6 @@ export const DenomTrace = {
   }
 
 };
-
-/**
- * Params defines the set of IBC transfer parameters.
- * NOTE: To prevent a single token from being transferred, set the
- * TransfersEnabled parameter to true and then set the bank module's SendEnabled
- * parameter for the denomination to false.
- */
-export interface Params {
-  /**
-   * send_enabled enables or disables all cross-chain token transfers from this
-   * chain.
-   */
-  sendEnabled: boolean;
-
-  /**
-   * receive_enabled enables or disables all cross-chain token transfers to this
-   * chain.
-   */
-  receiveEnabled: boolean;
-}
 
 function createBaseParams(): Params {
   return {

@@ -13,6 +13,18 @@ export interface EventGrant {
   grantee: string;
 }
 
+/** EventRevoke is emitted on Msg/Revoke */
+export interface EventRevoke {
+  /** Msg type URL for which an autorization is revoked */
+  msgTypeUrl: string;
+
+  /** Granter account address */
+  granter: string;
+
+  /** Grantee account address */
+  grantee: string;
+}
+
 function createBaseEventGrant(): EventGrant {
   return {
     msgTypeUrl: "",
@@ -93,18 +105,6 @@ export const EventGrant = {
   }
 
 };
-
-/** EventRevoke is emitted on Msg/Revoke */
-export interface EventRevoke {
-  /** Msg type URL for which an autorization is revoked */
-  msgTypeUrl: string;
-
-  /** Granter account address */
-  granter: string;
-
-  /** Grantee account address */
-  grantee: string;
-}
 
 function createBaseEventRevoke(): EventRevoke {
   return {

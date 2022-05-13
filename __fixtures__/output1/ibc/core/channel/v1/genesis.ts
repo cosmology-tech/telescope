@@ -16,6 +16,16 @@ export interface GenesisState {
   nextChannelSequence: Long;
 }
 
+/**
+ * PacketSequence defines the genesis type necessary to retrieve and store
+ * next send and receive sequences.
+ */
+export interface PacketSequence {
+  portId: string;
+  channelId: string;
+  sequence: Long;
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     channels: [],
@@ -192,16 +202,6 @@ export const GenesisState = {
   }
 
 };
-
-/**
- * PacketSequence defines the genesis type necessary to retrieve and store
- * next send and receive sequences.
- */
-export interface PacketSequence {
-  portId: string;
-  channelId: string;
-  sequence: Long;
-}
 
 function createBasePacketSequence(): PacketSequence {
   return {

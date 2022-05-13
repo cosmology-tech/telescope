@@ -7,6 +7,63 @@ export interface MetricValue_LabelsEntry {
   value: string;
 }
 
+/** Represents a single metric value. */
+export interface MetricValue {
+  /**
+   * The labels describing the metric value.
+   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
+   * the overriding relationship.
+   * Note that this map must not contain monitored resource labels.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The start of the time period over which this metric value's measurement
+   * applies. The time period has different semantics for different metric
+   * types (cumulative, delta, and gauge). See the metric definition
+   * documentation in the service configuration for details. If not specified,
+   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+   */
+  startTime: Date;
+
+  /**
+   * The end of the time period over which this metric value's measurement
+   * applies.  If not specified,
+   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+   */
+  endTime: Date;
+
+  /** A boolean value. */
+  boolValue?: boolean;
+
+  /** A signed 64-bit integer value. */
+  int64Value?: Long;
+
+  /** A double precision floating point value. */
+  doubleValue?: number;
+
+  /** A text string value. */
+  stringValue?: string;
+
+  /** A distribution value. */
+  distributionValue?: Distribution;
+}
+
+/**
+ * Represents a set of metric values in the same metric.
+ * Each metric value in the set should have a unique combination of start time,
+ * end time, and label values.
+ */
+export interface MetricValueSet {
+  /** The metric name defined in the service configuration. */
+  metricName: string;
+
+  /** The values in this metric. */
+  metricValues: MetricValue[];
+}
+
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   return {
     key: "",
@@ -76,50 +133,6 @@ export const MetricValue_LabelsEntry = {
 
 };
 
-/** Represents a single metric value. */
-export interface MetricValue {
-  /**
-   * The labels describing the metric value.
-   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
-   * the overriding relationship.
-   * Note that this map must not contain monitored resource labels.
-   */
-  labels: {
-    [key: string]: string;
-  };
-
-  /**
-   * The start of the time period over which this metric value's measurement
-   * applies. The time period has different semantics for different metric
-   * types (cumulative, delta, and gauge). See the metric definition
-   * documentation in the service configuration for details. If not specified,
-   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
-   */
-  startTime: Date;
-
-  /**
-   * The end of the time period over which this metric value's measurement
-   * applies.  If not specified,
-   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
-   */
-  endTime: Date;
-
-  /** A boolean value. */
-  boolValue?: boolean;
-
-  /** A signed 64-bit integer value. */
-  int64Value?: Long;
-
-  /** A double precision floating point value. */
-  doubleValue?: number;
-
-  /** A text string value. */
-  stringValue?: string;
-
-  /** A distribution value. */
-  distributionValue?: Distribution;
-}
-
 function createBaseMetricValue(): MetricValue {
   return {
     labels: {},
@@ -141,8 +154,14 @@ export const MetricValue = {
         value
       }, writer.uint32(10).fork()).ldelim();
     });
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(18).fork()).ldelim();
-    if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(26).fork()).ldelim();
+
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.endTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.endTime), writer.uint32(26).fork()).ldelim();
+    }
 
     if (message.boolValue !== undefined) {
       writer.uint32(32).bool(message.boolValue);
@@ -282,19 +301,6 @@ export const MetricValue = {
   }
 
 };
-
-/**
- * Represents a set of metric values in the same metric.
- * Each metric value in the set should have a unique combination of start time,
- * end time, and label values.
- */
-export interface MetricValueSet {
-  /** The metric name defined in the service configuration. */
-  metricName: string;
-
-  /** The values in this metric. */
-  metricValues: MetricValue[];
-}
 
 function createBaseMetricValueSet(): MetricValueSet {
   return {

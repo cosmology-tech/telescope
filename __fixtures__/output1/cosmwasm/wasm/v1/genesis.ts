@@ -12,6 +12,39 @@ export interface GenesisState {
   genMsgs: GenesisState_GenMsgs[];
 }
 
+/**
+ * GenMsgs define the messages that can be executed during genesis phase in
+ * order. The intention is to have more human readable data that is auditable.
+ */
+export interface GenesisState_GenMsgs {
+  storeCode?: MsgStoreCode;
+  instantiateContract?: MsgInstantiateContract;
+  executeContract?: MsgExecuteContract;
+}
+
+/** Code struct encompasses CodeInfo and CodeBytes */
+export interface Code {
+  codeId: Long;
+  codeInfo: CodeInfo;
+  codeBytes: Uint8Array;
+
+  /** Pinned to wasmvm cache */
+  pinned: boolean;
+}
+
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
+export interface Contract {
+  contractAddress: string;
+  contractInfo: ContractInfo;
+  contractState: Model[];
+}
+
+/** Sequence key and value of an id generation counter */
+export interface Sequence {
+  idKey: Uint8Array;
+  value: Long;
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     params: undefined,
@@ -138,16 +171,6 @@ export const GenesisState = {
 
 };
 
-/**
- * GenMsgs define the messages that can be executed during genesis phase in
- * order. The intention is to have more human readable data that is auditable.
- */
-export interface GenesisState_GenMsgs {
-  storeCode?: MsgStoreCode;
-  instantiateContract?: MsgInstantiateContract;
-  executeContract?: MsgExecuteContract;
-}
-
 function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
   return {
     storeCode: undefined,
@@ -228,16 +251,6 @@ export const GenesisState_GenMsgs = {
   }
 
 };
-
-/** Code struct encompasses CodeInfo and CodeBytes */
-export interface Code {
-  codeId: Long;
-  codeInfo: CodeInfo;
-  codeBytes: Uint8Array;
-
-  /** Pinned to wasmvm cache */
-  pinned: boolean;
-}
 
 function createBaseCode(): Code {
   return {
@@ -332,13 +345,6 @@ export const Code = {
 
 };
 
-/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
-export interface Contract {
-  contractAddress: string;
-  contractInfo: ContractInfo;
-  contractState: Model[];
-}
-
 function createBaseContract(): Contract {
   return {
     contractAddress: "",
@@ -425,12 +431,6 @@ export const Contract = {
   }
 
 };
-
-/** Sequence key and value of an id generation counter */
-export interface Sequence {
-  idKey: Uint8Array;
-  value: Long;
-}
 
 function createBaseSequence(): Sequence {
   return {

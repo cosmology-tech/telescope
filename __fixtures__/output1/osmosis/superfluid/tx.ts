@@ -6,6 +6,31 @@ export interface MsgSuperfluidDelegate {
   lockId: Long;
   valAddr: string;
 }
+export interface MsgSuperfluidDelegateResponse {}
+export interface MsgSuperfluidUndelegate {
+  sender: string;
+  lockId: Long;
+}
+export interface MsgSuperfluidUndelegateResponse {}
+export interface MsgSuperfluidUnbondLock {
+  sender: string;
+  lockId: Long;
+}
+export interface MsgSuperfluidUnbondLockResponse {}
+
+/**
+ * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
+ * and then does a superfluid lock from the newly created lockup, to the
+ * specified validator addr.
+ */
+export interface MsgLockAndSuperfluidDelegate {
+  sender: string;
+  coins: Coin[];
+  valAddr: string;
+}
+export interface MsgLockAndSuperfluidDelegateResponse {
+  ID: Long;
+}
 
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
   return {
@@ -87,14 +112,13 @@ export const MsgSuperfluidDelegate = {
   }
 
 };
-export interface MsgSuperfluidDelegateResponse {}
 
 function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateResponse {
   return {};
 }
 
 export const MsgSuperfluidDelegateResponse = {
-  encode(message: MsgSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -116,25 +140,21 @@ export const MsgSuperfluidDelegateResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSuperfluidDelegateResponse {
+  fromJSON(_: any): MsgSuperfluidDelegateResponse {
     return {};
   },
 
-  toJSON(message: MsgSuperfluidDelegateResponse): unknown {
+  toJSON(_: MsgSuperfluidDelegateResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSuperfluidDelegateResponse>, I>>(object: I): MsgSuperfluidDelegateResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSuperfluidDelegateResponse>, I>>(_: I): MsgSuperfluidDelegateResponse {
     const message = createBaseMsgSuperfluidDelegateResponse();
     return message;
   }
 
 };
-export interface MsgSuperfluidUndelegate {
-  sender: string;
-  lockId: Long;
-}
 
 function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
   return {
@@ -204,14 +224,13 @@ export const MsgSuperfluidUndelegate = {
   }
 
 };
-export interface MsgSuperfluidUndelegateResponse {}
 
 function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateResponse {
   return {};
 }
 
 export const MsgSuperfluidUndelegateResponse = {
-  encode(message: MsgSuperfluidUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSuperfluidUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -233,25 +252,21 @@ export const MsgSuperfluidUndelegateResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSuperfluidUndelegateResponse {
+  fromJSON(_: any): MsgSuperfluidUndelegateResponse {
     return {};
   },
 
-  toJSON(message: MsgSuperfluidUndelegateResponse): unknown {
+  toJSON(_: MsgSuperfluidUndelegateResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSuperfluidUndelegateResponse>, I>>(object: I): MsgSuperfluidUndelegateResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSuperfluidUndelegateResponse>, I>>(_: I): MsgSuperfluidUndelegateResponse {
     const message = createBaseMsgSuperfluidUndelegateResponse();
     return message;
   }
 
 };
-export interface MsgSuperfluidUnbondLock {
-  sender: string;
-  lockId: Long;
-}
 
 function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
   return {
@@ -321,14 +336,13 @@ export const MsgSuperfluidUnbondLock = {
   }
 
 };
-export interface MsgSuperfluidUnbondLockResponse {}
 
 function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockResponse {
   return {};
 }
 
 export const MsgSuperfluidUnbondLockResponse = {
-  encode(message: MsgSuperfluidUnbondLockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSuperfluidUnbondLockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -350,32 +364,21 @@ export const MsgSuperfluidUnbondLockResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSuperfluidUnbondLockResponse {
+  fromJSON(_: any): MsgSuperfluidUnbondLockResponse {
     return {};
   },
 
-  toJSON(message: MsgSuperfluidUnbondLockResponse): unknown {
+  toJSON(_: MsgSuperfluidUnbondLockResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSuperfluidUnbondLockResponse>, I>>(object: I): MsgSuperfluidUnbondLockResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSuperfluidUnbondLockResponse>, I>>(_: I): MsgSuperfluidUnbondLockResponse {
     const message = createBaseMsgSuperfluidUnbondLockResponse();
     return message;
   }
 
 };
-
-/**
- * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
- * and then does a superfluid lock from the newly created lockup, to the
- * specified validator addr.
- */
-export interface MsgLockAndSuperfluidDelegate {
-  sender: string;
-  coins: Coin[];
-  valAddr: string;
-}
 
 function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate {
   return {
@@ -463,9 +466,6 @@ export const MsgLockAndSuperfluidDelegate = {
   }
 
 };
-export interface MsgLockAndSuperfluidDelegateResponse {
-  ID: Long;
-}
 
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
   return {

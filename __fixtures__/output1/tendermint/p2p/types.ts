@@ -6,6 +6,31 @@ export interface ProtocolVersion {
   block: Long;
   app: Long;
 }
+export interface NodeInfo {
+  protocolVersion: ProtocolVersion;
+  nodeId: string;
+  listenAddr: string;
+  network: string;
+  version: string;
+  channels: Uint8Array;
+  moniker: string;
+  other: NodeInfoOther;
+}
+export interface NodeInfoOther {
+  txIndex: string;
+  rpcAddress: string;
+}
+export interface PeerInfo {
+  id: string;
+  addressInfo: PeerAddressInfo[];
+  lastConnected: Date;
+}
+export interface PeerAddressInfo {
+  address: string;
+  lastDialSuccess: Date;
+  lastDialFailure: Date;
+  dialFailures: number;
+}
 
 function createBaseProtocolVersion(): ProtocolVersion {
   return {
@@ -87,16 +112,6 @@ export const ProtocolVersion = {
   }
 
 };
-export interface NodeInfo {
-  protocolVersion: ProtocolVersion;
-  nodeId: string;
-  listenAddr: string;
-  network: string;
-  version: string;
-  channels: Uint8Array;
-  moniker: string;
-  other: NodeInfoOther;
-}
 
 function createBaseNodeInfo(): NodeInfo {
   return {
@@ -238,10 +253,6 @@ export const NodeInfo = {
   }
 
 };
-export interface NodeInfoOther {
-  txIndex: string;
-  rpcAddress: string;
-}
 
 function createBaseNodeInfoOther(): NodeInfoOther {
   return {
@@ -311,11 +322,6 @@ export const NodeInfoOther = {
   }
 
 };
-export interface PeerInfo {
-  id: string;
-  addressInfo: PeerAddressInfo[];
-  lastConnected: Date;
-}
 
 function createBasePeerInfo(): PeerInfo {
   return {
@@ -335,7 +341,10 @@ export const PeerInfo = {
       PeerAddressInfo.encode(v!, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.lastConnected !== undefined) Timestamp.encode(toTimestamp(message.lastConnected), writer.uint32(26).fork()).ldelim();
+    if (message.lastConnected !== undefined) {
+      Timestamp.encode(toTimestamp(message.lastConnected), writer.uint32(26).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -400,12 +409,6 @@ export const PeerInfo = {
   }
 
 };
-export interface PeerAddressInfo {
-  address: string;
-  lastDialSuccess: Date;
-  lastDialFailure: Date;
-  dialFailures: number;
-}
 
 function createBasePeerAddressInfo(): PeerAddressInfo {
   return {
@@ -422,8 +425,13 @@ export const PeerAddressInfo = {
       writer.uint32(10).string(message.address);
     }
 
-    if (message.lastDialSuccess !== undefined) Timestamp.encode(toTimestamp(message.lastDialSuccess), writer.uint32(18).fork()).ldelim();
-    if (message.lastDialFailure !== undefined) Timestamp.encode(toTimestamp(message.lastDialFailure), writer.uint32(26).fork()).ldelim();
+    if (message.lastDialSuccess !== undefined) {
+      Timestamp.encode(toTimestamp(message.lastDialSuccess), writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.lastDialFailure !== undefined) {
+      Timestamp.encode(toTimestamp(message.lastDialFailure), writer.uint32(26).fork()).ldelim();
+    }
 
     if (message.dialFailures !== 0) {
       writer.uint32(32).uint32(message.dialFailures);

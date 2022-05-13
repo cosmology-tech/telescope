@@ -10,6 +10,27 @@ export interface Minter {
   annualProvisions: string;
 }
 
+/** Params holds parameters for the mint module. */
+export interface Params {
+  /** type of coin to mint */
+  mintDenom: string;
+
+  /** maximum annual change in inflation rate */
+  inflationRateChange: string;
+
+  /** maximum inflation rate */
+  inflationMax: string;
+
+  /** minimum inflation rate */
+  inflationMin: string;
+
+  /** goal of percent bonded atoms */
+  goalBonded: string;
+
+  /** expected blocks per year */
+  blocksPerYear: Long;
+}
+
 function createBaseMinter(): Minter {
   return {
     inflation: "",
@@ -78,27 +99,6 @@ export const Minter = {
   }
 
 };
-
-/** Params holds parameters for the mint module. */
-export interface Params {
-  /** type of coin to mint */
-  mintDenom: string;
-
-  /** maximum annual change in inflation rate */
-  inflationRateChange: string;
-
-  /** maximum inflation rate */
-  inflationMax: string;
-
-  /** minimum inflation rate */
-  inflationMin: string;
-
-  /** goal of percent bonded atoms */
-  goalBonded: string;
-
-  /** expected blocks per year */
-  blocksPerYear: Long;
-}
 
 function createBaseParams(): Params {
   return {

@@ -16,6 +16,71 @@ export interface MsgCreateValidator {
   value: Coin;
 }
 
+/** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
+export interface MsgCreateValidatorResponse {}
+
+/** MsgEditValidator defines a SDK message for editing an existing validator. */
+export interface MsgEditValidator {
+  description: Description;
+  validatorAddress: string;
+
+  /**
+   * We pass a reference to the new commission rate and min self delegation as
+   * it's not mandatory to update. If not updated, the deserialized rate will be
+   * zero with no way to distinguish if an update was intended.
+   * REF: #2373
+   */
+  commissionRate: string;
+  minSelfDelegation: string;
+}
+
+/** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
+export interface MsgEditValidatorResponse {}
+
+/**
+ * MsgDelegate defines a SDK message for performing a delegation of coins
+ * from a delegator to a validator.
+ */
+export interface MsgDelegate {
+  delegatorAddress: string;
+  validatorAddress: string;
+  amount: Coin;
+}
+
+/** MsgDelegateResponse defines the Msg/Delegate response type. */
+export interface MsgDelegateResponse {}
+
+/**
+ * MsgBeginRedelegate defines a SDK message for performing a redelegation
+ * of coins from a delegator and source validator to a destination validator.
+ */
+export interface MsgBeginRedelegate {
+  delegatorAddress: string;
+  validatorSrcAddress: string;
+  validatorDstAddress: string;
+  amount: Coin;
+}
+
+/** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
+export interface MsgBeginRedelegateResponse {
+  completionTime: Date;
+}
+
+/**
+ * MsgUndelegate defines a SDK message for performing an undelegation from a
+ * delegate and a validator.
+ */
+export interface MsgUndelegate {
+  delegatorAddress: string;
+  validatorAddress: string;
+  amount: Coin;
+}
+
+/** MsgUndelegateResponse defines the Msg/Undelegate response type. */
+export interface MsgUndelegateResponse {
+  completionTime: Date;
+}
+
 function createBaseMsgCreateValidator(): MsgCreateValidator {
   return {
     description: undefined,
@@ -145,15 +210,12 @@ export const MsgCreateValidator = {
 
 };
 
-/** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
-export interface MsgCreateValidatorResponse {}
-
 function createBaseMsgCreateValidatorResponse(): MsgCreateValidatorResponse {
   return {};
 }
 
 export const MsgCreateValidatorResponse = {
-  encode(message: MsgCreateValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -175,36 +237,21 @@ export const MsgCreateValidatorResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCreateValidatorResponse {
+  fromJSON(_: any): MsgCreateValidatorResponse {
     return {};
   },
 
-  toJSON(message: MsgCreateValidatorResponse): unknown {
+  toJSON(_: MsgCreateValidatorResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateValidatorResponse>, I>>(object: I): MsgCreateValidatorResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateValidatorResponse>, I>>(_: I): MsgCreateValidatorResponse {
     const message = createBaseMsgCreateValidatorResponse();
     return message;
   }
 
 };
-
-/** MsgEditValidator defines a SDK message for editing an existing validator. */
-export interface MsgEditValidator {
-  description: Description;
-  validatorAddress: string;
-
-  /**
-   * We pass a reference to the new commission rate and min self delegation as
-   * it's not mandatory to update. If not updated, the deserialized rate will be
-   * zero with no way to distinguish if an update was intended.
-   * REF: #2373
-   */
-  commissionRate: string;
-  minSelfDelegation: string;
-}
 
 function createBaseMsgEditValidator(): MsgEditValidator {
   return {
@@ -299,15 +346,12 @@ export const MsgEditValidator = {
 
 };
 
-/** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
-export interface MsgEditValidatorResponse {}
-
 function createBaseMsgEditValidatorResponse(): MsgEditValidatorResponse {
   return {};
 }
 
 export const MsgEditValidatorResponse = {
-  encode(message: MsgEditValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgEditValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -329,31 +373,21 @@ export const MsgEditValidatorResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgEditValidatorResponse {
+  fromJSON(_: any): MsgEditValidatorResponse {
     return {};
   },
 
-  toJSON(message: MsgEditValidatorResponse): unknown {
+  toJSON(_: MsgEditValidatorResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgEditValidatorResponse>, I>>(object: I): MsgEditValidatorResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgEditValidatorResponse>, I>>(_: I): MsgEditValidatorResponse {
     const message = createBaseMsgEditValidatorResponse();
     return message;
   }
 
 };
-
-/**
- * MsgDelegate defines a SDK message for performing a delegation of coins
- * from a delegator to a validator.
- */
-export interface MsgDelegate {
-  delegatorAddress: string;
-  validatorAddress: string;
-  amount: Coin;
-}
 
 function createBaseMsgDelegate(): MsgDelegate {
   return {
@@ -436,15 +470,12 @@ export const MsgDelegate = {
 
 };
 
-/** MsgDelegateResponse defines the Msg/Delegate response type. */
-export interface MsgDelegateResponse {}
-
 function createBaseMsgDelegateResponse(): MsgDelegateResponse {
   return {};
 }
 
 export const MsgDelegateResponse = {
-  encode(message: MsgDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -466,32 +497,21 @@ export const MsgDelegateResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgDelegateResponse {
+  fromJSON(_: any): MsgDelegateResponse {
     return {};
   },
 
-  toJSON(message: MsgDelegateResponse): unknown {
+  toJSON(_: MsgDelegateResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDelegateResponse>, I>>(object: I): MsgDelegateResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDelegateResponse>, I>>(_: I): MsgDelegateResponse {
     const message = createBaseMsgDelegateResponse();
     return message;
   }
 
 };
-
-/**
- * MsgBeginRedelegate defines a SDK message for performing a redelegation
- * of coins from a delegator and source validator to a destination validator.
- */
-export interface MsgBeginRedelegate {
-  delegatorAddress: string;
-  validatorSrcAddress: string;
-  validatorDstAddress: string;
-  amount: Coin;
-}
 
 function createBaseMsgBeginRedelegate(): MsgBeginRedelegate {
   return {
@@ -586,11 +606,6 @@ export const MsgBeginRedelegate = {
 
 };
 
-/** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
-export interface MsgBeginRedelegateResponse {
-  completionTime: Date;
-}
-
 function createBaseMsgBeginRedelegateResponse(): MsgBeginRedelegateResponse {
   return {
     completionTime: undefined
@@ -599,7 +614,10 @@ function createBaseMsgBeginRedelegateResponse(): MsgBeginRedelegateResponse {
 
 export const MsgBeginRedelegateResponse = {
   encode(message: MsgBeginRedelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.completionTime !== undefined) Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
+    if (message.completionTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -644,16 +662,6 @@ export const MsgBeginRedelegateResponse = {
   }
 
 };
-
-/**
- * MsgUndelegate defines a SDK message for performing an undelegation from a
- * delegate and a validator.
- */
-export interface MsgUndelegate {
-  delegatorAddress: string;
-  validatorAddress: string;
-  amount: Coin;
-}
 
 function createBaseMsgUndelegate(): MsgUndelegate {
   return {
@@ -736,11 +744,6 @@ export const MsgUndelegate = {
 
 };
 
-/** MsgUndelegateResponse defines the Msg/Undelegate response type. */
-export interface MsgUndelegateResponse {
-  completionTime: Date;
-}
-
 function createBaseMsgUndelegateResponse(): MsgUndelegateResponse {
   return {
     completionTime: undefined
@@ -749,7 +752,10 @@ function createBaseMsgUndelegateResponse(): MsgUndelegateResponse {
 
 export const MsgUndelegateResponse = {
   encode(message: MsgUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.completionTime !== undefined) Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
+    if (message.completionTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
+    }
+
     return writer;
   },
 

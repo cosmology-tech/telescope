@@ -3,370 +3,6 @@ import { Any } from "./any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
-/** A protocol buffer message type. */
-export interface Type {
-  /** The fully qualified message name. */
-  name: string;
-
-  /** The list of fields. */
-  fields: Field[];
-
-  /** The list of types appearing in `oneof` definitions in this type. */
-  oneofs: string[];
-
-  /** The protocol buffer options. */
-  options: Option[];
-
-  /** The source context. */
-  sourceContext: SourceContext;
-
-  /** The source syntax. */
-  syntax: Syntax;
-}
-
-function createBaseType(): Type {
-  return {
-    name: "",
-    fields: [],
-    oneofs: [],
-    options: [],
-    sourceContext: undefined,
-    syntax: 0
-  };
-}
-
-export const Type = {
-  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
-      writer.uint32(10).string(message.name);
-    }
-
-    for (const v of message.fields) {
-      Field.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-
-    for (const v of message.oneofs) {
-      writer.uint32(26).string(v!);
-    }
-
-    for (const v of message.options) {
-      Option.encode(v!, writer.uint32(34).fork()).ldelim();
-    }
-
-    if (message.sourceContext !== undefined) {
-      SourceContext.encode(message.sourceContext, writer.uint32(42).fork()).ldelim();
-    }
-
-    if (message.syntax !== 0) {
-      writer.uint32(48).int32(message.syntax);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseType();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.name = reader.string();
-          break;
-
-        case 2:
-          message.fields.push(Field.decode(reader, reader.uint32()));
-          break;
-
-        case 3:
-          message.oneofs.push(reader.string());
-          break;
-
-        case 4:
-          message.options.push(Option.decode(reader, reader.uint32()));
-          break;
-
-        case 5:
-          message.sourceContext = SourceContext.decode(reader, reader.uint32());
-          break;
-
-        case 6:
-          message.syntax = (reader.int32() as any);
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): Type {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromJSON(e)) : [],
-      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
-      sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
-    };
-  },
-
-  toJSON(message: Type): unknown {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-
-    if (message.fields) {
-      obj.fields = message.fields.map(e => e ? Field.toJSON(e) : undefined);
-    } else {
-      obj.fields = [];
-    }
-
-    if (message.oneofs) {
-      obj.oneofs = message.oneofs.map(e => e);
-    } else {
-      obj.oneofs = [];
-    }
-
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-
-    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
-    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
-    const message = createBaseType();
-    message.name = object.name ?? "";
-    message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
-    message.oneofs = object.oneofs?.map(e => e) || [];
-    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
-    message.syntax = object.syntax ?? 0;
-    return message;
-  }
-
-};
-
-/** A single field of a message type. */
-export interface Field {
-  /** The field type. */
-  kind: Field_Kind;
-
-  /** The field cardinality. */
-  cardinality: Field_Cardinality;
-
-  /** The field number. */
-  number: number;
-
-  /** The field name. */
-  name: string;
-
-  /**
-   * The field type URL, without the scheme, for message or enumeration
-   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
-   */
-  typeUrl: string;
-
-  /**
-   * The index of the field type in `Type.oneofs`, for message or enumeration
-   * types. The first type has index 1; zero means the type is not in the list.
-   */
-  oneofIndex: number;
-
-  /** Whether to use alternative packed wire representation. */
-  packed: boolean;
-
-  /** The protocol buffer options. */
-  options: Option[];
-
-  /** The field JSON name. */
-  jsonName: string;
-
-  /** The string value of the default value of this field. Proto2 syntax only. */
-  defaultValue: string;
-}
-
-function createBaseField(): Field {
-  return {
-    kind: 0,
-    cardinality: 0,
-    number: 0,
-    name: "",
-    typeUrl: "",
-    oneofIndex: 0,
-    packed: false,
-    options: [],
-    jsonName: "",
-    defaultValue: ""
-  };
-}
-
-export const Field = {
-  encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.kind !== 0) {
-      writer.uint32(8).int32(message.kind);
-    }
-
-    if (message.cardinality !== 0) {
-      writer.uint32(16).int32(message.cardinality);
-    }
-
-    if (message.number !== 0) {
-      writer.uint32(24).int32(message.number);
-    }
-
-    if (message.name !== "") {
-      writer.uint32(34).string(message.name);
-    }
-
-    if (message.typeUrl !== "") {
-      writer.uint32(50).string(message.typeUrl);
-    }
-
-    if (message.oneofIndex !== 0) {
-      writer.uint32(56).int32(message.oneofIndex);
-    }
-
-    if (message.packed === true) {
-      writer.uint32(64).bool(message.packed);
-    }
-
-    for (const v of message.options) {
-      Option.encode(v!, writer.uint32(74).fork()).ldelim();
-    }
-
-    if (message.jsonName !== "") {
-      writer.uint32(82).string(message.jsonName);
-    }
-
-    if (message.defaultValue !== "") {
-      writer.uint32(90).string(message.defaultValue);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Field {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseField();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.kind = (reader.int32() as any);
-          break;
-
-        case 2:
-          message.cardinality = (reader.int32() as any);
-          break;
-
-        case 3:
-          message.number = reader.int32();
-          break;
-
-        case 4:
-          message.name = reader.string();
-          break;
-
-        case 6:
-          message.typeUrl = reader.string();
-          break;
-
-        case 7:
-          message.oneofIndex = reader.int32();
-          break;
-
-        case 8:
-          message.packed = reader.bool();
-          break;
-
-        case 9:
-          message.options.push(Option.decode(reader, reader.uint32()));
-          break;
-
-        case 10:
-          message.jsonName = reader.string();
-          break;
-
-        case 11:
-          message.defaultValue = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): Field {
-    return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
-      number: isSet(object.number) ? Number(object.number) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
-      oneofIndex: isSet(object.oneofIndex) ? Number(object.oneofIndex) : 0,
-      packed: isSet(object.packed) ? Boolean(object.packed) : false,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
-      jsonName: isSet(object.jsonName) ? String(object.jsonName) : "",
-      defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : ""
-    };
-  },
-
-  toJSON(message: Field): unknown {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
-    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
-    message.number !== undefined && (obj.number = Math.round(message.number));
-    message.name !== undefined && (obj.name = message.name);
-    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
-    message.oneofIndex !== undefined && (obj.oneofIndex = Math.round(message.oneofIndex));
-    message.packed !== undefined && (obj.packed = message.packed);
-
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-
-    message.jsonName !== undefined && (obj.jsonName = message.jsonName);
-    message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Field>, I>>(object: I): Field {
-    const message = createBaseField();
-    message.kind = object.kind ?? 0;
-    message.cardinality = object.cardinality ?? 0;
-    message.number = object.number ?? 0;
-    message.name = object.name ?? "";
-    message.typeUrl = object.typeUrl ?? "";
-    message.oneofIndex = object.oneofIndex ?? 0;
-    message.packed = object.packed ?? false;
-    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.jsonName = object.jsonName ?? "";
-    message.defaultValue = object.defaultValue ?? "";
-    return message;
-  }
-
-};
-
 /** Basic field types. */
 export enum Field_Kind {
   /** TYPE_UNKNOWN - Field type unknown. */
@@ -633,6 +269,104 @@ export function field_CardinalityToJSON(object: Field_Cardinality): string {
   }
 }
 
+/** The syntax in which a protocol buffer element is defined. */
+export enum Syntax {
+  /** SYNTAX_PROTO2 - Syntax `proto2`. */
+  SYNTAX_PROTO2 = 0,
+
+  /** SYNTAX_PROTO3 - Syntax `proto3`. */
+  SYNTAX_PROTO3 = 1,
+  UNRECOGNIZED = -1,
+}
+export function syntaxFromJSON(object: any): Syntax {
+  switch (object) {
+    case 0:
+    case "SYNTAX_PROTO2":
+      return Syntax.SYNTAX_PROTO2;
+
+    case 1:
+    case "SYNTAX_PROTO3":
+      return Syntax.SYNTAX_PROTO3;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Syntax.UNRECOGNIZED;
+  }
+}
+export function syntaxToJSON(object: Syntax): string {
+  switch (object) {
+    case Syntax.SYNTAX_PROTO2:
+      return "SYNTAX_PROTO2";
+
+    case Syntax.SYNTAX_PROTO3:
+      return "SYNTAX_PROTO3";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/** A protocol buffer message type. */
+export interface Type {
+  /** The fully qualified message name. */
+  name: string;
+
+  /** The list of fields. */
+  fields: Field[];
+
+  /** The list of types appearing in `oneof` definitions in this type. */
+  oneofs: string[];
+
+  /** The protocol buffer options. */
+  options: Option[];
+
+  /** The source context. */
+  sourceContext: SourceContext;
+
+  /** The source syntax. */
+  syntax: Syntax;
+}
+
+/** A single field of a message type. */
+export interface Field {
+  /** The field type. */
+  kind: Field_Kind;
+
+  /** The field cardinality. */
+  cardinality: Field_Cardinality;
+
+  /** The field number. */
+  number: number;
+
+  /** The field name. */
+  name: string;
+
+  /**
+   * The field type URL, without the scheme, for message or enumeration
+   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+   */
+  typeUrl: string;
+
+  /**
+   * The index of the field type in `Type.oneofs`, for message or enumeration
+   * types. The first type has index 1; zero means the type is not in the list.
+   */
+  oneofIndex: number;
+
+  /** Whether to use alternative packed wire representation. */
+  packed: boolean;
+
+  /** The protocol buffer options. */
+  options: Option[];
+
+  /** The field JSON name. */
+  jsonName: string;
+
+  /** The string value of the default value of this field. Proto2 syntax only. */
+  defaultValue: string;
+}
+
 /** Enum type definition. */
 export interface Enum {
   /** Enum type name. */
@@ -650,6 +384,344 @@ export interface Enum {
   /** The source syntax. */
   syntax: Syntax;
 }
+
+/** Enum value definition. */
+export interface EnumValue {
+  /** Enum value name. */
+  name: string;
+
+  /** Enum value number. */
+  number: number;
+
+  /** Protocol buffer options. */
+  options: Option[];
+}
+
+/**
+ * A protocol buffer option, which can be attached to a message, field,
+ * enumeration, etc.
+ */
+export interface Option {
+  /**
+   * The option's name. For protobuf built-in options (options defined in
+   * descriptor.proto), this is the short name. For example, `"map_entry"`.
+   * For custom options, it should be the fully-qualified name. For example,
+   * `"google.api.http"`.
+   */
+  name: string;
+
+  /**
+   * The option's value packed in an Any message. If the value is a primitive,
+   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
+   * should be used. If the value is an enum, it should be stored as an int32
+   * value using the google.protobuf.Int32Value type.
+   */
+  value: Any;
+}
+
+function createBaseType(): Type {
+  return {
+    name: "",
+    fields: [],
+    oneofs: [],
+    options: [],
+    sourceContext: undefined,
+    syntax: 0
+  };
+}
+
+export const Type = {
+  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+
+    for (const v of message.fields) {
+      Field.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    for (const v of message.oneofs) {
+      writer.uint32(26).string(v!);
+    }
+
+    for (const v of message.options) {
+      Option.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+
+    if (message.sourceContext !== undefined) {
+      SourceContext.encode(message.sourceContext, writer.uint32(42).fork()).ldelim();
+    }
+
+    if (message.syntax !== 0) {
+      writer.uint32(48).int32(message.syntax);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseType();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.name = reader.string();
+          break;
+
+        case 2:
+          message.fields.push(Field.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.oneofs.push(reader.string());
+          break;
+
+        case 4:
+          message.options.push(Option.decode(reader, reader.uint32()));
+          break;
+
+        case 5:
+          message.sourceContext = SourceContext.decode(reader, reader.uint32());
+          break;
+
+        case 6:
+          message.syntax = (reader.int32() as any);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Type {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromJSON(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toJSON(message: Type): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toJSON(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
+    const message = createBaseType();
+    message.name = object.name ?? "";
+    message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
+    message.oneofs = object.oneofs?.map(e => e) || [];
+    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
+    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
+    message.syntax = object.syntax ?? 0;
+    return message;
+  }
+
+};
+
+function createBaseField(): Field {
+  return {
+    kind: 0,
+    cardinality: 0,
+    number: 0,
+    name: "",
+    typeUrl: "",
+    oneofIndex: 0,
+    packed: false,
+    options: [],
+    jsonName: "",
+    defaultValue: ""
+  };
+}
+
+export const Field = {
+  encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.kind !== 0) {
+      writer.uint32(8).int32(message.kind);
+    }
+
+    if (message.cardinality !== 0) {
+      writer.uint32(16).int32(message.cardinality);
+    }
+
+    if (message.number !== 0) {
+      writer.uint32(24).int32(message.number);
+    }
+
+    if (message.name !== "") {
+      writer.uint32(34).string(message.name);
+    }
+
+    if (message.typeUrl !== "") {
+      writer.uint32(50).string(message.typeUrl);
+    }
+
+    if (message.oneofIndex !== 0) {
+      writer.uint32(56).int32(message.oneofIndex);
+    }
+
+    if (message.packed === true) {
+      writer.uint32(64).bool(message.packed);
+    }
+
+    for (const v of message.options) {
+      Option.encode(v!, writer.uint32(74).fork()).ldelim();
+    }
+
+    if (message.jsonName !== "") {
+      writer.uint32(82).string(message.jsonName);
+    }
+
+    if (message.defaultValue !== "") {
+      writer.uint32(90).string(message.defaultValue);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Field {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseField();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.kind = (reader.int32() as any);
+          break;
+
+        case 2:
+          message.cardinality = (reader.int32() as any);
+          break;
+
+        case 3:
+          message.number = reader.int32();
+          break;
+
+        case 4:
+          message.name = reader.string();
+          break;
+
+        case 6:
+          message.typeUrl = reader.string();
+          break;
+
+        case 7:
+          message.oneofIndex = reader.int32();
+          break;
+
+        case 8:
+          message.packed = reader.bool();
+          break;
+
+        case 9:
+          message.options.push(Option.decode(reader, reader.uint32()));
+          break;
+
+        case 10:
+          message.jsonName = reader.string();
+          break;
+
+        case 11:
+          message.defaultValue = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Field {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      number: isSet(object.number) ? Number(object.number) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
+      oneofIndex: isSet(object.oneofIndex) ? Number(object.oneofIndex) : 0,
+      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
+      jsonName: isSet(object.jsonName) ? String(object.jsonName) : "",
+      defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : ""
+    };
+  },
+
+  toJSON(message: Field): unknown {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
+    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
+    message.number !== undefined && (obj.number = Math.round(message.number));
+    message.name !== undefined && (obj.name = message.name);
+    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
+    message.oneofIndex !== undefined && (obj.oneofIndex = Math.round(message.oneofIndex));
+    message.packed !== undefined && (obj.packed = message.packed);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.jsonName !== undefined && (obj.jsonName = message.jsonName);
+    message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Field>, I>>(object: I): Field {
+    const message = createBaseField();
+    message.kind = object.kind ?? 0;
+    message.cardinality = object.cardinality ?? 0;
+    message.number = object.number ?? 0;
+    message.name = object.name ?? "";
+    message.typeUrl = object.typeUrl ?? "";
+    message.oneofIndex = object.oneofIndex ?? 0;
+    message.packed = object.packed ?? false;
+    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
+    message.jsonName = object.jsonName ?? "";
+    message.defaultValue = object.defaultValue ?? "";
+    return message;
+  }
+
+};
 
 function createBaseEnum(): Enum {
   return {
@@ -767,18 +839,6 @@ export const Enum = {
 
 };
 
-/** Enum value definition. */
-export interface EnumValue {
-  /** Enum value name. */
-  name: string;
-
-  /** Enum value number. */
-  number: number;
-
-  /** Protocol buffer options. */
-  options: Option[];
-}
-
 function createBaseEnumValue(): EnumValue {
   return {
     name: "",
@@ -866,28 +926,6 @@ export const EnumValue = {
 
 };
 
-/**
- * A protocol buffer option, which can be attached to a message, field,
- * enumeration, etc.
- */
-export interface Option {
-  /**
-   * The option's name. For protobuf built-in options (options defined in
-   * descriptor.proto), this is the short name. For example, `"map_entry"`.
-   * For custom options, it should be the fully-qualified name. For example,
-   * `"google.api.http"`.
-   */
-  name: string;
-
-  /**
-   * The option's value packed in an Any message. If the value is a primitive,
-   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
-   * should be used. If the value is an enum, it should be stored as an int32
-   * value using the google.protobuf.Int32Value type.
-   */
-  value: Any;
-}
-
 function createBaseOption(): Option {
   return {
     name: "",
@@ -956,41 +994,3 @@ export const Option = {
   }
 
 };
-
-/** The syntax in which a protocol buffer element is defined. */
-export enum Syntax {
-  /** SYNTAX_PROTO2 - Syntax `proto2`. */
-  SYNTAX_PROTO2 = 0,
-
-  /** SYNTAX_PROTO3 - Syntax `proto3`. */
-  SYNTAX_PROTO3 = 1,
-  UNRECOGNIZED = -1,
-}
-export function syntaxFromJSON(object: any): Syntax {
-  switch (object) {
-    case 0:
-    case "SYNTAX_PROTO2":
-      return Syntax.SYNTAX_PROTO2;
-
-    case 1:
-    case "SYNTAX_PROTO3":
-      return Syntax.SYNTAX_PROTO3;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Syntax.UNRECOGNIZED;
-  }
-}
-export function syntaxToJSON(object: Syntax): string {
-  switch (object) {
-    case Syntax.SYNTAX_PROTO2:
-      return "SYNTAX_PROTO2";
-
-    case Syntax.SYNTAX_PROTO3:
-      return "SYNTAX_PROTO3";
-
-    default:
-      return "UNKNOWN";
-  }
-}

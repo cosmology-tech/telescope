@@ -154,7 +154,9 @@ export const HttpRequest = {
       writer.uint32(66).string(message.referer);
     }
 
-    if (message.latency !== undefined) Duration.encode(toDuration(message.latency), writer.uint32(114).fork()).ldelim();
+    if (message.latency !== undefined) {
+      Duration.encode(toDuration(message.latency), writer.uint32(114).fork()).ldelim();
+    }
 
     if (message.cacheLookup === true) {
       writer.uint32(88).bool(message.cacheLookup);

@@ -14,6 +14,122 @@ export interface QueryConnectionRequest {
   connectionId: string;
 }
 
+/**
+ * QueryConnectionResponse is the response type for the Query/Connection RPC
+ * method. Besides the connection end, it includes a proof and the height from
+ * which the proof was retrieved.
+ */
+export interface QueryConnectionResponse {
+  /** connection associated with the request identifier */
+  connection: ConnectionEnd;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proofHeight: Height;
+}
+
+/**
+ * QueryConnectionsRequest is the request type for the Query/Connections RPC
+ * method
+ */
+export interface QueryConnectionsRequest {
+  pagination: PageRequest;
+}
+
+/**
+ * QueryConnectionsResponse is the response type for the Query/Connections RPC
+ * method.
+ */
+export interface QueryConnectionsResponse {
+  /** list of stored connections of the chain. */
+  connections: IdentifiedConnection[];
+
+  /** pagination response */
+  pagination: PageResponse;
+
+  /** query block height */
+  height: Height;
+}
+
+/**
+ * QueryClientConnectionsRequest is the request type for the
+ * Query/ClientConnections RPC method
+ */
+export interface QueryClientConnectionsRequest {
+  /** client identifier associated with a connection */
+  clientId: string;
+}
+
+/**
+ * QueryClientConnectionsResponse is the response type for the
+ * Query/ClientConnections RPC method
+ */
+export interface QueryClientConnectionsResponse {
+  /** slice of all the connection paths associated with a client. */
+  connectionPaths: string[];
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was generated */
+  proofHeight: Height;
+}
+
+/**
+ * QueryConnectionClientStateRequest is the request type for the
+ * Query/ConnectionClientState RPC method
+ */
+export interface QueryConnectionClientStateRequest {
+  /** connection identifier */
+  connectionId: string;
+}
+
+/**
+ * QueryConnectionClientStateResponse is the response type for the
+ * Query/ConnectionClientState RPC method
+ */
+export interface QueryConnectionClientStateResponse {
+  /** client state associated with the channel */
+  identifiedClientState: IdentifiedClientState;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proofHeight: Height;
+}
+
+/**
+ * QueryConnectionConsensusStateRequest is the request type for the
+ * Query/ConnectionConsensusState RPC method
+ */
+export interface QueryConnectionConsensusStateRequest {
+  /** connection identifier */
+  connectionId: string;
+  revisionNumber: Long;
+  revisionHeight: Long;
+}
+
+/**
+ * QueryConnectionConsensusStateResponse is the response type for the
+ * Query/ConnectionConsensusState RPC method
+ */
+export interface QueryConnectionConsensusStateResponse {
+  /** consensus state associated with the channel */
+  consensusState: Any;
+
+  /** client ID associated with the consensus state */
+  clientId: string;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proofHeight: Height;
+}
+
 function createBaseQueryConnectionRequest(): QueryConnectionRequest {
   return {
     connectionId: ""
@@ -70,22 +186,6 @@ export const QueryConnectionRequest = {
   }
 
 };
-
-/**
- * QueryConnectionResponse is the response type for the Query/Connection RPC
- * method. Besides the connection end, it includes a proof and the height from
- * which the proof was retrieved.
- */
-export interface QueryConnectionResponse {
-  /** connection associated with the request identifier */
-  connection: ConnectionEnd;
-
-  /** merkle proof of existence */
-  proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
-  proofHeight: Height;
-}
 
 function createBaseQueryConnectionResponse(): QueryConnectionResponse {
   return {
@@ -168,14 +268,6 @@ export const QueryConnectionResponse = {
 
 };
 
-/**
- * QueryConnectionsRequest is the request type for the Query/Connections RPC
- * method
- */
-export interface QueryConnectionsRequest {
-  pagination: PageRequest;
-}
-
 function createBaseQueryConnectionsRequest(): QueryConnectionsRequest {
   return {
     pagination: undefined
@@ -232,21 +324,6 @@ export const QueryConnectionsRequest = {
   }
 
 };
-
-/**
- * QueryConnectionsResponse is the response type for the Query/Connections RPC
- * method.
- */
-export interface QueryConnectionsResponse {
-  /** list of stored connections of the chain. */
-  connections: IdentifiedConnection[];
-
-  /** pagination response */
-  pagination: PageResponse;
-
-  /** query block height */
-  height: Height;
-}
 
 function createBaseQueryConnectionsResponse(): QueryConnectionsResponse {
   return {
@@ -335,15 +412,6 @@ export const QueryConnectionsResponse = {
 
 };
 
-/**
- * QueryClientConnectionsRequest is the request type for the
- * Query/ClientConnections RPC method
- */
-export interface QueryClientConnectionsRequest {
-  /** client identifier associated with a connection */
-  clientId: string;
-}
-
 function createBaseQueryClientConnectionsRequest(): QueryClientConnectionsRequest {
   return {
     clientId: ""
@@ -400,21 +468,6 @@ export const QueryClientConnectionsRequest = {
   }
 
 };
-
-/**
- * QueryClientConnectionsResponse is the response type for the
- * Query/ClientConnections RPC method
- */
-export interface QueryClientConnectionsResponse {
-  /** slice of all the connection paths associated with a client. */
-  connectionPaths: string[];
-
-  /** merkle proof of existence */
-  proof: Uint8Array;
-
-  /** height at which the proof was generated */
-  proofHeight: Height;
-}
 
 function createBaseQueryClientConnectionsResponse(): QueryClientConnectionsResponse {
   return {
@@ -503,15 +556,6 @@ export const QueryClientConnectionsResponse = {
 
 };
 
-/**
- * QueryConnectionClientStateRequest is the request type for the
- * Query/ConnectionClientState RPC method
- */
-export interface QueryConnectionClientStateRequest {
-  /** connection identifier */
-  connectionId: string;
-}
-
 function createBaseQueryConnectionClientStateRequest(): QueryConnectionClientStateRequest {
   return {
     connectionId: ""
@@ -568,21 +612,6 @@ export const QueryConnectionClientStateRequest = {
   }
 
 };
-
-/**
- * QueryConnectionClientStateResponse is the response type for the
- * Query/ConnectionClientState RPC method
- */
-export interface QueryConnectionClientStateResponse {
-  /** client state associated with the channel */
-  identifiedClientState: IdentifiedClientState;
-
-  /** merkle proof of existence */
-  proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
-  proofHeight: Height;
-}
 
 function createBaseQueryConnectionClientStateResponse(): QueryConnectionClientStateResponse {
   return {
@@ -665,17 +694,6 @@ export const QueryConnectionClientStateResponse = {
 
 };
 
-/**
- * QueryConnectionConsensusStateRequest is the request type for the
- * Query/ConnectionConsensusState RPC method
- */
-export interface QueryConnectionConsensusStateRequest {
-  /** connection identifier */
-  connectionId: string;
-  revisionNumber: Long;
-  revisionHeight: Long;
-}
-
 function createBaseQueryConnectionConsensusStateRequest(): QueryConnectionConsensusStateRequest {
   return {
     connectionId: "",
@@ -756,24 +774,6 @@ export const QueryConnectionConsensusStateRequest = {
   }
 
 };
-
-/**
- * QueryConnectionConsensusStateResponse is the response type for the
- * Query/ConnectionConsensusState RPC method
- */
-export interface QueryConnectionConsensusStateResponse {
-  /** consensus state associated with the channel */
-  consensusState: Any;
-
-  /** client ID associated with the consensus state */
-  clientId: string;
-
-  /** merkle proof of existence */
-  proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
-  proofHeight: Height;
-}
 
 function createBaseQueryConnectionConsensusStateResponse(): QueryConnectionConsensusStateResponse {
   return {

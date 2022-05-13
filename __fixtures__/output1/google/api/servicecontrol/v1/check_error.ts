@@ -2,128 +2,6 @@ import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
-/**
- * Defines the errors to be returned in
- * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
- */
-export interface CheckError {
-  /** The error code. */
-  code: CheckError_Code;
-
-  /**
-   * Subject to whom this error applies. See the specific code enum for more
-   * details on this field. For example:
-   * 
-   * - "project:<project-id or project-number>"
-   * - "folder:<folder-id>"
-   * - "organization:<organization-id>"
-   */
-  subject: string;
-
-  /** Free-form text providing details on the error cause of the error. */
-  detail: string;
-
-  /**
-   * Contains public information about the check error. If available,
-   * `status.code` will be non zero and client can propagate it out as public
-   * error.
-   */
-  status: Status;
-}
-
-function createBaseCheckError(): CheckError {
-  return {
-    code: 0,
-    subject: "",
-    detail: "",
-    status: undefined
-  };
-}
-
-export const CheckError = {
-  encode(message: CheckError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.code !== 0) {
-      writer.uint32(8).int32(message.code);
-    }
-
-    if (message.subject !== "") {
-      writer.uint32(34).string(message.subject);
-    }
-
-    if (message.detail !== "") {
-      writer.uint32(18).string(message.detail);
-    }
-
-    if (message.status !== undefined) {
-      Status.encode(message.status, writer.uint32(26).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckError {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckError();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.code = (reader.int32() as any);
-          break;
-
-        case 4:
-          message.subject = reader.string();
-          break;
-
-        case 2:
-          message.detail = reader.string();
-          break;
-
-        case 3:
-          message.status = Status.decode(reader, reader.uint32());
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): CheckError {
-    return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      detail: isSet(object.detail) ? String(object.detail) : "",
-      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
-    };
-  },
-
-  toJSON(message: CheckError): unknown {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.detail !== undefined && (obj.detail = message.detail);
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<CheckError>, I>>(object: I): CheckError {
-    const message = createBaseCheckError();
-    message.code = object.code ?? 0;
-    message.subject = object.subject ?? "";
-    message.detail = object.detail ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
-    return message;
-  }
-
-};
-
 /** Error codes for Check responses. */
 export enum CheckError_Code {
   /** ERROR_CODE_UNSPECIFIED - This is never used in `CheckResponse`. */
@@ -372,3 +250,125 @@ export function checkError_CodeToJSON(object: CheckError_Code): string {
       return "UNKNOWN";
   }
 }
+
+/**
+ * Defines the errors to be returned in
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ */
+export interface CheckError {
+  /** The error code. */
+  code: CheckError_Code;
+
+  /**
+   * Subject to whom this error applies. See the specific code enum for more
+   * details on this field. For example:
+   * 
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
+   */
+  subject: string;
+
+  /** Free-form text providing details on the error cause of the error. */
+  detail: string;
+
+  /**
+   * Contains public information about the check error. If available,
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
+   */
+  status: Status;
+}
+
+function createBaseCheckError(): CheckError {
+  return {
+    code: 0,
+    subject: "",
+    detail: "",
+    status: undefined
+  };
+}
+
+export const CheckError = {
+  encode(message: CheckError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.code !== 0) {
+      writer.uint32(8).int32(message.code);
+    }
+
+    if (message.subject !== "") {
+      writer.uint32(34).string(message.subject);
+    }
+
+    if (message.detail !== "") {
+      writer.uint32(18).string(message.detail);
+    }
+
+    if (message.status !== undefined) {
+      Status.encode(message.status, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckError {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCheckError();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.code = (reader.int32() as any);
+          break;
+
+        case 4:
+          message.subject = reader.string();
+          break;
+
+        case 2:
+          message.detail = reader.string();
+          break;
+
+        case 3:
+          message.status = Status.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): CheckError {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      detail: isSet(object.detail) ? String(object.detail) : "",
+      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
+    };
+  },
+
+  toJSON(message: CheckError): unknown {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
+    message.subject !== undefined && (obj.subject = message.subject);
+    message.detail !== undefined && (obj.detail = message.detail);
+    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CheckError>, I>>(object: I): CheckError {
+    const message = createBaseCheckError();
+    message.code = object.code ?? 0;
+    message.subject = object.subject ?? "";
+    message.detail = object.detail ?? "";
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
+    return message;
+  }
+
+};

@@ -1,6 +1,105 @@
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 
+/**
+ * Path Translation specifies how to combine the backend address with the
+ * request path in order to produce the appropriate forwarding URL for the
+ * request.
+ * 
+ * Path Translation is applicable only to HTTP-based backends. Backends which
+ * do not accept requests over HTTP/HTTPS should leave `path_translation`
+ * unspecified.
+ */
+export enum BackendRule_PathTranslation {
+  PATH_TRANSLATION_UNSPECIFIED = 0,
+
+  /**
+   * CONSTANT_ADDRESS - Use the backend address as-is, with no modification to the path. If the
+   * URL pattern contains variables, the variable names and values will be
+   * appended to the query string. If a query string parameter and a URL
+   * pattern variable have the same name, this may result in duplicate keys in
+   * the query string.
+   * 
+   * # Examples
+   * 
+   * Given the following operation config:
+   * 
+   * Method path:        /api/company/{cid}/user/{uid}
+   * Backend address:    https://example.cloudfunctions.net/getUser
+   * 
+   * Requests to the following request paths will call the backend at the
+   * translated path:
+   * 
+   * Request path: /api/company/widgetworks/user/johndoe
+   * Translated:
+   * https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
+   * 
+   * Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+   * Translated:
+   * https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
+   */
+  CONSTANT_ADDRESS = 1,
+
+  /**
+   * APPEND_PATH_TO_ADDRESS - The request path will be appended to the backend address.
+   * 
+   * # Examples
+   * 
+   * Given the following operation config:
+   * 
+   * Method path:        /api/company/{cid}/user/{uid}
+   * Backend address:    https://example.appspot.com
+   * 
+   * Requests to the following request paths will call the backend at the
+   * translated path:
+   * 
+   * Request path: /api/company/widgetworks/user/johndoe
+   * Translated:
+   * https://example.appspot.com/api/company/widgetworks/user/johndoe
+   * 
+   * Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+   * Translated:
+   * https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
+   */
+  APPEND_PATH_TO_ADDRESS = 2,
+  UNRECOGNIZED = -1,
+}
+export function backendRule_PathTranslationFromJSON(object: any): BackendRule_PathTranslation {
+  switch (object) {
+    case 0:
+    case "PATH_TRANSLATION_UNSPECIFIED":
+      return BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED;
+
+    case 1:
+    case "CONSTANT_ADDRESS":
+      return BackendRule_PathTranslation.CONSTANT_ADDRESS;
+
+    case 2:
+    case "APPEND_PATH_TO_ADDRESS":
+      return BackendRule_PathTranslation.APPEND_PATH_TO_ADDRESS;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BackendRule_PathTranslation.UNRECOGNIZED;
+  }
+}
+export function backendRule_PathTranslationToJSON(object: BackendRule_PathTranslation): string {
+  switch (object) {
+    case BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED:
+      return "PATH_TRANSLATION_UNSPECIFIED";
+
+    case BackendRule_PathTranslation.CONSTANT_ADDRESS:
+      return "CONSTANT_ADDRESS";
+
+    case BackendRule_PathTranslation.APPEND_PATH_TO_ADDRESS:
+      return "APPEND_PATH_TO_ADDRESS";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** `Backend` defines the backend configuration for a service. */
 export interface Backend {
   /**
@@ -10,69 +109,6 @@ export interface Backend {
    */
   rules: BackendRule[];
 }
-
-function createBaseBackend(): Backend {
-  return {
-    rules: []
-  };
-}
-
-export const Backend = {
-  encode(message: Backend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.rules) {
-      BackendRule.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Backend {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBackend();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.rules.push(BackendRule.decode(reader, reader.uint32()));
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): Backend {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromJSON(e)) : []
-    };
-  },
-
-  toJSON(message: Backend): unknown {
-    const obj: any = {};
-
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? BackendRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Backend>, I>>(object: I): Backend {
-    const message = createBaseBackend();
-    message.rules = object.rules?.map(e => BackendRule.fromPartial(e)) || [];
-    return message;
-  }
-
-};
 
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRule {
@@ -166,6 +202,69 @@ export interface BackendRule {
    */
   protocol: string;
 }
+
+function createBaseBackend(): Backend {
+  return {
+    rules: []
+  };
+}
+
+export const Backend = {
+  encode(message: Backend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.rules) {
+      BackendRule.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Backend {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBackend();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.rules.push(BackendRule.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Backend {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: Backend): unknown {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? BackendRule.toJSON(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Backend>, I>>(object: I): Backend {
+    const message = createBaseBackend();
+    message.rules = object.rules?.map(e => BackendRule.fromPartial(e)) || [];
+    return message;
+  }
+
+};
 
 function createBaseBackendRule(): BackendRule {
   return {
@@ -319,102 +418,3 @@ export const BackendRule = {
   }
 
 };
-
-/**
- * Path Translation specifies how to combine the backend address with the
- * request path in order to produce the appropriate forwarding URL for the
- * request.
- * 
- * Path Translation is applicable only to HTTP-based backends. Backends which
- * do not accept requests over HTTP/HTTPS should leave `path_translation`
- * unspecified.
- */
-export enum BackendRule_PathTranslation {
-  PATH_TRANSLATION_UNSPECIFIED = 0,
-
-  /**
-   * CONSTANT_ADDRESS - Use the backend address as-is, with no modification to the path. If the
-   * URL pattern contains variables, the variable names and values will be
-   * appended to the query string. If a query string parameter and a URL
-   * pattern variable have the same name, this may result in duplicate keys in
-   * the query string.
-   * 
-   * # Examples
-   * 
-   * Given the following operation config:
-   * 
-   * Method path:        /api/company/{cid}/user/{uid}
-   * Backend address:    https://example.cloudfunctions.net/getUser
-   * 
-   * Requests to the following request paths will call the backend at the
-   * translated path:
-   * 
-   * Request path: /api/company/widgetworks/user/johndoe
-   * Translated:
-   * https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
-   * 
-   * Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   * Translated:
-   * https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
-   */
-  CONSTANT_ADDRESS = 1,
-
-  /**
-   * APPEND_PATH_TO_ADDRESS - The request path will be appended to the backend address.
-   * 
-   * # Examples
-   * 
-   * Given the following operation config:
-   * 
-   * Method path:        /api/company/{cid}/user/{uid}
-   * Backend address:    https://example.appspot.com
-   * 
-   * Requests to the following request paths will call the backend at the
-   * translated path:
-   * 
-   * Request path: /api/company/widgetworks/user/johndoe
-   * Translated:
-   * https://example.appspot.com/api/company/widgetworks/user/johndoe
-   * 
-   * Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   * Translated:
-   * https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
-   */
-  APPEND_PATH_TO_ADDRESS = 2,
-  UNRECOGNIZED = -1,
-}
-export function backendRule_PathTranslationFromJSON(object: any): BackendRule_PathTranslation {
-  switch (object) {
-    case 0:
-    case "PATH_TRANSLATION_UNSPECIFIED":
-      return BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED;
-
-    case 1:
-    case "CONSTANT_ADDRESS":
-      return BackendRule_PathTranslation.CONSTANT_ADDRESS;
-
-    case 2:
-    case "APPEND_PATH_TO_ADDRESS":
-      return BackendRule_PathTranslation.APPEND_PATH_TO_ADDRESS;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return BackendRule_PathTranslation.UNRECOGNIZED;
-  }
-}
-export function backendRule_PathTranslationToJSON(object: BackendRule_PathTranslation): string {
-  switch (object) {
-    case BackendRule_PathTranslation.PATH_TRANSLATION_UNSPECIFIED:
-      return "PATH_TRANSLATION_UNSPECIFIED";
-
-    case BackendRule_PathTranslation.CONSTANT_ADDRESS:
-      return "CONSTANT_ADDRESS";
-
-    case BackendRule_PathTranslation.APPEND_PATH_TO_ADDRESS:
-      return "APPEND_PATH_TO_ADDRESS";
-
-    default:
-      return "UNKNOWN";
-  }
-}

@@ -10,6 +10,12 @@ export interface PubKey {
   key: Uint8Array;
 }
 
+/** PrivKey defines a secp256r1 ECDSA private key. */
+export interface PrivKey {
+  /** secret number serialized using big-endian encoding */
+  secret: Uint8Array;
+}
+
 function createBasePubKey(): PubKey {
   return {
     key: new Uint8Array()
@@ -66,12 +72,6 @@ export const PubKey = {
   }
 
 };
-
-/** PrivKey defines a secp256r1 ECDSA private key. */
-export interface PrivKey {
-  /** secret number serialized using big-endian encoding */
-  secret: Uint8Array;
-}
 
 function createBasePrivKey(): PrivKey {
   return {

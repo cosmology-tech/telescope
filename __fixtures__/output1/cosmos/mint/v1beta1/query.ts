@@ -5,12 +5,45 @@ import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@os
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+
+/** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
+export interface QueryInflationRequest {}
+
+/**
+ * QueryInflationResponse is the response type for the Query/Inflation RPC
+ * method.
+ */
+export interface QueryInflationResponse {
+  /** inflation is the current minting inflation value. */
+  inflation: Uint8Array;
+}
+
+/**
+ * QueryAnnualProvisionsRequest is the request type for the
+ * Query/AnnualProvisions RPC method.
+ */
+export interface QueryAnnualProvisionsRequest {}
+
+/**
+ * QueryAnnualProvisionsResponse is the response type for the
+ * Query/AnnualProvisions RPC method.
+ */
+export interface QueryAnnualProvisionsResponse {
+  /** annual_provisions is the current minting annual provisions value. */
+  annualProvisions: Uint8Array;
+}
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -32,27 +65,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
-export interface QueryParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -111,15 +138,12 @@ export const QueryParamsResponse = {
 
 };
 
-/** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
-export interface QueryInflationRequest {}
-
 function createBaseQueryInflationRequest(): QueryInflationRequest {
   return {};
 }
 
 export const QueryInflationRequest = {
-  encode(message: QueryInflationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryInflationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -141,30 +165,21 @@ export const QueryInflationRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryInflationRequest {
+  fromJSON(_: any): QueryInflationRequest {
     return {};
   },
 
-  toJSON(message: QueryInflationRequest): unknown {
+  toJSON(_: QueryInflationRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryInflationRequest>, I>>(object: I): QueryInflationRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryInflationRequest>, I>>(_: I): QueryInflationRequest {
     const message = createBaseQueryInflationRequest();
     return message;
   }
 
 };
-
-/**
- * QueryInflationResponse is the response type for the Query/Inflation RPC
- * method.
- */
-export interface QueryInflationResponse {
-  /** inflation is the current minting inflation value. */
-  inflation: Uint8Array;
-}
 
 function createBaseQueryInflationResponse(): QueryInflationResponse {
   return {
@@ -223,18 +238,12 @@ export const QueryInflationResponse = {
 
 };
 
-/**
- * QueryAnnualProvisionsRequest is the request type for the
- * Query/AnnualProvisions RPC method.
- */
-export interface QueryAnnualProvisionsRequest {}
-
 function createBaseQueryAnnualProvisionsRequest(): QueryAnnualProvisionsRequest {
   return {};
 }
 
 export const QueryAnnualProvisionsRequest = {
-  encode(message: QueryAnnualProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryAnnualProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -256,30 +265,21 @@ export const QueryAnnualProvisionsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryAnnualProvisionsRequest {
+  fromJSON(_: any): QueryAnnualProvisionsRequest {
     return {};
   },
 
-  toJSON(message: QueryAnnualProvisionsRequest): unknown {
+  toJSON(_: QueryAnnualProvisionsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAnnualProvisionsRequest>, I>>(object: I): QueryAnnualProvisionsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryAnnualProvisionsRequest>, I>>(_: I): QueryAnnualProvisionsRequest {
     const message = createBaseQueryAnnualProvisionsRequest();
     return message;
   }
 
 };
-
-/**
- * QueryAnnualProvisionsResponse is the response type for the
- * Query/AnnualProvisions RPC method.
- */
-export interface QueryAnnualProvisionsResponse {
-  /** annual_provisions is the current minting annual provisions value. */
-  annualProvisions: Uint8Array;
-}
 
 function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsResponse {
   return {

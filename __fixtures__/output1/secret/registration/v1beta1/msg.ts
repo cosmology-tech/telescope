@@ -4,6 +4,12 @@ export interface RaAuthenticate {
   sender: Uint8Array;
   certificate: Uint8Array;
 }
+export interface MasterCertificate {
+  bytes: Uint8Array;
+}
+export interface Key {
+  key: Uint8Array;
+}
 
 function createBaseRaAuthenticate(): RaAuthenticate {
   return {
@@ -73,9 +79,6 @@ export const RaAuthenticate = {
   }
 
 };
-export interface MasterCertificate {
-  bytes: Uint8Array;
-}
 
 function createBaseMasterCertificate(): MasterCertificate {
   return {
@@ -133,9 +136,6 @@ export const MasterCertificate = {
   }
 
 };
-export interface Key {
-  key: Uint8Array;
-}
 
 function createBaseKey(): Key {
   return {

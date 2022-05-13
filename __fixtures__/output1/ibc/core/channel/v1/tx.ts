@@ -13,6 +13,145 @@ export interface MsgChannelOpenInit {
   signer: string;
 }
 
+/** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
+export interface MsgChannelOpenInitResponse {}
+
+/**
+ * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
+ * on Chain B.
+ */
+export interface MsgChannelOpenTry {
+  portId: string;
+
+  /**
+   * in the case of crossing hello's, when both chains call OpenInit, we need
+   * the channel identifier of the previous channel in state INIT
+   */
+  previousChannelId: string;
+  channel: Channel;
+  counterpartyVersion: string;
+  proofInit: Uint8Array;
+  proofHeight: Height;
+  signer: string;
+}
+
+/** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
+export interface MsgChannelOpenTryResponse {}
+
+/**
+ * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
+ * the change of channel state to TRYOPEN on Chain B.
+ */
+export interface MsgChannelOpenAck {
+  portId: string;
+  channelId: string;
+  counterpartyChannelId: string;
+  counterpartyVersion: string;
+  proofTry: Uint8Array;
+  proofHeight: Height;
+  signer: string;
+}
+
+/** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
+export interface MsgChannelOpenAckResponse {}
+
+/**
+ * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
+ * acknowledge the change of channel state to OPEN on Chain A.
+ */
+export interface MsgChannelOpenConfirm {
+  portId: string;
+  channelId: string;
+  proofAck: Uint8Array;
+  proofHeight: Height;
+  signer: string;
+}
+
+/**
+ * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
+ * type.
+ */
+export interface MsgChannelOpenConfirmResponse {}
+
+/**
+ * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
+ * to close a channel with Chain B.
+ */
+export interface MsgChannelCloseInit {
+  portId: string;
+  channelId: string;
+  signer: string;
+}
+
+/** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
+export interface MsgChannelCloseInitResponse {}
+
+/**
+ * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
+ * to acknowledge the change of channel state to CLOSED on Chain A.
+ */
+export interface MsgChannelCloseConfirm {
+  portId: string;
+  channelId: string;
+  proofInit: Uint8Array;
+  proofHeight: Height;
+  signer: string;
+}
+
+/**
+ * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
+ * type.
+ */
+export interface MsgChannelCloseConfirmResponse {}
+
+/** MsgRecvPacket receives incoming IBC packet */
+export interface MsgRecvPacket {
+  packet: Packet;
+  proofCommitment: Uint8Array;
+  proofHeight: Height;
+  signer: string;
+}
+
+/** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
+export interface MsgRecvPacketResponse {}
+
+/** MsgTimeout receives timed-out packet */
+export interface MsgTimeout {
+  packet: Packet;
+  proofUnreceived: Uint8Array;
+  proofHeight: Height;
+  nextSequenceRecv: Long;
+  signer: string;
+}
+
+/** MsgTimeoutResponse defines the Msg/Timeout response type. */
+export interface MsgTimeoutResponse {}
+
+/** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
+export interface MsgTimeoutOnClose {
+  packet: Packet;
+  proofUnreceived: Uint8Array;
+  proofClose: Uint8Array;
+  proofHeight: Height;
+  nextSequenceRecv: Long;
+  signer: string;
+}
+
+/** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
+export interface MsgTimeoutOnCloseResponse {}
+
+/** MsgAcknowledgement receives incoming IBC acknowledgement */
+export interface MsgAcknowledgement {
+  packet: Packet;
+  acknowledgement: Uint8Array;
+  proofAcked: Uint8Array;
+  proofHeight: Height;
+  signer: string;
+}
+
+/** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
+export interface MsgAcknowledgementResponse {}
+
 function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
   return {
     portId: "",
@@ -94,15 +233,12 @@ export const MsgChannelOpenInit = {
 
 };
 
-/** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
-export interface MsgChannelOpenInitResponse {}
-
 function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
   return {};
 }
 
 export const MsgChannelOpenInitResponse = {
-  encode(message: MsgChannelOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgChannelOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -124,40 +260,21 @@ export const MsgChannelOpenInitResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgChannelOpenInitResponse {
+  fromJSON(_: any): MsgChannelOpenInitResponse {
     return {};
   },
 
-  toJSON(message: MsgChannelOpenInitResponse): unknown {
+  toJSON(_: MsgChannelOpenInitResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenInitResponse>, I>>(object: I): MsgChannelOpenInitResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenInitResponse>, I>>(_: I): MsgChannelOpenInitResponse {
     const message = createBaseMsgChannelOpenInitResponse();
     return message;
   }
 
 };
-
-/**
- * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
- * on Chain B.
- */
-export interface MsgChannelOpenTry {
-  portId: string;
-
-  /**
-   * in the case of crossing hello's, when both chains call OpenInit, we need
-   * the channel identifier of the previous channel in state INIT
-   */
-  previousChannelId: string;
-  channel: Channel;
-  counterpartyVersion: string;
-  proofInit: Uint8Array;
-  proofHeight: Height;
-  signer: string;
-}
 
 function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
   return {
@@ -288,15 +405,12 @@ export const MsgChannelOpenTry = {
 
 };
 
-/** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
-export interface MsgChannelOpenTryResponse {}
-
 function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
   return {};
 }
 
 export const MsgChannelOpenTryResponse = {
-  encode(message: MsgChannelOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgChannelOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -318,35 +432,21 @@ export const MsgChannelOpenTryResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgChannelOpenTryResponse {
+  fromJSON(_: any): MsgChannelOpenTryResponse {
     return {};
   },
 
-  toJSON(message: MsgChannelOpenTryResponse): unknown {
+  toJSON(_: MsgChannelOpenTryResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenTryResponse>, I>>(object: I): MsgChannelOpenTryResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenTryResponse>, I>>(_: I): MsgChannelOpenTryResponse {
     const message = createBaseMsgChannelOpenTryResponse();
     return message;
   }
 
 };
-
-/**
- * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
- * the change of channel state to TRYOPEN on Chain B.
- */
-export interface MsgChannelOpenAck {
-  portId: string;
-  channelId: string;
-  counterpartyChannelId: string;
-  counterpartyVersion: string;
-  proofTry: Uint8Array;
-  proofHeight: Height;
-  signer: string;
-}
 
 function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
   return {
@@ -477,15 +577,12 @@ export const MsgChannelOpenAck = {
 
 };
 
-/** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
-export interface MsgChannelOpenAckResponse {}
-
 function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
   return {};
 }
 
 export const MsgChannelOpenAckResponse = {
-  encode(message: MsgChannelOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgChannelOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -507,33 +604,21 @@ export const MsgChannelOpenAckResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgChannelOpenAckResponse {
+  fromJSON(_: any): MsgChannelOpenAckResponse {
     return {};
   },
 
-  toJSON(message: MsgChannelOpenAckResponse): unknown {
+  toJSON(_: MsgChannelOpenAckResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenAckResponse>, I>>(object: I): MsgChannelOpenAckResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenAckResponse>, I>>(_: I): MsgChannelOpenAckResponse {
     const message = createBaseMsgChannelOpenAckResponse();
     return message;
   }
 
 };
-
-/**
- * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
- * acknowledge the change of channel state to OPEN on Chain A.
- */
-export interface MsgChannelOpenConfirm {
-  portId: string;
-  channelId: string;
-  proofAck: Uint8Array;
-  proofHeight: Height;
-  signer: string;
-}
 
 function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
   return {
@@ -640,18 +725,12 @@ export const MsgChannelOpenConfirm = {
 
 };
 
-/**
- * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
- * type.
- */
-export interface MsgChannelOpenConfirmResponse {}
-
 function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmResponse {
   return {};
 }
 
 export const MsgChannelOpenConfirmResponse = {
-  encode(message: MsgChannelOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgChannelOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -673,31 +752,21 @@ export const MsgChannelOpenConfirmResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgChannelOpenConfirmResponse {
+  fromJSON(_: any): MsgChannelOpenConfirmResponse {
     return {};
   },
 
-  toJSON(message: MsgChannelOpenConfirmResponse): unknown {
+  toJSON(_: MsgChannelOpenConfirmResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenConfirmResponse>, I>>(object: I): MsgChannelOpenConfirmResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgChannelOpenConfirmResponse>, I>>(_: I): MsgChannelOpenConfirmResponse {
     const message = createBaseMsgChannelOpenConfirmResponse();
     return message;
   }
 
 };
-
-/**
- * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
- * to close a channel with Chain B.
- */
-export interface MsgChannelCloseInit {
-  portId: string;
-  channelId: string;
-  signer: string;
-}
 
 function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
   return {
@@ -780,15 +849,12 @@ export const MsgChannelCloseInit = {
 
 };
 
-/** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
-export interface MsgChannelCloseInitResponse {}
-
 function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
   return {};
 }
 
 export const MsgChannelCloseInitResponse = {
-  encode(message: MsgChannelCloseInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgChannelCloseInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -810,33 +876,21 @@ export const MsgChannelCloseInitResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgChannelCloseInitResponse {
+  fromJSON(_: any): MsgChannelCloseInitResponse {
     return {};
   },
 
-  toJSON(message: MsgChannelCloseInitResponse): unknown {
+  toJSON(_: MsgChannelCloseInitResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgChannelCloseInitResponse>, I>>(object: I): MsgChannelCloseInitResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgChannelCloseInitResponse>, I>>(_: I): MsgChannelCloseInitResponse {
     const message = createBaseMsgChannelCloseInitResponse();
     return message;
   }
 
 };
-
-/**
- * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
- * to acknowledge the change of channel state to CLOSED on Chain A.
- */
-export interface MsgChannelCloseConfirm {
-  portId: string;
-  channelId: string;
-  proofInit: Uint8Array;
-  proofHeight: Height;
-  signer: string;
-}
 
 function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
   return {
@@ -943,18 +997,12 @@ export const MsgChannelCloseConfirm = {
 
 };
 
-/**
- * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
- * type.
- */
-export interface MsgChannelCloseConfirmResponse {}
-
 function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmResponse {
   return {};
 }
 
 export const MsgChannelCloseConfirmResponse = {
-  encode(message: MsgChannelCloseConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgChannelCloseConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -976,29 +1024,21 @@ export const MsgChannelCloseConfirmResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgChannelCloseConfirmResponse {
+  fromJSON(_: any): MsgChannelCloseConfirmResponse {
     return {};
   },
 
-  toJSON(message: MsgChannelCloseConfirmResponse): unknown {
+  toJSON(_: MsgChannelCloseConfirmResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgChannelCloseConfirmResponse>, I>>(object: I): MsgChannelCloseConfirmResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgChannelCloseConfirmResponse>, I>>(_: I): MsgChannelCloseConfirmResponse {
     const message = createBaseMsgChannelCloseConfirmResponse();
     return message;
   }
 
 };
-
-/** MsgRecvPacket receives incoming IBC packet */
-export interface MsgRecvPacket {
-  packet: Packet;
-  proofCommitment: Uint8Array;
-  proofHeight: Height;
-  signer: string;
-}
 
 function createBaseMsgRecvPacket(): MsgRecvPacket {
   return {
@@ -1093,15 +1133,12 @@ export const MsgRecvPacket = {
 
 };
 
-/** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
-export interface MsgRecvPacketResponse {}
-
 function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
   return {};
 }
 
 export const MsgRecvPacketResponse = {
-  encode(message: MsgRecvPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgRecvPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1123,30 +1160,21 @@ export const MsgRecvPacketResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgRecvPacketResponse {
+  fromJSON(_: any): MsgRecvPacketResponse {
     return {};
   },
 
-  toJSON(message: MsgRecvPacketResponse): unknown {
+  toJSON(_: MsgRecvPacketResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRecvPacketResponse>, I>>(object: I): MsgRecvPacketResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRecvPacketResponse>, I>>(_: I): MsgRecvPacketResponse {
     const message = createBaseMsgRecvPacketResponse();
     return message;
   }
 
 };
-
-/** MsgTimeout receives timed-out packet */
-export interface MsgTimeout {
-  packet: Packet;
-  proofUnreceived: Uint8Array;
-  proofHeight: Height;
-  nextSequenceRecv: Long;
-  signer: string;
-}
 
 function createBaseMsgTimeout(): MsgTimeout {
   return {
@@ -1253,15 +1281,12 @@ export const MsgTimeout = {
 
 };
 
-/** MsgTimeoutResponse defines the Msg/Timeout response type. */
-export interface MsgTimeoutResponse {}
-
 function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
   return {};
 }
 
 export const MsgTimeoutResponse = {
-  encode(message: MsgTimeoutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgTimeoutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1283,31 +1308,21 @@ export const MsgTimeoutResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgTimeoutResponse {
+  fromJSON(_: any): MsgTimeoutResponse {
     return {};
   },
 
-  toJSON(message: MsgTimeoutResponse): unknown {
+  toJSON(_: MsgTimeoutResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgTimeoutResponse>, I>>(object: I): MsgTimeoutResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgTimeoutResponse>, I>>(_: I): MsgTimeoutResponse {
     const message = createBaseMsgTimeoutResponse();
     return message;
   }
 
 };
-
-/** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
-export interface MsgTimeoutOnClose {
-  packet: Packet;
-  proofUnreceived: Uint8Array;
-  proofClose: Uint8Array;
-  proofHeight: Height;
-  nextSequenceRecv: Long;
-  signer: string;
-}
 
 function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
   return {
@@ -1426,15 +1441,12 @@ export const MsgTimeoutOnClose = {
 
 };
 
-/** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
-export interface MsgTimeoutOnCloseResponse {}
-
 function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
   return {};
 }
 
 export const MsgTimeoutOnCloseResponse = {
-  encode(message: MsgTimeoutOnCloseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgTimeoutOnCloseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1456,30 +1468,21 @@ export const MsgTimeoutOnCloseResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgTimeoutOnCloseResponse {
+  fromJSON(_: any): MsgTimeoutOnCloseResponse {
     return {};
   },
 
-  toJSON(message: MsgTimeoutOnCloseResponse): unknown {
+  toJSON(_: MsgTimeoutOnCloseResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgTimeoutOnCloseResponse>, I>>(object: I): MsgTimeoutOnCloseResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgTimeoutOnCloseResponse>, I>>(_: I): MsgTimeoutOnCloseResponse {
     const message = createBaseMsgTimeoutOnCloseResponse();
     return message;
   }
 
 };
-
-/** MsgAcknowledgement receives incoming IBC acknowledgement */
-export interface MsgAcknowledgement {
-  packet: Packet;
-  acknowledgement: Uint8Array;
-  proofAcked: Uint8Array;
-  proofHeight: Height;
-  signer: string;
-}
 
 function createBaseMsgAcknowledgement(): MsgAcknowledgement {
   return {
@@ -1586,15 +1589,12 @@ export const MsgAcknowledgement = {
 
 };
 
-/** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
-export interface MsgAcknowledgementResponse {}
-
 function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {
   return {};
 }
 
 export const MsgAcknowledgementResponse = {
-  encode(message: MsgAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1616,16 +1616,16 @@ export const MsgAcknowledgementResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgAcknowledgementResponse {
+  fromJSON(_: any): MsgAcknowledgementResponse {
     return {};
   },
 
-  toJSON(message: MsgAcknowledgementResponse): unknown {
+  toJSON(_: MsgAcknowledgementResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAcknowledgementResponse>, I>>(object: I): MsgAcknowledgementResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAcknowledgementResponse>, I>>(_: I): MsgAcknowledgementResponse {
     const message = createBaseMsgAcknowledgementResponse();
     return message;
   }

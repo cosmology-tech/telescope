@@ -7,12 +7,46 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceResponse {
+  /** params defines the parameters of the module. */
+  moduleAccountBalance: Coin[];
+}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequest {}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+export interface QueryClaimRecordRequest {
+  address: string;
+}
+export interface QueryClaimRecordResponse {
+  claimRecord: ClaimRecord;
+}
+export interface QueryClaimableForActionRequest {
+  address: string;
+  action: Action;
+}
+export interface QueryClaimableForActionResponse {
+  coins: Coin[];
+}
+export interface QueryTotalClaimableRequest {
+  address: string;
+}
+export interface QueryTotalClaimableResponse {
+  coins: Coin[];
+}
+
 function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalanceRequest {
   return {};
 }
 
 export const QueryModuleAccountBalanceRequest = {
-  encode(message: QueryModuleAccountBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryModuleAccountBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -34,27 +68,21 @@ export const QueryModuleAccountBalanceRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryModuleAccountBalanceRequest {
+  fromJSON(_: any): QueryModuleAccountBalanceRequest {
     return {};
   },
 
-  toJSON(message: QueryModuleAccountBalanceRequest): unknown {
+  toJSON(_: QueryModuleAccountBalanceRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountBalanceRequest>, I>>(object: I): QueryModuleAccountBalanceRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountBalanceRequest>, I>>(_: I): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
-export interface QueryModuleAccountBalanceResponse {
-  /** params defines the parameters of the module. */
-  moduleAccountBalance: Coin[];
-}
 
 function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanceResponse {
   return {
@@ -119,15 +147,12 @@ export const QueryModuleAccountBalanceResponse = {
 
 };
 
-/** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequest {}
-
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -149,27 +174,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
-export interface QueryParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -227,9 +246,6 @@ export const QueryParamsResponse = {
   }
 
 };
-export interface QueryClaimRecordRequest {
-  address: string;
-}
 
 function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
   return {
@@ -287,9 +303,6 @@ export const QueryClaimRecordRequest = {
   }
 
 };
-export interface QueryClaimRecordResponse {
-  claimRecord: ClaimRecord;
-}
 
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   return {
@@ -347,10 +360,6 @@ export const QueryClaimRecordResponse = {
   }
 
 };
-export interface QueryClaimableForActionRequest {
-  address: string;
-  action: Action;
-}
 
 function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequest {
   return {
@@ -420,9 +429,6 @@ export const QueryClaimableForActionRequest = {
   }
 
 };
-export interface QueryClaimableForActionResponse {
-  coins: Coin[];
-}
 
 function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionResponse {
   return {
@@ -486,9 +492,6 @@ export const QueryClaimableForActionResponse = {
   }
 
 };
-export interface QueryTotalClaimableRequest {
-  address: string;
-}
 
 function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
   return {
@@ -546,9 +549,6 @@ export const QueryTotalClaimableRequest = {
   }
 
 };
-export interface QueryTotalClaimableResponse {
-  coins: Coin[];
-}
 
 function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
   return {

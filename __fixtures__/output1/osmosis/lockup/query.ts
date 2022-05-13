@@ -5,13 +5,108 @@ import { PeriodLock, SyntheticLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 export interface ModuleBalanceRequest {}
+export interface ModuleBalanceResponse {
+  coins: Coin[];
+}
+export interface ModuleLockedAmountRequest {}
+export interface ModuleLockedAmountResponse {
+  coins: Coin[];
+}
+export interface AccountUnlockableCoinsRequest {
+  owner: string;
+}
+export interface AccountUnlockableCoinsResponse {
+  coins: Coin[];
+}
+export interface AccountUnlockingCoinsRequest {
+  owner: string;
+}
+export interface AccountUnlockingCoinsResponse {
+  coins: Coin[];
+}
+export interface AccountLockedCoinsRequest {
+  owner: string;
+}
+export interface AccountLockedCoinsResponse {
+  coins: Coin[];
+}
+export interface AccountLockedPastTimeRequest {
+  owner: string;
+  timestamp: Date;
+}
+export interface AccountLockedPastTimeResponse {
+  locks: PeriodLock[];
+}
+export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
+  owner: string;
+  timestamp: Date;
+}
+export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
+  locks: PeriodLock[];
+}
+export interface AccountUnlockedBeforeTimeRequest {
+  owner: string;
+  timestamp: Date;
+}
+export interface AccountUnlockedBeforeTimeResponse {
+  locks: PeriodLock[];
+}
+export interface AccountLockedPastTimeDenomRequest {
+  owner: string;
+  timestamp: Date;
+  denom: string;
+}
+export interface AccountLockedPastTimeDenomResponse {
+  locks: PeriodLock[];
+}
+export interface LockedDenomRequest {
+  denom: string;
+  duration: string;
+}
+export interface LockedDenomResponse {
+  amount: string;
+}
+export interface LockedRequest {
+  lockId: Long;
+}
+export interface LockedResponse {
+  lock: PeriodLock;
+}
+export interface SyntheticLockupsByLockupIDRequest {
+  lockId: Long;
+}
+export interface SyntheticLockupsByLockupIDResponse {
+  syntheticLocks: SyntheticLock[];
+}
+export interface AccountLockedLongerDurationRequest {
+  owner: string;
+  duration: string;
+}
+export interface AccountLockedLongerDurationResponse {
+  locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
+  owner: string;
+  duration: string;
+}
+export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
+  locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationDenomRequest {
+  owner: string;
+  duration: string;
+  denom: string;
+}
+export interface AccountLockedLongerDurationDenomResponse {
+  locks: PeriodLock[];
+}
 
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
   return {};
 }
 
 export const ModuleBalanceRequest = {
-  encode(message: ModuleBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ModuleBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -33,24 +128,21 @@ export const ModuleBalanceRequest = {
     return message;
   },
 
-  fromJSON(object: any): ModuleBalanceRequest {
+  fromJSON(_: any): ModuleBalanceRequest {
     return {};
   },
 
-  toJSON(message: ModuleBalanceRequest): unknown {
+  toJSON(_: ModuleBalanceRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleBalanceRequest>, I>>(object: I): ModuleBalanceRequest {
+  fromPartial<I extends Exact<DeepPartial<ModuleBalanceRequest>, I>>(_: I): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
     return message;
   }
 
 };
-export interface ModuleBalanceResponse {
-  coins: Coin[];
-}
 
 function createBaseModuleBalanceResponse(): ModuleBalanceResponse {
   return {
@@ -114,14 +206,13 @@ export const ModuleBalanceResponse = {
   }
 
 };
-export interface ModuleLockedAmountRequest {}
 
 function createBaseModuleLockedAmountRequest(): ModuleLockedAmountRequest {
   return {};
 }
 
 export const ModuleLockedAmountRequest = {
-  encode(message: ModuleLockedAmountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ModuleLockedAmountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -143,24 +234,21 @@ export const ModuleLockedAmountRequest = {
     return message;
   },
 
-  fromJSON(object: any): ModuleLockedAmountRequest {
+  fromJSON(_: any): ModuleLockedAmountRequest {
     return {};
   },
 
-  toJSON(message: ModuleLockedAmountRequest): unknown {
+  toJSON(_: ModuleLockedAmountRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleLockedAmountRequest>, I>>(object: I): ModuleLockedAmountRequest {
+  fromPartial<I extends Exact<DeepPartial<ModuleLockedAmountRequest>, I>>(_: I): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
     return message;
   }
 
 };
-export interface ModuleLockedAmountResponse {
-  coins: Coin[];
-}
 
 function createBaseModuleLockedAmountResponse(): ModuleLockedAmountResponse {
   return {
@@ -224,9 +312,6 @@ export const ModuleLockedAmountResponse = {
   }
 
 };
-export interface AccountUnlockableCoinsRequest {
-  owner: string;
-}
 
 function createBaseAccountUnlockableCoinsRequest(): AccountUnlockableCoinsRequest {
   return {
@@ -284,9 +369,6 @@ export const AccountUnlockableCoinsRequest = {
   }
 
 };
-export interface AccountUnlockableCoinsResponse {
-  coins: Coin[];
-}
 
 function createBaseAccountUnlockableCoinsResponse(): AccountUnlockableCoinsResponse {
   return {
@@ -350,9 +432,6 @@ export const AccountUnlockableCoinsResponse = {
   }
 
 };
-export interface AccountUnlockingCoinsRequest {
-  owner: string;
-}
 
 function createBaseAccountUnlockingCoinsRequest(): AccountUnlockingCoinsRequest {
   return {
@@ -410,9 +489,6 @@ export const AccountUnlockingCoinsRequest = {
   }
 
 };
-export interface AccountUnlockingCoinsResponse {
-  coins: Coin[];
-}
 
 function createBaseAccountUnlockingCoinsResponse(): AccountUnlockingCoinsResponse {
   return {
@@ -476,9 +552,6 @@ export const AccountUnlockingCoinsResponse = {
   }
 
 };
-export interface AccountLockedCoinsRequest {
-  owner: string;
-}
 
 function createBaseAccountLockedCoinsRequest(): AccountLockedCoinsRequest {
   return {
@@ -536,9 +609,6 @@ export const AccountLockedCoinsRequest = {
   }
 
 };
-export interface AccountLockedCoinsResponse {
-  coins: Coin[];
-}
 
 function createBaseAccountLockedCoinsResponse(): AccountLockedCoinsResponse {
   return {
@@ -602,10 +672,6 @@ export const AccountLockedCoinsResponse = {
   }
 
 };
-export interface AccountLockedPastTimeRequest {
-  owner: string;
-  timestamp: Date;
-}
 
 function createBaseAccountLockedPastTimeRequest(): AccountLockedPastTimeRequest {
   return {
@@ -620,7 +686,10 @@ export const AccountLockedPastTimeRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -672,9 +741,6 @@ export const AccountLockedPastTimeRequest = {
   }
 
 };
-export interface AccountLockedPastTimeResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountLockedPastTimeResponse(): AccountLockedPastTimeResponse {
   return {
@@ -738,10 +804,6 @@ export const AccountLockedPastTimeResponse = {
   }
 
 };
-export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
-  owner: string;
-  timestamp: Date;
-}
 
 function createBaseAccountLockedPastTimeNotUnlockingOnlyRequest(): AccountLockedPastTimeNotUnlockingOnlyRequest {
   return {
@@ -756,7 +818,10 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -808,9 +873,6 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   }
 
 };
-export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountLockedPastTimeNotUnlockingOnlyResponse(): AccountLockedPastTimeNotUnlockingOnlyResponse {
   return {
@@ -874,10 +936,6 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
   }
 
 };
-export interface AccountUnlockedBeforeTimeRequest {
-  owner: string;
-  timestamp: Date;
-}
 
 function createBaseAccountUnlockedBeforeTimeRequest(): AccountUnlockedBeforeTimeRequest {
   return {
@@ -892,7 +950,10 @@ export const AccountUnlockedBeforeTimeRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -944,9 +1005,6 @@ export const AccountUnlockedBeforeTimeRequest = {
   }
 
 };
-export interface AccountUnlockedBeforeTimeResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountUnlockedBeforeTimeResponse(): AccountUnlockedBeforeTimeResponse {
   return {
@@ -1010,11 +1068,6 @@ export const AccountUnlockedBeforeTimeResponse = {
   }
 
 };
-export interface AccountLockedPastTimeDenomRequest {
-  owner: string;
-  timestamp: Date;
-  denom: string;
-}
 
 function createBaseAccountLockedPastTimeDenomRequest(): AccountLockedPastTimeDenomRequest {
   return {
@@ -1030,7 +1083,9 @@ export const AccountLockedPastTimeDenomRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    }
 
     if (message.denom !== "") {
       writer.uint32(26).string(message.denom);
@@ -1094,9 +1149,6 @@ export const AccountLockedPastTimeDenomRequest = {
   }
 
 };
-export interface AccountLockedPastTimeDenomResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountLockedPastTimeDenomResponse(): AccountLockedPastTimeDenomResponse {
   return {
@@ -1160,10 +1212,6 @@ export const AccountLockedPastTimeDenomResponse = {
   }
 
 };
-export interface LockedDenomRequest {
-  denom: string;
-  duration: string;
-}
 
 function createBaseLockedDenomRequest(): LockedDenomRequest {
   return {
@@ -1178,7 +1226,10 @@ export const LockedDenomRequest = {
       writer.uint32(10).string(message.denom);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -1230,9 +1281,6 @@ export const LockedDenomRequest = {
   }
 
 };
-export interface LockedDenomResponse {
-  amount: string;
-}
 
 function createBaseLockedDenomResponse(): LockedDenomResponse {
   return {
@@ -1290,9 +1338,6 @@ export const LockedDenomResponse = {
   }
 
 };
-export interface LockedRequest {
-  lockId: Long;
-}
 
 function createBaseLockedRequest(): LockedRequest {
   return {
@@ -1350,9 +1395,6 @@ export const LockedRequest = {
   }
 
 };
-export interface LockedResponse {
-  lock: PeriodLock;
-}
 
 function createBaseLockedResponse(): LockedResponse {
   return {
@@ -1410,9 +1452,6 @@ export const LockedResponse = {
   }
 
 };
-export interface SyntheticLockupsByLockupIDRequest {
-  lockId: Long;
-}
 
 function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockupIDRequest {
   return {
@@ -1470,9 +1509,6 @@ export const SyntheticLockupsByLockupIDRequest = {
   }
 
 };
-export interface SyntheticLockupsByLockupIDResponse {
-  syntheticLocks: SyntheticLock[];
-}
 
 function createBaseSyntheticLockupsByLockupIDResponse(): SyntheticLockupsByLockupIDResponse {
   return {
@@ -1536,10 +1572,6 @@ export const SyntheticLockupsByLockupIDResponse = {
   }
 
 };
-export interface AccountLockedLongerDurationRequest {
-  owner: string;
-  duration: string;
-}
 
 function createBaseAccountLockedLongerDurationRequest(): AccountLockedLongerDurationRequest {
   return {
@@ -1554,7 +1586,10 @@ export const AccountLockedLongerDurationRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -1606,9 +1641,6 @@ export const AccountLockedLongerDurationRequest = {
   }
 
 };
-export interface AccountLockedLongerDurationResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountLockedLongerDurationResponse(): AccountLockedLongerDurationResponse {
   return {
@@ -1672,10 +1704,6 @@ export const AccountLockedLongerDurationResponse = {
   }
 
 };
-export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
-  owner: string;
-  duration: string;
-}
 
 function createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest(): AccountLockedLongerDurationNotUnlockingOnlyRequest {
   return {
@@ -1690,7 +1718,10 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -1742,9 +1773,6 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   }
 
 };
-export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse(): AccountLockedLongerDurationNotUnlockingOnlyResponse {
   return {
@@ -1808,11 +1836,6 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
   }
 
 };
-export interface AccountLockedLongerDurationDenomRequest {
-  owner: string;
-  duration: string;
-  denom: string;
-}
 
 function createBaseAccountLockedLongerDurationDenomRequest(): AccountLockedLongerDurationDenomRequest {
   return {
@@ -1828,7 +1851,9 @@ export const AccountLockedLongerDurationDenomRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
 
     if (message.denom !== "") {
       writer.uint32(26).string(message.denom);
@@ -1892,9 +1917,6 @@ export const AccountLockedLongerDurationDenomRequest = {
   }
 
 };
-export interface AccountLockedLongerDurationDenomResponse {
-  locks: PeriodLock[];
-}
 
 function createBaseAccountLockedLongerDurationDenomResponse(): AccountLockedLongerDurationDenomResponse {
   return {

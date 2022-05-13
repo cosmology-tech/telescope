@@ -6,6 +6,38 @@ import { Long, isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmo
 export interface QueryGaugeIdsRequest {
   poolId: Long;
 }
+export interface QueryGaugeIdsResponse {
+  gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
+}
+export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
+  gaugeId: Long;
+  duration: string;
+}
+export interface QueryDistrInfoRequest {}
+export interface QueryDistrInfoResponse {
+  distrInfo: DistrInfo;
+}
+export interface QueryParamsRequest {}
+export interface QueryParamsResponse {
+  params: Params;
+}
+export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsResponse {
+  lockableDurations: string[];
+}
+export interface QueryIncentivizedPoolsRequest {}
+export interface IncentivizedPool {
+  poolId: Long;
+  lockableDuration: string;
+  gaugeId: Long;
+}
+export interface QueryIncentivizedPoolsResponse {
+  incentivizedPools: IncentivizedPool[];
+}
+export interface QueryExternalIncentiveGaugesRequest {}
+export interface QueryExternalIncentiveGaugesResponse {
+  data: Gauge[];
+}
 
 function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
   return {
@@ -63,9 +95,6 @@ export const QueryGaugeIdsRequest = {
   }
 
 };
-export interface QueryGaugeIdsResponse {
-  gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
-}
 
 function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
   return {
@@ -129,10 +158,6 @@ export const QueryGaugeIdsResponse = {
   }
 
 };
-export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
-  gaugeId: Long;
-  duration: string;
-}
 
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
   return {
@@ -147,7 +172,10 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
       writer.uint32(8).uint64(message.gaugeId);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -199,14 +227,13 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   }
 
 };
-export interface QueryDistrInfoRequest {}
 
 function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
   return {};
 }
 
 export const QueryDistrInfoRequest = {
-  encode(message: QueryDistrInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryDistrInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -228,24 +255,21 @@ export const QueryDistrInfoRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryDistrInfoRequest {
+  fromJSON(_: any): QueryDistrInfoRequest {
     return {};
   },
 
-  toJSON(message: QueryDistrInfoRequest): unknown {
+  toJSON(_: QueryDistrInfoRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDistrInfoRequest>, I>>(object: I): QueryDistrInfoRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryDistrInfoRequest>, I>>(_: I): QueryDistrInfoRequest {
     const message = createBaseQueryDistrInfoRequest();
     return message;
   }
 
 };
-export interface QueryDistrInfoResponse {
-  distrInfo: DistrInfo;
-}
 
 function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
   return {
@@ -303,14 +327,13 @@ export const QueryDistrInfoResponse = {
   }
 
 };
-export interface QueryParamsRequest {}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -332,24 +355,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-export interface QueryParamsResponse {
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -407,14 +427,13 @@ export const QueryParamsResponse = {
   }
 
 };
-export interface QueryLockableDurationsRequest {}
 
 function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsRequest {
   return {};
 }
 
 export const QueryLockableDurationsRequest = {
-  encode(message: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -436,24 +455,21 @@ export const QueryLockableDurationsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryLockableDurationsRequest {
+  fromJSON(_: any): QueryLockableDurationsRequest {
     return {};
   },
 
-  toJSON(message: QueryLockableDurationsRequest): unknown {
+  toJSON(_: QueryLockableDurationsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsRequest>, I>>(object: I): QueryLockableDurationsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsRequest>, I>>(_: I): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
   }
 
 };
-export interface QueryLockableDurationsResponse {
-  lockableDurations: string[];
-}
 
 function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsResponse {
   return {
@@ -517,14 +533,13 @@ export const QueryLockableDurationsResponse = {
   }
 
 };
-export interface QueryIncentivizedPoolsRequest {}
 
 function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsRequest {
   return {};
 }
 
 export const QueryIncentivizedPoolsRequest = {
-  encode(message: QueryIncentivizedPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryIncentivizedPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -546,26 +561,21 @@ export const QueryIncentivizedPoolsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryIncentivizedPoolsRequest {
+  fromJSON(_: any): QueryIncentivizedPoolsRequest {
     return {};
   },
 
-  toJSON(message: QueryIncentivizedPoolsRequest): unknown {
+  toJSON(_: QueryIncentivizedPoolsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryIncentivizedPoolsRequest>, I>>(object: I): QueryIncentivizedPoolsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryIncentivizedPoolsRequest>, I>>(_: I): QueryIncentivizedPoolsRequest {
     const message = createBaseQueryIncentivizedPoolsRequest();
     return message;
   }
 
 };
-export interface IncentivizedPool {
-  poolId: Long;
-  lockableDuration: string;
-  gaugeId: Long;
-}
 
 function createBaseIncentivizedPool(): IncentivizedPool {
   return {
@@ -581,7 +591,9 @@ export const IncentivizedPool = {
       writer.uint32(8).uint64(message.poolId);
     }
 
-    if (message.lockableDuration !== undefined) Duration.encode(toDuration(message.lockableDuration), writer.uint32(18).fork()).ldelim();
+    if (message.lockableDuration !== undefined) {
+      Duration.encode(toDuration(message.lockableDuration), writer.uint32(18).fork()).ldelim();
+    }
 
     if (!message.gaugeId.isZero()) {
       writer.uint32(24).uint64(message.gaugeId);
@@ -645,9 +657,6 @@ export const IncentivizedPool = {
   }
 
 };
-export interface QueryIncentivizedPoolsResponse {
-  incentivizedPools: IncentivizedPool[];
-}
 
 function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsResponse {
   return {
@@ -711,14 +720,13 @@ export const QueryIncentivizedPoolsResponse = {
   }
 
 };
-export interface QueryExternalIncentiveGaugesRequest {}
 
 function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentiveGaugesRequest {
   return {};
 }
 
 export const QueryExternalIncentiveGaugesRequest = {
-  encode(message: QueryExternalIncentiveGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryExternalIncentiveGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -740,24 +748,21 @@ export const QueryExternalIncentiveGaugesRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryExternalIncentiveGaugesRequest {
+  fromJSON(_: any): QueryExternalIncentiveGaugesRequest {
     return {};
   },
 
-  toJSON(message: QueryExternalIncentiveGaugesRequest): unknown {
+  toJSON(_: QueryExternalIncentiveGaugesRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryExternalIncentiveGaugesRequest>, I>>(object: I): QueryExternalIncentiveGaugesRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryExternalIncentiveGaugesRequest>, I>>(_: I): QueryExternalIncentiveGaugesRequest {
     const message = createBaseQueryExternalIncentiveGaugesRequest();
     return message;
   }
 
 };
-export interface QueryExternalIncentiveGaugesResponse {
-  data: Gauge[];
-}
 
 function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiveGaugesResponse {
   return {

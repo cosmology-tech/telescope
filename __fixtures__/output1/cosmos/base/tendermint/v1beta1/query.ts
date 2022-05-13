@@ -14,6 +14,101 @@ export interface GetValidatorSetByHeightRequest {
   pagination: PageRequest;
 }
 
+/** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
+export interface GetValidatorSetByHeightResponse {
+  blockHeight: Long;
+  validators: Validator[];
+
+  /** pagination defines an pagination for the response. */
+  pagination: PageResponse;
+}
+
+/** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
+export interface GetLatestValidatorSetRequest {
+  /** pagination defines an pagination for the request. */
+  pagination: PageRequest;
+}
+
+/** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
+export interface GetLatestValidatorSetResponse {
+  blockHeight: Long;
+  validators: Validator[];
+
+  /** pagination defines an pagination for the response. */
+  pagination: PageResponse;
+}
+
+/** Validator is the type for the validator-set. */
+export interface Validator {
+  address: string;
+  pubKey: Any;
+  votingPower: Long;
+  proposerPriority: Long;
+}
+
+/** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
+export interface GetBlockByHeightRequest {
+  height: Long;
+}
+
+/** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
+export interface GetBlockByHeightResponse {
+  blockId: BlockID;
+  block: Block;
+}
+
+/** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
+export interface GetLatestBlockRequest {}
+
+/** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
+export interface GetLatestBlockResponse {
+  blockId: BlockID;
+  block: Block;
+}
+
+/** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
+export interface GetSyncingRequest {}
+
+/** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
+export interface GetSyncingResponse {
+  syncing: boolean;
+}
+
+/** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
+export interface GetNodeInfoRequest {}
+
+/** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
+export interface GetNodeInfoResponse {
+  nodeInfo: NodeInfo;
+  applicationVersion: VersionInfo;
+}
+
+/** VersionInfo is the type for the GetNodeInfoResponse message. */
+export interface VersionInfo {
+  name: string;
+  appName: string;
+  version: string;
+  gitCommit: string;
+  buildTags: string;
+  goVersion: string;
+  buildDeps: Module[];
+
+  /** Since: cosmos-sdk 0.43 */
+  cosmosSdkVersion: string;
+}
+
+/** Module is the type for VersionInfo */
+export interface Module {
+  /** module path */
+  path: string;
+
+  /** module version */
+  version: string;
+
+  /** checksum */
+  sum: string;
+}
+
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
     height: Long.ZERO,
@@ -82,15 +177,6 @@ export const GetValidatorSetByHeightRequest = {
   }
 
 };
-
-/** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
-export interface GetValidatorSetByHeightResponse {
-  blockHeight: Long;
-  validators: Validator[];
-
-  /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
-}
 
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return {
@@ -179,12 +265,6 @@ export const GetValidatorSetByHeightResponse = {
 
 };
 
-/** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
-export interface GetLatestValidatorSetRequest {
-  /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
-}
-
 function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
   return {
     pagination: undefined
@@ -241,15 +321,6 @@ export const GetLatestValidatorSetRequest = {
   }
 
 };
-
-/** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
-export interface GetLatestValidatorSetResponse {
-  blockHeight: Long;
-  validators: Validator[];
-
-  /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
-}
 
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return {
@@ -337,14 +408,6 @@ export const GetLatestValidatorSetResponse = {
   }
 
 };
-
-/** Validator is the type for the validator-set. */
-export interface Validator {
-  address: string;
-  pubKey: Any;
-  votingPower: Long;
-  proposerPriority: Long;
-}
 
 function createBaseValidator(): Validator {
   return {
@@ -439,11 +502,6 @@ export const Validator = {
 
 };
 
-/** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
-export interface GetBlockByHeightRequest {
-  height: Long;
-}
-
 function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
   return {
     height: Long.ZERO
@@ -500,12 +558,6 @@ export const GetBlockByHeightRequest = {
   }
 
 };
-
-/** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
-export interface GetBlockByHeightResponse {
-  blockId: BlockID;
-  block: Block;
-}
 
 function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
   return {
@@ -576,15 +628,12 @@ export const GetBlockByHeightResponse = {
 
 };
 
-/** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
-export interface GetLatestBlockRequest {}
-
 function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
   return {};
 }
 
 export const GetLatestBlockRequest = {
-  encode(message: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -606,27 +655,21 @@ export const GetLatestBlockRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetLatestBlockRequest {
+  fromJSON(_: any): GetLatestBlockRequest {
     return {};
   },
 
-  toJSON(message: GetLatestBlockRequest): unknown {
+  toJSON(_: GetLatestBlockRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetLatestBlockRequest>, I>>(object: I): GetLatestBlockRequest {
+  fromPartial<I extends Exact<DeepPartial<GetLatestBlockRequest>, I>>(_: I): GetLatestBlockRequest {
     const message = createBaseGetLatestBlockRequest();
     return message;
   }
 
 };
-
-/** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
-export interface GetLatestBlockResponse {
-  blockId: BlockID;
-  block: Block;
-}
 
 function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
   return {
@@ -697,15 +740,12 @@ export const GetLatestBlockResponse = {
 
 };
 
-/** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
-export interface GetSyncingRequest {}
-
 function createBaseGetSyncingRequest(): GetSyncingRequest {
   return {};
 }
 
 export const GetSyncingRequest = {
-  encode(message: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -727,26 +767,21 @@ export const GetSyncingRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetSyncingRequest {
+  fromJSON(_: any): GetSyncingRequest {
     return {};
   },
 
-  toJSON(message: GetSyncingRequest): unknown {
+  toJSON(_: GetSyncingRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetSyncingRequest>, I>>(object: I): GetSyncingRequest {
+  fromPartial<I extends Exact<DeepPartial<GetSyncingRequest>, I>>(_: I): GetSyncingRequest {
     const message = createBaseGetSyncingRequest();
     return message;
   }
 
 };
-
-/** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
-export interface GetSyncingResponse {
-  syncing: boolean;
-}
 
 function createBaseGetSyncingResponse(): GetSyncingResponse {
   return {
@@ -805,15 +840,12 @@ export const GetSyncingResponse = {
 
 };
 
-/** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
-export interface GetNodeInfoRequest {}
-
 function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
   return {};
 }
 
 export const GetNodeInfoRequest = {
-  encode(message: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -835,27 +867,21 @@ export const GetNodeInfoRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetNodeInfoRequest {
+  fromJSON(_: any): GetNodeInfoRequest {
     return {};
   },
 
-  toJSON(message: GetNodeInfoRequest): unknown {
+  toJSON(_: GetNodeInfoRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetNodeInfoRequest>, I>>(object: I): GetNodeInfoRequest {
+  fromPartial<I extends Exact<DeepPartial<GetNodeInfoRequest>, I>>(_: I): GetNodeInfoRequest {
     const message = createBaseGetNodeInfoRequest();
     return message;
   }
 
 };
-
-/** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
-export interface GetNodeInfoResponse {
-  nodeInfo: NodeInfo;
-  applicationVersion: VersionInfo;
-}
 
 function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
   return {
@@ -925,20 +951,6 @@ export const GetNodeInfoResponse = {
   }
 
 };
-
-/** VersionInfo is the type for the GetNodeInfoResponse message. */
-export interface VersionInfo {
-  name: string;
-  appName: string;
-  version: string;
-  gitCommit: string;
-  buildTags: string;
-  goVersion: string;
-  buildDeps: Module[];
-
-  /** Since: cosmos-sdk 0.43 */
-  cosmosSdkVersion: string;
-}
 
 function createBaseVersionInfo(): VersionInfo {
   return {
@@ -1086,18 +1098,6 @@ export const VersionInfo = {
   }
 
 };
-
-/** Module is the type for VersionInfo */
-export interface Module {
-  /** module path */
-  path: string;
-
-  /** module version */
-  version: string;
-
-  /** checksum */
-  sum: string;
-}
 
 function createBaseModule(): Module {
   return {

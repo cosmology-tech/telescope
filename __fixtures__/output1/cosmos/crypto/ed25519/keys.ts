@@ -12,6 +12,14 @@ export interface PubKey {
   key: Uint8Array;
 }
 
+/**
+ * Deprecated: PrivKey defines a ed25519 private key.
+ * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
+ */
+export interface PrivKey {
+  key: Uint8Array;
+}
+
 function createBasePubKey(): PubKey {
   return {
     key: new Uint8Array()
@@ -68,14 +76,6 @@ export const PubKey = {
   }
 
 };
-
-/**
- * Deprecated: PrivKey defines a ed25519 private key.
- * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
- */
-export interface PrivKey {
-  key: Uint8Array;
-}
 
 function createBasePrivKey(): PrivKey {
   return {

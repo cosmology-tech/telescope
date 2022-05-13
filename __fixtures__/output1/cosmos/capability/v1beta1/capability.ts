@@ -9,6 +9,23 @@ export interface Capability {
   index: Long;
 }
 
+/**
+ * Owner defines a single capability owner. An owner is defined by the name of
+ * capability and the module name.
+ */
+export interface Owner {
+  module: string;
+  name: string;
+}
+
+/**
+ * CapabilityOwners defines a set of owners of a single Capability. The set of
+ * owners must be unique.
+ */
+export interface CapabilityOwners {
+  owners: Owner[];
+}
+
 function createBaseCapability(): Capability {
   return {
     index: Long.UZERO
@@ -65,15 +82,6 @@ export const Capability = {
   }
 
 };
-
-/**
- * Owner defines a single capability owner. An owner is defined by the name of
- * capability and the module name.
- */
-export interface Owner {
-  module: string;
-  name: string;
-}
 
 function createBaseOwner(): Owner {
   return {
@@ -143,14 +151,6 @@ export const Owner = {
   }
 
 };
-
-/**
- * CapabilityOwners defines a set of owners of a single Capability. The set of
- * owners must be unique.
- */
-export interface CapabilityOwners {
-  owners: Owner[];
-}
 
 function createBaseCapabilityOwners(): CapabilityOwners {
   return {

@@ -9,6 +9,88 @@ import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface QueryPoolRequest {
   poolId: Long;
 }
+export interface QueryPoolResponse {
+  pool: Any;
+}
+
+/** =============================== Pools */
+export interface QueryPoolsRequest {
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest;
+}
+export interface QueryPoolsResponse {
+  pools: Any[];
+
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse;
+}
+
+/** =============================== NumPools */
+export interface QueryNumPoolsRequest {}
+export interface QueryNumPoolsResponse {
+  numPools: Long;
+}
+
+/** =============================== PoolParams */
+export interface QueryPoolParamsRequest {
+  poolId: Long;
+}
+export interface QueryPoolParamsResponse {
+  params: Any;
+}
+
+/** =============================== PoolLiquidity */
+export interface QueryTotalPoolLiquidityRequest {
+  poolId: Long;
+}
+export interface QueryTotalPoolLiquidityResponse {
+  liquidity: Coin[];
+}
+
+/** =============================== TotalShares */
+export interface QueryTotalSharesRequest {
+  poolId: Long;
+}
+export interface QueryTotalSharesResponse {
+  totalShares: Coin;
+}
+
+/** =============================== SpotPrice */
+export interface QuerySpotPriceRequest {
+  poolId: Long;
+  tokenInDenom: string;
+  tokenOutDenom: string;
+}
+export interface QuerySpotPriceResponse {
+  /** String of the Dec. Ex) 10.203uatom */
+  spotPrice: string;
+}
+
+/** =============================== EstimateSwapExactAmountIn */
+export interface QuerySwapExactAmountInRequest {
+  sender: string;
+  poolId: Long;
+  tokenIn: string;
+  routes: SwapAmountInRoute[];
+}
+export interface QuerySwapExactAmountInResponse {
+  tokenOutAmount: string;
+}
+
+/** =============================== EstimateSwapExactAmountOut */
+export interface QuerySwapExactAmountOutRequest {
+  sender: string;
+  poolId: Long;
+  routes: SwapAmountOutRoute[];
+  tokenOut: string;
+}
+export interface QuerySwapExactAmountOutResponse {
+  tokenInAmount: string;
+}
+export interface QueryTotalLiquidityRequest {}
+export interface QueryTotalLiquidityResponse {
+  liquidity: Coin[];
+}
 
 function createBaseQueryPoolRequest(): QueryPoolRequest {
   return {
@@ -66,9 +148,6 @@ export const QueryPoolRequest = {
   }
 
 };
-export interface QueryPoolResponse {
-  pool: Any;
-}
 
 function createBaseQueryPoolResponse(): QueryPoolResponse {
   return {
@@ -127,12 +206,6 @@ export const QueryPoolResponse = {
 
 };
 
-/** =============================== Pools */
-export interface QueryPoolsRequest {
-  /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
-}
-
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   return {
     pagination: undefined
@@ -189,12 +262,6 @@ export const QueryPoolsRequest = {
   }
 
 };
-export interface QueryPoolsResponse {
-  pools: Any[];
-
-  /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
-}
 
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
@@ -271,15 +338,12 @@ export const QueryPoolsResponse = {
 
 };
 
-/** =============================== NumPools */
-export interface QueryNumPoolsRequest {}
-
 function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
   return {};
 }
 
 export const QueryNumPoolsRequest = {
-  encode(message: QueryNumPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryNumPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -301,24 +365,21 @@ export const QueryNumPoolsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryNumPoolsRequest {
+  fromJSON(_: any): QueryNumPoolsRequest {
     return {};
   },
 
-  toJSON(message: QueryNumPoolsRequest): unknown {
+  toJSON(_: QueryNumPoolsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryNumPoolsRequest>, I>>(object: I): QueryNumPoolsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryNumPoolsRequest>, I>>(_: I): QueryNumPoolsRequest {
     const message = createBaseQueryNumPoolsRequest();
     return message;
   }
 
 };
-export interface QueryNumPoolsResponse {
-  numPools: Long;
-}
 
 function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
   return {
@@ -377,11 +438,6 @@ export const QueryNumPoolsResponse = {
 
 };
 
-/** =============================== PoolParams */
-export interface QueryPoolParamsRequest {
-  poolId: Long;
-}
-
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
   return {
     poolId: Long.UZERO
@@ -438,9 +494,6 @@ export const QueryPoolParamsRequest = {
   }
 
 };
-export interface QueryPoolParamsResponse {
-  params: Any;
-}
 
 function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
   return {
@@ -499,11 +552,6 @@ export const QueryPoolParamsResponse = {
 
 };
 
-/** =============================== PoolLiquidity */
-export interface QueryTotalPoolLiquidityRequest {
-  poolId: Long;
-}
-
 function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequest {
   return {
     poolId: Long.UZERO
@@ -560,9 +608,6 @@ export const QueryTotalPoolLiquidityRequest = {
   }
 
 };
-export interface QueryTotalPoolLiquidityResponse {
-  liquidity: Coin[];
-}
 
 function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityResponse {
   return {
@@ -627,11 +672,6 @@ export const QueryTotalPoolLiquidityResponse = {
 
 };
 
-/** =============================== TotalShares */
-export interface QueryTotalSharesRequest {
-  poolId: Long;
-}
-
 function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
   return {
     poolId: Long.UZERO
@@ -688,9 +728,6 @@ export const QueryTotalSharesRequest = {
   }
 
 };
-export interface QueryTotalSharesResponse {
-  totalShares: Coin;
-}
 
 function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
   return {
@@ -748,13 +785,6 @@ export const QueryTotalSharesResponse = {
   }
 
 };
-
-/** =============================== SpotPrice */
-export interface QuerySpotPriceRequest {
-  poolId: Long;
-  tokenInDenom: string;
-  tokenOutDenom: string;
-}
 
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
@@ -836,10 +866,6 @@ export const QuerySpotPriceRequest = {
   }
 
 };
-export interface QuerySpotPriceResponse {
-  /** String of the Dec. Ex) 10.203uatom */
-  spotPrice: string;
-}
 
 function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
   return {
@@ -897,14 +923,6 @@ export const QuerySpotPriceResponse = {
   }
 
 };
-
-/** =============================== EstimateSwapExactAmountIn */
-export interface QuerySwapExactAmountInRequest {
-  sender: string;
-  poolId: Long;
-  tokenIn: string;
-  routes: SwapAmountInRoute[];
-}
 
 function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInRequest {
   return {
@@ -1004,9 +1022,6 @@ export const QuerySwapExactAmountInRequest = {
   }
 
 };
-export interface QuerySwapExactAmountInResponse {
-  tokenOutAmount: string;
-}
 
 function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInResponse {
   return {
@@ -1064,14 +1079,6 @@ export const QuerySwapExactAmountInResponse = {
   }
 
 };
-
-/** =============================== EstimateSwapExactAmountOut */
-export interface QuerySwapExactAmountOutRequest {
-  sender: string;
-  poolId: Long;
-  routes: SwapAmountOutRoute[];
-  tokenOut: string;
-}
 
 function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequest {
   return {
@@ -1171,9 +1178,6 @@ export const QuerySwapExactAmountOutRequest = {
   }
 
 };
-export interface QuerySwapExactAmountOutResponse {
-  tokenInAmount: string;
-}
 
 function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutResponse {
   return {
@@ -1231,14 +1235,13 @@ export const QuerySwapExactAmountOutResponse = {
   }
 
 };
-export interface QueryTotalLiquidityRequest {}
 
 function createBaseQueryTotalLiquidityRequest(): QueryTotalLiquidityRequest {
   return {};
 }
 
 export const QueryTotalLiquidityRequest = {
-  encode(message: QueryTotalLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryTotalLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1260,24 +1263,21 @@ export const QueryTotalLiquidityRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryTotalLiquidityRequest {
+  fromJSON(_: any): QueryTotalLiquidityRequest {
     return {};
   },
 
-  toJSON(message: QueryTotalLiquidityRequest): unknown {
+  toJSON(_: QueryTotalLiquidityRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryTotalLiquidityRequest>, I>>(object: I): QueryTotalLiquidityRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryTotalLiquidityRequest>, I>>(_: I): QueryTotalLiquidityRequest {
     const message = createBaseQueryTotalLiquidityRequest();
     return message;
   }
 
 };
-export interface QueryTotalLiquidityResponse {
-  liquidity: Coin[];
-}
 
 function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
   return {

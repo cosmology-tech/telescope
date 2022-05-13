@@ -47,6 +47,56 @@ export interface Value {
   typeValue?: string;
 }
 
+/** An enum value. */
+export interface EnumValue {
+  /** The fully qualified name of the enum type. */
+  type: string;
+
+  /** The value of the enum. */
+  value: number;
+}
+
+/**
+ * A list.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
+export interface ListValue {
+  /** The ordered values in the list. */
+  values: Value[];
+}
+
+/**
+ * A map.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
+export interface MapValue {
+  /**
+   * The set of map entries.
+   * 
+   * CEL has fewer restrictions on keys, so a protobuf map represenation
+   * cannot be used.
+   */
+  entries: MapValue_Entry[];
+}
+
+/** An entry in the map. */
+export interface MapValue_Entry {
+  /**
+   * The key.
+   * 
+   * Must be unique with in the map.
+   * Currently only boolean, int, uint, and string values can be keys.
+   */
+  key: Value;
+
+  /** The value. */
+  value: Value;
+}
+
 function createBaseValue(): Value {
   return {
     nullValue: undefined,
@@ -236,15 +286,6 @@ export const Value = {
 
 };
 
-/** An enum value. */
-export interface EnumValue {
-  /** The fully qualified name of the enum type. */
-  type: string;
-
-  /** The value of the enum. */
-  value: number;
-}
-
 function createBaseEnumValue(): EnumValue {
   return {
     type: "",
@@ -314,17 +355,6 @@ export const EnumValue = {
 
 };
 
-/**
- * A list.
- * 
- * Wrapped in a message so 'not set' and empty can be differentiated, which is
- * required for use in a 'oneof'.
- */
-export interface ListValue {
-  /** The ordered values in the list. */
-  values: Value[];
-}
-
 function createBaseListValue(): ListValue {
   return {
     values: []
@@ -388,22 +418,6 @@ export const ListValue = {
 
 };
 
-/**
- * A map.
- * 
- * Wrapped in a message so 'not set' and empty can be differentiated, which is
- * required for use in a 'oneof'.
- */
-export interface MapValue {
-  /**
-   * The set of map entries.
-   * 
-   * CEL has fewer restrictions on keys, so a protobuf map represenation
-   * cannot be used.
-   */
-  entries: MapValue_Entry[];
-}
-
 function createBaseMapValue(): MapValue {
   return {
     entries: []
@@ -466,20 +480,6 @@ export const MapValue = {
   }
 
 };
-
-/** An entry in the map. */
-export interface MapValue_Entry {
-  /**
-   * The key.
-   * 
-   * Must be unique with in the map.
-   * Currently only boolean, int, uint, and string values can be keys.
-   */
-  key: Value;
-
-  /** The value. */
-  value: Value;
-}
 
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {

@@ -3,6 +3,42 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { toDuration, toTimestamp, Long, fromDuration, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+export enum LockQueryType {
+  /** ByDuration - Queries for locks that are longer than a certain duration */
+  ByDuration = 0,
+
+  /** ByTime - Queries for lockups that started before a specific time */
+  ByTime = 1,
+  UNRECOGNIZED = -1,
+}
+export function lockQueryTypeFromJSON(object: any): LockQueryType {
+  switch (object) {
+    case 0:
+    case "ByDuration":
+      return LockQueryType.ByDuration;
+
+    case 1:
+    case "ByTime":
+      return LockQueryType.ByTime;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LockQueryType.UNRECOGNIZED;
+  }
+}
+export function lockQueryTypeToJSON(object: LockQueryType): string {
+  switch (object) {
+    case LockQueryType.ByDuration:
+      return "ByDuration";
+
+    case LockQueryType.ByTime:
+      return "ByTime";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 
 /**
  * PeriodLock is a single unit of lock by period. It's a record of locked coin
@@ -15,6 +51,48 @@ export interface PeriodLock {
   duration: string;
   endTime: Date;
   coins: Coin[];
+}
+export interface QueryCondition {
+  /** type of lock query, ByLockDuration | ByLockTime */
+  lockQueryType: LockQueryType;
+
+  /** What token denomination are we looking for lockups of */
+  denom: string;
+
+  /** valid when query condition is ByDuration */
+  duration: string;
+
+  /** valid when query condition is ByTime */
+  timestamp: Date;
+}
+
+/**
+ * SyntheticLock is a single unit of synthetic lockup
+ * TODO: Change this to have
+ * * underlying_lock_id
+ * * synthetic_coin
+ * * end_time
+ * * duration
+ * * owner
+ * We then index synthetic locks by the denom, just like we do with normal
+ * locks. Ideally we even get an interface, so we can re-use that same logic.
+ * I currently have no idea how reward distribution is supposed to be working...
+ * EVENTUALLY
+ * we make a "constrained_coin" field, which is what the current "coins" field
+ * is. Constrained coin field can be a #post-v7 feature, since we aren't
+ * allowing partial unlocks of synthetic lockups.
+ */
+export interface SyntheticLock {
+  /** underlying native lockup id for this synthetic lockup */
+  underlyingLockId: Long;
+  synthDenom: string;
+
+  /**
+   * used for unbonding synthetic lockups, for active synthetic lockups, this
+   * value is set to uninitialized value
+   */
+  endTime: Date;
+  duration: string;
 }
 
 function createBasePeriodLock(): PeriodLock {
@@ -37,8 +115,13 @@ export const PeriodLock = {
       writer.uint32(18).string(message.owner);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
-    if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(34).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.endTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.endTime), writer.uint32(34).fork()).ldelim();
+    }
 
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(42).fork()).ldelim();
@@ -122,55 +205,6 @@ export const PeriodLock = {
   }
 
 };
-export enum LockQueryType {
-  /** ByDuration - Queries for locks that are longer than a certain duration */
-  ByDuration = 0,
-
-  /** ByTime - Queries for lockups that started before a specific time */
-  ByTime = 1,
-  UNRECOGNIZED = -1,
-}
-export function lockQueryTypeFromJSON(object: any): LockQueryType {
-  switch (object) {
-    case 0:
-    case "ByDuration":
-      return LockQueryType.ByDuration;
-
-    case 1:
-    case "ByTime":
-      return LockQueryType.ByTime;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return LockQueryType.UNRECOGNIZED;
-  }
-}
-export function lockQueryTypeToJSON(object: LockQueryType): string {
-  switch (object) {
-    case LockQueryType.ByDuration:
-      return "ByDuration";
-
-    case LockQueryType.ByTime:
-      return "ByTime";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-export interface QueryCondition {
-  /** type of lock query, ByLockDuration | ByLockTime */
-  lockQueryType: LockQueryType;
-
-  /** What token denomination are we looking for lockups of */
-  denom: string;
-
-  /** valid when query condition is ByDuration */
-  duration: string;
-
-  /** valid when query condition is ByTime */
-  timestamp: Date;
-}
 
 function createBaseQueryCondition(): QueryCondition {
   return {
@@ -191,8 +225,14 @@ export const QueryCondition = {
       writer.uint32(18).string(message.denom);
     }
 
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(34).fork()).ldelim();
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(34).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -259,35 +299,6 @@ export const QueryCondition = {
 
 };
 
-/**
- * SyntheticLock is a single unit of synthetic lockup
- * TODO: Change this to have
- * * underlying_lock_id
- * * synthetic_coin
- * * end_time
- * * duration
- * * owner
- * We then index synthetic locks by the denom, just like we do with normal
- * locks. Ideally we even get an interface, so we can re-use that same logic.
- * I currently have no idea how reward distribution is supposed to be working...
- * EVENTUALLY
- * we make a "constrained_coin" field, which is what the current "coins" field
- * is. Constrained coin field can be a #post-v7 feature, since we aren't
- * allowing partial unlocks of synthetic lockups.
- */
-export interface SyntheticLock {
-  /** underlying native lockup id for this synthetic lockup */
-  underlyingLockId: Long;
-  synthDenom: string;
-
-  /**
-   * used for unbonding synthetic lockups, for active synthetic lockups, this
-   * value is set to uninitialized value
-   */
-  endTime: Date;
-  duration: string;
-}
-
 function createBaseSyntheticLock(): SyntheticLock {
   return {
     underlyingLockId: Long.UZERO,
@@ -307,8 +318,14 @@ export const SyntheticLock = {
       writer.uint32(18).string(message.synthDenom);
     }
 
-    if (message.endTime !== undefined) Timestamp.encode(toTimestamp(message.endTime), writer.uint32(26).fork()).ldelim();
-    if (message.duration !== undefined) Duration.encode(toDuration(message.duration), writer.uint32(34).fork()).ldelim();
+    if (message.endTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.endTime), writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.duration !== undefined) {
+      Duration.encode(toDuration(message.duration), writer.uint32(34).fork()).ldelim();
+    }
+
     return writer;
   },
 

@@ -5,12 +5,18 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
 
+/** QueryConfigRequest is the Query/Config response type. */
+export interface QueryConfigResponse {
+  /** config is the current app config. */
+  config: Config;
+}
+
 function createBaseQueryConfigRequest(): QueryConfigRequest {
   return {};
 }
 
 export const QueryConfigRequest = {
-  encode(message: QueryConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -32,27 +38,21 @@ export const QueryConfigRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryConfigRequest {
+  fromJSON(_: any): QueryConfigRequest {
     return {};
   },
 
-  toJSON(message: QueryConfigRequest): unknown {
+  toJSON(_: QueryConfigRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryConfigRequest>, I>>(object: I): QueryConfigRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryConfigRequest>, I>>(_: I): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
   }
 
 };
-
-/** QueryConfigRequest is the Query/Config response type. */
-export interface QueryConfigResponse {
-  /** config is the current app config. */
-  config: Config;
-}
 
 function createBaseQueryConfigResponse(): QueryConfigResponse {
   return {

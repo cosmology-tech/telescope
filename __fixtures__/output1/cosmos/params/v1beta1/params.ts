@@ -8,6 +8,16 @@ export interface ParameterChangeProposal {
   changes: ParamChange[];
 }
 
+/**
+ * ParamChange defines an individual parameter change, for use in
+ * ParameterChangeProposal.
+ */
+export interface ParamChange {
+  subspace: string;
+  key: string;
+  value: string;
+}
+
 function createBaseParameterChangeProposal(): ParameterChangeProposal {
   return {
     title: "",
@@ -94,16 +104,6 @@ export const ParameterChangeProposal = {
   }
 
 };
-
-/**
- * ParamChange defines an individual parameter change, for use in
- * ParameterChangeProposal.
- */
-export interface ParamChange {
-  subspace: string;
-  key: string;
-  value: string;
-}
 
 function createBaseParamChange(): ParamChange {
   return {

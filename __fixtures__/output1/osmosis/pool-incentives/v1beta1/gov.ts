@@ -17,6 +17,21 @@ export interface ReplacePoolIncentivesProposal {
   records: DistrRecord[];
 }
 
+/**
+ * For example: if the existing DistrRecords were:
+ * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
+ * An UpdatePoolIncentivesProposal includes
+ * [(Gauge 1, 0), (Gauge 2, 4), (Gauge 3, 10)]
+ * This would delete Gauge 1, Edit Gauge 2, and Add Gauge 3
+ * The result DistrRecords in state would be:
+ * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
+ */
+export interface UpdatePoolIncentivesProposal {
+  title: string;
+  description: string;
+  records: DistrRecord[];
+}
+
 function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposal {
   return {
     title: "",
@@ -103,21 +118,6 @@ export const ReplacePoolIncentivesProposal = {
   }
 
 };
-
-/**
- * For example: if the existing DistrRecords were:
- * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
- * An UpdatePoolIncentivesProposal includes
- * [(Gauge 1, 0), (Gauge 2, 4), (Gauge 3, 10)]
- * This would delete Gauge 1, Edit Gauge 2, and Add Gauge 3
- * The result DistrRecords in state would be:
- * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
- */
-export interface UpdatePoolIncentivesProposal {
-  title: string;
-  description: string;
-  records: DistrRecord[];
-}
 
 function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal {
   return {

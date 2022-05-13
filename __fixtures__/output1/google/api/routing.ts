@@ -374,69 +374,6 @@ export interface RoutingRule {
   routingParameters: RoutingParameter[];
 }
 
-function createBaseRoutingRule(): RoutingRule {
-  return {
-    routingParameters: []
-  };
-}
-
-export const RoutingRule = {
-  encode(message: RoutingRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.routingParameters) {
-      RoutingParameter.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): RoutingRule {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseRoutingRule();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 2:
-          message.routingParameters.push(RoutingParameter.decode(reader, reader.uint32()));
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routingParameters) ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e)) : []
-    };
-  },
-
-  toJSON(message: RoutingRule): unknown {
-    const obj: any = {};
-
-    if (message.routingParameters) {
-      obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
-    } else {
-      obj.routingParameters = [];
-    }
-
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<RoutingRule>, I>>(object: I): RoutingRule {
-    const message = createBaseRoutingRule();
-    message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
-    return message;
-  }
-
-};
-
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameter {
   /** A request field to extract the header key-value pair from. */
@@ -500,6 +437,69 @@ export interface RoutingParameter {
    */
   pathTemplate: string;
 }
+
+function createBaseRoutingRule(): RoutingRule {
+  return {
+    routingParameters: []
+  };
+}
+
+export const RoutingRule = {
+  encode(message: RoutingRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.routingParameters) {
+      RoutingParameter.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): RoutingRule {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRoutingRule();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 2:
+          message.routingParameters.push(RoutingParameter.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): RoutingRule {
+    return {
+      routingParameters: Array.isArray(object?.routingParameters) ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: RoutingRule): unknown {
+    const obj: any = {};
+
+    if (message.routingParameters) {
+      obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
+    } else {
+      obj.routingParameters = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<RoutingRule>, I>>(object: I): RoutingRule {
+    const message = createBaseRoutingRule();
+    message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
+    return message;
+  }
+
+};
 
 function createBaseRoutingParameter(): RoutingParameter {
   return {

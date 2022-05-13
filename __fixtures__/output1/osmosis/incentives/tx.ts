@@ -23,6 +23,13 @@ export interface MsgCreateGauge {
   /** number of epochs distribution will be done */
   numEpochsPaidOver: Long;
 }
+export interface MsgCreateGaugeResponse {}
+export interface MsgAddToGauge {
+  owner: string;
+  gaugeId: Long;
+  rewards: Coin[];
+}
+export interface MsgAddToGaugeResponse {}
 
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
@@ -53,7 +60,9 @@ export const MsgCreateGauge = {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.startTime !== undefined) Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
+    if (message.startTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
+    }
 
     if (!message.numEpochsPaidOver.isZero()) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
@@ -144,14 +153,13 @@ export const MsgCreateGauge = {
   }
 
 };
-export interface MsgCreateGaugeResponse {}
 
 function createBaseMsgCreateGaugeResponse(): MsgCreateGaugeResponse {
   return {};
 }
 
 export const MsgCreateGaugeResponse = {
-  encode(message: MsgCreateGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -173,26 +181,21 @@ export const MsgCreateGaugeResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCreateGaugeResponse {
+  fromJSON(_: any): MsgCreateGaugeResponse {
     return {};
   },
 
-  toJSON(message: MsgCreateGaugeResponse): unknown {
+  toJSON(_: MsgCreateGaugeResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGaugeResponse>, I>>(object: I): MsgCreateGaugeResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateGaugeResponse>, I>>(_: I): MsgCreateGaugeResponse {
     const message = createBaseMsgCreateGaugeResponse();
     return message;
   }
 
 };
-export interface MsgAddToGauge {
-  owner: string;
-  gaugeId: Long;
-  rewards: Coin[];
-}
 
 function createBaseMsgAddToGauge(): MsgAddToGauge {
   return {
@@ -280,14 +283,13 @@ export const MsgAddToGauge = {
   }
 
 };
-export interface MsgAddToGaugeResponse {}
 
 function createBaseMsgAddToGaugeResponse(): MsgAddToGaugeResponse {
   return {};
 }
 
 export const MsgAddToGaugeResponse = {
-  encode(message: MsgAddToGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgAddToGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -309,16 +311,16 @@ export const MsgAddToGaugeResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgAddToGaugeResponse {
+  fromJSON(_: any): MsgAddToGaugeResponse {
     return {};
   },
 
-  toJSON(message: MsgAddToGaugeResponse): unknown {
+  toJSON(_: MsgAddToGaugeResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddToGaugeResponse>, I>>(object: I): MsgAddToGaugeResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAddToGaugeResponse>, I>>(_: I): MsgAddToGaugeResponse {
     const message = createBaseMsgAddToGaugeResponse();
     return message;
   }

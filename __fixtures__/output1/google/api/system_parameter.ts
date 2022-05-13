@@ -44,6 +44,51 @@ export interface SystemParameters {
   rules: SystemParameterRule[];
 }
 
+/**
+ * Define a system parameter rule mapping system parameter definitions to
+ * methods.
+ */
+export interface SystemParameterRule {
+  /**
+   * Selects the methods to which this rule applies. Use '*' to indicate all
+   * methods in all APIs.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+
+  /**
+   * Define parameters. Multiple names may be defined for a parameter.
+   * For a given method call, only one of them should be used. If multiple
+   * names are used the behavior is implementation-dependent.
+   * If none of the specified names are present the behavior is
+   * parameter-dependent.
+   */
+  parameters: SystemParameter[];
+}
+
+/**
+ * Define a parameter's name and location. The parameter may be passed as either
+ * an HTTP header or a URL query parameter, and if both are passed the behavior
+ * is implementation-dependent.
+ */
+export interface SystemParameter {
+  /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
+  name: string;
+
+  /**
+   * Define the HTTP header name to use for the parameter. It is case
+   * insensitive.
+   */
+  httpHeader: string;
+
+  /**
+   * Define the URL query parameter name to use for the parameter. It is case
+   * sensitive.
+   */
+  urlQueryParameter: string;
+}
+
 function createBaseSystemParameters(): SystemParameters {
   return {
     rules: []
@@ -106,29 +151,6 @@ export const SystemParameters = {
   }
 
 };
-
-/**
- * Define a system parameter rule mapping system parameter definitions to
- * methods.
- */
-export interface SystemParameterRule {
-  /**
-   * Selects the methods to which this rule applies. Use '*' to indicate all
-   * methods in all APIs.
-   * 
-   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
-   */
-  selector: string;
-
-  /**
-   * Define parameters. Multiple names may be defined for a parameter.
-   * For a given method call, only one of them should be used. If multiple
-   * names are used the behavior is implementation-dependent.
-   * If none of the specified names are present the behavior is
-   * parameter-dependent.
-   */
-  parameters: SystemParameter[];
-}
 
 function createBaseSystemParameterRule(): SystemParameterRule {
   return {
@@ -204,28 +226,6 @@ export const SystemParameterRule = {
   }
 
 };
-
-/**
- * Define a parameter's name and location. The parameter may be passed as either
- * an HTTP header or a URL query parameter, and if both are passed the behavior
- * is implementation-dependent.
- */
-export interface SystemParameter {
-  /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
-  name: string;
-
-  /**
-   * Define the HTTP header name to use for the parameter. It is case
-   * insensitive.
-   */
-  httpHeader: string;
-
-  /**
-   * Define the URL query parameter name to use for the parameter. It is case
-   * sensitive.
-   */
-  urlQueryParameter: string;
-}
 
 function createBaseSystemParameter(): SystemParameter {
   return {

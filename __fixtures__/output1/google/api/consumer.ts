@@ -1,6 +1,74 @@
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 
+/** Supported data type of the property values */
+export enum Property_PropertyType {
+  /** UNSPECIFIED - The type is unspecified, and will result in an error. */
+  UNSPECIFIED = 0,
+
+  /** INT64 - The type is `int64`. */
+  INT64 = 1,
+
+  /** BOOL - The type is `bool`. */
+  BOOL = 2,
+
+  /** STRING - The type is `string`. */
+  STRING = 3,
+
+  /** DOUBLE - The type is 'double'. */
+  DOUBLE = 4,
+  UNRECOGNIZED = -1,
+}
+export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
+  switch (object) {
+    case 0:
+    case "UNSPECIFIED":
+      return Property_PropertyType.UNSPECIFIED;
+
+    case 1:
+    case "INT64":
+      return Property_PropertyType.INT64;
+
+    case 2:
+    case "BOOL":
+      return Property_PropertyType.BOOL;
+
+    case 3:
+    case "STRING":
+      return Property_PropertyType.STRING;
+
+    case 4:
+    case "DOUBLE":
+      return Property_PropertyType.DOUBLE;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Property_PropertyType.UNRECOGNIZED;
+  }
+}
+export function property_PropertyTypeToJSON(object: Property_PropertyType): string {
+  switch (object) {
+    case Property_PropertyType.UNSPECIFIED:
+      return "UNSPECIFIED";
+
+    case Property_PropertyType.INT64:
+      return "INT64";
+
+    case Property_PropertyType.BOOL:
+      return "BOOL";
+
+    case Property_PropertyType.STRING:
+      return "STRING";
+
+    case Property_PropertyType.DOUBLE:
+      return "DOUBLE";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -22,6 +90,29 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
+}
+
+/**
+ * Defines project properties.
+ * 
+ * API services can define properties that can be assigned to consumer projects
+ * so that backends can perform response customization without having to make
+ * additional calls or maintain additional storage. For example, Maps API
+ * defines properties that controls map tile cache period, or whether to embed a
+ * watermark in a result.
+ * 
+ * These values can be set via API producer console. Only API providers can
+ * define and set these properties.
+ */
+export interface Property {
+  /** The name of the property (a.k.a key). */
+  name: string;
+
+  /** The type of this property. */
+  type: Property_PropertyType;
+
+  /** The description of the property */
+  description: string;
 }
 
 function createBaseProjectProperties(): ProjectProperties {
@@ -86,29 +177,6 @@ export const ProjectProperties = {
   }
 
 };
-
-/**
- * Defines project properties.
- * 
- * API services can define properties that can be assigned to consumer projects
- * so that backends can perform response customization without having to make
- * additional calls or maintain additional storage. For example, Maps API
- * defines properties that controls map tile cache period, or whether to embed a
- * watermark in a result.
- * 
- * These values can be set via API producer console. Only API providers can
- * define and set these properties.
- */
-export interface Property {
-  /** The name of the property (a.k.a key). */
-  name: string;
-
-  /** The type of this property. */
-  type: Property_PropertyType;
-
-  /** The description of the property */
-  description: string;
-}
 
 function createBaseProperty(): Property {
   return {
@@ -190,71 +258,3 @@ export const Property = {
   }
 
 };
-
-/** Supported data type of the property values */
-export enum Property_PropertyType {
-  /** UNSPECIFIED - The type is unspecified, and will result in an error. */
-  UNSPECIFIED = 0,
-
-  /** INT64 - The type is `int64`. */
-  INT64 = 1,
-
-  /** BOOL - The type is `bool`. */
-  BOOL = 2,
-
-  /** STRING - The type is `string`. */
-  STRING = 3,
-
-  /** DOUBLE - The type is 'double'. */
-  DOUBLE = 4,
-  UNRECOGNIZED = -1,
-}
-export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
-  switch (object) {
-    case 0:
-    case "UNSPECIFIED":
-      return Property_PropertyType.UNSPECIFIED;
-
-    case 1:
-    case "INT64":
-      return Property_PropertyType.INT64;
-
-    case 2:
-    case "BOOL":
-      return Property_PropertyType.BOOL;
-
-    case 3:
-    case "STRING":
-      return Property_PropertyType.STRING;
-
-    case 4:
-    case "DOUBLE":
-      return Property_PropertyType.DOUBLE;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Property_PropertyType.UNRECOGNIZED;
-  }
-}
-export function property_PropertyTypeToJSON(object: Property_PropertyType): string {
-  switch (object) {
-    case Property_PropertyType.UNSPECIFIED:
-      return "UNSPECIFIED";
-
-    case Property_PropertyType.INT64:
-      return "INT64";
-
-    case Property_PropertyType.BOOL:
-      return "BOOL";
-
-    case Property_PropertyType.STRING:
-      return "STRING";
-
-    case Property_PropertyType.DOUBLE:
-      return "DOUBLE";
-
-    default:
-      return "UNKNOWN";
-  }
-}

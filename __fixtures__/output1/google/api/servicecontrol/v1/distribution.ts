@@ -60,6 +60,79 @@ export interface Distribution {
   explicitBuckets?: Distribution_ExplicitBuckets;
 }
 
+/** Describing buckets with constant width. */
+export interface Distribution_LinearBuckets {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  numFiniteBuckets: number;
+
+  /**
+   * The i'th linear bucket covers the interval
+   * [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   * Must be strictly positive.
+   */
+  width: number;
+
+  /**
+   * The i'th linear bucket covers the interval
+   * [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   */
+  offset: number;
+}
+
+/** Describing buckets with exponentially growing width. */
+export interface Distribution_ExponentialBuckets {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  numFiniteBuckets: number;
+
+  /**
+   * The i'th exponential bucket covers the interval
+   * [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be larger than 1.0.
+   */
+  growthFactor: number;
+
+  /**
+   * The i'th exponential bucket covers the interval
+   * [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be > 0.
+   */
+  scale: number;
+}
+
+/** Describing buckets with arbitrary user-provided width. */
+export interface Distribution_ExplicitBuckets {
+  /**
+   * 'bound' is a list of strictly increasing boundaries between
+   * buckets. Note that a list of length N-1 defines N buckets because
+   * of fenceposting. See comments on `bucket_options` for details.
+   * 
+   * The i'th finite bucket covers the interval
+   * [bound[i-1], bound[i])
+   * where i ranges from 1 to bound_size() - 1. Note that there are no
+   * finite buckets at all if 'bound' only contains a single element; in
+   * that special case the single bound defines the boundary between the
+   * underflow and overflow buckets.
+   * 
+   * bucket number                   lower bound    upper bound
+   * i == 0 (underflow)              -inf           bound[i]
+   * 0 < i < bound_size()            bound[i-1]     bound[i]
+   * i == bound_size() (overflow)    bound[i-1]     +inf
+   */
+  bounds: number[];
+}
+
 function createBaseDistribution(): Distribution {
   return {
     count: Long.ZERO,
@@ -232,31 +305,6 @@ export const Distribution = {
 
 };
 
-/** Describing buckets with constant width. */
-export interface Distribution_LinearBuckets {
-  /**
-   * The number of finite buckets. With the underflow and overflow buckets,
-   * the total number of buckets is `num_finite_buckets` + 2.
-   * See comments on `bucket_options` for details.
-   */
-  numFiniteBuckets: number;
-
-  /**
-   * The i'th linear bucket covers the interval
-   * [offset + (i-1) * width, offset + i * width)
-   * where i ranges from 1 to num_finite_buckets, inclusive.
-   * Must be strictly positive.
-   */
-  width: number;
-
-  /**
-   * The i'th linear bucket covers the interval
-   * [offset + (i-1) * width, offset + i * width)
-   * where i ranges from 1 to num_finite_buckets, inclusive.
-   */
-  offset: number;
-}
-
 function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
   return {
     numFiniteBuckets: 0,
@@ -338,32 +386,6 @@ export const Distribution_LinearBuckets = {
 
 };
 
-/** Describing buckets with exponentially growing width. */
-export interface Distribution_ExponentialBuckets {
-  /**
-   * The number of finite buckets. With the underflow and overflow buckets,
-   * the total number of buckets is `num_finite_buckets` + 2.
-   * See comments on `bucket_options` for details.
-   */
-  numFiniteBuckets: number;
-
-  /**
-   * The i'th exponential bucket covers the interval
-   * [scale * growth_factor^(i-1), scale * growth_factor^i)
-   * where i ranges from 1 to num_finite_buckets inclusive.
-   * Must be larger than 1.0.
-   */
-  growthFactor: number;
-
-  /**
-   * The i'th exponential bucket covers the interval
-   * [scale * growth_factor^(i-1), scale * growth_factor^i)
-   * where i ranges from 1 to num_finite_buckets inclusive.
-   * Must be > 0.
-   */
-  scale: number;
-}
-
 function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBuckets {
   return {
     numFiniteBuckets: 0,
@@ -444,28 +466,6 @@ export const Distribution_ExponentialBuckets = {
   }
 
 };
-
-/** Describing buckets with arbitrary user-provided width. */
-export interface Distribution_ExplicitBuckets {
-  /**
-   * 'bound' is a list of strictly increasing boundaries between
-   * buckets. Note that a list of length N-1 defines N buckets because
-   * of fenceposting. See comments on `bucket_options` for details.
-   * 
-   * The i'th finite bucket covers the interval
-   * [bound[i-1], bound[i])
-   * where i ranges from 1 to bound_size() - 1. Note that there are no
-   * finite buckets at all if 'bound' only contains a single element; in
-   * that special case the single bound defines the boundary between the
-   * underflow and overflow buckets.
-   * 
-   * bucket number                   lower bound    upper bound
-   * i == 0 (underflow)              -inf           bound[i]
-   * 0 < i < bound_size()            bound[i-1]     bound[i]
-   * i == bound_size() (overflow)    bound[i-1]     +inf
-   */
-  bounds: number[];
-}
 
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
   return {

@@ -13,6 +13,43 @@ export interface MsgGrant {
   grant: Grant;
 }
 
+/** MsgExecResponse defines the Msg/MsgExecResponse response type. */
+export interface MsgExecResponse {
+  results: Uint8Array[];
+}
+
+/**
+ * MsgExec attempts to execute the provided messages using
+ * authorizations granted to the grantee. Each message should have only
+ * one signer corresponding to the granter of the authorization.
+ */
+export interface MsgExec {
+  grantee: string;
+
+  /**
+   * Authorization Msg requests to execute. Each msg must implement Authorization interface
+   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
+   * triple and validate it.
+   */
+  msgs: Any[];
+}
+
+/** MsgGrantResponse defines the Msg/MsgGrant response type. */
+export interface MsgGrantResponse {}
+
+/**
+ * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
+ * granter's account with that has been granted to the grantee.
+ */
+export interface MsgRevoke {
+  granter: string;
+  grantee: string;
+  msgTypeUrl: string;
+}
+
+/** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
+export interface MsgRevokeResponse {}
+
 function createBaseMsgGrant(): MsgGrant {
   return {
     granter: "",
@@ -94,11 +131,6 @@ export const MsgGrant = {
 
 };
 
-/** MsgExecResponse defines the Msg/MsgExecResponse response type. */
-export interface MsgExecResponse {
-  results: Uint8Array[];
-}
-
 function createBaseMsgExecResponse(): MsgExecResponse {
   return {
     results: []
@@ -161,22 +193,6 @@ export const MsgExecResponse = {
   }
 
 };
-
-/**
- * MsgExec attempts to execute the provided messages using
- * authorizations granted to the grantee. Each message should have only
- * one signer corresponding to the granter of the authorization.
- */
-export interface MsgExec {
-  grantee: string;
-
-  /**
-   * Authorization Msg requests to execute. Each msg must implement Authorization interface
-   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
-   * triple and validate it.
-   */
-  msgs: Any[];
-}
 
 function createBaseMsgExec(): MsgExec {
   return {
@@ -253,15 +269,12 @@ export const MsgExec = {
 
 };
 
-/** MsgGrantResponse defines the Msg/MsgGrant response type. */
-export interface MsgGrantResponse {}
-
 function createBaseMsgGrantResponse(): MsgGrantResponse {
   return {};
 }
 
 export const MsgGrantResponse = {
-  encode(message: MsgGrantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgGrantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -283,31 +296,21 @@ export const MsgGrantResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgGrantResponse {
+  fromJSON(_: any): MsgGrantResponse {
     return {};
   },
 
-  toJSON(message: MsgGrantResponse): unknown {
+  toJSON(_: MsgGrantResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgGrantResponse>, I>>(object: I): MsgGrantResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgGrantResponse>, I>>(_: I): MsgGrantResponse {
     const message = createBaseMsgGrantResponse();
     return message;
   }
 
 };
-
-/**
- * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
- * granter's account with that has been granted to the grantee.
- */
-export interface MsgRevoke {
-  granter: string;
-  grantee: string;
-  msgTypeUrl: string;
-}
 
 function createBaseMsgRevoke(): MsgRevoke {
   return {
@@ -390,15 +393,12 @@ export const MsgRevoke = {
 
 };
 
-/** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
-export interface MsgRevokeResponse {}
-
 function createBaseMsgRevokeResponse(): MsgRevokeResponse {
   return {};
 }
 
 export const MsgRevokeResponse = {
-  encode(message: MsgRevokeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgRevokeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -420,16 +420,16 @@ export const MsgRevokeResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgRevokeResponse {
+  fromJSON(_: any): MsgRevokeResponse {
     return {};
   },
 
-  toJSON(message: MsgRevokeResponse): unknown {
+  toJSON(_: MsgRevokeResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRevokeResponse>, I>>(object: I): MsgRevokeResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeResponse>, I>>(_: I): MsgRevokeResponse {
     const message = createBaseMsgRevokeResponse();
     return message;
   }

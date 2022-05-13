@@ -8,6 +8,60 @@ export interface EventCreateGroup {
   groupId: Long;
 }
 
+/** EventUpdateGroup is an event emitted when a group is updated. */
+export interface EventUpdateGroup {
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+}
+
+/** EventCreateGroupPolicy is an event emitted when a group policy is created. */
+export interface EventCreateGroupPolicy {
+  /** address is the account address of the group policy. */
+  address: string;
+}
+
+/** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
+export interface EventUpdateGroupPolicy {
+  /** address is the account address of the group policy. */
+  address: string;
+}
+
+/** EventSubmitProposal is an event emitted when a proposal is created. */
+export interface EventSubmitProposal {
+  /** proposal_id is the unique ID of the proposal. */
+  proposalId: Long;
+}
+
+/** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
+export interface EventWithdrawProposal {
+  /** proposal_id is the unique ID of the proposal. */
+  proposalId: Long;
+}
+
+/** EventVote is an event emitted when a voter votes on a proposal. */
+export interface EventVote {
+  /** proposal_id is the unique ID of the proposal. */
+  proposalId: Long;
+}
+
+/** EventExec is an event emitted when a proposal is executed. */
+export interface EventExec {
+  /** proposal_id is the unique ID of the proposal. */
+  proposalId: Long;
+
+  /** result is the proposal execution result. */
+  result: ProposalExecutorResult;
+}
+
+/** EventLeaveGroup is an event emitted when group member leaves the group. */
+export interface EventLeaveGroup {
+  /** group_id is the unique ID of the group. */
+  groupId: Long;
+
+  /** address is the account address of the group member. */
+  address: string;
+}
+
 function createBaseEventCreateGroup(): EventCreateGroup {
   return {
     groupId: Long.UZERO
@@ -64,12 +118,6 @@ export const EventCreateGroup = {
   }
 
 };
-
-/** EventUpdateGroup is an event emitted when a group is updated. */
-export interface EventUpdateGroup {
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-}
 
 function createBaseEventUpdateGroup(): EventUpdateGroup {
   return {
@@ -128,12 +176,6 @@ export const EventUpdateGroup = {
 
 };
 
-/** EventCreateGroupPolicy is an event emitted when a group policy is created. */
-export interface EventCreateGroupPolicy {
-  /** address is the account address of the group policy. */
-  address: string;
-}
-
 function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
   return {
     address: ""
@@ -190,12 +232,6 @@ export const EventCreateGroupPolicy = {
   }
 
 };
-
-/** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
-export interface EventUpdateGroupPolicy {
-  /** address is the account address of the group policy. */
-  address: string;
-}
 
 function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
   return {
@@ -254,12 +290,6 @@ export const EventUpdateGroupPolicy = {
 
 };
 
-/** EventSubmitProposal is an event emitted when a proposal is created. */
-export interface EventSubmitProposal {
-  /** proposal_id is the unique ID of the proposal. */
-  proposalId: Long;
-}
-
 function createBaseEventSubmitProposal(): EventSubmitProposal {
   return {
     proposalId: Long.UZERO
@@ -316,12 +346,6 @@ export const EventSubmitProposal = {
   }
 
 };
-
-/** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
-export interface EventWithdrawProposal {
-  /** proposal_id is the unique ID of the proposal. */
-  proposalId: Long;
-}
 
 function createBaseEventWithdrawProposal(): EventWithdrawProposal {
   return {
@@ -380,12 +404,6 @@ export const EventWithdrawProposal = {
 
 };
 
-/** EventVote is an event emitted when a voter votes on a proposal. */
-export interface EventVote {
-  /** proposal_id is the unique ID of the proposal. */
-  proposalId: Long;
-}
-
 function createBaseEventVote(): EventVote {
   return {
     proposalId: Long.UZERO
@@ -442,15 +460,6 @@ export const EventVote = {
   }
 
 };
-
-/** EventExec is an event emitted when a proposal is executed. */
-export interface EventExec {
-  /** proposal_id is the unique ID of the proposal. */
-  proposalId: Long;
-
-  /** result is the proposal execution result. */
-  result: ProposalExecutorResult;
-}
 
 function createBaseEventExec(): EventExec {
   return {
@@ -520,15 +529,6 @@ export const EventExec = {
   }
 
 };
-
-/** EventLeaveGroup is an event emitted when group member leaves the group. */
-export interface EventLeaveGroup {
-  /** group_id is the unique ID of the group. */
-  groupId: Long;
-
-  /** address is the account address of the group member. */
-  address: string;
-}
 
 function createBaseEventLeaveGroup(): EventLeaveGroup {
   return {

@@ -14,6 +14,76 @@ export interface QueryAccountsRequest {
   pagination: PageRequest;
 }
 
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryAccountsResponse {
+  /** accounts are the existing accounts */
+  accounts: Any[];
+
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse;
+}
+
+/** QueryAccountRequest is the request type for the Query/Account RPC method. */
+export interface QueryAccountRequest {
+  /** address defines the address to query for. */
+  address: string;
+}
+
+/** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
+export interface QueryModuleAccountsRequest {}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+
+/** QueryAccountResponse is the response type for the Query/Account RPC method. */
+export interface QueryAccountResponse {
+  /** account defines the account of the corresponding address. */
+  account: Any;
+}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequest {}
+
+/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
+export interface QueryModuleAccountsResponse {
+  accounts: Any[];
+}
+
+/** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
+export interface Bech32PrefixRequest {}
+
+/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
+export interface Bech32PrefixResponse {
+  bech32Prefix: string;
+}
+
+/** AddressBytesToStringRequest is the request type for AddressString rpc method */
+export interface AddressBytesToStringRequest {
+  addressBytes: Uint8Array;
+}
+
+/** AddressBytesToStringResponse is the response type for AddressString rpc method */
+export interface AddressBytesToStringResponse {
+  addressString: string;
+}
+
+/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
+export interface AddressStringToBytesRequest {
+  addressString: string;
+}
+
+/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
+export interface AddressStringToBytesResponse {
+  addressBytes: Uint8Array;
+}
+
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
     pagination: undefined
@@ -70,19 +140,6 @@ export const QueryAccountsRequest = {
   }
 
 };
-
-/**
- * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface QueryAccountsResponse {
-  /** accounts are the existing accounts */
-  accounts: Any[];
-
-  /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
-}
 
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
@@ -159,12 +216,6 @@ export const QueryAccountsResponse = {
 
 };
 
-/** QueryAccountRequest is the request type for the Query/Account RPC method. */
-export interface QueryAccountRequest {
-  /** address defines the address to query for. */
-  address: string;
-}
-
 function createBaseQueryAccountRequest(): QueryAccountRequest {
   return {
     address: ""
@@ -222,15 +273,12 @@ export const QueryAccountRequest = {
 
 };
 
-/** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
-export interface QueryModuleAccountsRequest {}
-
 function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
   return {};
 }
 
 export const QueryModuleAccountsRequest = {
-  encode(message: QueryModuleAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryModuleAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -252,27 +300,21 @@ export const QueryModuleAccountsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryModuleAccountsRequest {
+  fromJSON(_: any): QueryModuleAccountsRequest {
     return {};
   },
 
-  toJSON(message: QueryModuleAccountsRequest): unknown {
+  toJSON(_: QueryModuleAccountsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountsRequest>, I>>(object: I): QueryModuleAccountsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountsRequest>, I>>(_: I): QueryModuleAccountsRequest {
     const message = createBaseQueryModuleAccountsRequest();
     return message;
   }
 
 };
-
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
-export interface QueryParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -331,12 +373,6 @@ export const QueryParamsResponse = {
 
 };
 
-/** QueryAccountResponse is the response type for the Query/Account RPC method. */
-export interface QueryAccountResponse {
-  /** account defines the account of the corresponding address. */
-  account: Any;
-}
-
 function createBaseQueryAccountResponse(): QueryAccountResponse {
   return {
     account: undefined
@@ -394,15 +430,12 @@ export const QueryAccountResponse = {
 
 };
 
-/** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequest {}
-
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -424,26 +457,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-
-/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
-export interface QueryModuleAccountsResponse {
-  accounts: Any[];
-}
 
 function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
   return {
@@ -508,15 +536,12 @@ export const QueryModuleAccountsResponse = {
 
 };
 
-/** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
-export interface Bech32PrefixRequest {}
-
 function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
   return {};
 }
 
 export const Bech32PrefixRequest = {
-  encode(message: Bech32PrefixRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Bech32PrefixRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -538,26 +563,21 @@ export const Bech32PrefixRequest = {
     return message;
   },
 
-  fromJSON(object: any): Bech32PrefixRequest {
+  fromJSON(_: any): Bech32PrefixRequest {
     return {};
   },
 
-  toJSON(message: Bech32PrefixRequest): unknown {
+  toJSON(_: Bech32PrefixRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Bech32PrefixRequest>, I>>(object: I): Bech32PrefixRequest {
+  fromPartial<I extends Exact<DeepPartial<Bech32PrefixRequest>, I>>(_: I): Bech32PrefixRequest {
     const message = createBaseBech32PrefixRequest();
     return message;
   }
 
 };
-
-/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
-export interface Bech32PrefixResponse {
-  bech32Prefix: string;
-}
 
 function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
   return {
@@ -616,11 +636,6 @@ export const Bech32PrefixResponse = {
 
 };
 
-/** AddressBytesToStringRequest is the request type for AddressString rpc method */
-export interface AddressBytesToStringRequest {
-  addressBytes: Uint8Array;
-}
-
 function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
   return {
     addressBytes: new Uint8Array()
@@ -677,11 +692,6 @@ export const AddressBytesToStringRequest = {
   }
 
 };
-
-/** AddressBytesToStringResponse is the response type for AddressString rpc method */
-export interface AddressBytesToStringResponse {
-  addressString: string;
-}
 
 function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse {
   return {
@@ -740,11 +750,6 @@ export const AddressBytesToStringResponse = {
 
 };
 
-/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
-export interface AddressStringToBytesRequest {
-  addressString: string;
-}
-
 function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
   return {
     addressString: ""
@@ -801,11 +806,6 @@ export const AddressStringToBytesRequest = {
   }
 
 };
-
-/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
-export interface AddressStringToBytesResponse {
-  addressBytes: Uint8Array;
-}
 
 function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse {
   return {

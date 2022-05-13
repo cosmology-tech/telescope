@@ -8,6 +8,27 @@ export interface Evidence {
   lightClientAttackEvidence?: LightClientAttackEvidence;
 }
 
+/** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
+export interface DuplicateVoteEvidence {
+  voteA: Vote;
+  voteB: Vote;
+  totalVotingPower: Long;
+  validatorPower: Long;
+  timestamp: Date;
+}
+
+/** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
+export interface LightClientAttackEvidence {
+  conflictingBlock: LightBlock;
+  commonHeight: Long;
+  byzantineValidators: Validator[];
+  totalVotingPower: Long;
+  timestamp: Date;
+}
+export interface EvidenceList {
+  evidence: Evidence[];
+}
+
 function createBaseEvidence(): Evidence {
   return {
     duplicateVoteEvidence: undefined,
@@ -77,15 +98,6 @@ export const Evidence = {
 
 };
 
-/** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
-export interface DuplicateVoteEvidence {
-  voteA: Vote;
-  voteB: Vote;
-  totalVotingPower: Long;
-  validatorPower: Long;
-  timestamp: Date;
-}
-
 function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
     voteA: undefined,
@@ -114,7 +126,10 @@ export const DuplicateVoteEvidence = {
       writer.uint32(32).int64(message.validatorPower);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -188,15 +203,6 @@ export const DuplicateVoteEvidence = {
 
 };
 
-/** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
-export interface LightClientAttackEvidence {
-  conflictingBlock: LightBlock;
-  commonHeight: Long;
-  byzantineValidators: Validator[];
-  totalVotingPower: Long;
-  timestamp: Date;
-}
-
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
     conflictingBlock: undefined,
@@ -225,7 +231,10 @@ export const LightClientAttackEvidence = {
       writer.uint32(32).int64(message.totalVotingPower);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -304,9 +313,6 @@ export const LightClientAttackEvidence = {
   }
 
 };
-export interface EvidenceList {
-  evidence: Evidence[];
-}
 
 function createBaseEvidenceList(): EvidenceList {
   return {

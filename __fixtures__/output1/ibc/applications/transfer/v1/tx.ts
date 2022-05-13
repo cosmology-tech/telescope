@@ -37,6 +37,9 @@ export interface MsgTransfer {
   timeoutTimestamp: Long;
 }
 
+/** MsgTransferResponse defines the Msg/Transfer response type. */
+export interface MsgTransferResponse {}
+
 function createBaseMsgTransfer(): MsgTransfer {
   return {
     sourcePort: "",
@@ -166,15 +169,12 @@ export const MsgTransfer = {
 
 };
 
-/** MsgTransferResponse defines the Msg/Transfer response type. */
-export interface MsgTransferResponse {}
-
 function createBaseMsgTransferResponse(): MsgTransferResponse {
   return {};
 }
 
 export const MsgTransferResponse = {
-  encode(message: MsgTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -196,16 +196,16 @@ export const MsgTransferResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgTransferResponse {
+  fromJSON(_: any): MsgTransferResponse {
     return {};
   },
 
-  toJSON(message: MsgTransferResponse): unknown {
+  toJSON(_: MsgTransferResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgTransferResponse>, I>>(object: I): MsgTransferResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgTransferResponse>, I>>(_: I): MsgTransferResponse {
     const message = createBaseMsgTransferResponse();
     return message;
   }

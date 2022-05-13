@@ -16,6 +16,9 @@ export interface MsgSend {
   receiver: string;
 }
 
+/** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponse {}
+
 function createBaseMsgSend(): MsgSend {
   return {
     classId: "",
@@ -109,15 +112,12 @@ export const MsgSend = {
 
 };
 
-/** MsgSendResponse defines the Msg/Send response type. */
-export interface MsgSendResponse {}
-
 function createBaseMsgSendResponse(): MsgSendResponse {
   return {};
 }
 
 export const MsgSendResponse = {
-  encode(message: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -139,16 +139,16 @@ export const MsgSendResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSendResponse {
+  fromJSON(_: any): MsgSendResponse {
     return {};
   },
 
-  toJSON(message: MsgSendResponse): unknown {
+  toJSON(_: MsgSendResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSendResponse>, I>>(object: I): MsgSendResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSendResponse>, I>>(_: I): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
   }

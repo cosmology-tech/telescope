@@ -9,6 +9,78 @@ export interface QueryBalanceRequest {
   owner: string;
 }
 
+/** QueryBalanceResponse is the response type for the Query/Balance RPC method */
+export interface QueryBalanceResponse {
+  amount: Long;
+}
+
+/** QueryOwnerRequest is the request type for the Query/Owner RPC method */
+export interface QueryOwnerRequest {
+  classId: string;
+  id: string;
+}
+
+/** QueryOwnerResponse is the response type for the Query/Owner RPC method */
+export interface QueryOwnerResponse {
+  owner: string;
+}
+
+/** QuerySupplyRequest is the request type for the Query/Supply RPC method */
+export interface QuerySupplyRequest {
+  classId: string;
+}
+
+/** QuerySupplyResponse is the response type for the Query/Supply RPC method */
+export interface QuerySupplyResponse {
+  amount: Long;
+}
+
+/** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
+export interface QueryNFTsRequest {
+  classId: string;
+  owner: string;
+  pagination: PageRequest;
+}
+
+/** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
+export interface QueryNFTsResponse {
+  nfts: NFT[];
+  pagination: PageResponse;
+}
+
+/** QueryNFTRequest is the request type for the Query/NFT RPC method */
+export interface QueryNFTRequest {
+  classId: string;
+  id: string;
+}
+
+/** QueryNFTResponse is the response type for the Query/NFT RPC method */
+export interface QueryNFTResponse {
+  nft: NFT;
+}
+
+/** QueryClassRequest is the request type for the Query/Class RPC method */
+export interface QueryClassRequest {
+  classId: string;
+}
+
+/** QueryClassResponse is the response type for the Query/Class RPC method */
+export interface QueryClassResponse {
+  class: Class;
+}
+
+/** QueryClassesRequest is the request type for the Query/Classes RPC method */
+export interface QueryClassesRequest {
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest;
+}
+
+/** QueryClassesResponse is the response type for the Query/Classes RPC method */
+export interface QueryClassesResponse {
+  classes: Class[];
+  pagination: PageResponse;
+}
+
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   return {
     classId: "",
@@ -78,11 +150,6 @@ export const QueryBalanceRequest = {
 
 };
 
-/** QueryBalanceResponse is the response type for the Query/Balance RPC method */
-export interface QueryBalanceResponse {
-  amount: Long;
-}
-
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   return {
     amount: Long.UZERO
@@ -139,12 +206,6 @@ export const QueryBalanceResponse = {
   }
 
 };
-
-/** QueryOwnerRequest is the request type for the Query/Owner RPC method */
-export interface QueryOwnerRequest {
-  classId: string;
-  id: string;
-}
 
 function createBaseQueryOwnerRequest(): QueryOwnerRequest {
   return {
@@ -215,11 +276,6 @@ export const QueryOwnerRequest = {
 
 };
 
-/** QueryOwnerResponse is the response type for the Query/Owner RPC method */
-export interface QueryOwnerResponse {
-  owner: string;
-}
-
 function createBaseQueryOwnerResponse(): QueryOwnerResponse {
   return {
     owner: ""
@@ -276,11 +332,6 @@ export const QueryOwnerResponse = {
   }
 
 };
-
-/** QuerySupplyRequest is the request type for the Query/Supply RPC method */
-export interface QuerySupplyRequest {
-  classId: string;
-}
 
 function createBaseQuerySupplyRequest(): QuerySupplyRequest {
   return {
@@ -339,11 +390,6 @@ export const QuerySupplyRequest = {
 
 };
 
-/** QuerySupplyResponse is the response type for the Query/Supply RPC method */
-export interface QuerySupplyResponse {
-  amount: Long;
-}
-
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   return {
     amount: Long.UZERO
@@ -400,13 +446,6 @@ export const QuerySupplyResponse = {
   }
 
 };
-
-/** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
-export interface QueryNFTsRequest {
-  classId: string;
-  owner: string;
-  pagination: PageRequest;
-}
 
 function createBaseQueryNFTsRequest(): QueryNFTsRequest {
   return {
@@ -489,12 +528,6 @@ export const QueryNFTsRequest = {
 
 };
 
-/** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
-export interface QueryNFTsResponse {
-  nfts: NFT[];
-  pagination: PageResponse;
-}
-
 function createBaseQueryNFTsResponse(): QueryNFTsResponse {
   return {
     nfts: [],
@@ -570,12 +603,6 @@ export const QueryNFTsResponse = {
 
 };
 
-/** QueryNFTRequest is the request type for the Query/NFT RPC method */
-export interface QueryNFTRequest {
-  classId: string;
-  id: string;
-}
-
 function createBaseQueryNFTRequest(): QueryNFTRequest {
   return {
     classId: "",
@@ -645,11 +672,6 @@ export const QueryNFTRequest = {
 
 };
 
-/** QueryNFTResponse is the response type for the Query/NFT RPC method */
-export interface QueryNFTResponse {
-  nft: NFT;
-}
-
 function createBaseQueryNFTResponse(): QueryNFTResponse {
   return {
     nft: undefined
@@ -706,11 +728,6 @@ export const QueryNFTResponse = {
   }
 
 };
-
-/** QueryClassRequest is the request type for the Query/Class RPC method */
-export interface QueryClassRequest {
-  classId: string;
-}
 
 function createBaseQueryClassRequest(): QueryClassRequest {
   return {
@@ -769,11 +786,6 @@ export const QueryClassRequest = {
 
 };
 
-/** QueryClassResponse is the response type for the Query/Class RPC method */
-export interface QueryClassResponse {
-  class: Class;
-}
-
 function createBaseQueryClassResponse(): QueryClassResponse {
   return {
     class: undefined
@@ -831,12 +843,6 @@ export const QueryClassResponse = {
 
 };
 
-/** QueryClassesRequest is the request type for the Query/Classes RPC method */
-export interface QueryClassesRequest {
-  /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
-}
-
 function createBaseQueryClassesRequest(): QueryClassesRequest {
   return {
     pagination: undefined
@@ -893,12 +899,6 @@ export const QueryClassesRequest = {
   }
 
 };
-
-/** QueryClassesResponse is the response type for the Query/Classes RPC method */
-export interface QueryClassesResponse {
-  classes: Class[];
-  pagination: PageResponse;
-}
 
 function createBaseQueryClassesResponse(): QueryClassesResponse {
   return {

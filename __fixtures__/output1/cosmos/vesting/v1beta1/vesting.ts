@@ -15,6 +15,51 @@ export interface BaseVestingAccount {
   endTime: Long;
 }
 
+/**
+ * ContinuousVestingAccount implements the VestingAccount interface. It
+ * continuously vests by unlocking coins linearly with respect to time.
+ */
+export interface ContinuousVestingAccount {
+  baseVestingAccount: BaseVestingAccount;
+  startTime: Long;
+}
+
+/**
+ * DelayedVestingAccount implements the VestingAccount interface. It vests all
+ * coins after a specific time, but non prior. In other words, it keeps them
+ * locked until a specified time.
+ */
+export interface DelayedVestingAccount {
+  baseVestingAccount: BaseVestingAccount;
+}
+
+/** Period defines a length of time and amount of coins that will vest. */
+export interface Period {
+  length: Long;
+  amount: Coin[];
+}
+
+/**
+ * PeriodicVestingAccount implements the VestingAccount interface. It
+ * periodically vests by unlocking coins during each specified period.
+ */
+export interface PeriodicVestingAccount {
+  baseVestingAccount: BaseVestingAccount;
+  startTime: Long;
+  vestingPeriods: Period[];
+}
+
+/**
+ * PermanentLockedAccount implements the VestingAccount interface. It does
+ * not ever release coins, locking them indefinitely. Coins in this account can
+ * still be used for delegating and for governance votes even while locked.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface PermanentLockedAccount {
+  baseVestingAccount: BaseVestingAccount;
+}
+
 function createBaseBaseVestingAccount(): BaseVestingAccount {
   return {
     baseAccount: undefined,
@@ -136,15 +181,6 @@ export const BaseVestingAccount = {
 
 };
 
-/**
- * ContinuousVestingAccount implements the VestingAccount interface. It
- * continuously vests by unlocking coins linearly with respect to time.
- */
-export interface ContinuousVestingAccount {
-  baseVestingAccount: BaseVestingAccount;
-  startTime: Long;
-}
-
 function createBaseContinuousVestingAccount(): ContinuousVestingAccount {
   return {
     baseVestingAccount: undefined,
@@ -214,15 +250,6 @@ export const ContinuousVestingAccount = {
 
 };
 
-/**
- * DelayedVestingAccount implements the VestingAccount interface. It vests all
- * coins after a specific time, but non prior. In other words, it keeps them
- * locked until a specified time.
- */
-export interface DelayedVestingAccount {
-  baseVestingAccount: BaseVestingAccount;
-}
-
 function createBaseDelayedVestingAccount(): DelayedVestingAccount {
   return {
     baseVestingAccount: undefined
@@ -279,12 +306,6 @@ export const DelayedVestingAccount = {
   }
 
 };
-
-/** Period defines a length of time and amount of coins that will vest. */
-export interface Period {
-  length: Long;
-  amount: Coin[];
-}
 
 function createBasePeriod(): Period {
   return {
@@ -360,16 +381,6 @@ export const Period = {
   }
 
 };
-
-/**
- * PeriodicVestingAccount implements the VestingAccount interface. It
- * periodically vests by unlocking coins during each specified period.
- */
-export interface PeriodicVestingAccount {
-  baseVestingAccount: BaseVestingAccount;
-  startTime: Long;
-  vestingPeriods: Period[];
-}
 
 function createBasePeriodicVestingAccount(): PeriodicVestingAccount {
   return {
@@ -457,17 +468,6 @@ export const PeriodicVestingAccount = {
   }
 
 };
-
-/**
- * PermanentLockedAccount implements the VestingAccount interface. It does
- * not ever release coins, locking them indefinitely. Coins in this account can
- * still be used for delegating and for governance votes even while locked.
- * 
- * Since: cosmos-sdk 0.43
- */
-export interface PermanentLockedAccount {
-  baseVestingAccount: BaseVestingAccount;
-}
 
 function createBasePermanentLockedAccount(): PermanentLockedAccount {
   return {

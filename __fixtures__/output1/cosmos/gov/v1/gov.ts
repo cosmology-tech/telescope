@@ -73,10 +73,192 @@ export function voteOptionToJSON(object: VoteOption): string {
   }
 }
 
+/** ProposalStatus enumerates the valid statuses of a proposal. */
+export enum ProposalStatus {
+  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
+  PROPOSAL_STATUS_UNSPECIFIED = 0,
+
+  /**
+   * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
+   * period.
+   */
+  PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
+
+  /**
+   * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
+   * period.
+   */
+  PROPOSAL_STATUS_VOTING_PERIOD = 2,
+
+  /**
+   * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
+   * passed.
+   */
+  PROPOSAL_STATUS_PASSED = 3,
+
+  /**
+   * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
+   * been rejected.
+   */
+  PROPOSAL_STATUS_REJECTED = 4,
+
+  /**
+   * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
+   * failed.
+   */
+  PROPOSAL_STATUS_FAILED = 5,
+  UNRECOGNIZED = -1,
+}
+export function proposalStatusFromJSON(object: any): ProposalStatus {
+  switch (object) {
+    case 0:
+    case "PROPOSAL_STATUS_UNSPECIFIED":
+      return ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED;
+
+    case 1:
+    case "PROPOSAL_STATUS_DEPOSIT_PERIOD":
+      return ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD;
+
+    case 2:
+    case "PROPOSAL_STATUS_VOTING_PERIOD":
+      return ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD;
+
+    case 3:
+    case "PROPOSAL_STATUS_PASSED":
+      return ProposalStatus.PROPOSAL_STATUS_PASSED;
+
+    case 4:
+    case "PROPOSAL_STATUS_REJECTED":
+      return ProposalStatus.PROPOSAL_STATUS_REJECTED;
+
+    case 5:
+    case "PROPOSAL_STATUS_FAILED":
+      return ProposalStatus.PROPOSAL_STATUS_FAILED;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ProposalStatus.UNRECOGNIZED;
+  }
+}
+export function proposalStatusToJSON(object: ProposalStatus): string {
+  switch (object) {
+    case ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED:
+      return "PROPOSAL_STATUS_UNSPECIFIED";
+
+    case ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD:
+      return "PROPOSAL_STATUS_DEPOSIT_PERIOD";
+
+    case ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD:
+      return "PROPOSAL_STATUS_VOTING_PERIOD";
+
+    case ProposalStatus.PROPOSAL_STATUS_PASSED:
+      return "PROPOSAL_STATUS_PASSED";
+
+    case ProposalStatus.PROPOSAL_STATUS_REJECTED:
+      return "PROPOSAL_STATUS_REJECTED";
+
+    case ProposalStatus.PROPOSAL_STATUS_FAILED:
+      return "PROPOSAL_STATUS_FAILED";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
+}
+
+/**
+ * Deposit defines an amount deposited by an account address to an active
+ * proposal.
+ */
+export interface Deposit {
+  proposalId: Long;
+  depositor: string;
+  amount: Coin[];
+}
+
+/** Proposal defines the core field members of a governance proposal. */
+export interface Proposal {
+  id: Long;
+  messages: Any[];
+  status: ProposalStatus;
+
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
+  finalTallyResult: TallyResult;
+  submitTime: Date;
+  depositEndTime: Date;
+  totalDeposit: Coin[];
+  votingStartTime: Date;
+  votingEndTime: Date;
+
+  /** metadata is any arbitrary metadata attached to the proposal. */
+  metadata: string;
+}
+
+/** TallyResult defines a standard tally for a governance proposal. */
+export interface TallyResult {
+  yesCount: string;
+  abstainCount: string;
+  noCount: string;
+  noWithVetoCount: string;
+}
+
+/**
+ * Vote defines a vote on a governance proposal.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
+ */
+export interface Vote {
+  proposalId: Long;
+  voter: string;
+  options: WeightedVoteOption[];
+
+  /** metadata is any  arbitrary metadata to attached to the vote. */
+  metadata: string;
+}
+
+/** DepositParams defines the params for deposits on governance proposals. */
+export interface DepositParams {
+  /** Minimum deposit for a proposal to enter voting period. */
+  minDeposit: Coin[];
+
+  /**
+   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
+   * months.
+   */
+  maxDepositPeriod: string;
+}
+
+/** VotingParams defines the params for voting on governance proposals. */
+export interface VotingParams {
+  /** Length of the voting period. */
+  votingPeriod: string;
+}
+
+/** TallyParams defines the params for tallying votes on governance proposals. */
+export interface TallyParams {
+  /**
+   * Minimum percentage of total stake needed to vote for a result to be
+   * considered valid.
+   */
+  quorum: string;
+
+  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
+  threshold: string;
+
+  /**
+   * Minimum value of Veto votes to Total votes ratio for proposal to be
+   * vetoed. Default value: 1/3.
+   */
+  vetoThreshold: string;
 }
 
 function createBaseWeightedVoteOption(): WeightedVoteOption {
@@ -147,16 +329,6 @@ export const WeightedVoteOption = {
   }
 
 };
-
-/**
- * Deposit defines an amount deposited by an account address to an active
- * proposal.
- */
-export interface Deposit {
-  proposalId: Long;
-  depositor: string;
-  amount: Coin[];
-}
 
 function createBaseDeposit(): Deposit {
   return {
@@ -245,28 +417,6 @@ export const Deposit = {
 
 };
 
-/** Proposal defines the core field members of a governance proposal. */
-export interface Proposal {
-  id: Long;
-  messages: Any[];
-  status: ProposalStatus;
-
-  /**
-   * final_tally_result is the final tally result of the proposal. When
-   * querying a proposal via gRPC, this field is not populated until the
-   * proposal's voting period has ended.
-   */
-  finalTallyResult: TallyResult;
-  submitTime: Date;
-  depositEndTime: Date;
-  totalDeposit: Coin[];
-  votingStartTime: Date;
-  votingEndTime: Date;
-
-  /** metadata is any arbitrary metadata attached to the proposal. */
-  metadata: string;
-}
-
 function createBaseProposal(): Proposal {
   return {
     id: Long.UZERO,
@@ -300,15 +450,25 @@ export const Proposal = {
       TallyResult.encode(message.finalTallyResult, writer.uint32(34).fork()).ldelim();
     }
 
-    if (message.submitTime !== undefined) Timestamp.encode(toTimestamp(message.submitTime), writer.uint32(42).fork()).ldelim();
-    if (message.depositEndTime !== undefined) Timestamp.encode(toTimestamp(message.depositEndTime), writer.uint32(50).fork()).ldelim();
+    if (message.submitTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.submitTime), writer.uint32(42).fork()).ldelim();
+    }
+
+    if (message.depositEndTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.depositEndTime), writer.uint32(50).fork()).ldelim();
+    }
 
     for (const v of message.totalDeposit) {
       Coin.encode(v!, writer.uint32(58).fork()).ldelim();
     }
 
-    if (message.votingStartTime !== undefined) Timestamp.encode(toTimestamp(message.votingStartTime), writer.uint32(66).fork()).ldelim();
-    if (message.votingEndTime !== undefined) Timestamp.encode(toTimestamp(message.votingEndTime), writer.uint32(74).fork()).ldelim();
+    if (message.votingStartTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.votingStartTime), writer.uint32(66).fork()).ldelim();
+    }
+
+    if (message.votingEndTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.votingEndTime), writer.uint32(74).fork()).ldelim();
+    }
 
     if (message.metadata !== "") {
       writer.uint32(82).string(message.metadata);
@@ -434,107 +594,6 @@ export const Proposal = {
 
 };
 
-/** ProposalStatus enumerates the valid statuses of a proposal. */
-export enum ProposalStatus {
-  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
-  PROPOSAL_STATUS_UNSPECIFIED = 0,
-
-  /**
-   * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
-   * period.
-   */
-  PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
-
-  /**
-   * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
-   * period.
-   */
-  PROPOSAL_STATUS_VOTING_PERIOD = 2,
-
-  /**
-   * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
-   * passed.
-   */
-  PROPOSAL_STATUS_PASSED = 3,
-
-  /**
-   * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
-   * been rejected.
-   */
-  PROPOSAL_STATUS_REJECTED = 4,
-
-  /**
-   * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
-   * failed.
-   */
-  PROPOSAL_STATUS_FAILED = 5,
-  UNRECOGNIZED = -1,
-}
-export function proposalStatusFromJSON(object: any): ProposalStatus {
-  switch (object) {
-    case 0:
-    case "PROPOSAL_STATUS_UNSPECIFIED":
-      return ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED;
-
-    case 1:
-    case "PROPOSAL_STATUS_DEPOSIT_PERIOD":
-      return ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD;
-
-    case 2:
-    case "PROPOSAL_STATUS_VOTING_PERIOD":
-      return ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD;
-
-    case 3:
-    case "PROPOSAL_STATUS_PASSED":
-      return ProposalStatus.PROPOSAL_STATUS_PASSED;
-
-    case 4:
-    case "PROPOSAL_STATUS_REJECTED":
-      return ProposalStatus.PROPOSAL_STATUS_REJECTED;
-
-    case 5:
-    case "PROPOSAL_STATUS_FAILED":
-      return ProposalStatus.PROPOSAL_STATUS_FAILED;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ProposalStatus.UNRECOGNIZED;
-  }
-}
-export function proposalStatusToJSON(object: ProposalStatus): string {
-  switch (object) {
-    case ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED:
-      return "PROPOSAL_STATUS_UNSPECIFIED";
-
-    case ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD:
-      return "PROPOSAL_STATUS_DEPOSIT_PERIOD";
-
-    case ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD:
-      return "PROPOSAL_STATUS_VOTING_PERIOD";
-
-    case ProposalStatus.PROPOSAL_STATUS_PASSED:
-      return "PROPOSAL_STATUS_PASSED";
-
-    case ProposalStatus.PROPOSAL_STATUS_REJECTED:
-      return "PROPOSAL_STATUS_REJECTED";
-
-    case ProposalStatus.PROPOSAL_STATUS_FAILED:
-      return "PROPOSAL_STATUS_FAILED";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** TallyResult defines a standard tally for a governance proposal. */
-export interface TallyResult {
-  yesCount: string;
-  abstainCount: string;
-  noCount: string;
-  noWithVetoCount: string;
-}
-
 function createBaseTallyResult(): TallyResult {
   return {
     yesCount: "",
@@ -627,19 +686,6 @@ export const TallyResult = {
   }
 
 };
-
-/**
- * Vote defines a vote on a governance proposal.
- * A Vote consists of a proposal ID, the voter, and the vote option.
- */
-export interface Vote {
-  proposalId: Long;
-  voter: string;
-  options: WeightedVoteOption[];
-
-  /** metadata is any  arbitrary metadata to attached to the vote. */
-  metadata: string;
-}
 
 function createBaseVote(): Vote {
   return {
@@ -740,18 +786,6 @@ export const Vote = {
 
 };
 
-/** DepositParams defines the params for deposits on governance proposals. */
-export interface DepositParams {
-  /** Minimum deposit for a proposal to enter voting period. */
-  minDeposit: Coin[];
-
-  /**
-   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   * months.
-   */
-  maxDepositPeriod: string;
-}
-
 function createBaseDepositParams(): DepositParams {
   return {
     minDeposit: [],
@@ -765,7 +799,10 @@ export const DepositParams = {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
-    if (message.maxDepositPeriod !== undefined) Duration.encode(toDuration(message.maxDepositPeriod), writer.uint32(18).fork()).ldelim();
+    if (message.maxDepositPeriod !== undefined) {
+      Duration.encode(toDuration(message.maxDepositPeriod), writer.uint32(18).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -824,12 +861,6 @@ export const DepositParams = {
 
 };
 
-/** VotingParams defines the params for voting on governance proposals. */
-export interface VotingParams {
-  /** Length of the voting period. */
-  votingPeriod: string;
-}
-
 function createBaseVotingParams(): VotingParams {
   return {
     votingPeriod: undefined
@@ -838,7 +869,10 @@ function createBaseVotingParams(): VotingParams {
 
 export const VotingParams = {
   encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.votingPeriod !== undefined) Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
+    if (message.votingPeriod !== undefined) {
+      Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -883,24 +917,6 @@ export const VotingParams = {
   }
 
 };
-
-/** TallyParams defines the params for tallying votes on governance proposals. */
-export interface TallyParams {
-  /**
-   * Minimum percentage of total stake needed to vote for a result to be
-   * considered valid.
-   */
-  quorum: string;
-
-  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
-  threshold: string;
-
-  /**
-   * Minimum value of Veto votes to Total votes ratio for proposal to be
-   * vetoed. Default value: 1/3.
-   */
-  vetoThreshold: string;
-}
 
 function createBaseTallyParams(): TallyParams {
   return {

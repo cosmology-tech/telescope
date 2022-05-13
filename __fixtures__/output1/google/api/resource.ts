@@ -2,6 +2,111 @@ import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
+ * A description of the historical or future-looking state of the
+ * resource pattern.
+ */
+export enum ResourceDescriptor_History {
+  /** HISTORY_UNSPECIFIED - The "unset" value. */
+  HISTORY_UNSPECIFIED = 0,
+
+  /**
+   * ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
+   * additional patterns were added later.
+   */
+  ORIGINALLY_SINGLE_PATTERN = 1,
+
+  /**
+   * FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
+   * later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
+   * that from being necessary once there are multiple patterns.)
+   */
+  FUTURE_MULTI_PATTERN = 2,
+  UNRECOGNIZED = -1,
+}
+export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescriptor_History {
+  switch (object) {
+    case 0:
+    case "HISTORY_UNSPECIFIED":
+      return ResourceDescriptor_History.HISTORY_UNSPECIFIED;
+
+    case 1:
+    case "ORIGINALLY_SINGLE_PATTERN":
+      return ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN;
+
+    case 2:
+    case "FUTURE_MULTI_PATTERN":
+      return ResourceDescriptor_History.FUTURE_MULTI_PATTERN;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResourceDescriptor_History.UNRECOGNIZED;
+  }
+}
+export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_History): string {
+  switch (object) {
+    case ResourceDescriptor_History.HISTORY_UNSPECIFIED:
+      return "HISTORY_UNSPECIFIED";
+
+    case ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN:
+      return "ORIGINALLY_SINGLE_PATTERN";
+
+    case ResourceDescriptor_History.FUTURE_MULTI_PATTERN:
+      return "FUTURE_MULTI_PATTERN";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/** A flag representing a specific style that a resource claims to conform to. */
+export enum ResourceDescriptor_Style {
+  /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
+  STYLE_UNSPECIFIED = 0,
+
+  /**
+   * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
+   * 
+   * Declarative-friendly resources must be more strictly consistent, and
+   * setting this to true communicates to tools that this resource should
+   * adhere to declarative-friendly expectations.
+   * 
+   * Note: This is used by the API linter (linter.aip.dev) to enable
+   * additional checks.
+   */
+  DECLARATIVE_FRIENDLY = 1,
+  UNRECOGNIZED = -1,
+}
+export function resourceDescriptor_StyleFromJSON(object: any): ResourceDescriptor_Style {
+  switch (object) {
+    case 0:
+    case "STYLE_UNSPECIFIED":
+      return ResourceDescriptor_Style.STYLE_UNSPECIFIED;
+
+    case 1:
+    case "DECLARATIVE_FRIENDLY":
+      return ResourceDescriptor_Style.DECLARATIVE_FRIENDLY;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResourceDescriptor_Style.UNRECOGNIZED;
+  }
+}
+export function resourceDescriptor_StyleToJSON(object: ResourceDescriptor_Style): string {
+  switch (object) {
+    case ResourceDescriptor_Style.STYLE_UNSPECIFIED:
+      return "STYLE_UNSPECIFIED";
+
+    case ResourceDescriptor_Style.DECLARATIVE_FRIENDLY:
+      return "DECLARATIVE_FRIENDLY";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/**
  * A simple descriptor of a resource type.
  * 
  * ResourceDescriptor annotates a resource message (either by means of a
@@ -138,6 +243,51 @@ export interface ResourceDescriptor {
    * style. See the specific style flags for additional information.
    */
   style: ResourceDescriptor_Style[];
+}
+
+/**
+ * Defines a proto annotation that describes a string field that refers to
+ * an API resource.
+ */
+export interface ResourceReference {
+  /**
+   * The resource type that the annotated field references.
+   * 
+   * Example:
+   * 
+   * message Subscription {
+   * string topic = 2 [(google.api.resource_reference) = {
+   * type: "pubsub.googleapis.com/Topic"
+   * }];
+   * }
+   * 
+   * Occasionally, a field may reference an arbitrary resource. In this case,
+   * APIs use the special value * in their resource reference.
+   * 
+   * Example:
+   * 
+   * message GetIamPolicyRequest {
+   * string resource = 2 [(google.api.resource_reference) = {
+   * type: "*"
+   * }];
+   * }
+   */
+  type: string;
+
+  /**
+   * The resource type of a child collection that the annotated field
+   * references. This is useful for annotating the `parent` field that
+   * doesn't have a fixed resource type.
+   * 
+   * Example:
+   * 
+   * message ListLogEntriesRequest {
+   * string parent = 1 [(google.api.resource_reference) = {
+   * child_type: "logging.googleapis.com/LogEntry"
+   * };
+   * }
+   */
+  childType: string;
 }
 
 function createBaseResourceDescriptor(): ResourceDescriptor {
@@ -292,156 +442,6 @@ export const ResourceDescriptor = {
   }
 
 };
-
-/**
- * A description of the historical or future-looking state of the
- * resource pattern.
- */
-export enum ResourceDescriptor_History {
-  /** HISTORY_UNSPECIFIED - The "unset" value. */
-  HISTORY_UNSPECIFIED = 0,
-
-  /**
-   * ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
-   * additional patterns were added later.
-   */
-  ORIGINALLY_SINGLE_PATTERN = 1,
-
-  /**
-   * FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
-   * later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
-   * that from being necessary once there are multiple patterns.)
-   */
-  FUTURE_MULTI_PATTERN = 2,
-  UNRECOGNIZED = -1,
-}
-export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescriptor_History {
-  switch (object) {
-    case 0:
-    case "HISTORY_UNSPECIFIED":
-      return ResourceDescriptor_History.HISTORY_UNSPECIFIED;
-
-    case 1:
-    case "ORIGINALLY_SINGLE_PATTERN":
-      return ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN;
-
-    case 2:
-    case "FUTURE_MULTI_PATTERN":
-      return ResourceDescriptor_History.FUTURE_MULTI_PATTERN;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ResourceDescriptor_History.UNRECOGNIZED;
-  }
-}
-export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_History): string {
-  switch (object) {
-    case ResourceDescriptor_History.HISTORY_UNSPECIFIED:
-      return "HISTORY_UNSPECIFIED";
-
-    case ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN:
-      return "ORIGINALLY_SINGLE_PATTERN";
-
-    case ResourceDescriptor_History.FUTURE_MULTI_PATTERN:
-      return "FUTURE_MULTI_PATTERN";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/** A flag representing a specific style that a resource claims to conform to. */
-export enum ResourceDescriptor_Style {
-  /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
-  STYLE_UNSPECIFIED = 0,
-
-  /**
-   * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
-   * 
-   * Declarative-friendly resources must be more strictly consistent, and
-   * setting this to true communicates to tools that this resource should
-   * adhere to declarative-friendly expectations.
-   * 
-   * Note: This is used by the API linter (linter.aip.dev) to enable
-   * additional checks.
-   */
-  DECLARATIVE_FRIENDLY = 1,
-  UNRECOGNIZED = -1,
-}
-export function resourceDescriptor_StyleFromJSON(object: any): ResourceDescriptor_Style {
-  switch (object) {
-    case 0:
-    case "STYLE_UNSPECIFIED":
-      return ResourceDescriptor_Style.STYLE_UNSPECIFIED;
-
-    case 1:
-    case "DECLARATIVE_FRIENDLY":
-      return ResourceDescriptor_Style.DECLARATIVE_FRIENDLY;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ResourceDescriptor_Style.UNRECOGNIZED;
-  }
-}
-export function resourceDescriptor_StyleToJSON(object: ResourceDescriptor_Style): string {
-  switch (object) {
-    case ResourceDescriptor_Style.STYLE_UNSPECIFIED:
-      return "STYLE_UNSPECIFIED";
-
-    case ResourceDescriptor_Style.DECLARATIVE_FRIENDLY:
-      return "DECLARATIVE_FRIENDLY";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/**
- * Defines a proto annotation that describes a string field that refers to
- * an API resource.
- */
-export interface ResourceReference {
-  /**
-   * The resource type that the annotated field references.
-   * 
-   * Example:
-   * 
-   * message Subscription {
-   * string topic = 2 [(google.api.resource_reference) = {
-   * type: "pubsub.googleapis.com/Topic"
-   * }];
-   * }
-   * 
-   * Occasionally, a field may reference an arbitrary resource. In this case,
-   * APIs use the special value * in their resource reference.
-   * 
-   * Example:
-   * 
-   * message GetIamPolicyRequest {
-   * string resource = 2 [(google.api.resource_reference) = {
-   * type: "*"
-   * }];
-   * }
-   */
-  type: string;
-
-  /**
-   * The resource type of a child collection that the annotated field
-   * references. This is useful for annotating the `parent` field that
-   * doesn't have a fixed resource type.
-   * 
-   * Example:
-   * 
-   * message ListLogEntriesRequest {
-   * string parent = 1 [(google.api.resource_reference) = {
-   * child_type: "logging.googleapis.com/LogEntry"
-   * };
-   * }
-   */
-  childType: string;
-}
 
 function createBaseResourceReference(): ResourceReference {
   return {

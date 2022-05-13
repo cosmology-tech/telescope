@@ -11,6 +11,18 @@ export interface GenesisOwners {
   indexOwners: CapabilityOwners;
 }
 
+/** GenesisState defines the capability module's genesis state. */
+export interface GenesisState {
+  /** index is the capability global index. */
+  index: Long;
+
+  /**
+   * owners represents a map from index to owners of the capability index
+   * index key is string to allow amino marshalling.
+   */
+  owners: GenesisOwners[];
+}
+
 function createBaseGenesisOwners(): GenesisOwners {
   return {
     index: Long.UZERO,
@@ -79,18 +91,6 @@ export const GenesisOwners = {
   }
 
 };
-
-/** GenesisState defines the capability module's genesis state. */
-export interface GenesisState {
-  /** index is the capability global index. */
-  index: Long;
-
-  /**
-   * owners represents a map from index to owners of the capability index
-   * index key is string to allow amino marshalling.
-   */
-  owners: GenesisOwners[];
-}
 
 function createBaseGenesisState(): GenesisState {
   return {

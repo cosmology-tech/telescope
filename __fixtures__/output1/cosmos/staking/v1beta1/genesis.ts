@@ -33,6 +33,15 @@ export interface GenesisState {
   exported: boolean;
 }
 
+/** LastValidatorPower required for validator set update logic. */
+export interface LastValidatorPower {
+  /** address is the address of the validator. */
+  address: string;
+
+  /** power defines the power of the validator. */
+  power: Long;
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     params: undefined,
@@ -199,15 +208,6 @@ export const GenesisState = {
   }
 
 };
-
-/** LastValidatorPower required for validator set update logic. */
-export interface LastValidatorPower {
-  /** address is the address of the validator. */
-  address: string;
-
-  /** power defines the power of the validator. */
-  power: Long;
-}
 
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {

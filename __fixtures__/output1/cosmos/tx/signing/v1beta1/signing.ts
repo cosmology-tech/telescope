@@ -106,6 +106,52 @@ export interface SignatureDescriptors {
   signatures: SignatureDescriptor[];
 }
 
+/**
+ * SignatureDescriptor is a convenience type which represents the full data for
+ * a signature including the public key of the signer, signing modes and the
+ * signature itself. It is primarily used for coordinating signatures between
+ * clients.
+ */
+export interface SignatureDescriptor {
+  /** public_key is the public key of the signer */
+  publicKey: Any;
+  data: SignatureDescriptor_Data;
+
+  /**
+   * sequence is the sequence of the account, which describes the
+   * number of committed transactions signed by a given address. It is used to prevent
+   * replay attacks.
+   */
+  sequence: Long;
+}
+
+/** Data represents signature data */
+export interface SignatureDescriptor_Data {
+  /** single represents a single signer */
+  single?: SignatureDescriptor_Data_Single;
+
+  /** multi represents a multisig signer */
+  multi?: SignatureDescriptor_Data_Multi;
+}
+
+/** Single is the signature data for a single signer */
+export interface SignatureDescriptor_Data_Single {
+  /** mode is the signing mode of the single signer */
+  mode: SignMode;
+
+  /** signature is the raw signature bytes */
+  signature: Uint8Array;
+}
+
+/** Multi is the signature data for a multisig public key */
+export interface SignatureDescriptor_Data_Multi {
+  /** bitarray specifies which keys within the multisig are signing */
+  bitarray: CompactBitArray;
+
+  /** signatures is the signatures of the multi-signature */
+  signatures: SignatureDescriptor_Data[];
+}
+
 function createBaseSignatureDescriptors(): SignatureDescriptors {
   return {
     signatures: []
@@ -168,25 +214,6 @@ export const SignatureDescriptors = {
   }
 
 };
-
-/**
- * SignatureDescriptor is a convenience type which represents the full data for
- * a signature including the public key of the signer, signing modes and the
- * signature itself. It is primarily used for coordinating signatures between
- * clients.
- */
-export interface SignatureDescriptor {
-  /** public_key is the public key of the signer */
-  publicKey: Any;
-  data: SignatureDescriptor_Data;
-
-  /**
-   * sequence is the sequence of the account, which describes the
-   * number of committed transactions signed by a given address. It is used to prevent
-   * replay attacks.
-   */
-  sequence: Long;
-}
 
 function createBaseSignatureDescriptor(): SignatureDescriptor {
   return {
@@ -269,15 +296,6 @@ export const SignatureDescriptor = {
 
 };
 
-/** Data represents signature data */
-export interface SignatureDescriptor_Data {
-  /** single represents a single signer */
-  single?: SignatureDescriptor_Data_Single;
-
-  /** multi represents a multisig signer */
-  multi?: SignatureDescriptor_Data_Multi;
-}
-
 function createBaseSignatureDescriptor_Data(): SignatureDescriptor_Data {
   return {
     single: undefined,
@@ -347,15 +365,6 @@ export const SignatureDescriptor_Data = {
 
 };
 
-/** Single is the signature data for a single signer */
-export interface SignatureDescriptor_Data_Single {
-  /** mode is the signing mode of the single signer */
-  mode: SignMode;
-
-  /** signature is the raw signature bytes */
-  signature: Uint8Array;
-}
-
 function createBaseSignatureDescriptor_Data_Single(): SignatureDescriptor_Data_Single {
   return {
     mode: 0,
@@ -424,15 +433,6 @@ export const SignatureDescriptor_Data_Single = {
   }
 
 };
-
-/** Multi is the signature data for a multisig public key */
-export interface SignatureDescriptor_Data_Multi {
-  /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArray;
-
-  /** signatures is the signatures of the multi-signature */
-  signatures: SignatureDescriptor_Data[];
-}
 
 function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
   return {

@@ -1,5 +1,46 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+export enum ScalarType {
+  SCALAR_TYPE_UNSPECIFIED = 0,
+  SCALAR_TYPE_STRING = 1,
+  SCALAR_TYPE_BYTES = 2,
+  UNRECOGNIZED = -1,
+}
+export function scalarTypeFromJSON(object: any): ScalarType {
+  switch (object) {
+    case 0:
+    case "SCALAR_TYPE_UNSPECIFIED":
+      return ScalarType.SCALAR_TYPE_UNSPECIFIED;
+
+    case 1:
+    case "SCALAR_TYPE_STRING":
+      return ScalarType.SCALAR_TYPE_STRING;
+
+    case 2:
+    case "SCALAR_TYPE_BYTES":
+      return ScalarType.SCALAR_TYPE_BYTES;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ScalarType.UNRECOGNIZED;
+  }
+}
+export function scalarTypeToJSON(object: ScalarType): string {
+  switch (object) {
+    case ScalarType.SCALAR_TYPE_UNSPECIFIED:
+      return "SCALAR_TYPE_UNSPECIFIED";
+
+    case ScalarType.SCALAR_TYPE_STRING:
+      return "SCALAR_TYPE_STRING";
+
+    case ScalarType.SCALAR_TYPE_BYTES:
+      return "SCALAR_TYPE_BYTES";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 
 /**
  * InterfaceDescriptor describes an interface type to be used with
@@ -19,6 +60,40 @@ export interface InterfaceDescriptor {
    * purpose.
    */
   description: string;
+}
+
+/**
+ * ScalarDescriptor describes an scalar type to be used with
+ * the scalar field option and declared by declare_scalar.
+ * Scalars extend simple protobuf built-in types with additional
+ * syntax and semantics, for instance to represent big integers.
+ * Scalars should ideally define an encoding such that there is only one
+ * valid syntactical representation for a given semantic meaning,
+ * i.e. the encoding should be deterministic.
+ */
+export interface ScalarDescriptor {
+  /**
+   * name is the name of the scalar. It should be a short-name (without
+   * a period) such that the fully qualified name of the scalar will be
+   * package.name, ex. for the package a.b and scalar named C, the
+   * fully-qualified name will be a.b.C.
+   */
+  name: string;
+
+  /**
+   * description is a human-readable description of the scalar and its
+   * encoding format. For instance a big integer or decimal scalar should
+   * specify precisely the expected encoding format.
+   */
+  description: string;
+
+  /**
+   * field_type is the type of field with which this scalar can be used.
+   * Scalars can be used with one and only one type of field so that
+   * encoding standards and simple and clear. Currently only string and
+   * bytes fields are supported for scalars.
+   */
+  fieldType: ScalarType[];
 }
 
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
@@ -89,40 +164,6 @@ export const InterfaceDescriptor = {
   }
 
 };
-
-/**
- * ScalarDescriptor describes an scalar type to be used with
- * the scalar field option and declared by declare_scalar.
- * Scalars extend simple protobuf built-in types with additional
- * syntax and semantics, for instance to represent big integers.
- * Scalars should ideally define an encoding such that there is only one
- * valid syntactical representation for a given semantic meaning,
- * i.e. the encoding should be deterministic.
- */
-export interface ScalarDescriptor {
-  /**
-   * name is the name of the scalar. It should be a short-name (without
-   * a period) such that the fully qualified name of the scalar will be
-   * package.name, ex. for the package a.b and scalar named C, the
-   * fully-qualified name will be a.b.C.
-   */
-  name: string;
-
-  /**
-   * description is a human-readable description of the scalar and its
-   * encoding format. For instance a big integer or decimal scalar should
-   * specify precisely the expected encoding format.
-   */
-  description: string;
-
-  /**
-   * field_type is the type of field with which this scalar can be used.
-   * Scalars can be used with one and only one type of field so that
-   * encoding standards and simple and clear. Currently only string and
-   * bytes fields are supported for scalars.
-   */
-  fieldType: ScalarType[];
-}
 
 function createBaseScalarDescriptor(): ScalarDescriptor {
   return {
@@ -222,44 +263,3 @@ export const ScalarDescriptor = {
   }
 
 };
-export enum ScalarType {
-  SCALAR_TYPE_UNSPECIFIED = 0,
-  SCALAR_TYPE_STRING = 1,
-  SCALAR_TYPE_BYTES = 2,
-  UNRECOGNIZED = -1,
-}
-export function scalarTypeFromJSON(object: any): ScalarType {
-  switch (object) {
-    case 0:
-    case "SCALAR_TYPE_UNSPECIFIED":
-      return ScalarType.SCALAR_TYPE_UNSPECIFIED;
-
-    case 1:
-    case "SCALAR_TYPE_STRING":
-      return ScalarType.SCALAR_TYPE_STRING;
-
-    case 2:
-    case "SCALAR_TYPE_BYTES":
-      return ScalarType.SCALAR_TYPE_BYTES;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ScalarType.UNRECOGNIZED;
-  }
-}
-export function scalarTypeToJSON(object: ScalarType): string {
-  switch (object) {
-    case ScalarType.SCALAR_TYPE_UNSPECIFIED:
-      return "SCALAR_TYPE_UNSPECIFIED";
-
-    case ScalarType.SCALAR_TYPE_STRING:
-      return "SCALAR_TYPE_STRING";
-
-    case ScalarType.SCALAR_TYPE_BYTES:
-      return "SCALAR_TYPE_BYTES";
-
-    default:
-      return "UNKNOWN";
-  }
-}

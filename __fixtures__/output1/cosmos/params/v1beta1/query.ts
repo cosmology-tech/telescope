@@ -11,6 +11,35 @@ export interface QueryParamsRequest {
   key: string;
 }
 
+/** QueryParamsResponse is response type for the Query/Params RPC method. */
+export interface QueryParamsResponse {
+  /** param defines the queried parameter. */
+  param: ParamChange;
+}
+
+/**
+ * QuerySubspacesRequest defines a request type for querying for all registered
+ * subspaces and all keys for a subspace.
+ */
+export interface QuerySubspacesRequest {}
+
+/**
+ * QuerySubspacesResponse defines the response types for querying for all
+ * registered subspaces and all keys for a subspace.
+ */
+export interface QuerySubspacesResponse {
+  subspaces: Subspace[];
+}
+
+/**
+ * Subspace defines a parameter subspace name and all the keys that exist for
+ * the subspace.
+ */
+export interface Subspace {
+  subspace: string;
+  keys: string[];
+}
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {
     subspace: "",
@@ -80,12 +109,6 @@ export const QueryParamsRequest = {
 
 };
 
-/** QueryParamsResponse is response type for the Query/Params RPC method. */
-export interface QueryParamsResponse {
-  /** param defines the queried parameter. */
-  param: ParamChange;
-}
-
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
     param: undefined
@@ -143,18 +166,12 @@ export const QueryParamsResponse = {
 
 };
 
-/**
- * QuerySubspacesRequest defines a request type for querying for all registered
- * subspaces and all keys for a subspace.
- */
-export interface QuerySubspacesRequest {}
-
 function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
   return {};
 }
 
 export const QuerySubspacesRequest = {
-  encode(message: QuerySubspacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QuerySubspacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -176,29 +193,21 @@ export const QuerySubspacesRequest = {
     return message;
   },
 
-  fromJSON(object: any): QuerySubspacesRequest {
+  fromJSON(_: any): QuerySubspacesRequest {
     return {};
   },
 
-  toJSON(message: QuerySubspacesRequest): unknown {
+  toJSON(_: QuerySubspacesRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySubspacesRequest>, I>>(object: I): QuerySubspacesRequest {
+  fromPartial<I extends Exact<DeepPartial<QuerySubspacesRequest>, I>>(_: I): QuerySubspacesRequest {
     const message = createBaseQuerySubspacesRequest();
     return message;
   }
 
 };
-
-/**
- * QuerySubspacesResponse defines the response types for querying for all
- * registered subspaces and all keys for a subspace.
- */
-export interface QuerySubspacesResponse {
-  subspaces: Subspace[];
-}
 
 function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
   return {
@@ -262,15 +271,6 @@ export const QuerySubspacesResponse = {
   }
 
 };
-
-/**
- * Subspace defines a parameter subspace name and all the keys that exist for
- * the subspace.
- */
-export interface Subspace {
-  subspace: string;
-  keys: string[];
-}
 
 function createBaseSubspace(): Subspace {
   return {

@@ -12,6 +12,16 @@ export interface SetSuperfluidAssetsProposal {
   assets: SuperfluidAsset[];
 }
 
+/**
+ * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
+ * assets by denom
+ */
+export interface RemoveSuperfluidAssetsProposal {
+  title: string;
+  description: string;
+  superfluidAssetDenoms: string[];
+}
+
 function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
   return {
     title: "",
@@ -98,16 +108,6 @@ export const SetSuperfluidAssetsProposal = {
   }
 
 };
-
-/**
- * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
- * assets by denom
- */
-export interface RemoveSuperfluidAssetsProposal {
-  title: string;
-  description: string;
-  superfluidAssetDenoms: string[];
-}
 
 function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsProposal {
   return {

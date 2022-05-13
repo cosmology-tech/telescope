@@ -15,6 +15,30 @@ export interface MsgSoftwareUpgrade {
   plan: Plan;
 }
 
+/**
+ * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgSoftwareUpgradeResponse {}
+
+/**
+ * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgCancelUpgrade {
+  /** authority is the address of the governance account. */
+  authority: string;
+}
+
+/**
+ * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgCancelUpgradeResponse {}
+
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
   return {
     authority: "",
@@ -84,19 +108,12 @@ export const MsgSoftwareUpgrade = {
 
 };
 
-/**
- * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
- * 
- * Since: cosmos-sdk 0.46
- */
-export interface MsgSoftwareUpgradeResponse {}
-
 function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
   return {};
 }
 
 export const MsgSoftwareUpgradeResponse = {
-  encode(message: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -118,31 +135,21 @@ export const MsgSoftwareUpgradeResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgSoftwareUpgradeResponse {
+  fromJSON(_: any): MsgSoftwareUpgradeResponse {
     return {};
   },
 
-  toJSON(message: MsgSoftwareUpgradeResponse): unknown {
+  toJSON(_: MsgSoftwareUpgradeResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgradeResponse>, I>>(object: I): MsgSoftwareUpgradeResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgradeResponse>, I>>(_: I): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
   }
 
 };
-
-/**
- * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
- * 
- * Since: cosmos-sdk 0.46
- */
-export interface MsgCancelUpgrade {
-  /** authority is the address of the governance account. */
-  authority: string;
-}
 
 function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
   return {
@@ -201,19 +208,12 @@ export const MsgCancelUpgrade = {
 
 };
 
-/**
- * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
- * 
- * Since: cosmos-sdk 0.46
- */
-export interface MsgCancelUpgradeResponse {}
-
 function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
   return {};
 }
 
 export const MsgCancelUpgradeResponse = {
-  encode(message: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -235,16 +235,16 @@ export const MsgCancelUpgradeResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgCancelUpgradeResponse {
+  fromJSON(_: any): MsgCancelUpgradeResponse {
     return {};
   },
 
-  toJSON(message: MsgCancelUpgradeResponse): unknown {
+  toJSON(_: MsgCancelUpgradeResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelUpgradeResponse>, I>>(object: I): MsgCancelUpgradeResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCancelUpgradeResponse>, I>>(_: I): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
   }

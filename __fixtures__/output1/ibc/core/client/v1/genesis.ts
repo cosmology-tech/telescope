@@ -21,6 +21,27 @@ export interface GenesisState {
   nextClientSequence: Long;
 }
 
+/**
+ * GenesisMetadata defines the genesis type for metadata that clients may return
+ * with ExportMetadata
+ */
+export interface GenesisMetadata {
+  /** store key of metadata without clientID-prefix */
+  key: Uint8Array;
+
+  /** metadata value */
+  value: Uint8Array;
+}
+
+/**
+ * IdentifiedGenesisMetadata has the client metadata with the corresponding
+ * client id.
+ */
+export interface IdentifiedGenesisMetadata {
+  clientId: string;
+  clientMetadata: GenesisMetadata[];
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     clients: [],
@@ -154,18 +175,6 @@ export const GenesisState = {
 
 };
 
-/**
- * GenesisMetadata defines the genesis type for metadata that clients may return
- * with ExportMetadata
- */
-export interface GenesisMetadata {
-  /** store key of metadata without clientID-prefix */
-  key: Uint8Array;
-
-  /** metadata value */
-  value: Uint8Array;
-}
-
 function createBaseGenesisMetadata(): GenesisMetadata {
   return {
     key: new Uint8Array(),
@@ -234,15 +243,6 @@ export const GenesisMetadata = {
   }
 
 };
-
-/**
- * IdentifiedGenesisMetadata has the client metadata with the corresponding
- * client id.
- */
-export interface IdentifiedGenesisMetadata {
-  clientId: string;
-  clientMetadata: GenesisMetadata[];
-}
 
 function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
   return {

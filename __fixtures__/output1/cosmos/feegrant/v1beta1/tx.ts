@@ -17,6 +17,21 @@ export interface MsgGrantAllowance {
   allowance: Any;
 }
 
+/** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
+export interface MsgGrantAllowanceResponse {}
+
+/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
+export interface MsgRevokeAllowance {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+}
+
+/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
+export interface MsgRevokeAllowanceResponse {}
+
 function createBaseMsgGrantAllowance(): MsgGrantAllowance {
   return {
     granter: "",
@@ -98,15 +113,12 @@ export const MsgGrantAllowance = {
 
 };
 
-/** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
-export interface MsgGrantAllowanceResponse {}
-
 function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
   return {};
 }
 
 export const MsgGrantAllowanceResponse = {
-  encode(message: MsgGrantAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgGrantAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -128,30 +140,21 @@ export const MsgGrantAllowanceResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgGrantAllowanceResponse {
+  fromJSON(_: any): MsgGrantAllowanceResponse {
     return {};
   },
 
-  toJSON(message: MsgGrantAllowanceResponse): unknown {
+  toJSON(_: MsgGrantAllowanceResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgGrantAllowanceResponse>, I>>(object: I): MsgGrantAllowanceResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgGrantAllowanceResponse>, I>>(_: I): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
   }
 
 };
-
-/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
-export interface MsgRevokeAllowance {
-  /** granter is the address of the user granting an allowance of their funds. */
-  granter: string;
-
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
-  grantee: string;
-}
 
 function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
   return {
@@ -222,15 +225,12 @@ export const MsgRevokeAllowance = {
 
 };
 
-/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
-export interface MsgRevokeAllowanceResponse {}
-
 function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {
   return {};
 }
 
 export const MsgRevokeAllowanceResponse = {
-  encode(message: MsgRevokeAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgRevokeAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -252,16 +252,16 @@ export const MsgRevokeAllowanceResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgRevokeAllowanceResponse {
+  fromJSON(_: any): MsgRevokeAllowanceResponse {
     return {};
   },
 
-  toJSON(message: MsgRevokeAllowanceResponse): unknown {
+  toJSON(_: MsgRevokeAllowanceResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRevokeAllowanceResponse>, I>>(object: I): MsgRevokeAllowanceResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeAllowanceResponse>, I>>(_: I): MsgRevokeAllowanceResponse {
     const message = createBaseMsgRevokeAllowanceResponse();
     return message;
   }

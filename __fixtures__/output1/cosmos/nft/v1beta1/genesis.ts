@@ -9,6 +9,15 @@ export interface GenesisState {
   entries: Entry[];
 }
 
+/** Entry Defines all nft owned by a person */
+export interface Entry {
+  /** owner is the owner address of the following nft */
+  owner: string;
+
+  /** nfts is a group of nfts of the same owner */
+  nfts: NFT[];
+}
+
 function createBaseGenesisState(): GenesisState {
   return {
     classes: [],
@@ -88,15 +97,6 @@ export const GenesisState = {
   }
 
 };
-
-/** Entry Defines all nft owned by a person */
-export interface Entry {
-  /** owner is the owner address of the following nft */
-  owner: string;
-
-  /** nfts is a group of nfts of the same owner */
-  nfts: NFT[];
-}
 
 function createBaseEntry(): Entry {
   return {

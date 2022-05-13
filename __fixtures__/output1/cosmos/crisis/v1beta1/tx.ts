@@ -8,6 +8,9 @@ export interface MsgVerifyInvariant {
   invariantRoute: string;
 }
 
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
+export interface MsgVerifyInvariantResponse {}
+
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
   return {
     sender: "",
@@ -89,15 +92,12 @@ export const MsgVerifyInvariant = {
 
 };
 
-/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
-export interface MsgVerifyInvariantResponse {}
-
 function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
   return {};
 }
 
 export const MsgVerifyInvariantResponse = {
-  encode(message: MsgVerifyInvariantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgVerifyInvariantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -119,16 +119,16 @@ export const MsgVerifyInvariantResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgVerifyInvariantResponse {
+  fromJSON(_: any): MsgVerifyInvariantResponse {
     return {};
   },
 
-  toJSON(message: MsgVerifyInvariantResponse): unknown {
+  toJSON(_: MsgVerifyInvariantResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVerifyInvariantResponse>, I>>(object: I): MsgVerifyInvariantResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgVerifyInvariantResponse>, I>>(_: I): MsgVerifyInvariantResponse {
     const message = createBaseMsgVerifyInvariantResponse();
     return message;
   }

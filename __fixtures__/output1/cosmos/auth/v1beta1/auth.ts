@@ -14,6 +14,22 @@ export interface BaseAccount {
   sequence: Long;
 }
 
+/** ModuleAccount defines an account for modules that holds coins on a pool. */
+export interface ModuleAccount {
+  baseAccount: BaseAccount;
+  name: string;
+  permissions: string[];
+}
+
+/** Params defines the parameters for the auth module. */
+export interface Params {
+  maxMemoCharacters: Long;
+  txSigLimit: Long;
+  txSizeCostPerByte: Long;
+  sigVerifyCostEd25519: Long;
+  sigVerifyCostSecp256k1: Long;
+}
+
 function createBaseBaseAccount(): BaseAccount {
   return {
     address: "",
@@ -107,13 +123,6 @@ export const BaseAccount = {
 
 };
 
-/** ModuleAccount defines an account for modules that holds coins on a pool. */
-export interface ModuleAccount {
-  baseAccount: BaseAccount;
-  name: string;
-  permissions: string[];
-}
-
 function createBaseModuleAccount(): ModuleAccount {
   return {
     baseAccount: undefined,
@@ -200,15 +209,6 @@ export const ModuleAccount = {
   }
 
 };
-
-/** Params defines the parameters for the auth module. */
-export interface Params {
-  maxMemoCharacters: Long;
-  txSigLimit: Long;
-  txSizeCostPerByte: Long;
-  sigVerifyCostEd25519: Long;
-  sigVerifyCostSecp256k1: Long;
-}
 
 function createBaseParams(): Params {
   return {

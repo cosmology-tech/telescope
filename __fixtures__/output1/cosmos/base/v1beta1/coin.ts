@@ -12,6 +12,27 @@ export interface Coin {
   amount: string;
 }
 
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.
+ * 
+ * NOTE: The amount field is an Dec which implements the custom method
+ * signatures required by gogoproto.
+ */
+export interface DecCoin {
+  denom: string;
+  amount: string;
+}
+
+/** IntProto defines a Protobuf wrapper around an Int object. */
+export interface IntProto {
+  int: string;
+}
+
+/** DecProto defines a Protobuf wrapper around a Dec object. */
+export interface DecProto {
+  dec: string;
+}
+
 function createBaseCoin(): Coin {
   return {
     denom: "",
@@ -80,17 +101,6 @@ export const Coin = {
   }
 
 };
-
-/**
- * DecCoin defines a token with a denomination and a decimal amount.
- * 
- * NOTE: The amount field is an Dec which implements the custom method
- * signatures required by gogoproto.
- */
-export interface DecCoin {
-  denom: string;
-  amount: string;
-}
 
 function createBaseDecCoin(): DecCoin {
   return {
@@ -161,11 +171,6 @@ export const DecCoin = {
 
 };
 
-/** IntProto defines a Protobuf wrapper around an Int object. */
-export interface IntProto {
-  int: string;
-}
-
 function createBaseIntProto(): IntProto {
   return {
     int: ""
@@ -222,11 +227,6 @@ export const IntProto = {
   }
 
 };
-
-/** DecProto defines a Protobuf wrapper around a Dec object. */
-export interface DecProto {
-  dec: string;
-}
 
 function createBaseDecProto(): DecProto {
   return {

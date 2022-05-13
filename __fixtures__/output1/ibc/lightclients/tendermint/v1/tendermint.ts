@@ -61,6 +61,59 @@ export interface ClientState {
   allowUpdateAfterMisbehaviour: boolean;
 }
 
+/** ConsensusState defines the consensus state from Tendermint. */
+export interface ConsensusState {
+  /**
+   * timestamp that corresponds to the block height in which the ConsensusState
+   * was stored.
+   */
+  timestamp: Date;
+
+  /** commitment root (i.e app hash) */
+  root: MerkleRoot;
+  nextValidatorsHash: Uint8Array;
+}
+
+/**
+ * Misbehaviour is a wrapper over two conflicting Headers
+ * that implements Misbehaviour interface expected by ICS-02
+ */
+export interface Misbehaviour {
+  clientId: string;
+  header_1: Header;
+  header_2: Header;
+}
+
+/**
+ * Header defines the Tendermint client consensus Header.
+ * It encapsulates all the information necessary to update from a trusted
+ * Tendermint ConsensusState. The inclusion of TrustedHeight and
+ * TrustedValidators allows this update to process correctly, so long as the
+ * ConsensusState for the TrustedHeight exists, this removes race conditions
+ * among relayers The SignedHeader and ValidatorSet are the new untrusted update
+ * fields for the client. The TrustedHeight is the height of a stored
+ * ConsensusState on the client that will be used to verify the new untrusted
+ * header. The Trusted ConsensusState must be within the unbonding period of
+ * current time in order to correctly verify, and the TrustedValidators must
+ * hash to TrustedConsensusState.NextValidatorsHash since that is the last
+ * trusted validator set at the TrustedHeight.
+ */
+export interface Header {
+  signedHeader: SignedHeader;
+  validatorSet: ValidatorSet;
+  trustedHeight: Height;
+  trustedValidators: ValidatorSet;
+}
+
+/**
+ * Fraction defines the protobuf message type for tmmath.Fraction that only
+ * supports positive values.
+ */
+export interface Fraction {
+  numerator: Long;
+  denominator: Long;
+}
+
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
@@ -87,9 +140,17 @@ export const ClientState = {
       Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
     }
 
-    if (message.trustingPeriod !== undefined) Duration.encode(toDuration(message.trustingPeriod), writer.uint32(26).fork()).ldelim();
-    if (message.unbondingPeriod !== undefined) Duration.encode(toDuration(message.unbondingPeriod), writer.uint32(34).fork()).ldelim();
-    if (message.maxClockDrift !== undefined) Duration.encode(toDuration(message.maxClockDrift), writer.uint32(42).fork()).ldelim();
+    if (message.trustingPeriod !== undefined) {
+      Duration.encode(toDuration(message.trustingPeriod), writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.unbondingPeriod !== undefined) {
+      Duration.encode(toDuration(message.unbondingPeriod), writer.uint32(34).fork()).ldelim();
+    }
+
+    if (message.maxClockDrift !== undefined) {
+      Duration.encode(toDuration(message.maxClockDrift), writer.uint32(42).fork()).ldelim();
+    }
 
     if (message.frozenHeight !== undefined) {
       Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
@@ -241,19 +302,6 @@ export const ClientState = {
 
 };
 
-/** ConsensusState defines the consensus state from Tendermint. */
-export interface ConsensusState {
-  /**
-   * timestamp that corresponds to the block height in which the ConsensusState
-   * was stored.
-   */
-  timestamp: Date;
-
-  /** commitment root (i.e app hash) */
-  root: MerkleRoot;
-  nextValidatorsHash: Uint8Array;
-}
-
 function createBaseConsensusState(): ConsensusState {
   return {
     timestamp: undefined,
@@ -264,7 +312,9 @@ function createBaseConsensusState(): ConsensusState {
 
 export const ConsensusState = {
   encode(message: ConsensusState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).ldelim();
+    }
 
     if (message.root !== undefined) {
       MerkleRoot.encode(message.root, writer.uint32(18).fork()).ldelim();
@@ -332,16 +382,6 @@ export const ConsensusState = {
   }
 
 };
-
-/**
- * Misbehaviour is a wrapper over two conflicting Headers
- * that implements Misbehaviour interface expected by ICS-02
- */
-export interface Misbehaviour {
-  clientId: string;
-  header_1: Header;
-  header_2: Header;
-}
 
 function createBaseMisbehaviour(): Misbehaviour {
   return {
@@ -423,27 +463,6 @@ export const Misbehaviour = {
   }
 
 };
-
-/**
- * Header defines the Tendermint client consensus Header.
- * It encapsulates all the information necessary to update from a trusted
- * Tendermint ConsensusState. The inclusion of TrustedHeight and
- * TrustedValidators allows this update to process correctly, so long as the
- * ConsensusState for the TrustedHeight exists, this removes race conditions
- * among relayers The SignedHeader and ValidatorSet are the new untrusted update
- * fields for the client. The TrustedHeight is the height of a stored
- * ConsensusState on the client that will be used to verify the new untrusted
- * header. The Trusted ConsensusState must be within the unbonding period of
- * current time in order to correctly verify, and the TrustedValidators must
- * hash to TrustedConsensusState.NextValidatorsHash since that is the last
- * trusted validator set at the TrustedHeight.
- */
-export interface Header {
-  signedHeader: SignedHeader;
-  validatorSet: ValidatorSet;
-  trustedHeight: Height;
-  trustedValidators: ValidatorSet;
-}
 
 function createBaseHeader(): Header {
   return {
@@ -537,15 +556,6 @@ export const Header = {
   }
 
 };
-
-/**
- * Fraction defines the protobuf message type for tmmath.Fraction that only
- * supports positive values.
- */
-export interface Fraction {
-  numerator: Long;
-  denominator: Long;
-}
 
 function createBaseFraction(): Fraction {
   return {

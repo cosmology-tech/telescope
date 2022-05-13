@@ -81,6 +81,138 @@ export interface Distribution {
   exemplars: Distribution_Exemplar[];
 }
 
+/** The range of the population values. */
+export interface Distribution_Range {
+  /** The minimum of the population values. */
+  min: number;
+
+  /** The maximum of the population values. */
+  max: number;
+}
+
+/**
+ * `BucketOptions` describes the bucket boundaries used to create a histogram
+ * for the distribution. The buckets can be in a linear sequence, an
+ * exponential sequence, or each bucket can be specified explicitly.
+ * `BucketOptions` does not include the number of values in each bucket.
+ * 
+ * A bucket has an inclusive lower bound and exclusive upper bound for the
+ * values that are counted for that bucket. The upper bound of a bucket must
+ * be strictly greater than the lower bound. The sequence of N buckets for a
+ * distribution consists of an underflow bucket (number 0), zero or more
+ * finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+ * 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the
+ * same as the upper bound of bucket i - 1. The buckets span the whole range
+ * of finite values: lower bound of the underflow bucket is -infinity and the
+ * upper bound of the overflow bucket is +infinity. The finite buckets are
+ * so-called because both bounds are finite.
+ */
+export interface Distribution_BucketOptions {
+  /** The linear bucket. */
+  linearBuckets?: Distribution_BucketOptions_Linear;
+
+  /** The exponential buckets. */
+  exponentialBuckets?: Distribution_BucketOptions_Exponential;
+
+  /** The explicit buckets. */
+  explicitBuckets?: Distribution_BucketOptions_Explicit;
+}
+
+/**
+ * Specifies a linear sequence of buckets that all have the same width
+ * (except overflow and underflow). Each bucket represents a constant
+ * absolute uncertainty on the specific value in the bucket.
+ * 
+ * There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+ * following boundaries:
+ * 
+ * Upper bound (0 <= i < N-1):     offset + (width * i).
+ * Lower bound (1 <= i < N):       offset + (width * (i - 1)).
+ */
+export interface Distribution_BucketOptions_Linear {
+  /** Must be greater than 0. */
+  numFiniteBuckets: number;
+
+  /** Must be greater than 0. */
+  width: number;
+
+  /** Lower bound of the first bucket. */
+  offset: number;
+}
+
+/**
+ * Specifies an exponential sequence of buckets that have a width that is
+ * proportional to the value of the lower bound. Each bucket represents a
+ * constant relative uncertainty on a specific value in the bucket.
+ * 
+ * There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+ * following boundaries:
+ * 
+ * Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
+ * Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
+ */
+export interface Distribution_BucketOptions_Exponential {
+  /** Must be greater than 0. */
+  numFiniteBuckets: number;
+
+  /** Must be greater than 1. */
+  growthFactor: number;
+
+  /** Must be greater than 0. */
+  scale: number;
+}
+
+/**
+ * Specifies a set of buckets with arbitrary widths.
+ * 
+ * There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+ * boundaries:
+ * 
+ * Upper bound (0 <= i < N-1):     bounds[i]
+ * Lower bound (1 <= i < N);       bounds[i - 1]
+ * 
+ * The `bounds` field must contain at least one element. If `bounds` has
+ * only one element, then there are no finite buckets, and that single
+ * element is the common boundary of the overflow and underflow buckets.
+ */
+export interface Distribution_BucketOptions_Explicit {
+  /** The values must be monotonically increasing. */
+  bounds: number[];
+}
+
+/**
+ * Exemplars are example points that may be used to annotate aggregated
+ * distribution values. They are metadata that gives information about a
+ * particular value added to a Distribution bucket, such as a trace ID that
+ * was active when a value was added. They may contain further information,
+ * such as a example values and timestamps, origin, etc.
+ */
+export interface Distribution_Exemplar {
+  /**
+   * Value of the exemplar point. This value determines to which bucket the
+   * exemplar belongs.
+   */
+  value: number;
+
+  /** The observation (sampling) time of the above value. */
+  timestamp: Date;
+
+  /**
+   * Contextual information about the example value. Examples are:
+   * 
+   * Trace: type.googleapis.com/google.monitoring.v3.SpanContext
+   * 
+   * Literal string: type.googleapis.com/google.protobuf.StringValue
+   * 
+   * Labels dropped during aggregation:
+   * type.googleapis.com/google.monitoring.v3.DroppedLabels
+   * 
+   * There may be only a single attachment of any given message type in a
+   * single exemplar, and this is enforced by the system.
+   */
+  attachments: Any[];
+}
+
 function createBaseDistribution(): Distribution {
   return {
     count: Long.ZERO,
@@ -234,15 +366,6 @@ export const Distribution = {
 
 };
 
-/** The range of the population values. */
-export interface Distribution_Range {
-  /** The minimum of the population values. */
-  min: number;
-
-  /** The maximum of the population values. */
-  max: number;
-}
-
 function createBaseDistribution_Range(): Distribution_Range {
   return {
     min: 0,
@@ -311,34 +434,6 @@ export const Distribution_Range = {
   }
 
 };
-
-/**
- * `BucketOptions` describes the bucket boundaries used to create a histogram
- * for the distribution. The buckets can be in a linear sequence, an
- * exponential sequence, or each bucket can be specified explicitly.
- * `BucketOptions` does not include the number of values in each bucket.
- * 
- * A bucket has an inclusive lower bound and exclusive upper bound for the
- * values that are counted for that bucket. The upper bound of a bucket must
- * be strictly greater than the lower bound. The sequence of N buckets for a
- * distribution consists of an underflow bucket (number 0), zero or more
- * finite buckets (number 1 through N - 2) and an overflow bucket (number N -
- * 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the
- * same as the upper bound of bucket i - 1. The buckets span the whole range
- * of finite values: lower bound of the underflow bucket is -infinity and the
- * upper bound of the overflow bucket is +infinity. The finite buckets are
- * so-called because both bounds are finite.
- */
-export interface Distribution_BucketOptions {
-  /** The linear bucket. */
-  linearBuckets?: Distribution_BucketOptions_Linear;
-
-  /** The exponential buckets. */
-  exponentialBuckets?: Distribution_BucketOptions_Exponential;
-
-  /** The explicit buckets. */
-  explicitBuckets?: Distribution_BucketOptions_Explicit;
-}
 
 function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
   return {
@@ -421,28 +516,6 @@ export const Distribution_BucketOptions = {
 
 };
 
-/**
- * Specifies a linear sequence of buckets that all have the same width
- * (except overflow and underflow). Each bucket represents a constant
- * absolute uncertainty on the specific value in the bucket.
- * 
- * There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
- * following boundaries:
- * 
- * Upper bound (0 <= i < N-1):     offset + (width * i).
- * Lower bound (1 <= i < N):       offset + (width * (i - 1)).
- */
-export interface Distribution_BucketOptions_Linear {
-  /** Must be greater than 0. */
-  numFiniteBuckets: number;
-
-  /** Must be greater than 0. */
-  width: number;
-
-  /** Lower bound of the first bucket. */
-  offset: number;
-}
-
 function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptions_Linear {
   return {
     numFiniteBuckets: 0,
@@ -523,28 +596,6 @@ export const Distribution_BucketOptions_Linear = {
   }
 
 };
-
-/**
- * Specifies an exponential sequence of buckets that have a width that is
- * proportional to the value of the lower bound. Each bucket represents a
- * constant relative uncertainty on a specific value in the bucket.
- * 
- * There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
- * following boundaries:
- * 
- * Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
- * Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
- */
-export interface Distribution_BucketOptions_Exponential {
-  /** Must be greater than 0. */
-  numFiniteBuckets: number;
-
-  /** Must be greater than 1. */
-  growthFactor: number;
-
-  /** Must be greater than 0. */
-  scale: number;
-}
 
 function createBaseDistribution_BucketOptions_Exponential(): Distribution_BucketOptions_Exponential {
   return {
@@ -627,24 +678,6 @@ export const Distribution_BucketOptions_Exponential = {
 
 };
 
-/**
- * Specifies a set of buckets with arbitrary widths.
- * 
- * There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
- * boundaries:
- * 
- * Upper bound (0 <= i < N-1):     bounds[i]
- * Lower bound (1 <= i < N);       bounds[i - 1]
- * 
- * The `bounds` field must contain at least one element. If `bounds` has
- * only one element, then there are no finite buckets, and that single
- * element is the common boundary of the overflow and underflow buckets.
- */
-export interface Distribution_BucketOptions_Explicit {
-  /** The values must be monotonically increasing. */
-  bounds: number[];
-}
-
 function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOptions_Explicit {
   return {
     bounds: []
@@ -720,39 +753,6 @@ export const Distribution_BucketOptions_Explicit = {
 
 };
 
-/**
- * Exemplars are example points that may be used to annotate aggregated
- * distribution values. They are metadata that gives information about a
- * particular value added to a Distribution bucket, such as a trace ID that
- * was active when a value was added. They may contain further information,
- * such as a example values and timestamps, origin, etc.
- */
-export interface Distribution_Exemplar {
-  /**
-   * Value of the exemplar point. This value determines to which bucket the
-   * exemplar belongs.
-   */
-  value: number;
-
-  /** The observation (sampling) time of the above value. */
-  timestamp: Date;
-
-  /**
-   * Contextual information about the example value. Examples are:
-   * 
-   * Trace: type.googleapis.com/google.monitoring.v3.SpanContext
-   * 
-   * Literal string: type.googleapis.com/google.protobuf.StringValue
-   * 
-   * Labels dropped during aggregation:
-   * type.googleapis.com/google.monitoring.v3.DroppedLabels
-   * 
-   * There may be only a single attachment of any given message type in a
-   * single exemplar, and this is enforced by the system.
-   */
-  attachments: Any[];
-}
-
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: 0,
@@ -767,7 +767,9 @@ export const Distribution_Exemplar = {
       writer.uint32(9).double(message.value);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
+    }
 
     for (const v of message.attachments) {
       Any.encode(v!, writer.uint32(26).fork()).ldelim();

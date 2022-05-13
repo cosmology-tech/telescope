@@ -6,13 +6,94 @@ import { SyntheticLock } from "../lockup/lock";
 import * as _m0 from "protobufjs/minimal";
 import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryParamsRequest {}
+export interface QueryParamsResponse {
+  /** params defines the parameters of the module. */
+  params: Params;
+}
+export interface AssetTypeRequest {
+  denom: string;
+}
+export interface AssetTypeResponse {
+  assetType: SuperfluidAssetType;
+}
+export interface AllAssetsRequest {}
+export interface AllAssetsResponse {
+  assets: SuperfluidAsset[];
+}
+export interface AssetMultiplierRequest {
+  denom: string;
+}
+export interface AssetMultiplierResponse {
+  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
+}
+export interface SuperfluidIntermediaryAccountInfo {
+  denom: string;
+  valAddr: string;
+  gaugeId: Long;
+  address: string;
+}
+export interface AllIntermediaryAccountsRequest {
+  pagination: PageRequest;
+}
+export interface AllIntermediaryAccountsResponse {
+  accounts: SuperfluidIntermediaryAccountInfo[];
+  pagination: PageResponse;
+}
+export interface ConnectedIntermediaryAccountRequest {
+  lockId: Long;
+}
+export interface ConnectedIntermediaryAccountResponse {
+  account: SuperfluidIntermediaryAccountInfo;
+}
+export interface TotalSuperfluidDelegationsRequest {}
+export interface TotalSuperfluidDelegationsResponse {
+  totalDelegations: string;
+}
+export interface SuperfluidDelegationAmountRequest {
+  delegatorAddress: string;
+  validatorAddress: string;
+  denom: string;
+}
+export interface SuperfluidDelegationAmountResponse {
+  amount: Coin[];
+}
+export interface SuperfluidDelegationsByDelegatorRequest {
+  delegatorAddress: string;
+}
+export interface SuperfluidDelegationsByDelegatorResponse {
+  superfluidDelegationRecords: SuperfluidDelegationRecord[];
+  totalDelegatedCoins: Coin[];
+}
+export interface SuperfluidUndelegationsByDelegatorRequest {
+  delegatorAddress: string;
+  denom: string;
+}
+export interface SuperfluidUndelegationsByDelegatorResponse {
+  superfluidDelegationRecords: SuperfluidDelegationRecord[];
+  totalUndelegatedCoins: Coin[];
+  syntheticLocks: SyntheticLock[];
+}
+export interface SuperfluidDelegationsByValidatorDenomRequest {
+  validatorAddress: string;
+  denom: string;
+}
+export interface SuperfluidDelegationsByValidatorDenomResponse {
+  superfluidDelegationRecords: SuperfluidDelegationRecord[];
+}
+export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+  validatorAddress: string;
+  denom: string;
+}
+export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+  totalDelegatedCoins: Coin[];
+}
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -34,25 +115,21 @@ export const QueryParamsRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryParamsRequest {
+  fromJSON(_: any): QueryParamsRequest {
     return {};
   },
 
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(object: I): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
 
 };
-export interface QueryParamsResponse {
-  /** params defines the parameters of the module. */
-  params: Params;
-}
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -110,9 +187,6 @@ export const QueryParamsResponse = {
   }
 
 };
-export interface AssetTypeRequest {
-  denom: string;
-}
 
 function createBaseAssetTypeRequest(): AssetTypeRequest {
   return {
@@ -170,9 +244,6 @@ export const AssetTypeRequest = {
   }
 
 };
-export interface AssetTypeResponse {
-  assetType: SuperfluidAssetType;
-}
 
 function createBaseAssetTypeResponse(): AssetTypeResponse {
   return {
@@ -230,14 +301,13 @@ export const AssetTypeResponse = {
   }
 
 };
-export interface AllAssetsRequest {}
 
 function createBaseAllAssetsRequest(): AllAssetsRequest {
   return {};
 }
 
 export const AllAssetsRequest = {
-  encode(message: AllAssetsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: AllAssetsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -259,24 +329,21 @@ export const AllAssetsRequest = {
     return message;
   },
 
-  fromJSON(object: any): AllAssetsRequest {
+  fromJSON(_: any): AllAssetsRequest {
     return {};
   },
 
-  toJSON(message: AllAssetsRequest): unknown {
+  toJSON(_: AllAssetsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllAssetsRequest>, I>>(object: I): AllAssetsRequest {
+  fromPartial<I extends Exact<DeepPartial<AllAssetsRequest>, I>>(_: I): AllAssetsRequest {
     const message = createBaseAllAssetsRequest();
     return message;
   }
 
 };
-export interface AllAssetsResponse {
-  assets: SuperfluidAsset[];
-}
 
 function createBaseAllAssetsResponse(): AllAssetsResponse {
   return {
@@ -340,9 +407,6 @@ export const AllAssetsResponse = {
   }
 
 };
-export interface AssetMultiplierRequest {
-  denom: string;
-}
 
 function createBaseAssetMultiplierRequest(): AssetMultiplierRequest {
   return {
@@ -400,9 +464,6 @@ export const AssetMultiplierRequest = {
   }
 
 };
-export interface AssetMultiplierResponse {
-  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
-}
 
 function createBaseAssetMultiplierResponse(): AssetMultiplierResponse {
   return {
@@ -460,12 +521,6 @@ export const AssetMultiplierResponse = {
   }
 
 };
-export interface SuperfluidIntermediaryAccountInfo {
-  denom: string;
-  valAddr: string;
-  gaugeId: Long;
-  address: string;
-}
 
 function createBaseSuperfluidIntermediaryAccountInfo(): SuperfluidIntermediaryAccountInfo {
   return {
@@ -559,9 +614,6 @@ export const SuperfluidIntermediaryAccountInfo = {
   }
 
 };
-export interface AllIntermediaryAccountsRequest {
-  pagination: PageRequest;
-}
 
 function createBaseAllIntermediaryAccountsRequest(): AllIntermediaryAccountsRequest {
   return {
@@ -619,10 +671,6 @@ export const AllIntermediaryAccountsRequest = {
   }
 
 };
-export interface AllIntermediaryAccountsResponse {
-  accounts: SuperfluidIntermediaryAccountInfo[];
-  pagination: PageResponse;
-}
 
 function createBaseAllIntermediaryAccountsResponse(): AllIntermediaryAccountsResponse {
   return {
@@ -698,9 +746,6 @@ export const AllIntermediaryAccountsResponse = {
   }
 
 };
-export interface ConnectedIntermediaryAccountRequest {
-  lockId: Long;
-}
 
 function createBaseConnectedIntermediaryAccountRequest(): ConnectedIntermediaryAccountRequest {
   return {
@@ -758,9 +803,6 @@ export const ConnectedIntermediaryAccountRequest = {
   }
 
 };
-export interface ConnectedIntermediaryAccountResponse {
-  account: SuperfluidIntermediaryAccountInfo;
-}
 
 function createBaseConnectedIntermediaryAccountResponse(): ConnectedIntermediaryAccountResponse {
   return {
@@ -818,14 +860,13 @@ export const ConnectedIntermediaryAccountResponse = {
   }
 
 };
-export interface TotalSuperfluidDelegationsRequest {}
 
 function createBaseTotalSuperfluidDelegationsRequest(): TotalSuperfluidDelegationsRequest {
   return {};
 }
 
 export const TotalSuperfluidDelegationsRequest = {
-  encode(message: TotalSuperfluidDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: TotalSuperfluidDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -847,24 +888,21 @@ export const TotalSuperfluidDelegationsRequest = {
     return message;
   },
 
-  fromJSON(object: any): TotalSuperfluidDelegationsRequest {
+  fromJSON(_: any): TotalSuperfluidDelegationsRequest {
     return {};
   },
 
-  toJSON(message: TotalSuperfluidDelegationsRequest): unknown {
+  toJSON(_: TotalSuperfluidDelegationsRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TotalSuperfluidDelegationsRequest>, I>>(object: I): TotalSuperfluidDelegationsRequest {
+  fromPartial<I extends Exact<DeepPartial<TotalSuperfluidDelegationsRequest>, I>>(_: I): TotalSuperfluidDelegationsRequest {
     const message = createBaseTotalSuperfluidDelegationsRequest();
     return message;
   }
 
 };
-export interface TotalSuperfluidDelegationsResponse {
-  totalDelegations: string;
-}
 
 function createBaseTotalSuperfluidDelegationsResponse(): TotalSuperfluidDelegationsResponse {
   return {
@@ -922,11 +960,6 @@ export const TotalSuperfluidDelegationsResponse = {
   }
 
 };
-export interface SuperfluidDelegationAmountRequest {
-  delegatorAddress: string;
-  validatorAddress: string;
-  denom: string;
-}
 
 function createBaseSuperfluidDelegationAmountRequest(): SuperfluidDelegationAmountRequest {
   return {
@@ -1008,9 +1041,6 @@ export const SuperfluidDelegationAmountRequest = {
   }
 
 };
-export interface SuperfluidDelegationAmountResponse {
-  amount: Coin[];
-}
 
 function createBaseSuperfluidDelegationAmountResponse(): SuperfluidDelegationAmountResponse {
   return {
@@ -1074,9 +1104,6 @@ export const SuperfluidDelegationAmountResponse = {
   }
 
 };
-export interface SuperfluidDelegationsByDelegatorRequest {
-  delegatorAddress: string;
-}
 
 function createBaseSuperfluidDelegationsByDelegatorRequest(): SuperfluidDelegationsByDelegatorRequest {
   return {
@@ -1134,10 +1161,6 @@ export const SuperfluidDelegationsByDelegatorRequest = {
   }
 
 };
-export interface SuperfluidDelegationsByDelegatorResponse {
-  superfluidDelegationRecords: SuperfluidDelegationRecord[];
-  totalDelegatedCoins: Coin[];
-}
 
 function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegationsByDelegatorResponse {
   return {
@@ -1218,10 +1241,6 @@ export const SuperfluidDelegationsByDelegatorResponse = {
   }
 
 };
-export interface SuperfluidUndelegationsByDelegatorRequest {
-  delegatorAddress: string;
-  denom: string;
-}
 
 function createBaseSuperfluidUndelegationsByDelegatorRequest(): SuperfluidUndelegationsByDelegatorRequest {
   return {
@@ -1291,11 +1310,6 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
   }
 
 };
-export interface SuperfluidUndelegationsByDelegatorResponse {
-  superfluidDelegationRecords: SuperfluidDelegationRecord[];
-  totalUndelegatedCoins: Coin[];
-  syntheticLocks: SyntheticLock[];
-}
 
 function createBaseSuperfluidUndelegationsByDelegatorResponse(): SuperfluidUndelegationsByDelegatorResponse {
   return {
@@ -1393,10 +1407,6 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
   }
 
 };
-export interface SuperfluidDelegationsByValidatorDenomRequest {
-  validatorAddress: string;
-  denom: string;
-}
 
 function createBaseSuperfluidDelegationsByValidatorDenomRequest(): SuperfluidDelegationsByValidatorDenomRequest {
   return {
@@ -1466,9 +1476,6 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
   }
 
 };
-export interface SuperfluidDelegationsByValidatorDenomResponse {
-  superfluidDelegationRecords: SuperfluidDelegationRecord[];
-}
 
 function createBaseSuperfluidDelegationsByValidatorDenomResponse(): SuperfluidDelegationsByValidatorDenomResponse {
   return {
@@ -1532,10 +1539,6 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
   }
 
 };
-export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-  validatorAddress: string;
-  denom: string;
-}
 
 function createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest(): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
   return {
@@ -1605,9 +1608,6 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
   }
 
 };
-export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-  totalDelegatedCoins: Coin[];
-}
 
 function createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse(): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
   return {

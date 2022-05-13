@@ -5,6 +5,232 @@ import { EvidenceParams, ValidatorParams, VersionParams } from "../types/params"
 import { PublicKey } from "../crypto/keys";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export enum CheckTxType {
+  NEW = 0,
+  RECHECK = 1,
+  UNRECOGNIZED = -1,
+}
+export function checkTxTypeFromJSON(object: any): CheckTxType {
+  switch (object) {
+    case 0:
+    case "NEW":
+      return CheckTxType.NEW;
+
+    case 1:
+    case "RECHECK":
+      return CheckTxType.RECHECK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CheckTxType.UNRECOGNIZED;
+  }
+}
+export function checkTxTypeToJSON(object: CheckTxType): string {
+  switch (object) {
+    case CheckTxType.NEW:
+      return "NEW";
+
+    case CheckTxType.RECHECK:
+      return "RECHECK";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+export enum ResponseOfferSnapshot_Result {
+  /** UNKNOWN - Unknown result, abort all snapshot restoration */
+  UNKNOWN = 0,
+
+  /** ACCEPT - Snapshot accepted, apply chunks */
+  ACCEPT = 1,
+
+  /** ABORT - Abort all snapshot restoration */
+  ABORT = 2,
+
+  /** REJECT - Reject this specific snapshot, try others */
+  REJECT = 3,
+
+  /** REJECT_FORMAT - Reject all snapshots of this format, try others */
+  REJECT_FORMAT = 4,
+
+  /** REJECT_SENDER - Reject all snapshots from the sender(s), try others */
+  REJECT_SENDER = 5,
+  UNRECOGNIZED = -1,
+}
+export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
+  switch (object) {
+    case 0:
+    case "UNKNOWN":
+      return ResponseOfferSnapshot_Result.UNKNOWN;
+
+    case 1:
+    case "ACCEPT":
+      return ResponseOfferSnapshot_Result.ACCEPT;
+
+    case 2:
+    case "ABORT":
+      return ResponseOfferSnapshot_Result.ABORT;
+
+    case 3:
+    case "REJECT":
+      return ResponseOfferSnapshot_Result.REJECT;
+
+    case 4:
+    case "REJECT_FORMAT":
+      return ResponseOfferSnapshot_Result.REJECT_FORMAT;
+
+    case 5:
+    case "REJECT_SENDER":
+      return ResponseOfferSnapshot_Result.REJECT_SENDER;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResponseOfferSnapshot_Result.UNRECOGNIZED;
+  }
+}
+export function responseOfferSnapshot_ResultToJSON(object: ResponseOfferSnapshot_Result): string {
+  switch (object) {
+    case ResponseOfferSnapshot_Result.UNKNOWN:
+      return "UNKNOWN";
+
+    case ResponseOfferSnapshot_Result.ACCEPT:
+      return "ACCEPT";
+
+    case ResponseOfferSnapshot_Result.ABORT:
+      return "ABORT";
+
+    case ResponseOfferSnapshot_Result.REJECT:
+      return "REJECT";
+
+    case ResponseOfferSnapshot_Result.REJECT_FORMAT:
+      return "REJECT_FORMAT";
+
+    case ResponseOfferSnapshot_Result.REJECT_SENDER:
+      return "REJECT_SENDER";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+export enum ResponseApplySnapshotChunk_Result {
+  /** UNKNOWN - Unknown result, abort all snapshot restoration */
+  UNKNOWN = 0,
+
+  /** ACCEPT - Chunk successfully accepted */
+  ACCEPT = 1,
+
+  /** ABORT - Abort all snapshot restoration */
+  ABORT = 2,
+
+  /** RETRY - Retry chunk (combine with refetch and reject) */
+  RETRY = 3,
+
+  /** RETRY_SNAPSHOT - Retry snapshot (combine with refetch and reject) */
+  RETRY_SNAPSHOT = 4,
+
+  /** REJECT_SNAPSHOT - Reject this snapshot, try others */
+  REJECT_SNAPSHOT = 5,
+  UNRECOGNIZED = -1,
+}
+export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
+  switch (object) {
+    case 0:
+    case "UNKNOWN":
+      return ResponseApplySnapshotChunk_Result.UNKNOWN;
+
+    case 1:
+    case "ACCEPT":
+      return ResponseApplySnapshotChunk_Result.ACCEPT;
+
+    case 2:
+    case "ABORT":
+      return ResponseApplySnapshotChunk_Result.ABORT;
+
+    case 3:
+    case "RETRY":
+      return ResponseApplySnapshotChunk_Result.RETRY;
+
+    case 4:
+    case "RETRY_SNAPSHOT":
+      return ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT;
+
+    case 5:
+    case "REJECT_SNAPSHOT":
+      return ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ResponseApplySnapshotChunk_Result.UNRECOGNIZED;
+  }
+}
+export function responseApplySnapshotChunk_ResultToJSON(object: ResponseApplySnapshotChunk_Result): string {
+  switch (object) {
+    case ResponseApplySnapshotChunk_Result.UNKNOWN:
+      return "UNKNOWN";
+
+    case ResponseApplySnapshotChunk_Result.ACCEPT:
+      return "ACCEPT";
+
+    case ResponseApplySnapshotChunk_Result.ABORT:
+      return "ABORT";
+
+    case ResponseApplySnapshotChunk_Result.RETRY:
+      return "RETRY";
+
+    case ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT:
+      return "RETRY_SNAPSHOT";
+
+    case ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT:
+      return "REJECT_SNAPSHOT";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+export enum EvidenceType {
+  UNKNOWN = 0,
+  DUPLICATE_VOTE = 1,
+  LIGHT_CLIENT_ATTACK = 2,
+  UNRECOGNIZED = -1,
+}
+export function evidenceTypeFromJSON(object: any): EvidenceType {
+  switch (object) {
+    case 0:
+    case "UNKNOWN":
+      return EvidenceType.UNKNOWN;
+
+    case 1:
+    case "DUPLICATE_VOTE":
+      return EvidenceType.DUPLICATE_VOTE;
+
+    case 2:
+    case "LIGHT_CLIENT_ATTACK":
+      return EvidenceType.LIGHT_CLIENT_ATTACK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return EvidenceType.UNRECOGNIZED;
+  }
+}
+export function evidenceTypeToJSON(object: EvidenceType): string {
+  switch (object) {
+    case EvidenceType.UNKNOWN:
+      return "UNKNOWN";
+
+    case EvidenceType.DUPLICATE_VOTE:
+      return "DUPLICATE_VOTE";
+
+    case EvidenceType.LIGHT_CLIENT_ATTACK:
+      return "LIGHT_CLIENT_ATTACK";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 export interface Request {
   echo?: RequestEcho;
   flush?: RequestFlush;
@@ -21,6 +247,314 @@ export interface Request {
   offerSnapshot?: RequestOfferSnapshot;
   loadSnapshotChunk?: RequestLoadSnapshotChunk;
   applySnapshotChunk?: RequestApplySnapshotChunk;
+}
+export interface RequestEcho {
+  message: string;
+}
+export interface RequestFlush {}
+export interface RequestInfo {
+  version: string;
+  blockVersion: Long;
+  p2pVersion: Long;
+}
+
+/** nondeterministic */
+export interface RequestSetOption {
+  key: string;
+  value: string;
+}
+export interface RequestInitChain {
+  time: Date;
+  chainId: string;
+  consensusParams: ConsensusParams;
+  validators: ValidatorUpdate[];
+  appStateBytes: Uint8Array;
+  initialHeight: Long;
+}
+export interface RequestQuery {
+  data: Uint8Array;
+  path: string;
+  height: Long;
+  prove: boolean;
+}
+export interface RequestBeginBlock {
+  hash: Uint8Array;
+  header: Header;
+  lastCommitInfo: LastCommitInfo;
+  byzantineValidators: Evidence[];
+}
+export interface RequestCheckTx {
+  tx: Uint8Array;
+  type: CheckTxType;
+}
+export interface RequestDeliverTx {
+  tx: Uint8Array;
+}
+export interface RequestEndBlock {
+  height: Long;
+}
+export interface RequestCommit {}
+
+/** lists available snapshots */
+export interface RequestListSnapshots {}
+
+/** offers a snapshot to the application */
+export interface RequestOfferSnapshot {
+  /** snapshot offered by peers */
+  snapshot: Snapshot;
+
+  /** light client-verified app hash for snapshot height */
+  appHash: Uint8Array;
+}
+
+/** loads a snapshot chunk */
+export interface RequestLoadSnapshotChunk {
+  height: Long;
+  format: number;
+  chunk: number;
+}
+
+/** Applies a snapshot chunk */
+export interface RequestApplySnapshotChunk {
+  index: number;
+  chunk: Uint8Array;
+  sender: string;
+}
+export interface Response {
+  exception?: ResponseException;
+  echo?: ResponseEcho;
+  flush?: ResponseFlush;
+  info?: ResponseInfo;
+  setOption?: ResponseSetOption;
+  initChain?: ResponseInitChain;
+  query?: ResponseQuery;
+  beginBlock?: ResponseBeginBlock;
+  checkTx?: ResponseCheckTx;
+  deliverTx?: ResponseDeliverTx;
+  endBlock?: ResponseEndBlock;
+  commit?: ResponseCommit;
+  listSnapshots?: ResponseListSnapshots;
+  offerSnapshot?: ResponseOfferSnapshot;
+  loadSnapshotChunk?: ResponseLoadSnapshotChunk;
+  applySnapshotChunk?: ResponseApplySnapshotChunk;
+}
+
+/** nondeterministic */
+export interface ResponseException {
+  error: string;
+}
+export interface ResponseEcho {
+  message: string;
+}
+export interface ResponseFlush {}
+export interface ResponseInfo {
+  data: string;
+  version: string;
+  appVersion: Long;
+  lastBlockHeight: Long;
+  lastBlockAppHash: Uint8Array;
+}
+
+/** nondeterministic */
+export interface ResponseSetOption {
+  code: number;
+
+  /** bytes data = 2; */
+  log: string;
+  info: string;
+}
+export interface ResponseInitChain {
+  consensusParams: ConsensusParams;
+  validators: ValidatorUpdate[];
+  appHash: Uint8Array;
+}
+export interface ResponseQuery {
+  code: number;
+
+  /** bytes data = 2; // use "value" instead. */
+  log: string;
+
+  /** nondeterministic */
+  info: string;
+  index: Long;
+  key: Uint8Array;
+  value: Uint8Array;
+  proofOps: ProofOps;
+  height: Long;
+  codespace: string;
+}
+export interface ResponseBeginBlock {
+  events: Event[];
+}
+export interface ResponseCheckTx {
+  code: number;
+  data: Uint8Array;
+
+  /** nondeterministic */
+  log: string;
+
+  /** nondeterministic */
+  info: string;
+  gasWanted: Long;
+  gasUsed: Long;
+  events: Event[];
+  codespace: string;
+}
+export interface ResponseDeliverTx {
+  code: number;
+  data: Uint8Array;
+
+  /** nondeterministic */
+  log: string;
+
+  /** nondeterministic */
+  info: string;
+  gasWanted: Long;
+  gasUsed: Long;
+  events: Event[];
+  codespace: string;
+}
+export interface ResponseEndBlock {
+  validatorUpdates: ValidatorUpdate[];
+  consensusParamUpdates: ConsensusParams;
+  events: Event[];
+}
+export interface ResponseCommit {
+  /** reserve 1 */
+  data: Uint8Array;
+  retainHeight: Long;
+}
+export interface ResponseListSnapshots {
+  snapshots: Snapshot[];
+}
+export interface ResponseOfferSnapshot {
+  result: ResponseOfferSnapshot_Result;
+}
+export interface ResponseLoadSnapshotChunk {
+  chunk: Uint8Array;
+}
+export interface ResponseApplySnapshotChunk {
+  result: ResponseApplySnapshotChunk_Result;
+
+  /** Chunks to refetch and reapply */
+  refetchChunks: number[];
+
+  /** Chunk senders to reject and ban */
+  rejectSenders: string[];
+}
+
+/**
+ * ConsensusParams contains all consensus-relevant parameters
+ * that can be adjusted by the abci app
+ */
+export interface ConsensusParams {
+  block: BlockParams;
+  evidence: EvidenceParams;
+  validator: ValidatorParams;
+  version: VersionParams;
+}
+
+/** BlockParams contains limits on the block size. */
+export interface BlockParams {
+  /** Note: must be greater than 0 */
+  maxBytes: Long;
+
+  /** Note: must be greater or equal to -1 */
+  maxGas: Long;
+}
+export interface LastCommitInfo {
+  round: number;
+  votes: VoteInfo[];
+}
+
+/**
+ * Event allows application developers to attach additional information to
+ * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
+ * Later, transactions may be queried using these events.
+ */
+export interface Event {
+  type: string;
+  attributes: EventAttribute[];
+}
+
+/** EventAttribute is a single key-value pair, associated with an event. */
+export interface EventAttribute {
+  key: Uint8Array;
+  value: Uint8Array;
+
+  /** nondeterministic */
+  index: boolean;
+}
+
+/**
+ * TxResult contains results of executing the transaction.
+ * 
+ * One usage is indexing transaction results.
+ */
+export interface TxResult {
+  height: Long;
+  index: number;
+  tx: Uint8Array;
+  result: ResponseDeliverTx;
+}
+
+/** Validator */
+export interface Validator {
+  /**
+   * The first 20 bytes of SHA256(public key)
+   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
+   */
+  address: Uint8Array;
+
+  /** The voting power */
+  power: Long;
+}
+
+/** ValidatorUpdate */
+export interface ValidatorUpdate {
+  pubKey: PublicKey;
+  power: Long;
+}
+
+/** VoteInfo */
+export interface VoteInfo {
+  validator: Validator;
+  signedLastBlock: boolean;
+}
+export interface Evidence {
+  type: EvidenceType;
+
+  /** The offending validator */
+  validator: Validator;
+
+  /** The height when the offense occurred */
+  height: Long;
+
+  /** The corresponding time where the offense occurred */
+  time: Date;
+
+  /**
+   * Total voting power of the validator set in case the ABCI application does
+   * not store historical validators.
+   * https://github.com/tendermint/tendermint/issues/4581
+   */
+  totalVotingPower: Long;
+}
+export interface Snapshot {
+  /** The height at which the snapshot was taken */
+  height: Long;
+
+  /** The application-specific snapshot format */
+  format: number;
+
+  /** Number of chunks in the snapshot */
+  chunks: number;
+
+  /** Arbitrary snapshot hash, equal only if identical */
+  hash: Uint8Array;
+
+  /** Arbitrary application metadata */
+  metadata: Uint8Array;
 }
 
 function createBaseRequest(): Request {
@@ -247,9 +781,6 @@ export const Request = {
   }
 
 };
-export interface RequestEcho {
-  message: string;
-}
 
 function createBaseRequestEcho(): RequestEcho {
   return {
@@ -307,14 +838,13 @@ export const RequestEcho = {
   }
 
 };
-export interface RequestFlush {}
 
 function createBaseRequestFlush(): RequestFlush {
   return {};
 }
 
 export const RequestFlush = {
-  encode(message: RequestFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: RequestFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -336,26 +866,21 @@ export const RequestFlush = {
     return message;
   },
 
-  fromJSON(object: any): RequestFlush {
+  fromJSON(_: any): RequestFlush {
     return {};
   },
 
-  toJSON(message: RequestFlush): unknown {
+  toJSON(_: RequestFlush): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RequestFlush>, I>>(object: I): RequestFlush {
+  fromPartial<I extends Exact<DeepPartial<RequestFlush>, I>>(_: I): RequestFlush {
     const message = createBaseRequestFlush();
     return message;
   }
 
 };
-export interface RequestInfo {
-  version: string;
-  blockVersion: Long;
-  p2pVersion: Long;
-}
 
 function createBaseRequestInfo(): RequestInfo {
   return {
@@ -438,12 +963,6 @@ export const RequestInfo = {
 
 };
 
-/** nondeterministic */
-export interface RequestSetOption {
-  key: string;
-  value: string;
-}
-
 function createBaseRequestSetOption(): RequestSetOption {
   return {
     key: "",
@@ -512,14 +1031,6 @@ export const RequestSetOption = {
   }
 
 };
-export interface RequestInitChain {
-  time: Date;
-  chainId: string;
-  consensusParams: ConsensusParams;
-  validators: ValidatorUpdate[];
-  appStateBytes: Uint8Array;
-  initialHeight: Long;
-}
 
 function createBaseRequestInitChain(): RequestInitChain {
   return {
@@ -534,7 +1045,9 @@ function createBaseRequestInitChain(): RequestInitChain {
 
 export const RequestInitChain = {
   encode(message: RequestInitChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.time !== undefined) Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
+    if (message.time !== undefined) {
+      Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
+    }
 
     if (message.chainId !== "") {
       writer.uint32(18).string(message.chainId);
@@ -641,12 +1154,6 @@ export const RequestInitChain = {
   }
 
 };
-export interface RequestQuery {
-  data: Uint8Array;
-  path: string;
-  height: Long;
-  prove: boolean;
-}
 
 function createBaseRequestQuery(): RequestQuery {
   return {
@@ -740,12 +1247,6 @@ export const RequestQuery = {
   }
 
 };
-export interface RequestBeginBlock {
-  hash: Uint8Array;
-  header: Header;
-  lastCommitInfo: LastCommitInfo;
-  byzantineValidators: Evidence[];
-}
 
 function createBaseRequestBeginBlock(): RequestBeginBlock {
   return {
@@ -845,43 +1346,6 @@ export const RequestBeginBlock = {
   }
 
 };
-export enum CheckTxType {
-  NEW = 0,
-  RECHECK = 1,
-  UNRECOGNIZED = -1,
-}
-export function checkTxTypeFromJSON(object: any): CheckTxType {
-  switch (object) {
-    case 0:
-    case "NEW":
-      return CheckTxType.NEW;
-
-    case 1:
-    case "RECHECK":
-      return CheckTxType.RECHECK;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return CheckTxType.UNRECOGNIZED;
-  }
-}
-export function checkTxTypeToJSON(object: CheckTxType): string {
-  switch (object) {
-    case CheckTxType.NEW:
-      return "NEW";
-
-    case CheckTxType.RECHECK:
-      return "RECHECK";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-export interface RequestCheckTx {
-  tx: Uint8Array;
-  type: CheckTxType;
-}
 
 function createBaseRequestCheckTx(): RequestCheckTx {
   return {
@@ -951,9 +1415,6 @@ export const RequestCheckTx = {
   }
 
 };
-export interface RequestDeliverTx {
-  tx: Uint8Array;
-}
 
 function createBaseRequestDeliverTx(): RequestDeliverTx {
   return {
@@ -1011,9 +1472,6 @@ export const RequestDeliverTx = {
   }
 
 };
-export interface RequestEndBlock {
-  height: Long;
-}
 
 function createBaseRequestEndBlock(): RequestEndBlock {
   return {
@@ -1071,14 +1529,13 @@ export const RequestEndBlock = {
   }
 
 };
-export interface RequestCommit {}
 
 function createBaseRequestCommit(): RequestCommit {
   return {};
 }
 
 export const RequestCommit = {
-  encode(message: RequestCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: RequestCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1100,31 +1557,28 @@ export const RequestCommit = {
     return message;
   },
 
-  fromJSON(object: any): RequestCommit {
+  fromJSON(_: any): RequestCommit {
     return {};
   },
 
-  toJSON(message: RequestCommit): unknown {
+  toJSON(_: RequestCommit): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RequestCommit>, I>>(object: I): RequestCommit {
+  fromPartial<I extends Exact<DeepPartial<RequestCommit>, I>>(_: I): RequestCommit {
     const message = createBaseRequestCommit();
     return message;
   }
 
 };
 
-/** lists available snapshots */
-export interface RequestListSnapshots {}
-
 function createBaseRequestListSnapshots(): RequestListSnapshots {
   return {};
 }
 
 export const RequestListSnapshots = {
-  encode(message: RequestListSnapshots, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: RequestListSnapshots, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1146,30 +1600,21 @@ export const RequestListSnapshots = {
     return message;
   },
 
-  fromJSON(object: any): RequestListSnapshots {
+  fromJSON(_: any): RequestListSnapshots {
     return {};
   },
 
-  toJSON(message: RequestListSnapshots): unknown {
+  toJSON(_: RequestListSnapshots): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RequestListSnapshots>, I>>(object: I): RequestListSnapshots {
+  fromPartial<I extends Exact<DeepPartial<RequestListSnapshots>, I>>(_: I): RequestListSnapshots {
     const message = createBaseRequestListSnapshots();
     return message;
   }
 
 };
-
-/** offers a snapshot to the application */
-export interface RequestOfferSnapshot {
-  /** snapshot offered by peers */
-  snapshot: Snapshot;
-
-  /** light client-verified app hash for snapshot height */
-  appHash: Uint8Array;
-}
 
 function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
   return {
@@ -1239,13 +1684,6 @@ export const RequestOfferSnapshot = {
   }
 
 };
-
-/** loads a snapshot chunk */
-export interface RequestLoadSnapshotChunk {
-  height: Long;
-  format: number;
-  chunk: number;
-}
 
 function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
   return {
@@ -1328,13 +1766,6 @@ export const RequestLoadSnapshotChunk = {
 
 };
 
-/** Applies a snapshot chunk */
-export interface RequestApplySnapshotChunk {
-  index: number;
-  chunk: Uint8Array;
-  sender: string;
-}
-
 function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
   return {
     index: 0,
@@ -1415,24 +1846,6 @@ export const RequestApplySnapshotChunk = {
   }
 
 };
-export interface Response {
-  exception?: ResponseException;
-  echo?: ResponseEcho;
-  flush?: ResponseFlush;
-  info?: ResponseInfo;
-  setOption?: ResponseSetOption;
-  initChain?: ResponseInitChain;
-  query?: ResponseQuery;
-  beginBlock?: ResponseBeginBlock;
-  checkTx?: ResponseCheckTx;
-  deliverTx?: ResponseDeliverTx;
-  endBlock?: ResponseEndBlock;
-  commit?: ResponseCommit;
-  listSnapshots?: ResponseListSnapshots;
-  offerSnapshot?: ResponseOfferSnapshot;
-  loadSnapshotChunk?: ResponseLoadSnapshotChunk;
-  applySnapshotChunk?: ResponseApplySnapshotChunk;
-}
 
 function createBaseResponse(): Response {
   return {
@@ -1671,11 +2084,6 @@ export const Response = {
 
 };
 
-/** nondeterministic */
-export interface ResponseException {
-  error: string;
-}
-
 function createBaseResponseException(): ResponseException {
   return {
     error: ""
@@ -1732,9 +2140,6 @@ export const ResponseException = {
   }
 
 };
-export interface ResponseEcho {
-  message: string;
-}
 
 function createBaseResponseEcho(): ResponseEcho {
   return {
@@ -1792,14 +2197,13 @@ export const ResponseEcho = {
   }
 
 };
-export interface ResponseFlush {}
 
 function createBaseResponseFlush(): ResponseFlush {
   return {};
 }
 
 export const ResponseFlush = {
-  encode(message: ResponseFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ResponseFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1821,28 +2225,21 @@ export const ResponseFlush = {
     return message;
   },
 
-  fromJSON(object: any): ResponseFlush {
+  fromJSON(_: any): ResponseFlush {
     return {};
   },
 
-  toJSON(message: ResponseFlush): unknown {
+  toJSON(_: ResponseFlush): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResponseFlush>, I>>(object: I): ResponseFlush {
+  fromPartial<I extends Exact<DeepPartial<ResponseFlush>, I>>(_: I): ResponseFlush {
     const message = createBaseResponseFlush();
     return message;
   }
 
 };
-export interface ResponseInfo {
-  data: string;
-  version: string;
-  appVersion: Long;
-  lastBlockHeight: Long;
-  lastBlockAppHash: Uint8Array;
-}
 
 function createBaseResponseInfo(): ResponseInfo {
   return {
@@ -1949,15 +2346,6 @@ export const ResponseInfo = {
 
 };
 
-/** nondeterministic */
-export interface ResponseSetOption {
-  code: number;
-
-  /** bytes data = 2; */
-  log: string;
-  info: string;
-}
-
 function createBaseResponseSetOption(): ResponseSetOption {
   return {
     code: 0,
@@ -2038,11 +2426,6 @@ export const ResponseSetOption = {
   }
 
 };
-export interface ResponseInitChain {
-  consensusParams: ConsensusParams;
-  validators: ValidatorUpdate[];
-  appHash: Uint8Array;
-}
 
 function createBaseResponseInitChain(): ResponseInitChain {
   return {
@@ -2130,21 +2513,6 @@ export const ResponseInitChain = {
   }
 
 };
-export interface ResponseQuery {
-  code: number;
-
-  /** bytes data = 2; // use "value" instead. */
-  log: string;
-
-  /** nondeterministic */
-  info: string;
-  index: Long;
-  key: Uint8Array;
-  value: Uint8Array;
-  proofOps: ProofOps;
-  height: Long;
-  codespace: string;
-}
 
 function createBaseResponseQuery(): ResponseQuery {
   return {
@@ -2298,9 +2666,6 @@ export const ResponseQuery = {
   }
 
 };
-export interface ResponseBeginBlock {
-  events: Event[];
-}
 
 function createBaseResponseBeginBlock(): ResponseBeginBlock {
   return {
@@ -2364,20 +2729,6 @@ export const ResponseBeginBlock = {
   }
 
 };
-export interface ResponseCheckTx {
-  code: number;
-  data: Uint8Array;
-
-  /** nondeterministic */
-  log: string;
-
-  /** nondeterministic */
-  info: string;
-  gasWanted: Long;
-  gasUsed: Long;
-  events: Event[];
-  codespace: string;
-}
 
 function createBaseResponseCheckTx(): ResponseCheckTx {
   return {
@@ -2525,20 +2876,6 @@ export const ResponseCheckTx = {
   }
 
 };
-export interface ResponseDeliverTx {
-  code: number;
-  data: Uint8Array;
-
-  /** nondeterministic */
-  log: string;
-
-  /** nondeterministic */
-  info: string;
-  gasWanted: Long;
-  gasUsed: Long;
-  events: Event[];
-  codespace: string;
-}
 
 function createBaseResponseDeliverTx(): ResponseDeliverTx {
   return {
@@ -2686,11 +3023,6 @@ export const ResponseDeliverTx = {
   }
 
 };
-export interface ResponseEndBlock {
-  validatorUpdates: ValidatorUpdate[];
-  consensusParamUpdates: ConsensusParams;
-  events: Event[];
-}
 
 function createBaseResponseEndBlock(): ResponseEndBlock {
   return {
@@ -2784,11 +3116,6 @@ export const ResponseEndBlock = {
   }
 
 };
-export interface ResponseCommit {
-  /** reserve 1 */
-  data: Uint8Array;
-  retainHeight: Long;
-}
 
 function createBaseResponseCommit(): ResponseCommit {
   return {
@@ -2858,9 +3185,6 @@ export const ResponseCommit = {
   }
 
 };
-export interface ResponseListSnapshots {
-  snapshots: Snapshot[];
-}
 
 function createBaseResponseListSnapshots(): ResponseListSnapshots {
   return {
@@ -2924,9 +3248,6 @@ export const ResponseListSnapshots = {
   }
 
 };
-export interface ResponseOfferSnapshot {
-  result: ResponseOfferSnapshot_Result;
-}
 
 function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
   return {
@@ -2984,85 +3305,6 @@ export const ResponseOfferSnapshot = {
   }
 
 };
-export enum ResponseOfferSnapshot_Result {
-  /** UNKNOWN - Unknown result, abort all snapshot restoration */
-  UNKNOWN = 0,
-
-  /** ACCEPT - Snapshot accepted, apply chunks */
-  ACCEPT = 1,
-
-  /** ABORT - Abort all snapshot restoration */
-  ABORT = 2,
-
-  /** REJECT - Reject this specific snapshot, try others */
-  REJECT = 3,
-
-  /** REJECT_FORMAT - Reject all snapshots of this format, try others */
-  REJECT_FORMAT = 4,
-
-  /** REJECT_SENDER - Reject all snapshots from the sender(s), try others */
-  REJECT_SENDER = 5,
-  UNRECOGNIZED = -1,
-}
-export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return ResponseOfferSnapshot_Result.UNKNOWN;
-
-    case 1:
-    case "ACCEPT":
-      return ResponseOfferSnapshot_Result.ACCEPT;
-
-    case 2:
-    case "ABORT":
-      return ResponseOfferSnapshot_Result.ABORT;
-
-    case 3:
-    case "REJECT":
-      return ResponseOfferSnapshot_Result.REJECT;
-
-    case 4:
-    case "REJECT_FORMAT":
-      return ResponseOfferSnapshot_Result.REJECT_FORMAT;
-
-    case 5:
-    case "REJECT_SENDER":
-      return ResponseOfferSnapshot_Result.REJECT_SENDER;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ResponseOfferSnapshot_Result.UNRECOGNIZED;
-  }
-}
-export function responseOfferSnapshot_ResultToJSON(object: ResponseOfferSnapshot_Result): string {
-  switch (object) {
-    case ResponseOfferSnapshot_Result.UNKNOWN:
-      return "UNKNOWN";
-
-    case ResponseOfferSnapshot_Result.ACCEPT:
-      return "ACCEPT";
-
-    case ResponseOfferSnapshot_Result.ABORT:
-      return "ABORT";
-
-    case ResponseOfferSnapshot_Result.REJECT:
-      return "REJECT";
-
-    case ResponseOfferSnapshot_Result.REJECT_FORMAT:
-      return "REJECT_FORMAT";
-
-    case ResponseOfferSnapshot_Result.REJECT_SENDER:
-      return "REJECT_SENDER";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-export interface ResponseLoadSnapshotChunk {
-  chunk: Uint8Array;
-}
 
 function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
   return {
@@ -3120,15 +3362,6 @@ export const ResponseLoadSnapshotChunk = {
   }
 
 };
-export interface ResponseApplySnapshotChunk {
-  result: ResponseOfferSnapshot_Result;
-
-  /** Chunks to refetch and reapply */
-  refetchChunks: number[];
-
-  /** Chunk senders to reject and ban */
-  rejectSenders: string[];
-}
 
 function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
   return {
@@ -3200,7 +3433,7 @@ export const ResponseApplySnapshotChunk = {
 
   fromJSON(object: any): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
       refetchChunks: Array.isArray(object?.refetchChunks) ? object.refetchChunks.map((e: any) => Number(e)) : [],
       rejectSenders: Array.isArray(object?.rejectSenders) ? object.rejectSenders.map((e: any) => String(e)) : []
     };
@@ -3208,7 +3441,7 @@ export const ResponseApplySnapshotChunk = {
 
   toJSON(message: ResponseApplySnapshotChunk): unknown {
     const obj: any = {};
-    message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
+    message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
 
     if (message.refetchChunks) {
       obj.refetchChunks = message.refetchChunks.map(e => Math.round(e));
@@ -3234,93 +3467,6 @@ export const ResponseApplySnapshotChunk = {
   }
 
 };
-export enum ResponseApplySnapshotChunk_Result {
-  /** UNKNOWN - Unknown result, abort all snapshot restoration */
-  UNKNOWN = 0,
-
-  /** ACCEPT - Chunk successfully accepted */
-  ACCEPT = 1,
-
-  /** ABORT - Abort all snapshot restoration */
-  ABORT = 2,
-
-  /** RETRY - Retry chunk (combine with refetch and reject) */
-  RETRY = 3,
-
-  /** RETRY_SNAPSHOT - Retry snapshot (combine with refetch and reject) */
-  RETRY_SNAPSHOT = 4,
-
-  /** REJECT_SNAPSHOT - Reject this snapshot, try others */
-  REJECT_SNAPSHOT = 5,
-  UNRECOGNIZED = -1,
-}
-export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return ResponseApplySnapshotChunk_Result.UNKNOWN;
-
-    case 1:
-    case "ACCEPT":
-      return ResponseApplySnapshotChunk_Result.ACCEPT;
-
-    case 2:
-    case "ABORT":
-      return ResponseApplySnapshotChunk_Result.ABORT;
-
-    case 3:
-    case "RETRY":
-      return ResponseApplySnapshotChunk_Result.RETRY;
-
-    case 4:
-    case "RETRY_SNAPSHOT":
-      return ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT;
-
-    case 5:
-    case "REJECT_SNAPSHOT":
-      return ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ResponseApplySnapshotChunk_Result.UNRECOGNIZED;
-  }
-}
-export function responseApplySnapshotChunk_ResultToJSON(object: ResponseApplySnapshotChunk_Result): string {
-  switch (object) {
-    case ResponseApplySnapshotChunk_Result.UNKNOWN:
-      return "UNKNOWN";
-
-    case ResponseApplySnapshotChunk_Result.ACCEPT:
-      return "ACCEPT";
-
-    case ResponseApplySnapshotChunk_Result.ABORT:
-      return "ABORT";
-
-    case ResponseApplySnapshotChunk_Result.RETRY:
-      return "RETRY";
-
-    case ResponseApplySnapshotChunk_Result.RETRY_SNAPSHOT:
-      return "RETRY_SNAPSHOT";
-
-    case ResponseApplySnapshotChunk_Result.REJECT_SNAPSHOT:
-      return "REJECT_SNAPSHOT";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-
-/**
- * ConsensusParams contains all consensus-relevant parameters
- * that can be adjusted by the abci app
- */
-export interface ConsensusParams {
-  block: BlockParams;
-  evidence: EvidenceParams;
-  validator: ValidatorParams;
-  version: VersionParams;
-}
 
 function createBaseConsensusParams(): ConsensusParams {
   return {
@@ -3415,15 +3561,6 @@ export const ConsensusParams = {
 
 };
 
-/** BlockParams contains limits on the block size. */
-export interface BlockParams {
-  /** Note: must be greater than 0 */
-  maxBytes: Long;
-
-  /** Note: must be greater or equal to -1 */
-  maxGas: Long;
-}
-
 function createBaseBlockParams(): BlockParams {
   return {
     maxBytes: Long.ZERO,
@@ -3492,10 +3629,6 @@ export const BlockParams = {
   }
 
 };
-export interface LastCommitInfo {
-  round: number;
-  votes: VoteInfo[];
-}
 
 function createBaseLastCommitInfo(): LastCommitInfo {
   return {
@@ -3572,16 +3705,6 @@ export const LastCommitInfo = {
 
 };
 
-/**
- * Event allows application developers to attach additional information to
- * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
- * Later, transactions may be queried using these events.
- */
-export interface Event {
-  type: string;
-  attributes: EventAttribute[];
-}
-
 function createBaseEvent(): Event {
   return {
     type: "",
@@ -3656,15 +3779,6 @@ export const Event = {
   }
 
 };
-
-/** EventAttribute is a single key-value pair, associated with an event. */
-export interface EventAttribute {
-  key: Uint8Array;
-  value: Uint8Array;
-
-  /** nondeterministic */
-  index: boolean;
-}
 
 function createBaseEventAttribute(): EventAttribute {
   return {
@@ -3746,18 +3860,6 @@ export const EventAttribute = {
   }
 
 };
-
-/**
- * TxResult contains results of executing the transaction.
- * 
- * One usage is indexing transaction results.
- */
-export interface TxResult {
-  height: Long;
-  index: number;
-  tx: Uint8Array;
-  result: ResponseDeliverTx;
-}
 
 function createBaseTxResult(): TxResult {
   return {
@@ -3852,18 +3954,6 @@ export const TxResult = {
 
 };
 
-/** Validator */
-export interface Validator {
-  /**
-   * The first 20 bytes of SHA256(public key)
-   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
-   */
-  address: Uint8Array;
-
-  /** The voting power */
-  power: Long;
-}
-
 function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
@@ -3932,12 +4022,6 @@ export const Validator = {
   }
 
 };
-
-/** ValidatorUpdate */
-export interface ValidatorUpdate {
-  pubKey: PublicKey;
-  power: Long;
-}
 
 function createBaseValidatorUpdate(): ValidatorUpdate {
   return {
@@ -4008,12 +4092,6 @@ export const ValidatorUpdate = {
 
 };
 
-/** VoteInfo */
-export interface VoteInfo {
-  validator: Validator;
-  signedLastBlock: boolean;
-}
-
 function createBaseVoteInfo(): VoteInfo {
   return {
     validator: undefined,
@@ -4082,66 +4160,6 @@ export const VoteInfo = {
   }
 
 };
-export enum EvidenceType {
-  UNKNOWN = 0,
-  DUPLICATE_VOTE = 1,
-  LIGHT_CLIENT_ATTACK = 2,
-  UNRECOGNIZED = -1,
-}
-export function evidenceTypeFromJSON(object: any): EvidenceType {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return EvidenceType.UNKNOWN;
-
-    case 1:
-    case "DUPLICATE_VOTE":
-      return EvidenceType.DUPLICATE_VOTE;
-
-    case 2:
-    case "LIGHT_CLIENT_ATTACK":
-      return EvidenceType.LIGHT_CLIENT_ATTACK;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return EvidenceType.UNRECOGNIZED;
-  }
-}
-export function evidenceTypeToJSON(object: EvidenceType): string {
-  switch (object) {
-    case EvidenceType.UNKNOWN:
-      return "UNKNOWN";
-
-    case EvidenceType.DUPLICATE_VOTE:
-      return "DUPLICATE_VOTE";
-
-    case EvidenceType.LIGHT_CLIENT_ATTACK:
-      return "LIGHT_CLIENT_ATTACK";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-export interface Evidence {
-  type: EvidenceType;
-
-  /** The offending validator */
-  validator: Validator;
-
-  /** The height when the offense occurred */
-  height: Long;
-
-  /** The corresponding time where the offense occurred */
-  time: Date;
-
-  /**
-   * Total voting power of the validator set in case the ABCI application does
-   * not store historical validators.
-   * https://github.com/tendermint/tendermint/issues/4581
-   */
-  totalVotingPower: Long;
-}
 
 function createBaseEvidence(): Evidence {
   return {
@@ -4167,7 +4185,9 @@ export const Evidence = {
       writer.uint32(24).int64(message.height);
     }
 
-    if (message.time !== undefined) Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
+    if (message.time !== undefined) {
+      Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
+    }
 
     if (!message.totalVotingPower.isZero()) {
       writer.uint32(40).int64(message.totalVotingPower);
@@ -4245,22 +4265,6 @@ export const Evidence = {
   }
 
 };
-export interface Snapshot {
-  /** The height at which the snapshot was taken */
-  height: Long;
-
-  /** The application-specific snapshot format */
-  format: number;
-
-  /** Number of chunks in the snapshot */
-  chunks: number;
-
-  /** Arbitrary snapshot hash, equal only if identical */
-  hash: Uint8Array;
-
-  /** Arbitrary application metadata */
-  metadata: Uint8Array;
-}
 
 function createBaseSnapshot(): Snapshot {
   return {
