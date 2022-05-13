@@ -47,9 +47,16 @@ export const buildBaseTypeScriptClass = (
     name: string,
     obj: any
 ) => {
-    context.body.push(createProtoType(context.proto, name, obj));
     context.body.push(createCreateProtoType(name, obj));
     context.body.push(createObjectWithMethods(context.proto, name, obj));
+};
+
+export const buildBaseTypeScriptInterface = (
+    context: TelescopeParseContext,
+    name: string,
+    obj: any
+) => {
+    context.body.push(createProtoType(context.proto, name, obj));
 };
 
 export const buildEnums = (
@@ -111,12 +118,20 @@ export class TelescopeParseContext implements TelescopeParseContext {
     buildBase() {
         this.types.forEach(typeReg => {
             const { name, obj } = typeReg;
+            if (obj.type === 'Enum') {
+                buildEnums(this, name, obj);
+            }
+        })
+        this.types.forEach(typeReg => {
+            const { name, obj } = typeReg;
+            if (obj.type === 'Type') {
+                buildBaseTypeScriptInterface(this, name, obj);
+            }
+        })
+        this.types.forEach(typeReg => {
+            const { name, obj } = typeReg;
             if (obj.type === 'Type') {
                 buildBaseTypeScriptClass(this, name, obj);
-            } else if (obj.type === 'Enum') {
-                buildEnums(this, name, obj);
-            } else {
-                throw new Error('buildBase(): unknown type');
             }
         })
     }

@@ -1171,8 +1171,14 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       writer.uint32(58).bytes(message.bytesValue);
     }
 
-    if (message.durationValue !== undefined) Duration.encode(toDuration(message.durationValue), writer.uint32(66).fork()).ldelim();
-    if (message.timestampValue !== undefined) Timestamp.encode(toTimestamp(message.timestampValue), writer.uint32(74).fork()).ldelim();
+    if (message.durationValue !== undefined) {
+      Duration.encode(toDuration(message.durationValue), writer.uint32(66).fork()).ldelim();
+    }
+
+    if (message.timestampValue !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestampValue), writer.uint32(74).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -1622,7 +1628,9 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       writer.uint32(82).string(message.name);
     }
 
-    if (message.timestamp !== undefined) Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(90).fork()).ldelim();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(90).fork()).ldelim();
+    }
 
     if (message.severity !== 0) {
       writer.uint32(96).int32(message.severity);
@@ -1815,6 +1823,79 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 };"
 `;
 
+exports[`google/rpc/error_details name collisions 1`] = `
+"/**
+ * Describes what preconditions have failed.
+ * 
+ * For example, if an RPC failed because it required the Terms of Service to be
+ * acknowledged, it could list the terms of service violation in the
+ * PreconditionFailure message.
+ */
+export interface PreconditionFailure {
+  /** Describes all precondition violations. */
+  violations: PreconditionFailure_Violation[];
+}"
+`;
+
+exports[`google/rpc/error_details name collisions 2`] = `
+"export const PreconditionFailure = {
+  encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.violations) {
+      PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePreconditionFailure();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): PreconditionFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: PreconditionFailure): unknown {
+    const obj: any = {};
+
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PreconditionFailure>, I>>(object: I): PreconditionFailure {
+    const message = createBasePreconditionFailure();
+    message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
 exports[`ibc/core/port/v1/query 1`] = `
 "export const QueryAppVersionRequest = {
   encode(message: QueryAppVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -1952,6 +2033,20 @@ Array [
 `;
 
 exports[`ibc/core/types/v1/genesis name collisions 1`] = `
+"/** GenesisState defines the ibc module's genesis state. */
+export interface GenesisState {
+  /** ICS002 - Clients genesis state */
+  clientGenesis: GenesisState1;
+
+  /** ICS003 - Connections genesis state */
+  connectionGenesis: GenesisState2;
+
+  /** ICS004 - Channel genesis state */
+  channelGenesis: GenesisState3;
+}"
+`;
+
+exports[`ibc/core/types/v1/genesis name collisions 2`] = `
 "export const GenesisState = {
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientGenesis !== undefined) {
@@ -2026,7 +2121,7 @@ exports[`ibc/core/types/v1/genesis name collisions 1`] = `
 };"
 `;
 
-exports[`ibc/core/types/v1/genesis name collisions 2`] = `
+exports[`ibc/core/types/v1/genesis name collisions 3`] = `
 Array [
   Object {
     "import": "ibc/core/client/v1/genesis.proto",

@@ -117,12 +117,15 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
 
 export const toJSONMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     const fields = toJSONMethodFields(context, name, proto);
-
+    let varName = 'message';
+    if (!fields.length) {
+        varName = '_';
+    }
     return objectMethod('method',
         t.identifier('toJSON'),
         [
             identifier(
-                'message',
+                varName,
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
                         t.identifier(name)

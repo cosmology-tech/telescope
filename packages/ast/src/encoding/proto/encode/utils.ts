@@ -488,46 +488,48 @@ export const types = {
     timestamp(num: number, prop: string) {
         return t.ifStatement(
             notUndefined(prop),
-            t.expressionStatement(
-                t.callExpression(
-                    t.memberExpression(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.identifier('Timestamp'),
-                                t.identifier('encode')
-                            ),
-                            [
-                                t.callExpression(
-                                    t.identifier('toTimestamp'),
-                                    [
-                                        t.memberExpression(
-                                            t.identifier('message'),
-                                            t.identifier(prop)
-                                        )
-                                    ]
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('Timestamp'),
+                                    t.identifier('encode')
                                 ),
-                                t.callExpression(
-                                    t.memberExpression(
-                                        t.callExpression(
+                                [
+                                    t.callExpression(
+                                        t.identifier('toTimestamp'),
+                                        [
                                             t.memberExpression(
-                                                t.identifier('writer'),
-                                                t.identifier('uint32')
-                                            ),
-                                            [
-                                                t.numericLiteral(num)
-                                            ]
-                                        ),
-                                        t.identifier('fork')
+                                                t.identifier('message'),
+                                                t.identifier(prop)
+                                            )
+                                        ]
                                     ),
-                                    []
-                                )
-                            ]
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('writer'),
+                                                    t.identifier('uint32')
+                                                ),
+                                                [
+                                                    t.numericLiteral(num)
+                                                ]
+                                            ),
+                                            t.identifier('fork')
+                                        ),
+                                        []
+                                    )
+                                ]
+                            ),
+                            t.identifier('ldelim')
                         ),
-                        t.identifier('ldelim')
-                    ),
-                    []
+                        []
+                    )
                 )
-            )
+            ])
         );
     },
 
@@ -538,46 +540,48 @@ export const types = {
     duration(num: number, prop: string) {
         return t.ifStatement(
             notUndefined(prop),
-            t.expressionStatement(
-                t.callExpression(
-                    t.memberExpression(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.identifier('Duration'),
-                                t.identifier('encode')
-                            ),
-                            [
-                                t.callExpression(
-                                    t.identifier('toDuration'),
-                                    [
-                                        t.memberExpression(
-                                            t.identifier('message'),
-                                            t.identifier(prop)
-                                        )
-                                    ]
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('Duration'),
+                                    t.identifier('encode')
                                 ),
-                                t.callExpression(
-                                    t.memberExpression(
-                                        t.callExpression(
+                                [
+                                    t.callExpression(
+                                        t.identifier('toDuration'),
+                                        [
                                             t.memberExpression(
-                                                t.identifier('writer'),
-                                                t.identifier('uint32')
-                                            ),
-                                            [
-                                                t.numericLiteral(num)
-                                            ]
-                                        ),
-                                        t.identifier('fork')
+                                                t.identifier('message'),
+                                                t.identifier(prop)
+                                            )
+                                        ]
                                     ),
-                                    []
-                                )
-                            ]
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.callExpression(
+                                                t.memberExpression(
+                                                    t.identifier('writer'),
+                                                    t.identifier('uint32')
+                                                ),
+                                                [
+                                                    t.numericLiteral(num)
+                                                ]
+                                            ),
+                                            t.identifier('fork')
+                                        ),
+                                        []
+                                    )
+                                ]
+                            ),
+                            t.identifier('ldelim')
                         ),
-                        t.identifier('ldelim')
-                    ),
-                    []
+                        []
+                    )
                 )
-            )
+            ])
         );
     },
 

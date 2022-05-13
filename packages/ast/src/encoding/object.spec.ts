@@ -263,13 +263,32 @@ describe('ibc/core/types/v1/genesis', () => {
             'GenesisState',
             getNestedProto(res).GenesisState
         )
-        printCode(ast);
+        expectCode(ast);
         expectCode(createObjectWithMethods(
             context,
             'GenesisState',
             getNestedProto(res).GenesisState
         ))
         expect(context.imports).toMatchSnapshot();
-        // console.log(context.imports);
+    });
+});
+
+describe('google/rpc/error_details', () => {
+    it('name collisions', () => {
+        store.traverseAll();
+        const ref = store.findProto('google/rpc/error_details.proto');
+        const res = traverse(store, ref);
+        const context = new ProtoParseContext(ref, store);
+        const ast = createProtoType(
+            context,
+            'PreconditionFailure',
+            getNestedProto(res).PreconditionFailure
+        )
+        expectCode(ast);
+        expectCode(createObjectWithMethods(
+            context,
+            'PreconditionFailure',
+            getNestedProto(res).PreconditionFailure
+        ))
     });
 });

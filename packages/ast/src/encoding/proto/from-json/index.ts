@@ -114,10 +114,16 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
 };
 
 export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const fields = fromJSONMethodFields(context, name, proto);
+    let varName = 'object';
+    if (!fields.length) {
+        varName = '_';
+    }
+
     return objectMethod('method',
         t.identifier('fromJSON'),
         [
-            identifier('object',
+            identifier(varName,
                 t.tsTypeAnnotation(
                     t.tsAnyKeyword()
                 ),
@@ -128,7 +134,7 @@ export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: 
         t.blockStatement(
             [
                 t.returnStatement(
-                    t.objectExpression(fromJSONMethodFields(context, name, proto))
+                    t.objectExpression(fields)
                 )
             ]
         ),

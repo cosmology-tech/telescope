@@ -120,13 +120,17 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
     context.addUtil('DeepPartial');
 
     const fields = fromPartialMethodFields(context, name, proto);
+    let varName = 'object';
+    if (!fields.length) {
+        varName = '_';
+    }
 
     return objectMethod(
         'method',
         t.identifier('fromPartial'),
         [
             identifier(
-                'object',
+                varName,
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
                         t.identifier('I')

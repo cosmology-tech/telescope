@@ -113,6 +113,10 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
     context.addUtil('_m0');
 
     const fields = encodeMethodFields(context, name, proto);
+    let varName = 'message';
+    if (!fields.length) {
+        varName = '_';
+    }
     const body = [
         ...fields,
         /* RETURN writer */
@@ -134,7 +138,7 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
         [
             // args
 
-            identifier('message', t.tsTypeAnnotation(
+            identifier(varName, t.tsTypeAnnotation(
                 t.tsTypeReference(
                     t.identifier(name)
                 )
