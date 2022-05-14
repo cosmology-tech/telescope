@@ -1,6 +1,5 @@
-import Long from "long";
+import { Plan } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
-import { Plan } from "../../../cosmos/upgrade/v1beta1/upgrade";
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
  *
@@ -40,36 +39,66 @@ export declare const MsgSoftwareUpgrade: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgrade;
     fromJSON(object: any): MsgSoftwareUpgrade;
     toJSON(message: MsgSoftwareUpgrade): unknown;
-    fromPartial<I extends unknown>(object: I): MsgSoftwareUpgrade;
+    fromPartial<I extends {
+        authority?: string;
+        plan?: {
+            name?: string;
+            time?: Date;
+            height?: any;
+            info?: string;
+            upgradedClientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        };
+    } & {
+        authority?: string;
+        plan?: {
+            name?: string;
+            time?: Date;
+            height?: any;
+            info?: string;
+            upgradedClientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        } & {
+            name?: string;
+            time?: Date;
+            height?: any;
+            info?: string;
+            upgradedClientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["plan"]["upgradedClientState"], keyof import("../../../google/protobuf/any").Any>, never>;
+        } & Record<Exclude<keyof I["plan"], keyof Plan>, never>;
+    } & Record<Exclude<keyof I, keyof MsgSoftwareUpgrade>, never>>(object: I): MsgSoftwareUpgrade;
 };
 export declare const MsgSoftwareUpgradeResponse: {
     encode(_: MsgSoftwareUpgradeResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse;
     fromJSON(_: any): MsgSoftwareUpgradeResponse;
     toJSON(_: MsgSoftwareUpgradeResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgSoftwareUpgradeResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgSoftwareUpgradeResponse;
 };
 export declare const MsgCancelUpgrade: {
     encode(message: MsgCancelUpgrade, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgrade;
     fromJSON(object: any): MsgCancelUpgrade;
     toJSON(message: MsgCancelUpgrade): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCancelUpgrade;
+    fromPartial<I extends {
+        authority?: string;
+    } & {
+        authority?: string;
+    } & Record<Exclude<keyof I, "authority">, never>>(object: I): MsgCancelUpgrade;
 };
 export declare const MsgCancelUpgradeResponse: {
     encode(_: MsgCancelUpgradeResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgradeResponse;
     fromJSON(_: any): MsgCancelUpgradeResponse;
     toJSON(_: MsgCancelUpgradeResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgCancelUpgradeResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgCancelUpgradeResponse;
 };
-/** Msg defines the upgrade Msg service. */
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

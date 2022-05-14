@@ -1,31 +1,5 @@
-import Long from "long";
+import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { Status } from "../../../../google/rpc/status";
-/**
- * Defines the errors to be returned in
- * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
- */
-export interface CheckError {
-    /** The error code. */
-    code: CheckError_Code;
-    /**
-     * Subject to whom this error applies. See the specific code enum for more
-     * details on this field. For example:
-     *
-     * - "project:<project-id or project-number>"
-     * - "folder:<folder-id>"
-     * - "organization:<organization-id>"
-     */
-    subject: string;
-    /** Free-form text providing details on the error cause of the error. */
-    detail: string;
-    /**
-     * Contains public information about the check error. If available,
-     * `status.code` will be non zero and client can propagate it out as public
-     * error.
-     */
-    status: Status;
-}
 /** Error codes for Check responses. */
 export declare enum CheckError_Code {
     /** ERROR_CODE_UNSPECIFIED - This is never used in `CheckResponse`. */
@@ -95,19 +69,75 @@ export declare enum CheckError_Code {
 }
 export declare function checkError_CodeFromJSON(object: any): CheckError_Code;
 export declare function checkError_CodeToJSON(object: CheckError_Code): string;
+/**
+ * Defines the errors to be returned in
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ */
+export interface CheckError {
+    /** The error code. */
+    code: CheckError_Code;
+    /**
+     * Subject to whom this error applies. See the specific code enum for more
+     * details on this field. For example:
+     *
+     * - "project:<project-id or project-number>"
+     * - "folder:<folder-id>"
+     * - "organization:<organization-id>"
+     */
+    subject: string;
+    /** Free-form text providing details on the error cause of the error. */
+    detail: string;
+    /**
+     * Contains public information about the check error. If available,
+     * `status.code` will be non zero and client can propagate it out as public
+     * error.
+     */
+    status: Status;
+}
 export declare const CheckError: {
     encode(message: CheckError, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CheckError;
     fromJSON(object: any): CheckError;
     toJSON(message: CheckError): unknown;
-    fromPartial<I extends unknown>(object: I): CheckError;
+    fromPartial<I extends {
+        code?: CheckError_Code;
+        subject?: string;
+        detail?: string;
+        status?: {
+            code?: number;
+            message?: string;
+            details?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+        };
+    } & {
+        code?: CheckError_Code;
+        subject?: string;
+        detail?: string;
+        status?: {
+            code?: number;
+            message?: string;
+            details?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+        } & {
+            code?: number;
+            message?: string;
+            details?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[] & ({
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["status"]["details"][number], keyof import("../../../protobuf/any").Any>, never>)[] & Record<Exclude<keyof I["status"]["details"], keyof {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["status"], keyof Status>, never>;
+    } & Record<Exclude<keyof I, keyof CheckError>, never>>(object: I): CheckError;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

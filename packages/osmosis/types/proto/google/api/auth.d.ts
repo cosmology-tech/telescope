@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -6,19 +5,19 @@ import * as _m0 from "protobufjs/minimal";
  *
  * Example:
  *
- *     name: calendar.googleapis.com
- *     authentication:
- *       providers:
- *       - id: google_calendar_auth
- *         jwks_uri: https://www.googleapis.com/oauth2/v1/certs
- *         issuer: https://securetoken.google.com
- *       rules:
- *       - selector: "*"
- *         requirements:
- *           provider_id: google_calendar_auth
- *       - selector: google.calendar.Delegate
- *         oauth:
- *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
+ * name: calendar.googleapis.com
+ * authentication:
+ * providers:
+ * - id: google_calendar_auth
+ * jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ * issuer: https://securetoken.google.com
+ * rules:
+ * - selector: "*"
+ * requirements:
+ * provider_id: google_calendar_auth
+ * - selector: google.calendar.Delegate
+ * oauth:
+ * canonical_scopes: https://www.googleapis.com/auth/calendar.read
  */
 export interface Authentication {
     /**
@@ -61,9 +60,9 @@ export interface AuthenticationRule {
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocation {
     /** Specifies HTTP header name to extract JWT token. */
-    header: string | undefined;
+    header?: string;
     /** Specifies URL query parameter name to extract JWT token. */
-    query: string | undefined;
+    query?: string;
     /**
      * The value prefix. The value format is "value_prefix{token}"
      * Only applies to "in" header type. Must be empty for "in" query type.
@@ -103,12 +102,12 @@ export interface AuthProvider {
      * [OpenID
      * Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
      * Optional if the key set document:
-     *  - can be retrieved from
-     *    [OpenID
-     *    Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
-     *    of the issuer.
-     *  - can be inferred from the email domain of the issuer (e.g. a Google
-     *  service account).
+     * - can be retrieved from
+     * [OpenID
+     * Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
+     * of the issuer.
+     * - can be inferred from the email domain of the issuer (e.g. a Google
+     * service account).
      *
      * Example: https://www.googleapis.com/oauth2/v1/certs
      */
@@ -118,19 +117,19 @@ export interface AuthProvider {
      * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
      * that are allowed to access. A JWT containing any of these audiences will
      * be accepted. When this setting is absent, JWTs with audiences:
-     *   - "https://[service.name]/[google.protobuf.Api.name]"
-     *   - "https://[service.name]/"
+     * - "https://[service.name]/[google.protobuf.Api.name]"
+     * - "https://[service.name]/"
      * will be accepted.
      * For example, if no audiences are in the setting, LibraryService API will
      * accept JWTs with the following audiences:
-     *   -
-     *   https://library-example.googleapis.com/google.example.library.v1.LibraryService
-     *   - https://library-example.googleapis.com/
+     * -
+     * https://library-example.googleapis.com/google.example.library.v1.LibraryService
+     * - https://library-example.googleapis.com/
      *
      * Example:
      *
-     *     audiences: bookstore_android.apps.googleusercontent.com,
-     *                bookstore_web.apps.googleusercontent.com
+     * audiences: bookstore_android.apps.googleusercontent.com,
+     * bookstore_web.apps.googleusercontent.com
      */
     audiences: string;
     /**
@@ -146,16 +145,16 @@ export interface AuthProvider {
      * all headers first, then URL query parameters.
      *
      * If not specified,  default to use following 3 locations:
-     *    1) Authorization: Bearer
-     *    2) x-goog-iap-jwt-assertion
-     *    3) access_token query parameter
+     * 1) Authorization: Bearer
+     * 2) x-goog-iap-jwt-assertion
+     * 3) access_token query parameter
      *
      * Default locations can be specified as followings:
-     *    jwt_locations:
-     *    - header: Authorization
-     *      value_prefix: "Bearer "
-     *    - header: x-goog-iap-jwt-assertion
-     *    - query: access_token
+     * jwt_locations:
+     * - header: Authorization
+     * value_prefix: "Bearer "
+     * - header: x-goog-iap-jwt-assertion
+     * - query: access_token
      */
     jwtLocations: JwtLocation[];
 }
@@ -186,8 +185,8 @@ export interface OAuthRequirements {
      *
      * Example:
      *
-     *      canonical_scopes: https://www.googleapis.com/auth/calendar,
-     *                        https://www.googleapis.com/auth/calendar.read
+     * canonical_scopes: https://www.googleapis.com/auth/calendar,
+     * https://www.googleapis.com/auth/calendar.read
      */
     canonicalScopes: string;
 }
@@ -202,7 +201,7 @@ export interface AuthRequirement {
      *
      * Example:
      *
-     *     provider_id: bookstore_auth
+     * provider_id: bookstore_auth
      */
     providerId: string;
     /**
@@ -220,8 +219,8 @@ export interface AuthRequirement {
      *
      * Example:
      *
-     *     audiences: bookstore_android.apps.googleusercontent.com,
-     *                bookstore_web.apps.googleusercontent.com
+     * audiences: bookstore_android.apps.googleusercontent.com,
+     * bookstore_web.apps.googleusercontent.com
      */
     audiences: string;
 }
@@ -230,49 +229,257 @@ export declare const Authentication: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Authentication;
     fromJSON(object: any): Authentication;
     toJSON(message: Authentication): unknown;
-    fromPartial<I extends unknown>(object: I): Authentication;
+    fromPartial<I extends {
+        rules?: {
+            selector?: string;
+            oauth?: {
+                canonicalScopes?: string;
+            };
+            allowWithoutCredential?: boolean;
+            requirements?: {
+                providerId?: string;
+                audiences?: string;
+            }[];
+        }[];
+        providers?: {
+            id?: string;
+            issuer?: string;
+            jwksUri?: string;
+            audiences?: string;
+            authorizationUrl?: string;
+            jwtLocations?: {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            }[];
+        }[];
+    } & {
+        rules?: {
+            selector?: string;
+            oauth?: {
+                canonicalScopes?: string;
+            };
+            allowWithoutCredential?: boolean;
+            requirements?: {
+                providerId?: string;
+                audiences?: string;
+            }[];
+        }[] & ({
+            selector?: string;
+            oauth?: {
+                canonicalScopes?: string;
+            };
+            allowWithoutCredential?: boolean;
+            requirements?: {
+                providerId?: string;
+                audiences?: string;
+            }[];
+        } & {
+            selector?: string;
+            oauth?: {
+                canonicalScopes?: string;
+            } & {
+                canonicalScopes?: string;
+            } & Record<Exclude<keyof I["rules"][number]["oauth"], "canonicalScopes">, never>;
+            allowWithoutCredential?: boolean;
+            requirements?: {
+                providerId?: string;
+                audiences?: string;
+            }[] & ({
+                providerId?: string;
+                audiences?: string;
+            } & {
+                providerId?: string;
+                audiences?: string;
+            } & Record<Exclude<keyof I["rules"][number]["requirements"][number], keyof AuthRequirement>, never>)[] & Record<Exclude<keyof I["rules"][number]["requirements"], keyof {
+                providerId?: string;
+                audiences?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["rules"][number], keyof AuthenticationRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
+            selector?: string;
+            oauth?: {
+                canonicalScopes?: string;
+            };
+            allowWithoutCredential?: boolean;
+            requirements?: {
+                providerId?: string;
+                audiences?: string;
+            }[];
+        }[]>, never>;
+        providers?: {
+            id?: string;
+            issuer?: string;
+            jwksUri?: string;
+            audiences?: string;
+            authorizationUrl?: string;
+            jwtLocations?: {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            }[];
+        }[] & ({
+            id?: string;
+            issuer?: string;
+            jwksUri?: string;
+            audiences?: string;
+            authorizationUrl?: string;
+            jwtLocations?: {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            }[];
+        } & {
+            id?: string;
+            issuer?: string;
+            jwksUri?: string;
+            audiences?: string;
+            authorizationUrl?: string;
+            jwtLocations?: {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            }[] & ({
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            } & {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            } & Record<Exclude<keyof I["providers"][number]["jwtLocations"][number], keyof JwtLocation>, never>)[] & Record<Exclude<keyof I["providers"][number]["jwtLocations"], keyof {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["providers"][number], keyof AuthProvider>, never>)[] & Record<Exclude<keyof I["providers"], keyof {
+            id?: string;
+            issuer?: string;
+            jwksUri?: string;
+            audiences?: string;
+            authorizationUrl?: string;
+            jwtLocations?: {
+                header?: string;
+                query?: string;
+                valuePrefix?: string;
+            }[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof Authentication>, never>>(object: I): Authentication;
 };
 export declare const AuthenticationRule: {
     encode(message: AuthenticationRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticationRule;
     fromJSON(object: any): AuthenticationRule;
     toJSON(message: AuthenticationRule): unknown;
-    fromPartial<I extends unknown>(object: I): AuthenticationRule;
+    fromPartial<I extends {
+        selector?: string;
+        oauth?: {
+            canonicalScopes?: string;
+        };
+        allowWithoutCredential?: boolean;
+        requirements?: {
+            providerId?: string;
+            audiences?: string;
+        }[];
+    } & {
+        selector?: string;
+        oauth?: {
+            canonicalScopes?: string;
+        } & {
+            canonicalScopes?: string;
+        } & Record<Exclude<keyof I["oauth"], "canonicalScopes">, never>;
+        allowWithoutCredential?: boolean;
+        requirements?: {
+            providerId?: string;
+            audiences?: string;
+        }[] & ({
+            providerId?: string;
+            audiences?: string;
+        } & {
+            providerId?: string;
+            audiences?: string;
+        } & Record<Exclude<keyof I["requirements"][number], keyof AuthRequirement>, never>)[] & Record<Exclude<keyof I["requirements"], keyof {
+            providerId?: string;
+            audiences?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof AuthenticationRule>, never>>(object: I): AuthenticationRule;
 };
 export declare const JwtLocation: {
     encode(message: JwtLocation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): JwtLocation;
     fromJSON(object: any): JwtLocation;
     toJSON(message: JwtLocation): unknown;
-    fromPartial<I extends unknown>(object: I): JwtLocation;
+    fromPartial<I extends {
+        header?: string;
+        query?: string;
+        valuePrefix?: string;
+    } & {
+        header?: string;
+        query?: string;
+        valuePrefix?: string;
+    } & Record<Exclude<keyof I, keyof JwtLocation>, never>>(object: I): JwtLocation;
 };
 export declare const AuthProvider: {
     encode(message: AuthProvider, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthProvider;
     fromJSON(object: any): AuthProvider;
     toJSON(message: AuthProvider): unknown;
-    fromPartial<I extends unknown>(object: I): AuthProvider;
+    fromPartial<I extends {
+        id?: string;
+        issuer?: string;
+        jwksUri?: string;
+        audiences?: string;
+        authorizationUrl?: string;
+        jwtLocations?: {
+            header?: string;
+            query?: string;
+            valuePrefix?: string;
+        }[];
+    } & {
+        id?: string;
+        issuer?: string;
+        jwksUri?: string;
+        audiences?: string;
+        authorizationUrl?: string;
+        jwtLocations?: {
+            header?: string;
+            query?: string;
+            valuePrefix?: string;
+        }[] & ({
+            header?: string;
+            query?: string;
+            valuePrefix?: string;
+        } & {
+            header?: string;
+            query?: string;
+            valuePrefix?: string;
+        } & Record<Exclude<keyof I["jwtLocations"][number], keyof JwtLocation>, never>)[] & Record<Exclude<keyof I["jwtLocations"], keyof {
+            header?: string;
+            query?: string;
+            valuePrefix?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof AuthProvider>, never>>(object: I): AuthProvider;
 };
 export declare const OAuthRequirements: {
     encode(message: OAuthRequirements, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OAuthRequirements;
     fromJSON(object: any): OAuthRequirements;
     toJSON(message: OAuthRequirements): unknown;
-    fromPartial<I extends unknown>(object: I): OAuthRequirements;
+    fromPartial<I extends {
+        canonicalScopes?: string;
+    } & {
+        canonicalScopes?: string;
+    } & Record<Exclude<keyof I, "canonicalScopes">, never>>(object: I): OAuthRequirements;
 };
 export declare const AuthRequirement: {
     encode(message: AuthRequirement, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthRequirement;
     fromJSON(object: any): AuthRequirement;
     toJSON(message: AuthRequirement): unknown;
-    fromPartial<I extends unknown>(object: I): AuthRequirement;
+    fromPartial<I extends {
+        providerId?: string;
+        audiences?: string;
+    } & {
+        providerId?: string;
+        audiences?: string;
+    } & Record<Exclude<keyof I, keyof AuthRequirement>, never>>(object: I): AuthRequirement;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

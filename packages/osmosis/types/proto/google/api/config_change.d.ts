@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -81,21 +80,38 @@ export declare const ConfigChange: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigChange;
     fromJSON(object: any): ConfigChange;
     toJSON(message: ConfigChange): unknown;
-    fromPartial<I extends unknown>(object: I): ConfigChange;
+    fromPartial<I extends {
+        element?: string;
+        oldValue?: string;
+        newValue?: string;
+        changeType?: ChangeType;
+        advices?: {
+            description?: string;
+        }[];
+    } & {
+        element?: string;
+        oldValue?: string;
+        newValue?: string;
+        changeType?: ChangeType;
+        advices?: {
+            description?: string;
+        }[] & ({
+            description?: string;
+        } & {
+            description?: string;
+        } & Record<Exclude<keyof I["advices"][number], "description">, never>)[] & Record<Exclude<keyof I["advices"], keyof {
+            description?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof ConfigChange>, never>>(object: I): ConfigChange;
 };
 export declare const Advice: {
     encode(message: Advice, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Advice;
     fromJSON(object: any): Advice;
     toJSON(message: Advice): unknown;
-    fromPartial<I extends unknown>(object: I): Advice;
+    fromPartial<I extends {
+        description?: string;
+    } & {
+        description?: string;
+    } & Record<Exclude<keyof I, "description">, never>>(object: I): Advice;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

@@ -1,7 +1,7 @@
-import Long from "long";
+import { Struct } from "../../protobuf/struct";
+import { Any } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../../google/protobuf/duration";
-import { Any } from "../../../google/protobuf/any";
+import { Long } from "@osmonauts/helpers";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  *
@@ -55,6 +55,10 @@ export interface AttributeContext {
     /** Supports extensions for advanced use cases, such as logs and metrics. */
     extensions: Any[];
 }
+export interface AttributeContext_Peer_LabelsEntry {
+    key: string;
+    value: string;
+}
 /**
  * This message defines attributes for a node that handles a network request.
  * The node can be either a service or an application that sends, forwards,
@@ -82,10 +86,6 @@ export interface AttributeContext_Peer {
      * physical location where this peer is running.
      */
     regionCode: string;
-}
-export interface AttributeContext_Peer_LabelsEntry {
-    key: string;
-    value: string;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -137,11 +137,11 @@ export interface AttributeContext_Auth {
      * the following pieces of information:
      *
      * *  The services intended to receive the credential. For example,
-     *    ["https://pubsub.googleapis.com/", "https://storage.googleapis.com/"].
+     * ["https://pubsub.googleapis.com/", "https://storage.googleapis.com/"].
      * *  A set of service-based scopes. For example,
-     *    ["https://www.googleapis.com/auth/cloud-platform"].
+     * ["https://www.googleapis.com/auth/cloud-platform"].
      * *  The client id of an app, such as the Firebase project id for JWTs
-     *    from Firebase Auth.
+     * from Firebase Auth.
      *
      * Consult the documentation for the credential issuer to determine the
      * information provided.
@@ -160,20 +160,18 @@ export interface AttributeContext_Auth {
      * is a subset of the standard required and optional claims that would
      * typically be presented for a Google-based JWT:
      *
-     *    {'iss': 'accounts.google.com',
-     *     'sub': '113289723416554971153',
-     *     'aud': ['123456789012', 'pubsub.googleapis.com'],
-     *     'azp': '123456789012.apps.googleusercontent.com',
-     *     'email': 'jsmith@example.com',
-     *     'iat': 1353601026,
-     *     'exp': 1353604926}
+     * {'iss': 'accounts.google.com',
+     * 'sub': '113289723416554971153',
+     * 'aud': ['123456789012', 'pubsub.googleapis.com'],
+     * 'azp': '123456789012.apps.googleusercontent.com',
+     * 'email': 'jsmith@example.com',
+     * 'iat': 1353601026,
+     * 'exp': 1353604926}
      *
      * SAML assertions are similarly specified, but with an identity provider
      * dependent structure.
      */
-    claims: {
-        [key: string]: any;
-    } | undefined;
+    claims: Struct;
     /**
      * A list of access level resource names that allow resources to be
      * accessed by authenticated requester. It is part of Secure GCP processing
@@ -184,6 +182,10 @@ export interface AttributeContext_Auth {
      * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
      */
     accessLevels: string[];
+}
+export interface AttributeContext_Request_HeadersEntry {
+    key: string;
+    value: string;
 }
 /**
  * This message defines attributes for an HTTP request. If the actual
@@ -243,7 +245,7 @@ export interface AttributeContext_Request {
      */
     auth: AttributeContext_Auth;
 }
-export interface AttributeContext_Request_HeadersEntry {
+export interface AttributeContext_Response_HeadersEntry {
     key: string;
     value: string;
 }
@@ -275,9 +277,13 @@ export interface AttributeContext_Response {
      * request to the backend until when the destination service receives the
      * complete response from the backend.
      */
-    backendLatency: Duration;
+    backendLatency: string;
 }
-export interface AttributeContext_Response_HeadersEntry {
+export interface AttributeContext_Resource_LabelsEntry {
+    key: string;
+    value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntry {
     key: string;
     value: string;
 }
@@ -299,11 +305,11 @@ export interface AttributeContext_Resource {
      * The differences between a resource name and a URI are:
      *
      * *   Resource name is a logical identifier, independent of network
-     *     protocol and API version. For example,
-     *     `//pubsub.googleapis.com/projects/123/topics/news-feed`.
+     * protocol and API version. For example,
+     * `//pubsub.googleapis.com/projects/123/topics/news-feed`.
      * *   URI often includes protocol and version information, so it can
-     *     be used directly by applications. For example,
-     *     `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.
+     * be used directly by applications. For example,
+     * `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.
      *
      * See https://cloud.google.com/apis/design/resource_names for details.
      */
@@ -376,104 +382,808 @@ export interface AttributeContext_Resource {
      */
     location: string;
 }
-export interface AttributeContext_Resource_LabelsEntry {
-    key: string;
-    value: string;
-}
-export interface AttributeContext_Resource_AnnotationsEntry {
-    key: string;
-    value: string;
-}
 export declare const AttributeContext: {
     encode(message: AttributeContext, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext;
     fromJSON(object: any): AttributeContext;
     toJSON(message: AttributeContext): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext;
-};
-export declare const AttributeContext_Peer: {
-    encode(message: AttributeContext_Peer, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Peer;
-    fromJSON(object: any): AttributeContext_Peer;
-    toJSON(message: AttributeContext_Peer): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Peer;
+    fromPartial<I extends {
+        origin?: {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            };
+            principal?: string;
+            regionCode?: string;
+        };
+        source?: {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            };
+            principal?: string;
+            regionCode?: string;
+        };
+        destination?: {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            };
+            principal?: string;
+            regionCode?: string;
+        };
+        request?: {
+            id?: string;
+            method?: string;
+            headers?: {
+                [x: string]: string;
+            };
+            path?: string;
+            host?: string;
+            scheme?: string;
+            query?: string;
+            time?: Date;
+            size?: any;
+            protocol?: string;
+            reason?: string;
+            auth?: {
+                principal?: string;
+                audiences?: string[];
+                presenter?: string;
+                claims?: {
+                    fields?: {
+                        [x: string]: {
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        };
+                    };
+                };
+                accessLevels?: string[];
+            };
+        };
+        response?: {
+            code?: any;
+            size?: any;
+            headers?: {
+                [x: string]: string;
+            };
+            time?: Date;
+            backendLatency?: string;
+        };
+        resource?: {
+            service?: string;
+            name?: string;
+            type?: string;
+            labels?: {
+                [x: string]: string;
+            };
+            uid?: string;
+            annotations?: {
+                [x: string]: string;
+            };
+            displayName?: string;
+            createTime?: Date;
+            updateTime?: Date;
+            deleteTime?: Date;
+            etag?: string;
+            location?: string;
+        };
+        api?: {
+            service?: string;
+            operation?: string;
+            protocol?: string;
+            version?: string;
+        };
+        extensions?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[];
+    } & {
+        origin?: {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            };
+            principal?: string;
+            regionCode?: string;
+        } & {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["origin"]["labels"], string | number>, never>;
+            principal?: string;
+            regionCode?: string;
+        } & Record<Exclude<keyof I["origin"], keyof AttributeContext_Peer>, never>;
+        source?: {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            };
+            principal?: string;
+            regionCode?: string;
+        } & {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["source"]["labels"], string | number>, never>;
+            principal?: string;
+            regionCode?: string;
+        } & Record<Exclude<keyof I["source"], keyof AttributeContext_Peer>, never>;
+        destination?: {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            };
+            principal?: string;
+            regionCode?: string;
+        } & {
+            ip?: string;
+            port?: any;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["destination"]["labels"], string | number>, never>;
+            principal?: string;
+            regionCode?: string;
+        } & Record<Exclude<keyof I["destination"], keyof AttributeContext_Peer>, never>;
+        request?: {
+            id?: string;
+            method?: string;
+            headers?: {
+                [x: string]: string;
+            };
+            path?: string;
+            host?: string;
+            scheme?: string;
+            query?: string;
+            time?: Date;
+            size?: any;
+            protocol?: string;
+            reason?: string;
+            auth?: {
+                principal?: string;
+                audiences?: string[];
+                presenter?: string;
+                claims?: {
+                    fields?: {
+                        [x: string]: {
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        };
+                    };
+                };
+                accessLevels?: string[];
+            };
+        } & {
+            id?: string;
+            method?: string;
+            headers?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["request"]["headers"], string | number>, never>;
+            path?: string;
+            host?: string;
+            scheme?: string;
+            query?: string;
+            time?: Date;
+            size?: any;
+            protocol?: string;
+            reason?: string;
+            auth?: {
+                principal?: string;
+                audiences?: string[];
+                presenter?: string;
+                claims?: {
+                    fields?: {
+                        [x: string]: {
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        };
+                    };
+                };
+                accessLevels?: string[];
+            } & {
+                principal?: string;
+                audiences?: string[] & string[] & Record<Exclude<keyof I["request"]["auth"]["audiences"], keyof string[]>, never>;
+                presenter?: string;
+                claims?: {
+                    fields?: {
+                        [x: string]: {
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        };
+                    };
+                } & {
+                    fields?: {
+                        [x: string]: {
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        };
+                    } & {
+                        [x: string]: {
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["request"]["auth"]["claims"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                    } & Record<Exclude<keyof I["request"]["auth"]["claims"]["fields"], string | number>, never>;
+                } & Record<Exclude<keyof I["request"]["auth"]["claims"], "fields">, never>;
+                accessLevels?: string[] & string[] & Record<Exclude<keyof I["request"]["auth"]["accessLevels"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["request"]["auth"], keyof AttributeContext_Auth>, never>;
+        } & Record<Exclude<keyof I["request"], keyof AttributeContext_Request>, never>;
+        response?: {
+            code?: any;
+            size?: any;
+            headers?: {
+                [x: string]: string;
+            };
+            time?: Date;
+            backendLatency?: string;
+        } & {
+            code?: any;
+            size?: any;
+            headers?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["response"]["headers"], string | number>, never>;
+            time?: Date;
+            backendLatency?: string;
+        } & Record<Exclude<keyof I["response"], keyof AttributeContext_Response>, never>;
+        resource?: {
+            service?: string;
+            name?: string;
+            type?: string;
+            labels?: {
+                [x: string]: string;
+            };
+            uid?: string;
+            annotations?: {
+                [x: string]: string;
+            };
+            displayName?: string;
+            createTime?: Date;
+            updateTime?: Date;
+            deleteTime?: Date;
+            etag?: string;
+            location?: string;
+        } & {
+            service?: string;
+            name?: string;
+            type?: string;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["resource"]["labels"], string | number>, never>;
+            uid?: string;
+            annotations?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["resource"]["annotations"], string | number>, never>;
+            displayName?: string;
+            createTime?: Date;
+            updateTime?: Date;
+            deleteTime?: Date;
+            etag?: string;
+            location?: string;
+        } & Record<Exclude<keyof I["resource"], keyof AttributeContext_Resource>, never>;
+        api?: {
+            service?: string;
+            operation?: string;
+            protocol?: string;
+            version?: string;
+        } & {
+            service?: string;
+            operation?: string;
+            protocol?: string;
+            version?: string;
+        } & Record<Exclude<keyof I["api"], keyof AttributeContext_Api>, never>;
+        extensions?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[] & ({
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["extensions"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["extensions"], keyof {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof AttributeContext>, never>>(object: I): AttributeContext;
 };
 export declare const AttributeContext_Peer_LabelsEntry: {
     encode(message: AttributeContext_Peer_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Peer_LabelsEntry;
     fromJSON(object: any): AttributeContext_Peer_LabelsEntry;
     toJSON(message: AttributeContext_Peer_LabelsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Peer_LabelsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Peer_LabelsEntry>, never>>(object: I): AttributeContext_Peer_LabelsEntry;
+};
+export declare const AttributeContext_Peer: {
+    encode(message: AttributeContext_Peer, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Peer;
+    fromJSON(object: any): AttributeContext_Peer;
+    toJSON(message: AttributeContext_Peer): unknown;
+    fromPartial<I extends {
+        ip?: string;
+        port?: any;
+        labels?: {
+            [x: string]: string;
+        };
+        principal?: string;
+        regionCode?: string;
+    } & {
+        ip?: string;
+        port?: any;
+        labels?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["labels"], string | number>, never>;
+        principal?: string;
+        regionCode?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Peer>, never>>(object: I): AttributeContext_Peer;
 };
 export declare const AttributeContext_Api: {
     encode(message: AttributeContext_Api, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Api;
     fromJSON(object: any): AttributeContext_Api;
     toJSON(message: AttributeContext_Api): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Api;
+    fromPartial<I extends {
+        service?: string;
+        operation?: string;
+        protocol?: string;
+        version?: string;
+    } & {
+        service?: string;
+        operation?: string;
+        protocol?: string;
+        version?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Api>, never>>(object: I): AttributeContext_Api;
 };
 export declare const AttributeContext_Auth: {
     encode(message: AttributeContext_Auth, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Auth;
     fromJSON(object: any): AttributeContext_Auth;
     toJSON(message: AttributeContext_Auth): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Auth;
-};
-export declare const AttributeContext_Request: {
-    encode(message: AttributeContext_Request, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Request;
-    fromJSON(object: any): AttributeContext_Request;
-    toJSON(message: AttributeContext_Request): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Request;
+    fromPartial<I extends {
+        principal?: string;
+        audiences?: string[];
+        presenter?: string;
+        claims?: {
+            fields?: {
+                [x: string]: {
+                    nullValue?: import("../../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                };
+            };
+        };
+        accessLevels?: string[];
+    } & {
+        principal?: string;
+        audiences?: string[] & string[] & Record<Exclude<keyof I["audiences"], keyof string[]>, never>;
+        presenter?: string;
+        claims?: {
+            fields?: {
+                [x: string]: {
+                    nullValue?: import("../../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                };
+            };
+        } & {
+            fields?: {
+                [x: string]: {
+                    nullValue?: import("../../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                };
+            } & {
+                [x: string]: {
+                    nullValue?: import("../../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                } & {
+                    nullValue?: import("../../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: {
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            };
+                        };
+                    } & {
+                        fields?: {
+                            [x: string]: {
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            };
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["claims"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                    } & Record<Exclude<keyof I["claims"]["fields"][string]["structValue"], "fields">, never>;
+                    listValue?: {
+                        values?: any[];
+                    } & {
+                        values?: any[] & ({
+                            nullValue?: import("../../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["claims"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["claims"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["claims"]["fields"][string]["listValue"], "values">, never>;
+                } & Record<Exclude<keyof I["claims"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+            } & Record<Exclude<keyof I["claims"]["fields"], string | number>, never>;
+        } & Record<Exclude<keyof I["claims"], "fields">, never>;
+        accessLevels?: string[] & string[] & Record<Exclude<keyof I["accessLevels"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Auth>, never>>(object: I): AttributeContext_Auth;
 };
 export declare const AttributeContext_Request_HeadersEntry: {
     encode(message: AttributeContext_Request_HeadersEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Request_HeadersEntry;
     fromJSON(object: any): AttributeContext_Request_HeadersEntry;
     toJSON(message: AttributeContext_Request_HeadersEntry): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Request_HeadersEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Request_HeadersEntry>, never>>(object: I): AttributeContext_Request_HeadersEntry;
 };
-export declare const AttributeContext_Response: {
-    encode(message: AttributeContext_Response, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Response;
-    fromJSON(object: any): AttributeContext_Response;
-    toJSON(message: AttributeContext_Response): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Response;
+export declare const AttributeContext_Request: {
+    encode(message: AttributeContext_Request, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Request;
+    fromJSON(object: any): AttributeContext_Request;
+    toJSON(message: AttributeContext_Request): unknown;
+    fromPartial<I extends {
+        id?: string;
+        method?: string;
+        headers?: {
+            [x: string]: string;
+        };
+        path?: string;
+        host?: string;
+        scheme?: string;
+        query?: string;
+        time?: Date;
+        size?: any;
+        protocol?: string;
+        reason?: string;
+        auth?: {
+            principal?: string;
+            audiences?: string[];
+            presenter?: string;
+            claims?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            accessLevels?: string[];
+        };
+    } & {
+        id?: string;
+        method?: string;
+        headers?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["headers"], string | number>, never>;
+        path?: string;
+        host?: string;
+        scheme?: string;
+        query?: string;
+        time?: Date;
+        size?: any;
+        protocol?: string;
+        reason?: string;
+        auth?: {
+            principal?: string;
+            audiences?: string[];
+            presenter?: string;
+            claims?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            accessLevels?: string[];
+        } & {
+            principal?: string;
+            audiences?: string[] & string[] & Record<Exclude<keyof I["auth"]["audiences"], keyof string[]>, never>;
+            presenter?: string;
+            claims?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            } & {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                } & {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            };
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["auth"]["claims"]["fields"][string]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["auth"]["claims"]["fields"][string]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["auth"]["claims"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                } & Record<Exclude<keyof I["auth"]["claims"]["fields"], string | number>, never>;
+            } & Record<Exclude<keyof I["auth"]["claims"], "fields">, never>;
+            accessLevels?: string[] & string[] & Record<Exclude<keyof I["auth"]["accessLevels"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["auth"], keyof AttributeContext_Auth>, never>;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Request>, never>>(object: I): AttributeContext_Request;
 };
 export declare const AttributeContext_Response_HeadersEntry: {
     encode(message: AttributeContext_Response_HeadersEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Response_HeadersEntry;
     fromJSON(object: any): AttributeContext_Response_HeadersEntry;
     toJSON(message: AttributeContext_Response_HeadersEntry): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Response_HeadersEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Response_HeadersEntry>, never>>(object: I): AttributeContext_Response_HeadersEntry;
 };
-export declare const AttributeContext_Resource: {
-    encode(message: AttributeContext_Resource, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource;
-    fromJSON(object: any): AttributeContext_Resource;
-    toJSON(message: AttributeContext_Resource): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Resource;
+export declare const AttributeContext_Response: {
+    encode(message: AttributeContext_Response, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Response;
+    fromJSON(object: any): AttributeContext_Response;
+    toJSON(message: AttributeContext_Response): unknown;
+    fromPartial<I extends {
+        code?: any;
+        size?: any;
+        headers?: {
+            [x: string]: string;
+        };
+        time?: Date;
+        backendLatency?: string;
+    } & {
+        code?: any;
+        size?: any;
+        headers?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["headers"], string | number>, never>;
+        time?: Date;
+        backendLatency?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Response>, never>>(object: I): AttributeContext_Response;
 };
 export declare const AttributeContext_Resource_LabelsEntry: {
     encode(message: AttributeContext_Resource_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource_LabelsEntry;
     fromJSON(object: any): AttributeContext_Resource_LabelsEntry;
     toJSON(message: AttributeContext_Resource_LabelsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Resource_LabelsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Resource_LabelsEntry>, never>>(object: I): AttributeContext_Resource_LabelsEntry;
 };
 export declare const AttributeContext_Resource_AnnotationsEntry: {
     encode(message: AttributeContext_Resource_AnnotationsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource_AnnotationsEntry;
     fromJSON(object: any): AttributeContext_Resource_AnnotationsEntry;
     toJSON(message: AttributeContext_Resource_AnnotationsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): AttributeContext_Resource_AnnotationsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Resource_AnnotationsEntry>, never>>(object: I): AttributeContext_Resource_AnnotationsEntry;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};
+export declare const AttributeContext_Resource: {
+    encode(message: AttributeContext_Resource, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AttributeContext_Resource;
+    fromJSON(object: any): AttributeContext_Resource;
+    toJSON(message: AttributeContext_Resource): unknown;
+    fromPartial<I extends {
+        service?: string;
+        name?: string;
+        type?: string;
+        labels?: {
+            [x: string]: string;
+        };
+        uid?: string;
+        annotations?: {
+            [x: string]: string;
+        };
+        displayName?: string;
+        createTime?: Date;
+        updateTime?: Date;
+        deleteTime?: Date;
+        etag?: string;
+        location?: string;
+    } & {
+        service?: string;
+        name?: string;
+        type?: string;
+        labels?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["labels"], string | number>, never>;
+        uid?: string;
+        annotations?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["annotations"], string | number>, never>;
+        displayName?: string;
+        createTime?: Date;
+        updateTime?: Date;
+        deleteTime?: Date;
+        etag?: string;
+        location?: string;
+    } & Record<Exclude<keyof I, keyof AttributeContext_Resource>, never>>(object: I): AttributeContext_Resource;
+};

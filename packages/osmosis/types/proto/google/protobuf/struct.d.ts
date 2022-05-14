@@ -1,10 +1,9 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
  * `Value` type union.
  *
- *  The JSON representation for `NullValue` is JSON `null`.
+ * The JSON representation for `NullValue` is JSON `null`.
  */
 export declare enum NullValue {
     /** NULL_VALUE - Null value. */
@@ -13,6 +12,10 @@ export declare enum NullValue {
 }
 export declare function nullValueFromJSON(object: any): NullValue;
 export declare function nullValueToJSON(object: NullValue): string;
+export interface Struct_FieldsEntry {
+    key: string;
+    value: Value;
+}
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -26,36 +29,30 @@ export declare function nullValueToJSON(object: NullValue): string;
 export interface Struct {
     /** Unordered map of dynamically typed values. */
     fields: {
-        [key: string]: any | undefined;
+        [key: string]: Value;
     };
-}
-export interface Struct_FieldsEntry {
-    key: string;
-    value: any | undefined;
 }
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
- * list of values. A producer of value is expected to set one of these
- * variants. Absence of any variant indicates an error.
+ * list of values. A producer of value is expected to set one of that
+ * variants, absence of any variant indicates an error.
  *
  * The JSON representation for `Value` is JSON value.
  */
 export interface Value {
     /** Represents a null value. */
-    nullValue: NullValue | undefined;
+    nullValue?: NullValue;
     /** Represents a double value. */
-    numberValue: number | undefined;
+    numberValue?: number;
     /** Represents a string value. */
-    stringValue: string | undefined;
+    stringValue?: string;
     /** Represents a boolean value. */
-    boolValue: boolean | undefined;
+    boolValue?: boolean;
     /** Represents a structured value. */
-    structValue: {
-        [key: string]: any;
-    } | undefined;
+    structValue?: Struct;
     /** Represents a repeated `Value`. */
-    listValue: Array<any> | undefined;
+    listValue?: ListValue;
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -64,52 +61,3018 @@ export interface Value {
  */
 export interface ListValue {
     /** Repeated field of dynamically typed values. */
-    values: any[];
+    values: Value[];
 }
-export declare const Struct: {
-    encode(message: Struct, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Struct;
-    fromJSON(object: any): Struct;
-    toJSON(message: Struct): unknown;
-    fromPartial<I extends unknown>(object: I): Struct;
-    wrap(object: {
-        [key: string]: any;
-    }): Struct;
-    unwrap(message: Struct): {
-        [key: string]: any;
-    };
-};
 export declare const Struct_FieldsEntry: {
     encode(message: Struct_FieldsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsEntry;
     fromJSON(object: any): Struct_FieldsEntry;
     toJSON(message: Struct_FieldsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): Struct_FieldsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: {
+            nullValue?: NullValue;
+            numberValue?: number;
+            stringValue?: string;
+            boolValue?: boolean;
+            structValue?: {
+                fields?: {
+                    [x: string]: any;
+                };
+            };
+            listValue?: {
+                values?: any[];
+            };
+        };
+    } & {
+        key?: string;
+        value?: {
+            nullValue?: NullValue;
+            numberValue?: number;
+            stringValue?: string;
+            boolValue?: boolean;
+            structValue?: {
+                fields?: {
+                    [x: string]: any;
+                };
+            };
+            listValue?: {
+                values?: any[];
+            };
+        } & {
+            nullValue?: NullValue;
+            numberValue?: number;
+            stringValue?: string;
+            boolValue?: boolean;
+            structValue?: {
+                fields?: {
+                    [x: string]: any;
+                };
+            } & {
+                fields?: {
+                    [x: string]: any;
+                } & {
+                    [x: string]: {
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        };
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: any;
+                            } & {
+                                [x: string]: {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["value"]["structValue"]["fields"][string], keyof Value>, never>;
+                } & Record<Exclude<keyof I["value"]["structValue"]["fields"], string | number>, never>;
+            } & Record<Exclude<keyof I["value"]["structValue"], "fields">, never>;
+            listValue?: {
+                values?: any[];
+            } & {
+                values?: any[] & ({
+                    nullValue?: NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: any;
+                        };
+                    };
+                    listValue?: {
+                        values?: any[];
+                    };
+                } & {
+                    nullValue?: NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: any;
+                        };
+                    } & {
+                        fields?: {
+                            [x: string]: any;
+                        } & {
+                            [x: string]: {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                    listValue?: {
+                        values?: any[];
+                    } & {
+                        values?: any[] & ({
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            };
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            } & {
+                                fields?: {
+                                    [x: string]: any;
+                                } & {
+                                    [x: string]: {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                            listValue?: {
+                                values?: any[];
+                            } & {
+                                values?: any[] & ({
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                        } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["value"]["listValue"]["values"][number]["listValue"], "values">, never>;
+                } & Record<Exclude<keyof I["value"]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["value"]["listValue"]["values"], keyof any[]>, never>;
+            } & Record<Exclude<keyof I["value"]["listValue"], "values">, never>;
+        } & Record<Exclude<keyof I["value"], keyof Value>, never>;
+    } & Record<Exclude<keyof I, keyof Struct_FieldsEntry>, never>>(object: I): Struct_FieldsEntry;
+};
+export declare const Struct: {
+    encode(message: Struct, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Struct;
+    fromJSON(object: any): Struct;
+    toJSON(message: Struct): unknown;
+    fromPartial<I extends {
+        fields?: {
+            [x: string]: any;
+        };
+    } & {
+        fields?: {
+            [x: string]: any;
+        } & {
+            [x: string]: {
+                nullValue?: NullValue;
+                numberValue?: number;
+                stringValue?: string;
+                boolValue?: boolean;
+                structValue?: {
+                    fields?: {
+                        [x: string]: any;
+                    };
+                };
+                listValue?: {
+                    values?: any[];
+                };
+            } & {
+                nullValue?: NullValue;
+                numberValue?: number;
+                stringValue?: string;
+                boolValue?: boolean;
+                structValue?: {
+                    fields?: {
+                        [x: string]: any;
+                    };
+                } & {
+                    fields?: {
+                        [x: string]: any;
+                    } & {
+                        [x: string]: {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            };
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            } & {
+                                fields?: {
+                                    [x: string]: any;
+                                } & {
+                                    [x: string]: {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                            listValue?: {
+                                values?: any[];
+                            } & {
+                                values?: any[] & ({
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                        } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                    } & Record<Exclude<keyof I["fields"][string]["structValue"]["fields"], string | number>, never>;
+                } & Record<Exclude<keyof I["fields"][string]["structValue"], "fields">, never>;
+                listValue?: {
+                    values?: any[];
+                } & {
+                    values?: any[] & ({
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        };
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: any;
+                            } & {
+                                [x: string]: {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                } & Record<Exclude<keyof I["fields"][string]["listValue"], "values">, never>;
+            } & Record<Exclude<keyof I["fields"][string], keyof Value>, never>;
+        } & Record<Exclude<keyof I["fields"], string | number>, never>;
+    } & Record<Exclude<keyof I, "fields">, never>>(object: I): Struct;
 };
 export declare const Value: {
     encode(message: Value, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Value;
     fromJSON(object: any): Value;
     toJSON(message: Value): unknown;
-    fromPartial<I extends unknown>(object: I): Value;
-    wrap(value: any): Value;
-    unwrap(message: Value): string | number | boolean | Object | null | Array<any> | undefined;
+    fromPartial<I extends {
+        nullValue?: NullValue;
+        numberValue?: number;
+        stringValue?: string;
+        boolValue?: boolean;
+        structValue?: {
+            fields?: {
+                [x: string]: any;
+            };
+        };
+        listValue?: {
+            values?: any[];
+        };
+    } & {
+        nullValue?: NullValue;
+        numberValue?: number;
+        stringValue?: string;
+        boolValue?: boolean;
+        structValue?: {
+            fields?: {
+                [x: string]: any;
+            };
+        } & {
+            fields?: {
+                [x: string]: any;
+            } & {
+                [x: string]: {
+                    nullValue?: NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: any;
+                        };
+                    };
+                    listValue?: {
+                        values?: any[];
+                    };
+                } & {
+                    nullValue?: NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: any;
+                        };
+                    } & {
+                        fields?: {
+                            [x: string]: any;
+                        } & {
+                            [x: string]: {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                    listValue?: {
+                        values?: any[];
+                    } & {
+                        values?: any[] & ({
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            };
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            } & {
+                                fields?: {
+                                    [x: string]: any;
+                                } & {
+                                    [x: string]: {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                            listValue?: {
+                                values?: any[];
+                            } & {
+                                values?: any[] & ({
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                        } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["structValue"]["fields"][string]["listValue"], "values">, never>;
+                } & Record<Exclude<keyof I["structValue"]["fields"][string], keyof Value>, never>;
+            } & Record<Exclude<keyof I["structValue"]["fields"], string | number>, never>;
+        } & Record<Exclude<keyof I["structValue"], "fields">, never>;
+        listValue?: {
+            values?: any[];
+        } & {
+            values?: any[] & ({
+                nullValue?: NullValue;
+                numberValue?: number;
+                stringValue?: string;
+                boolValue?: boolean;
+                structValue?: {
+                    fields?: {
+                        [x: string]: any;
+                    };
+                };
+                listValue?: {
+                    values?: any[];
+                };
+            } & {
+                nullValue?: NullValue;
+                numberValue?: number;
+                stringValue?: string;
+                boolValue?: boolean;
+                structValue?: {
+                    fields?: {
+                        [x: string]: any;
+                    };
+                } & {
+                    fields?: {
+                        [x: string]: any;
+                    } & {
+                        [x: string]: {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            };
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            } & {
+                                fields?: {
+                                    [x: string]: any;
+                                } & {
+                                    [x: string]: {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                            listValue?: {
+                                values?: any[];
+                            } & {
+                                values?: any[] & ({
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                        } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                    } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                } & Record<Exclude<keyof I["listValue"]["values"][number]["structValue"], "fields">, never>;
+                listValue?: {
+                    values?: any[];
+                } & {
+                    values?: any[] & ({
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        };
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: any;
+                            } & {
+                                [x: string]: {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                } & Record<Exclude<keyof I["listValue"]["values"][number]["listValue"], "values">, never>;
+            } & Record<Exclude<keyof I["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["listValue"]["values"], keyof any[]>, never>;
+        } & Record<Exclude<keyof I["listValue"], "values">, never>;
+    } & Record<Exclude<keyof I, keyof Value>, never>>(object: I): Value;
 };
 export declare const ListValue: {
     encode(message: ListValue, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListValue;
     fromJSON(object: any): ListValue;
     toJSON(message: ListValue): unknown;
-    fromPartial<I extends unknown>(object: I): ListValue;
-    wrap(value: Array<any> | undefined): ListValue;
-    unwrap(message: ListValue): Array<any>;
+    fromPartial<I extends {
+        values?: any[];
+    } & {
+        values?: any[] & ({
+            nullValue?: NullValue;
+            numberValue?: number;
+            stringValue?: string;
+            boolValue?: boolean;
+            structValue?: {
+                fields?: {
+                    [x: string]: any;
+                };
+            };
+            listValue?: {
+                values?: any[];
+            };
+        } & {
+            nullValue?: NullValue;
+            numberValue?: number;
+            stringValue?: string;
+            boolValue?: boolean;
+            structValue?: {
+                fields?: {
+                    [x: string]: any;
+                };
+            } & {
+                fields?: {
+                    [x: string]: any;
+                } & {
+                    [x: string]: {
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        };
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: any;
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: any;
+                            } & {
+                                [x: string]: {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                } & Record<Exclude<keyof I["values"][number]["structValue"]["fields"], string | number>, never>;
+            } & Record<Exclude<keyof I["values"][number]["structValue"], "fields">, never>;
+            listValue?: {
+                values?: any[];
+            } & {
+                values?: any[] & ({
+                    nullValue?: NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: any;
+                        };
+                    };
+                    listValue?: {
+                        values?: any[];
+                    };
+                } & {
+                    nullValue?: NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: any;
+                        };
+                    } & {
+                        fields?: {
+                            [x: string]: any;
+                        } & {
+                            [x: string]: {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                };
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: any;
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: any;
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                    listValue?: {
+                        values?: any[];
+                    } & {
+                        values?: any[] & ({
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            };
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            nullValue?: NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: any;
+                                };
+                            } & {
+                                fields?: {
+                                    [x: string]: any;
+                                } & {
+                                    [x: string]: {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        };
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: any;
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: any;
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof Value>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                            listValue?: {
+                                values?: any[];
+                            } & {
+                                values?: any[] & ({
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    };
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: any;
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: any;
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                };
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: any;
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof Value>, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            };
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: any;
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: {
+                                                        fields?: {
+                                                            [x: string]: any;
+                                                        };
+                                                    };
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                        } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                } & Record<Exclude<keyof I["values"][number]["listValue"]["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"][number]["listValue"]["values"], keyof any[]>, never>;
+            } & Record<Exclude<keyof I["values"][number]["listValue"], "values">, never>;
+        } & Record<Exclude<keyof I["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"], keyof any[]>, never>;
+    } & Record<Exclude<keyof I, "values">, never>>(object: I): ListValue;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

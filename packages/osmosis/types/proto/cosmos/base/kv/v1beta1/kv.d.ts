@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
@@ -14,21 +13,37 @@ export declare const Pairs: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Pairs;
     fromJSON(object: any): Pairs;
     toJSON(message: Pairs): unknown;
-    fromPartial<I extends unknown>(object: I): Pairs;
+    fromPartial<I extends {
+        pairs?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        }[];
+    } & {
+        pairs?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        }[] & ({
+            key?: Uint8Array;
+            value?: Uint8Array;
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["pairs"][number], keyof Pair>, never>)[] & Record<Exclude<keyof I["pairs"], keyof {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "pairs">, never>>(object: I): Pairs;
 };
 export declare const Pair: {
     encode(message: Pair, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Pair;
     fromJSON(object: any): Pair;
     toJSON(message: Pair): unknown;
-    fromPartial<I extends unknown>(object: I): Pair;
+    fromPartial<I extends {
+        key?: Uint8Array;
+        value?: Uint8Array;
+    } & {
+        key?: Uint8Array;
+        value?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof Pair>, never>>(object: I): Pair;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

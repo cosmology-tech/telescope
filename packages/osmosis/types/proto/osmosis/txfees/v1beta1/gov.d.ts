@@ -1,6 +1,5 @@
-import Long from "long";
+import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
-import { FeeToken } from "../../../osmosis/txfees/v1beta1/feetoken";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -18,14 +17,22 @@ export declare const UpdateFeeTokenProposal: {
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateFeeTokenProposal;
     fromJSON(object: any): UpdateFeeTokenProposal;
     toJSON(message: UpdateFeeTokenProposal): unknown;
-    fromPartial<I extends unknown>(object: I): UpdateFeeTokenProposal;
+    fromPartial<I extends {
+        title?: string;
+        description?: string;
+        feetoken?: {
+            denom?: string;
+            poolID?: any;
+        };
+    } & {
+        title?: string;
+        description?: string;
+        feetoken?: {
+            denom?: string;
+            poolID?: any;
+        } & {
+            denom?: string;
+            poolID?: any;
+        } & Record<Exclude<keyof I["feetoken"], keyof FeeToken>, never>;
+    } & Record<Exclude<keyof I, keyof UpdateFeeTokenProposal>, never>>(object: I): UpdateFeeTokenProposal;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

@@ -1,6 +1,5 @@
-import Long from "long";
+import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { Any } from "../../google/protobuf/any";
 /**
  * The `Status` type defines a logical error model that is suitable for
  * different programming environments, including REST APIs and RPC APIs. It is
@@ -30,14 +29,28 @@ export declare const Status: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Status;
     fromJSON(object: any): Status;
     toJSON(message: Status): unknown;
-    fromPartial<I extends unknown>(object: I): Status;
+    fromPartial<I extends {
+        code?: number;
+        message?: string;
+        details?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[];
+    } & {
+        code?: number;
+        message?: string;
+        details?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[] & ({
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["details"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["details"], keyof {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof Status>, never>>(object: I): Status;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

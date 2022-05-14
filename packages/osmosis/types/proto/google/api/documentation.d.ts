@@ -1,28 +1,27 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Documentation` provides the information for describing a service.
  *
  * Example:
  * <pre><code>documentation:
- *   summary: >
- *     The Google Calendar API gives access
- *     to most calendar features.
- *   pages:
- *   - name: Overview
- *     content: &#40;== include google/foo/overview.md ==&#41;
- *   - name: Tutorial
- *     content: &#40;== include google/foo/tutorial.md ==&#41;
- *     subpages;
- *     - name: Java
- *       content: &#40;== include google/foo/tutorial_java.md ==&#41;
- *   rules:
- *   - selector: google.calendar.Calendar.Get
- *     description: >
- *       ...
- *   - selector: google.calendar.Calendar.Put
- *     description: >
- *       ...
+ * summary: >
+ * The Google Calendar API gives access
+ * to most calendar features.
+ * pages:
+ * - name: Overview
+ * content: &#40;== include google/foo/overview.md ==&#41;
+ * - name: Tutorial
+ * content: &#40;== include google/foo/tutorial.md ==&#41;
+ * subpages;
+ * - name: Java
+ * content: &#40;== include google/foo/tutorial_java.md ==&#41;
+ * rules:
+ * - selector: google.calendar.Calendar.Get
+ * description: >
+ * ...
+ * - selector: google.calendar.Calendar.Put
+ * description: >
+ * ...
  * </code></pre>
  * Documentation is provided in markdown syntax. In addition to
  * standard markdown features, definition lists, tables and fenced
@@ -83,15 +82,15 @@ export interface Documentation {
     /**
      * Declares a single overview page. For example:
      * <pre><code>documentation:
-     *   summary: ...
-     *   overview: &#40;== include overview.md ==&#41;
+     * summary: ...
+     * overview: &#40;== include overview.md ==&#41;
      * </code></pre>
      * This is a shortcut for the following declaration (using pages style):
      * <pre><code>documentation:
-     *   summary: ...
-     *   pages:
-     *   - name: Overview
-     *     content: &#40;== include overview.md ==&#41;
+     * summary: ...
+     * pages:
+     * - name: Overview
+     * content: &#40;== include overview.md ==&#41;
      * </code></pre>
      * Note: you cannot specify both `overview` field and `pages` field.
      */
@@ -129,10 +128,10 @@ export interface Page {
      * documentation. For example:
      * <pre><code>pages:
      * - name: Tutorial
-     *   content: &#40;== include tutorial.md ==&#41;
-     *   subpages:
-     *   - name: Java
-     *     content: &#40;== include tutorial_java.md ==&#41;
+     * content: &#40;== include tutorial.md ==&#41;
+     * subpages:
+     * - name: Java
+     * content: &#40;== include tutorial_java.md ==&#41;
      * </code></pre>
      * You can reference `Java` page using Markdown reference link syntax:
      * `[Java][Tutorial.Java]`.
@@ -154,28 +153,417 @@ export declare const Documentation: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Documentation;
     fromJSON(object: any): Documentation;
     toJSON(message: Documentation): unknown;
-    fromPartial<I extends unknown>(object: I): Documentation;
+    fromPartial<I extends {
+        summary?: string;
+        pages?: {
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        }[];
+        rules?: {
+            selector?: string;
+            description?: string;
+            deprecationDescription?: string;
+        }[];
+        documentationRootUrl?: string;
+        serviceRootUrl?: string;
+        overview?: string;
+    } & {
+        summary?: string;
+        pages?: {
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        }[] & ({
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        } & {
+            name?: string;
+            content?: string;
+            subpages?: {
+                name?: string;
+                content?: string;
+                subpages?: any[];
+            }[] & ({
+                name?: string;
+                content?: string;
+                subpages?: any[];
+            } & {
+                name?: string;
+                content?: string;
+                subpages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[] & ({
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                } & {
+                    name?: string;
+                    content?: string;
+                    subpages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[] & ({
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    } & {
+                        name?: string;
+                        content?: string;
+                        subpages?: {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[] & ({
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        } & {
+                            name?: string;
+                            content?: string;
+                            subpages?: {
+                                name?: string;
+                                content?: string;
+                                subpages?: any[];
+                            }[] & ({
+                                name?: string;
+                                content?: string;
+                                subpages?: any[];
+                            } & {
+                                name?: string;
+                                content?: string;
+                                subpages?: {
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: any[];
+                                }[] & ({
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: any[];
+                                } & {
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: {
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: any[];
+                                    }[] & ({
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: any[];
+                                    } & {
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: {
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: any[];
+                                        }[] & ({
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: any[];
+                                        } & {
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: {
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: any[];
+                                            }[] & ({
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: any[];
+                                            } & {
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: {
+                                                    name?: string;
+                                                    content?: string;
+                                                    subpages?: any[];
+                                                }[] & ({
+                                                    name?: string;
+                                                    content?: string;
+                                                    subpages?: any[];
+                                                } & any & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                                    name?: string;
+                                                    content?: string;
+                                                    subpages?: any[];
+                                                }[]>, never>;
+                                            } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: any[];
+                                            }[]>, never>;
+                                        } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: any[];
+                                        }[]>, never>;
+                                    } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: any[];
+                                    }[]>, never>;
+                                } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: any[];
+                                }[]>, never>;
+                            } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                name?: string;
+                                content?: string;
+                                subpages?: any[];
+                            }[]>, never>;
+                        } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"][number]["subpages"], keyof {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["pages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"][number]["subpages"], keyof {
+                name?: string;
+                content?: string;
+                subpages?: any[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["pages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["pages"], keyof {
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        }[]>, never>;
+        rules?: {
+            selector?: string;
+            description?: string;
+            deprecationDescription?: string;
+        }[] & ({
+            selector?: string;
+            description?: string;
+            deprecationDescription?: string;
+        } & {
+            selector?: string;
+            description?: string;
+            deprecationDescription?: string;
+        } & Record<Exclude<keyof I["rules"][number], keyof DocumentationRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
+            selector?: string;
+            description?: string;
+            deprecationDescription?: string;
+        }[]>, never>;
+        documentationRootUrl?: string;
+        serviceRootUrl?: string;
+        overview?: string;
+    } & Record<Exclude<keyof I, keyof Documentation>, never>>(object: I): Documentation;
 };
 export declare const DocumentationRule: {
     encode(message: DocumentationRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DocumentationRule;
     fromJSON(object: any): DocumentationRule;
     toJSON(message: DocumentationRule): unknown;
-    fromPartial<I extends unknown>(object: I): DocumentationRule;
+    fromPartial<I extends {
+        selector?: string;
+        description?: string;
+        deprecationDescription?: string;
+    } & {
+        selector?: string;
+        description?: string;
+        deprecationDescription?: string;
+    } & Record<Exclude<keyof I, keyof DocumentationRule>, never>>(object: I): DocumentationRule;
 };
 export declare const Page: {
     encode(message: Page, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Page;
     fromJSON(object: any): Page;
     toJSON(message: Page): unknown;
-    fromPartial<I extends unknown>(object: I): Page;
+    fromPartial<I extends {
+        name?: string;
+        content?: string;
+        subpages?: any[];
+    } & {
+        name?: string;
+        content?: string;
+        subpages?: {
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        }[] & ({
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        } & {
+            name?: string;
+            content?: string;
+            subpages?: {
+                name?: string;
+                content?: string;
+                subpages?: any[];
+            }[] & ({
+                name?: string;
+                content?: string;
+                subpages?: any[];
+            } & {
+                name?: string;
+                content?: string;
+                subpages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[] & ({
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                } & {
+                    name?: string;
+                    content?: string;
+                    subpages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[] & ({
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    } & {
+                        name?: string;
+                        content?: string;
+                        subpages?: {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[] & ({
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        } & {
+                            name?: string;
+                            content?: string;
+                            subpages?: {
+                                name?: string;
+                                content?: string;
+                                subpages?: any[];
+                            }[] & ({
+                                name?: string;
+                                content?: string;
+                                subpages?: any[];
+                            } & {
+                                name?: string;
+                                content?: string;
+                                subpages?: {
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: any[];
+                                }[] & ({
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: any[];
+                                } & {
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: {
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: any[];
+                                    }[] & ({
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: any[];
+                                    } & {
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: {
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: any[];
+                                        }[] & ({
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: any[];
+                                        } & {
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: {
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: any[];
+                                            }[] & ({
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: any[];
+                                            } & {
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: {
+                                                    name?: string;
+                                                    content?: string;
+                                                    subpages?: any[];
+                                                }[] & ({
+                                                    name?: string;
+                                                    content?: string;
+                                                    subpages?: any[];
+                                                } & any & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                                    name?: string;
+                                                    content?: string;
+                                                    subpages?: any[];
+                                                }[]>, never>;
+                                            } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                                name?: string;
+                                                content?: string;
+                                                subpages?: any[];
+                                            }[]>, never>;
+                                        } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                            name?: string;
+                                            content?: string;
+                                            subpages?: any[];
+                                        }[]>, never>;
+                                    } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                        name?: string;
+                                        content?: string;
+                                        subpages?: any[];
+                                    }[]>, never>;
+                                } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                    name?: string;
+                                    content?: string;
+                                    subpages?: any[];
+                                }[]>, never>;
+                            } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                                name?: string;
+                                content?: string;
+                                subpages?: any[];
+                            }[]>, never>;
+                        } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number]["subpages"], keyof {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"][number]["subpages"], keyof {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["subpages"][number]["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"][number]["subpages"], keyof {
+                name?: string;
+                content?: string;
+                subpages?: any[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["subpages"][number], keyof Page>, never>)[] & Record<Exclude<keyof I["subpages"], keyof {
+            name?: string;
+            content?: string;
+            subpages?: any[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof Page>, never>>(object: I): Page;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

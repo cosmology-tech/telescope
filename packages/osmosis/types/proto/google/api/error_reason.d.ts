@@ -19,13 +19,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when the consumer "projects/123" contacting
      * "pubsub.googleapis.com" service which is disabled:
      *
-     *     { "reason": "SERVICE_DISABLED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "pubsub.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "SERVICE_DISABLED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "pubsub.googleapis.com"
+     * }
+     * }
      *
      * This response indicates the "pubsub.googleapis.com" has been disabled in
      * "projects/123".
@@ -38,13 +38,13 @@ export declare enum ErrorReason {
      * "pubsub.googleapis.com" service because the associated billing account is
      * disabled:
      *
-     *     { "reason": "BILLING_DISABLED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "pubsub.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "BILLING_DISABLED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "pubsub.googleapis.com"
+     * }
+     * }
      *
      * This response indicates the billing account associated has been disabled.
      */
@@ -57,12 +57,12 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when the request is contacting
      * "storage.googleapis.com" service with an invalid API key:
      *
-     *     { "reason": "API_KEY_INVALID",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "service": "storage.googleapis.com",
-     *       }
-     *     }
+     * { "reason": "API_KEY_INVALID",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "service": "storage.googleapis.com",
+     * }
+     * }
      */
     API_KEY_INVALID = 3,
     /**
@@ -73,13 +73,13 @@ export declare enum ErrorReason {
      * "storage.googleapis.com" service because this service is restricted in the
      * API key:
      *
-     *     { "reason": "API_KEY_SERVICE_BLOCKED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "API_KEY_SERVICE_BLOCKED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     API_KEY_SERVICE_BLOCKED = 4,
     /**
@@ -90,13 +90,13 @@ export declare enum ErrorReason {
      * "storage.googleapis.com" service because the http referrer of the request
      * violates API key HTTP restrictions:
      *
-     *     { "reason": "API_KEY_HTTP_REFERRER_BLOCKED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com",
-     *       }
-     *     }
+     * { "reason": "API_KEY_HTTP_REFERRER_BLOCKED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com",
+     * }
+     * }
      */
     API_KEY_HTTP_REFERRER_BLOCKED = 7,
     /**
@@ -107,13 +107,13 @@ export declare enum ErrorReason {
      * "storage.googleapis.com" service because the caller IP of the request
      * violates API key IP address restrictions:
      *
-     *     { "reason": "API_KEY_IP_ADDRESS_BLOCKED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com",
-     *       }
-     *     }
+     * { "reason": "API_KEY_IP_ADDRESS_BLOCKED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com",
+     * }
+     * }
      */
     API_KEY_IP_ADDRESS_BLOCKED = 8,
     /**
@@ -124,13 +124,13 @@ export declare enum ErrorReason {
      * "storage.googleapis.com" service because the request from the Android apps
      * violates the API key Android application restrictions:
      *
-     *     { "reason": "API_KEY_ANDROID_APP_BLOCKED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "API_KEY_ANDROID_APP_BLOCKED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     API_KEY_ANDROID_APP_BLOCKED = 9,
     /**
@@ -141,13 +141,13 @@ export declare enum ErrorReason {
      * "storage.googleapis.com" service because the request from the iOS apps
      * violates the API key iOS application restrictions:
      *
-     *     { "reason": "API_KEY_IOS_APP_BLOCKED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "API_KEY_IOS_APP_BLOCKED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     API_KEY_IOS_APP_BLOCKED = 13,
     /**
@@ -160,30 +160,30 @@ export declare enum ErrorReason {
      * "ReadsPerMinutePerProject" on the quota metric
      * "pubsub.googleapis.com/read_requests":
      *
-     *     { "reason": "RATE_LIMIT_EXCEEDED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "pubsub.googleapis.com",
-     *         "quota_metric": "pubsub.googleapis.com/read_requests",
-     *         "quota_limit": "ReadsPerMinutePerProject"
-     *       }
-     *     }
+     * { "reason": "RATE_LIMIT_EXCEEDED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "pubsub.googleapis.com",
+     * "quota_metric": "pubsub.googleapis.com/read_requests",
+     * "quota_limit": "ReadsPerMinutePerProject"
+     * }
+     * }
      *
      * Example of an ErrorInfo when the consumer "projects/123" checks quota on
      * the service "dataflow.googleapis.com" and hits the organization quota
      * limit "DefaultRequestsPerMinutePerOrganization" on the metric
      * "dataflow.googleapis.com/default_requests".
      *
-     *     { "reason": "RATE_LIMIT_EXCEEDED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "dataflow.googleapis.com",
-     *         "quota_metric": "dataflow.googleapis.com/default_requests",
-     *         "quota_limit": "DefaultRequestsPerMinutePerOrganization"
-     *       }
-     *     }
+     * { "reason": "RATE_LIMIT_EXCEEDED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "dataflow.googleapis.com",
+     * "quota_metric": "dataflow.googleapis.com/default_requests",
+     * "quota_limit": "DefaultRequestsPerMinutePerOrganization"
+     * }
+     * }
      */
     RATE_LIMIT_EXCEEDED = 5,
     /**
@@ -195,30 +195,30 @@ export declare enum ErrorReason {
      * has reached the maximum value set for the quota limit "VMsPerProject"
      * on the quota metric "compute.googleapis.com/vms":
      *
-     *     { "reason": "RESOURCE_QUOTA_EXCEEDED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "compute.googleapis.com",
-     *         "quota_metric": "compute.googleapis.com/vms",
-     *         "quota_limit": "VMsPerProject"
-     *       }
-     *     }
+     * { "reason": "RESOURCE_QUOTA_EXCEEDED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "compute.googleapis.com",
+     * "quota_metric": "compute.googleapis.com/vms",
+     * "quota_limit": "VMsPerProject"
+     * }
+     * }
      *
      * Example of an ErrorInfo when the consumer "projects/123" checks resource
      * quota on the service "dataflow.googleapis.com" and hits the organization
      * quota limit "jobs-per-organization" on the metric
      * "dataflow.googleapis.com/job_count".
      *
-     *     { "reason": "RESOURCE_QUOTA_EXCEEDED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "dataflow.googleapis.com",
-     *         "quota_metric": "dataflow.googleapis.com/job_count",
-     *         "quota_limit": "jobs-per-organization"
-     *       }
-     *     }
+     * { "reason": "RESOURCE_QUOTA_EXCEEDED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "dataflow.googleapis.com",
+     * "quota_metric": "dataflow.googleapis.com/job_count",
+     * "quota_limit": "jobs-per-organization"
+     * }
+     * }
      */
     RESOURCE_QUOTA_EXCEEDED = 6,
     /**
@@ -230,14 +230,14 @@ export declare enum ErrorReason {
      * container "projects/123" under a tax restricted region
      * "locations/asia-northeast3":
      *
-     *     { "reason": "LOCATION_TAX_POLICY_VIOLATED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com",
-     *         "location": "locations/asia-northeast3"
-     *       }
-     *     }
+     * { "reason": "LOCATION_TAX_POLICY_VIOLATED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com",
+     * "location": "locations/asia-northeast3"
+     * }
+     * }
      *
      * This response indicates creating the Cloud Storage Bucket in
      * "locations/asia-northeast3" violates the location tax restriction.
@@ -252,13 +252,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when the caller is calling Cloud Storage service
      * with insufficient permissions on the user project:
      *
-     *     { "reason": "USER_PROJECT_DENIED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "USER_PROJECT_DENIED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     USER_PROJECT_DENIED = 11,
     /**
@@ -270,13 +270,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when calling Cloud Storage service with the
      * suspended consumer "projects/123":
      *
-     *     { "reason": "CONSUMER_SUSPENDED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "CONSUMER_SUSPENDED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     CONSUMER_SUSPENDED = 12,
     /**
@@ -286,13 +286,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when calling Cloud Storage service with the
      * invalid consumer "projects/123":
      *
-     *     { "reason": "CONSUMER_INVALID",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "CONSUMER_INVALID",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     CONSUMER_INVALID = 14,
     /**
@@ -307,14 +307,14 @@ export declare enum ErrorReason {
      * Cloud Storage service because the request is prohibited by the VPC Service
      * Controls.
      *
-     *     { "reason": "SECURITY_POLICY_VIOLATED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "uid": "123456789abcde",
-     *         "consumer": "projects/123",
-     *         "service": "storage.googleapis.com"
-     *       }
-     *     }
+     * { "reason": "SECURITY_POLICY_VIOLATED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "uid": "123456789abcde",
+     * "consumer": "projects/123",
+     * "service": "storage.googleapis.com"
+     * }
+     * }
      */
     SECURITY_POLICY_VIOLATED = 15,
     /**
@@ -323,13 +323,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when the request is calling Cloud Storage service
      * with an expired access token:
      *
-     *     { "reason": "ACCESS_TOKEN_EXPIRED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "service": "storage.googleapis.com",
-     *         "method": "google.storage.v1.Storage.GetObject"
-     *       }
-     *     }
+     * { "reason": "ACCESS_TOKEN_EXPIRED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "service": "storage.googleapis.com",
+     * "method": "google.storage.v1.Storage.GetObject"
+     * }
+     * }
      */
     ACCESS_TOKEN_EXPIRED = 16,
     /**
@@ -343,13 +343,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when the request is calling Cloud Storage service
      * with an access token that is missing required scopes:
      *
-     *     { "reason": "ACCESS_TOKEN_SCOPE_INSUFFICIENT",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "service": "storage.googleapis.com",
-     *         "method": "google.storage.v1.Storage.GetObject"
-     *       }
-     *     }
+     * { "reason": "ACCESS_TOKEN_SCOPE_INSUFFICIENT",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "service": "storage.googleapis.com",
+     * "method": "google.storage.v1.Storage.GetObject"
+     * }
+     * }
      */
     ACCESS_TOKEN_SCOPE_INSUFFICIENT = 17,
     /**
@@ -365,14 +365,14 @@ export declare enum ErrorReason {
      * an access token that is associated with a disabled or deleted [service
      * account](http://cloud/iam/docs/service-accounts):
      *
-     *     { "reason": "ACCOUNT_STATE_INVALID",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "service": "storage.googleapis.com",
-     *         "method": "google.storage.v1.Storage.GetObject",
-     *         "email": "user@123.iam.gserviceaccount.com"
-     *       }
-     *     }
+     * { "reason": "ACCOUNT_STATE_INVALID",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "service": "storage.googleapis.com",
+     * "method": "google.storage.v1.Storage.GetObject",
+     * "email": "user@123.iam.gserviceaccount.com"
+     * }
+     * }
      */
     ACCOUNT_STATE_INVALID = 18,
     /**
@@ -382,13 +382,13 @@ export declare enum ErrorReason {
      * Example of an ErrorInfo when the request is to the Cloud Storage API with
      * an unsupported token type.
      *
-     *     { "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
-     *       "domain": "googleapis.com",
-     *       "metadata": {
-     *         "service": "storage.googleapis.com",
-     *         "method": "google.storage.v1.Storage.GetObject"
-     *       }
-     *     }
+     * { "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
+     * "domain": "googleapis.com",
+     * "metadata": {
+     * "service": "storage.googleapis.com",
+     * "method": "google.storage.v1.Storage.GetObject"
+     * }
+     * }
      */
     ACCESS_TOKEN_TYPE_UNSUPPORTED = 19,
     UNRECOGNIZED = -1

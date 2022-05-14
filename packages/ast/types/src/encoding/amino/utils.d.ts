@@ -16,6 +16,7 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
     id: number;
     options: {
         [key: string]: any;
+        deprecated?: boolean;
         "(gogoproto.nullable)"?: boolean;
         "(cosmos_proto.scalar)"?: string;
         "(gogoproto.customtype)"?: string;

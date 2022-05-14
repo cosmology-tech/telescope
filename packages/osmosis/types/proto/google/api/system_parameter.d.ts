@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * ### System parameter configuration
@@ -19,24 +18,24 @@ export interface SystemParameters {
      *
      * Example: define api key for all methods
      *
-     *     system_parameters
-     *       rules:
-     *         - selector: "*"
-     *           parameters:
-     *             - name: api_key
-     *               url_query_parameter: api_key
+     * system_parameters
+     * rules:
+     * - selector: "*"
+     * parameters:
+     * - name: api_key
+     * url_query_parameter: api_key
      *
      *
      * Example: define 2 api key names for a specific method.
      *
-     *     system_parameters
-     *       rules:
-     *         - selector: "/ListShelves"
-     *           parameters:
-     *             - name: api_key
-     *               http_header: Api-Key1
-     *             - name: api_key
-     *               http_header: Api-Key2
+     * system_parameters
+     * rules:
+     * - selector: "/ListShelves"
+     * parameters:
+     * - name: api_key
+     * http_header: Api-Key1
+     * - name: api_key
+     * http_header: Api-Key2
      *
      * **NOTE:** All service configuration rules follow "last one wins" order.
      */
@@ -87,28 +86,104 @@ export declare const SystemParameters: {
     decode(input: _m0.Reader | Uint8Array, length?: number): SystemParameters;
     fromJSON(object: any): SystemParameters;
     toJSON(message: SystemParameters): unknown;
-    fromPartial<I extends unknown>(object: I): SystemParameters;
+    fromPartial<I extends {
+        rules?: {
+            selector?: string;
+            parameters?: {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            }[];
+        }[];
+    } & {
+        rules?: {
+            selector?: string;
+            parameters?: {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            }[];
+        }[] & ({
+            selector?: string;
+            parameters?: {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            }[];
+        } & {
+            selector?: string;
+            parameters?: {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            }[] & ({
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            } & {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            } & Record<Exclude<keyof I["rules"][number]["parameters"][number], keyof SystemParameter>, never>)[] & Record<Exclude<keyof I["rules"][number]["parameters"], keyof {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["rules"][number], keyof SystemParameterRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
+            selector?: string;
+            parameters?: {
+                name?: string;
+                httpHeader?: string;
+                urlQueryParameter?: string;
+            }[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "rules">, never>>(object: I): SystemParameters;
 };
 export declare const SystemParameterRule: {
     encode(message: SystemParameterRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SystemParameterRule;
     fromJSON(object: any): SystemParameterRule;
     toJSON(message: SystemParameterRule): unknown;
-    fromPartial<I extends unknown>(object: I): SystemParameterRule;
+    fromPartial<I extends {
+        selector?: string;
+        parameters?: {
+            name?: string;
+            httpHeader?: string;
+            urlQueryParameter?: string;
+        }[];
+    } & {
+        selector?: string;
+        parameters?: {
+            name?: string;
+            httpHeader?: string;
+            urlQueryParameter?: string;
+        }[] & ({
+            name?: string;
+            httpHeader?: string;
+            urlQueryParameter?: string;
+        } & {
+            name?: string;
+            httpHeader?: string;
+            urlQueryParameter?: string;
+        } & Record<Exclude<keyof I["parameters"][number], keyof SystemParameter>, never>)[] & Record<Exclude<keyof I["parameters"], keyof {
+            name?: string;
+            httpHeader?: string;
+            urlQueryParameter?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof SystemParameterRule>, never>>(object: I): SystemParameterRule;
 };
 export declare const SystemParameter: {
     encode(message: SystemParameter, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SystemParameter;
     fromJSON(object: any): SystemParameter;
     toJSON(message: SystemParameter): unknown;
-    fromPartial<I extends unknown>(object: I): SystemParameter;
+    fromPartial<I extends {
+        name?: string;
+        httpHeader?: string;
+        urlQueryParameter?: string;
+    } & {
+        name?: string;
+        httpHeader?: string;
+        urlQueryParameter?: string;
+    } & Record<Exclude<keyof I, keyof SystemParameter>, never>>(object: I): SystemParameter;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

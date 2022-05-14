@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 export declare enum HashOp {
     /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
@@ -82,10 +81,10 @@ export interface NonExistenceProof {
 }
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProof {
-    exist: ExistenceProof | undefined;
-    nonexist: NonExistenceProof | undefined;
-    batch: BatchProof | undefined;
-    compressed: CompressedBatchProof | undefined;
+    exist?: ExistenceProof;
+    nonexist?: NonExistenceProof;
+    batch?: BatchProof;
+    compressed?: CompressedBatchProof;
 }
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
@@ -191,8 +190,8 @@ export interface BatchProof {
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface BatchEntry {
-    exist: ExistenceProof | undefined;
-    nonexist: NonExistenceProof | undefined;
+    exist?: ExistenceProof;
+    nonexist?: NonExistenceProof;
 }
 export interface CompressedBatchProof {
     entries: CompressedBatchEntry[];
@@ -200,8 +199,8 @@ export interface CompressedBatchProof {
 }
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface CompressedBatchEntry {
-    exist: CompressedExistenceProof | undefined;
-    nonexist: CompressedNonExistenceProof | undefined;
+    exist?: CompressedExistenceProof;
+    nonexist?: CompressedNonExistenceProof;
 }
 export interface CompressedExistenceProof {
     key: Uint8Array;
@@ -221,98 +220,2604 @@ export declare const ExistenceProof: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ExistenceProof;
     fromJSON(object: any): ExistenceProof;
     toJSON(message: ExistenceProof): unknown;
-    fromPartial<I extends unknown>(object: I): ExistenceProof;
+    fromPartial<I extends {
+        key?: Uint8Array;
+        value?: Uint8Array;
+        leaf?: {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        };
+        path?: {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        }[];
+    } & {
+        key?: Uint8Array;
+        value?: Uint8Array;
+        leaf?: {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        } & {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        } & Record<Exclude<keyof I["leaf"], keyof LeafOp>, never>;
+        path?: {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        }[] & ({
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        } & {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        } & Record<Exclude<keyof I["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["path"], keyof {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof ExistenceProof>, never>>(object: I): ExistenceProof;
 };
 export declare const NonExistenceProof: {
     encode(message: NonExistenceProof, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): NonExistenceProof;
     fromJSON(object: any): NonExistenceProof;
     toJSON(message: NonExistenceProof): unknown;
-    fromPartial<I extends unknown>(object: I): NonExistenceProof;
+    fromPartial<I extends {
+        key?: Uint8Array;
+        left?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        };
+        right?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        };
+    } & {
+        key?: Uint8Array;
+        left?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["left"]["leaf"], keyof LeafOp>, never>;
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[] & ({
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & Record<Exclude<keyof I["left"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["left"]["path"], keyof {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["left"], keyof ExistenceProof>, never>;
+        right?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["right"]["leaf"], keyof LeafOp>, never>;
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[] & ({
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & Record<Exclude<keyof I["right"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["right"]["path"], keyof {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["right"], keyof ExistenceProof>, never>;
+    } & Record<Exclude<keyof I, keyof NonExistenceProof>, never>>(object: I): NonExistenceProof;
 };
 export declare const CommitmentProof: {
     encode(message: CommitmentProof, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CommitmentProof;
     fromJSON(object: any): CommitmentProof;
     toJSON(message: CommitmentProof): unknown;
-    fromPartial<I extends unknown>(object: I): CommitmentProof;
+    fromPartial<I extends {
+        exist?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        };
+        nonexist?: {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+        };
+        batch?: {
+            entries?: {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                };
+            }[];
+        };
+        compressed?: {
+            entries?: {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                };
+            }[];
+            lookupInners?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        };
+    } & {
+        exist?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["exist"]["leaf"], keyof LeafOp>, never>;
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[] & ({
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & Record<Exclude<keyof I["exist"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["exist"]["path"], keyof {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["exist"], keyof ExistenceProof>, never>;
+        nonexist?: {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+        } & {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[] & ({
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["left"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["nonexist"]["left"]["path"], keyof {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["nonexist"]["left"], keyof ExistenceProof>, never>;
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[] & ({
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["right"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["nonexist"]["right"]["path"], keyof {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["nonexist"]["right"], keyof ExistenceProof>, never>;
+        } & Record<Exclude<keyof I["nonexist"], keyof NonExistenceProof>, never>;
+        batch?: {
+            entries?: {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                };
+            }[];
+        } & {
+            entries?: {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                };
+            }[] & ({
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                };
+            } & {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                } & {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & Record<Exclude<keyof I["batch"]["entries"][number]["exist"]["leaf"], keyof LeafOp>, never>;
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[] & ({
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    } & Record<Exclude<keyof I["batch"]["entries"][number]["exist"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["batch"]["entries"][number]["exist"]["path"], keyof {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["batch"]["entries"][number]["exist"], keyof ExistenceProof>, never>;
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                } & {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    } & {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[] & ({
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        } & {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["left"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["left"]["path"], keyof {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["left"], keyof ExistenceProof>, never>;
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    } & {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[] & ({
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        } & {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["right"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["right"]["path"], keyof {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"]["right"], keyof ExistenceProof>, never>;
+                } & Record<Exclude<keyof I["batch"]["entries"][number]["nonexist"], keyof NonExistenceProof>, never>;
+            } & Record<Exclude<keyof I["batch"]["entries"][number], keyof BatchEntry>, never>)[] & Record<Exclude<keyof I["batch"]["entries"], keyof {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: {
+                            hash?: HashOp;
+                            prefix?: Uint8Array;
+                            suffix?: Uint8Array;
+                        }[];
+                    };
+                };
+            }[]>, never>;
+        } & Record<Exclude<keyof I["batch"], "entries">, never>;
+        compressed?: {
+            entries?: {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                };
+            }[];
+            lookupInners?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        } & {
+            entries?: {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                };
+            }[] & ({
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                };
+            } & {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                } & {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & Record<Exclude<keyof I["compressed"]["entries"][number]["exist"]["leaf"], keyof LeafOp>, never>;
+                    path?: number[] & number[] & Record<Exclude<keyof I["compressed"]["entries"][number]["exist"]["path"], keyof number[]>, never>;
+                } & Record<Exclude<keyof I["compressed"]["entries"][number]["exist"], keyof CompressedExistenceProof>, never>;
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                } & {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    } & {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                        path?: number[] & number[] & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"]["left"]["path"], keyof number[]>, never>;
+                    } & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"]["left"], keyof CompressedExistenceProof>, never>;
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    } & {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        } & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                        path?: number[] & number[] & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"]["right"]["path"], keyof number[]>, never>;
+                    } & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"]["right"], keyof CompressedExistenceProof>, never>;
+                } & Record<Exclude<keyof I["compressed"]["entries"][number]["nonexist"], keyof CompressedNonExistenceProof>, never>;
+            } & Record<Exclude<keyof I["compressed"]["entries"][number], keyof CompressedBatchEntry>, never>)[] & Record<Exclude<keyof I["compressed"]["entries"], keyof {
+                exist?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                nonexist?: {
+                    key?: Uint8Array;
+                    left?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                    right?: {
+                        key?: Uint8Array;
+                        value?: Uint8Array;
+                        leaf?: {
+                            hash?: HashOp;
+                            prehashKey?: HashOp;
+                            prehashValue?: HashOp;
+                            length?: LengthOp;
+                            prefix?: Uint8Array;
+                        };
+                        path?: number[];
+                    };
+                };
+            }[]>, never>;
+            lookupInners?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[] & ({
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & Record<Exclude<keyof I["compressed"]["lookupInners"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["compressed"]["lookupInners"], keyof {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["compressed"], keyof CompressedBatchProof>, never>;
+    } & Record<Exclude<keyof I, keyof CommitmentProof>, never>>(object: I): CommitmentProof;
 };
 export declare const LeafOp: {
     encode(message: LeafOp, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LeafOp;
     fromJSON(object: any): LeafOp;
     toJSON(message: LeafOp): unknown;
-    fromPartial<I extends unknown>(object: I): LeafOp;
+    fromPartial<I extends {
+        hash?: HashOp;
+        prehashKey?: HashOp;
+        prehashValue?: HashOp;
+        length?: LengthOp;
+        prefix?: Uint8Array;
+    } & {
+        hash?: HashOp;
+        prehashKey?: HashOp;
+        prehashValue?: HashOp;
+        length?: LengthOp;
+        prefix?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof LeafOp>, never>>(object: I): LeafOp;
 };
 export declare const InnerOp: {
     encode(message: InnerOp, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): InnerOp;
     fromJSON(object: any): InnerOp;
     toJSON(message: InnerOp): unknown;
-    fromPartial<I extends unknown>(object: I): InnerOp;
+    fromPartial<I extends {
+        hash?: HashOp;
+        prefix?: Uint8Array;
+        suffix?: Uint8Array;
+    } & {
+        hash?: HashOp;
+        prefix?: Uint8Array;
+        suffix?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof InnerOp>, never>>(object: I): InnerOp;
 };
 export declare const ProofSpec: {
     encode(message: ProofSpec, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ProofSpec;
     fromJSON(object: any): ProofSpec;
     toJSON(message: ProofSpec): unknown;
-    fromPartial<I extends unknown>(object: I): ProofSpec;
+    fromPartial<I extends {
+        leafSpec?: {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        };
+        innerSpec?: {
+            childOrder?: number[];
+            childSize?: number;
+            minPrefixLength?: number;
+            maxPrefixLength?: number;
+            emptyChild?: Uint8Array;
+            hash?: HashOp;
+        };
+        maxDepth?: number;
+        minDepth?: number;
+    } & {
+        leafSpec?: {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        } & {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        } & Record<Exclude<keyof I["leafSpec"], keyof LeafOp>, never>;
+        innerSpec?: {
+            childOrder?: number[];
+            childSize?: number;
+            minPrefixLength?: number;
+            maxPrefixLength?: number;
+            emptyChild?: Uint8Array;
+            hash?: HashOp;
+        } & {
+            childOrder?: number[] & number[] & Record<Exclude<keyof I["innerSpec"]["childOrder"], keyof number[]>, never>;
+            childSize?: number;
+            minPrefixLength?: number;
+            maxPrefixLength?: number;
+            emptyChild?: Uint8Array;
+            hash?: HashOp;
+        } & Record<Exclude<keyof I["innerSpec"], keyof InnerSpec>, never>;
+        maxDepth?: number;
+        minDepth?: number;
+    } & Record<Exclude<keyof I, keyof ProofSpec>, never>>(object: I): ProofSpec;
 };
 export declare const InnerSpec: {
     encode(message: InnerSpec, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): InnerSpec;
     fromJSON(object: any): InnerSpec;
     toJSON(message: InnerSpec): unknown;
-    fromPartial<I extends unknown>(object: I): InnerSpec;
+    fromPartial<I extends {
+        childOrder?: number[];
+        childSize?: number;
+        minPrefixLength?: number;
+        maxPrefixLength?: number;
+        emptyChild?: Uint8Array;
+        hash?: HashOp;
+    } & {
+        childOrder?: number[] & number[] & Record<Exclude<keyof I["childOrder"], keyof number[]>, never>;
+        childSize?: number;
+        minPrefixLength?: number;
+        maxPrefixLength?: number;
+        emptyChild?: Uint8Array;
+        hash?: HashOp;
+    } & Record<Exclude<keyof I, keyof InnerSpec>, never>>(object: I): InnerSpec;
 };
 export declare const BatchProof: {
     encode(message: BatchProof, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BatchProof;
     fromJSON(object: any): BatchProof;
     toJSON(message: BatchProof): unknown;
-    fromPartial<I extends unknown>(object: I): BatchProof;
+    fromPartial<I extends {
+        entries?: {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+            };
+        }[];
+    } & {
+        entries?: {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+            };
+        }[] & ({
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+            };
+        } & {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["entries"][number]["exist"]["leaf"], keyof LeafOp>, never>;
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[] & ({
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & Record<Exclude<keyof I["entries"][number]["exist"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["entries"][number]["exist"]["path"], keyof {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["exist"], keyof ExistenceProof>, never>;
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+            } & {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                } & {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[] & ({
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    } & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"]["path"], keyof {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"], keyof ExistenceProof>, never>;
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                } & {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[] & ({
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    } & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"]["path"], keyof {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"], keyof ExistenceProof>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["nonexist"], keyof NonExistenceProof>, never>;
+        } & Record<Exclude<keyof I["entries"][number], keyof BatchEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: {
+                        hash?: HashOp;
+                        prefix?: Uint8Array;
+                        suffix?: Uint8Array;
+                    }[];
+                };
+            };
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "entries">, never>>(object: I): BatchProof;
 };
 export declare const BatchEntry: {
     encode(message: BatchEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BatchEntry;
     fromJSON(object: any): BatchEntry;
     toJSON(message: BatchEntry): unknown;
-    fromPartial<I extends unknown>(object: I): BatchEntry;
+    fromPartial<I extends {
+        exist?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        };
+        nonexist?: {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+        };
+    } & {
+        exist?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["exist"]["leaf"], keyof LeafOp>, never>;
+            path?: {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[] & ({
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            } & Record<Exclude<keyof I["exist"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["exist"]["path"], keyof {
+                hash?: HashOp;
+                prefix?: Uint8Array;
+                suffix?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["exist"], keyof ExistenceProof>, never>;
+        nonexist?: {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            };
+        } & {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[] & ({
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["left"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["nonexist"]["left"]["path"], keyof {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["nonexist"]["left"], keyof ExistenceProof>, never>;
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                path?: {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[] & ({
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["right"]["path"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["nonexist"]["right"]["path"], keyof {
+                    hash?: HashOp;
+                    prefix?: Uint8Array;
+                    suffix?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["nonexist"]["right"], keyof ExistenceProof>, never>;
+        } & Record<Exclude<keyof I["nonexist"], keyof NonExistenceProof>, never>;
+    } & Record<Exclude<keyof I, keyof BatchEntry>, never>>(object: I): BatchEntry;
 };
 export declare const CompressedBatchProof: {
     encode(message: CompressedBatchProof, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CompressedBatchProof;
     fromJSON(object: any): CompressedBatchProof;
     toJSON(message: CompressedBatchProof): unknown;
-    fromPartial<I extends unknown>(object: I): CompressedBatchProof;
+    fromPartial<I extends {
+        entries?: {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+            };
+        }[];
+        lookupInners?: {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        }[];
+    } & {
+        entries?: {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+            };
+        }[] & ({
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+            };
+        } & {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["entries"][number]["exist"]["leaf"], keyof LeafOp>, never>;
+                path?: number[] & number[] & Record<Exclude<keyof I["entries"][number]["exist"]["path"], keyof number[]>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["exist"], keyof CompressedExistenceProof>, never>;
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+            } & {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                } & {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                    path?: number[] & number[] & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"]["path"], keyof number[]>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["nonexist"]["left"], keyof CompressedExistenceProof>, never>;
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                } & {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    } & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                    path?: number[] & number[] & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"]["path"], keyof number[]>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["nonexist"]["right"], keyof CompressedExistenceProof>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["nonexist"], keyof CompressedNonExistenceProof>, never>;
+        } & Record<Exclude<keyof I["entries"][number], keyof CompressedBatchEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
+            exist?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+            nonexist?: {
+                key?: Uint8Array;
+                left?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+                right?: {
+                    key?: Uint8Array;
+                    value?: Uint8Array;
+                    leaf?: {
+                        hash?: HashOp;
+                        prehashKey?: HashOp;
+                        prehashValue?: HashOp;
+                        length?: LengthOp;
+                        prefix?: Uint8Array;
+                    };
+                    path?: number[];
+                };
+            };
+        }[]>, never>;
+        lookupInners?: {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        }[] & ({
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        } & {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        } & Record<Exclude<keyof I["lookupInners"][number], keyof InnerOp>, never>)[] & Record<Exclude<keyof I["lookupInners"], keyof {
+            hash?: HashOp;
+            prefix?: Uint8Array;
+            suffix?: Uint8Array;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof CompressedBatchProof>, never>>(object: I): CompressedBatchProof;
 };
 export declare const CompressedBatchEntry: {
     encode(message: CompressedBatchEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CompressedBatchEntry;
     fromJSON(object: any): CompressedBatchEntry;
     toJSON(message: CompressedBatchEntry): unknown;
-    fromPartial<I extends unknown>(object: I): CompressedBatchEntry;
+    fromPartial<I extends {
+        exist?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: number[];
+        };
+        nonexist?: {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+        };
+    } & {
+        exist?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: number[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["exist"]["leaf"], keyof LeafOp>, never>;
+            path?: number[] & number[] & Record<Exclude<keyof I["exist"]["path"], keyof number[]>, never>;
+        } & Record<Exclude<keyof I["exist"], keyof CompressedExistenceProof>, never>;
+        nonexist?: {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            };
+        } & {
+            key?: Uint8Array;
+            left?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["left"]["leaf"], keyof LeafOp>, never>;
+                path?: number[] & number[] & Record<Exclude<keyof I["nonexist"]["left"]["path"], keyof number[]>, never>;
+            } & Record<Exclude<keyof I["nonexist"]["left"], keyof CompressedExistenceProof>, never>;
+            right?: {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                };
+                path?: number[];
+            } & {
+                key?: Uint8Array;
+                value?: Uint8Array;
+                leaf?: {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & {
+                    hash?: HashOp;
+                    prehashKey?: HashOp;
+                    prehashValue?: HashOp;
+                    length?: LengthOp;
+                    prefix?: Uint8Array;
+                } & Record<Exclude<keyof I["nonexist"]["right"]["leaf"], keyof LeafOp>, never>;
+                path?: number[] & number[] & Record<Exclude<keyof I["nonexist"]["right"]["path"], keyof number[]>, never>;
+            } & Record<Exclude<keyof I["nonexist"]["right"], keyof CompressedExistenceProof>, never>;
+        } & Record<Exclude<keyof I["nonexist"], keyof CompressedNonExistenceProof>, never>;
+    } & Record<Exclude<keyof I, keyof CompressedBatchEntry>, never>>(object: I): CompressedBatchEntry;
 };
 export declare const CompressedExistenceProof: {
     encode(message: CompressedExistenceProof, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CompressedExistenceProof;
     fromJSON(object: any): CompressedExistenceProof;
     toJSON(message: CompressedExistenceProof): unknown;
-    fromPartial<I extends unknown>(object: I): CompressedExistenceProof;
+    fromPartial<I extends {
+        key?: Uint8Array;
+        value?: Uint8Array;
+        leaf?: {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        };
+        path?: number[];
+    } & {
+        key?: Uint8Array;
+        value?: Uint8Array;
+        leaf?: {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        } & {
+            hash?: HashOp;
+            prehashKey?: HashOp;
+            prehashValue?: HashOp;
+            length?: LengthOp;
+            prefix?: Uint8Array;
+        } & Record<Exclude<keyof I["leaf"], keyof LeafOp>, never>;
+        path?: number[] & number[] & Record<Exclude<keyof I["path"], keyof number[]>, never>;
+    } & Record<Exclude<keyof I, keyof CompressedExistenceProof>, never>>(object: I): CompressedExistenceProof;
 };
 export declare const CompressedNonExistenceProof: {
     encode(message: CompressedNonExistenceProof, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CompressedNonExistenceProof;
     fromJSON(object: any): CompressedNonExistenceProof;
     toJSON(message: CompressedNonExistenceProof): unknown;
-    fromPartial<I extends unknown>(object: I): CompressedNonExistenceProof;
+    fromPartial<I extends {
+        key?: Uint8Array;
+        left?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: number[];
+        };
+        right?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: number[];
+        };
+    } & {
+        key?: Uint8Array;
+        left?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: number[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["left"]["leaf"], keyof LeafOp>, never>;
+            path?: number[] & number[] & Record<Exclude<keyof I["left"]["path"], keyof number[]>, never>;
+        } & Record<Exclude<keyof I["left"], keyof CompressedExistenceProof>, never>;
+        right?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            };
+            path?: number[];
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+            leaf?: {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & {
+                hash?: HashOp;
+                prehashKey?: HashOp;
+                prehashValue?: HashOp;
+                length?: LengthOp;
+                prefix?: Uint8Array;
+            } & Record<Exclude<keyof I["right"]["leaf"], keyof LeafOp>, never>;
+            path?: number[] & number[] & Record<Exclude<keyof I["right"]["path"], keyof number[]>, never>;
+        } & Record<Exclude<keyof I["right"], keyof CompressedExistenceProof>, never>;
+    } & Record<Exclude<keyof I, keyof CompressedNonExistenceProof>, never>>(object: I): CompressedNonExistenceProof;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

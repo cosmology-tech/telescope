@@ -1,9 +1,9 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Channel, IdentifiedChannel, PacketState } from "../../../../ibc/core/channel/v1/channel";
-import { Height, IdentifiedClientState } from "../../../../ibc/core/client/v1/client";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Channel, IdentifiedChannel, PacketState } from "./channel";
+import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequest {
     /** port unique identifier */
@@ -304,189 +304,829 @@ export declare const QueryChannelRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelRequest;
     fromJSON(object: any): QueryChannelRequest;
     toJSON(message: QueryChannelRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+    } & {
+        portId?: string;
+        channelId?: string;
+    } & Record<Exclude<keyof I, keyof QueryChannelRequest>, never>>(object: I): QueryChannelRequest;
 };
 export declare const QueryChannelResponse: {
     encode(message: QueryChannelResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelResponse;
     fromJSON(object: any): QueryChannelResponse;
     toJSON(message: QueryChannelResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelResponse;
+    fromPartial<I extends {
+        channel?: {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+        };
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        channel?: {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+        } & {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            } & {
+                portId?: string;
+                channelId?: string;
+            } & Record<Exclude<keyof I["channel"]["counterparty"], keyof import("./channel").Counterparty>, never>;
+            connectionHops?: string[] & string[] & Record<Exclude<keyof I["channel"]["connectionHops"], keyof string[]>, never>;
+            version?: string;
+        } & Record<Exclude<keyof I["channel"], keyof Channel>, never>;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryChannelResponse>, never>>(object: I): QueryChannelResponse;
 };
 export declare const QueryChannelsRequest: {
     encode(message: QueryChannelsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelsRequest;
     fromJSON(object: any): QueryChannelsRequest;
     toJSON(message: QueryChannelsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelsRequest;
+    fromPartial<I extends {
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryChannelsRequest;
 };
 export declare const QueryChannelsResponse: {
     encode(message: QueryChannelsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelsResponse;
     fromJSON(object: any): QueryChannelsResponse;
     toJSON(message: QueryChannelsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelsResponse;
+    fromPartial<I extends {
+        channels?: {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        channels?: {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        }[] & ({
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        } & {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            } & {
+                portId?: string;
+                channelId?: string;
+            } & Record<Exclude<keyof I["channels"][number]["counterparty"], keyof import("./channel").Counterparty>, never>;
+            connectionHops?: string[] & string[] & Record<Exclude<keyof I["channels"][number]["connectionHops"], keyof string[]>, never>;
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        } & Record<Exclude<keyof I["channels"][number], keyof IdentifiedChannel>, never>)[] & Record<Exclude<keyof I["channels"], keyof {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryChannelsResponse>, never>>(object: I): QueryChannelsResponse;
 };
 export declare const QueryConnectionChannelsRequest: {
     encode(message: QueryConnectionChannelsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionChannelsRequest;
     fromJSON(object: any): QueryConnectionChannelsRequest;
     toJSON(message: QueryConnectionChannelsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryConnectionChannelsRequest;
+    fromPartial<I extends {
+        connection?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        connection?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, keyof QueryConnectionChannelsRequest>, never>>(object: I): QueryConnectionChannelsRequest;
 };
 export declare const QueryConnectionChannelsResponse: {
     encode(message: QueryConnectionChannelsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionChannelsResponse;
     fromJSON(object: any): QueryConnectionChannelsResponse;
     toJSON(message: QueryConnectionChannelsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryConnectionChannelsResponse;
+    fromPartial<I extends {
+        channels?: {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        channels?: {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        }[] & ({
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        } & {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            } & {
+                portId?: string;
+                channelId?: string;
+            } & Record<Exclude<keyof I["channels"][number]["counterparty"], keyof import("./channel").Counterparty>, never>;
+            connectionHops?: string[] & string[] & Record<Exclude<keyof I["channels"][number]["connectionHops"], keyof string[]>, never>;
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        } & Record<Exclude<keyof I["channels"][number], keyof IdentifiedChannel>, never>)[] & Record<Exclude<keyof I["channels"], keyof {
+            state?: import("./channel").State;
+            ordering?: import("./channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+            portId?: string;
+            channelId?: string;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryConnectionChannelsResponse>, never>>(object: I): QueryConnectionChannelsResponse;
 };
 export declare const QueryChannelClientStateRequest: {
     encode(message: QueryChannelClientStateRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelClientStateRequest;
     fromJSON(object: any): QueryChannelClientStateRequest;
     toJSON(message: QueryChannelClientStateRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelClientStateRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+    } & {
+        portId?: string;
+        channelId?: string;
+    } & Record<Exclude<keyof I, keyof QueryChannelClientStateRequest>, never>>(object: I): QueryChannelClientStateRequest;
 };
 export declare const QueryChannelClientStateResponse: {
     encode(message: QueryChannelClientStateResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelClientStateResponse;
     fromJSON(object: any): QueryChannelClientStateResponse;
     toJSON(message: QueryChannelClientStateResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelClientStateResponse;
+    fromPartial<I extends {
+        identifiedClientState?: {
+            clientId?: string;
+            clientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        };
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        identifiedClientState?: {
+            clientId?: string;
+            clientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        } & {
+            clientId?: string;
+            clientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["identifiedClientState"]["clientState"], keyof Any>, never>;
+        } & Record<Exclude<keyof I["identifiedClientState"], keyof IdentifiedClientState>, never>;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryChannelClientStateResponse>, never>>(object: I): QueryChannelClientStateResponse;
 };
 export declare const QueryChannelConsensusStateRequest: {
     encode(message: QueryChannelConsensusStateRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelConsensusStateRequest;
     fromJSON(object: any): QueryChannelConsensusStateRequest;
     toJSON(message: QueryChannelConsensusStateRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelConsensusStateRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        revisionNumber?: any;
+        revisionHeight?: any;
+    } & {
+        portId?: string;
+        channelId?: string;
+        revisionNumber?: any;
+        revisionHeight?: any;
+    } & Record<Exclude<keyof I, keyof QueryChannelConsensusStateRequest>, never>>(object: I): QueryChannelConsensusStateRequest;
 };
 export declare const QueryChannelConsensusStateResponse: {
     encode(message: QueryChannelConsensusStateResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryChannelConsensusStateResponse;
     fromJSON(object: any): QueryChannelConsensusStateResponse;
     toJSON(message: QueryChannelConsensusStateResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryChannelConsensusStateResponse;
+    fromPartial<I extends {
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        clientId?: string;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["consensusState"], keyof Any>, never>;
+        clientId?: string;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryChannelConsensusStateResponse>, never>>(object: I): QueryChannelConsensusStateResponse;
 };
 export declare const QueryPacketCommitmentRequest: {
     encode(message: QueryPacketCommitmentRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentRequest;
     fromJSON(object: any): QueryPacketCommitmentRequest;
     toJSON(message: QueryPacketCommitmentRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketCommitmentRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        sequence?: any;
+    } & {
+        portId?: string;
+        channelId?: string;
+        sequence?: any;
+    } & Record<Exclude<keyof I, keyof QueryPacketCommitmentRequest>, never>>(object: I): QueryPacketCommitmentRequest;
 };
 export declare const QueryPacketCommitmentResponse: {
     encode(message: QueryPacketCommitmentResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentResponse;
     fromJSON(object: any): QueryPacketCommitmentResponse;
     toJSON(message: QueryPacketCommitmentResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketCommitmentResponse;
+    fromPartial<I extends {
+        commitment?: Uint8Array;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        commitment?: Uint8Array;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketCommitmentResponse>, never>>(object: I): QueryPacketCommitmentResponse;
 };
 export declare const QueryPacketCommitmentsRequest: {
     encode(message: QueryPacketCommitmentsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentsRequest;
     fromJSON(object: any): QueryPacketCommitmentsRequest;
     toJSON(message: QueryPacketCommitmentsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketCommitmentsRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        portId?: string;
+        channelId?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketCommitmentsRequest>, never>>(object: I): QueryPacketCommitmentsRequest;
 };
 export declare const QueryPacketCommitmentsResponse: {
     encode(message: QueryPacketCommitmentsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketCommitmentsResponse;
     fromJSON(object: any): QueryPacketCommitmentsResponse;
     toJSON(message: QueryPacketCommitmentsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketCommitmentsResponse;
+    fromPartial<I extends {
+        commitments?: {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        commitments?: {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        }[] & ({
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        } & {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        } & Record<Exclude<keyof I["commitments"][number], keyof PacketState>, never>)[] & Record<Exclude<keyof I["commitments"], keyof {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketCommitmentsResponse>, never>>(object: I): QueryPacketCommitmentsResponse;
 };
 export declare const QueryPacketReceiptRequest: {
     encode(message: QueryPacketReceiptRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketReceiptRequest;
     fromJSON(object: any): QueryPacketReceiptRequest;
     toJSON(message: QueryPacketReceiptRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketReceiptRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        sequence?: any;
+    } & {
+        portId?: string;
+        channelId?: string;
+        sequence?: any;
+    } & Record<Exclude<keyof I, keyof QueryPacketReceiptRequest>, never>>(object: I): QueryPacketReceiptRequest;
 };
 export declare const QueryPacketReceiptResponse: {
     encode(message: QueryPacketReceiptResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketReceiptResponse;
     fromJSON(object: any): QueryPacketReceiptResponse;
     toJSON(message: QueryPacketReceiptResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketReceiptResponse;
+    fromPartial<I extends {
+        received?: boolean;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        received?: boolean;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketReceiptResponse>, never>>(object: I): QueryPacketReceiptResponse;
 };
 export declare const QueryPacketAcknowledgementRequest: {
     encode(message: QueryPacketAcknowledgementRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementRequest;
     fromJSON(object: any): QueryPacketAcknowledgementRequest;
     toJSON(message: QueryPacketAcknowledgementRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketAcknowledgementRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        sequence?: any;
+    } & {
+        portId?: string;
+        channelId?: string;
+        sequence?: any;
+    } & Record<Exclude<keyof I, keyof QueryPacketAcknowledgementRequest>, never>>(object: I): QueryPacketAcknowledgementRequest;
 };
 export declare const QueryPacketAcknowledgementResponse: {
     encode(message: QueryPacketAcknowledgementResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementResponse;
     fromJSON(object: any): QueryPacketAcknowledgementResponse;
     toJSON(message: QueryPacketAcknowledgementResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketAcknowledgementResponse;
+    fromPartial<I extends {
+        acknowledgement?: Uint8Array;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        acknowledgement?: Uint8Array;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketAcknowledgementResponse>, never>>(object: I): QueryPacketAcknowledgementResponse;
 };
 export declare const QueryPacketAcknowledgementsRequest: {
     encode(message: QueryPacketAcknowledgementsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementsRequest;
     fromJSON(object: any): QueryPacketAcknowledgementsRequest;
     toJSON(message: QueryPacketAcknowledgementsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketAcknowledgementsRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+        packetCommitmentSequences?: any[];
+    } & {
+        portId?: string;
+        channelId?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+        packetCommitmentSequences?: any[] & any[] & Record<Exclude<keyof I["packetCommitmentSequences"], keyof any[]>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketAcknowledgementsRequest>, never>>(object: I): QueryPacketAcknowledgementsRequest;
 };
 export declare const QueryPacketAcknowledgementsResponse: {
     encode(message: QueryPacketAcknowledgementsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPacketAcknowledgementsResponse;
     fromJSON(object: any): QueryPacketAcknowledgementsResponse;
     toJSON(message: QueryPacketAcknowledgementsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPacketAcknowledgementsResponse;
+    fromPartial<I extends {
+        acknowledgements?: {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        acknowledgements?: {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        }[] & ({
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        } & {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        } & Record<Exclude<keyof I["acknowledgements"][number], keyof PacketState>, never>)[] & Record<Exclude<keyof I["acknowledgements"], keyof {
+            portId?: string;
+            channelId?: string;
+            sequence?: any;
+            data?: Uint8Array;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPacketAcknowledgementsResponse>, never>>(object: I): QueryPacketAcknowledgementsResponse;
 };
 export declare const QueryUnreceivedPacketsRequest: {
     encode(message: QueryUnreceivedPacketsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedPacketsRequest;
     fromJSON(object: any): QueryUnreceivedPacketsRequest;
     toJSON(message: QueryUnreceivedPacketsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryUnreceivedPacketsRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        packetCommitmentSequences?: any[];
+    } & {
+        portId?: string;
+        channelId?: string;
+        packetCommitmentSequences?: any[] & any[] & Record<Exclude<keyof I["packetCommitmentSequences"], keyof any[]>, never>;
+    } & Record<Exclude<keyof I, keyof QueryUnreceivedPacketsRequest>, never>>(object: I): QueryUnreceivedPacketsRequest;
 };
 export declare const QueryUnreceivedPacketsResponse: {
     encode(message: QueryUnreceivedPacketsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedPacketsResponse;
     fromJSON(object: any): QueryUnreceivedPacketsResponse;
     toJSON(message: QueryUnreceivedPacketsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryUnreceivedPacketsResponse;
+    fromPartial<I extends {
+        sequences?: any[];
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        sequences?: any[] & any[] & Record<Exclude<keyof I["sequences"], keyof any[]>, never>;
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryUnreceivedPacketsResponse>, never>>(object: I): QueryUnreceivedPacketsResponse;
 };
 export declare const QueryUnreceivedAcksRequest: {
     encode(message: QueryUnreceivedAcksRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedAcksRequest;
     fromJSON(object: any): QueryUnreceivedAcksRequest;
     toJSON(message: QueryUnreceivedAcksRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryUnreceivedAcksRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+        packetAckSequences?: any[];
+    } & {
+        portId?: string;
+        channelId?: string;
+        packetAckSequences?: any[] & any[] & Record<Exclude<keyof I["packetAckSequences"], keyof any[]>, never>;
+    } & Record<Exclude<keyof I, keyof QueryUnreceivedAcksRequest>, never>>(object: I): QueryUnreceivedAcksRequest;
 };
 export declare const QueryUnreceivedAcksResponse: {
     encode(message: QueryUnreceivedAcksResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnreceivedAcksResponse;
     fromJSON(object: any): QueryUnreceivedAcksResponse;
     toJSON(message: QueryUnreceivedAcksResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryUnreceivedAcksResponse;
+    fromPartial<I extends {
+        sequences?: any[];
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        sequences?: any[] & any[] & Record<Exclude<keyof I["sequences"], keyof any[]>, never>;
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryUnreceivedAcksResponse>, never>>(object: I): QueryUnreceivedAcksResponse;
 };
 export declare const QueryNextSequenceReceiveRequest: {
     encode(message: QueryNextSequenceReceiveRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryNextSequenceReceiveRequest;
     fromJSON(object: any): QueryNextSequenceReceiveRequest;
     toJSON(message: QueryNextSequenceReceiveRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryNextSequenceReceiveRequest;
+    fromPartial<I extends {
+        portId?: string;
+        channelId?: string;
+    } & {
+        portId?: string;
+        channelId?: string;
+    } & Record<Exclude<keyof I, keyof QueryNextSequenceReceiveRequest>, never>>(object: I): QueryNextSequenceReceiveRequest;
 };
 export declare const QueryNextSequenceReceiveResponse: {
     encode(message: QueryNextSequenceReceiveResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryNextSequenceReceiveResponse;
     fromJSON(object: any): QueryNextSequenceReceiveResponse;
     toJSON(message: QueryNextSequenceReceiveResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryNextSequenceReceiveResponse;
+    fromPartial<I extends {
+        nextSequenceReceive?: any;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+    } & {
+        nextSequenceReceive?: any;
+        proof?: Uint8Array;
+        proofHeight?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
+    } & Record<Exclude<keyof I, keyof QueryNextSequenceReceiveResponse>, never>>(object: I): QueryNextSequenceReceiveResponse;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

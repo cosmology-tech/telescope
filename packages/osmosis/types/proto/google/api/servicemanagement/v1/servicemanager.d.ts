@@ -1,9 +1,21 @@
-import Long from "long";
+import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "./resources";
+import { Service } from "../../service";
+import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "../../../../google/api/servicemanagement/v1/resources";
-import { Service } from "../../../../google/api/service";
-import { Any } from "../../../../google/protobuf/any";
-import { Operation } from "../../../../google/longrunning/operations";
+export declare enum GetServiceConfigRequest_ConfigView {
+    /** BASIC - Server response includes all fields except SourceInfo. */
+    BASIC = 0,
+    /**
+     * FULL - Server response includes all fields including SourceInfo.
+     * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
+     * and are only available for configs created using the
+     * SubmitConfigSource method.
+     */
+    FULL = 1,
+    UNRECOGNIZED = -1
+}
+export declare function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView;
+export declare function getServiceConfigRequest_ConfigViewToJSON(object: GetServiceConfigRequest_ConfigView): string;
 /** Request message for `ListServices` method. */
 export interface ListServicesRequest {
     /** Include services produced by the specified project. */
@@ -24,9 +36,8 @@ export interface ListServicesRequest {
      * The Google Service Management implementation accepts the following
      * forms:
      * - project:<project_id>
-     *
-     * @deprecated
      */
+    /** @deprecated */
     consumerId: string;
 }
 /** Response message for `ListServices` method. */
@@ -90,20 +101,6 @@ export interface GetServiceConfigRequest {
      */
     view: GetServiceConfigRequest_ConfigView;
 }
-export declare enum GetServiceConfigRequest_ConfigView {
-    /** BASIC - Server response includes all fields except SourceInfo. */
-    BASIC = 0,
-    /**
-     * FULL - Server response includes all fields including SourceInfo.
-     * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
-     * and are only available for configs created using the
-     * SubmitConfigSource method.
-     */
-    FULL = 1,
-    UNRECOGNIZED = -1
-}
-export declare function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView;
-export declare function getServiceConfigRequest_ConfigViewToJSON(object: GetServiceConfigRequest_ConfigView): string;
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequest {
     /**
@@ -184,12 +181,12 @@ export interface ListServiceRolloutsRequest {
     /**
      * Required. Use `filter` to return subset of rollouts.
      * The following filters are supported:
-     *   -- To limit the results to only those in
-     *      [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
-     *      use filter='status=SUCCESS'
-     *   -- To limit the results to those in
-     *      [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
-     *      or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+     * -- To limit the results to only those in
+     * [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+     * use filter='status=SUCCESS'
+     * -- To limit the results to those in
+     * [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+     * or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
      */
     filter: string;
 }
@@ -252,280 +249,6851 @@ export declare const ListServicesRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesRequest;
     fromJSON(object: any): ListServicesRequest;
     toJSON(message: ListServicesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListServicesRequest;
+    fromPartial<I extends {
+        producerProjectId?: string;
+        pageSize?: number;
+        pageToken?: string;
+        consumerId?: string;
+    } & {
+        producerProjectId?: string;
+        pageSize?: number;
+        pageToken?: string;
+        consumerId?: string;
+    } & Record<Exclude<keyof I, keyof ListServicesRequest>, never>>(object: I): ListServicesRequest;
 };
 export declare const ListServicesResponse: {
     encode(message: ListServicesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse;
     fromJSON(object: any): ListServicesResponse;
     toJSON(message: ListServicesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListServicesResponse;
+    fromPartial<I extends {
+        services?: {
+            serviceName?: string;
+            producerProjectId?: string;
+        }[];
+        nextPageToken?: string;
+    } & {
+        services?: {
+            serviceName?: string;
+            producerProjectId?: string;
+        }[] & ({
+            serviceName?: string;
+            producerProjectId?: string;
+        } & {
+            serviceName?: string;
+            producerProjectId?: string;
+        } & Record<Exclude<keyof I["services"][number], keyof ManagedService>, never>)[] & Record<Exclude<keyof I["services"], keyof {
+            serviceName?: string;
+            producerProjectId?: string;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListServicesResponse>, never>>(object: I): ListServicesResponse;
 };
 export declare const GetServiceRequest: {
     encode(message: GetServiceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRequest;
     fromJSON(object: any): GetServiceRequest;
     toJSON(message: GetServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetServiceRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+    } & {
+        serviceName?: string;
+    } & Record<Exclude<keyof I, "serviceName">, never>>(object: I): GetServiceRequest;
 };
 export declare const CreateServiceRequest: {
     encode(message: CreateServiceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateServiceRequest;
     fromJSON(object: any): CreateServiceRequest;
     toJSON(message: CreateServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): CreateServiceRequest;
+    fromPartial<I extends {
+        service?: {
+            serviceName?: string;
+            producerProjectId?: string;
+        };
+    } & {
+        service?: {
+            serviceName?: string;
+            producerProjectId?: string;
+        } & {
+            serviceName?: string;
+            producerProjectId?: string;
+        } & Record<Exclude<keyof I["service"], keyof ManagedService>, never>;
+    } & Record<Exclude<keyof I, "service">, never>>(object: I): CreateServiceRequest;
 };
 export declare const DeleteServiceRequest: {
     encode(message: DeleteServiceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteServiceRequest;
     fromJSON(object: any): DeleteServiceRequest;
     toJSON(message: DeleteServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): DeleteServiceRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+    } & {
+        serviceName?: string;
+    } & Record<Exclude<keyof I, "serviceName">, never>>(object: I): DeleteServiceRequest;
 };
 export declare const UndeleteServiceRequest: {
     encode(message: UndeleteServiceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteServiceRequest;
     fromJSON(object: any): UndeleteServiceRequest;
     toJSON(message: UndeleteServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): UndeleteServiceRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+    } & {
+        serviceName?: string;
+    } & Record<Exclude<keyof I, "serviceName">, never>>(object: I): UndeleteServiceRequest;
 };
 export declare const UndeleteServiceResponse: {
     encode(message: UndeleteServiceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteServiceResponse;
     fromJSON(object: any): UndeleteServiceResponse;
     toJSON(message: UndeleteServiceResponse): unknown;
-    fromPartial<I extends unknown>(object: I): UndeleteServiceResponse;
+    fromPartial<I extends {
+        service?: {
+            serviceName?: string;
+            producerProjectId?: string;
+        };
+    } & {
+        service?: {
+            serviceName?: string;
+            producerProjectId?: string;
+        } & {
+            serviceName?: string;
+            producerProjectId?: string;
+        } & Record<Exclude<keyof I["service"], keyof ManagedService>, never>;
+    } & Record<Exclude<keyof I, "service">, never>>(object: I): UndeleteServiceResponse;
 };
 export declare const GetServiceConfigRequest: {
     encode(message: GetServiceConfigRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceConfigRequest;
     fromJSON(object: any): GetServiceConfigRequest;
     toJSON(message: GetServiceConfigRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetServiceConfigRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        configId?: string;
+        view?: GetServiceConfigRequest_ConfigView;
+    } & {
+        serviceName?: string;
+        configId?: string;
+        view?: GetServiceConfigRequest_ConfigView;
+    } & Record<Exclude<keyof I, keyof GetServiceConfigRequest>, never>>(object: I): GetServiceConfigRequest;
 };
 export declare const ListServiceConfigsRequest: {
     encode(message: ListServiceConfigsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceConfigsRequest;
     fromJSON(object: any): ListServiceConfigsRequest;
     toJSON(message: ListServiceConfigsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListServiceConfigsRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        pageToken?: string;
+        pageSize?: number;
+    } & {
+        serviceName?: string;
+        pageToken?: string;
+        pageSize?: number;
+    } & Record<Exclude<keyof I, keyof ListServiceConfigsRequest>, never>>(object: I): ListServiceConfigsRequest;
 };
 export declare const ListServiceConfigsResponse: {
     encode(message: ListServiceConfigsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceConfigsResponse;
     fromJSON(object: any): ListServiceConfigsResponse;
     toJSON(message: ListServiceConfigsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListServiceConfigsResponse;
+    fromPartial<I extends {
+        serviceConfigs?: {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        }[];
+        nextPageToken?: string;
+    } & {
+        serviceConfigs?: {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        }[] & ({
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        } & {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["apis"][number], keyof import("../../../protobuf/api").Api>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["apis"], keyof {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["types"][number], keyof import("../../../protobuf/type").Type>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["types"], keyof {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["enums"][number], keyof import("../../../protobuf/type").Enum>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["enums"], keyof {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["documentation"], keyof import("../../documentation").Documentation>, never>;
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["backend"], "rules">, never>;
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["http"], keyof import("../../http").Http>, never>;
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["quota"], keyof import("../../quota").Quota>, never>;
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["authentication"], keyof import("../../auth").Authentication>, never>;
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["context"], "rules">, never>;
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["usage"], keyof import("../../usage").Usage>, never>;
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[] & ({
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["endpoints"][number], keyof import("../../endpoint").Endpoint>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["endpoints"], keyof {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[]>, never>;
+            control?: {
+                environment?: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["control"], "environment">, never>;
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[] & ({
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["logs"][number], keyof import("../../log").LogDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["logs"], keyof {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[]>, never>;
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[] & ({
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["metrics"][number], keyof import("../../metric").MetricDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["metrics"], keyof {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[]>, never>;
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[] & ({
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["monitoredResources"][number], keyof import("../../monitored_resource").MonitoredResourceDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfigs"][number]["monitoredResources"], keyof {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[]>, never>;
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["billing"], "consumerDestinations">, never>;
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["logging"], keyof import("../../logging").Logging>, never>;
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["monitoring"], keyof import("../../monitoring").Monitoring>, never>;
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["systemParameters"], "rules">, never>;
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["sourceInfo"], "sourceFiles">, never>;
+            configVersion?: {
+                value?: number;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["serviceConfigs"][number]["configVersion"], "value">, never>;
+        } & Record<Exclude<keyof I["serviceConfigs"][number], keyof Service>, never>)[] & Record<Exclude<keyof I["serviceConfigs"], keyof {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListServiceConfigsResponse>, never>>(object: I): ListServiceConfigsResponse;
 };
 export declare const CreateServiceConfigRequest: {
     encode(message: CreateServiceConfigRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateServiceConfigRequest;
     fromJSON(object: any): CreateServiceConfigRequest;
     toJSON(message: CreateServiceConfigRequest): unknown;
-    fromPartial<I extends unknown>(object: I): CreateServiceConfigRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        serviceConfig?: {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        };
+    } & {
+        serviceName?: string;
+        serviceConfig?: {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        } & {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[] & ({
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                } & {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[] & ({
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"][number]["options"], keyof {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[]>, never>;
+                    syntax?: import("../../../protobuf/type").Syntax;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"][number], keyof import("../../../protobuf/api").Method>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"], keyof {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[]>, never>;
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[] & ({
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["options"][number]["value"], keyof Any>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["options"], keyof {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[]>, never>;
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                } & {
+                    fileName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["sourceContext"], "fileName">, never>;
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[] & ({
+                    name?: string;
+                    root?: string;
+                } & {
+                    name?: string;
+                    root?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["mixins"][number], keyof import("../../../protobuf/api").Mixin>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["mixins"], keyof {
+                    name?: string;
+                    root?: string;
+                }[]>, never>;
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & Record<Exclude<keyof I["serviceConfig"]["apis"][number], keyof import("../../../protobuf/api").Api>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"], keyof {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[] & ({
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                } & {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[] & ({
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"][number]["options"], keyof {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[]>, never>;
+                    jsonName?: string;
+                    defaultValue?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"][number], keyof import("../../../protobuf/type").Field>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"], keyof {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[]>, never>;
+                oneofs?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["oneofs"], keyof string[]>, never>;
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[] & ({
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["options"][number]["value"], keyof Any>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["options"], keyof {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[]>, never>;
+                sourceContext?: {
+                    fileName?: string;
+                } & {
+                    fileName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["sourceContext"], "fileName">, never>;
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & Record<Exclude<keyof I["serviceConfig"]["types"][number], keyof import("../../../protobuf/type").Type>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"], keyof {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[] & ({
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                } & {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[] & ({
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"][number]["options"], keyof {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"][number], keyof import("../../../protobuf/type").EnumValue>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"], keyof {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[]>, never>;
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[] & ({
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["options"][number]["value"], keyof Any>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["options"], keyof {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[]>, never>;
+                sourceContext?: {
+                    fileName?: string;
+                } & {
+                    fileName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["sourceContext"], "fileName">, never>;
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & Record<Exclude<keyof I["serviceConfig"]["enums"][number], keyof import("../../../protobuf/type").Enum>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"], keyof {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            } & {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[] & ({
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                } & {
+                    name?: string;
+                    content?: string;
+                    subpages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[] & ({
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    } & {
+                        name?: string;
+                        content?: string;
+                        subpages?: {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[] & ({
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"][number]["subpages"][number], keyof import("../../documentation").Page>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"][number]["subpages"], keyof {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"][number], keyof import("../../documentation").Page>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"], keyof {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number], keyof import("../../documentation").Page>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"], keyof {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[]>, never>;
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[] & ({
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                } & {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["rules"][number], keyof import("../../documentation").DocumentationRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["rules"], keyof {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[]>, never>;
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["documentation"], keyof import("../../documentation").Documentation>, never>;
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[] & ({
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                } & {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["backend"]["rules"][number], keyof import("../../backend").BackendRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["backend"]["rules"], keyof {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["backend"], "rules">, never>;
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            } & {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[] & ({
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                } & {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    } & {
+                        kind?: string;
+                        path?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["custom"], keyof import("../../http").CustomHttpPattern>, never>;
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: {
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        };
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: any[];
+                    }[] & ({
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        };
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: any[];
+                    } & {
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number]["custom"], keyof import("../../http").CustomHttpPattern>, never>;
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: {
+                            selector?: string;
+                            get?: string;
+                            put?: string;
+                            post?: string;
+                            delete?: string;
+                            patch?: string;
+                            custom?: {
+                                kind?: string;
+                                path?: string;
+                            };
+                            body?: string;
+                            responseBody?: string;
+                            additionalBindings?: any[];
+                        }[] & ({
+                            selector?: string;
+                            get?: string;
+                            put?: string;
+                            post?: string;
+                            delete?: string;
+                            patch?: string;
+                            custom?: {
+                                kind?: string;
+                                path?: string;
+                            };
+                            body?: string;
+                            responseBody?: string;
+                            additionalBindings?: any[];
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number]["additionalBindings"][number], keyof import("../../http").HttpRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number]["additionalBindings"], keyof {
+                            selector?: string;
+                            get?: string;
+                            put?: string;
+                            post?: string;
+                            delete?: string;
+                            patch?: string;
+                            custom?: {
+                                kind?: string;
+                                path?: string;
+                            };
+                            body?: string;
+                            responseBody?: string;
+                            additionalBindings?: any[];
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number], keyof import("../../http").HttpRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"], keyof {
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        };
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: any[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number], keyof import("../../http").HttpRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"], keyof {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[]>, never>;
+                fullyDecodeReservedExpansion?: boolean;
+            } & Record<Exclude<keyof I["serviceConfig"]["http"], keyof import("../../http").Http>, never>;
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            } & {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[] & ({
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                } & {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["quota"]["limits"][number]["values"], string | number>, never>;
+                    displayName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["quota"]["limits"][number], keyof import("../../quota").QuotaLimit>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["quota"]["limits"], keyof {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[]>, never>;
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[] & ({
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                } & {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["quota"]["metricRules"][number]["metricCosts"], string | number>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["quota"]["metricRules"][number], keyof import("../../quota").MetricRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["quota"]["metricRules"], keyof {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["quota"], keyof import("../../quota").Quota>, never>;
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[] & ({
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                } & {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    } & {
+                        canonicalScopes?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number]["oauth"], "canonicalScopes">, never>;
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[] & ({
+                        providerId?: string;
+                        audiences?: string;
+                    } & {
+                        providerId?: string;
+                        audiences?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number]["requirements"][number], keyof import("../../auth").AuthRequirement>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number]["requirements"], keyof {
+                        providerId?: string;
+                        audiences?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number], keyof import("../../auth").AuthenticationRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"], keyof {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[]>, never>;
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[] & ({
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                } & {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[] & ({
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    } & {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"][number]["jwtLocations"][number], keyof import("../../auth").JwtLocation>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"][number]["jwtLocations"], keyof {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"][number], keyof import("../../auth").AuthProvider>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"], keyof {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["authentication"], keyof import("../../auth").Authentication>, never>;
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[] & ({
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                } & {
+                    selector?: string;
+                    requested?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["requested"], keyof string[]>, never>;
+                    provided?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["provided"], keyof string[]>, never>;
+                    allowedRequestExtensions?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["allowedRequestExtensions"], keyof string[]>, never>;
+                    allowedResponseExtensions?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["allowedResponseExtensions"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number], keyof import("../../context").ContextRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"], keyof {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["context"], "rules">, never>;
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            } & {
+                requirements?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["usage"]["requirements"], keyof string[]>, never>;
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[] & ({
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                } & {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                } & Record<Exclude<keyof I["serviceConfig"]["usage"]["rules"][number], keyof import("../../usage").UsageRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["usage"]["rules"], keyof {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[]>, never>;
+                producerNotificationChannel?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["usage"], keyof import("../../usage").Usage>, never>;
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[] & ({
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            } & {
+                name?: string;
+                aliases?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["endpoints"][number]["aliases"], keyof string[]>, never>;
+                target?: string;
+                allowCors?: boolean;
+            } & Record<Exclude<keyof I["serviceConfig"]["endpoints"][number], keyof import("../../endpoint").Endpoint>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["endpoints"], keyof {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[]>, never>;
+            control?: {
+                environment?: string;
+            } & {
+                environment?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["control"], "environment">, never>;
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[] & ({
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            } & {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["logs"][number]["labels"][number], keyof import("../../label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logs"][number]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                description?: string;
+                displayName?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["logs"][number], keyof import("../../log").LogDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logs"], keyof {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[]>, never>;
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[] & ({
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            } & {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["labels"][number], keyof import("../../label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["metadata"], keyof import("../../metric").MetricDescriptor_MetricDescriptorMetadata>, never>;
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["monitoredResourceTypes"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["metrics"][number], keyof import("../../metric").MetricDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["metrics"], keyof {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[]>, never>;
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[] & ({
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            } & {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"][number]["labels"][number], keyof import("../../label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"][number]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                launchStage?: import("../../launch_stage").LaunchStage;
+            } & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"][number], keyof import("../../monitored_resource").MonitoredResourceDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"], keyof {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[]>, never>;
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            } & {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    metrics?: string[];
+                } & {
+                    monitoredResource?: string;
+                    metrics?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["billing"]["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["billing"]["consumerDestinations"][number], keyof import("../../billing").Billing_BillingDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["billing"]["consumerDestinations"], keyof {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["billing"], "consumerDestinations">, never>;
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            } & {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    logs?: string[];
+                } & {
+                    monitoredResource?: string;
+                    logs?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["producerDestinations"][number]["logs"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["logging"]["producerDestinations"][number], keyof import("../../logging").Logging_LoggingDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["producerDestinations"], keyof {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[]>, never>;
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    logs?: string[];
+                } & {
+                    monitoredResource?: string;
+                    logs?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["consumerDestinations"][number]["logs"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["logging"]["consumerDestinations"][number], keyof import("../../logging").Logging_LoggingDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["consumerDestinations"], keyof {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["logging"], keyof import("../../logging").Logging>, never>;
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            } & {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    metrics?: string[];
+                } & {
+                    monitoredResource?: string;
+                    metrics?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["producerDestinations"][number]["metrics"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["producerDestinations"][number], keyof import("../../monitoring").Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["producerDestinations"], keyof {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[]>, never>;
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    metrics?: string[];
+                } & {
+                    monitoredResource?: string;
+                    metrics?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["consumerDestinations"][number], keyof import("../../monitoring").Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["consumerDestinations"], keyof {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["monitoring"], keyof import("../../monitoring").Monitoring>, never>;
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[] & ({
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                } & {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[] & ({
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    } & {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"][number]["parameters"][number], keyof import("../../system_parameter").SystemParameter>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"][number]["parameters"], keyof {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"][number], keyof import("../../system_parameter").SystemParameterRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"], keyof {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["systemParameters"], "rules">, never>;
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            } & {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[] & ({
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & Record<Exclude<keyof I["serviceConfig"]["sourceInfo"]["sourceFiles"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["sourceInfo"]["sourceFiles"], keyof {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["sourceInfo"], "sourceFiles">, never>;
+            configVersion?: {
+                value?: number;
+            } & {
+                value?: number;
+            } & Record<Exclude<keyof I["serviceConfig"]["configVersion"], "value">, never>;
+        } & Record<Exclude<keyof I["serviceConfig"], keyof Service>, never>;
+    } & Record<Exclude<keyof I, keyof CreateServiceConfigRequest>, never>>(object: I): CreateServiceConfigRequest;
 };
 export declare const SubmitConfigSourceRequest: {
     encode(message: SubmitConfigSourceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SubmitConfigSourceRequest;
     fromJSON(object: any): SubmitConfigSourceRequest;
     toJSON(message: SubmitConfigSourceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): SubmitConfigSourceRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        configSource?: {
+            id?: string;
+            files?: {
+                filePath?: string;
+                fileContents?: Uint8Array;
+                fileType?: import("./resources").ConfigFile_FileType;
+            }[];
+        };
+        validateOnly?: boolean;
+    } & {
+        serviceName?: string;
+        configSource?: {
+            id?: string;
+            files?: {
+                filePath?: string;
+                fileContents?: Uint8Array;
+                fileType?: import("./resources").ConfigFile_FileType;
+            }[];
+        } & {
+            id?: string;
+            files?: {
+                filePath?: string;
+                fileContents?: Uint8Array;
+                fileType?: import("./resources").ConfigFile_FileType;
+            }[] & ({
+                filePath?: string;
+                fileContents?: Uint8Array;
+                fileType?: import("./resources").ConfigFile_FileType;
+            } & {
+                filePath?: string;
+                fileContents?: Uint8Array;
+                fileType?: import("./resources").ConfigFile_FileType;
+            } & Record<Exclude<keyof I["configSource"]["files"][number], keyof import("./resources").ConfigFile>, never>)[] & Record<Exclude<keyof I["configSource"]["files"], keyof {
+                filePath?: string;
+                fileContents?: Uint8Array;
+                fileType?: import("./resources").ConfigFile_FileType;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["configSource"], keyof ConfigSource>, never>;
+        validateOnly?: boolean;
+    } & Record<Exclude<keyof I, keyof SubmitConfigSourceRequest>, never>>(object: I): SubmitConfigSourceRequest;
 };
 export declare const SubmitConfigSourceResponse: {
     encode(message: SubmitConfigSourceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SubmitConfigSourceResponse;
     fromJSON(object: any): SubmitConfigSourceResponse;
     toJSON(message: SubmitConfigSourceResponse): unknown;
-    fromPartial<I extends unknown>(object: I): SubmitConfigSourceResponse;
+    fromPartial<I extends {
+        serviceConfig?: {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        };
+    } & {
+        serviceConfig?: {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[];
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            };
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            };
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            };
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            };
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            };
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            };
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            };
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[];
+            control?: {
+                environment?: string;
+            };
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[];
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[];
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[];
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            };
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            };
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            };
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+            configVersion?: {
+                value?: number;
+            };
+        } & {
+            name?: string;
+            title?: string;
+            producerProjectId?: string;
+            id?: string;
+            apis?: {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[] & ({
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                } & {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[] & ({
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"][number]["options"], keyof {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[]>, never>;
+                    syntax?: import("../../../protobuf/type").Syntax;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"][number], keyof import("../../../protobuf/api").Method>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["methods"], keyof {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[]>, never>;
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[] & ({
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["options"][number]["value"], keyof Any>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["options"], keyof {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[]>, never>;
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                } & {
+                    fileName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["sourceContext"], "fileName">, never>;
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[] & ({
+                    name?: string;
+                    root?: string;
+                } & {
+                    name?: string;
+                    root?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["mixins"][number], keyof import("../../../protobuf/api").Mixin>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"][number]["mixins"], keyof {
+                    name?: string;
+                    root?: string;
+                }[]>, never>;
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & Record<Exclude<keyof I["serviceConfig"]["apis"][number], keyof import("../../../protobuf/api").Api>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["apis"], keyof {
+                name?: string;
+                methods?: {
+                    name?: string;
+                    requestTypeUrl?: string;
+                    requestStreaming?: boolean;
+                    responseTypeUrl?: string;
+                    responseStreaming?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                version?: string;
+                sourceContext?: {
+                    fileName?: string;
+                };
+                mixins?: {
+                    name?: string;
+                    root?: string;
+                }[];
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            types?: {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[] & ({
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                } & {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[] & ({
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"][number]["options"], keyof {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[]>, never>;
+                    jsonName?: string;
+                    defaultValue?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"][number], keyof import("../../../protobuf/type").Field>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["fields"], keyof {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[]>, never>;
+                oneofs?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["oneofs"], keyof string[]>, never>;
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[] & ({
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["options"][number]["value"], keyof Any>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"][number]["options"], keyof {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[]>, never>;
+                sourceContext?: {
+                    fileName?: string;
+                } & {
+                    fileName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["types"][number]["sourceContext"], "fileName">, never>;
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & Record<Exclude<keyof I["serviceConfig"]["types"][number], keyof import("../../../protobuf/type").Type>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["types"], keyof {
+                name?: string;
+                fields?: {
+                    kind?: import("../../../protobuf/type").Field_Kind;
+                    cardinality?: import("../../../protobuf/type").Field_Cardinality;
+                    number?: number;
+                    name?: string;
+                    typeUrl?: string;
+                    oneofIndex?: number;
+                    packed?: boolean;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    jsonName?: string;
+                    defaultValue?: string;
+                }[];
+                oneofs?: string[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            enums?: {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[] & ({
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[] & ({
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                } & {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[] & ({
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"][number]["options"], keyof {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"][number], keyof import("../../../protobuf/type").EnumValue>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["enumvalue"], keyof {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[]>, never>;
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[] & ({
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["options"][number]["value"], keyof Any>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["options"][number], keyof import("../../../protobuf/type").Option>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["options"], keyof {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[]>, never>;
+                sourceContext?: {
+                    fileName?: string;
+                } & {
+                    fileName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["enums"][number]["sourceContext"], "fileName">, never>;
+                syntax?: import("../../../protobuf/type").Syntax;
+            } & Record<Exclude<keyof I["serviceConfig"]["enums"][number], keyof import("../../../protobuf/type").Enum>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["enums"], keyof {
+                name?: string;
+                enumvalue?: {
+                    name?: string;
+                    number?: number;
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                }[];
+                options?: {
+                    name?: string;
+                    value?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                }[];
+                sourceContext?: {
+                    fileName?: string;
+                };
+                syntax?: import("../../../protobuf/type").Syntax;
+            }[]>, never>;
+            documentation?: {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[];
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[];
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            } & {
+                summary?: string;
+                pages?: {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[] & ({
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                } & {
+                    name?: string;
+                    content?: string;
+                    subpages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[] & ({
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    } & {
+                        name?: string;
+                        content?: string;
+                        subpages?: {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[] & ({
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"][number]["subpages"][number], keyof import("../../documentation").Page>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"][number]["subpages"], keyof {
+                            name?: string;
+                            content?: string;
+                            subpages?: any[];
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"][number], keyof import("../../documentation").Page>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number]["subpages"], keyof {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"][number], keyof import("../../documentation").Page>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["pages"], keyof {
+                    name?: string;
+                    content?: string;
+                    subpages?: any[];
+                }[]>, never>;
+                rules?: {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[] & ({
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                } & {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["documentation"]["rules"][number], keyof import("../../documentation").DocumentationRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["documentation"]["rules"], keyof {
+                    selector?: string;
+                    description?: string;
+                    deprecationDescription?: string;
+                }[]>, never>;
+                documentationRootUrl?: string;
+                serviceRootUrl?: string;
+                overview?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["documentation"], keyof import("../../documentation").Documentation>, never>;
+            backend?: {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[] & ({
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                } & {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["backend"]["rules"][number], keyof import("../../backend").BackendRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["backend"]["rules"], keyof {
+                    selector?: string;
+                    address?: string;
+                    deadline?: number;
+                    minDeadline?: number;
+                    operationDeadline?: number;
+                    pathTranslation?: import("../../backend").BackendRule_PathTranslation;
+                    jwtAudience?: string;
+                    disableAuth?: boolean;
+                    protocol?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["backend"], "rules">, never>;
+            http?: {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[];
+                fullyDecodeReservedExpansion?: boolean;
+            } & {
+                rules?: {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[] & ({
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                } & {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    } & {
+                        kind?: string;
+                        path?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["custom"], keyof import("../../http").CustomHttpPattern>, never>;
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: {
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        };
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: any[];
+                    }[] & ({
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        };
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: any[];
+                    } & {
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number]["custom"], keyof import("../../http").CustomHttpPattern>, never>;
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: {
+                            selector?: string;
+                            get?: string;
+                            put?: string;
+                            post?: string;
+                            delete?: string;
+                            patch?: string;
+                            custom?: {
+                                kind?: string;
+                                path?: string;
+                            };
+                            body?: string;
+                            responseBody?: string;
+                            additionalBindings?: any[];
+                        }[] & ({
+                            selector?: string;
+                            get?: string;
+                            put?: string;
+                            post?: string;
+                            delete?: string;
+                            patch?: string;
+                            custom?: {
+                                kind?: string;
+                                path?: string;
+                            };
+                            body?: string;
+                            responseBody?: string;
+                            additionalBindings?: any[];
+                        } & {
+                            [x: string]: any;
+                        } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number]["additionalBindings"][number], keyof import("../../http").HttpRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number]["additionalBindings"], keyof {
+                            selector?: string;
+                            get?: string;
+                            put?: string;
+                            post?: string;
+                            delete?: string;
+                            patch?: string;
+                            custom?: {
+                                kind?: string;
+                                path?: string;
+                            };
+                            body?: string;
+                            responseBody?: string;
+                            additionalBindings?: any[];
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"][number], keyof import("../../http").HttpRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number]["additionalBindings"], keyof {
+                        selector?: string;
+                        get?: string;
+                        put?: string;
+                        post?: string;
+                        delete?: string;
+                        patch?: string;
+                        custom?: {
+                            kind?: string;
+                            path?: string;
+                        };
+                        body?: string;
+                        responseBody?: string;
+                        additionalBindings?: any[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"][number], keyof import("../../http").HttpRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["http"]["rules"], keyof {
+                    selector?: string;
+                    get?: string;
+                    put?: string;
+                    post?: string;
+                    delete?: string;
+                    patch?: string;
+                    custom?: {
+                        kind?: string;
+                        path?: string;
+                    };
+                    body?: string;
+                    responseBody?: string;
+                    additionalBindings?: any[];
+                }[]>, never>;
+                fullyDecodeReservedExpansion?: boolean;
+            } & Record<Exclude<keyof I["serviceConfig"]["http"], keyof import("../../http").Http>, never>;
+            quota?: {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[];
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[];
+            } & {
+                limits?: {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[] & ({
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                } & {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["quota"]["limits"][number]["values"], string | number>, never>;
+                    displayName?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["quota"]["limits"][number], keyof import("../../quota").QuotaLimit>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["quota"]["limits"], keyof {
+                    name?: string;
+                    description?: string;
+                    defaultLimit?: any;
+                    maxLimit?: any;
+                    freeTier?: any;
+                    duration?: string;
+                    metric?: string;
+                    unit?: string;
+                    values?: {
+                        [x: string]: any;
+                    };
+                    displayName?: string;
+                }[]>, never>;
+                metricRules?: {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[] & ({
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                } & {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    } & {
+                        [x: string]: any;
+                    } & Record<Exclude<keyof I["serviceConfig"]["quota"]["metricRules"][number]["metricCosts"], string | number>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["quota"]["metricRules"][number], keyof import("../../quota").MetricRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["quota"]["metricRules"], keyof {
+                    selector?: string;
+                    metricCosts?: {
+                        [x: string]: any;
+                    };
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["quota"], keyof import("../../quota").Quota>, never>;
+            authentication?: {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[];
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[] & ({
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                } & {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    } & {
+                        canonicalScopes?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number]["oauth"], "canonicalScopes">, never>;
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[] & ({
+                        providerId?: string;
+                        audiences?: string;
+                    } & {
+                        providerId?: string;
+                        audiences?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number]["requirements"][number], keyof import("../../auth").AuthRequirement>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number]["requirements"], keyof {
+                        providerId?: string;
+                        audiences?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"][number], keyof import("../../auth").AuthenticationRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["rules"], keyof {
+                    selector?: string;
+                    oauth?: {
+                        canonicalScopes?: string;
+                    };
+                    allowWithoutCredential?: boolean;
+                    requirements?: {
+                        providerId?: string;
+                        audiences?: string;
+                    }[];
+                }[]>, never>;
+                providers?: {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[] & ({
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                } & {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[] & ({
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    } & {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"][number]["jwtLocations"][number], keyof import("../../auth").JwtLocation>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"][number]["jwtLocations"], keyof {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"][number], keyof import("../../auth").AuthProvider>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["authentication"]["providers"], keyof {
+                    id?: string;
+                    issuer?: string;
+                    jwksUri?: string;
+                    audiences?: string;
+                    authorizationUrl?: string;
+                    jwtLocations?: {
+                        header?: string;
+                        query?: string;
+                        valuePrefix?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["authentication"], keyof import("../../auth").Authentication>, never>;
+            context?: {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[] & ({
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                } & {
+                    selector?: string;
+                    requested?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["requested"], keyof string[]>, never>;
+                    provided?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["provided"], keyof string[]>, never>;
+                    allowedRequestExtensions?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["allowedRequestExtensions"], keyof string[]>, never>;
+                    allowedResponseExtensions?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number]["allowedResponseExtensions"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"][number], keyof import("../../context").ContextRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["context"]["rules"], keyof {
+                    selector?: string;
+                    requested?: string[];
+                    provided?: string[];
+                    allowedRequestExtensions?: string[];
+                    allowedResponseExtensions?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["context"], "rules">, never>;
+            usage?: {
+                requirements?: string[];
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[];
+                producerNotificationChannel?: string;
+            } & {
+                requirements?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["usage"]["requirements"], keyof string[]>, never>;
+                rules?: {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[] & ({
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                } & {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                } & Record<Exclude<keyof I["serviceConfig"]["usage"]["rules"][number], keyof import("../../usage").UsageRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["usage"]["rules"], keyof {
+                    selector?: string;
+                    allowUnregisteredCalls?: boolean;
+                    skipServiceControl?: boolean;
+                }[]>, never>;
+                producerNotificationChannel?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["usage"], keyof import("../../usage").Usage>, never>;
+            endpoints?: {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[] & ({
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            } & {
+                name?: string;
+                aliases?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["endpoints"][number]["aliases"], keyof string[]>, never>;
+                target?: string;
+                allowCors?: boolean;
+            } & Record<Exclude<keyof I["serviceConfig"]["endpoints"][number], keyof import("../../endpoint").Endpoint>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["endpoints"], keyof {
+                name?: string;
+                aliases?: string[];
+                target?: string;
+                allowCors?: boolean;
+            }[]>, never>;
+            control?: {
+                environment?: string;
+            } & {
+                environment?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["control"], "environment">, never>;
+            logs?: {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[] & ({
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            } & {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["logs"][number]["labels"][number], keyof import("../../label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logs"][number]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                description?: string;
+                displayName?: string;
+            } & Record<Exclude<keyof I["serviceConfig"]["logs"][number], keyof import("../../log").LogDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logs"], keyof {
+                name?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                description?: string;
+                displayName?: string;
+            }[]>, never>;
+            metrics?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[] & ({
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            } & {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["labels"][number], keyof import("../../label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["metadata"], keyof import("../../metric").MetricDescriptor_MetricDescriptorMetadata>, never>;
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["metrics"][number]["monitoredResourceTypes"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["metrics"][number], keyof import("../../metric").MetricDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["metrics"], keyof {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            }[]>, never>;
+            monitoredResources?: {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[] & ({
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            } & {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"][number]["labels"][number], keyof import("../../label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"][number]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                launchStage?: import("../../launch_stage").LaunchStage;
+            } & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"][number], keyof import("../../monitored_resource").MonitoredResourceDescriptor>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoredResources"], keyof {
+                name?: string;
+                type?: string;
+                displayName?: string;
+                description?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                launchStage?: import("../../launch_stage").LaunchStage;
+            }[]>, never>;
+            billing?: {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            } & {
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    metrics?: string[];
+                } & {
+                    monitoredResource?: string;
+                    metrics?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["billing"]["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["billing"]["consumerDestinations"][number], keyof import("../../billing").Billing_BillingDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["billing"]["consumerDestinations"], keyof {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["billing"], "consumerDestinations">, never>;
+            logging?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[];
+            } & {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    logs?: string[];
+                } & {
+                    monitoredResource?: string;
+                    logs?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["producerDestinations"][number]["logs"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["logging"]["producerDestinations"][number], keyof import("../../logging").Logging_LoggingDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["producerDestinations"], keyof {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[]>, never>;
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    logs?: string[];
+                } & {
+                    monitoredResource?: string;
+                    logs?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["consumerDestinations"][number]["logs"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["logging"]["consumerDestinations"][number], keyof import("../../logging").Logging_LoggingDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["logging"]["consumerDestinations"], keyof {
+                    monitoredResource?: string;
+                    logs?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["logging"], keyof import("../../logging").Logging>, never>;
+            monitoring?: {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[];
+            } & {
+                producerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    metrics?: string[];
+                } & {
+                    monitoredResource?: string;
+                    metrics?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["producerDestinations"][number]["metrics"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["producerDestinations"][number], keyof import("../../monitoring").Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["producerDestinations"], keyof {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[]>, never>;
+                consumerDestinations?: {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[] & ({
+                    monitoredResource?: string;
+                    metrics?: string[];
+                } & {
+                    monitoredResource?: string;
+                    metrics?: string[] & string[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["consumerDestinations"][number], keyof import("../../monitoring").Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["monitoring"]["consumerDestinations"], keyof {
+                    monitoredResource?: string;
+                    metrics?: string[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["monitoring"], keyof import("../../monitoring").Monitoring>, never>;
+            systemParameters?: {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[];
+            } & {
+                rules?: {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[] & ({
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                } & {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[] & ({
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    } & {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    } & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"][number]["parameters"][number], keyof import("../../system_parameter").SystemParameter>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"][number]["parameters"], keyof {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"][number], keyof import("../../system_parameter").SystemParameterRule>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["systemParameters"]["rules"], keyof {
+                    selector?: string;
+                    parameters?: {
+                        name?: string;
+                        httpHeader?: string;
+                        urlQueryParameter?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["systemParameters"], "rules">, never>;
+            sourceInfo?: {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            } & {
+                sourceFiles?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[] & ({
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & Record<Exclude<keyof I["serviceConfig"]["sourceInfo"]["sourceFiles"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["serviceConfig"]["sourceInfo"]["sourceFiles"], keyof {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["serviceConfig"]["sourceInfo"], "sourceFiles">, never>;
+            configVersion?: {
+                value?: number;
+            } & {
+                value?: number;
+            } & Record<Exclude<keyof I["serviceConfig"]["configVersion"], "value">, never>;
+        } & Record<Exclude<keyof I["serviceConfig"], keyof Service>, never>;
+    } & Record<Exclude<keyof I, "serviceConfig">, never>>(object: I): SubmitConfigSourceResponse;
 };
 export declare const CreateServiceRolloutRequest: {
     encode(message: CreateServiceRolloutRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateServiceRolloutRequest;
     fromJSON(object: any): CreateServiceRolloutRequest;
     toJSON(message: CreateServiceRolloutRequest): unknown;
-    fromPartial<I extends unknown>(object: I): CreateServiceRolloutRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        rollout?: {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            };
+            deleteServiceStrategy?: {};
+            serviceName?: string;
+        };
+    } & {
+        serviceName?: string;
+        rollout?: {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            };
+            deleteServiceStrategy?: {};
+            serviceName?: string;
+        } & {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            } & {
+                percentages?: {
+                    [x: string]: number;
+                } & {
+                    [x: string]: number;
+                } & Record<Exclude<keyof I["rollout"]["trafficPercentStrategy"]["percentages"], string | number>, never>;
+            } & Record<Exclude<keyof I["rollout"]["trafficPercentStrategy"], "percentages">, never>;
+            deleteServiceStrategy?: {} & {} & Record<Exclude<keyof I["rollout"]["deleteServiceStrategy"], never>, never>;
+            serviceName?: string;
+        } & Record<Exclude<keyof I["rollout"], keyof Rollout>, never>;
+    } & Record<Exclude<keyof I, keyof CreateServiceRolloutRequest>, never>>(object: I): CreateServiceRolloutRequest;
 };
 export declare const ListServiceRolloutsRequest: {
     encode(message: ListServiceRolloutsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceRolloutsRequest;
     fromJSON(object: any): ListServiceRolloutsRequest;
     toJSON(message: ListServiceRolloutsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListServiceRolloutsRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        pageToken?: string;
+        pageSize?: number;
+        filter?: string;
+    } & {
+        serviceName?: string;
+        pageToken?: string;
+        pageSize?: number;
+        filter?: string;
+    } & Record<Exclude<keyof I, keyof ListServiceRolloutsRequest>, never>>(object: I): ListServiceRolloutsRequest;
 };
 export declare const ListServiceRolloutsResponse: {
     encode(message: ListServiceRolloutsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceRolloutsResponse;
     fromJSON(object: any): ListServiceRolloutsResponse;
     toJSON(message: ListServiceRolloutsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListServiceRolloutsResponse;
+    fromPartial<I extends {
+        rollouts?: {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            };
+            deleteServiceStrategy?: {};
+            serviceName?: string;
+        }[];
+        nextPageToken?: string;
+    } & {
+        rollouts?: {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            };
+            deleteServiceStrategy?: {};
+            serviceName?: string;
+        }[] & ({
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            };
+            deleteServiceStrategy?: {};
+            serviceName?: string;
+        } & {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["rollouts"][number]["trafficPercentStrategy"], "percentages">, never>;
+            deleteServiceStrategy?: {} & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["rollouts"][number]["deleteServiceStrategy"], never>, never>;
+            serviceName?: string;
+        } & Record<Exclude<keyof I["rollouts"][number], keyof Rollout>, never>)[] & Record<Exclude<keyof I["rollouts"], keyof {
+            rolloutId?: string;
+            createTime?: Date;
+            createdBy?: string;
+            status?: import("./resources").Rollout_RolloutStatus;
+            trafficPercentStrategy?: {
+                percentages?: {
+                    [x: string]: number;
+                };
+            };
+            deleteServiceStrategy?: {};
+            serviceName?: string;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListServiceRolloutsResponse>, never>>(object: I): ListServiceRolloutsResponse;
 };
 export declare const GetServiceRolloutRequest: {
     encode(message: GetServiceRolloutRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRolloutRequest;
     fromJSON(object: any): GetServiceRolloutRequest;
     toJSON(message: GetServiceRolloutRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetServiceRolloutRequest;
+    fromPartial<I extends {
+        serviceName?: string;
+        rolloutId?: string;
+    } & {
+        serviceName?: string;
+        rolloutId?: string;
+    } & Record<Exclude<keyof I, keyof GetServiceRolloutRequest>, never>>(object: I): GetServiceRolloutRequest;
 };
 export declare const GenerateConfigReportRequest: {
     encode(message: GenerateConfigReportRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GenerateConfigReportRequest;
     fromJSON(object: any): GenerateConfigReportRequest;
     toJSON(message: GenerateConfigReportRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GenerateConfigReportRequest;
+    fromPartial<I extends {
+        newConfig?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        oldConfig?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        newConfig?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["newConfig"], keyof Any>, never>;
+        oldConfig?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["oldConfig"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof GenerateConfigReportRequest>, never>>(object: I): GenerateConfigReportRequest;
 };
 export declare const GenerateConfigReportResponse: {
     encode(message: GenerateConfigReportResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GenerateConfigReportResponse;
     fromJSON(object: any): GenerateConfigReportResponse;
     toJSON(message: GenerateConfigReportResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GenerateConfigReportResponse;
+    fromPartial<I extends {
+        serviceName?: string;
+        id?: string;
+        changeReports?: {
+            configChanges?: {
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            }[];
+        }[];
+        diagnostics?: {
+            location?: string;
+            kind?: import("./resources").Diagnostic_Kind;
+            message?: string;
+        }[];
+    } & {
+        serviceName?: string;
+        id?: string;
+        changeReports?: {
+            configChanges?: {
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            }[];
+        }[] & ({
+            configChanges?: {
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            }[];
+        } & {
+            configChanges?: {
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            }[] & ({
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["changeReports"][number]["configChanges"][number], keyof import("../../config_change").ConfigChange>, never>)[] & Record<Exclude<keyof I["changeReports"][number]["configChanges"], keyof {
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["changeReports"][number], "configChanges">, never>)[] & Record<Exclude<keyof I["changeReports"], keyof {
+            configChanges?: {
+                element?: string;
+                oldValue?: string;
+                newValue?: string;
+                changeType?: import("../../config_change").ChangeType;
+                advices?: {
+                    description?: string;
+                }[];
+            }[];
+        }[]>, never>;
+        diagnostics?: {
+            location?: string;
+            kind?: import("./resources").Diagnostic_Kind;
+            message?: string;
+        }[] & ({
+            location?: string;
+            kind?: import("./resources").Diagnostic_Kind;
+            message?: string;
+        } & {
+            location?: string;
+            kind?: import("./resources").Diagnostic_Kind;
+            message?: string;
+        } & Record<Exclude<keyof I["diagnostics"][number], keyof Diagnostic>, never>)[] & Record<Exclude<keyof I["diagnostics"], keyof {
+            location?: string;
+            kind?: import("./resources").Diagnostic_Kind;
+            message?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof GenerateConfigReportResponse>, never>>(object: I): GenerateConfigReportResponse;
 };
-/** [Google Service Management API](/service-management/overview) */
-export interface ServiceManager {
-    /**
-     * Lists managed services.
-     *
-     * Returns all public services. For authenticated users, also returns all
-     * services the calling user has "servicemanagement.services.get" permission
-     * for.
-     */
-    ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-    /**
-     * Gets a managed service. Authentication is required unless the service is
-     * public.
-     */
-    GetService(request: GetServiceRequest): Promise<ManagedService>;
-    /**
-     * Creates a new managed service.
-     *
-     * A managed service is immutable, and is subject to mandatory 30-day
-     * data retention. You cannot move a service or recreate it within 30 days
-     * after deletion.
-     *
-     * One producer project can own no more than 500 services. For security and
-     * reliability purposes, a production service should be hosted in a
-     * dedicated producer project.
-     *
-     * Operation<response: ManagedService>
-     */
-    CreateService(request: CreateServiceRequest): Promise<Operation>;
-    /**
-     * Deletes a managed service. This method will change the service to the
-     * `Soft-Delete` state for 30 days. Within this period, service producers may
-     * call [UndeleteService][google.api.servicemanagement.v1.ServiceManager.UndeleteService] to restore the service.
-     * After 30 days, the service will be permanently deleted.
-     *
-     * Operation<response: google.protobuf.Empty>
-     */
-    DeleteService(request: DeleteServiceRequest): Promise<Operation>;
-    /**
-     * Revives a previously deleted managed service. The method restores the
-     * service using the configuration at the time the service was deleted.
-     * The target service must exist and must have been deleted within the
-     * last 30 days.
-     *
-     * Operation<response: UndeleteServiceResponse>
-     */
-    UndeleteService(request: UndeleteServiceRequest): Promise<Operation>;
-    /**
-     * Lists the history of the service configuration for a managed service,
-     * from the newest to the oldest.
-     */
-    ListServiceConfigs(request: ListServiceConfigsRequest): Promise<ListServiceConfigsResponse>;
-    /** Gets a service configuration (version) for a managed service. */
-    GetServiceConfig(request: GetServiceConfigRequest): Promise<Service>;
-    /**
-     * Creates a new service configuration (version) for a managed service.
-     * This method only stores the service configuration. To roll out the service
-     * configuration to backend systems please call
-     * [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout].
-     *
-     * Only the 100 most recent service configurations and ones referenced by
-     * existing rollouts are kept for each service. The rest will be deleted
-     * eventually.
-     */
-    CreateServiceConfig(request: CreateServiceConfigRequest): Promise<Service>;
-    /**
-     * Creates a new service configuration (version) for a managed service based
-     * on
-     * user-supplied configuration source files (for example: OpenAPI
-     * Specification). This method stores the source configurations as well as the
-     * generated service configuration. To rollout the service configuration to
-     * other services,
-     * please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout].
-     *
-     * Only the 100 most recent configuration sources and ones referenced by
-     * existing service configurtions are kept for each service. The rest will be
-     * deleted eventually.
-     *
-     * Operation<response: SubmitConfigSourceResponse>
-     */
-    SubmitConfigSource(request: SubmitConfigSourceRequest): Promise<Operation>;
-    /**
-     * Lists the history of the service configuration rollouts for a managed
-     * service, from the newest to the oldest.
-     */
-    ListServiceRollouts(request: ListServiceRolloutsRequest): Promise<ListServiceRolloutsResponse>;
-    /** Gets a service configuration [rollout][google.api.servicemanagement.v1.Rollout]. */
-    GetServiceRollout(request: GetServiceRolloutRequest): Promise<Rollout>;
-    /**
-     * Creates a new service configuration rollout. Based on rollout, the
-     * Google Service Management will roll out the service configurations to
-     * different backend services. For example, the logging configuration will be
-     * pushed to Google Cloud Logging.
-     *
-     * Please note that any previous pending and running Rollouts and associated
-     * Operations will be automatically cancelled so that the latest Rollout will
-     * not be blocked by previous Rollouts.
-     *
-     * Only the 100 most recent (in any state) and the last 10 successful (if not
-     * already part of the set of 100 most recent) rollouts are kept for each
-     * service. The rest will be deleted eventually.
-     *
-     * Operation<response: Rollout>
-     */
-    CreateServiceRollout(request: CreateServiceRolloutRequest): Promise<Operation>;
-    /**
-     * Generates and returns a report (errors, warnings and changes from
-     * existing configurations) associated with
-     * GenerateConfigReportRequest.new_value
-     *
-     * If GenerateConfigReportRequest.old_value is specified,
-     * GenerateConfigReportRequest will contain a single ChangeReport based on the
-     * comparison between GenerateConfigReportRequest.new_value and
-     * GenerateConfigReportRequest.old_value.
-     * If GenerateConfigReportRequest.old_value is not specified, this method
-     * will compare GenerateConfigReportRequest.new_value with the last pushed
-     * service configuration.
-     */
-    GenerateConfigReport(request: GenerateConfigReportRequest): Promise<GenerateConfigReportResponse>;
-}
-export declare class ServiceManagerClientImpl implements ServiceManager {
-    private readonly rpc;
-    constructor(rpc: Rpc);
-    ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-    GetService(request: GetServiceRequest): Promise<ManagedService>;
-    CreateService(request: CreateServiceRequest): Promise<Operation>;
-    DeleteService(request: DeleteServiceRequest): Promise<Operation>;
-    UndeleteService(request: UndeleteServiceRequest): Promise<Operation>;
-    ListServiceConfigs(request: ListServiceConfigsRequest): Promise<ListServiceConfigsResponse>;
-    GetServiceConfig(request: GetServiceConfigRequest): Promise<Service>;
-    CreateServiceConfig(request: CreateServiceConfigRequest): Promise<Service>;
-    SubmitConfigSource(request: SubmitConfigSourceRequest): Promise<Operation>;
-    ListServiceRollouts(request: ListServiceRolloutsRequest): Promise<ListServiceRolloutsResponse>;
-    GetServiceRollout(request: GetServiceRolloutRequest): Promise<Rollout>;
-    CreateServiceRollout(request: CreateServiceRolloutRequest): Promise<Operation>;
-    GenerateConfigReport(request: GenerateConfigReportRequest): Promise<GenerateConfigReportResponse>;
-}
-interface Rpc {
-    request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

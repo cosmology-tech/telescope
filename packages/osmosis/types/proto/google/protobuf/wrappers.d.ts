@@ -1,5 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * Wrapper message for `double`.
  *
@@ -86,70 +86,97 @@ export declare const DoubleValue: {
     decode(input: _m0.Reader | Uint8Array, length?: number): DoubleValue;
     fromJSON(object: any): DoubleValue;
     toJSON(message: DoubleValue): unknown;
-    fromPartial<I extends unknown>(object: I): DoubleValue;
+    fromPartial<I extends {
+        value?: number;
+    } & {
+        value?: number;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): DoubleValue;
 };
 export declare const FloatValue: {
     encode(message: FloatValue, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): FloatValue;
     fromJSON(object: any): FloatValue;
     toJSON(message: FloatValue): unknown;
-    fromPartial<I extends unknown>(object: I): FloatValue;
+    fromPartial<I extends {
+        value?: number;
+    } & {
+        value?: number;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): FloatValue;
 };
 export declare const Int64Value: {
     encode(message: Int64Value, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Int64Value;
     fromJSON(object: any): Int64Value;
     toJSON(message: Int64Value): unknown;
-    fromPartial<I extends unknown>(object: I): Int64Value;
+    fromPartial<I extends {
+        value?: any;
+    } & {
+        value?: any;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): Int64Value;
 };
 export declare const UInt64Value: {
     encode(message: UInt64Value, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UInt64Value;
     fromJSON(object: any): UInt64Value;
     toJSON(message: UInt64Value): unknown;
-    fromPartial<I extends unknown>(object: I): UInt64Value;
+    fromPartial<I extends {
+        value?: any;
+    } & {
+        value?: any;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): UInt64Value;
 };
 export declare const Int32Value: {
     encode(message: Int32Value, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Int32Value;
     fromJSON(object: any): Int32Value;
     toJSON(message: Int32Value): unknown;
-    fromPartial<I extends unknown>(object: I): Int32Value;
+    fromPartial<I extends {
+        value?: number;
+    } & {
+        value?: number;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): Int32Value;
 };
 export declare const UInt32Value: {
     encode(message: UInt32Value, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UInt32Value;
     fromJSON(object: any): UInt32Value;
     toJSON(message: UInt32Value): unknown;
-    fromPartial<I extends unknown>(object: I): UInt32Value;
+    fromPartial<I extends {
+        value?: number;
+    } & {
+        value?: number;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): UInt32Value;
 };
 export declare const BoolValue: {
     encode(message: BoolValue, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BoolValue;
     fromJSON(object: any): BoolValue;
     toJSON(message: BoolValue): unknown;
-    fromPartial<I extends unknown>(object: I): BoolValue;
+    fromPartial<I extends {
+        value?: boolean;
+    } & {
+        value?: boolean;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): BoolValue;
 };
 export declare const StringValue: {
     encode(message: StringValue, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): StringValue;
     fromJSON(object: any): StringValue;
     toJSON(message: StringValue): unknown;
-    fromPartial<I extends unknown>(object: I): StringValue;
+    fromPartial<I extends {
+        value?: string;
+    } & {
+        value?: string;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): StringValue;
 };
 export declare const BytesValue: {
     encode(message: BytesValue, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BytesValue;
     fromJSON(object: any): BytesValue;
     toJSON(message: BytesValue): unknown;
-    fromPartial<I extends unknown>(object: I): BytesValue;
+    fromPartial<I extends {
+        value?: Uint8Array;
+    } & {
+        value?: Uint8Array;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): BytesValue;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

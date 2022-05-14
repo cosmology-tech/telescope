@@ -1,7 +1,5 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-/** Since: cosmos-sdk 0.43 */
+import * as _m0 from "protobufjs/minimal";
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
  * of fees from the account of Granter.
@@ -32,36 +30,49 @@ export declare const MsgGrantAllowance: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowance;
     fromJSON(object: any): MsgGrantAllowance;
     toJSON(message: MsgGrantAllowance): unknown;
-    fromPartial<I extends unknown>(object: I): MsgGrantAllowance;
+    fromPartial<I extends {
+        granter?: string;
+        grantee?: string;
+        allowance?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        granter?: string;
+        grantee?: string;
+        allowance?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["allowance"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof MsgGrantAllowance>, never>>(object: I): MsgGrantAllowance;
 };
 export declare const MsgGrantAllowanceResponse: {
     encode(_: MsgGrantAllowanceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponse;
     fromJSON(_: any): MsgGrantAllowanceResponse;
     toJSON(_: MsgGrantAllowanceResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgGrantAllowanceResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgGrantAllowanceResponse;
 };
 export declare const MsgRevokeAllowance: {
     encode(message: MsgRevokeAllowance, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowance;
     fromJSON(object: any): MsgRevokeAllowance;
     toJSON(message: MsgRevokeAllowance): unknown;
-    fromPartial<I extends unknown>(object: I): MsgRevokeAllowance;
+    fromPartial<I extends {
+        granter?: string;
+        grantee?: string;
+    } & {
+        granter?: string;
+        grantee?: string;
+    } & Record<Exclude<keyof I, keyof MsgRevokeAllowance>, never>>(object: I): MsgRevokeAllowance;
 };
 export declare const MsgRevokeAllowanceResponse: {
     encode(_: MsgRevokeAllowanceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponse;
     fromJSON(_: any): MsgRevokeAllowanceResponse;
     toJSON(_: MsgRevokeAllowanceResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgRevokeAllowanceResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgRevokeAllowanceResponse;
 };
-/** Msg defines the feegrant msg service. */
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

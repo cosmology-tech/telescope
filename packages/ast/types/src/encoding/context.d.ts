@@ -10,11 +10,15 @@ export interface ImportUsage {
     type: 'typeImport' | 'toJSONEnum' | 'fromJSONEnum';
     name: string;
     import: string;
+    importedAs?: string;
 }
 export declare class GenericParseContext implements ParseContext {
     imports: ImportUsage[];
     utils: Record<string, boolean>;
+    store: ProtoStore;
+    ref: ProtoRef;
     addUtil(util: any): void;
+    addImport(imp: ImportUsage): void;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {
     store: ProtoStore;

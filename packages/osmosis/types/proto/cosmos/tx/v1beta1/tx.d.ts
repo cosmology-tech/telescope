@@ -1,9 +1,9 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-import { SignMode } from "../../../cosmos/tx/signing/v1beta1/signing";
-import { CompactBitArray } from "../../../cosmos/crypto/multisig/v1beta1/multisig";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { SignMode } from "../signing/v1beta1/signing";
+import { CompactBitArray } from "../../crypto/multisig/v1beta1/multisig";
+import { Coin } from "../../base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
     /** body is the processable content of the transaction */
@@ -184,9 +184,9 @@ export interface SignerInfo {
 /** ModeInfo describes the signing mode of a single or nested multisig signer. */
 export interface ModeInfo {
     /** single represents a single signer */
-    single: ModeInfo_Single | undefined;
+    single?: ModeInfo_Single;
     /** multi represents a nested multisig signer */
-    multi: ModeInfo_Multi | undefined;
+    multi?: ModeInfo_Multi;
 }
 /**
  * Single is the mode info for a single signer. It is structured as a message
@@ -275,98 +275,1626 @@ export declare const Tx: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Tx;
     fromJSON(object: any): Tx;
     toJSON(message: Tx): unknown;
-    fromPartial<I extends unknown>(object: I): Tx;
+    fromPartial<I extends {
+        body?: {
+            messages?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+            memo?: string;
+            timeoutHeight?: any;
+            extensionOptions?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+            nonCriticalExtensionOptions?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+        };
+        authInfo?: {
+            signerInfos?: {
+                publicKey?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                };
+                modeInfo?: {
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                };
+                sequence?: any;
+            }[];
+            fee?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                gasLimit?: any;
+                payer?: string;
+                granter?: string;
+            };
+            tip?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                tipper?: string;
+            };
+        };
+        signatures?: Uint8Array[];
+    } & {
+        body?: {
+            messages?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+            memo?: string;
+            timeoutHeight?: any;
+            extensionOptions?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+            nonCriticalExtensionOptions?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+        } & {
+            messages?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[] & ({
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["body"]["messages"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["body"]["messages"], keyof {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[]>, never>;
+            memo?: string;
+            timeoutHeight?: any;
+            extensionOptions?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[] & ({
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["body"]["extensionOptions"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["body"]["extensionOptions"], keyof {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[]>, never>;
+            nonCriticalExtensionOptions?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[] & ({
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["body"]["nonCriticalExtensionOptions"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["body"]["nonCriticalExtensionOptions"], keyof {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["body"], keyof TxBody>, never>;
+        authInfo?: {
+            signerInfos?: {
+                publicKey?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                };
+                modeInfo?: {
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                };
+                sequence?: any;
+            }[];
+            fee?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                gasLimit?: any;
+                payer?: string;
+                granter?: string;
+            };
+            tip?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                tipper?: string;
+            };
+        } & {
+            signerInfos?: {
+                publicKey?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                };
+                modeInfo?: {
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                };
+                sequence?: any;
+            }[] & ({
+                publicKey?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                };
+                modeInfo?: {
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                };
+                sequence?: any;
+            } & {
+                publicKey?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["publicKey"], keyof Any>, never>;
+                modeInfo?: {
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                } & {
+                    single?: {
+                        mode?: SignMode;
+                    } & {
+                        mode?: SignMode;
+                    } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["single"], "mode">, never>;
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    } & {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        } & {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                        modeInfos?: any[] & ({
+                            single?: {
+                                mode?: SignMode;
+                            };
+                            multi?: {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                };
+                                modeInfos?: any[];
+                            };
+                        } & {
+                            single?: {
+                                mode?: SignMode;
+                            } & {
+                                mode?: SignMode;
+                            } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                            multi?: {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                };
+                                modeInfos?: any[];
+                            } & {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                } & {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                modeInfos?: any[] & ({
+                                    single?: {
+                                        mode?: SignMode;
+                                    };
+                                    multi?: {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        };
+                                        modeInfos?: any[];
+                                    };
+                                } & {
+                                    single?: {
+                                        mode?: SignMode;
+                                    } & {
+                                        mode?: SignMode;
+                                    } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                    multi?: {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        };
+                                        modeInfos?: any[];
+                                    } & {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        } & {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                        modeInfos?: any[] & ({
+                                            single?: {
+                                                mode?: SignMode;
+                                            };
+                                            multi?: {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                };
+                                                modeInfos?: any[];
+                                            };
+                                        } & {
+                                            single?: {
+                                                mode?: SignMode;
+                                            } & {
+                                                mode?: SignMode;
+                                            } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                            multi?: {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                };
+                                                modeInfos?: any[];
+                                            } & {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                } & any & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                                modeInfos?: any[] & ({
+                                                    single?: {
+                                                        mode?: SignMode;
+                                                    };
+                                                    multi?: {
+                                                        bitarray?: {
+                                                            extraBitsStored?: number;
+                                                            elems?: Uint8Array;
+                                                        };
+                                                        modeInfos?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                        } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                        } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"]["multi"], keyof ModeInfo_Multi>, never>;
+                } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number]["modeInfo"], keyof ModeInfo>, never>;
+                sequence?: any;
+            } & Record<Exclude<keyof I["authInfo"]["signerInfos"][number], keyof SignerInfo>, never>)[] & Record<Exclude<keyof I["authInfo"]["signerInfos"], keyof {
+                publicKey?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                };
+                modeInfo?: {
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                };
+                sequence?: any;
+            }[]>, never>;
+            fee?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                gasLimit?: any;
+                payer?: string;
+                granter?: string;
+            } & {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["authInfo"]["fee"]["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["authInfo"]["fee"]["amount"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                gasLimit?: any;
+                payer?: string;
+                granter?: string;
+            } & Record<Exclude<keyof I["authInfo"]["fee"], keyof Fee>, never>;
+            tip?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                tipper?: string;
+            } & {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["authInfo"]["tip"]["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["authInfo"]["tip"]["amount"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                tipper?: string;
+            } & Record<Exclude<keyof I["authInfo"]["tip"], keyof Tip>, never>;
+        } & Record<Exclude<keyof I["authInfo"], keyof AuthInfo>, never>;
+        signatures?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["signatures"], keyof Uint8Array[]>, never>;
+    } & Record<Exclude<keyof I, keyof Tx>, never>>(object: I): Tx;
 };
 export declare const TxRaw: {
     encode(message: TxRaw, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TxRaw;
     fromJSON(object: any): TxRaw;
     toJSON(message: TxRaw): unknown;
-    fromPartial<I extends unknown>(object: I): TxRaw;
+    fromPartial<I extends {
+        bodyBytes?: Uint8Array;
+        authInfoBytes?: Uint8Array;
+        signatures?: Uint8Array[];
+    } & {
+        bodyBytes?: Uint8Array;
+        authInfoBytes?: Uint8Array;
+        signatures?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["signatures"], keyof Uint8Array[]>, never>;
+    } & Record<Exclude<keyof I, keyof TxRaw>, never>>(object: I): TxRaw;
 };
 export declare const SignDoc: {
     encode(message: SignDoc, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SignDoc;
     fromJSON(object: any): SignDoc;
     toJSON(message: SignDoc): unknown;
-    fromPartial<I extends unknown>(object: I): SignDoc;
+    fromPartial<I extends {
+        bodyBytes?: Uint8Array;
+        authInfoBytes?: Uint8Array;
+        chainId?: string;
+        accountNumber?: any;
+    } & {
+        bodyBytes?: Uint8Array;
+        authInfoBytes?: Uint8Array;
+        chainId?: string;
+        accountNumber?: any;
+    } & Record<Exclude<keyof I, keyof SignDoc>, never>>(object: I): SignDoc;
 };
 export declare const SignDocDirectAux: {
     encode(message: SignDocDirectAux, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SignDocDirectAux;
     fromJSON(object: any): SignDocDirectAux;
     toJSON(message: SignDocDirectAux): unknown;
-    fromPartial<I extends unknown>(object: I): SignDocDirectAux;
+    fromPartial<I extends {
+        bodyBytes?: Uint8Array;
+        publicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        chainId?: string;
+        accountNumber?: any;
+        sequence?: any;
+        tip?: {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            tipper?: string;
+        };
+    } & {
+        bodyBytes?: Uint8Array;
+        publicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["publicKey"], keyof Any>, never>;
+        chainId?: string;
+        accountNumber?: any;
+        sequence?: any;
+        tip?: {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            tipper?: string;
+        } & {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["tip"]["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["tip"]["amount"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+            tipper?: string;
+        } & Record<Exclude<keyof I["tip"], keyof Tip>, never>;
+    } & Record<Exclude<keyof I, keyof SignDocDirectAux>, never>>(object: I): SignDocDirectAux;
 };
 export declare const TxBody: {
     encode(message: TxBody, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TxBody;
     fromJSON(object: any): TxBody;
     toJSON(message: TxBody): unknown;
-    fromPartial<I extends unknown>(object: I): TxBody;
+    fromPartial<I extends {
+        messages?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[];
+        memo?: string;
+        timeoutHeight?: any;
+        extensionOptions?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[];
+        nonCriticalExtensionOptions?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[];
+    } & {
+        messages?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[] & ({
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["messages"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["messages"], keyof {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[]>, never>;
+        memo?: string;
+        timeoutHeight?: any;
+        extensionOptions?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[] & ({
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["extensionOptions"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["extensionOptions"], keyof {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[]>, never>;
+        nonCriticalExtensionOptions?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[] & ({
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["nonCriticalExtensionOptions"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["nonCriticalExtensionOptions"], keyof {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof TxBody>, never>>(object: I): TxBody;
 };
 export declare const AuthInfo: {
     encode(message: AuthInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthInfo;
     fromJSON(object: any): AuthInfo;
     toJSON(message: AuthInfo): unknown;
-    fromPartial<I extends unknown>(object: I): AuthInfo;
+    fromPartial<I extends {
+        signerInfos?: {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            modeInfo?: {
+                single?: {
+                    mode?: SignMode;
+                };
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                };
+            };
+            sequence?: any;
+        }[];
+        fee?: {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            gasLimit?: any;
+            payer?: string;
+            granter?: string;
+        };
+        tip?: {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            tipper?: string;
+        };
+    } & {
+        signerInfos?: {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            modeInfo?: {
+                single?: {
+                    mode?: SignMode;
+                };
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                };
+            };
+            sequence?: any;
+        }[] & ({
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            modeInfo?: {
+                single?: {
+                    mode?: SignMode;
+                };
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                };
+            };
+            sequence?: any;
+        } & {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["signerInfos"][number]["publicKey"], keyof Any>, never>;
+            modeInfo?: {
+                single?: {
+                    mode?: SignMode;
+                };
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                };
+            } & {
+                single?: {
+                    mode?: SignMode;
+                } & {
+                    mode?: SignMode;
+                } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["single"], "mode">, never>;
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                } & {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    } & {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                    modeInfos?: any[] & ({
+                        single?: {
+                            mode?: SignMode;
+                        };
+                        multi?: {
+                            bitarray?: {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            };
+                            modeInfos?: any[];
+                        };
+                    } & {
+                        single?: {
+                            mode?: SignMode;
+                        } & {
+                            mode?: SignMode;
+                        } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                        multi?: {
+                            bitarray?: {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            };
+                            modeInfos?: any[];
+                        } & {
+                            bitarray?: {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            } & {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                            modeInfos?: any[] & ({
+                                single?: {
+                                    mode?: SignMode;
+                                };
+                                multi?: {
+                                    bitarray?: {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    };
+                                    modeInfos?: any[];
+                                };
+                            } & {
+                                single?: {
+                                    mode?: SignMode;
+                                } & {
+                                    mode?: SignMode;
+                                } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                multi?: {
+                                    bitarray?: {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    };
+                                    modeInfos?: any[];
+                                } & {
+                                    bitarray?: {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    } & {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                    modeInfos?: any[] & ({
+                                        single?: {
+                                            mode?: SignMode;
+                                        };
+                                        multi?: {
+                                            bitarray?: {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            };
+                                            modeInfos?: any[];
+                                        };
+                                    } & {
+                                        single?: {
+                                            mode?: SignMode;
+                                        } & {
+                                            mode?: SignMode;
+                                        } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                        multi?: {
+                                            bitarray?: {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            };
+                                            modeInfos?: any[];
+                                        } & {
+                                            bitarray?: {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            } & {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                            modeInfos?: any[] & ({
+                                                single?: {
+                                                    mode?: SignMode;
+                                                };
+                                                multi?: {
+                                                    bitarray?: {
+                                                        extraBitsStored?: number;
+                                                        elems?: Uint8Array;
+                                                    };
+                                                    modeInfos?: any[];
+                                                };
+                                            } & {
+                                                single?: {
+                                                    mode?: SignMode;
+                                                } & any & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                                multi?: {
+                                                    bitarray?: {
+                                                        extraBitsStored?: number;
+                                                        elems?: Uint8Array;
+                                                    };
+                                                    modeInfos?: any[];
+                                                } & any & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                            } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                    } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                            } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                    } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"]["modeInfos"], keyof any[]>, never>;
+                } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"]["multi"], keyof ModeInfo_Multi>, never>;
+            } & Record<Exclude<keyof I["signerInfos"][number]["modeInfo"], keyof ModeInfo>, never>;
+            sequence?: any;
+        } & Record<Exclude<keyof I["signerInfos"][number], keyof SignerInfo>, never>)[] & Record<Exclude<keyof I["signerInfos"], keyof {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            modeInfo?: {
+                single?: {
+                    mode?: SignMode;
+                };
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                };
+            };
+            sequence?: any;
+        }[]>, never>;
+        fee?: {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            gasLimit?: any;
+            payer?: string;
+            granter?: string;
+        } & {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["fee"]["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["fee"]["amount"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+            gasLimit?: any;
+            payer?: string;
+            granter?: string;
+        } & Record<Exclude<keyof I["fee"], keyof Fee>, never>;
+        tip?: {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            tipper?: string;
+        } & {
+            amount?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["tip"]["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["tip"]["amount"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+            tipper?: string;
+        } & Record<Exclude<keyof I["tip"], keyof Tip>, never>;
+    } & Record<Exclude<keyof I, keyof AuthInfo>, never>>(object: I): AuthInfo;
 };
 export declare const SignerInfo: {
     encode(message: SignerInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SignerInfo;
     fromJSON(object: any): SignerInfo;
     toJSON(message: SignerInfo): unknown;
-    fromPartial<I extends unknown>(object: I): SignerInfo;
+    fromPartial<I extends {
+        publicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        modeInfo?: {
+            single?: {
+                mode?: SignMode;
+            };
+            multi?: {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                };
+                modeInfos?: any[];
+            };
+        };
+        sequence?: any;
+    } & {
+        publicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["publicKey"], keyof Any>, never>;
+        modeInfo?: {
+            single?: {
+                mode?: SignMode;
+            };
+            multi?: {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                };
+                modeInfos?: any[];
+            };
+        } & {
+            single?: {
+                mode?: SignMode;
+            } & {
+                mode?: SignMode;
+            } & Record<Exclude<keyof I["modeInfo"]["single"], "mode">, never>;
+            multi?: {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                };
+                modeInfos?: any[];
+            } & {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                } & {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                } & Record<Exclude<keyof I["modeInfo"]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                modeInfos?: any[] & ({
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                } & {
+                    single?: {
+                        mode?: SignMode;
+                    } & {
+                        mode?: SignMode;
+                    } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    } & {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        } & {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                        modeInfos?: any[] & ({
+                            single?: {
+                                mode?: SignMode;
+                            };
+                            multi?: {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                };
+                                modeInfos?: any[];
+                            };
+                        } & {
+                            single?: {
+                                mode?: SignMode;
+                            } & {
+                                mode?: SignMode;
+                            } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                            multi?: {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                };
+                                modeInfos?: any[];
+                            } & {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                } & {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                modeInfos?: any[] & ({
+                                    single?: {
+                                        mode?: SignMode;
+                                    };
+                                    multi?: {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        };
+                                        modeInfos?: any[];
+                                    };
+                                } & {
+                                    single?: {
+                                        mode?: SignMode;
+                                    } & {
+                                        mode?: SignMode;
+                                    } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                    multi?: {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        };
+                                        modeInfos?: any[];
+                                    } & {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        } & {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                        modeInfos?: any[] & ({
+                                            single?: {
+                                                mode?: SignMode;
+                                            };
+                                            multi?: {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                };
+                                                modeInfos?: any[];
+                                            };
+                                        } & {
+                                            single?: {
+                                                mode?: SignMode;
+                                            } & {
+                                                mode?: SignMode;
+                                            } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                            multi?: {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                };
+                                                modeInfos?: any[];
+                                            } & {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                } & any & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                                modeInfos?: any[] & ({
+                                                    single?: {
+                                                        mode?: SignMode;
+                                                    };
+                                                    multi?: {
+                                                        bitarray?: {
+                                                            extraBitsStored?: number;
+                                                            elems?: Uint8Array;
+                                                        };
+                                                        modeInfos?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                        } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                        } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                } & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfo"]["multi"]["modeInfos"], keyof any[]>, never>;
+            } & Record<Exclude<keyof I["modeInfo"]["multi"], keyof ModeInfo_Multi>, never>;
+        } & Record<Exclude<keyof I["modeInfo"], keyof ModeInfo>, never>;
+        sequence?: any;
+    } & Record<Exclude<keyof I, keyof SignerInfo>, never>>(object: I): SignerInfo;
 };
 export declare const ModeInfo: {
     encode(message: ModeInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo;
     fromJSON(object: any): ModeInfo;
     toJSON(message: ModeInfo): unknown;
-    fromPartial<I extends unknown>(object: I): ModeInfo;
+    fromPartial<I extends {
+        single?: {
+            mode?: SignMode;
+        };
+        multi?: {
+            bitarray?: {
+                extraBitsStored?: number;
+                elems?: Uint8Array;
+            };
+            modeInfos?: any[];
+        };
+    } & {
+        single?: {
+            mode?: SignMode;
+        } & {
+            mode?: SignMode;
+        } & Record<Exclude<keyof I["single"], "mode">, never>;
+        multi?: {
+            bitarray?: {
+                extraBitsStored?: number;
+                elems?: Uint8Array;
+            };
+            modeInfos?: any[];
+        } & {
+            bitarray?: {
+                extraBitsStored?: number;
+                elems?: Uint8Array;
+            } & {
+                extraBitsStored?: number;
+                elems?: Uint8Array;
+            } & Record<Exclude<keyof I["multi"]["bitarray"], keyof CompactBitArray>, never>;
+            modeInfos?: any[] & ({
+                single?: {
+                    mode?: SignMode;
+                };
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                };
+            } & {
+                single?: {
+                    mode?: SignMode;
+                } & {
+                    mode?: SignMode;
+                } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                multi?: {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    };
+                    modeInfos?: any[];
+                } & {
+                    bitarray?: {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    } & {
+                        extraBitsStored?: number;
+                        elems?: Uint8Array;
+                    } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                    modeInfos?: any[] & ({
+                        single?: {
+                            mode?: SignMode;
+                        };
+                        multi?: {
+                            bitarray?: {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            };
+                            modeInfos?: any[];
+                        };
+                    } & {
+                        single?: {
+                            mode?: SignMode;
+                        } & {
+                            mode?: SignMode;
+                        } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                        multi?: {
+                            bitarray?: {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            };
+                            modeInfos?: any[];
+                        } & {
+                            bitarray?: {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            } & {
+                                extraBitsStored?: number;
+                                elems?: Uint8Array;
+                            } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                            modeInfos?: any[] & ({
+                                single?: {
+                                    mode?: SignMode;
+                                };
+                                multi?: {
+                                    bitarray?: {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    };
+                                    modeInfos?: any[];
+                                };
+                            } & {
+                                single?: {
+                                    mode?: SignMode;
+                                } & {
+                                    mode?: SignMode;
+                                } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                multi?: {
+                                    bitarray?: {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    };
+                                    modeInfos?: any[];
+                                } & {
+                                    bitarray?: {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    } & {
+                                        extraBitsStored?: number;
+                                        elems?: Uint8Array;
+                                    } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                    modeInfos?: any[] & ({
+                                        single?: {
+                                            mode?: SignMode;
+                                        };
+                                        multi?: {
+                                            bitarray?: {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            };
+                                            modeInfos?: any[];
+                                        };
+                                    } & {
+                                        single?: {
+                                            mode?: SignMode;
+                                        } & {
+                                            mode?: SignMode;
+                                        } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                        multi?: {
+                                            bitarray?: {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            };
+                                            modeInfos?: any[];
+                                        } & {
+                                            bitarray?: {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            } & {
+                                                extraBitsStored?: number;
+                                                elems?: Uint8Array;
+                                            } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                            modeInfos?: any[] & ({
+                                                single?: {
+                                                    mode?: SignMode;
+                                                };
+                                                multi?: {
+                                                    bitarray?: {
+                                                        extraBitsStored?: number;
+                                                        elems?: Uint8Array;
+                                                    };
+                                                    modeInfos?: any[];
+                                                };
+                                            } & {
+                                                single?: {
+                                                    mode?: SignMode;
+                                                } & any & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                                multi?: {
+                                                    bitarray?: {
+                                                        extraBitsStored?: number;
+                                                        elems?: Uint8Array;
+                                                    };
+                                                    modeInfos?: any[];
+                                                } & any & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                            } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                    } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                            } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                    } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                } & Record<Exclude<keyof I["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+            } & Record<Exclude<keyof I["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["multi"]["modeInfos"], keyof any[]>, never>;
+        } & Record<Exclude<keyof I["multi"], keyof ModeInfo_Multi>, never>;
+    } & Record<Exclude<keyof I, keyof ModeInfo>, never>>(object: I): ModeInfo;
 };
 export declare const ModeInfo_Single: {
     encode(message: ModeInfo_Single, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Single;
     fromJSON(object: any): ModeInfo_Single;
     toJSON(message: ModeInfo_Single): unknown;
-    fromPartial<I extends unknown>(object: I): ModeInfo_Single;
+    fromPartial<I extends {
+        mode?: SignMode;
+    } & {
+        mode?: SignMode;
+    } & Record<Exclude<keyof I, "mode">, never>>(object: I): ModeInfo_Single;
 };
 export declare const ModeInfo_Multi: {
     encode(message: ModeInfo_Multi, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Multi;
     fromJSON(object: any): ModeInfo_Multi;
     toJSON(message: ModeInfo_Multi): unknown;
-    fromPartial<I extends unknown>(object: I): ModeInfo_Multi;
+    fromPartial<I extends {
+        bitarray?: {
+            extraBitsStored?: number;
+            elems?: Uint8Array;
+        };
+        modeInfos?: any[];
+    } & {
+        bitarray?: {
+            extraBitsStored?: number;
+            elems?: Uint8Array;
+        } & {
+            extraBitsStored?: number;
+            elems?: Uint8Array;
+        } & Record<Exclude<keyof I["bitarray"], keyof CompactBitArray>, never>;
+        modeInfos?: any[] & ({
+            single?: {
+                mode?: SignMode;
+            };
+            multi?: {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                };
+                modeInfos?: any[];
+            };
+        } & {
+            single?: {
+                mode?: SignMode;
+            } & {
+                mode?: SignMode;
+            } & Record<Exclude<keyof I["modeInfos"][number]["single"], "mode">, never>;
+            multi?: {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                };
+                modeInfos?: any[];
+            } & {
+                bitarray?: {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                } & {
+                    extraBitsStored?: number;
+                    elems?: Uint8Array;
+                } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                modeInfos?: any[] & ({
+                    single?: {
+                        mode?: SignMode;
+                    };
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    };
+                } & {
+                    single?: {
+                        mode?: SignMode;
+                    } & {
+                        mode?: SignMode;
+                    } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                    multi?: {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        };
+                        modeInfos?: any[];
+                    } & {
+                        bitarray?: {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        } & {
+                            extraBitsStored?: number;
+                            elems?: Uint8Array;
+                        } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                        modeInfos?: any[] & ({
+                            single?: {
+                                mode?: SignMode;
+                            };
+                            multi?: {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                };
+                                modeInfos?: any[];
+                            };
+                        } & {
+                            single?: {
+                                mode?: SignMode;
+                            } & {
+                                mode?: SignMode;
+                            } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                            multi?: {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                };
+                                modeInfos?: any[];
+                            } & {
+                                bitarray?: {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                } & {
+                                    extraBitsStored?: number;
+                                    elems?: Uint8Array;
+                                } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                modeInfos?: any[] & ({
+                                    single?: {
+                                        mode?: SignMode;
+                                    };
+                                    multi?: {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        };
+                                        modeInfos?: any[];
+                                    };
+                                } & {
+                                    single?: {
+                                        mode?: SignMode;
+                                    } & {
+                                        mode?: SignMode;
+                                    } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                    multi?: {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        };
+                                        modeInfos?: any[];
+                                    } & {
+                                        bitarray?: {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        } & {
+                                            extraBitsStored?: number;
+                                            elems?: Uint8Array;
+                                        } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                        modeInfos?: any[] & ({
+                                            single?: {
+                                                mode?: SignMode;
+                                            };
+                                            multi?: {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                };
+                                                modeInfos?: any[];
+                                            };
+                                        } & {
+                                            single?: {
+                                                mode?: SignMode;
+                                            } & {
+                                                mode?: SignMode;
+                                            } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["single"], "mode">, never>;
+                                            multi?: {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                };
+                                                modeInfos?: any[];
+                                            } & {
+                                                bitarray?: {
+                                                    extraBitsStored?: number;
+                                                    elems?: Uint8Array;
+                                                } & any & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["bitarray"], keyof CompactBitArray>, never>;
+                                                modeInfos?: any[] & ({
+                                                    single?: {
+                                                        mode?: SignMode;
+                                                    };
+                                                    multi?: {
+                                                        bitarray?: {
+                                                            extraBitsStored?: number;
+                                                            elems?: Uint8Array;
+                                                        };
+                                                        modeInfos?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                        } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                                } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                        } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+                } & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfos"][number]["multi"]["modeInfos"], keyof any[]>, never>;
+            } & Record<Exclude<keyof I["modeInfos"][number]["multi"], keyof ModeInfo_Multi>, never>;
+        } & Record<Exclude<keyof I["modeInfos"][number], keyof ModeInfo>, never>)[] & Record<Exclude<keyof I["modeInfos"], keyof any[]>, never>;
+    } & Record<Exclude<keyof I, keyof ModeInfo_Multi>, never>>(object: I): ModeInfo_Multi;
 };
 export declare const Fee: {
     encode(message: Fee, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Fee;
     fromJSON(object: any): Fee;
     toJSON(message: Fee): unknown;
-    fromPartial<I extends unknown>(object: I): Fee;
+    fromPartial<I extends {
+        amount?: {
+            denom?: string;
+            amount?: string;
+        }[];
+        gasLimit?: any;
+        payer?: string;
+        granter?: string;
+    } & {
+        amount?: {
+            denom?: string;
+            amount?: string;
+        }[] & ({
+            denom?: string;
+            amount?: string;
+        } & {
+            denom?: string;
+            amount?: string;
+        } & Record<Exclude<keyof I["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["amount"], keyof {
+            denom?: string;
+            amount?: string;
+        }[]>, never>;
+        gasLimit?: any;
+        payer?: string;
+        granter?: string;
+    } & Record<Exclude<keyof I, keyof Fee>, never>>(object: I): Fee;
 };
 export declare const Tip: {
     encode(message: Tip, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Tip;
     fromJSON(object: any): Tip;
     toJSON(message: Tip): unknown;
-    fromPartial<I extends unknown>(object: I): Tip;
+    fromPartial<I extends {
+        amount?: {
+            denom?: string;
+            amount?: string;
+        }[];
+        tipper?: string;
+    } & {
+        amount?: {
+            denom?: string;
+            amount?: string;
+        }[] & ({
+            denom?: string;
+            amount?: string;
+        } & {
+            denom?: string;
+            amount?: string;
+        } & Record<Exclude<keyof I["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["amount"], keyof {
+            denom?: string;
+            amount?: string;
+        }[]>, never>;
+        tipper?: string;
+    } & Record<Exclude<keyof I, keyof Tip>, never>>(object: I): Tip;
 };
 export declare const AuxSignerData: {
     encode(message: AuxSignerData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuxSignerData;
     fromJSON(object: any): AuxSignerData;
     toJSON(message: AuxSignerData): unknown;
-    fromPartial<I extends unknown>(object: I): AuxSignerData;
+    fromPartial<I extends {
+        address?: string;
+        signDoc?: {
+            bodyBytes?: Uint8Array;
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            chainId?: string;
+            accountNumber?: any;
+            sequence?: any;
+            tip?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                tipper?: string;
+            };
+        };
+        mode?: SignMode;
+        sig?: Uint8Array;
+    } & {
+        address?: string;
+        signDoc?: {
+            bodyBytes?: Uint8Array;
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            chainId?: string;
+            accountNumber?: any;
+            sequence?: any;
+            tip?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                tipper?: string;
+            };
+        } & {
+            bodyBytes?: Uint8Array;
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["signDoc"]["publicKey"], keyof Any>, never>;
+            chainId?: string;
+            accountNumber?: any;
+            sequence?: any;
+            tip?: {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                tipper?: string;
+            } & {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["signDoc"]["tip"]["amount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["signDoc"]["tip"]["amount"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                tipper?: string;
+            } & Record<Exclude<keyof I["signDoc"]["tip"], keyof Tip>, never>;
+        } & Record<Exclude<keyof I["signDoc"], keyof SignDocDirectAux>, never>;
+        mode?: SignMode;
+        sig?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof AuxSignerData>, never>>(object: I): AuxSignerData;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

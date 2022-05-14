@@ -1,6 +1,5 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
     /** light client state */
@@ -78,63 +77,146 @@ export declare const MsgCreateClient: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClient;
     fromJSON(object: any): MsgCreateClient;
     toJSON(message: MsgCreateClient): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateClient;
+    fromPartial<I extends {
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        signer?: string;
+    } & {
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["clientState"], keyof Any>, never>;
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["consensusState"], keyof Any>, never>;
+        signer?: string;
+    } & Record<Exclude<keyof I, keyof MsgCreateClient>, never>>(object: I): MsgCreateClient;
 };
 export declare const MsgCreateClientResponse: {
     encode(_: MsgCreateClientResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClientResponse;
     fromJSON(_: any): MsgCreateClientResponse;
     toJSON(_: MsgCreateClientResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgCreateClientResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgCreateClientResponse;
 };
 export declare const MsgUpdateClient: {
     encode(message: MsgUpdateClient, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClient;
     fromJSON(object: any): MsgUpdateClient;
     toJSON(message: MsgUpdateClient): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateClient;
+    fromPartial<I extends {
+        clientId?: string;
+        header?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        signer?: string;
+    } & {
+        clientId?: string;
+        header?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["header"], keyof Any>, never>;
+        signer?: string;
+    } & Record<Exclude<keyof I, keyof MsgUpdateClient>, never>>(object: I): MsgUpdateClient;
 };
 export declare const MsgUpdateClientResponse: {
     encode(_: MsgUpdateClientResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClientResponse;
     fromJSON(_: any): MsgUpdateClientResponse;
     toJSON(_: MsgUpdateClientResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateClientResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateClientResponse;
 };
 export declare const MsgUpgradeClient: {
     encode(message: MsgUpgradeClient, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClient;
     fromJSON(object: any): MsgUpgradeClient;
     toJSON(message: MsgUpgradeClient): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpgradeClient;
+    fromPartial<I extends {
+        clientId?: string;
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        proofUpgradeClient?: Uint8Array;
+        proofUpgradeConsensusState?: Uint8Array;
+        signer?: string;
+    } & {
+        clientId?: string;
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["clientState"], keyof Any>, never>;
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["consensusState"], keyof Any>, never>;
+        proofUpgradeClient?: Uint8Array;
+        proofUpgradeConsensusState?: Uint8Array;
+        signer?: string;
+    } & Record<Exclude<keyof I, keyof MsgUpgradeClient>, never>>(object: I): MsgUpgradeClient;
 };
 export declare const MsgUpgradeClientResponse: {
     encode(_: MsgUpgradeClientResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClientResponse;
     fromJSON(_: any): MsgUpgradeClientResponse;
     toJSON(_: MsgUpgradeClientResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpgradeClientResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpgradeClientResponse;
 };
 export declare const MsgSubmitMisbehaviour: {
     encode(message: MsgSubmitMisbehaviour, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviour;
     fromJSON(object: any): MsgSubmitMisbehaviour;
     toJSON(message: MsgSubmitMisbehaviour): unknown;
-    fromPartial<I extends unknown>(object: I): MsgSubmitMisbehaviour;
+    fromPartial<I extends {
+        clientId?: string;
+        misbehaviour?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        signer?: string;
+    } & {
+        clientId?: string;
+        misbehaviour?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["misbehaviour"], keyof Any>, never>;
+        signer?: string;
+    } & Record<Exclude<keyof I, keyof MsgSubmitMisbehaviour>, never>>(object: I): MsgSubmitMisbehaviour;
 };
 export declare const MsgSubmitMisbehaviourResponse: {
     encode(_: MsgSubmitMisbehaviourResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponse;
     fromJSON(_: any): MsgSubmitMisbehaviourResponse;
     toJSON(_: MsgSubmitMisbehaviourResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgSubmitMisbehaviourResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgSubmitMisbehaviourResponse;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

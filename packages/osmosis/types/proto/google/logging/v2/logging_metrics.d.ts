@@ -1,8 +1,20 @@
-import Long from "long";
+import { MetricDescriptor } from "../../api/metric";
+import { Distribution_BucketOptions } from "../../api/distribution";
 import * as _m0 from "protobufjs/minimal";
-import { MetricDescriptor } from "../../../google/api/metric";
-import { Distribution_BucketOptions } from "../../../google/api/distribution";
-import { Empty } from "../../../google/protobuf/empty";
+/** Logging API version. */
+export declare enum LogMetric_ApiVersion {
+    /** V2 - Logging API v2. */
+    V2 = 0,
+    /** V1 - Logging API v1. */
+    V1 = 1,
+    UNRECOGNIZED = -1
+}
+export declare function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion;
+export declare function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string;
+export interface LogMetric_LabelExtractorsEntry {
+    key: string;
+    value: string;
+}
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -39,7 +51,7 @@ export interface LogMetric {
      * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
      * is used to match log entries. Example:
      *
-     *     "resource.type=gae_app AND severity>=ERROR"
+     * "resource.type=gae_app AND severity>=ERROR"
      *
      * The maximum length of the filter is 20000 characters.
      */
@@ -78,14 +90,14 @@ export interface LogMetric {
      * logs-based metric to extract the values to record from a log entry.
      * Two functions are supported for value extraction: `EXTRACT(field)` or
      * `REGEXP_EXTRACT(field, regex)`. The argument are:
-     *   1. field: The name of the log entry field from which the value is to be
-     *      extracted.
-     *   2. regex: A regular expression using the Google RE2 syntax
-     *      (https://github.com/google/re2/wiki/Syntax) with a single capture
-     *      group to extract data from the specified log entry field. The value
-     *      of the field is converted to a string before applying the regex.
-     *      It is an error to specify a regex that does not include exactly one
-     *      capture group.
+     * 1. field: The name of the log entry field from which the value is to be
+     * extracted.
+     * 2. regex: A regular expression using the Google RE2 syntax
+     * (https://github.com/google/re2/wiki/Syntax) with a single capture
+     * group to extract data from the specified log entry field. The value
+     * of the field is converted to a string before applying the regex.
+     * It is an error to specify a regex that does not include exactly one
+     * capture group.
      *
      * The result of the extraction must be convertible to a double type, as the
      * distribution always records double values. If either the extraction or
@@ -135,31 +147,16 @@ export interface LogMetric {
     /**
      * Deprecated. The API version that created or updated this metric.
      * The v2 format is used by default and cannot be changed.
-     *
-     * @deprecated
      */
+    /** @deprecated */
     version: LogMetric_ApiVersion;
-}
-/** Logging API version. */
-export declare enum LogMetric_ApiVersion {
-    /** V2 - Logging API v2. */
-    V2 = 0,
-    /** V1 - Logging API v1. */
-    V1 = 1,
-    UNRECOGNIZED = -1
-}
-export declare function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion;
-export declare function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string;
-export interface LogMetric_LabelExtractorsEntry {
-    key: string;
-    value: string;
 }
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequest {
     /**
      * Required. The name of the project containing the metrics:
      *
-     *     "projects/[PROJECT_ID]"
+     * "projects/[PROJECT_ID]"
      */
     parent: string;
     /**
@@ -192,7 +189,7 @@ export interface GetLogMetricRequest {
     /**
      * Required. The resource name of the desired metric:
      *
-     *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+     * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
      */
     metricName: string;
 }
@@ -201,7 +198,7 @@ export interface CreateLogMetricRequest {
     /**
      * Required. The resource name of the project in which to create the metric:
      *
-     *     "projects/[PROJECT_ID]"
+     * "projects/[PROJECT_ID]"
      *
      * The new metric must be provided in the request.
      */
@@ -217,7 +214,7 @@ export interface UpdateLogMetricRequest {
     /**
      * Required. The resource name of the metric to update:
      *
-     *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+     * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
      *
      * The updated metric must be provided in the request and it's
      * `name` field must be the same as `[METRIC_ID]` If the metric
@@ -232,97 +229,975 @@ export interface DeleteLogMetricRequest {
     /**
      * Required. The resource name of the metric to delete:
      *
-     *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+     * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
      */
     metricName: string;
 }
-export declare const LogMetric: {
-    encode(message: LogMetric, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric;
-    fromJSON(object: any): LogMetric;
-    toJSON(message: LogMetric): unknown;
-    fromPartial<I extends unknown>(object: I): LogMetric;
-};
 export declare const LogMetric_LabelExtractorsEntry: {
     encode(message: LogMetric_LabelExtractorsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry;
     fromJSON(object: any): LogMetric_LabelExtractorsEntry;
     toJSON(message: LogMetric_LabelExtractorsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): LogMetric_LabelExtractorsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof LogMetric_LabelExtractorsEntry>, never>>(object: I): LogMetric_LabelExtractorsEntry;
+};
+export declare const LogMetric: {
+    encode(message: LogMetric, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric;
+    fromJSON(object: any): LogMetric;
+    toJSON(message: LogMetric): unknown;
+    fromPartial<I extends {
+        name?: string;
+        description?: string;
+        filter?: string;
+        disabled?: boolean;
+        metricDescriptor?: {
+            name?: string;
+            type?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[];
+            metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+            valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+            unit?: string;
+            description?: string;
+            displayName?: string;
+            metadata?: {
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                samplePeriod?: string;
+                ingestDelay?: string;
+            };
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+            monitoredResourceTypes?: string[];
+        };
+        valueExtractor?: string;
+        labelExtractors?: {
+            [x: string]: string;
+        };
+        bucketOptions?: {
+            linearBuckets?: {
+                numFiniteBuckets?: number;
+                width?: number;
+                offset?: number;
+            };
+            exponentialBuckets?: {
+                numFiniteBuckets?: number;
+                growthFactor?: number;
+                scale?: number;
+            };
+            explicitBuckets?: {
+                bounds?: number[];
+            };
+        };
+        createTime?: Date;
+        updateTime?: Date;
+        version?: LogMetric_ApiVersion;
+    } & {
+        name?: string;
+        description?: string;
+        filter?: string;
+        disabled?: boolean;
+        metricDescriptor?: {
+            name?: string;
+            type?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[];
+            metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+            valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+            unit?: string;
+            description?: string;
+            displayName?: string;
+            metadata?: {
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                samplePeriod?: string;
+                ingestDelay?: string;
+            };
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+            monitoredResourceTypes?: string[];
+        } & {
+            name?: string;
+            type?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[] & ({
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            } & {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            } & Record<Exclude<keyof I["metricDescriptor"]["labels"][number], keyof import("../../api/label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["metricDescriptor"]["labels"], keyof {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[]>, never>;
+            metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+            valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+            unit?: string;
+            description?: string;
+            displayName?: string;
+            metadata?: {
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                samplePeriod?: string;
+                ingestDelay?: string;
+            } & {
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                samplePeriod?: string;
+                ingestDelay?: string;
+            } & Record<Exclude<keyof I["metricDescriptor"]["metadata"], keyof import("../../api/metric").MetricDescriptor_MetricDescriptorMetadata>, never>;
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+            monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["metricDescriptor"]["monitoredResourceTypes"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["metricDescriptor"], keyof MetricDescriptor>, never>;
+        valueExtractor?: string;
+        labelExtractors?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["labelExtractors"], string | number>, never>;
+        bucketOptions?: {
+            linearBuckets?: {
+                numFiniteBuckets?: number;
+                width?: number;
+                offset?: number;
+            };
+            exponentialBuckets?: {
+                numFiniteBuckets?: number;
+                growthFactor?: number;
+                scale?: number;
+            };
+            explicitBuckets?: {
+                bounds?: number[];
+            };
+        } & {
+            linearBuckets?: {
+                numFiniteBuckets?: number;
+                width?: number;
+                offset?: number;
+            } & {
+                numFiniteBuckets?: number;
+                width?: number;
+                offset?: number;
+            } & Record<Exclude<keyof I["bucketOptions"]["linearBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Linear>, never>;
+            exponentialBuckets?: {
+                numFiniteBuckets?: number;
+                growthFactor?: number;
+                scale?: number;
+            } & {
+                numFiniteBuckets?: number;
+                growthFactor?: number;
+                scale?: number;
+            } & Record<Exclude<keyof I["bucketOptions"]["exponentialBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Exponential>, never>;
+            explicitBuckets?: {
+                bounds?: number[];
+            } & {
+                bounds?: number[] & number[] & Record<Exclude<keyof I["bucketOptions"]["explicitBuckets"]["bounds"], keyof number[]>, never>;
+            } & Record<Exclude<keyof I["bucketOptions"]["explicitBuckets"], "bounds">, never>;
+        } & Record<Exclude<keyof I["bucketOptions"], keyof Distribution_BucketOptions>, never>;
+        createTime?: Date;
+        updateTime?: Date;
+        version?: LogMetric_ApiVersion;
+    } & Record<Exclude<keyof I, keyof LogMetric>, never>>(object: I): LogMetric;
 };
 export declare const ListLogMetricsRequest: {
     encode(message: ListLogMetricsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsRequest;
     fromJSON(object: any): ListLogMetricsRequest;
     toJSON(message: ListLogMetricsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListLogMetricsRequest;
+    fromPartial<I extends {
+        parent?: string;
+        pageToken?: string;
+        pageSize?: number;
+    } & {
+        parent?: string;
+        pageToken?: string;
+        pageSize?: number;
+    } & Record<Exclude<keyof I, keyof ListLogMetricsRequest>, never>>(object: I): ListLogMetricsRequest;
 };
 export declare const ListLogMetricsResponse: {
     encode(message: ListLogMetricsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponse;
     fromJSON(object: any): ListLogMetricsResponse;
     toJSON(message: ListLogMetricsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListLogMetricsResponse;
+    fromPartial<I extends {
+        metrics?: {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        }[];
+        nextPageToken?: string;
+    } & {
+        metrics?: {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        }[] & ({
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        } & {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            } & {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["metrics"][number]["metricDescriptor"]["labels"][number], keyof import("../../api/label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["metrics"][number]["metricDescriptor"]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & Record<Exclude<keyof I["metrics"][number]["metricDescriptor"]["metadata"], keyof import("../../api/metric").MetricDescriptor_MetricDescriptorMetadata>, never>;
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["metrics"][number]["metricDescriptor"]["monitoredResourceTypes"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["metrics"][number]["metricDescriptor"], keyof MetricDescriptor>, never>;
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["metrics"][number]["labelExtractors"], string | number>, never>;
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            } & {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                } & {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                } & Record<Exclude<keyof I["metrics"][number]["bucketOptions"]["linearBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Linear>, never>;
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                } & {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                } & Record<Exclude<keyof I["metrics"][number]["bucketOptions"]["exponentialBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Exponential>, never>;
+                explicitBuckets?: {
+                    bounds?: number[];
+                } & {
+                    bounds?: number[] & number[] & Record<Exclude<keyof I["metrics"][number]["bucketOptions"]["explicitBuckets"]["bounds"], keyof number[]>, never>;
+                } & Record<Exclude<keyof I["metrics"][number]["bucketOptions"]["explicitBuckets"], "bounds">, never>;
+            } & Record<Exclude<keyof I["metrics"][number]["bucketOptions"], keyof Distribution_BucketOptions>, never>;
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        } & Record<Exclude<keyof I["metrics"][number], keyof LogMetric>, never>)[] & Record<Exclude<keyof I["metrics"], keyof {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListLogMetricsResponse>, never>>(object: I): ListLogMetricsResponse;
 };
 export declare const GetLogMetricRequest: {
     encode(message: GetLogMetricRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetLogMetricRequest;
     fromJSON(object: any): GetLogMetricRequest;
     toJSON(message: GetLogMetricRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetLogMetricRequest;
+    fromPartial<I extends {
+        metricName?: string;
+    } & {
+        metricName?: string;
+    } & Record<Exclude<keyof I, "metricName">, never>>(object: I): GetLogMetricRequest;
 };
 export declare const CreateLogMetricRequest: {
     encode(message: CreateLogMetricRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateLogMetricRequest;
     fromJSON(object: any): CreateLogMetricRequest;
     toJSON(message: CreateLogMetricRequest): unknown;
-    fromPartial<I extends unknown>(object: I): CreateLogMetricRequest;
+    fromPartial<I extends {
+        parent?: string;
+        metric?: {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        };
+    } & {
+        parent?: string;
+        metric?: {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        } & {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            } & {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["metric"]["metricDescriptor"]["labels"][number], keyof import("../../api/label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["metric"]["metricDescriptor"]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & Record<Exclude<keyof I["metric"]["metricDescriptor"]["metadata"], keyof import("../../api/metric").MetricDescriptor_MetricDescriptorMetadata>, never>;
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["metric"]["metricDescriptor"]["monitoredResourceTypes"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["metric"]["metricDescriptor"], keyof MetricDescriptor>, never>;
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["metric"]["labelExtractors"], string | number>, never>;
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            } & {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                } & {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                } & Record<Exclude<keyof I["metric"]["bucketOptions"]["linearBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Linear>, never>;
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                } & {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                } & Record<Exclude<keyof I["metric"]["bucketOptions"]["exponentialBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Exponential>, never>;
+                explicitBuckets?: {
+                    bounds?: number[];
+                } & {
+                    bounds?: number[] & number[] & Record<Exclude<keyof I["metric"]["bucketOptions"]["explicitBuckets"]["bounds"], keyof number[]>, never>;
+                } & Record<Exclude<keyof I["metric"]["bucketOptions"]["explicitBuckets"], "bounds">, never>;
+            } & Record<Exclude<keyof I["metric"]["bucketOptions"], keyof Distribution_BucketOptions>, never>;
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        } & Record<Exclude<keyof I["metric"], keyof LogMetric>, never>;
+    } & Record<Exclude<keyof I, keyof CreateLogMetricRequest>, never>>(object: I): CreateLogMetricRequest;
 };
 export declare const UpdateLogMetricRequest: {
     encode(message: UpdateLogMetricRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateLogMetricRequest;
     fromJSON(object: any): UpdateLogMetricRequest;
     toJSON(message: UpdateLogMetricRequest): unknown;
-    fromPartial<I extends unknown>(object: I): UpdateLogMetricRequest;
+    fromPartial<I extends {
+        metricName?: string;
+        metric?: {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        };
+    } & {
+        metricName?: string;
+        metric?: {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            };
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            };
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            };
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        } & {
+            name?: string;
+            description?: string;
+            filter?: string;
+            disabled?: boolean;
+            metricDescriptor?: {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[];
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                };
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[];
+            } & {
+                name?: string;
+                type?: string;
+                labels?: {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[] & ({
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                } & Record<Exclude<keyof I["metric"]["metricDescriptor"]["labels"][number], keyof import("../../api/label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["metric"]["metricDescriptor"]["labels"], keyof {
+                    key?: string;
+                    valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                    description?: string;
+                }[]>, never>;
+                metricKind?: import("../../api/metric").MetricDescriptor_MetricKind;
+                valueType?: import("../../api/metric").MetricDescriptor_ValueType;
+                unit?: string;
+                description?: string;
+                displayName?: string;
+                metadata?: {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & {
+                    launchStage?: import("../../api/launch_stage").LaunchStage;
+                    samplePeriod?: string;
+                    ingestDelay?: string;
+                } & Record<Exclude<keyof I["metric"]["metricDescriptor"]["metadata"], keyof import("../../api/metric").MetricDescriptor_MetricDescriptorMetadata>, never>;
+                launchStage?: import("../../api/launch_stage").LaunchStage;
+                monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["metric"]["metricDescriptor"]["monitoredResourceTypes"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["metric"]["metricDescriptor"], keyof MetricDescriptor>, never>;
+            valueExtractor?: string;
+            labelExtractors?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["metric"]["labelExtractors"], string | number>, never>;
+            bucketOptions?: {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                };
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                };
+                explicitBuckets?: {
+                    bounds?: number[];
+                };
+            } & {
+                linearBuckets?: {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                } & {
+                    numFiniteBuckets?: number;
+                    width?: number;
+                    offset?: number;
+                } & Record<Exclude<keyof I["metric"]["bucketOptions"]["linearBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Linear>, never>;
+                exponentialBuckets?: {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                } & {
+                    numFiniteBuckets?: number;
+                    growthFactor?: number;
+                    scale?: number;
+                } & Record<Exclude<keyof I["metric"]["bucketOptions"]["exponentialBuckets"], keyof import("../../api/distribution").Distribution_BucketOptions_Exponential>, never>;
+                explicitBuckets?: {
+                    bounds?: number[];
+                } & {
+                    bounds?: number[] & number[] & Record<Exclude<keyof I["metric"]["bucketOptions"]["explicitBuckets"]["bounds"], keyof number[]>, never>;
+                } & Record<Exclude<keyof I["metric"]["bucketOptions"]["explicitBuckets"], "bounds">, never>;
+            } & Record<Exclude<keyof I["metric"]["bucketOptions"], keyof Distribution_BucketOptions>, never>;
+            createTime?: Date;
+            updateTime?: Date;
+            version?: LogMetric_ApiVersion;
+        } & Record<Exclude<keyof I["metric"], keyof LogMetric>, never>;
+    } & Record<Exclude<keyof I, keyof UpdateLogMetricRequest>, never>>(object: I): UpdateLogMetricRequest;
 };
 export declare const DeleteLogMetricRequest: {
     encode(message: DeleteLogMetricRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteLogMetricRequest;
     fromJSON(object: any): DeleteLogMetricRequest;
     toJSON(message: DeleteLogMetricRequest): unknown;
-    fromPartial<I extends unknown>(object: I): DeleteLogMetricRequest;
+    fromPartial<I extends {
+        metricName?: string;
+    } & {
+        metricName?: string;
+    } & Record<Exclude<keyof I, "metricName">, never>>(object: I): DeleteLogMetricRequest;
 };
-/** Service for configuring logs-based metrics. */
-export interface MetricsServiceV2 {
-    /** Lists logs-based metrics. */
-    ListLogMetrics(request: ListLogMetricsRequest): Promise<ListLogMetricsResponse>;
-    /** Gets a logs-based metric. */
-    GetLogMetric(request: GetLogMetricRequest): Promise<LogMetric>;
-    /** Creates a logs-based metric. */
-    CreateLogMetric(request: CreateLogMetricRequest): Promise<LogMetric>;
-    /** Creates or updates a logs-based metric. */
-    UpdateLogMetric(request: UpdateLogMetricRequest): Promise<LogMetric>;
-    /** Deletes a logs-based metric. */
-    DeleteLogMetric(request: DeleteLogMetricRequest): Promise<Empty>;
-}
-export declare class MetricsServiceV2ClientImpl implements MetricsServiceV2 {
-    private readonly rpc;
-    constructor(rpc: Rpc);
-    ListLogMetrics(request: ListLogMetricsRequest): Promise<ListLogMetricsResponse>;
-    GetLogMetric(request: GetLogMetricRequest): Promise<LogMetric>;
-    CreateLogMetric(request: CreateLogMetricRequest): Promise<LogMetric>;
-    UpdateLogMetric(request: UpdateLogMetricRequest): Promise<LogMetric>;
-    DeleteLogMetric(request: DeleteLogMetricRequest): Promise<Empty>;
-}
-interface Rpc {
-    request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

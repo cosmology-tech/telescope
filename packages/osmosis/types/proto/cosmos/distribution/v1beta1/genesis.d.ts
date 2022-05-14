@@ -1,7 +1,7 @@
-import Long from "long";
+import { DecCoin } from "../../base/v1beta1/coin";
+import { ValidatorAccumulatedCommission, ValidatorHistoricalRewards, ValidatorCurrentRewards, DelegatorStartingInfo, ValidatorSlashEvent, Params, FeePool } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { ValidatorAccumulatedCommission, ValidatorHistoricalRewards, ValidatorCurrentRewards, DelegatorStartingInfo, ValidatorSlashEvent, Params, FeePool } from "../../../cosmos/distribution/v1beta1/distribution";
-import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
+import { Long } from "@osmonauts/helpers";
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
  * withdrawn to by default this struct is only used at genesis to feed in
@@ -97,63 +97,599 @@ export declare const DelegatorWithdrawInfo: {
     decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorWithdrawInfo;
     fromJSON(object: any): DelegatorWithdrawInfo;
     toJSON(message: DelegatorWithdrawInfo): unknown;
-    fromPartial<I extends unknown>(object: I): DelegatorWithdrawInfo;
+    fromPartial<I extends {
+        delegatorAddress?: string;
+        withdrawAddress?: string;
+    } & {
+        delegatorAddress?: string;
+        withdrawAddress?: string;
+    } & Record<Exclude<keyof I, keyof DelegatorWithdrawInfo>, never>>(object: I): DelegatorWithdrawInfo;
 };
 export declare const ValidatorOutstandingRewardsRecord: {
     encode(message: ValidatorOutstandingRewardsRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorOutstandingRewardsRecord;
     fromJSON(object: any): ValidatorOutstandingRewardsRecord;
     toJSON(message: ValidatorOutstandingRewardsRecord): unknown;
-    fromPartial<I extends unknown>(object: I): ValidatorOutstandingRewardsRecord;
+    fromPartial<I extends {
+        validatorAddress?: string;
+        outstandingRewards?: {
+            denom?: string;
+            amount?: string;
+        }[];
+    } & {
+        validatorAddress?: string;
+        outstandingRewards?: {
+            denom?: string;
+            amount?: string;
+        }[] & ({
+            denom?: string;
+            amount?: string;
+        } & {
+            denom?: string;
+            amount?: string;
+        } & Record<Exclude<keyof I["outstandingRewards"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["outstandingRewards"], keyof {
+            denom?: string;
+            amount?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof ValidatorOutstandingRewardsRecord>, never>>(object: I): ValidatorOutstandingRewardsRecord;
 };
 export declare const ValidatorAccumulatedCommissionRecord: {
     encode(message: ValidatorAccumulatedCommissionRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorAccumulatedCommissionRecord;
     fromJSON(object: any): ValidatorAccumulatedCommissionRecord;
     toJSON(message: ValidatorAccumulatedCommissionRecord): unknown;
-    fromPartial<I extends unknown>(object: I): ValidatorAccumulatedCommissionRecord;
+    fromPartial<I extends {
+        validatorAddress?: string;
+        accumulated?: {
+            commission?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        };
+    } & {
+        validatorAddress?: string;
+        accumulated?: {
+            commission?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        } & {
+            commission?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["accumulated"]["commission"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["accumulated"]["commission"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["accumulated"], "commission">, never>;
+    } & Record<Exclude<keyof I, keyof ValidatorAccumulatedCommissionRecord>, never>>(object: I): ValidatorAccumulatedCommissionRecord;
 };
 export declare const ValidatorHistoricalRewardsRecord: {
     encode(message: ValidatorHistoricalRewardsRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorHistoricalRewardsRecord;
     fromJSON(object: any): ValidatorHistoricalRewardsRecord;
     toJSON(message: ValidatorHistoricalRewardsRecord): unknown;
-    fromPartial<I extends unknown>(object: I): ValidatorHistoricalRewardsRecord;
+    fromPartial<I extends {
+        validatorAddress?: string;
+        period?: any;
+        rewards?: {
+            cumulativeRewardRatio?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            referenceCount?: number;
+        };
+    } & {
+        validatorAddress?: string;
+        period?: any;
+        rewards?: {
+            cumulativeRewardRatio?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            referenceCount?: number;
+        } & {
+            cumulativeRewardRatio?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["rewards"]["cumulativeRewardRatio"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["rewards"]["cumulativeRewardRatio"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+            referenceCount?: number;
+        } & Record<Exclude<keyof I["rewards"], keyof ValidatorHistoricalRewards>, never>;
+    } & Record<Exclude<keyof I, keyof ValidatorHistoricalRewardsRecord>, never>>(object: I): ValidatorHistoricalRewardsRecord;
 };
 export declare const ValidatorCurrentRewardsRecord: {
     encode(message: ValidatorCurrentRewardsRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorCurrentRewardsRecord;
     fromJSON(object: any): ValidatorCurrentRewardsRecord;
     toJSON(message: ValidatorCurrentRewardsRecord): unknown;
-    fromPartial<I extends unknown>(object: I): ValidatorCurrentRewardsRecord;
+    fromPartial<I extends {
+        validatorAddress?: string;
+        rewards?: {
+            rewards?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            period?: any;
+        };
+    } & {
+        validatorAddress?: string;
+        rewards?: {
+            rewards?: {
+                denom?: string;
+                amount?: string;
+            }[];
+            period?: any;
+        } & {
+            rewards?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["rewards"]["rewards"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["rewards"]["rewards"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+            period?: any;
+        } & Record<Exclude<keyof I["rewards"], keyof ValidatorCurrentRewards>, never>;
+    } & Record<Exclude<keyof I, keyof ValidatorCurrentRewardsRecord>, never>>(object: I): ValidatorCurrentRewardsRecord;
 };
 export declare const DelegatorStartingInfoRecord: {
     encode(message: DelegatorStartingInfoRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorStartingInfoRecord;
     fromJSON(object: any): DelegatorStartingInfoRecord;
     toJSON(message: DelegatorStartingInfoRecord): unknown;
-    fromPartial<I extends unknown>(object: I): DelegatorStartingInfoRecord;
+    fromPartial<I extends {
+        delegatorAddress?: string;
+        validatorAddress?: string;
+        startingInfo?: {
+            previousPeriod?: any;
+            stake?: string;
+            height?: any;
+        };
+    } & {
+        delegatorAddress?: string;
+        validatorAddress?: string;
+        startingInfo?: {
+            previousPeriod?: any;
+            stake?: string;
+            height?: any;
+        } & {
+            previousPeriod?: any;
+            stake?: string;
+            height?: any;
+        } & Record<Exclude<keyof I["startingInfo"], keyof DelegatorStartingInfo>, never>;
+    } & Record<Exclude<keyof I, keyof DelegatorStartingInfoRecord>, never>>(object: I): DelegatorStartingInfoRecord;
 };
 export declare const ValidatorSlashEventRecord: {
     encode(message: ValidatorSlashEventRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSlashEventRecord;
     fromJSON(object: any): ValidatorSlashEventRecord;
     toJSON(message: ValidatorSlashEventRecord): unknown;
-    fromPartial<I extends unknown>(object: I): ValidatorSlashEventRecord;
+    fromPartial<I extends {
+        validatorAddress?: string;
+        height?: any;
+        period?: any;
+        validatorSlashEvent?: {
+            validatorPeriod?: any;
+            fraction?: string;
+        };
+    } & {
+        validatorAddress?: string;
+        height?: any;
+        period?: any;
+        validatorSlashEvent?: {
+            validatorPeriod?: any;
+            fraction?: string;
+        } & {
+            validatorPeriod?: any;
+            fraction?: string;
+        } & Record<Exclude<keyof I["validatorSlashEvent"], keyof ValidatorSlashEvent>, never>;
+    } & Record<Exclude<keyof I, keyof ValidatorSlashEventRecord>, never>>(object: I): ValidatorSlashEventRecord;
 };
 export declare const GenesisState: {
     encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
-    fromPartial<I extends unknown>(object: I): GenesisState;
+    fromPartial<I extends {
+        params?: {
+            communityTax?: string;
+            baseProposerReward?: string;
+            bonusProposerReward?: string;
+            withdrawAddrEnabled?: boolean;
+        };
+        feePool?: {
+            communityPool?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        };
+        delegatorWithdrawInfos?: {
+            delegatorAddress?: string;
+            withdrawAddress?: string;
+        }[];
+        previousProposer?: string;
+        outstandingRewards?: {
+            validatorAddress?: string;
+            outstandingRewards?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        }[];
+        validatorAccumulatedCommissions?: {
+            validatorAddress?: string;
+            accumulated?: {
+                commission?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            };
+        }[];
+        validatorHistoricalRewards?: {
+            validatorAddress?: string;
+            period?: any;
+            rewards?: {
+                cumulativeRewardRatio?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                referenceCount?: number;
+            };
+        }[];
+        validatorCurrentRewards?: {
+            validatorAddress?: string;
+            rewards?: {
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                period?: any;
+            };
+        }[];
+        delegatorStartingInfos?: {
+            delegatorAddress?: string;
+            validatorAddress?: string;
+            startingInfo?: {
+                previousPeriod?: any;
+                stake?: string;
+                height?: any;
+            };
+        }[];
+        validatorSlashEvents?: {
+            validatorAddress?: string;
+            height?: any;
+            period?: any;
+            validatorSlashEvent?: {
+                validatorPeriod?: any;
+                fraction?: string;
+            };
+        }[];
+    } & {
+        params?: {
+            communityTax?: string;
+            baseProposerReward?: string;
+            bonusProposerReward?: string;
+            withdrawAddrEnabled?: boolean;
+        } & {
+            communityTax?: string;
+            baseProposerReward?: string;
+            bonusProposerReward?: string;
+            withdrawAddrEnabled?: boolean;
+        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
+        feePool?: {
+            communityPool?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        } & {
+            communityPool?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["feePool"]["communityPool"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["feePool"]["communityPool"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["feePool"], "communityPool">, never>;
+        delegatorWithdrawInfos?: {
+            delegatorAddress?: string;
+            withdrawAddress?: string;
+        }[] & ({
+            delegatorAddress?: string;
+            withdrawAddress?: string;
+        } & {
+            delegatorAddress?: string;
+            withdrawAddress?: string;
+        } & Record<Exclude<keyof I["delegatorWithdrawInfos"][number], keyof DelegatorWithdrawInfo>, never>)[] & Record<Exclude<keyof I["delegatorWithdrawInfos"], keyof {
+            delegatorAddress?: string;
+            withdrawAddress?: string;
+        }[]>, never>;
+        previousProposer?: string;
+        outstandingRewards?: {
+            validatorAddress?: string;
+            outstandingRewards?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        }[] & ({
+            validatorAddress?: string;
+            outstandingRewards?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        } & {
+            validatorAddress?: string;
+            outstandingRewards?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["outstandingRewards"][number]["outstandingRewards"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["outstandingRewards"][number]["outstandingRewards"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["outstandingRewards"][number], keyof ValidatorOutstandingRewardsRecord>, never>)[] & Record<Exclude<keyof I["outstandingRewards"], keyof {
+            validatorAddress?: string;
+            outstandingRewards?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        }[]>, never>;
+        validatorAccumulatedCommissions?: {
+            validatorAddress?: string;
+            accumulated?: {
+                commission?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            };
+        }[] & ({
+            validatorAddress?: string;
+            accumulated?: {
+                commission?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            };
+        } & {
+            validatorAddress?: string;
+            accumulated?: {
+                commission?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                commission?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["validatorAccumulatedCommissions"][number]["accumulated"]["commission"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["validatorAccumulatedCommissions"][number]["accumulated"]["commission"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["validatorAccumulatedCommissions"][number]["accumulated"], "commission">, never>;
+        } & Record<Exclude<keyof I["validatorAccumulatedCommissions"][number], keyof ValidatorAccumulatedCommissionRecord>, never>)[] & Record<Exclude<keyof I["validatorAccumulatedCommissions"], keyof {
+            validatorAddress?: string;
+            accumulated?: {
+                commission?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            };
+        }[]>, never>;
+        validatorHistoricalRewards?: {
+            validatorAddress?: string;
+            period?: any;
+            rewards?: {
+                cumulativeRewardRatio?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                referenceCount?: number;
+            };
+        }[] & ({
+            validatorAddress?: string;
+            period?: any;
+            rewards?: {
+                cumulativeRewardRatio?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                referenceCount?: number;
+            };
+        } & {
+            validatorAddress?: string;
+            period?: any;
+            rewards?: {
+                cumulativeRewardRatio?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                referenceCount?: number;
+            } & {
+                cumulativeRewardRatio?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["validatorHistoricalRewards"][number]["rewards"]["cumulativeRewardRatio"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["validatorHistoricalRewards"][number]["rewards"]["cumulativeRewardRatio"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                referenceCount?: number;
+            } & Record<Exclude<keyof I["validatorHistoricalRewards"][number]["rewards"], keyof ValidatorHistoricalRewards>, never>;
+        } & Record<Exclude<keyof I["validatorHistoricalRewards"][number], keyof ValidatorHistoricalRewardsRecord>, never>)[] & Record<Exclude<keyof I["validatorHistoricalRewards"], keyof {
+            validatorAddress?: string;
+            period?: any;
+            rewards?: {
+                cumulativeRewardRatio?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                referenceCount?: number;
+            };
+        }[]>, never>;
+        validatorCurrentRewards?: {
+            validatorAddress?: string;
+            rewards?: {
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                period?: any;
+            };
+        }[] & ({
+            validatorAddress?: string;
+            rewards?: {
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                period?: any;
+            };
+        } & {
+            validatorAddress?: string;
+            rewards?: {
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                period?: any;
+            } & {
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["validatorCurrentRewards"][number]["rewards"]["rewards"][number], keyof DecCoin>, never>)[] & Record<Exclude<keyof I["validatorCurrentRewards"][number]["rewards"]["rewards"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                period?: any;
+            } & Record<Exclude<keyof I["validatorCurrentRewards"][number]["rewards"], keyof ValidatorCurrentRewards>, never>;
+        } & Record<Exclude<keyof I["validatorCurrentRewards"][number], keyof ValidatorCurrentRewardsRecord>, never>)[] & Record<Exclude<keyof I["validatorCurrentRewards"], keyof {
+            validatorAddress?: string;
+            rewards?: {
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                period?: any;
+            };
+        }[]>, never>;
+        delegatorStartingInfos?: {
+            delegatorAddress?: string;
+            validatorAddress?: string;
+            startingInfo?: {
+                previousPeriod?: any;
+                stake?: string;
+                height?: any;
+            };
+        }[] & ({
+            delegatorAddress?: string;
+            validatorAddress?: string;
+            startingInfo?: {
+                previousPeriod?: any;
+                stake?: string;
+                height?: any;
+            };
+        } & {
+            delegatorAddress?: string;
+            validatorAddress?: string;
+            startingInfo?: {
+                previousPeriod?: any;
+                stake?: string;
+                height?: any;
+            } & {
+                previousPeriod?: any;
+                stake?: string;
+                height?: any;
+            } & Record<Exclude<keyof I["delegatorStartingInfos"][number]["startingInfo"], keyof DelegatorStartingInfo>, never>;
+        } & Record<Exclude<keyof I["delegatorStartingInfos"][number], keyof DelegatorStartingInfoRecord>, never>)[] & Record<Exclude<keyof I["delegatorStartingInfos"], keyof {
+            delegatorAddress?: string;
+            validatorAddress?: string;
+            startingInfo?: {
+                previousPeriod?: any;
+                stake?: string;
+                height?: any;
+            };
+        }[]>, never>;
+        validatorSlashEvents?: {
+            validatorAddress?: string;
+            height?: any;
+            period?: any;
+            validatorSlashEvent?: {
+                validatorPeriod?: any;
+                fraction?: string;
+            };
+        }[] & ({
+            validatorAddress?: string;
+            height?: any;
+            period?: any;
+            validatorSlashEvent?: {
+                validatorPeriod?: any;
+                fraction?: string;
+            };
+        } & {
+            validatorAddress?: string;
+            height?: any;
+            period?: any;
+            validatorSlashEvent?: {
+                validatorPeriod?: any;
+                fraction?: string;
+            } & {
+                validatorPeriod?: any;
+                fraction?: string;
+            } & Record<Exclude<keyof I["validatorSlashEvents"][number]["validatorSlashEvent"], keyof ValidatorSlashEvent>, never>;
+        } & Record<Exclude<keyof I["validatorSlashEvents"][number], keyof ValidatorSlashEventRecord>, never>)[] & Record<Exclude<keyof I["validatorSlashEvents"], keyof {
+            validatorAddress?: string;
+            height?: any;
+            period?: any;
+            validatorSlashEvent?: {
+                validatorPeriod?: any;
+                fraction?: string;
+            };
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof GenesisState>, never>>(object: I): GenesisState;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

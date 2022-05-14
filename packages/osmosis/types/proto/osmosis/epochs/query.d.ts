@@ -1,6 +1,6 @@
-import Long from "long";
+import { EpochInfo } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
-import { EpochInfo } from "../../osmosis/epochs/genesis";
+import { Long } from "@osmonauts/helpers";
 export interface QueryEpochsInfoRequest {
 }
 export interface QueryEpochsInfoResponse {
@@ -17,36 +17,78 @@ export declare const QueryEpochsInfoRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoRequest;
     fromJSON(_: any): QueryEpochsInfoRequest;
     toJSON(_: QueryEpochsInfoRequest): unknown;
-    fromPartial<I extends unknown>(_: I): QueryEpochsInfoRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QueryEpochsInfoRequest;
 };
 export declare const QueryEpochsInfoResponse: {
     encode(message: QueryEpochsInfoResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponse;
     fromJSON(object: any): QueryEpochsInfoResponse;
     toJSON(message: QueryEpochsInfoResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryEpochsInfoResponse;
+    fromPartial<I extends {
+        epochs?: {
+            identifier?: string;
+            startTime?: Date;
+            duration?: string;
+            currentEpoch?: any;
+            currentEpochStartTime?: Date;
+            epochCountingStarted?: boolean;
+            currentEpochStartHeight?: any;
+        }[];
+    } & {
+        epochs?: {
+            identifier?: string;
+            startTime?: Date;
+            duration?: string;
+            currentEpoch?: any;
+            currentEpochStartTime?: Date;
+            epochCountingStarted?: boolean;
+            currentEpochStartHeight?: any;
+        }[] & ({
+            identifier?: string;
+            startTime?: Date;
+            duration?: string;
+            currentEpoch?: any;
+            currentEpochStartTime?: Date;
+            epochCountingStarted?: boolean;
+            currentEpochStartHeight?: any;
+        } & {
+            identifier?: string;
+            startTime?: Date;
+            duration?: string;
+            currentEpoch?: any;
+            currentEpochStartTime?: Date;
+            epochCountingStarted?: boolean;
+            currentEpochStartHeight?: any;
+        } & Record<Exclude<keyof I["epochs"][number], keyof EpochInfo>, never>)[] & Record<Exclude<keyof I["epochs"], keyof {
+            identifier?: string;
+            startTime?: Date;
+            duration?: string;
+            currentEpoch?: any;
+            currentEpochStartTime?: Date;
+            epochCountingStarted?: boolean;
+            currentEpochStartHeight?: any;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "epochs">, never>>(object: I): QueryEpochsInfoResponse;
 };
 export declare const QueryCurrentEpochRequest: {
     encode(message: QueryCurrentEpochRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochRequest;
     fromJSON(object: any): QueryCurrentEpochRequest;
     toJSON(message: QueryCurrentEpochRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCurrentEpochRequest;
+    fromPartial<I extends {
+        identifier?: string;
+    } & {
+        identifier?: string;
+    } & Record<Exclude<keyof I, "identifier">, never>>(object: I): QueryCurrentEpochRequest;
 };
 export declare const QueryCurrentEpochResponse: {
     encode(message: QueryCurrentEpochResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponse;
     fromJSON(object: any): QueryCurrentEpochResponse;
     toJSON(message: QueryCurrentEpochResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCurrentEpochResponse;
+    fromPartial<I extends {
+        currentEpoch?: any;
+    } & {
+        currentEpoch?: any;
+    } & Record<Exclude<keyof I, "currentEpoch">, never>>(object: I): QueryCurrentEpochResponse;
 };
-/** Query defines the gRPC querier service. */
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

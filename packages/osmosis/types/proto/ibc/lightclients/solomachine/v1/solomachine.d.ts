@@ -1,8 +1,8 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
-import { ConnectionEnd } from "../../../../ibc/core/connection/v1/connection";
-import { Channel } from "../../../../ibc/core/channel/v1/channel";
+import { ConnectionEnd } from "../../../core/connection/v1/connection";
+import { Channel } from "../../../core/channel/v1/channel";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * DataType defines the type of solo machine proof being created. This is done
  * to preserve uniqueness of different data sign byte encodings.
@@ -183,119 +183,421 @@ export declare const ClientState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ClientState;
     fromJSON(object: any): ClientState;
     toJSON(message: ClientState): unknown;
-    fromPartial<I extends unknown>(object: I): ClientState;
+    fromPartial<I extends {
+        sequence?: any;
+        frozenSequence?: any;
+        consensusState?: {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            diversifier?: string;
+            timestamp?: any;
+        };
+        allowUpdateAfterProposal?: boolean;
+    } & {
+        sequence?: any;
+        frozenSequence?: any;
+        consensusState?: {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            diversifier?: string;
+            timestamp?: any;
+        } & {
+            publicKey?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["consensusState"]["publicKey"], keyof Any>, never>;
+            diversifier?: string;
+            timestamp?: any;
+        } & Record<Exclude<keyof I["consensusState"], keyof ConsensusState>, never>;
+        allowUpdateAfterProposal?: boolean;
+    } & Record<Exclude<keyof I, keyof ClientState>, never>>(object: I): ClientState;
 };
 export declare const ConsensusState: {
     encode(message: ConsensusState, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusState;
     fromJSON(object: any): ConsensusState;
     toJSON(message: ConsensusState): unknown;
-    fromPartial<I extends unknown>(object: I): ConsensusState;
+    fromPartial<I extends {
+        publicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        diversifier?: string;
+        timestamp?: any;
+    } & {
+        publicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["publicKey"], keyof Any>, never>;
+        diversifier?: string;
+        timestamp?: any;
+    } & Record<Exclude<keyof I, keyof ConsensusState>, never>>(object: I): ConsensusState;
 };
 export declare const Header: {
     encode(message: Header, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Header;
     fromJSON(object: any): Header;
     toJSON(message: Header): unknown;
-    fromPartial<I extends unknown>(object: I): Header;
+    fromPartial<I extends {
+        sequence?: any;
+        timestamp?: any;
+        signature?: Uint8Array;
+        newPublicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        newDiversifier?: string;
+    } & {
+        sequence?: any;
+        timestamp?: any;
+        signature?: Uint8Array;
+        newPublicKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["newPublicKey"], keyof Any>, never>;
+        newDiversifier?: string;
+    } & Record<Exclude<keyof I, keyof Header>, never>>(object: I): Header;
 };
 export declare const Misbehaviour: {
     encode(message: Misbehaviour, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Misbehaviour;
     fromJSON(object: any): Misbehaviour;
     toJSON(message: Misbehaviour): unknown;
-    fromPartial<I extends unknown>(object: I): Misbehaviour;
+    fromPartial<I extends {
+        clientId?: string;
+        sequence?: any;
+        signatureOne?: {
+            signature?: Uint8Array;
+            dataType?: DataType;
+            data?: Uint8Array;
+            timestamp?: any;
+        };
+        signatureTwo?: {
+            signature?: Uint8Array;
+            dataType?: DataType;
+            data?: Uint8Array;
+            timestamp?: any;
+        };
+    } & {
+        clientId?: string;
+        sequence?: any;
+        signatureOne?: {
+            signature?: Uint8Array;
+            dataType?: DataType;
+            data?: Uint8Array;
+            timestamp?: any;
+        } & {
+            signature?: Uint8Array;
+            dataType?: DataType;
+            data?: Uint8Array;
+            timestamp?: any;
+        } & Record<Exclude<keyof I["signatureOne"], keyof SignatureAndData>, never>;
+        signatureTwo?: {
+            signature?: Uint8Array;
+            dataType?: DataType;
+            data?: Uint8Array;
+            timestamp?: any;
+        } & {
+            signature?: Uint8Array;
+            dataType?: DataType;
+            data?: Uint8Array;
+            timestamp?: any;
+        } & Record<Exclude<keyof I["signatureTwo"], keyof SignatureAndData>, never>;
+    } & Record<Exclude<keyof I, keyof Misbehaviour>, never>>(object: I): Misbehaviour;
 };
 export declare const SignatureAndData: {
     encode(message: SignatureAndData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SignatureAndData;
     fromJSON(object: any): SignatureAndData;
     toJSON(message: SignatureAndData): unknown;
-    fromPartial<I extends unknown>(object: I): SignatureAndData;
+    fromPartial<I extends {
+        signature?: Uint8Array;
+        dataType?: DataType;
+        data?: Uint8Array;
+        timestamp?: any;
+    } & {
+        signature?: Uint8Array;
+        dataType?: DataType;
+        data?: Uint8Array;
+        timestamp?: any;
+    } & Record<Exclude<keyof I, keyof SignatureAndData>, never>>(object: I): SignatureAndData;
 };
 export declare const TimestampedSignatureData: {
     encode(message: TimestampedSignatureData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TimestampedSignatureData;
     fromJSON(object: any): TimestampedSignatureData;
     toJSON(message: TimestampedSignatureData): unknown;
-    fromPartial<I extends unknown>(object: I): TimestampedSignatureData;
+    fromPartial<I extends {
+        signatureData?: Uint8Array;
+        timestamp?: any;
+    } & {
+        signatureData?: Uint8Array;
+        timestamp?: any;
+    } & Record<Exclude<keyof I, keyof TimestampedSignatureData>, never>>(object: I): TimestampedSignatureData;
 };
 export declare const SignBytes: {
     encode(message: SignBytes, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SignBytes;
     fromJSON(object: any): SignBytes;
     toJSON(message: SignBytes): unknown;
-    fromPartial<I extends unknown>(object: I): SignBytes;
+    fromPartial<I extends {
+        sequence?: any;
+        timestamp?: any;
+        diversifier?: string;
+        dataType?: DataType;
+        data?: Uint8Array;
+    } & {
+        sequence?: any;
+        timestamp?: any;
+        diversifier?: string;
+        dataType?: DataType;
+        data?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof SignBytes>, never>>(object: I): SignBytes;
 };
 export declare const HeaderData: {
     encode(message: HeaderData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): HeaderData;
     fromJSON(object: any): HeaderData;
     toJSON(message: HeaderData): unknown;
-    fromPartial<I extends unknown>(object: I): HeaderData;
+    fromPartial<I extends {
+        newPubKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+        newDiversifier?: string;
+    } & {
+        newPubKey?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["newPubKey"], keyof Any>, never>;
+        newDiversifier?: string;
+    } & Record<Exclude<keyof I, keyof HeaderData>, never>>(object: I): HeaderData;
 };
 export declare const ClientStateData: {
     encode(message: ClientStateData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ClientStateData;
     fromJSON(object: any): ClientStateData;
     toJSON(message: ClientStateData): unknown;
-    fromPartial<I extends unknown>(object: I): ClientStateData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        path?: Uint8Array;
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["clientState"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof ClientStateData>, never>>(object: I): ClientStateData;
 };
 export declare const ConsensusStateData: {
     encode(message: ConsensusStateData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusStateData;
     fromJSON(object: any): ConsensusStateData;
     toJSON(message: ConsensusStateData): unknown;
-    fromPartial<I extends unknown>(object: I): ConsensusStateData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        path?: Uint8Array;
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["consensusState"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof ConsensusStateData>, never>>(object: I): ConsensusStateData;
 };
 export declare const ConnectionStateData: {
     encode(message: ConnectionStateData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionStateData;
     fromJSON(object: any): ConnectionStateData;
     toJSON(message: ConnectionStateData): unknown;
-    fromPartial<I extends unknown>(object: I): ConnectionStateData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        connection?: {
+            clientId?: string;
+            versions?: {
+                identifier?: string;
+                features?: string[];
+            }[];
+            state?: import("../../../core/connection/v1/connection").State;
+            counterparty?: {
+                clientId?: string;
+                connectionId?: string;
+                prefix?: {
+                    keyPrefix?: Uint8Array;
+                };
+            };
+            delayPeriod?: any;
+        };
+    } & {
+        path?: Uint8Array;
+        connection?: {
+            clientId?: string;
+            versions?: {
+                identifier?: string;
+                features?: string[];
+            }[];
+            state?: import("../../../core/connection/v1/connection").State;
+            counterparty?: {
+                clientId?: string;
+                connectionId?: string;
+                prefix?: {
+                    keyPrefix?: Uint8Array;
+                };
+            };
+            delayPeriod?: any;
+        } & {
+            clientId?: string;
+            versions?: {
+                identifier?: string;
+                features?: string[];
+            }[] & ({
+                identifier?: string;
+                features?: string[];
+            } & {
+                identifier?: string;
+                features?: string[] & string[] & Record<Exclude<keyof I["connection"]["versions"][number]["features"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["connection"]["versions"][number], keyof import("../../../core/connection/v1/connection").Version>, never>)[] & Record<Exclude<keyof I["connection"]["versions"], keyof {
+                identifier?: string;
+                features?: string[];
+            }[]>, never>;
+            state?: import("../../../core/connection/v1/connection").State;
+            counterparty?: {
+                clientId?: string;
+                connectionId?: string;
+                prefix?: {
+                    keyPrefix?: Uint8Array;
+                };
+            } & {
+                clientId?: string;
+                connectionId?: string;
+                prefix?: {
+                    keyPrefix?: Uint8Array;
+                } & {
+                    keyPrefix?: Uint8Array;
+                } & Record<Exclude<keyof I["connection"]["counterparty"]["prefix"], "keyPrefix">, never>;
+            } & Record<Exclude<keyof I["connection"]["counterparty"], keyof import("../../../core/connection/v1/connection").Counterparty>, never>;
+            delayPeriod?: any;
+        } & Record<Exclude<keyof I["connection"], keyof ConnectionEnd>, never>;
+    } & Record<Exclude<keyof I, keyof ConnectionStateData>, never>>(object: I): ConnectionStateData;
 };
 export declare const ChannelStateData: {
     encode(message: ChannelStateData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ChannelStateData;
     fromJSON(object: any): ChannelStateData;
     toJSON(message: ChannelStateData): unknown;
-    fromPartial<I extends unknown>(object: I): ChannelStateData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        channel?: {
+            state?: import("../../../core/channel/v1/channel").State;
+            ordering?: import("../../../core/channel/v1/channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+        };
+    } & {
+        path?: Uint8Array;
+        channel?: {
+            state?: import("../../../core/channel/v1/channel").State;
+            ordering?: import("../../../core/channel/v1/channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            };
+            connectionHops?: string[];
+            version?: string;
+        } & {
+            state?: import("../../../core/channel/v1/channel").State;
+            ordering?: import("../../../core/channel/v1/channel").Order;
+            counterparty?: {
+                portId?: string;
+                channelId?: string;
+            } & {
+                portId?: string;
+                channelId?: string;
+            } & Record<Exclude<keyof I["channel"]["counterparty"], keyof import("../../../core/channel/v1/channel").Counterparty>, never>;
+            connectionHops?: string[] & string[] & Record<Exclude<keyof I["channel"]["connectionHops"], keyof string[]>, never>;
+            version?: string;
+        } & Record<Exclude<keyof I["channel"], keyof Channel>, never>;
+    } & Record<Exclude<keyof I, keyof ChannelStateData>, never>>(object: I): ChannelStateData;
 };
 export declare const PacketCommitmentData: {
     encode(message: PacketCommitmentData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PacketCommitmentData;
     fromJSON(object: any): PacketCommitmentData;
     toJSON(message: PacketCommitmentData): unknown;
-    fromPartial<I extends unknown>(object: I): PacketCommitmentData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        commitment?: Uint8Array;
+    } & {
+        path?: Uint8Array;
+        commitment?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof PacketCommitmentData>, never>>(object: I): PacketCommitmentData;
 };
 export declare const PacketAcknowledgementData: {
     encode(message: PacketAcknowledgementData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PacketAcknowledgementData;
     fromJSON(object: any): PacketAcknowledgementData;
     toJSON(message: PacketAcknowledgementData): unknown;
-    fromPartial<I extends unknown>(object: I): PacketAcknowledgementData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        acknowledgement?: Uint8Array;
+    } & {
+        path?: Uint8Array;
+        acknowledgement?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof PacketAcknowledgementData>, never>>(object: I): PacketAcknowledgementData;
 };
 export declare const PacketReceiptAbsenceData: {
     encode(message: PacketReceiptAbsenceData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PacketReceiptAbsenceData;
     fromJSON(object: any): PacketReceiptAbsenceData;
     toJSON(message: PacketReceiptAbsenceData): unknown;
-    fromPartial<I extends unknown>(object: I): PacketReceiptAbsenceData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+    } & {
+        path?: Uint8Array;
+    } & Record<Exclude<keyof I, "path">, never>>(object: I): PacketReceiptAbsenceData;
 };
 export declare const NextSequenceRecvData: {
     encode(message: NextSequenceRecvData, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): NextSequenceRecvData;
     fromJSON(object: any): NextSequenceRecvData;
     toJSON(message: NextSequenceRecvData): unknown;
-    fromPartial<I extends unknown>(object: I): NextSequenceRecvData;
+    fromPartial<I extends {
+        path?: Uint8Array;
+        nextSeqRecv?: any;
+    } & {
+        path?: Uint8Array;
+        nextSeqRecv?: any;
+    } & Record<Exclude<keyof I, keyof NextSequenceRecvData>, never>>(object: I): NextSequenceRecvData;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

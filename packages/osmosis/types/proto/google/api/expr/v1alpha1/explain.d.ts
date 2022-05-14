@@ -1,12 +1,11 @@
-import Long from "long";
+import { Value } from "./value";
 import * as _m0 from "protobufjs/minimal";
-import { Value } from "../../../../google/api/expr/v1alpha1/value";
+import { Long } from "@osmonauts/helpers";
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
- *
- * @deprecated
  */
+/** @deprecated */
 export interface Explain {
     /**
      * All of the observed values.
@@ -36,21 +35,177 @@ export declare const Explain: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Explain;
     fromJSON(object: any): Explain;
     toJSON(message: Explain): unknown;
-    fromPartial<I extends unknown>(object: I): Explain;
+    fromPartial<I extends {
+        values?: {
+            nullValue?: import("../../../protobuf/struct").NullValue;
+            boolValue?: boolean;
+            int64Value?: any;
+            uint64Value?: any;
+            doubleValue?: number;
+            stringValue?: string;
+            bytesValue?: Uint8Array;
+            enumValue?: {
+                type?: string;
+                value?: number;
+            };
+            objectValue?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            mapValue?: {
+                entries?: {
+                    key?: any;
+                    value?: any;
+                }[];
+            };
+            listValue?: {
+                values?: any[];
+            };
+            typeValue?: string;
+        }[];
+        exprSteps?: {
+            id?: any;
+            valueIndex?: number;
+        }[];
+    } & {
+        values?: {
+            nullValue?: import("../../../protobuf/struct").NullValue;
+            boolValue?: boolean;
+            int64Value?: any;
+            uint64Value?: any;
+            doubleValue?: number;
+            stringValue?: string;
+            bytesValue?: Uint8Array;
+            enumValue?: {
+                type?: string;
+                value?: number;
+            };
+            objectValue?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            mapValue?: {
+                entries?: {
+                    key?: any;
+                    value?: any;
+                }[];
+            };
+            listValue?: {
+                values?: any[];
+            };
+            typeValue?: string;
+        }[] & ({
+            nullValue?: import("../../../protobuf/struct").NullValue;
+            boolValue?: boolean;
+            int64Value?: any;
+            uint64Value?: any;
+            doubleValue?: number;
+            stringValue?: string;
+            bytesValue?: Uint8Array;
+            enumValue?: {
+                type?: string;
+                value?: number;
+            };
+            objectValue?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            mapValue?: {
+                entries?: {
+                    key?: any;
+                    value?: any;
+                }[];
+            };
+            listValue?: {
+                values?: any[];
+            };
+            typeValue?: string;
+        } & {
+            nullValue?: import("../../../protobuf/struct").NullValue;
+            boolValue?: boolean;
+            int64Value?: any;
+            uint64Value?: any;
+            doubleValue?: number;
+            stringValue?: string;
+            bytesValue?: Uint8Array;
+            enumValue?: {
+                type?: string;
+                value?: number;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["values"][number]["enumValue"], keyof import("./value").EnumValue>, never>;
+            objectValue?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["values"][number]["objectValue"], keyof import("../../../protobuf/any").Any>, never>;
+            mapValue?: {
+                entries?: {
+                    key?: any;
+                    value?: any;
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["values"][number]["mapValue"], "entries">, never>;
+            listValue?: {
+                values?: any[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["values"][number]["listValue"], "values">, never>;
+            typeValue?: string;
+        } & Record<Exclude<keyof I["values"][number], keyof Value>, never>)[] & Record<Exclude<keyof I["values"], keyof {
+            nullValue?: import("../../../protobuf/struct").NullValue;
+            boolValue?: boolean;
+            int64Value?: any;
+            uint64Value?: any;
+            doubleValue?: number;
+            stringValue?: string;
+            bytesValue?: Uint8Array;
+            enumValue?: {
+                type?: string;
+                value?: number;
+            };
+            objectValue?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            mapValue?: {
+                entries?: {
+                    key?: any;
+                    value?: any;
+                }[];
+            };
+            listValue?: {
+                values?: any[];
+            };
+            typeValue?: string;
+        }[]>, never>;
+        exprSteps?: {
+            id?: any;
+            valueIndex?: number;
+        }[] & ({
+            id?: any;
+            valueIndex?: number;
+        } & {
+            id?: any;
+            valueIndex?: number;
+        } & Record<Exclude<keyof I["exprSteps"][number], keyof Explain_ExprStep>, never>)[] & Record<Exclude<keyof I["exprSteps"], keyof {
+            id?: any;
+            valueIndex?: number;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof Explain>, never>>(object: I): Explain;
 };
 export declare const Explain_ExprStep: {
     encode(message: Explain_ExprStep, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Explain_ExprStep;
     fromJSON(object: any): Explain_ExprStep;
     toJSON(message: Explain_ExprStep): unknown;
-    fromPartial<I extends unknown>(object: I): Explain_ExprStep;
+    fromPartial<I extends {
+        id?: any;
+        valueIndex?: number;
+    } & {
+        id?: any;
+        valueIndex?: number;
+    } & Record<Exclude<keyof I, keyof Explain_ExprStep>, never>>(object: I): Explain_ExprStep;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

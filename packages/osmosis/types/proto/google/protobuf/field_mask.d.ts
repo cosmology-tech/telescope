@@ -1,10 +1,9 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  *
- *     paths: "f.a"
- *     paths: "f.b.d"
+ * paths: "f.a"
+ * paths: "f.b.d"
  *
  * Here `f` represents a field in some root message, `a` and `b`
  * fields in the message found in `f`, and `d` a field found in the
@@ -21,27 +20,27 @@ import * as _m0 from "protobufjs/minimal";
  * specified in the mask. For example, if the mask in the previous
  * example is applied to a response message as follows:
  *
- *     f {
- *       a : 22
- *       b {
- *         d : 1
- *         x : 2
- *       }
- *       y : 13
- *     }
- *     z: 8
+ * f {
+ * a : 22
+ * b {
+ * d : 1
+ * x : 2
+ * }
+ * y : 13
+ * }
+ * z: 8
  *
  * The result will not contain specific values for fields x,y and z
  * (their value will be set to the default, and omitted in proto text
  * output):
  *
  *
- *     f {
- *       a : 22
- *       b {
- *         d : 1
- *       }
- *     }
+ * f {
+ * a : 22
+ * b {
+ * d : 1
+ * }
+ * }
  *
  * A repeated field is not allowed except at the last position of a
  * paths string.
@@ -79,36 +78,36 @@ import * as _m0 from "protobufjs/minimal";
  *
  * For example, given the target message:
  *
- *     f {
- *       b {
- *         d: 1
- *         x: 2
- *       }
- *       c: [1]
- *     }
+ * f {
+ * b {
+ * d: 1
+ * x: 2
+ * }
+ * c: [1]
+ * }
  *
  * And an update message:
  *
- *     f {
- *       b {
- *         d: 10
- *       }
- *       c: [2]
- *     }
+ * f {
+ * b {
+ * d: 10
+ * }
+ * c: [2]
+ * }
  *
  * then if the field mask is:
  *
- *  paths: ["f.b", "f.c"]
+ * paths: ["f.b", "f.c"]
  *
  * then the result will be:
  *
- *     f {
- *       b {
- *         d: 10
- *         x: 2
- *       }
- *       c: [1, 2]
- *     }
+ * f {
+ * b {
+ * d: 10
+ * x: 2
+ * }
+ * c: [1, 2]
+ * }
  *
  * An implementation may provide options to override this default behavior for
  * repeated and message fields.
@@ -146,51 +145,51 @@ import * as _m0 from "protobufjs/minimal";
  *
  * As an example, consider the following message declarations:
  *
- *     message Profile {
- *       User user = 1;
- *       Photo photo = 2;
- *     }
- *     message User {
- *       string display_name = 1;
- *       string address = 2;
- *     }
+ * message Profile {
+ * User user = 1;
+ * Photo photo = 2;
+ * }
+ * message User {
+ * string display_name = 1;
+ * string address = 2;
+ * }
  *
  * In proto a field mask for `Profile` may look as such:
  *
- *     mask {
- *       paths: "user.display_name"
- *       paths: "photo"
- *     }
+ * mask {
+ * paths: "user.display_name"
+ * paths: "photo"
+ * }
  *
  * In JSON, the same mask is represented as below:
  *
- *     {
- *       mask: "user.displayName,photo"
- *     }
+ * {
+ * mask: "user.displayName,photo"
+ * }
  *
  * # Field Masks and Oneof Fields
  *
  * Field masks treat fields in oneofs just as regular fields. Consider the
  * following message:
  *
- *     message SampleMessage {
- *       oneof test_oneof {
- *         string name = 4;
- *         SubMessage sub_message = 9;
- *       }
- *     }
+ * message SampleMessage {
+ * oneof test_oneof {
+ * string name = 4;
+ * SubMessage sub_message = 9;
+ * }
+ * }
  *
  * The field mask can be:
  *
- *     mask {
- *       paths: "name"
- *     }
+ * mask {
+ * paths: "name"
+ * }
  *
  * Or:
  *
- *     mask {
- *       paths: "sub_message"
- *     }
+ * mask {
+ * paths: "sub_message"
+ * }
  *
  * Note that oneof type names ("test_oneof" in this case) cannot be used in
  * paths.
@@ -199,7 +198,7 @@ import * as _m0 from "protobufjs/minimal";
  *
  * The implementation of any API method which has a FieldMask type field in the
  * request should verify the included field paths, and return an
- * `INVALID_ARGUMENT` error if any path is unmappable.
+ * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
 export interface FieldMask {
     /** The set of field mask paths. */
@@ -209,17 +208,10 @@ export declare const FieldMask: {
     encode(message: FieldMask, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): FieldMask;
     fromJSON(object: any): FieldMask;
-    toJSON(message: FieldMask): string;
-    fromPartial<I extends unknown>(object: I): FieldMask;
-    wrap(paths: string[]): FieldMask;
-    unwrap(message: FieldMask): string[];
+    toJSON(message: FieldMask): unknown;
+    fromPartial<I extends {
+        paths?: string[];
+    } & {
+        paths?: string[] & string[] & Record<Exclude<keyof I["paths"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, "paths">, never>>(object: I): FieldMask;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

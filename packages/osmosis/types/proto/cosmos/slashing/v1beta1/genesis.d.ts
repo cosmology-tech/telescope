@@ -1,6 +1,6 @@
-import Long from "long";
+import { Params, ValidatorSigningInfo } from "./slashing";
 import * as _m0 from "protobufjs/minimal";
-import { Params, ValidatorSigningInfo } from "../../../cosmos/slashing/v1beta1/slashing";
+import { Long } from "@osmonauts/helpers";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
     /** params defines all the paramaters of related to deposit. */
@@ -45,35 +45,202 @@ export declare const GenesisState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
-    fromPartial<I extends unknown>(object: I): GenesisState;
+    fromPartial<I extends {
+        params?: {
+            signedBlocksWindow?: any;
+            minSignedPerWindow?: Uint8Array;
+            downtimeJailDuration?: string;
+            slashFractionDoubleSign?: Uint8Array;
+            slashFractionDowntime?: Uint8Array;
+        };
+        signingInfos?: {
+            address?: string;
+            validatorSigningInfo?: {
+                address?: string;
+                startHeight?: any;
+                indexOffset?: any;
+                jailedUntil?: Date;
+                tombstoned?: boolean;
+                missedBlocksCounter?: any;
+            };
+        }[];
+        missedBlocks?: {
+            address?: string;
+            missedBlocks?: {
+                index?: any;
+                missed?: boolean;
+            }[];
+        }[];
+    } & {
+        params?: {
+            signedBlocksWindow?: any;
+            minSignedPerWindow?: Uint8Array;
+            downtimeJailDuration?: string;
+            slashFractionDoubleSign?: Uint8Array;
+            slashFractionDowntime?: Uint8Array;
+        } & {
+            signedBlocksWindow?: any;
+            minSignedPerWindow?: Uint8Array;
+            downtimeJailDuration?: string;
+            slashFractionDoubleSign?: Uint8Array;
+            slashFractionDowntime?: Uint8Array;
+        } & Record<Exclude<keyof I["params"], keyof Params>, never>;
+        signingInfos?: {
+            address?: string;
+            validatorSigningInfo?: {
+                address?: string;
+                startHeight?: any;
+                indexOffset?: any;
+                jailedUntil?: Date;
+                tombstoned?: boolean;
+                missedBlocksCounter?: any;
+            };
+        }[] & ({
+            address?: string;
+            validatorSigningInfo?: {
+                address?: string;
+                startHeight?: any;
+                indexOffset?: any;
+                jailedUntil?: Date;
+                tombstoned?: boolean;
+                missedBlocksCounter?: any;
+            };
+        } & {
+            address?: string;
+            validatorSigningInfo?: {
+                address?: string;
+                startHeight?: any;
+                indexOffset?: any;
+                jailedUntil?: Date;
+                tombstoned?: boolean;
+                missedBlocksCounter?: any;
+            } & {
+                address?: string;
+                startHeight?: any;
+                indexOffset?: any;
+                jailedUntil?: Date;
+                tombstoned?: boolean;
+                missedBlocksCounter?: any;
+            } & Record<Exclude<keyof I["signingInfos"][number]["validatorSigningInfo"], keyof ValidatorSigningInfo>, never>;
+        } & Record<Exclude<keyof I["signingInfos"][number], keyof SigningInfo>, never>)[] & Record<Exclude<keyof I["signingInfos"], keyof {
+            address?: string;
+            validatorSigningInfo?: {
+                address?: string;
+                startHeight?: any;
+                indexOffset?: any;
+                jailedUntil?: Date;
+                tombstoned?: boolean;
+                missedBlocksCounter?: any;
+            };
+        }[]>, never>;
+        missedBlocks?: {
+            address?: string;
+            missedBlocks?: {
+                index?: any;
+                missed?: boolean;
+            }[];
+        }[] & ({
+            address?: string;
+            missedBlocks?: {
+                index?: any;
+                missed?: boolean;
+            }[];
+        } & {
+            address?: string;
+            missedBlocks?: {
+                index?: any;
+                missed?: boolean;
+            }[] & ({
+                index?: any;
+                missed?: boolean;
+            } & {
+                index?: any;
+                missed?: boolean;
+            } & Record<Exclude<keyof I["missedBlocks"][number]["missedBlocks"][number], keyof MissedBlock>, never>)[] & Record<Exclude<keyof I["missedBlocks"][number]["missedBlocks"], keyof {
+                index?: any;
+                missed?: boolean;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["missedBlocks"][number], keyof ValidatorMissedBlocks>, never>)[] & Record<Exclude<keyof I["missedBlocks"], keyof {
+            address?: string;
+            missedBlocks?: {
+                index?: any;
+                missed?: boolean;
+            }[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof GenesisState>, never>>(object: I): GenesisState;
 };
 export declare const SigningInfo: {
     encode(message: SigningInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SigningInfo;
     fromJSON(object: any): SigningInfo;
     toJSON(message: SigningInfo): unknown;
-    fromPartial<I extends unknown>(object: I): SigningInfo;
+    fromPartial<I extends {
+        address?: string;
+        validatorSigningInfo?: {
+            address?: string;
+            startHeight?: any;
+            indexOffset?: any;
+            jailedUntil?: Date;
+            tombstoned?: boolean;
+            missedBlocksCounter?: any;
+        };
+    } & {
+        address?: string;
+        validatorSigningInfo?: {
+            address?: string;
+            startHeight?: any;
+            indexOffset?: any;
+            jailedUntil?: Date;
+            tombstoned?: boolean;
+            missedBlocksCounter?: any;
+        } & {
+            address?: string;
+            startHeight?: any;
+            indexOffset?: any;
+            jailedUntil?: Date;
+            tombstoned?: boolean;
+            missedBlocksCounter?: any;
+        } & Record<Exclude<keyof I["validatorSigningInfo"], keyof ValidatorSigningInfo>, never>;
+    } & Record<Exclude<keyof I, keyof SigningInfo>, never>>(object: I): SigningInfo;
 };
 export declare const ValidatorMissedBlocks: {
     encode(message: ValidatorMissedBlocks, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorMissedBlocks;
     fromJSON(object: any): ValidatorMissedBlocks;
     toJSON(message: ValidatorMissedBlocks): unknown;
-    fromPartial<I extends unknown>(object: I): ValidatorMissedBlocks;
+    fromPartial<I extends {
+        address?: string;
+        missedBlocks?: {
+            index?: any;
+            missed?: boolean;
+        }[];
+    } & {
+        address?: string;
+        missedBlocks?: {
+            index?: any;
+            missed?: boolean;
+        }[] & ({
+            index?: any;
+            missed?: boolean;
+        } & {
+            index?: any;
+            missed?: boolean;
+        } & Record<Exclude<keyof I["missedBlocks"][number], keyof MissedBlock>, never>)[] & Record<Exclude<keyof I["missedBlocks"], keyof {
+            index?: any;
+            missed?: boolean;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof ValidatorMissedBlocks>, never>>(object: I): ValidatorMissedBlocks;
 };
 export declare const MissedBlock: {
     encode(message: MissedBlock, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MissedBlock;
     fromJSON(object: any): MissedBlock;
     toJSON(message: MissedBlock): unknown;
-    fromPartial<I extends unknown>(object: I): MissedBlock;
+    fromPartial<I extends {
+        index?: any;
+        missed?: boolean;
+    } & {
+        index?: any;
+        missed?: boolean;
+    } & Record<Exclude<keyof I, keyof MissedBlock>, never>>(object: I): MissedBlock;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

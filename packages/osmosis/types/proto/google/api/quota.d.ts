@@ -1,5 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -7,49 +7,49 @@ import * as _m0 from "protobufjs/minimal";
  * The metric based quota configuration works this way:
  * - The service configuration defines a set of metrics.
  * - For API calls, the quota.metric_rules maps methods to metrics with
- *   corresponding costs.
+ * corresponding costs.
  * - The quota.limits defines limits on the metrics, which will be used for
- *   quota checks at runtime.
+ * quota checks at runtime.
  *
  * An example quota configuration in yaml format:
  *
- *    quota:
- *      limits:
+ * quota:
+ * limits:
  *
- *      - name: apiWriteQpsPerProject
- *        metric: library.googleapis.com/write_calls
- *        unit: "1/min/{project}"  # rate limit for consumer projects
- *        values:
- *          STANDARD: 10000
+ * - name: apiWriteQpsPerProject
+ * metric: library.googleapis.com/write_calls
+ * unit: "1/min/{project}"  # rate limit for consumer projects
+ * values:
+ * STANDARD: 10000
  *
  *
- *      # The metric rules bind all methods to the read_calls metric,
- *      # except for the UpdateBook and DeleteBook methods. These two methods
- *      # are mapped to the write_calls metric, with the UpdateBook method
- *      # consuming at twice rate as the DeleteBook method.
- *      metric_rules:
- *      - selector: "*"
- *        metric_costs:
- *          library.googleapis.com/read_calls: 1
- *      - selector: google.example.library.v1.LibraryService.UpdateBook
- *        metric_costs:
- *          library.googleapis.com/write_calls: 2
- *      - selector: google.example.library.v1.LibraryService.DeleteBook
- *        metric_costs:
- *          library.googleapis.com/write_calls: 1
+ * # The metric rules bind all methods to the read_calls metric,
+ * # except for the UpdateBook and DeleteBook methods. These two methods
+ * # are mapped to the write_calls metric, with the UpdateBook method
+ * # consuming at twice rate as the DeleteBook method.
+ * metric_rules:
+ * - selector: "*"
+ * metric_costs:
+ * library.googleapis.com/read_calls: 1
+ * - selector: google.example.library.v1.LibraryService.UpdateBook
+ * metric_costs:
+ * library.googleapis.com/write_calls: 2
+ * - selector: google.example.library.v1.LibraryService.DeleteBook
+ * metric_costs:
+ * library.googleapis.com/write_calls: 1
  *
- *  Corresponding Metric definition:
+ * Corresponding Metric definition:
  *
- *      metrics:
- *      - name: library.googleapis.com/read_calls
- *        display_name: Read requests
- *        metric_kind: DELTA
- *        value_type: INT64
+ * metrics:
+ * - name: library.googleapis.com/read_calls
+ * display_name: Read requests
+ * metric_kind: DELTA
+ * value_type: INT64
  *
- *      - name: library.googleapis.com/write_calls
- *        display_name: Write requests
- *        metric_kind: DELTA
- *        value_type: INT64
+ * - name: library.googleapis.com/write_calls
+ * display_name: Write requests
+ * metric_kind: DELTA
+ * value_type: INT64
  */
 export interface Quota {
     /** List of `QuotaLimit` definitions for the service. */
@@ -59,6 +59,10 @@ export interface Quota {
      * or more metrics.
      */
     metricRules: MetricRule[];
+}
+export interface MetricRule_MetricCostsEntry {
+    key: string;
+    value: Long;
 }
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
@@ -83,7 +87,7 @@ export interface MetricRule {
         [key: string]: Long;
     };
 }
-export interface MetricRule_MetricCostsEntry {
+export interface QuotaLimit_ValuesEntry {
     key: string;
     value: Long;
 }
@@ -184,51 +188,190 @@ export interface QuotaLimit {
      */
     displayName: string;
 }
-export interface QuotaLimit_ValuesEntry {
-    key: string;
-    value: Long;
-}
 export declare const Quota: {
     encode(message: Quota, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Quota;
     fromJSON(object: any): Quota;
     toJSON(message: Quota): unknown;
-    fromPartial<I extends unknown>(object: I): Quota;
-};
-export declare const MetricRule: {
-    encode(message: MetricRule, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule;
-    fromJSON(object: any): MetricRule;
-    toJSON(message: MetricRule): unknown;
-    fromPartial<I extends unknown>(object: I): MetricRule;
+    fromPartial<I extends {
+        limits?: {
+            name?: string;
+            description?: string;
+            defaultLimit?: any;
+            maxLimit?: any;
+            freeTier?: any;
+            duration?: string;
+            metric?: string;
+            unit?: string;
+            values?: {
+                [x: string]: any;
+            };
+            displayName?: string;
+        }[];
+        metricRules?: {
+            selector?: string;
+            metricCosts?: {
+                [x: string]: any;
+            };
+        }[];
+    } & {
+        limits?: {
+            name?: string;
+            description?: string;
+            defaultLimit?: any;
+            maxLimit?: any;
+            freeTier?: any;
+            duration?: string;
+            metric?: string;
+            unit?: string;
+            values?: {
+                [x: string]: any;
+            };
+            displayName?: string;
+        }[] & ({
+            name?: string;
+            description?: string;
+            defaultLimit?: any;
+            maxLimit?: any;
+            freeTier?: any;
+            duration?: string;
+            metric?: string;
+            unit?: string;
+            values?: {
+                [x: string]: any;
+            };
+            displayName?: string;
+        } & {
+            name?: string;
+            description?: string;
+            defaultLimit?: any;
+            maxLimit?: any;
+            freeTier?: any;
+            duration?: string;
+            metric?: string;
+            unit?: string;
+            values?: {
+                [x: string]: any;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["limits"][number]["values"], string | number>, never>;
+            displayName?: string;
+        } & Record<Exclude<keyof I["limits"][number], keyof QuotaLimit>, never>)[] & Record<Exclude<keyof I["limits"], keyof {
+            name?: string;
+            description?: string;
+            defaultLimit?: any;
+            maxLimit?: any;
+            freeTier?: any;
+            duration?: string;
+            metric?: string;
+            unit?: string;
+            values?: {
+                [x: string]: any;
+            };
+            displayName?: string;
+        }[]>, never>;
+        metricRules?: {
+            selector?: string;
+            metricCosts?: {
+                [x: string]: any;
+            };
+        }[] & ({
+            selector?: string;
+            metricCosts?: {
+                [x: string]: any;
+            };
+        } & {
+            selector?: string;
+            metricCosts?: {
+                [x: string]: any;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["metricRules"][number]["metricCosts"], string | number>, never>;
+        } & Record<Exclude<keyof I["metricRules"][number], keyof MetricRule>, never>)[] & Record<Exclude<keyof I["metricRules"], keyof {
+            selector?: string;
+            metricCosts?: {
+                [x: string]: any;
+            };
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof Quota>, never>>(object: I): Quota;
 };
 export declare const MetricRule_MetricCostsEntry: {
     encode(message: MetricRule_MetricCostsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule_MetricCostsEntry;
     fromJSON(object: any): MetricRule_MetricCostsEntry;
     toJSON(message: MetricRule_MetricCostsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): MetricRule_MetricCostsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: any;
+    } & {
+        key?: string;
+        value?: any;
+    } & Record<Exclude<keyof I, keyof MetricRule_MetricCostsEntry>, never>>(object: I): MetricRule_MetricCostsEntry;
 };
-export declare const QuotaLimit: {
-    encode(message: QuotaLimit, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit;
-    fromJSON(object: any): QuotaLimit;
-    toJSON(message: QuotaLimit): unknown;
-    fromPartial<I extends unknown>(object: I): QuotaLimit;
+export declare const MetricRule: {
+    encode(message: MetricRule, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule;
+    fromJSON(object: any): MetricRule;
+    toJSON(message: MetricRule): unknown;
+    fromPartial<I extends {
+        selector?: string;
+        metricCosts?: {
+            [x: string]: any;
+        };
+    } & {
+        selector?: string;
+        metricCosts?: {
+            [x: string]: any;
+        } & {
+            [x: string]: any;
+        } & Record<Exclude<keyof I["metricCosts"], string | number>, never>;
+    } & Record<Exclude<keyof I, keyof MetricRule>, never>>(object: I): MetricRule;
 };
 export declare const QuotaLimit_ValuesEntry: {
     encode(message: QuotaLimit_ValuesEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit_ValuesEntry;
     fromJSON(object: any): QuotaLimit_ValuesEntry;
     toJSON(message: QuotaLimit_ValuesEntry): unknown;
-    fromPartial<I extends unknown>(object: I): QuotaLimit_ValuesEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: any;
+    } & {
+        key?: string;
+        value?: any;
+    } & Record<Exclude<keyof I, keyof QuotaLimit_ValuesEntry>, never>>(object: I): QuotaLimit_ValuesEntry;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};
+export declare const QuotaLimit: {
+    encode(message: QuotaLimit, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit;
+    fromJSON(object: any): QuotaLimit;
+    toJSON(message: QuotaLimit): unknown;
+    fromPartial<I extends {
+        name?: string;
+        description?: string;
+        defaultLimit?: any;
+        maxLimit?: any;
+        freeTier?: any;
+        duration?: string;
+        metric?: string;
+        unit?: string;
+        values?: {
+            [x: string]: any;
+        };
+        displayName?: string;
+    } & {
+        name?: string;
+        description?: string;
+        defaultLimit?: any;
+        maxLimit?: any;
+        freeTier?: any;
+        duration?: string;
+        metric?: string;
+        unit?: string;
+        values?: {
+            [x: string]: any;
+        } & {
+            [x: string]: any;
+        } & Record<Exclude<keyof I["values"], string | number>, never>;
+        displayName?: string;
+    } & Record<Exclude<keyof I, keyof QuotaLimit>, never>>(object: I): QuotaLimit;
+};

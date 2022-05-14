@@ -1,5 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * App includes the protocol and software version for the application.
  * This information is included in ResponseInfo. The App.Protocol can be
@@ -23,21 +23,24 @@ export declare const App: {
     decode(input: _m0.Reader | Uint8Array, length?: number): App;
     fromJSON(object: any): App;
     toJSON(message: App): unknown;
-    fromPartial<I extends unknown>(object: I): App;
+    fromPartial<I extends {
+        protocol?: any;
+        software?: string;
+    } & {
+        protocol?: any;
+        software?: string;
+    } & Record<Exclude<keyof I, keyof App>, never>>(object: I): App;
 };
 export declare const Consensus: {
     encode(message: Consensus, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Consensus;
     fromJSON(object: any): Consensus;
     toJSON(message: Consensus): unknown;
-    fromPartial<I extends unknown>(object: I): Consensus;
+    fromPartial<I extends {
+        block?: any;
+        app?: any;
+    } & {
+        block?: any;
+        app?: any;
+    } & Record<Exclude<keyof I, keyof Consensus>, never>>(object: I): Consensus;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

@@ -1,6 +1,4 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../google/protobuf/duration";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -18,7 +16,7 @@ import { Duration } from "../../google/protobuf/duration";
  */
 export interface RetryInfo {
     /** Clients should wait at least this long between retrying the same request. */
-    retryDelay: Duration;
+    retryDelay: string;
 }
 /** Describes additional debugging info. */
 export interface DebugInfo {
@@ -66,31 +64,35 @@ export interface QuotaFailure_Violation {
      */
     description: string;
 }
+export interface ErrorInfo_MetadataEntry {
+    key: string;
+    value: string;
+}
 /**
  * Describes the cause of the error with structured details.
  *
  * Example of an error when contacting the "pubsub.googleapis.com" API when it
  * is not enabled:
  *
- *     { "reason": "API_DISABLED"
- *       "domain": "googleapis.com"
- *       "metadata": {
- *         "resource": "projects/123",
- *         "service": "pubsub.googleapis.com"
- *       }
- *     }
+ * { "reason": "API_DISABLED"
+ * "domain": "googleapis.com"
+ * "metadata": {
+ * "resource": "projects/123",
+ * "service": "pubsub.googleapis.com"
+ * }
+ * }
  *
  * This response indicates that the pubsub.googleapis.com API is not enabled.
  *
  * Example of an error that is returned when attempting to create a Spanner
  * instance in a region that is out of stock:
  *
- *     { "reason": "STOCKOUT"
- *       "domain": "spanner.googleapis.com",
- *       "metadata": {
- *         "availableRegions": "us-central1,us-east2"
- *       }
- *     }
+ * { "reason": "STOCKOUT"
+ * "domain": "spanner.googleapis.com",
+ * "metadata": {
+ * "availableRegions": "us-central1,us-east2"
+ * }
+ * }
  */
 export interface ErrorInfo {
     /**
@@ -122,10 +124,6 @@ export interface ErrorInfo {
     metadata: {
         [key: string]: string;
     };
-}
-export interface ErrorInfo_MetadataEntry {
-    key: string;
-    value: string;
 }
 /**
  * Describes what preconditions have failed.
@@ -259,112 +257,262 @@ export declare const RetryInfo: {
     decode(input: _m0.Reader | Uint8Array, length?: number): RetryInfo;
     fromJSON(object: any): RetryInfo;
     toJSON(message: RetryInfo): unknown;
-    fromPartial<I extends unknown>(object: I): RetryInfo;
+    fromPartial<I extends {
+        retryDelay?: string;
+    } & {
+        retryDelay?: string;
+    } & Record<Exclude<keyof I, "retryDelay">, never>>(object: I): RetryInfo;
 };
 export declare const DebugInfo: {
     encode(message: DebugInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DebugInfo;
     fromJSON(object: any): DebugInfo;
     toJSON(message: DebugInfo): unknown;
-    fromPartial<I extends unknown>(object: I): DebugInfo;
+    fromPartial<I extends {
+        stackEntries?: string[];
+        detail?: string;
+    } & {
+        stackEntries?: string[] & string[] & Record<Exclude<keyof I["stackEntries"], keyof string[]>, never>;
+        detail?: string;
+    } & Record<Exclude<keyof I, keyof DebugInfo>, never>>(object: I): DebugInfo;
 };
 export declare const QuotaFailure: {
     encode(message: QuotaFailure, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure;
     fromJSON(object: any): QuotaFailure;
     toJSON(message: QuotaFailure): unknown;
-    fromPartial<I extends unknown>(object: I): QuotaFailure;
+    fromPartial<I extends {
+        violations?: {
+            subject?: string;
+            description?: string;
+        }[];
+    } & {
+        violations?: {
+            subject?: string;
+            description?: string;
+        }[] & ({
+            subject?: string;
+            description?: string;
+        } & {
+            subject?: string;
+            description?: string;
+        } & Record<Exclude<keyof I["violations"][number], keyof QuotaFailure_Violation>, never>)[] & Record<Exclude<keyof I["violations"], keyof {
+            subject?: string;
+            description?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "violations">, never>>(object: I): QuotaFailure;
 };
 export declare const QuotaFailure_Violation: {
     encode(message: QuotaFailure_Violation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure_Violation;
     fromJSON(object: any): QuotaFailure_Violation;
     toJSON(message: QuotaFailure_Violation): unknown;
-    fromPartial<I extends unknown>(object: I): QuotaFailure_Violation;
-};
-export declare const ErrorInfo: {
-    encode(message: ErrorInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo;
-    fromJSON(object: any): ErrorInfo;
-    toJSON(message: ErrorInfo): unknown;
-    fromPartial<I extends unknown>(object: I): ErrorInfo;
+    fromPartial<I extends {
+        subject?: string;
+        description?: string;
+    } & {
+        subject?: string;
+        description?: string;
+    } & Record<Exclude<keyof I, keyof QuotaFailure_Violation>, never>>(object: I): QuotaFailure_Violation;
 };
 export declare const ErrorInfo_MetadataEntry: {
     encode(message: ErrorInfo_MetadataEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataEntry;
     fromJSON(object: any): ErrorInfo_MetadataEntry;
     toJSON(message: ErrorInfo_MetadataEntry): unknown;
-    fromPartial<I extends unknown>(object: I): ErrorInfo_MetadataEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof ErrorInfo_MetadataEntry>, never>>(object: I): ErrorInfo_MetadataEntry;
+};
+export declare const ErrorInfo: {
+    encode(message: ErrorInfo, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo;
+    fromJSON(object: any): ErrorInfo;
+    toJSON(message: ErrorInfo): unknown;
+    fromPartial<I extends {
+        reason?: string;
+        domain?: string;
+        metadata?: {
+            [x: string]: string;
+        };
+    } & {
+        reason?: string;
+        domain?: string;
+        metadata?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["metadata"], string | number>, never>;
+    } & Record<Exclude<keyof I, keyof ErrorInfo>, never>>(object: I): ErrorInfo;
 };
 export declare const PreconditionFailure: {
     encode(message: PreconditionFailure, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure;
     fromJSON(object: any): PreconditionFailure;
     toJSON(message: PreconditionFailure): unknown;
-    fromPartial<I extends unknown>(object: I): PreconditionFailure;
+    fromPartial<I extends {
+        violations?: {
+            type?: string;
+            subject?: string;
+            description?: string;
+        }[];
+    } & {
+        violations?: {
+            type?: string;
+            subject?: string;
+            description?: string;
+        }[] & ({
+            type?: string;
+            subject?: string;
+            description?: string;
+        } & {
+            type?: string;
+            subject?: string;
+            description?: string;
+        } & Record<Exclude<keyof I["violations"][number], keyof PreconditionFailure_Violation>, never>)[] & Record<Exclude<keyof I["violations"], keyof {
+            type?: string;
+            subject?: string;
+            description?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "violations">, never>>(object: I): PreconditionFailure;
 };
 export declare const PreconditionFailure_Violation: {
     encode(message: PreconditionFailure_Violation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure_Violation;
     fromJSON(object: any): PreconditionFailure_Violation;
     toJSON(message: PreconditionFailure_Violation): unknown;
-    fromPartial<I extends unknown>(object: I): PreconditionFailure_Violation;
+    fromPartial<I extends {
+        type?: string;
+        subject?: string;
+        description?: string;
+    } & {
+        type?: string;
+        subject?: string;
+        description?: string;
+    } & Record<Exclude<keyof I, keyof PreconditionFailure_Violation>, never>>(object: I): PreconditionFailure_Violation;
 };
 export declare const BadRequest: {
     encode(message: BadRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest;
     fromJSON(object: any): BadRequest;
     toJSON(message: BadRequest): unknown;
-    fromPartial<I extends unknown>(object: I): BadRequest;
+    fromPartial<I extends {
+        fieldViolations?: {
+            field?: string;
+            description?: string;
+        }[];
+    } & {
+        fieldViolations?: {
+            field?: string;
+            description?: string;
+        }[] & ({
+            field?: string;
+            description?: string;
+        } & {
+            field?: string;
+            description?: string;
+        } & Record<Exclude<keyof I["fieldViolations"][number], keyof BadRequest_FieldViolation>, never>)[] & Record<Exclude<keyof I["fieldViolations"], keyof {
+            field?: string;
+            description?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "fieldViolations">, never>>(object: I): BadRequest;
 };
 export declare const BadRequest_FieldViolation: {
     encode(message: BadRequest_FieldViolation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest_FieldViolation;
     fromJSON(object: any): BadRequest_FieldViolation;
     toJSON(message: BadRequest_FieldViolation): unknown;
-    fromPartial<I extends unknown>(object: I): BadRequest_FieldViolation;
+    fromPartial<I extends {
+        field?: string;
+        description?: string;
+    } & {
+        field?: string;
+        description?: string;
+    } & Record<Exclude<keyof I, keyof BadRequest_FieldViolation>, never>>(object: I): BadRequest_FieldViolation;
 };
 export declare const RequestInfo: {
     encode(message: RequestInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): RequestInfo;
     fromJSON(object: any): RequestInfo;
     toJSON(message: RequestInfo): unknown;
-    fromPartial<I extends unknown>(object: I): RequestInfo;
+    fromPartial<I extends {
+        requestId?: string;
+        servingData?: string;
+    } & {
+        requestId?: string;
+        servingData?: string;
+    } & Record<Exclude<keyof I, keyof RequestInfo>, never>>(object: I): RequestInfo;
 };
 export declare const ResourceInfo: {
     encode(message: ResourceInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ResourceInfo;
     fromJSON(object: any): ResourceInfo;
     toJSON(message: ResourceInfo): unknown;
-    fromPartial<I extends unknown>(object: I): ResourceInfo;
+    fromPartial<I extends {
+        resourceType?: string;
+        resourceName?: string;
+        owner?: string;
+        description?: string;
+    } & {
+        resourceType?: string;
+        resourceName?: string;
+        owner?: string;
+        description?: string;
+    } & Record<Exclude<keyof I, keyof ResourceInfo>, never>>(object: I): ResourceInfo;
 };
 export declare const Help: {
     encode(message: Help, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Help;
     fromJSON(object: any): Help;
     toJSON(message: Help): unknown;
-    fromPartial<I extends unknown>(object: I): Help;
+    fromPartial<I extends {
+        links?: {
+            description?: string;
+            url?: string;
+        }[];
+    } & {
+        links?: {
+            description?: string;
+            url?: string;
+        }[] & ({
+            description?: string;
+            url?: string;
+        } & {
+            description?: string;
+            url?: string;
+        } & Record<Exclude<keyof I["links"][number], keyof Help_Link>, never>)[] & Record<Exclude<keyof I["links"], keyof {
+            description?: string;
+            url?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "links">, never>>(object: I): Help;
 };
 export declare const Help_Link: {
     encode(message: Help_Link, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Help_Link;
     fromJSON(object: any): Help_Link;
     toJSON(message: Help_Link): unknown;
-    fromPartial<I extends unknown>(object: I): Help_Link;
+    fromPartial<I extends {
+        description?: string;
+        url?: string;
+    } & {
+        description?: string;
+        url?: string;
+    } & Record<Exclude<keyof I, keyof Help_Link>, never>>(object: I): Help_Link;
 };
 export declare const LocalizedMessage: {
     encode(message: LocalizedMessage, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LocalizedMessage;
     fromJSON(object: any): LocalizedMessage;
     toJSON(message: LocalizedMessage): unknown;
-    fromPartial<I extends unknown>(object: I): LocalizedMessage;
+    fromPartial<I extends {
+        locale?: string;
+        message?: string;
+    } & {
+        locale?: string;
+        message?: string;
+    } & Record<Exclude<keyof I, keyof LocalizedMessage>, never>>(object: I): LocalizedMessage;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

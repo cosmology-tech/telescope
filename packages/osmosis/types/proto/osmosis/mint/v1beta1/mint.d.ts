@@ -1,5 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /** Minter represents the minting state. */
 export interface Minter {
     /** current epoch provisions */
@@ -55,35 +55,94 @@ export declare const Minter: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Minter;
     fromJSON(object: any): Minter;
     toJSON(message: Minter): unknown;
-    fromPartial<I extends unknown>(object: I): Minter;
+    fromPartial<I extends {
+        epochProvisions?: string;
+    } & {
+        epochProvisions?: string;
+    } & Record<Exclude<keyof I, "epochProvisions">, never>>(object: I): Minter;
 };
 export declare const WeightedAddress: {
     encode(message: WeightedAddress, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): WeightedAddress;
     fromJSON(object: any): WeightedAddress;
     toJSON(message: WeightedAddress): unknown;
-    fromPartial<I extends unknown>(object: I): WeightedAddress;
+    fromPartial<I extends {
+        address?: string;
+        weight?: string;
+    } & {
+        address?: string;
+        weight?: string;
+    } & Record<Exclude<keyof I, keyof WeightedAddress>, never>>(object: I): WeightedAddress;
 };
 export declare const DistributionProportions: {
     encode(message: DistributionProportions, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DistributionProportions;
     fromJSON(object: any): DistributionProportions;
     toJSON(message: DistributionProportions): unknown;
-    fromPartial<I extends unknown>(object: I): DistributionProportions;
+    fromPartial<I extends {
+        staking?: string;
+        poolIncentives?: string;
+        developerRewards?: string;
+        communityPool?: string;
+    } & {
+        staking?: string;
+        poolIncentives?: string;
+        developerRewards?: string;
+        communityPool?: string;
+    } & Record<Exclude<keyof I, keyof DistributionProportions>, never>>(object: I): DistributionProportions;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends unknown>(object: I): Params;
+    fromPartial<I extends {
+        mintDenom?: string;
+        genesisEpochProvisions?: string;
+        epochIdentifier?: string;
+        reductionPeriodInEpochs?: any;
+        reductionFactor?: string;
+        distributionProportions?: {
+            staking?: string;
+            poolIncentives?: string;
+            developerRewards?: string;
+            communityPool?: string;
+        };
+        weightedDeveloperRewardsReceivers?: {
+            address?: string;
+            weight?: string;
+        }[];
+        mintingRewardsDistributionStartEpoch?: any;
+    } & {
+        mintDenom?: string;
+        genesisEpochProvisions?: string;
+        epochIdentifier?: string;
+        reductionPeriodInEpochs?: any;
+        reductionFactor?: string;
+        distributionProportions?: {
+            staking?: string;
+            poolIncentives?: string;
+            developerRewards?: string;
+            communityPool?: string;
+        } & {
+            staking?: string;
+            poolIncentives?: string;
+            developerRewards?: string;
+            communityPool?: string;
+        } & Record<Exclude<keyof I["distributionProportions"], keyof DistributionProportions>, never>;
+        weightedDeveloperRewardsReceivers?: {
+            address?: string;
+            weight?: string;
+        }[] & ({
+            address?: string;
+            weight?: string;
+        } & {
+            address?: string;
+            weight?: string;
+        } & Record<Exclude<keyof I["weightedDeveloperRewardsReceivers"][number], keyof WeightedAddress>, never>)[] & Record<Exclude<keyof I["weightedDeveloperRewardsReceivers"], keyof {
+            address?: string;
+            weight?: string;
+        }[]>, never>;
+        mintingRewardsDistributionStartEpoch?: any;
+    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

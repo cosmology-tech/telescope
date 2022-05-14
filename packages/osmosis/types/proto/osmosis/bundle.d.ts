@@ -1,2308 +1,6217 @@
-import * as _747 from "./claim/v1beta1/claim";
-import * as _748 from "./claim/v1beta1/genesis";
-import * as _749 from "./claim/v1beta1/params";
-import * as _750 from "./claim/v1beta1/query";
-import * as _751 from "./epochs/genesis";
-import * as _752 from "./epochs/query";
-import * as _753 from "./gamm/pool-models/balancer/balancerPool";
-import * as _754 from "./gamm/pool-models/balancer/tx";
-import * as _755 from "./gamm/v1beta1/genesis";
-import * as _756 from "./gamm/v1beta1/query";
-import * as _757 from "./gamm/v1beta1/tx";
-import * as _766 from "./incentives/gauge";
-import * as _767 from "./incentives/genesis";
-import * as _768 from "./incentives/params";
-import * as _769 from "./incentives/query";
-import * as _770 from "./incentives/tx";
-import * as _779 from "./lockup/genesis";
-import * as _780 from "./lockup/lock";
-import * as _781 from "./lockup/query";
-import * as _782 from "./lockup/tx";
-import * as _791 from "./mint/v1beta1/genesis";
-import * as _792 from "./mint/v1beta1/mint";
-import * as _793 from "./mint/v1beta1/query";
-import * as _794 from "./pool-incentives/v1beta1/genesis";
-import * as _795 from "./pool-incentives/v1beta1/gov";
-import * as _796 from "./pool-incentives/v1beta1/incentives";
-import * as _797 from "./pool-incentives/v1beta1/query";
-import * as _798 from "./store/v1beta1/tree";
-import * as _799 from "./superfluid/genesis";
-import * as _800 from "./superfluid/params";
-import * as _801 from "./superfluid/query";
-import * as _802 from "./superfluid/superfluid";
-import * as _803 from "./superfluid/tx";
-import * as _812 from "./txfees/v1beta1/feetoken";
-import * as _813 from "./txfees/v1beta1/genesis";
-import * as _814 from "./txfees/v1beta1/gov";
-import * as _815 from "./txfees/v1beta1/query";
+import * as _177 from "./claim/v1beta1/claim";
+import * as _178 from "./claim/v1beta1/genesis";
+import * as _179 from "./claim/v1beta1/params";
+import * as _180 from "./claim/v1beta1/query";
+import * as _181 from "./epochs/genesis";
+import * as _182 from "./epochs/query";
+import * as _183 from "./gamm/pool-models/balancer/balancerPool";
+import * as _184 from "./gamm/pool-models/balancer/tx";
+import * as _185 from "./gamm/v1beta1/genesis";
+import * as _186 from "./gamm/v1beta1/query";
+import * as _187 from "./gamm/v1beta1/tx";
+import * as _188 from "./incentives/gauge";
+import * as _189 from "./incentives/genesis";
+import * as _190 from "./incentives/params";
+import * as _191 from "./incentives/query";
+import * as _192 from "./incentives/tx";
+import * as _193 from "./lockup/genesis";
+import * as _194 from "./lockup/lock";
+import * as _195 from "./lockup/query";
+import * as _196 from "./lockup/tx";
+import * as _197 from "./mint/v1beta1/genesis";
+import * as _198 from "./mint/v1beta1/mint";
+import * as _199 from "./mint/v1beta1/query";
+import * as _200 from "./pool-incentives/v1beta1/genesis";
+import * as _201 from "./pool-incentives/v1beta1/gov";
+import * as _202 from "./pool-incentives/v1beta1/incentives";
+import * as _203 from "./pool-incentives/v1beta1/query";
+import * as _204 from "./store/v1beta1/tree";
+import * as _205 from "./superfluid/genesis";
+import * as _206 from "./superfluid/params";
+import * as _207 from "./superfluid/query";
+import * as _208 from "./superfluid/superfluid";
+import * as _209 from "./superfluid/tx";
+import * as _210 from "./txfees/v1beta1/feetoken";
+import * as _211 from "./txfees/v1beta1/genesis";
+import * as _212 from "./txfees/v1beta1/gov";
+import * as _213 from "./txfees/v1beta1/query";
 export declare namespace osmosis {
     namespace claim {
         const v1beta1: {
             QueryModuleAccountBalanceRequest: {
-                encode(_: _750.QueryModuleAccountBalanceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryModuleAccountBalanceRequest;
-                fromJSON(_: any): _750.QueryModuleAccountBalanceRequest;
-                toJSON(_: _750.QueryModuleAccountBalanceRequest): unknown;
-                fromPartial<I extends unknown>(_: I): _750.QueryModuleAccountBalanceRequest;
+                encode(_: _180.QueryModuleAccountBalanceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryModuleAccountBalanceRequest;
+                fromJSON(_: any): _180.QueryModuleAccountBalanceRequest;
+                toJSON(_: _180.QueryModuleAccountBalanceRequest): unknown;
+                fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): _180.QueryModuleAccountBalanceRequest;
             };
             QueryModuleAccountBalanceResponse: {
-                encode(message: _750.QueryModuleAccountBalanceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryModuleAccountBalanceResponse;
-                fromJSON(object: any): _750.QueryModuleAccountBalanceResponse;
-                toJSON(message: _750.QueryModuleAccountBalanceResponse): unknown;
-                fromPartial<I_1 extends unknown>(object: I_1): _750.QueryModuleAccountBalanceResponse;
+                encode(message: _180.QueryModuleAccountBalanceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryModuleAccountBalanceResponse;
+                fromJSON(object: any): _180.QueryModuleAccountBalanceResponse;
+                toJSON(message: _180.QueryModuleAccountBalanceResponse): unknown;
+                fromPartial<I_1 extends {
+                    moduleAccountBalance?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    moduleAccountBalance?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_1["moduleAccountBalance"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_1["moduleAccountBalance"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_1, "moduleAccountBalance">, never>>(object: I_1): _180.QueryModuleAccountBalanceResponse;
             };
             QueryParamsRequest: {
-                encode(_: _750.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryParamsRequest;
-                fromJSON(_: any): _750.QueryParamsRequest;
-                toJSON(_: _750.QueryParamsRequest): unknown;
-                fromPartial<I_2 extends unknown>(_: I_2): _750.QueryParamsRequest;
+                encode(_: _180.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryParamsRequest;
+                fromJSON(_: any): _180.QueryParamsRequest;
+                toJSON(_: _180.QueryParamsRequest): unknown;
+                fromPartial<I_2 extends {} & {} & Record<Exclude<keyof I_2, never>, never>>(_: I_2): _180.QueryParamsRequest;
             };
             QueryParamsResponse: {
-                encode(message: _750.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryParamsResponse;
-                fromJSON(object: any): _750.QueryParamsResponse;
-                toJSON(message: _750.QueryParamsResponse): unknown;
-                fromPartial<I_3 extends unknown>(object: I_3): _750.QueryParamsResponse;
+                encode(message: _180.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryParamsResponse;
+                fromJSON(object: any): _180.QueryParamsResponse;
+                toJSON(message: _180.QueryParamsResponse): unknown;
+                fromPartial<I_3 extends {
+                    params?: {
+                        airdropStartTime?: Date;
+                        durationUntilDecay?: string;
+                        durationOfDecay?: string;
+                        claimDenom?: string;
+                    };
+                } & {
+                    params?: {
+                        airdropStartTime?: Date;
+                        durationUntilDecay?: string;
+                        durationOfDecay?: string;
+                        claimDenom?: string;
+                    } & {
+                        airdropStartTime?: Date;
+                        durationUntilDecay?: string;
+                        durationOfDecay?: string;
+                        claimDenom?: string;
+                    } & Record<Exclude<keyof I_3["params"], keyof _179.Params>, never>;
+                } & Record<Exclude<keyof I_3, "params">, never>>(object: I_3): _180.QueryParamsResponse;
             };
             QueryClaimRecordRequest: {
-                encode(message: _750.QueryClaimRecordRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryClaimRecordRequest;
-                fromJSON(object: any): _750.QueryClaimRecordRequest;
-                toJSON(message: _750.QueryClaimRecordRequest): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _750.QueryClaimRecordRequest;
+                encode(message: _180.QueryClaimRecordRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryClaimRecordRequest;
+                fromJSON(object: any): _180.QueryClaimRecordRequest;
+                toJSON(message: _180.QueryClaimRecordRequest): unknown;
+                fromPartial<I_4 extends {
+                    address?: string;
+                } & {
+                    address?: string;
+                } & Record<Exclude<keyof I_4, "address">, never>>(object: I_4): _180.QueryClaimRecordRequest;
             };
             QueryClaimRecordResponse: {
-                encode(message: _750.QueryClaimRecordResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryClaimRecordResponse;
-                fromJSON(object: any): _750.QueryClaimRecordResponse;
-                toJSON(message: _750.QueryClaimRecordResponse): unknown;
-                fromPartial<I_5 extends unknown>(object: I_5): _750.QueryClaimRecordResponse;
+                encode(message: _180.QueryClaimRecordResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryClaimRecordResponse;
+                fromJSON(object: any): _180.QueryClaimRecordResponse;
+                toJSON(message: _180.QueryClaimRecordResponse): unknown;
+                fromPartial<I_5 extends {
+                    claimRecord?: {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        actionCompleted?: boolean[];
+                    };
+                } & {
+                    claimRecord?: {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        actionCompleted?: boolean[];
+                    } & {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[] & ({
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_5["claimRecord"]["initialClaimableAmount"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_5["claimRecord"]["initialClaimableAmount"], keyof {
+                            denom?: string;
+                            amount?: string;
+                        }[]>, never>;
+                        actionCompleted?: boolean[] & boolean[] & Record<Exclude<keyof I_5["claimRecord"]["actionCompleted"], keyof boolean[]>, never>;
+                    } & Record<Exclude<keyof I_5["claimRecord"], keyof _177.ClaimRecord>, never>;
+                } & Record<Exclude<keyof I_5, "claimRecord">, never>>(object: I_5): _180.QueryClaimRecordResponse;
             };
             QueryClaimableForActionRequest: {
-                encode(message: _750.QueryClaimableForActionRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryClaimableForActionRequest;
-                fromJSON(object: any): _750.QueryClaimableForActionRequest;
-                toJSON(message: _750.QueryClaimableForActionRequest): unknown;
-                fromPartial<I_6 extends unknown>(object: I_6): _750.QueryClaimableForActionRequest;
+                encode(message: _180.QueryClaimableForActionRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryClaimableForActionRequest;
+                fromJSON(object: any): _180.QueryClaimableForActionRequest;
+                toJSON(message: _180.QueryClaimableForActionRequest): unknown;
+                fromPartial<I_6 extends {
+                    address?: string;
+                    action?: _177.Action;
+                } & {
+                    address?: string;
+                    action?: _177.Action;
+                } & Record<Exclude<keyof I_6, keyof _180.QueryClaimableForActionRequest>, never>>(object: I_6): _180.QueryClaimableForActionRequest;
             };
             QueryClaimableForActionResponse: {
-                encode(message: _750.QueryClaimableForActionResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryClaimableForActionResponse;
-                fromJSON(object: any): _750.QueryClaimableForActionResponse;
-                toJSON(message: _750.QueryClaimableForActionResponse): unknown;
-                fromPartial<I_7 extends unknown>(object: I_7): _750.QueryClaimableForActionResponse;
+                encode(message: _180.QueryClaimableForActionResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryClaimableForActionResponse;
+                fromJSON(object: any): _180.QueryClaimableForActionResponse;
+                toJSON(message: _180.QueryClaimableForActionResponse): unknown;
+                fromPartial<I_7 extends {
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_7["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_7["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_7, "coins">, never>>(object: I_7): _180.QueryClaimableForActionResponse;
             };
             QueryTotalClaimableRequest: {
-                encode(message: _750.QueryTotalClaimableRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryTotalClaimableRequest;
-                fromJSON(object: any): _750.QueryTotalClaimableRequest;
-                toJSON(message: _750.QueryTotalClaimableRequest): unknown;
-                fromPartial<I_8 extends unknown>(object: I_8): _750.QueryTotalClaimableRequest;
+                encode(message: _180.QueryTotalClaimableRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryTotalClaimableRequest;
+                fromJSON(object: any): _180.QueryTotalClaimableRequest;
+                toJSON(message: _180.QueryTotalClaimableRequest): unknown;
+                fromPartial<I_8 extends {
+                    address?: string;
+                } & {
+                    address?: string;
+                } & Record<Exclude<keyof I_8, "address">, never>>(object: I_8): _180.QueryTotalClaimableRequest;
             };
             QueryTotalClaimableResponse: {
-                encode(message: _750.QueryTotalClaimableResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _750.QueryTotalClaimableResponse;
-                fromJSON(object: any): _750.QueryTotalClaimableResponse;
-                toJSON(message: _750.QueryTotalClaimableResponse): unknown;
-                fromPartial<I_9 extends unknown>(object: I_9): _750.QueryTotalClaimableResponse;
+                encode(message: _180.QueryTotalClaimableResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _180.QueryTotalClaimableResponse;
+                fromJSON(object: any): _180.QueryTotalClaimableResponse;
+                toJSON(message: _180.QueryTotalClaimableResponse): unknown;
+                fromPartial<I_9 extends {
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_9["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_9["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_9, "coins">, never>>(object: I_9): _180.QueryTotalClaimableResponse;
             };
             Params: {
-                encode(message: _749.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _749.Params;
-                fromJSON(object: any): _749.Params;
-                toJSON(message: _749.Params): unknown;
-                fromPartial<I_10 extends unknown>(object: I_10): _749.Params;
+                encode(message: _179.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _179.Params;
+                fromJSON(object: any): _179.Params;
+                toJSON(message: _179.Params): unknown;
+                fromPartial<I_10 extends {
+                    airdropStartTime?: Date;
+                    durationUntilDecay?: string;
+                    durationOfDecay?: string;
+                    claimDenom?: string;
+                } & {
+                    airdropStartTime?: Date;
+                    durationUntilDecay?: string;
+                    durationOfDecay?: string;
+                    claimDenom?: string;
+                } & Record<Exclude<keyof I_10, keyof _179.Params>, never>>(object: I_10): _179.Params;
             };
             GenesisState: {
-                encode(message: _748.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _748.GenesisState;
-                fromJSON(object: any): _748.GenesisState;
-                toJSON(message: _748.GenesisState): unknown;
-                fromPartial<I_11 extends unknown>(object: I_11): _748.GenesisState;
+                encode(message: _178.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _178.GenesisState;
+                fromJSON(object: any): _178.GenesisState;
+                toJSON(message: _178.GenesisState): unknown;
+                fromPartial<I_11 extends {
+                    moduleAccountBalance?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    params?: {
+                        airdropStartTime?: Date;
+                        durationUntilDecay?: string;
+                        durationOfDecay?: string;
+                        claimDenom?: string;
+                    };
+                    claimRecords?: {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        actionCompleted?: boolean[];
+                    }[];
+                } & {
+                    moduleAccountBalance?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_11["moduleAccountBalance"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                    params?: {
+                        airdropStartTime?: Date;
+                        durationUntilDecay?: string;
+                        durationOfDecay?: string;
+                        claimDenom?: string;
+                    } & {
+                        airdropStartTime?: Date;
+                        durationUntilDecay?: string;
+                        durationOfDecay?: string;
+                        claimDenom?: string;
+                    } & Record<Exclude<keyof I_11["params"], keyof _179.Params>, never>;
+                    claimRecords?: {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        actionCompleted?: boolean[];
+                    }[] & ({
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        actionCompleted?: boolean[];
+                    } & {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[] & ({
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_11["claimRecords"][number]["initialClaimableAmount"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_11["claimRecords"][number]["initialClaimableAmount"], keyof {
+                            denom?: string;
+                            amount?: string;
+                        }[]>, never>;
+                        actionCompleted?: boolean[] & boolean[] & Record<Exclude<keyof I_11["claimRecords"][number]["actionCompleted"], keyof boolean[]>, never>;
+                    } & Record<Exclude<keyof I_11["claimRecords"][number], keyof _177.ClaimRecord>, never>)[] & Record<Exclude<keyof I_11["claimRecords"], keyof {
+                        address?: string;
+                        initialClaimableAmount?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        actionCompleted?: boolean[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_11, keyof _178.GenesisState>, never>>(object: I_11): _178.GenesisState;
             };
-            actionFromJSON(object: any): _747.Action;
-            actionToJSON(object: _747.Action): string;
-            Action: typeof _747.Action;
+            actionFromJSON(object: any): _177.Action;
+            actionToJSON(object: _177.Action): string;
+            Action: typeof _177.Action;
             ClaimRecord: {
-                encode(message: _747.ClaimRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _747.ClaimRecord;
-                fromJSON(object: any): _747.ClaimRecord;
-                toJSON(message: _747.ClaimRecord): unknown;
-                fromPartial<I_12 extends unknown>(object: I_12): _747.ClaimRecord;
+                encode(message: _177.ClaimRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _177.ClaimRecord;
+                fromJSON(object: any): _177.ClaimRecord;
+                toJSON(message: _177.ClaimRecord): unknown;
+                fromPartial<I_12 extends {
+                    address?: string;
+                    initialClaimableAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    actionCompleted?: boolean[];
+                } & {
+                    address?: string;
+                    initialClaimableAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_12["initialClaimableAmount"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_12["initialClaimableAmount"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    actionCompleted?: boolean[] & boolean[] & Record<Exclude<keyof I_12["actionCompleted"], keyof boolean[]>, never>;
+                } & Record<Exclude<keyof I_12, keyof _177.ClaimRecord>, never>>(object: I_12): _177.ClaimRecord;
             };
         };
     }
     namespace epochs {
         const v1beta1: {
             QueryEpochsInfoRequest: {
-                encode(_: _752.QueryEpochsInfoRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _752.QueryEpochsInfoRequest;
-                fromJSON(_: any): _752.QueryEpochsInfoRequest;
-                toJSON(_: _752.QueryEpochsInfoRequest): unknown;
-                fromPartial<I extends unknown>(_: I): _752.QueryEpochsInfoRequest;
+                encode(_: _182.QueryEpochsInfoRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _182.QueryEpochsInfoRequest;
+                fromJSON(_: any): _182.QueryEpochsInfoRequest;
+                toJSON(_: _182.QueryEpochsInfoRequest): unknown;
+                fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): _182.QueryEpochsInfoRequest;
             };
             QueryEpochsInfoResponse: {
-                encode(message: _752.QueryEpochsInfoResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _752.QueryEpochsInfoResponse;
-                fromJSON(object: any): _752.QueryEpochsInfoResponse;
-                toJSON(message: _752.QueryEpochsInfoResponse): unknown;
-                fromPartial<I_1 extends unknown>(object: I_1): _752.QueryEpochsInfoResponse;
+                encode(message: _182.QueryEpochsInfoResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _182.QueryEpochsInfoResponse;
+                fromJSON(object: any): _182.QueryEpochsInfoResponse;
+                toJSON(message: _182.QueryEpochsInfoResponse): unknown;
+                fromPartial<I_1 extends {
+                    epochs?: {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    }[];
+                } & {
+                    epochs?: {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    }[] & ({
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    } & {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    } & Record<Exclude<keyof I_1["epochs"][number], keyof _181.EpochInfo>, never>)[] & Record<Exclude<keyof I_1["epochs"], keyof {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_1, "epochs">, never>>(object: I_1): _182.QueryEpochsInfoResponse;
             };
             QueryCurrentEpochRequest: {
-                encode(message: _752.QueryCurrentEpochRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _752.QueryCurrentEpochRequest;
-                fromJSON(object: any): _752.QueryCurrentEpochRequest;
-                toJSON(message: _752.QueryCurrentEpochRequest): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _752.QueryCurrentEpochRequest;
+                encode(message: _182.QueryCurrentEpochRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _182.QueryCurrentEpochRequest;
+                fromJSON(object: any): _182.QueryCurrentEpochRequest;
+                toJSON(message: _182.QueryCurrentEpochRequest): unknown;
+                fromPartial<I_2 extends {
+                    identifier?: string;
+                } & {
+                    identifier?: string;
+                } & Record<Exclude<keyof I_2, "identifier">, never>>(object: I_2): _182.QueryCurrentEpochRequest;
             };
             QueryCurrentEpochResponse: {
-                encode(message: _752.QueryCurrentEpochResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _752.QueryCurrentEpochResponse;
-                fromJSON(object: any): _752.QueryCurrentEpochResponse;
-                toJSON(message: _752.QueryCurrentEpochResponse): unknown;
-                fromPartial<I_3 extends unknown>(object: I_3): _752.QueryCurrentEpochResponse;
+                encode(message: _182.QueryCurrentEpochResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _182.QueryCurrentEpochResponse;
+                fromJSON(object: any): _182.QueryCurrentEpochResponse;
+                toJSON(message: _182.QueryCurrentEpochResponse): unknown;
+                fromPartial<I_3 extends {
+                    currentEpoch?: any;
+                } & {
+                    currentEpoch?: any;
+                } & Record<Exclude<keyof I_3, "currentEpoch">, never>>(object: I_3): _182.QueryCurrentEpochResponse;
             };
             EpochInfo: {
-                encode(message: _751.EpochInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _751.EpochInfo;
-                fromJSON(object: any): _751.EpochInfo;
-                toJSON(message: _751.EpochInfo): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _751.EpochInfo;
+                encode(message: _181.EpochInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _181.EpochInfo;
+                fromJSON(object: any): _181.EpochInfo;
+                toJSON(message: _181.EpochInfo): unknown;
+                fromPartial<I_4 extends {
+                    identifier?: string;
+                    startTime?: Date;
+                    duration?: string;
+                    currentEpoch?: any;
+                    currentEpochStartTime?: Date;
+                    epochCountingStarted?: boolean;
+                    currentEpochStartHeight?: any;
+                } & {
+                    identifier?: string;
+                    startTime?: Date;
+                    duration?: string;
+                    currentEpoch?: any;
+                    currentEpochStartTime?: Date;
+                    epochCountingStarted?: boolean;
+                    currentEpochStartHeight?: any;
+                } & Record<Exclude<keyof I_4, keyof _181.EpochInfo>, never>>(object: I_4): _181.EpochInfo;
             };
             GenesisState: {
-                encode(message: _751.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _751.GenesisState;
-                fromJSON(object: any): _751.GenesisState;
-                toJSON(message: _751.GenesisState): unknown;
-                fromPartial<I_5 extends unknown>(object: I_5): _751.GenesisState;
+                encode(message: _181.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _181.GenesisState;
+                fromJSON(object: any): _181.GenesisState;
+                toJSON(message: _181.GenesisState): unknown;
+                fromPartial<I_5 extends {
+                    epochs?: {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    }[];
+                } & {
+                    epochs?: {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    }[] & ({
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    } & {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    } & Record<Exclude<keyof I_5["epochs"][number], keyof _181.EpochInfo>, never>)[] & Record<Exclude<keyof I_5["epochs"], keyof {
+                        identifier?: string;
+                        startTime?: Date;
+                        duration?: string;
+                        currentEpoch?: any;
+                        currentEpochStartTime?: Date;
+                        epochCountingStarted?: boolean;
+                        currentEpochStartHeight?: any;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_5, "epochs">, never>>(object: I_5): _181.GenesisState;
             };
         };
     }
     namespace gamm {
         const v1beta1: {
             MsgJoinPool: {
-                encode(message: _757.MsgJoinPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinPool;
-                fromJSON(object: any): _757.MsgJoinPool;
-                toJSON(message: _757.MsgJoinPool): unknown;
-                fromPartial<I extends unknown>(object: I): _757.MsgJoinPool;
+                encode(message: _187.MsgJoinPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinPool;
+                fromJSON(object: any): _187.MsgJoinPool;
+                toJSON(message: _187.MsgJoinPool): unknown;
+                fromPartial<I extends {
+                    sender?: string;
+                    poolId?: any;
+                    shareOutAmount?: string;
+                    tokenInMaxs?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    shareOutAmount?: string;
+                    tokenInMaxs?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I["tokenInMaxs"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I["tokenInMaxs"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I, keyof _187.MsgJoinPool>, never>>(object: I): _187.MsgJoinPool;
             };
             MsgJoinPoolResponse: {
-                encode(_: _757.MsgJoinPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinPoolResponse;
-                fromJSON(_: any): _757.MsgJoinPoolResponse;
-                toJSON(_: _757.MsgJoinPoolResponse): unknown;
-                fromPartial<I_1 extends unknown>(_: I_1): _757.MsgJoinPoolResponse;
+                encode(_: _187.MsgJoinPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinPoolResponse;
+                fromJSON(_: any): _187.MsgJoinPoolResponse;
+                toJSON(_: _187.MsgJoinPoolResponse): unknown;
+                fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _187.MsgJoinPoolResponse;
             };
             MsgExitPool: {
-                encode(message: _757.MsgExitPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitPool;
-                fromJSON(object: any): _757.MsgExitPool;
-                toJSON(message: _757.MsgExitPool): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _757.MsgExitPool;
+                encode(message: _187.MsgExitPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgExitPool;
+                fromJSON(object: any): _187.MsgExitPool;
+                toJSON(message: _187.MsgExitPool): unknown;
+                fromPartial<I_2 extends {
+                    sender?: string;
+                    poolId?: any;
+                    shareInAmount?: string;
+                    tokenOutMins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    shareInAmount?: string;
+                    tokenOutMins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_2["tokenOutMins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_2["tokenOutMins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_2, keyof _187.MsgExitPool>, never>>(object: I_2): _187.MsgExitPool;
             };
             MsgExitPoolResponse: {
-                encode(_: _757.MsgExitPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitPoolResponse;
-                fromJSON(_: any): _757.MsgExitPoolResponse;
-                toJSON(_: _757.MsgExitPoolResponse): unknown;
-                fromPartial<I_3 extends unknown>(_: I_3): _757.MsgExitPoolResponse;
+                encode(_: _187.MsgExitPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgExitPoolResponse;
+                fromJSON(_: any): _187.MsgExitPoolResponse;
+                toJSON(_: _187.MsgExitPoolResponse): unknown;
+                fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _187.MsgExitPoolResponse;
             };
             SwapAmountInRoute: {
-                encode(message: _757.SwapAmountInRoute, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.SwapAmountInRoute;
-                fromJSON(object: any): _757.SwapAmountInRoute;
-                toJSON(message: _757.SwapAmountInRoute): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _757.SwapAmountInRoute;
+                encode(message: _187.SwapAmountInRoute, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.SwapAmountInRoute;
+                fromJSON(object: any): _187.SwapAmountInRoute;
+                toJSON(message: _187.SwapAmountInRoute): unknown;
+                fromPartial<I_4 extends {
+                    poolId?: any;
+                    tokenOutDenom?: string;
+                } & {
+                    poolId?: any;
+                    tokenOutDenom?: string;
+                } & Record<Exclude<keyof I_4, keyof _187.SwapAmountInRoute>, never>>(object: I_4): _187.SwapAmountInRoute;
             };
             MsgSwapExactAmountIn: {
-                encode(message: _757.MsgSwapExactAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgSwapExactAmountIn;
-                fromJSON(object: any): _757.MsgSwapExactAmountIn;
-                toJSON(message: _757.MsgSwapExactAmountIn): unknown;
-                fromPartial<I_5 extends unknown>(object: I_5): _757.MsgSwapExactAmountIn;
+                encode(message: _187.MsgSwapExactAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgSwapExactAmountIn;
+                fromJSON(object: any): _187.MsgSwapExactAmountIn;
+                toJSON(message: _187.MsgSwapExactAmountIn): unknown;
+                fromPartial<I_5 extends {
+                    sender?: string;
+                    routes?: {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    }[];
+                    tokenIn?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    tokenOutMinAmount?: string;
+                } & {
+                    sender?: string;
+                    routes?: {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    }[] & ({
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    } & {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    } & Record<Exclude<keyof I_5["routes"][number], keyof _187.SwapAmountInRoute>, never>)[] & Record<Exclude<keyof I_5["routes"], keyof {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    }[]>, never>;
+                    tokenIn?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_5["tokenIn"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                    tokenOutMinAmount?: string;
+                } & Record<Exclude<keyof I_5, keyof _187.MsgSwapExactAmountIn>, never>>(object: I_5): _187.MsgSwapExactAmountIn;
             };
             MsgSwapExactAmountInResponse: {
-                encode(message: _757.MsgSwapExactAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgSwapExactAmountInResponse;
-                fromJSON(object: any): _757.MsgSwapExactAmountInResponse;
-                toJSON(message: _757.MsgSwapExactAmountInResponse): unknown;
-                fromPartial<I_6 extends unknown>(object: I_6): _757.MsgSwapExactAmountInResponse;
+                encode(message: _187.MsgSwapExactAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgSwapExactAmountInResponse;
+                fromJSON(object: any): _187.MsgSwapExactAmountInResponse;
+                toJSON(message: _187.MsgSwapExactAmountInResponse): unknown;
+                fromPartial<I_6 extends {
+                    tokenOutAmount?: string;
+                } & {
+                    tokenOutAmount?: string;
+                } & Record<Exclude<keyof I_6, "tokenOutAmount">, never>>(object: I_6): _187.MsgSwapExactAmountInResponse;
             };
             SwapAmountOutRoute: {
-                encode(message: _757.SwapAmountOutRoute, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.SwapAmountOutRoute;
-                fromJSON(object: any): _757.SwapAmountOutRoute;
-                toJSON(message: _757.SwapAmountOutRoute): unknown;
-                fromPartial<I_7 extends unknown>(object: I_7): _757.SwapAmountOutRoute;
+                encode(message: _187.SwapAmountOutRoute, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.SwapAmountOutRoute;
+                fromJSON(object: any): _187.SwapAmountOutRoute;
+                toJSON(message: _187.SwapAmountOutRoute): unknown;
+                fromPartial<I_7 extends {
+                    poolId?: any;
+                    tokenInDenom?: string;
+                } & {
+                    poolId?: any;
+                    tokenInDenom?: string;
+                } & Record<Exclude<keyof I_7, keyof _187.SwapAmountOutRoute>, never>>(object: I_7): _187.SwapAmountOutRoute;
             };
             MsgSwapExactAmountOut: {
-                encode(message: _757.MsgSwapExactAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgSwapExactAmountOut;
-                fromJSON(object: any): _757.MsgSwapExactAmountOut;
-                toJSON(message: _757.MsgSwapExactAmountOut): unknown;
-                fromPartial<I_8 extends unknown>(object: I_8): _757.MsgSwapExactAmountOut;
+                encode(message: _187.MsgSwapExactAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgSwapExactAmountOut;
+                fromJSON(object: any): _187.MsgSwapExactAmountOut;
+                toJSON(message: _187.MsgSwapExactAmountOut): unknown;
+                fromPartial<I_8 extends {
+                    sender?: string;
+                    routes?: {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    }[];
+                    tokenInMaxAmount?: string;
+                    tokenOut?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                } & {
+                    sender?: string;
+                    routes?: {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    }[] & ({
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    } & {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    } & Record<Exclude<keyof I_8["routes"][number], keyof _187.SwapAmountOutRoute>, never>)[] & Record<Exclude<keyof I_8["routes"], keyof {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    }[]>, never>;
+                    tokenInMaxAmount?: string;
+                    tokenOut?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_8["tokenOut"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                } & Record<Exclude<keyof I_8, keyof _187.MsgSwapExactAmountOut>, never>>(object: I_8): _187.MsgSwapExactAmountOut;
             };
             MsgSwapExactAmountOutResponse: {
-                encode(message: _757.MsgSwapExactAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgSwapExactAmountOutResponse;
-                fromJSON(object: any): _757.MsgSwapExactAmountOutResponse;
-                toJSON(message: _757.MsgSwapExactAmountOutResponse): unknown;
-                fromPartial<I_9 extends unknown>(object: I_9): _757.MsgSwapExactAmountOutResponse;
+                encode(message: _187.MsgSwapExactAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgSwapExactAmountOutResponse;
+                fromJSON(object: any): _187.MsgSwapExactAmountOutResponse;
+                toJSON(message: _187.MsgSwapExactAmountOutResponse): unknown;
+                fromPartial<I_9 extends {
+                    tokenInAmount?: string;
+                } & {
+                    tokenInAmount?: string;
+                } & Record<Exclude<keyof I_9, "tokenInAmount">, never>>(object: I_9): _187.MsgSwapExactAmountOutResponse;
             };
             MsgJoinSwapExternAmountIn: {
-                encode(message: _757.MsgJoinSwapExternAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinSwapExternAmountIn;
-                fromJSON(object: any): _757.MsgJoinSwapExternAmountIn;
-                toJSON(message: _757.MsgJoinSwapExternAmountIn): unknown;
-                fromPartial<I_10 extends unknown>(object: I_10): _757.MsgJoinSwapExternAmountIn;
+                encode(message: _187.MsgJoinSwapExternAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinSwapExternAmountIn;
+                fromJSON(object: any): _187.MsgJoinSwapExternAmountIn;
+                toJSON(message: _187.MsgJoinSwapExternAmountIn): unknown;
+                fromPartial<I_10 extends {
+                    sender?: string;
+                    poolId?: any;
+                    tokenIn?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    shareOutMinAmount?: string;
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    tokenIn?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_10["tokenIn"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                    shareOutMinAmount?: string;
+                } & Record<Exclude<keyof I_10, keyof _187.MsgJoinSwapExternAmountIn>, never>>(object: I_10): _187.MsgJoinSwapExternAmountIn;
             };
             MsgJoinSwapExternAmountInResponse: {
-                encode(message: _757.MsgJoinSwapExternAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinSwapExternAmountInResponse;
-                fromJSON(object: any): _757.MsgJoinSwapExternAmountInResponse;
-                toJSON(message: _757.MsgJoinSwapExternAmountInResponse): unknown;
-                fromPartial<I_11 extends unknown>(object: I_11): _757.MsgJoinSwapExternAmountInResponse;
+                encode(message: _187.MsgJoinSwapExternAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinSwapExternAmountInResponse;
+                fromJSON(object: any): _187.MsgJoinSwapExternAmountInResponse;
+                toJSON(message: _187.MsgJoinSwapExternAmountInResponse): unknown;
+                fromPartial<I_11 extends {
+                    shareOutAmount?: string;
+                } & {
+                    shareOutAmount?: string;
+                } & Record<Exclude<keyof I_11, "shareOutAmount">, never>>(object: I_11): _187.MsgJoinSwapExternAmountInResponse;
             };
             MsgJoinSwapShareAmountOut: {
-                encode(message: _757.MsgJoinSwapShareAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinSwapShareAmountOut;
-                fromJSON(object: any): _757.MsgJoinSwapShareAmountOut;
-                toJSON(message: _757.MsgJoinSwapShareAmountOut): unknown;
-                fromPartial<I_12 extends unknown>(object: I_12): _757.MsgJoinSwapShareAmountOut;
+                encode(message: _187.MsgJoinSwapShareAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinSwapShareAmountOut;
+                fromJSON(object: any): _187.MsgJoinSwapShareAmountOut;
+                toJSON(message: _187.MsgJoinSwapShareAmountOut): unknown;
+                fromPartial<I_12 extends {
+                    sender?: string;
+                    poolId?: any;
+                    tokenInDenom?: string;
+                    shareOutAmount?: string;
+                    tokenInMaxAmount?: string;
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    tokenInDenom?: string;
+                    shareOutAmount?: string;
+                    tokenInMaxAmount?: string;
+                } & Record<Exclude<keyof I_12, keyof _187.MsgJoinSwapShareAmountOut>, never>>(object: I_12): _187.MsgJoinSwapShareAmountOut;
             };
             MsgJoinSwapShareAmountOutResponse: {
-                encode(message: _757.MsgJoinSwapShareAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgJoinSwapShareAmountOutResponse;
-                fromJSON(object: any): _757.MsgJoinSwapShareAmountOutResponse;
-                toJSON(message: _757.MsgJoinSwapShareAmountOutResponse): unknown;
-                fromPartial<I_13 extends unknown>(object: I_13): _757.MsgJoinSwapShareAmountOutResponse;
+                encode(message: _187.MsgJoinSwapShareAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinSwapShareAmountOutResponse;
+                fromJSON(object: any): _187.MsgJoinSwapShareAmountOutResponse;
+                toJSON(message: _187.MsgJoinSwapShareAmountOutResponse): unknown;
+                fromPartial<I_13 extends {
+                    tokenInAmount?: string;
+                } & {
+                    tokenInAmount?: string;
+                } & Record<Exclude<keyof I_13, "tokenInAmount">, never>>(object: I_13): _187.MsgJoinSwapShareAmountOutResponse;
             };
             MsgExitSwapShareAmountIn: {
-                encode(message: _757.MsgExitSwapShareAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitSwapShareAmountIn;
-                fromJSON(object: any): _757.MsgExitSwapShareAmountIn;
-                toJSON(message: _757.MsgExitSwapShareAmountIn): unknown;
-                fromPartial<I_14 extends unknown>(object: I_14): _757.MsgExitSwapShareAmountIn;
+                encode(message: _187.MsgExitSwapShareAmountIn, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgExitSwapShareAmountIn;
+                fromJSON(object: any): _187.MsgExitSwapShareAmountIn;
+                toJSON(message: _187.MsgExitSwapShareAmountIn): unknown;
+                fromPartial<I_14 extends {
+                    sender?: string;
+                    poolId?: any;
+                    tokenOutDenom?: string;
+                    shareInAmount?: string;
+                    tokenOutMinAmount?: string;
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    tokenOutDenom?: string;
+                    shareInAmount?: string;
+                    tokenOutMinAmount?: string;
+                } & Record<Exclude<keyof I_14, keyof _187.MsgExitSwapShareAmountIn>, never>>(object: I_14): _187.MsgExitSwapShareAmountIn;
             };
             MsgExitSwapShareAmountInResponse: {
-                encode(message: _757.MsgExitSwapShareAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitSwapShareAmountInResponse;
-                fromJSON(object: any): _757.MsgExitSwapShareAmountInResponse;
-                toJSON(message: _757.MsgExitSwapShareAmountInResponse): unknown;
-                fromPartial<I_15 extends unknown>(object: I_15): _757.MsgExitSwapShareAmountInResponse;
+                encode(message: _187.MsgExitSwapShareAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgExitSwapShareAmountInResponse;
+                fromJSON(object: any): _187.MsgExitSwapShareAmountInResponse;
+                toJSON(message: _187.MsgExitSwapShareAmountInResponse): unknown;
+                fromPartial<I_15 extends {
+                    tokenOutAmount?: string;
+                } & {
+                    tokenOutAmount?: string;
+                } & Record<Exclude<keyof I_15, "tokenOutAmount">, never>>(object: I_15): _187.MsgExitSwapShareAmountInResponse;
             };
             MsgExitSwapExternAmountOut: {
-                encode(message: _757.MsgExitSwapExternAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitSwapExternAmountOut;
-                fromJSON(object: any): _757.MsgExitSwapExternAmountOut;
-                toJSON(message: _757.MsgExitSwapExternAmountOut): unknown;
-                fromPartial<I_16 extends unknown>(object: I_16): _757.MsgExitSwapExternAmountOut;
+                encode(message: _187.MsgExitSwapExternAmountOut, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgExitSwapExternAmountOut;
+                fromJSON(object: any): _187.MsgExitSwapExternAmountOut;
+                toJSON(message: _187.MsgExitSwapExternAmountOut): unknown;
+                fromPartial<I_16 extends {
+                    sender?: string;
+                    poolId?: any;
+                    tokenOut?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    shareInMaxAmount?: string;
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    tokenOut?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_16["tokenOut"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                    shareInMaxAmount?: string;
+                } & Record<Exclude<keyof I_16, keyof _187.MsgExitSwapExternAmountOut>, never>>(object: I_16): _187.MsgExitSwapExternAmountOut;
             };
             MsgExitSwapExternAmountOutResponse: {
-                encode(message: _757.MsgExitSwapExternAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _757.MsgExitSwapExternAmountOutResponse;
-                fromJSON(object: any): _757.MsgExitSwapExternAmountOutResponse;
-                toJSON(message: _757.MsgExitSwapExternAmountOutResponse): unknown;
-                fromPartial<I_17 extends unknown>(object: I_17): _757.MsgExitSwapExternAmountOutResponse;
-            };
-            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
-            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
-            AminoConverter: {
-                "/osmosis.gamm.v1beta1.MsgJoinPool": {
-                    aminoType: string;
-                    toAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: _757.MsgJoinPool) => {
-                        sender: string;
-                        poolId: string;
-                        shareOutAmount: string;
-                        tokenInMaxs: {
-                            denom: string;
-                            amount: string;
-                        }[];
-                    };
-                    fromAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: {
-                        sender: string;
-                        poolId: string;
-                        shareOutAmount: string;
-                        tokenInMaxs: {
-                            denom: string;
-                            amount: string;
-                        }[];
-                    }) => _757.MsgJoinPool;
-                };
-                "/osmosis.gamm.v1beta1.MsgExitPool": {
-                    aminoType: string;
-                    toAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: _757.MsgExitPool) => {
-                        sender: string;
-                        poolId: string;
-                        shareInAmount: string;
-                        tokenOutMins: {
-                            denom: string;
-                            amount: string;
-                        }[];
-                    };
-                    fromAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: {
-                        sender: string;
-                        poolId: string;
-                        shareInAmount: string;
-                        tokenOutMins: {
-                            denom: string;
-                            amount: string;
-                        }[];
-                    }) => _757.MsgExitPool;
-                };
-                "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn": {
-                    aminoType: string;
-                    toAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: _757.MsgSwapExactAmountIn) => {
-                        sender: string;
-                        routes: {
-                            poolId: string;
-                            tokenOutDenom: string;
-                        }[];
-                        tokenIn: {
-                            denom: string;
-                            amount: string;
-                        };
-                        tokenOutMinAmount: string;
-                    };
-                    fromAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: {
-                        sender: string;
-                        routes: {
-                            poolId: string;
-                            tokenOutDenom: string;
-                        }[];
-                        tokenIn: {
-                            denom: string;
-                            amount: string;
-                        };
-                        tokenOutMinAmount: string;
-                    }) => _757.MsgSwapExactAmountIn;
-                };
-                "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut": {
-                    aminoType: string;
-                    toAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: _757.MsgSwapExactAmountOut) => {
-                        sender: string;
-                        routes: {
-                            poolId: string;
-                            tokenInDenom: string;
-                        }[];
-                        tokenInMaxAmount: string;
-                        tokenOut: {
-                            denom: string;
-                            amount: string;
-                        };
-                    };
-                    fromAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: {
-                        sender: string;
-                        routes: {
-                            poolId: string;
-                            tokenInDenom: string;
-                        }[];
-                        tokenInMaxAmount: string;
-                        tokenOut: {
-                            denom: string;
-                            amount: string;
-                        };
-                    }) => _757.MsgSwapExactAmountOut;
-                };
-                "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn": {
-                    aminoType: string;
-                    toAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: _757.MsgJoinSwapExternAmountIn) => {
-                        sender: string;
-                        poolId: string;
-                        tokenIn: {
-                            denom: string;
-                            amount: string;
-                        };
-                        shareOutMinAmount: string;
-                    };
-                    fromAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: {
-                        sender: string;
-                        poolId: string;
-                        tokenIn: {
-                            denom: string;
-                            amount: string;
-                        };
-                        shareOutMinAmount: string;
-                    }) => _757.MsgJoinSwapExternAmountIn;
-                };
-                "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut": {
-                    aminoType: string;
-                    toAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: _757.MsgJoinSwapShareAmountOut) => {
-                        sender: string;
-                        poolId: string;
-                        tokenInDenom: string;
-                        shareOutAmount: string;
-                        tokenInMaxAmount: string;
-                    };
-                    fromAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: {
-                        sender: string;
-                        poolId: string;
-                        tokenInDenom: string;
-                        shareOutAmount: string;
-                        tokenInMaxAmount: string;
-                    }) => _757.MsgJoinSwapShareAmountOut;
-                };
-                "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut": {
-                    aminoType: string;
-                    toAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: _757.MsgExitSwapExternAmountOut) => {
-                        sender: string;
-                        poolId: string;
-                        tokenOut: {
-                            denom: string;
-                            amount: string;
-                        };
-                        shareInMaxAmount: string;
-                    };
-                    fromAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: {
-                        sender: string;
-                        poolId: string;
-                        tokenOut: {
-                            denom: string;
-                            amount: string;
-                        };
-                        shareInMaxAmount: string;
-                    }) => _757.MsgExitSwapExternAmountOut;
-                };
-                "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn": {
-                    aminoType: string;
-                    toAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: _757.MsgExitSwapShareAmountIn) => {
-                        sender: string;
-                        poolId: string;
-                        tokenOutDenom: string;
-                        shareInAmount: string;
-                        tokenOutMinAmount: string;
-                    };
-                    fromAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: {
-                        sender: string;
-                        poolId: string;
-                        tokenOutDenom: string;
-                        shareInAmount: string;
-                        tokenOutMinAmount: string;
-                    }) => _757.MsgExitSwapShareAmountIn;
-                };
-            };
-            encoded: {
-                joinPool(value: _757.MsgJoinPool): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                exitPool(value: _757.MsgExitPool): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                swapExactAmountIn(value: _757.MsgSwapExactAmountIn): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                swapExactAmountOut(value: _757.MsgSwapExactAmountOut): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                joinSwapExternAmountIn(value: _757.MsgJoinSwapExternAmountIn): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                joinSwapShareAmountOut(value: _757.MsgJoinSwapShareAmountOut): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                exitSwapExternAmountOut(value: _757.MsgExitSwapExternAmountOut): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-                exitSwapShareAmountIn(value: _757.MsgExitSwapShareAmountIn): {
-                    type_url: string;
-                    value: Uint8Array;
-                };
-            };
-            fromJSON: {
-                joinPool(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgJoinPool;
-                };
-                exitPool(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgExitPool;
-                };
-                swapExactAmountIn(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgSwapExactAmountIn;
-                };
-                swapExactAmountOut(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgSwapExactAmountOut;
-                };
-                joinSwapExternAmountIn(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgJoinSwapExternAmountIn;
-                };
-                joinSwapShareAmountOut(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgJoinSwapShareAmountOut;
-                };
-                exitSwapExternAmountOut(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgExitSwapExternAmountOut;
-                };
-                exitSwapShareAmountIn(value: any): {
-                    typeUrl: string;
-                    value: _757.MsgExitSwapShareAmountIn;
-                };
-            };
-            toJSON: {
-                joinPool(value: _757.MsgJoinPool): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                exitPool(value: _757.MsgExitPool): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                swapExactAmountIn(value: _757.MsgSwapExactAmountIn): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                swapExactAmountOut(value: _757.MsgSwapExactAmountOut): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                joinSwapExternAmountIn(value: _757.MsgJoinSwapExternAmountIn): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                joinSwapShareAmountOut(value: _757.MsgJoinSwapShareAmountOut): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                exitSwapExternAmountOut(value: _757.MsgExitSwapExternAmountOut): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-                exitSwapShareAmountIn(value: _757.MsgExitSwapShareAmountIn): {
-                    typeUrl: string;
-                    value: unknown;
-                };
-            };
-            json: {
-                joinPool(value: _757.MsgJoinPool): {
-                    typeUrl: string;
-                    value: _757.MsgJoinPool;
-                };
-                exitPool(value: _757.MsgExitPool): {
-                    typeUrl: string;
-                    value: _757.MsgExitPool;
-                };
-                swapExactAmountIn(value: _757.MsgSwapExactAmountIn): {
-                    typeUrl: string;
-                    value: _757.MsgSwapExactAmountIn;
-                };
-                swapExactAmountOut(value: _757.MsgSwapExactAmountOut): {
-                    typeUrl: string;
-                    value: _757.MsgSwapExactAmountOut;
-                };
-                joinSwapExternAmountIn(value: _757.MsgJoinSwapExternAmountIn): {
-                    typeUrl: string;
-                    value: _757.MsgJoinSwapExternAmountIn;
-                };
-                joinSwapShareAmountOut(value: _757.MsgJoinSwapShareAmountOut): {
-                    typeUrl: string;
-                    value: _757.MsgJoinSwapShareAmountOut;
-                };
-                exitSwapExternAmountOut(value: _757.MsgExitSwapExternAmountOut): {
-                    typeUrl: string;
-                    value: _757.MsgExitSwapExternAmountOut;
-                };
-                exitSwapShareAmountIn(value: _757.MsgExitSwapShareAmountIn): {
-                    typeUrl: string;
-                    value: _757.MsgExitSwapShareAmountIn;
-                };
-            };
-            messages: {
-                joinPool(value: _757.MsgJoinPool): {
-                    typeUrl: string;
-                    value: _757.MsgJoinPool;
-                };
-                exitPool(value: _757.MsgExitPool): {
-                    typeUrl: string;
-                    value: _757.MsgExitPool;
-                };
-                swapExactAmountIn(value: _757.MsgSwapExactAmountIn): {
-                    typeUrl: string;
-                    value: _757.MsgSwapExactAmountIn;
-                };
-                swapExactAmountOut(value: _757.MsgSwapExactAmountOut): {
-                    typeUrl: string;
-                    value: _757.MsgSwapExactAmountOut;
-                };
-                joinSwapExternAmountIn(value: _757.MsgJoinSwapExternAmountIn): {
-                    typeUrl: string;
-                    value: _757.MsgJoinSwapExternAmountIn;
-                };
-                joinSwapShareAmountOut(value: _757.MsgJoinSwapShareAmountOut): {
-                    typeUrl: string;
-                    value: _757.MsgJoinSwapShareAmountOut;
-                };
-                exitSwapExternAmountOut(value: _757.MsgExitSwapExternAmountOut): {
-                    typeUrl: string;
-                    value: _757.MsgExitSwapExternAmountOut;
-                };
-                exitSwapShareAmountIn(value: _757.MsgExitSwapShareAmountIn): {
-                    typeUrl: string;
-                    value: _757.MsgExitSwapShareAmountIn;
-                };
+                encode(message: _187.MsgExitSwapExternAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgExitSwapExternAmountOutResponse;
+                fromJSON(object: any): _187.MsgExitSwapExternAmountOutResponse;
+                toJSON(message: _187.MsgExitSwapExternAmountOutResponse): unknown;
+                fromPartial<I_17 extends {
+                    shareInAmount?: string;
+                } & {
+                    shareInAmount?: string;
+                } & Record<Exclude<keyof I_17, "shareInAmount">, never>>(object: I_17): _187.MsgExitSwapExternAmountOutResponse;
             };
             QueryPoolRequest: {
-                encode(message: _756.QueryPoolRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryPoolRequest;
-                fromJSON(object: any): _756.QueryPoolRequest;
-                toJSON(message: _756.QueryPoolRequest): unknown;
-                fromPartial<I_18 extends unknown>(object: I_18): _756.QueryPoolRequest;
+                encode(message: _186.QueryPoolRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryPoolRequest;
+                fromJSON(object: any): _186.QueryPoolRequest;
+                toJSON(message: _186.QueryPoolRequest): unknown;
+                fromPartial<I_18 extends {
+                    poolId?: any;
+                } & {
+                    poolId?: any;
+                } & Record<Exclude<keyof I_18, "poolId">, never>>(object: I_18): _186.QueryPoolRequest;
             };
             QueryPoolResponse: {
-                encode(message: _756.QueryPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryPoolResponse;
-                fromJSON(object: any): _756.QueryPoolResponse;
-                toJSON(message: _756.QueryPoolResponse): unknown;
-                fromPartial<I_19 extends unknown>(object: I_19): _756.QueryPoolResponse;
+                encode(message: _186.QueryPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryPoolResponse;
+                fromJSON(object: any): _186.QueryPoolResponse;
+                toJSON(message: _186.QueryPoolResponse): unknown;
+                fromPartial<I_19 extends {
+                    pool?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    pool?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I_19["pool"], keyof import("../google/protobuf/any").Any>, never>;
+                } & Record<Exclude<keyof I_19, "pool">, never>>(object: I_19): _186.QueryPoolResponse;
             };
             QueryPoolsRequest: {
-                encode(message: _756.QueryPoolsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryPoolsRequest;
-                fromJSON(object: any): _756.QueryPoolsRequest;
-                toJSON(message: _756.QueryPoolsRequest): unknown;
-                fromPartial<I_20 extends unknown>(object: I_20): _756.QueryPoolsRequest;
+                encode(message: _186.QueryPoolsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryPoolsRequest;
+                fromJSON(object: any): _186.QueryPoolsRequest;
+                toJSON(message: _186.QueryPoolsRequest): unknown;
+                fromPartial<I_20 extends {
+                    pagination?: {
+                        key?: Uint8Array;
+                        offset?: any;
+                        limit?: any;
+                        countTotal?: boolean;
+                        reverse?: boolean;
+                    };
+                } & {
+                    pagination?: {
+                        key?: Uint8Array;
+                        offset?: any;
+                        limit?: any;
+                        countTotal?: boolean;
+                        reverse?: boolean;
+                    } & {
+                        key?: Uint8Array;
+                        offset?: any;
+                        limit?: any;
+                        countTotal?: boolean;
+                        reverse?: boolean;
+                    } & Record<Exclude<keyof I_20["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
+                } & Record<Exclude<keyof I_20, "pagination">, never>>(object: I_20): _186.QueryPoolsRequest;
             };
             QueryPoolsResponse: {
-                encode(message: _756.QueryPoolsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryPoolsResponse;
-                fromJSON(object: any): _756.QueryPoolsResponse;
-                toJSON(message: _756.QueryPoolsResponse): unknown;
-                fromPartial<I_21 extends unknown>(object: I_21): _756.QueryPoolsResponse;
+                encode(message: _186.QueryPoolsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryPoolsResponse;
+                fromJSON(object: any): _186.QueryPoolsResponse;
+                toJSON(message: _186.QueryPoolsResponse): unknown;
+                fromPartial<I_21 extends {
+                    pools?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    }[];
+                    pagination?: {
+                        nextKey?: Uint8Array;
+                        total?: any;
+                    };
+                } & {
+                    pools?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    }[] & ({
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I_21["pools"][number], keyof import("../google/protobuf/any").Any>, never>)[] & Record<Exclude<keyof I_21["pools"], keyof {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    }[]>, never>;
+                    pagination?: {
+                        nextKey?: Uint8Array;
+                        total?: any;
+                    } & {
+                        nextKey?: Uint8Array;
+                        total?: any;
+                    } & Record<Exclude<keyof I_21["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
+                } & Record<Exclude<keyof I_21, keyof _186.QueryPoolsResponse>, never>>(object: I_21): _186.QueryPoolsResponse;
             };
             QueryNumPoolsRequest: {
-                encode(_: _756.QueryNumPoolsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryNumPoolsRequest;
-                fromJSON(_: any): _756.QueryNumPoolsRequest;
-                toJSON(_: _756.QueryNumPoolsRequest): unknown;
-                fromPartial<I_22 extends unknown>(_: I_22): _756.QueryNumPoolsRequest;
+                encode(_: _186.QueryNumPoolsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryNumPoolsRequest;
+                fromJSON(_: any): _186.QueryNumPoolsRequest;
+                toJSON(_: _186.QueryNumPoolsRequest): unknown;
+                fromPartial<I_22 extends {} & {} & Record<Exclude<keyof I_22, never>, never>>(_: I_22): _186.QueryNumPoolsRequest;
             };
             QueryNumPoolsResponse: {
-                encode(message: _756.QueryNumPoolsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryNumPoolsResponse;
-                fromJSON(object: any): _756.QueryNumPoolsResponse;
-                toJSON(message: _756.QueryNumPoolsResponse): unknown;
-                fromPartial<I_23 extends unknown>(object: I_23): _756.QueryNumPoolsResponse;
+                encode(message: _186.QueryNumPoolsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryNumPoolsResponse;
+                fromJSON(object: any): _186.QueryNumPoolsResponse;
+                toJSON(message: _186.QueryNumPoolsResponse): unknown;
+                fromPartial<I_23 extends {
+                    numPools?: any;
+                } & {
+                    numPools?: any;
+                } & Record<Exclude<keyof I_23, "numPools">, never>>(object: I_23): _186.QueryNumPoolsResponse;
             };
             QueryPoolParamsRequest: {
-                encode(message: _756.QueryPoolParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryPoolParamsRequest;
-                fromJSON(object: any): _756.QueryPoolParamsRequest;
-                toJSON(message: _756.QueryPoolParamsRequest): unknown;
-                fromPartial<I_24 extends unknown>(object: I_24): _756.QueryPoolParamsRequest;
+                encode(message: _186.QueryPoolParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryPoolParamsRequest;
+                fromJSON(object: any): _186.QueryPoolParamsRequest;
+                toJSON(message: _186.QueryPoolParamsRequest): unknown;
+                fromPartial<I_24 extends {
+                    poolId?: any;
+                } & {
+                    poolId?: any;
+                } & Record<Exclude<keyof I_24, "poolId">, never>>(object: I_24): _186.QueryPoolParamsRequest;
             };
             QueryPoolParamsResponse: {
-                encode(message: _756.QueryPoolParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryPoolParamsResponse;
-                fromJSON(object: any): _756.QueryPoolParamsResponse;
-                toJSON(message: _756.QueryPoolParamsResponse): unknown;
-                fromPartial<I_25 extends unknown>(object: I_25): _756.QueryPoolParamsResponse;
+                encode(message: _186.QueryPoolParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryPoolParamsResponse;
+                fromJSON(object: any): _186.QueryPoolParamsResponse;
+                toJSON(message: _186.QueryPoolParamsResponse): unknown;
+                fromPartial<I_25 extends {
+                    params?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    };
+                } & {
+                    params?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I_25["params"], keyof import("../google/protobuf/any").Any>, never>;
+                } & Record<Exclude<keyof I_25, "params">, never>>(object: I_25): _186.QueryPoolParamsResponse;
             };
             QueryTotalPoolLiquidityRequest: {
-                encode(message: _756.QueryTotalPoolLiquidityRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryTotalPoolLiquidityRequest;
-                fromJSON(object: any): _756.QueryTotalPoolLiquidityRequest;
-                toJSON(message: _756.QueryTotalPoolLiquidityRequest): unknown;
-                fromPartial<I_26 extends unknown>(object: I_26): _756.QueryTotalPoolLiquidityRequest;
+                encode(message: _186.QueryTotalPoolLiquidityRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryTotalPoolLiquidityRequest;
+                fromJSON(object: any): _186.QueryTotalPoolLiquidityRequest;
+                toJSON(message: _186.QueryTotalPoolLiquidityRequest): unknown;
+                fromPartial<I_26 extends {
+                    poolId?: any;
+                } & {
+                    poolId?: any;
+                } & Record<Exclude<keyof I_26, "poolId">, never>>(object: I_26): _186.QueryTotalPoolLiquidityRequest;
             };
             QueryTotalPoolLiquidityResponse: {
-                encode(message: _756.QueryTotalPoolLiquidityResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryTotalPoolLiquidityResponse;
-                fromJSON(object: any): _756.QueryTotalPoolLiquidityResponse;
-                toJSON(message: _756.QueryTotalPoolLiquidityResponse): unknown;
-                fromPartial<I_27 extends unknown>(object: I_27): _756.QueryTotalPoolLiquidityResponse;
+                encode(message: _186.QueryTotalPoolLiquidityResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryTotalPoolLiquidityResponse;
+                fromJSON(object: any): _186.QueryTotalPoolLiquidityResponse;
+                toJSON(message: _186.QueryTotalPoolLiquidityResponse): unknown;
+                fromPartial<I_27 extends {
+                    liquidity?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    liquidity?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_27["liquidity"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_27["liquidity"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_27, "liquidity">, never>>(object: I_27): _186.QueryTotalPoolLiquidityResponse;
             };
             QueryTotalSharesRequest: {
-                encode(message: _756.QueryTotalSharesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryTotalSharesRequest;
-                fromJSON(object: any): _756.QueryTotalSharesRequest;
-                toJSON(message: _756.QueryTotalSharesRequest): unknown;
-                fromPartial<I_28 extends unknown>(object: I_28): _756.QueryTotalSharesRequest;
+                encode(message: _186.QueryTotalSharesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryTotalSharesRequest;
+                fromJSON(object: any): _186.QueryTotalSharesRequest;
+                toJSON(message: _186.QueryTotalSharesRequest): unknown;
+                fromPartial<I_28 extends {
+                    poolId?: any;
+                } & {
+                    poolId?: any;
+                } & Record<Exclude<keyof I_28, "poolId">, never>>(object: I_28): _186.QueryTotalSharesRequest;
             };
             QueryTotalSharesResponse: {
-                encode(message: _756.QueryTotalSharesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryTotalSharesResponse;
-                fromJSON(object: any): _756.QueryTotalSharesResponse;
-                toJSON(message: _756.QueryTotalSharesResponse): unknown;
-                fromPartial<I_29 extends unknown>(object: I_29): _756.QueryTotalSharesResponse;
+                encode(message: _186.QueryTotalSharesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryTotalSharesResponse;
+                fromJSON(object: any): _186.QueryTotalSharesResponse;
+                toJSON(message: _186.QueryTotalSharesResponse): unknown;
+                fromPartial<I_29 extends {
+                    totalShares?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                } & {
+                    totalShares?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_29["totalShares"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                } & Record<Exclude<keyof I_29, "totalShares">, never>>(object: I_29): _186.QueryTotalSharesResponse;
             };
             QuerySpotPriceRequest: {
-                encode(message: _756.QuerySpotPriceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QuerySpotPriceRequest;
-                fromJSON(object: any): _756.QuerySpotPriceRequest;
-                toJSON(message: _756.QuerySpotPriceRequest): unknown;
-                fromPartial<I_30 extends unknown>(object: I_30): _756.QuerySpotPriceRequest;
+                encode(message: _186.QuerySpotPriceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QuerySpotPriceRequest;
+                fromJSON(object: any): _186.QuerySpotPriceRequest;
+                toJSON(message: _186.QuerySpotPriceRequest): unknown;
+                fromPartial<I_30 extends {
+                    poolId?: any;
+                    tokenInDenom?: string;
+                    tokenOutDenom?: string;
+                } & {
+                    poolId?: any;
+                    tokenInDenom?: string;
+                    tokenOutDenom?: string;
+                } & Record<Exclude<keyof I_30, keyof _186.QuerySpotPriceRequest>, never>>(object: I_30): _186.QuerySpotPriceRequest;
             };
             QuerySpotPriceResponse: {
-                encode(message: _756.QuerySpotPriceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QuerySpotPriceResponse;
-                fromJSON(object: any): _756.QuerySpotPriceResponse;
-                toJSON(message: _756.QuerySpotPriceResponse): unknown;
-                fromPartial<I_31 extends unknown>(object: I_31): _756.QuerySpotPriceResponse;
+                encode(message: _186.QuerySpotPriceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QuerySpotPriceResponse;
+                fromJSON(object: any): _186.QuerySpotPriceResponse;
+                toJSON(message: _186.QuerySpotPriceResponse): unknown;
+                fromPartial<I_31 extends {
+                    spotPrice?: string;
+                } & {
+                    spotPrice?: string;
+                } & Record<Exclude<keyof I_31, "spotPrice">, never>>(object: I_31): _186.QuerySpotPriceResponse;
             };
             QuerySwapExactAmountInRequest: {
-                encode(message: _756.QuerySwapExactAmountInRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QuerySwapExactAmountInRequest;
-                fromJSON(object: any): _756.QuerySwapExactAmountInRequest;
-                toJSON(message: _756.QuerySwapExactAmountInRequest): unknown;
-                fromPartial<I_32 extends unknown>(object: I_32): _756.QuerySwapExactAmountInRequest;
+                encode(message: _186.QuerySwapExactAmountInRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QuerySwapExactAmountInRequest;
+                fromJSON(object: any): _186.QuerySwapExactAmountInRequest;
+                toJSON(message: _186.QuerySwapExactAmountInRequest): unknown;
+                fromPartial<I_32 extends {
+                    sender?: string;
+                    poolId?: any;
+                    tokenIn?: string;
+                    routes?: {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    }[];
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    tokenIn?: string;
+                    routes?: {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    }[] & ({
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    } & {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    } & Record<Exclude<keyof I_32["routes"][number], keyof _187.SwapAmountInRoute>, never>)[] & Record<Exclude<keyof I_32["routes"], keyof {
+                        poolId?: any;
+                        tokenOutDenom?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_32, keyof _186.QuerySwapExactAmountInRequest>, never>>(object: I_32): _186.QuerySwapExactAmountInRequest;
             };
             QuerySwapExactAmountInResponse: {
-                encode(message: _756.QuerySwapExactAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QuerySwapExactAmountInResponse;
-                fromJSON(object: any): _756.QuerySwapExactAmountInResponse;
-                toJSON(message: _756.QuerySwapExactAmountInResponse): unknown;
-                fromPartial<I_33 extends unknown>(object: I_33): _756.QuerySwapExactAmountInResponse;
+                encode(message: _186.QuerySwapExactAmountInResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QuerySwapExactAmountInResponse;
+                fromJSON(object: any): _186.QuerySwapExactAmountInResponse;
+                toJSON(message: _186.QuerySwapExactAmountInResponse): unknown;
+                fromPartial<I_33 extends {
+                    tokenOutAmount?: string;
+                } & {
+                    tokenOutAmount?: string;
+                } & Record<Exclude<keyof I_33, "tokenOutAmount">, never>>(object: I_33): _186.QuerySwapExactAmountInResponse;
             };
             QuerySwapExactAmountOutRequest: {
-                encode(message: _756.QuerySwapExactAmountOutRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QuerySwapExactAmountOutRequest;
-                fromJSON(object: any): _756.QuerySwapExactAmountOutRequest;
-                toJSON(message: _756.QuerySwapExactAmountOutRequest): unknown;
-                fromPartial<I_34 extends unknown>(object: I_34): _756.QuerySwapExactAmountOutRequest;
+                encode(message: _186.QuerySwapExactAmountOutRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QuerySwapExactAmountOutRequest;
+                fromJSON(object: any): _186.QuerySwapExactAmountOutRequest;
+                toJSON(message: _186.QuerySwapExactAmountOutRequest): unknown;
+                fromPartial<I_34 extends {
+                    sender?: string;
+                    poolId?: any;
+                    routes?: {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    }[];
+                    tokenOut?: string;
+                } & {
+                    sender?: string;
+                    poolId?: any;
+                    routes?: {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    }[] & ({
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    } & {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    } & Record<Exclude<keyof I_34["routes"][number], keyof _187.SwapAmountOutRoute>, never>)[] & Record<Exclude<keyof I_34["routes"], keyof {
+                        poolId?: any;
+                        tokenInDenom?: string;
+                    }[]>, never>;
+                    tokenOut?: string;
+                } & Record<Exclude<keyof I_34, keyof _186.QuerySwapExactAmountOutRequest>, never>>(object: I_34): _186.QuerySwapExactAmountOutRequest;
             };
             QuerySwapExactAmountOutResponse: {
-                encode(message: _756.QuerySwapExactAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QuerySwapExactAmountOutResponse;
-                fromJSON(object: any): _756.QuerySwapExactAmountOutResponse;
-                toJSON(message: _756.QuerySwapExactAmountOutResponse): unknown;
-                fromPartial<I_35 extends unknown>(object: I_35): _756.QuerySwapExactAmountOutResponse;
+                encode(message: _186.QuerySwapExactAmountOutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QuerySwapExactAmountOutResponse;
+                fromJSON(object: any): _186.QuerySwapExactAmountOutResponse;
+                toJSON(message: _186.QuerySwapExactAmountOutResponse): unknown;
+                fromPartial<I_35 extends {
+                    tokenInAmount?: string;
+                } & {
+                    tokenInAmount?: string;
+                } & Record<Exclude<keyof I_35, "tokenInAmount">, never>>(object: I_35): _186.QuerySwapExactAmountOutResponse;
             };
             QueryTotalLiquidityRequest: {
-                encode(_: _756.QueryTotalLiquidityRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryTotalLiquidityRequest;
-                fromJSON(_: any): _756.QueryTotalLiquidityRequest;
-                toJSON(_: _756.QueryTotalLiquidityRequest): unknown;
-                fromPartial<I_36 extends unknown>(_: I_36): _756.QueryTotalLiquidityRequest;
+                encode(_: _186.QueryTotalLiquidityRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryTotalLiquidityRequest;
+                fromJSON(_: any): _186.QueryTotalLiquidityRequest;
+                toJSON(_: _186.QueryTotalLiquidityRequest): unknown;
+                fromPartial<I_36 extends {} & {} & Record<Exclude<keyof I_36, never>, never>>(_: I_36): _186.QueryTotalLiquidityRequest;
             };
             QueryTotalLiquidityResponse: {
-                encode(message: _756.QueryTotalLiquidityResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _756.QueryTotalLiquidityResponse;
-                fromJSON(object: any): _756.QueryTotalLiquidityResponse;
-                toJSON(message: _756.QueryTotalLiquidityResponse): unknown;
-                fromPartial<I_37 extends unknown>(object: I_37): _756.QueryTotalLiquidityResponse;
+                encode(message: _186.QueryTotalLiquidityResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _186.QueryTotalLiquidityResponse;
+                fromJSON(object: any): _186.QueryTotalLiquidityResponse;
+                toJSON(message: _186.QueryTotalLiquidityResponse): unknown;
+                fromPartial<I_37 extends {
+                    liquidity?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    liquidity?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_37["liquidity"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_37["liquidity"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_37, "liquidity">, never>>(object: I_37): _186.QueryTotalLiquidityResponse;
             };
             Params: {
-                encode(message: _755.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _755.Params;
-                fromJSON(object: any): _755.Params;
-                toJSON(message: _755.Params): unknown;
-                fromPartial<I_38 extends unknown>(object: I_38): _755.Params;
+                encode(message: _185.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _185.Params;
+                fromJSON(object: any): _185.Params;
+                toJSON(message: _185.Params): unknown;
+                fromPartial<I_38 extends {
+                    poolCreationFee?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    poolCreationFee?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_38["poolCreationFee"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_38["poolCreationFee"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_38, "poolCreationFee">, never>>(object: I_38): _185.Params;
             };
             GenesisState: {
-                encode(message: _755.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _755.GenesisState;
-                fromJSON(object: any): _755.GenesisState;
-                toJSON(message: _755.GenesisState): unknown;
-                fromPartial<I_39 extends unknown>(object: I_39): _755.GenesisState;
+                encode(message: _185.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _185.GenesisState;
+                fromJSON(object: any): _185.GenesisState;
+                toJSON(message: _185.GenesisState): unknown;
+                fromPartial<I_39 extends {
+                    pools?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    }[];
+                    nextPoolNumber?: any;
+                    params?: {
+                        poolCreationFee?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                    };
+                } & {
+                    pools?: {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    }[] & ({
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    } & Record<Exclude<keyof I_39["pools"][number], keyof import("../google/protobuf/any").Any>, never>)[] & Record<Exclude<keyof I_39["pools"], keyof {
+                        typeUrl?: string;
+                        value?: Uint8Array;
+                    }[]>, never>;
+                    nextPoolNumber?: any;
+                    params?: {
+                        poolCreationFee?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                    } & {
+                        poolCreationFee?: {
+                            denom?: string;
+                            amount?: string;
+                        }[] & ({
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_39["params"]["poolCreationFee"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_39["params"]["poolCreationFee"], keyof {
+                            denom?: string;
+                            amount?: string;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I_39["params"], "poolCreationFee">, never>;
+                } & Record<Exclude<keyof I_39, keyof _185.GenesisState>, never>>(object: I_39): _185.GenesisState;
             };
             MsgCreateBalancerPool: {
-                encode(message: _754.MsgCreateBalancerPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _754.MsgCreateBalancerPool;
-                fromJSON(object: any): _754.MsgCreateBalancerPool;
-                toJSON(message: _754.MsgCreateBalancerPool): unknown;
-                fromPartial<I_40 extends unknown>(object: I_40): _754.MsgCreateBalancerPool;
+                encode(message: _184.MsgCreateBalancerPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _184.MsgCreateBalancerPool;
+                fromJSON(object: any): _184.MsgCreateBalancerPool;
+                toJSON(message: _184.MsgCreateBalancerPool): unknown;
+                fromPartial<I_40 extends {
+                    sender?: string;
+                    poolParams?: {
+                        swapFee?: string;
+                        exitFee?: string;
+                        smoothWeightChangeParams?: {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                        };
+                    };
+                    poolAssets?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[];
+                    futurePoolGovernor?: string;
+                } & {
+                    sender?: string;
+                    poolParams?: {
+                        swapFee?: string;
+                        exitFee?: string;
+                        smoothWeightChangeParams?: {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                        };
+                    } & {
+                        swapFee?: string;
+                        exitFee?: string;
+                        smoothWeightChangeParams?: {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                        } & {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[] & ({
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            } & {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                } & {
+                                    denom?: string;
+                                    amount?: string;
+                                } & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                                weight?: string;
+                            } & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"], keyof {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[]>, never>;
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[] & ({
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            } & {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                } & {
+                                    denom?: string;
+                                    amount?: string;
+                                } & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                                weight?: string;
+                            } & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"], keyof {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[]>, never>;
+                        } & Record<Exclude<keyof I_40["poolParams"]["smoothWeightChangeParams"], keyof _183.SmoothWeightChangeParams>, never>;
+                    } & Record<Exclude<keyof I_40["poolParams"], keyof _183.PoolParams>, never>;
+                    poolAssets?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[] & ({
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    } & {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_40["poolAssets"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_40["poolAssets"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_40["poolAssets"], keyof {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[]>, never>;
+                    futurePoolGovernor?: string;
+                } & Record<Exclude<keyof I_40, keyof _184.MsgCreateBalancerPool>, never>>(object: I_40): _184.MsgCreateBalancerPool;
             };
             MsgCreateBalancerPoolResponse: {
-                encode(message: _754.MsgCreateBalancerPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _754.MsgCreateBalancerPoolResponse;
-                fromJSON(object: any): _754.MsgCreateBalancerPoolResponse;
-                toJSON(message: _754.MsgCreateBalancerPoolResponse): unknown;
-                fromPartial<I_41 extends unknown>(object: I_41): _754.MsgCreateBalancerPoolResponse;
+                encode(message: _184.MsgCreateBalancerPoolResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _184.MsgCreateBalancerPoolResponse;
+                fromJSON(object: any): _184.MsgCreateBalancerPoolResponse;
+                toJSON(message: _184.MsgCreateBalancerPoolResponse): unknown;
+                fromPartial<I_41 extends {
+                    poolId?: any;
+                } & {
+                    poolId?: any;
+                } & Record<Exclude<keyof I_41, "poolId">, never>>(object: I_41): _184.MsgCreateBalancerPoolResponse;
             };
-            BalancerMsgClientImpl: typeof _754.BalancerMsgClientImpl;
             SmoothWeightChangeParams: {
-                encode(message: _753.SmoothWeightChangeParams, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _753.SmoothWeightChangeParams;
-                fromJSON(object: any): _753.SmoothWeightChangeParams;
-                toJSON(message: _753.SmoothWeightChangeParams): unknown;
-                fromPartial<I_42 extends unknown>(object: I_42): _753.SmoothWeightChangeParams;
+                encode(message: _183.SmoothWeightChangeParams, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _183.SmoothWeightChangeParams;
+                fromJSON(object: any): _183.SmoothWeightChangeParams;
+                toJSON(message: _183.SmoothWeightChangeParams): unknown;
+                fromPartial<I_42 extends {
+                    startTime?: Date;
+                    duration?: string;
+                    initialPoolWeights?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[];
+                    targetPoolWeights?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[];
+                } & {
+                    startTime?: Date;
+                    duration?: string;
+                    initialPoolWeights?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[] & ({
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    } & {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_42["initialPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_42["initialPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_42["initialPoolWeights"], keyof {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[]>, never>;
+                    targetPoolWeights?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[] & ({
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    } & {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_42["targetPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_42["targetPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_42["targetPoolWeights"], keyof {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_42, keyof _183.SmoothWeightChangeParams>, never>>(object: I_42): _183.SmoothWeightChangeParams;
             };
             PoolParams: {
-                encode(message: _753.PoolParams, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _753.PoolParams;
-                fromJSON(object: any): _753.PoolParams;
-                toJSON(message: _753.PoolParams): unknown;
-                fromPartial<I_43 extends unknown>(object: I_43): _753.PoolParams;
+                encode(message: _183.PoolParams, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _183.PoolParams;
+                fromJSON(object: any): _183.PoolParams;
+                toJSON(message: _183.PoolParams): unknown;
+                fromPartial<I_43 extends {
+                    swapFee?: string;
+                    exitFee?: string;
+                    smoothWeightChangeParams?: {
+                        startTime?: Date;
+                        duration?: string;
+                        initialPoolWeights?: {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[];
+                        targetPoolWeights?: {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[];
+                    };
+                } & {
+                    swapFee?: string;
+                    exitFee?: string;
+                    smoothWeightChangeParams?: {
+                        startTime?: Date;
+                        duration?: string;
+                        initialPoolWeights?: {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[];
+                        targetPoolWeights?: {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[];
+                    } & {
+                        startTime?: Date;
+                        duration?: string;
+                        initialPoolWeights?: {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[] & ({
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        } & {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            } & {
+                                denom?: string;
+                                amount?: string;
+                            } & Record<Exclude<keyof I_43["smoothWeightChangeParams"]["initialPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                            weight?: string;
+                        } & Record<Exclude<keyof I_43["smoothWeightChangeParams"]["initialPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_43["smoothWeightChangeParams"]["initialPoolWeights"], keyof {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[]>, never>;
+                        targetPoolWeights?: {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[] & ({
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        } & {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            } & {
+                                denom?: string;
+                                amount?: string;
+                            } & Record<Exclude<keyof I_43["smoothWeightChangeParams"]["targetPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                            weight?: string;
+                        } & Record<Exclude<keyof I_43["smoothWeightChangeParams"]["targetPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_43["smoothWeightChangeParams"]["targetPoolWeights"], keyof {
+                            token?: {
+                                denom?: string;
+                                amount?: string;
+                            };
+                            weight?: string;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I_43["smoothWeightChangeParams"], keyof _183.SmoothWeightChangeParams>, never>;
+                } & Record<Exclude<keyof I_43, keyof _183.PoolParams>, never>>(object: I_43): _183.PoolParams;
             };
             PoolAsset: {
-                encode(message: _753.PoolAsset, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _753.PoolAsset;
-                fromJSON(object: any): _753.PoolAsset;
-                toJSON(message: _753.PoolAsset): unknown;
-                fromPartial<I_44 extends unknown>(object: I_44): _753.PoolAsset;
+                encode(message: _183.PoolAsset, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _183.PoolAsset;
+                fromJSON(object: any): _183.PoolAsset;
+                toJSON(message: _183.PoolAsset): unknown;
+                fromPartial<I_44 extends {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                } & {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_44["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                    weight?: string;
+                } & Record<Exclude<keyof I_44, keyof _183.PoolAsset>, never>>(object: I_44): _183.PoolAsset;
             };
             Pool: {
-                encode(message: _753.Pool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _753.Pool;
-                fromJSON(object: any): _753.Pool;
-                toJSON(message: _753.Pool): unknown;
-                fromPartial<I_45 extends unknown>(object: I_45): _753.Pool;
+                encode(message: _183.Pool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _183.Pool;
+                fromJSON(object: any): _183.Pool;
+                toJSON(message: _183.Pool): unknown;
+                fromPartial<I_45 extends {
+                    address?: string;
+                    id?: any;
+                    poolParams?: {
+                        swapFee?: string;
+                        exitFee?: string;
+                        smoothWeightChangeParams?: {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                        };
+                    };
+                    futurePoolGovernor?: string;
+                    totalShares?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    poolAssets?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[];
+                    totalWeight?: string;
+                } & {
+                    address?: string;
+                    id?: any;
+                    poolParams?: {
+                        swapFee?: string;
+                        exitFee?: string;
+                        smoothWeightChangeParams?: {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                        };
+                    } & {
+                        swapFee?: string;
+                        exitFee?: string;
+                        smoothWeightChangeParams?: {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[];
+                        } & {
+                            startTime?: Date;
+                            duration?: string;
+                            initialPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[] & ({
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            } & {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                } & {
+                                    denom?: string;
+                                    amount?: string;
+                                } & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                                weight?: string;
+                            } & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"], keyof {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[]>, never>;
+                            targetPoolWeights?: {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[] & ({
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            } & {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                } & {
+                                    denom?: string;
+                                    amount?: string;
+                                } & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                                weight?: string;
+                            } & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"], keyof {
+                                token?: {
+                                    denom?: string;
+                                    amount?: string;
+                                };
+                                weight?: string;
+                            }[]>, never>;
+                        } & Record<Exclude<keyof I_45["poolParams"]["smoothWeightChangeParams"], keyof _183.SmoothWeightChangeParams>, never>;
+                    } & Record<Exclude<keyof I_45["poolParams"], keyof _183.PoolParams>, never>;
+                    futurePoolGovernor?: string;
+                    totalShares?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_45["totalShares"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                    poolAssets?: {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[] & ({
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    } & {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_45["poolAssets"][number]["token"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_45["poolAssets"][number], keyof _183.PoolAsset>, never>)[] & Record<Exclude<keyof I_45["poolAssets"], keyof {
+                        token?: {
+                            denom?: string;
+                            amount?: string;
+                        };
+                        weight?: string;
+                    }[]>, never>;
+                    totalWeight?: string;
+                } & Record<Exclude<keyof I_45, keyof _183.Pool>, never>>(object: I_45): _183.Pool;
             };
         };
     }
     const incentives: {
         MsgCreateGauge: {
-            encode(message: _770.MsgCreateGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _770.MsgCreateGauge;
-            fromJSON(object: any): _770.MsgCreateGauge;
-            toJSON(message: _770.MsgCreateGauge): unknown;
-            fromPartial<I extends unknown>(object: I): _770.MsgCreateGauge;
+            encode(message: _192.MsgCreateGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _192.MsgCreateGauge;
+            fromJSON(object: any): _192.MsgCreateGauge;
+            toJSON(message: _192.MsgCreateGauge): unknown;
+            fromPartial<I extends {
+                isPerpetual?: boolean;
+                owner?: string;
+                distributeTo?: {
+                    lockQueryType?: _194.LockQueryType;
+                    denom?: string;
+                    duration?: string;
+                    timestamp?: Date;
+                };
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                startTime?: Date;
+                numEpochsPaidOver?: any;
+            } & {
+                isPerpetual?: boolean;
+                owner?: string;
+                distributeTo?: {
+                    lockQueryType?: _194.LockQueryType;
+                    denom?: string;
+                    duration?: string;
+                    timestamp?: Date;
+                } & {
+                    lockQueryType?: _194.LockQueryType;
+                    denom?: string;
+                    duration?: string;
+                    timestamp?: Date;
+                } & Record<Exclude<keyof I["distributeTo"], keyof _194.QueryCondition>, never>;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                startTime?: Date;
+                numEpochsPaidOver?: any;
+            } & Record<Exclude<keyof I, keyof _192.MsgCreateGauge>, never>>(object: I): _192.MsgCreateGauge;
         };
         MsgCreateGaugeResponse: {
-            encode(_: _770.MsgCreateGaugeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _770.MsgCreateGaugeResponse;
-            fromJSON(_: any): _770.MsgCreateGaugeResponse;
-            toJSON(_: _770.MsgCreateGaugeResponse): unknown;
-            fromPartial<I_1 extends unknown>(_: I_1): _770.MsgCreateGaugeResponse;
+            encode(_: _192.MsgCreateGaugeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _192.MsgCreateGaugeResponse;
+            fromJSON(_: any): _192.MsgCreateGaugeResponse;
+            toJSON(_: _192.MsgCreateGaugeResponse): unknown;
+            fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _192.MsgCreateGaugeResponse;
         };
         MsgAddToGauge: {
-            encode(message: _770.MsgAddToGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _770.MsgAddToGauge;
-            fromJSON(object: any): _770.MsgAddToGauge;
-            toJSON(message: _770.MsgAddToGauge): unknown;
-            fromPartial<I_2 extends unknown>(object: I_2): _770.MsgAddToGauge;
+            encode(message: _192.MsgAddToGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _192.MsgAddToGauge;
+            fromJSON(object: any): _192.MsgAddToGauge;
+            toJSON(message: _192.MsgAddToGauge): unknown;
+            fromPartial<I_2 extends {
+                owner?: string;
+                gaugeId?: any;
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                owner?: string;
+                gaugeId?: any;
+                rewards?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_2["rewards"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_2["rewards"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_2, keyof _192.MsgAddToGauge>, never>>(object: I_2): _192.MsgAddToGauge;
         };
         MsgAddToGaugeResponse: {
-            encode(_: _770.MsgAddToGaugeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _770.MsgAddToGaugeResponse;
-            fromJSON(_: any): _770.MsgAddToGaugeResponse;
-            toJSON(_: _770.MsgAddToGaugeResponse): unknown;
-            fromPartial<I_3 extends unknown>(_: I_3): _770.MsgAddToGaugeResponse;
-        };
-        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
-        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
-        AminoConverter: {
-            "/osmosis.incentives.MsgCreateGauge": {
-                aminoType: string;
-                toAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: _770.MsgCreateGauge) => {
-                    isPerpetual: boolean;
-                    owner: string;
-                    distributeTo: {
-                        lockQueryType: number;
-                        denom: string;
-                        duration: {
-                            seconds: string;
-                            nanos: number;
-                        };
-                        timestamp: Date;
-                    };
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                    startTime: Date;
-                    numEpochsPaidOver: string;
-                };
-                fromAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: {
-                    isPerpetual: boolean;
-                    owner: string;
-                    distributeTo: {
-                        lockQueryType: number;
-                        denom: string;
-                        duration: {
-                            seconds: string;
-                            nanos: number;
-                        };
-                        timestamp: Date;
-                    };
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                    startTime: Date;
-                    numEpochsPaidOver: string;
-                }) => _770.MsgCreateGauge;
-            };
-            "/osmosis.incentives.MsgAddToGauge": {
-                aminoType: string;
-                toAmino: ({ owner, gaugeId, rewards }: _770.MsgAddToGauge) => {
-                    owner: string;
-                    gaugeId: string;
-                    rewards: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                };
-                fromAmino: ({ owner, gaugeId, rewards }: {
-                    owner: string;
-                    gaugeId: string;
-                    rewards: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                }) => _770.MsgAddToGauge;
-            };
-        };
-        encoded: {
-            createGauge(value: _770.MsgCreateGauge): {
-                type_url: string;
-                value: Uint8Array;
-            };
-            addToGauge(value: _770.MsgAddToGauge): {
-                type_url: string;
-                value: Uint8Array;
-            };
-        };
-        fromJSON: {
-            createGauge(value: any): {
-                typeUrl: string;
-                value: _770.MsgCreateGauge;
-            };
-            addToGauge(value: any): {
-                typeUrl: string;
-                value: _770.MsgAddToGauge;
-            };
-        };
-        toJSON: {
-            createGauge(value: _770.MsgCreateGauge): {
-                typeUrl: string;
-                value: unknown;
-            };
-            addToGauge(value: _770.MsgAddToGauge): {
-                typeUrl: string;
-                value: unknown;
-            };
-        };
-        json: {
-            createGauge(value: _770.MsgCreateGauge): {
-                typeUrl: string;
-                value: _770.MsgCreateGauge;
-            };
-            addToGauge(value: _770.MsgAddToGauge): {
-                typeUrl: string;
-                value: _770.MsgAddToGauge;
-            };
-        };
-        messages: {
-            createGauge(value: _770.MsgCreateGauge): {
-                typeUrl: string;
-                value: _770.MsgCreateGauge;
-            };
-            addToGauge(value: _770.MsgAddToGauge): {
-                typeUrl: string;
-                value: _770.MsgAddToGauge;
-            };
+            encode(_: _192.MsgAddToGaugeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _192.MsgAddToGaugeResponse;
+            fromJSON(_: any): _192.MsgAddToGaugeResponse;
+            toJSON(_: _192.MsgAddToGaugeResponse): unknown;
+            fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _192.MsgAddToGaugeResponse;
         };
         ModuleToDistributeCoinsRequest: {
-            encode(_: _769.ModuleToDistributeCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ModuleToDistributeCoinsRequest;
-            fromJSON(_: any): _769.ModuleToDistributeCoinsRequest;
-            toJSON(_: _769.ModuleToDistributeCoinsRequest): unknown;
-            fromPartial<I_4 extends unknown>(_: I_4): _769.ModuleToDistributeCoinsRequest;
+            encode(_: _191.ModuleToDistributeCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ModuleToDistributeCoinsRequest;
+            fromJSON(_: any): _191.ModuleToDistributeCoinsRequest;
+            toJSON(_: _191.ModuleToDistributeCoinsRequest): unknown;
+            fromPartial<I_4 extends {} & {} & Record<Exclude<keyof I_4, never>, never>>(_: I_4): _191.ModuleToDistributeCoinsRequest;
         };
         ModuleToDistributeCoinsResponse: {
-            encode(message: _769.ModuleToDistributeCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ModuleToDistributeCoinsResponse;
-            fromJSON(object: any): _769.ModuleToDistributeCoinsResponse;
-            toJSON(message: _769.ModuleToDistributeCoinsResponse): unknown;
-            fromPartial<I_5 extends unknown>(object: I_5): _769.ModuleToDistributeCoinsResponse;
+            encode(message: _191.ModuleToDistributeCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ModuleToDistributeCoinsResponse;
+            fromJSON(object: any): _191.ModuleToDistributeCoinsResponse;
+            toJSON(message: _191.ModuleToDistributeCoinsResponse): unknown;
+            fromPartial<I_5 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_5["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_5["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_5, "coins">, never>>(object: I_5): _191.ModuleToDistributeCoinsResponse;
         };
         ModuleDistributedCoinsRequest: {
-            encode(_: _769.ModuleDistributedCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ModuleDistributedCoinsRequest;
-            fromJSON(_: any): _769.ModuleDistributedCoinsRequest;
-            toJSON(_: _769.ModuleDistributedCoinsRequest): unknown;
-            fromPartial<I_6 extends unknown>(_: I_6): _769.ModuleDistributedCoinsRequest;
+            encode(_: _191.ModuleDistributedCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ModuleDistributedCoinsRequest;
+            fromJSON(_: any): _191.ModuleDistributedCoinsRequest;
+            toJSON(_: _191.ModuleDistributedCoinsRequest): unknown;
+            fromPartial<I_6 extends {} & {} & Record<Exclude<keyof I_6, never>, never>>(_: I_6): _191.ModuleDistributedCoinsRequest;
         };
         ModuleDistributedCoinsResponse: {
-            encode(message: _769.ModuleDistributedCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ModuleDistributedCoinsResponse;
-            fromJSON(object: any): _769.ModuleDistributedCoinsResponse;
-            toJSON(message: _769.ModuleDistributedCoinsResponse): unknown;
-            fromPartial<I_7 extends unknown>(object: I_7): _769.ModuleDistributedCoinsResponse;
+            encode(message: _191.ModuleDistributedCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ModuleDistributedCoinsResponse;
+            fromJSON(object: any): _191.ModuleDistributedCoinsResponse;
+            toJSON(message: _191.ModuleDistributedCoinsResponse): unknown;
+            fromPartial<I_7 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_7["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_7["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_7, "coins">, never>>(object: I_7): _191.ModuleDistributedCoinsResponse;
         };
         GaugeByIDRequest: {
-            encode(message: _769.GaugeByIDRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.GaugeByIDRequest;
-            fromJSON(object: any): _769.GaugeByIDRequest;
-            toJSON(message: _769.GaugeByIDRequest): unknown;
-            fromPartial<I_8 extends unknown>(object: I_8): _769.GaugeByIDRequest;
+            encode(message: _191.GaugeByIDRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.GaugeByIDRequest;
+            fromJSON(object: any): _191.GaugeByIDRequest;
+            toJSON(message: _191.GaugeByIDRequest): unknown;
+            fromPartial<I_8 extends {
+                id?: any;
+            } & {
+                id?: any;
+            } & Record<Exclude<keyof I_8, "id">, never>>(object: I_8): _191.GaugeByIDRequest;
         };
         GaugeByIDResponse: {
-            encode(message: _769.GaugeByIDResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.GaugeByIDResponse;
-            fromJSON(object: any): _769.GaugeByIDResponse;
-            toJSON(message: _769.GaugeByIDResponse): unknown;
-            fromPartial<I_9 extends unknown>(object: I_9): _769.GaugeByIDResponse;
+            encode(message: _191.GaugeByIDResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.GaugeByIDResponse;
+            fromJSON(object: any): _191.GaugeByIDResponse;
+            toJSON(message: _191.GaugeByIDResponse): unknown;
+            fromPartial<I_9 extends {
+                gauge?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                };
+            } & {
+                gauge?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & Record<Exclude<keyof I_9["gauge"]["distributeTo"], keyof _194.QueryCondition>, never>;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_9["gauge"]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_9["gauge"]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_9["gauge"]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_9["gauge"]["distributedCoins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_9["gauge"], keyof _188.Gauge>, never>;
+            } & Record<Exclude<keyof I_9, "gauge">, never>>(object: I_9): _191.GaugeByIDResponse;
         };
         GaugesRequest: {
-            encode(message: _769.GaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.GaugesRequest;
-            fromJSON(object: any): _769.GaugesRequest;
-            toJSON(message: _769.GaugesRequest): unknown;
-            fromPartial<I_10 extends unknown>(object: I_10): _769.GaugesRequest;
+            encode(message: _191.GaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.GaugesRequest;
+            fromJSON(object: any): _191.GaugesRequest;
+            toJSON(message: _191.GaugesRequest): unknown;
+            fromPartial<I_10 extends {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                };
+            } & {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & Record<Exclude<keyof I_10["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
+            } & Record<Exclude<keyof I_10, "pagination">, never>>(object: I_10): _191.GaugesRequest;
         };
         GaugesResponse: {
-            encode(message: _769.GaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.GaugesResponse;
-            fromJSON(object: any): _769.GaugesResponse;
-            toJSON(message: _769.GaugesResponse): unknown;
-            fromPartial<I_11 extends unknown>(object: I_11): _769.GaugesResponse;
+            encode(message: _191.GaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.GaugesResponse;
+            fromJSON(object: any): _191.GaugesResponse;
+            toJSON(message: _191.GaugesResponse): unknown;
+            fromPartial<I_11 extends {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                };
+            } & {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & Record<Exclude<keyof I_11["data"][number]["distributeTo"], keyof _194.QueryCondition>, never>;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_11["data"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_11["data"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_11["data"][number]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_11["data"][number]["distributedCoins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_11["data"][number], keyof _188.Gauge>, never>)[] & Record<Exclude<keyof I_11["data"], keyof {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & Record<Exclude<keyof I_11["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
+            } & Record<Exclude<keyof I_11, keyof _191.GaugesResponse>, never>>(object: I_11): _191.GaugesResponse;
         };
         ActiveGaugesRequest: {
-            encode(message: _769.ActiveGaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ActiveGaugesRequest;
-            fromJSON(object: any): _769.ActiveGaugesRequest;
-            toJSON(message: _769.ActiveGaugesRequest): unknown;
-            fromPartial<I_12 extends unknown>(object: I_12): _769.ActiveGaugesRequest;
+            encode(message: _191.ActiveGaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ActiveGaugesRequest;
+            fromJSON(object: any): _191.ActiveGaugesRequest;
+            toJSON(message: _191.ActiveGaugesRequest): unknown;
+            fromPartial<I_12 extends {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                };
+            } & {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & Record<Exclude<keyof I_12["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
+            } & Record<Exclude<keyof I_12, "pagination">, never>>(object: I_12): _191.ActiveGaugesRequest;
         };
         ActiveGaugesResponse: {
-            encode(message: _769.ActiveGaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ActiveGaugesResponse;
-            fromJSON(object: any): _769.ActiveGaugesResponse;
-            toJSON(message: _769.ActiveGaugesResponse): unknown;
-            fromPartial<I_13 extends unknown>(object: I_13): _769.ActiveGaugesResponse;
+            encode(message: _191.ActiveGaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ActiveGaugesResponse;
+            fromJSON(object: any): _191.ActiveGaugesResponse;
+            toJSON(message: _191.ActiveGaugesResponse): unknown;
+            fromPartial<I_13 extends {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                };
+            } & {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & Record<Exclude<keyof I_13["data"][number]["distributeTo"], keyof _194.QueryCondition>, never>;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_13["data"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_13["data"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_13["data"][number]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_13["data"][number]["distributedCoins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_13["data"][number], keyof _188.Gauge>, never>)[] & Record<Exclude<keyof I_13["data"], keyof {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & Record<Exclude<keyof I_13["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
+            } & Record<Exclude<keyof I_13, keyof _191.ActiveGaugesResponse>, never>>(object: I_13): _191.ActiveGaugesResponse;
         };
         ActiveGaugesPerDenomRequest: {
-            encode(message: _769.ActiveGaugesPerDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ActiveGaugesPerDenomRequest;
-            fromJSON(object: any): _769.ActiveGaugesPerDenomRequest;
-            toJSON(message: _769.ActiveGaugesPerDenomRequest): unknown;
-            fromPartial<I_14 extends unknown>(object: I_14): _769.ActiveGaugesPerDenomRequest;
+            encode(message: _191.ActiveGaugesPerDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ActiveGaugesPerDenomRequest;
+            fromJSON(object: any): _191.ActiveGaugesPerDenomRequest;
+            toJSON(message: _191.ActiveGaugesPerDenomRequest): unknown;
+            fromPartial<I_14 extends {
+                denom?: string;
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                };
+            } & {
+                denom?: string;
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & Record<Exclude<keyof I_14["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
+            } & Record<Exclude<keyof I_14, keyof _191.ActiveGaugesPerDenomRequest>, never>>(object: I_14): _191.ActiveGaugesPerDenomRequest;
         };
         ActiveGaugesPerDenomResponse: {
-            encode(message: _769.ActiveGaugesPerDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.ActiveGaugesPerDenomResponse;
-            fromJSON(object: any): _769.ActiveGaugesPerDenomResponse;
-            toJSON(message: _769.ActiveGaugesPerDenomResponse): unknown;
-            fromPartial<I_15 extends unknown>(object: I_15): _769.ActiveGaugesPerDenomResponse;
+            encode(message: _191.ActiveGaugesPerDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.ActiveGaugesPerDenomResponse;
+            fromJSON(object: any): _191.ActiveGaugesPerDenomResponse;
+            toJSON(message: _191.ActiveGaugesPerDenomResponse): unknown;
+            fromPartial<I_15 extends {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                };
+            } & {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & Record<Exclude<keyof I_15["data"][number]["distributeTo"], keyof _194.QueryCondition>, never>;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_15["data"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_15["data"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_15["data"][number]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_15["data"][number]["distributedCoins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_15["data"][number], keyof _188.Gauge>, never>)[] & Record<Exclude<keyof I_15["data"], keyof {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & Record<Exclude<keyof I_15["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
+            } & Record<Exclude<keyof I_15, keyof _191.ActiveGaugesPerDenomResponse>, never>>(object: I_15): _191.ActiveGaugesPerDenomResponse;
         };
         UpcomingGaugesRequest: {
-            encode(message: _769.UpcomingGaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.UpcomingGaugesRequest;
-            fromJSON(object: any): _769.UpcomingGaugesRequest;
-            toJSON(message: _769.UpcomingGaugesRequest): unknown;
-            fromPartial<I_16 extends unknown>(object: I_16): _769.UpcomingGaugesRequest;
+            encode(message: _191.UpcomingGaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.UpcomingGaugesRequest;
+            fromJSON(object: any): _191.UpcomingGaugesRequest;
+            toJSON(message: _191.UpcomingGaugesRequest): unknown;
+            fromPartial<I_16 extends {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                };
+            } & {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & Record<Exclude<keyof I_16["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
+            } & Record<Exclude<keyof I_16, "pagination">, never>>(object: I_16): _191.UpcomingGaugesRequest;
         };
         UpcomingGaugesResponse: {
-            encode(message: _769.UpcomingGaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.UpcomingGaugesResponse;
-            fromJSON(object: any): _769.UpcomingGaugesResponse;
-            toJSON(message: _769.UpcomingGaugesResponse): unknown;
-            fromPartial<I_17 extends unknown>(object: I_17): _769.UpcomingGaugesResponse;
+            encode(message: _191.UpcomingGaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.UpcomingGaugesResponse;
+            fromJSON(object: any): _191.UpcomingGaugesResponse;
+            toJSON(message: _191.UpcomingGaugesResponse): unknown;
+            fromPartial<I_17 extends {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                };
+            } & {
+                data?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & Record<Exclude<keyof I_17["data"][number]["distributeTo"], keyof _194.QueryCondition>, never>;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_17["data"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_17["data"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_17["data"][number]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_17["data"][number]["distributedCoins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_17["data"][number], keyof _188.Gauge>, never>)[] & Record<Exclude<keyof I_17["data"], keyof {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & Record<Exclude<keyof I_17["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
+            } & Record<Exclude<keyof I_17, keyof _191.UpcomingGaugesResponse>, never>>(object: I_17): _191.UpcomingGaugesResponse;
         };
         RewardsEstRequest: {
-            encode(message: _769.RewardsEstRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.RewardsEstRequest;
-            fromJSON(object: any): _769.RewardsEstRequest;
-            toJSON(message: _769.RewardsEstRequest): unknown;
-            fromPartial<I_18 extends unknown>(object: I_18): _769.RewardsEstRequest;
+            encode(message: _191.RewardsEstRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.RewardsEstRequest;
+            fromJSON(object: any): _191.RewardsEstRequest;
+            toJSON(message: _191.RewardsEstRequest): unknown;
+            fromPartial<I_18 extends {
+                owner?: string;
+                lockIds?: any[];
+                endEpoch?: any;
+            } & {
+                owner?: string;
+                lockIds?: any[] & any[] & Record<Exclude<keyof I_18["lockIds"], keyof any[]>, never>;
+                endEpoch?: any;
+            } & Record<Exclude<keyof I_18, keyof _191.RewardsEstRequest>, never>>(object: I_18): _191.RewardsEstRequest;
         };
         RewardsEstResponse: {
-            encode(message: _769.RewardsEstResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.RewardsEstResponse;
-            fromJSON(object: any): _769.RewardsEstResponse;
-            toJSON(message: _769.RewardsEstResponse): unknown;
-            fromPartial<I_19 extends unknown>(object: I_19): _769.RewardsEstResponse;
+            encode(message: _191.RewardsEstResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.RewardsEstResponse;
+            fromJSON(object: any): _191.RewardsEstResponse;
+            toJSON(message: _191.RewardsEstResponse): unknown;
+            fromPartial<I_19 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_19["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_19["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_19, "coins">, never>>(object: I_19): _191.RewardsEstResponse;
         };
         QueryLockableDurationsRequest: {
-            encode(_: _769.QueryLockableDurationsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.QueryLockableDurationsRequest;
-            fromJSON(_: any): _769.QueryLockableDurationsRequest;
-            toJSON(_: _769.QueryLockableDurationsRequest): unknown;
-            fromPartial<I_20 extends unknown>(_: I_20): _769.QueryLockableDurationsRequest;
+            encode(_: _191.QueryLockableDurationsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.QueryLockableDurationsRequest;
+            fromJSON(_: any): _191.QueryLockableDurationsRequest;
+            toJSON(_: _191.QueryLockableDurationsRequest): unknown;
+            fromPartial<I_20 extends {} & {} & Record<Exclude<keyof I_20, never>, never>>(_: I_20): _191.QueryLockableDurationsRequest;
         };
         QueryLockableDurationsResponse: {
-            encode(message: _769.QueryLockableDurationsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _769.QueryLockableDurationsResponse;
-            fromJSON(object: any): _769.QueryLockableDurationsResponse;
-            toJSON(message: _769.QueryLockableDurationsResponse): unknown;
-            fromPartial<I_21 extends unknown>(object: I_21): _769.QueryLockableDurationsResponse;
+            encode(message: _191.QueryLockableDurationsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _191.QueryLockableDurationsResponse;
+            fromJSON(object: any): _191.QueryLockableDurationsResponse;
+            toJSON(message: _191.QueryLockableDurationsResponse): unknown;
+            fromPartial<I_21 extends {
+                lockableDurations?: string[];
+            } & {
+                lockableDurations?: string[] & string[] & Record<Exclude<keyof I_21["lockableDurations"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I_21, "lockableDurations">, never>>(object: I_21): _191.QueryLockableDurationsResponse;
         };
         Params: {
-            encode(message: _768.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _768.Params;
-            fromJSON(object: any): _768.Params;
-            toJSON(message: _768.Params): unknown;
-            fromPartial<I_22 extends unknown>(object: I_22): _768.Params;
+            encode(message: _190.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _190.Params;
+            fromJSON(object: any): _190.Params;
+            toJSON(message: _190.Params): unknown;
+            fromPartial<I_22 extends {
+                distrEpochIdentifier?: string;
+            } & {
+                distrEpochIdentifier?: string;
+            } & Record<Exclude<keyof I_22, "distrEpochIdentifier">, never>>(object: I_22): _190.Params;
         };
         GenesisState: {
-            encode(message: _767.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _767.GenesisState;
-            fromJSON(object: any): _767.GenesisState;
-            toJSON(message: _767.GenesisState): unknown;
-            fromPartial<I_23 extends unknown>(object: I_23): _767.GenesisState;
+            encode(message: _189.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _189.GenesisState;
+            fromJSON(object: any): _189.GenesisState;
+            toJSON(message: _189.GenesisState): unknown;
+            fromPartial<I_23 extends {
+                params?: {
+                    distrEpochIdentifier?: string;
+                };
+                gauges?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+                lockableDurations?: string[];
+                lastGaugeId?: any;
+            } & {
+                params?: {
+                    distrEpochIdentifier?: string;
+                } & {
+                    distrEpochIdentifier?: string;
+                } & Record<Exclude<keyof I_23["params"], "distrEpochIdentifier">, never>;
+                gauges?: {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    } & Record<Exclude<keyof I_23["gauges"][number]["distributeTo"], keyof _194.QueryCondition>, never>;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_23["gauges"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_23["gauges"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_23["gauges"][number]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_23["gauges"][number]["distributedCoins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_23["gauges"][number], keyof _188.Gauge>, never>)[] & Record<Exclude<keyof I_23["gauges"], keyof {
+                    id?: any;
+                    isPerpetual?: boolean;
+                    distributeTo?: {
+                        lockQueryType?: _194.LockQueryType;
+                        denom?: string;
+                        duration?: string;
+                        timestamp?: Date;
+                    };
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                    startTime?: Date;
+                    numEpochsPaidOver?: any;
+                    filledEpochs?: any;
+                    distributedCoins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+                lockableDurations?: string[] & string[] & Record<Exclude<keyof I_23["lockableDurations"], keyof string[]>, never>;
+                lastGaugeId?: any;
+            } & Record<Exclude<keyof I_23, keyof _189.GenesisState>, never>>(object: I_23): _189.GenesisState;
         };
         Gauge: {
-            encode(message: _766.Gauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _766.Gauge;
-            fromJSON(object: any): _766.Gauge;
-            toJSON(message: _766.Gauge): unknown;
-            fromPartial<I_24 extends unknown>(object: I_24): _766.Gauge;
+            encode(message: _188.Gauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _188.Gauge;
+            fromJSON(object: any): _188.Gauge;
+            toJSON(message: _188.Gauge): unknown;
+            fromPartial<I_24 extends {
+                id?: any;
+                isPerpetual?: boolean;
+                distributeTo?: {
+                    lockQueryType?: _194.LockQueryType;
+                    denom?: string;
+                    duration?: string;
+                    timestamp?: Date;
+                };
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                startTime?: Date;
+                numEpochsPaidOver?: any;
+                filledEpochs?: any;
+                distributedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                id?: any;
+                isPerpetual?: boolean;
+                distributeTo?: {
+                    lockQueryType?: _194.LockQueryType;
+                    denom?: string;
+                    duration?: string;
+                    timestamp?: Date;
+                } & {
+                    lockQueryType?: _194.LockQueryType;
+                    denom?: string;
+                    duration?: string;
+                    timestamp?: Date;
+                } & Record<Exclude<keyof I_24["distributeTo"], keyof _194.QueryCondition>, never>;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_24["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_24["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                startTime?: Date;
+                numEpochsPaidOver?: any;
+                filledEpochs?: any;
+                distributedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_24["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_24["distributedCoins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_24, keyof _188.Gauge>, never>>(object: I_24): _188.Gauge;
         };
         LockableDurationsInfo: {
-            encode(message: _766.LockableDurationsInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _766.LockableDurationsInfo;
-            fromJSON(object: any): _766.LockableDurationsInfo;
-            toJSON(message: _766.LockableDurationsInfo): unknown;
-            fromPartial<I_25 extends unknown>(object: I_25): _766.LockableDurationsInfo;
+            encode(message: _188.LockableDurationsInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _188.LockableDurationsInfo;
+            fromJSON(object: any): _188.LockableDurationsInfo;
+            toJSON(message: _188.LockableDurationsInfo): unknown;
+            fromPartial<I_25 extends {
+                lockableDurations?: string[];
+            } & {
+                lockableDurations?: string[] & string[] & Record<Exclude<keyof I_25["lockableDurations"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I_25, "lockableDurations">, never>>(object: I_25): _188.LockableDurationsInfo;
         };
     };
     const lockup: {
         MsgLockTokens: {
-            encode(message: _782.MsgLockTokens, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgLockTokens;
-            fromJSON(object: any): _782.MsgLockTokens;
-            toJSON(message: _782.MsgLockTokens): unknown;
-            fromPartial<I extends unknown>(object: I): _782.MsgLockTokens;
+            encode(message: _196.MsgLockTokens, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgLockTokens;
+            fromJSON(object: any): _196.MsgLockTokens;
+            toJSON(message: _196.MsgLockTokens): unknown;
+            fromPartial<I extends {
+                owner?: string;
+                duration?: string;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                owner?: string;
+                duration?: string;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I, keyof _196.MsgLockTokens>, never>>(object: I): _196.MsgLockTokens;
         };
         MsgLockTokensResponse: {
-            encode(message: _782.MsgLockTokensResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgLockTokensResponse;
-            fromJSON(object: any): _782.MsgLockTokensResponse;
-            toJSON(message: _782.MsgLockTokensResponse): unknown;
-            fromPartial<I_1 extends unknown>(object: I_1): _782.MsgLockTokensResponse;
+            encode(message: _196.MsgLockTokensResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgLockTokensResponse;
+            fromJSON(object: any): _196.MsgLockTokensResponse;
+            toJSON(message: _196.MsgLockTokensResponse): unknown;
+            fromPartial<I_1 extends {
+                ID?: any;
+            } & {
+                ID?: any;
+            } & Record<Exclude<keyof I_1, "ID">, never>>(object: I_1): _196.MsgLockTokensResponse;
         };
         MsgBeginUnlockingAll: {
-            encode(message: _782.MsgBeginUnlockingAll, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgBeginUnlockingAll;
-            fromJSON(object: any): _782.MsgBeginUnlockingAll;
-            toJSON(message: _782.MsgBeginUnlockingAll): unknown;
-            fromPartial<I_2 extends unknown>(object: I_2): _782.MsgBeginUnlockingAll;
+            encode(message: _196.MsgBeginUnlockingAll, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgBeginUnlockingAll;
+            fromJSON(object: any): _196.MsgBeginUnlockingAll;
+            toJSON(message: _196.MsgBeginUnlockingAll): unknown;
+            fromPartial<I_2 extends {
+                owner?: string;
+            } & {
+                owner?: string;
+            } & Record<Exclude<keyof I_2, "owner">, never>>(object: I_2): _196.MsgBeginUnlockingAll;
         };
         MsgBeginUnlockingAllResponse: {
-            encode(message: _782.MsgBeginUnlockingAllResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgBeginUnlockingAllResponse;
-            fromJSON(object: any): _782.MsgBeginUnlockingAllResponse;
-            toJSON(message: _782.MsgBeginUnlockingAllResponse): unknown;
-            fromPartial<I_3 extends unknown>(object: I_3): _782.MsgBeginUnlockingAllResponse;
+            encode(message: _196.MsgBeginUnlockingAllResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgBeginUnlockingAllResponse;
+            fromJSON(object: any): _196.MsgBeginUnlockingAllResponse;
+            toJSON(message: _196.MsgBeginUnlockingAllResponse): unknown;
+            fromPartial<I_3 extends {
+                unlocks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                unlocks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_3["unlocks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_3["unlocks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_3["unlocks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_3["unlocks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_3, "unlocks">, never>>(object: I_3): _196.MsgBeginUnlockingAllResponse;
         };
         MsgBeginUnlocking: {
-            encode(message: _782.MsgBeginUnlocking, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgBeginUnlocking;
-            fromJSON(object: any): _782.MsgBeginUnlocking;
-            toJSON(message: _782.MsgBeginUnlocking): unknown;
-            fromPartial<I_4 extends unknown>(object: I_4): _782.MsgBeginUnlocking;
+            encode(message: _196.MsgBeginUnlocking, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgBeginUnlocking;
+            fromJSON(object: any): _196.MsgBeginUnlocking;
+            toJSON(message: _196.MsgBeginUnlocking): unknown;
+            fromPartial<I_4 extends {
+                owner?: string;
+                ID?: any;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                owner?: string;
+                ID?: any;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_4["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_4["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_4, keyof _196.MsgBeginUnlocking>, never>>(object: I_4): _196.MsgBeginUnlocking;
         };
         MsgBeginUnlockingResponse: {
-            encode(message: _782.MsgBeginUnlockingResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _782.MsgBeginUnlockingResponse;
-            fromJSON(object: any): _782.MsgBeginUnlockingResponse;
-            toJSON(message: _782.MsgBeginUnlockingResponse): unknown;
-            fromPartial<I_5 extends unknown>(object: I_5): _782.MsgBeginUnlockingResponse;
-        };
-        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
-        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
-        AminoConverter: {
-            "/osmosis.lockup.MsgLockTokens": {
-                aminoType: string;
-                toAmino: ({ owner, duration, coins }: _782.MsgLockTokens) => {
-                    owner: string;
-                    duration: {
-                        seconds: string;
-                        nanos: number;
-                    };
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                };
-                fromAmino: ({ owner, duration, coins }: {
-                    owner: string;
-                    duration: {
-                        seconds: string;
-                        nanos: number;
-                    };
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                }) => _782.MsgLockTokens;
-            };
-            "/osmosis.lockup.MsgBeginUnlockingAll": {
-                aminoType: string;
-                toAmino: ({ owner }: _782.MsgBeginUnlockingAll) => {
-                    owner: string;
-                };
-                fromAmino: ({ owner }: {
-                    owner: string;
-                }) => _782.MsgBeginUnlockingAll;
-            };
-            "/osmosis.lockup.MsgBeginUnlocking": {
-                aminoType: string;
-                toAmino: ({ owner, ID, coins }: _782.MsgBeginUnlocking) => {
-                    owner: string;
-                    id: string;
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                };
-                fromAmino: ({ owner, id, coins }: {
-                    owner: string;
-                    id: string;
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                }) => _782.MsgBeginUnlocking;
-            };
-        };
-        encoded: {
-            lockTokens(value: _782.MsgLockTokens): {
-                type_url: string;
-                value: Uint8Array;
-            };
-            beginUnlockingAll(value: _782.MsgBeginUnlockingAll): {
-                type_url: string;
-                value: Uint8Array;
-            };
-            beginUnlocking(value: _782.MsgBeginUnlocking): {
-                type_url: string;
-                value: Uint8Array;
-            };
-        };
-        fromJSON: {
-            lockTokens(value: any): {
-                typeUrl: string;
-                value: _782.MsgLockTokens;
-            };
-            beginUnlockingAll(value: any): {
-                typeUrl: string;
-                value: _782.MsgBeginUnlockingAll;
-            };
-            beginUnlocking(value: any): {
-                typeUrl: string;
-                value: _782.MsgBeginUnlocking;
-            };
-        };
-        toJSON: {
-            lockTokens(value: _782.MsgLockTokens): {
-                typeUrl: string;
-                value: unknown;
-            };
-            beginUnlockingAll(value: _782.MsgBeginUnlockingAll): {
-                typeUrl: string;
-                value: unknown;
-            };
-            beginUnlocking(value: _782.MsgBeginUnlocking): {
-                typeUrl: string;
-                value: unknown;
-            };
-        };
-        json: {
-            lockTokens(value: _782.MsgLockTokens): {
-                typeUrl: string;
-                value: _782.MsgLockTokens;
-            };
-            beginUnlockingAll(value: _782.MsgBeginUnlockingAll): {
-                typeUrl: string;
-                value: _782.MsgBeginUnlockingAll;
-            };
-            beginUnlocking(value: _782.MsgBeginUnlocking): {
-                typeUrl: string;
-                value: _782.MsgBeginUnlocking;
-            };
-        };
-        messages: {
-            lockTokens(value: _782.MsgLockTokens): {
-                typeUrl: string;
-                value: _782.MsgLockTokens;
-            };
-            beginUnlockingAll(value: _782.MsgBeginUnlockingAll): {
-                typeUrl: string;
-                value: _782.MsgBeginUnlockingAll;
-            };
-            beginUnlocking(value: _782.MsgBeginUnlocking): {
-                typeUrl: string;
-                value: _782.MsgBeginUnlocking;
-            };
+            encode(message: _196.MsgBeginUnlockingResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgBeginUnlockingResponse;
+            fromJSON(object: any): _196.MsgBeginUnlockingResponse;
+            toJSON(message: _196.MsgBeginUnlockingResponse): unknown;
+            fromPartial<I_5 extends {
+                success?: boolean;
+            } & {
+                success?: boolean;
+            } & Record<Exclude<keyof I_5, "success">, never>>(object: I_5): _196.MsgBeginUnlockingResponse;
         };
         ModuleBalanceRequest: {
-            encode(_: _781.ModuleBalanceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.ModuleBalanceRequest;
-            fromJSON(_: any): _781.ModuleBalanceRequest;
-            toJSON(_: _781.ModuleBalanceRequest): unknown;
-            fromPartial<I_6 extends unknown>(_: I_6): _781.ModuleBalanceRequest;
+            encode(_: _195.ModuleBalanceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.ModuleBalanceRequest;
+            fromJSON(_: any): _195.ModuleBalanceRequest;
+            toJSON(_: _195.ModuleBalanceRequest): unknown;
+            fromPartial<I_6 extends {} & {} & Record<Exclude<keyof I_6, never>, never>>(_: I_6): _195.ModuleBalanceRequest;
         };
         ModuleBalanceResponse: {
-            encode(message: _781.ModuleBalanceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.ModuleBalanceResponse;
-            fromJSON(object: any): _781.ModuleBalanceResponse;
-            toJSON(message: _781.ModuleBalanceResponse): unknown;
-            fromPartial<I_7 extends unknown>(object: I_7): _781.ModuleBalanceResponse;
+            encode(message: _195.ModuleBalanceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.ModuleBalanceResponse;
+            fromJSON(object: any): _195.ModuleBalanceResponse;
+            toJSON(message: _195.ModuleBalanceResponse): unknown;
+            fromPartial<I_7 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_7["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_7["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_7, "coins">, never>>(object: I_7): _195.ModuleBalanceResponse;
         };
         ModuleLockedAmountRequest: {
-            encode(_: _781.ModuleLockedAmountRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.ModuleLockedAmountRequest;
-            fromJSON(_: any): _781.ModuleLockedAmountRequest;
-            toJSON(_: _781.ModuleLockedAmountRequest): unknown;
-            fromPartial<I_8 extends unknown>(_: I_8): _781.ModuleLockedAmountRequest;
+            encode(_: _195.ModuleLockedAmountRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.ModuleLockedAmountRequest;
+            fromJSON(_: any): _195.ModuleLockedAmountRequest;
+            toJSON(_: _195.ModuleLockedAmountRequest): unknown;
+            fromPartial<I_8 extends {} & {} & Record<Exclude<keyof I_8, never>, never>>(_: I_8): _195.ModuleLockedAmountRequest;
         };
         ModuleLockedAmountResponse: {
-            encode(message: _781.ModuleLockedAmountResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.ModuleLockedAmountResponse;
-            fromJSON(object: any): _781.ModuleLockedAmountResponse;
-            toJSON(message: _781.ModuleLockedAmountResponse): unknown;
-            fromPartial<I_9 extends unknown>(object: I_9): _781.ModuleLockedAmountResponse;
+            encode(message: _195.ModuleLockedAmountResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.ModuleLockedAmountResponse;
+            fromJSON(object: any): _195.ModuleLockedAmountResponse;
+            toJSON(message: _195.ModuleLockedAmountResponse): unknown;
+            fromPartial<I_9 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_9["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_9["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_9, "coins">, never>>(object: I_9): _195.ModuleLockedAmountResponse;
         };
         AccountUnlockableCoinsRequest: {
-            encode(message: _781.AccountUnlockableCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountUnlockableCoinsRequest;
-            fromJSON(object: any): _781.AccountUnlockableCoinsRequest;
-            toJSON(message: _781.AccountUnlockableCoinsRequest): unknown;
-            fromPartial<I_10 extends unknown>(object: I_10): _781.AccountUnlockableCoinsRequest;
+            encode(message: _195.AccountUnlockableCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountUnlockableCoinsRequest;
+            fromJSON(object: any): _195.AccountUnlockableCoinsRequest;
+            toJSON(message: _195.AccountUnlockableCoinsRequest): unknown;
+            fromPartial<I_10 extends {
+                owner?: string;
+            } & {
+                owner?: string;
+            } & Record<Exclude<keyof I_10, "owner">, never>>(object: I_10): _195.AccountUnlockableCoinsRequest;
         };
         AccountUnlockableCoinsResponse: {
-            encode(message: _781.AccountUnlockableCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountUnlockableCoinsResponse;
-            fromJSON(object: any): _781.AccountUnlockableCoinsResponse;
-            toJSON(message: _781.AccountUnlockableCoinsResponse): unknown;
-            fromPartial<I_11 extends unknown>(object: I_11): _781.AccountUnlockableCoinsResponse;
+            encode(message: _195.AccountUnlockableCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountUnlockableCoinsResponse;
+            fromJSON(object: any): _195.AccountUnlockableCoinsResponse;
+            toJSON(message: _195.AccountUnlockableCoinsResponse): unknown;
+            fromPartial<I_11 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_11["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_11["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_11, "coins">, never>>(object: I_11): _195.AccountUnlockableCoinsResponse;
         };
         AccountUnlockingCoinsRequest: {
-            encode(message: _781.AccountUnlockingCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountUnlockingCoinsRequest;
-            fromJSON(object: any): _781.AccountUnlockingCoinsRequest;
-            toJSON(message: _781.AccountUnlockingCoinsRequest): unknown;
-            fromPartial<I_12 extends unknown>(object: I_12): _781.AccountUnlockingCoinsRequest;
+            encode(message: _195.AccountUnlockingCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountUnlockingCoinsRequest;
+            fromJSON(object: any): _195.AccountUnlockingCoinsRequest;
+            toJSON(message: _195.AccountUnlockingCoinsRequest): unknown;
+            fromPartial<I_12 extends {
+                owner?: string;
+            } & {
+                owner?: string;
+            } & Record<Exclude<keyof I_12, "owner">, never>>(object: I_12): _195.AccountUnlockingCoinsRequest;
         };
         AccountUnlockingCoinsResponse: {
-            encode(message: _781.AccountUnlockingCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountUnlockingCoinsResponse;
-            fromJSON(object: any): _781.AccountUnlockingCoinsResponse;
-            toJSON(message: _781.AccountUnlockingCoinsResponse): unknown;
-            fromPartial<I_13 extends unknown>(object: I_13): _781.AccountUnlockingCoinsResponse;
+            encode(message: _195.AccountUnlockingCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountUnlockingCoinsResponse;
+            fromJSON(object: any): _195.AccountUnlockingCoinsResponse;
+            toJSON(message: _195.AccountUnlockingCoinsResponse): unknown;
+            fromPartial<I_13 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_13["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_13["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_13, "coins">, never>>(object: I_13): _195.AccountUnlockingCoinsResponse;
         };
         AccountLockedCoinsRequest: {
-            encode(message: _781.AccountLockedCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedCoinsRequest;
-            fromJSON(object: any): _781.AccountLockedCoinsRequest;
-            toJSON(message: _781.AccountLockedCoinsRequest): unknown;
-            fromPartial<I_14 extends unknown>(object: I_14): _781.AccountLockedCoinsRequest;
+            encode(message: _195.AccountLockedCoinsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedCoinsRequest;
+            fromJSON(object: any): _195.AccountLockedCoinsRequest;
+            toJSON(message: _195.AccountLockedCoinsRequest): unknown;
+            fromPartial<I_14 extends {
+                owner?: string;
+            } & {
+                owner?: string;
+            } & Record<Exclude<keyof I_14, "owner">, never>>(object: I_14): _195.AccountLockedCoinsRequest;
         };
         AccountLockedCoinsResponse: {
-            encode(message: _781.AccountLockedCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedCoinsResponse;
-            fromJSON(object: any): _781.AccountLockedCoinsResponse;
-            toJSON(message: _781.AccountLockedCoinsResponse): unknown;
-            fromPartial<I_15 extends unknown>(object: I_15): _781.AccountLockedCoinsResponse;
+            encode(message: _195.AccountLockedCoinsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedCoinsResponse;
+            fromJSON(object: any): _195.AccountLockedCoinsResponse;
+            toJSON(message: _195.AccountLockedCoinsResponse): unknown;
+            fromPartial<I_15 extends {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_15["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_15["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_15, "coins">, never>>(object: I_15): _195.AccountLockedCoinsResponse;
         };
         AccountLockedPastTimeRequest: {
-            encode(message: _781.AccountLockedPastTimeRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedPastTimeRequest;
-            fromJSON(object: any): _781.AccountLockedPastTimeRequest;
-            toJSON(message: _781.AccountLockedPastTimeRequest): unknown;
-            fromPartial<I_16 extends unknown>(object: I_16): _781.AccountLockedPastTimeRequest;
+            encode(message: _195.AccountLockedPastTimeRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedPastTimeRequest;
+            fromJSON(object: any): _195.AccountLockedPastTimeRequest;
+            toJSON(message: _195.AccountLockedPastTimeRequest): unknown;
+            fromPartial<I_16 extends {
+                owner?: string;
+                timestamp?: Date;
+            } & {
+                owner?: string;
+                timestamp?: Date;
+            } & Record<Exclude<keyof I_16, keyof _195.AccountLockedPastTimeRequest>, never>>(object: I_16): _195.AccountLockedPastTimeRequest;
         };
         AccountLockedPastTimeResponse: {
-            encode(message: _781.AccountLockedPastTimeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedPastTimeResponse;
-            fromJSON(object: any): _781.AccountLockedPastTimeResponse;
-            toJSON(message: _781.AccountLockedPastTimeResponse): unknown;
-            fromPartial<I_17 extends unknown>(object: I_17): _781.AccountLockedPastTimeResponse;
+            encode(message: _195.AccountLockedPastTimeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedPastTimeResponse;
+            fromJSON(object: any): _195.AccountLockedPastTimeResponse;
+            toJSON(message: _195.AccountLockedPastTimeResponse): unknown;
+            fromPartial<I_17 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_17["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_17["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_17["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_17["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_17, "locks">, never>>(object: I_17): _195.AccountLockedPastTimeResponse;
         };
         AccountLockedPastTimeNotUnlockingOnlyRequest: {
-            encode(message: _781.AccountLockedPastTimeNotUnlockingOnlyRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedPastTimeNotUnlockingOnlyRequest;
-            fromJSON(object: any): _781.AccountLockedPastTimeNotUnlockingOnlyRequest;
-            toJSON(message: _781.AccountLockedPastTimeNotUnlockingOnlyRequest): unknown;
-            fromPartial<I_18 extends unknown>(object: I_18): _781.AccountLockedPastTimeNotUnlockingOnlyRequest;
+            encode(message: _195.AccountLockedPastTimeNotUnlockingOnlyRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedPastTimeNotUnlockingOnlyRequest;
+            fromJSON(object: any): _195.AccountLockedPastTimeNotUnlockingOnlyRequest;
+            toJSON(message: _195.AccountLockedPastTimeNotUnlockingOnlyRequest): unknown;
+            fromPartial<I_18 extends {
+                owner?: string;
+                timestamp?: Date;
+            } & {
+                owner?: string;
+                timestamp?: Date;
+            } & Record<Exclude<keyof I_18, keyof _195.AccountLockedPastTimeNotUnlockingOnlyRequest>, never>>(object: I_18): _195.AccountLockedPastTimeNotUnlockingOnlyRequest;
         };
         AccountLockedPastTimeNotUnlockingOnlyResponse: {
-            encode(message: _781.AccountLockedPastTimeNotUnlockingOnlyResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedPastTimeNotUnlockingOnlyResponse;
-            fromJSON(object: any): _781.AccountLockedPastTimeNotUnlockingOnlyResponse;
-            toJSON(message: _781.AccountLockedPastTimeNotUnlockingOnlyResponse): unknown;
-            fromPartial<I_19 extends unknown>(object: I_19): _781.AccountLockedPastTimeNotUnlockingOnlyResponse;
+            encode(message: _195.AccountLockedPastTimeNotUnlockingOnlyResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedPastTimeNotUnlockingOnlyResponse;
+            fromJSON(object: any): _195.AccountLockedPastTimeNotUnlockingOnlyResponse;
+            toJSON(message: _195.AccountLockedPastTimeNotUnlockingOnlyResponse): unknown;
+            fromPartial<I_19 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_19["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_19["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_19["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_19["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_19, "locks">, never>>(object: I_19): _195.AccountLockedPastTimeNotUnlockingOnlyResponse;
         };
         AccountUnlockedBeforeTimeRequest: {
-            encode(message: _781.AccountUnlockedBeforeTimeRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountUnlockedBeforeTimeRequest;
-            fromJSON(object: any): _781.AccountUnlockedBeforeTimeRequest;
-            toJSON(message: _781.AccountUnlockedBeforeTimeRequest): unknown;
-            fromPartial<I_20 extends unknown>(object: I_20): _781.AccountUnlockedBeforeTimeRequest;
+            encode(message: _195.AccountUnlockedBeforeTimeRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountUnlockedBeforeTimeRequest;
+            fromJSON(object: any): _195.AccountUnlockedBeforeTimeRequest;
+            toJSON(message: _195.AccountUnlockedBeforeTimeRequest): unknown;
+            fromPartial<I_20 extends {
+                owner?: string;
+                timestamp?: Date;
+            } & {
+                owner?: string;
+                timestamp?: Date;
+            } & Record<Exclude<keyof I_20, keyof _195.AccountUnlockedBeforeTimeRequest>, never>>(object: I_20): _195.AccountUnlockedBeforeTimeRequest;
         };
         AccountUnlockedBeforeTimeResponse: {
-            encode(message: _781.AccountUnlockedBeforeTimeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountUnlockedBeforeTimeResponse;
-            fromJSON(object: any): _781.AccountUnlockedBeforeTimeResponse;
-            toJSON(message: _781.AccountUnlockedBeforeTimeResponse): unknown;
-            fromPartial<I_21 extends unknown>(object: I_21): _781.AccountUnlockedBeforeTimeResponse;
+            encode(message: _195.AccountUnlockedBeforeTimeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountUnlockedBeforeTimeResponse;
+            fromJSON(object: any): _195.AccountUnlockedBeforeTimeResponse;
+            toJSON(message: _195.AccountUnlockedBeforeTimeResponse): unknown;
+            fromPartial<I_21 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_21["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_21["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_21["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_21["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_21, "locks">, never>>(object: I_21): _195.AccountUnlockedBeforeTimeResponse;
         };
         AccountLockedPastTimeDenomRequest: {
-            encode(message: _781.AccountLockedPastTimeDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedPastTimeDenomRequest;
-            fromJSON(object: any): _781.AccountLockedPastTimeDenomRequest;
-            toJSON(message: _781.AccountLockedPastTimeDenomRequest): unknown;
-            fromPartial<I_22 extends unknown>(object: I_22): _781.AccountLockedPastTimeDenomRequest;
+            encode(message: _195.AccountLockedPastTimeDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedPastTimeDenomRequest;
+            fromJSON(object: any): _195.AccountLockedPastTimeDenomRequest;
+            toJSON(message: _195.AccountLockedPastTimeDenomRequest): unknown;
+            fromPartial<I_22 extends {
+                owner?: string;
+                timestamp?: Date;
+                denom?: string;
+            } & {
+                owner?: string;
+                timestamp?: Date;
+                denom?: string;
+            } & Record<Exclude<keyof I_22, keyof _195.AccountLockedPastTimeDenomRequest>, never>>(object: I_22): _195.AccountLockedPastTimeDenomRequest;
         };
         AccountLockedPastTimeDenomResponse: {
-            encode(message: _781.AccountLockedPastTimeDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedPastTimeDenomResponse;
-            fromJSON(object: any): _781.AccountLockedPastTimeDenomResponse;
-            toJSON(message: _781.AccountLockedPastTimeDenomResponse): unknown;
-            fromPartial<I_23 extends unknown>(object: I_23): _781.AccountLockedPastTimeDenomResponse;
+            encode(message: _195.AccountLockedPastTimeDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedPastTimeDenomResponse;
+            fromJSON(object: any): _195.AccountLockedPastTimeDenomResponse;
+            toJSON(message: _195.AccountLockedPastTimeDenomResponse): unknown;
+            fromPartial<I_23 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_23["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_23["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_23["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_23["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_23, "locks">, never>>(object: I_23): _195.AccountLockedPastTimeDenomResponse;
         };
         LockedDenomRequest: {
-            encode(message: _781.LockedDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.LockedDenomRequest;
-            fromJSON(object: any): _781.LockedDenomRequest;
-            toJSON(message: _781.LockedDenomRequest): unknown;
-            fromPartial<I_24 extends unknown>(object: I_24): _781.LockedDenomRequest;
+            encode(message: _195.LockedDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.LockedDenomRequest;
+            fromJSON(object: any): _195.LockedDenomRequest;
+            toJSON(message: _195.LockedDenomRequest): unknown;
+            fromPartial<I_24 extends {
+                denom?: string;
+                duration?: string;
+            } & {
+                denom?: string;
+                duration?: string;
+            } & Record<Exclude<keyof I_24, keyof _195.LockedDenomRequest>, never>>(object: I_24): _195.LockedDenomRequest;
         };
         LockedDenomResponse: {
-            encode(message: _781.LockedDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.LockedDenomResponse;
-            fromJSON(object: any): _781.LockedDenomResponse;
-            toJSON(message: _781.LockedDenomResponse): unknown;
-            fromPartial<I_25 extends unknown>(object: I_25): _781.LockedDenomResponse;
+            encode(message: _195.LockedDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.LockedDenomResponse;
+            fromJSON(object: any): _195.LockedDenomResponse;
+            toJSON(message: _195.LockedDenomResponse): unknown;
+            fromPartial<I_25 extends {
+                amount?: string;
+            } & {
+                amount?: string;
+            } & Record<Exclude<keyof I_25, "amount">, never>>(object: I_25): _195.LockedDenomResponse;
         };
         LockedRequest: {
-            encode(message: _781.LockedRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.LockedRequest;
-            fromJSON(object: any): _781.LockedRequest;
-            toJSON(message: _781.LockedRequest): unknown;
-            fromPartial<I_26 extends unknown>(object: I_26): _781.LockedRequest;
+            encode(message: _195.LockedRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.LockedRequest;
+            fromJSON(object: any): _195.LockedRequest;
+            toJSON(message: _195.LockedRequest): unknown;
+            fromPartial<I_26 extends {
+                lockId?: any;
+            } & {
+                lockId?: any;
+            } & Record<Exclude<keyof I_26, "lockId">, never>>(object: I_26): _195.LockedRequest;
         };
         LockedResponse: {
-            encode(message: _781.LockedResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.LockedResponse;
-            fromJSON(object: any): _781.LockedResponse;
-            toJSON(message: _781.LockedResponse): unknown;
-            fromPartial<I_27 extends unknown>(object: I_27): _781.LockedResponse;
+            encode(message: _195.LockedResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.LockedResponse;
+            fromJSON(object: any): _195.LockedResponse;
+            toJSON(message: _195.LockedResponse): unknown;
+            fromPartial<I_27 extends {
+                lock?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                };
+            } & {
+                lock?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_27["lock"]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_27["lock"]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_27["lock"], keyof _194.PeriodLock>, never>;
+            } & Record<Exclude<keyof I_27, "lock">, never>>(object: I_27): _195.LockedResponse;
         };
         SyntheticLockupsByLockupIDRequest: {
-            encode(message: _781.SyntheticLockupsByLockupIDRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.SyntheticLockupsByLockupIDRequest;
-            fromJSON(object: any): _781.SyntheticLockupsByLockupIDRequest;
-            toJSON(message: _781.SyntheticLockupsByLockupIDRequest): unknown;
-            fromPartial<I_28 extends unknown>(object: I_28): _781.SyntheticLockupsByLockupIDRequest;
+            encode(message: _195.SyntheticLockupsByLockupIDRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.SyntheticLockupsByLockupIDRequest;
+            fromJSON(object: any): _195.SyntheticLockupsByLockupIDRequest;
+            toJSON(message: _195.SyntheticLockupsByLockupIDRequest): unknown;
+            fromPartial<I_28 extends {
+                lockId?: any;
+            } & {
+                lockId?: any;
+            } & Record<Exclude<keyof I_28, "lockId">, never>>(object: I_28): _195.SyntheticLockupsByLockupIDRequest;
         };
         SyntheticLockupsByLockupIDResponse: {
-            encode(message: _781.SyntheticLockupsByLockupIDResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.SyntheticLockupsByLockupIDResponse;
-            fromJSON(object: any): _781.SyntheticLockupsByLockupIDResponse;
-            toJSON(message: _781.SyntheticLockupsByLockupIDResponse): unknown;
-            fromPartial<I_29 extends unknown>(object: I_29): _781.SyntheticLockupsByLockupIDResponse;
+            encode(message: _195.SyntheticLockupsByLockupIDResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.SyntheticLockupsByLockupIDResponse;
+            fromJSON(object: any): _195.SyntheticLockupsByLockupIDResponse;
+            toJSON(message: _195.SyntheticLockupsByLockupIDResponse): unknown;
+            fromPartial<I_29 extends {
+                syntheticLocks?: {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[];
+            } & {
+                syntheticLocks?: {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[] & ({
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                } & {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                } & Record<Exclude<keyof I_29["syntheticLocks"][number], keyof _194.SyntheticLock>, never>)[] & Record<Exclude<keyof I_29["syntheticLocks"], keyof {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_29, "syntheticLocks">, never>>(object: I_29): _195.SyntheticLockupsByLockupIDResponse;
         };
         AccountLockedLongerDurationRequest: {
-            encode(message: _781.AccountLockedLongerDurationRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedLongerDurationRequest;
-            fromJSON(object: any): _781.AccountLockedLongerDurationRequest;
-            toJSON(message: _781.AccountLockedLongerDurationRequest): unknown;
-            fromPartial<I_30 extends unknown>(object: I_30): _781.AccountLockedLongerDurationRequest;
+            encode(message: _195.AccountLockedLongerDurationRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedLongerDurationRequest;
+            fromJSON(object: any): _195.AccountLockedLongerDurationRequest;
+            toJSON(message: _195.AccountLockedLongerDurationRequest): unknown;
+            fromPartial<I_30 extends {
+                owner?: string;
+                duration?: string;
+            } & {
+                owner?: string;
+                duration?: string;
+            } & Record<Exclude<keyof I_30, keyof _195.AccountLockedLongerDurationRequest>, never>>(object: I_30): _195.AccountLockedLongerDurationRequest;
         };
         AccountLockedLongerDurationResponse: {
-            encode(message: _781.AccountLockedLongerDurationResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedLongerDurationResponse;
-            fromJSON(object: any): _781.AccountLockedLongerDurationResponse;
-            toJSON(message: _781.AccountLockedLongerDurationResponse): unknown;
-            fromPartial<I_31 extends unknown>(object: I_31): _781.AccountLockedLongerDurationResponse;
+            encode(message: _195.AccountLockedLongerDurationResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedLongerDurationResponse;
+            fromJSON(object: any): _195.AccountLockedLongerDurationResponse;
+            toJSON(message: _195.AccountLockedLongerDurationResponse): unknown;
+            fromPartial<I_31 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_31["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_31["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_31["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_31["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_31, "locks">, never>>(object: I_31): _195.AccountLockedLongerDurationResponse;
         };
         AccountLockedLongerDurationNotUnlockingOnlyRequest: {
-            encode(message: _781.AccountLockedLongerDurationNotUnlockingOnlyRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedLongerDurationNotUnlockingOnlyRequest;
-            fromJSON(object: any): _781.AccountLockedLongerDurationNotUnlockingOnlyRequest;
-            toJSON(message: _781.AccountLockedLongerDurationNotUnlockingOnlyRequest): unknown;
-            fromPartial<I_32 extends unknown>(object: I_32): _781.AccountLockedLongerDurationNotUnlockingOnlyRequest;
+            encode(message: _195.AccountLockedLongerDurationNotUnlockingOnlyRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedLongerDurationNotUnlockingOnlyRequest;
+            fromJSON(object: any): _195.AccountLockedLongerDurationNotUnlockingOnlyRequest;
+            toJSON(message: _195.AccountLockedLongerDurationNotUnlockingOnlyRequest): unknown;
+            fromPartial<I_32 extends {
+                owner?: string;
+                duration?: string;
+            } & {
+                owner?: string;
+                duration?: string;
+            } & Record<Exclude<keyof I_32, keyof _195.AccountLockedLongerDurationNotUnlockingOnlyRequest>, never>>(object: I_32): _195.AccountLockedLongerDurationNotUnlockingOnlyRequest;
         };
         AccountLockedLongerDurationNotUnlockingOnlyResponse: {
-            encode(message: _781.AccountLockedLongerDurationNotUnlockingOnlyResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedLongerDurationNotUnlockingOnlyResponse;
-            fromJSON(object: any): _781.AccountLockedLongerDurationNotUnlockingOnlyResponse;
-            toJSON(message: _781.AccountLockedLongerDurationNotUnlockingOnlyResponse): unknown;
-            fromPartial<I_33 extends unknown>(object: I_33): _781.AccountLockedLongerDurationNotUnlockingOnlyResponse;
+            encode(message: _195.AccountLockedLongerDurationNotUnlockingOnlyResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedLongerDurationNotUnlockingOnlyResponse;
+            fromJSON(object: any): _195.AccountLockedLongerDurationNotUnlockingOnlyResponse;
+            toJSON(message: _195.AccountLockedLongerDurationNotUnlockingOnlyResponse): unknown;
+            fromPartial<I_33 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_33["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_33["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_33["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_33["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_33, "locks">, never>>(object: I_33): _195.AccountLockedLongerDurationNotUnlockingOnlyResponse;
         };
         AccountLockedLongerDurationDenomRequest: {
-            encode(message: _781.AccountLockedLongerDurationDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedLongerDurationDenomRequest;
-            fromJSON(object: any): _781.AccountLockedLongerDurationDenomRequest;
-            toJSON(message: _781.AccountLockedLongerDurationDenomRequest): unknown;
-            fromPartial<I_34 extends unknown>(object: I_34): _781.AccountLockedLongerDurationDenomRequest;
+            encode(message: _195.AccountLockedLongerDurationDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedLongerDurationDenomRequest;
+            fromJSON(object: any): _195.AccountLockedLongerDurationDenomRequest;
+            toJSON(message: _195.AccountLockedLongerDurationDenomRequest): unknown;
+            fromPartial<I_34 extends {
+                owner?: string;
+                duration?: string;
+                denom?: string;
+            } & {
+                owner?: string;
+                duration?: string;
+                denom?: string;
+            } & Record<Exclude<keyof I_34, keyof _195.AccountLockedLongerDurationDenomRequest>, never>>(object: I_34): _195.AccountLockedLongerDurationDenomRequest;
         };
         AccountLockedLongerDurationDenomResponse: {
-            encode(message: _781.AccountLockedLongerDurationDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _781.AccountLockedLongerDurationDenomResponse;
-            fromJSON(object: any): _781.AccountLockedLongerDurationDenomResponse;
-            toJSON(message: _781.AccountLockedLongerDurationDenomResponse): unknown;
-            fromPartial<I_35 extends unknown>(object: I_35): _781.AccountLockedLongerDurationDenomResponse;
+            encode(message: _195.AccountLockedLongerDurationDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _195.AccountLockedLongerDurationDenomResponse;
+            fromJSON(object: any): _195.AccountLockedLongerDurationDenomResponse;
+            toJSON(message: _195.AccountLockedLongerDurationDenomResponse): unknown;
+            fromPartial<I_35 extends {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+            } & {
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_35["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_35["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_35["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_35["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+            } & Record<Exclude<keyof I_35, "locks">, never>>(object: I_35): _195.AccountLockedLongerDurationDenomResponse;
         };
-        lockQueryTypeFromJSON(object: any): _780.LockQueryType;
-        lockQueryTypeToJSON(object: _780.LockQueryType): string;
-        LockQueryType: typeof _780.LockQueryType;
+        lockQueryTypeFromJSON(object: any): _194.LockQueryType;
+        lockQueryTypeToJSON(object: _194.LockQueryType): string;
+        LockQueryType: typeof _194.LockQueryType;
         PeriodLock: {
-            encode(message: _780.PeriodLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _780.PeriodLock;
-            fromJSON(object: any): _780.PeriodLock;
-            toJSON(message: _780.PeriodLock): unknown;
-            fromPartial<I_36 extends unknown>(object: I_36): _780.PeriodLock;
+            encode(message: _194.PeriodLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _194.PeriodLock;
+            fromJSON(object: any): _194.PeriodLock;
+            toJSON(message: _194.PeriodLock): unknown;
+            fromPartial<I_36 extends {
+                ID?: any;
+                owner?: string;
+                duration?: string;
+                endTime?: Date;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                ID?: any;
+                owner?: string;
+                duration?: string;
+                endTime?: Date;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_36["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_36["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_36, keyof _194.PeriodLock>, never>>(object: I_36): _194.PeriodLock;
         };
         QueryCondition: {
-            encode(message: _780.QueryCondition, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _780.QueryCondition;
-            fromJSON(object: any): _780.QueryCondition;
-            toJSON(message: _780.QueryCondition): unknown;
-            fromPartial<I_37 extends unknown>(object: I_37): _780.QueryCondition;
+            encode(message: _194.QueryCondition, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _194.QueryCondition;
+            fromJSON(object: any): _194.QueryCondition;
+            toJSON(message: _194.QueryCondition): unknown;
+            fromPartial<I_37 extends {
+                lockQueryType?: _194.LockQueryType;
+                denom?: string;
+                duration?: string;
+                timestamp?: Date;
+            } & {
+                lockQueryType?: _194.LockQueryType;
+                denom?: string;
+                duration?: string;
+                timestamp?: Date;
+            } & Record<Exclude<keyof I_37, keyof _194.QueryCondition>, never>>(object: I_37): _194.QueryCondition;
         };
         SyntheticLock: {
-            encode(message: _780.SyntheticLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _780.SyntheticLock;
-            fromJSON(object: any): _780.SyntheticLock;
-            toJSON(message: _780.SyntheticLock): unknown;
-            fromPartial<I_38 extends unknown>(object: I_38): _780.SyntheticLock;
+            encode(message: _194.SyntheticLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _194.SyntheticLock;
+            fromJSON(object: any): _194.SyntheticLock;
+            toJSON(message: _194.SyntheticLock): unknown;
+            fromPartial<I_38 extends {
+                underlyingLockId?: any;
+                synthDenom?: string;
+                endTime?: Date;
+                duration?: string;
+            } & {
+                underlyingLockId?: any;
+                synthDenom?: string;
+                endTime?: Date;
+                duration?: string;
+            } & Record<Exclude<keyof I_38, keyof _194.SyntheticLock>, never>>(object: I_38): _194.SyntheticLock;
         };
         GenesisState: {
-            encode(message: _779.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _779.GenesisState;
-            fromJSON(object: any): _779.GenesisState;
-            toJSON(message: _779.GenesisState): unknown;
-            fromPartial<I_39 extends unknown>(object: I_39): _779.GenesisState;
+            encode(message: _193.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _193.GenesisState;
+            fromJSON(object: any): _193.GenesisState;
+            toJSON(message: _193.GenesisState): unknown;
+            fromPartial<I_39 extends {
+                lastLockId?: any;
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[];
+                syntheticLocks?: {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[];
+            } & {
+                lastLockId?: any;
+                locks?: {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[] & ({
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                } & {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[] & ({
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_39["locks"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_39["locks"][number]["coins"], keyof {
+                        denom?: string;
+                        amount?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_39["locks"][number], keyof _194.PeriodLock>, never>)[] & Record<Exclude<keyof I_39["locks"], keyof {
+                    ID?: any;
+                    owner?: string;
+                    duration?: string;
+                    endTime?: Date;
+                    coins?: {
+                        denom?: string;
+                        amount?: string;
+                    }[];
+                }[]>, never>;
+                syntheticLocks?: {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[] & ({
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                } & {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                } & Record<Exclude<keyof I_39["syntheticLocks"][number], keyof _194.SyntheticLock>, never>)[] & Record<Exclude<keyof I_39["syntheticLocks"], keyof {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_39, keyof _193.GenesisState>, never>>(object: I_39): _193.GenesisState;
         };
     };
     namespace mint {
         const v1beta1: {
             QueryParamsRequest: {
-                encode(_: _793.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _793.QueryParamsRequest;
-                fromJSON(_: any): _793.QueryParamsRequest;
-                toJSON(_: _793.QueryParamsRequest): unknown;
-                fromPartial<I extends unknown>(_: I): _793.QueryParamsRequest;
+                encode(_: _199.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _199.QueryParamsRequest;
+                fromJSON(_: any): _199.QueryParamsRequest;
+                toJSON(_: _199.QueryParamsRequest): unknown;
+                fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): _199.QueryParamsRequest;
             };
             QueryParamsResponse: {
-                encode(message: _793.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _793.QueryParamsResponse;
-                fromJSON(object: any): _793.QueryParamsResponse;
-                toJSON(message: _793.QueryParamsResponse): unknown;
-                fromPartial<I_1 extends unknown>(object: I_1): _793.QueryParamsResponse;
+                encode(message: _199.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _199.QueryParamsResponse;
+                fromJSON(object: any): _199.QueryParamsResponse;
+                toJSON(message: _199.QueryParamsResponse): unknown;
+                fromPartial<I_1 extends {
+                    params?: {
+                        mintDenom?: string;
+                        genesisEpochProvisions?: string;
+                        epochIdentifier?: string;
+                        reductionPeriodInEpochs?: any;
+                        reductionFactor?: string;
+                        distributionProportions?: {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        };
+                        weightedDeveloperRewardsReceivers?: {
+                            address?: string;
+                            weight?: string;
+                        }[];
+                        mintingRewardsDistributionStartEpoch?: any;
+                    };
+                } & {
+                    params?: {
+                        mintDenom?: string;
+                        genesisEpochProvisions?: string;
+                        epochIdentifier?: string;
+                        reductionPeriodInEpochs?: any;
+                        reductionFactor?: string;
+                        distributionProportions?: {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        };
+                        weightedDeveloperRewardsReceivers?: {
+                            address?: string;
+                            weight?: string;
+                        }[];
+                        mintingRewardsDistributionStartEpoch?: any;
+                    } & {
+                        mintDenom?: string;
+                        genesisEpochProvisions?: string;
+                        epochIdentifier?: string;
+                        reductionPeriodInEpochs?: any;
+                        reductionFactor?: string;
+                        distributionProportions?: {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        } & {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        } & Record<Exclude<keyof I_1["params"]["distributionProportions"], keyof _198.DistributionProportions>, never>;
+                        weightedDeveloperRewardsReceivers?: {
+                            address?: string;
+                            weight?: string;
+                        }[] & ({
+                            address?: string;
+                            weight?: string;
+                        } & {
+                            address?: string;
+                            weight?: string;
+                        } & Record<Exclude<keyof I_1["params"]["weightedDeveloperRewardsReceivers"][number], keyof _198.WeightedAddress>, never>)[] & Record<Exclude<keyof I_1["params"]["weightedDeveloperRewardsReceivers"], keyof {
+                            address?: string;
+                            weight?: string;
+                        }[]>, never>;
+                        mintingRewardsDistributionStartEpoch?: any;
+                    } & Record<Exclude<keyof I_1["params"], keyof _198.Params>, never>;
+                } & Record<Exclude<keyof I_1, "params">, never>>(object: I_1): _199.QueryParamsResponse;
             };
             QueryEpochProvisionsRequest: {
-                encode(_: _793.QueryEpochProvisionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _793.QueryEpochProvisionsRequest;
-                fromJSON(_: any): _793.QueryEpochProvisionsRequest;
-                toJSON(_: _793.QueryEpochProvisionsRequest): unknown;
-                fromPartial<I_2 extends unknown>(_: I_2): _793.QueryEpochProvisionsRequest;
+                encode(_: _199.QueryEpochProvisionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _199.QueryEpochProvisionsRequest;
+                fromJSON(_: any): _199.QueryEpochProvisionsRequest;
+                toJSON(_: _199.QueryEpochProvisionsRequest): unknown;
+                fromPartial<I_2 extends {} & {} & Record<Exclude<keyof I_2, never>, never>>(_: I_2): _199.QueryEpochProvisionsRequest;
             };
             QueryEpochProvisionsResponse: {
-                encode(message: _793.QueryEpochProvisionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _793.QueryEpochProvisionsResponse;
-                fromJSON(object: any): _793.QueryEpochProvisionsResponse;
-                toJSON(message: _793.QueryEpochProvisionsResponse): unknown;
-                fromPartial<I_3 extends unknown>(object: I_3): _793.QueryEpochProvisionsResponse;
+                encode(message: _199.QueryEpochProvisionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _199.QueryEpochProvisionsResponse;
+                fromJSON(object: any): _199.QueryEpochProvisionsResponse;
+                toJSON(message: _199.QueryEpochProvisionsResponse): unknown;
+                fromPartial<I_3 extends {
+                    epochProvisions?: Uint8Array;
+                } & {
+                    epochProvisions?: Uint8Array;
+                } & Record<Exclude<keyof I_3, "epochProvisions">, never>>(object: I_3): _199.QueryEpochProvisionsResponse;
             };
             Minter: {
-                encode(message: _792.Minter, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _792.Minter;
-                fromJSON(object: any): _792.Minter;
-                toJSON(message: _792.Minter): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _792.Minter;
+                encode(message: _198.Minter, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _198.Minter;
+                fromJSON(object: any): _198.Minter;
+                toJSON(message: _198.Minter): unknown;
+                fromPartial<I_4 extends {
+                    epochProvisions?: string;
+                } & {
+                    epochProvisions?: string;
+                } & Record<Exclude<keyof I_4, "epochProvisions">, never>>(object: I_4): _198.Minter;
             };
             WeightedAddress: {
-                encode(message: _792.WeightedAddress, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _792.WeightedAddress;
-                fromJSON(object: any): _792.WeightedAddress;
-                toJSON(message: _792.WeightedAddress): unknown;
-                fromPartial<I_5 extends unknown>(object: I_5): _792.WeightedAddress;
+                encode(message: _198.WeightedAddress, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _198.WeightedAddress;
+                fromJSON(object: any): _198.WeightedAddress;
+                toJSON(message: _198.WeightedAddress): unknown;
+                fromPartial<I_5 extends {
+                    address?: string;
+                    weight?: string;
+                } & {
+                    address?: string;
+                    weight?: string;
+                } & Record<Exclude<keyof I_5, keyof _198.WeightedAddress>, never>>(object: I_5): _198.WeightedAddress;
             };
             DistributionProportions: {
-                encode(message: _792.DistributionProportions, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _792.DistributionProportions;
-                fromJSON(object: any): _792.DistributionProportions;
-                toJSON(message: _792.DistributionProportions): unknown;
-                fromPartial<I_6 extends unknown>(object: I_6): _792.DistributionProportions;
+                encode(message: _198.DistributionProportions, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _198.DistributionProportions;
+                fromJSON(object: any): _198.DistributionProportions;
+                toJSON(message: _198.DistributionProportions): unknown;
+                fromPartial<I_6 extends {
+                    staking?: string;
+                    poolIncentives?: string;
+                    developerRewards?: string;
+                    communityPool?: string;
+                } & {
+                    staking?: string;
+                    poolIncentives?: string;
+                    developerRewards?: string;
+                    communityPool?: string;
+                } & Record<Exclude<keyof I_6, keyof _198.DistributionProportions>, never>>(object: I_6): _198.DistributionProportions;
             };
             Params: {
-                encode(message: _792.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _792.Params;
-                fromJSON(object: any): _792.Params;
-                toJSON(message: _792.Params): unknown;
-                fromPartial<I_7 extends unknown>(object: I_7): _792.Params;
+                encode(message: _198.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _198.Params;
+                fromJSON(object: any): _198.Params;
+                toJSON(message: _198.Params): unknown;
+                fromPartial<I_7 extends {
+                    mintDenom?: string;
+                    genesisEpochProvisions?: string;
+                    epochIdentifier?: string;
+                    reductionPeriodInEpochs?: any;
+                    reductionFactor?: string;
+                    distributionProportions?: {
+                        staking?: string;
+                        poolIncentives?: string;
+                        developerRewards?: string;
+                        communityPool?: string;
+                    };
+                    weightedDeveloperRewardsReceivers?: {
+                        address?: string;
+                        weight?: string;
+                    }[];
+                    mintingRewardsDistributionStartEpoch?: any;
+                } & {
+                    mintDenom?: string;
+                    genesisEpochProvisions?: string;
+                    epochIdentifier?: string;
+                    reductionPeriodInEpochs?: any;
+                    reductionFactor?: string;
+                    distributionProportions?: {
+                        staking?: string;
+                        poolIncentives?: string;
+                        developerRewards?: string;
+                        communityPool?: string;
+                    } & {
+                        staking?: string;
+                        poolIncentives?: string;
+                        developerRewards?: string;
+                        communityPool?: string;
+                    } & Record<Exclude<keyof I_7["distributionProportions"], keyof _198.DistributionProportions>, never>;
+                    weightedDeveloperRewardsReceivers?: {
+                        address?: string;
+                        weight?: string;
+                    }[] & ({
+                        address?: string;
+                        weight?: string;
+                    } & {
+                        address?: string;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_7["weightedDeveloperRewardsReceivers"][number], keyof _198.WeightedAddress>, never>)[] & Record<Exclude<keyof I_7["weightedDeveloperRewardsReceivers"], keyof {
+                        address?: string;
+                        weight?: string;
+                    }[]>, never>;
+                    mintingRewardsDistributionStartEpoch?: any;
+                } & Record<Exclude<keyof I_7, keyof _198.Params>, never>>(object: I_7): _198.Params;
             };
             GenesisState: {
-                encode(message: _791.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _791.GenesisState;
-                fromJSON(object: any): _791.GenesisState;
-                toJSON(message: _791.GenesisState): unknown;
-                fromPartial<I_8 extends unknown>(object: I_8): _791.GenesisState;
+                encode(message: _197.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _197.GenesisState;
+                fromJSON(object: any): _197.GenesisState;
+                toJSON(message: _197.GenesisState): unknown;
+                fromPartial<I_8 extends {
+                    minter?: {
+                        epochProvisions?: string;
+                    };
+                    params?: {
+                        mintDenom?: string;
+                        genesisEpochProvisions?: string;
+                        epochIdentifier?: string;
+                        reductionPeriodInEpochs?: any;
+                        reductionFactor?: string;
+                        distributionProportions?: {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        };
+                        weightedDeveloperRewardsReceivers?: {
+                            address?: string;
+                            weight?: string;
+                        }[];
+                        mintingRewardsDistributionStartEpoch?: any;
+                    };
+                    halvenStartedEpoch?: any;
+                } & {
+                    minter?: {
+                        epochProvisions?: string;
+                    } & {
+                        epochProvisions?: string;
+                    } & Record<Exclude<keyof I_8["minter"], "epochProvisions">, never>;
+                    params?: {
+                        mintDenom?: string;
+                        genesisEpochProvisions?: string;
+                        epochIdentifier?: string;
+                        reductionPeriodInEpochs?: any;
+                        reductionFactor?: string;
+                        distributionProportions?: {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        };
+                        weightedDeveloperRewardsReceivers?: {
+                            address?: string;
+                            weight?: string;
+                        }[];
+                        mintingRewardsDistributionStartEpoch?: any;
+                    } & {
+                        mintDenom?: string;
+                        genesisEpochProvisions?: string;
+                        epochIdentifier?: string;
+                        reductionPeriodInEpochs?: any;
+                        reductionFactor?: string;
+                        distributionProportions?: {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        } & {
+                            staking?: string;
+                            poolIncentives?: string;
+                            developerRewards?: string;
+                            communityPool?: string;
+                        } & Record<Exclude<keyof I_8["params"]["distributionProportions"], keyof _198.DistributionProportions>, never>;
+                        weightedDeveloperRewardsReceivers?: {
+                            address?: string;
+                            weight?: string;
+                        }[] & ({
+                            address?: string;
+                            weight?: string;
+                        } & {
+                            address?: string;
+                            weight?: string;
+                        } & Record<Exclude<keyof I_8["params"]["weightedDeveloperRewardsReceivers"][number], keyof _198.WeightedAddress>, never>)[] & Record<Exclude<keyof I_8["params"]["weightedDeveloperRewardsReceivers"], keyof {
+                            address?: string;
+                            weight?: string;
+                        }[]>, never>;
+                        mintingRewardsDistributionStartEpoch?: any;
+                    } & Record<Exclude<keyof I_8["params"], keyof _198.Params>, never>;
+                    halvenStartedEpoch?: any;
+                } & Record<Exclude<keyof I_8, keyof _197.GenesisState>, never>>(object: I_8): _197.GenesisState;
             };
         };
     }
     namespace poolincentives {
         const v1beta1: {
             QueryGaugeIdsRequest: {
-                encode(message: _797.QueryGaugeIdsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryGaugeIdsRequest;
-                fromJSON(object: any): _797.QueryGaugeIdsRequest;
-                toJSON(message: _797.QueryGaugeIdsRequest): unknown;
-                fromPartial<I extends unknown>(object: I): _797.QueryGaugeIdsRequest;
+                encode(message: _203.QueryGaugeIdsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryGaugeIdsRequest;
+                fromJSON(object: any): _203.QueryGaugeIdsRequest;
+                toJSON(message: _203.QueryGaugeIdsRequest): unknown;
+                fromPartial<I extends {
+                    poolId?: any;
+                } & {
+                    poolId?: any;
+                } & Record<Exclude<keyof I, "poolId">, never>>(object: I): _203.QueryGaugeIdsRequest;
             };
             QueryGaugeIdsResponse: {
-                encode(message: _797.QueryGaugeIdsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryGaugeIdsResponse;
-                fromJSON(object: any): _797.QueryGaugeIdsResponse;
-                toJSON(message: _797.QueryGaugeIdsResponse): unknown;
-                fromPartial<I_1 extends unknown>(object: I_1): _797.QueryGaugeIdsResponse;
+                encode(message: _203.QueryGaugeIdsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryGaugeIdsResponse;
+                fromJSON(object: any): _203.QueryGaugeIdsResponse;
+                toJSON(message: _203.QueryGaugeIdsResponse): unknown;
+                fromPartial<I_1 extends {
+                    gaugeIdsWithDuration?: {
+                        gaugeId?: any;
+                        duration?: string;
+                    }[];
+                } & {
+                    gaugeIdsWithDuration?: {
+                        gaugeId?: any;
+                        duration?: string;
+                    }[] & ({
+                        gaugeId?: any;
+                        duration?: string;
+                    } & {
+                        gaugeId?: any;
+                        duration?: string;
+                    } & Record<Exclude<keyof I_1["gaugeIdsWithDuration"][number], keyof _203.QueryGaugeIdsResponse_GaugeIdWithDuration>, never>)[] & Record<Exclude<keyof I_1["gaugeIdsWithDuration"], keyof {
+                        gaugeId?: any;
+                        duration?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_1, "gaugeIdsWithDuration">, never>>(object: I_1): _203.QueryGaugeIdsResponse;
             };
             QueryGaugeIdsResponse_GaugeIdWithDuration: {
-                encode(message: _797.QueryGaugeIdsResponse_GaugeIdWithDuration, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryGaugeIdsResponse_GaugeIdWithDuration;
-                fromJSON(object: any): _797.QueryGaugeIdsResponse_GaugeIdWithDuration;
-                toJSON(message: _797.QueryGaugeIdsResponse_GaugeIdWithDuration): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _797.QueryGaugeIdsResponse_GaugeIdWithDuration;
+                encode(message: _203.QueryGaugeIdsResponse_GaugeIdWithDuration, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryGaugeIdsResponse_GaugeIdWithDuration;
+                fromJSON(object: any): _203.QueryGaugeIdsResponse_GaugeIdWithDuration;
+                toJSON(message: _203.QueryGaugeIdsResponse_GaugeIdWithDuration): unknown;
+                fromPartial<I_2 extends {
+                    gaugeId?: any;
+                    duration?: string;
+                } & {
+                    gaugeId?: any;
+                    duration?: string;
+                } & Record<Exclude<keyof I_2, keyof _203.QueryGaugeIdsResponse_GaugeIdWithDuration>, never>>(object: I_2): _203.QueryGaugeIdsResponse_GaugeIdWithDuration;
             };
             QueryDistrInfoRequest: {
-                encode(_: _797.QueryDistrInfoRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryDistrInfoRequest;
-                fromJSON(_: any): _797.QueryDistrInfoRequest;
-                toJSON(_: _797.QueryDistrInfoRequest): unknown;
-                fromPartial<I_3 extends unknown>(_: I_3): _797.QueryDistrInfoRequest;
+                encode(_: _203.QueryDistrInfoRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryDistrInfoRequest;
+                fromJSON(_: any): _203.QueryDistrInfoRequest;
+                toJSON(_: _203.QueryDistrInfoRequest): unknown;
+                fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _203.QueryDistrInfoRequest;
             };
             QueryDistrInfoResponse: {
-                encode(message: _797.QueryDistrInfoResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryDistrInfoResponse;
-                fromJSON(object: any): _797.QueryDistrInfoResponse;
-                toJSON(message: _797.QueryDistrInfoResponse): unknown;
-                fromPartial<I_4 extends unknown>(object: I_4): _797.QueryDistrInfoResponse;
+                encode(message: _203.QueryDistrInfoResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryDistrInfoResponse;
+                fromJSON(object: any): _203.QueryDistrInfoResponse;
+                toJSON(message: _203.QueryDistrInfoResponse): unknown;
+                fromPartial<I_4 extends {
+                    distrInfo?: {
+                        totalWeight?: string;
+                        records?: {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[];
+                    };
+                } & {
+                    distrInfo?: {
+                        totalWeight?: string;
+                        records?: {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[];
+                    } & {
+                        totalWeight?: string;
+                        records?: {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[] & ({
+                            gaugeId?: any;
+                            weight?: string;
+                        } & {
+                            gaugeId?: any;
+                            weight?: string;
+                        } & Record<Exclude<keyof I_4["distrInfo"]["records"][number], keyof _202.DistrRecord>, never>)[] & Record<Exclude<keyof I_4["distrInfo"]["records"], keyof {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I_4["distrInfo"], keyof _202.DistrInfo>, never>;
+                } & Record<Exclude<keyof I_4, "distrInfo">, never>>(object: I_4): _203.QueryDistrInfoResponse;
             };
             QueryParamsRequest: {
-                encode(_: _797.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryParamsRequest;
-                fromJSON(_: any): _797.QueryParamsRequest;
-                toJSON(_: _797.QueryParamsRequest): unknown;
-                fromPartial<I_5 extends unknown>(_: I_5): _797.QueryParamsRequest;
+                encode(_: _203.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryParamsRequest;
+                fromJSON(_: any): _203.QueryParamsRequest;
+                toJSON(_: _203.QueryParamsRequest): unknown;
+                fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _203.QueryParamsRequest;
             };
             QueryParamsResponse: {
-                encode(message: _797.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryParamsResponse;
-                fromJSON(object: any): _797.QueryParamsResponse;
-                toJSON(message: _797.QueryParamsResponse): unknown;
-                fromPartial<I_6 extends unknown>(object: I_6): _797.QueryParamsResponse;
+                encode(message: _203.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryParamsResponse;
+                fromJSON(object: any): _203.QueryParamsResponse;
+                toJSON(message: _203.QueryParamsResponse): unknown;
+                fromPartial<I_6 extends {
+                    params?: {
+                        mintedDenom?: string;
+                    };
+                } & {
+                    params?: {
+                        mintedDenom?: string;
+                    } & {
+                        mintedDenom?: string;
+                    } & Record<Exclude<keyof I_6["params"], "mintedDenom">, never>;
+                } & Record<Exclude<keyof I_6, "params">, never>>(object: I_6): _203.QueryParamsResponse;
             };
             QueryLockableDurationsRequest: {
-                encode(_: _797.QueryLockableDurationsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryLockableDurationsRequest;
-                fromJSON(_: any): _797.QueryLockableDurationsRequest;
-                toJSON(_: _797.QueryLockableDurationsRequest): unknown;
-                fromPartial<I_7 extends unknown>(_: I_7): _797.QueryLockableDurationsRequest;
+                encode(_: _203.QueryLockableDurationsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryLockableDurationsRequest;
+                fromJSON(_: any): _203.QueryLockableDurationsRequest;
+                toJSON(_: _203.QueryLockableDurationsRequest): unknown;
+                fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _203.QueryLockableDurationsRequest;
             };
             QueryLockableDurationsResponse: {
-                encode(message: _797.QueryLockableDurationsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryLockableDurationsResponse;
-                fromJSON(object: any): _797.QueryLockableDurationsResponse;
-                toJSON(message: _797.QueryLockableDurationsResponse): unknown;
-                fromPartial<I_8 extends unknown>(object: I_8): _797.QueryLockableDurationsResponse;
+                encode(message: _203.QueryLockableDurationsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryLockableDurationsResponse;
+                fromJSON(object: any): _203.QueryLockableDurationsResponse;
+                toJSON(message: _203.QueryLockableDurationsResponse): unknown;
+                fromPartial<I_8 extends {
+                    lockableDurations?: string[];
+                } & {
+                    lockableDurations?: string[] & string[] & Record<Exclude<keyof I_8["lockableDurations"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I_8, "lockableDurations">, never>>(object: I_8): _203.QueryLockableDurationsResponse;
             };
             QueryIncentivizedPoolsRequest: {
-                encode(_: _797.QueryIncentivizedPoolsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryIncentivizedPoolsRequest;
-                fromJSON(_: any): _797.QueryIncentivizedPoolsRequest;
-                toJSON(_: _797.QueryIncentivizedPoolsRequest): unknown;
-                fromPartial<I_9 extends unknown>(_: I_9): _797.QueryIncentivizedPoolsRequest;
+                encode(_: _203.QueryIncentivizedPoolsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryIncentivizedPoolsRequest;
+                fromJSON(_: any): _203.QueryIncentivizedPoolsRequest;
+                toJSON(_: _203.QueryIncentivizedPoolsRequest): unknown;
+                fromPartial<I_9 extends {} & {} & Record<Exclude<keyof I_9, never>, never>>(_: I_9): _203.QueryIncentivizedPoolsRequest;
             };
             IncentivizedPool: {
-                encode(message: _797.IncentivizedPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.IncentivizedPool;
-                fromJSON(object: any): _797.IncentivizedPool;
-                toJSON(message: _797.IncentivizedPool): unknown;
-                fromPartial<I_10 extends unknown>(object: I_10): _797.IncentivizedPool;
+                encode(message: _203.IncentivizedPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.IncentivizedPool;
+                fromJSON(object: any): _203.IncentivizedPool;
+                toJSON(message: _203.IncentivizedPool): unknown;
+                fromPartial<I_10 extends {
+                    poolId?: any;
+                    lockableDuration?: string;
+                    gaugeId?: any;
+                } & {
+                    poolId?: any;
+                    lockableDuration?: string;
+                    gaugeId?: any;
+                } & Record<Exclude<keyof I_10, keyof _203.IncentivizedPool>, never>>(object: I_10): _203.IncentivizedPool;
             };
             QueryIncentivizedPoolsResponse: {
-                encode(message: _797.QueryIncentivizedPoolsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryIncentivizedPoolsResponse;
-                fromJSON(object: any): _797.QueryIncentivizedPoolsResponse;
-                toJSON(message: _797.QueryIncentivizedPoolsResponse): unknown;
-                fromPartial<I_11 extends unknown>(object: I_11): _797.QueryIncentivizedPoolsResponse;
+                encode(message: _203.QueryIncentivizedPoolsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryIncentivizedPoolsResponse;
+                fromJSON(object: any): _203.QueryIncentivizedPoolsResponse;
+                toJSON(message: _203.QueryIncentivizedPoolsResponse): unknown;
+                fromPartial<I_11 extends {
+                    incentivizedPools?: {
+                        poolId?: any;
+                        lockableDuration?: string;
+                        gaugeId?: any;
+                    }[];
+                } & {
+                    incentivizedPools?: {
+                        poolId?: any;
+                        lockableDuration?: string;
+                        gaugeId?: any;
+                    }[] & ({
+                        poolId?: any;
+                        lockableDuration?: string;
+                        gaugeId?: any;
+                    } & {
+                        poolId?: any;
+                        lockableDuration?: string;
+                        gaugeId?: any;
+                    } & Record<Exclude<keyof I_11["incentivizedPools"][number], keyof _203.IncentivizedPool>, never>)[] & Record<Exclude<keyof I_11["incentivizedPools"], keyof {
+                        poolId?: any;
+                        lockableDuration?: string;
+                        gaugeId?: any;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_11, "incentivizedPools">, never>>(object: I_11): _203.QueryIncentivizedPoolsResponse;
             };
             QueryExternalIncentiveGaugesRequest: {
-                encode(_: _797.QueryExternalIncentiveGaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryExternalIncentiveGaugesRequest;
-                fromJSON(_: any): _797.QueryExternalIncentiveGaugesRequest;
-                toJSON(_: _797.QueryExternalIncentiveGaugesRequest): unknown;
-                fromPartial<I_12 extends unknown>(_: I_12): _797.QueryExternalIncentiveGaugesRequest;
+                encode(_: _203.QueryExternalIncentiveGaugesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryExternalIncentiveGaugesRequest;
+                fromJSON(_: any): _203.QueryExternalIncentiveGaugesRequest;
+                toJSON(_: _203.QueryExternalIncentiveGaugesRequest): unknown;
+                fromPartial<I_12 extends {} & {} & Record<Exclude<keyof I_12, never>, never>>(_: I_12): _203.QueryExternalIncentiveGaugesRequest;
             };
             QueryExternalIncentiveGaugesResponse: {
-                encode(message: _797.QueryExternalIncentiveGaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _797.QueryExternalIncentiveGaugesResponse;
-                fromJSON(object: any): _797.QueryExternalIncentiveGaugesResponse;
-                toJSON(message: _797.QueryExternalIncentiveGaugesResponse): unknown;
-                fromPartial<I_13 extends unknown>(object: I_13): _797.QueryExternalIncentiveGaugesResponse;
+                encode(message: _203.QueryExternalIncentiveGaugesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _203.QueryExternalIncentiveGaugesResponse;
+                fromJSON(object: any): _203.QueryExternalIncentiveGaugesResponse;
+                toJSON(message: _203.QueryExternalIncentiveGaugesResponse): unknown;
+                fromPartial<I_13 extends {
+                    data?: {
+                        id?: any;
+                        isPerpetual?: boolean;
+                        distributeTo?: {
+                            lockQueryType?: _194.LockQueryType;
+                            denom?: string;
+                            duration?: string;
+                            timestamp?: Date;
+                        };
+                        coins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        startTime?: Date;
+                        numEpochsPaidOver?: any;
+                        filledEpochs?: any;
+                        distributedCoins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                    }[];
+                } & {
+                    data?: {
+                        id?: any;
+                        isPerpetual?: boolean;
+                        distributeTo?: {
+                            lockQueryType?: _194.LockQueryType;
+                            denom?: string;
+                            duration?: string;
+                            timestamp?: Date;
+                        };
+                        coins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        startTime?: Date;
+                        numEpochsPaidOver?: any;
+                        filledEpochs?: any;
+                        distributedCoins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                    }[] & ({
+                        id?: any;
+                        isPerpetual?: boolean;
+                        distributeTo?: {
+                            lockQueryType?: _194.LockQueryType;
+                            denom?: string;
+                            duration?: string;
+                            timestamp?: Date;
+                        };
+                        coins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        startTime?: Date;
+                        numEpochsPaidOver?: any;
+                        filledEpochs?: any;
+                        distributedCoins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                    } & {
+                        id?: any;
+                        isPerpetual?: boolean;
+                        distributeTo?: {
+                            lockQueryType?: _194.LockQueryType;
+                            denom?: string;
+                            duration?: string;
+                            timestamp?: Date;
+                        } & {
+                            lockQueryType?: _194.LockQueryType;
+                            denom?: string;
+                            duration?: string;
+                            timestamp?: Date;
+                        } & Record<Exclude<keyof I_13["data"][number]["distributeTo"], keyof _194.QueryCondition>, never>;
+                        coins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[] & ({
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_13["data"][number]["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_13["data"][number]["coins"], keyof {
+                            denom?: string;
+                            amount?: string;
+                        }[]>, never>;
+                        startTime?: Date;
+                        numEpochsPaidOver?: any;
+                        filledEpochs?: any;
+                        distributedCoins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[] & ({
+                            denom?: string;
+                            amount?: string;
+                        } & {
+                            denom?: string;
+                            amount?: string;
+                        } & Record<Exclude<keyof I_13["data"][number]["distributedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_13["data"][number]["distributedCoins"], keyof {
+                            denom?: string;
+                            amount?: string;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I_13["data"][number], keyof _188.Gauge>, never>)[] & Record<Exclude<keyof I_13["data"], keyof {
+                        id?: any;
+                        isPerpetual?: boolean;
+                        distributeTo?: {
+                            lockQueryType?: _194.LockQueryType;
+                            denom?: string;
+                            duration?: string;
+                            timestamp?: Date;
+                        };
+                        coins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                        startTime?: Date;
+                        numEpochsPaidOver?: any;
+                        filledEpochs?: any;
+                        distributedCoins?: {
+                            denom?: string;
+                            amount?: string;
+                        }[];
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_13, "data">, never>>(object: I_13): _203.QueryExternalIncentiveGaugesResponse;
             };
             Params: {
-                encode(message: _796.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _796.Params;
-                fromJSON(object: any): _796.Params;
-                toJSON(message: _796.Params): unknown;
-                fromPartial<I_14 extends unknown>(object: I_14): _796.Params;
+                encode(message: _202.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _202.Params;
+                fromJSON(object: any): _202.Params;
+                toJSON(message: _202.Params): unknown;
+                fromPartial<I_14 extends {
+                    mintedDenom?: string;
+                } & {
+                    mintedDenom?: string;
+                } & Record<Exclude<keyof I_14, "mintedDenom">, never>>(object: I_14): _202.Params;
             };
             LockableDurationsInfo: {
-                encode(message: _796.LockableDurationsInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _796.LockableDurationsInfo;
-                fromJSON(object: any): _796.LockableDurationsInfo;
-                toJSON(message: _796.LockableDurationsInfo): unknown;
-                fromPartial<I_15 extends unknown>(object: I_15): _796.LockableDurationsInfo;
+                encode(message: _202.LockableDurationsInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _202.LockableDurationsInfo;
+                fromJSON(object: any): _202.LockableDurationsInfo;
+                toJSON(message: _202.LockableDurationsInfo): unknown;
+                fromPartial<I_15 extends {
+                    lockableDurations?: string[];
+                } & {
+                    lockableDurations?: string[] & string[] & Record<Exclude<keyof I_15["lockableDurations"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I_15, "lockableDurations">, never>>(object: I_15): _202.LockableDurationsInfo;
             };
             DistrInfo: {
-                encode(message: _796.DistrInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _796.DistrInfo;
-                fromJSON(object: any): _796.DistrInfo;
-                toJSON(message: _796.DistrInfo): unknown;
-                fromPartial<I_16 extends unknown>(object: I_16): _796.DistrInfo;
+                encode(message: _202.DistrInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _202.DistrInfo;
+                fromJSON(object: any): _202.DistrInfo;
+                toJSON(message: _202.DistrInfo): unknown;
+                fromPartial<I_16 extends {
+                    totalWeight?: string;
+                    records?: {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[];
+                } & {
+                    totalWeight?: string;
+                    records?: {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[] & ({
+                        gaugeId?: any;
+                        weight?: string;
+                    } & {
+                        gaugeId?: any;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_16["records"][number], keyof _202.DistrRecord>, never>)[] & Record<Exclude<keyof I_16["records"], keyof {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_16, keyof _202.DistrInfo>, never>>(object: I_16): _202.DistrInfo;
             };
             DistrRecord: {
-                encode(message: _796.DistrRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _796.DistrRecord;
-                fromJSON(object: any): _796.DistrRecord;
-                toJSON(message: _796.DistrRecord): unknown;
-                fromPartial<I_17 extends unknown>(object: I_17): _796.DistrRecord;
+                encode(message: _202.DistrRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _202.DistrRecord;
+                fromJSON(object: any): _202.DistrRecord;
+                toJSON(message: _202.DistrRecord): unknown;
+                fromPartial<I_17 extends {
+                    gaugeId?: any;
+                    weight?: string;
+                } & {
+                    gaugeId?: any;
+                    weight?: string;
+                } & Record<Exclude<keyof I_17, keyof _202.DistrRecord>, never>>(object: I_17): _202.DistrRecord;
             };
             ReplacePoolIncentivesProposal: {
-                encode(message: _795.ReplacePoolIncentivesProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _795.ReplacePoolIncentivesProposal;
-                fromJSON(object: any): _795.ReplacePoolIncentivesProposal;
-                toJSON(message: _795.ReplacePoolIncentivesProposal): unknown;
-                fromPartial<I_18 extends unknown>(object: I_18): _795.ReplacePoolIncentivesProposal;
+                encode(message: _201.ReplacePoolIncentivesProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _201.ReplacePoolIncentivesProposal;
+                fromJSON(object: any): _201.ReplacePoolIncentivesProposal;
+                toJSON(message: _201.ReplacePoolIncentivesProposal): unknown;
+                fromPartial<I_18 extends {
+                    title?: string;
+                    description?: string;
+                    records?: {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[];
+                } & {
+                    title?: string;
+                    description?: string;
+                    records?: {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[] & ({
+                        gaugeId?: any;
+                        weight?: string;
+                    } & {
+                        gaugeId?: any;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_18["records"][number], keyof _202.DistrRecord>, never>)[] & Record<Exclude<keyof I_18["records"], keyof {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_18, keyof _201.ReplacePoolIncentivesProposal>, never>>(object: I_18): _201.ReplacePoolIncentivesProposal;
             };
             UpdatePoolIncentivesProposal: {
-                encode(message: _795.UpdatePoolIncentivesProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _795.UpdatePoolIncentivesProposal;
-                fromJSON(object: any): _795.UpdatePoolIncentivesProposal;
-                toJSON(message: _795.UpdatePoolIncentivesProposal): unknown;
-                fromPartial<I_19 extends unknown>(object: I_19): _795.UpdatePoolIncentivesProposal;
+                encode(message: _201.UpdatePoolIncentivesProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _201.UpdatePoolIncentivesProposal;
+                fromJSON(object: any): _201.UpdatePoolIncentivesProposal;
+                toJSON(message: _201.UpdatePoolIncentivesProposal): unknown;
+                fromPartial<I_19 extends {
+                    title?: string;
+                    description?: string;
+                    records?: {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[];
+                } & {
+                    title?: string;
+                    description?: string;
+                    records?: {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[] & ({
+                        gaugeId?: any;
+                        weight?: string;
+                    } & {
+                        gaugeId?: any;
+                        weight?: string;
+                    } & Record<Exclude<keyof I_19["records"][number], keyof _202.DistrRecord>, never>)[] & Record<Exclude<keyof I_19["records"], keyof {
+                        gaugeId?: any;
+                        weight?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_19, keyof _201.UpdatePoolIncentivesProposal>, never>>(object: I_19): _201.UpdatePoolIncentivesProposal;
             };
             GenesisState: {
-                encode(message: _794.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _794.GenesisState;
-                fromJSON(object: any): _794.GenesisState;
-                toJSON(message: _794.GenesisState): unknown;
-                fromPartial<I_20 extends unknown>(object: I_20): _794.GenesisState;
+                encode(message: _200.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _200.GenesisState;
+                fromJSON(object: any): _200.GenesisState;
+                toJSON(message: _200.GenesisState): unknown;
+                fromPartial<I_20 extends {
+                    params?: {
+                        mintedDenom?: string;
+                    };
+                    lockableDurations?: string[];
+                    distrInfo?: {
+                        totalWeight?: string;
+                        records?: {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[];
+                    };
+                } & {
+                    params?: {
+                        mintedDenom?: string;
+                    } & {
+                        mintedDenom?: string;
+                    } & Record<Exclude<keyof I_20["params"], "mintedDenom">, never>;
+                    lockableDurations?: string[] & string[] & Record<Exclude<keyof I_20["lockableDurations"], keyof string[]>, never>;
+                    distrInfo?: {
+                        totalWeight?: string;
+                        records?: {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[];
+                    } & {
+                        totalWeight?: string;
+                        records?: {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[] & ({
+                            gaugeId?: any;
+                            weight?: string;
+                        } & {
+                            gaugeId?: any;
+                            weight?: string;
+                        } & Record<Exclude<keyof I_20["distrInfo"]["records"][number], keyof _202.DistrRecord>, never>)[] & Record<Exclude<keyof I_20["distrInfo"]["records"], keyof {
+                            gaugeId?: any;
+                            weight?: string;
+                        }[]>, never>;
+                    } & Record<Exclude<keyof I_20["distrInfo"], keyof _202.DistrInfo>, never>;
+                } & Record<Exclude<keyof I_20, keyof _200.GenesisState>, never>>(object: I_20): _200.GenesisState;
             };
         };
     }
     namespace store {
         const v1beta1: {
             Node: {
-                encode(message: _798.Node, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _798.Node;
-                fromJSON(object: any): _798.Node;
-                toJSON(message: _798.Node): unknown;
-                fromPartial<I extends unknown>(object: I): _798.Node;
+                encode(message: _204.Node, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _204.Node;
+                fromJSON(object: any): _204.Node;
+                toJSON(message: _204.Node): unknown;
+                fromPartial<I extends {
+                    children?: {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    }[];
+                } & {
+                    children?: {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    }[] & ({
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    } & {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    } & Record<Exclude<keyof I["children"][number], keyof _204.Child>, never>)[] & Record<Exclude<keyof I["children"], keyof {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I, "children">, never>>(object: I): _204.Node;
             };
             Child: {
-                encode(message: _798.Child, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _798.Child;
-                fromJSON(object: any): _798.Child;
-                toJSON(message: _798.Child): unknown;
-                fromPartial<I_1 extends unknown>(object: I_1): _798.Child;
+                encode(message: _204.Child, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _204.Child;
+                fromJSON(object: any): _204.Child;
+                toJSON(message: _204.Child): unknown;
+                fromPartial<I_1 extends {
+                    index?: Uint8Array;
+                    accumulation?: string;
+                } & {
+                    index?: Uint8Array;
+                    accumulation?: string;
+                } & Record<Exclude<keyof I_1, keyof _204.Child>, never>>(object: I_1): _204.Child;
             };
             Leaf: {
-                encode(message: _798.Leaf, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _798.Leaf;
-                fromJSON(object: any): _798.Leaf;
-                toJSON(message: _798.Leaf): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _798.Leaf;
+                encode(message: _204.Leaf, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _204.Leaf;
+                fromJSON(object: any): _204.Leaf;
+                toJSON(message: _204.Leaf): unknown;
+                fromPartial<I_2 extends {
+                    leaf?: {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    };
+                } & {
+                    leaf?: {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    } & {
+                        index?: Uint8Array;
+                        accumulation?: string;
+                    } & Record<Exclude<keyof I_2["leaf"], keyof _204.Child>, never>;
+                } & Record<Exclude<keyof I_2, "leaf">, never>>(object: I_2): _204.Leaf;
             };
         };
     }
     const superfluid: {
         MsgSuperfluidDelegate: {
-            encode(message: _803.MsgSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidDelegate;
-            fromJSON(object: any): _803.MsgSuperfluidDelegate;
-            toJSON(message: _803.MsgSuperfluidDelegate): unknown;
-            fromPartial<I extends unknown>(object: I): _803.MsgSuperfluidDelegate;
+            encode(message: _209.MsgSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidDelegate;
+            fromJSON(object: any): _209.MsgSuperfluidDelegate;
+            toJSON(message: _209.MsgSuperfluidDelegate): unknown;
+            fromPartial<I extends {
+                sender?: string;
+                lockId?: any;
+                valAddr?: string;
+            } & {
+                sender?: string;
+                lockId?: any;
+                valAddr?: string;
+            } & Record<Exclude<keyof I, keyof _209.MsgSuperfluidDelegate>, never>>(object: I): _209.MsgSuperfluidDelegate;
         };
         MsgSuperfluidDelegateResponse: {
-            encode(_: _803.MsgSuperfluidDelegateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidDelegateResponse;
-            fromJSON(_: any): _803.MsgSuperfluidDelegateResponse;
-            toJSON(_: _803.MsgSuperfluidDelegateResponse): unknown;
-            fromPartial<I_1 extends unknown>(_: I_1): _803.MsgSuperfluidDelegateResponse;
+            encode(_: _209.MsgSuperfluidDelegateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidDelegateResponse;
+            fromJSON(_: any): _209.MsgSuperfluidDelegateResponse;
+            toJSON(_: _209.MsgSuperfluidDelegateResponse): unknown;
+            fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _209.MsgSuperfluidDelegateResponse;
         };
         MsgSuperfluidUndelegate: {
-            encode(message: _803.MsgSuperfluidUndelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidUndelegate;
-            fromJSON(object: any): _803.MsgSuperfluidUndelegate;
-            toJSON(message: _803.MsgSuperfluidUndelegate): unknown;
-            fromPartial<I_2 extends unknown>(object: I_2): _803.MsgSuperfluidUndelegate;
+            encode(message: _209.MsgSuperfluidUndelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidUndelegate;
+            fromJSON(object: any): _209.MsgSuperfluidUndelegate;
+            toJSON(message: _209.MsgSuperfluidUndelegate): unknown;
+            fromPartial<I_2 extends {
+                sender?: string;
+                lockId?: any;
+            } & {
+                sender?: string;
+                lockId?: any;
+            } & Record<Exclude<keyof I_2, keyof _209.MsgSuperfluidUndelegate>, never>>(object: I_2): _209.MsgSuperfluidUndelegate;
         };
         MsgSuperfluidUndelegateResponse: {
-            encode(_: _803.MsgSuperfluidUndelegateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidUndelegateResponse;
-            fromJSON(_: any): _803.MsgSuperfluidUndelegateResponse;
-            toJSON(_: _803.MsgSuperfluidUndelegateResponse): unknown;
-            fromPartial<I_3 extends unknown>(_: I_3): _803.MsgSuperfluidUndelegateResponse;
+            encode(_: _209.MsgSuperfluidUndelegateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidUndelegateResponse;
+            fromJSON(_: any): _209.MsgSuperfluidUndelegateResponse;
+            toJSON(_: _209.MsgSuperfluidUndelegateResponse): unknown;
+            fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _209.MsgSuperfluidUndelegateResponse;
         };
         MsgSuperfluidUnbondLock: {
-            encode(message: _803.MsgSuperfluidUnbondLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidUnbondLock;
-            fromJSON(object: any): _803.MsgSuperfluidUnbondLock;
-            toJSON(message: _803.MsgSuperfluidUnbondLock): unknown;
-            fromPartial<I_4 extends unknown>(object: I_4): _803.MsgSuperfluidUnbondLock;
+            encode(message: _209.MsgSuperfluidUnbondLock, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidUnbondLock;
+            fromJSON(object: any): _209.MsgSuperfluidUnbondLock;
+            toJSON(message: _209.MsgSuperfluidUnbondLock): unknown;
+            fromPartial<I_4 extends {
+                sender?: string;
+                lockId?: any;
+            } & {
+                sender?: string;
+                lockId?: any;
+            } & Record<Exclude<keyof I_4, keyof _209.MsgSuperfluidUnbondLock>, never>>(object: I_4): _209.MsgSuperfluidUnbondLock;
         };
         MsgSuperfluidUnbondLockResponse: {
-            encode(_: _803.MsgSuperfluidUnbondLockResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgSuperfluidUnbondLockResponse;
-            fromJSON(_: any): _803.MsgSuperfluidUnbondLockResponse;
-            toJSON(_: _803.MsgSuperfluidUnbondLockResponse): unknown;
-            fromPartial<I_5 extends unknown>(_: I_5): _803.MsgSuperfluidUnbondLockResponse;
+            encode(_: _209.MsgSuperfluidUnbondLockResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidUnbondLockResponse;
+            fromJSON(_: any): _209.MsgSuperfluidUnbondLockResponse;
+            toJSON(_: _209.MsgSuperfluidUnbondLockResponse): unknown;
+            fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _209.MsgSuperfluidUnbondLockResponse;
         };
         MsgLockAndSuperfluidDelegate: {
-            encode(message: _803.MsgLockAndSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgLockAndSuperfluidDelegate;
-            fromJSON(object: any): _803.MsgLockAndSuperfluidDelegate;
-            toJSON(message: _803.MsgLockAndSuperfluidDelegate): unknown;
-            fromPartial<I_6 extends unknown>(object: I_6): _803.MsgLockAndSuperfluidDelegate;
+            encode(message: _209.MsgLockAndSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgLockAndSuperfluidDelegate;
+            fromJSON(object: any): _209.MsgLockAndSuperfluidDelegate;
+            toJSON(message: _209.MsgLockAndSuperfluidDelegate): unknown;
+            fromPartial<I_6 extends {
+                sender?: string;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                valAddr?: string;
+            } & {
+                sender?: string;
+                coins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_6["coins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_6["coins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                valAddr?: string;
+            } & Record<Exclude<keyof I_6, keyof _209.MsgLockAndSuperfluidDelegate>, never>>(object: I_6): _209.MsgLockAndSuperfluidDelegate;
         };
         MsgLockAndSuperfluidDelegateResponse: {
-            encode(message: _803.MsgLockAndSuperfluidDelegateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _803.MsgLockAndSuperfluidDelegateResponse;
-            fromJSON(object: any): _803.MsgLockAndSuperfluidDelegateResponse;
-            toJSON(message: _803.MsgLockAndSuperfluidDelegateResponse): unknown;
-            fromPartial<I_7 extends unknown>(object: I_7): _803.MsgLockAndSuperfluidDelegateResponse;
+            encode(message: _209.MsgLockAndSuperfluidDelegateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgLockAndSuperfluidDelegateResponse;
+            fromJSON(object: any): _209.MsgLockAndSuperfluidDelegateResponse;
+            toJSON(message: _209.MsgLockAndSuperfluidDelegateResponse): unknown;
+            fromPartial<I_7 extends {
+                ID?: any;
+            } & {
+                ID?: any;
+            } & Record<Exclude<keyof I_7, "ID">, never>>(object: I_7): _209.MsgLockAndSuperfluidDelegateResponse;
         };
-        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
-        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
-        AminoConverter: {
-            "/osmosis.superfluid.MsgSuperfluidDelegate": {
-                aminoType: string;
-                toAmino: ({ sender, lockId, valAddr }: _803.MsgSuperfluidDelegate) => {
-                    sender: string;
-                    lockId: string;
-                    valAddr: string;
-                };
-                fromAmino: ({ sender, lockId, valAddr }: {
-                    sender: string;
-                    lockId: string;
-                    valAddr: string;
-                }) => _803.MsgSuperfluidDelegate;
-            };
-            "/osmosis.superfluid.MsgSuperfluidUndelegate": {
-                aminoType: string;
-                toAmino: ({ sender, lockId }: _803.MsgSuperfluidUndelegate) => {
-                    sender: string;
-                    lockId: string;
-                };
-                fromAmino: ({ sender, lockId }: {
-                    sender: string;
-                    lockId: string;
-                }) => _803.MsgSuperfluidUndelegate;
-            };
-            "/osmosis.superfluid.MsgSuperfluidUnbondLock": {
-                aminoType: string;
-                toAmino: ({ sender, lockId }: _803.MsgSuperfluidUnbondLock) => {
-                    sender: string;
-                    lockId: string;
-                };
-                fromAmino: ({ sender, lockId }: {
-                    sender: string;
-                    lockId: string;
-                }) => _803.MsgSuperfluidUnbondLock;
-            };
-            "/osmosis.superfluid.MsgLockAndSuperfluidDelegate": {
-                aminoType: string;
-                toAmino: ({ sender, coins, valAddr }: _803.MsgLockAndSuperfluidDelegate) => {
-                    sender: string;
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                    valAddr: string;
-                };
-                fromAmino: ({ sender, coins, valAddr }: {
-                    sender: string;
-                    coins: {
-                        denom: string;
-                        amount: string;
-                    }[];
-                    valAddr: string;
-                }) => _803.MsgLockAndSuperfluidDelegate;
-            };
-        };
-        encoded: {
-            superfluidDelegate(value: _803.MsgSuperfluidDelegate): {
-                type_url: string;
-                value: Uint8Array;
-            };
-            superfluidUndelegate(value: _803.MsgSuperfluidUndelegate): {
-                type_url: string;
-                value: Uint8Array;
-            };
-            superfluidUnbondLock(value: _803.MsgSuperfluidUnbondLock): {
-                type_url: string;
-                value: Uint8Array;
-            };
-            lockAndSuperfluidDelegate(value: _803.MsgLockAndSuperfluidDelegate): {
-                type_url: string;
-                value: Uint8Array;
-            };
-        };
-        fromJSON: {
-            superfluidDelegate(value: any): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidDelegate;
-            };
-            superfluidUndelegate(value: any): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidUndelegate;
-            };
-            superfluidUnbondLock(value: any): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidUnbondLock;
-            };
-            lockAndSuperfluidDelegate(value: any): {
-                typeUrl: string;
-                value: _803.MsgLockAndSuperfluidDelegate;
-            };
-        };
-        toJSON: {
-            superfluidDelegate(value: _803.MsgSuperfluidDelegate): {
-                typeUrl: string;
-                value: unknown;
-            };
-            superfluidUndelegate(value: _803.MsgSuperfluidUndelegate): {
-                typeUrl: string;
-                value: unknown;
-            };
-            superfluidUnbondLock(value: _803.MsgSuperfluidUnbondLock): {
-                typeUrl: string;
-                value: unknown;
-            };
-            lockAndSuperfluidDelegate(value: _803.MsgLockAndSuperfluidDelegate): {
-                typeUrl: string;
-                value: unknown;
-            };
-        };
-        json: {
-            superfluidDelegate(value: _803.MsgSuperfluidDelegate): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidDelegate;
-            };
-            superfluidUndelegate(value: _803.MsgSuperfluidUndelegate): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidUndelegate;
-            };
-            superfluidUnbondLock(value: _803.MsgSuperfluidUnbondLock): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidUnbondLock;
-            };
-            lockAndSuperfluidDelegate(value: _803.MsgLockAndSuperfluidDelegate): {
-                typeUrl: string;
-                value: _803.MsgLockAndSuperfluidDelegate;
-            };
-        };
-        messages: {
-            superfluidDelegate(value: _803.MsgSuperfluidDelegate): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidDelegate;
-            };
-            superfluidUndelegate(value: _803.MsgSuperfluidUndelegate): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidUndelegate;
-            };
-            superfluidUnbondLock(value: _803.MsgSuperfluidUnbondLock): {
-                typeUrl: string;
-                value: _803.MsgSuperfluidUnbondLock;
-            };
-            lockAndSuperfluidDelegate(value: _803.MsgLockAndSuperfluidDelegate): {
-                typeUrl: string;
-                value: _803.MsgLockAndSuperfluidDelegate;
-            };
-        };
-        superfluidAssetTypeFromJSON(object: any): _802.SuperfluidAssetType;
-        superfluidAssetTypeToJSON(object: _802.SuperfluidAssetType): string;
-        SuperfluidAssetType: typeof _802.SuperfluidAssetType;
+        superfluidAssetTypeFromJSON(object: any): _208.SuperfluidAssetType;
+        superfluidAssetTypeToJSON(object: _208.SuperfluidAssetType): string;
+        SuperfluidAssetType: typeof _208.SuperfluidAssetType;
         SuperfluidAsset: {
-            encode(message: _802.SuperfluidAsset, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _802.SuperfluidAsset;
-            fromJSON(object: any): _802.SuperfluidAsset;
-            toJSON(message: _802.SuperfluidAsset): unknown;
-            fromPartial<I_8 extends unknown>(object: I_8): _802.SuperfluidAsset;
+            encode(message: _208.SuperfluidAsset, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _208.SuperfluidAsset;
+            fromJSON(object: any): _208.SuperfluidAsset;
+            toJSON(message: _208.SuperfluidAsset): unknown;
+            fromPartial<I_8 extends {
+                denom?: string;
+                assetType?: _208.SuperfluidAssetType;
+            } & {
+                denom?: string;
+                assetType?: _208.SuperfluidAssetType;
+            } & Record<Exclude<keyof I_8, keyof _208.SuperfluidAsset>, never>>(object: I_8): _208.SuperfluidAsset;
         };
         SuperfluidIntermediaryAccount: {
-            encode(message: _802.SuperfluidIntermediaryAccount, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _802.SuperfluidIntermediaryAccount;
-            fromJSON(object: any): _802.SuperfluidIntermediaryAccount;
-            toJSON(message: _802.SuperfluidIntermediaryAccount): unknown;
-            fromPartial<I_9 extends unknown>(object: I_9): _802.SuperfluidIntermediaryAccount;
+            encode(message: _208.SuperfluidIntermediaryAccount, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _208.SuperfluidIntermediaryAccount;
+            fromJSON(object: any): _208.SuperfluidIntermediaryAccount;
+            toJSON(message: _208.SuperfluidIntermediaryAccount): unknown;
+            fromPartial<I_9 extends {
+                denom?: string;
+                valAddr?: string;
+                gaugeId?: any;
+            } & {
+                denom?: string;
+                valAddr?: string;
+                gaugeId?: any;
+            } & Record<Exclude<keyof I_9, keyof _208.SuperfluidIntermediaryAccount>, never>>(object: I_9): _208.SuperfluidIntermediaryAccount;
         };
         OsmoEquivalentMultiplierRecord: {
-            encode(message: _802.OsmoEquivalentMultiplierRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _802.OsmoEquivalentMultiplierRecord;
-            fromJSON(object: any): _802.OsmoEquivalentMultiplierRecord;
-            toJSON(message: _802.OsmoEquivalentMultiplierRecord): unknown;
-            fromPartial<I_10 extends unknown>(object: I_10): _802.OsmoEquivalentMultiplierRecord;
+            encode(message: _208.OsmoEquivalentMultiplierRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _208.OsmoEquivalentMultiplierRecord;
+            fromJSON(object: any): _208.OsmoEquivalentMultiplierRecord;
+            toJSON(message: _208.OsmoEquivalentMultiplierRecord): unknown;
+            fromPartial<I_10 extends {
+                epochNumber?: any;
+                denom?: string;
+                multiplier?: string;
+            } & {
+                epochNumber?: any;
+                denom?: string;
+                multiplier?: string;
+            } & Record<Exclude<keyof I_10, keyof _208.OsmoEquivalentMultiplierRecord>, never>>(object: I_10): _208.OsmoEquivalentMultiplierRecord;
         };
         SuperfluidDelegationRecord: {
-            encode(message: _802.SuperfluidDelegationRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _802.SuperfluidDelegationRecord;
-            fromJSON(object: any): _802.SuperfluidDelegationRecord;
-            toJSON(message: _802.SuperfluidDelegationRecord): unknown;
-            fromPartial<I_11 extends unknown>(object: I_11): _802.SuperfluidDelegationRecord;
+            encode(message: _208.SuperfluidDelegationRecord, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _208.SuperfluidDelegationRecord;
+            fromJSON(object: any): _208.SuperfluidDelegationRecord;
+            toJSON(message: _208.SuperfluidDelegationRecord): unknown;
+            fromPartial<I_11 extends {
+                delegatorAddress?: string;
+                validatorAddress?: string;
+                delegationAmount?: {
+                    denom?: string;
+                    amount?: string;
+                };
+            } & {
+                delegatorAddress?: string;
+                validatorAddress?: string;
+                delegationAmount?: {
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_11["delegationAmount"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+            } & Record<Exclude<keyof I_11, keyof _208.SuperfluidDelegationRecord>, never>>(object: I_11): _208.SuperfluidDelegationRecord;
         };
         LockIdIntermediaryAccountConnection: {
-            encode(message: _802.LockIdIntermediaryAccountConnection, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _802.LockIdIntermediaryAccountConnection;
-            fromJSON(object: any): _802.LockIdIntermediaryAccountConnection;
-            toJSON(message: _802.LockIdIntermediaryAccountConnection): unknown;
-            fromPartial<I_12 extends unknown>(object: I_12): _802.LockIdIntermediaryAccountConnection;
+            encode(message: _208.LockIdIntermediaryAccountConnection, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _208.LockIdIntermediaryAccountConnection;
+            fromJSON(object: any): _208.LockIdIntermediaryAccountConnection;
+            toJSON(message: _208.LockIdIntermediaryAccountConnection): unknown;
+            fromPartial<I_12 extends {
+                lockId?: any;
+                intermediaryAccount?: string;
+            } & {
+                lockId?: any;
+                intermediaryAccount?: string;
+            } & Record<Exclude<keyof I_12, keyof _208.LockIdIntermediaryAccountConnection>, never>>(object: I_12): _208.LockIdIntermediaryAccountConnection;
         };
         QueryParamsRequest: {
-            encode(_: _801.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.QueryParamsRequest;
-            fromJSON(_: any): _801.QueryParamsRequest;
-            toJSON(_: _801.QueryParamsRequest): unknown;
-            fromPartial<I_13 extends unknown>(_: I_13): _801.QueryParamsRequest;
+            encode(_: _207.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.QueryParamsRequest;
+            fromJSON(_: any): _207.QueryParamsRequest;
+            toJSON(_: _207.QueryParamsRequest): unknown;
+            fromPartial<I_13 extends {} & {} & Record<Exclude<keyof I_13, never>, never>>(_: I_13): _207.QueryParamsRequest;
         };
         QueryParamsResponse: {
-            encode(message: _801.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.QueryParamsResponse;
-            fromJSON(object: any): _801.QueryParamsResponse;
-            toJSON(message: _801.QueryParamsResponse): unknown;
-            fromPartial<I_14 extends unknown>(object: I_14): _801.QueryParamsResponse;
+            encode(message: _207.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.QueryParamsResponse;
+            fromJSON(object: any): _207.QueryParamsResponse;
+            toJSON(message: _207.QueryParamsResponse): unknown;
+            fromPartial<I_14 extends {
+                params?: {
+                    minimumRiskFactor?: string;
+                };
+            } & {
+                params?: {
+                    minimumRiskFactor?: string;
+                } & {
+                    minimumRiskFactor?: string;
+                } & Record<Exclude<keyof I_14["params"], "minimumRiskFactor">, never>;
+            } & Record<Exclude<keyof I_14, "params">, never>>(object: I_14): _207.QueryParamsResponse;
         };
         AssetTypeRequest: {
-            encode(message: _801.AssetTypeRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AssetTypeRequest;
-            fromJSON(object: any): _801.AssetTypeRequest;
-            toJSON(message: _801.AssetTypeRequest): unknown;
-            fromPartial<I_15 extends unknown>(object: I_15): _801.AssetTypeRequest;
+            encode(message: _207.AssetTypeRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AssetTypeRequest;
+            fromJSON(object: any): _207.AssetTypeRequest;
+            toJSON(message: _207.AssetTypeRequest): unknown;
+            fromPartial<I_15 extends {
+                denom?: string;
+            } & {
+                denom?: string;
+            } & Record<Exclude<keyof I_15, "denom">, never>>(object: I_15): _207.AssetTypeRequest;
         };
         AssetTypeResponse: {
-            encode(message: _801.AssetTypeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AssetTypeResponse;
-            fromJSON(object: any): _801.AssetTypeResponse;
-            toJSON(message: _801.AssetTypeResponse): unknown;
-            fromPartial<I_16 extends unknown>(object: I_16): _801.AssetTypeResponse;
+            encode(message: _207.AssetTypeResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AssetTypeResponse;
+            fromJSON(object: any): _207.AssetTypeResponse;
+            toJSON(message: _207.AssetTypeResponse): unknown;
+            fromPartial<I_16 extends {
+                assetType?: _208.SuperfluidAssetType;
+            } & {
+                assetType?: _208.SuperfluidAssetType;
+            } & Record<Exclude<keyof I_16, "assetType">, never>>(object: I_16): _207.AssetTypeResponse;
         };
         AllAssetsRequest: {
-            encode(_: _801.AllAssetsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AllAssetsRequest;
-            fromJSON(_: any): _801.AllAssetsRequest;
-            toJSON(_: _801.AllAssetsRequest): unknown;
-            fromPartial<I_17 extends unknown>(_: I_17): _801.AllAssetsRequest;
+            encode(_: _207.AllAssetsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AllAssetsRequest;
+            fromJSON(_: any): _207.AllAssetsRequest;
+            toJSON(_: _207.AllAssetsRequest): unknown;
+            fromPartial<I_17 extends {} & {} & Record<Exclude<keyof I_17, never>, never>>(_: I_17): _207.AllAssetsRequest;
         };
         AllAssetsResponse: {
-            encode(message: _801.AllAssetsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AllAssetsResponse;
-            fromJSON(object: any): _801.AllAssetsResponse;
-            toJSON(message: _801.AllAssetsResponse): unknown;
-            fromPartial<I_18 extends unknown>(object: I_18): _801.AllAssetsResponse;
+            encode(message: _207.AllAssetsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AllAssetsResponse;
+            fromJSON(object: any): _207.AllAssetsResponse;
+            toJSON(message: _207.AllAssetsResponse): unknown;
+            fromPartial<I_18 extends {
+                assets?: {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                }[];
+            } & {
+                assets?: {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                }[] & ({
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                } & {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                } & Record<Exclude<keyof I_18["assets"][number], keyof _208.SuperfluidAsset>, never>)[] & Record<Exclude<keyof I_18["assets"], keyof {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_18, "assets">, never>>(object: I_18): _207.AllAssetsResponse;
         };
         AssetMultiplierRequest: {
-            encode(message: _801.AssetMultiplierRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AssetMultiplierRequest;
-            fromJSON(object: any): _801.AssetMultiplierRequest;
-            toJSON(message: _801.AssetMultiplierRequest): unknown;
-            fromPartial<I_19 extends unknown>(object: I_19): _801.AssetMultiplierRequest;
+            encode(message: _207.AssetMultiplierRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AssetMultiplierRequest;
+            fromJSON(object: any): _207.AssetMultiplierRequest;
+            toJSON(message: _207.AssetMultiplierRequest): unknown;
+            fromPartial<I_19 extends {
+                denom?: string;
+            } & {
+                denom?: string;
+            } & Record<Exclude<keyof I_19, "denom">, never>>(object: I_19): _207.AssetMultiplierRequest;
         };
         AssetMultiplierResponse: {
-            encode(message: _801.AssetMultiplierResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AssetMultiplierResponse;
-            fromJSON(object: any): _801.AssetMultiplierResponse;
-            toJSON(message: _801.AssetMultiplierResponse): unknown;
-            fromPartial<I_20 extends unknown>(object: I_20): _801.AssetMultiplierResponse;
+            encode(message: _207.AssetMultiplierResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AssetMultiplierResponse;
+            fromJSON(object: any): _207.AssetMultiplierResponse;
+            toJSON(message: _207.AssetMultiplierResponse): unknown;
+            fromPartial<I_20 extends {
+                osmoEquivalentMultiplier?: {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                };
+            } & {
+                osmoEquivalentMultiplier?: {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                } & {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                } & Record<Exclude<keyof I_20["osmoEquivalentMultiplier"], keyof _208.OsmoEquivalentMultiplierRecord>, never>;
+            } & Record<Exclude<keyof I_20, "osmoEquivalentMultiplier">, never>>(object: I_20): _207.AssetMultiplierResponse;
         };
         SuperfluidIntermediaryAccountInfo: {
-            encode(message: _801.SuperfluidIntermediaryAccountInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidIntermediaryAccountInfo;
-            fromJSON(object: any): _801.SuperfluidIntermediaryAccountInfo;
-            toJSON(message: _801.SuperfluidIntermediaryAccountInfo): unknown;
-            fromPartial<I_21 extends unknown>(object: I_21): _801.SuperfluidIntermediaryAccountInfo;
+            encode(message: _207.SuperfluidIntermediaryAccountInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidIntermediaryAccountInfo;
+            fromJSON(object: any): _207.SuperfluidIntermediaryAccountInfo;
+            toJSON(message: _207.SuperfluidIntermediaryAccountInfo): unknown;
+            fromPartial<I_21 extends {
+                denom?: string;
+                valAddr?: string;
+                gaugeId?: any;
+                address?: string;
+            } & {
+                denom?: string;
+                valAddr?: string;
+                gaugeId?: any;
+                address?: string;
+            } & Record<Exclude<keyof I_21, keyof _207.SuperfluidIntermediaryAccountInfo>, never>>(object: I_21): _207.SuperfluidIntermediaryAccountInfo;
         };
         AllIntermediaryAccountsRequest: {
-            encode(message: _801.AllIntermediaryAccountsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AllIntermediaryAccountsRequest;
-            fromJSON(object: any): _801.AllIntermediaryAccountsRequest;
-            toJSON(message: _801.AllIntermediaryAccountsRequest): unknown;
-            fromPartial<I_22 extends unknown>(object: I_22): _801.AllIntermediaryAccountsRequest;
+            encode(message: _207.AllIntermediaryAccountsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AllIntermediaryAccountsRequest;
+            fromJSON(object: any): _207.AllIntermediaryAccountsRequest;
+            toJSON(message: _207.AllIntermediaryAccountsRequest): unknown;
+            fromPartial<I_22 extends {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                };
+            } & {
+                pagination?: {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & {
+                    key?: Uint8Array;
+                    offset?: any;
+                    limit?: any;
+                    countTotal?: boolean;
+                    reverse?: boolean;
+                } & Record<Exclude<keyof I_22["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
+            } & Record<Exclude<keyof I_22, "pagination">, never>>(object: I_22): _207.AllIntermediaryAccountsRequest;
         };
         AllIntermediaryAccountsResponse: {
-            encode(message: _801.AllIntermediaryAccountsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.AllIntermediaryAccountsResponse;
-            fromJSON(object: any): _801.AllIntermediaryAccountsResponse;
-            toJSON(message: _801.AllIntermediaryAccountsResponse): unknown;
-            fromPartial<I_23 extends unknown>(object: I_23): _801.AllIntermediaryAccountsResponse;
+            encode(message: _207.AllIntermediaryAccountsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.AllIntermediaryAccountsResponse;
+            fromJSON(object: any): _207.AllIntermediaryAccountsResponse;
+            toJSON(message: _207.AllIntermediaryAccountsResponse): unknown;
+            fromPartial<I_23 extends {
+                accounts?: {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                }[];
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                };
+            } & {
+                accounts?: {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                }[] & ({
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                } & {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                } & Record<Exclude<keyof I_23["accounts"][number], keyof _207.SuperfluidIntermediaryAccountInfo>, never>)[] & Record<Exclude<keyof I_23["accounts"], keyof {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                }[]>, never>;
+                pagination?: {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & {
+                    nextKey?: Uint8Array;
+                    total?: any;
+                } & Record<Exclude<keyof I_23["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
+            } & Record<Exclude<keyof I_23, keyof _207.AllIntermediaryAccountsResponse>, never>>(object: I_23): _207.AllIntermediaryAccountsResponse;
         };
         ConnectedIntermediaryAccountRequest: {
-            encode(message: _801.ConnectedIntermediaryAccountRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.ConnectedIntermediaryAccountRequest;
-            fromJSON(object: any): _801.ConnectedIntermediaryAccountRequest;
-            toJSON(message: _801.ConnectedIntermediaryAccountRequest): unknown;
-            fromPartial<I_24 extends unknown>(object: I_24): _801.ConnectedIntermediaryAccountRequest;
+            encode(message: _207.ConnectedIntermediaryAccountRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.ConnectedIntermediaryAccountRequest;
+            fromJSON(object: any): _207.ConnectedIntermediaryAccountRequest;
+            toJSON(message: _207.ConnectedIntermediaryAccountRequest): unknown;
+            fromPartial<I_24 extends {
+                lockId?: any;
+            } & {
+                lockId?: any;
+            } & Record<Exclude<keyof I_24, "lockId">, never>>(object: I_24): _207.ConnectedIntermediaryAccountRequest;
         };
         ConnectedIntermediaryAccountResponse: {
-            encode(message: _801.ConnectedIntermediaryAccountResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.ConnectedIntermediaryAccountResponse;
-            fromJSON(object: any): _801.ConnectedIntermediaryAccountResponse;
-            toJSON(message: _801.ConnectedIntermediaryAccountResponse): unknown;
-            fromPartial<I_25 extends unknown>(object: I_25): _801.ConnectedIntermediaryAccountResponse;
+            encode(message: _207.ConnectedIntermediaryAccountResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.ConnectedIntermediaryAccountResponse;
+            fromJSON(object: any): _207.ConnectedIntermediaryAccountResponse;
+            toJSON(message: _207.ConnectedIntermediaryAccountResponse): unknown;
+            fromPartial<I_25 extends {
+                account?: {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                };
+            } & {
+                account?: {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                } & {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                    address?: string;
+                } & Record<Exclude<keyof I_25["account"], keyof _207.SuperfluidIntermediaryAccountInfo>, never>;
+            } & Record<Exclude<keyof I_25, "account">, never>>(object: I_25): _207.ConnectedIntermediaryAccountResponse;
         };
         TotalSuperfluidDelegationsRequest: {
-            encode(_: _801.TotalSuperfluidDelegationsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.TotalSuperfluidDelegationsRequest;
-            fromJSON(_: any): _801.TotalSuperfluidDelegationsRequest;
-            toJSON(_: _801.TotalSuperfluidDelegationsRequest): unknown;
-            fromPartial<I_26 extends unknown>(_: I_26): _801.TotalSuperfluidDelegationsRequest;
+            encode(_: _207.TotalSuperfluidDelegationsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.TotalSuperfluidDelegationsRequest;
+            fromJSON(_: any): _207.TotalSuperfluidDelegationsRequest;
+            toJSON(_: _207.TotalSuperfluidDelegationsRequest): unknown;
+            fromPartial<I_26 extends {} & {} & Record<Exclude<keyof I_26, never>, never>>(_: I_26): _207.TotalSuperfluidDelegationsRequest;
         };
         TotalSuperfluidDelegationsResponse: {
-            encode(message: _801.TotalSuperfluidDelegationsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.TotalSuperfluidDelegationsResponse;
-            fromJSON(object: any): _801.TotalSuperfluidDelegationsResponse;
-            toJSON(message: _801.TotalSuperfluidDelegationsResponse): unknown;
-            fromPartial<I_27 extends unknown>(object: I_27): _801.TotalSuperfluidDelegationsResponse;
+            encode(message: _207.TotalSuperfluidDelegationsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.TotalSuperfluidDelegationsResponse;
+            fromJSON(object: any): _207.TotalSuperfluidDelegationsResponse;
+            toJSON(message: _207.TotalSuperfluidDelegationsResponse): unknown;
+            fromPartial<I_27 extends {
+                totalDelegations?: string;
+            } & {
+                totalDelegations?: string;
+            } & Record<Exclude<keyof I_27, "totalDelegations">, never>>(object: I_27): _207.TotalSuperfluidDelegationsResponse;
         };
         SuperfluidDelegationAmountRequest: {
-            encode(message: _801.SuperfluidDelegationAmountRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidDelegationAmountRequest;
-            fromJSON(object: any): _801.SuperfluidDelegationAmountRequest;
-            toJSON(message: _801.SuperfluidDelegationAmountRequest): unknown;
-            fromPartial<I_28 extends unknown>(object: I_28): _801.SuperfluidDelegationAmountRequest;
+            encode(message: _207.SuperfluidDelegationAmountRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidDelegationAmountRequest;
+            fromJSON(object: any): _207.SuperfluidDelegationAmountRequest;
+            toJSON(message: _207.SuperfluidDelegationAmountRequest): unknown;
+            fromPartial<I_28 extends {
+                delegatorAddress?: string;
+                validatorAddress?: string;
+                denom?: string;
+            } & {
+                delegatorAddress?: string;
+                validatorAddress?: string;
+                denom?: string;
+            } & Record<Exclude<keyof I_28, keyof _207.SuperfluidDelegationAmountRequest>, never>>(object: I_28): _207.SuperfluidDelegationAmountRequest;
         };
         SuperfluidDelegationAmountResponse: {
-            encode(message: _801.SuperfluidDelegationAmountResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidDelegationAmountResponse;
-            fromJSON(object: any): _801.SuperfluidDelegationAmountResponse;
-            toJSON(message: _801.SuperfluidDelegationAmountResponse): unknown;
-            fromPartial<I_29 extends unknown>(object: I_29): _801.SuperfluidDelegationAmountResponse;
+            encode(message: _207.SuperfluidDelegationAmountResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidDelegationAmountResponse;
+            fromJSON(object: any): _207.SuperfluidDelegationAmountResponse;
+            toJSON(message: _207.SuperfluidDelegationAmountResponse): unknown;
+            fromPartial<I_29 extends {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                amount?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_29["amount"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_29["amount"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_29, "amount">, never>>(object: I_29): _207.SuperfluidDelegationAmountResponse;
         };
         SuperfluidDelegationsByDelegatorRequest: {
-            encode(message: _801.SuperfluidDelegationsByDelegatorRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidDelegationsByDelegatorRequest;
-            fromJSON(object: any): _801.SuperfluidDelegationsByDelegatorRequest;
-            toJSON(message: _801.SuperfluidDelegationsByDelegatorRequest): unknown;
-            fromPartial<I_30 extends unknown>(object: I_30): _801.SuperfluidDelegationsByDelegatorRequest;
+            encode(message: _207.SuperfluidDelegationsByDelegatorRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidDelegationsByDelegatorRequest;
+            fromJSON(object: any): _207.SuperfluidDelegationsByDelegatorRequest;
+            toJSON(message: _207.SuperfluidDelegationsByDelegatorRequest): unknown;
+            fromPartial<I_30 extends {
+                delegatorAddress?: string;
+            } & {
+                delegatorAddress?: string;
+            } & Record<Exclude<keyof I_30, "delegatorAddress">, never>>(object: I_30): _207.SuperfluidDelegationsByDelegatorRequest;
         };
         SuperfluidDelegationsByDelegatorResponse: {
-            encode(message: _801.SuperfluidDelegationsByDelegatorResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidDelegationsByDelegatorResponse;
-            fromJSON(object: any): _801.SuperfluidDelegationsByDelegatorResponse;
-            toJSON(message: _801.SuperfluidDelegationsByDelegatorResponse): unknown;
-            fromPartial<I_31 extends unknown>(object: I_31): _801.SuperfluidDelegationsByDelegatorResponse;
+            encode(message: _207.SuperfluidDelegationsByDelegatorResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidDelegationsByDelegatorResponse;
+            fromJSON(object: any): _207.SuperfluidDelegationsByDelegatorResponse;
+            toJSON(message: _207.SuperfluidDelegationsByDelegatorResponse): unknown;
+            fromPartial<I_31 extends {
+                superfluidDelegationRecords?: {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[];
+                totalDelegatedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                superfluidDelegationRecords?: {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[] & ({
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                } & {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_31["superfluidDelegationRecords"][number]["delegationAmount"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                } & Record<Exclude<keyof I_31["superfluidDelegationRecords"][number], keyof _208.SuperfluidDelegationRecord>, never>)[] & Record<Exclude<keyof I_31["superfluidDelegationRecords"], keyof {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[]>, never>;
+                totalDelegatedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_31["totalDelegatedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_31["totalDelegatedCoins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_31, keyof _207.SuperfluidDelegationsByDelegatorResponse>, never>>(object: I_31): _207.SuperfluidDelegationsByDelegatorResponse;
         };
         SuperfluidUndelegationsByDelegatorRequest: {
-            encode(message: _801.SuperfluidUndelegationsByDelegatorRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidUndelegationsByDelegatorRequest;
-            fromJSON(object: any): _801.SuperfluidUndelegationsByDelegatorRequest;
-            toJSON(message: _801.SuperfluidUndelegationsByDelegatorRequest): unknown;
-            fromPartial<I_32 extends unknown>(object: I_32): _801.SuperfluidUndelegationsByDelegatorRequest;
+            encode(message: _207.SuperfluidUndelegationsByDelegatorRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidUndelegationsByDelegatorRequest;
+            fromJSON(object: any): _207.SuperfluidUndelegationsByDelegatorRequest;
+            toJSON(message: _207.SuperfluidUndelegationsByDelegatorRequest): unknown;
+            fromPartial<I_32 extends {
+                delegatorAddress?: string;
+                denom?: string;
+            } & {
+                delegatorAddress?: string;
+                denom?: string;
+            } & Record<Exclude<keyof I_32, keyof _207.SuperfluidUndelegationsByDelegatorRequest>, never>>(object: I_32): _207.SuperfluidUndelegationsByDelegatorRequest;
         };
         SuperfluidUndelegationsByDelegatorResponse: {
-            encode(message: _801.SuperfluidUndelegationsByDelegatorResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidUndelegationsByDelegatorResponse;
-            fromJSON(object: any): _801.SuperfluidUndelegationsByDelegatorResponse;
-            toJSON(message: _801.SuperfluidUndelegationsByDelegatorResponse): unknown;
-            fromPartial<I_33 extends unknown>(object: I_33): _801.SuperfluidUndelegationsByDelegatorResponse;
+            encode(message: _207.SuperfluidUndelegationsByDelegatorResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidUndelegationsByDelegatorResponse;
+            fromJSON(object: any): _207.SuperfluidUndelegationsByDelegatorResponse;
+            toJSON(message: _207.SuperfluidUndelegationsByDelegatorResponse): unknown;
+            fromPartial<I_33 extends {
+                superfluidDelegationRecords?: {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[];
+                totalUndelegatedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+                syntheticLocks?: {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[];
+            } & {
+                superfluidDelegationRecords?: {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[] & ({
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                } & {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_33["superfluidDelegationRecords"][number]["delegationAmount"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                } & Record<Exclude<keyof I_33["superfluidDelegationRecords"][number], keyof _208.SuperfluidDelegationRecord>, never>)[] & Record<Exclude<keyof I_33["superfluidDelegationRecords"], keyof {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[]>, never>;
+                totalUndelegatedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_33["totalUndelegatedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_33["totalUndelegatedCoins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+                syntheticLocks?: {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[] & ({
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                } & {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                } & Record<Exclude<keyof I_33["syntheticLocks"][number], keyof _194.SyntheticLock>, never>)[] & Record<Exclude<keyof I_33["syntheticLocks"], keyof {
+                    underlyingLockId?: any;
+                    synthDenom?: string;
+                    endTime?: Date;
+                    duration?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_33, keyof _207.SuperfluidUndelegationsByDelegatorResponse>, never>>(object: I_33): _207.SuperfluidUndelegationsByDelegatorResponse;
         };
         SuperfluidDelegationsByValidatorDenomRequest: {
-            encode(message: _801.SuperfluidDelegationsByValidatorDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidDelegationsByValidatorDenomRequest;
-            fromJSON(object: any): _801.SuperfluidDelegationsByValidatorDenomRequest;
-            toJSON(message: _801.SuperfluidDelegationsByValidatorDenomRequest): unknown;
-            fromPartial<I_34 extends unknown>(object: I_34): _801.SuperfluidDelegationsByValidatorDenomRequest;
+            encode(message: _207.SuperfluidDelegationsByValidatorDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidDelegationsByValidatorDenomRequest;
+            fromJSON(object: any): _207.SuperfluidDelegationsByValidatorDenomRequest;
+            toJSON(message: _207.SuperfluidDelegationsByValidatorDenomRequest): unknown;
+            fromPartial<I_34 extends {
+                validatorAddress?: string;
+                denom?: string;
+            } & {
+                validatorAddress?: string;
+                denom?: string;
+            } & Record<Exclude<keyof I_34, keyof _207.SuperfluidDelegationsByValidatorDenomRequest>, never>>(object: I_34): _207.SuperfluidDelegationsByValidatorDenomRequest;
         };
         SuperfluidDelegationsByValidatorDenomResponse: {
-            encode(message: _801.SuperfluidDelegationsByValidatorDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.SuperfluidDelegationsByValidatorDenomResponse;
-            fromJSON(object: any): _801.SuperfluidDelegationsByValidatorDenomResponse;
-            toJSON(message: _801.SuperfluidDelegationsByValidatorDenomResponse): unknown;
-            fromPartial<I_35 extends unknown>(object: I_35): _801.SuperfluidDelegationsByValidatorDenomResponse;
+            encode(message: _207.SuperfluidDelegationsByValidatorDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.SuperfluidDelegationsByValidatorDenomResponse;
+            fromJSON(object: any): _207.SuperfluidDelegationsByValidatorDenomResponse;
+            toJSON(message: _207.SuperfluidDelegationsByValidatorDenomResponse): unknown;
+            fromPartial<I_35 extends {
+                superfluidDelegationRecords?: {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[];
+            } & {
+                superfluidDelegationRecords?: {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[] & ({
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                } & {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I_35["superfluidDelegationRecords"][number]["delegationAmount"], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>;
+                } & Record<Exclude<keyof I_35["superfluidDelegationRecords"][number], keyof _208.SuperfluidDelegationRecord>, never>)[] & Record<Exclude<keyof I_35["superfluidDelegationRecords"], keyof {
+                    delegatorAddress?: string;
+                    validatorAddress?: string;
+                    delegationAmount?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                }[]>, never>;
+            } & Record<Exclude<keyof I_35, "superfluidDelegationRecords">, never>>(object: I_35): _207.SuperfluidDelegationsByValidatorDenomResponse;
         };
         EstimateSuperfluidDelegatedAmountByValidatorDenomRequest: {
-            encode(message: _801.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
-            fromJSON(object: any): _801.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
-            toJSON(message: _801.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): unknown;
-            fromPartial<I_36 extends unknown>(object: I_36): _801.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
+            encode(message: _207.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
+            fromJSON(object: any): _207.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
+            toJSON(message: _207.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): unknown;
+            fromPartial<I_36 extends {
+                validatorAddress?: string;
+                denom?: string;
+            } & {
+                validatorAddress?: string;
+                denom?: string;
+            } & Record<Exclude<keyof I_36, keyof _207.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>, never>>(object: I_36): _207.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
         };
         EstimateSuperfluidDelegatedAmountByValidatorDenomResponse: {
-            encode(message: _801.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _801.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse;
-            fromJSON(object: any): _801.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse;
-            toJSON(message: _801.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): unknown;
-            fromPartial<I_37 extends unknown>(object: I_37): _801.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse;
+            encode(message: _207.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _207.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse;
+            fromJSON(object: any): _207.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse;
+            toJSON(message: _207.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): unknown;
+            fromPartial<I_37 extends {
+                totalDelegatedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[];
+            } & {
+                totalDelegatedCoins?: {
+                    denom?: string;
+                    amount?: string;
+                }[] & ({
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I_37["totalDelegatedCoins"][number], keyof import("../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I_37["totalDelegatedCoins"], keyof {
+                    denom?: string;
+                    amount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_37, "totalDelegatedCoins">, never>>(object: I_37): _207.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse;
         };
         Params: {
-            encode(message: _800.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _800.Params;
-            fromJSON(object: any): _800.Params;
-            toJSON(message: _800.Params): unknown;
-            fromPartial<I_38 extends unknown>(object: I_38): _800.Params;
+            encode(message: _206.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _206.Params;
+            fromJSON(object: any): _206.Params;
+            toJSON(message: _206.Params): unknown;
+            fromPartial<I_38 extends {
+                minimumRiskFactor?: string;
+            } & {
+                minimumRiskFactor?: string;
+            } & Record<Exclude<keyof I_38, "minimumRiskFactor">, never>>(object: I_38): _206.Params;
         };
         GenesisState: {
-            encode(message: _799.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _799.GenesisState;
-            fromJSON(object: any): _799.GenesisState;
-            toJSON(message: _799.GenesisState): unknown;
-            fromPartial<I_39 extends unknown>(object: I_39): _799.GenesisState;
+            encode(message: _205.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _205.GenesisState;
+            fromJSON(object: any): _205.GenesisState;
+            toJSON(message: _205.GenesisState): unknown;
+            fromPartial<I_39 extends {
+                params?: {
+                    minimumRiskFactor?: string;
+                };
+                superfluidAssets?: {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                }[];
+                osmoEquivalentMultipliers?: {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                }[];
+                intermediaryAccounts?: {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                }[];
+                intemediaryAccountConnections?: {
+                    lockId?: any;
+                    intermediaryAccount?: string;
+                }[];
+            } & {
+                params?: {
+                    minimumRiskFactor?: string;
+                } & {
+                    minimumRiskFactor?: string;
+                } & Record<Exclude<keyof I_39["params"], "minimumRiskFactor">, never>;
+                superfluidAssets?: {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                }[] & ({
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                } & {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                } & Record<Exclude<keyof I_39["superfluidAssets"][number], keyof _208.SuperfluidAsset>, never>)[] & Record<Exclude<keyof I_39["superfluidAssets"], keyof {
+                    denom?: string;
+                    assetType?: _208.SuperfluidAssetType;
+                }[]>, never>;
+                osmoEquivalentMultipliers?: {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                }[] & ({
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                } & {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                } & Record<Exclude<keyof I_39["osmoEquivalentMultipliers"][number], keyof _208.OsmoEquivalentMultiplierRecord>, never>)[] & Record<Exclude<keyof I_39["osmoEquivalentMultipliers"], keyof {
+                    epochNumber?: any;
+                    denom?: string;
+                    multiplier?: string;
+                }[]>, never>;
+                intermediaryAccounts?: {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                }[] & ({
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                } & {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                } & Record<Exclude<keyof I_39["intermediaryAccounts"][number], keyof _208.SuperfluidIntermediaryAccount>, never>)[] & Record<Exclude<keyof I_39["intermediaryAccounts"], keyof {
+                    denom?: string;
+                    valAddr?: string;
+                    gaugeId?: any;
+                }[]>, never>;
+                intemediaryAccountConnections?: {
+                    lockId?: any;
+                    intermediaryAccount?: string;
+                }[] & ({
+                    lockId?: any;
+                    intermediaryAccount?: string;
+                } & {
+                    lockId?: any;
+                    intermediaryAccount?: string;
+                } & Record<Exclude<keyof I_39["intemediaryAccountConnections"][number], keyof _208.LockIdIntermediaryAccountConnection>, never>)[] & Record<Exclude<keyof I_39["intemediaryAccountConnections"], keyof {
+                    lockId?: any;
+                    intermediaryAccount?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I_39, keyof _205.GenesisState>, never>>(object: I_39): _205.GenesisState;
         };
     };
     namespace txfees {
         const v1beta1: {
             QueryFeeTokensRequest: {
-                encode(_: _815.QueryFeeTokensRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _815.QueryFeeTokensRequest;
-                fromJSON(_: any): _815.QueryFeeTokensRequest;
-                toJSON(_: _815.QueryFeeTokensRequest): unknown;
-                fromPartial<I extends unknown>(_: I): _815.QueryFeeTokensRequest;
+                encode(_: _213.QueryFeeTokensRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _213.QueryFeeTokensRequest;
+                fromJSON(_: any): _213.QueryFeeTokensRequest;
+                toJSON(_: _213.QueryFeeTokensRequest): unknown;
+                fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): _213.QueryFeeTokensRequest;
             };
             QueryFeeTokensResponse: {
-                encode(message: _815.QueryFeeTokensResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _815.QueryFeeTokensResponse;
-                fromJSON(object: any): _815.QueryFeeTokensResponse;
-                toJSON(message: _815.QueryFeeTokensResponse): unknown;
-                fromPartial<I_1 extends unknown>(object: I_1): _815.QueryFeeTokensResponse;
+                encode(message: _213.QueryFeeTokensResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _213.QueryFeeTokensResponse;
+                fromJSON(object: any): _213.QueryFeeTokensResponse;
+                toJSON(message: _213.QueryFeeTokensResponse): unknown;
+                fromPartial<I_1 extends {
+                    feeTokens?: {
+                        denom?: string;
+                        poolID?: any;
+                    }[];
+                } & {
+                    feeTokens?: {
+                        denom?: string;
+                        poolID?: any;
+                    }[] & ({
+                        denom?: string;
+                        poolID?: any;
+                    } & {
+                        denom?: string;
+                        poolID?: any;
+                    } & Record<Exclude<keyof I_1["feeTokens"][number], keyof _210.FeeToken>, never>)[] & Record<Exclude<keyof I_1["feeTokens"], keyof {
+                        denom?: string;
+                        poolID?: any;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_1, "feeTokens">, never>>(object: I_1): _213.QueryFeeTokensResponse;
             };
             QueryDenomPoolIdRequest: {
-                encode(message: _815.QueryDenomPoolIdRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _815.QueryDenomPoolIdRequest;
-                fromJSON(object: any): _815.QueryDenomPoolIdRequest;
-                toJSON(message: _815.QueryDenomPoolIdRequest): unknown;
-                fromPartial<I_2 extends unknown>(object: I_2): _815.QueryDenomPoolIdRequest;
+                encode(message: _213.QueryDenomPoolIdRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _213.QueryDenomPoolIdRequest;
+                fromJSON(object: any): _213.QueryDenomPoolIdRequest;
+                toJSON(message: _213.QueryDenomPoolIdRequest): unknown;
+                fromPartial<I_2 extends {
+                    denom?: string;
+                } & {
+                    denom?: string;
+                } & Record<Exclude<keyof I_2, "denom">, never>>(object: I_2): _213.QueryDenomPoolIdRequest;
             };
             QueryDenomPoolIdResponse: {
-                encode(message: _815.QueryDenomPoolIdResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _815.QueryDenomPoolIdResponse;
-                fromJSON(object: any): _815.QueryDenomPoolIdResponse;
-                toJSON(message: _815.QueryDenomPoolIdResponse): unknown;
-                fromPartial<I_3 extends unknown>(object: I_3): _815.QueryDenomPoolIdResponse;
+                encode(message: _213.QueryDenomPoolIdResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _213.QueryDenomPoolIdResponse;
+                fromJSON(object: any): _213.QueryDenomPoolIdResponse;
+                toJSON(message: _213.QueryDenomPoolIdResponse): unknown;
+                fromPartial<I_3 extends {
+                    poolID?: any;
+                } & {
+                    poolID?: any;
+                } & Record<Exclude<keyof I_3, "poolID">, never>>(object: I_3): _213.QueryDenomPoolIdResponse;
             };
             QueryBaseDenomRequest: {
-                encode(_: _815.QueryBaseDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _815.QueryBaseDenomRequest;
-                fromJSON(_: any): _815.QueryBaseDenomRequest;
-                toJSON(_: _815.QueryBaseDenomRequest): unknown;
-                fromPartial<I_4 extends unknown>(_: I_4): _815.QueryBaseDenomRequest;
+                encode(_: _213.QueryBaseDenomRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _213.QueryBaseDenomRequest;
+                fromJSON(_: any): _213.QueryBaseDenomRequest;
+                toJSON(_: _213.QueryBaseDenomRequest): unknown;
+                fromPartial<I_4 extends {} & {} & Record<Exclude<keyof I_4, never>, never>>(_: I_4): _213.QueryBaseDenomRequest;
             };
             QueryBaseDenomResponse: {
-                encode(message: _815.QueryBaseDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _815.QueryBaseDenomResponse;
-                fromJSON(object: any): _815.QueryBaseDenomResponse;
-                toJSON(message: _815.QueryBaseDenomResponse): unknown;
-                fromPartial<I_5 extends unknown>(object: I_5): _815.QueryBaseDenomResponse;
+                encode(message: _213.QueryBaseDenomResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _213.QueryBaseDenomResponse;
+                fromJSON(object: any): _213.QueryBaseDenomResponse;
+                toJSON(message: _213.QueryBaseDenomResponse): unknown;
+                fromPartial<I_5 extends {
+                    baseDenom?: string;
+                } & {
+                    baseDenom?: string;
+                } & Record<Exclude<keyof I_5, "baseDenom">, never>>(object: I_5): _213.QueryBaseDenomResponse;
             };
             UpdateFeeTokenProposal: {
-                encode(message: _814.UpdateFeeTokenProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _814.UpdateFeeTokenProposal;
-                fromJSON(object: any): _814.UpdateFeeTokenProposal;
-                toJSON(message: _814.UpdateFeeTokenProposal): unknown;
-                fromPartial<I_6 extends unknown>(object: I_6): _814.UpdateFeeTokenProposal;
+                encode(message: _212.UpdateFeeTokenProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _212.UpdateFeeTokenProposal;
+                fromJSON(object: any): _212.UpdateFeeTokenProposal;
+                toJSON(message: _212.UpdateFeeTokenProposal): unknown;
+                fromPartial<I_6 extends {
+                    title?: string;
+                    description?: string;
+                    feetoken?: {
+                        denom?: string;
+                        poolID?: any;
+                    };
+                } & {
+                    title?: string;
+                    description?: string;
+                    feetoken?: {
+                        denom?: string;
+                        poolID?: any;
+                    } & {
+                        denom?: string;
+                        poolID?: any;
+                    } & Record<Exclude<keyof I_6["feetoken"], keyof _210.FeeToken>, never>;
+                } & Record<Exclude<keyof I_6, keyof _212.UpdateFeeTokenProposal>, never>>(object: I_6): _212.UpdateFeeTokenProposal;
             };
             GenesisState: {
-                encode(message: _813.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _813.GenesisState;
-                fromJSON(object: any): _813.GenesisState;
-                toJSON(message: _813.GenesisState): unknown;
-                fromPartial<I_7 extends unknown>(object: I_7): _813.GenesisState;
+                encode(message: _211.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _211.GenesisState;
+                fromJSON(object: any): _211.GenesisState;
+                toJSON(message: _211.GenesisState): unknown;
+                fromPartial<I_7 extends {
+                    basedenom?: string;
+                    feetokens?: {
+                        denom?: string;
+                        poolID?: any;
+                    }[];
+                } & {
+                    basedenom?: string;
+                    feetokens?: {
+                        denom?: string;
+                        poolID?: any;
+                    }[] & ({
+                        denom?: string;
+                        poolID?: any;
+                    } & {
+                        denom?: string;
+                        poolID?: any;
+                    } & Record<Exclude<keyof I_7["feetokens"][number], keyof _210.FeeToken>, never>)[] & Record<Exclude<keyof I_7["feetokens"], keyof {
+                        denom?: string;
+                        poolID?: any;
+                    }[]>, never>;
+                } & Record<Exclude<keyof I_7, keyof _211.GenesisState>, never>>(object: I_7): _211.GenesisState;
             };
             FeeToken: {
-                encode(message: _812.FeeToken, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _812.FeeToken;
-                fromJSON(object: any): _812.FeeToken;
-                toJSON(message: _812.FeeToken): unknown;
-                fromPartial<I_8 extends unknown>(object: I_8): _812.FeeToken;
+                encode(message: _210.FeeToken, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _210.FeeToken;
+                fromJSON(object: any): _210.FeeToken;
+                toJSON(message: _210.FeeToken): unknown;
+                fromPartial<I_8 extends {
+                    denom?: string;
+                    poolID?: any;
+                } & {
+                    denom?: string;
+                    poolID?: any;
+                } & Record<Exclude<keyof I_8, keyof _210.FeeToken>, never>>(object: I_8): _210.FeeToken;
             };
         };
     }

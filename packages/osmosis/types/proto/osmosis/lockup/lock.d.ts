@@ -1,7 +1,6 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 export declare enum LockQueryType {
     /** ByDuration - Queries for locks that are longer than a certain duration */
     ByDuration = 0,
@@ -19,7 +18,7 @@ export declare function lockQueryTypeToJSON(object: LockQueryType): string;
 export interface PeriodLock {
     ID: Long;
     owner: string;
-    duration: Duration;
+    duration: string;
     endTime: Date;
     coins: Coin[];
 }
@@ -29,7 +28,7 @@ export interface QueryCondition {
     /** What token denomination are we looking for lockups of */
     denom: string;
     /** valid when query condition is ByDuration */
-    duration: Duration;
+    duration: string;
     /** valid when query condition is ByTime */
     timestamp: Date;
 }
@@ -58,35 +57,73 @@ export interface SyntheticLock {
      * value is set to uninitialized value
      */
     endTime: Date;
-    duration: Duration;
+    duration: string;
 }
 export declare const PeriodLock: {
     encode(message: PeriodLock, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PeriodLock;
     fromJSON(object: any): PeriodLock;
     toJSON(message: PeriodLock): unknown;
-    fromPartial<I extends unknown>(object: I): PeriodLock;
+    fromPartial<I extends {
+        ID?: any;
+        owner?: string;
+        duration?: string;
+        endTime?: Date;
+        coins?: {
+            denom?: string;
+            amount?: string;
+        }[];
+    } & {
+        ID?: any;
+        owner?: string;
+        duration?: string;
+        endTime?: Date;
+        coins?: {
+            denom?: string;
+            amount?: string;
+        }[] & ({
+            denom?: string;
+            amount?: string;
+        } & {
+            denom?: string;
+            amount?: string;
+        } & Record<Exclude<keyof I["coins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
+            denom?: string;
+            amount?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof PeriodLock>, never>>(object: I): PeriodLock;
 };
 export declare const QueryCondition: {
     encode(message: QueryCondition, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCondition;
     fromJSON(object: any): QueryCondition;
     toJSON(message: QueryCondition): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCondition;
+    fromPartial<I extends {
+        lockQueryType?: LockQueryType;
+        denom?: string;
+        duration?: string;
+        timestamp?: Date;
+    } & {
+        lockQueryType?: LockQueryType;
+        denom?: string;
+        duration?: string;
+        timestamp?: Date;
+    } & Record<Exclude<keyof I, keyof QueryCondition>, never>>(object: I): QueryCondition;
 };
 export declare const SyntheticLock: {
     encode(message: SyntheticLock, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLock;
     fromJSON(object: any): SyntheticLock;
     toJSON(message: SyntheticLock): unknown;
-    fromPartial<I extends unknown>(object: I): SyntheticLock;
+    fromPartial<I extends {
+        underlyingLockId?: any;
+        synthDenom?: string;
+        endTime?: Date;
+        duration?: string;
+    } & {
+        underlyingLockId?: any;
+        synthDenom?: string;
+        endTime?: Date;
+        duration?: string;
+    } & Record<Exclude<keyof I, keyof SyntheticLock>, never>>(object: I): SyntheticLock;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

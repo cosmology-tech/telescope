@@ -1,6 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../../../google/protobuf/duration";
+import { Long } from "@osmonauts/helpers";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
  * defined by the HTTP specification. Product-specific logging
@@ -56,7 +55,7 @@ export interface HttpRequest {
      * The request processing latency on the server, from the time the request was
      * received until the response was sent.
      */
-    latency: Duration;
+    latency: string;
     /** Whether or not a cache lookup was attempted. */
     cacheLookup: boolean;
     /**
@@ -83,14 +82,37 @@ export declare const HttpRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): HttpRequest;
     fromJSON(object: any): HttpRequest;
     toJSON(message: HttpRequest): unknown;
-    fromPartial<I extends unknown>(object: I): HttpRequest;
+    fromPartial<I extends {
+        requestMethod?: string;
+        requestUrl?: string;
+        requestSize?: any;
+        status?: number;
+        responseSize?: any;
+        userAgent?: string;
+        remoteIp?: string;
+        serverIp?: string;
+        referer?: string;
+        latency?: string;
+        cacheLookup?: boolean;
+        cacheHit?: boolean;
+        cacheValidatedWithOriginServer?: boolean;
+        cacheFillBytes?: any;
+        protocol?: string;
+    } & {
+        requestMethod?: string;
+        requestUrl?: string;
+        requestSize?: any;
+        status?: number;
+        responseSize?: any;
+        userAgent?: string;
+        remoteIp?: string;
+        serverIp?: string;
+        referer?: string;
+        latency?: string;
+        cacheLookup?: boolean;
+        cacheHit?: boolean;
+        cacheValidatedWithOriginServer?: boolean;
+        cacheFillBytes?: any;
+        protocol?: string;
+    } & Record<Exclude<keyof I, keyof HttpRequest>, never>>(object: I): HttpRequest;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

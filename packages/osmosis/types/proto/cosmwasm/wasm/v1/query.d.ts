@@ -1,7 +1,7 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { ContractInfo, ContractCodeHistoryEntry, Model } from "../../../cosmwasm/wasm/v1/types";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { ContractInfo, ContractCodeHistoryEntry, Model } from "./types";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
  * method
@@ -43,9 +43,11 @@ export interface QueryContractHistoryResponse {
  * RPC method
  */
 export interface QueryContractsByCodeRequest {
-    /** grpc-gateway_out does not support Go style CodID */
+    /**
+     * grpc-gateway_out does not support Go style CodID
+     * pagination defines an optional pagination for the request.
+     */
     codeId: Long;
-    /** pagination defines an optional pagination for the request. */
     pagination: PageRequest;
 }
 /**
@@ -119,7 +121,6 @@ export interface QueryCodeRequest {
 }
 /** CodeInfoResponse contains code meta data from CodeInfo */
 export interface CodeInfoResponse {
-    /** id for legacy support */
     codeId: Long;
     creator: string;
     dataHash: Uint8Array;
@@ -162,140 +163,508 @@ export declare const QueryContractInfoRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractInfoRequest;
     fromJSON(object: any): QueryContractInfoRequest;
     toJSON(message: QueryContractInfoRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryContractInfoRequest;
+    fromPartial<I extends {
+        address?: string;
+    } & {
+        address?: string;
+    } & Record<Exclude<keyof I, "address">, never>>(object: I): QueryContractInfoRequest;
 };
 export declare const QueryContractInfoResponse: {
     encode(message: QueryContractInfoResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractInfoResponse;
     fromJSON(object: any): QueryContractInfoResponse;
     toJSON(message: QueryContractInfoResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryContractInfoResponse;
+    fromPartial<I extends {
+        address?: string;
+        contractInfo?: {
+            codeId?: any;
+            creator?: string;
+            admin?: string;
+            label?: string;
+            created?: {
+                blockHeight?: any;
+                txIndex?: any;
+            };
+            ibcPortId?: string;
+            extension?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        };
+    } & {
+        address?: string;
+        contractInfo?: {
+            codeId?: any;
+            creator?: string;
+            admin?: string;
+            label?: string;
+            created?: {
+                blockHeight?: any;
+                txIndex?: any;
+            };
+            ibcPortId?: string;
+            extension?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        } & {
+            codeId?: any;
+            creator?: string;
+            admin?: string;
+            label?: string;
+            created?: {
+                blockHeight?: any;
+                txIndex?: any;
+            } & {
+                blockHeight?: any;
+                txIndex?: any;
+            } & Record<Exclude<keyof I["contractInfo"]["created"], keyof import("./types").AbsoluteTxPosition>, never>;
+            ibcPortId?: string;
+            extension?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["contractInfo"]["extension"], keyof import("../../../google/protobuf/any").Any>, never>;
+        } & Record<Exclude<keyof I["contractInfo"], keyof ContractInfo>, never>;
+    } & Record<Exclude<keyof I, keyof QueryContractInfoResponse>, never>>(object: I): QueryContractInfoResponse;
 };
 export declare const QueryContractHistoryRequest: {
     encode(message: QueryContractHistoryRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractHistoryRequest;
     fromJSON(object: any): QueryContractHistoryRequest;
     toJSON(message: QueryContractHistoryRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryContractHistoryRequest;
+    fromPartial<I extends {
+        address?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        address?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, keyof QueryContractHistoryRequest>, never>>(object: I): QueryContractHistoryRequest;
 };
 export declare const QueryContractHistoryResponse: {
     encode(message: QueryContractHistoryResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractHistoryResponse;
     fromJSON(object: any): QueryContractHistoryResponse;
     toJSON(message: QueryContractHistoryResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryContractHistoryResponse;
+    fromPartial<I extends {
+        entries?: {
+            operation?: import("./types").ContractCodeHistoryOperationType;
+            codeId?: any;
+            updated?: {
+                blockHeight?: any;
+                txIndex?: any;
+            };
+            msg?: Uint8Array;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+    } & {
+        entries?: {
+            operation?: import("./types").ContractCodeHistoryOperationType;
+            codeId?: any;
+            updated?: {
+                blockHeight?: any;
+                txIndex?: any;
+            };
+            msg?: Uint8Array;
+        }[] & ({
+            operation?: import("./types").ContractCodeHistoryOperationType;
+            codeId?: any;
+            updated?: {
+                blockHeight?: any;
+                txIndex?: any;
+            };
+            msg?: Uint8Array;
+        } & {
+            operation?: import("./types").ContractCodeHistoryOperationType;
+            codeId?: any;
+            updated?: {
+                blockHeight?: any;
+                txIndex?: any;
+            } & {
+                blockHeight?: any;
+                txIndex?: any;
+            } & Record<Exclude<keyof I["entries"][number]["updated"], keyof import("./types").AbsoluteTxPosition>, never>;
+            msg?: Uint8Array;
+        } & Record<Exclude<keyof I["entries"][number], keyof ContractCodeHistoryEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
+            operation?: import("./types").ContractCodeHistoryOperationType;
+            codeId?: any;
+            updated?: {
+                blockHeight?: any;
+                txIndex?: any;
+            };
+            msg?: Uint8Array;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+    } & Record<Exclude<keyof I, keyof QueryContractHistoryResponse>, never>>(object: I): QueryContractHistoryResponse;
 };
 export declare const QueryContractsByCodeRequest: {
     encode(message: QueryContractsByCodeRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractsByCodeRequest;
     fromJSON(object: any): QueryContractsByCodeRequest;
     toJSON(message: QueryContractsByCodeRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryContractsByCodeRequest;
+    fromPartial<I extends {
+        codeId?: any;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        codeId?: any;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, keyof QueryContractsByCodeRequest>, never>>(object: I): QueryContractsByCodeRequest;
 };
 export declare const QueryContractsByCodeResponse: {
     encode(message: QueryContractsByCodeResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractsByCodeResponse;
     fromJSON(object: any): QueryContractsByCodeResponse;
     toJSON(message: QueryContractsByCodeResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryContractsByCodeResponse;
+    fromPartial<I extends {
+        contracts?: string[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+    } & {
+        contracts?: string[] & string[] & Record<Exclude<keyof I["contracts"], keyof string[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+    } & Record<Exclude<keyof I, keyof QueryContractsByCodeResponse>, never>>(object: I): QueryContractsByCodeResponse;
 };
 export declare const QueryAllContractStateRequest: {
     encode(message: QueryAllContractStateRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllContractStateRequest;
     fromJSON(object: any): QueryAllContractStateRequest;
     toJSON(message: QueryAllContractStateRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryAllContractStateRequest;
+    fromPartial<I extends {
+        address?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        address?: string;
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, keyof QueryAllContractStateRequest>, never>>(object: I): QueryAllContractStateRequest;
 };
 export declare const QueryAllContractStateResponse: {
     encode(message: QueryAllContractStateResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllContractStateResponse;
     fromJSON(object: any): QueryAllContractStateResponse;
     toJSON(message: QueryAllContractStateResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryAllContractStateResponse;
+    fromPartial<I extends {
+        models?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+    } & {
+        models?: {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        }[] & ({
+            key?: Uint8Array;
+            value?: Uint8Array;
+        } & {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["models"][number], keyof Model>, never>)[] & Record<Exclude<keyof I["models"], keyof {
+            key?: Uint8Array;
+            value?: Uint8Array;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+    } & Record<Exclude<keyof I, keyof QueryAllContractStateResponse>, never>>(object: I): QueryAllContractStateResponse;
 };
 export declare const QueryRawContractStateRequest: {
     encode(message: QueryRawContractStateRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateRequest;
     fromJSON(object: any): QueryRawContractStateRequest;
     toJSON(message: QueryRawContractStateRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryRawContractStateRequest;
+    fromPartial<I extends {
+        address?: string;
+        queryData?: Uint8Array;
+    } & {
+        address?: string;
+        queryData?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof QueryRawContractStateRequest>, never>>(object: I): QueryRawContractStateRequest;
 };
 export declare const QueryRawContractStateResponse: {
     encode(message: QueryRawContractStateResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateResponse;
     fromJSON(object: any): QueryRawContractStateResponse;
     toJSON(message: QueryRawContractStateResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryRawContractStateResponse;
+    fromPartial<I extends {
+        data?: Uint8Array;
+    } & {
+        data?: Uint8Array;
+    } & Record<Exclude<keyof I, "data">, never>>(object: I): QueryRawContractStateResponse;
 };
 export declare const QuerySmartContractStateRequest: {
     encode(message: QuerySmartContractStateRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySmartContractStateRequest;
     fromJSON(object: any): QuerySmartContractStateRequest;
     toJSON(message: QuerySmartContractStateRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QuerySmartContractStateRequest;
+    fromPartial<I extends {
+        address?: string;
+        queryData?: Uint8Array;
+    } & {
+        address?: string;
+        queryData?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof QuerySmartContractStateRequest>, never>>(object: I): QuerySmartContractStateRequest;
 };
 export declare const QuerySmartContractStateResponse: {
     encode(message: QuerySmartContractStateResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySmartContractStateResponse;
     fromJSON(object: any): QuerySmartContractStateResponse;
     toJSON(message: QuerySmartContractStateResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QuerySmartContractStateResponse;
+    fromPartial<I extends {
+        data?: Uint8Array;
+    } & {
+        data?: Uint8Array;
+    } & Record<Exclude<keyof I, "data">, never>>(object: I): QuerySmartContractStateResponse;
 };
 export declare const QueryCodeRequest: {
     encode(message: QueryCodeRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodeRequest;
     fromJSON(object: any): QueryCodeRequest;
     toJSON(message: QueryCodeRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCodeRequest;
+    fromPartial<I extends {
+        codeId?: any;
+    } & {
+        codeId?: any;
+    } & Record<Exclude<keyof I, "codeId">, never>>(object: I): QueryCodeRequest;
 };
 export declare const CodeInfoResponse: {
     encode(message: CodeInfoResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CodeInfoResponse;
     fromJSON(object: any): CodeInfoResponse;
     toJSON(message: CodeInfoResponse): unknown;
-    fromPartial<I extends unknown>(object: I): CodeInfoResponse;
+    fromPartial<I extends {
+        codeId?: any;
+        creator?: string;
+        dataHash?: Uint8Array;
+    } & {
+        codeId?: any;
+        creator?: string;
+        dataHash?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof CodeInfoResponse>, never>>(object: I): CodeInfoResponse;
 };
 export declare const QueryCodeResponse: {
     encode(message: QueryCodeResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodeResponse;
     fromJSON(object: any): QueryCodeResponse;
     toJSON(message: QueryCodeResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCodeResponse;
+    fromPartial<I extends {
+        codeInfo?: {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        };
+        data?: Uint8Array;
+    } & {
+        codeInfo?: {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        } & {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        } & Record<Exclude<keyof I["codeInfo"], keyof CodeInfoResponse>, never>;
+        data?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof QueryCodeResponse>, never>>(object: I): QueryCodeResponse;
 };
 export declare const QueryCodesRequest: {
     encode(message: QueryCodesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodesRequest;
     fromJSON(object: any): QueryCodesRequest;
     toJSON(message: QueryCodesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCodesRequest;
+    fromPartial<I extends {
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryCodesRequest;
 };
 export declare const QueryCodesResponse: {
     encode(message: QueryCodesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodesResponse;
     fromJSON(object: any): QueryCodesResponse;
     toJSON(message: QueryCodesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryCodesResponse;
+    fromPartial<I extends {
+        codeInfos?: {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        }[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+    } & {
+        codeInfos?: {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        }[] & ({
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        } & {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        } & Record<Exclude<keyof I["codeInfos"][number], keyof CodeInfoResponse>, never>)[] & Record<Exclude<keyof I["codeInfos"], keyof {
+            codeId?: any;
+            creator?: string;
+            dataHash?: Uint8Array;
+        }[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+    } & Record<Exclude<keyof I, keyof QueryCodesResponse>, never>>(object: I): QueryCodesResponse;
 };
 export declare const QueryPinnedCodesRequest: {
     encode(message: QueryPinnedCodesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPinnedCodesRequest;
     fromJSON(object: any): QueryPinnedCodesRequest;
     toJSON(message: QueryPinnedCodesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPinnedCodesRequest;
+    fromPartial<I extends {
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        };
+    } & {
+        pagination?: {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & {
+            key?: Uint8Array;
+            offset?: any;
+            limit?: any;
+            countTotal?: boolean;
+            reverse?: boolean;
+        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
+    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryPinnedCodesRequest;
 };
 export declare const QueryPinnedCodesResponse: {
     encode(message: QueryPinnedCodesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryPinnedCodesResponse;
     fromJSON(object: any): QueryPinnedCodesResponse;
     toJSON(message: QueryPinnedCodesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): QueryPinnedCodesResponse;
+    fromPartial<I extends {
+        codeIds?: any[];
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        };
+    } & {
+        codeIds?: any[] & any[] & Record<Exclude<keyof I["codeIds"], keyof any[]>, never>;
+        pagination?: {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & {
+            nextKey?: Uint8Array;
+            total?: any;
+        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
+    } & Record<Exclude<keyof I, keyof QueryPinnedCodesResponse>, never>>(object: I): QueryPinnedCodesResponse;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

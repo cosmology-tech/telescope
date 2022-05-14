@@ -1,7 +1,7 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
 import { Plan } from "../../../../cosmos/upgrade/v1beta1/upgrade";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
@@ -97,56 +97,212 @@ export declare const IdentifiedClientState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedClientState;
     fromJSON(object: any): IdentifiedClientState;
     toJSON(message: IdentifiedClientState): unknown;
-    fromPartial<I extends unknown>(object: I): IdentifiedClientState;
+    fromPartial<I extends {
+        clientId?: string;
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        clientId?: string;
+        clientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["clientState"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof IdentifiedClientState>, never>>(object: I): IdentifiedClientState;
 };
 export declare const ConsensusStateWithHeight: {
     encode(message: ConsensusStateWithHeight, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusStateWithHeight;
     fromJSON(object: any): ConsensusStateWithHeight;
     toJSON(message: ConsensusStateWithHeight): unknown;
-    fromPartial<I extends unknown>(object: I): ConsensusStateWithHeight;
+    fromPartial<I extends {
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        };
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        height?: {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & {
+            revisionNumber?: any;
+            revisionHeight?: any;
+        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
+        consensusState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["consensusState"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof ConsensusStateWithHeight>, never>>(object: I): ConsensusStateWithHeight;
 };
 export declare const ClientConsensusStates: {
     encode(message: ClientConsensusStates, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ClientConsensusStates;
     fromJSON(object: any): ClientConsensusStates;
     toJSON(message: ClientConsensusStates): unknown;
-    fromPartial<I extends unknown>(object: I): ClientConsensusStates;
+    fromPartial<I extends {
+        clientId?: string;
+        consensusStates?: {
+            height?: {
+                revisionNumber?: any;
+                revisionHeight?: any;
+            };
+            consensusState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        }[];
+    } & {
+        clientId?: string;
+        consensusStates?: {
+            height?: {
+                revisionNumber?: any;
+                revisionHeight?: any;
+            };
+            consensusState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        }[] & ({
+            height?: {
+                revisionNumber?: any;
+                revisionHeight?: any;
+            };
+            consensusState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        } & {
+            height?: {
+                revisionNumber?: any;
+                revisionHeight?: any;
+            } & {
+                revisionNumber?: any;
+                revisionHeight?: any;
+            } & Record<Exclude<keyof I["consensusStates"][number]["height"], keyof Height>, never>;
+            consensusState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["consensusStates"][number]["consensusState"], keyof Any>, never>;
+        } & Record<Exclude<keyof I["consensusStates"][number], keyof ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I["consensusStates"], keyof {
+            height?: {
+                revisionNumber?: any;
+                revisionHeight?: any;
+            };
+            consensusState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof ClientConsensusStates>, never>>(object: I): ClientConsensusStates;
 };
 export declare const ClientUpdateProposal: {
     encode(message: ClientUpdateProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ClientUpdateProposal;
     fromJSON(object: any): ClientUpdateProposal;
     toJSON(message: ClientUpdateProposal): unknown;
-    fromPartial<I extends unknown>(object: I): ClientUpdateProposal;
+    fromPartial<I extends {
+        title?: string;
+        description?: string;
+        subjectClientId?: string;
+        substituteClientId?: string;
+    } & {
+        title?: string;
+        description?: string;
+        subjectClientId?: string;
+        substituteClientId?: string;
+    } & Record<Exclude<keyof I, keyof ClientUpdateProposal>, never>>(object: I): ClientUpdateProposal;
 };
 export declare const UpgradeProposal: {
     encode(message: UpgradeProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpgradeProposal;
     fromJSON(object: any): UpgradeProposal;
     toJSON(message: UpgradeProposal): unknown;
-    fromPartial<I extends unknown>(object: I): UpgradeProposal;
+    fromPartial<I extends {
+        title?: string;
+        description?: string;
+        plan?: {
+            name?: string;
+            time?: Date;
+            height?: any;
+            info?: string;
+            upgradedClientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        };
+        upgradedClientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        title?: string;
+        description?: string;
+        plan?: {
+            name?: string;
+            time?: Date;
+            height?: any;
+            info?: string;
+            upgradedClientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        } & {
+            name?: string;
+            time?: Date;
+            height?: any;
+            info?: string;
+            upgradedClientState?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["plan"]["upgradedClientState"], keyof Any>, never>;
+        } & Record<Exclude<keyof I["plan"], keyof Plan>, never>;
+        upgradedClientState?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["upgradedClientState"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof UpgradeProposal>, never>>(object: I): UpgradeProposal;
 };
 export declare const Height: {
     encode(message: Height, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Height;
     fromJSON(object: any): Height;
     toJSON(message: Height): unknown;
-    fromPartial<I extends unknown>(object: I): Height;
+    fromPartial<I extends {
+        revisionNumber?: any;
+        revisionHeight?: any;
+    } & {
+        revisionNumber?: any;
+        revisionHeight?: any;
+    } & Record<Exclude<keyof I, keyof Height>, never>>(object: I): Height;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends unknown>(object: I): Params;
+    fromPartial<I extends {
+        allowedClients?: string[];
+    } & {
+        allowedClients?: string[] & string[] & Record<Exclude<keyof I["allowedClients"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, "allowedClients">, never>>(object: I): Params;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

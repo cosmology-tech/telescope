@@ -1,5 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 export declare enum AccessType {
     UNDEFINED = 0,
     NOBODY = 1,
@@ -17,7 +17,6 @@ export interface CodeInfo {
     codeHash: Uint8Array;
     creator: Uint8Array;
     source: string;
-    /** AccessConfig instantiate_config = 5 [(gogoproto.nullable) = false]; */
     builder: string;
 }
 export interface ContractCustomInfo {
@@ -55,49 +54,91 @@ export declare const AccessTypeParam: {
     decode(input: _m0.Reader | Uint8Array, length?: number): AccessTypeParam;
     fromJSON(object: any): AccessTypeParam;
     toJSON(message: AccessTypeParam): unknown;
-    fromPartial<I extends unknown>(object: I): AccessTypeParam;
+    fromPartial<I extends {
+        value?: AccessType;
+    } & {
+        value?: AccessType;
+    } & Record<Exclude<keyof I, "value">, never>>(object: I): AccessTypeParam;
 };
 export declare const CodeInfo: {
     encode(message: CodeInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CodeInfo;
     fromJSON(object: any): CodeInfo;
     toJSON(message: CodeInfo): unknown;
-    fromPartial<I extends unknown>(object: I): CodeInfo;
+    fromPartial<I extends {
+        codeHash?: Uint8Array;
+        creator?: Uint8Array;
+        source?: string;
+        builder?: string;
+    } & {
+        codeHash?: Uint8Array;
+        creator?: Uint8Array;
+        source?: string;
+        builder?: string;
+    } & Record<Exclude<keyof I, keyof CodeInfo>, never>>(object: I): CodeInfo;
 };
 export declare const ContractCustomInfo: {
     encode(message: ContractCustomInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ContractCustomInfo;
     fromJSON(object: any): ContractCustomInfo;
     toJSON(message: ContractCustomInfo): unknown;
-    fromPartial<I extends unknown>(object: I): ContractCustomInfo;
+    fromPartial<I extends {
+        enclaveKey?: Uint8Array;
+        label?: string;
+    } & {
+        enclaveKey?: Uint8Array;
+        label?: string;
+    } & Record<Exclude<keyof I, keyof ContractCustomInfo>, never>>(object: I): ContractCustomInfo;
 };
 export declare const ContractInfo: {
     encode(message: ContractInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ContractInfo;
     fromJSON(object: any): ContractInfo;
     toJSON(message: ContractInfo): unknown;
-    fromPartial<I extends unknown>(object: I): ContractInfo;
+    fromPartial<I extends {
+        codeId?: any;
+        creator?: Uint8Array;
+        label?: string;
+        created?: {
+            blockHeight?: any;
+            txIndex?: any;
+        };
+    } & {
+        codeId?: any;
+        creator?: Uint8Array;
+        label?: string;
+        created?: {
+            blockHeight?: any;
+            txIndex?: any;
+        } & {
+            blockHeight?: any;
+            txIndex?: any;
+        } & Record<Exclude<keyof I["created"], keyof AbsoluteTxPosition>, never>;
+    } & Record<Exclude<keyof I, keyof ContractInfo>, never>>(object: I): ContractInfo;
 };
 export declare const AbsoluteTxPosition: {
     encode(message: AbsoluteTxPosition, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AbsoluteTxPosition;
     fromJSON(object: any): AbsoluteTxPosition;
     toJSON(message: AbsoluteTxPosition): unknown;
-    fromPartial<I extends unknown>(object: I): AbsoluteTxPosition;
+    fromPartial<I extends {
+        blockHeight?: any;
+        txIndex?: any;
+    } & {
+        blockHeight?: any;
+        txIndex?: any;
+    } & Record<Exclude<keyof I, keyof AbsoluteTxPosition>, never>>(object: I): AbsoluteTxPosition;
 };
 export declare const Model: {
     encode(message: Model, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Model;
     fromJSON(object: any): Model;
     toJSON(message: Model): unknown;
-    fromPartial<I extends unknown>(object: I): Model;
+    fromPartial<I extends {
+        Key?: Uint8Array;
+        Value?: Uint8Array;
+    } & {
+        Key?: Uint8Array;
+        Value?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof Model>, never>>(object: I): Model;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

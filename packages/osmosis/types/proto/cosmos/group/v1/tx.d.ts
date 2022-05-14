@@ -1,7 +1,7 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import { Member, VoteOption } from "./types";
 import { Any } from "../../../google/protobuf/any";
-import { VoteOption, Member } from "../../../cosmos/group/v1/types";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export declare enum Exec {
     /**
@@ -226,204 +226,451 @@ export declare const MsgCreateGroup: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroup;
     fromJSON(object: any): MsgCreateGroup;
     toJSON(message: MsgCreateGroup): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateGroup;
+    fromPartial<I extends {
+        admin?: string;
+        members?: {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[];
+        metadata?: string;
+    } & {
+        admin?: string;
+        members?: {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[] & ({
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        } & {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        } & Record<Exclude<keyof I["members"][number], keyof Member>, never>)[] & Record<Exclude<keyof I["members"], keyof {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[]>, never>;
+        metadata?: string;
+    } & Record<Exclude<keyof I, keyof MsgCreateGroup>, never>>(object: I): MsgCreateGroup;
 };
 export declare const MsgCreateGroupResponse: {
     encode(message: MsgCreateGroupResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupResponse;
     fromJSON(object: any): MsgCreateGroupResponse;
     toJSON(message: MsgCreateGroupResponse): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateGroupResponse;
+    fromPartial<I extends {
+        groupId?: any;
+    } & {
+        groupId?: any;
+    } & Record<Exclude<keyof I, "groupId">, never>>(object: I): MsgCreateGroupResponse;
 };
 export declare const MsgUpdateGroupMembers: {
     encode(message: MsgUpdateGroupMembers, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembers;
     fromJSON(object: any): MsgUpdateGroupMembers;
     toJSON(message: MsgUpdateGroupMembers): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateGroupMembers;
+    fromPartial<I extends {
+        admin?: string;
+        groupId?: any;
+        memberUpdates?: {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[];
+    } & {
+        admin?: string;
+        groupId?: any;
+        memberUpdates?: {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[] & ({
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        } & {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        } & Record<Exclude<keyof I["memberUpdates"][number], keyof Member>, never>)[] & Record<Exclude<keyof I["memberUpdates"], keyof {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof MsgUpdateGroupMembers>, never>>(object: I): MsgUpdateGroupMembers;
 };
 export declare const MsgUpdateGroupMembersResponse: {
     encode(_: MsgUpdateGroupMembersResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembersResponse;
     fromJSON(_: any): MsgUpdateGroupMembersResponse;
     toJSON(_: MsgUpdateGroupMembersResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateGroupMembersResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateGroupMembersResponse;
 };
 export declare const MsgUpdateGroupAdmin: {
     encode(message: MsgUpdateGroupAdmin, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdmin;
     fromJSON(object: any): MsgUpdateGroupAdmin;
     toJSON(message: MsgUpdateGroupAdmin): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateGroupAdmin;
+    fromPartial<I extends {
+        admin?: string;
+        groupId?: any;
+        newAdmin?: string;
+    } & {
+        admin?: string;
+        groupId?: any;
+        newAdmin?: string;
+    } & Record<Exclude<keyof I, keyof MsgUpdateGroupAdmin>, never>>(object: I): MsgUpdateGroupAdmin;
 };
 export declare const MsgUpdateGroupAdminResponse: {
     encode(_: MsgUpdateGroupAdminResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdminResponse;
     fromJSON(_: any): MsgUpdateGroupAdminResponse;
     toJSON(_: MsgUpdateGroupAdminResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateGroupAdminResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateGroupAdminResponse;
 };
 export declare const MsgUpdateGroupMetadata: {
     encode(message: MsgUpdateGroupMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadata;
     fromJSON(object: any): MsgUpdateGroupMetadata;
     toJSON(message: MsgUpdateGroupMetadata): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateGroupMetadata;
+    fromPartial<I extends {
+        admin?: string;
+        groupId?: any;
+        metadata?: string;
+    } & {
+        admin?: string;
+        groupId?: any;
+        metadata?: string;
+    } & Record<Exclude<keyof I, keyof MsgUpdateGroupMetadata>, never>>(object: I): MsgUpdateGroupMetadata;
 };
 export declare const MsgUpdateGroupMetadataResponse: {
     encode(_: MsgUpdateGroupMetadataResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadataResponse;
     fromJSON(_: any): MsgUpdateGroupMetadataResponse;
     toJSON(_: MsgUpdateGroupMetadataResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateGroupMetadataResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateGroupMetadataResponse;
 };
 export declare const MsgCreateGroupPolicy: {
     encode(message: MsgCreateGroupPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicy;
     fromJSON(object: any): MsgCreateGroupPolicy;
     toJSON(message: MsgCreateGroupPolicy): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateGroupPolicy;
+    fromPartial<I extends {
+        admin?: string;
+        groupId?: any;
+        metadata?: string;
+        decisionPolicy?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        admin?: string;
+        groupId?: any;
+        metadata?: string;
+        decisionPolicy?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["decisionPolicy"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof MsgCreateGroupPolicy>, never>>(object: I): MsgCreateGroupPolicy;
 };
 export declare const MsgCreateGroupPolicyResponse: {
     encode(message: MsgCreateGroupPolicyResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicyResponse;
     fromJSON(object: any): MsgCreateGroupPolicyResponse;
     toJSON(message: MsgCreateGroupPolicyResponse): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateGroupPolicyResponse;
+    fromPartial<I extends {
+        address?: string;
+    } & {
+        address?: string;
+    } & Record<Exclude<keyof I, "address">, never>>(object: I): MsgCreateGroupPolicyResponse;
 };
 export declare const MsgUpdateGroupPolicyAdmin: {
     encode(message: MsgUpdateGroupPolicyAdmin, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdmin;
     fromJSON(object: any): MsgUpdateGroupPolicyAdmin;
     toJSON(message: MsgUpdateGroupPolicyAdmin): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateGroupPolicyAdmin;
+    fromPartial<I extends {
+        admin?: string;
+        address?: string;
+        newAdmin?: string;
+    } & {
+        admin?: string;
+        address?: string;
+        newAdmin?: string;
+    } & Record<Exclude<keyof I, keyof MsgUpdateGroupPolicyAdmin>, never>>(object: I): MsgUpdateGroupPolicyAdmin;
 };
 export declare const MsgCreateGroupWithPolicy: {
     encode(message: MsgCreateGroupWithPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicy;
     fromJSON(object: any): MsgCreateGroupWithPolicy;
     toJSON(message: MsgCreateGroupWithPolicy): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateGroupWithPolicy;
+    fromPartial<I extends {
+        admin?: string;
+        members?: {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[];
+        groupMetadata?: string;
+        groupPolicyMetadata?: string;
+        groupPolicyAsAdmin?: boolean;
+        decisionPolicy?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        admin?: string;
+        members?: {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[] & ({
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        } & {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        } & Record<Exclude<keyof I["members"][number], keyof Member>, never>)[] & Record<Exclude<keyof I["members"], keyof {
+            address?: string;
+            weight?: string;
+            metadata?: string;
+            addedAt?: Date;
+        }[]>, never>;
+        groupMetadata?: string;
+        groupPolicyMetadata?: string;
+        groupPolicyAsAdmin?: boolean;
+        decisionPolicy?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["decisionPolicy"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof MsgCreateGroupWithPolicy>, never>>(object: I): MsgCreateGroupWithPolicy;
 };
 export declare const MsgCreateGroupWithPolicyResponse: {
     encode(message: MsgCreateGroupWithPolicyResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicyResponse;
     fromJSON(object: any): MsgCreateGroupWithPolicyResponse;
     toJSON(message: MsgCreateGroupWithPolicyResponse): unknown;
-    fromPartial<I extends unknown>(object: I): MsgCreateGroupWithPolicyResponse;
+    fromPartial<I extends {
+        groupId?: any;
+        groupPolicyAddress?: string;
+    } & {
+        groupId?: any;
+        groupPolicyAddress?: string;
+    } & Record<Exclude<keyof I, keyof MsgCreateGroupWithPolicyResponse>, never>>(object: I): MsgCreateGroupWithPolicyResponse;
 };
 export declare const MsgUpdateGroupPolicyAdminResponse: {
     encode(_: MsgUpdateGroupPolicyAdminResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdminResponse;
     fromJSON(_: any): MsgUpdateGroupPolicyAdminResponse;
     toJSON(_: MsgUpdateGroupPolicyAdminResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateGroupPolicyAdminResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateGroupPolicyAdminResponse;
 };
 export declare const MsgUpdateGroupPolicyDecisionPolicy: {
     encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicy;
     fromJSON(object: any): MsgUpdateGroupPolicyDecisionPolicy;
     toJSON(message: MsgUpdateGroupPolicyDecisionPolicy): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateGroupPolicyDecisionPolicy;
+    fromPartial<I extends {
+        admin?: string;
+        address?: string;
+        decisionPolicy?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        admin?: string;
+        address?: string;
+        decisionPolicy?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["decisionPolicy"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof MsgUpdateGroupPolicyDecisionPolicy>, never>>(object: I): MsgUpdateGroupPolicyDecisionPolicy;
 };
 export declare const MsgUpdateGroupPolicyDecisionPolicyResponse: {
     encode(_: MsgUpdateGroupPolicyDecisionPolicyResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicyResponse;
     fromJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponse;
     toJSON(_: MsgUpdateGroupPolicyDecisionPolicyResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateGroupPolicyDecisionPolicyResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateGroupPolicyDecisionPolicyResponse;
 };
 export declare const MsgUpdateGroupPolicyMetadata: {
     encode(message: MsgUpdateGroupPolicyMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadata;
     fromJSON(object: any): MsgUpdateGroupPolicyMetadata;
     toJSON(message: MsgUpdateGroupPolicyMetadata): unknown;
-    fromPartial<I extends unknown>(object: I): MsgUpdateGroupPolicyMetadata;
+    fromPartial<I extends {
+        admin?: string;
+        address?: string;
+        metadata?: string;
+    } & {
+        admin?: string;
+        address?: string;
+        metadata?: string;
+    } & Record<Exclude<keyof I, keyof MsgUpdateGroupPolicyMetadata>, never>>(object: I): MsgUpdateGroupPolicyMetadata;
 };
 export declare const MsgUpdateGroupPolicyMetadataResponse: {
     encode(_: MsgUpdateGroupPolicyMetadataResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadataResponse;
     fromJSON(_: any): MsgUpdateGroupPolicyMetadataResponse;
     toJSON(_: MsgUpdateGroupPolicyMetadataResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgUpdateGroupPolicyMetadataResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgUpdateGroupPolicyMetadataResponse;
 };
 export declare const MsgSubmitProposal: {
     encode(message: MsgSubmitProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposal;
     fromJSON(object: any): MsgSubmitProposal;
     toJSON(message: MsgSubmitProposal): unknown;
-    fromPartial<I extends unknown>(object: I): MsgSubmitProposal;
+    fromPartial<I extends {
+        address?: string;
+        proposers?: string[];
+        metadata?: string;
+        messages?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[];
+        exec?: Exec;
+    } & {
+        address?: string;
+        proposers?: string[] & string[] & Record<Exclude<keyof I["proposers"], keyof string[]>, never>;
+        metadata?: string;
+        messages?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[] & ({
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["messages"][number], keyof Any>, never>)[] & Record<Exclude<keyof I["messages"], keyof {
+            typeUrl?: string;
+            value?: Uint8Array;
+        }[]>, never>;
+        exec?: Exec;
+    } & Record<Exclude<keyof I, keyof MsgSubmitProposal>, never>>(object: I): MsgSubmitProposal;
 };
 export declare const MsgSubmitProposalResponse: {
     encode(message: MsgSubmitProposalResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse;
     fromJSON(object: any): MsgSubmitProposalResponse;
     toJSON(message: MsgSubmitProposalResponse): unknown;
-    fromPartial<I extends unknown>(object: I): MsgSubmitProposalResponse;
+    fromPartial<I extends {
+        proposalId?: any;
+    } & {
+        proposalId?: any;
+    } & Record<Exclude<keyof I, "proposalId">, never>>(object: I): MsgSubmitProposalResponse;
 };
 export declare const MsgWithdrawProposal: {
     encode(message: MsgWithdrawProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposal;
     fromJSON(object: any): MsgWithdrawProposal;
     toJSON(message: MsgWithdrawProposal): unknown;
-    fromPartial<I extends unknown>(object: I): MsgWithdrawProposal;
+    fromPartial<I extends {
+        proposalId?: any;
+        address?: string;
+    } & {
+        proposalId?: any;
+        address?: string;
+    } & Record<Exclude<keyof I, keyof MsgWithdrawProposal>, never>>(object: I): MsgWithdrawProposal;
 };
 export declare const MsgWithdrawProposalResponse: {
     encode(_: MsgWithdrawProposalResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposalResponse;
     fromJSON(_: any): MsgWithdrawProposalResponse;
     toJSON(_: MsgWithdrawProposalResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgWithdrawProposalResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgWithdrawProposalResponse;
 };
 export declare const MsgVote: {
     encode(message: MsgVote, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgVote;
     fromJSON(object: any): MsgVote;
     toJSON(message: MsgVote): unknown;
-    fromPartial<I extends unknown>(object: I): MsgVote;
+    fromPartial<I extends {
+        proposalId?: any;
+        voter?: string;
+        option?: VoteOption;
+        metadata?: string;
+        exec?: Exec;
+    } & {
+        proposalId?: any;
+        voter?: string;
+        option?: VoteOption;
+        metadata?: string;
+        exec?: Exec;
+    } & Record<Exclude<keyof I, keyof MsgVote>, never>>(object: I): MsgVote;
 };
 export declare const MsgVoteResponse: {
     encode(_: MsgVoteResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponse;
     fromJSON(_: any): MsgVoteResponse;
     toJSON(_: MsgVoteResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgVoteResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgVoteResponse;
 };
 export declare const MsgExec: {
     encode(message: MsgExec, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgExec;
     fromJSON(object: any): MsgExec;
     toJSON(message: MsgExec): unknown;
-    fromPartial<I extends unknown>(object: I): MsgExec;
+    fromPartial<I extends {
+        proposalId?: any;
+        signer?: string;
+    } & {
+        proposalId?: any;
+        signer?: string;
+    } & Record<Exclude<keyof I, keyof MsgExec>, never>>(object: I): MsgExec;
 };
 export declare const MsgExecResponse: {
     encode(_: MsgExecResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecResponse;
     fromJSON(_: any): MsgExecResponse;
     toJSON(_: MsgExecResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgExecResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgExecResponse;
 };
 export declare const MsgLeaveGroup: {
     encode(message: MsgLeaveGroup, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroup;
     fromJSON(object: any): MsgLeaveGroup;
     toJSON(message: MsgLeaveGroup): unknown;
-    fromPartial<I extends unknown>(object: I): MsgLeaveGroup;
+    fromPartial<I extends {
+        address?: string;
+        groupId?: any;
+    } & {
+        address?: string;
+        groupId?: any;
+    } & Record<Exclude<keyof I, keyof MsgLeaveGroup>, never>>(object: I): MsgLeaveGroup;
 };
 export declare const MsgLeaveGroupResponse: {
     encode(_: MsgLeaveGroupResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroupResponse;
     fromJSON(_: any): MsgLeaveGroupResponse;
     toJSON(_: MsgLeaveGroupResponse): unknown;
-    fromPartial<I extends unknown>(_: I): MsgLeaveGroupResponse;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgLeaveGroupResponse;
 };
-/** Msg is the cosmos.group.v1 Msg service. */
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

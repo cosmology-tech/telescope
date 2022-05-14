@@ -1,6 +1,6 @@
-import Long from "long";
+import { PeriodLock, SyntheticLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
-import { PeriodLock, SyntheticLock } from "../../osmosis/lockup/lock";
+import { Long } from "@osmonauts/helpers";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
     lastLockId: Long;
@@ -12,14 +12,92 @@ export declare const GenesisState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
-    fromPartial<I extends unknown>(object: I): GenesisState;
+    fromPartial<I extends {
+        lastLockId?: any;
+        locks?: {
+            ID?: any;
+            owner?: string;
+            duration?: string;
+            endTime?: Date;
+            coins?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        }[];
+        syntheticLocks?: {
+            underlyingLockId?: any;
+            synthDenom?: string;
+            endTime?: Date;
+            duration?: string;
+        }[];
+    } & {
+        lastLockId?: any;
+        locks?: {
+            ID?: any;
+            owner?: string;
+            duration?: string;
+            endTime?: Date;
+            coins?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        }[] & ({
+            ID?: any;
+            owner?: string;
+            duration?: string;
+            endTime?: Date;
+            coins?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        } & {
+            ID?: any;
+            owner?: string;
+            duration?: string;
+            endTime?: Date;
+            coins?: {
+                denom?: string;
+                amount?: string;
+            }[] & ({
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["locks"][number]["coins"][number], keyof import("../../cosmos/base/v1beta1/coin").Coin>, never>)[] & Record<Exclude<keyof I["locks"][number]["coins"], keyof {
+                denom?: string;
+                amount?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["locks"][number], keyof PeriodLock>, never>)[] & Record<Exclude<keyof I["locks"], keyof {
+            ID?: any;
+            owner?: string;
+            duration?: string;
+            endTime?: Date;
+            coins?: {
+                denom?: string;
+                amount?: string;
+            }[];
+        }[]>, never>;
+        syntheticLocks?: {
+            underlyingLockId?: any;
+            synthDenom?: string;
+            endTime?: Date;
+            duration?: string;
+        }[] & ({
+            underlyingLockId?: any;
+            synthDenom?: string;
+            endTime?: Date;
+            duration?: string;
+        } & {
+            underlyingLockId?: any;
+            synthDenom?: string;
+            endTime?: Date;
+            duration?: string;
+        } & Record<Exclude<keyof I["syntheticLocks"][number], keyof SyntheticLock>, never>)[] & Record<Exclude<keyof I["syntheticLocks"], keyof {
+            underlyingLockId?: any;
+            synthDenom?: string;
+            endTime?: Date;
+            duration?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof GenesisState>, never>>(object: I): GenesisState;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

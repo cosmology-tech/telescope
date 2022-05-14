@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run prepare --parallel",
+    "buidl": "lerna run buidl --parallel",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "elint": "DEBUG=eslint:*,eslintrc:* eslint --ignore-path .gitignore .",
     "lint": "eslint --ignore-path .gitignore .",

@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -23,21 +22,22 @@ export declare const MultiSignature: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MultiSignature;
     fromJSON(object: any): MultiSignature;
     toJSON(message: MultiSignature): unknown;
-    fromPartial<I extends unknown>(object: I): MultiSignature;
+    fromPartial<I extends {
+        signatures?: Uint8Array[];
+    } & {
+        signatures?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["signatures"], keyof Uint8Array[]>, never>;
+    } & Record<Exclude<keyof I, "signatures">, never>>(object: I): MultiSignature;
 };
 export declare const CompactBitArray: {
     encode(message: CompactBitArray, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CompactBitArray;
     fromJSON(object: any): CompactBitArray;
     toJSON(message: CompactBitArray): unknown;
-    fromPartial<I extends unknown>(object: I): CompactBitArray;
+    fromPartial<I extends {
+        extraBitsStored?: number;
+        elems?: Uint8Array;
+    } & {
+        extraBitsStored?: number;
+        elems?: Uint8Array;
+    } & Record<Exclude<keyof I, keyof CompactBitArray>, never>>(object: I): CompactBitArray;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

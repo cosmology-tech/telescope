@@ -1,33 +1,5 @@
-import Long from "long";
+import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
-import { ConfigChange } from "../../../../google/api/config_change";
-/**
- * The full representation of a Service that is managed by
- * Google Service Management.
- */
-export interface ManagedService {
-    /**
-     * The name of the service. See the [overview](/service-management/overview)
-     * for naming requirements.
-     */
-    serviceName: string;
-    /** ID of the project that produces and owns this service. */
-    producerProjectId: string;
-}
-/** The metadata associated with a long running operation resource. */
-export interface OperationMetadata {
-    /**
-     * The full name of the resources that this operation is directly
-     * associated with.
-     */
-    resourceNames: string[];
-    /** Detailed status information for each step. The order is undetermined. */
-    steps: OperationMetadata_Step[];
-    /** Percentage of completion of this operation, ranging from 0 to 100. */
-    progressPercentage: number;
-    /** The start time of the operation. */
-    startTime: Date;
-}
 /** Code describes the status of the operation (or one of its steps). */
 export declare enum OperationMetadata_Status {
     /** STATUS_UNSPECIFIED - Unspecifed code. */
@@ -49,22 +21,6 @@ export declare enum OperationMetadata_Status {
 }
 export declare function operationMetadata_StatusFromJSON(object: any): OperationMetadata_Status;
 export declare function operationMetadata_StatusToJSON(object: OperationMetadata_Status): string;
-/** Represents the status of one operation step. */
-export interface OperationMetadata_Step {
-    /** The short description of the step. */
-    description: string;
-    /** The status code. */
-    status: OperationMetadata_Status;
-}
-/** Represents a diagnostic message (error or warning) */
-export interface Diagnostic {
-    /** File name and line number of the error or warning. */
-    location: string;
-    /** The kind of diagnostic information provided. */
-    kind: Diagnostic_Kind;
-    /** Message describing the error or warning. */
-    message: string;
-}
 /** The kind of diagnostic information possible. */
 export declare enum Diagnostic_Kind {
     /** WARNING - Warnings and errors */
@@ -75,32 +31,6 @@ export declare enum Diagnostic_Kind {
 }
 export declare function diagnostic_KindFromJSON(object: any): Diagnostic_Kind;
 export declare function diagnostic_KindToJSON(object: Diagnostic_Kind): string;
-/**
- * Represents a source file which is used to generate the service configuration
- * defined by `google.api.Service`.
- */
-export interface ConfigSource {
-    /**
-     * A unique ID for a specific instance of this message, typically assigned
-     * by the client for tracking purpose. If empty, the server may choose to
-     * generate one instead.
-     */
-    id: string;
-    /**
-     * Set of source configuration files that are used to generate a service
-     * configuration (`google.api.Service`).
-     */
-    files: ConfigFile[];
-}
-/** Generic specification of a source configuration file */
-export interface ConfigFile {
-    /** The file name of the configuration file (full or relative path). */
-    filePath: string;
-    /** The bytes that constitute the file. */
-    fileContents: Uint8Array;
-    /** The type of configuration file this represents. */
-    fileType: ConfigFile_FileType;
-}
 export declare enum ConfigFile_FileType {
     /** FILE_TYPE_UNSPECIFIED - Unknown file type. */
     FILE_TYPE_UNSPECIFIED = 0,
@@ -132,6 +62,101 @@ export declare enum ConfigFile_FileType {
 }
 export declare function configFile_FileTypeFromJSON(object: any): ConfigFile_FileType;
 export declare function configFile_FileTypeToJSON(object: ConfigFile_FileType): string;
+/** Status of a Rollout. */
+export declare enum Rollout_RolloutStatus {
+    /** ROLLOUT_STATUS_UNSPECIFIED - No status specified. */
+    ROLLOUT_STATUS_UNSPECIFIED = 0,
+    /** IN_PROGRESS - The Rollout is in progress. */
+    IN_PROGRESS = 1,
+    /** SUCCESS - The Rollout has completed successfully. */
+    SUCCESS = 2,
+    /**
+     * CANCELLED - The Rollout has been cancelled. This can happen if you have overlapping
+     * Rollout pushes, and the previous ones will be cancelled.
+     */
+    CANCELLED = 3,
+    /** FAILED - The Rollout has failed and the rollback attempt has failed too. */
+    FAILED = 4,
+    /** PENDING - The Rollout has not started yet and is pending for execution. */
+    PENDING = 5,
+    /**
+     * FAILED_ROLLED_BACK - The Rollout has failed and rolled back to the previous successful
+     * Rollout.
+     */
+    FAILED_ROLLED_BACK = 6,
+    UNRECOGNIZED = -1
+}
+export declare function rollout_RolloutStatusFromJSON(object: any): Rollout_RolloutStatus;
+export declare function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): string;
+/**
+ * The full representation of a Service that is managed by
+ * Google Service Management.
+ */
+export interface ManagedService {
+    /**
+     * The name of the service. See the [overview](/service-management/overview)
+     * for naming requirements.
+     */
+    serviceName: string;
+    /** ID of the project that produces and owns this service. */
+    producerProjectId: string;
+}
+/** The metadata associated with a long running operation resource. */
+export interface OperationMetadata {
+    /**
+     * The full name of the resources that this operation is directly
+     * associated with.
+     */
+    resourceNames: string[];
+    /** Detailed status information for each step. The order is undetermined. */
+    steps: OperationMetadata_Step[];
+    /** Percentage of completion of this operation, ranging from 0 to 100. */
+    progressPercentage: number;
+    /** The start time of the operation. */
+    startTime: Date;
+}
+/** Represents the status of one operation step. */
+export interface OperationMetadata_Step {
+    /** The short description of the step. */
+    description: string;
+    /** The status code. */
+    status: OperationMetadata_Status;
+}
+/** Represents a diagnostic message (error or warning) */
+export interface Diagnostic {
+    /** File name and line number of the error or warning. */
+    location: string;
+    /** The kind of diagnostic information provided. */
+    kind: Diagnostic_Kind;
+    /** Message describing the error or warning. */
+    message: string;
+}
+/**
+ * Represents a source file which is used to generate the service configuration
+ * defined by `google.api.Service`.
+ */
+export interface ConfigSource {
+    /**
+     * A unique ID for a specific instance of this message, typically assigned
+     * by the client for tracking purpose. If empty, the server may choose to
+     * generate one instead.
+     */
+    id: string;
+    /**
+     * Set of source configuration files that are used to generate a service
+     * configuration (`google.api.Service`).
+     */
+    files: ConfigFile[];
+}
+/** Generic specification of a source configuration file */
+export interface ConfigFile {
+    /** The file name of the configuration file (full or relative path). */
+    filePath: string;
+    /** The bytes that constitute the file. */
+    fileContents: Uint8Array;
+    /** The type of configuration file this represents. */
+    fileType: ConfigFile_FileType;
+}
 /** Represents a service configuration with its name and id. */
 export interface ConfigRef {
     /**
@@ -187,41 +212,19 @@ export interface Rollout {
      * Google Service Control selects service configurations based on
      * traffic percentage.
      */
-    trafficPercentStrategy: Rollout_TrafficPercentStrategy | undefined;
+    trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
     /**
      * The strategy associated with a rollout to delete a `ManagedService`.
      * Readonly.
      */
-    deleteServiceStrategy: Rollout_DeleteServiceStrategy | undefined;
+    deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
     /** The name of the service associated with this Rollout. */
     serviceName: string;
 }
-/** Status of a Rollout. */
-export declare enum Rollout_RolloutStatus {
-    /** ROLLOUT_STATUS_UNSPECIFIED - No status specified. */
-    ROLLOUT_STATUS_UNSPECIFIED = 0,
-    /** IN_PROGRESS - The Rollout is in progress. */
-    IN_PROGRESS = 1,
-    /** SUCCESS - The Rollout has completed successfully. */
-    SUCCESS = 2,
-    /**
-     * CANCELLED - The Rollout has been cancelled. This can happen if you have overlapping
-     * Rollout pushes, and the previous ones will be cancelled.
-     */
-    CANCELLED = 3,
-    /** FAILED - The Rollout has failed and the rollback attempt has failed too. */
-    FAILED = 4,
-    /** PENDING - The Rollout has not started yet and is pending for execution. */
-    PENDING = 5,
-    /**
-     * FAILED_ROLLED_BACK - The Rollout has failed and rolled back to the previous successful
-     * Rollout.
-     */
-    FAILED_ROLLED_BACK = 6,
-    UNRECOGNIZED = -1
+export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
+    key: string;
+    value: number;
 }
-export declare function rollout_RolloutStatusFromJSON(object: any): Rollout_RolloutStatus;
-export declare function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): string;
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -233,26 +236,26 @@ export declare function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatu
  * strategy:
  * Day 1
  *
- *     Rollout {
- *       id: "example.googleapis.com/rollout_20160206"
- *       traffic_percent_strategy {
- *         percentages: {
- *           "example.googleapis.com/20160201": 70.00
- *           "example.googleapis.com/20160206": 30.00
- *         }
- *       }
- *     }
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160206"
+ * traffic_percent_strategy {
+ * percentages: {
+ * "example.googleapis.com/20160201": 70.00
+ * "example.googleapis.com/20160206": 30.00
+ * }
+ * }
+ * }
  *
  * Day 2
  *
- *     Rollout {
- *       id: "example.googleapis.com/rollout_20160207"
- *       traffic_percent_strategy: {
- *         percentages: {
- *           "example.googleapis.com/20160206": 100.00
- *         }
- *       }
- *     }
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160207"
+ * traffic_percent_strategy: {
+ * percentages: {
+ * "example.googleapis.com/20160206": 100.00
+ * }
+ * }
+ * }
  */
 export interface Rollout_TrafficPercentStrategy {
     /**
@@ -263,10 +266,6 @@ export interface Rollout_TrafficPercentStrategy {
     percentages: {
         [key: string]: number;
     };
-}
-export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
-    key: string;
-    value: number;
 }
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
@@ -279,91 +278,261 @@ export declare const ManagedService: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService;
     fromJSON(object: any): ManagedService;
     toJSON(message: ManagedService): unknown;
-    fromPartial<I extends unknown>(object: I): ManagedService;
+    fromPartial<I extends {
+        serviceName?: string;
+        producerProjectId?: string;
+    } & {
+        serviceName?: string;
+        producerProjectId?: string;
+    } & Record<Exclude<keyof I, keyof ManagedService>, never>>(object: I): ManagedService;
 };
 export declare const OperationMetadata: {
     encode(message: OperationMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata;
     fromJSON(object: any): OperationMetadata;
     toJSON(message: OperationMetadata): unknown;
-    fromPartial<I extends unknown>(object: I): OperationMetadata;
+    fromPartial<I extends {
+        resourceNames?: string[];
+        steps?: {
+            description?: string;
+            status?: OperationMetadata_Status;
+        }[];
+        progressPercentage?: number;
+        startTime?: Date;
+    } & {
+        resourceNames?: string[] & string[] & Record<Exclude<keyof I["resourceNames"], keyof string[]>, never>;
+        steps?: {
+            description?: string;
+            status?: OperationMetadata_Status;
+        }[] & ({
+            description?: string;
+            status?: OperationMetadata_Status;
+        } & {
+            description?: string;
+            status?: OperationMetadata_Status;
+        } & Record<Exclude<keyof I["steps"][number], keyof OperationMetadata_Step>, never>)[] & Record<Exclude<keyof I["steps"], keyof {
+            description?: string;
+            status?: OperationMetadata_Status;
+        }[]>, never>;
+        progressPercentage?: number;
+        startTime?: Date;
+    } & Record<Exclude<keyof I, keyof OperationMetadata>, never>>(object: I): OperationMetadata;
 };
 export declare const OperationMetadata_Step: {
     encode(message: OperationMetadata_Step, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata_Step;
     fromJSON(object: any): OperationMetadata_Step;
     toJSON(message: OperationMetadata_Step): unknown;
-    fromPartial<I extends unknown>(object: I): OperationMetadata_Step;
+    fromPartial<I extends {
+        description?: string;
+        status?: OperationMetadata_Status;
+    } & {
+        description?: string;
+        status?: OperationMetadata_Status;
+    } & Record<Exclude<keyof I, keyof OperationMetadata_Step>, never>>(object: I): OperationMetadata_Step;
 };
 export declare const Diagnostic: {
     encode(message: Diagnostic, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Diagnostic;
     fromJSON(object: any): Diagnostic;
     toJSON(message: Diagnostic): unknown;
-    fromPartial<I extends unknown>(object: I): Diagnostic;
+    fromPartial<I extends {
+        location?: string;
+        kind?: Diagnostic_Kind;
+        message?: string;
+    } & {
+        location?: string;
+        kind?: Diagnostic_Kind;
+        message?: string;
+    } & Record<Exclude<keyof I, keyof Diagnostic>, never>>(object: I): Diagnostic;
 };
 export declare const ConfigSource: {
     encode(message: ConfigSource, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigSource;
     fromJSON(object: any): ConfigSource;
     toJSON(message: ConfigSource): unknown;
-    fromPartial<I extends unknown>(object: I): ConfigSource;
+    fromPartial<I extends {
+        id?: string;
+        files?: {
+            filePath?: string;
+            fileContents?: Uint8Array;
+            fileType?: ConfigFile_FileType;
+        }[];
+    } & {
+        id?: string;
+        files?: {
+            filePath?: string;
+            fileContents?: Uint8Array;
+            fileType?: ConfigFile_FileType;
+        }[] & ({
+            filePath?: string;
+            fileContents?: Uint8Array;
+            fileType?: ConfigFile_FileType;
+        } & {
+            filePath?: string;
+            fileContents?: Uint8Array;
+            fileType?: ConfigFile_FileType;
+        } & Record<Exclude<keyof I["files"][number], keyof ConfigFile>, never>)[] & Record<Exclude<keyof I["files"], keyof {
+            filePath?: string;
+            fileContents?: Uint8Array;
+            fileType?: ConfigFile_FileType;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof ConfigSource>, never>>(object: I): ConfigSource;
 };
 export declare const ConfigFile: {
     encode(message: ConfigFile, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigFile;
     fromJSON(object: any): ConfigFile;
     toJSON(message: ConfigFile): unknown;
-    fromPartial<I extends unknown>(object: I): ConfigFile;
+    fromPartial<I extends {
+        filePath?: string;
+        fileContents?: Uint8Array;
+        fileType?: ConfigFile_FileType;
+    } & {
+        filePath?: string;
+        fileContents?: Uint8Array;
+        fileType?: ConfigFile_FileType;
+    } & Record<Exclude<keyof I, keyof ConfigFile>, never>>(object: I): ConfigFile;
 };
 export declare const ConfigRef: {
     encode(message: ConfigRef, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigRef;
     fromJSON(object: any): ConfigRef;
     toJSON(message: ConfigRef): unknown;
-    fromPartial<I extends unknown>(object: I): ConfigRef;
+    fromPartial<I extends {
+        name?: string;
+    } & {
+        name?: string;
+    } & Record<Exclude<keyof I, "name">, never>>(object: I): ConfigRef;
 };
 export declare const ChangeReport: {
     encode(message: ChangeReport, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ChangeReport;
     fromJSON(object: any): ChangeReport;
     toJSON(message: ChangeReport): unknown;
-    fromPartial<I extends unknown>(object: I): ChangeReport;
+    fromPartial<I extends {
+        configChanges?: {
+            element?: string;
+            oldValue?: string;
+            newValue?: string;
+            changeType?: import("../../config_change").ChangeType;
+            advices?: {
+                description?: string;
+            }[];
+        }[];
+    } & {
+        configChanges?: {
+            element?: string;
+            oldValue?: string;
+            newValue?: string;
+            changeType?: import("../../config_change").ChangeType;
+            advices?: {
+                description?: string;
+            }[];
+        }[] & ({
+            element?: string;
+            oldValue?: string;
+            newValue?: string;
+            changeType?: import("../../config_change").ChangeType;
+            advices?: {
+                description?: string;
+            }[];
+        } & {
+            element?: string;
+            oldValue?: string;
+            newValue?: string;
+            changeType?: import("../../config_change").ChangeType;
+            advices?: {
+                description?: string;
+            }[] & ({
+                description?: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["configChanges"][number]["advices"][number], "description">, never>)[] & Record<Exclude<keyof I["configChanges"][number]["advices"], keyof {
+                description?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["configChanges"][number], keyof ConfigChange>, never>)[] & Record<Exclude<keyof I["configChanges"], keyof {
+            element?: string;
+            oldValue?: string;
+            newValue?: string;
+            changeType?: import("../../config_change").ChangeType;
+            advices?: {
+                description?: string;
+            }[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "configChanges">, never>>(object: I): ChangeReport;
 };
 export declare const Rollout: {
     encode(message: Rollout, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout;
     fromJSON(object: any): Rollout;
     toJSON(message: Rollout): unknown;
-    fromPartial<I extends unknown>(object: I): Rollout;
-};
-export declare const Rollout_TrafficPercentStrategy: {
-    encode(message: Rollout_TrafficPercentStrategy, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy;
-    fromJSON(object: any): Rollout_TrafficPercentStrategy;
-    toJSON(message: Rollout_TrafficPercentStrategy): unknown;
-    fromPartial<I extends unknown>(object: I): Rollout_TrafficPercentStrategy;
+    fromPartial<I extends {
+        rolloutId?: string;
+        createTime?: Date;
+        createdBy?: string;
+        status?: Rollout_RolloutStatus;
+        trafficPercentStrategy?: {
+            percentages?: {
+                [x: string]: number;
+            };
+        };
+        deleteServiceStrategy?: {};
+        serviceName?: string;
+    } & {
+        rolloutId?: string;
+        createTime?: Date;
+        createdBy?: string;
+        status?: Rollout_RolloutStatus;
+        trafficPercentStrategy?: {
+            percentages?: {
+                [x: string]: number;
+            };
+        } & {
+            percentages?: {
+                [x: string]: number;
+            } & {
+                [x: string]: number;
+            } & Record<Exclude<keyof I["trafficPercentStrategy"]["percentages"], string | number>, never>;
+        } & Record<Exclude<keyof I["trafficPercentStrategy"], "percentages">, never>;
+        deleteServiceStrategy?: {} & {} & Record<Exclude<keyof I["deleteServiceStrategy"], never>, never>;
+        serviceName?: string;
+    } & Record<Exclude<keyof I, keyof Rollout>, never>>(object: I): Rollout;
 };
 export declare const Rollout_TrafficPercentStrategy_PercentagesEntry: {
     encode(message: Rollout_TrafficPercentStrategy_PercentagesEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy_PercentagesEntry;
     fromJSON(object: any): Rollout_TrafficPercentStrategy_PercentagesEntry;
     toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): unknown;
-    fromPartial<I extends unknown>(object: I): Rollout_TrafficPercentStrategy_PercentagesEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: number;
+    } & {
+        key?: string;
+        value?: number;
+    } & Record<Exclude<keyof I, keyof Rollout_TrafficPercentStrategy_PercentagesEntry>, never>>(object: I): Rollout_TrafficPercentStrategy_PercentagesEntry;
+};
+export declare const Rollout_TrafficPercentStrategy: {
+    encode(message: Rollout_TrafficPercentStrategy, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy;
+    fromJSON(object: any): Rollout_TrafficPercentStrategy;
+    toJSON(message: Rollout_TrafficPercentStrategy): unknown;
+    fromPartial<I extends {
+        percentages?: {
+            [x: string]: number;
+        };
+    } & {
+        percentages?: {
+            [x: string]: number;
+        } & {
+            [x: string]: number;
+        } & Record<Exclude<keyof I["percentages"], string | number>, never>;
+    } & Record<Exclude<keyof I, "percentages">, never>>(object: I): Rollout_TrafficPercentStrategy;
 };
 export declare const Rollout_DeleteServiceStrategy: {
     encode(_: Rollout_DeleteServiceStrategy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_DeleteServiceStrategy;
     fromJSON(_: any): Rollout_DeleteServiceStrategy;
     toJSON(_: Rollout_DeleteServiceStrategy): unknown;
-    fromPartial<I extends unknown>(_: I): Rollout_DeleteServiceStrategy;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): Rollout_DeleteServiceStrategy;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

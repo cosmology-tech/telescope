@@ -1,7 +1,19 @@
-import Long from "long";
+import { QuotaView, QuotaOverride, QuotaSafetyCheck, OverrideInlineSource, Service, ConsumerQuotaMetric, AdminQuotaPolicy, ServiceIdentity } from "./resources";
+import { FieldMask } from "../../../protobuf/field_mask";
 import * as _m0 from "protobufjs/minimal";
-import { QuotaView, QuotaOverride, ServiceIdentity, Service, ConsumerQuotaMetric, QuotaSafetyCheck, OverrideInlineSource, AdminQuotaPolicy, ConsumerQuotaLimit } from "../../../../google/api/serviceusage/v1beta1/resources";
-import { Operation } from "../../../../google/longrunning/operations";
+/** Enum for service identity state. */
+export declare enum GetServiceIdentityResponse_IdentityState {
+    /**
+     * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
+     * omitted.
+     */
+    IDENTITY_STATE_UNSPECIFIED = 0,
+    /** ACTIVE - Service identity has been created and can be used. */
+    ACTIVE = 1,
+    UNRECOGNIZED = -1
+}
+export declare function getServiceIdentityResponse_IdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState;
+export declare function getServiceIdentityResponse_IdentityStateToJSON(object: GetServiceIdentityResponse_IdentityState): string;
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequest {
     /**
@@ -56,7 +68,7 @@ export interface ListServicesRequest {
     /**
      * Requested size of the next page of data.
      * Requested page size cannot exceed 200.
-     *  If not set, the default page size is 50.
+     * If not set, the default page size is 50.
      */
     pageSize: number;
     /**
@@ -215,7 +227,7 @@ export interface UpdateAdminOverrideRequest {
      * Update only the specified fields of the override.
      * If unset, all fields will be updated.
      */
-    updateMask: string[] | undefined;
+    updateMask: FieldMask;
     /**
      * The list of quota safety checks to ignore before the override mutation.
      * Unlike 'force' field that ignores all the quota safety checks, the
@@ -290,7 +302,7 @@ export interface ImportAdminOverridesRequest {
      */
     parent: string;
     /** The import data is specified in the request message itself */
-    inlineSource: OverrideInlineSource | undefined;
+    inlineSource?: OverrideInlineSource;
     /**
      * Whether to force the creation of the quota overrides.
      * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -367,7 +379,7 @@ export interface UpdateConsumerOverrideRequest {
      * Update only the specified fields of the override.
      * If unset, all fields will be updated.
      */
-    updateMask: string[] | undefined;
+    updateMask: FieldMask;
     /**
      * The list of quota safety checks to ignore before the override mutation.
      * Unlike 'force' field that ignores all the quota safety checks, the
@@ -442,7 +454,7 @@ export interface ImportConsumerOverridesRequest {
      */
     parent: string;
     /** The import data is specified in the request message itself */
-    inlineSource: OverrideInlineSource | undefined;
+    inlineSource?: OverrideInlineSource;
     /**
      * Whether to force the creation of the quota overrides.
      * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -526,19 +538,6 @@ export interface GetServiceIdentityResponse {
     /** Service identity state. */
     state: GetServiceIdentityResponse_IdentityState;
 }
-/** Enum for service identity state. */
-export declare enum GetServiceIdentityResponse_IdentityState {
-    /**
-     * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
-     * omitted.
-     */
-    IDENTITY_STATE_UNSPECIFIED = 0,
-    /** ACTIVE - Service identity has been created and can be used. */
-    ACTIVE = 1,
-    UNRECOGNIZED = -1
-}
-export declare function getServiceIdentityResponse_IdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState;
-export declare function getServiceIdentityResponse_IdentityStateToJSON(object: GetServiceIdentityResponse_IdentityState): string;
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {
 }
@@ -547,393 +546,2393 @@ export declare const EnableServiceRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): EnableServiceRequest;
     fromJSON(object: any): EnableServiceRequest;
     toJSON(message: EnableServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): EnableServiceRequest;
+    fromPartial<I extends {
+        name?: string;
+    } & {
+        name?: string;
+    } & Record<Exclude<keyof I, "name">, never>>(object: I): EnableServiceRequest;
 };
 export declare const DisableServiceRequest: {
     encode(message: DisableServiceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DisableServiceRequest;
     fromJSON(object: any): DisableServiceRequest;
     toJSON(message: DisableServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): DisableServiceRequest;
+    fromPartial<I extends {
+        name?: string;
+    } & {
+        name?: string;
+    } & Record<Exclude<keyof I, "name">, never>>(object: I): DisableServiceRequest;
 };
 export declare const GetServiceRequest: {
     encode(message: GetServiceRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceRequest;
     fromJSON(object: any): GetServiceRequest;
     toJSON(message: GetServiceRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetServiceRequest;
+    fromPartial<I extends {
+        name?: string;
+    } & {
+        name?: string;
+    } & Record<Exclude<keyof I, "name">, never>>(object: I): GetServiceRequest;
 };
 export declare const ListServicesRequest: {
     encode(message: ListServicesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesRequest;
     fromJSON(object: any): ListServicesRequest;
     toJSON(message: ListServicesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListServicesRequest;
+    fromPartial<I extends {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+        filter?: string;
+    } & {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+        filter?: string;
+    } & Record<Exclude<keyof I, keyof ListServicesRequest>, never>>(object: I): ListServicesRequest;
 };
 export declare const ListServicesResponse: {
     encode(message: ListServicesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse;
     fromJSON(object: any): ListServicesResponse;
     toJSON(message: ListServicesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListServicesResponse;
+    fromPartial<I extends {
+        services?: {
+            name?: string;
+            parent?: string;
+            config?: {
+                name?: string;
+                title?: string;
+                apis?: {
+                    name?: string;
+                    methods?: {
+                        name?: string;
+                        requestTypeUrl?: string;
+                        requestStreaming?: boolean;
+                        responseTypeUrl?: string;
+                        responseStreaming?: boolean;
+                        options?: {
+                            name?: string;
+                            value?: {
+                                typeUrl?: string;
+                                value?: Uint8Array;
+                            };
+                        }[];
+                        syntax?: import("../../../protobuf/type").Syntax;
+                    }[];
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    version?: string;
+                    sourceContext?: {
+                        fileName?: string;
+                    };
+                    mixins?: {
+                        name?: string;
+                        root?: string;
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                documentation?: {
+                    summary?: string;
+                    pages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[];
+                    rules?: {
+                        selector?: string;
+                        description?: string;
+                        deprecationDescription?: string;
+                    }[];
+                    documentationRootUrl?: string;
+                    serviceRootUrl?: string;
+                    overview?: string;
+                };
+                quota?: {
+                    limits?: {
+                        name?: string;
+                        description?: string;
+                        defaultLimit?: any;
+                        maxLimit?: any;
+                        freeTier?: any;
+                        duration?: string;
+                        metric?: string;
+                        unit?: string;
+                        values?: {
+                            [x: string]: any;
+                        };
+                        displayName?: string;
+                    }[];
+                    metricRules?: {
+                        selector?: string;
+                        metricCosts?: {
+                            [x: string]: any;
+                        };
+                    }[];
+                };
+                authentication?: {
+                    rules?: {
+                        selector?: string;
+                        oauth?: {
+                            canonicalScopes?: string;
+                        };
+                        allowWithoutCredential?: boolean;
+                        requirements?: {
+                            providerId?: string;
+                            audiences?: string;
+                        }[];
+                    }[];
+                    providers?: {
+                        id?: string;
+                        issuer?: string;
+                        jwksUri?: string;
+                        audiences?: string;
+                        authorizationUrl?: string;
+                        jwtLocations?: {
+                            header?: string;
+                            query?: string;
+                            valuePrefix?: string;
+                        }[];
+                    }[];
+                };
+                usage?: {
+                    requirements?: string[];
+                    rules?: {
+                        selector?: string;
+                        allowUnregisteredCalls?: boolean;
+                        skipServiceControl?: boolean;
+                    }[];
+                    producerNotificationChannel?: string;
+                };
+                endpoints?: {
+                    name?: string;
+                    aliases?: string[];
+                    target?: string;
+                    allowCors?: boolean;
+                }[];
+                monitoredResources?: {
+                    name?: string;
+                    type?: string;
+                    displayName?: string;
+                    description?: string;
+                    labels?: {
+                        key?: string;
+                        valueType?: import("../../label").LabelDescriptor_ValueType;
+                        description?: string;
+                    }[];
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                }[];
+                monitoring?: {
+                    producerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                    consumerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                };
+            };
+            state?: import("./resources").State;
+        }[];
+        nextPageToken?: string;
+    } & {
+        services?: {
+            name?: string;
+            parent?: string;
+            config?: {
+                name?: string;
+                title?: string;
+                apis?: {
+                    name?: string;
+                    methods?: {
+                        name?: string;
+                        requestTypeUrl?: string;
+                        requestStreaming?: boolean;
+                        responseTypeUrl?: string;
+                        responseStreaming?: boolean;
+                        options?: {
+                            name?: string;
+                            value?: {
+                                typeUrl?: string;
+                                value?: Uint8Array;
+                            };
+                        }[];
+                        syntax?: import("../../../protobuf/type").Syntax;
+                    }[];
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    version?: string;
+                    sourceContext?: {
+                        fileName?: string;
+                    };
+                    mixins?: {
+                        name?: string;
+                        root?: string;
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                documentation?: {
+                    summary?: string;
+                    pages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[];
+                    rules?: {
+                        selector?: string;
+                        description?: string;
+                        deprecationDescription?: string;
+                    }[];
+                    documentationRootUrl?: string;
+                    serviceRootUrl?: string;
+                    overview?: string;
+                };
+                quota?: {
+                    limits?: {
+                        name?: string;
+                        description?: string;
+                        defaultLimit?: any;
+                        maxLimit?: any;
+                        freeTier?: any;
+                        duration?: string;
+                        metric?: string;
+                        unit?: string;
+                        values?: {
+                            [x: string]: any;
+                        };
+                        displayName?: string;
+                    }[];
+                    metricRules?: {
+                        selector?: string;
+                        metricCosts?: {
+                            [x: string]: any;
+                        };
+                    }[];
+                };
+                authentication?: {
+                    rules?: {
+                        selector?: string;
+                        oauth?: {
+                            canonicalScopes?: string;
+                        };
+                        allowWithoutCredential?: boolean;
+                        requirements?: {
+                            providerId?: string;
+                            audiences?: string;
+                        }[];
+                    }[];
+                    providers?: {
+                        id?: string;
+                        issuer?: string;
+                        jwksUri?: string;
+                        audiences?: string;
+                        authorizationUrl?: string;
+                        jwtLocations?: {
+                            header?: string;
+                            query?: string;
+                            valuePrefix?: string;
+                        }[];
+                    }[];
+                };
+                usage?: {
+                    requirements?: string[];
+                    rules?: {
+                        selector?: string;
+                        allowUnregisteredCalls?: boolean;
+                        skipServiceControl?: boolean;
+                    }[];
+                    producerNotificationChannel?: string;
+                };
+                endpoints?: {
+                    name?: string;
+                    aliases?: string[];
+                    target?: string;
+                    allowCors?: boolean;
+                }[];
+                monitoredResources?: {
+                    name?: string;
+                    type?: string;
+                    displayName?: string;
+                    description?: string;
+                    labels?: {
+                        key?: string;
+                        valueType?: import("../../label").LabelDescriptor_ValueType;
+                        description?: string;
+                    }[];
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                }[];
+                monitoring?: {
+                    producerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                    consumerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                };
+            };
+            state?: import("./resources").State;
+        }[] & ({
+            name?: string;
+            parent?: string;
+            config?: {
+                name?: string;
+                title?: string;
+                apis?: {
+                    name?: string;
+                    methods?: {
+                        name?: string;
+                        requestTypeUrl?: string;
+                        requestStreaming?: boolean;
+                        responseTypeUrl?: string;
+                        responseStreaming?: boolean;
+                        options?: {
+                            name?: string;
+                            value?: {
+                                typeUrl?: string;
+                                value?: Uint8Array;
+                            };
+                        }[];
+                        syntax?: import("../../../protobuf/type").Syntax;
+                    }[];
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    version?: string;
+                    sourceContext?: {
+                        fileName?: string;
+                    };
+                    mixins?: {
+                        name?: string;
+                        root?: string;
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                documentation?: {
+                    summary?: string;
+                    pages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[];
+                    rules?: {
+                        selector?: string;
+                        description?: string;
+                        deprecationDescription?: string;
+                    }[];
+                    documentationRootUrl?: string;
+                    serviceRootUrl?: string;
+                    overview?: string;
+                };
+                quota?: {
+                    limits?: {
+                        name?: string;
+                        description?: string;
+                        defaultLimit?: any;
+                        maxLimit?: any;
+                        freeTier?: any;
+                        duration?: string;
+                        metric?: string;
+                        unit?: string;
+                        values?: {
+                            [x: string]: any;
+                        };
+                        displayName?: string;
+                    }[];
+                    metricRules?: {
+                        selector?: string;
+                        metricCosts?: {
+                            [x: string]: any;
+                        };
+                    }[];
+                };
+                authentication?: {
+                    rules?: {
+                        selector?: string;
+                        oauth?: {
+                            canonicalScopes?: string;
+                        };
+                        allowWithoutCredential?: boolean;
+                        requirements?: {
+                            providerId?: string;
+                            audiences?: string;
+                        }[];
+                    }[];
+                    providers?: {
+                        id?: string;
+                        issuer?: string;
+                        jwksUri?: string;
+                        audiences?: string;
+                        authorizationUrl?: string;
+                        jwtLocations?: {
+                            header?: string;
+                            query?: string;
+                            valuePrefix?: string;
+                        }[];
+                    }[];
+                };
+                usage?: {
+                    requirements?: string[];
+                    rules?: {
+                        selector?: string;
+                        allowUnregisteredCalls?: boolean;
+                        skipServiceControl?: boolean;
+                    }[];
+                    producerNotificationChannel?: string;
+                };
+                endpoints?: {
+                    name?: string;
+                    aliases?: string[];
+                    target?: string;
+                    allowCors?: boolean;
+                }[];
+                monitoredResources?: {
+                    name?: string;
+                    type?: string;
+                    displayName?: string;
+                    description?: string;
+                    labels?: {
+                        key?: string;
+                        valueType?: import("../../label").LabelDescriptor_ValueType;
+                        description?: string;
+                    }[];
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                }[];
+                monitoring?: {
+                    producerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                    consumerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                };
+            };
+            state?: import("./resources").State;
+        } & {
+            name?: string;
+            parent?: string;
+            config?: {
+                name?: string;
+                title?: string;
+                apis?: {
+                    name?: string;
+                    methods?: {
+                        name?: string;
+                        requestTypeUrl?: string;
+                        requestStreaming?: boolean;
+                        responseTypeUrl?: string;
+                        responseStreaming?: boolean;
+                        options?: {
+                            name?: string;
+                            value?: {
+                                typeUrl?: string;
+                                value?: Uint8Array;
+                            };
+                        }[];
+                        syntax?: import("../../../protobuf/type").Syntax;
+                    }[];
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    version?: string;
+                    sourceContext?: {
+                        fileName?: string;
+                    };
+                    mixins?: {
+                        name?: string;
+                        root?: string;
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                documentation?: {
+                    summary?: string;
+                    pages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[];
+                    rules?: {
+                        selector?: string;
+                        description?: string;
+                        deprecationDescription?: string;
+                    }[];
+                    documentationRootUrl?: string;
+                    serviceRootUrl?: string;
+                    overview?: string;
+                };
+                quota?: {
+                    limits?: {
+                        name?: string;
+                        description?: string;
+                        defaultLimit?: any;
+                        maxLimit?: any;
+                        freeTier?: any;
+                        duration?: string;
+                        metric?: string;
+                        unit?: string;
+                        values?: {
+                            [x: string]: any;
+                        };
+                        displayName?: string;
+                    }[];
+                    metricRules?: {
+                        selector?: string;
+                        metricCosts?: {
+                            [x: string]: any;
+                        };
+                    }[];
+                };
+                authentication?: {
+                    rules?: {
+                        selector?: string;
+                        oauth?: {
+                            canonicalScopes?: string;
+                        };
+                        allowWithoutCredential?: boolean;
+                        requirements?: {
+                            providerId?: string;
+                            audiences?: string;
+                        }[];
+                    }[];
+                    providers?: {
+                        id?: string;
+                        issuer?: string;
+                        jwksUri?: string;
+                        audiences?: string;
+                        authorizationUrl?: string;
+                        jwtLocations?: {
+                            header?: string;
+                            query?: string;
+                            valuePrefix?: string;
+                        }[];
+                    }[];
+                };
+                usage?: {
+                    requirements?: string[];
+                    rules?: {
+                        selector?: string;
+                        allowUnregisteredCalls?: boolean;
+                        skipServiceControl?: boolean;
+                    }[];
+                    producerNotificationChannel?: string;
+                };
+                endpoints?: {
+                    name?: string;
+                    aliases?: string[];
+                    target?: string;
+                    allowCors?: boolean;
+                }[];
+                monitoredResources?: {
+                    name?: string;
+                    type?: string;
+                    displayName?: string;
+                    description?: string;
+                    labels?: {
+                        key?: string;
+                        valueType?: import("../../label").LabelDescriptor_ValueType;
+                        description?: string;
+                    }[];
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                }[];
+                monitoring?: {
+                    producerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                    consumerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                };
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["services"][number]["config"], keyof import("./resources").ServiceConfig>, never>;
+            state?: import("./resources").State;
+        } & Record<Exclude<keyof I["services"][number], keyof Service>, never>)[] & Record<Exclude<keyof I["services"], keyof {
+            name?: string;
+            parent?: string;
+            config?: {
+                name?: string;
+                title?: string;
+                apis?: {
+                    name?: string;
+                    methods?: {
+                        name?: string;
+                        requestTypeUrl?: string;
+                        requestStreaming?: boolean;
+                        responseTypeUrl?: string;
+                        responseStreaming?: boolean;
+                        options?: {
+                            name?: string;
+                            value?: {
+                                typeUrl?: string;
+                                value?: Uint8Array;
+                            };
+                        }[];
+                        syntax?: import("../../../protobuf/type").Syntax;
+                    }[];
+                    options?: {
+                        name?: string;
+                        value?: {
+                            typeUrl?: string;
+                            value?: Uint8Array;
+                        };
+                    }[];
+                    version?: string;
+                    sourceContext?: {
+                        fileName?: string;
+                    };
+                    mixins?: {
+                        name?: string;
+                        root?: string;
+                    }[];
+                    syntax?: import("../../../protobuf/type").Syntax;
+                }[];
+                documentation?: {
+                    summary?: string;
+                    pages?: {
+                        name?: string;
+                        content?: string;
+                        subpages?: any[];
+                    }[];
+                    rules?: {
+                        selector?: string;
+                        description?: string;
+                        deprecationDescription?: string;
+                    }[];
+                    documentationRootUrl?: string;
+                    serviceRootUrl?: string;
+                    overview?: string;
+                };
+                quota?: {
+                    limits?: {
+                        name?: string;
+                        description?: string;
+                        defaultLimit?: any;
+                        maxLimit?: any;
+                        freeTier?: any;
+                        duration?: string;
+                        metric?: string;
+                        unit?: string;
+                        values?: {
+                            [x: string]: any;
+                        };
+                        displayName?: string;
+                    }[];
+                    metricRules?: {
+                        selector?: string;
+                        metricCosts?: {
+                            [x: string]: any;
+                        };
+                    }[];
+                };
+                authentication?: {
+                    rules?: {
+                        selector?: string;
+                        oauth?: {
+                            canonicalScopes?: string;
+                        };
+                        allowWithoutCredential?: boolean;
+                        requirements?: {
+                            providerId?: string;
+                            audiences?: string;
+                        }[];
+                    }[];
+                    providers?: {
+                        id?: string;
+                        issuer?: string;
+                        jwksUri?: string;
+                        audiences?: string;
+                        authorizationUrl?: string;
+                        jwtLocations?: {
+                            header?: string;
+                            query?: string;
+                            valuePrefix?: string;
+                        }[];
+                    }[];
+                };
+                usage?: {
+                    requirements?: string[];
+                    rules?: {
+                        selector?: string;
+                        allowUnregisteredCalls?: boolean;
+                        skipServiceControl?: boolean;
+                    }[];
+                    producerNotificationChannel?: string;
+                };
+                endpoints?: {
+                    name?: string;
+                    aliases?: string[];
+                    target?: string;
+                    allowCors?: boolean;
+                }[];
+                monitoredResources?: {
+                    name?: string;
+                    type?: string;
+                    displayName?: string;
+                    description?: string;
+                    labels?: {
+                        key?: string;
+                        valueType?: import("../../label").LabelDescriptor_ValueType;
+                        description?: string;
+                    }[];
+                    launchStage?: import("../../launch_stage").LaunchStage;
+                }[];
+                monitoring?: {
+                    producerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                    consumerDestinations?: {
+                        monitoredResource?: string;
+                        metrics?: string[];
+                    }[];
+                };
+            };
+            state?: import("./resources").State;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListServicesResponse>, never>>(object: I): ListServicesResponse;
 };
 export declare const BatchEnableServicesRequest: {
     encode(message: BatchEnableServicesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BatchEnableServicesRequest;
     fromJSON(object: any): BatchEnableServicesRequest;
     toJSON(message: BatchEnableServicesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): BatchEnableServicesRequest;
+    fromPartial<I extends {
+        parent?: string;
+        serviceIds?: string[];
+    } & {
+        parent?: string;
+        serviceIds?: string[] & string[] & Record<Exclude<keyof I["serviceIds"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof BatchEnableServicesRequest>, never>>(object: I): BatchEnableServicesRequest;
 };
 export declare const ListConsumerQuotaMetricsRequest: {
     encode(message: ListConsumerQuotaMetricsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerQuotaMetricsRequest;
     fromJSON(object: any): ListConsumerQuotaMetricsRequest;
     toJSON(message: ListConsumerQuotaMetricsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListConsumerQuotaMetricsRequest;
+    fromPartial<I extends {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+        view?: QuotaView;
+    } & {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+        view?: QuotaView;
+    } & Record<Exclude<keyof I, keyof ListConsumerQuotaMetricsRequest>, never>>(object: I): ListConsumerQuotaMetricsRequest;
 };
 export declare const ListConsumerQuotaMetricsResponse: {
     encode(message: ListConsumerQuotaMetricsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerQuotaMetricsResponse;
     fromJSON(object: any): ListConsumerQuotaMetricsResponse;
     toJSON(message: ListConsumerQuotaMetricsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListConsumerQuotaMetricsResponse;
+    fromPartial<I extends {
+        metrics?: {
+            name?: string;
+            metric?: string;
+            displayName?: string;
+            consumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            descendantConsumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            unit?: string;
+        }[];
+        nextPageToken?: string;
+    } & {
+        metrics?: {
+            name?: string;
+            metric?: string;
+            displayName?: string;
+            consumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            descendantConsumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            unit?: string;
+        }[] & ({
+            name?: string;
+            metric?: string;
+            displayName?: string;
+            consumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            descendantConsumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            unit?: string;
+        } & {
+            name?: string;
+            metric?: string;
+            displayName?: string;
+            consumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[] & ({
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["metrics"][number]["consumerQuotaLimits"][number], keyof import("./resources").ConsumerQuotaLimit>, never>)[] & Record<Exclude<keyof I["metrics"][number]["consumerQuotaLimits"], keyof {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[]>, never>;
+            descendantConsumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[] & ({
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["metrics"][number]["descendantConsumerQuotaLimits"][number], keyof import("./resources").ConsumerQuotaLimit>, never>)[] & Record<Exclude<keyof I["metrics"][number]["descendantConsumerQuotaLimits"], keyof {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[]>, never>;
+            unit?: string;
+        } & Record<Exclude<keyof I["metrics"][number], keyof ConsumerQuotaMetric>, never>)[] & Record<Exclude<keyof I["metrics"], keyof {
+            name?: string;
+            metric?: string;
+            displayName?: string;
+            consumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            descendantConsumerQuotaLimits?: {
+                name?: string;
+                metric?: string;
+                unit?: string;
+                isPrecise?: boolean;
+                allowsAdminOverrides?: boolean;
+                quotaBuckets?: {
+                    effectiveLimit?: any;
+                    defaultLimit?: any;
+                    producerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    consumerOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    adminOverride?: {
+                        name?: string;
+                        overrideValue?: any;
+                        dimensions?: {
+                            [x: string]: string;
+                        };
+                        metric?: string;
+                        unit?: string;
+                        adminOverrideAncestor?: string;
+                    };
+                    dimensions?: {
+                        [x: string]: string;
+                    };
+                }[];
+            }[];
+            unit?: string;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListConsumerQuotaMetricsResponse>, never>>(object: I): ListConsumerQuotaMetricsResponse;
 };
 export declare const GetConsumerQuotaMetricRequest: {
     encode(message: GetConsumerQuotaMetricRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetConsumerQuotaMetricRequest;
     fromJSON(object: any): GetConsumerQuotaMetricRequest;
     toJSON(message: GetConsumerQuotaMetricRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetConsumerQuotaMetricRequest;
+    fromPartial<I extends {
+        name?: string;
+        view?: QuotaView;
+    } & {
+        name?: string;
+        view?: QuotaView;
+    } & Record<Exclude<keyof I, keyof GetConsumerQuotaMetricRequest>, never>>(object: I): GetConsumerQuotaMetricRequest;
 };
 export declare const GetConsumerQuotaLimitRequest: {
     encode(message: GetConsumerQuotaLimitRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetConsumerQuotaLimitRequest;
     fromJSON(object: any): GetConsumerQuotaLimitRequest;
     toJSON(message: GetConsumerQuotaLimitRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GetConsumerQuotaLimitRequest;
+    fromPartial<I extends {
+        name?: string;
+        view?: QuotaView;
+    } & {
+        name?: string;
+        view?: QuotaView;
+    } & Record<Exclude<keyof I, keyof GetConsumerQuotaLimitRequest>, never>>(object: I): GetConsumerQuotaLimitRequest;
 };
 export declare const CreateAdminOverrideRequest: {
     encode(message: CreateAdminOverrideRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateAdminOverrideRequest;
     fromJSON(object: any): CreateAdminOverrideRequest;
     toJSON(message: CreateAdminOverrideRequest): unknown;
-    fromPartial<I extends unknown>(object: I): CreateAdminOverrideRequest;
+    fromPartial<I extends {
+        parent?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        };
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        parent?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["override"]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["override"], keyof QuotaOverride>, never>;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof CreateAdminOverrideRequest>, never>>(object: I): CreateAdminOverrideRequest;
 };
 export declare const UpdateAdminOverrideRequest: {
     encode(message: UpdateAdminOverrideRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminOverrideRequest;
     fromJSON(object: any): UpdateAdminOverrideRequest;
     toJSON(message: UpdateAdminOverrideRequest): unknown;
-    fromPartial<I extends unknown>(object: I): UpdateAdminOverrideRequest;
+    fromPartial<I extends {
+        name?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        };
+        force?: boolean;
+        updateMask?: {
+            paths?: string[];
+        };
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        name?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["override"]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["override"], keyof QuotaOverride>, never>;
+        force?: boolean;
+        updateMask?: {
+            paths?: string[];
+        } & {
+            paths?: string[] & string[] & Record<Exclude<keyof I["updateMask"]["paths"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["updateMask"], "paths">, never>;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof UpdateAdminOverrideRequest>, never>>(object: I): UpdateAdminOverrideRequest;
 };
 export declare const DeleteAdminOverrideRequest: {
     encode(message: DeleteAdminOverrideRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteAdminOverrideRequest;
     fromJSON(object: any): DeleteAdminOverrideRequest;
     toJSON(message: DeleteAdminOverrideRequest): unknown;
-    fromPartial<I extends unknown>(object: I): DeleteAdminOverrideRequest;
+    fromPartial<I extends {
+        name?: string;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        name?: string;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof DeleteAdminOverrideRequest>, never>>(object: I): DeleteAdminOverrideRequest;
 };
 export declare const ListAdminOverridesRequest: {
     encode(message: ListAdminOverridesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListAdminOverridesRequest;
     fromJSON(object: any): ListAdminOverridesRequest;
     toJSON(message: ListAdminOverridesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListAdminOverridesRequest;
+    fromPartial<I extends {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+    } & {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListAdminOverridesRequest>, never>>(object: I): ListAdminOverridesRequest;
 };
 export declare const ListAdminOverridesResponse: {
     encode(message: ListAdminOverridesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListAdminOverridesResponse;
     fromJSON(object: any): ListAdminOverridesResponse;
     toJSON(message: ListAdminOverridesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListAdminOverridesResponse;
+    fromPartial<I extends {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[];
+        nextPageToken?: string;
+    } & {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[] & ({
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["overrides"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["overrides"], keyof {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListAdminOverridesResponse>, never>>(object: I): ListAdminOverridesResponse;
 };
 export declare const BatchCreateAdminOverridesResponse: {
     encode(message: BatchCreateAdminOverridesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BatchCreateAdminOverridesResponse;
     fromJSON(object: any): BatchCreateAdminOverridesResponse;
     toJSON(message: BatchCreateAdminOverridesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): BatchCreateAdminOverridesResponse;
+    fromPartial<I extends {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[];
+    } & {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[] & ({
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["overrides"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["overrides"], keyof {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "overrides">, never>>(object: I): BatchCreateAdminOverridesResponse;
 };
 export declare const ImportAdminOverridesRequest: {
     encode(message: ImportAdminOverridesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminOverridesRequest;
     fromJSON(object: any): ImportAdminOverridesRequest;
     toJSON(message: ImportAdminOverridesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ImportAdminOverridesRequest;
+    fromPartial<I extends {
+        parent?: string;
+        inlineSource?: {
+            overrides?: {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[];
+        };
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        parent?: string;
+        inlineSource?: {
+            overrides?: {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[];
+        } & {
+            overrides?: {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[] & ({
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            } & {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                } & {
+                    [x: string]: string;
+                } & Record<Exclude<keyof I["inlineSource"]["overrides"][number]["dimensions"], string | number>, never>;
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            } & Record<Exclude<keyof I["inlineSource"]["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["inlineSource"]["overrides"], keyof {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["inlineSource"], "overrides">, never>;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof ImportAdminOverridesRequest>, never>>(object: I): ImportAdminOverridesRequest;
 };
 export declare const ImportAdminOverridesResponse: {
     encode(message: ImportAdminOverridesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminOverridesResponse;
     fromJSON(object: any): ImportAdminOverridesResponse;
     toJSON(message: ImportAdminOverridesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ImportAdminOverridesResponse;
+    fromPartial<I extends {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[];
+    } & {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[] & ({
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["overrides"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["overrides"], keyof {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "overrides">, never>>(object: I): ImportAdminOverridesResponse;
 };
 export declare const ImportAdminOverridesMetadata: {
     encode(_: ImportAdminOverridesMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminOverridesMetadata;
     fromJSON(_: any): ImportAdminOverridesMetadata;
     toJSON(_: ImportAdminOverridesMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): ImportAdminOverridesMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): ImportAdminOverridesMetadata;
 };
 export declare const CreateConsumerOverrideRequest: {
     encode(message: CreateConsumerOverrideRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateConsumerOverrideRequest;
     fromJSON(object: any): CreateConsumerOverrideRequest;
     toJSON(message: CreateConsumerOverrideRequest): unknown;
-    fromPartial<I extends unknown>(object: I): CreateConsumerOverrideRequest;
+    fromPartial<I extends {
+        parent?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        };
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        parent?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["override"]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["override"], keyof QuotaOverride>, never>;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof CreateConsumerOverrideRequest>, never>>(object: I): CreateConsumerOverrideRequest;
 };
 export declare const UpdateConsumerOverrideRequest: {
     encode(message: UpdateConsumerOverrideRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateConsumerOverrideRequest;
     fromJSON(object: any): UpdateConsumerOverrideRequest;
     toJSON(message: UpdateConsumerOverrideRequest): unknown;
-    fromPartial<I extends unknown>(object: I): UpdateConsumerOverrideRequest;
+    fromPartial<I extends {
+        name?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        };
+        force?: boolean;
+        updateMask?: {
+            paths?: string[];
+        };
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        name?: string;
+        override?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["override"]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["override"], keyof QuotaOverride>, never>;
+        force?: boolean;
+        updateMask?: {
+            paths?: string[];
+        } & {
+            paths?: string[] & string[] & Record<Exclude<keyof I["updateMask"]["paths"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["updateMask"], "paths">, never>;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof UpdateConsumerOverrideRequest>, never>>(object: I): UpdateConsumerOverrideRequest;
 };
 export declare const DeleteConsumerOverrideRequest: {
     encode(message: DeleteConsumerOverrideRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteConsumerOverrideRequest;
     fromJSON(object: any): DeleteConsumerOverrideRequest;
     toJSON(message: DeleteConsumerOverrideRequest): unknown;
-    fromPartial<I extends unknown>(object: I): DeleteConsumerOverrideRequest;
+    fromPartial<I extends {
+        name?: string;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        name?: string;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof DeleteConsumerOverrideRequest>, never>>(object: I): DeleteConsumerOverrideRequest;
 };
 export declare const ListConsumerOverridesRequest: {
     encode(message: ListConsumerOverridesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerOverridesRequest;
     fromJSON(object: any): ListConsumerOverridesRequest;
     toJSON(message: ListConsumerOverridesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListConsumerOverridesRequest;
+    fromPartial<I extends {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+    } & {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListConsumerOverridesRequest>, never>>(object: I): ListConsumerOverridesRequest;
 };
 export declare const ListConsumerOverridesResponse: {
     encode(message: ListConsumerOverridesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerOverridesResponse;
     fromJSON(object: any): ListConsumerOverridesResponse;
     toJSON(message: ListConsumerOverridesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListConsumerOverridesResponse;
+    fromPartial<I extends {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[];
+        nextPageToken?: string;
+    } & {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[] & ({
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["overrides"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["overrides"], keyof {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListConsumerOverridesResponse>, never>>(object: I): ListConsumerOverridesResponse;
 };
 export declare const BatchCreateConsumerOverridesResponse: {
     encode(message: BatchCreateConsumerOverridesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BatchCreateConsumerOverridesResponse;
     fromJSON(object: any): BatchCreateConsumerOverridesResponse;
     toJSON(message: BatchCreateConsumerOverridesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): BatchCreateConsumerOverridesResponse;
+    fromPartial<I extends {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[];
+    } & {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[] & ({
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["overrides"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["overrides"], keyof {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "overrides">, never>>(object: I): BatchCreateConsumerOverridesResponse;
 };
 export declare const ImportConsumerOverridesRequest: {
     encode(message: ImportConsumerOverridesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportConsumerOverridesRequest;
     fromJSON(object: any): ImportConsumerOverridesRequest;
     toJSON(message: ImportConsumerOverridesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ImportConsumerOverridesRequest;
+    fromPartial<I extends {
+        parent?: string;
+        inlineSource?: {
+            overrides?: {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[];
+        };
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[];
+    } & {
+        parent?: string;
+        inlineSource?: {
+            overrides?: {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[];
+        } & {
+            overrides?: {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[] & ({
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            } & {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                } & {
+                    [x: string]: string;
+                } & Record<Exclude<keyof I["inlineSource"]["overrides"][number]["dimensions"], string | number>, never>;
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            } & Record<Exclude<keyof I["inlineSource"]["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["inlineSource"]["overrides"], keyof {
+                name?: string;
+                overrideValue?: any;
+                dimensions?: {
+                    [x: string]: string;
+                };
+                metric?: string;
+                unit?: string;
+                adminOverrideAncestor?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["inlineSource"], "overrides">, never>;
+        force?: boolean;
+        forceOnly?: QuotaSafetyCheck[] & QuotaSafetyCheck[] & Record<Exclude<keyof I["forceOnly"], keyof QuotaSafetyCheck[]>, never>;
+    } & Record<Exclude<keyof I, keyof ImportConsumerOverridesRequest>, never>>(object: I): ImportConsumerOverridesRequest;
 };
 export declare const ImportConsumerOverridesResponse: {
     encode(message: ImportConsumerOverridesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportConsumerOverridesResponse;
     fromJSON(object: any): ImportConsumerOverridesResponse;
     toJSON(message: ImportConsumerOverridesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ImportConsumerOverridesResponse;
+    fromPartial<I extends {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[];
+    } & {
+        overrides?: {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[] & ({
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["overrides"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        } & Record<Exclude<keyof I["overrides"][number], keyof QuotaOverride>, never>)[] & Record<Exclude<keyof I["overrides"], keyof {
+            name?: string;
+            overrideValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            adminOverrideAncestor?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "overrides">, never>>(object: I): ImportConsumerOverridesResponse;
 };
 export declare const ImportConsumerOverridesMetadata: {
     encode(_: ImportConsumerOverridesMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportConsumerOverridesMetadata;
     fromJSON(_: any): ImportConsumerOverridesMetadata;
     toJSON(_: ImportConsumerOverridesMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): ImportConsumerOverridesMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): ImportConsumerOverridesMetadata;
 };
 export declare const ImportAdminQuotaPoliciesResponse: {
     encode(message: ImportAdminQuotaPoliciesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminQuotaPoliciesResponse;
     fromJSON(object: any): ImportAdminQuotaPoliciesResponse;
     toJSON(message: ImportAdminQuotaPoliciesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ImportAdminQuotaPoliciesResponse;
+    fromPartial<I extends {
+        policies?: {
+            name?: string;
+            policyValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            container?: string;
+        }[];
+    } & {
+        policies?: {
+            name?: string;
+            policyValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            container?: string;
+        }[] & ({
+            name?: string;
+            policyValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            container?: string;
+        } & {
+            name?: string;
+            policyValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            } & {
+                [x: string]: any;
+            } & Record<Exclude<keyof I["policies"][number]["dimensions"], string | number>, never>;
+            metric?: string;
+            unit?: string;
+            container?: string;
+        } & Record<Exclude<keyof I["policies"][number], keyof AdminQuotaPolicy>, never>)[] & Record<Exclude<keyof I["policies"], keyof {
+            name?: string;
+            policyValue?: any;
+            dimensions?: {
+                [x: string]: string;
+            };
+            metric?: string;
+            unit?: string;
+            container?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "policies">, never>>(object: I): ImportAdminQuotaPoliciesResponse;
 };
 export declare const ImportAdminQuotaPoliciesMetadata: {
     encode(_: ImportAdminQuotaPoliciesMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ImportAdminQuotaPoliciesMetadata;
     fromJSON(_: any): ImportAdminQuotaPoliciesMetadata;
     toJSON(_: ImportAdminQuotaPoliciesMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): ImportAdminQuotaPoliciesMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): ImportAdminQuotaPoliciesMetadata;
 };
 export declare const CreateAdminQuotaPolicyMetadata: {
     encode(_: CreateAdminQuotaPolicyMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CreateAdminQuotaPolicyMetadata;
     fromJSON(_: any): CreateAdminQuotaPolicyMetadata;
     toJSON(_: CreateAdminQuotaPolicyMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): CreateAdminQuotaPolicyMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): CreateAdminQuotaPolicyMetadata;
 };
 export declare const UpdateAdminQuotaPolicyMetadata: {
     encode(_: UpdateAdminQuotaPolicyMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminQuotaPolicyMetadata;
     fromJSON(_: any): UpdateAdminQuotaPolicyMetadata;
     toJSON(_: UpdateAdminQuotaPolicyMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): UpdateAdminQuotaPolicyMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): UpdateAdminQuotaPolicyMetadata;
 };
 export declare const DeleteAdminQuotaPolicyMetadata: {
     encode(_: DeleteAdminQuotaPolicyMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteAdminQuotaPolicyMetadata;
     fromJSON(_: any): DeleteAdminQuotaPolicyMetadata;
     toJSON(_: DeleteAdminQuotaPolicyMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): DeleteAdminQuotaPolicyMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): DeleteAdminQuotaPolicyMetadata;
 };
 export declare const GenerateServiceIdentityRequest: {
     encode(message: GenerateServiceIdentityRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GenerateServiceIdentityRequest;
     fromJSON(object: any): GenerateServiceIdentityRequest;
     toJSON(message: GenerateServiceIdentityRequest): unknown;
-    fromPartial<I extends unknown>(object: I): GenerateServiceIdentityRequest;
+    fromPartial<I extends {
+        parent?: string;
+    } & {
+        parent?: string;
+    } & Record<Exclude<keyof I, "parent">, never>>(object: I): GenerateServiceIdentityRequest;
 };
 export declare const GetServiceIdentityResponse: {
     encode(message: GetServiceIdentityResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceIdentityResponse;
     fromJSON(object: any): GetServiceIdentityResponse;
     toJSON(message: GetServiceIdentityResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetServiceIdentityResponse;
+    fromPartial<I extends {
+        identity?: {
+            email?: string;
+            uniqueId?: string;
+        };
+        state?: GetServiceIdentityResponse_IdentityState;
+    } & {
+        identity?: {
+            email?: string;
+            uniqueId?: string;
+        } & {
+            email?: string;
+            uniqueId?: string;
+        } & Record<Exclude<keyof I["identity"], keyof ServiceIdentity>, never>;
+        state?: GetServiceIdentityResponse_IdentityState;
+    } & Record<Exclude<keyof I, keyof GetServiceIdentityResponse>, never>>(object: I): GetServiceIdentityResponse;
 };
 export declare const GetServiceIdentityMetadata: {
     encode(_: GetServiceIdentityMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetServiceIdentityMetadata;
     fromJSON(_: any): GetServiceIdentityMetadata;
     toJSON(_: GetServiceIdentityMetadata): unknown;
-    fromPartial<I extends unknown>(_: I): GetServiceIdentityMetadata;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetServiceIdentityMetadata;
 };
-/** [Service Usage API](https://cloud.google.com/service-usage/docs/overview) */
-export interface ServiceUsage {
-    /**
-     * Enables a service so that it can be used with a project.
-     *
-     * Operation response type: `google.protobuf.Empty`
-     *
-     * @deprecated
-     */
-    EnableService(request: EnableServiceRequest): Promise<Operation>;
-    /**
-     * Disables a service so that it can no longer be used with a project.
-     * This prevents unintended usage that may cause unexpected billing
-     * charges or security leaks.
-     *
-     * It is not valid to call the disable method on a service that is not
-     * currently enabled. Callers will receive a `FAILED_PRECONDITION` status if
-     * the target service is not currently enabled.
-     *
-     * Operation response type: `google.protobuf.Empty`
-     *
-     * @deprecated
-     */
-    DisableService(request: DisableServiceRequest): Promise<Operation>;
-    /**
-     * Returns the service configuration and enabled state for a given service.
-     *
-     * @deprecated
-     */
-    GetService(request: GetServiceRequest): Promise<Service>;
-    /**
-     * Lists all services available to the specified project, and the current
-     * state of those services with respect to the project. The list includes
-     * all public services, all services for which the calling user has the
-     * `servicemanagement.services.bind` permission, and all services that have
-     * already been enabled on the project. The list can be filtered to
-     * only include services in a specific state, for example to only include
-     * services enabled on the project.
-     *
-     * @deprecated
-     */
-    ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-    /**
-     * Enables multiple services on a project. The operation is atomic: if
-     * enabling any service fails, then the entire batch fails, and no state
-     * changes occur.
-     *
-     * Operation response type: `google.protobuf.Empty`
-     *
-     * @deprecated
-     */
-    BatchEnableServices(request: BatchEnableServicesRequest): Promise<Operation>;
-    /**
-     * Retrieves a summary of all quota information visible to the service
-     * consumer, organized by service metric. Each metric includes information
-     * about all of its defined limits. Each limit includes the limit
-     * configuration (quota unit, preciseness, default value), the current
-     * effective limit value, and all of the overrides applied to the limit.
-     */
-    ListConsumerQuotaMetrics(request: ListConsumerQuotaMetricsRequest): Promise<ListConsumerQuotaMetricsResponse>;
-    /** Retrieves a summary of quota information for a specific quota metric */
-    GetConsumerQuotaMetric(request: GetConsumerQuotaMetricRequest): Promise<ConsumerQuotaMetric>;
-    /** Retrieves a summary of quota information for a specific quota limit. */
-    GetConsumerQuotaLimit(request: GetConsumerQuotaLimitRequest): Promise<ConsumerQuotaLimit>;
-    /**
-     * Creates an admin override.
-     * An admin override is applied by an administrator of a parent folder or
-     * parent organization of the consumer receiving the override. An admin
-     * override is intended to limit the amount of quota the consumer can use out
-     * of the total quota pool allocated to all children of the folder or
-     * organization.
-     */
-    CreateAdminOverride(request: CreateAdminOverrideRequest): Promise<Operation>;
-    /** Updates an admin override. */
-    UpdateAdminOverride(request: UpdateAdminOverrideRequest): Promise<Operation>;
-    /** Deletes an admin override. */
-    DeleteAdminOverride(request: DeleteAdminOverrideRequest): Promise<Operation>;
-    /** Lists all admin overrides on this limit. */
-    ListAdminOverrides(request: ListAdminOverridesRequest): Promise<ListAdminOverridesResponse>;
-    /**
-     * Creates or updates multiple admin overrides atomically, all on the
-     * same consumer, but on many different metrics or limits.
-     * The name field in the quota override message should not be set.
-     */
-    ImportAdminOverrides(request: ImportAdminOverridesRequest): Promise<Operation>;
-    /**
-     * Creates a consumer override.
-     * A consumer override is applied to the consumer on its own authority to
-     * limit its own quota usage. Consumer overrides cannot be used to grant more
-     * quota than would be allowed by admin overrides, producer overrides, or the
-     * default limit of the service.
-     */
-    CreateConsumerOverride(request: CreateConsumerOverrideRequest): Promise<Operation>;
-    /** Updates a consumer override. */
-    UpdateConsumerOverride(request: UpdateConsumerOverrideRequest): Promise<Operation>;
-    /** Deletes a consumer override. */
-    DeleteConsumerOverride(request: DeleteConsumerOverrideRequest): Promise<Operation>;
-    /** Lists all consumer overrides on this limit. */
-    ListConsumerOverrides(request: ListConsumerOverridesRequest): Promise<ListConsumerOverridesResponse>;
-    /**
-     * Creates or updates multiple consumer overrides atomically, all on the
-     * same consumer, but on many different metrics or limits.
-     * The name field in the quota override message should not be set.
-     */
-    ImportConsumerOverrides(request: ImportConsumerOverridesRequest): Promise<Operation>;
-    /** Generates service identity for service. */
-    GenerateServiceIdentity(request: GenerateServiceIdentityRequest): Promise<Operation>;
-}
-export declare class ServiceUsageClientImpl implements ServiceUsage {
-    private readonly rpc;
-    constructor(rpc: Rpc);
-    EnableService(request: EnableServiceRequest): Promise<Operation>;
-    DisableService(request: DisableServiceRequest): Promise<Operation>;
-    GetService(request: GetServiceRequest): Promise<Service>;
-    ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-    BatchEnableServices(request: BatchEnableServicesRequest): Promise<Operation>;
-    ListConsumerQuotaMetrics(request: ListConsumerQuotaMetricsRequest): Promise<ListConsumerQuotaMetricsResponse>;
-    GetConsumerQuotaMetric(request: GetConsumerQuotaMetricRequest): Promise<ConsumerQuotaMetric>;
-    GetConsumerQuotaLimit(request: GetConsumerQuotaLimitRequest): Promise<ConsumerQuotaLimit>;
-    CreateAdminOverride(request: CreateAdminOverrideRequest): Promise<Operation>;
-    UpdateAdminOverride(request: UpdateAdminOverrideRequest): Promise<Operation>;
-    DeleteAdminOverride(request: DeleteAdminOverrideRequest): Promise<Operation>;
-    ListAdminOverrides(request: ListAdminOverridesRequest): Promise<ListAdminOverridesResponse>;
-    ImportAdminOverrides(request: ImportAdminOverridesRequest): Promise<Operation>;
-    CreateConsumerOverride(request: CreateConsumerOverrideRequest): Promise<Operation>;
-    UpdateConsumerOverride(request: UpdateConsumerOverrideRequest): Promise<Operation>;
-    DeleteConsumerOverride(request: DeleteConsumerOverrideRequest): Promise<Operation>;
-    ListConsumerOverrides(request: ListConsumerOverridesRequest): Promise<ListConsumerOverridesResponse>;
-    ImportConsumerOverrides(request: ImportConsumerOverridesRequest): Promise<Operation>;
-    GenerateServiceIdentity(request: GenerateServiceIdentityRequest): Promise<Operation>;
-}
-interface Rpc {
-    request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

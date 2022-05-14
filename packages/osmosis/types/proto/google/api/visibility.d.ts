@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -14,12 +13,12 @@ import * as _m0 from "protobufjs/minimal";
  *
  * Example:
  *
- *     visibility:
- *       rules:
- *       - selector: google.calendar.Calendar.EnhancedSearch
- *         restriction: PREVIEW
- *       - selector: google.calendar.Calendar.Delegate
- *         restriction: INTERNAL
+ * visibility:
+ * rules:
+ * - selector: google.calendar.Calendar.EnhancedSearch
+ * restriction: PREVIEW
+ * - selector: google.calendar.Calendar.Delegate
+ * restriction: INTERNAL
  *
  * Here, all methods are publicly visible except for the restricted methods
  * EnhancedSearch and Delegate.
@@ -52,10 +51,10 @@ export interface VisibilityRule {
      *
      * Example:
      *
-     *     visibility:
-     *       rules:
-     *       - selector: google.calendar.Calendar.EnhancedSearch
-     *         restriction: INTERNAL, PREVIEW
+     * visibility:
+     * rules:
+     * - selector: google.calendar.Calendar.EnhancedSearch
+     * restriction: INTERNAL, PREVIEW
      *
      * Removing INTERNAL from this restriction will break clients that rely on
      * this method and only had access to it through INTERNAL.
@@ -67,21 +66,37 @@ export declare const Visibility: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Visibility;
     fromJSON(object: any): Visibility;
     toJSON(message: Visibility): unknown;
-    fromPartial<I extends unknown>(object: I): Visibility;
+    fromPartial<I extends {
+        rules?: {
+            selector?: string;
+            restriction?: string;
+        }[];
+    } & {
+        rules?: {
+            selector?: string;
+            restriction?: string;
+        }[] & ({
+            selector?: string;
+            restriction?: string;
+        } & {
+            selector?: string;
+            restriction?: string;
+        } & Record<Exclude<keyof I["rules"][number], keyof VisibilityRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
+            selector?: string;
+            restriction?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "rules">, never>>(object: I): Visibility;
 };
 export declare const VisibilityRule: {
     encode(message: VisibilityRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): VisibilityRule;
     fromJSON(object: any): VisibilityRule;
     toJSON(message: VisibilityRule): unknown;
-    fromPartial<I extends unknown>(object: I): VisibilityRule;
+    fromPartial<I extends {
+        selector?: string;
+        restriction?: string;
+    } & {
+        selector?: string;
+        restriction?: string;
+    } & Record<Exclude<keyof I, keyof VisibilityRule>, never>>(object: I): VisibilityRule;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -8,15 +7,15 @@ import * as _m0 from "protobufjs/minimal";
  *
  * Example service configuration:
  *
- *     name: library-example.googleapis.com
- *     endpoints:
- *       # Below entry makes 'google.example.library.v1.Library'
- *       # API be served from endpoint address library-example.googleapis.com.
- *       # It also allows HTTP OPTIONS calls to be passed to the backend, for
- *       # it to decide whether the subsequent cross-origin request is
- *       # allowed to proceed.
- *     - name: library-example.googleapis.com
- *       allow_cors: true
+ * name: library-example.googleapis.com
+ * endpoints:
+ * # Below entry makes 'google.example.library.v1.Library'
+ * # API be served from endpoint address library-example.googleapis.com.
+ * # It also allows HTTP OPTIONS calls to be passed to the backend, for
+ * # it to decide whether the subsequent cross-origin request is
+ * # allowed to proceed.
+ * - name: library-example.googleapis.com
+ * allow_cors: true
  */
 export interface Endpoint {
     /** The canonical name of this endpoint. */
@@ -29,9 +28,8 @@ export interface Endpoint {
      * aliases.
      *
      * Additional names that this endpoint will be hosted on.
-     *
-     * @deprecated
      */
+    /** @deprecated */
     aliases: string[];
     /**
      * The specification of an Internet routable address of API frontend that will
@@ -56,14 +54,15 @@ export declare const Endpoint: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Endpoint;
     fromJSON(object: any): Endpoint;
     toJSON(message: Endpoint): unknown;
-    fromPartial<I extends unknown>(object: I): Endpoint;
+    fromPartial<I extends {
+        name?: string;
+        aliases?: string[];
+        target?: string;
+        allowCors?: boolean;
+    } & {
+        name?: string;
+        aliases?: string[] & string[] & Record<Exclude<keyof I["aliases"], keyof string[]>, never>;
+        target?: string;
+        allowCors?: boolean;
+    } & Record<Exclude<keyof I, keyof Endpoint>, never>>(object: I): Endpoint;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

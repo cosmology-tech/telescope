@@ -1,7 +1,7 @@
-import Long from "long";
+import { LabelDescriptor } from "./label";
+import { LaunchStage } from "./launch_stage";
+import { Struct } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { LaunchStage } from "../../google/api/launch_stage";
-import { LabelDescriptor } from "../../google/api/label";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -49,6 +49,10 @@ export interface MonitoredResourceDescriptor {
     /** Optional. The launch stage of the monitored resource definition. */
     launchStage: LaunchStage;
 }
+export interface MonitoredResource_LabelsEntry {
+    key: string;
+    value: string;
+}
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -60,9 +64,9 @@ export interface MonitoredResourceDescriptor {
  * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
  * `"instance_id"` and `"zone"`:
  *
- *     { "type": "gce_instance",
- *       "labels": { "instance_id": "12345678901234",
- *                   "zone": "us-central1-a" }}
+ * { "type": "gce_instance",
+ * "labels": { "instance_id": "12345678901234",
+ * "zone": "us-central1-a" }}
  */
 export interface MonitoredResource {
     /**
@@ -80,7 +84,7 @@ export interface MonitoredResource {
         [key: string]: string;
     };
 }
-export interface MonitoredResource_LabelsEntry {
+export interface MonitoredResourceMetadata_UserLabelsEntry {
     key: string;
     value: string;
 }
@@ -101,63 +105,668 @@ export interface MonitoredResourceMetadata {
      * System label values can be only strings, Boolean values, or a list of
      * strings. For example:
      *
-     *     { "name": "my-test-instance",
-     *       "security_group": ["a", "b", "c"],
-     *       "spot_instance": false }
+     * { "name": "my-test-instance",
+     * "security_group": ["a", "b", "c"],
+     * "spot_instance": false }
      */
-    systemLabels: {
-        [key: string]: any;
-    } | undefined;
+    systemLabels: Struct;
     /** Output only. A map of user-defined metadata labels. */
     userLabels: {
         [key: string]: string;
     };
-}
-export interface MonitoredResourceMetadata_UserLabelsEntry {
-    key: string;
-    value: string;
 }
 export declare const MonitoredResourceDescriptor: {
     encode(message: MonitoredResourceDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceDescriptor;
     fromJSON(object: any): MonitoredResourceDescriptor;
     toJSON(message: MonitoredResourceDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): MonitoredResourceDescriptor;
-};
-export declare const MonitoredResource: {
-    encode(message: MonitoredResource, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource;
-    fromJSON(object: any): MonitoredResource;
-    toJSON(message: MonitoredResource): unknown;
-    fromPartial<I extends unknown>(object: I): MonitoredResource;
+    fromPartial<I extends {
+        name?: string;
+        type?: string;
+        displayName?: string;
+        description?: string;
+        labels?: {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[];
+        launchStage?: LaunchStage;
+    } & {
+        name?: string;
+        type?: string;
+        displayName?: string;
+        description?: string;
+        labels?: {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[] & ({
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        } & {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        } & Record<Exclude<keyof I["labels"][number], keyof LabelDescriptor>, never>)[] & Record<Exclude<keyof I["labels"], keyof {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[]>, never>;
+        launchStage?: LaunchStage;
+    } & Record<Exclude<keyof I, keyof MonitoredResourceDescriptor>, never>>(object: I): MonitoredResourceDescriptor;
 };
 export declare const MonitoredResource_LabelsEntry: {
     encode(message: MonitoredResource_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_LabelsEntry;
     fromJSON(object: any): MonitoredResource_LabelsEntry;
     toJSON(message: MonitoredResource_LabelsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): MonitoredResource_LabelsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof MonitoredResource_LabelsEntry>, never>>(object: I): MonitoredResource_LabelsEntry;
 };
-export declare const MonitoredResourceMetadata: {
-    encode(message: MonitoredResourceMetadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata;
-    fromJSON(object: any): MonitoredResourceMetadata;
-    toJSON(message: MonitoredResourceMetadata): unknown;
-    fromPartial<I extends unknown>(object: I): MonitoredResourceMetadata;
+export declare const MonitoredResource: {
+    encode(message: MonitoredResource, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource;
+    fromJSON(object: any): MonitoredResource;
+    toJSON(message: MonitoredResource): unknown;
+    fromPartial<I extends {
+        type?: string;
+        labels?: {
+            [x: string]: string;
+        };
+    } & {
+        type?: string;
+        labels?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["labels"], string | number>, never>;
+    } & Record<Exclude<keyof I, keyof MonitoredResource>, never>>(object: I): MonitoredResource;
 };
 export declare const MonitoredResourceMetadata_UserLabelsEntry: {
     encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata_UserLabelsEntry;
     fromJSON(object: any): MonitoredResourceMetadata_UserLabelsEntry;
     toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): MonitoredResourceMetadata_UserLabelsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof MonitoredResourceMetadata_UserLabelsEntry>, never>>(object: I): MonitoredResourceMetadata_UserLabelsEntry;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};
+export declare const MonitoredResourceMetadata: {
+    encode(message: MonitoredResourceMetadata, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata;
+    fromJSON(object: any): MonitoredResourceMetadata;
+    toJSON(message: MonitoredResourceMetadata): unknown;
+    fromPartial<I extends {
+        systemLabels?: {
+            fields?: {
+                [x: string]: {
+                    nullValue?: import("../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                };
+            };
+        };
+        userLabels?: {
+            [x: string]: string;
+        };
+    } & {
+        systemLabels?: {
+            fields?: {
+                [x: string]: {
+                    nullValue?: import("../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                };
+            };
+        } & {
+            fields?: {
+                [x: string]: {
+                    nullValue?: import("../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                };
+            } & {
+                [x: string]: {
+                    nullValue?: import("../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: any;
+                    listValue?: {
+                        values?: any[];
+                    };
+                } & {
+                    nullValue?: import("../protobuf/struct").NullValue;
+                    numberValue?: number;
+                    stringValue?: string;
+                    boolValue?: boolean;
+                    structValue?: {
+                        fields?: {
+                            [x: string]: {
+                                nullValue?: import("../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            };
+                        };
+                    } & {
+                        fields?: {
+                            [x: string]: {
+                                nullValue?: import("../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            };
+                        } & {
+                            [x: string]: {
+                                nullValue?: import("../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: import("../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: import("../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+                                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: import("../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: import("../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["structValue"], "fields">, never>;
+                    listValue?: {
+                        values?: any[];
+                    } & {
+                        values?: any[] & ({
+                            nullValue?: import("../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: any;
+                            listValue?: {
+                                values?: any[];
+                            };
+                        } & {
+                            nullValue?: import("../protobuf/struct").NullValue;
+                            numberValue?: number;
+                            stringValue?: string;
+                            boolValue?: boolean;
+                            structValue?: {
+                                fields?: {
+                                    [x: string]: {
+                                        nullValue?: import("../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    };
+                                };
+                            } & {
+                                fields?: {
+                                    [x: string]: {
+                                        nullValue?: import("../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    };
+                                } & {
+                                    [x: string]: {
+                                        nullValue?: import("../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: import("../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+                                } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                            listValue?: {
+                                values?: any[];
+                            } & {
+                                values?: any[] & ({
+                                    nullValue?: import("../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: import("../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: import("../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                            } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                        } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"][number], keyof import("../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                    } & Record<Exclude<keyof I["systemLabels"]["fields"][string]["listValue"], "values">, never>;
+                } & Record<Exclude<keyof I["systemLabels"]["fields"][string], keyof import("../protobuf/struct").Value>, never>;
+            } & Record<Exclude<keyof I["systemLabels"]["fields"], string | number>, never>;
+        } & Record<Exclude<keyof I["systemLabels"], "fields">, never>;
+        userLabels?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["userLabels"], string | number>, never>;
+    } & Record<Exclude<keyof I, keyof MonitoredResourceMetadata>, never>>(object: I): MonitoredResourceMetadata;
+};

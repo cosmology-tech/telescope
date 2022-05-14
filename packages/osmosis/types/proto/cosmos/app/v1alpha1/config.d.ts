@@ -1,6 +1,5 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -40,21 +39,64 @@ export declare const Config: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Config;
     fromJSON(object: any): Config;
     toJSON(message: Config): unknown;
-    fromPartial<I extends unknown>(object: I): Config;
+    fromPartial<I extends {
+        modules?: {
+            name?: string;
+            config?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        }[];
+    } & {
+        modules?: {
+            name?: string;
+            config?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        }[] & ({
+            name?: string;
+            config?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        } & {
+            name?: string;
+            config?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["modules"][number]["config"], keyof Any>, never>;
+        } & Record<Exclude<keyof I["modules"][number], keyof ModuleConfig>, never>)[] & Record<Exclude<keyof I["modules"], keyof {
+            name?: string;
+            config?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "modules">, never>>(object: I): Config;
 };
 export declare const ModuleConfig: {
     encode(message: ModuleConfig, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleConfig;
     fromJSON(object: any): ModuleConfig;
     toJSON(message: ModuleConfig): unknown;
-    fromPartial<I extends unknown>(object: I): ModuleConfig;
+    fromPartial<I extends {
+        name?: string;
+        config?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        };
+    } & {
+        name?: string;
+        config?: {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & {
+            typeUrl?: string;
+            value?: Uint8Array;
+        } & Record<Exclude<keyof I["config"], keyof Any>, never>;
+    } & Record<Exclude<keyof I, keyof ModuleConfig>, never>>(object: I): ModuleConfig;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

@@ -1,15 +1,14 @@
-import Long from "long";
+import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { LabelDescriptor } from "../../google/api/label";
 /**
  * A description of a log type. Example in YAML format:
  *
- *     - name: library.googleapis.com/activity_history
- *       description: The history of borrowing and returning library items.
- *       display_name: Activity
- *       labels:
- *       - key: /customer_id
- *         description: Identifier of a library customer
+ * - name: library.googleapis.com/activity_history
+ * description: The history of borrowing and returning library items.
+ * display_name: Activity
+ * labels:
+ * - key: /customer_id
+ * description: Identifier of a library customer
  */
 export interface LogDescriptor {
     /**
@@ -41,14 +40,35 @@ export declare const LogDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): LogDescriptor;
     fromJSON(object: any): LogDescriptor;
     toJSON(message: LogDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): LogDescriptor;
+    fromPartial<I extends {
+        name?: string;
+        labels?: {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[];
+        description?: string;
+        displayName?: string;
+    } & {
+        name?: string;
+        labels?: {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[] & ({
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        } & {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        } & Record<Exclude<keyof I["labels"][number], keyof LabelDescriptor>, never>)[] & Record<Exclude<keyof I["labels"], keyof {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[]>, never>;
+        description?: string;
+        displayName?: string;
+    } & Record<Exclude<keyof I, keyof LogDescriptor>, never>>(object: I): LogDescriptor;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

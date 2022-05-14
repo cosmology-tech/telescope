@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -47,17 +46,17 @@ export interface Usage {
  *
  * Example of an API that wants to allow unregistered calls for entire service.
  *
- *     usage:
- *       rules:
- *       - selector: "*"
- *         allow_unregistered_calls: true
+ * usage:
+ * rules:
+ * - selector: "*"
+ * allow_unregistered_calls: true
  *
  * Example of a method that wants to allow unregistered calls.
  *
- *     usage:
- *       rules:
- *       - selector: "google.example.library.v1.LibraryService.CreateBook"
- *         allow_unregistered_calls: true
+ * usage:
+ * rules:
+ * - selector: "google.example.library.v1.LibraryService.CreateBook"
+ * allow_unregistered_calls: true
  */
 export interface UsageRule {
     /**
@@ -85,21 +84,48 @@ export declare const Usage: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Usage;
     fromJSON(object: any): Usage;
     toJSON(message: Usage): unknown;
-    fromPartial<I extends unknown>(object: I): Usage;
+    fromPartial<I extends {
+        requirements?: string[];
+        rules?: {
+            selector?: string;
+            allowUnregisteredCalls?: boolean;
+            skipServiceControl?: boolean;
+        }[];
+        producerNotificationChannel?: string;
+    } & {
+        requirements?: string[] & string[] & Record<Exclude<keyof I["requirements"], keyof string[]>, never>;
+        rules?: {
+            selector?: string;
+            allowUnregisteredCalls?: boolean;
+            skipServiceControl?: boolean;
+        }[] & ({
+            selector?: string;
+            allowUnregisteredCalls?: boolean;
+            skipServiceControl?: boolean;
+        } & {
+            selector?: string;
+            allowUnregisteredCalls?: boolean;
+            skipServiceControl?: boolean;
+        } & Record<Exclude<keyof I["rules"][number], keyof UsageRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
+            selector?: string;
+            allowUnregisteredCalls?: boolean;
+            skipServiceControl?: boolean;
+        }[]>, never>;
+        producerNotificationChannel?: string;
+    } & Record<Exclude<keyof I, keyof Usage>, never>>(object: I): Usage;
 };
 export declare const UsageRule: {
     encode(message: UsageRule, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UsageRule;
     fromJSON(object: any): UsageRule;
     toJSON(message: UsageRule): unknown;
-    fromPartial<I extends unknown>(object: I): UsageRule;
+    fromPartial<I extends {
+        selector?: string;
+        allowUnregisteredCalls?: boolean;
+        skipServiceControl?: boolean;
+    } & {
+        selector?: string;
+        allowUnregisteredCalls?: boolean;
+        skipServiceControl?: boolean;
+    } & Record<Exclude<keyof I, keyof UsageRule>, never>>(object: I): UsageRule;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
@@ -19,27 +18,27 @@ export interface PrimaryKeyDescriptor {
      * fields is a comma-separated list of fields in the primary key. Spaces are
      * not allowed. Supported field types, their encodings, and any applicable constraints
      * are described below.
-     *   - uint32 are encoded as 2,3,4 or 5 bytes using a compact encoding that
-     *     is suitable for sorted iteration (not varint encoding). This type is
-     *     well-suited for small integers.
-     *   - uint64 are encoded as 2,4,6 or 9 bytes using a compact encoding that
-     *     is suitable for sorted iteration (not varint encoding). This type is
-     *     well-suited for small integers such as auto-incrementing sequences.
-     *   - fixed32, fixed64 are encoded as big-endian fixed width bytes and support
-     *   sorted iteration. These types are well-suited for encoding fixed with
-     *   decimals as integers.
-     *   - string's are encoded as raw bytes in terminal key segments and null-terminated
-     *   in non-terminal segments. Null characters are thus forbidden in strings.
-     *   string fields support sorted iteration.
-     *   - bytes are encoded as raw bytes in terminal segments and length-prefixed
-     *   with a 32-bit unsigned varint in non-terminal segments.
-     *   - int32, sint32, int64, sint64, sfixed32, sfixed64 are encoded as fixed width bytes with
-     *   an encoding that enables sorted iteration.
-     *   - google.protobuf.Timestamp and google.protobuf.Duration are encoded
-     *   as 12 bytes using an encoding that enables sorted iteration.
-     *   - enum fields are encoded using varint encoding and do not support sorted
-     *   iteration.
-     *   - bool fields are encoded as a single byte 0 or 1.
+     * - uint32 are encoded as 2,3,4 or 5 bytes using a compact encoding that
+     * is suitable for sorted iteration (not varint encoding). This type is
+     * well-suited for small integers.
+     * - uint64 are encoded as 2,4,6 or 9 bytes using a compact encoding that
+     * is suitable for sorted iteration (not varint encoding). This type is
+     * well-suited for small integers such as auto-incrementing sequences.
+     * - fixed32, fixed64 are encoded as big-endian fixed width bytes and support
+     * sorted iteration. These types are well-suited for encoding fixed with
+     * decimals as integers.
+     * - string's are encoded as raw bytes in terminal key segments and null-terminated
+     * in non-terminal segments. Null characters are thus forbidden in strings.
+     * string fields support sorted iteration.
+     * - bytes are encoded as raw bytes in terminal segments and length-prefixed
+     * with a 32-bit unsigned varint in non-terminal segments.
+     * - int32, sint32, int64, sint64, sfixed32, sfixed64 are encoded as fixed width bytes with
+     * an encoding that enables sorted iteration.
+     * - google.protobuf.Timestamp and google.protobuf.Duration are encoded
+     * as 12 bytes using an encoding that enables sorted iteration.
+     * - enum fields are encoded using varint encoding and do not support sorted
+     * iteration.
+     * - bool fields are encoded as a single byte 0 or 1.
      *
      * All other fields types are unsupported in keys including repeated and
      * oneof fields.
@@ -92,35 +91,81 @@ export declare const TableDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): TableDescriptor;
     fromJSON(object: any): TableDescriptor;
     toJSON(message: TableDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): TableDescriptor;
+    fromPartial<I extends {
+        primaryKey?: {
+            fields?: string;
+            autoIncrement?: boolean;
+        };
+        index?: {
+            fields?: string;
+            id?: number;
+            unique?: boolean;
+        }[];
+        id?: number;
+    } & {
+        primaryKey?: {
+            fields?: string;
+            autoIncrement?: boolean;
+        } & {
+            fields?: string;
+            autoIncrement?: boolean;
+        } & Record<Exclude<keyof I["primaryKey"], keyof PrimaryKeyDescriptor>, never>;
+        index?: {
+            fields?: string;
+            id?: number;
+            unique?: boolean;
+        }[] & ({
+            fields?: string;
+            id?: number;
+            unique?: boolean;
+        } & {
+            fields?: string;
+            id?: number;
+            unique?: boolean;
+        } & Record<Exclude<keyof I["index"][number], keyof SecondaryIndexDescriptor>, never>)[] & Record<Exclude<keyof I["index"], keyof {
+            fields?: string;
+            id?: number;
+            unique?: boolean;
+        }[]>, never>;
+        id?: number;
+    } & Record<Exclude<keyof I, keyof TableDescriptor>, never>>(object: I): TableDescriptor;
 };
 export declare const PrimaryKeyDescriptor: {
     encode(message: PrimaryKeyDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PrimaryKeyDescriptor;
     fromJSON(object: any): PrimaryKeyDescriptor;
     toJSON(message: PrimaryKeyDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): PrimaryKeyDescriptor;
+    fromPartial<I extends {
+        fields?: string;
+        autoIncrement?: boolean;
+    } & {
+        fields?: string;
+        autoIncrement?: boolean;
+    } & Record<Exclude<keyof I, keyof PrimaryKeyDescriptor>, never>>(object: I): PrimaryKeyDescriptor;
 };
 export declare const SecondaryIndexDescriptor: {
     encode(message: SecondaryIndexDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SecondaryIndexDescriptor;
     fromJSON(object: any): SecondaryIndexDescriptor;
     toJSON(message: SecondaryIndexDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): SecondaryIndexDescriptor;
+    fromPartial<I extends {
+        fields?: string;
+        id?: number;
+        unique?: boolean;
+    } & {
+        fields?: string;
+        id?: number;
+        unique?: boolean;
+    } & Record<Exclude<keyof I, keyof SecondaryIndexDescriptor>, never>>(object: I): SecondaryIndexDescriptor;
 };
 export declare const SingletonDescriptor: {
     encode(message: SingletonDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SingletonDescriptor;
     fromJSON(object: any): SingletonDescriptor;
     toJSON(message: SingletonDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): SingletonDescriptor;
+    fromPartial<I extends {
+        id?: number;
+    } & {
+        id?: number;
+    } & Record<Exclude<keyof I, "id">, never>>(object: I): SingletonDescriptor;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

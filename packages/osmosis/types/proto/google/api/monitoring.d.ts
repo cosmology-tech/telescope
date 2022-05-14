@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Monitoring configuration of the service.
@@ -10,49 +9,49 @@ import * as _m0 from "protobufjs/minimal";
  * `library.googleapis.com/book/num_overdue` metric is only sent to the
  * consumer project.
  *
- *     monitored_resources:
- *     - type: library.googleapis.com/Branch
- *       display_name: "Library Branch"
- *       description: "A branch of a library."
- *       launch_stage: GA
- *       labels:
- *       - key: resource_container
- *         description: "The Cloud container (ie. project id) for the Branch."
- *       - key: location
- *         description: "The location of the library branch."
- *       - key: branch_id
- *         description: "The id of the branch."
- *     metrics:
- *     - name: library.googleapis.com/book/returned_count
- *       display_name: "Books Returned"
- *       description: "The count of books that have been returned."
- *       launch_stage: GA
- *       metric_kind: DELTA
- *       value_type: INT64
- *       unit: "1"
- *       labels:
- *       - key: customer_id
- *         description: "The id of the customer."
- *     - name: library.googleapis.com/book/num_overdue
- *       display_name: "Books Overdue"
- *       description: "The current number of overdue books."
- *       launch_stage: GA
- *       metric_kind: GAUGE
- *       value_type: INT64
- *       unit: "1"
- *       labels:
- *       - key: customer_id
- *         description: "The id of the customer."
- *     monitoring:
- *       producer_destinations:
- *       - monitored_resource: library.googleapis.com/Branch
- *         metrics:
- *         - library.googleapis.com/book/returned_count
- *       consumer_destinations:
- *       - monitored_resource: library.googleapis.com/Branch
- *         metrics:
- *         - library.googleapis.com/book/returned_count
- *         - library.googleapis.com/book/num_overdue
+ * monitored_resources:
+ * - type: library.googleapis.com/Branch
+ * display_name: "Library Branch"
+ * description: "A branch of a library."
+ * launch_stage: GA
+ * labels:
+ * - key: resource_container
+ * description: "The Cloud container (ie. project id) for the Branch."
+ * - key: location
+ * description: "The location of the library branch."
+ * - key: branch_id
+ * description: "The id of the branch."
+ * metrics:
+ * - name: library.googleapis.com/book/returned_count
+ * display_name: "Books Returned"
+ * description: "The count of books that have been returned."
+ * launch_stage: GA
+ * metric_kind: DELTA
+ * value_type: INT64
+ * unit: "1"
+ * labels:
+ * - key: customer_id
+ * description: "The id of the customer."
+ * - name: library.googleapis.com/book/num_overdue
+ * display_name: "Books Overdue"
+ * description: "The current number of overdue books."
+ * launch_stage: GA
+ * metric_kind: GAUGE
+ * value_type: INT64
+ * unit: "1"
+ * labels:
+ * - key: customer_id
+ * description: "The id of the customer."
+ * monitoring:
+ * producer_destinations:
+ * - monitored_resource: library.googleapis.com/Branch
+ * metrics:
+ * - library.googleapis.com/book/returned_count
+ * consumer_destinations:
+ * - monitored_resource: library.googleapis.com/Branch
+ * metrics:
+ * - library.googleapis.com/book/returned_count
+ * - library.googleapis.com/book/num_overdue
  */
 export interface Monitoring {
     /**
@@ -95,21 +94,54 @@ export declare const Monitoring: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Monitoring;
     fromJSON(object: any): Monitoring;
     toJSON(message: Monitoring): unknown;
-    fromPartial<I extends unknown>(object: I): Monitoring;
+    fromPartial<I extends {
+        producerDestinations?: {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[];
+        consumerDestinations?: {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[];
+    } & {
+        producerDestinations?: {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[] & ({
+            monitoredResource?: string;
+            metrics?: string[];
+        } & {
+            monitoredResource?: string;
+            metrics?: string[] & string[] & Record<Exclude<keyof I["producerDestinations"][number]["metrics"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["producerDestinations"][number], keyof Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["producerDestinations"], keyof {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[]>, never>;
+        consumerDestinations?: {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[] & ({
+            monitoredResource?: string;
+            metrics?: string[];
+        } & {
+            monitoredResource?: string;
+            metrics?: string[] & string[] & Record<Exclude<keyof I["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["consumerDestinations"][number], keyof Monitoring_MonitoringDestination>, never>)[] & Record<Exclude<keyof I["consumerDestinations"], keyof {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof Monitoring>, never>>(object: I): Monitoring;
 };
 export declare const Monitoring_MonitoringDestination: {
     encode(message: Monitoring_MonitoringDestination, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Monitoring_MonitoringDestination;
     fromJSON(object: any): Monitoring_MonitoringDestination;
     toJSON(message: Monitoring_MonitoringDestination): unknown;
-    fromPartial<I extends unknown>(object: I): Monitoring_MonitoringDestination;
+    fromPartial<I extends {
+        monitoredResource?: string;
+        metrics?: string[];
+    } & {
+        monitoredResource?: string;
+        metrics?: string[] & string[] & Record<Exclude<keyof I["metrics"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof Monitoring_MonitoringDestination>, never>>(object: I): Monitoring_MonitoringDestination;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

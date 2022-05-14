@@ -1,6 +1,5 @@
-import Long from "long";
+import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
-import { FeeToken } from "../../../osmosis/txfees/v1beta1/feetoken";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
     basedenom: string;
@@ -11,14 +10,26 @@ export declare const GenesisState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
-    fromPartial<I extends unknown>(object: I): GenesisState;
+    fromPartial<I extends {
+        basedenom?: string;
+        feetokens?: {
+            denom?: string;
+            poolID?: any;
+        }[];
+    } & {
+        basedenom?: string;
+        feetokens?: {
+            denom?: string;
+            poolID?: any;
+        }[] & ({
+            denom?: string;
+            poolID?: any;
+        } & {
+            denom?: string;
+            poolID?: any;
+        } & Record<Exclude<keyof I["feetokens"][number], keyof FeeToken>, never>)[] & Record<Exclude<keyof I["feetokens"], keyof {
+            denom?: string;
+            poolID?: any;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof GenesisState>, never>>(object: I): GenesisState;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

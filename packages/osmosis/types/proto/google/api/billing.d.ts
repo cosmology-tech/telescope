@@ -1,4 +1,3 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Billing related configuration of the service.
@@ -11,28 +10,28 @@ import * as _m0 from "protobufjs/minimal";
  * recommended so they can be evolved independently:
  *
  *
- *     monitored_resources:
- *     - type: library.googleapis.com/billing_branch
- *       labels:
- *       - key: cloud.googleapis.com/location
- *         description: |
- *           Predefined label to support billing location restriction.
- *       - key: city
- *         description: |
- *           Custom label to define the city where the library branch is located
- *           in.
- *       - key: name
- *         description: Custom label to define the name of the library branch.
- *     metrics:
- *     - name: library.googleapis.com/book/borrowed_count
- *       metric_kind: DELTA
- *       value_type: INT64
- *       unit: "1"
- *     billing:
- *       consumer_destinations:
- *       - monitored_resource: library.googleapis.com/billing_branch
- *         metrics:
- *         - library.googleapis.com/book/borrowed_count
+ * monitored_resources:
+ * - type: library.googleapis.com/billing_branch
+ * labels:
+ * - key: cloud.googleapis.com/location
+ * description: |
+ * Predefined label to support billing location restriction.
+ * - key: city
+ * description: |
+ * Custom label to define the city where the library branch is located
+ * in.
+ * - key: name
+ * description: Custom label to define the name of the library branch.
+ * metrics:
+ * - name: library.googleapis.com/book/borrowed_count
+ * metric_kind: DELTA
+ * value_type: INT64
+ * unit: "1"
+ * billing:
+ * consumer_destinations:
+ * - monitored_resource: library.googleapis.com/billing_branch
+ * metrics:
+ * - library.googleapis.com/book/borrowed_count
  */
 export interface Billing {
     /**
@@ -64,21 +63,37 @@ export declare const Billing: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Billing;
     fromJSON(object: any): Billing;
     toJSON(message: Billing): unknown;
-    fromPartial<I extends unknown>(object: I): Billing;
+    fromPartial<I extends {
+        consumerDestinations?: {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[];
+    } & {
+        consumerDestinations?: {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[] & ({
+            monitoredResource?: string;
+            metrics?: string[];
+        } & {
+            monitoredResource?: string;
+            metrics?: string[] & string[] & Record<Exclude<keyof I["consumerDestinations"][number]["metrics"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["consumerDestinations"][number], keyof Billing_BillingDestination>, never>)[] & Record<Exclude<keyof I["consumerDestinations"], keyof {
+            monitoredResource?: string;
+            metrics?: string[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "consumerDestinations">, never>>(object: I): Billing;
 };
 export declare const Billing_BillingDestination: {
     encode(message: Billing_BillingDestination, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Billing_BillingDestination;
     fromJSON(object: any): Billing_BillingDestination;
     toJSON(message: Billing_BillingDestination): unknown;
-    fromPartial<I extends unknown>(object: I): Billing_BillingDestination;
+    fromPartial<I extends {
+        monitoredResource?: string;
+        metrics?: string[];
+    } & {
+        monitoredResource?: string;
+        metrics?: string[] & string[] & Record<Exclude<keyof I["metrics"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof Billing_BillingDestination>, never>>(object: I): Billing_BillingDestination;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

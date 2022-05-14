@@ -1,11 +1,27 @@
-import Long from "long";
+import { MonitoredResource, MonitoredResourceDescriptor } from "../../api/monitored_resource";
+import { LogEntry } from "./log_entry";
+import { Status } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { MonitoredResource, MonitoredResourceDescriptor } from "../../../google/api/monitored_resource";
-import { Status } from "../../../google/rpc/status";
-import { Duration } from "../../../google/protobuf/duration";
-import { Observable } from "rxjs";
-import { LogEntry } from "../../../google/logging/v2/log_entry";
-import { Empty } from "../../../google/protobuf/empty";
+/** An indicator of why entries were omitted. */
+export declare enum TailLogEntriesResponse_SuppressionInfo_Reason {
+    /** REASON_UNSPECIFIED - Unexpected default. */
+    REASON_UNSPECIFIED = 0,
+    /**
+     * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
+     * received in excess of rate limits. For quotas and limits, see
+     * [Logging API quotas and
+     * limits](https://cloud.google.com/logging/quotas#api-limits).
+     */
+    RATE_LIMIT = 1,
+    /**
+     * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
+     * responses quickly enough.
+     */
+    NOT_CONSUMED = 2,
+    UNRECOGNIZED = -1
+}
+export declare function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason;
+export declare function tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(object: TailLogEntriesResponse_SuppressionInfo_Reason): string;
 /** The parameters to DeleteLog. */
 export interface DeleteLogRequest {
     /**
@@ -25,6 +41,10 @@ export interface DeleteLogRequest {
      */
     logName: string;
 }
+export interface WriteLogEntriesRequest_LabelsEntry {
+    key: string;
+    value: string;
+}
 /** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequest {
     /**
@@ -38,8 +58,8 @@ export interface WriteLogEntriesRequest {
      *
      * `[LOG_ID]` must be URL-encoded. For example:
      *
-     *     "projects/my-project-id/logs/syslog"
-     *     "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
+     * "projects/my-project-id/logs/syslog"
+     * "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
      *
      * The permission `logging.logEntries.create` is needed on each project,
      * organization, billing account, or folder that is receiving new log
@@ -51,9 +71,9 @@ export interface WriteLogEntriesRequest {
      * Optional. A default monitored resource object that is assigned to all log
      * entries in `entries` that do not specify a value for `resource`. Example:
      *
-     *     { "type": "gce_instance",
-     *       "labels": {
-     *         "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
+     * { "type": "gce_instance",
+     * "labels": {
+     * "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
      *
      * See [LogEntry][google.logging.v2.LogEntry].
      */
@@ -109,12 +129,12 @@ export interface WriteLogEntriesRequest {
      */
     dryRun: boolean;
 }
-export interface WriteLogEntriesRequest_LabelsEntry {
-    key: string;
-    value: string;
-}
 /** Result returned from WriteLogEntries. */
 export interface WriteLogEntriesResponse {
+}
+export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    key: number;
+    value: Status;
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrors {
@@ -130,10 +150,6 @@ export interface WriteLogEntriesPartialErrors {
         [key: number]: Status;
     };
 }
-export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
-    key: number;
-    value: Status;
-}
 /** The parameters to `ListLogEntries`. */
 export interface ListLogEntriesRequest {
     /**
@@ -147,10 +163,10 @@ export interface ListLogEntriesRequest {
      *
      * May alternatively be one or more views:
      *
-     *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
      *
      * Projects listed in the `project_ids` field are added to this list.
      */
@@ -265,10 +281,10 @@ export interface ListLogsRequest {
     /**
      * Optional. The resource name that owns the logs:
      *
-     *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
      *
      * To support legacy queries, it could also be:
      *
@@ -306,10 +322,10 @@ export interface TailLogEntriesRequest {
      *
      * May alternatively be one or more views:
      *
-     *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-     *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+     * * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
      */
     resourceNames: string[];
     /**
@@ -328,7 +344,7 @@ export interface TailLogEntriesRequest {
      * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
      * milliseconds.
      */
-    bufferWindow: Duration;
+    bufferWindow: string;
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponse {
@@ -354,192 +370,2723 @@ export interface TailLogEntriesResponse_SuppressionInfo {
     /** A lower bound on the count of entries omitted due to `reason`. */
     suppressedCount: number;
 }
-/** An indicator of why entries were omitted. */
-export declare enum TailLogEntriesResponse_SuppressionInfo_Reason {
-    /** REASON_UNSPECIFIED - Unexpected default. */
-    REASON_UNSPECIFIED = 0,
-    /**
-     * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
-     * received in excess of rate limits. For quotas and limits, see
-     * [Logging API quotas and
-     * limits](https://cloud.google.com/logging/quotas#api-limits).
-     */
-    RATE_LIMIT = 1,
-    /**
-     * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
-     * responses quickly enough.
-     */
-    NOT_CONSUMED = 2,
-    UNRECOGNIZED = -1
-}
-export declare function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason;
-export declare function tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(object: TailLogEntriesResponse_SuppressionInfo_Reason): string;
 export declare const DeleteLogRequest: {
     encode(message: DeleteLogRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DeleteLogRequest;
     fromJSON(object: any): DeleteLogRequest;
     toJSON(message: DeleteLogRequest): unknown;
-    fromPartial<I extends unknown>(object: I): DeleteLogRequest;
-};
-export declare const WriteLogEntriesRequest: {
-    encode(message: WriteLogEntriesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest;
-    fromJSON(object: any): WriteLogEntriesRequest;
-    toJSON(message: WriteLogEntriesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): WriteLogEntriesRequest;
+    fromPartial<I extends {
+        logName?: string;
+    } & {
+        logName?: string;
+    } & Record<Exclude<keyof I, "logName">, never>>(object: I): DeleteLogRequest;
 };
 export declare const WriteLogEntriesRequest_LabelsEntry: {
     encode(message: WriteLogEntriesRequest_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest_LabelsEntry;
     fromJSON(object: any): WriteLogEntriesRequest_LabelsEntry;
     toJSON(message: WriteLogEntriesRequest_LabelsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): WriteLogEntriesRequest_LabelsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof WriteLogEntriesRequest_LabelsEntry>, never>>(object: I): WriteLogEntriesRequest_LabelsEntry;
+};
+export declare const WriteLogEntriesRequest: {
+    encode(message: WriteLogEntriesRequest, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesRequest;
+    fromJSON(object: any): WriteLogEntriesRequest;
+    toJSON(message: WriteLogEntriesRequest): unknown;
+    fromPartial<I extends {
+        logName?: string;
+        resource?: {
+            type?: string;
+            labels?: {
+                [x: string]: string;
+            };
+        };
+        labels?: {
+            [x: string]: string;
+        };
+        entries?: {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[];
+        partialSuccess?: boolean;
+        dryRun?: boolean;
+    } & {
+        logName?: string;
+        resource?: {
+            type?: string;
+            labels?: {
+                [x: string]: string;
+            };
+        } & {
+            type?: string;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["resource"]["labels"], string | number>, never>;
+        } & Record<Exclude<keyof I["resource"], keyof MonitoredResource>, never>;
+        labels?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["labels"], string | number>, never>;
+        entries?: {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[] & ({
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        } & {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            } & {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                } & {
+                    [x: string]: string;
+                } & Record<Exclude<keyof I["entries"][number]["resource"]["labels"], string | number>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["resource"], keyof MonitoredResource>, never>;
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["entries"][number]["protoPayload"], keyof import("../../protobuf/any").Any>, never>;
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            } & {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                } & {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            } & {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"], string | number>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"], "fields">, never>;
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            } & {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            } & Record<Exclude<keyof I["entries"][number]["httpRequest"], keyof import("../type/http_request").HttpRequest>, never>;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["entries"][number]["labels"], string | number>, never>;
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            } & {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            } & Record<Exclude<keyof I["entries"][number]["operation"], keyof import("./log_entry").LogEntryOperation>, never>;
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            } & {
+                file?: string;
+                line?: any;
+                function?: string;
+            } & Record<Exclude<keyof I["entries"][number]["sourceLocation"], keyof import("./log_entry").LogEntrySourceLocation>, never>;
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            } & {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            } & Record<Exclude<keyof I["entries"][number]["split"], keyof import("./log_entry").LogSplit>, never>;
+        } & Record<Exclude<keyof I["entries"][number], keyof LogEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[]>, never>;
+        partialSuccess?: boolean;
+        dryRun?: boolean;
+    } & Record<Exclude<keyof I, keyof WriteLogEntriesRequest>, never>>(object: I): WriteLogEntriesRequest;
 };
 export declare const WriteLogEntriesResponse: {
     encode(_: WriteLogEntriesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesResponse;
     fromJSON(_: any): WriteLogEntriesResponse;
     toJSON(_: WriteLogEntriesResponse): unknown;
-    fromPartial<I extends unknown>(_: I): WriteLogEntriesResponse;
-};
-export declare const WriteLogEntriesPartialErrors: {
-    encode(message: WriteLogEntriesPartialErrors, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors;
-    fromJSON(object: any): WriteLogEntriesPartialErrors;
-    toJSON(message: WriteLogEntriesPartialErrors): unknown;
-    fromPartial<I extends unknown>(object: I): WriteLogEntriesPartialErrors;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): WriteLogEntriesResponse;
 };
 export declare const WriteLogEntriesPartialErrors_LogEntryErrorsEntry: {
     encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors_LogEntryErrorsEntry;
     fromJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsEntry;
     toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): WriteLogEntriesPartialErrors_LogEntryErrorsEntry;
+    fromPartial<I extends {
+        key?: number;
+        value?: {
+            code?: number;
+            message?: string;
+            details?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+        };
+    } & {
+        key?: number;
+        value?: {
+            code?: number;
+            message?: string;
+            details?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[];
+        } & {
+            code?: number;
+            message?: string;
+            details?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[] & ({
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["value"]["details"][number], keyof import("../../protobuf/any").Any>, never>)[] & Record<Exclude<keyof I["value"]["details"], keyof {
+                typeUrl?: string;
+                value?: Uint8Array;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["value"], keyof Status>, never>;
+    } & Record<Exclude<keyof I, keyof WriteLogEntriesPartialErrors_LogEntryErrorsEntry>, never>>(object: I): WriteLogEntriesPartialErrors_LogEntryErrorsEntry;
+};
+export declare const WriteLogEntriesPartialErrors: {
+    encode(message: WriteLogEntriesPartialErrors, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesPartialErrors;
+    fromJSON(object: any): WriteLogEntriesPartialErrors;
+    toJSON(message: WriteLogEntriesPartialErrors): unknown;
+    fromPartial<I extends {
+        logEntryErrors?: {
+            [x: number]: {
+                code?: number;
+                message?: string;
+                details?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+        };
+    } & {
+        logEntryErrors?: {
+            [x: number]: {
+                code?: number;
+                message?: string;
+                details?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            };
+        } & {
+            [x: number]: {
+                code?: number;
+                message?: string;
+                details?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[];
+            } & {
+                code?: number;
+                message?: string;
+                details?: {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[] & ({
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                } & Record<Exclude<keyof I["logEntryErrors"][number]["details"][number], keyof import("../../protobuf/any").Any>, never>)[] & Record<Exclude<keyof I["logEntryErrors"][number]["details"], keyof {
+                    typeUrl?: string;
+                    value?: Uint8Array;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["logEntryErrors"][number], keyof Status>, never>;
+        } & Record<Exclude<keyof I["logEntryErrors"], number>, never>;
+    } & Record<Exclude<keyof I, "logEntryErrors">, never>>(object: I): WriteLogEntriesPartialErrors;
 };
 export declare const ListLogEntriesRequest: {
     encode(message: ListLogEntriesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListLogEntriesRequest;
     fromJSON(object: any): ListLogEntriesRequest;
     toJSON(message: ListLogEntriesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListLogEntriesRequest;
+    fromPartial<I extends {
+        resourceNames?: string[];
+        filter?: string;
+        orderBy?: string;
+        pageSize?: number;
+        pageToken?: string;
+    } & {
+        resourceNames?: string[] & string[] & Record<Exclude<keyof I["resourceNames"], keyof string[]>, never>;
+        filter?: string;
+        orderBy?: string;
+        pageSize?: number;
+        pageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListLogEntriesRequest>, never>>(object: I): ListLogEntriesRequest;
 };
 export declare const ListLogEntriesResponse: {
     encode(message: ListLogEntriesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListLogEntriesResponse;
     fromJSON(object: any): ListLogEntriesResponse;
     toJSON(message: ListLogEntriesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListLogEntriesResponse;
+    fromPartial<I extends {
+        entries?: {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[];
+        nextPageToken?: string;
+    } & {
+        entries?: {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[] & ({
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        } & {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            } & {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                } & {
+                    [x: string]: string;
+                } & Record<Exclude<keyof I["entries"][number]["resource"]["labels"], string | number>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["resource"], keyof MonitoredResource>, never>;
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["entries"][number]["protoPayload"], keyof import("../../protobuf/any").Any>, never>;
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            } & {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                } & {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            } & {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"], string | number>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"], "fields">, never>;
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            } & {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            } & Record<Exclude<keyof I["entries"][number]["httpRequest"], keyof import("../type/http_request").HttpRequest>, never>;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["entries"][number]["labels"], string | number>, never>;
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            } & {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            } & Record<Exclude<keyof I["entries"][number]["operation"], keyof import("./log_entry").LogEntryOperation>, never>;
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            } & {
+                file?: string;
+                line?: any;
+                function?: string;
+            } & Record<Exclude<keyof I["entries"][number]["sourceLocation"], keyof import("./log_entry").LogEntrySourceLocation>, never>;
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            } & {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            } & Record<Exclude<keyof I["entries"][number]["split"], keyof import("./log_entry").LogSplit>, never>;
+        } & Record<Exclude<keyof I["entries"][number], keyof LogEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListLogEntriesResponse>, never>>(object: I): ListLogEntriesResponse;
 };
 export declare const ListMonitoredResourceDescriptorsRequest: {
     encode(message: ListMonitoredResourceDescriptorsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListMonitoredResourceDescriptorsRequest;
     fromJSON(object: any): ListMonitoredResourceDescriptorsRequest;
     toJSON(message: ListMonitoredResourceDescriptorsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListMonitoredResourceDescriptorsRequest;
+    fromPartial<I extends {
+        pageSize?: number;
+        pageToken?: string;
+    } & {
+        pageSize?: number;
+        pageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListMonitoredResourceDescriptorsRequest>, never>>(object: I): ListMonitoredResourceDescriptorsRequest;
 };
 export declare const ListMonitoredResourceDescriptorsResponse: {
     encode(message: ListMonitoredResourceDescriptorsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListMonitoredResourceDescriptorsResponse;
     fromJSON(object: any): ListMonitoredResourceDescriptorsResponse;
     toJSON(message: ListMonitoredResourceDescriptorsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListMonitoredResourceDescriptorsResponse;
+    fromPartial<I extends {
+        resourceDescriptors?: {
+            name?: string;
+            type?: string;
+            displayName?: string;
+            description?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[];
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+        }[];
+        nextPageToken?: string;
+    } & {
+        resourceDescriptors?: {
+            name?: string;
+            type?: string;
+            displayName?: string;
+            description?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[];
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+        }[] & ({
+            name?: string;
+            type?: string;
+            displayName?: string;
+            description?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[];
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+        } & {
+            name?: string;
+            type?: string;
+            displayName?: string;
+            description?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[] & ({
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            } & {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            } & Record<Exclude<keyof I["resourceDescriptors"][number]["labels"][number], keyof import("../../api/label").LabelDescriptor>, never>)[] & Record<Exclude<keyof I["resourceDescriptors"][number]["labels"], keyof {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[]>, never>;
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+        } & Record<Exclude<keyof I["resourceDescriptors"][number], keyof MonitoredResourceDescriptor>, never>)[] & Record<Exclude<keyof I["resourceDescriptors"], keyof {
+            name?: string;
+            type?: string;
+            displayName?: string;
+            description?: string;
+            labels?: {
+                key?: string;
+                valueType?: import("../../api/label").LabelDescriptor_ValueType;
+                description?: string;
+            }[];
+            launchStage?: import("../../api/launch_stage").LaunchStage;
+        }[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListMonitoredResourceDescriptorsResponse>, never>>(object: I): ListMonitoredResourceDescriptorsResponse;
 };
 export declare const ListLogsRequest: {
     encode(message: ListLogsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListLogsRequest;
     fromJSON(object: any): ListLogsRequest;
     toJSON(message: ListLogsRequest): unknown;
-    fromPartial<I extends unknown>(object: I): ListLogsRequest;
+    fromPartial<I extends {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+        resourceNames?: string[];
+    } & {
+        parent?: string;
+        pageSize?: number;
+        pageToken?: string;
+        resourceNames?: string[] & string[] & Record<Exclude<keyof I["resourceNames"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof ListLogsRequest>, never>>(object: I): ListLogsRequest;
 };
 export declare const ListLogsResponse: {
     encode(message: ListLogsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ListLogsResponse;
     fromJSON(object: any): ListLogsResponse;
     toJSON(message: ListLogsResponse): unknown;
-    fromPartial<I extends unknown>(object: I): ListLogsResponse;
+    fromPartial<I extends {
+        logNames?: string[];
+        nextPageToken?: string;
+    } & {
+        logNames?: string[] & string[] & Record<Exclude<keyof I["logNames"], keyof string[]>, never>;
+        nextPageToken?: string;
+    } & Record<Exclude<keyof I, keyof ListLogsResponse>, never>>(object: I): ListLogsResponse;
 };
 export declare const TailLogEntriesRequest: {
     encode(message: TailLogEntriesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesRequest;
     fromJSON(object: any): TailLogEntriesRequest;
     toJSON(message: TailLogEntriesRequest): unknown;
-    fromPartial<I extends unknown>(object: I): TailLogEntriesRequest;
+    fromPartial<I extends {
+        resourceNames?: string[];
+        filter?: string;
+        bufferWindow?: string;
+    } & {
+        resourceNames?: string[] & string[] & Record<Exclude<keyof I["resourceNames"], keyof string[]>, never>;
+        filter?: string;
+        bufferWindow?: string;
+    } & Record<Exclude<keyof I, keyof TailLogEntriesRequest>, never>>(object: I): TailLogEntriesRequest;
 };
 export declare const TailLogEntriesResponse: {
     encode(message: TailLogEntriesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesResponse;
     fromJSON(object: any): TailLogEntriesResponse;
     toJSON(message: TailLogEntriesResponse): unknown;
-    fromPartial<I extends unknown>(object: I): TailLogEntriesResponse;
+    fromPartial<I extends {
+        entries?: {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[];
+        suppressionInfo?: {
+            reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+            suppressedCount?: number;
+        }[];
+    } & {
+        entries?: {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[] & ({
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        } & {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            } & {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                } & {
+                    [x: string]: string;
+                } & Record<Exclude<keyof I["entries"][number]["resource"]["labels"], string | number>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["resource"], keyof MonitoredResource>, never>;
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & {
+                typeUrl?: string;
+                value?: Uint8Array;
+            } & Record<Exclude<keyof I["entries"][number]["protoPayload"], keyof import("../../protobuf/any").Any>, never>;
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            } & {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                } & {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    } & {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            };
+                        } & {
+                            fields?: {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                };
+                            } & {
+                                [x: string]: {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: any;
+                                    listValue?: {
+                                        values?: any[];
+                                    };
+                                } & {
+                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                    numberValue?: number;
+                                    stringValue?: string;
+                                    boolValue?: boolean;
+                                    structValue?: {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        };
+                                    } & {
+                                        fields?: {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            };
+                                        } & {
+                                            [x: string]: {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                    listValue?: {
+                                        values?: any[];
+                                    } & {
+                                        values?: any[] & ({
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["structValue"], "fields">, never>;
+                        listValue?: {
+                            values?: any[];
+                        } & {
+                            values?: any[] & ({
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: any;
+                                listValue?: {
+                                    values?: any[];
+                                };
+                            } & {
+                                nullValue?: import("../../protobuf/struct").NullValue;
+                                numberValue?: number;
+                                stringValue?: string;
+                                boolValue?: boolean;
+                                structValue?: {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    fields?: {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        };
+                                    } & {
+                                        [x: string]: {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: any;
+                                            listValue?: {
+                                                values?: any[];
+                                            };
+                                        } & {
+                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                            numberValue?: number;
+                                            stringValue?: string;
+                                            boolValue?: boolean;
+                                            structValue?: {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                };
+                                            } & {
+                                                fields?: {
+                                                    [x: string]: {
+                                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                                        numberValue?: number;
+                                                        stringValue?: string;
+                                                        boolValue?: boolean;
+                                                        structValue?: any;
+                                                        listValue?: {
+                                                            values?: any[];
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"]["fields"], string | number>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["structValue"], "fields">, never>;
+                                            listValue?: {
+                                                values?: any[];
+                                            } & {
+                                                values?: any[] & ({
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string]["listValue"], "values">, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                listValue?: {
+                                    values?: any[];
+                                } & {
+                                    values?: any[] & ({
+                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: any;
+                                        listValue?: {
+                                            values?: any[];
+                                        };
+                                    } & {
+                                        nullValue?: import("../../protobuf/struct").NullValue;
+                                        numberValue?: number;
+                                        stringValue?: string;
+                                        boolValue?: boolean;
+                                        structValue?: {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            fields?: {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                };
+                                            } & {
+                                                [x: string]: {
+                                                    nullValue?: import("../../protobuf/struct").NullValue;
+                                                    numberValue?: number;
+                                                    stringValue?: string;
+                                                    boolValue?: boolean;
+                                                    structValue?: any;
+                                                    listValue?: {
+                                                        values?: any[];
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"]["fields"], string | number>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                        listValue?: {
+                                            values?: any[];
+                                        } & {
+                                            values?: any[] & ({
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: any;
+                                                listValue?: {
+                                                    values?: any[];
+                                                };
+                                            } & {
+                                                nullValue?: import("../../protobuf/struct").NullValue;
+                                                numberValue?: number;
+                                                stringValue?: string;
+                                                boolValue?: boolean;
+                                                structValue?: {
+                                                    fields?: {
+                                                        [x: string]: {
+                                                            nullValue?: import("../../protobuf/struct").NullValue;
+                                                            numberValue?: number;
+                                                            stringValue?: string;
+                                                            boolValue?: boolean;
+                                                            structValue?: any;
+                                                            listValue?: {
+                                                                values?: any[];
+                                                            };
+                                                        };
+                                                    };
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["structValue"], "fields">, never>;
+                                                listValue?: {
+                                                    values?: any[];
+                                                } & any & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number]["listValue"], "values">, never>;
+                                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"]["values"], keyof any[]>, never>;
+                                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number]["listValue"], "values">, never>;
+                            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"][number], keyof import("../../protobuf/struct").Value>, never>)[] & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"]["values"], keyof any[]>, never>;
+                        } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string]["listValue"], "values">, never>;
+                    } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"][string], keyof import("../../protobuf/struct").Value>, never>;
+                } & Record<Exclude<keyof I["entries"][number]["jsonPayload"]["fields"], string | number>, never>;
+            } & Record<Exclude<keyof I["entries"][number]["jsonPayload"], "fields">, never>;
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            } & {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            } & Record<Exclude<keyof I["entries"][number]["httpRequest"], keyof import("../type/http_request").HttpRequest>, never>;
+            labels?: {
+                [x: string]: string;
+            } & {
+                [x: string]: string;
+            } & Record<Exclude<keyof I["entries"][number]["labels"], string | number>, never>;
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            } & {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            } & Record<Exclude<keyof I["entries"][number]["operation"], keyof import("./log_entry").LogEntryOperation>, never>;
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            } & {
+                file?: string;
+                line?: any;
+                function?: string;
+            } & Record<Exclude<keyof I["entries"][number]["sourceLocation"], keyof import("./log_entry").LogEntrySourceLocation>, never>;
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            } & {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            } & Record<Exclude<keyof I["entries"][number]["split"], keyof import("./log_entry").LogSplit>, never>;
+        } & Record<Exclude<keyof I["entries"][number], keyof LogEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
+            logName?: string;
+            resource?: {
+                type?: string;
+                labels?: {
+                    [x: string]: string;
+                };
+            };
+            protoPayload?: {
+                typeUrl?: string;
+                value?: Uint8Array;
+            };
+            textPayload?: string;
+            jsonPayload?: {
+                fields?: {
+                    [x: string]: {
+                        nullValue?: import("../../protobuf/struct").NullValue;
+                        numberValue?: number;
+                        stringValue?: string;
+                        boolValue?: boolean;
+                        structValue?: any;
+                        listValue?: {
+                            values?: any[];
+                        };
+                    };
+                };
+            };
+            timestamp?: Date;
+            receiveTimestamp?: Date;
+            severity?: import("../type/log_severity").LogSeverity;
+            insertId?: string;
+            httpRequest?: {
+                requestMethod?: string;
+                requestUrl?: string;
+                requestSize?: any;
+                status?: number;
+                responseSize?: any;
+                userAgent?: string;
+                remoteIp?: string;
+                serverIp?: string;
+                referer?: string;
+                latency?: string;
+                cacheLookup?: boolean;
+                cacheHit?: boolean;
+                cacheValidatedWithOriginServer?: boolean;
+                cacheFillBytes?: any;
+                protocol?: string;
+            };
+            labels?: {
+                [x: string]: string;
+            };
+            operation?: {
+                id?: string;
+                producer?: string;
+                first?: boolean;
+                last?: boolean;
+            };
+            trace?: string;
+            spanId?: string;
+            traceSampled?: boolean;
+            sourceLocation?: {
+                file?: string;
+                line?: any;
+                function?: string;
+            };
+            split?: {
+                uid?: string;
+                index?: number;
+                totalSplits?: number;
+            };
+        }[]>, never>;
+        suppressionInfo?: {
+            reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+            suppressedCount?: number;
+        }[] & ({
+            reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+            suppressedCount?: number;
+        } & {
+            reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+            suppressedCount?: number;
+        } & Record<Exclude<keyof I["suppressionInfo"][number], keyof TailLogEntriesResponse_SuppressionInfo>, never>)[] & Record<Exclude<keyof I["suppressionInfo"], keyof {
+            reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+            suppressedCount?: number;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof TailLogEntriesResponse>, never>>(object: I): TailLogEntriesResponse;
 };
 export declare const TailLogEntriesResponse_SuppressionInfo: {
     encode(message: TailLogEntriesResponse_SuppressionInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesResponse_SuppressionInfo;
     fromJSON(object: any): TailLogEntriesResponse_SuppressionInfo;
     toJSON(message: TailLogEntriesResponse_SuppressionInfo): unknown;
-    fromPartial<I extends unknown>(object: I): TailLogEntriesResponse_SuppressionInfo;
+    fromPartial<I extends {
+        reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+        suppressedCount?: number;
+    } & {
+        reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+        suppressedCount?: number;
+    } & Record<Exclude<keyof I, keyof TailLogEntriesResponse_SuppressionInfo>, never>>(object: I): TailLogEntriesResponse_SuppressionInfo;
 };
-/** Service for ingesting and querying logs. */
-export interface LoggingServiceV2 {
-    /**
-     * Deletes all the log entries in a log for the _Default Log Bucket. The log
-     * reappears if it receives new entries. Log entries written shortly before
-     * the delete operation might not be deleted. Entries received after the
-     * delete operation with a timestamp before the operation will be deleted.
-     */
-    DeleteLog(request: DeleteLogRequest): Promise<Empty>;
-    /**
-     * Writes log entries to Logging. This API method is the
-     * only way to send log entries to Logging. This method
-     * is used, directly or indirectly, by the Logging agent
-     * (fluentd) and all logging libraries configured to use Logging.
-     * A single request may contain log entries for a maximum of 1000
-     * different resources (projects, organizations, billing accounts or
-     * folders)
-     */
-    WriteLogEntries(request: WriteLogEntriesRequest): Promise<WriteLogEntriesResponse>;
-    /**
-     * Lists log entries.  Use this method to retrieve log entries that originated
-     * from a project/folder/organization/billing account.  For ways to export log
-     * entries, see [Exporting
-     * Logs](https://cloud.google.com/logging/docs/export).
-     */
-    ListLogEntries(request: ListLogEntriesRequest): Promise<ListLogEntriesResponse>;
-    /** Lists the descriptors for monitored resource types used by Logging. */
-    ListMonitoredResourceDescriptors(request: ListMonitoredResourceDescriptorsRequest): Promise<ListMonitoredResourceDescriptorsResponse>;
-    /**
-     * Lists the logs in projects, organizations, folders, or billing accounts.
-     * Only logs that have entries are listed.
-     */
-    ListLogs(request: ListLogsRequest): Promise<ListLogsResponse>;
-    /**
-     * Streaming read of log entries as they are ingested. Until the stream is
-     * terminated, it will continue reading logs.
-     */
-    TailLogEntries(request: Observable<TailLogEntriesRequest>): Observable<TailLogEntriesResponse>;
-}
-export declare class LoggingServiceV2ClientImpl implements LoggingServiceV2 {
-    private readonly rpc;
-    constructor(rpc: Rpc);
-    DeleteLog(request: DeleteLogRequest): Promise<Empty>;
-    WriteLogEntries(request: WriteLogEntriesRequest): Promise<WriteLogEntriesResponse>;
-    ListLogEntries(request: ListLogEntriesRequest): Promise<ListLogEntriesResponse>;
-    ListMonitoredResourceDescriptors(request: ListMonitoredResourceDescriptorsRequest): Promise<ListMonitoredResourceDescriptorsResponse>;
-    ListLogs(request: ListLogsRequest): Promise<ListLogsResponse>;
-    TailLogEntries(request: Observable<TailLogEntriesRequest>): Observable<TailLogEntriesResponse>;
-}
-interface Rpc {
-    request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-    clientStreamingRequest(service: string, method: string, data: Observable<Uint8Array>): Promise<Uint8Array>;
-    serverStreamingRequest(service: string, method: string, data: Uint8Array): Observable<Uint8Array>;
-    bidirectionalStreamingRequest(service: string, method: string, data: Observable<Uint8Array>): Observable<Uint8Array>;
-}
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

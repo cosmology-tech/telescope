@@ -1,5 +1,20 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+/** Supported data type of the property values */
+export declare enum Property_PropertyType {
+    /** UNSPECIFIED - The type is unspecified, and will result in an error. */
+    UNSPECIFIED = 0,
+    /** INT64 - The type is `int64`. */
+    INT64 = 1,
+    /** BOOL - The type is `bool`. */
+    BOOL = 2,
+    /** STRING - The type is `string`. */
+    STRING = 3,
+    /** DOUBLE - The type is 'double'. */
+    DOUBLE = 4,
+    UNRECOGNIZED = -1
+}
+export declare function property_PropertyTypeFromJSON(object: any): Property_PropertyType;
+export declare function property_PropertyTypeToJSON(object: Property_PropertyType): string;
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -10,13 +25,13 @@ import * as _m0 from "protobufjs/minimal";
  *
  * Example:
  *
- *    project_properties:
- *      properties:
- *      - name: NO_WATERMARK
- *        type: BOOL
- *        description: Allows usage of the API without watermarks.
- *      - name: EXTENDED_TILE_CACHE_PERIOD
- *        type: INT64
+ * project_properties:
+ * properties:
+ * - name: NO_WATERMARK
+ * type: BOOL
+ * description: Allows usage of the API without watermarks.
+ * - name: EXTENDED_TILE_CACHE_PERIOD
+ * type: INT64
  */
 export interface ProjectProperties {
     /** List of per consumer project-specific properties. */
@@ -42,42 +57,49 @@ export interface Property {
     /** The description of the property */
     description: string;
 }
-/** Supported data type of the property values */
-export declare enum Property_PropertyType {
-    /** UNSPECIFIED - The type is unspecified, and will result in an error. */
-    UNSPECIFIED = 0,
-    /** INT64 - The type is `int64`. */
-    INT64 = 1,
-    /** BOOL - The type is `bool`. */
-    BOOL = 2,
-    /** STRING - The type is `string`. */
-    STRING = 3,
-    /** DOUBLE - The type is 'double'. */
-    DOUBLE = 4,
-    UNRECOGNIZED = -1
-}
-export declare function property_PropertyTypeFromJSON(object: any): Property_PropertyType;
-export declare function property_PropertyTypeToJSON(object: Property_PropertyType): string;
 export declare const ProjectProperties: {
     encode(message: ProjectProperties, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ProjectProperties;
     fromJSON(object: any): ProjectProperties;
     toJSON(message: ProjectProperties): unknown;
-    fromPartial<I extends unknown>(object: I): ProjectProperties;
+    fromPartial<I extends {
+        properties?: {
+            name?: string;
+            type?: Property_PropertyType;
+            description?: string;
+        }[];
+    } & {
+        properties?: {
+            name?: string;
+            type?: Property_PropertyType;
+            description?: string;
+        }[] & ({
+            name?: string;
+            type?: Property_PropertyType;
+            description?: string;
+        } & {
+            name?: string;
+            type?: Property_PropertyType;
+            description?: string;
+        } & Record<Exclude<keyof I["properties"][number], keyof Property>, never>)[] & Record<Exclude<keyof I["properties"], keyof {
+            name?: string;
+            type?: Property_PropertyType;
+            description?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "properties">, never>>(object: I): ProjectProperties;
 };
 export declare const Property: {
     encode(message: Property, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Property;
     fromJSON(object: any): Property;
     toJSON(message: Property): unknown;
-    fromPartial<I extends unknown>(object: I): Property;
+    fromPartial<I extends {
+        name?: string;
+        type?: Property_PropertyType;
+        description?: string;
+    } & {
+        name?: string;
+        type?: Property_PropertyType;
+        description?: string;
+    } & Record<Exclude<keyof I, keyof Property>, never>>(object: I): Property;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

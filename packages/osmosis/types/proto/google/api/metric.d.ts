@@ -1,8 +1,56 @@
-import Long from "long";
+import { LaunchStage } from "./launch_stage";
+import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { LaunchStage } from "../../google/api/launch_stage";
-import { Duration } from "../../google/protobuf/duration";
-import { LabelDescriptor } from "../../google/api/label";
+/**
+ * The kind of measurement. It describes how the data is reported.
+ * For information on setting the start time and end time based on
+ * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
+ */
+export declare enum MetricDescriptor_MetricKind {
+    /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
+    METRIC_KIND_UNSPECIFIED = 0,
+    /** GAUGE - An instantaneous measurement of a value. */
+    GAUGE = 1,
+    /** DELTA - The change in a value during a time interval. */
+    DELTA = 2,
+    /**
+     * CUMULATIVE - A value accumulated over a time interval.  Cumulative
+     * measurements in a time series should have the same start time
+     * and increasing end times, until an event resets the cumulative
+     * value to zero and sets a new start time for the following
+     * points.
+     */
+    CUMULATIVE = 3,
+    UNRECOGNIZED = -1
+}
+export declare function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind;
+export declare function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_MetricKind): string;
+/** The value type of a metric. */
+export declare enum MetricDescriptor_ValueType {
+    /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
+    VALUE_TYPE_UNSPECIFIED = 0,
+    /**
+     * BOOL - The value is a boolean.
+     * This value type can be used only if the metric kind is `GAUGE`.
+     */
+    BOOL = 1,
+    /** INT64 - The value is a signed 64-bit integer. */
+    INT64 = 2,
+    /** DOUBLE - The value is a double precision floating point number. */
+    DOUBLE = 3,
+    /**
+     * STRING - The value is a text string.
+     * This value type can be used only if the metric kind is `GAUGE`.
+     */
+    STRING = 4,
+    /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
+    DISTRIBUTION = 5,
+    /** MONEY - The value is money. */
+    MONEY = 6,
+    UNRECOGNIZED = -1
+}
+export declare function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType;
+export declare function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueType): string;
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
@@ -17,9 +65,9 @@ export interface MetricDescriptor {
      * `custom.googleapis.com` or `external.googleapis.com`. Metric types should
      * use a natural hierarchical grouping. For example:
      *
-     *     "custom.googleapis.com/invoice/paid/amount"
-     *     "external.googleapis.com/prometheus/up"
-     *     "appengine.googleapis.com/http/server/response_latencies"
+     * "custom.googleapis.com/invoice/paid/amount"
+     * "external.googleapis.com/prometheus/up"
+     * "appengine.googleapis.com/http/server/response_latencies"
      */
     type: string;
     /**
@@ -106,44 +154,44 @@ export interface MetricDescriptor {
      * The grammar also includes these connectors:
      *
      * * `/`    division or ratio (as an infix operator). For examples,
-     *          `kBy/{email}` or `MiBy/10ms` (although you should almost never
-     *          have `/s` in a metric `unit`; rates should always be computed at
-     *          query time from the underlying cumulative or delta value).
+     * `kBy/{email}` or `MiBy/10ms` (although you should almost never
+     * have `/s` in a metric `unit`; rates should always be computed at
+     * query time from the underlying cumulative or delta value).
      * * `.`    multiplication or composition (as an infix operator). For
-     *          examples, `GBy.d` or `k{watt}.h`.
+     * examples, `GBy.d` or `k{watt}.h`.
      *
      * The grammar for a unit is as follows:
      *
-     *     Expression = Component { "." Component } { "/" Component } ;
+     * Expression = Component { "." Component } { "/" Component } ;
      *
-     *     Component = ( [ PREFIX ] UNIT | "%" ) [ Annotation ]
-     *               | Annotation
-     *               | "1"
-     *               ;
+     * Component = ( [ PREFIX ] UNIT | "%" ) [ Annotation ]
+     * | Annotation
+     * | "1"
+     * ;
      *
-     *     Annotation = "{" NAME "}" ;
+     * Annotation = "{" NAME "}" ;
      *
      * Notes:
      *
      * * `Annotation` is just a comment if it follows a `UNIT`. If the annotation
-     *    is used alone, then the unit is equivalent to `1`. For examples,
-     *    `{request}/s == 1/s`, `By{transmitted}/s == By/s`.
+     * is used alone, then the unit is equivalent to `1`. For examples,
+     * `{request}/s == 1/s`, `By{transmitted}/s == By/s`.
      * * `NAME` is a sequence of non-blank printable ASCII characters not
-     *    containing `{` or `}`.
+     * containing `{` or `}`.
      * * `1` represents a unitary [dimensionless
-     *    unit](https://en.wikipedia.org/wiki/Dimensionless_quantity) of 1, such
-     *    as in `1/s`. It is typically used when none of the basic units are
-     *    appropriate. For example, "new users per day" can be represented as
-     *    `1/d` or `{new-users}/d` (and a metric value `5` would mean "5 new
-     *    users). Alternatively, "thousands of page views per day" would be
-     *    represented as `1000/d` or `k1/d` or `k{page_views}/d` (and a metric
-     *    value of `5.3` would mean "5300 page views per day").
+     * unit](https://en.wikipedia.org/wiki/Dimensionless_quantity) of 1, such
+     * as in `1/s`. It is typically used when none of the basic units are
+     * appropriate. For example, "new users per day" can be represented as
+     * `1/d` or `{new-users}/d` (and a metric value `5` would mean "5 new
+     * users). Alternatively, "thousands of page views per day" would be
+     * represented as `1000/d` or `k1/d` or `k{page_views}/d` (and a metric
+     * value of `5.3` would mean "5300 page views per day").
      * * `%` represents dimensionless value of 1/100, and annotates values giving
-     *    a percentage (so the metric values are typically in the range of 0..100,
-     *    and a metric value `3` means "3 percent").
+     * a percentage (so the metric values are typically in the range of 0..100,
+     * and a metric value `3` means "3 percent").
      * * `10^2.%` indicates a metric contains a ratio, typically in the range
-     *    0..1, that will be multiplied by 100 and displayed as a percentage
-     *    (so a metric value `0.03` means "3 percent").
+     * 0..1, that will be multiplied by 100 and displayed as a percentage
+     * (so a metric value `0.03` means "3 percent").
      */
     unit: string;
     /** A detailed description of the metric, which can be used in documentation. */
@@ -168,63 +216,10 @@ export interface MetricDescriptor {
      */
     monitoredResourceTypes: string[];
 }
-/**
- * The kind of measurement. It describes how the data is reported.
- * For information on setting the start time and end time based on
- * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
- */
-export declare enum MetricDescriptor_MetricKind {
-    /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
-    METRIC_KIND_UNSPECIFIED = 0,
-    /** GAUGE - An instantaneous measurement of a value. */
-    GAUGE = 1,
-    /** DELTA - The change in a value during a time interval. */
-    DELTA = 2,
-    /**
-     * CUMULATIVE - A value accumulated over a time interval.  Cumulative
-     * measurements in a time series should have the same start time
-     * and increasing end times, until an event resets the cumulative
-     * value to zero and sets a new start time for the following
-     * points.
-     */
-    CUMULATIVE = 3,
-    UNRECOGNIZED = -1
-}
-export declare function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind;
-export declare function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_MetricKind): string;
-/** The value type of a metric. */
-export declare enum MetricDescriptor_ValueType {
-    /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
-    VALUE_TYPE_UNSPECIFIED = 0,
-    /**
-     * BOOL - The value is a boolean.
-     * This value type can be used only if the metric kind is `GAUGE`.
-     */
-    BOOL = 1,
-    /** INT64 - The value is a signed 64-bit integer. */
-    INT64 = 2,
-    /** DOUBLE - The value is a double precision floating point number. */
-    DOUBLE = 3,
-    /**
-     * STRING - The value is a text string.
-     * This value type can be used only if the metric kind is `GAUGE`.
-     */
-    STRING = 4,
-    /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
-    DISTRIBUTION = 5,
-    /** MONEY - The value is money. */
-    MONEY = 6,
-    UNRECOGNIZED = -1
-}
-export declare function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType;
-export declare function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueType): string;
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadata {
-    /**
-     * Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead.
-     *
-     * @deprecated
-     */
+    /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
+    /** @deprecated */
     launchStage: LaunchStage;
     /**
      * The sampling period of metric data points. For metrics which are written
@@ -232,13 +227,17 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
      * excluding data loss due to errors. Metrics with a higher granularity have
      * a smaller sampling period.
      */
-    samplePeriod: Duration;
+    samplePeriod: string;
     /**
      * The delay of data points caused by ingestion. Data points older than this
      * age are guaranteed to be ingested and available to be read, excluding
      * data loss due to errors.
      */
-    ingestDelay: Duration;
+    ingestDelay: string;
+}
+export interface Metric_LabelsEntry {
+    key: string;
+    value: string;
 }
 /**
  * A specific metric, identified by specifying values for all of the
@@ -258,44 +257,113 @@ export interface Metric {
         [key: string]: string;
     };
 }
-export interface Metric_LabelsEntry {
-    key: string;
-    value: string;
-}
 export declare const MetricDescriptor: {
     encode(message: MetricDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor;
     fromJSON(object: any): MetricDescriptor;
     toJSON(message: MetricDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): MetricDescriptor;
+    fromPartial<I extends {
+        name?: string;
+        type?: string;
+        labels?: {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[];
+        metricKind?: MetricDescriptor_MetricKind;
+        valueType?: MetricDescriptor_ValueType;
+        unit?: string;
+        description?: string;
+        displayName?: string;
+        metadata?: {
+            launchStage?: LaunchStage;
+            samplePeriod?: string;
+            ingestDelay?: string;
+        };
+        launchStage?: LaunchStage;
+        monitoredResourceTypes?: string[];
+    } & {
+        name?: string;
+        type?: string;
+        labels?: {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[] & ({
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        } & {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        } & Record<Exclude<keyof I["labels"][number], keyof LabelDescriptor>, never>)[] & Record<Exclude<keyof I["labels"], keyof {
+            key?: string;
+            valueType?: import("./label").LabelDescriptor_ValueType;
+            description?: string;
+        }[]>, never>;
+        metricKind?: MetricDescriptor_MetricKind;
+        valueType?: MetricDescriptor_ValueType;
+        unit?: string;
+        description?: string;
+        displayName?: string;
+        metadata?: {
+            launchStage?: LaunchStage;
+            samplePeriod?: string;
+            ingestDelay?: string;
+        } & {
+            launchStage?: LaunchStage;
+            samplePeriod?: string;
+            ingestDelay?: string;
+        } & Record<Exclude<keyof I["metadata"], keyof MetricDescriptor_MetricDescriptorMetadata>, never>;
+        launchStage?: LaunchStage;
+        monitoredResourceTypes?: string[] & string[] & Record<Exclude<keyof I["monitoredResourceTypes"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof MetricDescriptor>, never>>(object: I): MetricDescriptor;
 };
 export declare const MetricDescriptor_MetricDescriptorMetadata: {
     encode(message: MetricDescriptor_MetricDescriptorMetadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor_MetricDescriptorMetadata;
     fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata;
     toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown;
-    fromPartial<I extends unknown>(object: I): MetricDescriptor_MetricDescriptorMetadata;
-};
-export declare const Metric: {
-    encode(message: Metric, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Metric;
-    fromJSON(object: any): Metric;
-    toJSON(message: Metric): unknown;
-    fromPartial<I extends unknown>(object: I): Metric;
+    fromPartial<I extends {
+        launchStage?: LaunchStage;
+        samplePeriod?: string;
+        ingestDelay?: string;
+    } & {
+        launchStage?: LaunchStage;
+        samplePeriod?: string;
+        ingestDelay?: string;
+    } & Record<Exclude<keyof I, keyof MetricDescriptor_MetricDescriptorMetadata>, never>>(object: I): MetricDescriptor_MetricDescriptorMetadata;
 };
 export declare const Metric_LabelsEntry: {
     encode(message: Metric_LabelsEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Metric_LabelsEntry;
     fromJSON(object: any): Metric_LabelsEntry;
     toJSON(message: Metric_LabelsEntry): unknown;
-    fromPartial<I extends unknown>(object: I): Metric_LabelsEntry;
+    fromPartial<I extends {
+        key?: string;
+        value?: string;
+    } & {
+        key?: string;
+        value?: string;
+    } & Record<Exclude<keyof I, keyof Metric_LabelsEntry>, never>>(object: I): Metric_LabelsEntry;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};
+export declare const Metric: {
+    encode(message: Metric, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Metric;
+    fromJSON(object: any): Metric;
+    toJSON(message: Metric): unknown;
+    fromPartial<I extends {
+        type?: string;
+        labels?: {
+            [x: string]: string;
+        };
+    } & {
+        type?: string;
+        labels?: {
+            [x: string]: string;
+        } & {
+            [x: string]: string;
+        } & Record<Exclude<keyof I["labels"], string | number>, never>;
+    } & Record<Exclude<keyof I, keyof Metric>, never>>(object: I): Metric;
+};

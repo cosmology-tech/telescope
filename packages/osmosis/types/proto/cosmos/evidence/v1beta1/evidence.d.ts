@@ -1,5 +1,5 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
@@ -15,14 +15,15 @@ export declare const Equivocation: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Equivocation;
     fromJSON(object: any): Equivocation;
     toJSON(message: Equivocation): unknown;
-    fromPartial<I extends unknown>(object: I): Equivocation;
+    fromPartial<I extends {
+        height?: any;
+        time?: Date;
+        power?: any;
+        consensusAddress?: string;
+    } & {
+        height?: any;
+        time?: Date;
+        power?: any;
+        consensusAddress?: string;
+    } & Record<Exclude<keyof I, keyof Equivocation>, never>>(object: I): Equivocation;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

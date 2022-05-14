@@ -23,6 +23,11 @@ export interface ProtoType {
             comment: string | undefined;
         };
     };
+    options?: {
+        [key: string]: any;
+        deprecated?: boolean;
+        "(cosmos_proto.implements_interface)"?: string;
+    };
     fields: {
         [key: string]: ProtoField;
     };
@@ -41,6 +46,7 @@ export interface ProtoField {
     id: number;
     options: {
         [key: string]: any;
+        deprecated?: boolean;
         "(gogoproto.nullable)"?: boolean;
         "(cosmos_proto.scalar)"?: string;
         "(gogoproto.customtype)"?: string;

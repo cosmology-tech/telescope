@@ -18,6 +18,7 @@
     "build:main": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
     "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
     "build": "npm run build:module && npm run build:main",
+    "buidl": "npm run build && npm run build:ts",
     "proto:build": "source ./scripts/run-proto.sh",
     "proto:gen": "cross-env NODE_ENV=development babel-node scripts/gen-proto.js",
     "build:ts": "tsc --project ./tsconfig.json",

@@ -1,6 +1,6 @@
-import Long from "long";
+import { MerklePrefix } from "../../commitment/v1/commitment";
 import * as _m0 from "protobufjs/minimal";
-import { MerklePrefix } from "../../../../ibc/core/commitment/v1/commitment";
+import { Long } from "@osmonauts/helpers";
 /**
  * State defines if a connection is in one of the following states:
  * INIT, TRYOPEN, OPEN or UNINITIALIZED.
@@ -118,56 +118,177 @@ export declare const ConnectionEnd: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionEnd;
     fromJSON(object: any): ConnectionEnd;
     toJSON(message: ConnectionEnd): unknown;
-    fromPartial<I extends unknown>(object: I): ConnectionEnd;
+    fromPartial<I extends {
+        clientId?: string;
+        versions?: {
+            identifier?: string;
+            features?: string[];
+        }[];
+        state?: State;
+        counterparty?: {
+            clientId?: string;
+            connectionId?: string;
+            prefix?: {
+                keyPrefix?: Uint8Array;
+            };
+        };
+        delayPeriod?: any;
+    } & {
+        clientId?: string;
+        versions?: {
+            identifier?: string;
+            features?: string[];
+        }[] & ({
+            identifier?: string;
+            features?: string[];
+        } & {
+            identifier?: string;
+            features?: string[] & string[] & Record<Exclude<keyof I["versions"][number]["features"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["versions"][number], keyof Version>, never>)[] & Record<Exclude<keyof I["versions"], keyof {
+            identifier?: string;
+            features?: string[];
+        }[]>, never>;
+        state?: State;
+        counterparty?: {
+            clientId?: string;
+            connectionId?: string;
+            prefix?: {
+                keyPrefix?: Uint8Array;
+            };
+        } & {
+            clientId?: string;
+            connectionId?: string;
+            prefix?: {
+                keyPrefix?: Uint8Array;
+            } & {
+                keyPrefix?: Uint8Array;
+            } & Record<Exclude<keyof I["counterparty"]["prefix"], "keyPrefix">, never>;
+        } & Record<Exclude<keyof I["counterparty"], keyof Counterparty>, never>;
+        delayPeriod?: any;
+    } & Record<Exclude<keyof I, keyof ConnectionEnd>, never>>(object: I): ConnectionEnd;
 };
 export declare const IdentifiedConnection: {
     encode(message: IdentifiedConnection, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedConnection;
     fromJSON(object: any): IdentifiedConnection;
     toJSON(message: IdentifiedConnection): unknown;
-    fromPartial<I extends unknown>(object: I): IdentifiedConnection;
+    fromPartial<I extends {
+        id?: string;
+        clientId?: string;
+        versions?: {
+            identifier?: string;
+            features?: string[];
+        }[];
+        state?: State;
+        counterparty?: {
+            clientId?: string;
+            connectionId?: string;
+            prefix?: {
+                keyPrefix?: Uint8Array;
+            };
+        };
+        delayPeriod?: any;
+    } & {
+        id?: string;
+        clientId?: string;
+        versions?: {
+            identifier?: string;
+            features?: string[];
+        }[] & ({
+            identifier?: string;
+            features?: string[];
+        } & {
+            identifier?: string;
+            features?: string[] & string[] & Record<Exclude<keyof I["versions"][number]["features"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["versions"][number], keyof Version>, never>)[] & Record<Exclude<keyof I["versions"], keyof {
+            identifier?: string;
+            features?: string[];
+        }[]>, never>;
+        state?: State;
+        counterparty?: {
+            clientId?: string;
+            connectionId?: string;
+            prefix?: {
+                keyPrefix?: Uint8Array;
+            };
+        } & {
+            clientId?: string;
+            connectionId?: string;
+            prefix?: {
+                keyPrefix?: Uint8Array;
+            } & {
+                keyPrefix?: Uint8Array;
+            } & Record<Exclude<keyof I["counterparty"]["prefix"], "keyPrefix">, never>;
+        } & Record<Exclude<keyof I["counterparty"], keyof Counterparty>, never>;
+        delayPeriod?: any;
+    } & Record<Exclude<keyof I, keyof IdentifiedConnection>, never>>(object: I): IdentifiedConnection;
 };
 export declare const Counterparty: {
     encode(message: Counterparty, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Counterparty;
     fromJSON(object: any): Counterparty;
     toJSON(message: Counterparty): unknown;
-    fromPartial<I extends unknown>(object: I): Counterparty;
+    fromPartial<I extends {
+        clientId?: string;
+        connectionId?: string;
+        prefix?: {
+            keyPrefix?: Uint8Array;
+        };
+    } & {
+        clientId?: string;
+        connectionId?: string;
+        prefix?: {
+            keyPrefix?: Uint8Array;
+        } & {
+            keyPrefix?: Uint8Array;
+        } & Record<Exclude<keyof I["prefix"], "keyPrefix">, never>;
+    } & Record<Exclude<keyof I, keyof Counterparty>, never>>(object: I): Counterparty;
 };
 export declare const ClientPaths: {
     encode(message: ClientPaths, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ClientPaths;
     fromJSON(object: any): ClientPaths;
     toJSON(message: ClientPaths): unknown;
-    fromPartial<I extends unknown>(object: I): ClientPaths;
+    fromPartial<I extends {
+        paths?: string[];
+    } & {
+        paths?: string[] & string[] & Record<Exclude<keyof I["paths"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, "paths">, never>>(object: I): ClientPaths;
 };
 export declare const ConnectionPaths: {
     encode(message: ConnectionPaths, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionPaths;
     fromJSON(object: any): ConnectionPaths;
     toJSON(message: ConnectionPaths): unknown;
-    fromPartial<I extends unknown>(object: I): ConnectionPaths;
+    fromPartial<I extends {
+        clientId?: string;
+        paths?: string[];
+    } & {
+        clientId?: string;
+        paths?: string[] & string[] & Record<Exclude<keyof I["paths"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof ConnectionPaths>, never>>(object: I): ConnectionPaths;
 };
 export declare const Version: {
     encode(message: Version, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Version;
     fromJSON(object: any): Version;
     toJSON(message: Version): unknown;
-    fromPartial<I extends unknown>(object: I): Version;
+    fromPartial<I extends {
+        identifier?: string;
+        features?: string[];
+    } & {
+        identifier?: string;
+        features?: string[] & string[] & Record<Exclude<keyof I["features"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof Version>, never>>(object: I): Version;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends unknown>(object: I): Params;
+    fromPartial<I extends {
+        maxExpectedTimePerBlock?: any;
+    } & {
+        maxExpectedTimePerBlock?: any;
+    } & Record<Exclude<keyof I, "maxExpectedTimePerBlock">, never>>(object: I): Params;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

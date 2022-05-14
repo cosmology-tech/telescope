@@ -1,7 +1,6 @@
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "@osmonauts/helpers";
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
  * a start weight and end weight over a period of time.
@@ -9,11 +8,11 @@ import { Coin } from "../../../../cosmos/base/v1beta1/coin";
  * the two weights, but more types may be added in the future.
  * When these parameters are set, the weight w(t) for pool time `t` is the
  * following:
- *   t <= start_time: w(t) = initial_pool_weights
- *   start_time < t <= start_time + duration:
- *     w(t) = initial_pool_weights + (t - start_time) *
- *       (target_pool_weights - initial_pool_weights) / (duration)
- *   t > start_time + duration: w(t) = target_pool_weights
+ * t <= start_time: w(t) = initial_pool_weights
+ * start_time < t <= start_time + duration:
+ * w(t) = initial_pool_weights + (t - start_time) *
+ * (target_pool_weights - initial_pool_weights) / (duration)
+ * t > start_time + duration: w(t) = target_pool_weights
  */
 export interface SmoothWeightChangeParams {
     /**
@@ -23,7 +22,7 @@ export interface SmoothWeightChangeParams {
      */
     startTime: Date;
     /** Duration for the weights to change over */
-    duration: Duration;
+    duration: string;
     /**
      * The initial pool weights. These are copied from the pool's settings
      * at the time of weight change instantiation.
@@ -49,7 +48,7 @@ export interface SmoothWeightChangeParams {
 export interface PoolParams {
     swapFee: string;
     exitFee: string;
-    smoothWeightChangeParams: SmoothWeightChangeParams;
+    smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -97,35 +96,398 @@ export declare const SmoothWeightChangeParams: {
     decode(input: _m0.Reader | Uint8Array, length?: number): SmoothWeightChangeParams;
     fromJSON(object: any): SmoothWeightChangeParams;
     toJSON(message: SmoothWeightChangeParams): unknown;
-    fromPartial<I extends unknown>(object: I): SmoothWeightChangeParams;
+    fromPartial<I extends {
+        startTime?: Date;
+        duration?: string;
+        initialPoolWeights?: {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[];
+        targetPoolWeights?: {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[];
+    } & {
+        startTime?: Date;
+        duration?: string;
+        initialPoolWeights?: {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[] & ({
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        } & {
+            token?: {
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["initialPoolWeights"][number]["token"], keyof Coin>, never>;
+            weight?: string;
+        } & Record<Exclude<keyof I["initialPoolWeights"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["initialPoolWeights"], keyof {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[]>, never>;
+        targetPoolWeights?: {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[] & ({
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        } & {
+            token?: {
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["targetPoolWeights"][number]["token"], keyof Coin>, never>;
+            weight?: string;
+        } & Record<Exclude<keyof I["targetPoolWeights"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["targetPoolWeights"], keyof {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof SmoothWeightChangeParams>, never>>(object: I): SmoothWeightChangeParams;
 };
 export declare const PoolParams: {
     encode(message: PoolParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PoolParams;
     fromJSON(object: any): PoolParams;
     toJSON(message: PoolParams): unknown;
-    fromPartial<I extends unknown>(object: I): PoolParams;
+    fromPartial<I extends {
+        swapFee?: string;
+        exitFee?: string;
+        smoothWeightChangeParams?: {
+            startTime?: Date;
+            duration?: string;
+            initialPoolWeights?: {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[];
+            targetPoolWeights?: {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[];
+        };
+    } & {
+        swapFee?: string;
+        exitFee?: string;
+        smoothWeightChangeParams?: {
+            startTime?: Date;
+            duration?: string;
+            initialPoolWeights?: {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[];
+            targetPoolWeights?: {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[];
+        } & {
+            startTime?: Date;
+            duration?: string;
+            initialPoolWeights?: {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[] & ({
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            } & {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["smoothWeightChangeParams"]["initialPoolWeights"][number]["token"], keyof Coin>, never>;
+                weight?: string;
+            } & Record<Exclude<keyof I["smoothWeightChangeParams"]["initialPoolWeights"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["smoothWeightChangeParams"]["initialPoolWeights"], keyof {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[]>, never>;
+            targetPoolWeights?: {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[] & ({
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            } & {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                } & {
+                    denom?: string;
+                    amount?: string;
+                } & Record<Exclude<keyof I["smoothWeightChangeParams"]["targetPoolWeights"][number]["token"], keyof Coin>, never>;
+                weight?: string;
+            } & Record<Exclude<keyof I["smoothWeightChangeParams"]["targetPoolWeights"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["smoothWeightChangeParams"]["targetPoolWeights"], keyof {
+                token?: {
+                    denom?: string;
+                    amount?: string;
+                };
+                weight?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["smoothWeightChangeParams"], keyof SmoothWeightChangeParams>, never>;
+    } & Record<Exclude<keyof I, keyof PoolParams>, never>>(object: I): PoolParams;
 };
 export declare const PoolAsset: {
     encode(message: PoolAsset, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PoolAsset;
     fromJSON(object: any): PoolAsset;
     toJSON(message: PoolAsset): unknown;
-    fromPartial<I extends unknown>(object: I): PoolAsset;
+    fromPartial<I extends {
+        token?: {
+            denom?: string;
+            amount?: string;
+        };
+        weight?: string;
+    } & {
+        token?: {
+            denom?: string;
+            amount?: string;
+        } & {
+            denom?: string;
+            amount?: string;
+        } & Record<Exclude<keyof I["token"], keyof Coin>, never>;
+        weight?: string;
+    } & Record<Exclude<keyof I, keyof PoolAsset>, never>>(object: I): PoolAsset;
 };
 export declare const Pool: {
     encode(message: Pool, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Pool;
     fromJSON(object: any): Pool;
     toJSON(message: Pool): unknown;
-    fromPartial<I extends unknown>(object: I): Pool;
+    fromPartial<I extends {
+        address?: string;
+        id?: any;
+        poolParams?: {
+            swapFee?: string;
+            exitFee?: string;
+            smoothWeightChangeParams?: {
+                startTime?: Date;
+                duration?: string;
+                initialPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[];
+                targetPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[];
+            };
+        };
+        futurePoolGovernor?: string;
+        totalShares?: {
+            denom?: string;
+            amount?: string;
+        };
+        poolAssets?: {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[];
+        totalWeight?: string;
+    } & {
+        address?: string;
+        id?: any;
+        poolParams?: {
+            swapFee?: string;
+            exitFee?: string;
+            smoothWeightChangeParams?: {
+                startTime?: Date;
+                duration?: string;
+                initialPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[];
+                targetPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[];
+            };
+        } & {
+            swapFee?: string;
+            exitFee?: string;
+            smoothWeightChangeParams?: {
+                startTime?: Date;
+                duration?: string;
+                initialPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[];
+                targetPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[];
+            } & {
+                startTime?: Date;
+                duration?: string;
+                initialPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[] & ({
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                } & {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"][number]["token"], keyof Coin>, never>;
+                    weight?: string;
+                } & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"]["initialPoolWeights"], keyof {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[]>, never>;
+                targetPoolWeights?: {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[] & ({
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                } & {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    } & {
+                        denom?: string;
+                        amount?: string;
+                    } & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"][number]["token"], keyof Coin>, never>;
+                    weight?: string;
+                } & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"]["targetPoolWeights"], keyof {
+                    token?: {
+                        denom?: string;
+                        amount?: string;
+                    };
+                    weight?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["poolParams"]["smoothWeightChangeParams"], keyof SmoothWeightChangeParams>, never>;
+        } & Record<Exclude<keyof I["poolParams"], keyof PoolParams>, never>;
+        futurePoolGovernor?: string;
+        totalShares?: {
+            denom?: string;
+            amount?: string;
+        } & {
+            denom?: string;
+            amount?: string;
+        } & Record<Exclude<keyof I["totalShares"], keyof Coin>, never>;
+        poolAssets?: {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[] & ({
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        } & {
+            token?: {
+                denom?: string;
+                amount?: string;
+            } & {
+                denom?: string;
+                amount?: string;
+            } & Record<Exclude<keyof I["poolAssets"][number]["token"], keyof Coin>, never>;
+            weight?: string;
+        } & Record<Exclude<keyof I["poolAssets"][number], keyof PoolAsset>, never>)[] & Record<Exclude<keyof I["poolAssets"], keyof {
+            token?: {
+                denom?: string;
+                amount?: string;
+            };
+            weight?: string;
+        }[]>, never>;
+        totalWeight?: string;
+    } & Record<Exclude<keyof I, keyof Pool>, never>>(object: I): Pool;
 };
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};

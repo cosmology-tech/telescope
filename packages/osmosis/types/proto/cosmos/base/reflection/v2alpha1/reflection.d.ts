@@ -1,6 +1,4 @@
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
-/** Since: cosmos-sdk 0.43 */
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {
     /**
@@ -197,221 +195,885 @@ export declare const AppDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): AppDescriptor;
     fromJSON(object: any): AppDescriptor;
     toJSON(message: AppDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): AppDescriptor;
+    fromPartial<I extends {
+        authn?: {
+            signModes?: {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[];
+        };
+        chain?: {
+            id?: string;
+        };
+        codec?: {
+            interfaces?: {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[];
+        };
+        configuration?: {
+            bech32AccountAddressPrefix?: string;
+        };
+        queryServices?: {
+            queryServices?: {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[];
+        };
+        tx?: {
+            fullname?: string;
+            msgs?: {
+                msgTypeUrl?: string;
+            }[];
+        };
+    } & {
+        authn?: {
+            signModes?: {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[];
+        } & {
+            signModes?: {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[] & ({
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            } & {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            } & Record<Exclude<keyof I["authn"]["signModes"][number], keyof SigningModeDescriptor>, never>)[] & Record<Exclude<keyof I["authn"]["signModes"], keyof {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["authn"], "signModes">, never>;
+        chain?: {
+            id?: string;
+        } & {
+            id?: string;
+        } & Record<Exclude<keyof I["chain"], "id">, never>;
+        codec?: {
+            interfaces?: {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[];
+        } & {
+            interfaces?: {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[] & ({
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            } & {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[] & ({
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                } & {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[] & string[] & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceAcceptingMessages"][number]["fieldDescriptorNames"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceAcceptingMessages"][number], keyof InterfaceAcceptingMessageDescriptor>, never>)[] & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceAcceptingMessages"], keyof {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[]>, never>;
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[] & ({
+                    fullname?: string;
+                    typeUrl?: string;
+                } & {
+                    fullname?: string;
+                    typeUrl?: string;
+                } & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceImplementers"][number], keyof InterfaceImplementerDescriptor>, never>)[] & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceImplementers"], keyof {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["codec"]["interfaces"][number], keyof InterfaceDescriptor>, never>)[] & Record<Exclude<keyof I["codec"]["interfaces"], keyof {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["codec"], "interfaces">, never>;
+        configuration?: {
+            bech32AccountAddressPrefix?: string;
+        } & {
+            bech32AccountAddressPrefix?: string;
+        } & Record<Exclude<keyof I["configuration"], "bech32AccountAddressPrefix">, never>;
+        queryServices?: {
+            queryServices?: {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[];
+        } & {
+            queryServices?: {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[] & ({
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            } & {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[] & ({
+                    name?: string;
+                    fullQueryPath?: string;
+                } & {
+                    name?: string;
+                    fullQueryPath?: string;
+                } & Record<Exclude<keyof I["queryServices"]["queryServices"][number]["methods"][number], keyof QueryMethodDescriptor>, never>)[] & Record<Exclude<keyof I["queryServices"]["queryServices"][number]["methods"], keyof {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["queryServices"]["queryServices"][number], keyof QueryServiceDescriptor>, never>)[] & Record<Exclude<keyof I["queryServices"]["queryServices"], keyof {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["queryServices"], "queryServices">, never>;
+        tx?: {
+            fullname?: string;
+            msgs?: {
+                msgTypeUrl?: string;
+            }[];
+        } & {
+            fullname?: string;
+            msgs?: {
+                msgTypeUrl?: string;
+            }[] & ({
+                msgTypeUrl?: string;
+            } & {
+                msgTypeUrl?: string;
+            } & Record<Exclude<keyof I["tx"]["msgs"][number], "msgTypeUrl">, never>)[] & Record<Exclude<keyof I["tx"]["msgs"], keyof {
+                msgTypeUrl?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["tx"], keyof TxDescriptor>, never>;
+    } & Record<Exclude<keyof I, keyof AppDescriptor>, never>>(object: I): AppDescriptor;
 };
 export declare const TxDescriptor: {
     encode(message: TxDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): TxDescriptor;
     fromJSON(object: any): TxDescriptor;
     toJSON(message: TxDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): TxDescriptor;
+    fromPartial<I extends {
+        fullname?: string;
+        msgs?: {
+            msgTypeUrl?: string;
+        }[];
+    } & {
+        fullname?: string;
+        msgs?: {
+            msgTypeUrl?: string;
+        }[] & ({
+            msgTypeUrl?: string;
+        } & {
+            msgTypeUrl?: string;
+        } & Record<Exclude<keyof I["msgs"][number], "msgTypeUrl">, never>)[] & Record<Exclude<keyof I["msgs"], keyof {
+            msgTypeUrl?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof TxDescriptor>, never>>(object: I): TxDescriptor;
 };
 export declare const AuthnDescriptor: {
     encode(message: AuthnDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuthnDescriptor;
     fromJSON(object: any): AuthnDescriptor;
     toJSON(message: AuthnDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): AuthnDescriptor;
+    fromPartial<I extends {
+        signModes?: {
+            name?: string;
+            number?: number;
+            authnInfoProviderMethodFullname?: string;
+        }[];
+    } & {
+        signModes?: {
+            name?: string;
+            number?: number;
+            authnInfoProviderMethodFullname?: string;
+        }[] & ({
+            name?: string;
+            number?: number;
+            authnInfoProviderMethodFullname?: string;
+        } & {
+            name?: string;
+            number?: number;
+            authnInfoProviderMethodFullname?: string;
+        } & Record<Exclude<keyof I["signModes"][number], keyof SigningModeDescriptor>, never>)[] & Record<Exclude<keyof I["signModes"], keyof {
+            name?: string;
+            number?: number;
+            authnInfoProviderMethodFullname?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "signModes">, never>>(object: I): AuthnDescriptor;
 };
 export declare const SigningModeDescriptor: {
     encode(message: SigningModeDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SigningModeDescriptor;
     fromJSON(object: any): SigningModeDescriptor;
     toJSON(message: SigningModeDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): SigningModeDescriptor;
+    fromPartial<I extends {
+        name?: string;
+        number?: number;
+        authnInfoProviderMethodFullname?: string;
+    } & {
+        name?: string;
+        number?: number;
+        authnInfoProviderMethodFullname?: string;
+    } & Record<Exclude<keyof I, keyof SigningModeDescriptor>, never>>(object: I): SigningModeDescriptor;
 };
 export declare const ChainDescriptor: {
     encode(message: ChainDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ChainDescriptor;
     fromJSON(object: any): ChainDescriptor;
     toJSON(message: ChainDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): ChainDescriptor;
+    fromPartial<I extends {
+        id?: string;
+    } & {
+        id?: string;
+    } & Record<Exclude<keyof I, "id">, never>>(object: I): ChainDescriptor;
 };
 export declare const CodecDescriptor: {
     encode(message: CodecDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CodecDescriptor;
     fromJSON(object: any): CodecDescriptor;
     toJSON(message: CodecDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): CodecDescriptor;
+    fromPartial<I extends {
+        interfaces?: {
+            fullname?: string;
+            interfaceAcceptingMessages?: {
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            }[];
+            interfaceImplementers?: {
+                fullname?: string;
+                typeUrl?: string;
+            }[];
+        }[];
+    } & {
+        interfaces?: {
+            fullname?: string;
+            interfaceAcceptingMessages?: {
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            }[];
+            interfaceImplementers?: {
+                fullname?: string;
+                typeUrl?: string;
+            }[];
+        }[] & ({
+            fullname?: string;
+            interfaceAcceptingMessages?: {
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            }[];
+            interfaceImplementers?: {
+                fullname?: string;
+                typeUrl?: string;
+            }[];
+        } & {
+            fullname?: string;
+            interfaceAcceptingMessages?: {
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            }[] & ({
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            } & {
+                fullname?: string;
+                fieldDescriptorNames?: string[] & string[] & Record<Exclude<keyof I["interfaces"][number]["interfaceAcceptingMessages"][number]["fieldDescriptorNames"], keyof string[]>, never>;
+            } & Record<Exclude<keyof I["interfaces"][number]["interfaceAcceptingMessages"][number], keyof InterfaceAcceptingMessageDescriptor>, never>)[] & Record<Exclude<keyof I["interfaces"][number]["interfaceAcceptingMessages"], keyof {
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            }[]>, never>;
+            interfaceImplementers?: {
+                fullname?: string;
+                typeUrl?: string;
+            }[] & ({
+                fullname?: string;
+                typeUrl?: string;
+            } & {
+                fullname?: string;
+                typeUrl?: string;
+            } & Record<Exclude<keyof I["interfaces"][number]["interfaceImplementers"][number], keyof InterfaceImplementerDescriptor>, never>)[] & Record<Exclude<keyof I["interfaces"][number]["interfaceImplementers"], keyof {
+                fullname?: string;
+                typeUrl?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["interfaces"][number], keyof InterfaceDescriptor>, never>)[] & Record<Exclude<keyof I["interfaces"], keyof {
+            fullname?: string;
+            interfaceAcceptingMessages?: {
+                fullname?: string;
+                fieldDescriptorNames?: string[];
+            }[];
+            interfaceImplementers?: {
+                fullname?: string;
+                typeUrl?: string;
+            }[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "interfaces">, never>>(object: I): CodecDescriptor;
 };
 export declare const InterfaceDescriptor: {
     encode(message: InterfaceDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceDescriptor;
     fromJSON(object: any): InterfaceDescriptor;
     toJSON(message: InterfaceDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): InterfaceDescriptor;
+    fromPartial<I extends {
+        fullname?: string;
+        interfaceAcceptingMessages?: {
+            fullname?: string;
+            fieldDescriptorNames?: string[];
+        }[];
+        interfaceImplementers?: {
+            fullname?: string;
+            typeUrl?: string;
+        }[];
+    } & {
+        fullname?: string;
+        interfaceAcceptingMessages?: {
+            fullname?: string;
+            fieldDescriptorNames?: string[];
+        }[] & ({
+            fullname?: string;
+            fieldDescriptorNames?: string[];
+        } & {
+            fullname?: string;
+            fieldDescriptorNames?: string[] & string[] & Record<Exclude<keyof I["interfaceAcceptingMessages"][number]["fieldDescriptorNames"], keyof string[]>, never>;
+        } & Record<Exclude<keyof I["interfaceAcceptingMessages"][number], keyof InterfaceAcceptingMessageDescriptor>, never>)[] & Record<Exclude<keyof I["interfaceAcceptingMessages"], keyof {
+            fullname?: string;
+            fieldDescriptorNames?: string[];
+        }[]>, never>;
+        interfaceImplementers?: {
+            fullname?: string;
+            typeUrl?: string;
+        }[] & ({
+            fullname?: string;
+            typeUrl?: string;
+        } & {
+            fullname?: string;
+            typeUrl?: string;
+        } & Record<Exclude<keyof I["interfaceImplementers"][number], keyof InterfaceImplementerDescriptor>, never>)[] & Record<Exclude<keyof I["interfaceImplementers"], keyof {
+            fullname?: string;
+            typeUrl?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof InterfaceDescriptor>, never>>(object: I): InterfaceDescriptor;
 };
 export declare const InterfaceImplementerDescriptor: {
     encode(message: InterfaceImplementerDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceImplementerDescriptor;
     fromJSON(object: any): InterfaceImplementerDescriptor;
     toJSON(message: InterfaceImplementerDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): InterfaceImplementerDescriptor;
+    fromPartial<I extends {
+        fullname?: string;
+        typeUrl?: string;
+    } & {
+        fullname?: string;
+        typeUrl?: string;
+    } & Record<Exclude<keyof I, keyof InterfaceImplementerDescriptor>, never>>(object: I): InterfaceImplementerDescriptor;
 };
 export declare const InterfaceAcceptingMessageDescriptor: {
     encode(message: InterfaceAcceptingMessageDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceAcceptingMessageDescriptor;
     fromJSON(object: any): InterfaceAcceptingMessageDescriptor;
     toJSON(message: InterfaceAcceptingMessageDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): InterfaceAcceptingMessageDescriptor;
+    fromPartial<I extends {
+        fullname?: string;
+        fieldDescriptorNames?: string[];
+    } & {
+        fullname?: string;
+        fieldDescriptorNames?: string[] & string[] & Record<Exclude<keyof I["fieldDescriptorNames"], keyof string[]>, never>;
+    } & Record<Exclude<keyof I, keyof InterfaceAcceptingMessageDescriptor>, never>>(object: I): InterfaceAcceptingMessageDescriptor;
 };
 export declare const ConfigurationDescriptor: {
     encode(message: ConfigurationDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ConfigurationDescriptor;
     fromJSON(object: any): ConfigurationDescriptor;
     toJSON(message: ConfigurationDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): ConfigurationDescriptor;
+    fromPartial<I extends {
+        bech32AccountAddressPrefix?: string;
+    } & {
+        bech32AccountAddressPrefix?: string;
+    } & Record<Exclude<keyof I, "bech32AccountAddressPrefix">, never>>(object: I): ConfigurationDescriptor;
 };
 export declare const MsgDescriptor: {
     encode(message: MsgDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgDescriptor;
     fromJSON(object: any): MsgDescriptor;
     toJSON(message: MsgDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): MsgDescriptor;
+    fromPartial<I extends {
+        msgTypeUrl?: string;
+    } & {
+        msgTypeUrl?: string;
+    } & Record<Exclude<keyof I, "msgTypeUrl">, never>>(object: I): MsgDescriptor;
 };
 export declare const GetAuthnDescriptorRequest: {
     encode(_: GetAuthnDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorRequest;
     fromJSON(_: any): GetAuthnDescriptorRequest;
     toJSON(_: GetAuthnDescriptorRequest): unknown;
-    fromPartial<I extends unknown>(_: I): GetAuthnDescriptorRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetAuthnDescriptorRequest;
 };
 export declare const GetAuthnDescriptorResponse: {
     encode(message: GetAuthnDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorResponse;
     fromJSON(object: any): GetAuthnDescriptorResponse;
     toJSON(message: GetAuthnDescriptorResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetAuthnDescriptorResponse;
+    fromPartial<I extends {
+        authn?: {
+            signModes?: {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[];
+        };
+    } & {
+        authn?: {
+            signModes?: {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[];
+        } & {
+            signModes?: {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[] & ({
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            } & {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            } & Record<Exclude<keyof I["authn"]["signModes"][number], keyof SigningModeDescriptor>, never>)[] & Record<Exclude<keyof I["authn"]["signModes"], keyof {
+                name?: string;
+                number?: number;
+                authnInfoProviderMethodFullname?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["authn"], "signModes">, never>;
+    } & Record<Exclude<keyof I, "authn">, never>>(object: I): GetAuthnDescriptorResponse;
 };
 export declare const GetChainDescriptorRequest: {
     encode(_: GetChainDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorRequest;
     fromJSON(_: any): GetChainDescriptorRequest;
     toJSON(_: GetChainDescriptorRequest): unknown;
-    fromPartial<I extends unknown>(_: I): GetChainDescriptorRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetChainDescriptorRequest;
 };
 export declare const GetChainDescriptorResponse: {
     encode(message: GetChainDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorResponse;
     fromJSON(object: any): GetChainDescriptorResponse;
     toJSON(message: GetChainDescriptorResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetChainDescriptorResponse;
+    fromPartial<I extends {
+        chain?: {
+            id?: string;
+        };
+    } & {
+        chain?: {
+            id?: string;
+        } & {
+            id?: string;
+        } & Record<Exclude<keyof I["chain"], "id">, never>;
+    } & Record<Exclude<keyof I, "chain">, never>>(object: I): GetChainDescriptorResponse;
 };
 export declare const GetCodecDescriptorRequest: {
     encode(_: GetCodecDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorRequest;
     fromJSON(_: any): GetCodecDescriptorRequest;
     toJSON(_: GetCodecDescriptorRequest): unknown;
-    fromPartial<I extends unknown>(_: I): GetCodecDescriptorRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetCodecDescriptorRequest;
 };
 export declare const GetCodecDescriptorResponse: {
     encode(message: GetCodecDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorResponse;
     fromJSON(object: any): GetCodecDescriptorResponse;
     toJSON(message: GetCodecDescriptorResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetCodecDescriptorResponse;
+    fromPartial<I extends {
+        codec?: {
+            interfaces?: {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[];
+        };
+    } & {
+        codec?: {
+            interfaces?: {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[];
+        } & {
+            interfaces?: {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[] & ({
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            } & {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[] & ({
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                } & {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[] & string[] & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceAcceptingMessages"][number]["fieldDescriptorNames"], keyof string[]>, never>;
+                } & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceAcceptingMessages"][number], keyof InterfaceAcceptingMessageDescriptor>, never>)[] & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceAcceptingMessages"], keyof {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[]>, never>;
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[] & ({
+                    fullname?: string;
+                    typeUrl?: string;
+                } & {
+                    fullname?: string;
+                    typeUrl?: string;
+                } & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceImplementers"][number], keyof InterfaceImplementerDescriptor>, never>)[] & Record<Exclude<keyof I["codec"]["interfaces"][number]["interfaceImplementers"], keyof {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["codec"]["interfaces"][number], keyof InterfaceDescriptor>, never>)[] & Record<Exclude<keyof I["codec"]["interfaces"], keyof {
+                fullname?: string;
+                interfaceAcceptingMessages?: {
+                    fullname?: string;
+                    fieldDescriptorNames?: string[];
+                }[];
+                interfaceImplementers?: {
+                    fullname?: string;
+                    typeUrl?: string;
+                }[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["codec"], "interfaces">, never>;
+    } & Record<Exclude<keyof I, "codec">, never>>(object: I): GetCodecDescriptorResponse;
 };
 export declare const GetConfigurationDescriptorRequest: {
     encode(_: GetConfigurationDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorRequest;
     fromJSON(_: any): GetConfigurationDescriptorRequest;
     toJSON(_: GetConfigurationDescriptorRequest): unknown;
-    fromPartial<I extends unknown>(_: I): GetConfigurationDescriptorRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetConfigurationDescriptorRequest;
 };
 export declare const GetConfigurationDescriptorResponse: {
     encode(message: GetConfigurationDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorResponse;
     fromJSON(object: any): GetConfigurationDescriptorResponse;
     toJSON(message: GetConfigurationDescriptorResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetConfigurationDescriptorResponse;
+    fromPartial<I extends {
+        config?: {
+            bech32AccountAddressPrefix?: string;
+        };
+    } & {
+        config?: {
+            bech32AccountAddressPrefix?: string;
+        } & {
+            bech32AccountAddressPrefix?: string;
+        } & Record<Exclude<keyof I["config"], "bech32AccountAddressPrefix">, never>;
+    } & Record<Exclude<keyof I, "config">, never>>(object: I): GetConfigurationDescriptorResponse;
 };
 export declare const GetQueryServicesDescriptorRequest: {
     encode(_: GetQueryServicesDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorRequest;
     fromJSON(_: any): GetQueryServicesDescriptorRequest;
     toJSON(_: GetQueryServicesDescriptorRequest): unknown;
-    fromPartial<I extends unknown>(_: I): GetQueryServicesDescriptorRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetQueryServicesDescriptorRequest;
 };
 export declare const GetQueryServicesDescriptorResponse: {
     encode(message: GetQueryServicesDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse;
     fromJSON(object: any): GetQueryServicesDescriptorResponse;
     toJSON(message: GetQueryServicesDescriptorResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetQueryServicesDescriptorResponse;
+    fromPartial<I extends {
+        queries?: {
+            queryServices?: {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[];
+        };
+    } & {
+        queries?: {
+            queryServices?: {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[];
+        } & {
+            queryServices?: {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[] & ({
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            } & {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[] & ({
+                    name?: string;
+                    fullQueryPath?: string;
+                } & {
+                    name?: string;
+                    fullQueryPath?: string;
+                } & Record<Exclude<keyof I["queries"]["queryServices"][number]["methods"][number], keyof QueryMethodDescriptor>, never>)[] & Record<Exclude<keyof I["queries"]["queryServices"][number]["methods"], keyof {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[]>, never>;
+            } & Record<Exclude<keyof I["queries"]["queryServices"][number], keyof QueryServiceDescriptor>, never>)[] & Record<Exclude<keyof I["queries"]["queryServices"], keyof {
+                fullname?: string;
+                isModule?: boolean;
+                methods?: {
+                    name?: string;
+                    fullQueryPath?: string;
+                }[];
+            }[]>, never>;
+        } & Record<Exclude<keyof I["queries"], "queryServices">, never>;
+    } & Record<Exclude<keyof I, "queries">, never>>(object: I): GetQueryServicesDescriptorResponse;
 };
 export declare const GetTxDescriptorRequest: {
     encode(_: GetTxDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorRequest;
     fromJSON(_: any): GetTxDescriptorRequest;
     toJSON(_: GetTxDescriptorRequest): unknown;
-    fromPartial<I extends unknown>(_: I): GetTxDescriptorRequest;
+    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): GetTxDescriptorRequest;
 };
 export declare const GetTxDescriptorResponse: {
     encode(message: GetTxDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorResponse;
     fromJSON(object: any): GetTxDescriptorResponse;
     toJSON(message: GetTxDescriptorResponse): unknown;
-    fromPartial<I extends unknown>(object: I): GetTxDescriptorResponse;
+    fromPartial<I extends {
+        tx?: {
+            fullname?: string;
+            msgs?: {
+                msgTypeUrl?: string;
+            }[];
+        };
+    } & {
+        tx?: {
+            fullname?: string;
+            msgs?: {
+                msgTypeUrl?: string;
+            }[];
+        } & {
+            fullname?: string;
+            msgs?: {
+                msgTypeUrl?: string;
+            }[] & ({
+                msgTypeUrl?: string;
+            } & {
+                msgTypeUrl?: string;
+            } & Record<Exclude<keyof I["tx"]["msgs"][number], "msgTypeUrl">, never>)[] & Record<Exclude<keyof I["tx"]["msgs"], keyof {
+                msgTypeUrl?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["tx"], keyof TxDescriptor>, never>;
+    } & Record<Exclude<keyof I, "tx">, never>>(object: I): GetTxDescriptorResponse;
 };
 export declare const QueryServicesDescriptor: {
     encode(message: QueryServicesDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryServicesDescriptor;
     fromJSON(object: any): QueryServicesDescriptor;
     toJSON(message: QueryServicesDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): QueryServicesDescriptor;
+    fromPartial<I extends {
+        queryServices?: {
+            fullname?: string;
+            isModule?: boolean;
+            methods?: {
+                name?: string;
+                fullQueryPath?: string;
+            }[];
+        }[];
+    } & {
+        queryServices?: {
+            fullname?: string;
+            isModule?: boolean;
+            methods?: {
+                name?: string;
+                fullQueryPath?: string;
+            }[];
+        }[] & ({
+            fullname?: string;
+            isModule?: boolean;
+            methods?: {
+                name?: string;
+                fullQueryPath?: string;
+            }[];
+        } & {
+            fullname?: string;
+            isModule?: boolean;
+            methods?: {
+                name?: string;
+                fullQueryPath?: string;
+            }[] & ({
+                name?: string;
+                fullQueryPath?: string;
+            } & {
+                name?: string;
+                fullQueryPath?: string;
+            } & Record<Exclude<keyof I["queryServices"][number]["methods"][number], keyof QueryMethodDescriptor>, never>)[] & Record<Exclude<keyof I["queryServices"][number]["methods"], keyof {
+                name?: string;
+                fullQueryPath?: string;
+            }[]>, never>;
+        } & Record<Exclude<keyof I["queryServices"][number], keyof QueryServiceDescriptor>, never>)[] & Record<Exclude<keyof I["queryServices"], keyof {
+            fullname?: string;
+            isModule?: boolean;
+            methods?: {
+                name?: string;
+                fullQueryPath?: string;
+            }[];
+        }[]>, never>;
+    } & Record<Exclude<keyof I, "queryServices">, never>>(object: I): QueryServicesDescriptor;
 };
 export declare const QueryServiceDescriptor: {
     encode(message: QueryServiceDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryServiceDescriptor;
     fromJSON(object: any): QueryServiceDescriptor;
     toJSON(message: QueryServiceDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): QueryServiceDescriptor;
+    fromPartial<I extends {
+        fullname?: string;
+        isModule?: boolean;
+        methods?: {
+            name?: string;
+            fullQueryPath?: string;
+        }[];
+    } & {
+        fullname?: string;
+        isModule?: boolean;
+        methods?: {
+            name?: string;
+            fullQueryPath?: string;
+        }[] & ({
+            name?: string;
+            fullQueryPath?: string;
+        } & {
+            name?: string;
+            fullQueryPath?: string;
+        } & Record<Exclude<keyof I["methods"][number], keyof QueryMethodDescriptor>, never>)[] & Record<Exclude<keyof I["methods"], keyof {
+            name?: string;
+            fullQueryPath?: string;
+        }[]>, never>;
+    } & Record<Exclude<keyof I, keyof QueryServiceDescriptor>, never>>(object: I): QueryServiceDescriptor;
 };
 export declare const QueryMethodDescriptor: {
     encode(message: QueryMethodDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryMethodDescriptor;
     fromJSON(object: any): QueryMethodDescriptor;
     toJSON(message: QueryMethodDescriptor): unknown;
-    fromPartial<I extends unknown>(object: I): QueryMethodDescriptor;
+    fromPartial<I extends {
+        name?: string;
+        fullQueryPath?: string;
+    } & {
+        name?: string;
+        fullQueryPath?: string;
+    } & Record<Exclude<keyof I, keyof QueryMethodDescriptor>, never>>(object: I): QueryMethodDescriptor;
 };
-/** ReflectionService defines a service for application reflection. */
-export interface ReflectionService {
-    /**
-     * GetAuthnDescriptor returns information on how to authenticate transactions in the application
-     * NOTE: this RPC is still experimental and might be subject to breaking changes or removal in
-     * future releases of the cosmos-sdk.
-     */
-    GetAuthnDescriptor(request: GetAuthnDescriptorRequest): Promise<GetAuthnDescriptorResponse>;
-    /** GetChainDescriptor returns the description of the chain */
-    GetChainDescriptor(request: GetChainDescriptorRequest): Promise<GetChainDescriptorResponse>;
-    /** GetCodecDescriptor returns the descriptor of the codec of the application */
-    GetCodecDescriptor(request: GetCodecDescriptorRequest): Promise<GetCodecDescriptorResponse>;
-    /** GetConfigurationDescriptor returns the descriptor for the sdk.Config of the application */
-    GetConfigurationDescriptor(request: GetConfigurationDescriptorRequest): Promise<GetConfigurationDescriptorResponse>;
-    /** GetQueryServicesDescriptor returns the available gRPC queryable services of the application */
-    GetQueryServicesDescriptor(request: GetQueryServicesDescriptorRequest): Promise<GetQueryServicesDescriptorResponse>;
-    /** GetTxDescriptor returns information on the used transaction object and available msgs that can be used */
-    GetTxDescriptor(request: GetTxDescriptorRequest): Promise<GetTxDescriptorResponse>;
-}
-export declare class ReflectionServiceClientImpl implements ReflectionService {
-    private readonly rpc;
-    constructor(rpc: Rpc);
-    GetAuthnDescriptor(request: GetAuthnDescriptorRequest): Promise<GetAuthnDescriptorResponse>;
-    GetChainDescriptor(request: GetChainDescriptorRequest): Promise<GetChainDescriptorResponse>;
-    GetCodecDescriptor(request: GetCodecDescriptorRequest): Promise<GetCodecDescriptorResponse>;
-    GetConfigurationDescriptor(request: GetConfigurationDescriptorRequest): Promise<GetConfigurationDescriptorResponse>;
-    GetQueryServicesDescriptor(request: GetQueryServicesDescriptorRequest): Promise<GetQueryServicesDescriptorResponse>;
-    GetTxDescriptor(request: GetTxDescriptorRequest): Promise<GetTxDescriptorResponse>;
-}
-interface Rpc {
-    request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export declare type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-declare type KeysOfUnion<T> = T extends T ? keyof T : never;
-export declare type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-export {};
