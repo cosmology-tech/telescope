@@ -90,9 +90,9 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
                 return decode.bytes(args);
             case 'bool':
                 return decode.bool(args);
-            case 'google.protobuf.Duration':
-            case 'Duration':
-                return decode.duration(args);
+            // case 'google.protobuf.Duration':
+            // case 'Duration':
+            // return decode.duration(args);
             case 'google.protobuf.Timestamp':
             case 'Timestamp':
                 return decode.timestamp(args);
