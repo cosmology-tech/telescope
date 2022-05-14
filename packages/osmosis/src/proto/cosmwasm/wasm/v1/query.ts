@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { ContractInfo, ContractCodeHistoryEntry, Model } from "../../../cosmwasm/wasm/v1/types";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { ContractInfo, ContractCodeHistoryEntry, Model } from "./types";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -12,178 +11,178 @@ export interface QueryContractInfoRequest {
   /** address is the address of the contract to query */
   address: string;
 }
+
 /**
  * QueryContractInfoResponse is the response type for the Query/ContractInfo RPC
  * method
  */
-
 export interface QueryContractInfoResponse {
   /** address is the address of the contract */
   address: string;
   contractInfo: ContractInfo;
 }
+
 /**
  * QueryContractHistoryRequest is the request type for the Query/ContractHistory
  * RPC method
  */
-
 export interface QueryContractHistoryRequest {
   /** address is the address of the contract to query */
   address: string;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryContractHistoryResponse is the response type for the
  * Query/ContractHistory RPC method
  */
-
 export interface QueryContractHistoryResponse {
   entries: ContractCodeHistoryEntry[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
+
 /**
  * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
  * RPC method
  */
-
 export interface QueryContractsByCodeRequest {
-  /** grpc-gateway_out does not support Go style CodID */
+  /**
+   * grpc-gateway_out does not support Go style CodID
+   * pagination defines an optional pagination for the request.
+   */
   codeId: Long;
-  /** pagination defines an optional pagination for the request. */
-
   pagination: PageRequest;
 }
+
 /**
  * QueryContractsByCodeResponse is the response type for the
  * Query/ContractsByCode RPC method
  */
-
 export interface QueryContractsByCodeResponse {
   /** contracts are a set of contract addresses */
   contracts: string[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
+
 /**
  * QueryAllContractStateRequest is the request type for the
  * Query/AllContractState RPC method
  */
-
 export interface QueryAllContractStateRequest {
   /** address is the address of the contract */
   address: string;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryAllContractStateResponse is the response type for the
  * Query/AllContractState RPC method
  */
-
 export interface QueryAllContractStateResponse {
   models: Model[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
+
 /**
  * QueryRawContractStateRequest is the request type for the
  * Query/RawContractState RPC method
  */
-
 export interface QueryRawContractStateRequest {
   /** address is the address of the contract */
   address: string;
   queryData: Uint8Array;
 }
+
 /**
  * QueryRawContractStateResponse is the response type for the
  * Query/RawContractState RPC method
  */
-
 export interface QueryRawContractStateResponse {
   /** Data contains the raw store data */
   data: Uint8Array;
 }
+
 /**
  * QuerySmartContractStateRequest is the request type for the
  * Query/SmartContractState RPC method
  */
-
 export interface QuerySmartContractStateRequest {
   /** address is the address of the contract */
   address: string;
-  /** QueryData contains the query data passed to the contract */
 
+  /** QueryData contains the query data passed to the contract */
   queryData: Uint8Array;
 }
+
 /**
  * QuerySmartContractStateResponse is the response type for the
  * Query/SmartContractState RPC method
  */
-
 export interface QuerySmartContractStateResponse {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
-/** QueryCodeRequest is the request type for the Query/Code RPC method */
 
+/** QueryCodeRequest is the request type for the Query/Code RPC method */
 export interface QueryCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
   codeId: Long;
 }
-/** CodeInfoResponse contains code meta data from CodeInfo */
 
+/** CodeInfoResponse contains code meta data from CodeInfo */
 export interface CodeInfoResponse {
-  /** id for legacy support */
   codeId: Long;
   creator: string;
   dataHash: Uint8Array;
 }
-/** QueryCodeResponse is the response type for the Query/Code RPC method */
 
+/** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponse {
   codeInfo: CodeInfoResponse;
   data: Uint8Array;
 }
-/** QueryCodesRequest is the request type for the Query/Codes RPC method */
 
+/** QueryCodesRequest is the request type for the Query/Codes RPC method */
 export interface QueryCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryCodesResponse is the response type for the Query/Codes RPC method */
 
+/** QueryCodesResponse is the response type for the Query/Codes RPC method */
 export interface QueryCodesResponse {
   codeInfos: CodeInfoResponse[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
+
 /**
  * QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
  * RPC method
  */
-
 export interface QueryPinnedCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryPinnedCodesResponse is the response type for the
  * Query/PinnedCodes RPC method
  */
-
 export interface QueryPinnedCodesResponse {
   codeIds: Long[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -1480,54 +1479,3 @@ export const QueryPinnedCodesResponse = {
   }
 
 };
-/** Query provides defines the gRPC querier service */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

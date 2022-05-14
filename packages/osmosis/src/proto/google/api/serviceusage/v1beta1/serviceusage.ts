@@ -1,606 +1,9 @@
-/* eslint-disable */
-import Long from "long";
+import { QuotaView, QuotaOverride, QuotaSafetyCheck, OverrideInlineSource, Service, ConsumerQuotaMetric, AdminQuotaPolicy, ServiceIdentity, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources";
+import { FieldMask } from "../../../protobuf/field_mask";
 import * as _m0 from "protobufjs/minimal";
-import { QuotaView, QuotaOverride, ServiceIdentity, Service, ConsumerQuotaMetric, QuotaSafetyCheck, OverrideInlineSource, AdminQuotaPolicy, ConsumerQuotaLimit, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "../../../../google/api/serviceusage/v1beta1/resources";
-import { Operation } from "../../../../google/longrunning/operations";
-import { FieldMask } from "../../../../google/protobuf/field_mask";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
-/** Request message for the `EnableService` method. */
-export interface EnableServiceRequest {
-  /**
-   * Name of the consumer and service to enable the service on.
-   *
-   * The `EnableService` and `DisableService` methods currently only support
-   * projects.
-   *
-   * Enabling a service requires that the service is public or is shared with
-   * the user enabling the service.
-   *
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com`
-   * where `123` is the project number (not project ID).
-   */
-  name: string;
-}
-/** Request message for the `DisableService` method. */
-
-export interface DisableServiceRequest {
-  /**
-   * Name of the consumer and service to disable the service on.
-   *
-   * The enable and disable methods currently only support projects.
-   *
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com`
-   * where `123` is the project number (not project ID).
-   */
-  name: string;
-}
-/** Request message for the `GetService` method. */
-
-export interface GetServiceRequest {
-  /**
-   * Name of the consumer and service to get the `ConsumerState` for.
-   *
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com`
-   * where `123` is the project number (not project ID).
-   */
-  name: string;
-}
-/** Request message for the `ListServices` method. */
-
-export interface ListServicesRequest {
-  /**
-   * Parent to search for services on.
-   *
-   * An example name would be:
-   * `projects/123`
-   * where `123` is the project number (not project ID).
-   */
-  parent: string;
-  /**
-   * Requested size of the next page of data.
-   * Requested page size cannot exceed 200.
-   *  If not set, the default page size is 50.
-   */
-
-  pageSize: number;
-  /**
-   * Token identifying which result to start with, which is returned by a
-   * previous list call.
-   */
-
-  pageToken: string;
-  /**
-   * Only list services that conform to the given filter.
-   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
-   */
-
-  filter: string;
-}
-/** Response message for the `ListServices` method. */
-
-export interface ListServicesResponse {
-  /** The available services for the requested project. */
-  services: Service[];
-  /**
-   * Token that can be passed to `ListServices` to resume a paginated
-   * query.
-   */
-
-  nextPageToken: string;
-}
-/** Request message for the `BatchEnableServices` method. */
-
-export interface BatchEnableServicesRequest {
-  /**
-   * Parent to enable services on.
-   *
-   * An example name would be:
-   * `projects/123`
-   * where `123` is the project number (not project ID).
-   *
-   * The `BatchEnableServices` method currently only supports projects.
-   */
-  parent: string;
-  /**
-   * The identifiers of the services to enable on the project.
-   *
-   * A valid identifier would be:
-   * serviceusage.googleapis.com
-   *
-   * Enabling services requires that each service is public or is shared with
-   * the user enabling the service.
-   *
-   * Two or more services must be specified. To enable a single service,
-   * use the `EnableService` method instead.
-   *
-   * A single request can enable a maximum of 20 services at a time. If more
-   * than 20 services are specified, the request will fail, and no state changes
-   * will occur.
-   */
-
-  serviceIds: string[];
-}
-/** Request message for ListConsumerQuotaMetrics */
-
-export interface ListConsumerQuotaMetricsRequest {
-  /**
-   * Parent of the quotas resource.
-   *
-   * Some example names would be:
-   * `projects/123/services/serviceconsumermanagement.googleapis.com`
-   * `folders/345/services/serviceconsumermanagement.googleapis.com`
-   * `organizations/456/services/serviceconsumermanagement.googleapis.com`
-   */
-  parent: string;
-  /** Requested size of the next page of data. */
-
-  pageSize: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  pageToken: string;
-  /** Specifies the level of detail for quota information in the response. */
-
-  view: QuotaView;
-}
-/** Response message for ListConsumerQuotaMetrics */
-
-export interface ListConsumerQuotaMetricsResponse {
-  /** Quota settings for the consumer, organized by quota metric. */
-  metrics: ConsumerQuotaMetric[];
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  nextPageToken: string;
-}
-/** Request message for GetConsumerQuotaMetric */
-
-export interface GetConsumerQuotaMetricRequest {
-  /**
-   * The resource name of the quota limit.
-   *
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
-   */
-  name: string;
-  /** Specifies the level of detail for quota information in the response. */
-
-  view: QuotaView;
-}
-/** Request message for GetConsumerQuotaLimit */
-
-export interface GetConsumerQuotaLimitRequest {
-  /**
-   * The resource name of the quota limit.
-   *
-   * Use the quota limit resource name returned by previous
-   * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
-   */
-  name: string;
-  /** Specifies the level of detail for quota information in the response. */
-
-  view: QuotaView;
-}
-/** Request message for CreateAdminOverride. */
-
-export interface CreateAdminOverrideRequest {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
-  parent: string;
-  /** The admin override to create. */
-
-  override: QuotaOverride;
-  /**
-   * Whether to force the creation of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Request message for UpdateAdminOverride. */
-
-export interface UpdateAdminOverrideRequest {
-  /**
-   * The resource name of the override to update.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
-   */
-  name: string;
-  /**
-   * The new override.
-   * Only the override_value is updated; all other fields are ignored.
-   */
-
-  override: QuotaOverride;
-  /**
-   * Whether to force the update of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * Update only the specified fields of the override.
-   * If unset, all fields will be updated.
-   */
-
-  updateMask: string[] | undefined;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Request message for DeleteAdminOverride. */
-
-export interface DeleteAdminOverrideRequest {
-  /**
-   * The resource name of the override to delete.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
-   */
-  name: string;
-  /**
-   * Whether to force the deletion of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Request message for ListAdminOverrides */
-
-export interface ListAdminOverridesRequest {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
-  parent: string;
-  /** Requested size of the next page of data. */
-
-  pageSize: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  pageToken: string;
-}
-/** Response message for ListAdminOverrides. */
-
-export interface ListAdminOverridesResponse {
-  /** Admin overrides on this limit. */
-  overrides: QuotaOverride[];
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  nextPageToken: string;
-}
-/** Response message for BatchCreateAdminOverrides */
-
-export interface BatchCreateAdminOverridesResponse {
-  /** The overrides that were created. */
-  overrides: QuotaOverride[];
-}
-/** Request message for ImportAdminOverrides */
-
-export interface ImportAdminOverridesRequest {
-  /**
-   * The resource name of the consumer.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com`
-   */
-  parent: string;
-  /** The import data is specified in the request message itself */
-
-  inlineSource: OverrideInlineSource | undefined;
-  /**
-   * Whether to force the creation of the quota overrides.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Response message for ImportAdminOverrides */
-
-export interface ImportAdminOverridesResponse {
-  /** The overrides that were created from the imported data. */
-  overrides: QuotaOverride[];
-}
-/**
- * Metadata message that provides information such as progress,
- * partial failures, and similar information on each GetOperation call
- * of LRO returned by ImportAdminOverrides.
- */
-
-export interface ImportAdminOverridesMetadata {}
-/** Request message for CreateConsumerOverride. */
-
-export interface CreateConsumerOverrideRequest {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
-  parent: string;
-  /** The override to create. */
-
-  override: QuotaOverride;
-  /**
-   * Whether to force the creation of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Request message for UpdateConsumerOverride. */
-
-export interface UpdateConsumerOverrideRequest {
-  /**
-   * The resource name of the override to update.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
-   */
-  name: string;
-  /**
-   * The new override.
-   * Only the override_value is updated; all other fields are ignored.
-   */
-
-  override: QuotaOverride;
-  /**
-   * Whether to force the update of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * Update only the specified fields of the override.
-   * If unset, all fields will be updated.
-   */
-
-  updateMask: string[] | undefined;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Request message for DeleteConsumerOverride. */
-
-export interface DeleteConsumerOverrideRequest {
-  /**
-   * The resource name of the override to delete.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
-   */
-  name: string;
-  /**
-   * Whether to force the deletion of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Request message for ListConsumerOverrides */
-
-export interface ListConsumerOverridesRequest {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
-  parent: string;
-  /** Requested size of the next page of data. */
-
-  pageSize: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  pageToken: string;
-}
-/** Response message for ListConsumerOverrides. */
-
-export interface ListConsumerOverridesResponse {
-  /** Consumer overrides on this limit. */
-  overrides: QuotaOverride[];
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  nextPageToken: string;
-}
-/** Response message for BatchCreateConsumerOverrides */
-
-export interface BatchCreateConsumerOverridesResponse {
-  /** The overrides that were created. */
-  overrides: QuotaOverride[];
-}
-/** Request message for ImportConsumerOverrides */
-
-export interface ImportConsumerOverridesRequest {
-  /**
-   * The resource name of the consumer.
-   *
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com`
-   */
-  parent: string;
-  /** The import data is specified in the request message itself */
-
-  inlineSource: OverrideInlineSource | undefined;
-  /**
-   * Whether to force the creation of the quota overrides.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
-
-  force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
-
-  forceOnly: QuotaSafetyCheck[];
-}
-/** Response message for ImportConsumerOverrides */
-
-export interface ImportConsumerOverridesResponse {
-  /** The overrides that were created from the imported data. */
-  overrides: QuotaOverride[];
-}
-/**
- * Metadata message that provides information such as progress,
- * partial failures, and similar information on each GetOperation call
- * of LRO returned by ImportConsumerOverrides.
- */
-
-export interface ImportConsumerOverridesMetadata {}
-/** Response message for ImportAdminQuotaPolicies */
-
-export interface ImportAdminQuotaPoliciesResponse {
-  /** The policies that were created from the imported data. */
-  policies: AdminQuotaPolicy[];
-}
-/**
- * Metadata message that provides information such as progress,
- * partial failures, and similar information on each GetOperation call
- * of LRO returned by ImportAdminQuotaPolicies.
- */
-
-export interface ImportAdminQuotaPoliciesMetadata {}
-/**
- * Metadata message that provides information such as progress,
- * partial failures, and similar information on each GetOperation call
- * of LRO returned by CreateAdminQuotaPolicy.
- */
-
-export interface CreateAdminQuotaPolicyMetadata {}
-/**
- * Metadata message that provides information such as progress,
- * partial failures, and similar information on each GetOperation call
- * of LRO returned by UpdateAdminQuotaPolicy.
- */
-
-export interface UpdateAdminQuotaPolicyMetadata {}
-/**
- * Metadata message that provides information such as progress,
- * partial failures, and similar information on each GetOperation call
- * of LRO returned by DeleteAdminQuotaPolicy.
- */
-
-export interface DeleteAdminQuotaPolicyMetadata {}
-/** Request message for generating service identity. */
-
-export interface GenerateServiceIdentityRequest {
-  /**
-   * Name of the consumer and service to generate an identity for.
-   *
-   * The `GenerateServiceIdentity` methods currently only support projects.
-   *
-   * An example name would be:
-   * `projects/123/services/example.googleapis.com` where `123` is the
-   * project number.
-   */
-  parent: string;
-}
-/** Response message for getting service identity. */
-
-export interface GetServiceIdentityResponse {
-  /**
-   * Service identity that service producer can use to access consumer
-   * resources. If exists is true, it contains email and unique_id. If exists is
-   * false, it contains pre-constructed email and empty unique_id.
-   */
-  identity: ServiceIdentity;
-  /** Service identity state. */
-
-  state: GetServiceIdentityResponse_IdentityState;
-}
 /** Enum for service identity state. */
-
 export enum GetServiceIdentityResponse_IdentityState {
   /**
    * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
@@ -640,8 +43,603 @@ export function getServiceIdentityResponse_IdentityStateToJSON(object: GetServic
       return "UNKNOWN";
   }
 }
-/** Metadata for the `GetServiceIdentity` method. */
 
+/** Request message for the `EnableService` method. */
+export interface EnableServiceRequest {
+  /**
+   * Name of the consumer and service to enable the service on.
+   * 
+   * The `EnableService` and `DisableService` methods currently only support
+   * projects.
+   * 
+   * Enabling a service requires that the service is public or is shared with
+   * the user enabling the service.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com`
+   * where `123` is the project number (not project ID).
+   */
+  name: string;
+}
+
+/** Request message for the `DisableService` method. */
+export interface DisableServiceRequest {
+  /**
+   * Name of the consumer and service to disable the service on.
+   * 
+   * The enable and disable methods currently only support projects.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com`
+   * where `123` is the project number (not project ID).
+   */
+  name: string;
+}
+
+/** Request message for the `GetService` method. */
+export interface GetServiceRequest {
+  /**
+   * Name of the consumer and service to get the `ConsumerState` for.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com`
+   * where `123` is the project number (not project ID).
+   */
+  name: string;
+}
+
+/** Request message for the `ListServices` method. */
+export interface ListServicesRequest {
+  /**
+   * Parent to search for services on.
+   * 
+   * An example name would be:
+   * `projects/123`
+   * where `123` is the project number (not project ID).
+   */
+  parent: string;
+
+  /**
+   * Requested size of the next page of data.
+   * Requested page size cannot exceed 200.
+   * If not set, the default page size is 50.
+   */
+  pageSize: number;
+
+  /**
+   * Token identifying which result to start with, which is returned by a
+   * previous list call.
+   */
+  pageToken: string;
+
+  /**
+   * Only list services that conform to the given filter.
+   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
+   */
+  filter: string;
+}
+
+/** Response message for the `ListServices` method. */
+export interface ListServicesResponse {
+  /** The available services for the requested project. */
+  services: Service[];
+
+  /**
+   * Token that can be passed to `ListServices` to resume a paginated
+   * query.
+   */
+  nextPageToken: string;
+}
+
+/** Request message for the `BatchEnableServices` method. */
+export interface BatchEnableServicesRequest {
+  /**
+   * Parent to enable services on.
+   * 
+   * An example name would be:
+   * `projects/123`
+   * where `123` is the project number (not project ID).
+   * 
+   * The `BatchEnableServices` method currently only supports projects.
+   */
+  parent: string;
+
+  /**
+   * The identifiers of the services to enable on the project.
+   * 
+   * A valid identifier would be:
+   * serviceusage.googleapis.com
+   * 
+   * Enabling services requires that each service is public or is shared with
+   * the user enabling the service.
+   * 
+   * Two or more services must be specified. To enable a single service,
+   * use the `EnableService` method instead.
+   * 
+   * A single request can enable a maximum of 20 services at a time. If more
+   * than 20 services are specified, the request will fail, and no state changes
+   * will occur.
+   */
+  serviceIds: string[];
+}
+
+/** Request message for ListConsumerQuotaMetrics */
+export interface ListConsumerQuotaMetricsRequest {
+  /**
+   * Parent of the quotas resource.
+   * 
+   * Some example names would be:
+   * `projects/123/services/serviceconsumermanagement.googleapis.com`
+   * `folders/345/services/serviceconsumermanagement.googleapis.com`
+   * `organizations/456/services/serviceconsumermanagement.googleapis.com`
+   */
+  parent: string;
+
+  /** Requested size of the next page of data. */
+  pageSize: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  pageToken: string;
+
+  /** Specifies the level of detail for quota information in the response. */
+  view: QuotaView;
+}
+
+/** Response message for ListConsumerQuotaMetrics */
+export interface ListConsumerQuotaMetricsResponse {
+  /** Quota settings for the consumer, organized by quota metric. */
+  metrics: ConsumerQuotaMetric[];
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  nextPageToken: string;
+}
+
+/** Request message for GetConsumerQuotaMetric */
+export interface GetConsumerQuotaMetricRequest {
+  /**
+   * The resource name of the quota limit.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
+   */
+  name: string;
+
+  /** Specifies the level of detail for quota information in the response. */
+  view: QuotaView;
+}
+
+/** Request message for GetConsumerQuotaLimit */
+export interface GetConsumerQuotaLimitRequest {
+  /**
+   * The resource name of the quota limit.
+   * 
+   * Use the quota limit resource name returned by previous
+   * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
+   */
+  name: string;
+
+  /** Specifies the level of detail for quota information in the response. */
+  view: QuotaView;
+}
+
+/** Request message for CreateAdminOverride. */
+export interface CreateAdminOverrideRequest {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent: string;
+
+  /** The admin override to create. */
+  override: QuotaOverride;
+
+  /**
+   * Whether to force the creation of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for UpdateAdminOverride. */
+export interface UpdateAdminOverrideRequest {
+  /**
+   * The resource name of the override to update.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * The new override.
+   * Only the override_value is updated; all other fields are ignored.
+   */
+  override: QuotaOverride;
+
+  /**
+   * Whether to force the update of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * Update only the specified fields of the override.
+   * If unset, all fields will be updated.
+   */
+  updateMask: FieldMask;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for DeleteAdminOverride. */
+export interface DeleteAdminOverrideRequest {
+  /**
+   * The resource name of the override to delete.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * Whether to force the deletion of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for ListAdminOverrides */
+export interface ListAdminOverridesRequest {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent: string;
+
+  /** Requested size of the next page of data. */
+  pageSize: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  pageToken: string;
+}
+
+/** Response message for ListAdminOverrides. */
+export interface ListAdminOverridesResponse {
+  /** Admin overrides on this limit. */
+  overrides: QuotaOverride[];
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  nextPageToken: string;
+}
+
+/** Response message for BatchCreateAdminOverrides */
+export interface BatchCreateAdminOverridesResponse {
+  /** The overrides that were created. */
+  overrides: QuotaOverride[];
+}
+
+/** Request message for ImportAdminOverrides */
+export interface ImportAdminOverridesRequest {
+  /**
+   * The resource name of the consumer.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com`
+   */
+  parent: string;
+
+  /** The import data is specified in the request message itself */
+  inlineSource?: OverrideInlineSource;
+
+  /**
+   * Whether to force the creation of the quota overrides.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Response message for ImportAdminOverrides */
+export interface ImportAdminOverridesResponse {
+  /** The overrides that were created from the imported data. */
+  overrides: QuotaOverride[];
+}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by ImportAdminOverrides.
+ */
+export interface ImportAdminOverridesMetadata {}
+
+/** Request message for CreateConsumerOverride. */
+export interface CreateConsumerOverrideRequest {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent: string;
+
+  /** The override to create. */
+  override: QuotaOverride;
+
+  /**
+   * Whether to force the creation of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for UpdateConsumerOverride. */
+export interface UpdateConsumerOverrideRequest {
+  /**
+   * The resource name of the override to update.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * The new override.
+   * Only the override_value is updated; all other fields are ignored.
+   */
+  override: QuotaOverride;
+
+  /**
+   * Whether to force the update of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * Update only the specified fields of the override.
+   * If unset, all fields will be updated.
+   */
+  updateMask: FieldMask;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for DeleteConsumerOverride. */
+export interface DeleteConsumerOverrideRequest {
+  /**
+   * The resource name of the override to delete.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * Whether to force the deletion of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for ListConsumerOverrides */
+export interface ListConsumerOverridesRequest {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent: string;
+
+  /** Requested size of the next page of data. */
+  pageSize: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  pageToken: string;
+}
+
+/** Response message for ListConsumerOverrides. */
+export interface ListConsumerOverridesResponse {
+  /** Consumer overrides on this limit. */
+  overrides: QuotaOverride[];
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  nextPageToken: string;
+}
+
+/** Response message for BatchCreateConsumerOverrides */
+export interface BatchCreateConsumerOverridesResponse {
+  /** The overrides that were created. */
+  overrides: QuotaOverride[];
+}
+
+/** Request message for ImportConsumerOverrides */
+export interface ImportConsumerOverridesRequest {
+  /**
+   * The resource name of the consumer.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com`
+   */
+  parent: string;
+
+  /** The import data is specified in the request message itself */
+  inlineSource?: OverrideInlineSource;
+
+  /**
+   * Whether to force the creation of the quota overrides.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  forceOnly: QuotaSafetyCheck[];
+}
+
+/** Response message for ImportConsumerOverrides */
+export interface ImportConsumerOverridesResponse {
+  /** The overrides that were created from the imported data. */
+  overrides: QuotaOverride[];
+}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by ImportConsumerOverrides.
+ */
+export interface ImportConsumerOverridesMetadata {}
+
+/** Response message for ImportAdminQuotaPolicies */
+export interface ImportAdminQuotaPoliciesResponse {
+  /** The policies that were created from the imported data. */
+  policies: AdminQuotaPolicy[];
+}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by ImportAdminQuotaPolicies.
+ */
+export interface ImportAdminQuotaPoliciesMetadata {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by CreateAdminQuotaPolicy.
+ */
+export interface CreateAdminQuotaPolicyMetadata {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by UpdateAdminQuotaPolicy.
+ */
+export interface UpdateAdminQuotaPolicyMetadata {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by DeleteAdminQuotaPolicy.
+ */
+export interface DeleteAdminQuotaPolicyMetadata {}
+
+/** Request message for generating service identity. */
+export interface GenerateServiceIdentityRequest {
+  /**
+   * Name of the consumer and service to generate an identity for.
+   * 
+   * The `GenerateServiceIdentity` methods currently only support projects.
+   * 
+   * An example name would be:
+   * `projects/123/services/example.googleapis.com` where `123` is the
+   * project number.
+   */
+  parent: string;
+}
+
+/** Response message for getting service identity. */
+export interface GetServiceIdentityResponse {
+  /**
+   * Service identity that service producer can use to access consumer
+   * resources. If exists is true, it contains email and unique_id. If exists is
+   * false, it contains pre-constructed email and empty unique_id.
+   */
+  identity: ServiceIdentity;
+
+  /** Service identity state. */
+  state: GetServiceIdentityResponse_IdentityState;
+}
+
+/** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {}
 
 function createBaseEnableServiceRequest(): EnableServiceRequest {
@@ -1500,7 +1498,7 @@ export const UpdateAdminOverrideRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(34).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
 
     writer.uint32(42).fork();
@@ -1535,7 +1533,7 @@ export const UpdateAdminOverrideRequest = {
           break;
 
         case 4:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         case 5:
@@ -1565,7 +1563,7 @@ export const UpdateAdminOverrideRequest = {
       name: isSet(object.name) ? String(object.name) : "",
       override: isSet(object.override) ? QuotaOverride.fromJSON(object.override) : undefined,
       force: isSet(object.force) ? Boolean(object.force) : false,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined,
       forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -1575,7 +1573,7 @@ export const UpdateAdminOverrideRequest = {
     message.name !== undefined && (obj.name = message.name);
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
     message.force !== undefined && (obj.force = message.force);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
 
     if (message.forceOnly) {
       obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -1591,7 +1589,7 @@ export const UpdateAdminOverrideRequest = {
     message.name = object.name ?? "";
     message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
   }
@@ -2269,7 +2267,7 @@ export const UpdateConsumerOverrideRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(34).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
 
     writer.uint32(42).fork();
@@ -2304,7 +2302,7 @@ export const UpdateConsumerOverrideRequest = {
           break;
 
         case 4:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         case 5:
@@ -2334,7 +2332,7 @@ export const UpdateConsumerOverrideRequest = {
       name: isSet(object.name) ? String(object.name) : "",
       override: isSet(object.override) ? QuotaOverride.fromJSON(object.override) : undefined,
       force: isSet(object.force) ? Boolean(object.force) : false,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined,
       forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -2344,7 +2342,7 @@ export const UpdateConsumerOverrideRequest = {
     message.name !== undefined && (obj.name = message.name);
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
     message.force !== undefined && (obj.force = message.force);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
 
     if (message.forceOnly) {
       obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -2360,7 +2358,7 @@ export const UpdateConsumerOverrideRequest = {
     message.name = object.name ?? "";
     message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
   }
@@ -3305,288 +3303,3 @@ export const GetServiceIdentityMetadata = {
   }
 
 };
-/** [Service Usage API](https://cloud.google.com/service-usage/docs/overview) */
-
-export interface ServiceUsage {
-  /**
-   * Enables a service so that it can be used with a project.
-   *
-   * Operation response type: `google.protobuf.Empty`
-   *
-   * @deprecated
-   */
-  EnableService(request: EnableServiceRequest): Promise<Operation>;
-  /**
-   * Disables a service so that it can no longer be used with a project.
-   * This prevents unintended usage that may cause unexpected billing
-   * charges or security leaks.
-   *
-   * It is not valid to call the disable method on a service that is not
-   * currently enabled. Callers will receive a `FAILED_PRECONDITION` status if
-   * the target service is not currently enabled.
-   *
-   * Operation response type: `google.protobuf.Empty`
-   *
-   * @deprecated
-   */
-
-  DisableService(request: DisableServiceRequest): Promise<Operation>;
-  /**
-   * Returns the service configuration and enabled state for a given service.
-   *
-   * @deprecated
-   */
-
-  GetService(request: GetServiceRequest): Promise<Service>;
-  /**
-   * Lists all services available to the specified project, and the current
-   * state of those services with respect to the project. The list includes
-   * all public services, all services for which the calling user has the
-   * `servicemanagement.services.bind` permission, and all services that have
-   * already been enabled on the project. The list can be filtered to
-   * only include services in a specific state, for example to only include
-   * services enabled on the project.
-   *
-   * @deprecated
-   */
-
-  ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-  /**
-   * Enables multiple services on a project. The operation is atomic: if
-   * enabling any service fails, then the entire batch fails, and no state
-   * changes occur.
-   *
-   * Operation response type: `google.protobuf.Empty`
-   *
-   * @deprecated
-   */
-
-  BatchEnableServices(request: BatchEnableServicesRequest): Promise<Operation>;
-  /**
-   * Retrieves a summary of all quota information visible to the service
-   * consumer, organized by service metric. Each metric includes information
-   * about all of its defined limits. Each limit includes the limit
-   * configuration (quota unit, preciseness, default value), the current
-   * effective limit value, and all of the overrides applied to the limit.
-   */
-
-  ListConsumerQuotaMetrics(request: ListConsumerQuotaMetricsRequest): Promise<ListConsumerQuotaMetricsResponse>;
-  /** Retrieves a summary of quota information for a specific quota metric */
-
-  GetConsumerQuotaMetric(request: GetConsumerQuotaMetricRequest): Promise<ConsumerQuotaMetric>;
-  /** Retrieves a summary of quota information for a specific quota limit. */
-
-  GetConsumerQuotaLimit(request: GetConsumerQuotaLimitRequest): Promise<ConsumerQuotaLimit>;
-  /**
-   * Creates an admin override.
-   * An admin override is applied by an administrator of a parent folder or
-   * parent organization of the consumer receiving the override. An admin
-   * override is intended to limit the amount of quota the consumer can use out
-   * of the total quota pool allocated to all children of the folder or
-   * organization.
-   */
-
-  CreateAdminOverride(request: CreateAdminOverrideRequest): Promise<Operation>;
-  /** Updates an admin override. */
-
-  UpdateAdminOverride(request: UpdateAdminOverrideRequest): Promise<Operation>;
-  /** Deletes an admin override. */
-
-  DeleteAdminOverride(request: DeleteAdminOverrideRequest): Promise<Operation>;
-  /** Lists all admin overrides on this limit. */
-
-  ListAdminOverrides(request: ListAdminOverridesRequest): Promise<ListAdminOverridesResponse>;
-  /**
-   * Creates or updates multiple admin overrides atomically, all on the
-   * same consumer, but on many different metrics or limits.
-   * The name field in the quota override message should not be set.
-   */
-
-  ImportAdminOverrides(request: ImportAdminOverridesRequest): Promise<Operation>;
-  /**
-   * Creates a consumer override.
-   * A consumer override is applied to the consumer on its own authority to
-   * limit its own quota usage. Consumer overrides cannot be used to grant more
-   * quota than would be allowed by admin overrides, producer overrides, or the
-   * default limit of the service.
-   */
-
-  CreateConsumerOverride(request: CreateConsumerOverrideRequest): Promise<Operation>;
-  /** Updates a consumer override. */
-
-  UpdateConsumerOverride(request: UpdateConsumerOverrideRequest): Promise<Operation>;
-  /** Deletes a consumer override. */
-
-  DeleteConsumerOverride(request: DeleteConsumerOverrideRequest): Promise<Operation>;
-  /** Lists all consumer overrides on this limit. */
-
-  ListConsumerOverrides(request: ListConsumerOverridesRequest): Promise<ListConsumerOverridesResponse>;
-  /**
-   * Creates or updates multiple consumer overrides atomically, all on the
-   * same consumer, but on many different metrics or limits.
-   * The name field in the quota override message should not be set.
-   */
-
-  ImportConsumerOverrides(request: ImportConsumerOverridesRequest): Promise<Operation>;
-  /** Generates service identity for service. */
-
-  GenerateServiceIdentity(request: GenerateServiceIdentityRequest): Promise<Operation>;
-}
-export class ServiceUsageClientImpl implements ServiceUsage {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.EnableService = this.EnableService.bind(this);
-    this.DisableService = this.DisableService.bind(this);
-    this.GetService = this.GetService.bind(this);
-    this.ListServices = this.ListServices.bind(this);
-    this.BatchEnableServices = this.BatchEnableServices.bind(this);
-    this.ListConsumerQuotaMetrics = this.ListConsumerQuotaMetrics.bind(this);
-    this.GetConsumerQuotaMetric = this.GetConsumerQuotaMetric.bind(this);
-    this.GetConsumerQuotaLimit = this.GetConsumerQuotaLimit.bind(this);
-    this.CreateAdminOverride = this.CreateAdminOverride.bind(this);
-    this.UpdateAdminOverride = this.UpdateAdminOverride.bind(this);
-    this.DeleteAdminOverride = this.DeleteAdminOverride.bind(this);
-    this.ListAdminOverrides = this.ListAdminOverrides.bind(this);
-    this.ImportAdminOverrides = this.ImportAdminOverrides.bind(this);
-    this.CreateConsumerOverride = this.CreateConsumerOverride.bind(this);
-    this.UpdateConsumerOverride = this.UpdateConsumerOverride.bind(this);
-    this.DeleteConsumerOverride = this.DeleteConsumerOverride.bind(this);
-    this.ListConsumerOverrides = this.ListConsumerOverrides.bind(this);
-    this.ImportConsumerOverrides = this.ImportConsumerOverrides.bind(this);
-    this.GenerateServiceIdentity = this.GenerateServiceIdentity.bind(this);
-  }
-
-  EnableService(request: EnableServiceRequest): Promise<Operation> {
-    const data = EnableServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "EnableService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  DisableService(request: DisableServiceRequest): Promise<Operation> {
-    const data = DisableServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "DisableService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  GetService(request: GetServiceRequest): Promise<Service> {
-    const data = GetServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "GetService", data);
-    return promise.then(data => Service.decode(new _m0.Reader(data)));
-  }
-
-  ListServices(request: ListServicesRequest): Promise<ListServicesResponse> {
-    const data = ListServicesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "ListServices", data);
-    return promise.then(data => ListServicesResponse.decode(new _m0.Reader(data)));
-  }
-
-  BatchEnableServices(request: BatchEnableServicesRequest): Promise<Operation> {
-    const data = BatchEnableServicesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "BatchEnableServices", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  ListConsumerQuotaMetrics(request: ListConsumerQuotaMetricsRequest): Promise<ListConsumerQuotaMetricsResponse> {
-    const data = ListConsumerQuotaMetricsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "ListConsumerQuotaMetrics", data);
-    return promise.then(data => ListConsumerQuotaMetricsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetConsumerQuotaMetric(request: GetConsumerQuotaMetricRequest): Promise<ConsumerQuotaMetric> {
-    const data = GetConsumerQuotaMetricRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "GetConsumerQuotaMetric", data);
-    return promise.then(data => ConsumerQuotaMetric.decode(new _m0.Reader(data)));
-  }
-
-  GetConsumerQuotaLimit(request: GetConsumerQuotaLimitRequest): Promise<ConsumerQuotaLimit> {
-    const data = GetConsumerQuotaLimitRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "GetConsumerQuotaLimit", data);
-    return promise.then(data => ConsumerQuotaLimit.decode(new _m0.Reader(data)));
-  }
-
-  CreateAdminOverride(request: CreateAdminOverrideRequest): Promise<Operation> {
-    const data = CreateAdminOverrideRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "CreateAdminOverride", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  UpdateAdminOverride(request: UpdateAdminOverrideRequest): Promise<Operation> {
-    const data = UpdateAdminOverrideRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "UpdateAdminOverride", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  DeleteAdminOverride(request: DeleteAdminOverrideRequest): Promise<Operation> {
-    const data = DeleteAdminOverrideRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "DeleteAdminOverride", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  ListAdminOverrides(request: ListAdminOverridesRequest): Promise<ListAdminOverridesResponse> {
-    const data = ListAdminOverridesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "ListAdminOverrides", data);
-    return promise.then(data => ListAdminOverridesResponse.decode(new _m0.Reader(data)));
-  }
-
-  ImportAdminOverrides(request: ImportAdminOverridesRequest): Promise<Operation> {
-    const data = ImportAdminOverridesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "ImportAdminOverrides", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  CreateConsumerOverride(request: CreateConsumerOverrideRequest): Promise<Operation> {
-    const data = CreateConsumerOverrideRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "CreateConsumerOverride", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  UpdateConsumerOverride(request: UpdateConsumerOverrideRequest): Promise<Operation> {
-    const data = UpdateConsumerOverrideRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "UpdateConsumerOverride", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  DeleteConsumerOverride(request: DeleteConsumerOverrideRequest): Promise<Operation> {
-    const data = DeleteConsumerOverrideRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "DeleteConsumerOverride", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  ListConsumerOverrides(request: ListConsumerOverridesRequest): Promise<ListConsumerOverridesResponse> {
-    const data = ListConsumerOverridesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "ListConsumerOverrides", data);
-    return promise.then(data => ListConsumerOverridesResponse.decode(new _m0.Reader(data)));
-  }
-
-  ImportConsumerOverrides(request: ImportConsumerOverridesRequest): Promise<Operation> {
-    const data = ImportConsumerOverridesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "ImportConsumerOverrides", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  GenerateServiceIdentity(request: GenerateServiceIdentityRequest): Promise<Operation> {
-    const data = GenerateServiceIdentityRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1beta1.ServiceUsage", "GenerateServiceIdentity", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

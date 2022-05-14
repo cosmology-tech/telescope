@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
+import { Coin } from "../../base/v1beta1/coin";
+import { Input, Output } from "./bank";
 import * as _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Input, Output } from "../../../cosmos/bank/v1beta1/bank";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
@@ -10,17 +9,17 @@ export interface MsgSend {
   toAddress: string;
   amount: Coin[];
 }
+
 /** MsgSendResponse defines the Msg/Send response type. */
-
 export interface MsgSendResponse {}
-/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 
+/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSend {
   inputs: Input[];
   outputs: Output[];
 }
-/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 
+/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponse {}
 
 function createBaseMsgSend(): MsgSend {
@@ -275,19 +274,3 @@ export const MsgMultiSendResponse = {
   }
 
 };
-/** Msg defines the bank Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

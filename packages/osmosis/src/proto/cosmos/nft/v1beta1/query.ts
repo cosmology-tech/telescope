@@ -1,82 +1,81 @@
-/* eslint-disable */
-import Long from "long";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { NFT, Class } from "./nft";
 import * as _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { NFT, Class } from "../../../cosmos/nft/v1beta1/nft";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
   classId: string;
   owner: string;
 }
-/** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 
+/** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponse {
   amount: Long;
 }
-/** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 
+/** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequest {
   classId: string;
   id: string;
 }
-/** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 
+/** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponse {
   owner: string;
 }
-/** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 
+/** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequest {
   classId: string;
 }
-/** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 
+/** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponse {
   amount: Long;
 }
-/** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 
+/** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequest {
   classId: string;
   owner: string;
   pagination: PageRequest;
 }
-/** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 
+/** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponse {
   nfts: NFT[];
   pagination: PageResponse;
 }
-/** QueryNFTRequest is the request type for the Query/NFT RPC method */
 
+/** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
   classId: string;
   id: string;
 }
-/** QueryNFTResponse is the response type for the Query/NFT RPC method */
 
+/** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponse {
   nft: NFT;
 }
-/** QueryClassRequest is the request type for the Query/Class RPC method */
 
+/** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
   classId: string;
 }
-/** QueryClassResponse is the response type for the Query/Class RPC method */
 
+/** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponse {
   class: Class;
 }
-/** QueryClassesRequest is the request type for the Query/Classes RPC method */
 
+/** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryClassesResponse is the response type for the Query/Classes RPC method */
 
+/** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponse {
   classes: Class[];
   pagination: PageResponse;
@@ -975,19 +974,3 @@ export const QueryClassesResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

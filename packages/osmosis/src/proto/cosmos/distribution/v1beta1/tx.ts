@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
@@ -11,47 +10,47 @@ export interface MsgSetWithdrawAddress {
   delegatorAddress: string;
   withdrawAddress: string;
 }
-/** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
 
+/** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
 export interface MsgSetWithdrawAddressResponse {}
+
 /**
  * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
  * from a single validator.
  */
-
 export interface MsgWithdrawDelegatorReward {
   delegatorAddress: string;
   validatorAddress: string;
 }
-/** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 
+/** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 export interface MsgWithdrawDelegatorRewardResponse {
   amount: Coin[];
 }
+
 /**
  * MsgWithdrawValidatorCommission withdraws the full commission to the validator
  * address.
  */
-
 export interface MsgWithdrawValidatorCommission {
   validatorAddress: string;
 }
-/** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 
+/** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 export interface MsgWithdrawValidatorCommissionResponse {
   amount: Coin[];
 }
+
 /**
  * MsgFundCommunityPool allows an account to directly
  * fund the community pool.
  */
-
 export interface MsgFundCommunityPool {
   amount: Coin[];
   depositor: string;
 }
-/** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
 
+/** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
 export interface MsgFundCommunityPoolResponse {}
 
 function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
@@ -535,19 +534,3 @@ export const MsgFundCommunityPoolResponse = {
   }
 
 };
-/** Msg defines the distribution Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

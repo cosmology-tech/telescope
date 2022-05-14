@@ -1,67 +1,11 @@
-/* eslint-disable */
-import Long from "long";
+import { Service } from "./resources";
 import * as _m0 from "protobufjs/minimal";
-import { Service } from "../../../../google/api/serviceusage/v1/resources";
-import { Operation } from "../../../../google/longrunning/operations";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
-/** Request message for the `EnableService` method. */
-export interface EnableServiceRequest {
-  /**
-   * Name of the consumer and service to enable the service on.
-   *
-   * The `EnableService` and `DisableService` methods currently only support
-   * projects.
-   *
-   * Enabling a service requires that the service is public or is shared with
-   * the user enabling the service.
-   *
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
-  name: string;
-}
-/**
- * Response message for the `EnableService` method.
- * This response message is assigned to the `response` field of the returned
- * Operation when that operation is done.
- */
-
-export interface EnableServiceResponse {
-  /** The new state of the service after enabling. */
-  service: Service;
-}
-/** Request message for the `DisableService` method. */
-
-export interface DisableServiceRequest {
-  /**
-   * Name of the consumer and service to disable the service on.
-   *
-   * The enable and disable methods currently only support projects.
-   *
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
-  name: string;
-  /**
-   * Indicates if services that are enabled and which depend on this service
-   * should also be disabled. If not set, an error will be generated if any
-   * enabled services depend on the service to be disabled. When set, the
-   * service, and any enabled services that depend on it, will be disabled
-   * together.
-   */
-
-  disableDependentServices: boolean;
-  /** Defines the behavior for checking service usage when disabling a service. */
-
-  checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
-}
 /**
  * Enum to determine if service usage should be checked when disabling a
  * service.
  */
-
 export enum DisableServiceRequest_CheckIfServiceHasUsage {
   /** CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED - When unset, the default behavior is used, which is SKIP. */
   CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED = 0,
@@ -112,125 +56,179 @@ export function disableServiceRequest_CheckIfServiceHasUsageToJSON(object: Disab
       return "UNKNOWN";
   }
 }
-/**
- * Response message for the `DisableService` method.
- * This response message is assigned to the `response` field of the returned
- * Operation when that operation is done.
- */
 
-export interface DisableServiceResponse {
-  /** The new state of the service after disabling. */
-  service: Service;
-}
-/** Request message for the `GetService` method. */
-
-export interface GetServiceRequest {
+/** Request message for the `EnableService` method. */
+export interface EnableServiceRequest {
   /**
-   * Name of the consumer and service to get the `ConsumerState` for.
-   *
+   * Name of the consumer and service to enable the service on.
+   * 
+   * The `EnableService` and `DisableService` methods currently only support
+   * projects.
+   * 
+   * Enabling a service requires that the service is public or is shared with
+   * the user enabling the service.
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
   name: string;
 }
-/** Request message for the `ListServices` method. */
 
+/**
+ * Response message for the `EnableService` method.
+ * This response message is assigned to the `response` field of the returned
+ * Operation when that operation is done.
+ */
+export interface EnableServiceResponse {
+  /** The new state of the service after enabling. */
+  service: Service;
+}
+
+/** Request message for the `DisableService` method. */
+export interface DisableServiceRequest {
+  /**
+   * Name of the consumer and service to disable the service on.
+   * 
+   * The enable and disable methods currently only support projects.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
+   * project number.
+   */
+  name: string;
+
+  /**
+   * Indicates if services that are enabled and which depend on this service
+   * should also be disabled. If not set, an error will be generated if any
+   * enabled services depend on the service to be disabled. When set, the
+   * service, and any enabled services that depend on it, will be disabled
+   * together.
+   */
+  disableDependentServices: boolean;
+
+  /** Defines the behavior for checking service usage when disabling a service. */
+  checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
+}
+
+/**
+ * Response message for the `DisableService` method.
+ * This response message is assigned to the `response` field of the returned
+ * Operation when that operation is done.
+ */
+export interface DisableServiceResponse {
+  /** The new state of the service after disabling. */
+  service: Service;
+}
+
+/** Request message for the `GetService` method. */
+export interface GetServiceRequest {
+  /**
+   * Name of the consumer and service to get the `ConsumerState` for.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
+   * project number.
+   */
+  name: string;
+}
+
+/** Request message for the `ListServices` method. */
 export interface ListServicesRequest {
   /**
    * Parent to search for services on.
-   *
+   * 
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
   parent: string;
+
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    * If not set, the default page size is 50.
    */
-
   pageSize: number;
+
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-
   pageToken: string;
+
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-
   filter: string;
 }
-/** Response message for the `ListServices` method. */
 
+/** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
   /** The available services for the requested project. */
   services: Service[];
+
   /**
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
    */
-
   nextPageToken: string;
 }
-/** Request message for the `BatchEnableServices` method. */
 
+/** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequest {
   /**
    * Parent to enable services on.
-   *
+   * 
    * An example name would be:
    * `projects/123` where `123` is the project number.
-   *
+   * 
    * The `BatchEnableServices` method currently only supports projects.
    */
   parent: string;
+
   /**
    * The identifiers of the services to enable on the project.
-   *
+   * 
    * A valid identifier would be:
    * serviceusage.googleapis.com
-   *
+   * 
    * Enabling services requires that each service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * A single request can enable a maximum of 20 services at a time. If more
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
    */
-
   serviceIds: string[];
 }
+
 /**
  * Response message for the `BatchEnableServices` method.
  * This response message is assigned to the `response` field of the returned
  * Operation when that operation is done.
  */
-
 export interface BatchEnableServicesResponse {
   /** The new state of the services after enabling. */
   services: Service[];
+
   /**
    * If allow_partial_success is true, and one or more services could not be
    * enabled, this field contains the details about each failure.
    */
-
   failures: BatchEnableServicesResponse_EnableFailure[];
 }
-/** Provides error messages for the failing services. */
 
+/** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailure {
   /** The service id of a service that could not be enabled. */
   serviceId: string;
-  /** An error message describing why the service could not be enabled. */
 
+  /** An error message describing why the service could not be enabled. */
   errorMessage: string;
 }
-/** Request message for the `BatchGetServices` method. */
 
+/** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequest {
   /**
    * Parent to retrieve services from.
@@ -240,19 +238,19 @@ export interface BatchGetServicesRequest {
    * projects.
    */
   parent: string;
+
   /**
    * Names of the services to retrieve.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    * A single request can get a maximum of 30 services at a time.
    */
-
   names: string[];
 }
-/** Response message for the `BatchGetServices` method. */
 
+/** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponse {
   /** The requested Service states. */
   services: Service[];
@@ -1096,126 +1094,3 @@ export const BatchGetServicesResponse = {
   }
 
 };
-/**
- * Enables services that service consumers want to use on Google Cloud Platform,
- * lists the available or enabled services, or disables services that service
- * consumers no longer use.
- *
- * See [Service Usage API](https://cloud.google.com/service-usage/docs/overview)
- */
-
-export interface ServiceUsage {
-  /** Enable a service so that it can be used with a project. */
-  EnableService(request: EnableServiceRequest): Promise<Operation>;
-  /**
-   * Disable a service so that it can no longer be used with a project.
-   * This prevents unintended usage that may cause unexpected billing
-   * charges or security leaks.
-   *
-   * It is not valid to call the disable method on a service that is not
-   * currently enabled. Callers will receive a `FAILED_PRECONDITION` status if
-   * the target service is not currently enabled.
-   */
-
-  DisableService(request: DisableServiceRequest): Promise<Operation>;
-  /** Returns the service configuration and enabled state for a given service. */
-
-  GetService(request: GetServiceRequest): Promise<Service>;
-  /**
-   * List all services available to the specified project, and the current
-   * state of those services with respect to the project. The list includes
-   * all public services, all services for which the calling user has the
-   * `servicemanagement.services.bind` permission, and all services that have
-   * already been enabled on the project. The list can be filtered to
-   * only include services in a specific state, for example to only include
-   * services enabled on the project.
-   *
-   * WARNING: If you need to query enabled services frequently or across
-   * an organization, you should use
-   * [Cloud Asset Inventory
-   * API](https://cloud.google.com/asset-inventory/docs/apis), which provides
-   * higher throughput and richer filtering capability.
-   */
-
-  ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-  /**
-   * Enable multiple services on a project. The operation is atomic: if enabling
-   * any service fails, then the entire batch fails, and no state changes occur.
-   * To enable a single service, use the `EnableService` method instead.
-   */
-
-  BatchEnableServices(request: BatchEnableServicesRequest): Promise<Operation>;
-  /**
-   * Returns the service configurations and enabled states for a given list of
-   * services.
-   */
-
-  BatchGetServices(request: BatchGetServicesRequest): Promise<BatchGetServicesResponse>;
-}
-export class ServiceUsageClientImpl implements ServiceUsage {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.EnableService = this.EnableService.bind(this);
-    this.DisableService = this.DisableService.bind(this);
-    this.GetService = this.GetService.bind(this);
-    this.ListServices = this.ListServices.bind(this);
-    this.BatchEnableServices = this.BatchEnableServices.bind(this);
-    this.BatchGetServices = this.BatchGetServices.bind(this);
-  }
-
-  EnableService(request: EnableServiceRequest): Promise<Operation> {
-    const data = EnableServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1.ServiceUsage", "EnableService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  DisableService(request: DisableServiceRequest): Promise<Operation> {
-    const data = DisableServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1.ServiceUsage", "DisableService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  GetService(request: GetServiceRequest): Promise<Service> {
-    const data = GetServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1.ServiceUsage", "GetService", data);
-    return promise.then(data => Service.decode(new _m0.Reader(data)));
-  }
-
-  ListServices(request: ListServicesRequest): Promise<ListServicesResponse> {
-    const data = ListServicesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1.ServiceUsage", "ListServices", data);
-    return promise.then(data => ListServicesResponse.decode(new _m0.Reader(data)));
-  }
-
-  BatchEnableServices(request: BatchEnableServicesRequest): Promise<Operation> {
-    const data = BatchEnableServicesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1.ServiceUsage", "BatchEnableServices", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  BatchGetServices(request: BatchGetServicesRequest): Promise<BatchGetServicesResponse> {
-    const data = BatchGetServicesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.serviceusage.v1.ServiceUsage", "BatchGetServices", data);
-    return promise.then(data => BatchGetServicesResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

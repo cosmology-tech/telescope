@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { Duration } from "../../../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../../../google/protobuf/duration";
+import { toDuration, Long, fromDuration, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -11,87 +10,87 @@ import { Duration } from "../../../../google/protobuf/duration";
 export interface HttpRequest {
   /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
   requestMethod: string;
+
   /**
    * The scheme (http, https), the host name, the path, and the query
    * portion of the URL that was requested.
    * Example: `"http://example.com/some/info?color=red"`.
    */
-
   requestUrl: string;
+
   /**
    * The size of the HTTP request message in bytes, including the request
    * headers and the request body.
    */
-
   requestSize: Long;
+
   /**
    * The response code indicating the status of the response.
    * Examples: 200, 404.
    */
-
   status: number;
+
   /**
    * The size of the HTTP response message sent back to the client, in bytes,
    * including the response headers and the response body.
    */
-
   responseSize: Long;
+
   /**
    * The user agent sent by the client. Example:
    * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
    * CLR 1.0.3705)"`.
    */
-
   userAgent: string;
+
   /**
    * The IP address (IPv4 or IPv6) of the client that issued the HTTP
    * request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.
    */
-
   remoteIp: string;
+
   /**
    * The IP address (IPv4 or IPv6) of the origin server that the request was
    * sent to.
    */
-
   serverIp: string;
+
   /**
    * The referer URL of the request, as defined in
    * [HTTP/1.1 Header Field
    * Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
    */
-
   referer: string;
+
   /**
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
+  latency: string;
 
-  latency: Duration;
   /** Whether or not a cache lookup was attempted. */
-
   cacheLookup: boolean;
+
   /**
    * Whether or not an entity was served from cache
    * (with or without validation).
    */
-
   cacheHit: boolean;
+
   /**
    * Whether or not the response was validated with the origin server before
    * being served from cache. This field is only meaningful if `cache_hit` is
    * True.
    */
-
   cacheValidatedWithOriginServer: boolean;
+
   /**
    * The number of HTTP response bytes inserted into cache. Set only when a
    * cache fill was attempted.
    */
-
   cacheFillBytes: Long;
-  /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
 
+  /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
 
@@ -154,7 +153,7 @@ export const HttpRequest = {
     }
 
     if (message.latency !== undefined) {
-      Duration.encode(message.latency, writer.uint32(114).fork()).ldelim();
+      Duration.encode(toDuration(message.latency), writer.uint32(114).fork()).ldelim();
     }
 
     if (message.cacheLookup === true) {
@@ -226,7 +225,7 @@ export const HttpRequest = {
           break;
 
         case 14:
-          message.latency = Duration.decode(reader, reader.uint32());
+          message.latency = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 11:
@@ -269,7 +268,7 @@ export const HttpRequest = {
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
       referer: isSet(object.referer) ? String(object.referer) : "",
-      latency: isSet(object.latency) ? Duration.fromJSON(object.latency) : undefined,
+      latency: isSet(object.latency) ? String(object.latency) : undefined,
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
@@ -289,7 +288,7 @@ export const HttpRequest = {
     message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
     message.serverIp !== undefined && (obj.serverIp = message.serverIp);
     message.referer !== undefined && (obj.referer = message.referer);
-    message.latency !== undefined && (obj.latency = message.latency ? Duration.toJSON(message.latency) : undefined);
+    message.latency !== undefined && (obj.latency = message.latency);
     message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
     message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
     message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);
@@ -309,7 +308,7 @@ export const HttpRequest = {
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : undefined;
+    message.latency = object.latency ?? undefined;
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
@@ -319,17 +318,3 @@ export const HttpRequest = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

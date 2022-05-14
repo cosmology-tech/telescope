@@ -1,48 +1,47 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
-import { BIP44Params } from "../../../../cosmos/crypto/hd/v1/hd";
+import { BIP44Params } from "../../hd/v1/hd";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** Record is used for representing a key in the keyring. */
 export interface Record {
   /** name represents a name of Record */
   name: string;
+
   /** pub_key represents a public key in any format */
-
   pubKey: Any;
+
   /** local stores the public information about a locally stored key */
+  local?: Record_Local;
 
-  local: Record_Local | undefined;
   /** ledger stores the public information about a Ledger key */
+  ledger?: Record_Ledger;
 
-  ledger: Record_Ledger | undefined;
   /** Multi does not store any information. */
+  multi?: Record_Multi;
 
-  multi: Record_Multi | undefined;
   /** Offline does not store any information. */
-
-  offline: Record_Offline | undefined;
+  offline?: Record_Offline;
 }
+
 /**
  * Item is a keyring item stored in a keyring backend.
  * Local item
  */
-
 export interface Record_Local {
   privKey: Any;
   privKeyType: string;
 }
-/** Ledger item */
 
+/** Ledger item */
 export interface Record_Ledger {
   path: BIP44Params;
 }
+
 /** Multi item */
-
 export interface Record_Multi {}
-/** Offline item */
 
+/** Offline item */
 export interface Record_Offline {}
 
 function createBaseRecord(): Record {
@@ -373,17 +372,3 @@ export const Record_Offline = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

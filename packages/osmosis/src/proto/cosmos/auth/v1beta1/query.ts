@@ -1,86 +1,85 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Params } from "../../../cosmos/auth/v1beta1/auth";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
+import { Params } from "./auth";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
-
 export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
   accounts: Any[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
-/** QueryAccountRequest is the request type for the Query/Account RPC method. */
 
+/** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
   /** address defines the address to query for. */
   address: string;
 }
+
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
-
 export interface QueryModuleAccountsRequest {}
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
 }
-/** QueryAccountResponse is the response type for the Query/Account RPC method. */
 
+/** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
   account: Any;
 }
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-
 export interface QueryParamsRequest {}
-/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 
+/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
   accounts: Any[];
 }
+
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
-
 export interface Bech32PrefixRequest {}
-/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 
+/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
   bech32Prefix: string;
 }
-/** AddressBytesToStringRequest is the request type for AddressString rpc method */
 
+/** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequest {
   addressBytes: Uint8Array;
 }
-/** AddressBytesToStringResponse is the response type for AddressString rpc method */
 
+/** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
   addressString: string;
 }
-/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 
+/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequest {
   addressString: string;
 }
-/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 
+/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponse {
   addressBytes: Uint8Array;
 }
@@ -864,54 +863,3 @@ export const AddressStringToBytesResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

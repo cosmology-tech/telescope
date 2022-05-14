@@ -1,10 +1,9 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { ConnectionEnd, IdentifiedConnection } from "../../../../ibc/core/connection/v1/connection";
-import { Height, IdentifiedClientState } from "../../../../ibc/core/client/v1/client";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { ConnectionEnd, IdentifiedConnection } from "./connection";
+import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -14,120 +13,120 @@ export interface QueryConnectionRequest {
   /** connection unique identifier */
   connectionId: string;
 }
+
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
  * method. Besides the connection end, it includes a proof and the height from
  * which the proof was retrieved.
  */
-
 export interface QueryConnectionResponse {
   /** connection associated with the request identifier */
   connection: ConnectionEnd;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
  * method
  */
-
 export interface QueryConnectionsRequest {
   pagination: PageRequest;
 }
+
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
  * method.
  */
-
 export interface QueryConnectionsResponse {
   /** list of stored connections of the chain. */
   connections: IdentifiedConnection[];
+
   /** pagination response */
-
   pagination: PageResponse;
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryClientConnectionsRequest is the request type for the
  * Query/ClientConnections RPC method
  */
-
 export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
   clientId: string;
 }
+
 /**
  * QueryClientConnectionsResponse is the response type for the
  * Query/ClientConnections RPC method
  */
-
 export interface QueryClientConnectionsResponse {
   /** slice of all the connection paths associated with a client. */
   connectionPaths: string[];
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was generated */
 
+  /** height at which the proof was generated */
   proofHeight: Height;
 }
+
 /**
  * QueryConnectionClientStateRequest is the request type for the
  * Query/ConnectionClientState RPC method
  */
-
 export interface QueryConnectionClientStateRequest {
   /** connection identifier */
   connectionId: string;
 }
+
 /**
  * QueryConnectionClientStateResponse is the response type for the
  * Query/ConnectionClientState RPC method
  */
-
 export interface QueryConnectionClientStateResponse {
   /** client state associated with the channel */
   identifiedClientState: IdentifiedClientState;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
  * Query/ConnectionConsensusState RPC method
  */
-
 export interface QueryConnectionConsensusStateRequest {
   /** connection identifier */
   connectionId: string;
   revisionNumber: Long;
   revisionHeight: Long;
 }
+
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
  * Query/ConnectionConsensusState RPC method
  */
-
 export interface QueryConnectionConsensusStateResponse {
   /** consensus state associated with the channel */
   consensusState: Any;
+
   /** client ID associated with the consensus state */
-
   clientId: string;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
 
@@ -868,54 +867,3 @@ export const QueryConnectionConsensusStateResponse = {
   }
 
 };
-/** Query provides defines the gRPC querier service */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

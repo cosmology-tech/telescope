@@ -1,6 +1,5 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -12,28 +11,28 @@ export interface DenomTrace {
    * source of the fungible token.
    */
   path: string;
-  /** base denomination of the relayed fungible token. */
 
+  /** base denomination of the relayed fungible token. */
   baseDenom: string;
 }
+
 /**
  * Params defines the set of IBC transfer parameters.
  * NOTE: To prevent a single token from being transferred, set the
  * TransfersEnabled parameter to true and then set the bank module's SendEnabled
  * parameter for the denomination to false.
  */
-
 export interface Params {
   /**
    * send_enabled enables or disables all cross-chain token transfers from this
    * chain.
    */
   sendEnabled: boolean;
+
   /**
    * receive_enabled enables or disables all cross-chain token transfers to this
    * chain.
    */
-
   receiveEnabled: boolean;
 }
 
@@ -174,17 +173,3 @@ export const Params = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

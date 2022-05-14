@@ -1,82 +1,79 @@
-/* eslint-disable */
-import Long from "long";
+import { ProposalStatus, Proposal, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
-import { Proposal, ProposalStatus, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult, proposalStatusFromJSON, proposalStatusToJSON } from "../../../cosmos/gov/v1/gov";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-
-/** Since: cosmos-sdk 0.46 */
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
 }
-/** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 
+/** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponse {
   proposal: Proposal;
 }
-/** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 
+/** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequest {
   /** proposal_status defines the status of the proposals. */
   proposalStatus: ProposalStatus;
+
   /** voter defines the voter address for the proposals. */
-
   voter: string;
+
   /** depositor defines the deposit addresses from the proposals. */
-
   depositor: string;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
  * method.
  */
-
 export interface QueryProposalsResponse {
   proposals: Proposal[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
-/** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 
+/** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
-  /** voter defines the oter address for the proposals. */
 
+  /** voter defines the oter address for the proposals. */
   voter: string;
 }
-/** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 
+/** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 export interface QueryVoteResponse {
   /** vote defined the queried vote. */
   vote: Vote;
 }
-/** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 
+/** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 
+/** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponse {
   /** votes defined the queried votes. */
   votes: Vote[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
-/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
   /**
    * params_type defines which parameters to query for, can be one of "voting",
@@ -84,58 +81,58 @@ export interface QueryParamsRequest {
    */
   paramsType: string;
 }
-/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** voting_params defines the parameters related to voting. */
   votingParams: VotingParams;
+
   /** deposit_params defines the parameters related to deposit. */
-
   depositParams: DepositParams;
-  /** tally_params defines the parameters related to tally. */
 
+  /** tally_params defines the parameters related to tally. */
   tallyParams: TallyParams;
 }
-/** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 
+/** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
-  /** depositor defines the deposit addresses from the proposals. */
 
+  /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
 }
-/** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 
+/** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 export interface QueryDepositResponse {
   /** deposit defines the requested deposit. */
   deposit: Deposit;
 }
-/** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 
+/** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 
+/** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponse {
   deposits: Deposit[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
-/** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 
+/** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
 }
-/** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 
+/** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponse {
   /** tally defines the requested tally. */
   tally: TallyResult;
@@ -1214,19 +1211,3 @@ export const QueryTallyResultResponse = {
   }
 
 };
-/** Query defines the gRPC querier service for gov module */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

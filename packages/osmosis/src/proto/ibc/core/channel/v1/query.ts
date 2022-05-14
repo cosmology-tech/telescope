@@ -1,376 +1,375 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Channel, IdentifiedChannel, PacketState } from "../../../../ibc/core/channel/v1/channel";
-import { Height, IdentifiedClientState } from "../../../../ibc/core/client/v1/client";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Channel, IdentifiedChannel, PacketState } from "./channel";
+import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequest {
   /** port unique identifier */
   portId: string;
-  /** channel unique identifier */
 
+  /** channel unique identifier */
   channelId: string;
 }
+
 /**
  * QueryChannelResponse is the response type for the Query/Channel RPC method.
  * Besides the Channel end, it includes a proof and the height from which the
  * proof was retrieved.
  */
-
 export interface QueryChannelResponse {
   /** channel associated with the request identifiers */
   channel: Channel;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
-/** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 
+/** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequest {
   /** pagination request */
   pagination: PageRequest;
 }
-/** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 
+/** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponse {
   /** list of stored channels of the chain. */
   channels: IdentifiedChannel[];
+
   /** pagination response */
-
   pagination: PageResponse;
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryConnectionChannelsRequest is the request type for the
  * Query/QueryConnectionChannels RPC method
  */
-
 export interface QueryConnectionChannelsRequest {
   /** connection unique identifier */
   connection: string;
-  /** pagination request */
 
+  /** pagination request */
   pagination: PageRequest;
 }
+
 /**
  * QueryConnectionChannelsResponse is the Response type for the
  * Query/QueryConnectionChannels RPC method
  */
-
 export interface QueryConnectionChannelsResponse {
   /** list of channels associated with a connection. */
   channels: IdentifiedChannel[];
+
   /** pagination response */
-
   pagination: PageResponse;
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
  * RPC method
  */
-
 export interface QueryChannelClientStateRequest {
   /** port unique identifier */
   portId: string;
-  /** channel unique identifier */
 
+  /** channel unique identifier */
   channelId: string;
 }
+
 /**
  * QueryChannelClientStateResponse is the Response type for the
  * Query/QueryChannelClientState RPC method
  */
-
 export interface QueryChannelClientStateResponse {
   /** client state associated with the channel */
   identifiedClientState: IdentifiedClientState;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryChannelConsensusStateRequest is the request type for the
  * Query/ConsensusState RPC method
  */
-
 export interface QueryChannelConsensusStateRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
+
   /** revision number of the consensus state */
-
   revisionNumber: Long;
-  /** revision height of the consensus state */
 
+  /** revision height of the consensus state */
   revisionHeight: Long;
 }
+
 /**
  * QueryChannelClientStateResponse is the Response type for the
  * Query/QueryChannelClientState RPC method
  */
-
 export interface QueryChannelConsensusStateResponse {
   /** consensus state associated with the channel */
   consensusState: Any;
+
   /** client ID associated with the consensus state */
-
   clientId: string;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryPacketCommitmentRequest is the request type for the
  * Query/PacketCommitment RPC method
  */
-
 export interface QueryPacketCommitmentRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
-  /** packet sequence */
 
+  /** packet sequence */
   sequence: Long;
 }
+
 /**
  * QueryPacketCommitmentResponse defines the client query response for a packet
  * which also includes a proof and the height from which the proof was
  * retrieved
  */
-
 export interface QueryPacketCommitmentResponse {
   /** packet associated with the request fields */
   commitment: Uint8Array;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryPacketCommitmentsRequest is the request type for the
  * Query/QueryPacketCommitments RPC method
  */
-
 export interface QueryPacketCommitmentsRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
-  /** pagination request */
 
+  /** pagination request */
   pagination: PageRequest;
 }
+
 /**
  * QueryPacketCommitmentsResponse is the request type for the
  * Query/QueryPacketCommitments RPC method
  */
-
 export interface QueryPacketCommitmentsResponse {
   commitments: PacketState[];
+
   /** pagination response */
-
   pagination: PageResponse;
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryPacketReceiptRequest is the request type for the
  * Query/PacketReceipt RPC method
  */
-
 export interface QueryPacketReceiptRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
-  /** packet sequence */
 
+  /** packet sequence */
   sequence: Long;
 }
+
 /**
  * QueryPacketReceiptResponse defines the client query response for a packet
  * receipt which also includes a proof, and the height from which the proof was
  * retrieved
  */
-
 export interface QueryPacketReceiptResponse {
   /** success flag for if receipt exists */
   received: boolean;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
  * Query/PacketAcknowledgement RPC method
  */
-
 export interface QueryPacketAcknowledgementRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
-  /** packet sequence */
 
+  /** packet sequence */
   sequence: Long;
 }
+
 /**
  * QueryPacketAcknowledgementResponse defines the client query response for a
  * packet which also includes a proof and the height from which the
  * proof was retrieved
  */
-
 export interface QueryPacketAcknowledgementResponse {
   /** packet associated with the request fields */
   acknowledgement: Uint8Array;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
  * Query/QueryPacketCommitments RPC method
  */
-
 export interface QueryPacketAcknowledgementsRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
+
   /** pagination request */
-
   pagination: PageRequest;
-  /** list of packet sequences */
 
+  /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
+
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
  * Query/QueryPacketAcknowledgements RPC method
  */
-
 export interface QueryPacketAcknowledgementsResponse {
   acknowledgements: PacketState[];
+
   /** pagination response */
-
   pagination: PageResponse;
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
  * Query/UnreceivedPackets RPC method
  */
-
 export interface QueryUnreceivedPacketsRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
-  /** list of packet sequences */
 
+  /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
+
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
  * Query/UnreceivedPacketCommitments RPC method
  */
-
 export interface QueryUnreceivedPacketsResponse {
   /** list of unreceived packet sequences */
   sequences: Long[];
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryUnreceivedAcks is the request type for the
  * Query/UnreceivedAcks RPC method
  */
-
 export interface QueryUnreceivedAcksRequest {
   /** port unique identifier */
   portId: string;
+
   /** channel unique identifier */
-
   channelId: string;
-  /** list of acknowledgement sequences */
 
+  /** list of acknowledgement sequences */
   packetAckSequences: Long[];
 }
+
 /**
  * QueryUnreceivedAcksResponse is the response type for the
  * Query/UnreceivedAcks RPC method
  */
-
 export interface QueryUnreceivedAcksResponse {
   /** list of unreceived acknowledgement sequences */
   sequences: Long[];
-  /** query block height */
 
+  /** query block height */
   height: Height;
 }
+
 /**
  * QueryNextSequenceReceiveRequest is the request type for the
  * Query/QueryNextSequenceReceiveRequest RPC method
  */
-
 export interface QueryNextSequenceReceiveRequest {
   /** port unique identifier */
   portId: string;
-  /** channel unique identifier */
 
+  /** channel unique identifier */
   channelId: string;
 }
+
 /**
  * QuerySequenceResponse is the request type for the
  * Query/QueryNextSequenceReceiveResponse RPC method
  */
-
 export interface QueryNextSequenceReceiveResponse {
   /** next sequence receive number */
   nextSequenceReceive: Long;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
 
@@ -2535,54 +2534,3 @@ export const QueryNextSequenceReceiveResponse = {
   }
 
 };
-/** Query provides defines the gRPC querier service */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

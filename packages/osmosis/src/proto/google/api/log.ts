@@ -1,17 +1,16 @@
-/* eslint-disable */
-import Long from "long";
+import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { LabelDescriptor } from "../../google/api/label";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A description of a log type. Example in YAML format:
- *
- *     - name: library.googleapis.com/activity_history
- *       description: The history of borrowing and returning library items.
- *       display_name: Activity
- *       labels:
- *       - key: /customer_id
- *         description: Identifier of a library customer
+ * 
+ * - name: library.googleapis.com/activity_history
+ * description: The history of borrowing and returning library items.
+ * display_name: Activity
+ * labels:
+ * - key: /customer_id
+ * description: Identifier of a library customer
  */
 export interface LogDescriptor {
   /**
@@ -21,24 +20,24 @@ export interface LogDescriptor {
    * slash, underscore, hyphen, period [/_-.].
    */
   name: string;
+
   /**
    * The set of labels that are available to describe a specific log entry.
    * Runtime requests that contain labels not specified here are
    * considered invalid.
    */
-
   labels: LabelDescriptor[];
+
   /**
    * A human-readable description of this log. This information appears in
    * the documentation and can contain details.
    */
-
   description: string;
+
   /**
    * The human-readable name for this log. This information appears on
    * the user interface and should be concise.
    */
-
   displayName: string;
 }
 
@@ -140,17 +139,3 @@ export const LogDescriptor = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

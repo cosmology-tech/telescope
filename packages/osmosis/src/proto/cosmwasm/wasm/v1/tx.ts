@@ -1,100 +1,99 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { AccessConfig } from "../../../cosmwasm/wasm/v1/types";
+import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCode {
   /** Sender is the that actor that signed the messages */
   sender: string;
-  /** WASMByteCode can be raw or gzip compressed */
 
+  /** WASMByteCode can be raw or gzip compressed */
   wasmByteCode: Uint8Array;
+
   /**
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
-
   instantiatePermission: AccessConfig;
 }
-/** MsgStoreCodeResponse returns store result data. */
 
+/** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponse {
   /** CodeID is the reference to the stored WASM code */
   codeId: Long;
 }
+
 /**
  * MsgInstantiateContract create a new smart contract instance for the given
  * code id.
  */
-
 export interface MsgInstantiateContract {
   /** Sender is the that actor that signed the messages */
   sender: string;
+
   /** Admin is an optional address that can execute migrations */
-
   admin: string;
+
   /** CodeID is the reference to the stored WASM code */
-
   codeId: Long;
+
   /** Label is optional metadata to be stored with a contract instance. */
-
   label: string;
+
   /** Msg json encoded message to be passed to the contract on instantiation */
-
   msg: Uint8Array;
-  /** Funds coins that are transferred to the contract on instantiation */
 
+  /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
-/** MsgInstantiateContractResponse return instantiation result data */
 
+/** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponse {
   /** Address is the bech32 address of the new contract instance. */
   address: string;
-  /** Data contains base64-encoded bytes to returned from the contract */
 
+  /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
 }
-/** MsgExecuteContract submits the given message data to a smart contract */
 
+/** MsgExecuteContract submits the given message data to a smart contract */
 export interface MsgExecuteContract {
   /** Sender is the that actor that signed the messages */
   sender: string;
+
   /** Contract is the address of the smart contract */
-
   contract: string;
+
   /** Msg json encoded message to be passed to the contract */
-
   msg: Uint8Array;
-  /** Funds coins that are transferred to the contract on execution */
 
+  /** Funds coins that are transferred to the contract on execution */
   funds: Coin[];
 }
-/** MsgExecuteContractResponse returns execution result data. */
 
+/** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponse {
   /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
 }
-/** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 
+/** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContract {
   /** Sender is the that actor that signed the messages */
   sender: string;
+
   /** Contract is the address of the smart contract */
-
   contract: string;
+
   /** CodeID references the new WASM code */
-
   codeId: Long;
-  /** Msg json encoded message to be passed to the contract on migration */
 
+  /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
-/** MsgMigrateContractResponse returns contract migration result data. */
 
+/** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponse {
   /**
    * Data contains same raw bytes returned as data from the wasm contract.
@@ -102,32 +101,32 @@ export interface MsgMigrateContractResponse {
    */
   data: Uint8Array;
 }
-/** MsgUpdateAdmin sets a new admin for a smart contract */
 
+/** MsgUpdateAdmin sets a new admin for a smart contract */
 export interface MsgUpdateAdmin {
   /** Sender is the that actor that signed the messages */
   sender: string;
+
   /** NewAdmin address to be set */
-
   newAdmin: string;
-  /** Contract is the address of the smart contract */
 
+  /** Contract is the address of the smart contract */
   contract: string;
 }
+
 /** MsgUpdateAdminResponse returns empty data */
-
 export interface MsgUpdateAdminResponse {}
-/** MsgClearAdmin removes any admin stored for a smart contract */
 
+/** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdmin {
   /** Sender is the that actor that signed the messages */
   sender: string;
-  /** Contract is the address of the smart contract */
 
+  /** Contract is the address of the smart contract */
   contract: string;
 }
-/** MsgClearAdminResponse returns empty data */
 
+/** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponse {}
 
 function createBaseMsgStoreCode(): MsgStoreCode {
@@ -1001,54 +1000,3 @@ export const MsgClearAdminResponse = {
   }
 
 };
-/** Msg defines the wasm Msg service. */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

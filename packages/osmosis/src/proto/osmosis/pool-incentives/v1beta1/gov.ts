@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { DistrRecord } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
-import { DistrRecord } from "../../../osmosis/pool-incentives/v1beta1/incentives";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -17,6 +16,7 @@ export interface ReplacePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
+
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -26,7 +26,6 @@ export interface ReplacePoolIncentivesProposal {
  * The result DistrRecords in state would be:
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
-
 export interface UpdatePoolIncentivesProposal {
   title: string;
   description: string;
@@ -206,17 +205,3 @@ export const UpdatePoolIncentivesProposal = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,110 +1,8 @@
-/* eslint-disable */
-import Long from "long";
+import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "./resources";
+import { Service } from "../../service";
+import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "../../../../google/api/servicemanagement/v1/resources";
-import { Service } from "../../../../google/api/service";
-import { Any } from "../../../../google/protobuf/any";
-import { Operation } from "../../../../google/longrunning/operations";
-
-/** Request message for `ListServices` method. */
-export interface ListServicesRequest {
-  /** Include services produced by the specified project. */
-  producerProjectId: string;
-  /**
-   * The max number of items to include in the response list. Page size is 50
-   * if not specified. Maximum value is 100.
-   */
-
-  pageSize: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
-
-  pageToken: string;
-  /**
-   * Include services consumed by the specified consumer.
-   *
-   * The Google Service Management implementation accepts the following
-   * forms:
-   * - project:<project_id>
-   *
-   * @deprecated
-   */
-
-  consumerId: string;
-}
-/** Response message for `ListServices` method. */
-
-export interface ListServicesResponse {
-  /** The returned services will only have the name field set. */
-  services: ManagedService[];
-  /** Token that can be passed to `ListServices` to resume a paginated query. */
-
-  nextPageToken: string;
-}
-/** Request message for `GetService` method. */
-
-export interface GetServiceRequest {
-  /**
-   * Required. The name of the service.  See the `ServiceManager` overview for naming
-   * requirements.  For example: `example.googleapis.com`.
-   */
-  serviceName: string;
-}
-/** Request message for CreateService method. */
-
-export interface CreateServiceRequest {
-  /** Required. Initial values for the service resource. */
-  service: ManagedService;
-}
-/** Request message for DeleteService method. */
-
-export interface DeleteServiceRequest {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
-  serviceName: string;
-}
-/** Request message for UndeleteService method. */
-
-export interface UndeleteServiceRequest {
-  /**
-   * Required. The name of the service. See the [overview](/service-management/overview)
-   * for naming requirements. For example: `example.googleapis.com`.
-   */
-  serviceName: string;
-}
-/** Response message for UndeleteService method. */
-
-export interface UndeleteServiceResponse {
-  /** Revived service resource. */
-  service: ManagedService;
-}
-/** Request message for GetServiceConfig method. */
-
-export interface GetServiceConfigRequest {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
-  serviceName: string;
-  /**
-   * Required. The id of the service configuration resource.
-   *
-   * This field must be specified for the server to return all fields, including
-   * `SourceInfo`.
-   */
-
-  configId: string;
-  /**
-   * Specifies which parts of the Service Config should be returned in the
-   * response.
-   */
-
-  view: GetServiceConfigRequest_ConfigView;
-}
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
   BASIC = 0,
@@ -146,135 +44,235 @@ export function getServiceConfigRequest_ConfigViewToJSON(object: GetServiceConfi
       return "UNKNOWN";
   }
 }
-/** Request message for ListServiceConfigs method. */
 
+/** Request message for `ListServices` method. */
+export interface ListServicesRequest {
+  /** Include services produced by the specified project. */
+  producerProjectId: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  pageSize: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  pageToken: string;
+
+  /**
+   * Include services consumed by the specified consumer.
+   * 
+   * The Google Service Management implementation accepts the following
+   * forms:
+   * - project:<project_id>
+   */
+
+  /** @deprecated */
+  consumerId: string;
+}
+
+/** Response message for `ListServices` method. */
+export interface ListServicesResponse {
+  /** The returned services will only have the name field set. */
+  services: ManagedService[];
+
+  /** Token that can be passed to `ListServices` to resume a paginated query. */
+  nextPageToken: string;
+}
+
+/** Request message for `GetService` method. */
+export interface GetServiceRequest {
+  /**
+   * Required. The name of the service.  See the `ServiceManager` overview for naming
+   * requirements.  For example: `example.googleapis.com`.
+   */
+  serviceName: string;
+}
+
+/** Request message for CreateService method. */
+export interface CreateServiceRequest {
+  /** Required. Initial values for the service resource. */
+  service: ManagedService;
+}
+
+/** Request message for DeleteService method. */
+export interface DeleteServiceRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  serviceName: string;
+}
+
+/** Request message for UndeleteService method. */
+export interface UndeleteServiceRequest {
+  /**
+   * Required. The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements. For example: `example.googleapis.com`.
+   */
+  serviceName: string;
+}
+
+/** Response message for UndeleteService method. */
+export interface UndeleteServiceResponse {
+  /** Revived service resource. */
+  service: ManagedService;
+}
+
+/** Request message for GetServiceConfig method. */
+export interface GetServiceConfigRequest {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  serviceName: string;
+
+  /**
+   * Required. The id of the service configuration resource.
+   * 
+   * This field must be specified for the server to return all fields, including
+   * `SourceInfo`.
+   */
+  configId: string;
+
+  /**
+   * Specifies which parts of the Service Config should be returned in the
+   * response.
+   */
+  view: GetServiceConfigRequest_ConfigView;
+}
+
+/** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequest {
   /**
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
-  /** The token of the page to retrieve. */
 
+  /** The token of the page to retrieve. */
   pageToken: string;
+
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-
   pageSize: number;
 }
-/** Response message for ListServiceConfigs method. */
 
+/** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponse {
   /** The list of service configuration resources. */
   serviceConfigs: Service[];
-  /** The token of the next page of results. */
 
+  /** The token of the next page of results. */
   nextPageToken: string;
 }
-/** Request message for CreateServiceConfig method. */
 
+/** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequest {
   /**
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
-  /** Required. The service configuration resource. */
 
+  /** Required. The service configuration resource. */
   serviceConfig: Service;
 }
-/** Request message for SubmitConfigSource method. */
 
+/** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequest {
   /**
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
-  /** Required. The source configuration for the service. */
 
+  /** Required. The source configuration for the service. */
   configSource: ConfigSource;
+
   /**
    * Optional. If set, this will result in the generation of a
    * `google.api.Service` configuration based on the `ConfigSource` provided,
    * but the generated config and the sources will NOT be persisted.
    */
-
   validateOnly: boolean;
 }
-/** Response message for SubmitConfigSource method. */
 
+/** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
   serviceConfig: Service;
 }
-/** Request message for 'CreateServiceRollout' */
 
+/** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequest {
   /**
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
-  /** Required. The rollout resource. The `service_name` field is output only. */
 
+  /** Required. The rollout resource. The `service_name` field is output only. */
   rollout: Rollout;
 }
-/** Request message for 'ListServiceRollouts' */
 
+/** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequest {
   /**
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
-  /** The token of the page to retrieve. */
 
+  /** The token of the page to retrieve. */
   pageToken: string;
+
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-
   pageSize: number;
+
   /**
    * Required. Use `filter` to return subset of rollouts.
    * The following filters are supported:
-   *   -- To limit the results to only those in
-   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
-   *      use filter='status=SUCCESS'
-   *   -- To limit the results to those in
-   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
-   *      or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+   * -- To limit the results to only those in
+   * [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   * use filter='status=SUCCESS'
+   * -- To limit the results to those in
+   * [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   * or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    */
-
   filter: string;
 }
-/** Response message for ListServiceRollouts method. */
 
+/** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponse {
   /** The list of rollout resources. */
   rollouts: Rollout[];
-  /** The token of the next page of results. */
 
+  /** The token of the next page of results. */
   nextPageToken: string;
 }
-/** Request message for GetServiceRollout method. */
 
+/** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequest {
   /**
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   serviceName: string;
-  /** Required. The id of the rollout resource. */
 
+  /** Required. The id of the rollout resource. */
   rolloutId: string;
 }
-/** Request message for GenerateConfigReport method. */
 
+/** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequest {
   /**
    * Required. Service configuration for which we want to generate the report.
@@ -284,6 +282,7 @@ export interface GenerateConfigReportRequest {
    * and [google.api.Service][google.api.Service]
    */
   newConfig: Any;
+
   /**
    * Optional. Service configuration against which the comparison will be done.
    * For this version of API, the supported types are
@@ -291,29 +290,28 @@ export interface GenerateConfigReportRequest {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-
   oldConfig: Any;
 }
-/** Response message for GenerateConfigReport method. */
 
+/** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponse {
   /** Name of the service this report belongs to. */
   serviceName: string;
-  /** ID of the service configuration this report belongs to. */
 
+  /** ID of the service configuration this report belongs to. */
   id: string;
+
   /**
    * list of ChangeReport, each corresponding to comparison between two
    * service configurations.
    */
-
   changeReports: ChangeReport[];
+
   /**
    * Errors / Linter warnings associated with the service definition this
    * report
    * belongs to.
    */
-
   diagnostics: Diagnostic[];
 }
 
@@ -1692,252 +1690,3 @@ export const GenerateConfigReportResponse = {
   }
 
 };
-/** [Google Service Management API](/service-management/overview) */
-
-export interface ServiceManager {
-  /**
-   * Lists managed services.
-   *
-   * Returns all public services. For authenticated users, also returns all
-   * services the calling user has "servicemanagement.services.get" permission
-   * for.
-   */
-  ListServices(request: ListServicesRequest): Promise<ListServicesResponse>;
-  /**
-   * Gets a managed service. Authentication is required unless the service is
-   * public.
-   */
-
-  GetService(request: GetServiceRequest): Promise<ManagedService>;
-  /**
-   * Creates a new managed service.
-   *
-   * A managed service is immutable, and is subject to mandatory 30-day
-   * data retention. You cannot move a service or recreate it within 30 days
-   * after deletion.
-   *
-   * One producer project can own no more than 500 services. For security and
-   * reliability purposes, a production service should be hosted in a
-   * dedicated producer project.
-   *
-   * Operation<response: ManagedService>
-   */
-
-  CreateService(request: CreateServiceRequest): Promise<Operation>;
-  /**
-   * Deletes a managed service. This method will change the service to the
-   * `Soft-Delete` state for 30 days. Within this period, service producers may
-   * call [UndeleteService][google.api.servicemanagement.v1.ServiceManager.UndeleteService] to restore the service.
-   * After 30 days, the service will be permanently deleted.
-   *
-   * Operation<response: google.protobuf.Empty>
-   */
-
-  DeleteService(request: DeleteServiceRequest): Promise<Operation>;
-  /**
-   * Revives a previously deleted managed service. The method restores the
-   * service using the configuration at the time the service was deleted.
-   * The target service must exist and must have been deleted within the
-   * last 30 days.
-   *
-   * Operation<response: UndeleteServiceResponse>
-   */
-
-  UndeleteService(request: UndeleteServiceRequest): Promise<Operation>;
-  /**
-   * Lists the history of the service configuration for a managed service,
-   * from the newest to the oldest.
-   */
-
-  ListServiceConfigs(request: ListServiceConfigsRequest): Promise<ListServiceConfigsResponse>;
-  /** Gets a service configuration (version) for a managed service. */
-
-  GetServiceConfig(request: GetServiceConfigRequest): Promise<Service>;
-  /**
-   * Creates a new service configuration (version) for a managed service.
-   * This method only stores the service configuration. To roll out the service
-   * configuration to backend systems please call
-   * [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout].
-   *
-   * Only the 100 most recent service configurations and ones referenced by
-   * existing rollouts are kept for each service. The rest will be deleted
-   * eventually.
-   */
-
-  CreateServiceConfig(request: CreateServiceConfigRequest): Promise<Service>;
-  /**
-   * Creates a new service configuration (version) for a managed service based
-   * on
-   * user-supplied configuration source files (for example: OpenAPI
-   * Specification). This method stores the source configurations as well as the
-   * generated service configuration. To rollout the service configuration to
-   * other services,
-   * please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout].
-   *
-   * Only the 100 most recent configuration sources and ones referenced by
-   * existing service configurtions are kept for each service. The rest will be
-   * deleted eventually.
-   *
-   * Operation<response: SubmitConfigSourceResponse>
-   */
-
-  SubmitConfigSource(request: SubmitConfigSourceRequest): Promise<Operation>;
-  /**
-   * Lists the history of the service configuration rollouts for a managed
-   * service, from the newest to the oldest.
-   */
-
-  ListServiceRollouts(request: ListServiceRolloutsRequest): Promise<ListServiceRolloutsResponse>;
-  /** Gets a service configuration [rollout][google.api.servicemanagement.v1.Rollout]. */
-
-  GetServiceRollout(request: GetServiceRolloutRequest): Promise<Rollout>;
-  /**
-   * Creates a new service configuration rollout. Based on rollout, the
-   * Google Service Management will roll out the service configurations to
-   * different backend services. For example, the logging configuration will be
-   * pushed to Google Cloud Logging.
-   *
-   * Please note that any previous pending and running Rollouts and associated
-   * Operations will be automatically cancelled so that the latest Rollout will
-   * not be blocked by previous Rollouts.
-   *
-   * Only the 100 most recent (in any state) and the last 10 successful (if not
-   * already part of the set of 100 most recent) rollouts are kept for each
-   * service. The rest will be deleted eventually.
-   *
-   * Operation<response: Rollout>
-   */
-
-  CreateServiceRollout(request: CreateServiceRolloutRequest): Promise<Operation>;
-  /**
-   * Generates and returns a report (errors, warnings and changes from
-   * existing configurations) associated with
-   * GenerateConfigReportRequest.new_value
-   *
-   * If GenerateConfigReportRequest.old_value is specified,
-   * GenerateConfigReportRequest will contain a single ChangeReport based on the
-   * comparison between GenerateConfigReportRequest.new_value and
-   * GenerateConfigReportRequest.old_value.
-   * If GenerateConfigReportRequest.old_value is not specified, this method
-   * will compare GenerateConfigReportRequest.new_value with the last pushed
-   * service configuration.
-   */
-
-  GenerateConfigReport(request: GenerateConfigReportRequest): Promise<GenerateConfigReportResponse>;
-}
-export class ServiceManagerClientImpl implements ServiceManager {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.ListServices = this.ListServices.bind(this);
-    this.GetService = this.GetService.bind(this);
-    this.CreateService = this.CreateService.bind(this);
-    this.DeleteService = this.DeleteService.bind(this);
-    this.UndeleteService = this.UndeleteService.bind(this);
-    this.ListServiceConfigs = this.ListServiceConfigs.bind(this);
-    this.GetServiceConfig = this.GetServiceConfig.bind(this);
-    this.CreateServiceConfig = this.CreateServiceConfig.bind(this);
-    this.SubmitConfigSource = this.SubmitConfigSource.bind(this);
-    this.ListServiceRollouts = this.ListServiceRollouts.bind(this);
-    this.GetServiceRollout = this.GetServiceRollout.bind(this);
-    this.CreateServiceRollout = this.CreateServiceRollout.bind(this);
-    this.GenerateConfigReport = this.GenerateConfigReport.bind(this);
-  }
-
-  ListServices(request: ListServicesRequest): Promise<ListServicesResponse> {
-    const data = ListServicesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "ListServices", data);
-    return promise.then(data => ListServicesResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetService(request: GetServiceRequest): Promise<ManagedService> {
-    const data = GetServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "GetService", data);
-    return promise.then(data => ManagedService.decode(new _m0.Reader(data)));
-  }
-
-  CreateService(request: CreateServiceRequest): Promise<Operation> {
-    const data = CreateServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "CreateService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  DeleteService(request: DeleteServiceRequest): Promise<Operation> {
-    const data = DeleteServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "DeleteService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  UndeleteService(request: UndeleteServiceRequest): Promise<Operation> {
-    const data = UndeleteServiceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "UndeleteService", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  ListServiceConfigs(request: ListServiceConfigsRequest): Promise<ListServiceConfigsResponse> {
-    const data = ListServiceConfigsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "ListServiceConfigs", data);
-    return promise.then(data => ListServiceConfigsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetServiceConfig(request: GetServiceConfigRequest): Promise<Service> {
-    const data = GetServiceConfigRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "GetServiceConfig", data);
-    return promise.then(data => Service.decode(new _m0.Reader(data)));
-  }
-
-  CreateServiceConfig(request: CreateServiceConfigRequest): Promise<Service> {
-    const data = CreateServiceConfigRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "CreateServiceConfig", data);
-    return promise.then(data => Service.decode(new _m0.Reader(data)));
-  }
-
-  SubmitConfigSource(request: SubmitConfigSourceRequest): Promise<Operation> {
-    const data = SubmitConfigSourceRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "SubmitConfigSource", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  ListServiceRollouts(request: ListServiceRolloutsRequest): Promise<ListServiceRolloutsResponse> {
-    const data = ListServiceRolloutsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "ListServiceRollouts", data);
-    return promise.then(data => ListServiceRolloutsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetServiceRollout(request: GetServiceRolloutRequest): Promise<Rollout> {
-    const data = GetServiceRolloutRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "GetServiceRollout", data);
-    return promise.then(data => Rollout.decode(new _m0.Reader(data)));
-  }
-
-  CreateServiceRollout(request: CreateServiceRolloutRequest): Promise<Operation> {
-    const data = CreateServiceRolloutRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "CreateServiceRollout", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  GenerateConfigReport(request: GenerateConfigReportRequest): Promise<GenerateConfigReportResponse> {
-    const data = GenerateConfigReportRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicemanagement.v1.ServiceManager", "GenerateConfigReport", data);
-    return promise.then(data => GenerateConfigReportResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

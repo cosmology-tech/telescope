@@ -1,44 +1,43 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `Documentation` provides the information for describing a service.
- *
+ * 
  * Example:
  * <pre><code>documentation:
- *   summary: >
- *     The Google Calendar API gives access
- *     to most calendar features.
- *   pages:
- *   - name: Overview
- *     content: &#40;== include google/foo/overview.md ==&#41;
- *   - name: Tutorial
- *     content: &#40;== include google/foo/tutorial.md ==&#41;
- *     subpages;
- *     - name: Java
- *       content: &#40;== include google/foo/tutorial_java.md ==&#41;
- *   rules:
- *   - selector: google.calendar.Calendar.Get
- *     description: >
- *       ...
- *   - selector: google.calendar.Calendar.Put
- *     description: >
- *       ...
+ * summary: >
+ * The Google Calendar API gives access
+ * to most calendar features.
+ * pages:
+ * - name: Overview
+ * content: &#40;== include google/foo/overview.md ==&#41;
+ * - name: Tutorial
+ * content: &#40;== include google/foo/tutorial.md ==&#41;
+ * subpages;
+ * - name: Java
+ * content: &#40;== include google/foo/tutorial_java.md ==&#41;
+ * rules:
+ * - selector: google.calendar.Calendar.Get
+ * description: >
+ * ...
+ * - selector: google.calendar.Calendar.Put
+ * description: >
+ * ...
  * </code></pre>
  * Documentation is provided in markdown syntax. In addition to
  * standard markdown features, definition lists, tables and fenced
  * code blocks are supported. Section headers can be provided and are
  * interpreted relative to the section nesting of the context where
  * a documentation fragment is embedded.
- *
+ * 
  * Documentation from the IDL is merged with documentation defined
  * via the config at normalization time, where documentation provided
  * by config rules overrides IDL provided.
- *
+ * 
  * A number of constructs specific to the API platform are supported
  * in documentation text.
- *
+ * 
  * In order to reference a proto element, the following
  * notation can be used:
  * <pre><code>&#91;fully.qualified.proto.name]&#91;]</code></pre>
@@ -46,7 +45,7 @@ import * as _m0 from "protobufjs/minimal";
  * <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
  * Text can be excluded from doc using the following notation:
  * <pre><code>&#40;-- internal comment --&#41;</code></pre>
- *
+ * 
  * A few directives are available in documentation. Note that
  * directives must appear on a single line to be properly
  * identified. The `include` directive includes a markdown file from
@@ -65,47 +64,47 @@ export interface Documentation {
    * plain text.
    */
   summary: string;
-  /** The top level pages for the documentation set. */
 
+  /** The top level pages for the documentation set. */
   pages: Page[];
+
   /**
    * A list of documentation rules that apply to individual API elements.
-   *
+   * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-
   rules: DocumentationRule[];
-  /** The URL to the root of documentation. */
 
+  /** The URL to the root of documentation. */
   documentationRootUrl: string;
+
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
    * specified service urls as well as sections that show a base that other
    * urls are relative to.
    */
-
   serviceRootUrl: string;
+
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
-   *   summary: ...
-   *   overview: &#40;== include overview.md ==&#41;
+   * summary: ...
+   * overview: &#40;== include overview.md ==&#41;
    * </code></pre>
    * This is a shortcut for the following declaration (using pages style):
    * <pre><code>documentation:
-   *   summary: ...
-   *   pages:
-   *   - name: Overview
-   *     content: &#40;== include overview.md ==&#41;
+   * summary: ...
+   * pages:
+   * - name: Overview
+   * content: &#40;== include overview.md ==&#41;
    * </code></pre>
    * Note: you cannot specify both `overview` field and `pages` field.
    */
-
   overview: string;
 }
-/** A documentation rule provides information about individual API elements. */
 
+/** A documentation rule provides information about individual API elements. */
 export interface DocumentationRule {
   /**
    * The selector is a comma-separated list of patterns. Each pattern is a
@@ -116,21 +115,21 @@ export interface DocumentationRule {
    * applicable elements, the whole pattern "*" is used.
    */
   selector: string;
-  /** Description of the selected API(s). */
 
+  /** Description of the selected API(s). */
   description: string;
+
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
-
   deprecationDescription: string;
 }
+
 /**
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
  */
-
 export interface Page {
   /**
    * The name of the page. It will be used as an identity of the page to
@@ -140,26 +139,26 @@ export interface Page {
    * documentation. For example:
    * <pre><code>pages:
    * - name: Tutorial
-   *   content: &#40;== include tutorial.md ==&#41;
-   *   subpages:
-   *   - name: Java
-   *     content: &#40;== include tutorial_java.md ==&#41;
+   * content: &#40;== include tutorial.md ==&#41;
+   * subpages:
+   * - name: Java
+   * content: &#40;== include tutorial_java.md ==&#41;
    * </code></pre>
    * You can reference `Java` page using Markdown reference link syntax:
    * `[Java][Tutorial.Java]`.
    */
   name: string;
+
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
-
   content: string;
+
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
-
   subpages: Page[];
 }
 
@@ -458,17 +457,3 @@ export const Page = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

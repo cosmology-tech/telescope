@@ -1,11 +1,10 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Header } from "../../tendermint/types/types";
-import { ProofOps } from "../../tendermint/crypto/proof";
-import { EvidenceParams, ValidatorParams, VersionParams } from "../../tendermint/types/params";
-import { PublicKey } from "../../tendermint/crypto/keys";
 import { Timestamp } from "../../google/protobuf/timestamp";
+import { Header } from "../types/types";
+import { ProofOps } from "../crypto/proof";
+import { EvidenceParams, ValidatorParams, VersionParams } from "../types/params";
+import { PublicKey } from "../crypto/keys";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export enum CheckTxType {
   NEW = 0,
   RECHECK = 1,
@@ -38,246 +37,6 @@ export function checkTxTypeToJSON(object: CheckTxType): string {
     default:
       return "UNKNOWN";
   }
-}
-export enum EvidenceType {
-  UNKNOWN = 0,
-  DUPLICATE_VOTE = 1,
-  LIGHT_CLIENT_ATTACK = 2,
-  UNRECOGNIZED = -1,
-}
-export function evidenceTypeFromJSON(object: any): EvidenceType {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return EvidenceType.UNKNOWN;
-
-    case 1:
-    case "DUPLICATE_VOTE":
-      return EvidenceType.DUPLICATE_VOTE;
-
-    case 2:
-    case "LIGHT_CLIENT_ATTACK":
-      return EvidenceType.LIGHT_CLIENT_ATTACK;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return EvidenceType.UNRECOGNIZED;
-  }
-}
-export function evidenceTypeToJSON(object: EvidenceType): string {
-  switch (object) {
-    case EvidenceType.UNKNOWN:
-      return "UNKNOWN";
-
-    case EvidenceType.DUPLICATE_VOTE:
-      return "DUPLICATE_VOTE";
-
-    case EvidenceType.LIGHT_CLIENT_ATTACK:
-      return "LIGHT_CLIENT_ATTACK";
-
-    default:
-      return "UNKNOWN";
-  }
-}
-export interface Request {
-  echo: RequestEcho | undefined;
-  flush: RequestFlush | undefined;
-  info: RequestInfo | undefined;
-  setOption: RequestSetOption | undefined;
-  initChain: RequestInitChain | undefined;
-  query: RequestQuery | undefined;
-  beginBlock: RequestBeginBlock | undefined;
-  checkTx: RequestCheckTx | undefined;
-  deliverTx: RequestDeliverTx | undefined;
-  endBlock: RequestEndBlock | undefined;
-  commit: RequestCommit | undefined;
-  listSnapshots: RequestListSnapshots | undefined;
-  offerSnapshot: RequestOfferSnapshot | undefined;
-  loadSnapshotChunk: RequestLoadSnapshotChunk | undefined;
-  applySnapshotChunk: RequestApplySnapshotChunk | undefined;
-}
-export interface RequestEcho {
-  message: string;
-}
-export interface RequestFlush {}
-export interface RequestInfo {
-  version: string;
-  blockVersion: Long;
-  p2pVersion: Long;
-}
-/** nondeterministic */
-
-export interface RequestSetOption {
-  key: string;
-  value: string;
-}
-export interface RequestInitChain {
-  time: Date;
-  chainId: string;
-  consensusParams: ConsensusParams;
-  validators: ValidatorUpdate[];
-  appStateBytes: Uint8Array;
-  initialHeight: Long;
-}
-export interface RequestQuery {
-  data: Uint8Array;
-  path: string;
-  height: Long;
-  prove: boolean;
-}
-export interface RequestBeginBlock {
-  hash: Uint8Array;
-  header: Header;
-  lastCommitInfo: LastCommitInfo;
-  byzantineValidators: Evidence[];
-}
-export interface RequestCheckTx {
-  tx: Uint8Array;
-  type: CheckTxType;
-}
-export interface RequestDeliverTx {
-  tx: Uint8Array;
-}
-export interface RequestEndBlock {
-  height: Long;
-}
-export interface RequestCommit {}
-/** lists available snapshots */
-
-export interface RequestListSnapshots {}
-/** offers a snapshot to the application */
-
-export interface RequestOfferSnapshot {
-  /** snapshot offered by peers */
-  snapshot: Snapshot;
-  /** light client-verified app hash for snapshot height */
-
-  appHash: Uint8Array;
-}
-/** loads a snapshot chunk */
-
-export interface RequestLoadSnapshotChunk {
-  height: Long;
-  format: number;
-  chunk: number;
-}
-/** Applies a snapshot chunk */
-
-export interface RequestApplySnapshotChunk {
-  index: number;
-  chunk: Uint8Array;
-  sender: string;
-}
-export interface Response {
-  exception: ResponseException | undefined;
-  echo: ResponseEcho | undefined;
-  flush: ResponseFlush | undefined;
-  info: ResponseInfo | undefined;
-  setOption: ResponseSetOption | undefined;
-  initChain: ResponseInitChain | undefined;
-  query: ResponseQuery | undefined;
-  beginBlock: ResponseBeginBlock | undefined;
-  checkTx: ResponseCheckTx | undefined;
-  deliverTx: ResponseDeliverTx | undefined;
-  endBlock: ResponseEndBlock | undefined;
-  commit: ResponseCommit | undefined;
-  listSnapshots: ResponseListSnapshots | undefined;
-  offerSnapshot: ResponseOfferSnapshot | undefined;
-  loadSnapshotChunk: ResponseLoadSnapshotChunk | undefined;
-  applySnapshotChunk: ResponseApplySnapshotChunk | undefined;
-}
-/** nondeterministic */
-
-export interface ResponseException {
-  error: string;
-}
-export interface ResponseEcho {
-  message: string;
-}
-export interface ResponseFlush {}
-export interface ResponseInfo {
-  data: string;
-  version: string;
-  appVersion: Long;
-  lastBlockHeight: Long;
-  lastBlockAppHash: Uint8Array;
-}
-/** nondeterministic */
-
-export interface ResponseSetOption {
-  code: number;
-  /** bytes data = 2; */
-
-  log: string;
-  info: string;
-}
-export interface ResponseInitChain {
-  consensusParams: ConsensusParams;
-  validators: ValidatorUpdate[];
-  appHash: Uint8Array;
-}
-export interface ResponseQuery {
-  code: number;
-  /** bytes data = 2; // use "value" instead. */
-
-  log: string;
-  /** nondeterministic */
-
-  info: string;
-  index: Long;
-  key: Uint8Array;
-  value: Uint8Array;
-  proofOps: ProofOps;
-  height: Long;
-  codespace: string;
-}
-export interface ResponseBeginBlock {
-  events: Event[];
-}
-export interface ResponseCheckTx {
-  code: number;
-  data: Uint8Array;
-  /** nondeterministic */
-
-  log: string;
-  /** nondeterministic */
-
-  info: string;
-  gasWanted: Long;
-  gasUsed: Long;
-  events: Event[];
-  codespace: string;
-}
-export interface ResponseDeliverTx {
-  code: number;
-  data: Uint8Array;
-  /** nondeterministic */
-
-  log: string;
-  /** nondeterministic */
-
-  info: string;
-  gasWanted: Long;
-  gasUsed: Long;
-  events: Event[];
-  codespace: string;
-}
-export interface ResponseEndBlock {
-  validatorUpdates: ValidatorUpdate[];
-  consensusParamUpdates: ConsensusParams;
-  events: Event[];
-}
-export interface ResponseCommit {
-  /** reserve 1 */
-  data: Uint8Array;
-  retainHeight: Long;
-}
-export interface ResponseListSnapshots {
-  snapshots: Snapshot[];
-}
-export interface ResponseOfferSnapshot {
-  result: ResponseOfferSnapshot_Result;
 }
 export enum ResponseOfferSnapshot_Result {
   /** UNKNOWN - Unknown result, abort all snapshot restoration */
@@ -355,18 +114,6 @@ export function responseOfferSnapshot_ResultToJSON(object: ResponseOfferSnapshot
       return "UNKNOWN";
   }
 }
-export interface ResponseLoadSnapshotChunk {
-  chunk: Uint8Array;
-}
-export interface ResponseApplySnapshotChunk {
-  result: ResponseApplySnapshotChunk_Result;
-  /** Chunks to refetch and reapply */
-
-  refetchChunks: number[];
-  /** Chunk senders to reject and ban */
-
-  rejectSenders: string[];
-}
 export enum ResponseApplySnapshotChunk_Result {
   /** UNKNOWN - Unknown result, abort all snapshot restoration */
   UNKNOWN = 0,
@@ -443,115 +190,370 @@ export function responseApplySnapshotChunk_ResultToJSON(object: ResponseApplySna
       return "UNKNOWN";
   }
 }
+export enum EvidenceType {
+  UNKNOWN = 0,
+  DUPLICATE_VOTE = 1,
+  LIGHT_CLIENT_ATTACK = 2,
+  UNRECOGNIZED = -1,
+}
+export function evidenceTypeFromJSON(object: any): EvidenceType {
+  switch (object) {
+    case 0:
+    case "UNKNOWN":
+      return EvidenceType.UNKNOWN;
+
+    case 1:
+    case "DUPLICATE_VOTE":
+      return EvidenceType.DUPLICATE_VOTE;
+
+    case 2:
+    case "LIGHT_CLIENT_ATTACK":
+      return EvidenceType.LIGHT_CLIENT_ATTACK;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return EvidenceType.UNRECOGNIZED;
+  }
+}
+export function evidenceTypeToJSON(object: EvidenceType): string {
+  switch (object) {
+    case EvidenceType.UNKNOWN:
+      return "UNKNOWN";
+
+    case EvidenceType.DUPLICATE_VOTE:
+      return "DUPLICATE_VOTE";
+
+    case EvidenceType.LIGHT_CLIENT_ATTACK:
+      return "LIGHT_CLIENT_ATTACK";
+
+    default:
+      return "UNKNOWN";
+  }
+}
+export interface Request {
+  echo?: RequestEcho;
+  flush?: RequestFlush;
+  info?: RequestInfo;
+  setOption?: RequestSetOption;
+  initChain?: RequestInitChain;
+  query?: RequestQuery;
+  beginBlock?: RequestBeginBlock;
+  checkTx?: RequestCheckTx;
+  deliverTx?: RequestDeliverTx;
+  endBlock?: RequestEndBlock;
+  commit?: RequestCommit;
+  listSnapshots?: RequestListSnapshots;
+  offerSnapshot?: RequestOfferSnapshot;
+  loadSnapshotChunk?: RequestLoadSnapshotChunk;
+  applySnapshotChunk?: RequestApplySnapshotChunk;
+}
+export interface RequestEcho {
+  message: string;
+}
+export interface RequestFlush {}
+export interface RequestInfo {
+  version: string;
+  blockVersion: Long;
+  p2pVersion: Long;
+}
+
+/** nondeterministic */
+export interface RequestSetOption {
+  key: string;
+  value: string;
+}
+export interface RequestInitChain {
+  time: Date;
+  chainId: string;
+  consensusParams: ConsensusParams;
+  validators: ValidatorUpdate[];
+  appStateBytes: Uint8Array;
+  initialHeight: Long;
+}
+export interface RequestQuery {
+  data: Uint8Array;
+  path: string;
+  height: Long;
+  prove: boolean;
+}
+export interface RequestBeginBlock {
+  hash: Uint8Array;
+  header: Header;
+  lastCommitInfo: LastCommitInfo;
+  byzantineValidators: Evidence[];
+}
+export interface RequestCheckTx {
+  tx: Uint8Array;
+  type: CheckTxType;
+}
+export interface RequestDeliverTx {
+  tx: Uint8Array;
+}
+export interface RequestEndBlock {
+  height: Long;
+}
+export interface RequestCommit {}
+
+/** lists available snapshots */
+export interface RequestListSnapshots {}
+
+/** offers a snapshot to the application */
+export interface RequestOfferSnapshot {
+  /** snapshot offered by peers */
+  snapshot: Snapshot;
+
+  /** light client-verified app hash for snapshot height */
+  appHash: Uint8Array;
+}
+
+/** loads a snapshot chunk */
+export interface RequestLoadSnapshotChunk {
+  height: Long;
+  format: number;
+  chunk: number;
+}
+
+/** Applies a snapshot chunk */
+export interface RequestApplySnapshotChunk {
+  index: number;
+  chunk: Uint8Array;
+  sender: string;
+}
+export interface Response {
+  exception?: ResponseException;
+  echo?: ResponseEcho;
+  flush?: ResponseFlush;
+  info?: ResponseInfo;
+  setOption?: ResponseSetOption;
+  initChain?: ResponseInitChain;
+  query?: ResponseQuery;
+  beginBlock?: ResponseBeginBlock;
+  checkTx?: ResponseCheckTx;
+  deliverTx?: ResponseDeliverTx;
+  endBlock?: ResponseEndBlock;
+  commit?: ResponseCommit;
+  listSnapshots?: ResponseListSnapshots;
+  offerSnapshot?: ResponseOfferSnapshot;
+  loadSnapshotChunk?: ResponseLoadSnapshotChunk;
+  applySnapshotChunk?: ResponseApplySnapshotChunk;
+}
+
+/** nondeterministic */
+export interface ResponseException {
+  error: string;
+}
+export interface ResponseEcho {
+  message: string;
+}
+export interface ResponseFlush {}
+export interface ResponseInfo {
+  data: string;
+  version: string;
+  appVersion: Long;
+  lastBlockHeight: Long;
+  lastBlockAppHash: Uint8Array;
+}
+
+/** nondeterministic */
+export interface ResponseSetOption {
+  code: number;
+
+  /** bytes data = 2; */
+  log: string;
+  info: string;
+}
+export interface ResponseInitChain {
+  consensusParams: ConsensusParams;
+  validators: ValidatorUpdate[];
+  appHash: Uint8Array;
+}
+export interface ResponseQuery {
+  code: number;
+
+  /** bytes data = 2; // use "value" instead. */
+  log: string;
+
+  /** nondeterministic */
+  info: string;
+  index: Long;
+  key: Uint8Array;
+  value: Uint8Array;
+  proofOps: ProofOps;
+  height: Long;
+  codespace: string;
+}
+export interface ResponseBeginBlock {
+  events: Event[];
+}
+export interface ResponseCheckTx {
+  code: number;
+  data: Uint8Array;
+
+  /** nondeterministic */
+  log: string;
+
+  /** nondeterministic */
+  info: string;
+  gasWanted: Long;
+  gasUsed: Long;
+  events: Event[];
+  codespace: string;
+}
+export interface ResponseDeliverTx {
+  code: number;
+  data: Uint8Array;
+
+  /** nondeterministic */
+  log: string;
+
+  /** nondeterministic */
+  info: string;
+  gasWanted: Long;
+  gasUsed: Long;
+  events: Event[];
+  codespace: string;
+}
+export interface ResponseEndBlock {
+  validatorUpdates: ValidatorUpdate[];
+  consensusParamUpdates: ConsensusParams;
+  events: Event[];
+}
+export interface ResponseCommit {
+  /** reserve 1 */
+  data: Uint8Array;
+  retainHeight: Long;
+}
+export interface ResponseListSnapshots {
+  snapshots: Snapshot[];
+}
+export interface ResponseOfferSnapshot {
+  result: ResponseOfferSnapshot_Result;
+}
+export interface ResponseLoadSnapshotChunk {
+  chunk: Uint8Array;
+}
+export interface ResponseApplySnapshotChunk {
+  result: ResponseApplySnapshotChunk_Result;
+
+  /** Chunks to refetch and reapply */
+  refetchChunks: number[];
+
+  /** Chunk senders to reject and ban */
+  rejectSenders: string[];
+}
+
 /**
  * ConsensusParams contains all consensus-relevant parameters
  * that can be adjusted by the abci app
  */
-
 export interface ConsensusParams {
   block: BlockParams;
   evidence: EvidenceParams;
   validator: ValidatorParams;
   version: VersionParams;
 }
-/** BlockParams contains limits on the block size. */
 
+/** BlockParams contains limits on the block size. */
 export interface BlockParams {
   /** Note: must be greater than 0 */
   maxBytes: Long;
-  /** Note: must be greater or equal to -1 */
 
+  /** Note: must be greater or equal to -1 */
   maxGas: Long;
 }
 export interface LastCommitInfo {
   round: number;
   votes: VoteInfo[];
 }
+
 /**
  * Event allows application developers to attach additional information to
  * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
  * Later, transactions may be queried using these events.
  */
-
 export interface Event {
   type: string;
   attributes: EventAttribute[];
 }
-/** EventAttribute is a single key-value pair, associated with an event. */
 
+/** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttribute {
   key: Uint8Array;
   value: Uint8Array;
-  /** nondeterministic */
 
+  /** nondeterministic */
   index: boolean;
 }
+
 /**
  * TxResult contains results of executing the transaction.
- *
+ * 
  * One usage is indexing transaction results.
  */
-
 export interface TxResult {
   height: Long;
   index: number;
   tx: Uint8Array;
   result: ResponseDeliverTx;
 }
+
 /** Validator */
-
 export interface Validator {
-  /** The first 20 bytes of SHA256(public key) */
+  /**
+   * The first 20 bytes of SHA256(public key)
+   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
+   */
   address: Uint8Array;
-  /** PubKey pub_key = 2 [(gogoproto.nullable)=false]; */
 
+  /** The voting power */
   power: Long;
 }
-/** ValidatorUpdate */
 
+/** ValidatorUpdate */
 export interface ValidatorUpdate {
   pubKey: PublicKey;
   power: Long;
 }
-/** VoteInfo */
 
+/** VoteInfo */
 export interface VoteInfo {
   validator: Validator;
   signedLastBlock: boolean;
 }
 export interface Evidence {
   type: EvidenceType;
+
   /** The offending validator */
-
   validator: Validator;
+
   /** The height when the offense occurred */
-
   height: Long;
-  /** The corresponding time where the offense occurred */
 
+  /** The corresponding time where the offense occurred */
   time: Date;
+
   /**
    * Total voting power of the validator set in case the ABCI application does
    * not store historical validators.
    * https://github.com/tendermint/tendermint/issues/4581
    */
-
   totalVotingPower: Long;
 }
 export interface Snapshot {
   /** The height at which the snapshot was taken */
   height: Long;
+
   /** The application-specific snapshot format */
-
   format: number;
+
   /** Number of chunks in the snapshot */
-
   chunks: number;
+
   /** Arbitrary snapshot hash, equal only if identical */
-
   hash: Uint8Array;
-  /** Arbitrary application metadata */
 
+  /** Arbitrary application metadata */
   metadata: Uint8Array;
 }
 
@@ -2834,8 +2836,8 @@ export const ResponseCheckTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? Long.fromString(object.gas_wanted) : Long.ZERO,
-      gasUsed: isSet(object.gas_used) ? Long.fromString(object.gas_used) : Long.ZERO,
+      gasWanted: isSet(object.gasWanted) ? Long.fromString(object.gasWanted) : Long.ZERO,
+      gasUsed: isSet(object.gasUsed) ? Long.fromString(object.gasUsed) : Long.ZERO,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -2847,8 +2849,8 @@ export const ResponseCheckTx = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || Long.ZERO).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || Long.ZERO).toString());
+    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || Long.ZERO).toString());
+    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.ZERO).toString());
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
@@ -2981,8 +2983,8 @@ export const ResponseDeliverTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? Long.fromString(object.gas_wanted) : Long.ZERO,
-      gasUsed: isSet(object.gas_used) ? Long.fromString(object.gas_used) : Long.ZERO,
+      gasWanted: isSet(object.gasWanted) ? Long.fromString(object.gasWanted) : Long.ZERO,
+      gasUsed: isSet(object.gasUsed) ? Long.fromString(object.gasUsed) : Long.ZERO,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -2994,8 +2996,8 @@ export const ResponseDeliverTx = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || Long.ZERO).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || Long.ZERO).toString());
+    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || Long.ZERO).toString());
+    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.ZERO).toString());
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
@@ -4368,214 +4370,3 @@ export const Snapshot = {
   }
 
 };
-export interface ABCIApplication {
-  Echo(request: RequestEcho): Promise<ResponseEcho>;
-  Flush(request: RequestFlush): Promise<ResponseFlush>;
-  Info(request: RequestInfo): Promise<ResponseInfo>;
-  SetOption(request: RequestSetOption): Promise<ResponseSetOption>;
-  DeliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx>;
-  CheckTx(request: RequestCheckTx): Promise<ResponseCheckTx>;
-  Query(request: RequestQuery): Promise<ResponseQuery>;
-  Commit(request: RequestCommit): Promise<ResponseCommit>;
-  InitChain(request: RequestInitChain): Promise<ResponseInitChain>;
-  BeginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock>;
-  EndBlock(request: RequestEndBlock): Promise<ResponseEndBlock>;
-  ListSnapshots(request: RequestListSnapshots): Promise<ResponseListSnapshots>;
-  OfferSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot>;
-  LoadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk>;
-  ApplySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk>;
-}
-export class ABCIApplicationClientImpl implements ABCIApplication {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.Echo = this.Echo.bind(this);
-    this.Flush = this.Flush.bind(this);
-    this.Info = this.Info.bind(this);
-    this.SetOption = this.SetOption.bind(this);
-    this.DeliverTx = this.DeliverTx.bind(this);
-    this.CheckTx = this.CheckTx.bind(this);
-    this.Query = this.Query.bind(this);
-    this.Commit = this.Commit.bind(this);
-    this.InitChain = this.InitChain.bind(this);
-    this.BeginBlock = this.BeginBlock.bind(this);
-    this.EndBlock = this.EndBlock.bind(this);
-    this.ListSnapshots = this.ListSnapshots.bind(this);
-    this.OfferSnapshot = this.OfferSnapshot.bind(this);
-    this.LoadSnapshotChunk = this.LoadSnapshotChunk.bind(this);
-    this.ApplySnapshotChunk = this.ApplySnapshotChunk.bind(this);
-  }
-
-  Echo(request: RequestEcho): Promise<ResponseEcho> {
-    const data = RequestEcho.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Echo", data);
-    return promise.then(data => ResponseEcho.decode(new _m0.Reader(data)));
-  }
-
-  Flush(request: RequestFlush): Promise<ResponseFlush> {
-    const data = RequestFlush.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Flush", data);
-    return promise.then(data => ResponseFlush.decode(new _m0.Reader(data)));
-  }
-
-  Info(request: RequestInfo): Promise<ResponseInfo> {
-    const data = RequestInfo.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Info", data);
-    return promise.then(data => ResponseInfo.decode(new _m0.Reader(data)));
-  }
-
-  SetOption(request: RequestSetOption): Promise<ResponseSetOption> {
-    const data = RequestSetOption.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "SetOption", data);
-    return promise.then(data => ResponseSetOption.decode(new _m0.Reader(data)));
-  }
-
-  DeliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
-    const data = RequestDeliverTx.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "DeliverTx", data);
-    return promise.then(data => ResponseDeliverTx.decode(new _m0.Reader(data)));
-  }
-
-  CheckTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
-    const data = RequestCheckTx.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "CheckTx", data);
-    return promise.then(data => ResponseCheckTx.decode(new _m0.Reader(data)));
-  }
-
-  Query(request: RequestQuery): Promise<ResponseQuery> {
-    const data = RequestQuery.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Query", data);
-    return promise.then(data => ResponseQuery.decode(new _m0.Reader(data)));
-  }
-
-  Commit(request: RequestCommit): Promise<ResponseCommit> {
-    const data = RequestCommit.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Commit", data);
-    return promise.then(data => ResponseCommit.decode(new _m0.Reader(data)));
-  }
-
-  InitChain(request: RequestInitChain): Promise<ResponseInitChain> {
-    const data = RequestInitChain.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "InitChain", data);
-    return promise.then(data => ResponseInitChain.decode(new _m0.Reader(data)));
-  }
-
-  BeginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
-    const data = RequestBeginBlock.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "BeginBlock", data);
-    return promise.then(data => ResponseBeginBlock.decode(new _m0.Reader(data)));
-  }
-
-  EndBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
-    const data = RequestEndBlock.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "EndBlock", data);
-    return promise.then(data => ResponseEndBlock.decode(new _m0.Reader(data)));
-  }
-
-  ListSnapshots(request: RequestListSnapshots): Promise<ResponseListSnapshots> {
-    const data = RequestListSnapshots.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ListSnapshots", data);
-    return promise.then(data => ResponseListSnapshots.decode(new _m0.Reader(data)));
-  }
-
-  OfferSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
-    const data = RequestOfferSnapshot.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "OfferSnapshot", data);
-    return promise.then(data => ResponseOfferSnapshot.decode(new _m0.Reader(data)));
-  }
-
-  LoadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> {
-    const data = RequestLoadSnapshotChunk.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "LoadSnapshotChunk", data);
-    return promise.then(data => ResponseLoadSnapshotChunk.decode(new _m0.Reader(data)));
-  }
-
-  ApplySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> {
-    const data = RequestApplySnapshotChunk.encode(request).finish();
-    const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ApplySnapshotChunk", data);
-    return promise.then(data => ResponseApplySnapshotChunk.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

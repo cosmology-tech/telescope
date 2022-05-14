@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * ===================== MsgJoinPool
@@ -14,8 +13,8 @@ export interface MsgJoinPool {
   tokenInMaxs: Coin[];
 }
 export interface MsgJoinPoolResponse {}
-/** ===================== MsgExitPool */
 
+/** ===================== MsgExitPool */
 export interface MsgExitPool {
   sender: string;
   poolId: Long;
@@ -23,8 +22,8 @@ export interface MsgExitPool {
   tokenOutMins: Coin[];
 }
 export interface MsgExitPoolResponse {}
-/** ===================== MsgSwapExactAmountIn */
 
+/** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRoute {
   poolId: Long;
   tokenOutDenom: string;
@@ -38,8 +37,8 @@ export interface MsgSwapExactAmountIn {
 export interface MsgSwapExactAmountInResponse {
   tokenOutAmount: string;
 }
-/** ===================== MsgSwapExactAmountOut */
 
+/** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRoute {
   poolId: Long;
   tokenInDenom: string;
@@ -53,27 +52,27 @@ export interface MsgSwapExactAmountOut {
 export interface MsgSwapExactAmountOutResponse {
   tokenInAmount: string;
 }
+
 /**
  * ===================== MsgJoinSwapExternAmountIn
  * TODO: Rename to MsgJoinSwapExactAmountIn
  */
-
 export interface MsgJoinSwapExternAmountIn {
   sender: string;
   poolId: Long;
   tokenIn: Coin;
+
   /**
    * reserved 3;
    * reserved "token_in";
    */
-
   shareOutMinAmount: string;
 }
 export interface MsgJoinSwapExternAmountInResponse {
   shareOutAmount: string;
 }
-/** ===================== MsgJoinSwapShareAmountOut */
 
+/** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOut {
   sender: string;
   poolId: Long;
@@ -84,8 +83,8 @@ export interface MsgJoinSwapShareAmountOut {
 export interface MsgJoinSwapShareAmountOutResponse {
   tokenInAmount: string;
 }
-/** ===================== MsgExitSwapShareAmountIn */
 
+/** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountIn {
   sender: string;
   poolId: Long;
@@ -96,8 +95,8 @@ export interface MsgExitSwapShareAmountIn {
 export interface MsgExitSwapShareAmountInResponse {
   tokenOutAmount: string;
 }
-/** ===================== MsgExitSwapExternAmountOut */
 
+/** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOut {
   sender: string;
   poolId: Long;
@@ -1465,17 +1464,3 @@ export const MsgExitSwapExternAmountOutResponse = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

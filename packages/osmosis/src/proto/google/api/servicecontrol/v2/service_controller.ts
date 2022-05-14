@@ -1,73 +1,76 @@
-/* eslint-disable */
-import Long from "long";
+import { AttributeContext } from "../../../rpc/context/attribute_context";
+import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { AttributeContext } from "../../../../google/rpc/context/attribute_context";
-import { Status } from "../../../../google/rpc/status";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /** Request message for the Check method. */
 export interface CheckRequest {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
   serviceName: string;
+
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-
   serviceConfigId: string;
+
   /** Describes attributes about the operation being executed by the service. */
-
   attributes: AttributeContext;
+
   /** Describes the resources and the policies applied to each resource. */
-
   resources: ResourceInfo[];
-  /** Optional. Contains a comma-separated list of flags. */
 
+  /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
-/** Describes a resource referenced in the request. */
 
+/** Describes a resource referenced in the request. */
 export interface ResourceInfo {
   /** The name of the resource referenced in the request. */
   name: string;
-  /** The resource type in the format of "{service}/{kind}". */
 
+  /** The resource type in the format of "{service}/{kind}". */
   type: string;
+
   /**
    * The resource permission needed for this request.
    * The format must be "{service}/{plural}.{verb}".
    */
-
   permission: string;
+
   /**
    * Optional. The identifier of the container of this resource. For Google
    * Cloud APIs, the resource container must be one of the following formats:
-   *     - `projects/<project-id or project-number>`
-   *     - `folders/<folder-id>`
-   *     - `organizations/<organization-id>`
+   * - `projects/<project-id or project-number>`
+   * - `folders/<folder-id>`
+   * - `organizations/<organization-id>`
    * For the policy enforcement on the container level (VPCSC and Location
    * Policy check), this field takes precedence on the container extracted from
    * name when presents.
    */
-
   container: string;
+
   /**
    * Optional. The location of the resource. The value must be a valid zone,
    * region or multiregion. For example: "europe-west4" or
    * "northamerica-northeast1-a"
    */
-
   location: string;
 }
-/** Response message for the Check method. */
+export interface CheckResponse_HeadersEntry {
+  key: string;
+  value: string;
+}
 
+/** Response message for the Check method. */
 export interface CheckResponse {
   /**
    * Operation is allowed when this field is not set. Any non-'OK' status
@@ -75,48 +78,44 @@ export interface CheckResponse {
    * would contain additional details about the denial.
    */
   status: Status;
-  /** Returns a set of request contexts generated from the `CheckRequest`. */
 
+  /** Returns a set of request contexts generated from the `CheckRequest`. */
   headers: {
     [key: string]: string;
   };
 }
-export interface CheckResponse_HeadersEntry {
-  key: string;
-  value: string;
-}
-/** Request message for the Report method. */
 
+/** Request message for the Report method. */
 export interface ReportRequest {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
   serviceName: string;
+
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-
   serviceConfigId: string;
+
   /**
    * Describes the list of operations to be reported. Each operation is
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
-
   operations: AttributeContext[];
 }
+
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
  */
-
 export interface ReportResponse {}
 
 function createBaseCheckRequest(): CheckRequest {
@@ -335,6 +334,75 @@ export const ResourceInfo = {
 
 };
 
+function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const CheckResponse_HeadersEntry = {
+  encode(message: CheckResponse_HeadersEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_HeadersEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCheckResponse_HeadersEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): CheckResponse_HeadersEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: CheckResponse_HeadersEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CheckResponse_HeadersEntry>, I>>(object: I): CheckResponse_HeadersEntry {
+    const message = createBaseCheckResponse_HeadersEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseCheckResponse(): CheckResponse {
   return {
     status: undefined,
@@ -426,75 +494,6 @@ export const CheckResponse = {
 
       return acc;
     }, {});
-    return message;
-  }
-
-};
-
-function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const CheckResponse_HeadersEntry = {
-  encode(message: CheckResponse_HeadersEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse_HeadersEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResponse_HeadersEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): CheckResponse_HeadersEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: CheckResponse_HeadersEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<CheckResponse_HeadersEntry>, I>>(object: I): CheckResponse_HeadersEntry {
-    const message = createBaseCheckResponse_HeadersEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
     return message;
   }
 
@@ -629,106 +628,3 @@ export const ReportResponse = {
   }
 
 };
-/**
- * [Service Control API
- * v2](https://cloud.google.com/service-infrastructure/docs/service-control/access-control)
- *
- * Private Preview. This feature is only available for approved services.
- *
- * This API provides admission control and telemetry reporting for services
- * that are integrated with [Service
- * Infrastructure](https://cloud.google.com/service-infrastructure).
- */
-
-export interface ServiceController {
-  /**
-   * Private Preview. This feature is only available for approved services.
-   *
-   * This method provides admission control for services that are integrated
-   * with [Service
-   * Infrastructure](https://cloud.google.com/service-infrastructure). It checks
-   * whether an operation should be allowed based on the service configuration
-   * and relevant policies. It must be called before the operation is executed.
-   * For more information, see
-   * [Admission
-   * Control](https://cloud.google.com/service-infrastructure/docs/admission-control).
-   *
-   * NOTE: The admission control has an expected policy propagation delay of
-   * 60s. The caller **must** not depend on the most recent policy changes.
-   *
-   * NOTE: The admission control has a hard limit of 1 referenced resources
-   * per call. If an operation refers to more than 1 resources, the caller
-   * must call the Check method multiple times.
-   *
-   * This method requires the `servicemanagement.services.check` permission
-   * on the specified service. For more information, see
-   * [Service Control API Access
-   * Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).
-   */
-  Check(request: CheckRequest): Promise<CheckResponse>;
-  /**
-   * Private Preview. This feature is only available for approved services.
-   *
-   * This method provides telemetry reporting for services that are integrated
-   * with [Service
-   * Infrastructure](https://cloud.google.com/service-infrastructure). It
-   * reports a list of operations that have occurred on a service. It must be
-   * called after the operations have been executed. For more information, see
-   * [Telemetry
-   * Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting).
-   *
-   * NOTE: The telemetry reporting has a hard limit of 1000 operations and 1MB
-   * per Report call. It is recommended to have no more than 100 operations per
-   * call.
-   *
-   * This method requires the `servicemanagement.services.report` permission
-   * on the specified service. For more information, see
-   * [Service Control API Access
-   * Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).
-   */
-
-  Report(request: ReportRequest): Promise<ReportResponse>;
-}
-export class ServiceControllerClientImpl implements ServiceController {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.Check = this.Check.bind(this);
-    this.Report = this.Report.bind(this);
-  }
-
-  Check(request: CheckRequest): Promise<CheckResponse> {
-    const data = CheckRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicecontrol.v2.ServiceController", "Check", data);
-    return promise.then(data => CheckResponse.decode(new _m0.Reader(data)));
-  }
-
-  Report(request: ReportRequest): Promise<ReportResponse> {
-    const data = ReportRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicecontrol.v2.ServiceController", "Report", data);
-    return promise.then(data => ReportResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

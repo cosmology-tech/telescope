@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** AccessType permission types */
 export enum AccessType {
@@ -60,8 +59,8 @@ export function accessTypeToJSON(object: AccessType): string {
       return "UNKNOWN";
   }
 }
-/** ContractCodeHistoryOperationType actions that caused a code change */
 
+/** ContractCodeHistoryOperationType actions that caused a code change */
 export enum ContractCodeHistoryOperationType {
   /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
@@ -118,99 +117,99 @@ export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHisto
       return "UNKNOWN";
   }
 }
-/** AccessTypeParam */
 
+/** AccessTypeParam */
 export interface AccessTypeParam {
   value: AccessType;
 }
-/** AccessConfig access control type. */
 
+/** AccessConfig access control type. */
 export interface AccessConfig {
   permission: AccessType;
   address: string;
 }
-/** Params defines the set of wasm parameters. */
 
+/** Params defines the set of wasm parameters. */
 export interface Params {
   codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
 }
-/** CodeInfo is data for the uploaded contract WASM code */
 
+/** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfo {
   /** CodeHash is the unique identifier created by wasmvm */
   codeHash: Uint8Array;
+
   /** Creator address who initially stored the code */
-
   creator: string;
-  /** InstantiateConfig access control to apply on contract creation, optional */
 
+  /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig: AccessConfig;
 }
-/** ContractInfo stores a WASM contract instance */
 
+/** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
   /** CodeID is the reference to the stored Wasm code */
   codeId: Long;
+
   /** Creator address who initially instantiated the contract */
-
   creator: string;
+
   /** Admin is an optional address that can execute migrations */
-
   admin: string;
-  /** Label is optional metadata to be stored with a contract instance. */
 
+  /** Label is optional metadata to be stored with a contract instance. */
   label: string;
+
   /**
    * Created Tx position when the contract was instantiated.
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
-
   created: AbsoluteTxPosition;
   ibcPortId: string;
+
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-
   extension: Any;
 }
-/** ContractCodeHistoryEntry metadata to a contract. */
 
+/** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
   operation: ContractCodeHistoryOperationType;
+
   /** CodeID is the reference to the stored WASM code */
-
   codeId: Long;
-  /** Updated Tx position when the operation was executed. */
 
+  /** Updated Tx position when the operation was executed. */
   updated: AbsoluteTxPosition;
   msg: Uint8Array;
 }
+
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
  * ordering of transactions.
  */
-
 export interface AbsoluteTxPosition {
   /** BlockHeight is the block the contract was created at */
   blockHeight: Long;
+
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
    * or gas consumed)
    */
-
   txIndex: Long;
 }
-/** Model is a struct that holds a KV pair */
 
+/** Model is a struct that holds a KV pair */
 export interface Model {
   /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
-  /** base64-encode raw value */
 
+  /** base64-encode raw value */
   value: Uint8Array;
 }
 
@@ -861,52 +860,3 @@ export const Model = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

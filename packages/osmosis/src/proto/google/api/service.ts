@@ -1,26 +1,25 @@
-/* eslint-disable */
-import Long from "long";
+import { Api } from "../protobuf/api";
+import { Type, Enum } from "../protobuf/type";
+import { Documentation } from "./documentation";
+import { Backend } from "./backend";
+import { Http } from "./http";
+import { Quota } from "./quota";
+import { Authentication } from "./auth";
+import { Context } from "./context";
+import { Usage } from "./usage";
+import { Endpoint } from "./endpoint";
+import { Control } from "./control";
+import { LogDescriptor } from "./log";
+import { MetricDescriptor } from "./metric";
+import { MonitoredResourceDescriptor } from "./monitored_resource";
+import { Billing } from "./billing";
+import { Logging } from "./logging";
+import { Monitoring } from "./monitoring";
+import { SystemParameters } from "./system_parameter";
+import { SourceInfo } from "./source_info";
+import { UInt32Value } from "../protobuf/wrappers";
 import * as _m0 from "protobufjs/minimal";
-import { Documentation } from "../../google/api/documentation";
-import { Backend } from "../../google/api/backend";
-import { Http } from "../../google/api/http";
-import { Quota } from "../../google/api/quota";
-import { Authentication } from "../../google/api/auth";
-import { Context } from "../../google/api/context";
-import { Usage } from "../../google/api/usage";
-import { Control } from "../../google/api/control";
-import { Billing } from "../../google/api/billing";
-import { Logging } from "../../google/api/logging";
-import { Monitoring } from "../../google/api/monitoring";
-import { SystemParameters } from "../../google/api/system_parameter";
-import { SourceInfo } from "../../google/api/source_info";
-import { Api } from "../../google/protobuf/api";
-import { Type, Enum } from "../../google/protobuf/type";
-import { Endpoint } from "../../google/api/endpoint";
-import { LogDescriptor } from "../../google/api/log";
-import { MetricDescriptor } from "../../google/api/metric";
-import { MonitoredResourceDescriptor } from "../../google/api/monitored_resource";
-import { UInt32Value } from "../../google/protobuf/wrappers";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -28,23 +27,23 @@ import { UInt32Value } from "../../google/protobuf/wrappers";
  * title, and delegates other aspects to sub-sections. Each sub-section is
  * either a proto message or a repeated proto message that configures a
  * specific aspect, such as auth. See each proto message definition for details.
- *
+ * 
  * Example:
- *
- *     type: google.api.Service
- *     name: calendar.googleapis.com
- *     title: Google Calendar API
- *     apis:
- *     - name: google.calendar.v3.Calendar
- *     authentication:
- *       providers:
- *       - id: google_calendar_auth
- *         jwks_uri: https://www.googleapis.com/oauth2/v1/certs
- *         issuer: https://securetoken.google.com
- *       rules:
- *       - selector: "*"
- *         requirements:
- *           provider_id: google_calendar_auth
+ * 
+ * type: google.api.Service
+ * name: calendar.googleapis.com
+ * title: Google Calendar API
+ * apis:
+ * - name: google.calendar.v3.Calendar
+ * authentication:
+ * providers:
+ * - id: google_calendar_auth
+ * jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ * issuer: https://securetoken.google.com
+ * rules:
+ * - selector: "*"
+ * requirements:
+ * provider_id: google_calendar_auth
  */
 export interface Service {
   /**
@@ -54,20 +53,21 @@ export interface Service {
    * of the service also owns the DNS name.
    */
   name: string;
+
   /** The product title for this service. */
-
   title: string;
-  /** The Google project that owns this service. */
 
+  /** The Google project that owns this service. */
   producerProjectId: string;
+
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-
   id: string;
+
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -75,99 +75,98 @@ export interface Service {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-
   apis: Api[];
+
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
    * automatically included.  Messages which are not referenced but
    * shall be included, such as types used by the `google.protobuf.Any` type,
    * should be listed here by name. Example:
-   *
-   *     types:
-   *     - name: google.protobuf.Int32
+   * 
+   * types:
+   * - name: google.protobuf.Int32
    */
-
   types: Type[];
+
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
    * included.  Enums which are not referenced but shall be included
    * should be listed here by name. Example:
-   *
-   *     enums:
-   *     - name: google.someapi.v1.SomeEnum
+   * 
+   * enums:
+   * - name: google.someapi.v1.SomeEnum
    */
-
   enums: Enum[];
+
   /** Additional API documentation. */
-
   documentation: Documentation;
+
   /** API backend configuration. */
-
   backend: Backend;
+
   /** HTTP configuration. */
-
   http: Http;
+
   /** Quota configuration. */
-
   quota: Quota;
+
   /** Auth configuration. */
-
   authentication: Authentication;
+
   /** Context configuration. */
-
   context: Context;
-  /** Configuration controlling usage of this service. */
 
+  /** Configuration controlling usage of this service. */
   usage: Usage;
+
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
-
   endpoints: Endpoint[];
+
   /** Configuration for the service control plane. */
-
   control: Control;
+
   /** Defines the logs used by this service. */
-
   logs: LogDescriptor[];
-  /** Defines the metrics used by this service. */
 
+  /** Defines the metrics used by this service. */
   metrics: MetricDescriptor[];
+
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-
   monitoredResources: MonitoredResourceDescriptor[];
+
   /** Billing configuration. */
-
   billing: Billing;
+
   /** Logging configuration. */
-
   logging: Logging;
+
   /** Monitoring configuration. */
-
   monitoring: Monitoring;
+
   /** System parameter configuration. */
-
   systemParameters: SystemParameters;
-  /** Output only. The source information for this configuration if available. */
 
+  /** Output only. The source information for this configuration if available. */
   sourceInfo: SourceInfo;
+
   /**
    * Obsolete. Do not use.
-   *
+   * 
    * This field has no semantic meaning. The service config compiler always
    * sets this field to `3`.
-   *
-   * @deprecated
    */
 
-  configVersion: number | undefined;
+  /** @deprecated */
+  configVersion: UInt32Value;
 }
 
 function createBaseService(): Service {
@@ -299,9 +298,7 @@ export const Service = {
     }
 
     if (message.configVersion !== undefined) {
-      UInt32Value.encode({
-        value: message.configVersion!
-      }, writer.uint32(162).fork()).ldelim();
+      UInt32Value.encode(message.configVersion, writer.uint32(162).fork()).ldelim();
     }
 
     return writer;
@@ -413,7 +410,7 @@ export const Service = {
           break;
 
         case 20:
-          message.configVersion = UInt32Value.decode(reader, reader.uint32()).value;
+          message.configVersion = UInt32Value.decode(reader, reader.uint32());
           break;
 
         default:
@@ -451,7 +448,7 @@ export const Service = {
       monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined,
       systemParameters: isSet(object.systemParameters) ? SystemParameters.fromJSON(object.systemParameters) : undefined,
       sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
-      configVersion: isSet(object.configVersion) ? Number(object.configVersion) : undefined
+      configVersion: isSet(object.configVersion) ? UInt32Value.fromJSON(object.configVersion) : undefined
     };
   },
 
@@ -519,7 +516,7 @@ export const Service = {
     message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toJSON(message.monitoring) : undefined);
     message.systemParameters !== undefined && (obj.systemParameters = message.systemParameters ? SystemParameters.toJSON(message.systemParameters) : undefined);
     message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
-    message.configVersion !== undefined && (obj.configVersion = message.configVersion);
+    message.configVersion !== undefined && (obj.configVersion = message.configVersion ? UInt32Value.toJSON(message.configVersion) : undefined);
     return obj;
   },
 
@@ -549,22 +546,8 @@ export const Service = {
     message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : undefined;
     message.systemParameters = object.systemParameters !== undefined && object.systemParameters !== null ? SystemParameters.fromPartial(object.systemParameters) : undefined;
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
-    message.configVersion = object.configVersion ?? undefined;
+    message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : undefined;
     return message;
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,183 +1,182 @@
-/* eslint-disable */
-import Long from "long";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { Coin } from "../../base/v1beta1/coin";
+import { Params, Metadata } from "./bank";
 import * as _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Params, Metadata } from "../../../cosmos/bank/v1beta1/bank";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
 export interface QueryBalanceRequest {
   /** address is the address to query balances for. */
   address: string;
-  /** denom is the coin denom to query balances for. */
 
+  /** denom is the coin denom to query balances for. */
   denom: string;
 }
-/** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 
+/** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponse {
   /** balance is the balance of the coin. */
   balance: Coin;
 }
-/** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 
+/** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequest {
   /** address is the address to query balances for. */
   address: string;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
  * method.
  */
-
 export interface QueryAllBalancesResponse {
   /** balances is the balances of all the coins. */
   balances: Coin[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
+
 /**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
  * an account's spendable balances.
  */
-
 export interface QuerySpendableBalancesRequest {
   /** address is the address to query spendable balances for. */
   address: string;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QuerySpendableBalancesResponse defines the gRPC response structure for querying
  * an account's spendable balances.
  */
-
 export interface QuerySpendableBalancesResponse {
   /** balances is the spendable balances of all the coins. */
   balances: Coin[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
+
 /**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
  * method.
  */
-
 export interface QueryTotalSupplyRequest {
   /**
    * pagination defines an optional pagination for the request.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   pagination: PageRequest;
 }
+
 /**
  * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
  * method
  */
-
 export interface QueryTotalSupplyResponse {
   /** supply is the supply of the coins */
   supply: Coin[];
+
   /**
    * pagination defines the pagination in the response.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
-
   pagination: PageResponse;
 }
-/** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 
+/** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequest {
   /** denom is the coin denom to query balances for. */
   denom: string;
 }
-/** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */
 
+/** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfResponse {
   /** amount is the supply of the coin. */
   amount: Coin;
 }
+
 /** QueryParamsRequest defines the request type for querying x/bank parameters. */
-
 export interface QueryParamsRequest {}
-/** QueryParamsResponse defines the response type for querying x/bank parameters. */
 
+/** QueryParamsResponse defines the response type for querying x/bank parameters. */
 export interface QueryParamsResponse {
   params: Params;
 }
-/** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 
+/** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequest {
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
  * method.
  */
-
 export interface QueryDenomsMetadataResponse {
   /** metadata provides the client information for all the registered tokens. */
   metadatas: Metadata[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
-/** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 
+/** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequest {
   /** denom is the coin denom to query the metadata for. */
   denom: string;
 }
+
 /**
  * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
  * method.
  */
-
 export interface QueryDenomMetadataResponse {
   /** metadata describes and provides all the client information for the requested token. */
   metadata: Metadata;
 }
+
 /**
  * QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
  * which queries for a paginated set of all account holders of a particular
  * denomination.
  */
-
 export interface QueryDenomOwnersRequest {
   /** denom defines the coin denomination to query all account holders for. */
   denom: string;
-  /** pagination defines an optional pagination for the request. */
 
+  /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
+
 /**
  * DenomOwner defines structure representing an account that owns or holds a
  * particular denominated token. It contains the account address and account
  * balance of the denominated token.
  */
-
 export interface DenomOwner {
   /** address defines the address that owns a particular denomination. */
   address: string;
-  /** balance is the balance of the denominated coin for an account. */
 
+  /** balance is the balance of the denominated coin for an account. */
   balance: Coin;
 }
-/** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
 
+/** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
 export interface QueryDenomOwnersResponse {
   denomOwners: DenomOwner[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
 
@@ -1399,19 +1398,3 @@ export const QueryDenomOwnersResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

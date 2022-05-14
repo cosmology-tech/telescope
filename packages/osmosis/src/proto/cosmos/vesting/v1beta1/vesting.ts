@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
+import { BaseAccount } from "../../auth/v1beta1/auth";
+import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { BaseAccount } from "../../../cosmos/auth/v1beta1/auth";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
@@ -15,48 +14,48 @@ export interface BaseVestingAccount {
   delegatedVesting: Coin[];
   endTime: Long;
 }
+
 /**
  * ContinuousVestingAccount implements the VestingAccount interface. It
  * continuously vests by unlocking coins linearly with respect to time.
  */
-
 export interface ContinuousVestingAccount {
   baseVestingAccount: BaseVestingAccount;
   startTime: Long;
 }
+
 /**
  * DelayedVestingAccount implements the VestingAccount interface. It vests all
  * coins after a specific time, but non prior. In other words, it keeps them
  * locked until a specified time.
  */
-
 export interface DelayedVestingAccount {
   baseVestingAccount: BaseVestingAccount;
 }
-/** Period defines a length of time and amount of coins that will vest. */
 
+/** Period defines a length of time and amount of coins that will vest. */
 export interface Period {
   length: Long;
   amount: Coin[];
 }
+
 /**
  * PeriodicVestingAccount implements the VestingAccount interface. It
  * periodically vests by unlocking coins during each specified period.
  */
-
 export interface PeriodicVestingAccount {
   baseVestingAccount: BaseVestingAccount;
   startTime: Long;
   vestingPeriods: Period[];
 }
+
 /**
  * PermanentLockedAccount implements the VestingAccount interface. It does
  * not ever release coins, locking them indefinitely. Coins in this account can
  * still be used for delegating and for governance votes even while locked.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
-
 export interface PermanentLockedAccount {
   baseVestingAccount: BaseVestingAccount;
 }
@@ -526,17 +525,3 @@ export const PermanentLockedAccount = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
@@ -16,75 +15,75 @@ export interface Plan {
    * reached and the software will exit.
    */
   name: string;
+
   /**
    * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
    * has been removed from the SDK.
    * If this field is not empty, an error will be thrown.
-   *
-   * @deprecated
    */
 
+  /** @deprecated */
   time: Date;
+
   /**
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
    */
-
   height: Long;
+
   /**
    * Any application specific upgrade info to be included on-chain
    * such as a git commit that validators could automatically upgrade to
    */
-
   info: string;
+
   /**
    * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
    * moved to the IBC module in the sub module 02-client.
    * If this field is not empty, an error will be thrown.
-   *
-   * @deprecated
    */
 
+  /** @deprecated */
   upgradedClientState: Any;
 }
+
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
  * upgrade.
  * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
  * proposals, see MsgSoftwareUpgrade.
- *
- * @deprecated
  */
 
+/** @deprecated */
 export interface SoftwareUpgradeProposal {
   title: string;
   description: string;
   plan: Plan;
 }
+
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
  * upgrade.
  * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
  * proposals, see MsgCancelUpgrade.
- *
- * @deprecated
  */
 
+/** @deprecated */
 export interface CancelSoftwareUpgradeProposal {
   title: string;
   description: string;
 }
+
 /**
  * ModuleVersion specifies a module and its consensus version.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
-
 export interface ModuleVersion {
   /** name of the app module */
   name: string;
-  /** consensus version of the app module */
 
+  /** consensus version of the app module */
   version: Long;
 }
 
@@ -411,46 +410,3 @@ export const ModuleVersion = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

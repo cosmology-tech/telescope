@@ -1,47 +1,46 @@
-/* eslint-disable */
-import Long from "long";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { Params, ValidatorSigningInfo } from "./slashing";
 import * as _m0 from "protobufjs/minimal";
-import { Params, ValidatorSigningInfo } from "../../../cosmos/slashing/v1beta1/slashing";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}
-/** QueryParamsResponse is the response type for the Query/Params RPC method */
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
   params: Params;
 }
+
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
  * method
  */
-
 export interface QuerySigningInfoRequest {
   /** cons_address is the address to query signing info of */
   consAddress: string;
 }
+
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
  * method
  */
-
 export interface QuerySigningInfoResponse {
   /** val_signing_info is the signing info of requested val cons address */
   valSigningInfo: ValidatorSigningInfo;
 }
+
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
  * method
  */
-
 export interface QuerySigningInfosRequest {
   pagination: PageRequest;
 }
+
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
  * method
  */
-
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
@@ -393,19 +392,3 @@ export const QuerySigningInfosResponse = {
   }
 
 };
-/** Query provides defines the gRPC querier service */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

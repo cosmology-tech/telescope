@@ -1,6 +1,5 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -9,51 +8,51 @@ import * as _m0 from "protobufjs/minimal";
  * or "month". It is related to Timestamp in that the difference between
  * two Timestamp values is a Duration and it can be added or subtracted
  * from a Timestamp. Range is approximately +-10,000 years.
- *
+ * 
  * # Examples
- *
+ * 
  * Example 1: Compute Duration from two Timestamps in pseudo code.
- *
- *     Timestamp start = ...;
- *     Timestamp end = ...;
- *     Duration duration = ...;
- *
- *     duration.seconds = end.seconds - start.seconds;
- *     duration.nanos = end.nanos - start.nanos;
- *
- *     if (duration.seconds < 0 && duration.nanos > 0) {
- *       duration.seconds += 1;
- *       duration.nanos -= 1000000000;
- *     } else if (duration.seconds > 0 && duration.nanos < 0) {
- *       duration.seconds -= 1;
- *       duration.nanos += 1000000000;
- *     }
- *
+ * 
+ * Timestamp start = ...;
+ * Timestamp end = ...;
+ * Duration duration = ...;
+ * 
+ * duration.seconds = end.seconds - start.seconds;
+ * duration.nanos = end.nanos - start.nanos;
+ * 
+ * if (duration.seconds < 0 && duration.nanos > 0) {
+ * duration.seconds += 1;
+ * duration.nanos -= 1000000000;
+ * } else if (durations.seconds > 0 && duration.nanos < 0) {
+ * duration.seconds -= 1;
+ * duration.nanos += 1000000000;
+ * }
+ * 
  * Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.
- *
- *     Timestamp start = ...;
- *     Duration duration = ...;
- *     Timestamp end = ...;
- *
- *     end.seconds = start.seconds + duration.seconds;
- *     end.nanos = start.nanos + duration.nanos;
- *
- *     if (end.nanos < 0) {
- *       end.seconds -= 1;
- *       end.nanos += 1000000000;
- *     } else if (end.nanos >= 1000000000) {
- *       end.seconds += 1;
- *       end.nanos -= 1000000000;
- *     }
- *
+ * 
+ * Timestamp start = ...;
+ * Duration duration = ...;
+ * Timestamp end = ...;
+ * 
+ * end.seconds = start.seconds + duration.seconds;
+ * end.nanos = start.nanos + duration.nanos;
+ * 
+ * if (end.nanos < 0) {
+ * end.seconds -= 1;
+ * end.nanos += 1000000000;
+ * } else if (end.nanos >= 1000000000) {
+ * end.seconds += 1;
+ * end.nanos -= 1000000000;
+ * }
+ * 
  * Example 3: Compute Duration from datetime.timedelta in Python.
- *
- *     td = datetime.timedelta(days=3, minutes=10)
- *     duration = Duration()
- *     duration.FromTimedelta(td)
- *
+ * 
+ * td = datetime.timedelta(days=3, minutes=10)
+ * duration = Duration()
+ * duration.FromTimedelta(td)
+ * 
  * # JSON Mapping
- *
+ * 
  * In JSON format, the Duration type is encoded as a string rather than an
  * object, where the string ends in the suffix "s" (indicating seconds) and
  * is preceded by the number of seconds, with nanoseconds expressed as
@@ -69,6 +68,7 @@ export interface Duration {
    * 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
   seconds: Long;
+
   /**
    * Signed fractions of a second at nanosecond resolution of the span
    * of time. Durations less than one second are represented with a 0
@@ -77,7 +77,6 @@ export interface Duration {
    * of the same sign as the `seconds` field. Must be from -999,999,999
    * to +999,999,999 inclusive.
    */
-
   nanos: number;
 }
 
@@ -149,17 +148,3 @@ export const Duration = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

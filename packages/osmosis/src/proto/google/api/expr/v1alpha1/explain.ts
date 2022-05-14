@@ -1,39 +1,38 @@
-/* eslint-disable */
-import Long from "long";
+import { Value } from "./value";
 import * as _m0 from "protobufjs/minimal";
-import { Value } from "../../../../google/api/expr/v1alpha1/value";
+import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
 
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
- *
- * @deprecated
  */
+
+/** @deprecated */
 export interface Explain {
   /**
    * All of the observed values.
-   *
+   * 
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
   values: Value[];
+
   /**
    * List of steps.
-   *
+   * 
    * Repeated evaluations of the same expression generate new ExprStep
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
-
   exprSteps: Explain_ExprStep[];
 }
-/** ID and value index of one step. */
 
+/** ID and value index of one step. */
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
   id: Long;
-  /** Index of the value in the values list. */
 
+  /** Index of the value in the values list. */
   valueIndex: number;
 }
 
@@ -185,17 +184,3 @@ export const Explain_ExprStep = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

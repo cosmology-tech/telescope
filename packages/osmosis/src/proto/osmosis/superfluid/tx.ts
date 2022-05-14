@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface MsgSuperfluidDelegate {
   sender: string;
   lockId: Long;
@@ -18,12 +17,12 @@ export interface MsgSuperfluidUnbondLock {
   lockId: Long;
 }
 export interface MsgSuperfluidUnbondLockResponse {}
+
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
  * and then does a superfluid lock from the newly created lockup, to the
  * specified validator addr.
  */
-
 export interface MsgLockAndSuperfluidDelegate {
   sender: string;
   coins: Coin[];
@@ -524,19 +523,3 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   }
 
 };
-/** Msg defines the Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

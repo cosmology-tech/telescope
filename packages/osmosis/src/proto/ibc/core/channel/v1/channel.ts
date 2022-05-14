@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
-import { Height } from "../../../../ibc/core/client/v1/client";
+import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * State defines if a channel is in one of the following states:
@@ -79,8 +78,8 @@ export function stateToJSON(object: State): string {
       return "UNKNOWN";
   }
 }
-/** Order defines if a channel is ORDERED or UNORDERED */
 
+/** Order defines if a channel is ORDERED or UNORDERED */
 export enum Order {
   /** ORDER_NONE_UNSPECIFIED - zero-value for channel ordering */
   ORDER_NONE_UNSPECIFIED = 0,
@@ -130,72 +129,72 @@ export function orderToJSON(object: Order): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
  * modules on separate blockchains, which has at least one end capable of
  * sending packets and one end capable of receiving packets.
  */
-
 export interface Channel {
   /** current state of the channel end */
   state: State;
+
   /** whether the channel is ordered or unordered */
-
   ordering: Order;
-  /** counterparty channel end */
 
+  /** counterparty channel end */
   counterparty: Counterparty;
+
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-
   connectionHops: string[];
-  /** opaque channel version, which is agreed upon during the handshake */
 
+  /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
+
 /**
  * IdentifiedChannel defines a channel with additional port and channel
  * identifier fields.
  */
-
 export interface IdentifiedChannel {
   /** current state of the channel end */
   state: State;
+
   /** whether the channel is ordered or unordered */
-
   ordering: Order;
-  /** counterparty channel end */
 
+  /** counterparty channel end */
   counterparty: Counterparty;
+
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-
   connectionHops: string[];
+
   /** opaque channel version, which is agreed upon during the handshake */
-
   version: string;
+
   /** port identifier */
-
   portId: string;
-  /** channel identifier */
 
+  /** channel identifier */
   channelId: string;
 }
-/** Counterparty defines a channel end counterparty */
 
+/** Counterparty defines a channel end counterparty */
 export interface Counterparty {
   /** port on the counterparty chain which owns the other end of the channel. */
   portId: string;
-  /** channel end on the counterparty chain */
 
+  /** channel end on the counterparty chain */
   channelId: string;
 }
-/** Packet defines a type that carries data across different chains through IBC */
 
+/** Packet defines a type that carries data across different chains through IBC */
 export interface Packet {
   /**
    * number corresponds to the order of sends and receives, where a Packet
@@ -203,48 +202,49 @@ export interface Packet {
    * with a later sequence number.
    */
   sequence: Long;
+
   /** identifies the port on the sending chain. */
-
   sourcePort: string;
+
   /** identifies the channel end on the sending chain. */
-
   sourceChannel: string;
+
   /** identifies the port on the receiving chain. */
-
   destinationPort: string;
+
   /** identifies the channel end on the receiving chain. */
-
   destinationChannel: string;
+
   /** actual opaque bytes transferred directly to the application module */
-
   data: Uint8Array;
+
   /** block height after which the packet times out */
-
   timeoutHeight: Height;
-  /** block timestamp (in nanoseconds) after which the packet times out */
 
+  /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
 }
+
 /**
  * PacketState defines the generic type necessary to retrieve and store
  * packet commitments, acknowledgements, and receipts.
  * Caller is responsible for knowing the context necessary to interpret this
  * state as a commitment, acknowledgement, or a receipt.
  */
-
 export interface PacketState {
   /** channel port identifier. */
   portId: string;
+
   /** channel unique identifier. */
-
   channelId: string;
+
   /** packet sequence. */
-
   sequence: Long;
-  /** embedded data that represents packet state. */
 
+  /** embedded data that represents packet state. */
   data: Uint8Array;
 }
+
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by
  * app-specific protocols.
@@ -254,10 +254,9 @@ export interface PacketState {
  * `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
  * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
-
 export interface Acknowledgement {
-  result: Uint8Array | undefined;
-  error: string | undefined;
+  result?: Uint8Array;
+  error?: string;
 }
 
 function createBaseChannel(): Channel {
@@ -877,52 +876,3 @@ export const Acknowledgement = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,7 +1,7 @@
-import * as _864 from "./wasm/v1/tx.aminos";
-import * as _865 from "./wasm/v1/tx.registry";
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
+import * as cosmwasmWasmV1TxRegistry from "./wasm/v1/tx.registry";
+import * as cosmwasmWasmV1TxAmino from "./wasm/v1/tx.amino";
 export const getSigningCosmwasmClient = async ({
   rpcEndpoint,
   signer,
@@ -11,8 +11,8 @@ export const getSigningCosmwasmClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry([...defaultTypes, ..._865.registry]);
-  const aminoTypes = new AminoTypes({ ..._864.AminoConverter
+  const registry = new Registry([...defaultTypes, ...cosmwasmWasmV1TxRegistry.registry]);
+  const aminoTypes = new AminoTypes({ ...cosmwasmWasmV1TxAmino.AminoConverter
   });
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
     registry,

@@ -1,6 +1,5 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,
   SCALAR_TYPE_STRING = 1,
@@ -42,11 +41,11 @@ export function scalarTypeToJSON(object: ScalarType): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
  */
-
 export interface InterfaceDescriptor {
   /**
    * name is the name of the interface. It should be a short-name (without
@@ -55,13 +54,14 @@ export interface InterfaceDescriptor {
    * fully-qualified name will be a.b.C.
    */
   name: string;
+
   /**
    * description is a human-readable description of the interface and its
    * purpose.
    */
-
   description: string;
 }
+
 /**
  * ScalarDescriptor describes an scalar type to be used with
  * the scalar field option and declared by declare_scalar.
@@ -71,7 +71,6 @@ export interface InterfaceDescriptor {
  * valid syntactical representation for a given semantic meaning,
  * i.e. the encoding should be deterministic.
  */
-
 export interface ScalarDescriptor {
   /**
    * name is the name of the scalar. It should be a short-name (without
@@ -80,20 +79,20 @@ export interface ScalarDescriptor {
    * fully-qualified name will be a.b.C.
    */
   name: string;
+
   /**
    * description is a human-readable description of the scalar and its
    * encoding format. For instance a big integer or decimal scalar should
    * specify precisely the expected encoding format.
    */
-
   description: string;
+
   /**
    * field_type is the type of field with which this scalar can be used.
    * Scalars can be used with one and only one type of field so that
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
-
   fieldType: ScalarType[];
 }
 
@@ -264,17 +263,3 @@ export const ScalarDescriptor = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

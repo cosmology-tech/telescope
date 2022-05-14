@@ -1,15 +1,56 @@
-import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, omitDefault } from "../../../amino.helpers";
-import { MsgSubmitEvidence, MsgSubmitEvidenceResponse, Msg, Rpc } from "./tx";
-
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-import { Registry, GeneratedType } from "@cosmjs/proto-signing";
+import { GeneratedType, Registry } from "@cosmjs/proto-signing";
+import { MsgSubmitEvidence } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.evidence.v1beta1.MsgSubmitEvidence", MsgSubmitEvidence]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {
     protoRegistry.register(typeUrl, mod);
   });
+};
+export const MessageComposer = {
+  encoded: {
+    submitEvidence(value: MsgSubmitEvidence) {
+      return {
+        type_url: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+        value: MsgSubmitEvidence.encode(value).finish()
+      };
+    }
+
+  },
+  withTypeUrl: {
+    submitEvidence(value: MsgSubmitEvidence) {
+      return {
+        typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+        value
+      };
+    }
+
+  },
+  toJSON: {
+    submitEvidence(value: MsgSubmitEvidence) {
+      return {
+        typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+        value: MsgSubmitEvidence.toJSON(value)
+      };
+    }
+
+  },
+  fromJSON: {
+    submitEvidence(value: any) {
+      return {
+        typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+        value: MsgSubmitEvidence.fromJSON(value)
+      };
+    }
+
+  },
+  fromPartial: {
+    submitEvidence(value: MsgSubmitEvidence) {
+      return {
+        typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+        value: MsgSubmitEvidence.fromPartial(value)
+      };
+    }
+
+  }
 };

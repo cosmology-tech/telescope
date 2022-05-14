@@ -1,7 +1,3 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-
 /**
  * The launch stage as defined by [Google Cloud Platform
  * Launch Stages](http://cloud.google.com/terms/launch-stages).
@@ -132,10 +128,4 @@ export function launchStageToJSON(object: LaunchStage): string {
     default:
       return "UNKNOWN";
   }
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
 }

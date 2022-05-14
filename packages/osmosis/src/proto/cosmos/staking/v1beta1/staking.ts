@@ -1,11 +1,10 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Header } from "../../../tendermint/types/types";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any } from "../../../google/protobuf/any";
 import { Duration } from "../../../google/protobuf/duration";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Coin } from "../../base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, Long, toDuration, fromDuration } from "@osmonauts/helpers";
 
 /** BondStatus is the status of a validator. */
 export enum BondStatus {
@@ -64,59 +63,60 @@ export function bondStatusToJSON(object: BondStatus): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * HistoricalInfo contains header and validator information for a given block.
  * It is stored as part of staking module's state, which persists the `n` most
  * recent HistoricalInfo
  * (`n` is set by the staking module's `historical_entries` parameter).
  */
-
 export interface HistoricalInfo {
   header: Header;
   valset: Validator[];
 }
+
 /**
  * CommissionRates defines the initial commission rates to be used for creating
  * a validator.
  */
-
 export interface CommissionRates {
   /** rate is the commission rate charged to delegators, as a fraction. */
   rate: string;
+
   /** max_rate defines the maximum commission rate which validator can ever charge, as a fraction. */
-
   maxRate: string;
-  /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
 
+  /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
   maxChangeRate: string;
 }
-/** Commission defines commission parameters for a given validator. */
 
+/** Commission defines commission parameters for a given validator. */
 export interface Commission {
   /** commission_rates defines the initial commission rates to be used for creating a validator. */
   commissionRates: CommissionRates;
-  /** update_time is the last time the commission rate was changed. */
 
+  /** update_time is the last time the commission rate was changed. */
   updateTime: Date;
 }
-/** Description defines a validator description. */
 
+/** Description defines a validator description. */
 export interface Description {
   /** moniker defines a human-readable name for the validator. */
   moniker: string;
+
   /** identity defines an optional identity signature (ex. UPort or Keybase). */
-
   identity: string;
+
   /** website defines an optional website link. */
-
   website: string;
+
   /** security_contact defines an optional email for security contact. */
-
   securityContact: string;
-  /** details define other optional details. */
 
+  /** details define other optional details. */
   details: string;
 }
+
 /**
  * Validator defines a validator, together with the total amount of the
  * Validator's bond shares and their exchange rate to coins. Slashing results in
@@ -127,212 +127,211 @@ export interface Description {
  * exchange rate. Voting power can be calculated as total bonded shares
  * multiplied by exchange rate.
  */
-
 export interface Validator {
   /** operator_address defines the address of the validator's operator; bech encoded in JSON. */
   operatorAddress: string;
+
   /** consensus_pubkey is the consensus public key of the validator, as a Protobuf Any. */
-
   consensusPubkey: Any;
+
   /** jailed defined whether the validator has been jailed from bonded status or not. */
-
   jailed: boolean;
+
   /** status is the validator status (bonded/unbonding/unbonded). */
-
   status: BondStatus;
+
   /** tokens define the delegated tokens (incl. self-delegation). */
-
   tokens: string;
+
   /** delegator_shares defines total shares issued to a validator's delegators. */
-
   delegatorShares: string;
+
   /** description defines the description terms for the validator. */
-
   description: Description;
+
   /** unbonding_height defines, if unbonding, the height at which this validator has begun unbonding. */
-
   unbondingHeight: Long;
+
   /** unbonding_time defines, if unbonding, the min time for the validator to complete unbonding. */
-
   unbondingTime: Date;
+
   /** commission defines the commission parameters. */
-
   commission: Commission;
-  /** min_self_delegation is the validator's self declared minimum self delegation. */
 
+  /** min_self_delegation is the validator's self declared minimum self delegation. */
   minSelfDelegation: string;
 }
-/** ValAddresses defines a repeated set of validator addresses. */
 
+/** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddresses {
   addresses: string[];
 }
+
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
  * It is intended to be used as a marshalable pointer. For example, a DVPair can
  * be used to construct the key to getting an UnbondingDelegation from state.
  */
-
 export interface DVPair {
   delegatorAddress: string;
   validatorAddress: string;
 }
-/** DVPairs defines an array of DVPair objects. */
 
+/** DVPairs defines an array of DVPair objects. */
 export interface DVPairs {
   pairs: DVPair[];
 }
+
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
  * with no other data. It is intended to be used as a marshalable pointer. For
  * example, a DVVTriplet can be used to construct the key to getting a
  * Redelegation from state.
  */
-
 export interface DVVTriplet {
   delegatorAddress: string;
   validatorSrcAddress: string;
   validatorDstAddress: string;
 }
-/** DVVTriplets defines an array of DVVTriplet objects. */
 
+/** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTriplets {
   triplets: DVVTriplet[];
 }
+
 /**
  * Delegation represents the bond with tokens held by an account. It is
  * owned by one delegator, and is associated with the voting power of one
  * validator.
  */
-
 export interface Delegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
   delegatorAddress: string;
+
   /** validator_address is the bech32-encoded address of the validator. */
-
   validatorAddress: string;
-  /** shares define the delegation shares received. */
 
+  /** shares define the delegation shares received. */
   shares: string;
 }
+
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
  * for a single validator in an time-ordered list.
  */
-
 export interface UnbondingDelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
   delegatorAddress: string;
+
   /** validator_address is the bech32-encoded address of the validator. */
-
   validatorAddress: string;
-  /** entries are the unbonding delegation entries. */
 
+  /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntry[];
 }
-/** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 
+/** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntry {
   /** creation_height is the height which the unbonding took place. */
   creationHeight: Long;
+
   /** completion_time is the unix time for unbonding completion. */
-
   completionTime: Date;
+
   /** initial_balance defines the tokens initially scheduled to receive at completion. */
-
   initialBalance: string;
-  /** balance defines the tokens to receive at completion. */
 
+  /** balance defines the tokens to receive at completion. */
   balance: string;
 }
-/** RedelegationEntry defines a redelegation object with relevant metadata. */
 
+/** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntry {
   /** creation_height  defines the height which the redelegation took place. */
   creationHeight: Long;
+
   /** completion_time defines the unix time for redelegation completion. */
-
   completionTime: Date;
+
   /** initial_balance defines the initial balance when redelegation started. */
-
   initialBalance: string;
-  /** shares_dst is the amount of destination-validator shares created by redelegation. */
 
+  /** shares_dst is the amount of destination-validator shares created by redelegation. */
   sharesDst: string;
 }
+
 /**
  * Redelegation contains the list of a particular delegator's redelegating bonds
  * from a particular source validator to a particular destination validator.
  */
-
 export interface Redelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
   delegatorAddress: string;
+
   /** validator_src_address is the validator redelegation source operator address. */
-
   validatorSrcAddress: string;
+
   /** validator_dst_address is the validator redelegation destination operator address. */
-
   validatorDstAddress: string;
-  /** entries are the redelegation entries. */
 
+  /** entries are the redelegation entries. */
   entries: RedelegationEntry[];
 }
-/** Params defines the parameters for the staking module. */
 
+/** Params defines the parameters for the staking module. */
 export interface Params {
   /** unbonding_time is the time duration of unbonding. */
-  unbondingTime: Duration;
+  unbondingTime: string;
+
   /** max_validators is the maximum number of validators. */
-
   maxValidators: number;
+
   /** max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio). */
-
   maxEntries: number;
+
   /** historical_entries is the number of historical entries to persist. */
-
   historicalEntries: number;
+
   /** bond_denom defines the bondable coin denomination. */
-
   bondDenom: string;
-  /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
 
+  /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
   minCommissionRate: string;
 }
+
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a
  * balance in addition to shares which is more suitable for client responses.
  */
-
 export interface DelegationResponse {
   delegation: Delegation;
   balance: Coin;
 }
+
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
  * contains a balance in addition to shares which is more suitable for client
  * responses.
  */
-
 export interface RedelegationEntryResponse {
   redelegationEntry: RedelegationEntry;
   balance: string;
 }
+
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
  * contain a balance in addition to shares which is more suitable for client
  * responses.
  */
-
 export interface RedelegationResponse {
   redelegation: Redelegation;
   entries: RedelegationEntryResponse[];
 }
+
 /**
  * Pool is used for tracking bonded and not-bonded token supply of the bond
  * denomination.
  */
-
 export interface Pool {
   notBondedTokens: string;
   bondedTokens: string;
@@ -1651,7 +1650,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.unbondingTime !== undefined) {
-      Duration.encode(message.unbondingTime, writer.uint32(10).fork()).ldelim();
+      Duration.encode(toDuration(message.unbondingTime), writer.uint32(10).fork()).ldelim();
     }
 
     if (message.maxValidators !== 0) {
@@ -1687,7 +1686,7 @@ export const Params = {
 
       switch (tag >>> 3) {
         case 1:
-          message.unbondingTime = Duration.decode(reader, reader.uint32());
+          message.unbondingTime = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 2:
@@ -1721,7 +1720,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      unbondingTime: isSet(object.unbondingTime) ? Duration.fromJSON(object.unbondingTime) : undefined,
+      unbondingTime: isSet(object.unbondingTime) ? String(object.unbondingTime) : undefined,
       maxValidators: isSet(object.maxValidators) ? Number(object.maxValidators) : 0,
       maxEntries: isSet(object.maxEntries) ? Number(object.maxEntries) : 0,
       historicalEntries: isSet(object.historicalEntries) ? Number(object.historicalEntries) : 0,
@@ -1732,7 +1731,7 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime ? Duration.toJSON(message.unbondingTime) : undefined);
+    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime);
     message.maxValidators !== undefined && (obj.maxValidators = Math.round(message.maxValidators));
     message.maxEntries !== undefined && (obj.maxEntries = Math.round(message.maxEntries));
     message.historicalEntries !== undefined && (obj.historicalEntries = Math.round(message.historicalEntries));
@@ -1743,7 +1742,7 @@ export const Params = {
 
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.unbondingTime = object.unbondingTime !== undefined && object.unbondingTime !== null ? Duration.fromPartial(object.unbondingTime) : undefined;
+    message.unbondingTime = object.unbondingTime ?? undefined;
     message.maxValidators = object.maxValidators ?? 0;
     message.maxEntries = object.maxEntries ?? 0;
     message.historicalEntries = object.historicalEntries ?? 0;
@@ -2035,46 +2034,3 @@ export const Pool = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

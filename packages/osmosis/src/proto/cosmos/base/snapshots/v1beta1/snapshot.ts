@@ -1,6 +1,5 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
@@ -10,58 +9,58 @@ export interface Snapshot {
   hash: Uint8Array;
   metadata: Metadata;
 }
-/** Metadata contains SDK-specific snapshot metadata. */
 
+/** Metadata contains SDK-specific snapshot metadata. */
 export interface Metadata {
   /** SHA-256 chunk hashes */
   chunkHashes: Uint8Array[];
 }
+
 /** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
-
 export interface SnapshotItem {
-  store: SnapshotStoreItem | undefined;
-  iavl: SnapshotIAVLItem | undefined;
-  extension: SnapshotExtensionMeta | undefined;
-  extensionPayload: SnapshotExtensionPayload | undefined;
-  kv: SnapshotKVItem | undefined;
-  schema: SnapshotSchema | undefined;
+  store?: SnapshotStoreItem;
+  iavl?: SnapshotIAVLItem;
+  extension?: SnapshotExtensionMeta;
+  extensionPayload?: SnapshotExtensionPayload;
+  kv?: SnapshotKVItem;
+  schema?: SnapshotSchema;
 }
-/** SnapshotStoreItem contains metadata about a snapshotted store. */
 
+/** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItem {
   name: string;
 }
-/** SnapshotIAVLItem is an exported IAVL node. */
 
+/** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItem {
   key: Uint8Array;
   value: Uint8Array;
+
   /** version is block height */
-
   version: Long;
-  /** height is depth of the tree. */
 
+  /** height is depth of the tree. */
   height: number;
 }
-/** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 
+/** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMeta {
   name: string;
   format: number;
 }
-/** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 
+/** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayload {
   payload: Uint8Array;
 }
-/** SnapshotKVItem is an exported Key/Value Pair */
 
+/** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItem {
   key: Uint8Array;
   value: Uint8Array;
 }
-/** SnapshotSchema is an exported schema of smt store */
 
+/** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchema {
   keys: Uint8Array[];
 }
@@ -758,52 +757,3 @@ export const SnapshotSchema = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

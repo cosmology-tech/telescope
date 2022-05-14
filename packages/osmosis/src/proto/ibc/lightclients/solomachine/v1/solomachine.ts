@@ -1,9 +1,8 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
-import { ConnectionEnd } from "../../../../ibc/core/connection/v1/connection";
-import { Channel } from "../../../../ibc/core/channel/v1/channel";
+import { ConnectionEnd } from "../../../core/connection/v1/connection";
+import { Channel } from "../../../core/channel/v1/channel";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * DataType defines the type of solo machine proof being created. This is done
@@ -125,45 +124,45 @@ export function dataTypeToJSON(object: DataType): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * ClientState defines a solo machine client that tracks the current consensus
  * state and if the client is frozen.
  */
-
 export interface ClientState {
   /** latest sequence of the client state */
   sequence: Long;
-  /** frozen sequence of the solo machine */
 
+  /** frozen sequence of the solo machine */
   frozenSequence: Long;
   consensusState: ConsensusState;
+
   /**
    * when set to true, will allow governance to update a solo machine client.
    * The client will be unfrozen if it is frozen.
    */
-
   allowUpdateAfterProposal: boolean;
 }
+
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
  * consensus state is contained in the "height" key used in storing the
  * consensus state.
  */
-
 export interface ConsensusState {
   /** public key of the solo machine */
   publicKey: Any;
+
   /**
    * diversifier allows the same public key to be re-used across different solo
    * machine clients (potentially on different chains) without being considered
    * misbehaviour.
    */
-
   diversifier: string;
   timestamp: Long;
 }
-/** Header defines a solo machine consensus header */
 
+/** Header defines a solo machine consensus header */
 export interface Header {
   /** sequence to update solo machine public key at */
   sequence: Long;
@@ -172,123 +171,123 @@ export interface Header {
   newPublicKey: Any;
   newDiversifier: string;
 }
+
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
  * of a sequence and two signatures over different messages at that sequence.
  */
-
 export interface Misbehaviour {
   clientId: string;
   sequence: Long;
   signatureOne: SignatureAndData;
   signatureTwo: SignatureAndData;
 }
+
 /**
  * SignatureAndData contains a signature and the data signed over to create that
  * signature.
  */
-
 export interface SignatureAndData {
   signature: Uint8Array;
   dataType: DataType;
   data: Uint8Array;
   timestamp: Long;
 }
+
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
  * signature.
  */
-
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: Long;
 }
-/** SignBytes defines the signed bytes used for signature verification. */
 
+/** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytes {
   sequence: Long;
   timestamp: Long;
   diversifier: string;
+
   /** type of the data used */
-
   dataType: DataType;
-  /** marshaled data */
 
+  /** marshaled data */
   data: Uint8Array;
 }
-/** HeaderData returns the SignBytes data for update verification. */
 
+/** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
   newPubKey: Any;
-  /** header diversifier */
 
+  /** header diversifier */
   newDiversifier: string;
 }
-/** ClientStateData returns the SignBytes data for client state verification. */
 
+/** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateData {
   path: Uint8Array;
   clientState: Any;
 }
+
 /**
  * ConsensusStateData returns the SignBytes data for consensus state
  * verification.
  */
-
 export interface ConsensusStateData {
   path: Uint8Array;
   consensusState: Any;
 }
+
 /**
  * ConnectionStateData returns the SignBytes data for connection state
  * verification.
  */
-
 export interface ConnectionStateData {
   path: Uint8Array;
   connection: ConnectionEnd;
 }
+
 /**
  * ChannelStateData returns the SignBytes data for channel state
  * verification.
  */
-
 export interface ChannelStateData {
   path: Uint8Array;
   channel: Channel;
 }
+
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
  * verification.
  */
-
 export interface PacketCommitmentData {
   path: Uint8Array;
   commitment: Uint8Array;
 }
+
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
  * verification.
  */
-
 export interface PacketAcknowledgementData {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
+
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
  * packet receipt absence verification.
  */
-
 export interface PacketReceiptAbsenceData {
   path: Uint8Array;
 }
+
 /**
  * NextSequenceRecvData returns the SignBytes data for verification of the next
  * sequence to be received.
  */
-
 export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;
@@ -1541,52 +1540,3 @@ export const NextSequenceRecvData = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

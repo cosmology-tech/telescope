@@ -1,10 +1,8 @@
-/* eslint-disable */
-import Long from "long";
+import { Duration } from "../protobuf/duration";
+import { Any } from "../protobuf/any";
+import { Status } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { Any } from "../../google/protobuf/any";
-import { Duration } from "../../google/protobuf/duration";
-import { Status } from "../../google/rpc/status";
-import { Empty } from "../../google/protobuf/empty";
+import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
 
 /**
  * This resource represents a long-running operation that is the result of a
@@ -17,24 +15,25 @@ export interface Operation {
    * `name` should be a resource name ending with `operations/{unique_id}`.
    */
   name: string;
+
   /**
    * Service-specific metadata associated with the operation.  It typically
    * contains progress information and common metadata such as create time.
    * Some services might not provide such metadata.  Any method that returns a
    * long-running operation should document the metadata type, if any.
    */
-
   metadata: Any;
+
   /**
    * If the value is `false`, it means the operation is still in progress.
    * If `true`, the operation is completed, and either `error` or `response` is
    * available.
    */
-
   done: boolean;
-  /** The error result of the operation in case of failure or cancellation. */
 
-  error: Status | undefined;
+  /** The error result of the operation in case of failure or cancellation. */
+  error?: Status;
+
   /**
    * The normal response of the operation in case of success.  If the original
    * method returns no data on success, such as `Delete`, the response is
@@ -45,100 +44,99 @@ export interface Operation {
    * is `TakeSnapshot()`, the inferred response type is
    * `TakeSnapshotResponse`.
    */
-
-  response: Any | undefined;
+  response?: Any;
 }
-/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 
+/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequest {
   /** The name of the operation resource. */
   name: string;
 }
-/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 
+/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequest {
   /** The name of the operation's parent resource. */
   name: string;
+
   /** The standard list filter. */
-
   filter: string;
+
   /** The standard list page size. */
-
   pageSize: number;
-  /** The standard list page token. */
 
+  /** The standard list page token. */
   pageToken: string;
 }
-/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 
+/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponse {
   /** A list of operations that matches the specified filter in the request. */
   operations: Operation[];
-  /** The standard List next-page token. */
 
+  /** The standard List next-page token. */
   nextPageToken: string;
 }
-/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 
+/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
-/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 
+/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequest {
   /** The name of the operation resource to be deleted. */
   name: string;
 }
-/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 
+/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequest {
   /** The name of the operation resource to wait on. */
   name: string;
+
   /**
    * The maximum duration to wait before timing out. If left blank, the wait
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
    * If RPC context deadline is also specified, the shorter one will be used.
    */
-
-  timeout: Duration;
+  timeout: string;
 }
+
 /**
  * A message representing the message types used by a long-running operation.
- *
+ * 
  * Example:
- *
- *   rpc LongRunningRecognize(LongRunningRecognizeRequest)
- *       returns (google.longrunning.Operation) {
- *     option (google.longrunning.operation_info) = {
- *       response_type: "LongRunningRecognizeResponse"
- *       metadata_type: "LongRunningRecognizeMetadata"
- *     };
- *   }
+ * 
+ * rpc LongRunningRecognize(LongRunningRecognizeRequest)
+ * returns (google.longrunning.Operation) {
+ * option (google.longrunning.operation_info) = {
+ * response_type: "LongRunningRecognizeResponse"
+ * metadata_type: "LongRunningRecognizeMetadata"
+ * };
+ * }
  */
-
 export interface OperationInfo {
   /**
    * Required. The message name of the primary return type for this
    * long-running operation.
    * This type will be used to deserialize the LRO's response.
-   *
+   * 
    * If the response is in a different package from the rpc, a fully-qualified
    * message name must be used (e.g. `google.protobuf.Struct`).
-   *
+   * 
    * Note: Altering this value constitutes a breaking change.
    */
   responseType: string;
+
   /**
    * Required. The message name of the metadata type for this long-running
    * operation.
-   *
+   * 
    * If the response is in a different package from the rpc, a fully-qualified
    * message name must be used (e.g. `google.protobuf.Struct`).
-   *
+   * 
    * Note: Altering this value constitutes a breaking change.
    */
-
   metadataType: string;
 }
 
@@ -600,7 +598,7 @@ export const WaitOperationRequest = {
     }
 
     if (message.timeout !== undefined) {
-      Duration.encode(message.timeout, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.timeout), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -620,7 +618,7 @@ export const WaitOperationRequest = {
           break;
 
         case 2:
-          message.timeout = Duration.decode(reader, reader.uint32());
+          message.timeout = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -635,21 +633,21 @@ export const WaitOperationRequest = {
   fromJSON(object: any): WaitOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
+      timeout: isSet(object.timeout) ? String(object.timeout) : undefined
     };
   },
 
   toJSON(message: WaitOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toJSON(message.timeout) : undefined);
+    message.timeout !== undefined && (obj.timeout = message.timeout);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<WaitOperationRequest>, I>>(object: I): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
-    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
+    message.timeout = object.timeout ?? undefined;
     return message;
   }
 
@@ -723,132 +721,3 @@ export const OperationInfo = {
   }
 
 };
-/**
- * Manages long-running operations with an API service.
- *
- * When an API method normally takes long time to complete, it can be designed
- * to return [Operation][google.longrunning.Operation] to the client, and the client can use this
- * interface to receive the real response asynchronously by polling the
- * operation resource, or pass the operation resource to another API (such as
- * Google Cloud Pub/Sub API) to receive the response.  Any API service that
- * returns long-running operations should implement the `Operations` interface
- * so developers can have a consistent client experience.
- */
-
-export interface Operations {
-  /**
-   * Lists operations that match the specified filter in the request. If the
-   * server doesn't support this method, it returns `UNIMPLEMENTED`.
-   *
-   * NOTE: the `name` binding allows API services to override the binding
-   * to use different resource name schemes, such as `users/* /operations`. To
-   * override the binding, API services can add a binding such as
-   * `"/v1/{name=users/*}/operations"` to their service configuration.
-   * For backwards compatibility, the default name includes the operations
-   * collection id, however overriding users must ensure the name binding
-   * is the parent resource, without the operations collection id.
-   */
-  ListOperations(request: ListOperationsRequest): Promise<ListOperationsResponse>;
-  /**
-   * Gets the latest state of a long-running operation.  Clients can use this
-   * method to poll the operation result at intervals as recommended by the API
-   * service.
-   */
-
-  GetOperation(request: GetOperationRequest): Promise<Operation>;
-  /**
-   * Deletes a long-running operation. This method indicates that the client is
-   * no longer interested in the operation result. It does not cancel the
-   * operation. If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   */
-
-  DeleteOperation(request: DeleteOperationRequest): Promise<Empty>;
-  /**
-   * Starts asynchronous cancellation on a long-running operation.  The server
-   * makes a best effort to cancel the operation, but success is not
-   * guaranteed.  If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-   * [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
-   * other methods to check whether the cancellation succeeded or whether the
-   * operation completed despite cancellation. On successful cancellation,
-   * the operation is not deleted; instead, it becomes an operation with
-   * an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
-   * corresponding to `Code.CANCELLED`.
-   */
-
-  CancelOperation(request: CancelOperationRequest): Promise<Empty>;
-  /**
-   * Waits until the specified long-running operation is done or reaches at most
-   * a specified timeout, returning the latest state.  If the operation is
-   * already done, the latest state is immediately returned.  If the timeout
-   * specified is greater than the default HTTP/RPC timeout, the HTTP/RPC
-   * timeout is used.  If the server does not support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   * Note that this method is on a best-effort basis.  It may return the latest
-   * state before the specified timeout (including immediately), meaning even an
-   * immediate response is no guarantee that the operation is done.
-   */
-
-  WaitOperation(request: WaitOperationRequest): Promise<Operation>;
-}
-export class OperationsClientImpl implements Operations {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.ListOperations = this.ListOperations.bind(this);
-    this.GetOperation = this.GetOperation.bind(this);
-    this.DeleteOperation = this.DeleteOperation.bind(this);
-    this.CancelOperation = this.CancelOperation.bind(this);
-    this.WaitOperation = this.WaitOperation.bind(this);
-  }
-
-  ListOperations(request: ListOperationsRequest): Promise<ListOperationsResponse> {
-    const data = ListOperationsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.longrunning.Operations", "ListOperations", data);
-    return promise.then(data => ListOperationsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetOperation(request: GetOperationRequest): Promise<Operation> {
-    const data = GetOperationRequest.encode(request).finish();
-    const promise = this.rpc.request("google.longrunning.Operations", "GetOperation", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-  DeleteOperation(request: DeleteOperationRequest): Promise<Empty> {
-    const data = DeleteOperationRequest.encode(request).finish();
-    const promise = this.rpc.request("google.longrunning.Operations", "DeleteOperation", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  CancelOperation(request: CancelOperationRequest): Promise<Empty> {
-    const data = CancelOperationRequest.encode(request).finish();
-    const promise = this.rpc.request("google.longrunning.Operations", "CancelOperation", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  WaitOperation(request: WaitOperationRequest): Promise<Operation> {
-    const data = WaitOperationRequest.encode(request).finish();
-    const promise = this.rpc.request("google.longrunning.Operations", "WaitOperation", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

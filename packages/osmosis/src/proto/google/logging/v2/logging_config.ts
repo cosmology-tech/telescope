@@ -1,10 +1,55 @@
-/* eslint-disable */
-import Long from "long";
+import { FieldMask } from "../../protobuf/field_mask";
+import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Empty } from "../../../google/protobuf/empty";
-import { Operation } from "../../../google/longrunning/operations";
-import { FieldMask } from "../../../google/protobuf/field_mask";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+
+/** Deprecated. This is unused. */
+export enum LogSink_VersionFormat {
+  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
+  VERSION_FORMAT_UNSPECIFIED = 0,
+
+  /** V2 - `LogEntry` version 2 format. */
+  V2 = 1,
+
+  /** V1 - `LogEntry` version 1 format. */
+  V1 = 2,
+  UNRECOGNIZED = -1,
+}
+export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
+  switch (object) {
+    case 0:
+    case "VERSION_FORMAT_UNSPECIFIED":
+      return LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED;
+
+    case 1:
+    case "V2":
+      return LogSink_VersionFormat.V2;
+
+    case 2:
+    case "V1":
+      return LogSink_VersionFormat.V1;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LogSink_VersionFormat.UNRECOGNIZED;
+  }
+}
+export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): string {
+  switch (object) {
+    case LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED:
+      return "VERSION_FORMAT_UNSPECIFIED";
+
+    case LogSink_VersionFormat.V2:
+      return "V2";
+
+    case LogSink_VersionFormat.V1:
+      return "V1";
+
+    default:
+      return "UNKNOWN";
+  }
+}
 
 /** LogBucket lifecycle states. */
 export enum LifecycleState {
@@ -59,6 +104,7 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * List of different operation states.
  * High level state of the operation. This is used to report the job's
@@ -66,7 +112,6 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
  * the current state of the operation can be queried even before the
  * operation is finished and the final result is available.
  */
-
 export enum OperationState {
   /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,
@@ -153,67 +198,68 @@ export function operationStateToJSON(object: OperationState): string {
       return "UNKNOWN";
   }
 }
-/** Describes a repository in which log entries are stored. */
 
+/** Describes a repository in which log entries are stored. */
 export interface LogBucket {
   /**
    * Output only. The resource name of the bucket.
-   *
+   * 
    * For example:
-   *
-   *   `projects/my-project/locations/global/buckets/my-bucket`
-   *
+   * 
+   * `projects/my-project/locations/global/buckets/my-bucket`
+   * 
    * For a list of supported locations, see [Supported
    * Regions](https://cloud.google.com/logging/docs/region-support)
-   *
+   * 
    * For the location of `global` it is unspecified where log entries are
    * actually stored.
-   *
+   * 
    * After a bucket has been created, the location cannot be changed.
    */
   name: string;
-  /** Describes this bucket. */
 
+  /** Describes this bucket. */
   description: string;
+
   /**
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
-
   createTime: Date;
-  /** Output only. The last update timestamp of the bucket. */
 
+  /** Output only. The last update timestamp of the bucket. */
   updateTime: Date;
+
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
    * this value is set to zero at bucket creation time, the default time of 30
    * days will be used.
    */
-
   retentionDays: number;
+
   /**
    * Whether the bucket is locked.
-   *
+   * 
    * The retention period on a locked bucket cannot be changed. Locked buckets
    * may only be deleted if they are empty.
    */
-
   locked: boolean;
-  /** Output only. The bucket lifecycle state. */
 
+  /** Output only. The bucket lifecycle state. */
   lifecycleState: LifecycleState;
+
   /**
    * Log entry field paths that are denied access in this bucket.
-   *
+   * 
    * The following fields and their children are eligible: `textPayload`,
    * `jsonPayload`, `protoPayload`, `httpRequest`, `labels`, `sourceLocation`.
-   *
+   * 
    * Restricting a repeated field will restrict all values. Adding a parent will
    * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
    */
-
   restrictedFields: string[];
+
   /**
    * The CMEK settings of the log bucket. If present, new log entries written to
    * this log bucket are encrypted using the CMEK key provided in this
@@ -221,48 +267,48 @@ export interface LogBucket {
    * be disabled later by updating the log bucket. Changing the KMS key is
    * allowed.
    */
-
   cmekSettings: CmekSettings;
 }
-/** Describes a view over log entries in a bucket. */
 
+/** Describes a view over log entries in a bucket. */
 export interface LogView {
   /**
    * The resource name of the view.
-   *
+   * 
    * For example:
-   *
-   *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
+   * 
+   * `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
    */
   name: string;
+
   /** Describes this view. */
-
   description: string;
+
   /** Output only. The creation timestamp of the view. */
-
   createTime: Date;
-  /** Output only. The last update timestamp of the view. */
 
+  /** Output only. The last update timestamp of the view. */
   updateTime: Date;
+
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
-   *
+   * 
    * Filters are restricted to be a logical AND of ==/!= of any of the
    * following:
-   *
-   *   - originating project/folder/organization/billing account.
-   *   - resource type
-   *   - log id
-   *
+   * 
+   * - originating project/folder/organization/billing account.
+   * - resource type
+   * - log id
+   * 
    * For example:
-   *
-   *   SOURCE("projects/myproject") AND resource.type = "gce_instance"
-   *                                AND LOG_ID("stdout")
+   * 
+   * SOURCE("projects/myproject") AND resource.type = "gce_instance"
+   * AND LOG_ID("stdout")
    */
-
   filter: string;
 }
+
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -270,72 +316,70 @@ export interface LogView {
  * entries are exported. The sink must be created within a project,
  * organization, billing account, or folder.
  */
-
 export interface LogSink {
   /**
    * Required. The client-assigned sink identifier, unique within the project.
-   *
+   * 
    * For example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited
    * to 100 characters and can include only the following characters: upper and
    * lower-case alphanumeric characters, underscores, hyphens, and periods.
    * First character has to be alphanumeric.
    */
   name: string;
+
   /**
    * Required. The export destination:
-   *
-   *     "storage.googleapis.com/[GCS_BUCKET]"
-   *     "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
-   *     "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
-   *
+   * 
+   * "storage.googleapis.com/[GCS_BUCKET]"
+   * "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
+   * "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
+   * 
    * The sink's `writer_identity`, set when the sink is created, must have
    * permission to write to the destination or else the log entries are not
    * exported. For more information, see
    * [Exporting Logs with
    * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    */
-
   destination: string;
+
   /**
    * Optional. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
    * only exported log entries are those that are in the resource owning the
    * sink and that match the filter.
-   *
+   * 
    * For example:
-   *
-   *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
+   * 
+   * `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
    */
-
   filter: string;
+
   /**
    * Optional. A description of this sink.
-   *
+   * 
    * The maximum length of the description is 8000 characters.
    */
-
   description: string;
+
   /**
    * Optional. If set to true, then this sink is disabled and it does not export any log
    * entries.
    */
-
   disabled: boolean;
+
   /**
    * Optional. Log entries that match any of these exclusion filters will not be exported.
-   *
+   * 
    * If a log entry is matched by both `filter` and one of `exclusion_filters`
    * it will not be exported.
    */
-
   exclusions: LogExclusion[];
-  /**
-   * Deprecated. This field is unused.
-   *
-   * @deprecated
-   */
 
+  /** Deprecated. This field is unused. */
+
+  /** @deprecated */
   outputVersionFormat: LogSink_VersionFormat;
+
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
    * Logging writes the exported log entries to the sink's destination. This
@@ -343,20 +387,20 @@ export interface LogSink {
    * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
    * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
    * value of `unique_writer_identity` in those methods.
-   *
+   * 
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information, see [Granting
    * Access for a
    * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
-   *
+   * 
    * Sinks that have a destination that is a log bucket in the same project as
    * the sink do not have a writer_identity and no additional permissions are
    * required.
    */
-
   writerIdentity: string;
+
   /**
    * Optional. This field applies only to sinks owned by organizations and folders. If the
    * field is false, the default, only the logs owned by the sink's parent
@@ -365,87 +409,38 @@ export interface LogSink {
    * sink's parent resource are also available for export. Whether a particular
    * log entry from the children is exported depends on the sink's filter
    * expression.
-   *
+   * 
    * For example, if this field is true, then the filter
    * `resource.type=gce_instance` would export all Compute Engine VM instance
    * log entries from all projects in the sink's parent.
-   *
+   * 
    * To only export entries from certain child projects, filter on the project
    * part of the log name:
-   *
-   *   logName:("projects/test-project1/" OR "projects/test-project2/") AND
-   *   resource.type=gce_instance
+   * 
+   * logName:("projects/test-project1/" OR "projects/test-project2/") AND
+   * resource.type=gce_instance
    */
-
   includeChildren: boolean;
-  /** Optional. Options that affect sinks exporting data to BigQuery. */
 
-  bigqueryOptions: BigQueryOptions | undefined;
+  /** Optional. Options that affect sinks exporting data to BigQuery. */
+  bigqueryOptions?: BigQueryOptions;
+
   /**
    * Output only. The creation timestamp of the sink.
-   *
+   * 
    * This field may not be present for older sinks.
    */
-
   createTime: Date;
+
   /**
    * Output only. The last update timestamp of the sink.
-   *
+   * 
    * This field may not be present for older sinks.
    */
-
   updateTime: Date;
 }
-/** Deprecated. This is unused. */
 
-export enum LogSink_VersionFormat {
-  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
-  VERSION_FORMAT_UNSPECIFIED = 0,
-
-  /** V2 - `LogEntry` version 2 format. */
-  V2 = 1,
-
-  /** V1 - `LogEntry` version 1 format. */
-  V1 = 2,
-  UNRECOGNIZED = -1,
-}
-export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
-  switch (object) {
-    case 0:
-    case "VERSION_FORMAT_UNSPECIFIED":
-      return LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED;
-
-    case 1:
-    case "V2":
-      return LogSink_VersionFormat.V2;
-
-    case 2:
-    case "V1":
-      return LogSink_VersionFormat.V1;
-
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return LogSink_VersionFormat.UNRECOGNIZED;
-  }
-}
-export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): string {
-  switch (object) {
-    case LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED:
-      return "VERSION_FORMAT_UNSPECIFIED";
-
-    case LogSink_VersionFormat.V2:
-      return "V2";
-
-    case LogSink_VersionFormat.V1:
-      return "V1";
-
-    default:
-      return "UNKNOWN";
-  }
-}
 /** Options that change functionality of a sink exporting data to BigQuery. */
-
 export interface BigQueryOptions {
   /**
    * Optional. Whether to use [BigQuery's partition
@@ -458,371 +453,372 @@ export interface BigQueryOptions {
    * timezone.
    */
   usePartitionedTables: boolean;
+
   /**
    * Output only. True if new timestamp column based partitioning is in use, false if legacy
    * ingestion-time partitioning is in use.
-   *
+   * 
    * All new sinks will have this field set true and will use timestamp column
    * based partitioning. If use_partitioned_tables is false, this value has no
    * meaning and will be false. Legacy sinks using partitioned tables will have
    * this field set to false.
    */
-
   usesTimestampColumnPartitioning: boolean;
 }
-/** The parameters to `ListBuckets`. */
 
+/** The parameters to `ListBuckets`. */
 export interface ListBucketsRequest {
   /**
    * Required. The parent resource whose buckets are to be listed:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
-   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
-   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   * 
    * Note: The locations portion of the resource must be specified, but
    * supplying the character `-` in place of [LOCATION_ID] will return all
    * buckets.
    */
   parent: string;
+
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-
   pageToken: string;
+
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
    * indicates that more results might be available.
    */
-
   pageSize: number;
 }
-/** The response from ListBuckets. */
 
+/** The response from ListBuckets. */
 export interface ListBucketsResponse {
   /** A list of buckets. */
   buckets: LogBucket[];
+
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-
   nextPageToken: string;
 }
-/** The parameters to `CreateBucket`. */
 
+/** The parameters to `CreateBucket`. */
 export interface CreateBucketRequest {
   /**
    * Required. The resource in which to create the log bucket:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global"`
+   * 
+   * `"projects/my-project/locations/global"`
    */
   parent: string;
+
   /**
    * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
    * to 100 characters and can include only letters, digits, underscores,
    * hyphens, and periods.
    */
-
   bucketId: string;
+
   /**
    * Required. The new bucket. The region specified in the new bucket must be compliant
    * with any Location Restriction Org Policy. The name field in the bucket is
    * ignored.
    */
-
   bucket: LogBucket;
 }
-/** The parameters to `UpdateBucket`. */
 
+/** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequest {
   /**
    * Required. The full resource name of the bucket to update.
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
-  /** Required. The updated bucket. */
 
+  /** Required. The updated bucket. */
   bucket: LogBucket;
+
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
    * bucket field will be overwritten if, and only if, it is in the update mask.
    * `name` and output only fields cannot be updated.
-   *
+   * 
    * For a detailed `FieldMask` definition, see:
    * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
-   *
+   * 
    * For example: `updateMask=retention_days`
    */
-
-  updateMask: string[] | undefined;
+  updateMask: FieldMask;
 }
-/** The parameters to `GetBucket`. */
 
+/** The parameters to `GetBucket`. */
 export interface GetBucketRequest {
   /**
    * Required. The resource name of the bucket:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
 }
-/** The parameters to `DeleteBucket`. */
 
+/** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequest {
   /**
    * Required. The full resource name of the bucket to delete.
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
 }
-/** The parameters to `UndeleteBucket`. */
 
+/** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequest {
   /**
    * Required. The full resource name of the bucket to undelete.
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
 }
-/** The parameters to `ListViews`. */
 
+/** The parameters to `ListViews`. */
 export interface ListViewsRequest {
   /**
    * Required. The bucket whose views are to be listed:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
   parent: string;
+
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-
   pageToken: string;
+
   /**
    * Optional. The maximum number of results to return from this request.
-   *
+   * 
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-
   pageSize: number;
 }
-/** The response from ListViews. */
 
+/** The response from ListViews. */
 export interface ListViewsResponse {
   /** A list of views. */
   views: LogView[];
+
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-
   nextPageToken: string;
 }
-/** The parameters to `CreateView`. */
 
+/** The parameters to `CreateView`. */
 export interface CreateViewRequest {
   /**
    * Required. The bucket in which to create the view
-   *
-   *     `"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"`
-   *
+   * 
+   * `"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"`
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   parent: string;
+
   /** Required. The id to use for this view. */
-
   viewId: string;
-  /** Required. The new view. */
 
+  /** Required. The new view. */
   view: LogView;
 }
-/** The parameters to `UpdateView`. */
 
+/** The parameters to `UpdateView`. */
 export interface UpdateViewRequest {
   /**
    * Required. The full resource name of the view to update
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
-  /** Required. The updated view. */
 
+  /** Required. The updated view. */
   view: LogView;
+
   /**
    * Optional. Field mask that specifies the fields in `view` that need
    * an update. A field will be overwritten if, and only if, it is
    * in the update mask. `name` and output only fields cannot be updated.
-   *
+   * 
    * For a detailed `FieldMask` definition, see
    * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
-   *
+   * 
    * For example: `updateMask=filter`
    */
-
-  updateMask: string[] | undefined;
+  updateMask: FieldMask;
 }
-/** The parameters to `GetView`. */
 
+/** The parameters to `GetView`. */
 export interface GetViewRequest {
   /**
    * Required. The resource name of the policy:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
 }
-/** The parameters to `DeleteView`. */
 
+/** The parameters to `DeleteView`. */
 export interface DeleteViewRequest {
   /**
    * Required. The full resource name of the view to delete:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
    * For example:
-   *
-   *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
 }
-/** The parameters to `ListSinks`. */
 
+/** The parameters to `ListSinks`. */
 export interface ListSinksRequest {
   /**
    * Required. The parent resource whose sinks are to be listed:
-   *
-   *     "projects/[PROJECT_ID]"
-   *     "organizations/[ORGANIZATION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
-   *     "folders/[FOLDER_ID]"
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
    */
   parent: string;
+
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-
   pageToken: string;
+
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-
   pageSize: number;
 }
-/** Result returned from `ListSinks`. */
 
+/** Result returned from `ListSinks`. */
 export interface ListSinksResponse {
   /** A list of sinks. */
   sinks: LogSink[];
+
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-
   nextPageToken: string;
 }
-/** The parameters to `GetSink`. */
 
+/** The parameters to `GetSink`. */
 export interface GetSinkRequest {
   /**
    * Required. The resource name of the sink:
-   *
-   *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/sinks/my-sink"`
+   * 
+   * `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
 }
-/** The parameters to `CreateSink`. */
 
+/** The parameters to `CreateSink`. */
 export interface CreateSinkRequest {
   /**
    * Required. The resource in which to create the sink:
-   *
-   *     "projects/[PROJECT_ID]"
-   *     "organizations/[ORGANIZATION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
-   *     "folders/[FOLDER_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
+   * 
    * For examples:
-   *
-   *   `"projects/my-project"`
-   *   `"organizations/123456789"`
+   * 
+   * `"projects/my-project"`
+   * `"organizations/123456789"`
    */
   parent: string;
+
   /**
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
-
   sink: LogSink;
+
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
    * in the new sink. If this value is omitted or set to false, and if the
@@ -830,92 +826,92 @@ export interface CreateSinkRequest {
    * the same group or service account used by Cloud Logging before the addition
    * of writer identities to this API. The sink's destination must be in the
    * same project as the sink itself.
-   *
+   * 
    * If this field is set to true, or if the sink is owned by a non-project
    * resource such as an organization, then the value of `writer_identity` will
    * be a unique service account used only for exports from the new sink. For
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
-
   uniqueWriterIdentity: boolean;
 }
-/** The parameters to `UpdateSink`. */
 
+/** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequest {
   /**
    * Required. The full resource name of the sink to update, including the parent
    * resource and the sink identifier:
-   *
-   *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/sinks/my-sink"`
+   * 
+   * `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+
   /**
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
-
   sink: LogSink;
+
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
    * for a description of this field. When updating a sink, the effect of this
    * field on the value of `writer_identity` in the updated sink depends on both
    * the old and new values of this field:
-   *
+   * 
    * +   If the old and new values of this field are both false or both true,
-   *     then there is no change to the sink's `writer_identity`.
+   * then there is no change to the sink's `writer_identity`.
    * +   If the old value is false and the new value is true, then
-   *     `writer_identity` is changed to a unique service account.
+   * `writer_identity` is changed to a unique service account.
    * +   It is an error if the old value is true and the new value is
-   *     set to false or defaulted to false.
+   * set to false or defaulted to false.
    */
-
   uniqueWriterIdentity: boolean;
+
   /**
    * Optional. Field mask that specifies the fields in `sink` that need
    * an update. A sink field will be overwritten if, and only if, it is
    * in the update mask. `name` and output only fields cannot be updated.
-   *
+   * 
    * An empty `updateMask` is temporarily treated as using the following mask
    * for backwards compatibility purposes:
-   *
-   *   `destination,filter,includeChildren`
-   *
+   * 
+   * `destination,filter,includeChildren`
+   * 
    * At some point in the future, behavior will be removed and specifying an
    * empty `updateMask` will be an error.
-   *
+   * 
    * For a detailed `FieldMask` definition, see
    * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
-   *
+   * 
    * For example: `updateMask=filter`
    */
-
-  updateMask: string[] | undefined;
+  updateMask: FieldMask;
 }
-/** The parameters to `DeleteSink`. */
 
+/** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequest {
   /**
    * Required. The full resource name of the sink to delete, including the parent
    * resource and the sink identifier:
-   *
-   *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/sinks/my-sink"`
+   * 
+   * `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
 }
+
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -923,7 +919,6 @@ export interface DeleteSinkRequest {
  * organization-level and folder-level sinks don't apply to child resources.
  * Note also that you cannot modify the _Required sink or exclude logs from it.
  */
-
 export interface LogExclusion {
   /**
    * Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
@@ -932,201 +927,201 @@ export interface LogExclusion {
    * alphanumeric.
    */
   name: string;
-  /** Optional. A description of this exclusion. */
 
+  /** Optional. A description of this exclusion. */
   description: string;
+
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
    * matches the log entries to be excluded. By using the [sample
    * function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
    * you can exclude less than 100% of the matching log entries.
-   *
+   * 
    * For example, the following query matches 99% of low-severity log entries
    * from Google Cloud Storage buckets:
-   *
-   *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
+   * 
+   * `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
    */
-
   filter: string;
+
   /**
    * Optional. If set to True, then this exclusion is disabled and it does not
    * exclude any log entries. You can [update an
    * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
    * value of this field.
    */
-
   disabled: boolean;
+
   /**
    * Output only. The creation timestamp of the exclusion.
-   *
+   * 
    * This field may not be present for older exclusions.
    */
-
   createTime: Date;
+
   /**
    * Output only. The last update timestamp of the exclusion.
-   *
+   * 
    * This field may not be present for older exclusions.
    */
-
   updateTime: Date;
 }
-/** The parameters to `ListExclusions`. */
 
+/** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequest {
   /**
    * Required. The parent resource whose exclusions are to be listed.
-   *
-   *     "projects/[PROJECT_ID]"
-   *     "organizations/[ORGANIZATION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
-   *     "folders/[FOLDER_ID]"
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
    */
   parent: string;
+
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-
   pageToken: string;
+
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-
   pageSize: number;
 }
-/** Result returned from `ListExclusions`. */
 
+/** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponse {
   /** A list of exclusions. */
   exclusions: LogExclusion[];
+
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-
   nextPageToken: string;
 }
-/** The parameters to `GetExclusion`. */
 
+/** The parameters to `GetExclusion`. */
 export interface GetExclusionRequest {
   /**
    * Required. The resource name of an existing exclusion:
-   *
-   *     "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   * "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   * "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/exclusions/my-exclusion"`
+   * 
+   * `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
 }
-/** The parameters to `CreateExclusion`. */
 
+/** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequest {
   /**
    * Required. The parent resource in which to create the exclusion:
-   *
-   *     "projects/[PROJECT_ID]"
-   *     "organizations/[ORGANIZATION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
-   *     "folders/[FOLDER_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
+   * 
    * For examples:
-   *
-   *   `"projects/my-logging-project"`
-   *   `"organizations/123456789"`
+   * 
+   * `"projects/my-logging-project"`
+   * `"organizations/123456789"`
    */
   parent: string;
+
   /**
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
-
   exclusion: LogExclusion;
 }
-/** The parameters to `UpdateExclusion`. */
 
+/** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequest {
   /**
    * Required. The resource name of the exclusion to update:
-   *
-   *     "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   * "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   * "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/exclusions/my-exclusion"`
+   * 
+   * `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
+
   /**
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
-
   exclusion: LogExclusion;
+
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
    * for the fields are taken from the corresponding fields in the
    * [LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in
    * `update_mask` are not changed and are ignored in the request.
-   *
+   * 
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    */
-
-  updateMask: string[] | undefined;
+  updateMask: FieldMask;
 }
-/** The parameters to `DeleteExclusion`. */
 
+/** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequest {
   /**
    * Required. The resource name of an existing exclusion to delete:
-   *
-   *     "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   * "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   * "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/exclusions/my-exclusion"`
+   * 
+   * `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
 }
+
 /**
  * The parameters to
  * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
- *
+ * 
  * See [Enabling CMEK for Log
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
-
 export interface GetCmekSettingsRequest {
   /**
    * Required. The resource for which to retrieve CMEK settings.
-   *
-   *     "projects/[PROJECT_ID]/cmekSettings"
-   *     "organizations/[ORGANIZATION_ID]/cmekSettings"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
-   *     "folders/[FOLDER_ID]/cmekSettings"
-   *
+   * 
+   * "projects/[PROJECT_ID]/cmekSettings"
+   * "organizations/[ORGANIZATION_ID]/cmekSettings"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+   * "folders/[FOLDER_ID]/cmekSettings"
+   * 
    * For example:
-   *
-   *   `"organizations/12345/cmekSettings"`
-   *
+   * 
+   * `"organizations/12345/cmekSettings"`
+   * 
    * Note: CMEK for the Log Router can be configured for Google Cloud projects,
    * folders, organizations and billing accounts. Once configured for an
    * organization, it applies to all projects and folders in the Google Cloud
@@ -1134,141 +1129,141 @@ export interface GetCmekSettingsRequest {
    */
   name: string;
 }
+
 /**
  * The parameters to
  * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
- *
+ * 
  * See [Enabling CMEK for Log
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
-
 export interface UpdateCmekSettingsRequest {
   /**
    * Required. The resource name for the CMEK settings to update.
-   *
-   *     "projects/[PROJECT_ID]/cmekSettings"
-   *     "organizations/[ORGANIZATION_ID]/cmekSettings"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
-   *     "folders/[FOLDER_ID]/cmekSettings"
-   *
+   * 
+   * "projects/[PROJECT_ID]/cmekSettings"
+   * "organizations/[ORGANIZATION_ID]/cmekSettings"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+   * "folders/[FOLDER_ID]/cmekSettings"
+   * 
    * For example:
-   *
-   *   `"organizations/12345/cmekSettings"`
-   *
+   * 
+   * `"organizations/12345/cmekSettings"`
+   * 
    * Note: CMEK for the Log Router can currently only be configured for Google
    * Cloud organizations. Once configured, it applies to all projects and
    * folders in the Google Cloud organization.
    */
   name: string;
+
   /**
    * Required. The CMEK settings to update.
-   *
+   * 
    * See [Enabling CMEK for Log
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-
   cmekSettings: CmekSettings;
+
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
    * be updated. A field will be overwritten if and only if it is in the update
    * mask. Output only fields cannot be updated.
-   *
+   * 
    * See [FieldMask][google.protobuf.FieldMask] for more information.
-   *
+   * 
    * For example: `"updateMask=kmsKeyName"`
    */
-
-  updateMask: string[] | undefined;
+  updateMask: FieldMask;
 }
+
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
- *
+ * 
  * Note: CMEK for the Log Router can currently only be configured for Google
  * Cloud organizations. Once configured, it applies to all projects and folders
  * in the Google Cloud organization.
- *
+ * 
  * See [Enabling CMEK for Log
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
-
 export interface CmekSettings {
   /** Output only. The resource name of the CMEK settings. */
   name: string;
+
   /**
    * The resource name for the configured Cloud KMS key.
-   *
+   * 
    * KMS key name format:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
-   *
-   *
-   *
+   * 
+   * `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+   * 
+   * 
+   * 
    * To enable CMEK for the Log Router, set this field to a valid
    * `kms_key_name` for which the associated service account has the required
    * cloudkms.cryptoKeyEncrypterDecrypter roles assigned for the key.
-   *
+   * 
    * The Cloud KMS key used by the Log Router can be updated by changing the
    * `kms_key_name` to a new valid key name or disabled by setting the key name
    * to an empty string. Encryption operations that are in progress will be
    * completed with the key that was in use when they started. Decryption
    * operations will be completed using the key that was used at the time of
    * encryption unless access to that key has been revoked.
-   *
+   * 
    * To disable CMEK for the Log Router, set this field to an empty string.
-   *
+   * 
    * See [Enabling CMEK for Log
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-
   kmsKeyName: string;
+
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
-   *
+   * 
    * Before enabling CMEK for Log Router, you must first assign the
    * cloudkms.cryptoKeyEncrypterDecrypter role to the service account that
    * the Log Router will use to access your Cloud KMS key. Use
    * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
    * obtain the service account ID.
-   *
+   * 
    * See [Enabling CMEK for Log
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-
   serviceAccountId: string;
 }
+
 /**
  * The parameters to
  * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
- *
+ * 
  * See [Enabling CMEK for Log
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
-
 export interface GetSettingsRequest {
   /**
    * Required. The resource for which to retrieve settings.
-   *
-   *     "projects/[PROJECT_ID]/settings"
-   *     "organizations/[ORGANIZATION_ID]/settings"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/settings"
-   *     "folders/[FOLDER_ID]/settings"
-   *
+   * 
+   * "projects/[PROJECT_ID]/settings"
+   * "organizations/[ORGANIZATION_ID]/settings"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/settings"
+   * "folders/[FOLDER_ID]/settings"
+   * 
    * For example:
-   *
-   *   `"organizations/12345/settings"`
-   *
+   * 
+   * `"organizations/12345/settings"`
+   * 
    * Note: Settings for the Log Router can be get for Google Cloud projects,
    * folders, organizations and billing accounts. Currently it can only be
    * configured for organizations. Once configured for an organization, it
@@ -1276,177 +1271,177 @@ export interface GetSettingsRequest {
    */
   name: string;
 }
+
 /**
  * The parameters to
  * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
- *
+ * 
  * See [Enabling CMEK for Log
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
-
 export interface UpdateSettingsRequest {
   /**
    * Required. The resource name for the settings to update.
-   *
-   *     "organizations/[ORGANIZATION_ID]/settings"
-   *
+   * 
+   * "organizations/[ORGANIZATION_ID]/settings"
+   * 
    * For example:
-   *
-   *   `"organizations/12345/settings"`
-   *
+   * 
+   * `"organizations/12345/settings"`
+   * 
    * Note: Settings for the Log Router can currently only be configured for
    * Google Cloud organizations. Once configured, it applies to all projects and
    * folders in the Google Cloud organization.
    */
   name: string;
+
   /**
    * Required. The settings to update.
-   *
+   * 
    * See [Enabling CMEK for Log
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-
   settings: Settings;
+
   /**
    * Optional. Field mask identifying which fields from `settings` should
    * be updated. A field will be overwritten if and only if it is in the update
    * mask. Output only fields cannot be updated.
-   *
+   * 
    * See [FieldMask][google.protobuf.FieldMask] for more information.
-   *
+   * 
    * For example: `"updateMask=kmsKeyName"`
    */
-
-  updateMask: string[] | undefined;
+  updateMask: FieldMask;
 }
+
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
  */
-
 export interface Settings {
   /** Output only. The resource name of the settings. */
   name: string;
+
   /**
    * Optional. The resource name for the configured Cloud KMS key.
-   *
+   * 
    * KMS key name format:
-   *
-   *     "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
-   *
-   *
-   *
+   * 
+   * `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+   * 
+   * 
+   * 
    * To enable CMEK for the Log Router, set this field to a valid
    * `kms_key_name` for which the associated service account has the required
    * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key.
-   *
+   * 
    * The Cloud KMS key used by the Log Router can be updated by changing the
    * `kms_key_name` to a new valid key name. Encryption operations that are in
    * progress will be completed with the key that was in use when they started.
    * Decryption operations will be completed using the key that was used at the
    * time of encryption unless access to that key has been revoked.
-   *
+   * 
    * To disable CMEK for the Log Router, set this field to an empty string.
-   *
+   * 
    * See [Enabling CMEK for Log
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-
   kmsKeyName: string;
+
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
-   *
+   * 
    * Before enabling CMEK for Log Router, you must first assign the role
    * `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
    * the Log Router will use to access your Cloud KMS key. Use
    * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings] to
    * obtain the service account ID.
-   *
+   * 
    * See [Enabling CMEK for Log
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-
   kmsServiceAccountId: string;
+
   /**
    * Optional. The Cloud region that will be used for _Default and _Required log buckets
    * for newly created projects and folders. For example `europe-west1`.
    * This setting does not affect the location of custom log buckets.
    */
-
   storageLocation: string;
+
   /**
    * Optional. If set to true, the _Default sink in newly created projects and folders
    * will created in a disabled state. This can be used to automatically disable
    * log ingestion if there is already an aggregated sink configured in the
    * hierarchy. The _Default sink can be re-enabled manually if needed.
    */
-
   disableDefaultSink: boolean;
 }
-/** The parameters to CopyLogEntries. */
 
+/** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequest {
   /**
    * Required. Log bucket from which to copy log entries.
-   *
+   * 
    * For example:
-   *
-   *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
+   * 
+   * `"projects/my-project/locations/global/buckets/my-source-bucket"`
    */
   name: string;
+
   /**
    * Optional. A filter specifying which log entries to copy. The filter must be no more
    * than 20k characters. An empty filter matches all log entries.
    */
-
   filter: string;
-  /** Required. Destination to which to copy log entries. */
 
+  /** Required. Destination to which to copy log entries. */
   destination: string;
 }
-/** Metadata for CopyLogEntries long running operations. */
 
+/** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadata {
   /** The create time of an operation. */
   startTime: Date;
+
   /** The end time of an operation. */
-
   endTime: Date;
+
   /** State of an operation. */
-
   state: OperationState;
+
   /** Identifies whether the user has requested cancellation of the operation. */
-
   cancellationRequested: boolean;
+
   /** CopyLogEntries RPC request. */
-
   request: CopyLogEntriesRequest;
-  /** Estimated progress of the operation (0 - 100%). */
 
+  /** Estimated progress of the operation (0 - 100%). */
   progress: number;
+
   /**
    * The IAM identity of a service account that must be granted access to the
    * destination.
-   *
+   * 
    * If the service account is not granted permission to the destination within
    * an hour, the operation will be cancelled.
-   *
+   * 
    * For example: `"serviceAccount:foo@bar.com"`
    */
-
   writerIdentity: string;
 }
-/** Response type for CopyLogEntries long running operations. */
 
+/** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: Long;
@@ -2236,7 +2231,7 @@ export const UpdateBucketRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(34).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -2260,7 +2255,7 @@ export const UpdateBucketRequest = {
           break;
 
         case 4:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         default:
@@ -2276,7 +2271,7 @@ export const UpdateBucketRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
 
@@ -2284,7 +2279,7 @@ export const UpdateBucketRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toJSON(message.bucket) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
 
@@ -2292,7 +2287,7 @@ export const UpdateBucketRequest = {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
 
@@ -2725,7 +2720,7 @@ export const UpdateViewRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(34).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -2749,7 +2744,7 @@ export const UpdateViewRequest = {
           break;
 
         case 4:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         default:
@@ -2765,7 +2760,7 @@ export const UpdateViewRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
 
@@ -2773,7 +2768,7 @@ export const UpdateViewRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.view !== undefined && (obj.view = message.view ? LogView.toJSON(message.view) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
 
@@ -2781,7 +2776,7 @@ export const UpdateViewRequest = {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
 
@@ -3219,7 +3214,7 @@ export const UpdateSinkRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(34).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -3247,7 +3242,7 @@ export const UpdateSinkRequest = {
           break;
 
         case 4:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         default:
@@ -3264,7 +3259,7 @@ export const UpdateSinkRequest = {
       sinkName: isSet(object.sinkName) ? String(object.sinkName) : "",
       sink: isSet(object.sink) ? LogSink.fromJSON(object.sink) : undefined,
       uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
 
@@ -3273,7 +3268,7 @@ export const UpdateSinkRequest = {
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toJSON(message.sink) : undefined);
     message.uniqueWriterIdentity !== undefined && (obj.uniqueWriterIdentity = message.uniqueWriterIdentity);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
 
@@ -3282,7 +3277,7 @@ export const UpdateSinkRequest = {
     message.sinkName = object.sinkName ?? "";
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
 
@@ -3763,7 +3758,7 @@ export const UpdateExclusionRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(26).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -3787,7 +3782,7 @@ export const UpdateExclusionRequest = {
           break;
 
         case 3:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         default:
@@ -3803,7 +3798,7 @@ export const UpdateExclusionRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
 
@@ -3811,7 +3806,7 @@ export const UpdateExclusionRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
 
@@ -3819,7 +3814,7 @@ export const UpdateExclusionRequest = {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
 
@@ -3958,7 +3953,7 @@ export const UpdateCmekSettingsRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(26).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -3982,7 +3977,7 @@ export const UpdateCmekSettingsRequest = {
           break;
 
         case 3:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         default:
@@ -3998,7 +3993,7 @@ export const UpdateCmekSettingsRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
 
@@ -4006,7 +4001,7 @@ export const UpdateCmekSettingsRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.cmekSettings !== undefined && (obj.cmekSettings = message.cmekSettings ? CmekSettings.toJSON(message.cmekSettings) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
 
@@ -4014,7 +4009,7 @@ export const UpdateCmekSettingsRequest = {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
 
@@ -4177,7 +4172,7 @@ export const UpdateSettingsRequest = {
     }
 
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(26).fork()).ldelim();
+      FieldMask.encode(message.updateMask, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -4201,7 +4196,7 @@ export const UpdateSettingsRequest = {
           break;
 
         case 3:
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
 
         default:
@@ -4217,7 +4212,7 @@ export const UpdateSettingsRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       settings: isSet(object.settings) ? Settings.fromJSON(object.settings) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
 
@@ -4225,7 +4220,7 @@ export const UpdateSettingsRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toJSON(message.settings) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = FieldMask.toJSON(FieldMask.wrap(message.updateMask)));
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
 
@@ -4233,7 +4228,7 @@ export const UpdateSettingsRequest = {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
     message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : undefined;
-    message.updateMask = object.updateMask ?? undefined;
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
 
@@ -4610,433 +4605,3 @@ export const CopyLogEntriesResponse = {
   }
 
 };
-/** Service for configuring sinks used to route log entries. */
-
-export interface ConfigServiceV2 {
-  /** Lists log buckets. */
-  ListBuckets(request: ListBucketsRequest): Promise<ListBucketsResponse>;
-  /** Gets a log bucket. */
-
-  GetBucket(request: GetBucketRequest): Promise<LogBucket>;
-  /**
-   * Creates a log bucket that can be used to store log entries. After a bucket
-   * has been created, the bucket's location cannot be changed.
-   */
-
-  CreateBucket(request: CreateBucketRequest): Promise<LogBucket>;
-  /**
-   * Updates a log bucket. This method replaces the following fields in the
-   * existing bucket with values from the new bucket: `retention_period`
-   *
-   * If the retention period is decreased and the bucket is locked,
-   * `FAILED_PRECONDITION` will be returned.
-   *
-   * If the bucket has a `lifecycle_state` of `DELETE_REQUESTED`, then
-   * `FAILED_PRECONDITION` will be returned.
-   *
-   * After a bucket has been created, the bucket's location cannot be changed.
-   */
-
-  UpdateBucket(request: UpdateBucketRequest): Promise<LogBucket>;
-  /**
-   * Deletes a log bucket.
-   *
-   * Changes the bucket's `lifecycle_state` to the `DELETE_REQUESTED` state.
-   * After 7 days, the bucket will be purged and all log entries in the bucket
-   * will be permanently deleted.
-   */
-
-  DeleteBucket(request: DeleteBucketRequest): Promise<Empty>;
-  /**
-   * Undeletes a log bucket. A bucket that has been deleted can be undeleted
-   * within the grace period of 7 days.
-   */
-
-  UndeleteBucket(request: UndeleteBucketRequest): Promise<Empty>;
-  /** Lists views on a log bucket. */
-
-  ListViews(request: ListViewsRequest): Promise<ListViewsResponse>;
-  /** Gets a view on a log bucket.. */
-
-  GetView(request: GetViewRequest): Promise<LogView>;
-  /**
-   * Creates a view over log entries in a log bucket. A bucket may contain a
-   * maximum of 30 views.
-   */
-
-  CreateView(request: CreateViewRequest): Promise<LogView>;
-  /**
-   * Updates a view on a log bucket. This method replaces the following fields
-   * in the existing view with values from the new view: `filter`.
-   * If an `UNAVAILABLE` error is returned, this indicates that system is not in
-   * a state where it can update the view. If this occurs, please try again in a
-   * few minutes.
-   */
-
-  UpdateView(request: UpdateViewRequest): Promise<LogView>;
-  /**
-   * Deletes a view on a log bucket.
-   * If an `UNAVAILABLE` error is returned, this indicates that system is not in
-   * a state where it can delete the view. If this occurs, please try again in a
-   * few minutes.
-   */
-
-  DeleteView(request: DeleteViewRequest): Promise<Empty>;
-  /** Lists sinks. */
-
-  ListSinks(request: ListSinksRequest): Promise<ListSinksResponse>;
-  /** Gets a sink. */
-
-  GetSink(request: GetSinkRequest): Promise<LogSink>;
-  /**
-   * Creates a sink that exports specified log entries to a destination. The
-   * export of newly-ingested log entries begins immediately, unless the sink's
-   * `writer_identity` is not permitted to write to the destination. A sink can
-   * export log entries only from the resource owning the sink.
-   */
-
-  CreateSink(request: CreateSinkRequest): Promise<LogSink>;
-  /**
-   * Updates a sink. This method replaces the following fields in the existing
-   * sink with values from the new sink: `destination`, and `filter`.
-   *
-   * The updated sink might also have a new `writer_identity`; see the
-   * `unique_writer_identity` field.
-   */
-
-  UpdateSink(request: UpdateSinkRequest): Promise<LogSink>;
-  /**
-   * Deletes a sink. If the sink has a unique `writer_identity`, then that
-   * service account is also deleted.
-   */
-
-  DeleteSink(request: DeleteSinkRequest): Promise<Empty>;
-  /** Lists all the exclusions on the _Default sink in a parent resource. */
-
-  ListExclusions(request: ListExclusionsRequest): Promise<ListExclusionsResponse>;
-  /** Gets the description of an exclusion in the _Default sink. */
-
-  GetExclusion(request: GetExclusionRequest): Promise<LogExclusion>;
-  /**
-   * Creates a new exclusion in the _Default sink in a specified parent
-   * resource. Only log entries belonging to that resource can be excluded. You
-   * can have up to 10 exclusions in a resource.
-   */
-
-  CreateExclusion(request: CreateExclusionRequest): Promise<LogExclusion>;
-  /**
-   * Changes one or more properties of an existing exclusion in the _Default
-   * sink.
-   */
-
-  UpdateExclusion(request: UpdateExclusionRequest): Promise<LogExclusion>;
-  /** Deletes an exclusion in the _Default sink. */
-
-  DeleteExclusion(request: DeleteExclusionRequest): Promise<Empty>;
-  /**
-   * Gets the Logging CMEK settings for the given resource.
-   *
-   * Note: CMEK for the Log Router can be configured for Google Cloud projects,
-   * folders, organizations and billing accounts. Once configured for an
-   * organization, it applies to all projects and folders in the Google Cloud
-   * organization.
-   *
-   * See [Enabling CMEK for Log
-   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-   * for more information.
-   */
-
-  GetCmekSettings(request: GetCmekSettingsRequest): Promise<CmekSettings>;
-  /**
-   * Updates the Log Router CMEK settings for the given resource.
-   *
-   * Note: CMEK for the Log Router can currently only be configured for Google
-   * Cloud organizations. Once configured, it applies to all projects and
-   * folders in the Google Cloud organization.
-   *
-   * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings]
-   * will fail if 1) `kms_key_name` is invalid, or 2) the associated service
-   * account does not have the required
-   * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or
-   * 3) access to the key is disabled.
-   *
-   * See [Enabling CMEK for Log
-   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-   * for more information.
-   */
-
-  UpdateCmekSettings(request: UpdateCmekSettingsRequest): Promise<CmekSettings>;
-  /**
-   * Gets the Log Router settings for the given resource.
-   *
-   * Note: Settings for the Log Router can be get for Google Cloud projects,
-   * folders, organizations and billing accounts. Currently it can only be
-   * configured for organizations. Once configured for an organization, it
-   * applies to all projects and folders in the Google Cloud organization.
-   *
-   * See [Enabling CMEK for Log
-   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-   * for more information.
-   */
-
-  GetSettings(request: GetSettingsRequest): Promise<Settings>;
-  /**
-   * Updates the Log Router settings for the given resource.
-   *
-   * Note: Settings for the Log Router can currently only be configured for
-   * Google Cloud organizations. Once configured, it applies to all projects and
-   * folders in the Google Cloud organization.
-   *
-   * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings]
-   * will fail if 1) `kms_key_name` is invalid, or 2) the associated service
-   * account does not have the required
-   * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or
-   * 3) access to the key is disabled. 4) `location_id` is not supported by
-   * Logging. 5) `location_id` violate OrgPolicy.
-   *
-   * See [Enabling CMEK for Log
-   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-   * for more information.
-   */
-
-  UpdateSettings(request: UpdateSettingsRequest): Promise<Settings>;
-  /** Copies a set of log entries from a log bucket to a Cloud Storage bucket. */
-
-  CopyLogEntries(request: CopyLogEntriesRequest): Promise<Operation>;
-}
-export class ConfigServiceV2ClientImpl implements ConfigServiceV2 {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.ListBuckets = this.ListBuckets.bind(this);
-    this.GetBucket = this.GetBucket.bind(this);
-    this.CreateBucket = this.CreateBucket.bind(this);
-    this.UpdateBucket = this.UpdateBucket.bind(this);
-    this.DeleteBucket = this.DeleteBucket.bind(this);
-    this.UndeleteBucket = this.UndeleteBucket.bind(this);
-    this.ListViews = this.ListViews.bind(this);
-    this.GetView = this.GetView.bind(this);
-    this.CreateView = this.CreateView.bind(this);
-    this.UpdateView = this.UpdateView.bind(this);
-    this.DeleteView = this.DeleteView.bind(this);
-    this.ListSinks = this.ListSinks.bind(this);
-    this.GetSink = this.GetSink.bind(this);
-    this.CreateSink = this.CreateSink.bind(this);
-    this.UpdateSink = this.UpdateSink.bind(this);
-    this.DeleteSink = this.DeleteSink.bind(this);
-    this.ListExclusions = this.ListExclusions.bind(this);
-    this.GetExclusion = this.GetExclusion.bind(this);
-    this.CreateExclusion = this.CreateExclusion.bind(this);
-    this.UpdateExclusion = this.UpdateExclusion.bind(this);
-    this.DeleteExclusion = this.DeleteExclusion.bind(this);
-    this.GetCmekSettings = this.GetCmekSettings.bind(this);
-    this.UpdateCmekSettings = this.UpdateCmekSettings.bind(this);
-    this.GetSettings = this.GetSettings.bind(this);
-    this.UpdateSettings = this.UpdateSettings.bind(this);
-    this.CopyLogEntries = this.CopyLogEntries.bind(this);
-  }
-
-  ListBuckets(request: ListBucketsRequest): Promise<ListBucketsResponse> {
-    const data = ListBucketsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "ListBuckets", data);
-    return promise.then(data => ListBucketsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetBucket(request: GetBucketRequest): Promise<LogBucket> {
-    const data = GetBucketRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "GetBucket", data);
-    return promise.then(data => LogBucket.decode(new _m0.Reader(data)));
-  }
-
-  CreateBucket(request: CreateBucketRequest): Promise<LogBucket> {
-    const data = CreateBucketRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "CreateBucket", data);
-    return promise.then(data => LogBucket.decode(new _m0.Reader(data)));
-  }
-
-  UpdateBucket(request: UpdateBucketRequest): Promise<LogBucket> {
-    const data = UpdateBucketRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UpdateBucket", data);
-    return promise.then(data => LogBucket.decode(new _m0.Reader(data)));
-  }
-
-  DeleteBucket(request: DeleteBucketRequest): Promise<Empty> {
-    const data = DeleteBucketRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "DeleteBucket", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  UndeleteBucket(request: UndeleteBucketRequest): Promise<Empty> {
-    const data = UndeleteBucketRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UndeleteBucket", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  ListViews(request: ListViewsRequest): Promise<ListViewsResponse> {
-    const data = ListViewsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "ListViews", data);
-    return promise.then(data => ListViewsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetView(request: GetViewRequest): Promise<LogView> {
-    const data = GetViewRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "GetView", data);
-    return promise.then(data => LogView.decode(new _m0.Reader(data)));
-  }
-
-  CreateView(request: CreateViewRequest): Promise<LogView> {
-    const data = CreateViewRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "CreateView", data);
-    return promise.then(data => LogView.decode(new _m0.Reader(data)));
-  }
-
-  UpdateView(request: UpdateViewRequest): Promise<LogView> {
-    const data = UpdateViewRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UpdateView", data);
-    return promise.then(data => LogView.decode(new _m0.Reader(data)));
-  }
-
-  DeleteView(request: DeleteViewRequest): Promise<Empty> {
-    const data = DeleteViewRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "DeleteView", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  ListSinks(request: ListSinksRequest): Promise<ListSinksResponse> {
-    const data = ListSinksRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "ListSinks", data);
-    return promise.then(data => ListSinksResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetSink(request: GetSinkRequest): Promise<LogSink> {
-    const data = GetSinkRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "GetSink", data);
-    return promise.then(data => LogSink.decode(new _m0.Reader(data)));
-  }
-
-  CreateSink(request: CreateSinkRequest): Promise<LogSink> {
-    const data = CreateSinkRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "CreateSink", data);
-    return promise.then(data => LogSink.decode(new _m0.Reader(data)));
-  }
-
-  UpdateSink(request: UpdateSinkRequest): Promise<LogSink> {
-    const data = UpdateSinkRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UpdateSink", data);
-    return promise.then(data => LogSink.decode(new _m0.Reader(data)));
-  }
-
-  DeleteSink(request: DeleteSinkRequest): Promise<Empty> {
-    const data = DeleteSinkRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "DeleteSink", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  ListExclusions(request: ListExclusionsRequest): Promise<ListExclusionsResponse> {
-    const data = ListExclusionsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "ListExclusions", data);
-    return promise.then(data => ListExclusionsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetExclusion(request: GetExclusionRequest): Promise<LogExclusion> {
-    const data = GetExclusionRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "GetExclusion", data);
-    return promise.then(data => LogExclusion.decode(new _m0.Reader(data)));
-  }
-
-  CreateExclusion(request: CreateExclusionRequest): Promise<LogExclusion> {
-    const data = CreateExclusionRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "CreateExclusion", data);
-    return promise.then(data => LogExclusion.decode(new _m0.Reader(data)));
-  }
-
-  UpdateExclusion(request: UpdateExclusionRequest): Promise<LogExclusion> {
-    const data = UpdateExclusionRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UpdateExclusion", data);
-    return promise.then(data => LogExclusion.decode(new _m0.Reader(data)));
-  }
-
-  DeleteExclusion(request: DeleteExclusionRequest): Promise<Empty> {
-    const data = DeleteExclusionRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "DeleteExclusion", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-  GetCmekSettings(request: GetCmekSettingsRequest): Promise<CmekSettings> {
-    const data = GetCmekSettingsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "GetCmekSettings", data);
-    return promise.then(data => CmekSettings.decode(new _m0.Reader(data)));
-  }
-
-  UpdateCmekSettings(request: UpdateCmekSettingsRequest): Promise<CmekSettings> {
-    const data = UpdateCmekSettingsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UpdateCmekSettings", data);
-    return promise.then(data => CmekSettings.decode(new _m0.Reader(data)));
-  }
-
-  GetSettings(request: GetSettingsRequest): Promise<Settings> {
-    const data = GetSettingsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "GetSettings", data);
-    return promise.then(data => Settings.decode(new _m0.Reader(data)));
-  }
-
-  UpdateSettings(request: UpdateSettingsRequest): Promise<Settings> {
-    const data = UpdateSettingsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "UpdateSettings", data);
-    return promise.then(data => Settings.decode(new _m0.Reader(data)));
-  }
-
-  CopyLogEntries(request: CopyLogEntriesRequest): Promise<Operation> {
-    const data = CopyLogEntriesRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.ConfigServiceV2", "CopyLogEntries", data);
-    return promise.then(data => Operation.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

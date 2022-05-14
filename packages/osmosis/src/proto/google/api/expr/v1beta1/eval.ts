@@ -1,111 +1,110 @@
-/* eslint-disable */
-import Long from "long";
+import { Value } from "./value";
+import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { Value } from "../../../../google/api/expr/v1beta1/value";
-import { Status } from "../../../../google/rpc/status";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * The state of an evaluation.
- *
+ * 
  * Can represent an initial, partial, or completed state of evaluation.
  */
 export interface EvalState {
   /** The unique values referenced in this message. */
   values: ExprValue[];
+
   /**
    * An ordered list of results.
-   *
+   * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-
   results: EvalState_Result[];
 }
-/** A single evaluation result. */
 
+/** A single evaluation result. */
 export interface EvalState_Result {
   /** The expression this result is for. */
   expr: IdRef;
-  /** The index in `values` of the resulting value. */
 
+  /** The index in `values` of the resulting value. */
   value: number;
 }
-/** The value of an evaluated expression. */
 
+/** The value of an evaluated expression. */
 export interface ExprValue {
   /** A concrete value. */
-  value: Value | undefined;
+  value?: Value;
+
   /**
    * The set of errors in the critical path of evalution.
-   *
+   * 
    * Only errors in the critical path are included. For example,
    * `(<error1> || true) && <error2>` will only result in `<error2>`,
    * while `<error1> || <error2>` will result in both `<error1>` and
    * `<error2>`.
-   *
+   * 
    * Errors cause by the presence of other errors are not included in the
    * set. For example `<error1>.foo`, `foo(<error1>)`, and `<error1> + 1` will
    * only result in `<error1>`.
-   *
+   * 
    * Multiple errors *might* be included when evaluation could result
    * in different errors. For example `<error1> + <error2>` and
    * `foo(<error1>, <error2>)` may result in `<error1>`, `<error2>` or both.
    * The exact subset of errors included for this case is unspecified and
    * depends on the implementation details of the evaluator.
    */
+  error?: ErrorSet;
 
-  error: ErrorSet | undefined;
   /**
    * The set of unknowns in the critical path of evaluation.
-   *
+   * 
    * Unknown behaves identically to Error with regards to propagation.
    * Specifically, only unknowns in the critical path are included, unknowns
    * caused by the presence of other unknowns are not included, and multiple
    * unknowns *might* be included included when evaluation could result in
    * different unknowns. For example:
-   *
-   *     (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
-   *     <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
-   *     <unknown[1]>.foo -> <unknown[1]>
-   *     foo(<unknown[1]>) -> <unknown[1]>
-   *     <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
-   *
+   * 
+   * (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
+   * <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
+   * <unknown[1]>.foo -> <unknown[1]>
+   * foo(<unknown[1]>) -> <unknown[1]>
+   * <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
+   * 
    * Unknown takes precidence over Error in cases where a `Value` can short
    * circuit the result:
-   *
-   *     <error> || <unknown> -> <unknown>
-   *     <error> && <unknown> -> <unknown>
-   *
+   * 
+   * <error> || <unknown> -> <unknown>
+   * <error> && <unknown> -> <unknown>
+   * 
    * Errors take precidence in all other cases:
-   *
-   *     <unknown> + <error> -> <error>
-   *     foo(<unknown>, <error>) -> <error>
+   * 
+   * <unknown> + <error> -> <error>
+   * foo(<unknown>, <error>) -> <error>
    */
-
-  unknown: UnknownSet | undefined;
+  unknown?: UnknownSet;
 }
+
 /**
  * A set of errors.
- *
+ * 
  * The errors included depend on the context. See `ExprValue.error`.
  */
-
 export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
 }
+
 /**
  * A set of expressions for which the value is unknown.
- *
+ * 
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
-
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: IdRef[];
 }
-/** A reference to an expression id. */
 
+/** A reference to an expression id. */
 export interface IdRef {
   /** The expression id. */
   id: number;
@@ -523,17 +522,3 @@ export const IdRef = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,17 +1,15 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { ContractInfo } from "../../../secret/compute/v1beta1/types";
+import { ContractInfo } from "./types";
 import { StringEvent } from "../../../cosmos/base/abci/v1beta1/abci";
-import { Empty } from "../../../google/protobuf/empty";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** QueryContractInfoRequest is the request type for the Query/ContractInfo RPC method */
 export interface QueryContractInfoRequest {
   /** address is the address of the contract to query */
   address: Uint8Array;
 }
-/** QueryContractInfoResponse is the response type for the Query/ContractInfo RPC method */
 
+/** QueryContractInfoResponse is the response type for the Query/ContractInfo RPC method */
 export interface QueryContractInfoResponse {
   /** address is the address of the contract */
   address: Uint8Array;
@@ -25,8 +23,8 @@ export interface QueryContractsByCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
   codeId: Long;
 }
-/** ContractInfoWithAddress adds the address (key) to the ContractInfo representation */
 
+/** ContractInfoWithAddress adds the address (key) to the ContractInfo representation */
 export interface ContractInfoWithAddress {
   address: Uint8Array;
   ContractInfo: ContractInfo;
@@ -83,8 +81,8 @@ export interface QueryContractKeyResponse {
 export interface QueryContractHashResponse {
   codeHash: Uint8Array;
 }
-/** DecryptedAnswer is a struct that represents a decrypted tx-query */
 
+/** DecryptedAnswer is a struct that represents a decrypted tx-query */
 export interface DecryptedAnswer {
   type: string;
   input: string;
@@ -1363,54 +1361,3 @@ export const DecryptedAnswer = {
   }
 
 };
-/** Query provides defines the gRPC querier service */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

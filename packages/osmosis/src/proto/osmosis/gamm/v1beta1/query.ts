@@ -1,10 +1,9 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Any } from "../../../google/protobuf/any";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { SwapAmountInRoute, SwapAmountOutRoute } from "./tx";
+import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { SwapAmountInRoute, SwapAmountOutRoute } from "../../../osmosis/gamm/v1beta1/tx";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** =============================== Pool */
 export interface QueryPoolRequest {
@@ -13,50 +12,50 @@ export interface QueryPoolRequest {
 export interface QueryPoolResponse {
   pool: Any;
 }
-/** =============================== Pools */
 
+/** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest;
 }
 export interface QueryPoolsResponse {
   pools: Any[];
-  /** pagination defines the pagination in the response. */
 
+  /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
-/** =============================== NumPools */
 
+/** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
 export interface QueryNumPoolsResponse {
   numPools: Long;
 }
-/** =============================== PoolParams */
 
+/** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
   poolId: Long;
 }
 export interface QueryPoolParamsResponse {
   params: Any;
 }
-/** =============================== PoolLiquidity */
 
+/** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
   poolId: Long;
 }
 export interface QueryTotalPoolLiquidityResponse {
   liquidity: Coin[];
 }
-/** =============================== TotalShares */
 
+/** =============================== TotalShares */
 export interface QueryTotalSharesRequest {
   poolId: Long;
 }
 export interface QueryTotalSharesResponse {
   totalShares: Coin;
 }
-/** =============================== SpotPrice */
 
+/** =============================== SpotPrice */
 export interface QuerySpotPriceRequest {
   poolId: Long;
   tokenInDenom: string;
@@ -66,8 +65,8 @@ export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
 }
-/** =============================== EstimateSwapExactAmountIn */
 
+/** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequest {
   sender: string;
   poolId: Long;
@@ -77,8 +76,8 @@ export interface QuerySwapExactAmountInRequest {
 export interface QuerySwapExactAmountInResponse {
   tokenOutAmount: string;
 }
-/** =============================== EstimateSwapExactAmountOut */
 
+/** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequest {
   sender: string;
   poolId: Long;
@@ -1342,17 +1341,3 @@ export const QueryTotalLiquidityResponse = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

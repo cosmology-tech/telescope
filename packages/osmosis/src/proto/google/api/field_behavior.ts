@@ -1,13 +1,9 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-
 /**
  * An indicator of the behavior of a given field (for example, that a field
  * is required in requests, or given as output but ignored as input).
  * This **does not** change the behavior in protocol buffers itself; it only
  * denotes the behavior and may affect how API tooling handles the field.
- *
+ * 
  * Note: This enum **may** receive new values in the future.
  */
 export enum FieldBehavior {
@@ -136,10 +132,4 @@ export function fieldBehaviorToJSON(object: FieldBehavior): string {
     default:
       return "UNKNOWN";
   }
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
 }

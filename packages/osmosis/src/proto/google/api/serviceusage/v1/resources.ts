@@ -1,14 +1,13 @@
-/* eslint-disable */
-import Long from "long";
+import { Api } from "../../../protobuf/api";
+import { Documentation } from "../../documentation";
+import { Quota } from "../../quota";
+import { Authentication } from "../../auth";
+import { Usage } from "../../usage";
+import { Endpoint } from "../../endpoint";
+import { MonitoredResourceDescriptor } from "../../monitored_resource";
+import { Monitoring } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
-import { Documentation } from "../../../../google/api/documentation";
-import { Quota } from "../../../../google/api/quota";
-import { Authentication } from "../../../../google/api/auth";
-import { Usage } from "../../../../google/api/usage";
-import { Monitoring } from "../../../../google/api/monitoring";
-import { Api } from "../../../../google/protobuf/api";
-import { Endpoint } from "../../../../google/api/endpoint";
-import { MonitoredResourceDescriptor } from "../../../../google/api/monitored_resource";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -64,91 +63,91 @@ export function stateToJSON(object: State): string {
       return "UNKNOWN";
   }
 }
-/** A service that is available for use by the consumer. */
 
+/** A service that is available for use by the consumer. */
 export interface Service {
   /**
    * The resource name of the consumer and service.
-   *
+   * 
    * A valid name would be:
    * - projects/123/services/serviceusage.googleapis.com
    */
   name: string;
+
   /**
    * The resource name of the consumer.
-   *
+   * 
    * A valid name would be:
    * - projects/123
    */
-
   parent: string;
+
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-
   config: ServiceConfig;
-  /** Whether or not the service has been enabled for use by the consumer. */
 
+  /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-/** The configuration of the service. */
 
+/** The configuration of the service. */
 export interface ServiceConfig {
   /**
    * The DNS address at which this service is available.
-   *
+   * 
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
   name: string;
-  /** The product title for this service. */
 
+  /** The product title for this service. */
   title: string;
+
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-
   apis: Api[];
+
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
-
   documentation: Documentation;
+
   /** Quota configuration. */
-
   quota: Quota;
+
   /** Auth configuration. Contains only the OAuth rules. */
-
   authentication: Authentication;
-  /** Configuration controlling usage of this service. */
 
+  /** Configuration controlling usage of this service. */
   usage: Usage;
+
   /**
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-
   endpoints: Endpoint[];
+
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-
   monitoredResources: MonitoredResourceDescriptor[];
+
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
-
   monitoring: Monitoring;
 }
-/** The operation metadata returned for the batchend services operation. */
 
+/** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadata {
   /**
    * The full name of the resources that this operation is directly
@@ -494,17 +493,3 @@ export const OperationMetadata = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

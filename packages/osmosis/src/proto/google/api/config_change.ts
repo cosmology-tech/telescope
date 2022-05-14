@@ -1,6 +1,5 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Classifies set of possible modifications to an object in the service
@@ -71,15 +70,15 @@ export function changeTypeToJSON(object: ChangeType): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
- *
+ * 
  * Includes detailed information about a field that have changed with
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
  */
-
 export interface ConfigChange {
   /**
    * Object hierarchy path to the change, with levels separated by a '.'
@@ -93,33 +92,33 @@ export interface ConfigChange {
    * - logging.producer_destinations[0]
    */
   element: string;
+
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-
   oldValue: string;
+
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
-
   newValue: string;
-  /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
 
+  /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
   changeType: ChangeType;
+
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
-
   advices: Advice[];
 }
+
 /**
  * Generated advice about this change, used for providing more
  * information about how a change will affect the existing service.
  */
-
 export interface Advice {
   /**
    * Useful description for why this advice was applied and what actions should
@@ -295,17 +294,3 @@ export const Advice = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,13 +1,12 @@
-/* eslint-disable */
-import Long from "long";
+import { Distribution_Exemplar } from "../../distribution";
 import * as _m0 from "protobufjs/minimal";
-import { Distribution_Exemplar } from "../../../../google/api/distribution";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
  * points. It contains the size of the population of sample points plus
  * additional optional information:
- *
+ * 
  * * the arithmetic mean of the samples
  * * the minimum and maximum of the samples
  * * the sum-squared-deviation of the samples, used to compute variance
@@ -16,56 +15,56 @@ import { Distribution_Exemplar } from "../../../../google/api/distribution";
 export interface Distribution {
   /** The total number of samples in the distribution. Must be >= 0. */
   count: Long;
+
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
    * zero then this field must be zero.
    */
-
   mean: number;
+
   /** The minimum of the population of values. Ignored if `count` is zero. */
-
   minimum: number;
-  /** The maximum of the population of values. Ignored if `count` is zero. */
 
+  /** The maximum of the population of values. Ignored if `count` is zero. */
   maximum: number;
+
   /**
    * The sum of squared deviations from the mean:
-   *   Sum[i=1..count]((x_i - mean)^2)
+   * Sum[i=1..count]((x_i - mean)^2)
    * where each x_i is a sample values. If `count` is zero then this field
    * must be zero, otherwise validation of the request fails.
    */
-
   sumOfSquaredDeviation: number;
+
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
    * optional. If present, they must sum to the `count` value.
-   *
+   * 
    * The buckets are defined below in `bucket_option`. There are N buckets.
    * `bucket_counts[0]` is the number of samples in the underflow bucket.
    * `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
    * in each of the finite buckets. And `bucket_counts[N] is the number
    * of samples in the overflow bucket. See the comments of `bucket_option`
    * below for more details.
-   *
+   * 
    * Any suffix of trailing zeros may be omitted.
    */
-
   bucketCounts: Long[];
+
   /** Buckets with constant width. */
+  linearBuckets?: Distribution_LinearBuckets;
 
-  linearBuckets: Distribution_LinearBuckets | undefined;
   /** Buckets with exponentially growing width. */
+  exponentialBuckets?: Distribution_ExponentialBuckets;
 
-  exponentialBuckets: Distribution_ExponentialBuckets | undefined;
   /** Buckets with arbitrary user-provided width. */
+  explicitBuckets?: Distribution_ExplicitBuckets;
 
-  explicitBuckets: Distribution_ExplicitBuckets | undefined;
   /** Example points. Must be in increasing order of `value` field. */
-
   exemplars: Distribution_Exemplar[];
 }
-/** Describing buckets with constant width. */
 
+/** Describing buckets with constant width. */
 export interface Distribution_LinearBuckets {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
@@ -73,24 +72,24 @@ export interface Distribution_LinearBuckets {
    * See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
+
   /**
    * The i'th linear bucket covers the interval
-   *   [offset + (i-1) * width, offset + i * width)
+   * [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    * Must be strictly positive.
    */
-
   width: number;
+
   /**
    * The i'th linear bucket covers the interval
-   *   [offset + (i-1) * width, offset + i * width)
+   * [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    */
-
   offset: number;
 }
-/** Describing buckets with exponentially growing width. */
 
+/** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBuckets {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
@@ -98,42 +97,42 @@ export interface Distribution_ExponentialBuckets {
    * See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
+
   /**
    * The i'th exponential bucket covers the interval
-   *   [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * [scale * growth_factor^(i-1), scale * growth_factor^i)
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be larger than 1.0.
    */
-
   growthFactor: number;
+
   /**
    * The i'th exponential bucket covers the interval
-   *   [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * [scale * growth_factor^(i-1), scale * growth_factor^i)
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be > 0.
    */
-
   scale: number;
 }
-/** Describing buckets with arbitrary user-provided width. */
 
+/** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBuckets {
   /**
    * 'bound' is a list of strictly increasing boundaries between
    * buckets. Note that a list of length N-1 defines N buckets because
    * of fenceposting. See comments on `bucket_options` for details.
-   *
+   * 
    * The i'th finite bucket covers the interval
-   *   [bound[i-1], bound[i])
+   * [bound[i-1], bound[i])
    * where i ranges from 1 to bound_size() - 1. Note that there are no
    * finite buckets at all if 'bound' only contains a single element; in
    * that special case the single bound defines the boundary between the
    * underflow and overflow buckets.
-   *
+   * 
    * bucket number                   lower bound    upper bound
-   *  i == 0 (underflow)              -inf           bound[i]
-   *  0 < i < bound_size()            bound[i-1]     bound[i]
-   *  i == bound_size() (overflow)    bound[i-1]     +inf
+   * i == 0 (underflow)              -inf           bound[i]
+   * 0 < i < bound_size()            bound[i-1]     bound[i]
+   * i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
 }
@@ -564,17 +563,3 @@ export const Distribution_ExplicitBuckets = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

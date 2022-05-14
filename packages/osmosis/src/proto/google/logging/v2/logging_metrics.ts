@@ -1,160 +1,10 @@
-/* eslint-disable */
-import Long from "long";
+import { MetricDescriptor } from "../../api/metric";
+import { Distribution_BucketOptions } from "../../api/distribution";
+import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { MetricDescriptor } from "../../../google/api/metric";
-import { Distribution_BucketOptions } from "../../../google/api/distribution";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Empty } from "../../../google/protobuf/empty";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 
-/**
- * Describes a logs-based metric. The value of the metric is the number of log
- * entries that match a logs filter in a given time interval.
- *
- * Logs-based metrics can also be used to extract values from logs and create a
- * distribution of the values. The distribution records the statistics of the
- * extracted values along with an optional histogram of the values as specified
- * by the bucket options.
- */
-export interface LogMetric {
-  /**
-   * Required. The client-assigned metric identifier.
-   * Examples: `"error_count"`, `"nginx/requests"`.
-   *
-   * Metric identifiers are limited to 100 characters and can include only the
-   * following characters: `A-Z`, `a-z`, `0-9`, and the special characters
-   * `_-.,+!*',()%/`. The forward-slash character (`/`) denotes a hierarchy of
-   * name pieces, and it cannot be the first character of the name.
-   *
-   * This field is the `[METRIC_ID]` part of a metric resource name in the
-   * format "projects/[PROJECT_ID]/metrics/[METRIC_ID]". Example: If the
-   * resource name of a metric is
-   * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
-   * `"nginx/requests"`.
-   */
-  name: string;
-  /**
-   * Optional. A description of this metric, which is used in documentation.
-   * The maximum length of the description is 8000 characters.
-   */
-
-  description: string;
-  /**
-   * Required. An [advanced logs
-   * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
-   * is used to match log entries. Example:
-   *
-   *     "resource.type=gae_app AND severity>=ERROR"
-   *
-   * The maximum length of the filter is 20000 characters.
-   */
-
-  filter: string;
-  /**
-   * Optional. If set to True, then this metric is disabled and it does not
-   * generate any points.
-   */
-
-  disabled: boolean;
-  /**
-   * Optional. The metric descriptor associated with the logs-based metric.
-   * If unspecified, it uses a default metric descriptor with a DELTA metric
-   * kind, INT64 value type, with no labels and a unit of "1". Such a metric
-   * counts the number of log entries matching the `filter` expression.
-   *
-   * The `name`, `type`, and `description` fields in the `metric_descriptor`
-   * are output only, and is constructed using the `name` and `description`
-   * field in the LogMetric.
-   *
-   * To create a logs-based metric that records a distribution of log values, a
-   * DELTA metric kind with a DISTRIBUTION value type must be used along with
-   * a `value_extractor` expression in the LogMetric.
-   *
-   * Each label in the metric descriptor must have a matching label
-   * name as the key and an extractor expression as the value in the
-   * `label_extractors` map.
-   *
-   * The `metric_kind` and `value_type` fields in the `metric_descriptor` cannot
-   * be updated once initially configured. New labels can be added in the
-   * `metric_descriptor`, but existing labels cannot be modified except for
-   * their description.
-   */
-
-  metricDescriptor: MetricDescriptor;
-  /**
-   * Optional. A `value_extractor` is required when using a distribution
-   * logs-based metric to extract the values to record from a log entry.
-   * Two functions are supported for value extraction: `EXTRACT(field)` or
-   * `REGEXP_EXTRACT(field, regex)`. The argument are:
-   *   1. field: The name of the log entry field from which the value is to be
-   *      extracted.
-   *   2. regex: A regular expression using the Google RE2 syntax
-   *      (https://github.com/google/re2/wiki/Syntax) with a single capture
-   *      group to extract data from the specified log entry field. The value
-   *      of the field is converted to a string before applying the regex.
-   *      It is an error to specify a regex that does not include exactly one
-   *      capture group.
-   *
-   * The result of the extraction must be convertible to a double type, as the
-   * distribution always records double values. If either the extraction or
-   * the conversion to double fails, then those values are not recorded in the
-   * distribution.
-   *
-   * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
-   */
-
-  valueExtractor: string;
-  /**
-   * Optional. A map from a label key string to an extractor expression which is
-   * used to extract data from a log entry field and assign as the label value.
-   * Each label key specified in the LabelDescriptor must have an associated
-   * extractor expression in this map. The syntax of the extractor expression
-   * is the same as for the `value_extractor` field.
-   *
-   * The extracted value is converted to the type defined in the label
-   * descriptor. If the either the extraction or the type conversion fails,
-   * the label will have a default value. The default value for a string
-   * label is an empty string, for an integer label its 0, and for a boolean
-   * label its `false`.
-   *
-   * Note that there are upper bounds on the maximum number of labels and the
-   * number of active time series that are allowed in a project.
-   */
-
-  labelExtractors: {
-    [key: string]: string;
-  };
-  /**
-   * Optional. The `bucket_options` are required when the logs-based metric is
-   * using a DISTRIBUTION value type and it describes the bucket boundaries
-   * used to create a histogram of the extracted values.
-   */
-
-  bucketOptions: Distribution_BucketOptions;
-  /**
-   * Output only. The creation timestamp of the metric.
-   *
-   * This field may not be present for older metrics.
-   */
-
-  createTime: Date;
-  /**
-   * Output only. The last update timestamp of the metric.
-   *
-   * This field may not be present for older metrics.
-   */
-
-  updateTime: Date;
-  /**
-   * Deprecated. The API version that created or updated this metric.
-   * The v2 format is used by default and cannot be changed.
-   *
-   * @deprecated
-   */
-
-  version: LogMetric_ApiVersion;
-}
 /** Logging API version. */
-
 export enum LogMetric_ApiVersion {
   /** V2 - Logging API v2. */
   V2 = 0,
@@ -195,99 +45,316 @@ export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
 }
-/** The parameters to ListLogMetrics. */
 
+/**
+ * Describes a logs-based metric. The value of the metric is the number of log
+ * entries that match a logs filter in a given time interval.
+ * 
+ * Logs-based metrics can also be used to extract values from logs and create a
+ * distribution of the values. The distribution records the statistics of the
+ * extracted values along with an optional histogram of the values as specified
+ * by the bucket options.
+ */
+export interface LogMetric {
+  /**
+   * Required. The client-assigned metric identifier.
+   * Examples: `"error_count"`, `"nginx/requests"`.
+   * 
+   * Metric identifiers are limited to 100 characters and can include only the
+   * following characters: `A-Z`, `a-z`, `0-9`, and the special characters
+   * `_-.,+!*',()%/`. The forward-slash character (`/`) denotes a hierarchy of
+   * name pieces, and it cannot be the first character of the name.
+   * 
+   * This field is the `[METRIC_ID]` part of a metric resource name in the
+   * format "projects/[PROJECT_ID]/metrics/[METRIC_ID]". Example: If the
+   * resource name of a metric is
+   * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
+   * `"nginx/requests"`.
+   */
+  name: string;
+
+  /**
+   * Optional. A description of this metric, which is used in documentation.
+   * The maximum length of the description is 8000 characters.
+   */
+  description: string;
+
+  /**
+   * Required. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
+   * is used to match log entries. Example:
+   * 
+   * "resource.type=gae_app AND severity>=ERROR"
+   * 
+   * The maximum length of the filter is 20000 characters.
+   */
+  filter: string;
+
+  /**
+   * Optional. If set to True, then this metric is disabled and it does not
+   * generate any points.
+   */
+  disabled: boolean;
+
+  /**
+   * Optional. The metric descriptor associated with the logs-based metric.
+   * If unspecified, it uses a default metric descriptor with a DELTA metric
+   * kind, INT64 value type, with no labels and a unit of "1". Such a metric
+   * counts the number of log entries matching the `filter` expression.
+   * 
+   * The `name`, `type`, and `description` fields in the `metric_descriptor`
+   * are output only, and is constructed using the `name` and `description`
+   * field in the LogMetric.
+   * 
+   * To create a logs-based metric that records a distribution of log values, a
+   * DELTA metric kind with a DISTRIBUTION value type must be used along with
+   * a `value_extractor` expression in the LogMetric.
+   * 
+   * Each label in the metric descriptor must have a matching label
+   * name as the key and an extractor expression as the value in the
+   * `label_extractors` map.
+   * 
+   * The `metric_kind` and `value_type` fields in the `metric_descriptor` cannot
+   * be updated once initially configured. New labels can be added in the
+   * `metric_descriptor`, but existing labels cannot be modified except for
+   * their description.
+   */
+  metricDescriptor: MetricDescriptor;
+
+  /**
+   * Optional. A `value_extractor` is required when using a distribution
+   * logs-based metric to extract the values to record from a log entry.
+   * Two functions are supported for value extraction: `EXTRACT(field)` or
+   * `REGEXP_EXTRACT(field, regex)`. The argument are:
+   * 1. field: The name of the log entry field from which the value is to be
+   * extracted.
+   * 2. regex: A regular expression using the Google RE2 syntax
+   * (https://github.com/google/re2/wiki/Syntax) with a single capture
+   * group to extract data from the specified log entry field. The value
+   * of the field is converted to a string before applying the regex.
+   * It is an error to specify a regex that does not include exactly one
+   * capture group.
+   * 
+   * The result of the extraction must be convertible to a double type, as the
+   * distribution always records double values. If either the extraction or
+   * the conversion to double fails, then those values are not recorded in the
+   * distribution.
+   * 
+   * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
+   */
+  valueExtractor: string;
+
+  /**
+   * Optional. A map from a label key string to an extractor expression which is
+   * used to extract data from a log entry field and assign as the label value.
+   * Each label key specified in the LabelDescriptor must have an associated
+   * extractor expression in this map. The syntax of the extractor expression
+   * is the same as for the `value_extractor` field.
+   * 
+   * The extracted value is converted to the type defined in the label
+   * descriptor. If the either the extraction or the type conversion fails,
+   * the label will have a default value. The default value for a string
+   * label is an empty string, for an integer label its 0, and for a boolean
+   * label its `false`.
+   * 
+   * Note that there are upper bounds on the maximum number of labels and the
+   * number of active time series that are allowed in a project.
+   */
+  labelExtractors: {
+    [key: string]: string;
+  };
+
+  /**
+   * Optional. The `bucket_options` are required when the logs-based metric is
+   * using a DISTRIBUTION value type and it describes the bucket boundaries
+   * used to create a histogram of the extracted values.
+   */
+  bucketOptions: Distribution_BucketOptions;
+
+  /**
+   * Output only. The creation timestamp of the metric.
+   * 
+   * This field may not be present for older metrics.
+   */
+  createTime: Date;
+
+  /**
+   * Output only. The last update timestamp of the metric.
+   * 
+   * This field may not be present for older metrics.
+   */
+  updateTime: Date;
+
+  /**
+   * Deprecated. The API version that created or updated this metric.
+   * The v2 format is used by default and cannot be changed.
+   */
+
+  /** @deprecated */
+  version: LogMetric_ApiVersion;
+}
+
+/** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequest {
   /**
    * Required. The name of the project containing the metrics:
-   *
-   *     "projects/[PROJECT_ID]"
+   * 
+   * "projects/[PROJECT_ID]"
    */
   parent: string;
+
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-
   pageToken: string;
+
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-
   pageSize: number;
 }
-/** Result returned from ListLogMetrics. */
 
+/** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponse {
   /** A list of logs-based metrics. */
   metrics: LogMetric[];
+
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-
   nextPageToken: string;
 }
-/** The parameters to GetLogMetric. */
 
+/** The parameters to GetLogMetric. */
 export interface GetLogMetricRequest {
   /**
    * Required. The resource name of the desired metric:
-   *
-   *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
 }
-/** The parameters to CreateLogMetric. */
 
+/** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequest {
   /**
    * Required. The resource name of the project in which to create the metric:
-   *
-   *     "projects/[PROJECT_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]"
+   * 
    * The new metric must be provided in the request.
    */
   parent: string;
+
   /**
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
-
   metric: LogMetric;
 }
-/** The parameters to UpdateLogMetric. */
 
+/** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequest {
   /**
    * Required. The resource name of the metric to update:
-   *
-   *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   *
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * 
    * The updated metric must be provided in the request and it's
    * `name` field must be the same as `[METRIC_ID]` If the metric
    * does not exist in `[PROJECT_ID]`, then a new metric is created.
    */
   metricName: string;
-  /** Required. The updated metric. */
 
+  /** Required. The updated metric. */
   metric: LogMetric;
 }
-/** The parameters to DeleteLogMetric. */
 
+/** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequest {
   /**
    * Required. The resource name of the metric to delete:
-   *
-   *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
 }
+
+function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const LogMetric_LabelExtractorsEntry = {
+  encode(message: LogMetric_LabelExtractorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): LogMetric_LabelExtractorsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<LogMetric_LabelExtractorsEntry>, I>>(object: I): LogMetric_LabelExtractorsEntry {
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
 
 function createBaseLogMetric(): LogMetric {
   return {
@@ -489,75 +556,6 @@ export const LogMetric = {
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     message.version = object.version ?? 0;
-    return message;
-  }
-
-};
-
-function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const LogMetric_LabelExtractorsEntry = {
-  encode(message: LogMetric_LabelExtractorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLogMetric_LabelExtractorsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): LogMetric_LabelExtractorsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<LogMetric_LabelExtractorsEntry>, I>>(object: I): LogMetric_LabelExtractorsEntry {
-    const message = createBaseLogMetric_LabelExtractorsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
     return message;
   }
 
@@ -970,114 +968,3 @@ export const DeleteLogMetricRequest = {
   }
 
 };
-/** Service for configuring logs-based metrics. */
-
-export interface MetricsServiceV2 {
-  /** Lists logs-based metrics. */
-  ListLogMetrics(request: ListLogMetricsRequest): Promise<ListLogMetricsResponse>;
-  /** Gets a logs-based metric. */
-
-  GetLogMetric(request: GetLogMetricRequest): Promise<LogMetric>;
-  /** Creates a logs-based metric. */
-
-  CreateLogMetric(request: CreateLogMetricRequest): Promise<LogMetric>;
-  /** Creates or updates a logs-based metric. */
-
-  UpdateLogMetric(request: UpdateLogMetricRequest): Promise<LogMetric>;
-  /** Deletes a logs-based metric. */
-
-  DeleteLogMetric(request: DeleteLogMetricRequest): Promise<Empty>;
-}
-export class MetricsServiceV2ClientImpl implements MetricsServiceV2 {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.ListLogMetrics = this.ListLogMetrics.bind(this);
-    this.GetLogMetric = this.GetLogMetric.bind(this);
-    this.CreateLogMetric = this.CreateLogMetric.bind(this);
-    this.UpdateLogMetric = this.UpdateLogMetric.bind(this);
-    this.DeleteLogMetric = this.DeleteLogMetric.bind(this);
-  }
-
-  ListLogMetrics(request: ListLogMetricsRequest): Promise<ListLogMetricsResponse> {
-    const data = ListLogMetricsRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.MetricsServiceV2", "ListLogMetrics", data);
-    return promise.then(data => ListLogMetricsResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetLogMetric(request: GetLogMetricRequest): Promise<LogMetric> {
-    const data = GetLogMetricRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.MetricsServiceV2", "GetLogMetric", data);
-    return promise.then(data => LogMetric.decode(new _m0.Reader(data)));
-  }
-
-  CreateLogMetric(request: CreateLogMetricRequest): Promise<LogMetric> {
-    const data = CreateLogMetricRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.MetricsServiceV2", "CreateLogMetric", data);
-    return promise.then(data => LogMetric.decode(new _m0.Reader(data)));
-  }
-
-  UpdateLogMetric(request: UpdateLogMetricRequest): Promise<LogMetric> {
-    const data = UpdateLogMetricRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.MetricsServiceV2", "UpdateLogMetric", data);
-    return promise.then(data => LogMetric.decode(new _m0.Reader(data)));
-  }
-
-  DeleteLogMetric(request: DeleteLogMetricRequest): Promise<Empty> {
-    const data = DeleteLogMetricRequest.encode(request).finish();
-    const promise = this.rpc.request("google.logging.v2.MetricsServiceV2", "DeleteLogMetric", data);
-    return promise.then(data => Empty.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

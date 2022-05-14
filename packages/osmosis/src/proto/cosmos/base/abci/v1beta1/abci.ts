@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
 import { Event } from "../../../../tendermint/abci/types";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -11,184 +10,182 @@ import { Event } from "../../../../tendermint/abci/types";
 export interface TxResponse {
   /** The block height */
   height: Long;
+
   /** The transaction hash. */
-
   txhash: string;
+
   /** Namespace for the Code */
-
   codespace: string;
+
   /** Response code. */
-
   code: number;
-  /** Result bytes, if any. */
 
+  /** Result bytes, if any. */
   data: string;
+
   /**
    * The output of the application's logger (raw string). May be
    * non-deterministic.
    */
-
   rawLog: string;
+
   /** The output of the application's logger (typed). May be non-deterministic. */
-
   logs: ABCIMessageLog[];
+
   /** Additional information. May be non-deterministic. */
-
   info: string;
+
   /** Amount of gas requested for transaction. */
-
   gasWanted: Long;
+
   /** Amount of gas consumed by transaction. */
-
   gasUsed: Long;
-  /** The request transaction bytes. */
 
+  /** The request transaction bytes. */
   tx: Any;
+
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
    * the timestamps of the valid votes in the block.LastCommit. For height == 1,
    * it's genesis time.
    */
-
   timestamp: string;
+
   /**
    * Events defines all the events emitted by processing a transaction. Note,
    * these events include those emitted by processing all the messages and those
    * emitted from the ante handler. Whereas Logs contains the events, with
    * additional metadata, emitted only by processing the messages.
-   *
+   * 
    * Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
    */
-
   events: Event[];
 }
-/** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 
+/** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLog {
   msgIndex: number;
   log: string;
+
   /**
    * Events contains a slice of Event objects that were emitted during some
    * execution.
    */
-
   events: StringEvent[];
 }
+
 /**
  * StringEvent defines en Event object wrapper where all the attributes
  * contain key/value pairs that are strings instead of raw bytes.
  */
-
 export interface StringEvent {
   type: string;
   attributes: Attribute[];
 }
+
 /**
  * Attribute defines an attribute wrapper where the key and value are
  * strings instead of raw bytes.
  */
-
 export interface Attribute {
   key: string;
   value: string;
 }
-/** GasInfo defines tx execution gas context. */
 
+/** GasInfo defines tx execution gas context. */
 export interface GasInfo {
   /** GasWanted is the maximum units of work we allow this tx to perform. */
   gasWanted: Long;
-  /** GasUsed is the amount of gas actually consumed. */
 
+  /** GasUsed is the amount of gas actually consumed. */
   gasUsed: Long;
 }
-/** Result is the union of ResponseFormat and ResponseCheckTx. */
 
+/** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface Result {
   /**
    * Data is any data returned from message or handler execution. It MUST be
    * length prefixed in order to separate data from multiple message executions.
    * Deprecated. This field is still populated, but prefer msg_response instead
    * because it also contains the Msg response typeURL.
-   *
-   * @deprecated
    */
-  data: Uint8Array;
-  /** Log contains the log information from message or handler execution. */
 
+  /** @deprecated */
+  data: Uint8Array;
+
+  /** Log contains the log information from message or handler execution. */
   log: string;
+
   /**
    * Events contains a slice of Event objects that were emitted during message
    * or handler execution.
    */
-
   events: Event[];
+
   /**
    * msg_responses contains the Msg handler responses type packed in Anys.
-   *
+   * 
    * Since: cosmos-sdk 0.46
    */
-
   msgResponses: Any[];
 }
+
 /**
  * SimulationResponse defines the response generated when a transaction is
  * successfully simulated.
  */
-
 export interface SimulationResponse {
   gasInfo: GasInfo;
   result: Result;
 }
+
 /**
  * MsgData defines the data returned in a Result object during message
  * execution.
- *
- * @deprecated
  */
 
+/** @deprecated */
 export interface MsgData {
   msgType: string;
   data: Uint8Array;
 }
+
 /**
  * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
  * for each message.
  */
-
 export interface TxMsgData {
-  /**
-   * data field is deprecated and not populated.
-   *
-   * @deprecated
-   */
+  /** data field is deprecated and not populated. */
+
+  /** @deprecated */
   data: MsgData[];
+
   /**
    * msg_responses contains the Msg handler responses packed into Anys.
-   *
+   * 
    * Since: cosmos-sdk 0.46
    */
-
   msgResponses: Any[];
 }
-/** SearchTxsResult defines a structure for querying txs pageable */
 
+/** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResult {
   /** Count of all txs */
   totalCount: Long;
+
   /** Count of txs in current page */
-
   count: Long;
+
   /** Index of current page, start from 1 */
-
   pageNumber: Long;
+
   /** Count of total pages */
-
   pageTotal: Long;
+
   /** Max count txs per page */
-
   limit: Long;
-  /** List of txs in current page */
 
+  /** List of txs in current page */
   txs: TxResponse[];
 }
 
@@ -1149,52 +1146,3 @@ export const SearchTxsResult = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

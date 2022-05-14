@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
+import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "./tx";
+import { Params, CodeInfo, ContractInfo, Model } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { Params, CodeInfo, ContractInfo, Model } from "../../../cosmwasm/wasm/v1/types";
-import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "../../../cosmwasm/wasm/v1/tx";
+import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -12,35 +11,35 @@ export interface GenesisState {
   sequences: Sequence[];
   genMsgs: GenesisState_GenMsgs[];
 }
+
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
  * order. The intention is to have more human readable data that is auditable.
  */
-
 export interface GenesisState_GenMsgs {
-  storeCode: MsgStoreCode | undefined;
-  instantiateContract: MsgInstantiateContract | undefined;
-  executeContract: MsgExecuteContract | undefined;
+  storeCode?: MsgStoreCode;
+  instantiateContract?: MsgInstantiateContract;
+  executeContract?: MsgExecuteContract;
 }
-/** Code struct encompasses CodeInfo and CodeBytes */
 
+/** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
   codeId: Long;
   codeInfo: CodeInfo;
   codeBytes: Uint8Array;
-  /** Pinned to wasmvm cache */
 
+  /** Pinned to wasmvm cache */
   pinned: boolean;
 }
-/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
   contractAddress: string;
   contractInfo: ContractInfo;
   contractState: Model[];
 }
-/** Sequence key and value of an id generation counter */
 
+/** Sequence key and value of an id generation counter */
 export interface Sequence {
   idKey: Uint8Array;
   value: Long;
@@ -501,52 +500,3 @@ export const Sequence = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

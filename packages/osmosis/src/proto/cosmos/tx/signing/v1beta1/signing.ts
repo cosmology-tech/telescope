@@ -1,12 +1,11 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import { CompactBitArray } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any } from "../../../../google/protobuf/any";
-import { CompactBitArray } from "../../../../cosmos/crypto/multisig/v1beta1/multisig";
+import * as _m0 from "protobufjs/minimal";
+import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * SignMode represents a signing mode with its own security guarantees.
- *
+ * 
  * This enum should be considered a registry of all known sign modes
  * in the Cosmos ecosystem. Apps are not expected to support all known
  * sign modes. Apps that would like to support custom  sign modes are
@@ -39,7 +38,7 @@ export enum SignMode {
    * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
    * require signers signing over other signers' `signer_info`. It also allows
    * for adding Tips in transactions.
-   *
+   * 
    * Since: cosmos-sdk 0.46
    */
   SIGN_MODE_DIRECT_AUX = 3,
@@ -100,56 +99,56 @@ export function signModeToJSON(object: SignMode): string {
       return "UNKNOWN";
   }
 }
-/** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 
+/** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptors {
   /** signatures are the signature descriptors */
   signatures: SignatureDescriptor[];
 }
+
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
  * a signature including the public key of the signer, signing modes and the
  * signature itself. It is primarily used for coordinating signatures between
  * clients.
  */
-
 export interface SignatureDescriptor {
   /** public_key is the public key of the signer */
   publicKey: Any;
   data: SignatureDescriptor_Data;
+
   /**
    * sequence is the sequence of the account, which describes the
    * number of committed transactions signed by a given address. It is used to prevent
    * replay attacks.
    */
-
   sequence: Long;
 }
-/** Data represents signature data */
 
+/** Data represents signature data */
 export interface SignatureDescriptor_Data {
   /** single represents a single signer */
-  single: SignatureDescriptor_Data_Single | undefined;
+  single?: SignatureDescriptor_Data_Single;
+
   /** multi represents a multisig signer */
-
-  multi: SignatureDescriptor_Data_Multi | undefined;
+  multi?: SignatureDescriptor_Data_Multi;
 }
-/** Single is the signature data for a single signer */
 
+/** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_Single {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
-  /** signature is the raw signature bytes */
 
+  /** signature is the raw signature bytes */
   signature: Uint8Array;
 }
-/** Multi is the signature data for a multisig public key */
 
+/** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
   /** bitarray specifies which keys within the multisig are signing */
   bitarray: CompactBitArray;
-  /** signatures is the signatures of the multi-signature */
 
+  /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
 }
 
@@ -509,52 +508,3 @@ export const SignatureDescriptor_Data_Multi = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

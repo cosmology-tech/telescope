@@ -1,11 +1,8 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "../../../cosmos/gov/v1/gov";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-
-/** Since: cosmos-sdk 0.46 */
+import { Coin } from "../../base/v1beta1/coin";
+import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "./gov";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -15,61 +12,61 @@ export interface MsgSubmitProposal {
   messages: Any[];
   initialDeposit: Coin[];
   proposer: string;
-  /** metadata is any arbitrary metadata attached to the proposal. */
 
+  /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
-/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 
+/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
 }
+
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
-
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
   content: Any;
-  /** authority must be the gov module address. */
 
+  /** authority must be the gov module address. */
   authority: string;
 }
+
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
-
 export interface MsgExecLegacyContentResponse {}
-/** MsgVote defines a message to cast a vote. */
 
+/** MsgVote defines a message to cast a vote. */
 export interface MsgVote {
   proposalId: Long;
   voter: string;
   option: VoteOption;
   metadata: string;
 }
+
 /** MsgVoteResponse defines the Msg/Vote response type. */
-
 export interface MsgVoteResponse {}
-/** MsgVoteWeighted defines a message to cast a vote. */
 
+/** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeighted {
   proposalId: Long;
   voter: string;
   options: WeightedVoteOption[];
   metadata: string;
 }
+
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
-
 export interface MsgVoteWeightedResponse {}
-/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 
+/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDeposit {
   proposalId: Long;
   depositor: string;
   amount: Coin[];
 }
-/** MsgDepositResponse defines the Msg/Deposit response type. */
 
+/** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
@@ -752,19 +749,3 @@ export const MsgDepositResponse = {
   }
 
 };
-/** Msg defines the gov Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

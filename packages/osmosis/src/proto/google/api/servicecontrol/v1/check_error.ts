@@ -1,38 +1,8 @@
-/* eslint-disable */
-import Long from "long";
+import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { Status } from "../../../../google/rpc/status";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
-/**
- * Defines the errors to be returned in
- * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
- */
-export interface CheckError {
-  /** The error code. */
-  code: CheckError_Code;
-  /**
-   * Subject to whom this error applies. See the specific code enum for more
-   * details on this field. For example:
-   *
-   * - "project:<project-id or project-number>"
-   * - "folder:<folder-id>"
-   * - "organization:<organization-id>"
-   */
-
-  subject: string;
-  /** Free-form text providing details on the error cause of the error. */
-
-  detail: string;
-  /**
-   * Contains public information about the check error. If available,
-   * `status.code` will be non zero and client can propagate it out as public
-   * error.
-   */
-
-  status: Status;
-}
 /** Error codes for Check responses. */
-
 export enum CheckError_Code {
   /** ERROR_CODE_UNSPECIFIED - This is never used in `CheckResponse`. */
   ERROR_CODE_UNSPECIFIED = 0,
@@ -281,6 +251,35 @@ export function checkError_CodeToJSON(object: CheckError_Code): string {
   }
 }
 
+/**
+ * Defines the errors to be returned in
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ */
+export interface CheckError {
+  /** The error code. */
+  code: CheckError_Code;
+
+  /**
+   * Subject to whom this error applies. See the specific code enum for more
+   * details on this field. For example:
+   * 
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
+   */
+  subject: string;
+
+  /** Free-form text providing details on the error cause of the error. */
+  detail: string;
+
+  /**
+   * Contains public information about the check error. If available,
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
+   */
+  status: Status;
+}
+
 function createBaseCheckError(): CheckError {
   return {
     code: 0,
@@ -373,17 +372,3 @@ export const CheckError = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

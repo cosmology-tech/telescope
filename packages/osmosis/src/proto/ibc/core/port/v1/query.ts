@@ -1,32 +1,31 @@
-/* eslint-disable */
-import Long from "long";
+import { Order, Counterparty, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
-import { Order, Counterparty, orderFromJSON, orderToJSON } from "../../../../ibc/core/channel/v1/channel";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
   /** port unique identifier */
   portId: string;
+
   /** connection unique identifier */
-
   connectionId: string;
+
   /** whether the channel is ordered or unordered */
-
   ordering: Order;
+
   /** counterparty channel end */
-
   counterparty: Counterparty;
-  /** proposed version */
 
+  /** proposed version */
   proposedVersion: string;
 }
-/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 
+/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponse {
   /** port id associated with the request identifiers */
   portId: string;
-  /** supported app version */
 
+  /** supported app version */
   version: string;
 }
 
@@ -203,19 +202,3 @@ export const QueryAppVersionResponse = {
   }
 
 };
-/** Query defines the gRPC querier service */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

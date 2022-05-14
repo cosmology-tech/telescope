@@ -1,10 +1,9 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../google/protobuf/duration";
-import { PeriodLock, SyntheticLock } from "../../osmosis/lockup/lock";
 import { Timestamp } from "../../google/protobuf/timestamp";
+import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, SyntheticLock } from "./lock";
+import * as _m0 from "protobufjs/minimal";
+import { Exact, DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, Long } from "@osmonauts/helpers";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceResponse {
   coins: Coin[];
@@ -62,7 +61,7 @@ export interface AccountLockedPastTimeDenomResponse {
 }
 export interface LockedDenomRequest {
   denom: string;
-  duration: Duration;
+  duration: string;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -81,21 +80,21 @@ export interface SyntheticLockupsByLockupIDResponse {
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
-  duration: Duration;
+  duration: string;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
-  duration: Duration;
+  duration: string;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
-  duration: Duration;
+  duration: string;
   denom: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {
@@ -1228,7 +1227,7 @@ export const LockedDenomRequest = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -1248,7 +1247,7 @@ export const LockedDenomRequest = {
           break;
 
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -1263,21 +1262,21 @@ export const LockedDenomRequest = {
   fromJSON(object: any): LockedDenomRequest {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
+      duration: isSet(object.duration) ? String(object.duration) : undefined
     };
   },
 
   toJSON(message: LockedDenomRequest): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<LockedDenomRequest>, I>>(object: I): LockedDenomRequest {
     const message = createBaseLockedDenomRequest();
     message.denom = object.denom ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.duration = object.duration ?? undefined;
     return message;
   }
 
@@ -1588,7 +1587,7 @@ export const AccountLockedLongerDurationRequest = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -1608,7 +1607,7 @@ export const AccountLockedLongerDurationRequest = {
           break;
 
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -1623,21 +1622,21 @@ export const AccountLockedLongerDurationRequest = {
   fromJSON(object: any): AccountLockedLongerDurationRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
+      duration: isSet(object.duration) ? String(object.duration) : undefined
     };
   },
 
   toJSON(message: AccountLockedLongerDurationRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationRequest>, I>>(object: I): AccountLockedLongerDurationRequest {
     const message = createBaseAccountLockedLongerDurationRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.duration = object.duration ?? undefined;
     return message;
   }
 
@@ -1720,7 +1719,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -1740,7 +1739,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
           break;
 
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -1755,21 +1754,21 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
+      duration: isSet(object.duration) ? String(object.duration) : undefined
     };
   },
 
   toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, I>>(object: I): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.duration = object.duration ?? undefined;
     return message;
   }
 
@@ -1853,7 +1852,7 @@ export const AccountLockedLongerDurationDenomRequest = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     }
 
     if (message.denom !== "") {
@@ -1877,7 +1876,7 @@ export const AccountLockedLongerDurationDenomRequest = {
           break;
 
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 3:
@@ -1896,7 +1895,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   fromJSON(object: any): AccountLockedLongerDurationDenomRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
+      duration: isSet(object.duration) ? String(object.duration) : undefined,
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
@@ -1904,7 +1903,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   toJSON(message: AccountLockedLongerDurationDenomRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration);
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },
@@ -1912,7 +1911,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationDenomRequest>, I>>(object: I): AccountLockedLongerDurationDenomRequest {
     const message = createBaseAccountLockedLongerDurationDenomRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.duration = object.duration ?? undefined;
     message.denom = object.denom ?? "";
     return message;
   }
@@ -1981,48 +1980,3 @@ export const AccountLockedLongerDurationDenomResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

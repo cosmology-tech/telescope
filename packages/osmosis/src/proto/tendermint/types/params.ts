@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../google/protobuf/duration";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long, toDuration, fromDuration } from "@osmonauts/helpers";
 
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -13,75 +12,75 @@ export interface ConsensusParams {
   validator: ValidatorParams;
   version: VersionParams;
 }
-/** BlockParams contains limits on the block size. */
 
+/** BlockParams contains limits on the block size. */
 export interface BlockParams {
   /**
    * Max block size, in bytes.
    * Note: must be greater than 0
    */
   maxBytes: Long;
+
   /**
    * Max gas per block.
    * Note: must be greater or equal to -1
    */
-
   maxGas: Long;
+
   /**
    * Minimum time increment between consecutive blocks (in milliseconds) If the
    * block header timestamp is ahead of the system clock, decrease this value.
-   *
+   * 
    * Not exposed to the application.
    */
-
   timeIotaMs: Long;
 }
-/** EvidenceParams determine how we handle evidence of malfeasance. */
 
+/** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParams {
   /**
    * Max age of evidence, in blocks.
-   *
+   * 
    * The basic formula for calculating this is: MaxAgeDuration / {average block
    * time}.
    */
   maxAgeNumBlocks: Long;
+
   /**
    * Max age of evidence, in time.
-   *
+   * 
    * It should correspond with an app's "unbonding period" or other similar
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
    */
+  maxAgeDuration: string;
 
-  maxAgeDuration: Duration;
   /**
    * This sets the maximum size of total evidence in bytes that can be committed in a single block.
    * and should fall comfortably under the max block bytes.
    * Default is 1048576 or 1MB
    */
-
   maxBytes: Long;
 }
+
 /**
  * ValidatorParams restrict the public key types validators can use.
  * NOTE: uses ABCI pubkey naming, not Amino names.
  */
-
 export interface ValidatorParams {
   pubKeyTypes: string[];
 }
-/** VersionParams contains the ABCI application version. */
 
+/** VersionParams contains the ABCI application version. */
 export interface VersionParams {
   appVersion: Long;
 }
+
 /**
  * HashedParams is a subset of ConsensusParams.
- *
+ * 
  * It is hashed into the Header.ConsensusHash.
  */
-
 export interface HashedParams {
   blockMaxBytes: Long;
   blockMaxGas: Long;
@@ -276,7 +275,7 @@ export const EvidenceParams = {
     }
 
     if (message.maxAgeDuration !== undefined) {
-      Duration.encode(message.maxAgeDuration, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.maxAgeDuration), writer.uint32(18).fork()).ldelim();
     }
 
     if (!message.maxBytes.isZero()) {
@@ -300,7 +299,7 @@ export const EvidenceParams = {
           break;
 
         case 2:
-          message.maxAgeDuration = Duration.decode(reader, reader.uint32());
+          message.maxAgeDuration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 3:
@@ -319,7 +318,7 @@ export const EvidenceParams = {
   fromJSON(object: any): EvidenceParams {
     return {
       maxAgeNumBlocks: isSet(object.maxAgeNumBlocks) ? Long.fromString(object.maxAgeNumBlocks) : Long.ZERO,
-      maxAgeDuration: isSet(object.maxAgeDuration) ? Duration.fromJSON(object.maxAgeDuration) : undefined,
+      maxAgeDuration: isSet(object.maxAgeDuration) ? String(object.maxAgeDuration) : undefined,
       maxBytes: isSet(object.maxBytes) ? Long.fromString(object.maxBytes) : Long.ZERO
     };
   },
@@ -327,7 +326,7 @@ export const EvidenceParams = {
   toJSON(message: EvidenceParams): unknown {
     const obj: any = {};
     message.maxAgeNumBlocks !== undefined && (obj.maxAgeNumBlocks = (message.maxAgeNumBlocks || Long.ZERO).toString());
-    message.maxAgeDuration !== undefined && (obj.maxAgeDuration = message.maxAgeDuration ? Duration.toJSON(message.maxAgeDuration) : undefined);
+    message.maxAgeDuration !== undefined && (obj.maxAgeDuration = message.maxAgeDuration);
     message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
     return obj;
   },
@@ -335,7 +334,7 @@ export const EvidenceParams = {
   fromPartial<I extends Exact<DeepPartial<EvidenceParams>, I>>(object: I): EvidenceParams {
     const message = createBaseEvidenceParams();
     message.maxAgeNumBlocks = object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null ? Long.fromValue(object.maxAgeNumBlocks) : Long.ZERO;
-    message.maxAgeDuration = object.maxAgeDuration !== undefined && object.maxAgeDuration !== null ? Duration.fromPartial(object.maxAgeDuration) : undefined;
+    message.maxAgeDuration = object.maxAgeDuration ?? undefined;
     message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
     return message;
   }
@@ -530,17 +529,3 @@ export const HashedParams = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

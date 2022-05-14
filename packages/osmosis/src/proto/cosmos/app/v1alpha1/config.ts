@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
+import * as _m0 from "protobufjs/minimal";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -16,14 +15,14 @@ export interface Config {
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
 }
-/** ModuleConfig is a module configuration for an app. */
 
+/** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfig {
   /**
    * name is the unique name of the module within the app. It should be a name
    * that persists between different versions of a module so that modules
    * can be smoothly upgraded to new versions.
-   *
+   * 
    * For example, for the module cosmos.bank.module.v1.Module, we may chose
    * to simply name the module "bank" in the app. When we upgrade to
    * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
@@ -32,11 +31,11 @@ export interface ModuleConfig {
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
   name: string;
+
   /**
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-
   config: Any;
 }
 
@@ -171,17 +170,3 @@ export const ModuleConfig = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

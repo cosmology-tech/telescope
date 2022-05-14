@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { MerklePrefix } from "../../commitment/v1/commitment";
 import * as _m0 from "protobufjs/minimal";
-import { MerklePrefix } from "../../../../ibc/core/commitment/v1/commitment";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * State defines if a connection is in one of the following states:
@@ -66,110 +65,110 @@ export function stateToJSON(object: State): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
  * separate one.
  * NOTE: there must only be 2 defined ConnectionEnds to establish
  * a connection between two chains.
  */
-
 export interface ConnectionEnd {
   /** client associated with this connection. */
   clientId: string;
+
   /**
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection.
    */
-
   versions: Version[];
+
   /** current state of the connection end. */
-
   state: State;
-  /** counterparty chain associated with this connection. */
 
+  /** counterparty chain associated with this connection. */
   counterparty: Counterparty;
+
   /**
    * delay period that must pass before a consensus state can be used for
    * packet-verification NOTE: delay period logic is only implemented by some
    * clients.
    */
-
   delayPeriod: Long;
 }
+
 /**
  * IdentifiedConnection defines a connection with additional connection
  * identifier field.
  */
-
 export interface IdentifiedConnection {
   /** connection identifier. */
   id: string;
-  /** client associated with this connection. */
 
+  /** client associated with this connection. */
   clientId: string;
+
   /**
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection
    */
-
   versions: Version[];
+
   /** current state of the connection end. */
-
   state: State;
+
   /** counterparty chain associated with this connection. */
-
   counterparty: Counterparty;
-  /** delay period associated with this connection. */
 
+  /** delay period associated with this connection. */
   delayPeriod: Long;
 }
-/** Counterparty defines the counterparty chain associated with a connection end. */
 
+/** Counterparty defines the counterparty chain associated with a connection end. */
 export interface Counterparty {
   /**
    * identifies the client on the counterparty chain associated with a given
    * connection.
    */
   clientId: string;
+
   /**
    * identifies the connection end on the counterparty chain associated with a
    * given connection.
    */
-
   connectionId: string;
-  /** commitment merkle prefix of the counterparty chain. */
 
+  /** commitment merkle prefix of the counterparty chain. */
   prefix: MerklePrefix;
 }
-/** ClientPaths define all the connection paths for a client state. */
 
+/** ClientPaths define all the connection paths for a client state. */
 export interface ClientPaths {
   /** list of connection paths */
   paths: string[];
 }
-/** ConnectionPaths define all the connection paths for a given client state. */
 
+/** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPaths {
   /** client state unique identifier */
   clientId: string;
-  /** list of connection paths */
 
+  /** list of connection paths */
   paths: string[];
 }
+
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
  * the connection handshake.
  */
-
 export interface Version {
   /** unique version identifier */
   identifier: string;
-  /** list of features compatible with the specified identifier */
 
+  /** list of features compatible with the specified identifier */
   features: string[];
 }
-/** Params defines the set of Connection parameters. */
 
+/** Params defines the set of Connection parameters. */
 export interface Params {
   /**
    * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
@@ -763,17 +762,3 @@ export const Params = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

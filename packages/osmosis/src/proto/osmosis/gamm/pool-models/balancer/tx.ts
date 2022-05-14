@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { PoolParams, PoolAsset } from "./balancerPool";
 import * as _m0 from "protobufjs/minimal";
-import { PoolParams, PoolAsset } from "../../../../osmosis/gamm/pool-models/balancer/balancerPool";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -169,35 +168,3 @@ export const MsgCreateBalancerPoolResponse = {
   }
 
 };
-export interface BalancerMsg {
-  CreateBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse>;
-}
-export class BalancerMsgClientImpl implements BalancerMsg {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.CreateBalancerPool = this.CreateBalancerPool.bind(this);
-  }
-
-  CreateBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse> {
-    const data = MsgCreateBalancerPool.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.BalancerMsg", "CreateBalancerPool", data);
-    return promise.then(data => MsgCreateBalancerPoolResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

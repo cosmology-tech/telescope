@@ -1,96 +1,9 @@
-/* eslint-disable */
-import Long from "long";
+import { MetricValueSet } from "./metric_value";
+import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { Status } from "../../../../google/rpc/status";
-import { MetricValueSet } from "../../../../google/api/servicecontrol/v1/metric_value";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
-/** Request message for the AllocateQuota method. */
-export interface AllocateQuotaRequest {
-  /**
-   * Name of the service as specified in the service configuration. For example,
-   * `"pubsub.googleapis.com"`.
-   *
-   * See [google.api.Service][google.api.Service] for the definition of a service name.
-   */
-  serviceName: string;
-  /** Operation that describes the quota allocation. */
-
-  allocateOperation: QuotaOperation;
-  /**
-   * Specifies which version of service configuration should be used to process
-   * the request. If unspecified or no matching version can be found, the latest
-   * one will be used.
-   */
-
-  serviceConfigId: string;
-}
-/** Represents information regarding a quota operation. */
-
-export interface QuotaOperation {
-  /**
-   * Identity of the operation. This is expected to be unique within the scope
-   * of the service that generated the operation, and guarantees idempotency in
-   * case of retries.
-   *
-   * In order to ensure best performance and latency in the Quota backends,
-   * operation_ids are optimally associated with time, so that related
-   * operations can be accessed fast in storage. For this reason, the
-   * recommended token for services that intend to operate at a high QPS is
-   * Unix time in nanos + UUID
-   */
-  operationId: string;
-  /**
-   * Fully qualified name of the API method for which this quota operation is
-   * requested. This name is used for matching quota rules or metric rules and
-   * billing status rules defined in service configuration.
-   *
-   * This field should not be set if any of the following is true:
-   * (1) the quota operation is performed on non-API resources.
-   * (2) quota_metrics is set because the caller is doing quota override.
-   *
-   *
-   * Example of an RPC method name:
-   *     google.example.library.v1.LibraryService.CreateShelf
-   */
-
-  methodName: string;
-  /**
-   * Identity of the consumer for whom this quota operation is being performed.
-   *
-   * This can be in one of the following formats:
-   *   project:<project_id>,
-   *   project_number:<project_number>,
-   *   api_key:<api_key>.
-   */
-
-  consumerId: string;
-  /** Labels describing the operation. */
-
-  labels: {
-    [key: string]: string;
-  };
-  /**
-   * Represents information about this operation. Each MetricValueSet
-   * corresponds to a metric defined in the service configuration.
-   * The data type used in the MetricValueSet must agree with
-   * the data type specified in the metric definition.
-   *
-   * Within a single operation, it is not allowed to have more than one
-   * MetricValue instances that have the same metric names and identical
-   * label value combinations. If a request has such duplicated MetricValue
-   * instances, the entire request is rejected with
-   * an invalid argument error.
-   *
-   * This field is mutually exclusive with method_name.
-   */
-
-  quotaMetrics: MetricValueSet[];
-  /** Quota mode for this operation. */
-
-  quotaMode: QuotaOperation_QuotaMode;
-}
 /** Supported quota modes. */
-
 export enum QuotaOperation_QuotaMode {
   /** UNSPECIFIED - Guard against implicit default. Must not be used. */
   UNSPECIFIED = 0,
@@ -199,61 +112,7 @@ export function quotaOperation_QuotaModeToJSON(object: QuotaOperation_QuotaMode)
       return "UNKNOWN";
   }
 }
-export interface QuotaOperation_LabelsEntry {
-  key: string;
-  value: string;
-}
-/** Response message for the AllocateQuota method. */
 
-export interface AllocateQuotaResponse {
-  /**
-   * The same operation_id value used in the AllocateQuotaRequest. Used for
-   * logging and diagnostics purposes.
-   */
-  operationId: string;
-  /** Indicates the decision of the allocate. */
-
-  allocateErrors: QuotaError[];
-  /**
-   * Quota metrics to indicate the result of allocation. Depending on the
-   * request, one or more of the following metrics will be included:
-   *
-   * 1. Per quota group or per quota metric incremental usage will be specified
-   * using the following delta metric :
-   *   "serviceruntime.googleapis.com/api/consumer/quota_used_count"
-   *
-   * 2. The quota limit reached condition will be specified using the following
-   * boolean metric :
-   *   "serviceruntime.googleapis.com/quota/exceeded"
-   */
-
-  quotaMetrics: MetricValueSet[];
-  /** ID of the actual config used to process the request. */
-
-  serviceConfigId: string;
-}
-/** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
-
-export interface QuotaError {
-  /** Error code. */
-  code: QuotaError_Code;
-  /**
-   * Subject to whom this error applies. See the specific enum for more details
-   * on this field. For example, "clientip:<ip address of client>" or
-   * "project:<Google developer project id>".
-   */
-
-  subject: string;
-  /** Free-form text that provides details on the cause of the error. */
-
-  description: string;
-  /**
-   * Contains additional information about the quota error.
-   * If available, `status.code` will be non zero.
-   */
-
-  status: Status;
-}
 /**
  * Error codes related to project config validations are deprecated since the
  * quota controller methods do not perform these validations. Instead services
@@ -261,7 +120,6 @@ export interface QuotaError {
  * these validations before calling the quota controller methods. These
  * methods check only for project deletion to be wipe out compliant.
  */
-
 export enum QuotaError_Code {
   /** UNSPECIFIED - This is never used. */
   UNSPECIFIED = 0,
@@ -345,6 +203,147 @@ export function quotaError_CodeToJSON(object: QuotaError_Code): string {
   }
 }
 
+/** Request message for the AllocateQuota method. */
+export interface AllocateQuotaRequest {
+  /**
+   * Name of the service as specified in the service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See [google.api.Service][google.api.Service] for the definition of a service name.
+   */
+  serviceName: string;
+
+  /** Operation that describes the quota allocation. */
+  allocateOperation: QuotaOperation;
+
+  /**
+   * Specifies which version of service configuration should be used to process
+   * the request. If unspecified or no matching version can be found, the latest
+   * one will be used.
+   */
+  serviceConfigId: string;
+}
+export interface QuotaOperation_LabelsEntry {
+  key: string;
+  value: string;
+}
+
+/** Represents information regarding a quota operation. */
+export interface QuotaOperation {
+  /**
+   * Identity of the operation. This is expected to be unique within the scope
+   * of the service that generated the operation, and guarantees idempotency in
+   * case of retries.
+   * 
+   * In order to ensure best performance and latency in the Quota backends,
+   * operation_ids are optimally associated with time, so that related
+   * operations can be accessed fast in storage. For this reason, the
+   * recommended token for services that intend to operate at a high QPS is
+   * Unix time in nanos + UUID
+   */
+  operationId: string;
+
+  /**
+   * Fully qualified name of the API method for which this quota operation is
+   * requested. This name is used for matching quota rules or metric rules and
+   * billing status rules defined in service configuration.
+   * 
+   * This field should not be set if any of the following is true:
+   * (1) the quota operation is performed on non-API resources.
+   * (2) quota_metrics is set because the caller is doing quota override.
+   * 
+   * 
+   * Example of an RPC method name:
+   * google.example.library.v1.LibraryService.CreateShelf
+   */
+  methodName: string;
+
+  /**
+   * Identity of the consumer for whom this quota operation is being performed.
+   * 
+   * This can be in one of the following formats:
+   * project:<project_id>,
+   * project_number:<project_number>,
+   * api_key:<api_key>.
+   */
+  consumerId: string;
+
+  /** Labels describing the operation. */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * Represents information about this operation. Each MetricValueSet
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   * 
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   * 
+   * This field is mutually exclusive with method_name.
+   */
+  quotaMetrics: MetricValueSet[];
+
+  /** Quota mode for this operation. */
+  quotaMode: QuotaOperation_QuotaMode;
+}
+
+/** Response message for the AllocateQuota method. */
+export interface AllocateQuotaResponse {
+  /**
+   * The same operation_id value used in the AllocateQuotaRequest. Used for
+   * logging and diagnostics purposes.
+   */
+  operationId: string;
+
+  /** Indicates the decision of the allocate. */
+  allocateErrors: QuotaError[];
+
+  /**
+   * Quota metrics to indicate the result of allocation. Depending on the
+   * request, one or more of the following metrics will be included:
+   * 
+   * 1. Per quota group or per quota metric incremental usage will be specified
+   * using the following delta metric :
+   * "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+   * 
+   * 2. The quota limit reached condition will be specified using the following
+   * boolean metric :
+   * "serviceruntime.googleapis.com/quota/exceeded"
+   */
+  quotaMetrics: MetricValueSet[];
+
+  /** ID of the actual config used to process the request. */
+  serviceConfigId: string;
+}
+
+/** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
+export interface QuotaError {
+  /** Error code. */
+  code: QuotaError_Code;
+
+  /**
+   * Subject to whom this error applies. See the specific enum for more details
+   * on this field. For example, "clientip:<ip address of client>" or
+   * "project:<Google developer project id>".
+   */
+  subject: string;
+
+  /** Free-form text that provides details on the cause of the error. */
+  description: string;
+
+  /**
+   * Contains additional information about the quota error.
+   * If available, `status.code` will be non zero.
+   */
+  status: Status;
+}
+
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {
     serviceName: "",
@@ -421,6 +420,75 @@ export const AllocateQuotaRequest = {
     message.serviceName = object.serviceName ?? "";
     message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : undefined;
     message.serviceConfigId = object.serviceConfigId ?? "";
+    return message;
+  }
+
+};
+
+function createBaseQuotaOperation_LabelsEntry(): QuotaOperation_LabelsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const QuotaOperation_LabelsEntry = {
+  encode(message: QuotaOperation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOperation_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuotaOperation_LabelsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QuotaOperation_LabelsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: QuotaOperation_LabelsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuotaOperation_LabelsEntry>, I>>(object: I): QuotaOperation_LabelsEntry {
+    const message = createBaseQuotaOperation_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
     return message;
   }
 
@@ -571,75 +639,6 @@ export const QuotaOperation = {
     }, {});
     message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
     message.quotaMode = object.quotaMode ?? 0;
-    return message;
-  }
-
-};
-
-function createBaseQuotaOperation_LabelsEntry(): QuotaOperation_LabelsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const QuotaOperation_LabelsEntry = {
-  encode(message: QuotaOperation_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOperation_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuotaOperation_LabelsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): QuotaOperation_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: QuotaOperation_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QuotaOperation_LabelsEntry>, I>>(object: I): QuotaOperation_LabelsEntry {
-    const message = createBaseQuotaOperation_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
     return message;
   }
 
@@ -841,62 +840,3 @@ export const QuotaError = {
   }
 
 };
-/**
- * [Google Quota Control API](/service-control/overview)
- *
- * Allows clients to allocate and release quota against a [managed
- * service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
- */
-
-export interface QuotaController {
-  /**
-   * Attempts to allocate quota for the specified consumer. It should be called
-   * before the operation is executed.
-   *
-   * This method requires the `servicemanagement.services.quota`
-   * permission on the specified service. For more information, see
-   * [Cloud IAM](https://cloud.google.com/iam).
-   *
-   * **NOTE:** The client **must** fail-open on server errors `INTERNAL`,
-   * `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system
-   * reliability, the server may inject these errors to prohibit any hard
-   * dependency on the quota functionality.
-   */
-  AllocateQuota(request: AllocateQuotaRequest): Promise<AllocateQuotaResponse>;
-}
-export class QuotaControllerClientImpl implements QuotaController {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.AllocateQuota = this.AllocateQuota.bind(this);
-  }
-
-  AllocateQuota(request: AllocateQuotaRequest): Promise<AllocateQuotaResponse> {
-    const data = AllocateQuotaRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.servicecontrol.v1.QuotaController", "AllocateQuota", data);
-    return promise.then(data => AllocateQuotaResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

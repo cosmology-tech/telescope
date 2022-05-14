@@ -1,13 +1,13 @@
-import * as _874 from "./gamm/v1beta1/tx.aminos";
-import * as _875 from "./gamm/v1beta1/tx.registry";
-import * as _876 from "./incentives/tx.aminos";
-import * as _877 from "./incentives/tx.registry";
-import * as _878 from "./lockup/tx.aminos";
-import * as _879 from "./lockup/tx.registry";
-import * as _880 from "./superfluid/tx.aminos";
-import * as _881 from "./superfluid/tx.registry";
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
+import * as osmosisGammV1beta1TxRegistry from "./gamm/v1beta1/tx.registry";
+import * as osmosisIncentivesTxRegistry from "./incentives/tx.registry";
+import * as osmosisLockupTxRegistry from "./lockup/tx.registry";
+import * as osmosisSuperfluidTxRegistry from "./superfluid/tx.registry";
+import * as osmosisGammV1beta1TxAmino from "./gamm/v1beta1/tx.amino";
+import * as osmosisIncentivesTxAmino from "./incentives/tx.amino";
+import * as osmosisLockupTxAmino from "./lockup/tx.amino";
+import * as osmosisSuperfluidTxAmino from "./superfluid/tx.amino";
 export const getSigningOsmosisClient = async ({
   rpcEndpoint,
   signer,
@@ -17,11 +17,11 @@ export const getSigningOsmosisClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry([...defaultTypes, ..._875.registry, ..._877.registry, ..._879.registry, ..._881.registry]);
-  const aminoTypes = new AminoTypes({ ..._874.AminoConverter,
-    ..._876.AminoConverter,
-    ..._878.AminoConverter,
-    ..._880.AminoConverter
+  const registry = new Registry([...defaultTypes, ...osmosisGammV1beta1TxRegistry.registry, ...osmosisIncentivesTxRegistry.registry, ...osmosisLockupTxRegistry.registry, ...osmosisSuperfluidTxRegistry.registry]);
+  const aminoTypes = new AminoTypes({ ...osmosisGammV1beta1TxAmino.AminoConverter,
+    ...osmosisIncentivesTxAmino.AminoConverter,
+    ...osmosisLockupTxAmino.AminoConverter,
+    ...osmosisSuperfluidTxAmino.AminoConverter
   });
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
     registry,

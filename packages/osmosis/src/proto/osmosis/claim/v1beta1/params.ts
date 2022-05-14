@@ -1,16 +1,15 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../../google/protobuf/duration";
 import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Duration } from "../../../google/protobuf/duration";
+import * as _m0 from "protobufjs/minimal";
+import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** Params defines the claim module's parameters. */
 export interface Params {
   airdropStartTime: Date;
-  durationUntilDecay: Duration;
-  durationOfDecay: Duration;
-  /** denom of claimable asset */
+  durationUntilDecay: string;
+  durationOfDecay: string;
 
+  /** denom of claimable asset */
   claimDenom: string;
 }
 
@@ -30,11 +29,11 @@ export const Params = {
     }
 
     if (message.durationUntilDecay !== undefined) {
-      Duration.encode(message.durationUntilDecay, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.durationUntilDecay), writer.uint32(18).fork()).ldelim();
     }
 
     if (message.durationOfDecay !== undefined) {
-      Duration.encode(message.durationOfDecay, writer.uint32(26).fork()).ldelim();
+      Duration.encode(toDuration(message.durationOfDecay), writer.uint32(26).fork()).ldelim();
     }
 
     if (message.claimDenom !== "") {
@@ -58,11 +57,11 @@ export const Params = {
           break;
 
         case 2:
-          message.durationUntilDecay = Duration.decode(reader, reader.uint32());
+          message.durationUntilDecay = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 3:
-          message.durationOfDecay = Duration.decode(reader, reader.uint32());
+          message.durationOfDecay = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 4:
@@ -81,8 +80,8 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
-      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
-      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
+      durationUntilDecay: isSet(object.durationUntilDecay) ? String(object.durationUntilDecay) : undefined,
+      durationOfDecay: isSet(object.durationOfDecay) ? String(object.durationOfDecay) : undefined,
       claimDenom: isSet(object.claimDenom) ? String(object.claimDenom) : ""
     };
   },
@@ -90,8 +89,8 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());
-    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);
-    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay ? Duration.toJSON(message.durationOfDecay) : undefined);
+    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay);
+    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay);
     message.claimDenom !== undefined && (obj.claimDenom = message.claimDenom);
     return obj;
   },
@@ -99,53 +98,10 @@ export const Params = {
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : undefined;
-    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
+    message.durationUntilDecay = object.durationUntilDecay ?? undefined;
+    message.durationOfDecay = object.durationOfDecay ?? undefined;
     message.claimDenom = object.claimDenom ?? "";
     return message;
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

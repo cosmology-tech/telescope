@@ -1,7 +1,6 @@
-/* eslint-disable */
-import Long from "long";
+import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { CodeInfo, ContractInfo, ContractCustomInfo, Model } from "../../../secret/compute/v1beta1/types";
+import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -10,23 +9,23 @@ export interface GenesisState {
   contracts: Contract[];
   sequences: Sequence[];
 }
-/** Code struct encompasses CodeInfo and CodeBytes */
 
+/** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
   codeId: Long;
   codeInfo: CodeInfo;
   codeBytes: Uint8Array;
 }
-/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
   contractAddress: Uint8Array;
   contractInfo: ContractInfo;
   contractState: Model[];
   contractCustomInfo: ContractCustomInfo;
 }
-/** Sequence id and value of a counter */
 
+/** Sequence id and value of a counter */
 export interface Sequence {
   idKey: Uint8Array;
   value: Long;
@@ -377,52 +376,3 @@ export const Sequence = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

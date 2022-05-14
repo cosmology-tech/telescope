@@ -1,10 +1,9 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import { Coin } from "../../base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
-import { Duration } from "../../../google/protobuf/duration";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Duration } from "../../../google/protobuf/duration";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -73,8 +72,8 @@ export function voteOptionToJSON(object: VoteOption): string {
       return "UNKNOWN";
   }
 }
-/** ProposalStatus enumerates the valid statuses of a proposal. */
 
+/** ProposalStatus enumerates the valid statuses of a proposal. */
 export enum ProposalStatus {
   /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
@@ -166,47 +165,47 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
       return "UNKNOWN";
   }
 }
+
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
-
 export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
 }
+
 /**
  * TextProposal defines a standard text proposal whose changes need to be
  * manually updated in case of approval.
  */
-
 export interface TextProposal {
   title: string;
   description: string;
 }
+
 /**
  * Deposit defines an amount deposited by an account address to an active
  * proposal.
  */
-
 export interface Deposit {
   proposalId: Long;
   depositor: string;
   amount: Coin[];
 }
-/** Proposal defines the core field members of a governance proposal. */
 
+/** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: Long;
   content: Any;
   status: ProposalStatus;
+
   /**
    * final_tally_result is the final tally result of the proposal. When
    * querying a proposal via gRPC, this field is not populated until the
    * proposal's voting period has ended.
    */
-
   finalTallyResult: TallyResult;
   submitTime: Date;
   depositEndTime: Date;
@@ -214,69 +213,69 @@ export interface Proposal {
   votingStartTime: Date;
   votingEndTime: Date;
 }
-/** TallyResult defines a standard tally for a governance proposal. */
 
+/** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
   yes: string;
   abstain: string;
   no: string;
   noWithVeto: string;
 }
+
 /**
  * Vote defines a vote on a governance proposal.
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
-
 export interface Vote {
   proposalId: Long;
   voter: string;
+
   /**
    * Deprecated: Prefer to use `options` instead. This field is set in queries
    * if and only if `len(options) == 1` and that option has weight 1. In all
    * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
-   *
-   * @deprecated
    */
 
+  /** @deprecated */
   option: VoteOption;
-  /** Since: cosmos-sdk 0.43 */
 
+  /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
-/** DepositParams defines the params for deposits on governance proposals. */
 
+/** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParams {
   /** Minimum deposit for a proposal to enter voting period. */
   minDeposit: Coin[];
+
   /**
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   *  months.
+   * months.
    */
-
-  maxDepositPeriod: Duration;
+  maxDepositPeriod: string;
 }
-/** VotingParams defines the params for voting on governance proposals. */
 
+/** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
   /** Length of the voting period. */
-  votingPeriod: Duration;
+  votingPeriod: string;
 }
-/** TallyParams defines the params for tallying votes on governance proposals. */
 
+/** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
   /**
    * Minimum percentage of total stake needed to vote for a result to be
-   *  considered valid.
+   * considered valid.
    */
   quorum: Uint8Array;
-  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
 
+  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
   threshold: Uint8Array;
+
   /**
    * Minimum value of Veto votes to Total votes ratio for proposal to be
-   *  vetoed. Default value: 1/3.
+   * vetoed. Default value: 1/3.
    */
-
   vetoThreshold: Uint8Array;
 }
 
@@ -870,7 +869,7 @@ export const DepositParams = {
     }
 
     if (message.maxDepositPeriod !== undefined) {
-      Duration.encode(message.maxDepositPeriod, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.maxDepositPeriod), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -890,7 +889,7 @@ export const DepositParams = {
           break;
 
         case 2:
-          message.maxDepositPeriod = Duration.decode(reader, reader.uint32());
+          message.maxDepositPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -905,7 +904,7 @@ export const DepositParams = {
   fromJSON(object: any): DepositParams {
     return {
       minDeposit: Array.isArray(object?.minDeposit) ? object.minDeposit.map((e: any) => Coin.fromJSON(e)) : [],
-      maxDepositPeriod: isSet(object.maxDepositPeriod) ? Duration.fromJSON(object.maxDepositPeriod) : undefined
+      maxDepositPeriod: isSet(object.maxDepositPeriod) ? String(object.maxDepositPeriod) : undefined
     };
   },
 
@@ -918,14 +917,14 @@ export const DepositParams = {
       obj.minDeposit = [];
     }
 
-    message.maxDepositPeriod !== undefined && (obj.maxDepositPeriod = message.maxDepositPeriod ? Duration.toJSON(message.maxDepositPeriod) : undefined);
+    message.maxDepositPeriod !== undefined && (obj.maxDepositPeriod = message.maxDepositPeriod);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<DepositParams>, I>>(object: I): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.maxDepositPeriod = object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null ? Duration.fromPartial(object.maxDepositPeriod) : undefined;
+    message.maxDepositPeriod = object.maxDepositPeriod ?? undefined;
     return message;
   }
 
@@ -940,7 +939,7 @@ function createBaseVotingParams(): VotingParams {
 export const VotingParams = {
   encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
-      Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
+      Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -956,7 +955,7 @@ export const VotingParams = {
 
       switch (tag >>> 3) {
         case 1:
-          message.votingPeriod = Duration.decode(reader, reader.uint32());
+          message.votingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -970,19 +969,19 @@ export const VotingParams = {
 
   fromJSON(object: any): VotingParams {
     return {
-      votingPeriod: isSet(object.votingPeriod) ? Duration.fromJSON(object.votingPeriod) : undefined
+      votingPeriod: isSet(object.votingPeriod) ? String(object.votingPeriod) : undefined
     };
   },
 
   toJSON(message: VotingParams): unknown {
     const obj: any = {};
-    message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
+    message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<VotingParams>, I>>(object: I): VotingParams {
     const message = createBaseVotingParams();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
+    message.votingPeriod = object.votingPeriod ?? undefined;
     return message;
   }
 
@@ -1068,81 +1067,3 @@ export const TallyParams = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

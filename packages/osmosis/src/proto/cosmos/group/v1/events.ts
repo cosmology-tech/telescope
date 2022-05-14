@@ -1,65 +1,64 @@
-/* eslint-disable */
-import Long from "long";
+import { ProposalExecutorResult, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { ProposalExecutorResult, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "../../../cosmos/group/v1/types";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
   /** group_id is the unique ID of the group. */
   groupId: Long;
 }
-/** EventUpdateGroup is an event emitted when a group is updated. */
 
+/** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroup {
   /** group_id is the unique ID of the group. */
   groupId: Long;
 }
-/** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 
+/** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicy {
   /** address is the account address of the group policy. */
   address: string;
 }
-/** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 
+/** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicy {
   /** address is the account address of the group policy. */
   address: string;
 }
-/** EventSubmitProposal is an event emitted when a proposal is created. */
 
+/** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposal {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
 }
-/** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 
+/** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposal {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
 }
-/** EventVote is an event emitted when a voter votes on a proposal. */
 
+/** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVote {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
 }
-/** EventExec is an event emitted when a proposal is executed. */
 
+/** EventExec is an event emitted when a proposal is executed. */
 export interface EventExec {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
-  /** result is the proposal execution result. */
 
+  /** result is the proposal execution result. */
   result: ProposalExecutorResult;
 }
-/** EventLeaveGroup is an event emitted when group member leaves the group. */
 
+/** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroup {
   /** group_id is the unique ID of the group. */
   groupId: Long;
-  /** address is the account address of the group member. */
 
+  /** address is the account address of the group member. */
   address: string;
 }
 
@@ -599,17 +598,3 @@ export const EventLeaveGroup = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

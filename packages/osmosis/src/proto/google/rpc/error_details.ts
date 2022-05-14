@@ -1,16 +1,15 @@
-/* eslint-disable */
-import Long from "long";
+import { Duration } from "../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../google/protobuf/duration";
+import { toDuration, fromDuration, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
  * responses.
- *
+ * 
  * It's always recommended that clients should use exponential backoff when
  * retrying.
- *
+ * 
  * Clients should wait until `retry_delay` amount of time has passed since
  * receiving the error response before retrying.  If retrying requests also
  * fail, clients should use an exponential backoff scheme to gradually increase
@@ -20,40 +19,40 @@ import { Duration } from "../../google/protobuf/duration";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: Duration;
+  retryDelay: string;
 }
-/** Describes additional debugging info. */
 
+/** Describes additional debugging info. */
 export interface DebugInfo {
   /** The stack trace entries indicating where the error occurred. */
   stackEntries: string[];
-  /** Additional debugging information provided by the server. */
 
+  /** Additional debugging information provided by the server. */
   detail: string;
 }
+
 /**
  * Describes how a quota check failed.
- *
+ * 
  * For example if a daily limit was exceeded for the calling project,
  * a service could respond with a QuotaFailure detail containing the project
  * id and the description of the quota limit that was exceeded.  If the
  * calling project hasn't enabled the service in the developer console, then
  * a service could respond with the project id and set `service_disabled`
  * to true.
- *
+ * 
  * Also see RetryInfo and Help types for other details about handling a
  * quota failure.
  */
-
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
 }
+
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
  */
-
 export interface QuotaFailure_Violation {
   /**
    * The subject on which the quota check failed.
@@ -61,45 +60,49 @@ export interface QuotaFailure_Violation {
    * developer project id>".
    */
   subject: string;
+
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
    * public documentation, or find the relevant quota limit to adjust through
    * developer console.
-   *
+   * 
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
-
   description: string;
 }
+export interface ErrorInfo_MetadataEntry {
+  key: string;
+  value: string;
+}
+
 /**
  * Describes the cause of the error with structured details.
- *
+ * 
  * Example of an error when contacting the "pubsub.googleapis.com" API when it
  * is not enabled:
- *
- *     { "reason": "API_DISABLED"
- *       "domain": "googleapis.com"
- *       "metadata": {
- *         "resource": "projects/123",
- *         "service": "pubsub.googleapis.com"
- *       }
- *     }
- *
+ * 
+ * { "reason": "API_DISABLED"
+ * "domain": "googleapis.com"
+ * "metadata": {
+ * "resource": "projects/123",
+ * "service": "pubsub.googleapis.com"
+ * }
+ * }
+ * 
  * This response indicates that the pubsub.googleapis.com API is not enabled.
- *
+ * 
  * Example of an error that is returned when attempting to create a Spanner
  * instance in a region that is out of stock:
- *
- *     { "reason": "STOCKOUT"
- *       "domain": "spanner.googleapis.com",
- *       "metadata": {
- *         "availableRegions": "us-central1,us-east2"
- *       }
- *     }
+ * 
+ * { "reason": "STOCKOUT"
+ * "domain": "spanner.googleapis.com",
+ * "metadata": {
+ * "availableRegions": "us-central1,us-east2"
+ * }
+ * }
  */
-
 export interface ErrorInfo {
   /**
    * The reason of the error. This is a constant value that identifies the
@@ -108,6 +111,7 @@ export interface ErrorInfo {
    * /[A-Z0-9_]+/.
    */
   reason: string;
+
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -116,11 +120,11 @@ export interface ErrorInfo {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-
   domain: string;
+
   /**
    * Additional structured details about this error.
-   *
+   * 
    * Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
    * length. When identifying the current value of an exceeded limit, the units
    * should be contained in the key, not the value.  For example, rather than
@@ -128,29 +132,24 @@ export interface ErrorInfo {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
-
   metadata: {
     [key: string]: string;
   };
 }
-export interface ErrorInfo_MetadataEntry {
-  key: string;
-  value: string;
-}
+
 /**
  * Describes what preconditions have failed.
- *
+ * 
  * For example, if an RPC failed because it required the Terms of Service to be
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
  */
-
 export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
-/** A message type used to describe a single precondition failure. */
 
+/** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_Violation {
   /**
    * The type of PreconditionFailure. We recommend using a service-specific
@@ -158,33 +157,33 @@ export interface PreconditionFailure_Violation {
    * example, "TOS" for "Terms of Service violation".
    */
   type: string;
+
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-
   subject: string;
+
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
-   *
+   * 
    * For example: "Terms of service not accepted".
    */
-
   description: string;
 }
+
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
  */
-
 export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
 }
-/** A message type used to describe a single bad request field. */
 
+/** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolation {
   /**
    * A path leading to a field in the request body. The value will be a
@@ -192,30 +191,30 @@ export interface BadRequest_FieldViolation {
    * field. E.g., "field_violations.field" would identify this field.
    */
   field: string;
-  /** A description of why the request element is bad. */
 
+  /** A description of why the request element is bad. */
   description: string;
 }
+
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
  */
-
 export interface RequestInfo {
   /**
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
   requestId: string;
+
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
-
   servingData: string;
 }
-/** Describes the resource that is being accessed. */
 
+/** Describes the resource that is being accessed. */
 export interface ResourceInfo {
   /**
    * A name for the type of resource being accessed, e.g. "sql table",
@@ -223,54 +222,54 @@ export interface ResourceInfo {
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
   resourceType: string;
+
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-
   resourceName: string;
+
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-
   owner: string;
+
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
-
   description: string;
 }
+
 /**
  * Provides links to documentation or for performing an out of band action.
- *
+ * 
  * For example, if a quota check failed with an error indicating the calling
  * project hasn't enabled the accessed service, this can contain a URL pointing
  * directly to the right place in the developer console to flip the bit.
  */
-
 export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
-/** Describes a URL link. */
 
+/** Describes a URL link. */
 export interface Help_Link {
   /** Describes what the link offers. */
   description: string;
-  /** The URL of the link. */
 
+  /** The URL of the link. */
   url: string;
 }
+
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
  */
-
 export interface LocalizedMessage {
   /**
    * The locale used following the specification defined at
@@ -278,8 +277,8 @@ export interface LocalizedMessage {
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
   locale: string;
-  /** The localized error message in the above locale. */
 
+  /** The localized error message in the above locale. */
   message: string;
 }
 
@@ -292,7 +291,7 @@ function createBaseRetryInfo(): RetryInfo {
 export const RetryInfo = {
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
-      Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
+      Duration.encode(toDuration(message.retryDelay), writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -308,7 +307,7 @@ export const RetryInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.retryDelay = Duration.decode(reader, reader.uint32());
+          message.retryDelay = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         default:
@@ -322,19 +321,19 @@ export const RetryInfo = {
 
   fromJSON(object: any): RetryInfo {
     return {
-      retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
+      retryDelay: isSet(object.retryDelay) ? String(object.retryDelay) : undefined
     };
   },
 
   toJSON(message: RetryInfo): unknown {
     const obj: any = {};
-    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
+    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<RetryInfo>, I>>(object: I): RetryInfo {
     const message = createBaseRetryInfo();
-    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
+    message.retryDelay = object.retryDelay ?? undefined;
     return message;
   }
 
@@ -547,6 +546,75 @@ export const QuotaFailure_Violation = {
 
 };
 
+function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const ErrorInfo_MetadataEntry = {
+  encode(message: ErrorInfo_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseErrorInfo_MetadataEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ErrorInfo_MetadataEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: ErrorInfo_MetadataEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ErrorInfo_MetadataEntry>, I>>(object: I): ErrorInfo_MetadataEntry {
+    const message = createBaseErrorInfo_MetadataEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseErrorInfo(): ErrorInfo {
   return {
     reason: "",
@@ -650,75 +718,6 @@ export const ErrorInfo = {
 
       return acc;
     }, {});
-    return message;
-  }
-
-};
-
-function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const ErrorInfo_MetadataEntry = {
-  encode(message: ErrorInfo_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseErrorInfo_MetadataEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): ErrorInfo_MetadataEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: ErrorInfo_MetadataEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<ErrorInfo_MetadataEntry>, I>>(object: I): ErrorInfo_MetadataEntry {
-    const message = createBaseErrorInfo_MetadataEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
     return message;
   }
 
@@ -1362,21 +1361,3 @@ export const LocalizedMessage = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

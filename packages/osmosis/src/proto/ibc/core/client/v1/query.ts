@@ -1,9 +1,8 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Any } from "../../../../google/protobuf/any";
-import { Height, Params, IdentifiedClientState, ConsensusStateWithHeight } from "../../../../ibc/core/client/v1/client";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Any } from "../../../../google/protobuf/any";
+import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -13,162 +12,162 @@ export interface QueryClientStateRequest {
   /** client state unique identifier */
   clientId: string;
 }
+
 /**
  * QueryClientStateResponse is the response type for the Query/ClientState RPC
  * method. Besides the client state, it includes a proof and the height from
  * which the proof was retrieved.
  */
-
 export interface QueryClientStateResponse {
   /** client state associated with the request identifier */
   clientState: Any;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
  * method
  */
-
 export interface QueryClientStatesRequest {
   /** pagination request */
   pagination: PageRequest;
 }
+
 /**
  * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
  * method.
  */
-
 export interface QueryClientStatesResponse {
   /** list of stored ClientStates of the chain. */
   clientStates: IdentifiedClientState[];
-  /** pagination response */
 
+  /** pagination response */
   pagination: PageResponse;
 }
+
 /**
  * QueryConsensusStateRequest is the request type for the Query/ConsensusState
  * RPC method. Besides the consensus state, it includes a proof and the height
  * from which the proof was retrieved.
  */
-
 export interface QueryConsensusStateRequest {
   /** client identifier */
   clientId: string;
+
   /** consensus state revision number */
-
   revisionNumber: Long;
-  /** consensus state revision height */
 
+  /** consensus state revision height */
   revisionHeight: Long;
+
   /**
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
    */
-
   latestHeight: boolean;
 }
+
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
  * RPC method
  */
-
 export interface QueryConsensusStateResponse {
   /** consensus state associated with the client identifier at the given height */
   consensusState: Any;
+
   /** merkle proof of existence */
-
   proof: Uint8Array;
-  /** height at which the proof was retrieved */
 
+  /** height at which the proof was retrieved */
   proofHeight: Height;
 }
+
 /**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
  */
-
 export interface QueryConsensusStatesRequest {
   /** client identifier */
   clientId: string;
-  /** pagination request */
 
+  /** pagination request */
   pagination: PageRequest;
 }
+
 /**
  * QueryConsensusStatesResponse is the response type for the
  * Query/ConsensusStates RPC method
  */
-
 export interface QueryConsensusStatesResponse {
   /** consensus states associated with the identifier */
   consensusStates: ConsensusStateWithHeight[];
-  /** pagination response */
 
+  /** pagination response */
   pagination: PageResponse;
 }
+
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
-
 export interface QueryClientStatusRequest {
   /** client unique identifier */
   clientId: string;
 }
+
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
  */
-
 export interface QueryClientStatusResponse {
   status: string;
 }
+
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
  * method.
  */
-
 export interface QueryClientParamsRequest {}
+
 /**
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
  * method.
  */
-
 export interface QueryClientParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
 }
+
 /**
  * QueryUpgradedClientStateRequest is the request type for the
  * Query/UpgradedClientState RPC method
  */
-
 export interface QueryUpgradedClientStateRequest {}
+
 /**
  * QueryUpgradedClientStateResponse is the response type for the
  * Query/UpgradedClientState RPC method.
  */
-
 export interface QueryUpgradedClientStateResponse {
   /** client state associated with the request identifier */
   upgradedClientState: Any;
 }
+
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
  * Query/UpgradedConsensusState RPC method
  */
-
 export interface QueryUpgradedConsensusStateRequest {}
+
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the
  * Query/UpgradedConsensusState RPC method.
  */
-
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
   upgradedConsensusState: Any;
@@ -1175,54 +1174,3 @@ export const QueryUpgradedConsensusStateResponse = {
   }
 
 };
-/** Query provides defines the gRPC querier service */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

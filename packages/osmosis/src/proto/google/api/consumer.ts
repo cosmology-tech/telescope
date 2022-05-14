@@ -1,54 +1,7 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
 
-/**
- * A descriptor for defining project properties for a service. One service may
- * have many consumer projects, and the service may want to behave differently
- * depending on some properties on the project. For example, a project may be
- * associated with a school, or a business, or a government agency, a business
- * type property on the project may affect how a service responds to the client.
- * This descriptor defines which properties are allowed to be set on a project.
- *
- * Example:
- *
- *    project_properties:
- *      properties:
- *      - name: NO_WATERMARK
- *        type: BOOL
- *        description: Allows usage of the API without watermarks.
- *      - name: EXTENDED_TILE_CACHE_PERIOD
- *        type: INT64
- */
-export interface ProjectProperties {
-  /** List of per consumer project-specific properties. */
-  properties: Property[];
-}
-/**
- * Defines project properties.
- *
- * API services can define properties that can be assigned to consumer projects
- * so that backends can perform response customization without having to make
- * additional calls or maintain additional storage. For example, Maps API
- * defines properties that controls map tile cache period, or whether to embed a
- * watermark in a result.
- *
- * These values can be set via API producer console. Only API providers can
- * define and set these properties.
- */
-
-export interface Property {
-  /** The name of the property (a.k.a key). */
-  name: string;
-  /** The type of this property. */
-
-  type: Property_PropertyType;
-  /** The description of the property */
-
-  description: string;
-}
 /** Supported data type of the property values */
-
 export enum Property_PropertyType {
   /** UNSPECIFIED - The type is unspecified, and will result in an error. */
   UNSPECIFIED = 0,
@@ -114,6 +67,52 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
     default:
       return "UNKNOWN";
   }
+}
+
+/**
+ * A descriptor for defining project properties for a service. One service may
+ * have many consumer projects, and the service may want to behave differently
+ * depending on some properties on the project. For example, a project may be
+ * associated with a school, or a business, or a government agency, a business
+ * type property on the project may affect how a service responds to the client.
+ * This descriptor defines which properties are allowed to be set on a project.
+ * 
+ * Example:
+ * 
+ * project_properties:
+ * properties:
+ * - name: NO_WATERMARK
+ * type: BOOL
+ * description: Allows usage of the API without watermarks.
+ * - name: EXTENDED_TILE_CACHE_PERIOD
+ * type: INT64
+ */
+export interface ProjectProperties {
+  /** List of per consumer project-specific properties. */
+  properties: Property[];
+}
+
+/**
+ * Defines project properties.
+ * 
+ * API services can define properties that can be assigned to consumer projects
+ * so that backends can perform response customization without having to make
+ * additional calls or maintain additional storage. For example, Maps API
+ * defines properties that controls map tile cache period, or whether to embed a
+ * watermark in a result.
+ * 
+ * These values can be set via API producer console. Only API providers can
+ * define and set these properties.
+ */
+export interface Property {
+  /** The name of the property (a.k.a key). */
+  name: string;
+
+  /** The type of this property. */
+  type: Property_PropertyType;
+
+  /** The description of the property */
+  description: string;
 }
 
 function createBaseProjectProperties(): ProjectProperties {
@@ -259,17 +258,3 @@ export const Property = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

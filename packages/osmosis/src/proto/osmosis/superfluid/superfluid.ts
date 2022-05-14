@@ -1,11 +1,8 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export enum SuperfluidAssetType {
   SuperfluidAssetTypeNative = 0,
-
-  /** SuperfluidAssetTypeLPShare - SuperfluidAssetTypeLendingShare = 2; // for now not exist */
   SuperfluidAssetTypeLPShare = 1,
   UNRECOGNIZED = -1,
 }
@@ -37,24 +34,25 @@ export function superfluidAssetTypeToJSON(object: SuperfluidAssetType): string {
       return "UNKNOWN";
   }
 }
-/** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 
+/** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAsset {
   denom: string;
   assetType: SuperfluidAssetType;
 }
+
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
  * and OSMO tokens for superfluid staking
  */
-
 export interface SuperfluidIntermediaryAccount {
   denom: string;
   valAddr: string;
-  /** perpetual gauge for rewards distribution */
 
+  /** perpetual gauge for rewards distribution */
   gaugeId: Long;
 }
+
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
  * treat an LP share as having, for all of epoch N. Eventually this is intended
@@ -64,19 +62,18 @@ export interface SuperfluidIntermediaryAccount {
  * price at the boundary.  For different types of assets in the future, it could
  * change.
  */
-
 export interface OsmoEquivalentMultiplierRecord {
   epochNumber: Long;
-  /** superfluid asset denom, can be LP token or native token */
 
+  /** superfluid asset denom, can be LP token or native token */
   denom: string;
   multiplier: string;
 }
+
 /**
  * SuperfluidDelegationRecord takes the role of intermediary between LP token
  * and OSMO tokens for superfluid staking
  */
-
 export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
   validatorAddress: string;
@@ -467,17 +464,3 @@ export const LockIdIntermediaryAccountConnection = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,125 +1,11 @@
-/* eslint-disable */
-import Long from "long";
+import { ParsedExpr, SourcePosition } from "../../v1alpha1/syntax";
+import { Decl, CheckedExpr } from "../../v1alpha1/checked";
+import { ExprValue } from "../../v1alpha1/eval";
+import { Status } from "../../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { ParsedExpr, SourcePosition } from "../../../../../google/api/expr/v1alpha1/syntax";
-import { CheckedExpr, Decl } from "../../../../../google/api/expr/v1alpha1/checked";
-import { ExprValue } from "../../../../../google/api/expr/v1alpha1/eval";
-import { Status } from "../../../../../google/rpc/status";
+import { isSet, Exact, DeepPartial, isObject, Long } from "@osmonauts/helpers";
 
-/** Request message for the Parse method. */
-export interface ParseRequest {
-  /** Required. Source text in CEL syntax. */
-  celSource: string;
-  /** Tag for version of CEL syntax, for future use. */
-
-  syntaxVersion: string;
-  /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
-
-  sourceLocation: string;
-  /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
-
-  disableMacros: boolean;
-}
-/** Response message for the Parse method. */
-
-export interface ParseResponse {
-  /** The parsed representation, or unset if parsing failed. */
-  parsedExpr: ParsedExpr;
-  /** Any number of issues with [StatusDetails][] as the details. */
-
-  issues: Status[];
-}
-/** Request message for the Check method. */
-
-export interface CheckRequest {
-  /** Required. The parsed representation of the CEL program. */
-  parsedExpr: ParsedExpr;
-  /**
-   * Declarations of types for external variables and functions.
-   * Required if program uses external variables or functions
-   * not in the default environment.
-   */
-
-  typeEnv: Decl[];
-  /**
-   * The protocol buffer context.  See "Name Resolution" in the
-   * Language Definition.
-   */
-
-  container: string;
-  /**
-   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
-   * add declarations for the standard definitions to the type environment.  See
-   * "Standard Definitions" in the Language Definition.
-   */
-
-  noStdEnv: boolean;
-}
-/** Response message for the Check method. */
-
-export interface CheckResponse {
-  /** The annotated representation, or unset if checking failed. */
-  checkedExpr: CheckedExpr;
-  /** Any number of issues with [StatusDetails][] as the details. */
-
-  issues: Status[];
-}
-/** Request message for the Eval method. */
-
-export interface EvalRequest {
-  /** Evaluate based on the parsed representation. */
-  parsedExpr: ParsedExpr | undefined;
-  /** Evaluate based on the checked representation. */
-
-  checkedExpr: CheckedExpr | undefined;
-  /**
-   * Bindings for the external variables.  The types SHOULD be compatible
-   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
-   */
-
-  bindings: {
-    [key: string]: ExprValue;
-  };
-  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
-
-  container: string;
-}
-export interface EvalRequest_BindingsEntry {
-  key: string;
-  value: ExprValue;
-}
-/** Response message for the Eval method. */
-
-export interface EvalResponse {
-  /** The execution result, or unset if execution couldn't start. */
-  result: ExprValue;
-  /**
-   * Any number of issues with [StatusDetails][] as the details.
-   * Note that CEL execution errors are reified into [ExprValue][].
-   * Nevertheless, we'll allow out-of-band issues to be raised,
-   * which also makes the replies more regular.
-   */
-
-  issues: Status[];
-}
-/**
- * Warnings or errors in service execution are represented by
- * [google.rpc.Status][google.rpc.Status] messages, with the following message
- * in the details field.
- */
-
-export interface IssueDetails {
-  /** The severity of the issue. */
-  severity: IssueDetails_Severity;
-  /** Position in the source, if known. */
-
-  position: SourcePosition;
-  /** Expression ID from [Expr][], 0 if unknown. */
-
-  id: Long;
-}
 /** Severities of issues. */
-
 export enum IssueDetails_Severity {
   /** SEVERITY_UNSPECIFIED - An unspecified severity. */
   SEVERITY_UNSPECIFIED = 0,
@@ -178,6 +64,119 @@ export function issueDetails_SeverityToJSON(object: IssueDetails_Severity): stri
     default:
       return "UNKNOWN";
   }
+}
+
+/** Request message for the Parse method. */
+export interface ParseRequest {
+  /** Required. Source text in CEL syntax. */
+  celSource: string;
+
+  /** Tag for version of CEL syntax, for future use. */
+  syntaxVersion: string;
+
+  /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
+  sourceLocation: string;
+
+  /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
+  disableMacros: boolean;
+}
+
+/** Response message for the Parse method. */
+export interface ParseResponse {
+  /** The parsed representation, or unset if parsing failed. */
+  parsedExpr: ParsedExpr;
+
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: Status[];
+}
+
+/** Request message for the Check method. */
+export interface CheckRequest {
+  /** Required. The parsed representation of the CEL program. */
+  parsedExpr: ParsedExpr;
+
+  /**
+   * Declarations of types for external variables and functions.
+   * Required if program uses external variables or functions
+   * not in the default environment.
+   */
+  typeEnv: Decl[];
+
+  /**
+   * The protocol buffer context.  See "Name Resolution" in the
+   * Language Definition.
+   */
+  container: string;
+
+  /**
+   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
+   * add declarations for the standard definitions to the type environment.  See
+   * "Standard Definitions" in the Language Definition.
+   */
+  noStdEnv: boolean;
+}
+
+/** Response message for the Check method. */
+export interface CheckResponse {
+  /** The annotated representation, or unset if checking failed. */
+  checkedExpr: CheckedExpr;
+
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: Status[];
+}
+export interface EvalRequest_BindingsEntry {
+  key: string;
+  value: ExprValue;
+}
+
+/** Request message for the Eval method. */
+export interface EvalRequest {
+  /** Evaluate based on the parsed representation. */
+  parsedExpr?: ParsedExpr;
+
+  /** Evaluate based on the checked representation. */
+  checkedExpr?: CheckedExpr;
+
+  /**
+   * Bindings for the external variables.  The types SHOULD be compatible
+   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   */
+  bindings: {
+    [key: string]: ExprValue;
+  };
+
+  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
+  container: string;
+}
+
+/** Response message for the Eval method. */
+export interface EvalResponse {
+  /** The execution result, or unset if execution couldn't start. */
+  result: ExprValue;
+
+  /**
+   * Any number of issues with [StatusDetails][] as the details.
+   * Note that CEL execution errors are reified into [ExprValue][].
+   * Nevertheless, we'll allow out-of-band issues to be raised,
+   * which also makes the replies more regular.
+   */
+  issues: Status[];
+}
+
+/**
+ * Warnings or errors in service execution are represented by
+ * [google.rpc.Status][google.rpc.Status] messages, with the following message
+ * in the details field.
+ */
+export interface IssueDetails {
+  /** The severity of the issue. */
+  severity: IssueDetails_Severity;
+
+  /** Position in the source, if known. */
+  position: SourcePosition;
+
+  /** Expression ID from [Expr][], 0 if unknown. */
+  id: Long;
 }
 
 function createBaseParseRequest(): ParseRequest {
@@ -522,6 +521,75 @@ export const CheckResponse = {
 
 };
 
+function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
+  return {
+    key: "",
+    value: undefined
+  };
+}
+
+export const EvalRequest_BindingsEntry = {
+  encode(message: EvalRequest_BindingsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== undefined) {
+      google.api.expr.v1alpha1.ExprValue.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_BindingsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEvalRequest_BindingsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = google.api.expr.v1alpha1.ExprValue.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): EvalRequest_BindingsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromJSON(object.value) : undefined
+    };
+  },
+
+  toJSON(message: EvalRequest_BindingsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toJSON(message.value) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EvalRequest_BindingsEntry>, I>>(object: I): EvalRequest_BindingsEntry {
+    const message = createBaseEvalRequest_BindingsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
+    return message;
+  }
+
+};
+
 function createBaseEvalRequest(): EvalRequest {
   return {
     parsedExpr: undefined,
@@ -638,75 +706,6 @@ export const EvalRequest = {
       return acc;
     }, {});
     message.container = object.container ?? "";
-    return message;
-  }
-
-};
-
-function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
-  return {
-    key: "",
-    value: undefined
-  };
-}
-
-export const EvalRequest_BindingsEntry = {
-  encode(message: EvalRequest_BindingsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== undefined) {
-      ExprValue.encode(message.value, writer.uint32(18).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_BindingsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEvalRequest_BindingsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = ExprValue.decode(reader, reader.uint32());
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): EvalRequest_BindingsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? ExprValue.fromJSON(object.value) : undefined
-    };
-  },
-
-  toJSON(message: EvalRequest_BindingsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? ExprValue.toJSON(message.value) : undefined);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<EvalRequest_BindingsEntry>, I>>(object: I): EvalRequest_BindingsEntry {
-    const message = createBaseEvalRequest_BindingsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : undefined;
     return message;
   }
 
@@ -867,77 +866,3 @@ export const IssueDetails = {
   }
 
 };
-/**
- * Access a CEL implementation from another process or machine.
- * A CEL implementation is decomposed as a parser, a static checker,
- * and an evaluator.  Every CEL implementation is expected to provide
- * a server for this API.  The API will be used for conformance testing
- * and other utilities.
- */
-
-export interface ConformanceService {
-  /** Transforms CEL source text into a parsed representation. */
-  Parse(request: ParseRequest): Promise<ParseResponse>;
-  /**
-   * Runs static checks on a parsed CEL representation and return
-   * an annotated representation, or a set of issues.
-   */
-
-  Check(request: CheckRequest): Promise<CheckResponse>;
-  /**
-   * Evaluates a parsed or annotation CEL representation given
-   * values of external bindings.
-   */
-
-  Eval(request: EvalRequest): Promise<EvalResponse>;
-}
-export class ConformanceServiceClientImpl implements ConformanceService {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.Parse = this.Parse.bind(this);
-    this.Check = this.Check.bind(this);
-    this.Eval = this.Eval.bind(this);
-  }
-
-  Parse(request: ParseRequest): Promise<ParseResponse> {
-    const data = ParseRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.expr.conformance.v1alpha1.ConformanceService", "Parse", data);
-    return promise.then(data => ParseResponse.decode(new _m0.Reader(data)));
-  }
-
-  Check(request: CheckRequest): Promise<CheckResponse> {
-    const data = CheckRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.expr.conformance.v1alpha1.ConformanceService", "Check", data);
-    return promise.then(data => CheckResponse.decode(new _m0.Reader(data)));
-  }
-
-  Eval(request: EvalRequest): Promise<EvalResponse> {
-    const data = EvalRequest.encode(request).finish();
-    const promise = this.rpc.request("google.api.expr.conformance.v1alpha1.ConformanceService", "Eval", data);
-    return promise.then(data => EvalResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

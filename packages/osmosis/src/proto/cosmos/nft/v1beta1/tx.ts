@@ -1,23 +1,22 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
   classId: string;
+
   /** id defines the unique identification of nft */
-
   id: string;
+
   /** sender is the address of the owner of nft */
-
   sender: string;
-  /** receiver is the receiver address of nft */
 
+  /** receiver is the receiver address of nft */
   receiver: string;
 }
-/** MsgSendResponse defines the Msg/Send response type. */
 
+/** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
 
 function createBaseMsgSend(): MsgSend {
@@ -155,19 +154,3 @@ export const MsgSendResponse = {
   }
 
 };
-/** Msg defines the nft Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

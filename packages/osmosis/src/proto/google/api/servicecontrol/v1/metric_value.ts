@@ -1,8 +1,11 @@
-/* eslint-disable */
-import Long from "long";
+import { Timestamp } from "../../../protobuf/timestamp";
+import { Distribution } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../../google/protobuf/timestamp";
-import { Distribution } from "../../../../google/api/servicecontrol/v1/distribution";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
+export interface MetricValue_LabelsEntry {
+  key: string;
+  value: string;
+}
 
 /** Represents a single metric value. */
 export interface MetricValue {
@@ -15,6 +18,7 @@ export interface MetricValue {
   labels: {
     [key: string]: string;
   };
+
   /**
    * The start of the time period over which this metric value's measurement
    * applies. The time period has different semantics for different metric
@@ -22,48 +26,112 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-
   startTime: Date;
+
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-
   endTime: Date;
+
   /** A boolean value. */
+  boolValue?: boolean;
 
-  boolValue: boolean | undefined;
   /** A signed 64-bit integer value. */
+  int64Value?: Long;
 
-  int64Value: Long | undefined;
   /** A double precision floating point value. */
+  doubleValue?: number;
 
-  doubleValue: number | undefined;
   /** A text string value. */
+  stringValue?: string;
 
-  stringValue: string | undefined;
   /** A distribution value. */
+  distributionValue?: Distribution;
+}
 
-  distributionValue: Distribution | undefined;
-}
-export interface MetricValue_LabelsEntry {
-  key: string;
-  value: string;
-}
 /**
  * Represents a set of metric values in the same metric.
  * Each metric value in the set should have a unique combination of start time,
  * end time, and label values.
  */
-
 export interface MetricValueSet {
   /** The metric name defined in the service configuration. */
   metricName: string;
-  /** The values in this metric. */
 
+  /** The values in this metric. */
   metricValues: MetricValue[];
 }
+
+function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const MetricValue_LabelsEntry = {
+  encode(message: MetricValue_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMetricValue_LabelsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MetricValue_LabelsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: MetricValue_LabelsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MetricValue_LabelsEntry>, I>>(object: I): MetricValue_LabelsEntry {
+    const message = createBaseMetricValue_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
 
 function createBaseMetricValue(): MetricValue {
   return {
@@ -234,75 +302,6 @@ export const MetricValue = {
 
 };
 
-function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const MetricValue_LabelsEntry = {
-  encode(message: MetricValue_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetricValue_LabelsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): MetricValue_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: MetricValue_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<MetricValue_LabelsEntry>, I>>(object: I): MetricValue_LabelsEntry {
-    const message = createBaseMetricValue_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  }
-
-};
-
 function createBaseMetricValueSet(): MetricValueSet {
   return {
     metricName: "",
@@ -377,50 +376,3 @@ export const MetricValueSet = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

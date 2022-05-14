@@ -1,19 +1,15 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-
 /**
  * The severity of the event described in a log entry, expressed as one of the
  * standard severity levels listed below.  For your reference, the levels are
  * assigned the listed numeric values. The effect of using numeric values other
  * than those listed is undefined.
- *
+ * 
  * You can filter for log entries by severity.  For example, the following
  * filter expression will match log entries with severities `INFO`, `NOTICE`,
  * and `WARNING`:
- *
- *     severity > DEBUG AND severity <= WARNING
- *
+ * 
+ * severity > DEBUG AND severity <= WARNING
+ * 
  * If you are writing log entries, you should map other severity encodings to
  * one of these standard levels. For example, you might map all of Java's FINE,
  * FINER, and FINEST levels to `LogSeverity.DEBUG`. You can preserve the
@@ -127,10 +123,4 @@ export function logSeverityToJSON(object: LogSeverity): string {
     default:
       return "UNKNOWN";
   }
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
 }

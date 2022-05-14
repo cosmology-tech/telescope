@@ -1,9 +1,8 @@
-/* eslint-disable */
-import Long from "long";
+import { LabelDescriptor } from "./label";
+import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { Struct } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "../../google/api/launch_stage";
-import { LabelDescriptor } from "../../google/api/label";
-import { Struct } from "../../google/protobuf/struct";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -11,7 +10,7 @@ import { Struct } from "../../google/protobuf/struct";
  * descriptor for Google Compute Engine VM instances has a type of
  * `"gce_instance"` and specifies the use of the labels `"instance_id"` and
  * `"zone"` to identify particular VM instances.
- *
+ * 
  * Different APIs can support different monitored resource types. APIs generally
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
@@ -26,37 +25,42 @@ export interface MonitoredResourceDescriptor {
    * resource name format `"monitoredResourceDescriptors/{type}"`.
    */
   name: string;
+
   /**
    * Required. The monitored resource type. For example, the type
    * `"cloudsql_database"` represents databases in Google Cloud SQL.
    */
-
   type: string;
+
   /**
    * Optional. A concise name for the monitored resource type that might be
    * displayed in user interfaces. It should be a Title Cased Noun Phrase,
    * without any article or other determiners. For example,
    * `"Google Cloud SQL Database"`.
    */
-
   displayName: string;
+
   /**
    * Optional. A detailed description of the monitored resource type that might
    * be used in documentation.
    */
-
   description: string;
+
   /**
    * Required. A set of labels used to describe instances of this monitored
    * resource type. For example, an individual Google Cloud SQL database is
    * identified by values for the labels `"database_id"` and `"zone"`.
    */
-
   labels: LabelDescriptor[];
-  /** Optional. The launch stage of the monitored resource definition. */
 
+  /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface MonitoredResource_LabelsEntry {
+  key: string;
+  value: string;
+}
+
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -67,12 +71,11 @@ export interface MonitoredResourceDescriptor {
  * Engine VM instance could be represented by the following object, because the
  * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
  * `"instance_id"` and `"zone"`:
- *
- *     { "type": "gce_instance",
- *       "labels": { "instance_id": "12345678901234",
- *                   "zone": "us-central1-a" }}
+ * 
+ * { "type": "gce_instance",
+ * "labels": { "instance_id": "12345678901234",
+ * "zone": "us-central1-a" }}
  */
-
 export interface MonitoredResource {
   /**
    * Required. The monitored resource type. This field must match
@@ -80,20 +83,21 @@ export interface MonitoredResource {
    * example, the type of a Compute Engine VM instance is `gce_instance`.
    */
   type: string;
+
   /**
    * Required. Values for all of the labels listed in the associated monitored
    * resource descriptor. For example, Compute Engine VM instances use the
    * labels `"project_id"`, `"instance_id"`, and `"zone"`.
    */
-
   labels: {
     [key: string]: string;
   };
 }
-export interface MonitoredResource_LabelsEntry {
+export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
 }
+
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
  * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
@@ -102,7 +106,6 @@ export interface MonitoredResource_LabelsEntry {
  * pipeline to extract metadata for cloud resources of all types, and store
  * the metadata in this message.
  */
-
 export interface MonitoredResourceMetadata {
   /**
    * Output only. Values for predefined system metadata labels.
@@ -111,23 +114,17 @@ export interface MonitoredResourceMetadata {
    * "security_group", "name", etc.
    * System label values can be only strings, Boolean values, or a list of
    * strings. For example:
-   *
-   *     { "name": "my-test-instance",
-   *       "security_group": ["a", "b", "c"],
-   *       "spot_instance": false }
+   * 
+   * { "name": "my-test-instance",
+   * "security_group": ["a", "b", "c"],
+   * "spot_instance": false }
    */
-  systemLabels: {
-    [key: string]: any;
-  } | undefined;
-  /** Output only. A map of user-defined metadata labels. */
+  systemLabels: Struct;
 
+  /** Output only. A map of user-defined metadata labels. */
   userLabels: {
     [key: string]: string;
   };
-}
-export interface MonitoredResourceMetadata_UserLabelsEntry {
-  key: string;
-  value: string;
 }
 
 function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
@@ -253,6 +250,75 @@ export const MonitoredResourceDescriptor = {
 
 };
 
+function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntry {
+  return {
+    key: "",
+    value: ""
+  };
+}
+
+export const MonitoredResource_LabelsEntry = {
+  encode(message: MonitoredResource_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_LabelsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMonitoredResource_LabelsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MonitoredResource_LabelsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
+  toJSON(message: MonitoredResource_LabelsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MonitoredResource_LabelsEntry>, I>>(object: I): MonitoredResource_LabelsEntry {
+    const message = createBaseMonitoredResource_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  }
+
+};
+
 function createBaseMonitoredResource(): MonitoredResource {
   return {
     type: "",
@@ -349,171 +415,6 @@ export const MonitoredResource = {
 
 };
 
-function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntry {
-  return {
-    key: "",
-    value: ""
-  };
-}
-
-export const MonitoredResource_LabelsEntry = {
-  encode(message: MonitoredResource_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMonitoredResource_LabelsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-
-        case 2:
-          message.value = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): MonitoredResource_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
-  toJSON(message: MonitoredResource_LabelsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<MonitoredResource_LabelsEntry>, I>>(object: I): MonitoredResource_LabelsEntry {
-    const message = createBaseMonitoredResource_LabelsEntry();
-    message.key = object.key ?? "";
-    message.value = object.value ?? "";
-    return message;
-  }
-
-};
-
-function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
-  return {
-    systemLabels: undefined,
-    userLabels: {}
-  };
-}
-
-export const MonitoredResourceMetadata = {
-  encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.systemLabels !== undefined) {
-      Struct.encode(Struct.wrap(message.systemLabels), writer.uint32(10).fork()).ldelim();
-    }
-
-    Object.entries(message.userLabels).forEach(([key, value]) => {
-      MonitoredResourceMetadata_UserLabelsEntry.encode({
-        key: (key as any),
-        value
-      }, writer.uint32(18).fork()).ldelim();
-    });
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMonitoredResourceMetadata();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.systemLabels = Struct.unwrap(Struct.decode(reader, reader.uint32()));
-          break;
-
-        case 2:
-          const entry2 = MonitoredResourceMetadata_UserLabelsEntry.decode(reader, reader.uint32());
-
-          if (entry2.value !== undefined) {
-            message.userLabels[entry2.key] = entry2.value;
-          }
-
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): MonitoredResourceMetadata {
-    return {
-      systemLabels: isObject(object.systemLabels) ? object.systemLabels : undefined,
-      userLabels: isObject(object.userLabels) ? Object.entries(object.userLabels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  toJSON(message: MonitoredResourceMetadata): unknown {
-    const obj: any = {};
-    message.systemLabels !== undefined && (obj.systemLabels = message.systemLabels);
-    obj.userLabels = {};
-
-    if (message.userLabels) {
-      Object.entries(message.userLabels).forEach(([k, v]) => {
-        obj.userLabels[k] = v;
-      });
-    }
-
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<MonitoredResourceMetadata>, I>>(object: I): MonitoredResourceMetadata {
-    const message = createBaseMonitoredResourceMetadata();
-    message.systemLabels = object.systemLabels ?? undefined;
-    message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = String(value);
-      }
-
-      return acc;
-    }, {});
-    return message;
-  }
-
-};
-
 function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourceMetadata_UserLabelsEntry {
   return {
     key: "",
@@ -582,21 +483,99 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
 
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
+function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
+  return {
+    systemLabels: undefined,
+    userLabels: {}
+  };
 }
 
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
+export const MonitoredResourceMetadata = {
+  encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.systemLabels !== undefined) {
+      Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();
+    }
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
+    Object.entries(message.userLabels).forEach(([key, value]) => {
+      MonitoredResourceMetadata_UserLabelsEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(18).fork()).ldelim();
+    });
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMonitoredResourceMetadata();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.systemLabels = Struct.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          const entry2 = MonitoredResourceMetadata_UserLabelsEntry.decode(reader, reader.uint32());
+
+          if (entry2.value !== undefined) {
+            message.userLabels[entry2.key] = entry2.value;
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MonitoredResourceMetadata {
+    return {
+      systemLabels: isSet(object.systemLabels) ? Struct.fromJSON(object.systemLabels) : undefined,
+      userLabels: isObject(object.userLabels) ? Object.entries(object.userLabels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toJSON(message: MonitoredResourceMetadata): unknown {
+    const obj: any = {};
+    message.systemLabels !== undefined && (obj.systemLabels = message.systemLabels ? Struct.toJSON(message.systemLabels) : undefined);
+    obj.userLabels = {};
+
+    if (message.userLabels) {
+      Object.entries(message.userLabels).forEach(([k, v]) => {
+        obj.userLabels[k] = v;
+      });
+    }
+
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MonitoredResourceMetadata>, I>>(object: I): MonitoredResourceMetadata {
+    const message = createBaseMonitoredResourceMetadata();
+    message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : undefined;
+    message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+
+      return acc;
+    }, {});
+    return message;
+  }
+
+};

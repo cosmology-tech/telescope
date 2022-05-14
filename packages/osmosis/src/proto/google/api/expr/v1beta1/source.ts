@@ -1,60 +1,128 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+export interface SourceInfo_PositionsEntry {
+  key: number;
+  value: number;
+}
 
 /** Source information collected at parse time. */
 export interface SourceInfo {
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
-   *
+   * 
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
   location: string;
+
   /**
    * Monotonically increasing list of character offsets where newlines appear.
-   *
+   * 
    * The line number of a given position is the index `i` where for a given
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
    */
-
   lineOffsets: number[];
+
   /**
    * A map from the parse node id (e.g. `Expr.id`) to the character offset
    * within source.
    */
-
   positions: {
     [key: number]: number;
   };
 }
-export interface SourceInfo_PositionsEntry {
-  key: number;
-  value: number;
-}
-/** A specific position in source. */
 
+/** A specific position in source. */
 export interface SourcePosition {
   /** The soucre location name (e.g. file name). */
   location: string;
-  /** The character offset. */
 
+  /** The character offset. */
   offset: number;
+
   /**
    * The 1-based index of the starting line in the source text
    * where the issue occurs, or 0 if unknown.
    */
-
   line: number;
+
   /**
    * The 0-based index of the starting position within the line of source text
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
-
   column: number;
 }
+
+function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
+  return {
+    key: 0,
+    value: 0
+  };
+}
+
+export const SourceInfo_PositionsEntry = {
+  encode(message: SourceInfo_PositionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== 0) {
+      writer.uint32(8).int32(message.key);
+    }
+
+    if (message.value !== 0) {
+      writer.uint32(16).int32(message.value);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSourceInfo_PositionsEntry();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.int32();
+          break;
+
+        case 2:
+          message.value = reader.int32();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): SourceInfo_PositionsEntry {
+    return {
+      key: isSet(object.key) ? Number(object.key) : 0,
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
+  toJSON(message: SourceInfo_PositionsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = Math.round(message.key));
+    message.value !== undefined && (obj.value = Math.round(message.value));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsEntry>, I>>(object: I): SourceInfo_PositionsEntry {
+    const message = createBaseSourceInfo_PositionsEntry();
+    message.key = object.key ?? 0;
+    message.value = object.value ?? 0;
+    return message;
+  }
+
+};
 
 function createBaseSourceInfo(): SourceInfo {
   return {
@@ -81,7 +149,7 @@ export const SourceInfo = {
       SourceInfo_PositionsEntry.encode({
         key: (key as any),
         value
-      }, writer.uint32(34).fork()).ldelim();
+      }, writer.uint32(32).fork()).ldelim();
     });
     return writer;
   },
@@ -182,75 +250,6 @@ export const SourceInfo = {
 
 };
 
-function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
-  return {
-    key: 0,
-    value: 0
-  };
-}
-
-export const SourceInfo_PositionsEntry = {
-  encode(message: SourceInfo_PositionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== 0) {
-      writer.uint32(8).int32(message.key);
-    }
-
-    if (message.value !== 0) {
-      writer.uint32(16).int32(message.value);
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSourceInfo_PositionsEntry();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.int32();
-          break;
-
-        case 2:
-          message.value = reader.int32();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): SourceInfo_PositionsEntry {
-    return {
-      key: isSet(object.key) ? Number(object.key) : 0,
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
-  },
-
-  toJSON(message: SourceInfo_PositionsEntry): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<SourceInfo_PositionsEntry>, I>>(object: I): SourceInfo_PositionsEntry {
-    const message = createBaseSourceInfo_PositionsEntry();
-    message.key = object.key ?? 0;
-    message.value = object.value ?? 0;
-    return message;
-  }
-
-};
-
 function createBaseSourcePosition(): SourcePosition {
   return {
     location: "",
@@ -343,21 +342,3 @@ export const SourcePosition = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

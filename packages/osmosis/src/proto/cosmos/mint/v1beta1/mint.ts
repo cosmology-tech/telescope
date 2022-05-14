@@ -1,34 +1,33 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** Minter represents the minting state. */
 export interface Minter {
   /** current annual inflation rate */
   inflation: string;
-  /** current annual expected provisions */
 
+  /** current annual expected provisions */
   annualProvisions: string;
 }
-/** Params holds parameters for the mint module. */
 
+/** Params holds parameters for the mint module. */
 export interface Params {
   /** type of coin to mint */
   mintDenom: string;
+
   /** maximum annual change in inflation rate */
-
   inflationRateChange: string;
+
   /** maximum inflation rate */
-
   inflationMax: string;
+
   /** minimum inflation rate */
-
   inflationMin: string;
+
   /** goal of percent bonded atoms */
-
   goalBonded: string;
-  /** expected blocks per year */
 
+  /** expected blocks per year */
   blocksPerYear: Long;
 }
 
@@ -217,17 +216,3 @@ export const Params = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

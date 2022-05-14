@@ -1,57 +1,54 @@
-/* eslint-disable */
-import Long from "long";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { Grant } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
-import { Grant } from "../../../cosmos/feegrant/v1beta1/feegrant";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-
-/** Since: cosmos-sdk 0.43 */
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
   /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
 
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
-/** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 
+/** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponse {
   /** allowance is a allowance granted for grantee by granter. */
   allowance: Grant;
 }
-/** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 
+/** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequest {
   grantee: string;
-  /** pagination defines an pagination for the request. */
 
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 
+/** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponse {
   /** allowances are allowance's granted for grantee by granter. */
   allowances: Grant[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
-/** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 
+/** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequest {
   granter: string;
-  /** pagination defines an pagination for the request. */
 
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
 
+/** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterResponse {
   /** allowances that have been issued by the granter. */
   allowances: Grant[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -468,19 +465,3 @@ export const QueryAllowancesByGranterResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

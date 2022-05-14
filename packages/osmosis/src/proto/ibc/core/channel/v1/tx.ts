@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
+import { Channel, Packet } from "./channel";
+import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
-import { Channel, Packet } from "../../../../ibc/core/channel/v1/channel";
-import { Height } from "../../../../ibc/core/client/v1/client";
+import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -13,21 +12,21 @@ export interface MsgChannelOpenInit {
   channel: Channel;
   signer: string;
 }
-/** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 
+/** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponse {}
+
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
  * on Chain B.
  */
-
 export interface MsgChannelOpenTry {
   portId: string;
+
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
    * the channel identifier of the previous channel in state INIT
    */
-
   previousChannelId: string;
   channel: Channel;
   counterpartyVersion: string;
@@ -35,14 +34,14 @@ export interface MsgChannelOpenTry {
   proofHeight: Height;
   signer: string;
 }
-/** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 
+/** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponse {}
+
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
  * the change of channel state to TRYOPEN on Chain B.
  */
-
 export interface MsgChannelOpenAck {
   portId: string;
   channelId: string;
@@ -52,14 +51,14 @@ export interface MsgChannelOpenAck {
   proofHeight: Height;
   signer: string;
 }
-/** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 
+/** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponse {}
+
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
  * acknowledge the change of channel state to OPEN on Chain A.
  */
-
 export interface MsgChannelOpenConfirm {
   portId: string;
   channelId: string;
@@ -67,30 +66,30 @@ export interface MsgChannelOpenConfirm {
   proofHeight: Height;
   signer: string;
 }
+
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
  * type.
  */
-
 export interface MsgChannelOpenConfirmResponse {}
+
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
  * to close a channel with Chain B.
  */
-
 export interface MsgChannelCloseInit {
   portId: string;
   channelId: string;
   signer: string;
 }
-/** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 
+/** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponse {}
+
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
  * to acknowledge the change of channel state to CLOSED on Chain A.
  */
-
 export interface MsgChannelCloseConfirm {
   portId: string;
   channelId: string;
@@ -98,25 +97,25 @@ export interface MsgChannelCloseConfirm {
   proofHeight: Height;
   signer: string;
 }
+
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
  * type.
  */
-
 export interface MsgChannelCloseConfirmResponse {}
-/** MsgRecvPacket receives incoming IBC packet */
 
+/** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacket {
   packet: Packet;
   proofCommitment: Uint8Array;
   proofHeight: Height;
   signer: string;
 }
+
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
-
 export interface MsgRecvPacketResponse {}
-/** MsgTimeout receives timed-out packet */
 
+/** MsgTimeout receives timed-out packet */
 export interface MsgTimeout {
   packet: Packet;
   proofUnreceived: Uint8Array;
@@ -124,11 +123,11 @@ export interface MsgTimeout {
   nextSequenceRecv: Long;
   signer: string;
 }
+
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
-
 export interface MsgTimeoutResponse {}
-/** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 
+/** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnClose {
   packet: Packet;
   proofUnreceived: Uint8Array;
@@ -137,11 +136,11 @@ export interface MsgTimeoutOnClose {
   nextSequenceRecv: Long;
   signer: string;
 }
+
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
-
 export interface MsgTimeoutOnCloseResponse {}
-/** MsgAcknowledgement receives incoming IBC acknowledgement */
 
+/** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgement {
   packet: Packet;
   acknowledgement: Uint8Array;
@@ -149,8 +148,8 @@ export interface MsgAcknowledgement {
   proofHeight: Height;
   signer: string;
 }
-/** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 
+/** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponse {}
 
 function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
@@ -1632,54 +1631,3 @@ export const MsgAcknowledgementResponse = {
   }
 
 };
-/** Msg defines the ibc/channel Msg service. */
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

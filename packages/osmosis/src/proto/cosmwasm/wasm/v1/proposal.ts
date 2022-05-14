@@ -1,171 +1,170 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { AccessConfig } from "../../../cosmwasm/wasm/v1/types";
+import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
+
   /** RunAs is the address that is passed to the contract's environment as sender */
-
   runAs: string;
+
   /** WASMByteCode can be raw or gzip compressed */
-
   wasmByteCode: Uint8Array;
-  /** InstantiatePermission to apply on contract creation, optional */
 
+  /** InstantiatePermission to apply on contract creation, optional */
   instantiatePermission: AccessConfig;
 }
+
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
  * contract.
  */
-
 export interface InstantiateContractProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
+
   /** RunAs is the address that is passed to the contract's environment as sender */
-
   runAs: string;
+
   /** Admin is an optional address that can execute migrations */
-
   admin: string;
+
   /** CodeID is the reference to the stored WASM code */
-
   codeId: Long;
+
   /** Label is optional metadata to be stored with a constract instance. */
-
   label: string;
+
   /** Msg json encoded message to be passed to the contract on instantiation */
-
   msg: Uint8Array;
-  /** Funds coins that are transferred to the contract on instantiation */
 
+  /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
-/** MigrateContractProposal gov proposal content type to migrate a contract. */
 
+/** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
+
   /** Contract is the address of the smart contract */
-
   contract: string;
+
   /** CodeID references the new WASM codesudo */
-
   codeId: Long;
-  /** Msg json encoded message to be passed to the contract on migration */
 
+  /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
-/** SudoContractProposal gov proposal content type to call sudo on a contract. */
 
+/** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
+
   /** Contract is the address of the smart contract */
-
   contract: string;
-  /** Msg json encoded message to be passed to the contract as sudo */
 
+  /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
 }
+
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
  * contract.
  */
-
 export interface ExecuteContractProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
+
   /** RunAs is the address that is passed to the contract's environment as sender */
-
   runAs: string;
+
   /** Contract is the address of the smart contract */
-
   contract: string;
+
   /** Msg json encoded message to be passed to the contract as execute */
-
   msg: Uint8Array;
-  /** Funds coins that are transferred to the contract on instantiation */
 
+  /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
-/** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 
+/** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
+
   /** NewAdmin address to be set */
-
   newAdmin: string;
-  /** Contract is the address of the smart contract */
 
+  /** Contract is the address of the smart contract */
   contract: string;
 }
+
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
  * contract.
  */
-
 export interface ClearAdminProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
-  /** Contract is the address of the smart contract */
 
+  /** Contract is the address of the smart contract */
   contract: string;
 }
+
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
  * wasmvm cache.
  */
-
 export interface PinCodesProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
-  /** CodeIDs references the new WASM codes */
 
+  /** CodeIDs references the new WASM codes */
   codeIds: Long[];
 }
+
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
  * the wasmvm cache.
  */
-
 export interface UnpinCodesProposal {
   /** Title is a short summary */
   title: string;
+
   /** Description is a human readable text */
-
   description: string;
-  /** CodeIDs references the WASM codes */
 
+  /** CodeIDs references the WASM codes */
   codeIds: Long[];
 }
 
@@ -1113,52 +1112,3 @@ export const UnpinCodesProposal = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

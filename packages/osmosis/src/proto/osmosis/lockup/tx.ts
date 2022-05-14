@@ -1,12 +1,11 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock } from "../../osmosis/lockup/lock";
+import { PeriodLock } from "./lock";
+import * as _m0 from "protobufjs/minimal";
+import { toDuration, fromDuration, isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgLockTokens {
   owner: string;
-  duration: Duration;
+  duration: string;
   coins: Coin[];
 }
 export interface MsgLockTokensResponse {
@@ -21,8 +20,8 @@ export interface MsgBeginUnlockingAllResponse {
 export interface MsgBeginUnlocking {
   owner: string;
   ID: Long;
-  /** Amount of unlocking coins. Unlock all if not set. */
 
+  /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
 export interface MsgBeginUnlockingResponse {
@@ -44,7 +43,7 @@ export const MsgLockTokens = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.coins) {
@@ -68,7 +67,7 @@ export const MsgLockTokens = {
           break;
 
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
         case 3:
@@ -87,7 +86,7 @@ export const MsgLockTokens = {
   fromJSON(object: any): MsgLockTokens {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
+      duration: isSet(object.duration) ? String(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -95,7 +94,7 @@ export const MsgLockTokens = {
   toJSON(message: MsgLockTokens): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration);
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -109,7 +108,7 @@ export const MsgLockTokens = {
   fromPartial<I extends Exact<DeepPartial<MsgLockTokens>, I>>(object: I): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.duration = object.duration ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -436,19 +435,3 @@ export const MsgBeginUnlockingResponse = {
   }
 
 };
-/** Msg defines the Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

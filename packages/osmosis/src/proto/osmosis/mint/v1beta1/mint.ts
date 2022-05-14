@@ -1,6 +1,5 @@
-/* eslint-disable */
-import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** Minter represents the minting state. */
 export interface Minter {
@@ -17,50 +16,50 @@ export interface DistributionProportions {
    * allocated as staking rewards.
    */
   staking: string;
+
   /**
    * pool_incentives defines the proportion of the minted minted_denom that is
    * to be allocated as pool incentives.
    */
-
   poolIncentives: string;
+
   /**
    * developer_rewards defines the proportion of the minted minted_denom that is
    * to be allocated to developer rewards address.
    */
-
   developerRewards: string;
+
   /**
    * community_pool defines the proportion of the minted minted_denom that is
    * to be allocated to the community pool.
    */
-
   communityPool: string;
 }
-/** Params holds parameters for the mint module. */
 
+/** Params holds parameters for the mint module. */
 export interface Params {
   /** type of coin to mint */
   mintDenom: string;
+
   /** epoch provisions from the first epoch */
-
   genesisEpochProvisions: string;
+
   /** mint epoch identifier */
-
   epochIdentifier: string;
+
   /** number of epochs take to reduce rewards */
-
   reductionPeriodInEpochs: Long;
+
   /** reduction multiplier to execute on each period */
-
   reductionFactor: string;
+
   /** distribution_proportions defines the proportion of the minted denom */
-
   distributionProportions: DistributionProportions;
+
   /** address to receive developer rewards */
-
   weightedDeveloperRewardsReceivers: WeightedAddress[];
-  /** start epoch to distribute minting rewards */
 
+  /** start epoch to distribute minting rewards */
   mintingRewardsDistributionStartEpoch: Long;
 }
 
@@ -429,17 +428,3 @@ export const Params = {
   }
 
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

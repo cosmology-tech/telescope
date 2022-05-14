@@ -1,10 +1,9 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Proof } from "../../tendermint/crypto/proof";
-import { Consensus } from "../../tendermint/version/types";
-import { ValidatorSet } from "../../tendermint/types/validator";
+import { Proof } from "../crypto/proof";
+import { Consensus } from "../version/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
+import { ValidatorSet } from "./validator";
+import * as _m0 from "protobufjs/minimal";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 
 /** BlockIdFlag indicates which BlcokID the signature is for */
 export enum BlockIDFlag {
@@ -56,8 +55,8 @@ export function blockIDFlagToJSON(object: BlockIDFlag): string {
       return "UNKNOWN";
   }
 }
-/** SignedMsgType is a type of signed message in the consensus. */
 
+/** SignedMsgType is a type of signed message in the consensus. */
 export enum SignedMsgType {
   SIGNED_MSG_TYPE_UNKNOWN = 0,
 
@@ -111,8 +110,8 @@ export function signedMsgTypeToJSON(object: SignedMsgType): string {
       return "UNKNOWN";
   }
 }
-/** PartsetHeader */
 
+/** PartsetHeader */
 export interface PartSetHeader {
   total: number;
   hash: Uint8Array;
@@ -122,53 +121,49 @@ export interface Part {
   bytes: Uint8Array;
   proof: Proof;
 }
-/** BlockID */
 
+/** BlockID */
 export interface BlockID {
   hash: Uint8Array;
   partSetHeader: PartSetHeader;
 }
-/** Header defines the structure of a Tendermint block header. */
 
+/** Header defines the structure of a Tendermint block header. */
 export interface Header {
   /** basic block info */
   version: Consensus;
   chainId: string;
   height: Long;
   time: Date;
+
   /** prev block info */
-
   lastBlockId: BlockID;
+
   /** hashes of block data */
-
   lastCommitHash: Uint8Array;
-  /** transactions */
-
   dataHash: Uint8Array;
+
   /** hashes from the app output from the prev block */
-
   validatorsHash: Uint8Array;
+
   /** validators for the next block */
-
   nextValidatorsHash: Uint8Array;
+
   /** consensus params for current block */
-
   consensusHash: Uint8Array;
+
   /** state after txs from the previous block */
-
   appHash: Uint8Array;
-  /** root hash of all results from the txs from the previous block */
-
   lastResultsHash: Uint8Array;
+
   /** consensus info */
-
   evidenceHash: Uint8Array;
-  /** original proposer of the block */
 
+  /** original proposer of the block */
   proposerAddress: Uint8Array;
 }
-/** Data contains the set of transactions included in the block */
 
+/** Data contains the set of transactions included in the block */
 export interface Data {
   /**
    * Txs that will be applied by state @ block.Height+1.
@@ -177,33 +172,33 @@ export interface Data {
    */
   txs: Uint8Array[];
 }
+
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for
  * consensus.
  */
-
 export interface Vote {
   type: SignedMsgType;
   height: Long;
   round: number;
-  /** zero if vote is nil. */
 
+  /** zero if vote is nil. */
   blockId: BlockID;
   timestamp: Date;
   validatorAddress: Uint8Array;
   validatorIndex: number;
   signature: Uint8Array;
 }
-/** Commit contains the evidence that a block was committed by a set of validators. */
 
+/** Commit contains the evidence that a block was committed by a set of validators. */
 export interface Commit {
   height: Long;
   round: number;
   blockId: BlockID;
   signatures: CommitSig[];
 }
-/** CommitSig is a part of the Vote included in a Commit. */
 
+/** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSig {
   blockIdFlag: BlockIDFlag;
   validatorAddress: Uint8Array;
@@ -233,8 +228,8 @@ export interface BlockMeta {
   header: Header;
   numTxs: Long;
 }
-/** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 
+/** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 export interface TxProof {
   rootHash: Uint8Array;
   data: Uint8Array;
@@ -1509,81 +1504,3 @@ export const TxProof = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
-  const nanos = date.getTime() % 1_000 * 1_000_000;
-  return {
-    seconds,
-    nanos
-  };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds.toNumber() * 1_000;
-  millis += t.nanos / 1_000_000;
-  return new Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

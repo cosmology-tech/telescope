@@ -1,9 +1,6 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-
-/** Since: cosmos-sdk 0.43 */
+import * as _m0 from "protobufjs/minimal";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -12,27 +9,27 @@ import { Any } from "../../../google/protobuf/any";
 export interface MsgGrantAllowance {
   /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
+
   /** grantee is the address of the user being granted an allowance of another user's funds. */
-
   grantee: string;
-  /** allowance can be any of basic, periodic, allowed fee allowance. */
 
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance: Any;
 }
+
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
-
 export interface MsgGrantAllowanceResponse {}
-/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 
+/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowance {
   /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
 
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
-/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 
+/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
 
 function createBaseMsgGrantAllowance(): MsgGrantAllowance {
@@ -270,19 +267,3 @@ export const MsgRevokeAllowanceResponse = {
   }
 
 };
-/** Msg defines the feegrant msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

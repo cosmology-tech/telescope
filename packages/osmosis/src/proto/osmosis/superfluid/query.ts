@@ -1,11 +1,10 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Params } from "../../osmosis/superfluid/params";
-import { SuperfluidAssetType, OsmoEquivalentMultiplierRecord, SuperfluidAsset, SuperfluidDelegationRecord, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "../../osmosis/superfluid/superfluid";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
+import { Params } from "./params";
+import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, SuperfluidDelegationRecord, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "./superfluid";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { SyntheticLock } from "../../osmosis/lockup/lock";
+import { SyntheticLock } from "../lockup/lock";
+import * as _m0 from "protobufjs/minimal";
+import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryParamsRequest {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
@@ -1672,19 +1671,3 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

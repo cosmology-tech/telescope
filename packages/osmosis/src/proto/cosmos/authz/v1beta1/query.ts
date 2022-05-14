@@ -1,63 +1,60 @@
-/* eslint-disable */
-import Long from "long";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantAuthorization } from "./authz";
 import * as _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Grant, GrantAuthorization } from "../../../cosmos/authz/v1beta1/authz";
-
-/** Since: cosmos-sdk 0.43 */
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequest {
   granter: string;
   grantee: string;
+
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
-
   msgTypeUrl: string;
-  /** pagination defines an pagination for the request. */
 
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 
+/** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponse {
   /** authorizations is a list of grants granted for grantee by granter. */
   grants: Grant[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
-/** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 
+/** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequest {
   granter: string;
-  /** pagination defines an pagination for the request. */
 
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 
+/** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponse {
   /** grants is a list of grants granted by the granter. */
   grants: GrantAuthorization[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
-/** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 
+/** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequest {
   grantee: string;
-  /** pagination defines an pagination for the request. */
 
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 
+/** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponse {
   /** grants is a list of grants granted to the grantee. */
   grants: GrantAuthorization[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
 
@@ -516,19 +513,3 @@ export const QueryGranteeGrantsResponse = {
   }
 
 };
-/** Query defines the gRPC querier service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

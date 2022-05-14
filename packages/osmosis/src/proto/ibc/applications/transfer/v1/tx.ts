@@ -1,8 +1,7 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
-import { Height } from "../../../../ibc/core/client/v1/client";
+import { Height } from "../../../core/client/v1/client";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -12,33 +11,33 @@ import { Height } from "../../../../ibc/core/client/v1/client";
 export interface MsgTransfer {
   /** the port on which the packet will be sent */
   sourcePort: string;
+
   /** the channel by which the packet will be sent */
-
   sourceChannel: string;
+
   /** the tokens to be transferred */
-
   token: Coin;
+
   /** the sender address */
-
   sender: string;
-  /** the recipient address on the destination chain */
 
+  /** the recipient address on the destination chain */
   receiver: string;
+
   /**
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
    */
-
   timeoutHeight: Height;
+
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
-
   timeoutTimestamp: Long;
 }
-/** MsgTransferResponse defines the Msg/Transfer response type. */
 
+/** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
 
 function createBaseMsgTransfer(): MsgTransfer {
@@ -212,19 +211,3 @@ export const MsgTransferResponse = {
   }
 
 };
-/** Msg defines the ibc/transfer Msg service. */
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

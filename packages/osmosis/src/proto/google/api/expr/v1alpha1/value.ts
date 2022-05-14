@@ -1,100 +1,99 @@
-/* eslint-disable */
-import Long from "long";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../../google/protobuf/struct";
-import { Any } from "../../../../google/protobuf/any";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Represents a CEL value.
- *
+ * 
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
 export interface Value {
   /** Null value. */
-  nullValue: NullValue | undefined;
+  nullValue?: NullValue;
+
   /** Boolean value. */
+  boolValue?: boolean;
 
-  boolValue: boolean | undefined;
   /** Signed integer value. */
+  int64Value?: Long;
 
-  int64Value: Long | undefined;
   /** Unsigned integer value. */
+  uint64Value?: Long;
 
-  uint64Value: Long | undefined;
   /** Floating point value. */
+  doubleValue?: number;
 
-  doubleValue: number | undefined;
   /** UTF-8 string value. */
+  stringValue?: string;
 
-  stringValue: string | undefined;
   /** Byte string value. */
+  bytesValue?: Uint8Array;
 
-  bytesValue: Uint8Array | undefined;
   /** An enum value. */
+  enumValue?: EnumValue;
 
-  enumValue: EnumValue | undefined;
   /** The proto message backing an object value. */
+  objectValue?: Any;
 
-  objectValue: Any | undefined;
   /** Map value. */
+  mapValue?: MapValue;
 
-  mapValue: MapValue | undefined;
   /** List value. */
+  listValue?: ListValue;
 
-  listValue: ListValue | undefined;
   /** Type value. */
-
-  typeValue: string | undefined;
+  typeValue?: string;
 }
-/** An enum value. */
 
+/** An enum value. */
 export interface EnumValue {
   /** The fully qualified name of the enum type. */
   type: string;
-  /** The value of the enum. */
 
+  /** The value of the enum. */
   value: number;
 }
+
 /**
  * A list.
- *
+ * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
 }
+
 /**
  * A map.
- *
+ * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface MapValue {
   /**
    * The set of map entries.
-   *
+   * 
    * CEL has fewer restrictions on keys, so a protobuf map represenation
    * cannot be used.
    */
   entries: MapValue_Entry[];
 }
-/** An entry in the map. */
 
+/** An entry in the map. */
 export interface MapValue_Entry {
   /**
    * The key.
-   *
+   * 
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
   key: Value;
-  /** The value. */
 
+  /** The value. */
   value: Value;
 }
 
@@ -253,7 +252,7 @@ export const Value = {
 
   toJSON(message: Value): unknown {
     const obj: any = {};
-    message.nullValue !== undefined && (obj.nullValue = message.nullValue !== undefined ? nullValueToJSON(message.nullValue) : undefined);
+    message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
     message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
     message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
@@ -550,52 +549,3 @@ export const MapValue_Entry = {
   }
 
 };
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-const atob: (b64: string) => string = globalThis.atob || (b64 => globalThis.Buffer.from(b64, "base64").toString("binary"));
-
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-
-  return arr;
-}
-
-const btoa: (bin: string) => string = globalThis.btoa || (bin => globalThis.Buffer.from(bin, "binary").toString("base64"));
-
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach(byte => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
-}
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}

@@ -1,90 +1,89 @@
-/* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { PageRequest, PageResponse } from "../../query/v1beta1/pagination";
 import { Any } from "../../../../google/protobuf/any";
 import { BlockID } from "../../../../tendermint/types/types";
 import { Block } from "../../../../tendermint/types/block";
 import { NodeInfo } from "../../../../tendermint/p2p/types";
+import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
   height: Long;
-  /** pagination defines an pagination for the request. */
 
+  /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 
+/** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
   blockHeight: Long;
   validators: Validator[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
-/** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 
+/** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequest {
   /** pagination defines an pagination for the request. */
   pagination: PageRequest;
 }
-/** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 
+/** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
   blockHeight: Long;
   validators: Validator[];
-  /** pagination defines an pagination for the response. */
 
+  /** pagination defines an pagination for the response. */
   pagination: PageResponse;
 }
-/** Validator is the type for the validator-set. */
 
+/** Validator is the type for the validator-set. */
 export interface Validator {
   address: string;
   pubKey: Any;
   votingPower: Long;
   proposerPriority: Long;
 }
-/** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 
+/** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequest {
   height: Long;
 }
-/** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 
+/** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
   blockId: BlockID;
   block: Block;
 }
+
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
-
 export interface GetLatestBlockRequest {}
-/** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 
+/** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
   blockId: BlockID;
   block: Block;
 }
+
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
-
 export interface GetSyncingRequest {}
-/** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 
+/** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 export interface GetSyncingResponse {
   syncing: boolean;
 }
+
 /** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
-
 export interface GetNodeInfoRequest {}
-/** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 
+/** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
   nodeInfo: NodeInfo;
   applicationVersion: VersionInfo;
 }
-/** VersionInfo is the type for the GetNodeInfoResponse message. */
 
+/** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
   name: string;
   appName: string;
@@ -93,20 +92,20 @@ export interface VersionInfo {
   buildTags: string;
   goVersion: string;
   buildDeps: Module[];
-  /** Since: cosmos-sdk 0.43 */
 
+  /** Since: cosmos-sdk 0.43 */
   cosmosSdkVersion: string;
 }
-/** Module is the type for VersionInfo */
 
+/** Module is the type for VersionInfo */
 export interface Module {
   /** module path */
   path: string;
+
   /** module version */
-
   version: string;
-  /** checksum */
 
+  /** checksum */
   sum: string;
 }
 
@@ -1180,88 +1179,3 @@ export const Module = {
   }
 
 };
-/** Service defines the gRPC querier service for tendermint queries. */
-
-export interface Service {
-  /** GetNodeInfo queries the current node info. */
-  GetNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponse>;
-  /** GetSyncing queries node syncing. */
-
-  GetSyncing(request: GetSyncingRequest): Promise<GetSyncingResponse>;
-  /** GetLatestBlock returns the latest block. */
-
-  GetLatestBlock(request: GetLatestBlockRequest): Promise<GetLatestBlockResponse>;
-  /** GetBlockByHeight queries block for given height. */
-
-  GetBlockByHeight(request: GetBlockByHeightRequest): Promise<GetBlockByHeightResponse>;
-  /** GetLatestValidatorSet queries latest validator-set. */
-
-  GetLatestValidatorSet(request: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponse>;
-  /** GetValidatorSetByHeight queries validator-set at a given height. */
-
-  GetValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse>;
-}
-export class ServiceClientImpl implements Service {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.GetNodeInfo = this.GetNodeInfo.bind(this);
-    this.GetSyncing = this.GetSyncing.bind(this);
-    this.GetLatestBlock = this.GetLatestBlock.bind(this);
-    this.GetBlockByHeight = this.GetBlockByHeight.bind(this);
-    this.GetLatestValidatorSet = this.GetLatestValidatorSet.bind(this);
-    this.GetValidatorSetByHeight = this.GetValidatorSetByHeight.bind(this);
-  }
-
-  GetNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponse> {
-    const data = GetNodeInfoRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetNodeInfo", data);
-    return promise.then(data => GetNodeInfoResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetSyncing(request: GetSyncingRequest): Promise<GetSyncingResponse> {
-    const data = GetSyncingRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetSyncing", data);
-    return promise.then(data => GetSyncingResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetLatestBlock(request: GetLatestBlockRequest): Promise<GetLatestBlockResponse> {
-    const data = GetLatestBlockRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetLatestBlock", data);
-    return promise.then(data => GetLatestBlockResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetBlockByHeight(request: GetBlockByHeightRequest): Promise<GetBlockByHeightResponse> {
-    const data = GetBlockByHeightRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetBlockByHeight", data);
-    return promise.then(data => GetBlockByHeightResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetLatestValidatorSet(request: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponse> {
-    const data = GetLatestValidatorSetRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetLatestValidatorSet", data);
-    return promise.then(data => GetLatestValidatorSetResponse.decode(new _m0.Reader(data)));
-  }
-
-  GetValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse> {
-    const data = GetValidatorSetByHeightRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetValidatorSetByHeight", data);
-    return promise.then(data => GetValidatorSetByHeightResponse.decode(new _m0.Reader(data)));
-  }
-
-}
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> } : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<Exclude<keyof I, KeysOfUnion<P>>, never>;
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = (Long as any);
-
-  _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
