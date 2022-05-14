@@ -131,20 +131,7 @@ export const parseService = (
     }> = obj.methods;
 
     if (!['Msg', 'Query'].includes(obj.name)) {
-        if (obj.name === 'ReflectionService') return;
-        if (obj.name === 'ConformanceService') return;
-        if (obj.name === 'QuotaController') return;
-        if (obj.name === 'ServiceController') return;
-        if (obj.name === 'ServiceManager') return;
-        if (obj.name === 'ServiceUsage') return;
-        if (obj.name === 'ConfigServiceV2') return;
-        if (obj.name === 'MetricsServiceV2') return;
-        if (obj.name === 'LoggingServiceV2') return;
-        if (obj.name === 'Operations') return;
-        if (obj.name === 'BalancerMsg') return;
-        if (obj.name === 'ABCIApplication') return;
-        if (obj.name === 'Service') return;
-        throw new Error('unsupported Service type. Contact Maintainers.');
+        return;
     }
 
     const isMutation = obj.name === 'Msg';
@@ -220,21 +207,21 @@ export const parseRecur = ({
                 throw new Error('parseRecur() cannot find protobufjs Type')
             }
         default:
-            if (obj.type === 'string') return;
-            if (obj.type === 'bool') return;
-            if (obj.type === 'HttpRule') return;
-            if (obj.type === 'InterfaceDescriptor') return;
-            if (obj.type === 'ScalarDescriptor') return;
-            if (obj.type === 'ModuleDescriptor') return;
-            if (obj.type === 'TableDescriptor') return;
-            if (obj.type === 'SingletonDescriptor') return;
-            if (obj.type === 'ModuleSchemaDescriptor') return;
-            if (obj.type === 'google.api.FieldBehavior') return;
-            if (obj.type === 'google.api.ResourceReference') return;
-            if (obj.type === 'google.api.ResourceDescriptor') return;
-            if (obj.type === 'google.api.RoutingRule') return;
-            if (obj.type === 'google.api.VisibilityRule') return;
-            if (obj.type === 'google.longrunning.OperationInfo') return;
-            throw new Error('parseRecur() cannot find protobufjs Type')
+        // if (obj.type === 'string') return;
+        // if (obj.type === 'bool') return;
+        // if (obj.type === 'HttpRule') return;
+        // if (obj.type === 'InterfaceDescriptor') return;
+        // if (obj.type === 'ScalarDescriptor') return;
+        // if (obj.type === 'ModuleDescriptor') return;
+        // if (obj.type === 'TableDescriptor') return;
+        // if (obj.type === 'SingletonDescriptor') return;
+        // if (obj.type === 'ModuleSchemaDescriptor') return;
+        // if (obj.type === 'google.api.FieldBehavior') return;
+        // if (obj.type === 'google.api.ResourceReference') return;
+        // if (obj.type === 'google.api.ResourceDescriptor') return;
+        // if (obj.type === 'google.api.RoutingRule') return;
+        // if (obj.type === 'google.api.VisibilityRule') return;
+        // if (obj.type === 'google.longrunning.OperationInfo') return;
+        // throw new Error('parseRecur() cannot find protobufjs Type')
     }
 };
