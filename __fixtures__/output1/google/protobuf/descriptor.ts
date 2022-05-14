@@ -1142,9 +1142,9 @@ export interface SourceCodeInfo_Location {
    * optional string corge = 5;
    * /* Block comment attached
    * * to corge.  Leading asterisks
-   * * will be removed. */
+   * * will be removed. *\/
    * /* Block comment attached to
-   * * grault. */
+   * * grault. *\/
    * optional int32 grault = 6;
    * 
    * // ignored detached comments.

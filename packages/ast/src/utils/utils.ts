@@ -4,12 +4,16 @@ const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
 export { BILLION };
 
+export const cleanComment = (str) => {
+    return str.replace(/\*\//g, '*\\\/');
+};
+
 export const commentBlock = (comment: string): t.CommentBlock => {
 
     if (!/[\n]+/.test(comment)) {
         return {
             type: 'CommentBlock',
-            value: `* ${comment} `
+            value: `* ${cleanComment(comment)} `
         };
     }
 
@@ -17,8 +21,8 @@ export const commentBlock = (comment: string): t.CommentBlock => {
     lines = ['*', ...lines, ' '];
     const comments = lines.map((line, i) => {
         if (i == 0) return line;
-        if (i == (lines.length - 1)) return line;
-        return ` * ${line}`
+        if (i == (lines.length - 1)) return cleanComment(line);
+        return ` * ${cleanComment(line)}`
     });
 
     return {

@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { getEnumFromJsonName, getEnumToJsonName } from './types';
-import { identifier, tsEnumMember, functionDeclaration, commentBlock } from '../../utils';
+import { identifier, tsEnumMember, functionDeclaration, commentBlock, cleanComment } from '../../utils';
 
 import { ProtoEnum } from './types';
 
@@ -20,6 +20,8 @@ const getEnumValues = (proto: ProtoEnum) => {
     return enums;
 }
 
+
+
 const processEnumComment = (e: ProtoEnum) => {
     const comment = e.comment;
 
@@ -30,9 +32,9 @@ const processEnumComment = (e: ProtoEnum) => {
     lines = ['*', ...lines, ' '];
     const comments = lines.map((line, i) => {
         if (i == 0) return line;
-        if (i == 1) return ` * ${e.name} - ${line}`;
-        if (i == (lines.length - 1)) return line;
-        return ` * ${line}`
+        if (i == 1) return ` * ${e.name} - ${cleanComment(line)}`;
+        if (i == (lines.length - 1)) return cleanComment(line);
+        return ` * ${cleanComment(line)}`
     });
     return comments.join('\n');
 };

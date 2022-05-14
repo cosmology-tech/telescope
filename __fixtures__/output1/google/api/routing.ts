@@ -93,7 +93,7 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * // syntax).
  * routing_parameters {
  * field: "table_name"
- * path_template: "{table_name=projects/*/instances/*/**}"
+ * path_template: "{table_name=projects/*\/instances/*\/**}"
  * }
  * };
  * 
@@ -113,7 +113,7 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * // syntax).
  * routing_parameters {
  * field: "table_name"
- * path_template: "{table_name=regions/*/zones/*/**}"
+ * path_template: "{table_name=regions/*\/zones/*\/**}"
  * }
  * };
  * 
@@ -134,11 +134,11 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * 
  * routing_parameters {
  * field: "table_name"
- * path_template: "{table_name=regions/*/zones/*/**}"
+ * path_template: "{table_name=regions/*\/zones/*\/**}"
  * }
  * routing_parameters {
  * field: "table_name"
- * path_template: "{table_name=projects/*/instances/*/**}"
+ * path_template: "{table_name=projects/*\/instances/*\/**}"
  * }
  * };
  * 
@@ -185,7 +185,7 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * }
  * routing_parameters {
  * field: "table_name"
- * path_template: "{routing_id=projects/*/instances/*}/**"
+ * path_template: "{routing_id=projects/*\/instances/*}/**"
  * }
  * };
  * 
@@ -213,11 +213,11 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * 
  * routing_parameters {
  * field: "table_name"
- * path_template: "{project_id=projects/*}/instances/*/**"
+ * path_template: "{project_id=projects/*}/instances/*\/**"
  * }
  * routing_parameters {
  * field: "table_name"
- * path_template: "projects/*/{instance_id=instances/*}/**"
+ * path_template: "projects/*\/{instance_id=instances/*}/**"
  * }
  * };
  * 
@@ -244,7 +244,7 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * }
  * routing_parameters {
  * field: "table_name"
- * path_template: "projects/*/{instance_id=instances/*}/**"
+ * path_template: "projects/*\/{instance_id=instances/*}/**"
  * }
  * };
  * 
@@ -337,11 +337,11 @@ import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
  * 
  * routing_parameters {
  * field: "table_name"
- * path_template: "projects/*/{table_location=instances/*}/tables/*"
+ * path_template: "projects/*\/{table_location=instances/*}/tables/*"
  * }
  * routing_parameters {
  * field: "table_name"
- * path_template: "{table_location=regions/*/zones/*}/tables/*"
+ * path_template: "{table_location=regions/*\/zones/*}/tables/*"
  * }
  * routing_parameters {
  * field: "table_name"
@@ -399,7 +399,7 @@ export interface RoutingParameter {
    * |                    |   routing header.
    * V                    |
    * field: "table_name"           v
-   * path_template: "projects/*/{table_location=instances/*}/tables/*"
+   * path_template: "projects/*\/{table_location=instances/*}/tables/*"
    * ^            ^
    * |            |
    * In the {} brackets is the pattern that --             |
@@ -415,7 +415,7 @@ export interface RoutingParameter {
    * to the x-goog-request-params routing header.
    * - The value is extracted from the request message's `table_name` field
    * if it matches the full pattern specified:
-   * `projects/*/instances/*/tables/*`.
+   * `projects/*\/instances/*\/tables/*`.
    * 
    * **NB:** If the `path_template` field is not provided, the key name is
    * equal to the field name, and the whole field should be sent as a value.
