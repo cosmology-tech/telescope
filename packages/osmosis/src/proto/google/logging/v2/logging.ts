@@ -3,7 +3,7 @@ import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
 import { Status } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -1436,7 +1436,7 @@ export const TailLogEntriesRequest = {
     }
 
     if (message.bufferWindow !== undefined) {
-      Duration.encode(toDuration(message.bufferWindow), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.bufferWindow, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -1460,7 +1460,7 @@ export const TailLogEntriesRequest = {
           break;
 
         case 3:
-          message.bufferWindow = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.bufferWindow = Duration.decode(reader, reader.uint32());
           break;
 
         default:

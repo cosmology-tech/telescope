@@ -6,7 +6,7 @@ import { MerkleRoot } from "../../../core/commitment/v1/commitment";
 import { SignedHeader } from "../../../../tendermint/types/types";
 import { ValidatorSet } from "../../../../tendermint/types/validator";
 import * as _m0 from "protobufjs/minimal";
-import { toDuration, fromDuration, isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -141,15 +141,15 @@ export const ClientState = {
     }
 
     if (message.trustingPeriod !== undefined) {
-      Duration.encode(toDuration(message.trustingPeriod), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.unbondingPeriod !== undefined) {
-      Duration.encode(toDuration(message.unbondingPeriod), writer.uint32(34).fork()).ldelim();
+      Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
     }
 
     if (message.maxClockDrift !== undefined) {
-      Duration.encode(toDuration(message.maxClockDrift), writer.uint32(42).fork()).ldelim();
+      Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
     }
 
     if (message.frozenHeight !== undefined) {
@@ -197,15 +197,15 @@ export const ClientState = {
           break;
 
         case 3:
-          message.trustingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.trustingPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:
-          message.unbondingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.unbondingPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 5:
-          message.maxClockDrift = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.maxClockDrift = Duration.decode(reader, reader.uint32());
           break;
 
         case 6:

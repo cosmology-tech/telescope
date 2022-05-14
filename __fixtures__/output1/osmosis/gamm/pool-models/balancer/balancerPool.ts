@@ -2,7 +2,7 @@ import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -121,7 +121,7 @@ export const SmoothWeightChangeParams = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.initialPoolWeights) {
@@ -149,7 +149,7 @@ export const SmoothWeightChangeParams = {
           break;
 
         case 2:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:

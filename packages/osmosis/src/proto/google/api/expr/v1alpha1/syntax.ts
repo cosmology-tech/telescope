@@ -2,7 +2,7 @@ import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf
 import { Duration } from "../../../protobuf/duration";
 import { Timestamp } from "../../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, toDuration, toTimestamp, fromDuration, fromTimestamp, bytesFromBase64, fromJsonTimestamp, base64FromBytes, isObject } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, bytesFromBase64, fromJsonTimestamp, base64FromBytes, isObject } from "@osmonauts/helpers";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -1200,7 +1200,7 @@ export const Constant = {
     }
 
     if (message.durationValue !== undefined) {
-      Duration.encode(toDuration(message.durationValue), writer.uint32(66).fork()).ldelim();
+      Duration.encode(message.durationValue, writer.uint32(66).fork()).ldelim();
     }
 
     if (message.timestampValue !== undefined) {
@@ -1248,7 +1248,7 @@ export const Constant = {
           break;
 
         case 8:
-          message.durationValue = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationValue = Duration.decode(reader, reader.uint32());
           break;
 
         case 9:

@@ -3,7 +3,7 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -1382,7 +1382,7 @@ export const AttributeContext_Response = {
     }
 
     if (message.backendLatency !== undefined) {
-      Duration.encode(toDuration(message.backendLatency), writer.uint32(42).fork()).ldelim();
+      Duration.encode(message.backendLatency, writer.uint32(42).fork()).ldelim();
     }
 
     return writer;
@@ -1419,7 +1419,7 @@ export const AttributeContext_Response = {
           break;
 
         case 5:
-          message.backendLatency = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.backendLatency = Duration.decode(reader, reader.uint32());
           break;
 
         default:

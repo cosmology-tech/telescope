@@ -1,6 +1,6 @@
 import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -275,7 +275,7 @@ export const EvidenceParams = {
     }
 
     if (message.maxAgeDuration !== undefined) {
-      Duration.encode(toDuration(message.maxAgeDuration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.maxAgeDuration, writer.uint32(18).fork()).ldelim();
     }
 
     if (!message.maxBytes.isZero()) {
@@ -299,7 +299,7 @@ export const EvidenceParams = {
           break;
 
         case 2:
-          message.maxAgeDuration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.maxAgeDuration = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:

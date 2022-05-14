@@ -3,7 +3,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -165,7 +165,7 @@ export const PeriodicAllowance = {
     }
 
     if (message.period !== undefined) {
-      Duration.encode(toDuration(message.period), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.period, writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.periodSpendLimit) {
@@ -197,7 +197,7 @@ export const PeriodicAllowance = {
           break;
 
         case 2:
-          message.period = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.period = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:

@@ -3,7 +3,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -800,7 +800,7 @@ export const DepositParams = {
     }
 
     if (message.maxDepositPeriod !== undefined) {
-      Duration.encode(toDuration(message.maxDepositPeriod), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.maxDepositPeriod, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -820,7 +820,7 @@ export const DepositParams = {
           break;
 
         case 2:
-          message.maxDepositPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.maxDepositPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -870,7 +870,7 @@ function createBaseVotingParams(): VotingParams {
 export const VotingParams = {
   encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
-      Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
+      Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -886,7 +886,7 @@ export const VotingParams = {
 
       switch (tag >>> 3) {
         case 1:
-          message.votingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.votingPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         default:

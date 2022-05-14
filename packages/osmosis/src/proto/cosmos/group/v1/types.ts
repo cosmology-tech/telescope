@@ -2,7 +2,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** VoteOption enumerates the valid vote options for a given proposal. */
 export enum VoteOption {
@@ -791,11 +791,11 @@ function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
 export const DecisionPolicyWindows = {
   encode(message: DecisionPolicyWindows, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
-      Duration.encode(toDuration(message.votingPeriod), writer.uint32(10).fork()).ldelim();
+      Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
     }
 
     if (message.minExecutionPeriod !== undefined) {
-      Duration.encode(toDuration(message.minExecutionPeriod), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.minExecutionPeriod, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -811,11 +811,11 @@ export const DecisionPolicyWindows = {
 
       switch (tag >>> 3) {
         case 1:
-          message.votingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.votingPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 2:
-          message.minExecutionPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.minExecutionPeriod = Duration.decode(reader, reader.uint32());
           break;
 
         default:

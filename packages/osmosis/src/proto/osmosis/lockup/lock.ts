@@ -2,7 +2,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { toDuration, toTimestamp, Long, fromDuration, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export enum LockQueryType {
   /** ByDuration - Queries for locks that are longer than a certain duration */
   ByDuration = 0,
@@ -116,7 +116,7 @@ export const PeriodLock = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.endTime !== undefined) {
@@ -148,7 +148,7 @@ export const PeriodLock = {
           break;
 
         case 3:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:
@@ -226,7 +226,7 @@ export const QueryCondition = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.timestamp !== undefined) {
@@ -254,7 +254,7 @@ export const QueryCondition = {
           break;
 
         case 3:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:
@@ -323,7 +323,7 @@ export const SyntheticLock = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(34).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -351,7 +351,7 @@ export const SyntheticLock = {
           break;
 
         case 4:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         default:

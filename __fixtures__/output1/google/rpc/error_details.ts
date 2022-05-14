@@ -1,6 +1,6 @@
 import { Duration } from "../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toDuration, fromDuration, isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -291,7 +291,7 @@ function createBaseRetryInfo(): RetryInfo {
 export const RetryInfo = {
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
-      Duration.encode(toDuration(message.retryDelay), writer.uint32(10).fork()).ldelim();
+      Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -307,7 +307,7 @@ export const RetryInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.retryDelay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.retryDelay = Duration.decode(reader, reader.uint32());
           break;
 
         default:

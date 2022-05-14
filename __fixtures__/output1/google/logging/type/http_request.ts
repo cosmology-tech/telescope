@@ -1,6 +1,6 @@
 import { Duration } from "../../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toDuration, Long, fromDuration, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -155,7 +155,7 @@ export const HttpRequest = {
     }
 
     if (message.latency !== undefined) {
-      Duration.encode(toDuration(message.latency), writer.uint32(114).fork()).ldelim();
+      Duration.encode(message.latency, writer.uint32(114).fork()).ldelim();
     }
 
     if (message.cacheLookup === true) {
@@ -227,7 +227,7 @@ export const HttpRequest = {
           break;
 
         case 14:
-          message.latency = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.latency = Duration.decode(reader, reader.uint32());
           break;
 
         case 11:

@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, toDuration, fromDuration, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -183,7 +183,7 @@ export const Params = {
     }
 
     if (message.downtimeJailDuration !== undefined) {
-      Duration.encode(toDuration(message.downtimeJailDuration), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.downtimeJailDuration, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.slashFractionDoubleSign.length !== 0) {
@@ -215,7 +215,7 @@ export const Params = {
           break;
 
         case 3:
-          message.downtimeJailDuration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.downtimeJailDuration = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:

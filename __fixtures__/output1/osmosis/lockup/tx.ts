@@ -2,7 +2,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
-import { toDuration, fromDuration, isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgLockTokens {
   owner: string;
   duration: string;
@@ -43,7 +43,7 @@ export const MsgLockTokens = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
 
     for (const v of message.coins) {
@@ -67,7 +67,7 @@ export const MsgLockTokens = {
           break;
 
         case 2:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:

@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /** Params defines the claim module's parameters. */
 export interface Params {
@@ -29,11 +29,11 @@ export const Params = {
     }
 
     if (message.durationUntilDecay !== undefined) {
-      Duration.encode(toDuration(message.durationUntilDecay), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.durationUntilDecay, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.durationOfDecay !== undefined) {
-      Duration.encode(toDuration(message.durationOfDecay), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.durationOfDecay, writer.uint32(26).fork()).ldelim();
     }
 
     if (message.claimDenom !== "") {
@@ -57,11 +57,11 @@ export const Params = {
           break;
 
         case 2:
-          message.durationUntilDecay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationUntilDecay = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
-          message.durationOfDecay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationOfDecay = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:

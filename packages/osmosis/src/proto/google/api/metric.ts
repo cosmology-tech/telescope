@@ -2,7 +2,7 @@ import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_st
 import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toDuration, fromDuration, isObject } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -593,11 +593,11 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     }
 
     if (message.samplePeriod !== undefined) {
-      Duration.encode(toDuration(message.samplePeriod), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.samplePeriod, writer.uint32(18).fork()).ldelim();
     }
 
     if (message.ingestDelay !== undefined) {
-      Duration.encode(toDuration(message.ingestDelay), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.ingestDelay, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -617,11 +617,11 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
           break;
 
         case 2:
-          message.samplePeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.samplePeriod = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:
-          message.ingestDelay = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.ingestDelay = Duration.decode(reader, reader.uint32());
           break;
 
         default:

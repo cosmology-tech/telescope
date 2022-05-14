@@ -2,7 +2,7 @@ import { Duration } from "../protobuf/duration";
 import { Any } from "../protobuf/any";
 import { Status } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
+import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * This resource represents a long-running operation that is the result of a
@@ -598,7 +598,7 @@ export const WaitOperationRequest = {
     }
 
     if (message.timeout !== undefined) {
-      Duration.encode(toDuration(message.timeout), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.timeout, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -618,7 +618,7 @@ export const WaitOperationRequest = {
           break;
 
         case 2:
-          message.timeout = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.timeout = Duration.decode(reader, reader.uint32());
           break;
 
         default:

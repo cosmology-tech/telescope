@@ -2,7 +2,7 @@ import { Duration } from "../../../google/protobuf/duration";
 import { DistrInfo, Params } from "./incentives";
 import { Gauge } from "../../incentives/gauge";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial, toDuration, fromDuration } from "@osmonauts/helpers";
+import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface QueryGaugeIdsRequest {
   poolId: Long;
 }
@@ -173,7 +173,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -193,7 +193,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
           break;
 
         case 2:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         default:
@@ -592,7 +592,7 @@ export const IncentivizedPool = {
     }
 
     if (message.lockableDuration !== undefined) {
-      Duration.encode(toDuration(message.lockableDuration), writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.lockableDuration, writer.uint32(18).fork()).ldelim();
     }
 
     if (!message.gaugeId.isZero()) {
@@ -616,7 +616,7 @@ export const IncentivizedPool = {
           break;
 
         case 2:
-          message.lockableDuration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.lockableDuration = Duration.decode(reader, reader.uint32());
           break;
 
         case 3:

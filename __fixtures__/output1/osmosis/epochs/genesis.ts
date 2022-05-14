@@ -1,7 +1,7 @@
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, toDuration, fromTimestamp, fromDuration, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
 export interface EpochInfo {
   identifier: string;
   startTime: Date;
@@ -40,7 +40,7 @@ export const EpochInfo = {
     }
 
     if (message.duration !== undefined) {
-      Duration.encode(toDuration(message.duration), writer.uint32(26).fork()).ldelim();
+      Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
 
     if (!message.currentEpoch.isZero()) {
@@ -80,7 +80,7 @@ export const EpochInfo = {
           break;
 
         case 3:
-          message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
 
         case 4:
