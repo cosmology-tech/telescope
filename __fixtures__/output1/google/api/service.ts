@@ -164,6 +164,8 @@ export interface Service {
    * This field has no semantic meaning. The service config compiler always
    * sets this field to `3`.
    */
+
+  /** @deprecated */
   configVersion: UInt32Value;
 }
 

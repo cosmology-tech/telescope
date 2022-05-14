@@ -668,6 +668,8 @@ export interface FileOptions {
   javaMultipleFiles: boolean;
 
   /** This option does nothing. */
+
+  /** @deprecated */
   javaGenerateEqualsAndHash: boolean;
 
   /**

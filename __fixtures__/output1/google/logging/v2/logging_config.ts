@@ -376,6 +376,8 @@ export interface LogSink {
   exclusions: LogExclusion[];
 
   /** Deprecated. This field is unused. */
+
+  /** @deprecated */
   outputVersionFormat: LogSink_VersionFormat;
 
   /**

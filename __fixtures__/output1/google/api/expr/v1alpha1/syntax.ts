@@ -270,6 +270,8 @@ export interface Constant {
    * 
    * Deprecated: duration is no longer considered a builtin cel type.
    */
+
+  /** @deprecated */
   durationValue?: string;
 
   /**
@@ -277,6 +279,8 @@ export interface Constant {
    * 
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
+
+  /** @deprecated */
   timestampValue?: Date;
 }
 export interface SourceInfo_PositionsEntry {

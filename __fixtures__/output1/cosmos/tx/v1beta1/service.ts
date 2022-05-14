@@ -177,6 +177,8 @@ export interface SimulateRequest {
    * tx is the transaction to simulate.
    * Deprecated. Send raw tx bytes instead.
    */
+
+  /** @deprecated */
   tx: Tx;
 
   /**

@@ -189,6 +189,8 @@ export interface LogMetric {
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
    */
+
+  /** @deprecated */
   version: LogMetric_ApiVersion;
 }
 

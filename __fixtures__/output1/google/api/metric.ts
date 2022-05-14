@@ -345,6 +345,8 @@ export interface MetricDescriptor {
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadata {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
+
+  /** @deprecated */
   launchStage: LaunchStage;
 
   /**

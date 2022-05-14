@@ -109,6 +109,8 @@ export interface Result {
    * Deprecated. This field is still populated, but prefer msg_response instead
    * because it also contains the Msg response typeURL.
    */
+
+  /** @deprecated */
   data: Uint8Array;
 
   /** Log contains the log information from message or handler execution. */
@@ -154,6 +156,8 @@ export interface MsgData {
  */
 export interface TxMsgData {
   /** data field is deprecated and not populated. */
+
+  /** @deprecated */
   data: MsgData[];
 
   /**

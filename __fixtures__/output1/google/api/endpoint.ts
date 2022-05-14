@@ -32,6 +32,8 @@ export interface Endpoint {
    * 
    * Additional names that this endpoint will be hosted on.
    */
+
+  /** @deprecated */
   aliases: string[];
 
   /**

@@ -20,6 +20,7 @@ export interface ProtoType {
     name?: string;
     oneofs?: { [key: string]: { oneof: string[], comment: string | undefined } },
     options?: {
+        [key: string]: any;
         deprecated?: boolean;
         "(cosmos_proto.implements_interface)"?: string;
     },
@@ -43,6 +44,7 @@ export interface ProtoField {
     id: number;
     options: {
         [key: string]: any;
+        deprecated?: boolean;
         "(gogoproto.nullable)"?: boolean;
         "(cosmos_proto.scalar)"?: string;
         "(gogoproto.customtype)"?: string;
@@ -388,11 +390,22 @@ export const createProtoType = (
                     ),
                     getFieldOptionality(field, isOneOf)
                 );
+
+                const comments = [];
                 if (field.comment) {
-                    propSig.leadingComments = [
+                    comments.push(
                         commentBlock(field.comment)
-                    ]
+                    );
                 }
+                if (field.options?.deprecated) {
+                    comments.push(
+                        commentBlock('@deprecated')
+                    );
+                }
+                if (comments.length) {
+                    propSig.leadingComments = comments;
+                }
+
                 m.push(propSig)
                 return m;
             }, [])

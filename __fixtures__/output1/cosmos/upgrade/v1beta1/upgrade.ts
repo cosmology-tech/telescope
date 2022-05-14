@@ -21,6 +21,8 @@ export interface Plan {
    * has been removed from the SDK.
    * If this field is not empty, an error will be thrown.
    */
+
+  /** @deprecated */
   time: Date;
 
   /**
@@ -40,6 +42,8 @@ export interface Plan {
    * moved to the IBC module in the sub module 02-client.
    * If this field is not empty, an error will be thrown.
    */
+
+  /** @deprecated */
   upgradedClientState: Any;
 }
 

@@ -235,6 +235,8 @@ export interface Vote {
    * if and only if `len(options) == 1` and that option has weight 1. In all
    * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
    */
+
+  /** @deprecated */
   option: VoteOption;
 
   /** Since: cosmos-sdk 0.43 */
