@@ -45,10 +45,7 @@ export const AminoConverter = {
     }: MsgLockTokens): AminoMsgLockTokens["value"] => {
       return {
         owner,
-        duration: {
-          seconds: duration.seconds.toString(),
-          nanos: duration.nanos
-        },
+        duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -63,8 +60,8 @@ export const AminoConverter = {
       return {
         owner,
         duration: {
-          seconds: Long.fromString(duration.seconds),
-          nanos: duration.nanos
+          seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
+          nanos: parseInt(duration) % 1_000_000_000
         },
         coins: coins.map(el0 => ({
           denom: el0.denom,

@@ -1,7 +1,7 @@
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "@osmonauts/helpers";
+import { omitDefault, Long } from "@osmonauts/helpers";
 import { MsgTransfer } from "./tx";
 export interface AminoMsgTransfer extends AminoMsg {
   type: "cosmos-sdk/MsgTransfer";
@@ -38,14 +38,14 @@ export const AminoConverter = {
         source_channel: sourceChannel,
         token: {
           denom: token.denom,
-          amount: token.amount
+          amount: Long.fromNumber(token.amount).toString()
         },
         sender,
         receiver,
-        timeout_height: {
-          revision_number: timeoutHeight.revisionNumber.toString(),
-          revision_height: timeoutHeight.revisionHeight.toString()
-        },
+        timeout_height: timeoutHeight ? {
+          revision_height: omitDefault(timeoutHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(timeoutHeight.revisionNumber)?.toString()
+        } : {},
         timeout_timestamp: timeoutTimestamp.toString()
       };
     },
@@ -67,10 +67,10 @@ export const AminoConverter = {
         },
         sender,
         receiver,
-        timeoutHeight: {
-          revisionNumber: Long.fromString(timeout_height.revision_number),
-          revisionHeight: Long.fromString(timeout_height.revision_height)
-        },
+        timeoutHeight: timeout_height ? {
+          revisionHeight: Long.fromString(timeout_height.revision_height || "0", true),
+          revisionNumber: Long.fromString(timeout_height.revision_number || "0", true)
+        } : undefined,
         timeoutTimestamp: Long.fromString(timeout_timestamp)
       };
     }

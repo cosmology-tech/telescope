@@ -1,7 +1,6 @@
 import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "@osmonauts/helpers";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { MsgGrant, MsgExec, MsgRevoke } from "./tx";
 export interface AminoMsgGrant extends AminoMsg {
@@ -55,10 +54,7 @@ export const AminoConverter = {
             type_url: grant.authorization.typeUrl,
             value: grant.authorization.value
           },
-          expiration: {
-            seconds: grant.expiration.seconds.toString(),
-            nanos: grant.expiration.nanos
-          }
+          expiration: grant.expiration
         }
       };
     },
@@ -75,10 +71,7 @@ export const AminoConverter = {
             typeUrl: grant.authorization.type_url,
             value: grant.authorization.value
           },
-          expiration: {
-            seconds: Long.fromString(grant.expiration.seconds),
-            nanos: grant.expiration.nanos
-          }
+          expiration: grant.expiration
         }
       };
     }

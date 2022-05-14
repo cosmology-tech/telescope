@@ -61,7 +61,7 @@ export const toAminoParseField = ({
     }
 
 
-    // casting special types
+    // casting Any types
     if (field.type === 'google.protobuf.Any') {
         switch (field.options?.['(cosmos_proto.accepts_interface)']) {
             case 'cosmos.crypto.PubKey':
@@ -69,28 +69,8 @@ export const toAminoParseField = ({
         }
     }
 
-    // Types/Enums
-    switch (field.parsedType.type) {
-        case 'Enum':
-            return toAmino.defaultType(args);
-        case 'Type':
-            return toAmino.type(args);
-    }
-
-
-    // scalar types...
+    // special types...
     switch (field.type) {
-        case 'string':
-            return toAmino.string(args);
-        case 'int64':
-        case 'uint64':
-            return toAmino.long(args);
-        case 'double':
-        case 'float':
-        case 'int32':
-        case 'uint32':
-        case 'bool':
-        case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
             return toAmino.defaultType(args)
@@ -107,6 +87,31 @@ export const toAminoParseField = ({
         case 'Duration':
         case 'google.protobuf.Duration':
             return toAmino.duration(args);
+        default:
+    }
+
+    // Types/Enums
+    switch (field.parsedType.type) {
+        case 'Enum':
+            return toAmino.defaultType(args);
+        case 'Type':
+            return toAmino.type(args);
+    }
+
+    // scalar types...
+    switch (field.type) {
+        case 'string':
+            return toAmino.string(args);
+        case 'int64':
+        case 'uint64':
+            return toAmino.long(args);
+        case 'double':
+        case 'float':
+        case 'int32':
+        case 'uint32':
+        case 'bool':
+        case 'bytes':
+            return toAmino.defaultType(args)
 
         default:
             warningDefaultImplementation(field.name, field);

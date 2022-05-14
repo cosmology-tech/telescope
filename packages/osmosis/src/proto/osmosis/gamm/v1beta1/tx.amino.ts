@@ -187,7 +187,7 @@ export const AminoConverter = {
         })),
         tokenIn: {
           denom: tokenIn.denom,
-          amount: tokenIn.amount
+          amount: Long.fromNumber(tokenIn.amount).toString()
         },
         tokenOutMinAmount
       };
@@ -229,7 +229,7 @@ export const AminoConverter = {
         tokenInMaxAmount,
         tokenOut: {
           denom: tokenOut.denom,
-          amount: tokenOut.amount
+          amount: Long.fromNumber(tokenOut.amount).toString()
         }
       };
     },
@@ -266,7 +266,7 @@ export const AminoConverter = {
         poolId: poolId.toString(),
         tokenIn: {
           denom: tokenIn.denom,
-          amount: tokenIn.amount
+          amount: Long.fromNumber(tokenIn.amount).toString()
         },
         shareOutMinAmount
       };
@@ -334,7 +334,7 @@ export const AminoConverter = {
         poolId: poolId.toString(),
         tokenOut: {
           denom: tokenOut.denom,
-          amount: tokenOut.amount
+          amount: Long.fromNumber(tokenOut.amount).toString()
         },
         shareInMaxAmount
       };

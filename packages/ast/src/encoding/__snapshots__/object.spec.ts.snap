@@ -295,7 +295,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);
@@ -388,7 +388,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);
@@ -1415,7 +1415,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       writer.uint32(18).string(message.location);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.lineOffsets) {
       writer.int32(v);

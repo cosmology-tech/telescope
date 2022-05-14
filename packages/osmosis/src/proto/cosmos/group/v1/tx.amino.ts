@@ -171,10 +171,7 @@ export const AminoConverter = {
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
-          added_at: {
-            seconds: el0.addedAt.seconds.toString(),
-            nanos: el0.addedAt.nanos
-          }
+          added_at: el0.addedAt
         })),
         metadata
       };
@@ -190,10 +187,7 @@ export const AminoConverter = {
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
-          addedAt: {
-            seconds: Long.fromString(el0.added_at.seconds),
-            nanos: el0.added_at.nanos
-          }
+          addedAt: el0.added_at
         })),
         metadata
       };
@@ -213,10 +207,7 @@ export const AminoConverter = {
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
-          added_at: {
-            seconds: el0.addedAt.seconds.toString(),
-            nanos: el0.addedAt.nanos
-          }
+          added_at: el0.addedAt
         }))
       };
     },
@@ -232,10 +223,7 @@ export const AminoConverter = {
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
-          addedAt: {
-            seconds: Long.fromString(el0.added_at.seconds),
-            nanos: el0.added_at.nanos
-          }
+          addedAt: el0.added_at
         }))
       };
     }
@@ -341,10 +329,7 @@ export const AminoConverter = {
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
-          added_at: {
-            seconds: el0.addedAt.seconds.toString(),
-            nanos: el0.addedAt.nanos
-          }
+          added_at: el0.addedAt
         })),
         group_metadata: groupMetadata,
         group_policy_metadata: groupPolicyMetadata,
@@ -369,10 +354,7 @@ export const AminoConverter = {
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
-          addedAt: {
-            seconds: Long.fromString(el0.added_at.seconds),
-            nanos: el0.added_at.nanos
-          }
+          addedAt: el0.added_at
         })),
         groupMetadata: group_metadata,
         groupPolicyMetadata: group_policy_metadata,

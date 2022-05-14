@@ -61,23 +61,14 @@ export const AminoConverter = {
         distributeTo: {
           lockQueryType: distributeTo.lockQueryType,
           denom: distributeTo.denom,
-          duration: {
-            seconds: distributeTo.duration.seconds.toString(),
-            nanos: distributeTo.duration.nanos
-          },
-          timestamp: {
-            seconds: distributeTo.timestamp.seconds.toString(),
-            nanos: distributeTo.timestamp.nanos
-          }
+          duration: (distributeTo.duration * 1_000_000_000).toString(),
+          timestamp: distributeTo.timestamp
         },
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
-        startTime: {
-          seconds: startTime.seconds.toString(),
-          nanos: startTime.nanos
-        },
+        startTime,
         numEpochsPaidOver: numEpochsPaidOver.toString()
       };
     },
@@ -96,22 +87,16 @@ export const AminoConverter = {
           lockQueryType: lockQueryTypeFromJSON(distributeTo.lockQueryType),
           denom: distributeTo.denom,
           duration: {
-            seconds: Long.fromString(distributeTo.duration.seconds),
-            nanos: distributeTo.duration.nanos
+            seconds: Long.fromNumber(Math.floor(parseInt(distributeTo.duration) / 1_000_000_000)),
+            nanos: parseInt(distributeTo.duration) % 1_000_000_000
           },
-          timestamp: {
-            seconds: Long.fromString(distributeTo.timestamp.seconds),
-            nanos: distributeTo.timestamp.nanos
-          }
+          timestamp: distributeTo.timestamp
         },
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
-        startTime: {
-          seconds: Long.fromString(startTime.seconds),
-          nanos: startTime.nanos
-        },
+        startTime,
         numEpochsPaidOver: Long.fromString(numEpochsPaidOver)
       };
     }

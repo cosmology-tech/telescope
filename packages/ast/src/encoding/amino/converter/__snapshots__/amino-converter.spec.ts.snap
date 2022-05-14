@@ -35,7 +35,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         },
         value: {
           denom: value.denom,
-          amount: value.amount
+          amount: Long.fromNumber(value.amount).toString()
         }
       };
     },
@@ -128,7 +128,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         validator_address: validatorAddress,
         amount: {
           denom: amount.denom,
-          amount: amount.amount
+          amount: Long.fromNumber(amount.amount).toString()
         }
       };
     },
@@ -161,7 +161,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         validator_dst_address: validatorDstAddress,
         amount: {
           denom: amount.denom,
-          amount: amount.amount
+          amount: Long.fromNumber(amount.amount).toString()
         }
       };
     },
@@ -194,7 +194,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         validator_address: validatorAddress,
         amount: {
           denom: amount.denom,
-          amount: amount.amount
+          amount: Long.fromNumber(amount.amount).toString()
         }
       };
     },
@@ -304,7 +304,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
         })),
         tokenIn: {
           denom: tokenIn.denom,
-          amount: tokenIn.amount
+          amount: Long.fromNumber(tokenIn.amount).toString()
         },
         tokenOutMinAmount
       };
@@ -346,7 +346,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
         tokenInMaxAmount,
         tokenOut: {
           denom: tokenOut.denom,
-          amount: tokenOut.amount
+          amount: Long.fromNumber(tokenOut.amount).toString()
         }
       };
     },
@@ -383,7 +383,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
         poolId: poolId.toString(),
         tokenIn: {
           denom: tokenIn.denom,
-          amount: tokenIn.amount
+          amount: Long.fromNumber(tokenIn.amount).toString()
         },
         shareOutMinAmount
       };
@@ -484,7 +484,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
         poolId: poolId.toString(),
         tokenOut: {
           denom: tokenOut.denom,
-          amount: tokenOut.amount
+          amount: Long.fromNumber(tokenOut.amount).toString()
         },
         shareInMaxAmount
       };

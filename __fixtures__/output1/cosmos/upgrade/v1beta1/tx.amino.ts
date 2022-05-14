@@ -40,10 +40,7 @@ export const AminoConverter = {
         authority,
         plan: {
           name: plan.name,
-          time: {
-            seconds: plan.time.seconds.toString(),
-            nanos: plan.time.nanos
-          },
+          time: plan.time,
           height: plan.height.toString(),
           info: plan.info,
           upgraded_client_state: {
@@ -61,10 +58,7 @@ export const AminoConverter = {
         authority,
         plan: {
           name: plan.name,
-          time: {
-            seconds: Long.fromString(plan.time.seconds),
-            nanos: plan.time.nanos
-          },
+          time: plan.time,
           height: Long.fromString(plan.height),
           info: plan.info,
           upgradedClientState: {

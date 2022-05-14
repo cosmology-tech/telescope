@@ -57,27 +57,8 @@ export const fromAminoParseField = ({
         }
     }
 
-    // Types/Enums
-    switch (field.parsedType.type) {
-        case 'Type':
-            return fromAmino.type(args);
-
-        case 'Enum':
-            return fromAmino.enum(args);
-    }
-
-    // scalar types...
-
+    // special types...
     switch (field.type) {
-        case 'string':
-            return fromAmino.string(args);
-        case 'int64':
-        case 'uint64':
-            return fromAmino.long(args);
-        case 'double':
-        case 'int64':
-        case 'bool':
-        case 'bytes':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
             return fromAmino.defaultType(args)
@@ -91,6 +72,31 @@ export const fromAminoParseField = ({
         case 'Duration':
         case 'google.protobuf.Duration':
             return fromAmino.duration(args);
+
+        default:
+    }
+
+    // Types/Enums
+    switch (field.parsedType.type) {
+        case 'Type':
+            return fromAmino.type(args);
+
+        case 'Enum':
+            return fromAmino.enum(args);
+    }
+
+    // scalar types...
+    switch (field.type) {
+        case 'string':
+            return fromAmino.string(args);
+        case 'int64':
+        case 'uint64':
+            return fromAmino.long(args);
+        case 'double':
+        case 'int64':
+        case 'bool':
+        case 'bytes':
+            return fromAmino.defaultType(args)
 
         default:
             return fromAmino.defaultType(args)

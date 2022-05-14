@@ -2,7 +2,7 @@ import { Counterparty, Version } from "./connection";
 import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "@osmonauts/helpers";
+import { Long, omitDefault } from "@osmonauts/helpers";
 import { MerklePrefix } from "../../commitment/v1/commitment";
 import { MsgConnectionOpenInit, MsgConnectionOpenTry, MsgConnectionOpenAck, MsgConnectionOpenConfirm } from "./tx";
 export interface AminoMsgConnectionOpenInit extends AminoMsg {
@@ -185,17 +185,17 @@ export const AminoConverter = {
           identifier: el0.identifier,
           features: el0.features
         })),
-        proof_height: {
-          revision_number: proofHeight.revisionNumber.toString(),
-          revision_height: proofHeight.revisionHeight.toString()
-        },
+        proof_height: proofHeight ? {
+          revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
+        } : {},
         proof_init: proofInit,
         proof_client: proofClient,
         proof_consensus: proofConsensus,
-        consensus_height: {
-          revision_number: consensusHeight.revisionNumber.toString(),
-          revision_height: consensusHeight.revisionHeight.toString()
-        },
+        consensus_height: consensusHeight ? {
+          revision_height: omitDefault(consensusHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(consensusHeight.revisionNumber)?.toString()
+        } : {},
         signer
       };
     },
@@ -232,17 +232,17 @@ export const AminoConverter = {
           identifier: el0.identifier,
           features: el0.features
         })),
-        proofHeight: {
-          revisionNumber: Long.fromString(proof_height.revision_number),
-          revisionHeight: Long.fromString(proof_height.revision_height)
-        },
+        proofHeight: proof_height ? {
+          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
+          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+        } : undefined,
         proofInit: proof_init,
         proofClient: proof_client,
         proofConsensus: proof_consensus,
-        consensusHeight: {
-          revisionNumber: Long.fromString(consensus_height.revision_number),
-          revisionHeight: Long.fromString(consensus_height.revision_height)
-        },
+        consensusHeight: consensus_height ? {
+          revisionHeight: Long.fromString(consensus_height.revision_height || "0", true),
+          revisionNumber: Long.fromString(consensus_height.revision_number || "0", true)
+        } : undefined,
         signer
       };
     }
@@ -272,17 +272,17 @@ export const AminoConverter = {
           type_url: clientState.typeUrl,
           value: clientState.value
         },
-        proof_height: {
-          revision_number: proofHeight.revisionNumber.toString(),
-          revision_height: proofHeight.revisionHeight.toString()
-        },
+        proof_height: proofHeight ? {
+          revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
+        } : {},
         proof_try: proofTry,
         proof_client: proofClient,
         proof_consensus: proofConsensus,
-        consensus_height: {
-          revision_number: consensusHeight.revisionNumber.toString(),
-          revision_height: consensusHeight.revisionHeight.toString()
-        },
+        consensus_height: consensusHeight ? {
+          revision_height: omitDefault(consensusHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(consensusHeight.revisionNumber)?.toString()
+        } : {},
         signer
       };
     },
@@ -309,17 +309,17 @@ export const AminoConverter = {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        proofHeight: {
-          revisionNumber: Long.fromString(proof_height.revision_number),
-          revisionHeight: Long.fromString(proof_height.revision_height)
-        },
+        proofHeight: proof_height ? {
+          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
+          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+        } : undefined,
         proofTry: proof_try,
         proofClient: proof_client,
         proofConsensus: proof_consensus,
-        consensusHeight: {
-          revisionNumber: Long.fromString(consensus_height.revision_number),
-          revisionHeight: Long.fromString(consensus_height.revision_height)
-        },
+        consensusHeight: consensus_height ? {
+          revisionHeight: Long.fromString(consensus_height.revision_height || "0", true),
+          revisionNumber: Long.fromString(consensus_height.revision_number || "0", true)
+        } : undefined,
         signer
       };
     }
@@ -335,10 +335,10 @@ export const AminoConverter = {
       return {
         connection_id: connectionId,
         proof_ack: proofAck,
-        proof_height: {
-          revision_number: proofHeight.revisionNumber.toString(),
-          revision_height: proofHeight.revisionHeight.toString()
-        },
+        proof_height: proofHeight ? {
+          revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
+        } : {},
         signer
       };
     },
@@ -351,10 +351,10 @@ export const AminoConverter = {
       return {
         connectionId: connection_id,
         proofAck: proof_ack,
-        proofHeight: {
-          revisionNumber: Long.fromString(proof_height.revision_number),
-          revisionHeight: Long.fromString(proof_height.revision_height)
-        },
+        proofHeight: proof_height ? {
+          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
+          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+        } : undefined,
         signer
       };
     }
