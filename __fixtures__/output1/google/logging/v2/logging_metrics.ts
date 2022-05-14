@@ -1,4 +1,5 @@
 import { MetricDescriptor } from "../../api/metric";
+import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
@@ -162,6 +163,13 @@ export interface LogMetric {
   labelExtractors: {
     [key: string]: string;
   };
+
+  /**
+   * Optional. The `bucket_options` are required when the logs-based metric is
+   * using a DISTRIBUTION value type and it describes the bucket boundaries
+   * used to create a histogram of the extracted values.
+   */
+  bucketOptions: Distribution_BucketOptions;
 
   /**
    * Output only. The creation timestamp of the metric.
@@ -355,6 +363,7 @@ function createBaseLogMetric(): LogMetric {
     metricDescriptor: undefined,
     valueExtractor: "",
     labelExtractors: {},
+    bucketOptions: undefined,
     createTime: undefined,
     updateTime: undefined,
     version: 0
@@ -393,6 +402,10 @@ export const LogMetric = {
         value
       }, writer.uint32(58).fork()).ldelim();
     });
+
+    if (message.bucketOptions !== undefined) {
+      Distribution_BucketOptions.encode(message.bucketOptions, writer.uint32(66).fork()).ldelim();
+    }
 
     if (message.createTime !== undefined) {
       Timestamp.encode(toTimestamp(message.createTime), writer.uint32(74).fork()).ldelim();
@@ -451,6 +464,10 @@ export const LogMetric = {
 
           break;
 
+        case 8:
+          message.bucketOptions = Distribution_BucketOptions.decode(reader, reader.uint32());
+          break;
+
         case 9:
           message.createTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
@@ -486,6 +503,7 @@ export const LogMetric = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
+      bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
       createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
@@ -508,6 +526,7 @@ export const LogMetric = {
       });
     }
 
+    message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
     message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
     message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
     message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
@@ -531,6 +550,7 @@ export const LogMetric = {
 
       return acc;
     }, {});
+    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     message.version = object.version ?? 0;

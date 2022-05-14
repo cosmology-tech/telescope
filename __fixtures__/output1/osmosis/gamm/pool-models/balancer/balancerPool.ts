@@ -27,6 +27,23 @@ export interface SmoothWeightChangeParams {
 
   /** Duration for the weights to change over */
   duration: string;
+
+  /**
+   * The initial pool weights. These are copied from the pool's settings
+   * at the time of weight change instantiation.
+   * The amount PoolAsset.token.amount field is ignored if present,
+   * future type refactorings should just have a type with the denom & weight
+   * here.
+   */
+  initialPoolWeights: PoolAsset[];
+
+  /**
+   * The target pool weights. The pool weights will change linearly with respect
+   * to time between start_time, and start_time + duration. The amount
+   * PoolAsset.token.amount field is ignored if present, future type
+   * refactorings should just have a type with the denom & weight here.
+   */
+  targetPoolWeights: PoolAsset[];
 }
 
 /**
@@ -78,6 +95,12 @@ export interface Pool {
   /** sum of all LP tokens sent out */
   totalShares: Coin;
 
+  /**
+   * These are assumed to be sorted by denomiation.
+   * They contain the pool asset and the information about the weight
+   */
+  poolAssets: PoolAsset[];
+
   /** sum of all non-normalized pool weights */
   totalWeight: string;
 }
@@ -85,7 +108,9 @@ export interface Pool {
 function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
   return {
     startTime: undefined,
-    duration: undefined
+    duration: undefined,
+    initialPoolWeights: [],
+    targetPoolWeights: []
   };
 }
 
@@ -97,6 +122,14 @@ export const SmoothWeightChangeParams = {
 
     if (message.duration !== undefined) {
       Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
+    }
+
+    for (const v of message.initialPoolWeights) {
+      PoolAsset.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+
+    for (const v of message.targetPoolWeights) {
+      PoolAsset.encode(v!, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -119,6 +152,14 @@ export const SmoothWeightChangeParams = {
           message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
 
+        case 3:
+          message.initialPoolWeights.push(PoolAsset.decode(reader, reader.uint32()));
+          break;
+
+        case 4:
+          message.targetPoolWeights.push(PoolAsset.decode(reader, reader.uint32()));
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -131,7 +172,9 @@ export const SmoothWeightChangeParams = {
   fromJSON(object: any): SmoothWeightChangeParams {
     return {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      duration: isSet(object.duration) ? String(object.duration) : undefined
+      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : [],
+      targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
     };
   },
 
@@ -139,6 +182,19 @@ export const SmoothWeightChangeParams = {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration);
+
+    if (message.initialPoolWeights) {
+      obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
+    } else {
+      obj.initialPoolWeights = [];
+    }
+
+    if (message.targetPoolWeights) {
+      obj.targetPoolWeights = message.targetPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
+    } else {
+      obj.targetPoolWeights = [];
+    }
+
     return obj;
   },
 
@@ -146,6 +202,8 @@ export const SmoothWeightChangeParams = {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime ?? undefined;
     message.duration = object.duration ?? undefined;
+    message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
+    message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
   }
 
@@ -308,6 +366,7 @@ function createBasePool(): Pool {
     poolParams: undefined,
     futurePoolGovernor: "",
     totalShares: undefined,
+    poolAssets: [],
     totalWeight: ""
   };
 }
@@ -332,6 +391,10 @@ export const Pool = {
 
     if (message.totalShares !== undefined) {
       Coin.encode(message.totalShares, writer.uint32(42).fork()).ldelim();
+    }
+
+    for (const v of message.poolAssets) {
+      PoolAsset.encode(v!, writer.uint32(50).fork()).ldelim();
     }
 
     if (message.totalWeight !== "") {
@@ -370,6 +433,10 @@ export const Pool = {
           message.totalShares = Coin.decode(reader, reader.uint32());
           break;
 
+        case 6:
+          message.poolAssets.push(PoolAsset.decode(reader, reader.uint32()));
+          break;
+
         case 7:
           message.totalWeight = reader.string();
           break;
@@ -390,6 +457,7 @@ export const Pool = {
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
+      poolAssets: Array.isArray(object?.poolAssets) ? object.poolAssets.map((e: any) => PoolAsset.fromJSON(e)) : [],
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : ""
     };
   },
@@ -401,6 +469,13 @@ export const Pool = {
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
+
+    if (message.poolAssets) {
+      obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toJSON(e) : undefined);
+    } else {
+      obj.poolAssets = [];
+    }
+
     message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
     return obj;
   },
@@ -412,6 +487,7 @@ export const Pool = {
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
+    message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.totalWeight = object.totalWeight ?? "";
     return message;
   }

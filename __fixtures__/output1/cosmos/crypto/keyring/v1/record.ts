@@ -1,4 +1,5 @@
 import { Any } from "../../../../google/protobuf/any";
+import { BIP44Params } from "../../hd/v1/hd";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
@@ -33,7 +34,9 @@ export interface Record_Local {
 }
 
 /** Ledger item */
-export interface Record_Ledger {}
+export interface Record_Ledger {
+  path: BIP44Params;
+}
 
 /** Multi item */
 export interface Record_Multi {}
@@ -228,11 +231,17 @@ export const Record_Local = {
 };
 
 function createBaseRecord_Ledger(): Record_Ledger {
-  return {};
+  return {
+    path: undefined
+  };
 }
 
 export const Record_Ledger = {
-  encode(_: Record_Ledger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Record_Ledger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.path !== undefined) {
+      BIP44Params.encode(message.path, writer.uint32(10).fork()).ldelim();
+    }
+
     return writer;
   },
 
@@ -245,6 +254,10 @@ export const Record_Ledger = {
       const tag = reader.uint32();
 
       switch (tag >>> 3) {
+        case 1:
+          message.path = BIP44Params.decode(reader, reader.uint32());
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -254,17 +267,21 @@ export const Record_Ledger = {
     return message;
   },
 
-  fromJSON(_: any): Record_Ledger {
-    return {};
+  fromJSON(object: any): Record_Ledger {
+    return {
+      path: isSet(object.path) ? BIP44Params.fromJSON(object.path) : undefined
+    };
   },
 
-  toJSON(_: Record_Ledger): unknown {
+  toJSON(message: Record_Ledger): unknown {
     const obj: any = {};
+    message.path !== undefined && (obj.path = message.path ? BIP44Params.toJSON(message.path) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Record_Ledger>, I>>(_: I): Record_Ledger {
+  fromPartial<I extends Exact<DeepPartial<Record_Ledger>, I>>(object: I): Record_Ledger {
     const message = createBaseRecord_Ledger();
+    message.path = object.path !== undefined && object.path !== null ? BIP44Params.fromPartial(object.path) : undefined;
     return message;
   }
 

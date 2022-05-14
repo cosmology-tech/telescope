@@ -1,3 +1,4 @@
+import { Distribution_Exemplar } from "../../distribution";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
 
@@ -58,6 +59,9 @@ export interface Distribution {
 
   /** Buckets with arbitrary user-provided width. */
   explicitBuckets?: Distribution_ExplicitBuckets;
+
+  /** Example points. Must be in increasing order of `value` field. */
+  exemplars: Distribution_Exemplar[];
 }
 
 /** Describing buckets with constant width. */
@@ -143,7 +147,8 @@ function createBaseDistribution(): Distribution {
     bucketCounts: [],
     linearBuckets: undefined,
     exponentialBuckets: undefined,
-    explicitBuckets: undefined
+    explicitBuckets: undefined,
+    exemplars: []
   };
 }
 
@@ -187,6 +192,10 @@ export const Distribution = {
 
     if (message.explicitBuckets !== undefined) {
       Distribution_ExplicitBuckets.encode(message.explicitBuckets, writer.uint32(74).fork()).ldelim();
+    }
+
+    for (const v of message.exemplars) {
+      Distribution_Exemplar.encode(v!, writer.uint32(82).fork()).ldelim();
     }
 
     return writer;
@@ -246,6 +255,10 @@ export const Distribution = {
           message.explicitBuckets = Distribution_ExplicitBuckets.decode(reader, reader.uint32());
           break;
 
+        case 10:
+          message.exemplars.push(Distribution_Exemplar.decode(reader, reader.uint32()));
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -265,7 +278,8 @@ export const Distribution = {
       bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromString(e)) : [],
       linearBuckets: isSet(object.linearBuckets) ? Distribution_LinearBuckets.fromJSON(object.linearBuckets) : undefined,
       exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets) : undefined,
-      explicitBuckets: isSet(object.explicitBuckets) ? Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets) : undefined
+      explicitBuckets: isSet(object.explicitBuckets) ? Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
 
@@ -286,6 +300,13 @@ export const Distribution = {
     message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_LinearBuckets.toJSON(message.linearBuckets) : undefined);
     message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toJSON(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toJSON(message.explicitBuckets) : undefined);
+
+    if (message.exemplars) {
+      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toJSON(e) : undefined);
+    } else {
+      obj.exemplars = [];
+    }
+
     return obj;
   },
 
@@ -300,6 +321,7 @@ export const Distribution = {
     message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_LinearBuckets.fromPartial(object.linearBuckets) : undefined;
     message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets) : undefined;
     message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : undefined;
+    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   }
 
