@@ -1836,7 +1836,7 @@ export const QueryPacketAcknowledgementsRequest = {
       PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
     }
 
-    writer.uint32(32).fork();
+    writer.uint32(34).fork();
 
     for (const v of message.packetCommitmentSequences) {
       writer.uint64(v);
@@ -2029,7 +2029,7 @@ export const QueryUnreceivedPacketsRequest = {
       writer.uint32(18).string(message.channelId);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.packetCommitmentSequences) {
       writer.uint64(v);
@@ -2119,7 +2119,7 @@ function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsRespo
 
 export const QueryUnreceivedPacketsResponse = {
   encode(message: QueryUnreceivedPacketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(8).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.sequences) {
       writer.uint64(v);
@@ -2216,7 +2216,7 @@ export const QueryUnreceivedAcksRequest = {
       writer.uint32(18).string(message.channelId);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.packetAckSequences) {
       writer.uint64(v);
@@ -2306,7 +2306,7 @@ function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
 
 export const QueryUnreceivedAcksResponse = {
   encode(message: QueryUnreceivedAcksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(8).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.sequences) {
       writer.uint64(v);

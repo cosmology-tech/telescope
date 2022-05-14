@@ -1284,14 +1284,14 @@ export const FileDescriptorProto = {
       writer.uint32(26).string(v!);
     }
 
-    writer.uint32(80).fork();
+    writer.uint32(82).fork();
 
     for (const v of message.publicDependency) {
       writer.int32(v);
     }
 
     writer.ldelim();
-    writer.uint32(88).fork();
+    writer.uint32(90).fork();
 
     for (const v of message.weakDependency) {
       writer.int32(v);
@@ -3848,14 +3848,14 @@ function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
 
 export const SourceCodeInfo_Location = {
   encode(message: SourceCodeInfo_Location, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(8).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.path) {
       writer.int32(v);
     }
 
     writer.ldelim();
-    writer.uint32(16).fork();
+    writer.uint32(18).fork();
 
     for (const v of message.span) {
       writer.int32(v);
@@ -4057,7 +4057,7 @@ function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation 
 
 export const GeneratedCodeInfo_Annotation = {
   encode(message: GeneratedCodeInfo_Annotation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(8).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.path) {
       writer.int32(v);

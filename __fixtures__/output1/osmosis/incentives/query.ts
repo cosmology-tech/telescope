@@ -953,7 +953,7 @@ export const RewardsEstRequest = {
       writer.uint32(10).string(message.owner);
     }
 
-    writer.uint32(16).fork();
+    writer.uint32(18).fork();
 
     for (const v of message.lockIds) {
       writer.uint64(v);

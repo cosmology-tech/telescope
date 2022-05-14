@@ -247,7 +247,7 @@ export const Distribution = {
       Distribution_BucketOptions.encode(message.bucketOptions, writer.uint32(50).fork()).ldelim();
     }
 
-    writer.uint32(56).fork();
+    writer.uint32(58).fork();
 
     for (const v of message.bucketCounts) {
       writer.int64(v);
@@ -686,7 +686,7 @@ function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOpt
 
 export const Distribution_BucketOptions_Explicit = {
   encode(message: Distribution_BucketOptions_Explicit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(9).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.bounds) {
       writer.double(v);

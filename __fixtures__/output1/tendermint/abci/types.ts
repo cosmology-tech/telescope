@@ -3377,7 +3377,7 @@ export const ResponseApplySnapshotChunk = {
       writer.uint32(8).int32(message.result);
     }
 
-    writer.uint32(16).fork();
+    writer.uint32(18).fork();
 
     for (const v of message.refetchChunks) {
       writer.uint32(v);

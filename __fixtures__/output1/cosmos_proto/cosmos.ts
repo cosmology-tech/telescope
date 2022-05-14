@@ -183,7 +183,7 @@ export const ScalarDescriptor = {
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.fieldType) {
       writer.int32(v);

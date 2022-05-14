@@ -937,7 +937,7 @@ function createBaseInnerSpec(): InnerSpec {
 
 export const InnerSpec = {
   encode(message: InnerSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(8).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.childOrder) {
       writer.int32(v);
@@ -1364,7 +1364,7 @@ export const CompressedExistenceProof = {
       LeafOp.encode(message.leaf, writer.uint32(26).fork()).ldelim();
     }
 
-    writer.uint32(32).fork();
+    writer.uint32(34).fork();
 
     for (const v of message.path) {
       writer.int32(v);

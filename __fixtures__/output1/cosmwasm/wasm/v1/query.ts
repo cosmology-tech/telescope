@@ -1401,7 +1401,7 @@ function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
 
 export const QueryPinnedCodesResponse = {
   encode(message: QueryPinnedCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(8).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);

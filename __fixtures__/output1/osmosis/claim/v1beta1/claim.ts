@@ -84,7 +84,7 @@ export const ClaimRecord = {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.actionCompleted) {
       writer.bool(v);

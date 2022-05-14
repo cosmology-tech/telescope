@@ -933,7 +933,7 @@ export const PinCodesProposal = {
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);
@@ -1032,7 +1032,7 @@ export const UnpinCodesProposal = {
       writer.uint32(18).string(message.description);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
       writer.uint64(v);

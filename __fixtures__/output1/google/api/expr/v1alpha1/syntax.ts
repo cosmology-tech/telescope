@@ -1462,7 +1462,7 @@ export const SourceInfo = {
       writer.uint32(18).string(message.location);
     }
 
-    writer.uint32(24).fork();
+    writer.uint32(26).fork();
 
     for (const v of message.lineOffsets) {
       writer.int32(v);

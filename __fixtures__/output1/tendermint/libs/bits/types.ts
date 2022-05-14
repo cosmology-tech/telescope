@@ -18,7 +18,7 @@ export const BitArray = {
       writer.uint32(8).int64(message.bits);
     }
 
-    writer.uint32(16).fork();
+    writer.uint32(18).fork();
 
     for (const v of message.elems) {
       writer.uint64(v);

@@ -328,7 +328,7 @@ export const ResourceDescriptor = {
       writer.uint32(50).string(message.singular);
     }
 
-    writer.uint32(80).fork();
+    writer.uint32(82).fork();
 
     for (const v of message.style) {
       writer.int32(v);

@@ -174,7 +174,7 @@ export const Distribution = {
       writer.uint32(41).double(message.sumOfSquaredDeviation);
     }
 
-    writer.uint32(48).fork();
+    writer.uint32(50).fork();
 
     for (const v of message.bucketCounts) {
       writer.int64(v);
@@ -497,7 +497,7 @@ function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets 
 
 export const Distribution_ExplicitBuckets = {
   encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    writer.uint32(9).fork();
+    writer.uint32(10).fork();
 
     for (const v of message.bounds) {
       writer.double(v);
